@@ -13,7 +13,6 @@ import {
 import { useRecoilState, useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { IconImage } from "@neverquest/components/IconImage";
 import { AMMUNITION_PRICE } from "@neverquest/data/caravan";
 import {
   CLASS_FULL_WIDTH_JUSTIFIED,
@@ -85,6 +84,7 @@ export function PurchaseAmmunition() {
                     {[
                       { amount: 1, label: "1" },
                       { amount: 10, label: "10" },
+                      { amount: 50, label: "50" },
                       { amount: ammunitionCapacityValue - ammunitionValue, label: LABEL_MAXIMUM },
                     ].map(({ amount, label }) => (
                       <DropdownItem
@@ -93,11 +93,9 @@ export function PurchaseAmmunition() {
                           setAmount(amount);
                         }}
                       >
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage className="small" Icon={IconAmmunition} />
-
-                          {label}
-                        </Stack>
+                        <IconDisplay Icon={IconAmmunition} iconProps={{ className: "small" }}>
+                          <span>{label}</span>
+                        </IconDisplay>
                       </DropdownItem>
                     ))}
                   </DropdownMenu>

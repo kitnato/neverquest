@@ -3,7 +3,6 @@ import { useRecoilValue } from "recoil";
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { IconImage } from "@neverquest/components/IconImage";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconEssence from "@neverquest/icons/essence.svg?react";
 import IconPowerLevel from "@neverquest/icons/power-level.svg?react";
@@ -30,11 +29,9 @@ export function PowerLevel() {
               </PopoverHeader>
 
               <PopoverBody>
-                <Stack className="justify-content-center" direction="horizontal" gap={1}>
-                  <IconImage className="small" Icon={IconEssence} />
-
-                  {formatNumber({ value: absorbedEssenceValue })}
-                </Stack>
+                <IconDisplay Icon={IconEssence} iconProps={{ className: "small" }}>
+                  <span>{formatNumber({ value: absorbedEssenceValue })}</span>
+                </IconDisplay>
               </PopoverBody>
             </Popover>
           }

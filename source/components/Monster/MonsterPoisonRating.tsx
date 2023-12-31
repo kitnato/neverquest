@@ -3,7 +3,6 @@ import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { IconImage } from "@neverquest/components/IconImage";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_MAXIMUM } from "@neverquest/data/general";
 import IconHealth from "@neverquest/icons/health.svg?react";
 import IconPoison from "@neverquest/icons/poison.svg?react";
@@ -60,9 +59,9 @@ export function MonsterPoisonRating() {
                           })}
                         </span>
 
-                        <IconImage className="small" Icon={IconHealth} />
-
-                        <span>{LABEL_MAXIMUM}</span>
+                        <IconDisplay Icon={IconHealth} iconProps={{ className: "small" }}>
+                          <span>{LABEL_MAXIMUM}</span>
+                        </IconDisplay>
                       </Stack>
                     </td>
                   </tr>

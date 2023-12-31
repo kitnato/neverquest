@@ -3,7 +3,7 @@ import type { Placement } from "react-bootstrap/esm/types";
 import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
-import { IconImage } from "@neverquest/components/IconImage";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { AppliedGems } from "@neverquest/components/Inventory/AppliedGems";
 import { DodgePenaltyContents } from "@neverquest/components/Inventory/Armor/DodgePenaltyContents";
 import { GearComparison } from "@neverquest/components/Inventory/GearComparison";
@@ -60,9 +60,9 @@ export function ArmorName({
 
                 <td>
                   <Stack direction="horizontal" gap={1}>
-                    <IconImage className="small" Icon={IconProtection} />
-
-                    <span>{formatNumber({ value: protection })}</span>
+                    <IconDisplay Icon={IconProtection} iconProps={{ className: "small" }}>
+                      <span>{formatNumber({ value: protection })}</span>
+                    </IconDisplay>
 
                     {showComparison && (
                       <GearComparison
@@ -88,11 +88,9 @@ export function ArmorName({
                         {(() => {
                           if (isUnarmored(armor)) {
                             return (
-                              <Stack direction="horizontal" gap={1}>
-                                <IconImage className="small" Icon={IconNone} />
-
+                              <IconDisplay Icon={IconNone} iconProps={{ className: "small" }}>
                                 <span>None</span>
-                              </Stack>
+                              </IconDisplay>
                             );
                           }
 
@@ -100,11 +98,9 @@ export function ArmorName({
                           const { Icon } = ARMOR_SPECIFICATIONS[gearClass];
 
                           return (
-                            <Stack direction="horizontal" gap={1}>
-                              <IconImage className="small" Icon={Icon} />
-
+                            <IconDisplay Icon={Icon} iconProps={{ className: "small" }}>
                               <span>{capitalizeAll(gearClass)}</span>
-                            </Stack>
+                            </IconDisplay>
                           );
                         })()}
                       </td>
@@ -127,9 +123,9 @@ export function ArmorName({
 
                       <td>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage className="small" Icon={IconDeflection} />
-
-                          <span>{formatNumber({ format: "percentage", value: deflection })}</span>
+                          <IconDisplay Icon={IconDeflection} iconProps={{ className: "small" }}>
+                            <span>{formatNumber({ format: "percentage", value: deflection })}</span>
+                          </IconDisplay>
 
                           {showComparison && (
                             <GearComparison

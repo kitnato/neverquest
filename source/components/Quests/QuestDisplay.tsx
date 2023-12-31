@@ -3,7 +3,6 @@ import { CircularProgressbar } from "react-circular-progressbar";
 import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { IconImage } from "@neverquest/components/IconImage";
 import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_UNKNOWN } from "@neverquest/data/general";
 import { QUEST_CLASS_ICONS, QUEST_COMPLETION_BONUS } from "@neverquest/data/quests";
 import { useCompleteQuest } from "@neverquest/hooks/actions/useCompleteQuest";
@@ -102,9 +101,7 @@ export function QuestDisplay({
               value={bonus}
               variant="outline-dark"
             >
-              <Stack direction="horizontal" gap={1}>
-                <IconImage className="small" Icon={Icon} />
-
+              <IconDisplay Icon={Icon} iconProps={{ className: "small" }}>
                 <span>
                   +
                   {formatNumber({
@@ -113,7 +110,7 @@ export function QuestDisplay({
                     value: QUEST_COMPLETION_BONUS,
                   })}
                 </span>
-              </Stack>
+              </IconDisplay>
             </ToggleButton>
           ))}
         </ToggleButtonGroup>

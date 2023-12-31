@@ -3,7 +3,6 @@ import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { IconImage } from "@neverquest/components/IconImage";
 import {
   CLASS_TABLE_CELL_ITALIC,
   LABEL_EMPTY,
@@ -59,9 +58,9 @@ export function MonsterBlightRating() {
                       <Stack direction="horizontal" gap={1}>
                         <span>{-formatNumber({ value: blightAmountValue })}</span>
 
-                        <IconImage className="small" Icon={IconStamina} />
-
-                        <span>{LABEL_MAXIMUM}</span>
+                        <IconDisplay Icon={IconStamina} iconProps={{ className: "small" }}>
+                          <span>{LABEL_MAXIMUM}</span>
+                        </IconDisplay>
                       </Stack>
                     </td>
                   </tr>

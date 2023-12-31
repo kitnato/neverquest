@@ -7,13 +7,11 @@ import {
   ModalHeader,
   ModalTitle,
   OverlayTrigger,
-  Stack,
   Tooltip,
 } from "react-bootstrap";
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { IconImage } from "@neverquest/components/IconImage";
 import { LABEL_SEPARATOR } from "@neverquest/data/general";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness";
@@ -63,10 +61,9 @@ export function CompassNavigate() {
       >
         <ModalHeader closeButton>
           <ModalTitle>
-            <Stack direction="horizontal" gap={3}>
-              <IconImage Icon={IconCompass} />
-              Navigate the wilderness
-            </Stack>
+            <IconDisplay Icon={IconCompass}>
+              <span>Navigate the wilderness</span>
+            </IconDisplay>
           </ModalTitle>
         </ModalHeader>
 

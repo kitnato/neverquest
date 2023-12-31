@@ -19,7 +19,7 @@ export function GearComparison({
   const isShowingGearComparison = useRecoilValue(isShowing(showing));
   const showGearComparisonValue = useRecoilValue(showGearComparison);
 
-  // NaN here is only produced by subtracting Infinity from Infinity, therefore it can be assumed as equal.
+  // NaN here is produced by subtracting Infinity from Infinity.
   const isDifferenceEqual = Number.isNaN(difference) || difference === 0;
   const isPositive = isDownPositive ? difference < 0 : difference > 0;
 

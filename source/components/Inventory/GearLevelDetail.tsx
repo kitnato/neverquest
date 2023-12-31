@@ -1,7 +1,7 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { IconImage } from "@neverquest/components/IconImage";
+import { IconDisplay } from "../IconDisplay";
 import { GearComparison } from "@neverquest/components/Inventory/GearComparison";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/data/general";
 import IconGearLevel from "@neverquest/icons/gear-level.svg?react";
@@ -24,9 +24,9 @@ export function GearLevelDetail({ comparison, level }: { comparison: Comparison;
 
       <td>
         <Stack direction="horizontal" gap={1}>
-          <IconImage className="small" Icon={IconGearLevel} />
-
-          <span>{formatNumber({ value: level })}</span>
+          <IconDisplay Icon={IconGearLevel} iconProps={{ className: "small" }}>
+            <span>{formatNumber({ value: level })}</span>
+          </IconDisplay>
 
           {comparison !== false && (
             <GearComparison

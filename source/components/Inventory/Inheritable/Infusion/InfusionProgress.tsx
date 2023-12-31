@@ -1,7 +1,6 @@
-import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { IconImage } from "@neverquest/components/IconImage";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { LABEL_MAXIMUM, LEVELLING_MAXIMUM, PERCENTAGE_POINTS } from "@neverquest/data/general";
 import IconEssence from "@neverquest/icons/essence.svg?react";
@@ -24,16 +23,14 @@ export function InfusionProgress({ infusable }: { infusable: Infusable }) {
       value={(infusionValue / infusionMaximumValue) * PERCENTAGE_POINTS}
       variant="secondary"
     >
-      <Stack direction="horizontal" gap={1}>
-        <IconImage className="small stencilled" Icon={IconEssence} />
-
+      <IconDisplay Icon={IconEssence} iconProps={{ className: "small stencilled" }}>
         <span>
           {formatNumber({ value: infusionValue })}&nbsp;/&nbsp;
           {formatNumber({
             value: infusionMaximumValue,
           })}
         </span>
-      </Stack>
+      </IconDisplay>
     </LabelledProgressBar>
   );
 }

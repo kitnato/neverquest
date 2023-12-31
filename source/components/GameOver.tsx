@@ -1,15 +1,7 @@
-import {
-  Button,
-  Modal,
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-  ModalTitle,
-  Stack,
-} from "react-bootstrap";
+import { Button, Modal, ModalBody, ModalFooter, ModalHeader, ModalTitle } from "react-bootstrap";
 import { useRecoilState, useRecoilValue } from "recoil";
 
-import { IconImage } from "@neverquest/components/IconImage";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
 import IconDead from "@neverquest/icons/dead.svg?react";
 import { isGameOver } from "@neverquest/state/character";
 import { isShowing } from "@neverquest/state/isShowing";
@@ -29,14 +21,13 @@ export function GameOver() {
     <Modal onHide={onHide} show={isGameOverValue && isShowingGameOver}>
       <ModalHeader closeButton>
         <ModalTitle>
-          <Stack direction="horizontal" gap={3}>
-            <IconImage Icon={IconDead} />
-            Death has come.
-          </Stack>
+          <IconDisplay Icon={IconDead}>
+            <span>Flatline.</span>
+          </IconDisplay>
         </ModalTitle>
       </ModalHeader>
 
-      <ModalBody>All lineage has been erased. Start anew?</ModalBody>
+      <ModalBody>Memory has been erased. Attempt anew?</ModalBody>
 
       <ModalFooter>
         <Button

@@ -4,7 +4,6 @@ import { useRecoilValue } from "recoil";
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { IconImage } from "@neverquest/components/IconImage";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/data/general";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconBleedRating from "@neverquest/icons/bleed-rating.svg?react";
@@ -59,25 +58,19 @@ export function BleedRating() {
                       </td>
 
                       <td>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage className="small" Icon={IconBleed} />
-
-                          {`${
-                            bleedChanceValue === 0
-                              ? LABEL_EMPTY
-                              : formatNumber({ format: "percentage", value: bleedChanceValue })
-                          }`}
-                        </Stack>
+                        <IconDisplay Icon={IconBleed} iconProps={{ className: "small" }}>
+                          {bleedChanceValue === 0
+                            ? LABEL_EMPTY
+                            : formatNumber({ format: "percentage", value: bleedChanceValue })}
+                        </IconDisplay>
                       </td>
                     </tr>
 
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage className="small" Icon={IconCruelty} />
-
+                        <IconDisplay Icon={IconCruelty} iconProps={{ className: "small" }}>
                           <span>Cruelty:</span>
-                        </Stack>
+                        </IconDisplay>
                       </td>
 
                       <td>
@@ -97,9 +90,7 @@ export function BleedRating() {
                       </td>
 
                       <td>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage className="small" Icon={IconBleeding} />
-
+                        <IconDisplay Icon={IconBleeding} iconProps={{ className: "small" }}>
                           <span>
                             {formatNumber({
                               value: damageValue * crueltyValue,
@@ -110,7 +101,7 @@ export function BleedRating() {
                               value: duration,
                             })}
                           </span>
-                        </Stack>
+                        </IconDisplay>
                       </td>
                     </tr>
                   </DetailsTable>

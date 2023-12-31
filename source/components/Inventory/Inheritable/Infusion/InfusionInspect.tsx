@@ -2,7 +2,7 @@ import { type FunctionComponent, useState } from "react";
 import { Button, Modal, ModalBody, ModalHeader, ModalTitle, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { IconImage } from "@neverquest/components/IconImage";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { HatchingProgress } from "@neverquest/components/Inventory/Inheritable/Infusion/HatchingProgress";
 import { Infuse } from "@neverquest/components/Inventory/Inheritable/Infusion/Infuse";
 import { InfusionLevel } from "@neverquest/components/Inventory/Inheritable/Infusion/InfusionLevel";
@@ -48,10 +48,9 @@ export function InfusionInspect({ infusable }: { infusable: Infusable }) {
         >
           <ModalHeader closeButton>
             <ModalTitle>
-              <Stack direction="horizontal" gap={3}>
-                <IconImage Icon={Icon} />
-                Essence infusion
-              </Stack>
+              <IconDisplay Icon={Icon}>
+                <span>Essence infusion</span>
+              </IconDisplay>
             </ModalTitle>
           </ModalHeader>
 

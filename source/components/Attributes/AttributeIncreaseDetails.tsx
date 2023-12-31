@@ -1,7 +1,7 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { IconImage } from "@neverquest/components/IconImage";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import IconAttackRate from "@neverquest/icons/attack-rate.svg?react";
 import IconCriticalChance from "@neverquest/icons/critical-chance.svg?react";
@@ -37,20 +37,17 @@ export function AttributeIncreaseDetails({ attribute }: { attribute: Attribute }
   const operand = ["speed", "vigor"].includes(attribute) ? "-" : "+";
 
   return (
-    <>
-      <Stack className="justify-content-center" direction="horizontal" gap={1}>
-        <IconImage className="small" Icon={Icon} />
-
+    <Stack className="justify-content-center" direction="horizontal" gap={1}>
+      <IconDisplay Icon={Icon} iconProps={{ className: "small" }}>
         <span>
           {operand}
+
           {increment < 1 ? formatNumber({ format: "percentage", value: increment }) : increment}
         </span>
-      </Stack>
+      </IconDisplay>
 
       {ownedItemTomeOfPower !== undefined && (
-        <Stack className="justify-content-center" direction="horizontal" gap={1}>
-          <IconImage className="small" Icon={IconTomeOfPower} />
-
+        <IconDisplay Icon={IconTomeOfPower} iconProps={{ className: "small" }}>
           <span>
             +
             {formatNumber({
@@ -58,8 +55,8 @@ export function AttributeIncreaseDetails({ attribute }: { attribute: Attribute }
               value: powerBonus * (1 + infusionEffectTomeOfPower),
             })}
           </span>
-        </Stack>
+        </IconDisplay>
       )}
-    </>
+    </Stack>
   );
 }

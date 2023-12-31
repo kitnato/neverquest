@@ -1,7 +1,7 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { IconImage } from "@neverquest/components/IconImage";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LABEL_NONE } from "@neverquest/data/general";
 import IconStalwart from "@neverquest/icons/stalwart.svg?react";
 import IconStamina from "@neverquest/icons/stamina.svg?react";
@@ -16,19 +16,15 @@ export function DodgePenaltyContents({ staminaCost }: { staminaCost: GeneratorRa
   return (
     <Stack direction="horizontal" gap={1}>
       {typeof staminaCost === "number" && isTraitAcquiredStalwart ? (
-        <>
-          <IconImage className="small" Icon={IconStalwart} />
-
+        <IconDisplay Icon={IconStalwart} iconProps={{ className: "small" }}>
           <span>{LABEL_NONE}</span>
-        </>
+        </IconDisplay>
       ) : staminaCost === Number.POSITIVE_INFINITY ? (
         <span>Cannot dodge.</span>
       ) : staminaCost === 0 ? (
         <span>{LABEL_NONE}</span>
       ) : (
-        <>
-          <IconImage className="small" Icon={IconStamina} />
-
+        <IconDisplay Icon={IconStamina} iconProps={{ className: "small" }}>
           <span>
             {isGeneratorRange(staminaCost)
               ? `${formatNumber({ value: staminaCost.minimum })} - ${formatNumber({
@@ -36,7 +32,7 @@ export function DodgePenaltyContents({ staminaCost }: { staminaCost: GeneratorRa
                 })}`
               : formatNumber({ value: staminaCost })}
           </span>
-        </>
+        </IconDisplay>
       )}
     </Stack>
   );

@@ -3,7 +3,7 @@ import type { Placement } from "react-bootstrap/esm/types";
 import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
-import { IconImage } from "@neverquest/components/IconImage";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { AppliedGems } from "@neverquest/components/Inventory/AppliedGems";
 import { GearComparison } from "@neverquest/components/Inventory/GearComparison";
 import { GearLevelDetail } from "@neverquest/components/Inventory/GearLevelDetail";
@@ -64,9 +64,9 @@ export function ShieldName({
 
                 <td>
                   <Stack direction="horizontal" gap={1}>
-                    <IconImage className="small" Icon={IconBlock} />
-
-                    <span>{formatNumber({ format: "percentage", value: block })}</span>
+                    <IconDisplay Icon={IconBlock} iconProps={{ className: "small" }}>
+                      <span>{formatNumber({ format: "percentage", value: block })}</span>
+                    </IconDisplay>
 
                     {showComparison && (
                       <GearComparison
@@ -100,11 +100,9 @@ export function ShieldName({
                         {(() => {
                           if (isUnshielded(shield)) {
                             return (
-                              <Stack direction="horizontal" gap={1}>
-                                <IconImage className="small" Icon={IconNone} />
-
+                              <IconDisplay Icon={IconNone} iconProps={{ className: "small" }}>
                                 <span>None</span>
-                              </Stack>
+                              </IconDisplay>
                             );
                           }
 
@@ -112,11 +110,9 @@ export function ShieldName({
                           const { Icon } = SHIELD_SPECIFICATIONS[gearClass];
 
                           return (
-                            <Stack direction="horizontal" gap={1}>
-                              <IconImage className="small" Icon={Icon} />
-
+                            <IconDisplay Icon={Icon} iconProps={{ className: "small" }}>
                               <span>{capitalizeAll(gearClass)}</span>
-                            </Stack>
+                            </IconDisplay>
                           );
                         })()}
                       </td>
@@ -139,9 +135,9 @@ export function ShieldName({
 
                       <td>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage className="small" Icon={IconStagger} />
-
-                          <span>{formatNumber({ format: "percentage", value: stagger })}</span>
+                          <IconDisplay Icon={IconStagger} iconProps={{ className: "small" }}>
+                            <span>{formatNumber({ format: "percentage", value: stagger })}</span>
+                          </IconDisplay>
 
                           {showComparison && (
                             <GearComparison

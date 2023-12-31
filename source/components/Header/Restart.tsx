@@ -7,11 +7,11 @@ import {
   ModalHeader,
   ModalTitle,
   OverlayTrigger,
-  Stack,
   Tooltip,
 } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
+import { IconDisplay } from "../IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import IconRestart from "@neverquest/icons/restart.svg?react";
 import IconWarning from "@neverquest/icons/warning.svg?react";
@@ -53,10 +53,9 @@ export function Restart() {
       <Modal onHide={onHide} show={isShowingRestart}>
         <ModalHeader closeButton>
           <ModalTitle>
-            <Stack direction="horizontal" gap={3}>
-              <IconImage Icon={IconWarning} />
-              Start anew?
-            </Stack>
+            <IconDisplay Icon={IconWarning}>
+              <span>Start anew?</span>
+            </IconDisplay>
           </ModalTitle>
         </ModalHeader>
 

@@ -1,7 +1,7 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { IconImage } from "@neverquest/components/IconImage";
+import { IconDisplay } from "../IconDisplay";
 import { GearComparison } from "@neverquest/components/Inventory/GearComparison";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/data/general";
 import IconStamina from "@neverquest/icons/stamina.svg?react";
@@ -22,9 +22,9 @@ export function StaminaCostDetail({ comparison, cost }: { comparison: Comparison
 
           <td>
             <Stack direction="horizontal" gap={1}>
-              <IconImage className="small" Icon={IconStamina} />
-
-              <span>{formatNumber({ value: cost })}</span>
+              <IconDisplay Icon={IconStamina} iconProps={{ className: "small" }}>
+                <span>{formatNumber({ value: cost })}</span>
+              </IconDisplay>
 
               {comparison !== false && (
                 <GearComparison

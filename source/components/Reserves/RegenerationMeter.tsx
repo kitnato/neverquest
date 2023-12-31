@@ -1,7 +1,7 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { IconImage } from "@neverquest/components/IconImage";
+import { IconDisplay } from "../IconDisplay";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { PERCENTAGE_POINTS } from "@neverquest/data/general";
 import { RESERVES } from "@neverquest/data/reserves";
@@ -47,9 +47,7 @@ export function RegenerationMeter({ reserve }: { reserve: Reserve }) {
             <Stack>
               <span>{`${label} regeneration`}</span>
 
-              <Stack direction="horizontal" gap={1}>
-                <IconImage className="small" Icon={ReserveIcon} />
-
+              <IconDisplay Icon={ReserveIcon} iconProps={{ className: "small" }}>
                 <span>
                   {regenerationAmountValue}&nbsp;per&nbsp;
                   {formatNumber({
@@ -57,7 +55,7 @@ export function RegenerationMeter({ reserve }: { reserve: Reserve }) {
                     value: regenerationRateValue,
                   })}
                 </span>
-              </Stack>
+              </IconDisplay>
             </Stack>
           );
         }
@@ -67,7 +65,7 @@ export function RegenerationMeter({ reserve }: { reserve: Reserve }) {
             {`Regenerating ${reserve}`}
 
             <Stack direction="horizontal" gap={1}>
-              <IconImage className="small" Icon={ReserveIcon} />
+              <IconDisplay Icon={ReserveIcon} iconProps={{ className: "small" }} />
 
               <span>
                 {regenerationAmountValue}&nbsp;in&nbsp;

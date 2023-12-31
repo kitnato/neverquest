@@ -1,5 +1,5 @@
 import { ListGroup, ListGroupItem, Stack } from "react-bootstrap";
-import { IconImage } from "@neverquest/components/IconImage";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
 import IconAttributes from "@neverquest/icons/attributes.svg?react";
 import IconEssence from "@neverquest/icons/essence.svg?react";
 import IconGear from "@neverquest/icons/gear.svg?react";
@@ -14,45 +14,39 @@ export function ResetDetails() {
 
       <ListGroup>
         <ListGroupItem>
-          <Stack direction="horizontal" gap={1}>
-            <IconImage className="small" Icon={IconStage} />
-            Stage
-          </Stack>
+          <IconDisplay Icon={IconStage} iconProps={{ className: "small" }}>
+            <span>Stage</span>
+          </IconDisplay>
         </ListGroupItem>
 
         <ListGroupItem>
-          <Stack direction="horizontal" gap={1}>
-            <IconImage className="small" Icon={IconEssence} />
-            Essence
-          </Stack>
+          <IconDisplay Icon={IconEssence} iconProps={{ className: "small" }}>
+            <span>Essence</span>
+          </IconDisplay>
         </ListGroupItem>
 
         <ListGroupItem>
-          <Stack direction="horizontal" gap={1}>
-            <IconImage className="small" Icon={IconAttributes} />
-            Attributes
-          </Stack>
+          <IconDisplay Icon={IconAttributes} iconProps={{ className: "small" }}>
+            <span>Attributes</span>
+          </IconDisplay>
         </ListGroupItem>
 
         <ListGroupItem>
-          <Stack direction="horizontal" gap={1}>
-            <IconImage className="small" Icon={IconSkills} />
-            Skills
-          </Stack>
+          <IconDisplay Icon={IconSkills} iconProps={{ className: "small" }}>
+            <span>Skills</span>
+          </IconDisplay>
         </ListGroupItem>
 
         <ListGroupItem>
-          <Stack direction="horizontal" gap={1}>
-            <IconImage className="small" Icon={IconMasteries} />
-            Masteries
-          </Stack>
+          <IconDisplay Icon={IconMasteries} iconProps={{ className: "small" }}>
+            <span>Masteries</span>
+          </IconDisplay>
         </ListGroupItem>
 
         <ListGroupItem>
-          <Stack direction="horizontal" gap={1}>
-            <IconImage className="small" Icon={IconGear} />
-            Gear
-          </Stack>
+          <IconDisplay Icon={IconGear} iconProps={{ className: "small" }}>
+            <span>Gear</span>
+          </IconDisplay>
         </ListGroupItem>
       </ListGroup>
     </Stack>

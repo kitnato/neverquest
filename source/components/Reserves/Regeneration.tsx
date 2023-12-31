@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
 import { useRecoilValue, useSetRecoilState } from "recoil";
+import { IconDisplay } from "../IconDisplay";
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
-import { IconImage } from "@neverquest/components/IconImage";
 import { RegenerationMeter } from "@neverquest/components/Reserves/RegenerationMeter";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
 import { RESERVES } from "@neverquest/data/reserves";
@@ -105,21 +105,17 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
                   </td>
 
                   <td>
-                    <Stack direction="horizontal" gap={1}>
-                      <IconImage className="small" Icon={IconRegenerationRate} />
-
+                    <IconDisplay Icon={IconRegenerationRate} iconProps={{ className: "small" }}>
                       <span>{formatNumber({ format: "time", value: baseRegenerationRate })}</span>
-                    </Stack>
+                    </IconDisplay>
                   </td>
                 </tr>
 
                 <tr>
                   <td className={CLASS_TABLE_CELL_ITALIC}>
-                    <Stack direction="horizontal" gap={1}>
-                      <IconImage className="small" Icon={IconVigor} />
-
+                    <IconDisplay Icon={IconVigor} iconProps={{ className: "small" }}>
                       <span>Vigor:</span>
-                    </Stack>
+                    </IconDisplay>
                   </td>
 
                   <td>
@@ -136,14 +132,14 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
                         <>
                           {LABEL_SEPARATOR}
 
-                          <IconImage className="small" Icon={IconTomeOfPower} />
-
-                          <span>
-                            {formatNumber({
-                              format: "multiplier",
-                              value: attributePowerBonusVigor,
-                            })}
-                          </span>
+                          <IconDisplay Icon={IconTomeOfPower} iconProps={{ className: "small" }}>
+                            <span>
+                              {formatNumber({
+                                format: "multiplier",
+                                value: attributePowerBonusVigor,
+                              })}
+                            </span>
+                          </IconDisplay>
                         </>
                       )}
                     </Stack>
@@ -156,21 +152,17 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
                   </td>
 
                   <td>
-                    <Stack direction="horizontal" gap={1}>
-                      <IconImage className="small" Icon={IconRegenerationAmount} />
-
+                    <IconDisplay Icon={IconRegenerationAmount} iconProps={{ className: "small" }}>
                       <span>{baseRegenerationAmount}</span>
-                    </Stack>
+                    </IconDisplay>
                   </td>
                 </tr>
 
                 <tr>
                   <td className={CLASS_TABLE_CELL_ITALIC}>
-                    <Stack direction="horizontal" gap={1}>
-                      <IconImage className="small" Icon={IconFortitude} />
-
+                    <IconDisplay Icon={IconFortitude} iconProps={{ className: "small" }}>
                       <span>Fortitude:</span>
-                    </Stack>
+                    </IconDisplay>
                   </td>
 
                   <td>
@@ -181,14 +173,14 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
                         <>
                           {LABEL_SEPARATOR}
 
-                          <IconImage className="small" Icon={IconTomeOfPower} />
-
-                          <span>
-                            {formatNumber({
-                              format: "multiplier",
-                              value: attributePowerBonusFortitude,
-                            })}
-                          </span>
+                          <IconDisplay Icon={IconTomeOfPower} iconProps={{ className: "small" }}>
+                            <span>
+                              {formatNumber({
+                                format: "multiplier",
+                                value: attributePowerBonusFortitude,
+                              })}
+                            </span>
+                          </IconDisplay>
                         </>
                       )}
                     </Stack>

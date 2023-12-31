@@ -4,7 +4,6 @@ import { useRecoilValue } from "recoil";
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { IconImage } from "@neverquest/components/IconImage";
 import { Regeneration } from "@neverquest/components/Reserves/Regeneration";
 import { ReserveMeter } from "@neverquest/components/Reserves/ReserveMeter";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
@@ -35,7 +34,7 @@ export function Stamina() {
         tooltip="Stamina"
       >
         <Stack>
-          <Stack className="w-100" direction="horizontal">
+          <Stack direction="horizontal">
             <OverlayTrigger
               overlay={
                 <Popover>
@@ -51,46 +50,45 @@ export function Stamina() {
                         </td>
 
                         <td>
-                          <Stack direction="horizontal" gap={1}>
-                            <IconImage className="small" Icon={IconStamina} />
-
+                          <IconDisplay Icon={IconStamina} iconProps={{ className: "small" }}>
                             <span>{baseAmount}</span>
-                          </Stack>
+                          </IconDisplay>
                         </td>
                       </tr>
 
                       <tr>
                         <td className={CLASS_TABLE_CELL_ITALIC}>
-                          <Stack direction="horizontal" gap={1}>
-                            <IconImage className="small" Icon={IconEndurance} />
-
+                          <IconDisplay Icon={IconEndurance} iconProps={{ className: "small" }}>
                             <span>Endurance:</span>
-                          </Stack>
+                          </IconDisplay>
                         </td>
 
                         <td>
                           <Stack direction="horizontal" gap={1}>
-                            <IconImage className="small" Icon={IconStamina} />
-
-                            <span>
-                              +
-                              {formatNumber({
-                                value: attributeStatisticEndurance - baseAmount,
-                              })}
-                            </span>
+                            <IconDisplay Icon={IconStamina} iconProps={{ className: "small" }}>
+                              <span>
+                                +
+                                {formatNumber({
+                                  value: attributeStatisticEndurance - baseAmount,
+                                })}
+                              </span>
+                            </IconDisplay>
 
                             {attributePowerBonusEndurance > 0 && (
                               <>
                                 {LABEL_SEPARATOR}
 
-                                <IconImage className="small" Icon={IconTomeOfPower} />
-
-                                <span>
-                                  {formatNumber({
-                                    format: "multiplier",
-                                    value: attributePowerBonusEndurance,
-                                  })}
-                                </span>
+                                <IconDisplay
+                                  Icon={IconTomeOfPower}
+                                  iconProps={{ className: "small" }}
+                                >
+                                  <span>
+                                    {formatNumber({
+                                      format: "multiplier",
+                                      value: attributePowerBonusEndurance,
+                                    })}
+                                  </span>
+                                </IconDisplay>
                               </>
                             )}
                           </Stack>
@@ -104,9 +102,7 @@ export function Stamina() {
                           </td>
 
                           <td>
-                            <Stack direction="horizontal" gap={1}>
-                              <IconImage className="small" Icon={IconStamina} />
-
+                            <IconDisplay Icon={IconStamina} iconProps={{ className: "small" }}>
                               <span>
                                 +
                                 {formatNumber({
@@ -115,7 +111,7 @@ export function Stamina() {
                                   value: questsBonusStamina,
                                 })}
                               </span>
-                            </Stack>
+                            </IconDisplay>
                           </td>
                         </tr>
                       )}

@@ -5,7 +5,6 @@ import { useRecoilValue, useResetRecoilState } from "recoil";
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { IconImage } from "@neverquest/components/IconImage";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/data/general";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
@@ -65,21 +64,17 @@ export function Protection() {
                       </td>
 
                       <td>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage className="small" Icon={IconArmor} />
-
+                        <IconDisplay Icon={IconArmor} iconProps={{ className: "small" }}>
                           <span>{formatNumber({ value: armorValue.protection })}</span>
-                        </Stack>
+                        </IconDisplay>
                       </td>
                     </tr>
 
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage className="small" Icon={IconTank} />
-
+                        <IconDisplay Icon={IconTank} iconProps={{ className: "small" }}>
                           <span>Tank:</span>
-                        </Stack>
+                        </IconDisplay>
                       </td>
 
                       <td>

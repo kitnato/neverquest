@@ -230,7 +230,7 @@ export const QUESTS: Record<
     title: "Better than mining",
   },
   hiring: {
-    description: "Hire caravan crew members @ times.",
+    description: "Hire caravan @ crew members.",
     progression: [3, 10, 25],
     title: "Don't forget the doctor",
   },

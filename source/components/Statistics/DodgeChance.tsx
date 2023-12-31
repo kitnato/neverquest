@@ -4,7 +4,6 @@ import { useRecoilValue } from "recoil";
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { IconImage } from "@neverquest/components/IconImage";
 import { DodgePenaltyContents } from "@neverquest/components/Inventory/Armor/DodgePenaltyContents";
 import {
   CLASS_TABLE_CELL_ITALIC,
@@ -68,11 +67,9 @@ export function DodgeChance() {
                   <DetailsTable>
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage className="small" Icon={IconAgility} />
-
+                        <IconDisplay Icon={IconAgility} iconProps={{ className: "small" }}>
                           <span>Agility:</span>
-                        </Stack>
+                        </IconDisplay>
                       </td>
 
                       <td>
@@ -88,14 +85,17 @@ export function DodgeChance() {
                             <>
                               {LABEL_SEPARATOR}
 
-                              <IconImage className="small" Icon={IconTomeOfPower} />
-
-                              <span>
-                                {formatNumber({
-                                  format: "multiplier",
-                                  value: attributePowerBonusAgility,
-                                })}
-                              </span>
+                              <IconDisplay
+                                Icon={IconTomeOfPower}
+                                iconProps={{ className: "small" }}
+                              >
+                                <span>
+                                  {formatNumber({
+                                    format: "multiplier",
+                                    value: attributePowerBonusAgility,
+                                  })}
+                                </span>
+                              </IconDisplay>
                             </>
                           )}
                         </Stack>
@@ -105,11 +105,9 @@ export function DodgeChance() {
                     {isTraitAcquiredNudist && isUnarmored(armorValue) && (
                       <tr>
                         <td className={CLASS_TABLE_CELL_ITALIC}>
-                          <Stack direction="horizontal" gap={1}>
-                            <IconImage className="small" Icon={IconNudist} />
-
+                          <IconDisplay Icon={IconNudist} iconProps={{ className: "small" }}>
                             <span>Nudist:</span>
-                          </Stack>
+                          </IconDisplay>
                         </td>
 
                         <td>
@@ -121,11 +119,9 @@ export function DodgeChance() {
                     {isShowingDodgePenalty ? (
                       <tr>
                         <td className={CLASS_TABLE_CELL_ITALIC}>
-                          <Stack direction="horizontal" gap={1}>
-                            <IconImage className="small" Icon={IconDodgePenalty} />
-
+                          <IconDisplay Icon={IconDodgePenalty} iconProps={{ className: "small" }}>
                             <span>Armor penalty:</span>
-                          </Stack>
+                          </IconDisplay>
                         </td>
 
                         <td>

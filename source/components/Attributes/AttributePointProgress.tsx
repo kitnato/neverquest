@@ -1,7 +1,7 @@
-import { OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { IconImage } from "@neverquest/components/IconImage";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { PERCENTAGE_POINTS } from "@neverquest/data/general";
 import IconEssence from "@neverquest/icons/essence.svg?react";
@@ -29,16 +29,14 @@ export function AttributePointProgress() {
           value={(essenceValue / nextTotalCost) * PERCENTAGE_POINTS}
           variant="secondary"
         >
-          <Stack direction="horizontal" gap={1}>
-            <IconImage className="small stencilled" Icon={IconEssence} />
-
+          <IconDisplay Icon={IconEssence} iconProps={{ className: "small stencilled" }}>
             <span>
               {formatNumber({ value: essenceValue })}&nbsp;/&nbsp;
               {formatNumber({
                 value: nextTotalCost,
               })}
             </span>
-          </Stack>
+          </IconDisplay>
         </LabelledProgressBar>
       </div>
     </OverlayTrigger>

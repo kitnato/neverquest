@@ -1,7 +1,7 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { IconImage } from "@neverquest/components/IconImage";
+import { IconDisplay } from "../IconDisplay";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
 import { ELEMENTALS, GEMS, GEMS_MAXIMUM } from "@neverquest/data/items";
 import { gems } from "@neverquest/state/items";
@@ -43,19 +43,19 @@ export function AppliedGems({ gearItem }: { gearItem: GearItem | GearItemUnequip
 
                   {LABEL_SEPARATOR}
 
-                  <IconImage className="small" Icon={ElementalIcon} />
-
-                  <span>
-                    {typeof effect === "number"
-                      ? `+${formatNumber({ decimals: 0, format: "percentage", value: effect })}`
-                      : formatNumber({ format: "time", value: effect.duration })}
-                  </span>
+                  <IconDisplay Icon={ElementalIcon} iconProps={{ className: "small" }}>
+                    <span>
+                      {typeof effect === "number"
+                        ? `+${formatNumber({ decimals: 0, format: "percentage", value: effect })}`
+                        : formatNumber({ format: "time", value: effect.duration })}
+                    </span>
+                  </IconDisplay>
 
                   {LABEL_SEPARATOR}
 
-                  <IconImage className="small" Icon={GemIcon} />
-
-                  <span>{amount}</span>
+                  <IconDisplay Icon={GemIcon} iconProps={{ className: "small" }}>
+                    <span>{amount}</span>
+                  </IconDisplay>
                 </Stack>
               );
             })}

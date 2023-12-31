@@ -5,7 +5,6 @@ import { useRecoilValue, useResetRecoilState } from "recoil";
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { IconImage } from "@neverquest/components/IconImage";
 import { DamagePerSecond } from "@neverquest/components/Statistics/DamagePerSecond";
 import { ElementalDetails } from "@neverquest/components/Statistics/ElementalDetails";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
@@ -75,11 +74,9 @@ export function Damage() {
                       </td>
 
                       <td>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage className="small" Icon={IconWeaponDamage} />
-
+                        <IconDisplay Icon={IconWeaponDamage} iconProps={{ className: "small" }}>
                           <span>{formatNumber({ value: weaponDamage })}</span>
-                        </Stack>
+                        </IconDisplay>
                       </td>
                     </tr>
 
@@ -87,11 +84,9 @@ export function Damage() {
 
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage className="small" Icon={IconStrength} />
-
+                        <IconDisplay Icon={IconStrength} iconProps={{ className: "small" }}>
                           <span>Strength:</span>
-                        </Stack>
+                        </IconDisplay>
                       </td>
 
                       <td>
@@ -107,14 +102,17 @@ export function Damage() {
                             <>
                               {LABEL_SEPARATOR}
 
-                              <IconImage className="small" Icon={IconTomeOfPower} />
-
-                              <span>
-                                {formatNumber({
-                                  format: "multiplier",
-                                  value: attributePowerBonusStrength,
-                                })}
-                              </span>
+                              <IconDisplay
+                                Icon={IconTomeOfPower}
+                                iconProps={{ className: "small" }}
+                              >
+                                <span>
+                                  {formatNumber({
+                                    format: "multiplier",
+                                    value: attributePowerBonusStrength,
+                                  })}
+                                </span>
+                              </IconDisplay>
                             </>
                           )}
                         </Stack>
@@ -128,9 +126,7 @@ export function Damage() {
                         </td>
 
                         <td>
-                          <Stack direction="horizontal" gap={1}>
-                            <IconImage className="small" Icon={IconDamage} />
-
+                          <IconDisplay Icon={IconDamage} iconProps={{ className: "small" }}>
                             <span>
                               +
                               {formatNumber({
@@ -139,7 +135,7 @@ export function Damage() {
                                 value: questsBonusDamage,
                               })}
                             </span>
-                          </Stack>
+                          </IconDisplay>
                         </td>
                       </tr>
                     )}
@@ -147,11 +143,9 @@ export function Damage() {
                     {isTraitAcquiredBruiser && isUnarmed(weaponValue) && (
                       <tr>
                         <td className={CLASS_TABLE_CELL_ITALIC}>
-                          <Stack direction="horizontal" gap={1}>
-                            <IconImage className="small" Icon={IconBruiser} />
-
+                          <IconDisplay Icon={IconBruiser} iconProps={{ className: "small" }}>
                             <span>Bruiser:</span>
-                          </Stack>
+                          </IconDisplay>
                         </td>
 
                         <td>
@@ -163,11 +157,9 @@ export function Damage() {
                     {isTraitAcquiredBrawler && isUnshielded(shieldValue) && (
                       <tr>
                         <td className={CLASS_TABLE_CELL_ITALIC}>
-                          <Stack direction="horizontal" gap={1}>
-                            <IconImage className="small" Icon={IconBrawler} />
-
+                          <IconDisplay Icon={IconBrawler} iconProps={{ className: "small" }}>
                             <span>Brawler:</span>
-                          </Stack>
+                          </IconDisplay>
                         </td>
 
                         <td>

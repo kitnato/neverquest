@@ -4,7 +4,6 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { IconImage } from "@neverquest/components/IconImage";
 import { Regeneration } from "@neverquest/components/Reserves/Regeneration";
 import { ReserveMeter } from "@neverquest/components/Reserves/ReserveMeter";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
@@ -44,7 +43,7 @@ export function Health() {
         tooltip="Health"
       >
         <Stack>
-          <Stack className="w-100" direction="horizontal">
+          <Stack direction="horizontal">
             <OverlayTrigger
               overlay={
                 <Popover>
@@ -60,46 +59,45 @@ export function Health() {
                         </td>
 
                         <td>
-                          <Stack direction="horizontal" gap={1}>
-                            <IconImage className="small" Icon={IconHealth} />
-
+                          <IconDisplay Icon={IconHealth} iconProps={{ className: "small" }}>
                             <span>{baseAmount}</span>
-                          </Stack>
+                          </IconDisplay>
                         </td>
                       </tr>
 
                       <tr>
                         <td className={CLASS_TABLE_CELL_ITALIC}>
-                          <Stack direction="horizontal" gap={1}>
-                            <IconImage className="small" Icon={IconVitality} />
-
+                          <IconDisplay Icon={IconVitality} iconProps={{ className: "small" }}>
                             <span>Vitality:</span>
-                          </Stack>
+                          </IconDisplay>
                         </td>
 
                         <td>
                           <Stack direction="horizontal" gap={1}>
-                            <IconImage className="small" Icon={IconHealth} />
-
-                            <span>
-                              +
-                              {formatNumber({
-                                value: attributeStatisticVitality - baseAmount,
-                              })}
-                            </span>
+                            <IconDisplay Icon={IconHealth} iconProps={{ className: "small" }}>
+                              <span>
+                                +
+                                {formatNumber({
+                                  value: attributeStatisticVitality - baseAmount,
+                                })}
+                              </span>
+                            </IconDisplay>
 
                             {attributePowerBonusVitality > 0 && (
                               <>
                                 {LABEL_SEPARATOR}
 
-                                <IconImage className="small" Icon={IconTomeOfPower} />
-
-                                <span>
-                                  {formatNumber({
-                                    format: "multiplier",
-                                    value: attributePowerBonusVitality,
-                                  })}
-                                </span>
+                                <IconDisplay
+                                  Icon={IconTomeOfPower}
+                                  iconProps={{ className: "small" }}
+                                >
+                                  <span>
+                                    {formatNumber({
+                                      format: "multiplier",
+                                      value: attributePowerBonusVitality,
+                                    })}
+                                  </span>
+                                </IconDisplay>
                               </>
                             )}
                           </Stack>
@@ -113,9 +111,7 @@ export function Health() {
                           </td>
 
                           <td>
-                            <Stack direction="horizontal" gap={1}>
-                              <IconImage className="small" Icon={IconHealth} />
-
+                            <IconDisplay Icon={IconHealth} iconProps={{ className: "small" }}>
                               <span>
                                 +
                                 {formatNumber({
@@ -124,7 +120,7 @@ export function Health() {
                                   value: questsBonusHealth,
                                 })}
                               </span>
-                            </Stack>
+                            </IconDisplay>
                           </td>
                         </tr>
                       )}

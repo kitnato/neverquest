@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { ProgressBar, Stack } from "react-bootstrap";
 import { useRecoilValue, useResetRecoilState } from "recoil";
 
+import { IconDisplay } from "../IconDisplay";
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
-import { IconImage } from "@neverquest/components/IconImage";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { PERCENTAGE_POINTS } from "@neverquest/data/general";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
@@ -83,19 +83,20 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
           <>
             <span>{` (${formatNumber({ value: reserveMaximumValue })})`}</span>
 
-            <IconImage className="small stencilled" Icon={isHealth ? IconPoison : IconBlight} />
-
-            <span>
-              {`${
-                typeof ailmentValue === "number"
+            <IconDisplay
+              Icon={isHealth ? IconPoison : IconBlight}
+              iconProps={{ className: "small stencilled" }}
+            >
+              <span>
+                {typeof ailmentValue === "number"
                   ? formatNumber({ format: "time", value: ailmentValue })
                   : formatNumber({
                       decimals: 0,
                       format: "percentage",
                       value: ailmentValue.percentage,
-                    })
-              }`}
-            </span>
+                    })}
+              </span>
+            </IconDisplay>
           </>
         )}
 

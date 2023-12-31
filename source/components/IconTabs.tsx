@@ -1,6 +1,6 @@
 import { Nav, NavItem, NavLink, Stack, TabContainer, TabContent, TabPane } from "react-bootstrap";
 
-import { IconImage } from "@neverquest/components/IconImage";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
 import type { TabsData } from "@neverquest/types/components";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 
@@ -11,16 +11,10 @@ export function IconTabs({ tabs }: { tabs: TabsData }) {
         <Nav justify variant="pills">
           {tabs.map(({ Icon, label }) => (
             <NavItem key={label}>
-              <NavLink eventKey={label}>
-                <Stack
-                  className="align-items-center justify-content-center"
-                  direction="horizontal"
-                  gap={3}
-                >
-                  <IconImage Icon={Icon} />
-
+              <NavLink className="d-flex justify-content-center" eventKey={label}>
+                <IconDisplay Icon={Icon}>
                   <span>{capitalizeAll(label)}</span>
-                </Stack>
+                </IconDisplay>
               </NavLink>
             </NavItem>
           ))}

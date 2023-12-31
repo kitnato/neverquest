@@ -4,7 +4,6 @@ import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { IconImage } from "@neverquest/components/IconImage";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/data/general";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconMarksmanship from "@neverquest/icons/marksmanship.svg?react";
@@ -57,21 +56,17 @@ export function CombatRange() {
                       </td>
 
                       <td>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage className="small" Icon={IconRanged} />
-
+                        <IconDisplay Icon={IconRanged} iconProps={{ className: "small" }}>
                           <span>{formatNumber({ format: "time", value: weaponValue.range })}</span>
-                        </Stack>
+                        </IconDisplay>
                       </td>
                     </tr>
 
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage className="small" Icon={IconMarksmanship} />
-
+                        <IconDisplay Icon={IconMarksmanship} iconProps={{ className: "small" }}>
                           <span>Marksmanship:</span>
-                        </Stack>
+                        </IconDisplay>
                       </td>
 
                       <td>

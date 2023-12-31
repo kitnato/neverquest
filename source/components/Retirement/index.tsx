@@ -10,7 +10,7 @@ import {
 } from "react-bootstrap";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
-import { IconImage } from "@neverquest/components/IconImage";
+import { IconDisplay } from "../IconDisplay";
 import { ItemsInherited } from "@neverquest/components/Retirement/ItemsInherited";
 import { ProgressReduction } from "@neverquest/components/Retirement/ProgressReduction";
 import { ResetDetails } from "@neverquest/components/Retirement/ResetDetails";
@@ -40,11 +40,9 @@ export function Retirement({
     <Modal onHide={onHide} show={isShowing} size="lg">
       <ModalHeader closeButton>
         <ModalTitle>
-          <Stack direction="horizontal" gap={3}>
-            <IconImage Icon={IconRetire} />
-
+          <IconDisplay Icon={IconRetire}>
             <span>Retirement</span>
-          </Stack>
+          </IconDisplay>
         </ModalTitle>
       </ModalHeader>
 

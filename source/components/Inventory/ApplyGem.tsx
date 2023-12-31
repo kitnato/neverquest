@@ -1,7 +1,7 @@
 import { Dropdown, Stack } from "react-bootstrap";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
-import { IconImage } from "@neverquest/components/IconImage";
+import { IconDisplay } from "../IconDisplay";
 import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_MAXIMUM } from "@neverquest/data/general";
 import { GEMS_MAXIMUM } from "@neverquest/data/items";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
@@ -98,11 +98,9 @@ export function ApplyGem({ gem }: { gem: GemItem }) {
 
                 <Stack className="ms-2" direction="horizontal" gap={1}>
                   {canApply ? (
-                    <>
-                      <IconImage className="small" Icon={IconEssence} />
-
+                    <IconDisplay Icon={IconEssence} iconProps={{ className: "small" }}>
                       <span>{getGemFittingCost(length)}</span>
-                    </>
+                    </IconDisplay>
                   ) : (
                     <span>{LABEL_MAXIMUM}</span>
                   )}

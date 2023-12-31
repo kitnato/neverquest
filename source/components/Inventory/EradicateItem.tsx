@@ -7,11 +7,11 @@ import {
   ModalHeader,
   ModalTitle,
   OverlayTrigger,
-  Stack,
   Tooltip,
 } from "react-bootstrap";
 import { useSetRecoilState } from "recoil";
 
+import { IconDisplay } from "../IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import IconEradicate from "@neverquest/icons/eradicate.svg?react";
 import { merchantInventory } from "@neverquest/state/caravan";
@@ -42,10 +42,9 @@ export function EradicateItem({ ID, name }: { ID: string; name: string }) {
       <Modal onHide={onHide} show={isShowingModal}>
         <ModalHeader closeButton>
           <ModalTitle>
-            <Stack direction="horizontal" gap={3}>
-              <IconImage Icon={IconEradicate} />
-              Eradicate item?
-            </Stack>
+            <IconDisplay Icon={IconEradicate}>
+              <span>Eradicate item?</span>
+            </IconDisplay>
           </ModalTitle>
         </ModalHeader>
 

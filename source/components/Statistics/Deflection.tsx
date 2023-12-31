@@ -4,7 +4,6 @@ import { useRecoilValue } from "recoil";
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { IconImage } from "@neverquest/components/IconImage";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/data/general";
 import { INOCULATED_DEFLECTION_BASE } from "@neverquest/data/traits";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
@@ -52,21 +51,17 @@ export function Deflection() {
                       </td>
 
                       <td>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage className="small" Icon={IconDeflection} />
-
+                        <IconDisplay Icon={IconDeflection} iconProps={{ className: "small" }}>
                           <span>{formatNumber({ format: "percentage", value: deflection })}</span>
-                        </Stack>
+                        </IconDisplay>
                       </td>
                     </tr>
 
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage className="small" Icon={IconInoculated} />
-
+                        <IconDisplay Icon={IconInoculated} iconProps={{ className: "small" }}>
                           <span>Inoculated:</span>
-                        </Stack>
+                        </IconDisplay>
                       </td>
 
                       <td>

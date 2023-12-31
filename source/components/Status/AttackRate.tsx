@@ -4,7 +4,6 @@ import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { IconImage } from "@neverquest/components/IconImage";
 import { AttackMeter } from "@neverquest/components/Status/AttackMeter";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
 import { useAttack } from "@neverquest/hooks/actions/useAttack";
@@ -73,7 +72,7 @@ export function AttackRate() {
       Icon={IconAttackRate}
       tooltip="Total attack rate"
     >
-      <Stack className="w-100" direction="horizontal">
+      <Stack direction="horizontal">
         <OverlayTrigger
           overlay={
             <Popover>
@@ -89,21 +88,17 @@ export function AttackRate() {
                     </td>
 
                     <td>
-                      <Stack direction="horizontal" gap={1}>
-                        <IconImage className="small" Icon={IconWeaponAttackRate} />
-
+                      <IconDisplay Icon={IconWeaponAttackRate} iconProps={{ className: "small" }}>
                         <span>{formatNumber({ format: "time", value: weaponValue.rate })}</span>
-                      </Stack>
+                      </IconDisplay>
                     </td>
                   </tr>
 
                   <tr>
                     <td className={CLASS_TABLE_CELL_ITALIC}>
-                      <Stack direction="horizontal" gap={1}>
-                        <IconImage className="small" Icon={IconWeaponSpeed} />
-
+                      <IconDisplay Icon={IconWeaponSpeed} iconProps={{ className: "small" }}>
                         <span>Speed:</span>
-                      </Stack>
+                      </IconDisplay>
                     </td>
 
                     <td>
@@ -121,14 +116,14 @@ export function AttackRate() {
                           <>
                             {LABEL_SEPARATOR}
 
-                            <IconImage className="small" Icon={IconTomeOfPower} />
-
-                            <span>
-                              {formatNumber({
-                                format: "multiplier",
-                                value: attributePowerBonusSpeed,
-                              })}
-                            </span>
+                            <IconDisplay Icon={IconTomeOfPower} iconProps={{ className: "small" }}>
+                              <span>
+                                {formatNumber({
+                                  format: "multiplier",
+                                  value: attributePowerBonusSpeed,
+                                })}
+                              </span>
+                            </IconDisplay>
                           </>
                         )}
                       </Stack>

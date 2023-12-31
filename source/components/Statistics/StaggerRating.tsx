@@ -4,7 +4,6 @@ import { useRecoilValue } from "recoil";
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { IconImage } from "@neverquest/components/IconImage";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/data/general";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconStability from "@neverquest/icons/stability.svg?react";
@@ -62,21 +61,17 @@ export function StaggerRating() {
                       </td>
 
                       <td>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage className="small" Icon={IconStagger} />
-
+                        <IconDisplay Icon={IconStagger} iconProps={{ className: "small" }}>
                           <span>{formatNumber({ format: "percentage", value: stagger })}</span>
-                        </Stack>
+                        </IconDisplay>
                       </td>
                     </tr>
 
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage className="small" Icon={IconStability} />
-
+                        <IconDisplay Icon={IconStability} iconProps={{ className: "small" }}>
                           <span>Stability:</span>
-                        </Stack>
+                        </IconDisplay>
                       </td>
 
                       <td>

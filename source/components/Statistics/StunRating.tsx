@@ -4,7 +4,6 @@ import { useRecoilValue } from "recoil";
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { IconImage } from "@neverquest/components/IconImage";
 import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/data/general";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconMight from "@neverquest/icons/might.svg?react";
@@ -54,23 +53,19 @@ export function StunRating() {
                       </td>
 
                       <td>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage className="small" Icon={IconStun} />
-
+                        <IconDisplay Icon={IconStun} iconProps={{ className: "small" }}>
                           <span>
                             {formatNumber({ format: "percentage", value: abilityChance })}
                           </span>
-                        </Stack>
+                        </IconDisplay>
                       </td>
                     </tr>
 
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage className="small" Icon={IconMight} />
-
+                        <IconDisplay Icon={IconMight} iconProps={{ className: "small" }}>
                           <span>Might:</span>
-                        </Stack>
+                        </IconDisplay>
                       </td>
 
                       <td>

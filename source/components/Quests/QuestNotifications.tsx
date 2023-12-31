@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import { Stack, Toast, ToastBody, ToastContainer, ToastHeader } from "react-bootstrap";
+import { Toast, ToastBody, ToastContainer, ToastHeader } from "react-bootstrap";
 import { useRecoilState, useResetRecoilState } from "recoil";
 
-import { IconImage } from "@neverquest/components/IconImage";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LABEL_UNKNOWN, QUEST_NOTIFICATION_DURATION } from "@neverquest/data/general";
 import { QUEST_CLASS_ICONS } from "@neverquest/data/quests";
 import { questNotifications } from "@neverquest/state/quests";
@@ -32,15 +32,19 @@ export function QuestNotifications() {
             show
           >
             <ToastHeader>
-              <Stack className="me-auto" direction="horizontal" gap={1}>
-                <IconImage className="small" Icon={QUEST_CLASS_ICONS[questClass]} />
-
-                {title}
-              </Stack>
+              <IconDisplay
+                className="me-auto"
+                Icon={QUEST_CLASS_ICONS[questClass]}
+                iconProps={{ className: "small" }}
+              >
+                <span>{title}</span>
+              </IconDisplay>
             </ToastHeader>
 
             <ToastBody>
-              {hidden === undefined ? description : description.replace(LABEL_UNKNOWN, hidden)}
+              <span>
+                {hidden === undefined ? description : description.replace(LABEL_UNKNOWN, hidden)}
+              </span>
             </ToastBody>
           </Toast>
         ),

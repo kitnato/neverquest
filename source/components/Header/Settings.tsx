@@ -12,6 +12,7 @@ import {
 } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
+import { IconDisplay } from "../IconDisplay";
 import { SettingsSwitch } from "@neverquest/components/Header/SettingsSwitch";
 import { ShowEverything } from "@neverquest/components/Header/ShowEverything";
 import { IconImage } from "@neverquest/components/IconImage";
@@ -52,10 +53,9 @@ export function Settings() {
       >
         <ModalHeader closeButton>
           <ModalTitle>
-            <Stack direction="horizontal" gap={3}>
-              <IconImage Icon={IconSettings} />
-              Settings
-            </Stack>
+            <IconDisplay Icon={IconSettings}>
+              <span>Settings</span>
+            </IconDisplay>
           </ModalTitle>
         </ModalHeader>
 

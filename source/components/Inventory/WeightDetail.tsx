@@ -1,7 +1,7 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { IconImage } from "@neverquest/components/IconImage";
+import { IconDisplay } from "../IconDisplay";
 import { GearComparison } from "@neverquest/components/Inventory/GearComparison";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/data/general";
 import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react";
@@ -30,9 +30,9 @@ export function WeightDetail({
 
           <td>
             <Stack direction="horizontal" gap={1}>
-              <IconImage className="small" Icon={IconEncumbrance} />
-
-              <span>{formatNumber({ value: weight })}</span>
+              <IconDisplay Icon={IconEncumbrance} iconProps={{ className: "small" }}>
+                <span>{formatNumber({ value: weight })}</span>
+              </IconDisplay>
 
               {comparison !== undefined && comparison !== false && (
                 <GearComparison

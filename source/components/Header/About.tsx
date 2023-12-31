@@ -6,11 +6,11 @@ import {
   ModalHeader,
   ModalTitle,
   OverlayTrigger,
-  Stack,
   Tooltip,
 } from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
 
+import { IconDisplay } from "../IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import manual from "@neverquest/data/manual.md?raw";
 import IconAbout from "@neverquest/icons/about.svg?react";
@@ -45,10 +45,9 @@ export function About() {
       >
         <ModalHeader closeButton>
           <ModalTitle>
-            <Stack direction="horizontal" gap={3}>
-              <IconImage Icon={IconAbout} />
-              About
-            </Stack>
+            <IconDisplay Icon={IconAbout}>
+              <span>About</span>
+            </IconDisplay>
           </ModalTitle>
         </ModalHeader>
 

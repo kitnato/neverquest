@@ -7,11 +7,11 @@ import {
   ModalHeader,
   ModalTitle,
   OverlayTrigger,
-  Stack,
   Tooltip,
 } from "react-bootstrap";
 import { useSetRecoilState } from "recoil";
 
+import { IconDisplay } from "../IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import IconDiscard from "@neverquest/icons/discard.svg?react";
 import { inventory } from "@neverquest/state/inventory";
@@ -42,10 +42,9 @@ export function DiscardItem({ ID, name }: { ID: string; name: string }) {
       <Modal onHide={onHide} show={isShowingModal}>
         <ModalHeader closeButton>
           <ModalTitle>
-            <Stack direction="horizontal" gap={3}>
-              <IconImage Icon={IconDiscard} />
-              Discard item?
-            </Stack>
+            <IconDisplay Icon={IconDiscard}>
+              <span>Discard item?</span>
+            </IconDisplay>
           </ModalTitle>
         </ModalHeader>
 

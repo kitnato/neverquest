@@ -1,6 +1,7 @@
 import { Nav, NavItem, NavLink, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
+import { IconDisplay } from "../IconDisplay";
 import { IconBadge } from "@neverquest/components/IconBadge";
 import { IconImage } from "@neverquest/components/IconImage";
 import IconAttention from "@neverquest/icons/attention.svg?react";
@@ -18,11 +19,9 @@ export function QuestTabsNav({ tabs }: { tabs: TabsData }) {
     <Nav justify variant="pills">
       {tabs.map(({ Icon, label }) => (
         <NavItem key={label}>
-          <NavLink eventKey={label}>
-            <Stack className="justify-content-center" direction="horizontal" gap={3}>
-              <IconImage Icon={Icon} />
-
-              <Stack className="align-items-center" direction="horizontal" gap={2}>
+          <NavLink className="d-flex justify-content-center" eventKey={label}>
+            <IconDisplay Icon={Icon}>
+              <Stack direction="horizontal" gap={2}>
                 <span>{capitalizeAll(label)}</span>
 
                 {((label === "conquests" && canCompleteConquests) ||
@@ -40,7 +39,7 @@ export function QuestTabsNav({ tabs }: { tabs: TabsData }) {
                   </div>
                 )}
               </Stack>
-            </Stack>
+            </IconDisplay>
           </NavLink>
         </NavItem>
       ))}

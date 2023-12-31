@@ -3,7 +3,6 @@ import { useRecoilValue } from "recoil";
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { IconImage } from "@neverquest/components/IconImage";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconAttributePoints from "@neverquest/icons/attribute-points.svg?react";
 import IconEssence from "@neverquest/icons/essence.svg?react";
@@ -32,11 +31,11 @@ export function AttributePoints() {
             <PopoverHeader className="text-center">Attribute point cost</PopoverHeader>
 
             <PopoverBody>
-              <Stack className="justify-content-center" direction="horizontal" gap={1}>
-                <IconImage className="small" Icon={IconEssence} />
-
-                <span>{formatNumber({ value: getAttributePointCost(powerLevelValue) })}</span>
-              </Stack>
+              <div className="d-flex justify-content-center">
+                <IconDisplay Icon={IconEssence} iconProps={{ className: "small" }}>
+                  <span>{formatNumber({ value: getAttributePointCost(powerLevelValue) })}</span>
+                </IconDisplay>
+              </div>
             </PopoverBody>
           </Popover>
         }

@@ -4,7 +4,6 @@ import { useRecoilValue } from "recoil";
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { IconImage } from "@neverquest/components/IconImage";
 import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
 import { PARRY_ABSORPTION, PARRY_DAMAGE } from "@neverquest/data/statistics";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
@@ -56,13 +55,11 @@ export function ParryRating() {
                       </td>
 
                       <td>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage className="small" Icon={IconParry} />
-
+                        <IconDisplay Icon={IconParry} iconProps={{ className: "small" }}>
                           <span>
                             {formatNumber({ format: "percentage", value: parryChanceValue })}
                           </span>
-                        </Stack>
+                        </IconDisplay>
                       </td>
                     </tr>
 
@@ -83,15 +80,15 @@ export function ParryRating() {
 
                           {LABEL_SEPARATOR}
 
-                          <IconImage className="small" Icon={IconFinesse} />
-
-                          <span>
-                            +
-                            {formatNumber({
-                              format: "percentage",
-                              value: finesseValue,
-                            })}
-                          </span>
+                          <IconDisplay Icon={IconFinesse} iconProps={{ className: "small" }}>
+                            <span>
+                              +
+                              {formatNumber({
+                                format: "percentage",
+                                value: finesseValue,
+                              })}
+                            </span>
+                          </IconDisplay>
                         </Stack>
                       </td>
                     </tr>
@@ -113,15 +110,15 @@ export function ParryRating() {
 
                           {LABEL_SEPARATOR}
 
-                          <IconImage className="small" Icon={IconFinesse} />
-
-                          <span>
-                            +
-                            {formatNumber({
-                              format: "percentage",
-                              value: finesseValue,
-                            })}
-                          </span>
+                          <IconDisplay Icon={IconFinesse} iconProps={{ className: "small" }}>
+                            <span>
+                              +
+                              {formatNumber({
+                                format: "percentage",
+                                value: finesseValue,
+                              })}
+                            </span>
+                          </IconDisplay>
                         </Stack>
                       </td>
                     </tr>

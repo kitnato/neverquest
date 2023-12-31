@@ -3,7 +3,7 @@ import type { Placement } from "react-bootstrap/esm/types";
 import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
-import { IconImage } from "@neverquest/components/IconImage";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { AppliedGems } from "@neverquest/components/Inventory/AppliedGems";
 import { GearComparison } from "@neverquest/components/Inventory/GearComparison";
 import { GearLevelDetail } from "@neverquest/components/Inventory/GearLevelDetail";
@@ -75,9 +75,9 @@ export function WeaponName({
 
                 <td>
                   <Stack direction="horizontal" gap={1}>
-                    <IconImage className="small" Icon={IconWeaponDamage} />
-
-                    <span>{formatNumber({ value: damage })}</span>
+                    <IconDisplay Icon={IconWeaponDamage} iconProps={{ className: "small" }}>
+                      <span>{formatNumber({ value: damage })}</span>
+                    </IconDisplay>
 
                     {showComparison && (
                       <GearComparison
@@ -98,9 +98,9 @@ export function WeaponName({
 
                 <td>
                   <Stack direction="horizontal" gap={1}>
-                    <IconImage className="small" Icon={IconWeaponAttackRate} />
-
-                    <span>{formatNumber({ format: "time", value: rate })}</span>
+                    <IconDisplay Icon={IconWeaponAttackRate} iconProps={{ className: "small" }}>
+                      <span>{formatNumber({ format: "time", value: rate })}</span>
+                    </IconDisplay>
 
                     {showComparison && (
                       <GearComparison
@@ -121,9 +121,12 @@ export function WeaponName({
 
                   <td>
                     <Stack direction="horizontal" gap={1}>
-                      <IconImage className="small" Icon={IconWeaponDamagePerSecond} />
-
-                      <span>{formatNumber({ format: "float", value: damagePerSecond })}</span>
+                      <IconDisplay
+                        Icon={IconWeaponDamagePerSecond}
+                        iconProps={{ className: "small" }}
+                      >
+                        <span>{formatNumber({ format: "float", value: damagePerSecond })}</span>
+                      </IconDisplay>
 
                       {showComparison && (
                         <GearComparison
@@ -149,12 +152,10 @@ export function WeaponName({
                   </td>
 
                   <td>
-                    <Stack direction="horizontal" gap={1}>
-                      <IconImage className="small" Icon={IconGrip} />
-
+                    <IconDisplay Icon={IconGrip} iconProps={{ className: "small" }}>
                       {/* eslint-disable-next-line unicorn/consistent-destructuring */}
                       <span>{capitalizeAll(weapon.grip)}</span>
-                    </Stack>
+                    </IconDisplay>
                   </td>
                 </tr>
               )}
@@ -166,12 +167,10 @@ export function WeaponName({
                   </td>
 
                   <td>
-                    <Stack direction="horizontal" gap={1}>
-                      <IconImage className="small" Icon={IconAmmunition} />
-
+                    <IconDisplay Icon={IconAmmunition} iconProps={{ className: "small" }}>
                       {/* eslint-disable-next-line unicorn/consistent-destructuring */}
                       <span>{formatNumber({ value: weapon.ammunitionCost })}</span>
-                    </Stack>
+                    </IconDisplay>
                   </td>
                 </tr>
               )}
@@ -194,11 +193,9 @@ export function WeaponName({
                     </td>
 
                     <td>
-                      <Stack direction="horizontal" gap={1}>
-                        <IconImage className="small" Icon={IconGearClass} />
-
+                      <IconDisplay Icon={IconGearClass} iconProps={{ className: "small" }}>
                         <span>{capitalizeAll(gearClass)}</span>
-                      </Stack>
+                      </IconDisplay>
                     </td>
                   </>
                 ) : (
@@ -217,9 +214,11 @@ export function WeaponName({
 
                     <td>
                       <Stack direction="horizontal" gap={1}>
-                        <IconImage className="small" Icon={IconAbility} />
-
-                        <span>{formatNumber({ format: "percentage", value: abilityChance })}</span>
+                        <IconDisplay Icon={IconAbility} iconProps={{ className: "small" }}>
+                          <span>
+                            {formatNumber({ format: "percentage", value: abilityChance })}
+                          </span>
+                        </IconDisplay>
 
                         {showComparison && gearClass === weaponEquippedValue.gearClass && (
                           <GearComparison

@@ -1,4 +1,4 @@
-import { IconImage } from "@neverquest/components/IconImage";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { ELEMENTALS, GEMS } from "@neverquest/data/items";
 import type { Gem } from "@neverquest/types/unions";
 
@@ -10,11 +10,11 @@ export function GemDescription({ gem }: { gem: Gem }) {
     <div>
       <span>Adds elemental&nbsp;</span>
 
-      <IconImage className="small" Icon={Icon} />
+      <IconDisplay Icon={Icon} iconProps={{ className: "small" }}>
+        <span className={color}>{elemental}</span>
+      </IconDisplay>
 
-      <span className={color}>&nbsp;{elemental}&nbsp;</span>
-
-      <span>effect to gear. Provides a</span>
+      <span>&nbsp;effect to gear. Provides a</span>
 
       <span className="fst-italic">&nbsp;{damageModification}&nbsp;</span>
 

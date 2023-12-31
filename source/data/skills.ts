@@ -80,6 +80,7 @@ export const SKILLS: Record<
     descriptionIcons: [IconRegenerationAmount, IconRegenerationRate, IconHealth, IconStamina],
     Icon: IconCalisthenics,
     requiredCrew: "merchant",
+    shows: ["health", "healthDetails", "stamina", "staminaDetails"],
   },
   escrime: {
     description:

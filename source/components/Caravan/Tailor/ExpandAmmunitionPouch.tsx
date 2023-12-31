@@ -9,7 +9,6 @@ import { AMMUNITION_CAPACITY } from "@neverquest/data/items";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import IconEssence from "@neverquest/icons/essence.svg?react";
 import IconTailoring from "@neverquest/icons/tailoring.svg?react";
-import { ownedItem } from "@neverquest/state/inventory";
 import { ammunitionCapacity } from "@neverquest/state/items";
 import { essence } from "@neverquest/state/resources";
 import { formatNumber } from "@neverquest/utilities/formatters";
@@ -18,60 +17,57 @@ import { getSigmoid } from "@neverquest/utilities/getters";
 export function ExpandAmmunitionPouch() {
   const [ammunitionCapacityValue, setAmmunitionCapacity] = useRecoilState(ammunitionCapacity);
   const essenceValue = useRecoilValue(essence);
-  const ownedAmmunitionPouch = useRecoilValue(ownedItem("ammunition pouch"));
 
   const transactEssence = useTransactEssence();
 
-  if (ownedAmmunitionPouch !== undefined) {
-    const { amount, priceMaximum } = TAILORING["ammunition pouch"];
-    const price = Math.ceil(
-      priceMaximum *
-        getSigmoid(Math.ceil(ammunitionCapacityValue - (AMMUNITION_CAPACITY - 1)) / amount),
-    );
-    const isAffordable = price <= essenceValue;
+  const { amount, priceMaximum } = TAILORING["ammunition pouch"];
+  const price = Math.ceil(
+    priceMaximum *
+      getSigmoid(Math.ceil(ammunitionCapacityValue - (AMMUNITION_CAPACITY - 1)) / amount),
+  );
+  const isAffordable = price <= essenceValue;
 
-    return (
-      <Stack gap={3}>
-        <h6>Ammunition pouch</h6>
+  return (
+    <Stack gap={3}>
+      <h6>Ammunition pouch</h6>
 
-        <AmmunitionPouchCapacity />
+      <AmmunitionPouchCapacity />
 
-        <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-          <IconDisplay
-            description={`Increases maximum ammunition by ${amount}.`}
-            Icon={IconTailoring}
-            tooltip="Tailoring"
-          >
-            Add quiver
+      <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
+        <IconDisplay
+          description={`Increases maximum ammunition by ${amount}.`}
+          Icon={IconTailoring}
+          tooltip="Tailoring"
+        >
+          Add quiver
+        </IconDisplay>
+
+        <Stack className="ms-2" direction="horizontal" gap={3}>
+          <IconDisplay Icon={IconEssence} tooltip="Price">
+            {formatNumber({ value: price })}
           </IconDisplay>
 
-          <Stack className="ms-2" direction="horizontal" gap={3}>
-            <IconDisplay Icon={IconEssence} tooltip="Price">
-              {formatNumber({ value: price })}
-            </IconDisplay>
-
-            <OverlayTrigger
-              overlay={<Tooltip> {LABEL_NO_ESSENCE}</Tooltip>}
-              trigger={isAffordable ? [] : ["focus", "hover"]}
-            >
-              <div>
-                <Button
-                  disabled={!isAffordable}
-                  onClick={() => {
-                    transactEssence(-price);
-                    setAmmunitionCapacity(
-                      (currentAmmunitionCapacity) => currentAmmunitionCapacity + amount,
-                    );
-                  }}
-                  variant="outline-dark"
-                >
-                  Expand
-                </Button>
-              </div>
-            </OverlayTrigger>
-          </Stack>
-        </div>
-      </Stack>
-    );
-  }
+          <OverlayTrigger
+            overlay={<Tooltip> {LABEL_NO_ESSENCE}</Tooltip>}
+            trigger={isAffordable ? [] : ["focus", "hover"]}
+          >
+            <div>
+              <Button
+                disabled={!isAffordable}
+                onClick={() => {
+                  transactEssence(-price);
+                  setAmmunitionCapacity(
+                    (currentAmmunitionCapacity) => currentAmmunitionCapacity + amount,
+                  );
+                }}
+                variant="outline-dark"
+              >
+                Expand
+              </Button>
+            </div>
+          </OverlayTrigger>
+        </Stack>
+      </div>
+    </Stack>
+  );
 }

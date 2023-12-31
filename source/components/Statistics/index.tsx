@@ -14,13 +14,13 @@ import { Protection } from "@neverquest/components/Statistics/Protection";
 import { StaggerRating } from "@neverquest/components/Statistics/StaggerRating";
 import { StunRating } from "@neverquest/components/Statistics/StunRating";
 import { Thorns } from "@neverquest/components/Statistics/Thorns";
-import { isShowing } from "@neverquest/state/isShowing";
+import { isShowingStatistics } from "@neverquest/state/isShowing";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Statistics() {
-  const isShowingStatistics = useRecoilValue(isShowing("statistics"));
+  const isShowingStatisticsValue = useRecoilValue(isShowingStatistics);
 
-  if (isShowingStatistics) {
+  if (isShowingStatisticsValue) {
     return (
       <Card className={getAnimationClass({ animation: "flipInX" })}>
         <CardBody>

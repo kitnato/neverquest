@@ -36,7 +36,6 @@ export function useIncreaseAttribute() {
           }
         }
 
-        set(isShowing("statistics"), true);
         set(attributeRank(attribute), newRank);
 
         transactEssence(-getAttributePointCost(get(powerLevel)));

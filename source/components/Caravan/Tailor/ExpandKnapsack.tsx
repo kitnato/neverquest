@@ -10,7 +10,7 @@ import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import IconEssence from "@neverquest/icons/essence.svg?react";
 import IconTailoring from "@neverquest/icons/tailoring.svg?react";
-import { knapsackCapacity, ownedItem } from "@neverquest/state/inventory";
+import { knapsackCapacity } from "@neverquest/state/inventory";
 import { essence } from "@neverquest/state/resources";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getSigmoid } from "@neverquest/utilities/getters";
@@ -18,68 +18,65 @@ import { getSigmoid } from "@neverquest/utilities/getters";
 export function ExpandKnapsack() {
   const [knapsackCapacityValue, setKnapsackCapacity] = useRecoilState(knapsackCapacity);
   const essenceValue = useRecoilValue(essence);
-  const ownedItemKnapsack = useRecoilValue(ownedItem("knapsack"));
 
   const progressQuest = useProgressQuest();
   const transactEssence = useTransactEssence();
 
   const { amount, priceMaximum } = TAILORING.knapsack;
 
-  if (ownedItemKnapsack !== undefined) {
-    const price = Math.ceil(
-      priceMaximum *
-        getSigmoid(Math.ceil((knapsackCapacityValue - (KNAPSACK_CAPACITY - 1)) / amount)),
-    );
-    const isAffordable = price <= essenceValue;
+  const price = Math.ceil(
+    priceMaximum *
+      getSigmoid(Math.ceil((knapsackCapacityValue - (KNAPSACK_CAPACITY - 1)) / amount)),
+  );
+  const isAffordable = price <= essenceValue;
 
-    return (
-      <Stack gap={3}>
-        <h6>Knapsack</h6>
+  return (
+    <Stack gap={3}>
+      <h6>Knapsack</h6>
 
-        <Encumbrance />
+      <Encumbrance />
 
-        <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-          <IconDisplay
-            description={`Increases maximum encumbrance by ${amount}.`}
-            Icon={IconTailoring}
-            tooltip="Tailoring"
-          >
-            Add pockets
+      <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
+        <IconDisplay
+          description={`Increases maximum encumbrance by ${amount}.`}
+          Icon={IconTailoring}
+          tooltip="Tailoring"
+        >
+          Add pockets
+        </IconDisplay>
+
+        <Stack className="ms-2" direction="horizontal" gap={3}>
+          <IconDisplay Icon={IconEssence} tooltip="Price">
+            {formatNumber({ value: price })}
           </IconDisplay>
 
-          <Stack className="ms-2" direction="horizontal" gap={3}>
-            <IconDisplay Icon={IconEssence} tooltip="Price">
-              {formatNumber({ value: price })}
-            </IconDisplay>
+          <OverlayTrigger
+            overlay={<Tooltip>{LABEL_NO_ESSENCE}</Tooltip>}
+            trigger={isAffordable ? [] : ["focus", "hover"]}
+          >
+            <div>
+              <Button
+                disabled={!isAffordable}
+                onClick={() => {
+                  transactEssence(-price);
 
-            <OverlayTrigger
-              overlay={<Tooltip>{LABEL_NO_ESSENCE}</Tooltip>}
-              trigger={isAffordable ? [] : ["focus", "hover"]}
-            >
-              <div>
-                <Button
-                  disabled={!isAffordable}
-                  onClick={() => {
-                    transactEssence(-price);
+                  setKnapsackCapacity(
+                    (currentKnapsackCapacity) => currentKnapsackCapacity + amount,
+                  );
 
-                    setKnapsackCapacity(
-                      (currentKnapsackCapacity) => currentKnapsackCapacity + amount,
-                    );
-
-                    progressQuest({
-                      amount,
-                      quest: "knapsackExpanding",
-                    });
-                  }}
-                  variant="outline-dark"
-                >
-                  Expand
-                </Button>
-              </div>
-            </OverlayTrigger>
-          </Stack>
-        </div>
-      </Stack>
-    );
-  }
+                  progressQuest({
+                    amount,
+                    quest: "knapsackExpanding",
+                  });
+                }}
+                variant="outline-dark"
+              >
+                Expand
+              </Button>
+            </div>
+          </OverlayTrigger>
+        </Stack>
+      </div>
+    </Stack>
+  );
 }

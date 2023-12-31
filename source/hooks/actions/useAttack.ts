@@ -65,7 +65,7 @@ export function useAttack() {
             get(distance) > 0) ||
           Math.random() <= criticalChanceValue;
 
-        set(isShowing("statistics"), true);
+        set(isShowing("damage"), true);
 
         if (get(isAttacking) && get(attackDuration) === 0) {
           set(attackDuration, get(attackRate));

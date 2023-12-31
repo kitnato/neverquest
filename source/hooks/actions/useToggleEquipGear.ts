@@ -33,8 +33,6 @@ export function useToggleEquipGear() {
         // eslint-disable-next-line unicorn/consistent-destructuring
         const isWeaponTwoHanded = isMelee(gearItem) && gearItem.grip === "two-handed";
 
-        set(isShowing("statistics"), true);
-
         if (isArmor(gearItem)) {
           if (gearClass === "heavy" && !get(isSkillAcquired("armorcraft"))) {
             return;

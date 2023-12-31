@@ -32,6 +32,7 @@ export function Damage() {
   const attributePowerBonusStrength = useRecoilValue(attributePowerBonus("strength"));
   const attributeStatisticStrength = useRecoilValue(attributeStatistic("strength"));
   const damageValue = useRecoilValue(damage);
+  const isShowingDamage = useRecoilValue(isShowing("damage"));
   const isShowingDamageDetails = useRecoilValue(isShowing("damageDetails"));
   const isTraitAcquiredBrawler = useRecoilValue(isTraitAcquired("brawler"));
   const isTraitAcquiredBruiser = useRecoilValue(isTraitAcquired("bruiser"));
@@ -55,137 +56,139 @@ export function Damage() {
     progressQuest({ amount: damageValue, quest: "damage" });
   }, [damageValue, progressQuest, resetQuestProgressDamage]);
 
-  return (
-    <IconDisplay description={<DamagePerSecond />} Icon={IconDamage} tooltip="Total damage">
-      <Stack direction="horizontal" gap={1}>
-        <OverlayTrigger
-          overlay={
-            <Popover>
-              <PopoverHeader className="text-center">
-                <span>Total damage details</span>
-              </PopoverHeader>
+  if (isShowingDamage) {
+    return (
+      <IconDisplay description={<DamagePerSecond />} Icon={IconDamage} tooltip="Total damage">
+        <Stack direction="horizontal" gap={1}>
+          <OverlayTrigger
+            overlay={
+              <Popover>
+                <PopoverHeader className="text-center">
+                  <span>Total damage details</span>
+                </PopoverHeader>
 
-              <PopoverBody>
-                <DetailsTable>
-                  <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>
-                      <span>Weapon:</span>
-                    </td>
-
-                    <td>
-                      <Stack direction="horizontal" gap={1}>
-                        <IconImage className="small" Icon={IconWeaponDamage} />
-
-                        <span>{formatNumber({ value: weaponDamage })}</span>
-                      </Stack>
-                    </td>
-                  </tr>
-
-                  <ElementalDetails slot="weapon" />
-
-                  <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>
-                      <Stack direction="horizontal" gap={1}>
-                        <IconImage className="small" Icon={IconStrength} />
-
-                        <span>Strength:</span>
-                      </Stack>
-                    </td>
-
-                    <td>
-                      <Stack direction="horizontal" gap={1}>
-                        <span>
-                          +
-                          {formatNumber({
-                            value: attributeStatisticStrength,
-                          })}
-                        </span>
-
-                        {attributePowerBonusStrength > 0 && (
-                          <>
-                            {LABEL_SEPARATOR}
-
-                            <IconImage className="small" Icon={IconTomeOfPower} />
-
-                            <span>
-                              {formatNumber({
-                                format: "multiplier",
-                                value: attributePowerBonusStrength,
-                              })}
-                            </span>
-                          </>
-                        )}
-                      </Stack>
-                    </td>
-                  </tr>
-
-                  {questsBonusDamage > 0 && (
+                <PopoverBody>
+                  <DetailsTable>
                     <tr>
                       <td className={CLASS_TABLE_CELL_ITALIC}>
-                        <span>Quest bonus:</span>
+                        <span>Weapon:</span>
                       </td>
 
                       <td>
                         <Stack direction="horizontal" gap={1}>
-                          <IconImage className="small" Icon={IconDamage} />
+                          <IconImage className="small" Icon={IconWeaponDamage} />
 
+                          <span>{formatNumber({ value: weaponDamage })}</span>
+                        </Stack>
+                      </td>
+                    </tr>
+
+                    <ElementalDetails slot="weapon" />
+
+                    <tr>
+                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                        <Stack direction="horizontal" gap={1}>
+                          <IconImage className="small" Icon={IconStrength} />
+
+                          <span>Strength:</span>
+                        </Stack>
+                      </td>
+
+                      <td>
+                        <Stack direction="horizontal" gap={1}>
                           <span>
                             +
                             {formatNumber({
-                              decimals: 0,
-                              format: "percentage",
-                              value: questsBonusDamage,
+                              value: attributeStatisticStrength,
                             })}
                           </span>
+
+                          {attributePowerBonusStrength > 0 && (
+                            <>
+                              {LABEL_SEPARATOR}
+
+                              <IconImage className="small" Icon={IconTomeOfPower} />
+
+                              <span>
+                                {formatNumber({
+                                  format: "multiplier",
+                                  value: attributePowerBonusStrength,
+                                })}
+                              </span>
+                            </>
+                          )}
                         </Stack>
                       </td>
                     </tr>
-                  )}
 
-                  {isTraitAcquiredBruiser && isUnarmed(weaponValue) && (
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage className="small" Icon={IconBruiser} />
+                    {questsBonusDamage > 0 && (
+                      <tr>
+                        <td className={CLASS_TABLE_CELL_ITALIC}>
+                          <span>Quest bonus:</span>
+                        </td>
 
-                          <span>Bruiser:</span>
-                        </Stack>
-                      </td>
+                        <td>
+                          <Stack direction="horizontal" gap={1}>
+                            <IconImage className="small" Icon={IconDamage} />
 
-                      <td>
-                        <span>+{staminaValue}</span>
-                      </td>
-                    </tr>
-                  )}
+                            <span>
+                              +
+                              {formatNumber({
+                                decimals: 0,
+                                format: "percentage",
+                                value: questsBonusDamage,
+                              })}
+                            </span>
+                          </Stack>
+                        </td>
+                      </tr>
+                    )}
 
-                  {isTraitAcquiredBrawler && isUnshielded(shieldValue) && (
-                    <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconImage className="small" Icon={IconBrawler} />
+                    {isTraitAcquiredBruiser && isUnarmed(weaponValue) && (
+                      <tr>
+                        <td className={CLASS_TABLE_CELL_ITALIC}>
+                          <Stack direction="horizontal" gap={1}>
+                            <IconImage className="small" Icon={IconBruiser} />
 
-                          <span>Brawler:</span>
-                        </Stack>
-                      </td>
+                            <span>Bruiser:</span>
+                          </Stack>
+                        </td>
 
-                      <td>
-                        <span>
-                          +{formatNumber({ format: "percentage", value: BRAWLER_DAMAGE_BONUS })}
-                        </span>
-                      </td>
-                    </tr>
-                  )}
-                </DetailsTable>
-              </PopoverBody>
-            </Popover>
-          }
-          trigger={isShowingDamageDetails ? ["focus", "hover"] : []}
-        >
-          <span>{formatNumber({ value: damageValue })}</span>
-        </OverlayTrigger>
+                        <td>
+                          <span>+{staminaValue}</span>
+                        </td>
+                      </tr>
+                    )}
 
-        <DeltasDisplay delta="damage" />
-      </Stack>
-    </IconDisplay>
-  );
+                    {isTraitAcquiredBrawler && isUnshielded(shieldValue) && (
+                      <tr>
+                        <td className={CLASS_TABLE_CELL_ITALIC}>
+                          <Stack direction="horizontal" gap={1}>
+                            <IconImage className="small" Icon={IconBrawler} />
+
+                            <span>Brawler:</span>
+                          </Stack>
+                        </td>
+
+                        <td>
+                          <span>
+                            +{formatNumber({ format: "percentage", value: BRAWLER_DAMAGE_BONUS })}
+                          </span>
+                        </td>
+                      </tr>
+                    )}
+                  </DetailsTable>
+                </PopoverBody>
+              </Popover>
+            }
+            trigger={isShowingDamageDetails ? ["focus", "hover"] : []}
+          >
+            <span>{formatNumber({ value: damageValue })}</span>
+          </OverlayTrigger>
+
+          <DeltasDisplay delta="damage" />
+        </Stack>
+      </IconDisplay>
+    );
+  }
 }

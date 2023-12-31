@@ -41,6 +41,8 @@ export function DodgeChance() {
   const isTraitAcquiredNudist = useRecoilValue(isTraitAcquired("nudist"));
   const ownedItemTomeOfPower = useRecoilValue(ownedItem("tome of power"));
 
+  const { staminaCost } = armorValue;
+
   useDeltaText({
     delta: "dodgeChance",
     format: "percentage",
@@ -127,7 +129,7 @@ export function DodgeChance() {
                         </td>
 
                         <td>
-                          <DodgePenaltyContents staminaCost={armorValue.staminaCost} />
+                          <DodgePenaltyContents staminaCost={staminaCost} />
                         </td>
                       </tr>
                     ) : (
@@ -147,7 +149,7 @@ export function DodgeChance() {
             }
           >
             <span>
-              {isSkillAcquiredEvasion
+              {isSkillAcquiredEvasion && staminaCost !== Number.POSITIVE_INFINITY
                 ? formatNumber({ format: "percentage", value: dodgeChanceValue })
                 : LABEL_EMPTY}
             </span>

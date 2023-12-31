@@ -73,7 +73,7 @@ export const ATTRIBUTES: Record<
     increment: 0.01,
     maximum: 0.75,
     powerBonus: 0.001,
-    shows: ["attackRateDetails"],
+    shows: ["attackRate", "attackRateDetails"],
   },
   strength: {
     base: 0,
@@ -81,7 +81,7 @@ export const ATTRIBUTES: Record<
     Icon: IconStrength,
     increment: 2,
     powerBonus: 0.01,
-    shows: ["damageDetails"],
+    shows: ["damage", "damageDetails"],
   },
   vigor: {
     base: 0,
@@ -98,6 +98,6 @@ export const ATTRIBUTES: Record<
     Icon: IconVitality,
     increment: 15,
     powerBonus: 0.01,
-    shows: ["healthDetails"],
+    shows: ["health", "healthDetails"],
   },
 };

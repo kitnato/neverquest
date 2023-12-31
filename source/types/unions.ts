@@ -215,6 +215,7 @@ export const SHOWING_TYPES = [
   "blockChance",
   "crewHiring",
   "criticalRating",
+  "damage",
   "damageDetails",
   "deflection",
   "dodgeChance",
@@ -235,7 +236,6 @@ export const SHOWING_TYPES = [
   "skills",
   "stamina",
   "staminaDetails",
-  "statistics",
   "traits",
   "weapon",
   "weight",
@@ -355,6 +355,7 @@ export type StateKey =
   | "isRegenerating"
   | "isShowing"
   | "isShowingEverything"
+  | "isShowingStatistics"
   | "isSkillAcquired"
   | "isStageCompleted"
   | "isStageStarted"

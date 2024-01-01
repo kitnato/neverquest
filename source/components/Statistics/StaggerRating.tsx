@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/data/general";
+
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconStability from "@neverquest/icons/stability.svg?react";
 import IconStaggerRating from "@neverquest/icons/stagger-rating.svg?react";
@@ -56,7 +56,7 @@ export function StaggerRating() {
                 <PopoverBody>
                   <DetailsTable>
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                      <td>
                         <span>Chance:</span>
                       </td>
 
@@ -68,7 +68,7 @@ export function StaggerRating() {
                     </tr>
 
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                      <td>
                         <IconDisplay Icon={IconStability} iconProps={{ className: "small" }}>
                           <span>Stability:</span>
                         </IconDisplay>

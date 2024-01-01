@@ -71,10 +71,6 @@ svg {
   }
 }
 
-td.text-end > .hstack {
-  justify-content: end;
-}
-
 .accordion-button {
   box-shadow: none !important;
 }
@@ -105,10 +101,6 @@ td.text-end > .hstack {
   transition: transform 0.5s;
 }
 
-.hstack.gap-1 {
-  gap: 0.35rem !important;
-}
-
 .journal .tab-pane.active {
   display: flex;
   flex-direction: column;
@@ -131,16 +123,16 @@ td.text-end > .hstack {
   z-index: calc($zindex-modal-backdrop + 1);
 }
 
-// Workaround for https://github.com/react-bootstrap/react-bootstrap/issues/6563
 .popover,
 .tooltip {
+  // Workaround for https://github.com/react-bootstrap/react-bootstrap/issues/6563;
   position: fixed;
-}
 
-// Tooltip doesn't have a box-shadow variable, and $popover-box-shadow doesn't control this way.
-.popover.show,
-.tooltip.show > .tooltip-inner {
-  box-shadow: 0 0 4px 1px rgb(0 0 0 / 20%);
+  // Tooltip doesn't have a box-shadow variable, and $popover-box-shadow doesn't control this way.
+  &.show,
+  &.show > .tooltip-inner {
+    box-shadow: 0 0 4px 1px rgb(0 0 0 / 20%);
+  }
 }
 
 .progress-labelled {
@@ -175,20 +167,29 @@ td.text-end > .hstack {
   }
 }
 
+.table-details td:first-child {
+  font-style: italic;
+  text-align: end;
+
+  .icon-display {
+    justify-content: end;
+  }
+}
+
+.tooltip.tooltip.show > .tooltip-inner .icon-display {
+  justify-content: center;
+}
+
 .text-blue {
   color: $blue;
 }
 
-.text-floating {
-  z-index: 100;
-
-  strong {
-    text-shadow:
-      -1px 1px 0 white,
-      1px 1px 0 white,
-      1px -1px 0 white,
-      -1px -1px 0 white;
-  }
+.text-floating strong {
+  text-shadow:
+    -1px 1px 0 white,
+    1px 1px 0 white,
+    1px -1px 0 white,
+    -1px -1px 0 white;
 }
 
 .text-orange {

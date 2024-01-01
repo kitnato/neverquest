@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { GearComparison } from "@neverquest/components/Inventory/GearComparison";
-import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/data/general";
+import { LABEL_UNKNOWN } from "@neverquest/data/general";
 import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react";
 import { isShowing } from "@neverquest/state/isShowing";
 import type { Comparison } from "@neverquest/types/components";
@@ -24,7 +24,7 @@ export function WeightDetail({
     <tr>
       {isShowingWeight ? (
         <>
-          <td className={CLASS_TABLE_CELL_ITALIC}>
+          <td>
             <span>Weight:</span>
           </td>
 

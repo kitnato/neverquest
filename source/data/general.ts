@@ -3,7 +3,6 @@ export const ACCORDION_EVENT_KEY = "0";
 export const CLASS_ANIMATE_PREFIX = "animate__";
 export const CLASS_ANIMATED = `${CLASS_ANIMATE_PREFIX}animated`;
 export const CLASS_FULL_WIDTH_JUSTIFIED = "align-items-center d-flex justify-content-between w-100";
-export const CLASS_TABLE_CELL_ITALIC = "fst-italic text-end";
 
 export const MILLISECONDS_IN_HOUR = 3_600_000;
 export const MILLISECONDS_IN_MINUTE = 60_000;

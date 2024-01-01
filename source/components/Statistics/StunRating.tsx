@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/data/general";
+
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconMight from "@neverquest/icons/might.svg?react";
 import IconStunRating from "@neverquest/icons/stun-rating.svg?react";
@@ -48,7 +48,7 @@ export function StunRating() {
                 <PopoverBody>
                   <DetailsTable>
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                      <td>
                         <span>Chance:</span>
                       </td>
 
@@ -62,7 +62,7 @@ export function StunRating() {
                     </tr>
 
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                      <td>
                         <IconDisplay Icon={IconMight} iconProps={{ className: "small" }}>
                           <span>Might:</span>
                         </IconDisplay>

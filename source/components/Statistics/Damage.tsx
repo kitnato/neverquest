@@ -7,7 +7,7 @@ import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { DamagePerSecond } from "@neverquest/components/Statistics/DamagePerSecond";
 import { ElementalDetails } from "@neverquest/components/Statistics/ElementalDetails";
-import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
+import { LABEL_SEPARATOR } from "@neverquest/data/general";
 import { BRAWLER_DAMAGE_BONUS } from "@neverquest/data/traits";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
@@ -69,7 +69,7 @@ export function Damage() {
                 <PopoverBody>
                   <DetailsTable>
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                      <td>
                         <span>Weapon:</span>
                       </td>
 
@@ -83,7 +83,7 @@ export function Damage() {
                     <ElementalDetails slot="weapon" />
 
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                      <td>
                         <IconDisplay Icon={IconStrength} iconProps={{ className: "small" }}>
                           <span>Strength:</span>
                         </IconDisplay>
@@ -121,7 +121,7 @@ export function Damage() {
 
                     {questsBonusDamage > 0 && (
                       <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>
+                        <td>
                           <span>Quest bonus:</span>
                         </td>
 
@@ -142,7 +142,7 @@ export function Damage() {
 
                     {isTraitAcquiredBruiser && isUnarmed(weaponValue) && (
                       <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>
+                        <td>
                           <IconDisplay Icon={IconBruiser} iconProps={{ className: "small" }}>
                             <span>Bruiser:</span>
                           </IconDisplay>
@@ -156,7 +156,7 @@ export function Damage() {
 
                     {isTraitAcquiredBrawler && isUnshielded(shieldValue) && (
                       <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>
+                        <td>
                           <IconDisplay Icon={IconBrawler} iconProps={{ className: "small" }}>
                             <span>Brawler:</span>
                           </IconDisplay>

@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { CLASS_TABLE_CELL_ITALIC, LABEL_MAXIMUM } from "@neverquest/data/general";
+import { LABEL_MAXIMUM } from "@neverquest/data/general";
 import IconHealth from "@neverquest/icons/health.svg?react";
 import IconPoison from "@neverquest/icons/poison.svg?react";
 import { poisonChance } from "@neverquest/state/monster";
@@ -33,7 +33,7 @@ export function MonsterPoisonRating() {
               <PopoverBody>
                 <DetailsTable>
                   <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>
+                    <td>
                       <span>Chance:</span>
                     </td>
 
@@ -45,7 +45,7 @@ export function MonsterPoisonRating() {
                   </tr>
 
                   <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>
+                    <td>
                       <span>Effect:</span>
                     </td>
 
@@ -67,7 +67,7 @@ export function MonsterPoisonRating() {
                   </tr>
 
                   <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>
+                    <td>
                       <span>Duration:</span>
                     </td>
 

@@ -29,11 +29,11 @@ export function QuestDisplay({
   questClass: QuestClass;
 }) {
   const questProgressValue = useRecoilValue(questProgress(quest));
-  const questStatusValue = useRecoilValue(questStatuses(quest));
+  const questStatusesValue = useRecoilValue(questStatuses(quest));
 
   const completeQuest = useCompleteQuest();
 
-  const questStatus = questStatusValue[progressionIndex];
+  const questStatus = questStatusesValue[progressionIndex];
 
   if (questStatus === undefined) {
     return;
@@ -53,16 +53,15 @@ export function QuestDisplay({
       >
         <CircularProgressbar
           maxValue={progressionMaximum}
-          text={`${formatNumber({ format: "abbreviated", value: cappedProgress })} / ${formatNumber(
-            {
-              format: "abbreviated",
-              value: progressionMaximum,
-            },
-          )}`}
+          text={`${formatNumber({ format: "abbreviated", value: cappedProgress })}/${formatNumber({
+            format: "abbreviated",
+            value: progressionMaximum,
+          })}`}
           value={cappedProgress}
         />
 
         <IconDisplay
+          className="me-2"
           description={
             hidden !== undefined && isQuestOver
               ? description.replace(LABEL_UNKNOWN, hidden)
@@ -75,9 +74,9 @@ export function QuestDisplay({
         </IconDisplay>
       </Stack>
 
-      {questProgressValue >= progressionMaximum && (
+      {questStatus !== "incomplete" && (
         <ToggleButtonGroup
-          className="ms-2"
+          className="me-1"
           name={choiceID}
           onChange={(value) => {
             completeQuest({

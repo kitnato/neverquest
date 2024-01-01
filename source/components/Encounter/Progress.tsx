@@ -52,7 +52,7 @@ export function Progress() {
           placement="bottom"
           trigger={progressReductionValue > 0 ? ["focus", "hover"] : []}
         >
-          <div>
+          <div className="w-100">
             <ProgressMeter />
           </div>
         </OverlayTrigger>

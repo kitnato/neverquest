@@ -10,7 +10,7 @@ import { GearLevelDetail } from "@neverquest/components/Inventory/GearLevelDetai
 import { StaminaCostDetail } from "@neverquest/components/Inventory/StaminaCostDetail";
 import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
 import { type SHIELD_NONE, SHIELD_SPECIFICATIONS } from "@neverquest/data/gear";
-import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/data/general";
+import { LABEL_UNKNOWN } from "@neverquest/data/general";
 import IconBlock from "@neverquest/icons/block.svg?react";
 import IconNone from "@neverquest/icons/none.svg?react";
 import IconStagger from "@neverquest/icons/stagger.svg?react";
@@ -58,7 +58,7 @@ export function ShieldName({
               <AppliedGems gearItem={shield} />
 
               <tr>
-                <td className={CLASS_TABLE_CELL_ITALIC}>
+                <td>
                   <span>Block chance:</span>
                 </td>
 
@@ -92,7 +92,7 @@ export function ShieldName({
                 <tr>
                   {isShowingGearClass ? (
                     <>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                      <td>
                         <span>Class:</span>
                       </td>
 
@@ -129,7 +129,7 @@ export function ShieldName({
                 <tr>
                   {shieldcraftSkill ? (
                     <>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                      <td>
                         <span>Stagger chance:</span>
                       </td>
 

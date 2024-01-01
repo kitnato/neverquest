@@ -71,7 +71,7 @@ export const MONSTER_HEALTH = {
   base: 17,
   bonus: 0.01,
   boss: 1.8,
-  finality: 7777,
+  finality: 17_777,
 };
 
 export const POISON = {

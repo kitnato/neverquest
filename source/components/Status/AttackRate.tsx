@@ -5,7 +5,7 @@ import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { AttackMeter } from "@neverquest/components/Status/AttackMeter";
-import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
+import { LABEL_SEPARATOR } from "@neverquest/data/general";
 import { useAttack } from "@neverquest/hooks/actions/useAttack";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { useTimerDelta } from "@neverquest/hooks/useTimerDelta";
@@ -72,7 +72,7 @@ export function AttackRate() {
       Icon={IconAttackRate}
       tooltip="Total attack rate"
     >
-      <Stack direction="horizontal">
+      <Stack className="w-100" direction="horizontal">
         <OverlayTrigger
           overlay={
             <Popover>
@@ -83,7 +83,7 @@ export function AttackRate() {
               <PopoverBody>
                 <DetailsTable>
                   <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>
+                    <td>
                       <span>{`${isUnarmed(weaponValue) ? "Base" : "Weapon"}:`}</span>
                     </td>
 
@@ -95,7 +95,7 @@ export function AttackRate() {
                   </tr>
 
                   <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>
+                    <td>
                       <IconDisplay Icon={IconWeaponSpeed} iconProps={{ className: "small" }}>
                         <span>Speed:</span>
                       </IconDisplay>

@@ -21,9 +21,12 @@ export function formatEnumeration(list: string[]) {
 function formatFloat({ decimals = 2, value }: { decimals?: number; value: number }) {
   const multiplier = 10 ** decimals;
 
-  return (Math.round(Number.parseFloat((value * multiplier).toFixed(12))) / multiplier)
-    .toFixed(decimals)
-    .toLocaleString();
+  return (
+    Math.round(Number.parseFloat((value * multiplier).toFixed(12))) / multiplier
+  ).toLocaleString(undefined, {
+    maximumFractionDigits: decimals,
+    minimumFractionDigits: decimals,
+  });
 }
 
 export function formatKebabCase(words: string) {

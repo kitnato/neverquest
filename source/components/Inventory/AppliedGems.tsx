@@ -2,7 +2,7 @@ import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
+import { LABEL_SEPARATOR } from "@neverquest/data/general";
 import { ELEMENTALS, GEMS, GEMS_MAXIMUM } from "@neverquest/data/items";
 import { gems } from "@neverquest/state/items";
 import type { GearItem, GearItemUnequipped } from "@neverquest/types";
@@ -19,7 +19,7 @@ export function AppliedGems({ gearItem }: { gearItem: GearItem | GearItemUnequip
   if (length > 0) {
     return (
       <tr>
-        <td className={CLASS_TABLE_CELL_ITALIC}>
+        <td>
           <span>{`Gems (${length} / ${GEMS_MAXIMUM}):`}</span>
         </td>
 

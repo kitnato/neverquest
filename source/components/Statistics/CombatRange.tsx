@@ -4,7 +4,7 @@ import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/data/general";
+import { LABEL_EMPTY } from "@neverquest/data/general";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconMarksmanship from "@neverquest/icons/marksmanship.svg?react";
 import IconRange from "@neverquest/icons/range.svg?react";
@@ -51,7 +51,7 @@ export function CombatRange() {
                 <PopoverBody>
                   <DetailsTable>
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                      <td>
                         <span>Weapon:</span>
                       </td>
 
@@ -63,7 +63,7 @@ export function CombatRange() {
                     </tr>
 
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                      <td>
                         <IconDisplay Icon={IconMarksmanship} iconProps={{ className: "small" }}>
                           <span>Marksmanship:</span>
                         </IconDisplay>

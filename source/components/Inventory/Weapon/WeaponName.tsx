@@ -10,7 +10,7 @@ import { GearLevelDetail } from "@neverquest/components/Inventory/GearLevelDetai
 import { StaminaCostDetail } from "@neverquest/components/Inventory/StaminaCostDetail";
 import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
 import { type WEAPON_NONE, WEAPON_SPECIFICATIONS } from "@neverquest/data/gear";
-import { CLASS_TABLE_CELL_ITALIC, LABEL_UNKNOWN } from "@neverquest/data/general";
+import { LABEL_UNKNOWN } from "@neverquest/data/general";
 import { WEAPON_ABILITY_SKILLS } from "@neverquest/data/skills";
 import IconAmmunition from "@neverquest/icons/ammunition.svg?react";
 import IconGrip from "@neverquest/icons/grip.svg?react";
@@ -69,7 +69,7 @@ export function WeaponName({
               />
 
               <tr>
-                <td className={CLASS_TABLE_CELL_ITALIC}>
+                <td>
                   <span>Damage:</span>
                 </td>
 
@@ -92,7 +92,7 @@ export function WeaponName({
               <AppliedGems gearItem={weapon} />
 
               <tr>
-                <td className={CLASS_TABLE_CELL_ITALIC}>
+                <td>
                   <span>Attack rate:</span>
                 </td>
 
@@ -115,7 +115,7 @@ export function WeaponName({
 
               {showDamagePerSecondValue && (
                 <tr>
-                  <td className={CLASS_TABLE_CELL_ITALIC}>
+                  <td>
                     <span>Damage per second:</span>
                   </td>
 
@@ -147,7 +147,7 @@ export function WeaponName({
 
               {isMelee(weapon) && isShowingGrip && (
                 <tr>
-                  <td className={CLASS_TABLE_CELL_ITALIC}>
+                  <td>
                     <span>Grip:</span>
                   </td>
 
@@ -162,7 +162,7 @@ export function WeaponName({
 
               {isRanged(weapon) && (
                 <tr>
-                  <td className={CLASS_TABLE_CELL_ITALIC}>
+                  <td>
                     <span>Ammunition cost:</span>
                   </td>
 
@@ -188,7 +188,7 @@ export function WeaponName({
               <tr>
                 {isShowingGearClass ? (
                   <>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>
+                    <td>
                       <span>Class:</span>
                     </td>
 
@@ -208,7 +208,7 @@ export function WeaponName({
               <tr>
                 {skillValue ? (
                   <>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>
+                    <td>
                       <span>{capitalizeAll(ability)} chance:</span>
                     </td>
 

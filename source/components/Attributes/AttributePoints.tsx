@@ -20,29 +20,29 @@ export function AttributePoints() {
   });
 
   return (
-    <Stack direction="horizontal">
-      <IconDisplay Icon={IconAttributePoints} tooltip="Available attribute points" />
+    <IconDisplay Icon={IconAttributePoints} tooltip="Available attribute points">
+      <Stack direction="horizontal">
+        <OverlayTrigger
+          overlay={
+            <Popover>
+              <PopoverHeader className="text-center">Attribute point cost</PopoverHeader>
 
-      <DeltasDisplay delta="attributePoints" />
+              <PopoverBody>
+                <div className="d-flex justify-content-center">
+                  <IconDisplay Icon={IconEssence} iconProps={{ className: "small" }}>
+                    <span>{formatNumber({ value: getAttributePointCost(powerLevelValue) })}</span>
+                  </IconDisplay>
+                </div>
+              </PopoverBody>
+            </Popover>
+          }
+          placement="left"
+        >
+          <span>{attributePointsValue}</span>
+        </OverlayTrigger>
 
-      <OverlayTrigger
-        overlay={
-          <Popover>
-            <PopoverHeader className="text-center">Attribute point cost</PopoverHeader>
-
-            <PopoverBody>
-              <div className="d-flex justify-content-center">
-                <IconDisplay Icon={IconEssence} iconProps={{ className: "small" }}>
-                  <span>{formatNumber({ value: getAttributePointCost(powerLevelValue) })}</span>
-                </IconDisplay>
-              </div>
-            </PopoverBody>
-          </Popover>
-        }
-        placement="left"
-      >
-        <span>{attributePointsValue}</span>
-      </OverlayTrigger>
-    </Stack>
+        <DeltasDisplay delta="attributePoints" />
+      </Stack>
+    </IconDisplay>
   );
 }

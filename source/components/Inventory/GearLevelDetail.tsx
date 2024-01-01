@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { GearComparison } from "@neverquest/components/Inventory/GearComparison";
-import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/data/general";
+
 import IconGearLevel from "@neverquest/icons/gear-level.svg?react";
 import { showGearLevel } from "@neverquest/state/settings";
 import type { Comparison } from "@neverquest/types/components";
@@ -18,7 +18,7 @@ export function GearLevelDetail({ comparison, level }: { comparison: Comparison;
 
   return (
     <tr>
-      <td className={CLASS_TABLE_CELL_ITALIC}>
+      <td>
         <span>Gear level:</span>
       </td>
 

@@ -266,7 +266,7 @@ export const QUESTS: Record<
   },
   killingOneStrike: {
     description:
-      "Kill a monster in one strike while at equal or lower power powerLevel than the current stage.",
+      "Kill a monster in one strike while at equal or lower power level than the current stage.",
     progression: [1],
     title: "One Punch Person",
   },
@@ -441,7 +441,7 @@ export const QUESTS: Record<
     title: "Sisyphean expedition",
   },
   stagesEnd: {
-    description: `Reach stage ${LABEL_UNKNOWN}${formatNumber({ value: GROWTH_MAXIMUM })}.`,
+    description: `Reach stage ${formatNumber({ value: GROWTH_MAXIMUM })}.`,
     progression: [GROWTH_MAXIMUM],
     title: "Where does it end?",
   },

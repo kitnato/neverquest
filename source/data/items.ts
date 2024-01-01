@@ -219,7 +219,7 @@ export const TRINKETS: Record<
     item: {
       description: "The wielder is bestowed with lucky finds.",
       name: "antique coin",
-      price: 777,
+      price: 77,
       weight: 2,
     },
   },

@@ -6,7 +6,7 @@ import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { RegenerationMeter } from "@neverquest/components/Reserves/RegenerationMeter";
-import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
+import { LABEL_SEPARATOR } from "@neverquest/data/general";
 import { RESERVES } from "@neverquest/data/reserves";
 import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth";
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
@@ -89,7 +89,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
   }, [isRegeneratingValue, isReserveAtMaximum, regenerationRateValue, setRegenerationDuration]);
 
   return (
-    <Stack className="w-100" direction="horizontal">
+    <Stack direction="horizontal">
       <OverlayTrigger
         overlay={
           <Popover>
@@ -100,7 +100,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
             <PopoverBody>
               <DetailsTable>
                 <tr>
-                  <td className={CLASS_TABLE_CELL_ITALIC}>
+                  <td>
                     <span>Base rate:</span>
                   </td>
 
@@ -112,7 +112,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
                 </tr>
 
                 <tr>
-                  <td className={CLASS_TABLE_CELL_ITALIC}>
+                  <td>
                     <IconDisplay Icon={IconVigor} iconProps={{ className: "small" }}>
                       <span>Vigor:</span>
                     </IconDisplay>
@@ -147,7 +147,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
                 </tr>
 
                 <tr>
-                  <td className={CLASS_TABLE_CELL_ITALIC}>
+                  <td>
                     <span>Base amount:</span>
                   </td>
 
@@ -159,7 +159,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
                 </tr>
 
                 <tr>
-                  <td className={CLASS_TABLE_CELL_ITALIC}>
+                  <td>
                     <IconDisplay Icon={IconFortitude} iconProps={{ className: "small" }}>
                       <span>Fortitude:</span>
                     </IconDisplay>

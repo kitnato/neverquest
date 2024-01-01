@@ -5,7 +5,7 @@ import { useRecoilValue, useResetRecoilState } from "recoil";
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/data/general";
+import { LABEL_EMPTY } from "@neverquest/data/general";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconArmor from "@neverquest/icons/armor.svg?react";
@@ -59,7 +59,7 @@ export function Protection() {
                 <PopoverBody>
                   <DetailsTable>
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                      <td>
                         <span>Armor:</span>
                       </td>
 
@@ -71,7 +71,7 @@ export function Protection() {
                     </tr>
 
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                      <td>
                         <IconDisplay Icon={IconTank} iconProps={{ className: "small" }}>
                           <span>Tank:</span>
                         </IconDisplay>

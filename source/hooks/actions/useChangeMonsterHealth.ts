@@ -3,6 +3,7 @@ import { useRecoilCallback } from "recoil";
 import { AILMENT_PENALTY, LOOTING_RATE } from "@neverquest/data/statistics";
 import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
+import { useProgressStage } from "@neverquest/hooks/actions/useProgressStage";
 import { powerLevel } from "@neverquest/state/attributes";
 import { attackDuration, lootingDuration } from "@neverquest/state/character";
 import { encounter, hasDefeatedFinality, stage } from "@neverquest/state/encounter";
@@ -20,6 +21,7 @@ import { getSnapshotGetter } from "@neverquest/utilities/getters";
 export function useChangeMonsterHealth() {
   const addDelta = useAddDelta();
   const progressQuest = useProgressQuest();
+  const progressStage = useProgressStage();
 
   return useRecoilCallback(
     ({ reset, set, snapshot }) =>
@@ -55,10 +57,15 @@ export function useChangeMonsterHealth() {
 
         if (newHealth <= 0) {
           set(monsterHealth, 0);
-          set(lootingDuration, get(ownedItem("ender hook")) === undefined ? LOOTING_RATE : 1);
 
           reset(attackDuration);
           reset(monsterAttackDuration);
+
+          if (get(ownedItem("ender hook")) === undefined) {
+            set(lootingDuration, LOOTING_RATE);
+          } else {
+            progressStage();
+          }
 
           switch (get(encounter)) {
             case "boss": {
@@ -130,6 +137,6 @@ export function useChangeMonsterHealth() {
           set(monsterHealth, newHealth);
         }
       },
-    [addDelta, progressQuest],
+    [addDelta, progressQuest, progressStage],
   );
 }

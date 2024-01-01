@@ -6,7 +6,7 @@ import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { Regeneration } from "@neverquest/components/Reserves/Regeneration";
 import { ReserveMeter } from "@neverquest/components/Reserves/ReserveMeter";
-import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
+import { LABEL_SEPARATOR } from "@neverquest/data/general";
 import { RESERVES } from "@neverquest/data/reserves";
 import IconEndurance from "@neverquest/icons/endurance.svg?react";
 import IconStamina from "@neverquest/icons/stamina.svg?react";
@@ -45,7 +45,7 @@ export function Stamina() {
                   <PopoverBody>
                     <DetailsTable>
                       <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>
+                        <td>
                           <span>Base:</span>
                         </td>
 
@@ -57,7 +57,7 @@ export function Stamina() {
                       </tr>
 
                       <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>
+                        <td>
                           <IconDisplay Icon={IconEndurance} iconProps={{ className: "small" }}>
                             <span>Endurance:</span>
                           </IconDisplay>
@@ -97,7 +97,7 @@ export function Stamina() {
 
                       {questsBonusStamina > 0 && (
                         <tr>
-                          <td className={CLASS_TABLE_CELL_ITALIC}>
+                          <td>
                             <span>Quest bonus:</span>
                           </td>
 

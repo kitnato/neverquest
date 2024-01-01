@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY } from "@neverquest/data/general";
+import { LABEL_EMPTY } from "@neverquest/data/general";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconBleedRating from "@neverquest/icons/bleed-rating.svg?react";
 import IconBleed from "@neverquest/icons/bleed.svg?react";
@@ -53,7 +53,7 @@ export function BleedRating() {
                 <PopoverBody>
                   <DetailsTable>
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                      <td>
                         <span>Chance on hit:</span>
                       </td>
 
@@ -67,7 +67,7 @@ export function BleedRating() {
                     </tr>
 
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                      <td>
                         <IconDisplay Icon={IconCruelty} iconProps={{ className: "small" }}>
                           <span>Cruelty:</span>
                         </IconDisplay>
@@ -85,7 +85,7 @@ export function BleedRating() {
                     </tr>
 
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                      <td>
                         <span>Bleed damage:</span>
                       </td>
 

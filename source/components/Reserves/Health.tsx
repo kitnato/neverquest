@@ -6,7 +6,7 @@ import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { Regeneration } from "@neverquest/components/Reserves/Regeneration";
 import { ReserveMeter } from "@neverquest/components/Reserves/ReserveMeter";
-import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
+import { LABEL_SEPARATOR } from "@neverquest/data/general";
 import { RESERVES } from "@neverquest/data/reserves";
 import { useTimerDelta } from "@neverquest/hooks/useTimerDelta";
 import IconHealth from "@neverquest/icons/health.svg?react";
@@ -54,7 +54,7 @@ export function Health() {
                   <PopoverBody>
                     <DetailsTable>
                       <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>
+                        <td>
                           <span>Base:</span>
                         </td>
 
@@ -66,7 +66,7 @@ export function Health() {
                       </tr>
 
                       <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>
+                        <td>
                           <IconDisplay Icon={IconVitality} iconProps={{ className: "small" }}>
                             <span>Vitality:</span>
                           </IconDisplay>
@@ -106,7 +106,7 @@ export function Health() {
 
                       {questsBonusHealth > 0 && (
                         <tr>
-                          <td className={CLASS_TABLE_CELL_ITALIC}>
+                          <td>
                             <span>Quest bonus:</span>
                           </td>
 

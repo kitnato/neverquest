@@ -5,7 +5,7 @@ import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { RecoveryMeter } from "@neverquest/components/Status/RecoveryMeter";
-import { CLASS_TABLE_CELL_ITALIC } from "@neverquest/data/general";
+
 import { RECOVERY_RATE } from "@neverquest/data/statistics";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { useTimerDelta } from "@neverquest/hooks/useTimerDelta";
@@ -45,7 +45,7 @@ export function Recovery() {
       Icon={IconRecovery}
       tooltip="Recovery rate"
     >
-      <Stack direction="horizontal">
+      <Stack className="w-100" direction="horizontal">
         <OverlayTrigger
           overlay={
             <Popover>
@@ -56,7 +56,7 @@ export function Recovery() {
               <PopoverBody>
                 <DetailsTable>
                   <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>
+                    <td>
                       <span>Base:</span>
                     </td>
 
@@ -66,7 +66,7 @@ export function Recovery() {
                   </tr>
 
                   <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>
+                    <td>
                       <IconDisplay Icon={IconResilience} iconProps={{ className: "small" }}>
                         <span>Resilience:</span>
                       </IconDisplay>

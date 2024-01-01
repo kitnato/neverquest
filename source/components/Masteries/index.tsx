@@ -26,7 +26,7 @@ export function Masteries() {
         <AccordionItem eventKey={ACCORDION_EVENT_KEY}>
           <AccordionHeader>
             <IconDisplay Icon={IconMasteries} tooltip="Masteries">
-              Masteries
+              <span>Masteries</span>
             </IconDisplay>
           </AccordionHeader>
 

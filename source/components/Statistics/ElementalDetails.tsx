@@ -2,7 +2,7 @@ import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { CLASS_TABLE_CELL_ITALIC, LABEL_SEPARATOR } from "@neverquest/data/general";
+import { LABEL_SEPARATOR } from "@neverquest/data/general";
 import { ELEMENTALS, GEMS } from "@neverquest/data/items";
 import { armor, elementalEffects, weapon } from "@neverquest/state/gear";
 import { gems } from "@neverquest/state/items";
@@ -19,7 +19,7 @@ export function ElementalDetails({ slot }: { slot: "armor" | "weapon" }) {
   if (gemsValue.length > 0) {
     return (
       <tr>
-        <td className={CLASS_TABLE_CELL_ITALIC}>
+        <td>
           <span>Elemental:</span>
         </td>
 

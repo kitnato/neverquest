@@ -141,7 +141,7 @@ export const CREW: Record<
     Icon: IconOccultist,
     interaction: "Ritual",
     monologues: {
-      1: "Prepared to transcend your mind?",
+      1: "Prepared to transcend your limits?",
       [GROWTH_MAXIMUM]: MONOLOGUE_EMPTY,
       [LEVELLING_MAXIMUM]: "I can't see any more.",
     },

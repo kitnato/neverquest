@@ -25,17 +25,21 @@ export function IconDisplay({
 }) {
   return (
     <Stack
-      className={className}
+      className={`icon-display${className === undefined ? "" : ` ${className}`}`}
       direction="horizontal"
       gap={iconProps?.className?.includes("small") ? 1 : gap}
     >
       <IconImage Icon={Icon} tooltip={tooltip} {...iconProps} />
 
-      <Stack gap={1}>
-        {children}
+      {description === undefined ? (
+        children
+      ) : (
+        <Stack gap={1}>
+          {children}
 
-        <div className="small text-muted">{description}</div>
-      </Stack>
+          <div className="small text-muted">{description}</div>
+        </Stack>
+      )}
     </Stack>
   );
 }

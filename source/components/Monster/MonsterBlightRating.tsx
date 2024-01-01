@@ -3,12 +3,7 @@ import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import {
-  CLASS_TABLE_CELL_ITALIC,
-  LABEL_EMPTY,
-  LABEL_MAXIMUM,
-  PERCENTAGE_POINTS,
-} from "@neverquest/data/general";
+import { LABEL_EMPTY, LABEL_MAXIMUM, PERCENTAGE_POINTS } from "@neverquest/data/general";
 import IconBlight from "@neverquest/icons/blight.svg?react";
 import IconStamina from "@neverquest/icons/stamina.svg?react";
 import { blightChance } from "@neverquest/state/monster";
@@ -38,7 +33,7 @@ export function MonsterBlightRating() {
               <PopoverBody>
                 <DetailsTable>
                   <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>
+                    <td>
                       <span>Chance:</span>
                     </td>
 
@@ -50,7 +45,7 @@ export function MonsterBlightRating() {
                   </tr>
 
                   <tr>
-                    <td className={CLASS_TABLE_CELL_ITALIC}>
+                    <td>
                       <span>Effect:</span>
                     </td>
 

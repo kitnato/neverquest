@@ -1,10 +1,10 @@
 import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
-import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { CLASS_TABLE_CELL_ITALIC, LABEL_EMPTY, LABEL_SEPARATOR } from "@neverquest/data/general";
+import { LABEL_EMPTY } from "@neverquest/data/general";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconCriticalChance from "@neverquest/icons/critical-chance.svg?react";
 import IconCriticalDamage from "@neverquest/icons/critical-damage.svg?react";
@@ -54,17 +54,18 @@ export function CriticalRating() {
                 <PopoverBody>
                   <DetailsTable>
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                      <td>
                         <IconDisplay Icon={IconDexterity} iconProps={{ className: "small" }}>
                           <span>Dexterity:</span>
                         </IconDisplay>
                       </td>
 
                       <td>
-                        <Stack direction="horizontal" gap={1}>
+                        <Stack gap={1}>
                           <IconDisplay Icon={IconCriticalChance} iconProps={{ className: "small" }}>
                             <span>
                               {formatNumber({
+                                decimals: 0,
                                 format: "percentage",
                                 value: attributeStatisticDexterity,
                               })}
@@ -73,35 +74,28 @@ export function CriticalRating() {
                           </IconDisplay>
 
                           {attributePowerBonusDexterity > 0 && (
-                            <>
-                              {LABEL_SEPARATOR}
-
-                              <IconDisplay
-                                Icon={IconTomeOfPower}
-                                iconProps={{ className: "small" }}
-                              >
-                                <span>
-                                  {formatNumber({
-                                    format: "multiplier",
-                                    value: attributePowerBonusDexterity,
-                                  })}
-                                </span>
-                              </IconDisplay>
-                            </>
+                            <IconDisplay Icon={IconTomeOfPower} iconProps={{ className: "small" }}>
+                              <span>
+                                {formatNumber({
+                                  format: "multiplier",
+                                  value: attributePowerBonusDexterity,
+                                })}
+                              </span>
+                            </IconDisplay>
                           )}
                         </Stack>
                       </td>
                     </tr>
 
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                      <td>
                         <IconDisplay Icon={IconPerception} iconProps={{ className: "small" }}>
                           <span>Perception:</span>
                         </IconDisplay>
                       </td>
 
                       <td>
-                        <Stack direction="horizontal" gap={1}>
+                        <Stack gap={1}>
                           <IconDisplay Icon={IconCriticalDamage} iconProps={{ className: "small" }}>
                             <span>
                               {formatNumber({
@@ -114,28 +108,21 @@ export function CriticalRating() {
                           </IconDisplay>
 
                           {attributePowerBonusPerception > 0 && (
-                            <>
-                              {LABEL_SEPARATOR}
-
-                              <IconDisplay
-                                Icon={IconTomeOfPower}
-                                iconProps={{ className: "small" }}
-                              >
-                                <span>
-                                  {formatNumber({
-                                    format: "multiplier",
-                                    value: attributePowerBonusPerception,
-                                  })}
-                                </span>
-                              </IconDisplay>
-                            </>
+                            <IconDisplay Icon={IconTomeOfPower} iconProps={{ className: "small" }}>
+                              <span>
+                                {formatNumber({
+                                  format: "multiplier",
+                                  value: attributePowerBonusPerception,
+                                })}
+                              </span>
+                            </IconDisplay>
                           )}
                         </Stack>
                       </td>
                     </tr>
 
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                      <td>
                         <span>Critical strike damage:</span>
                       </td>
 

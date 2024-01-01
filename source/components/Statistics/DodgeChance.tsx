@@ -5,12 +5,7 @@ import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { DodgePenaltyContents } from "@neverquest/components/Inventory/Armor/DodgePenaltyContents";
-import {
-  CLASS_TABLE_CELL_ITALIC,
-  LABEL_EMPTY,
-  LABEL_SEPARATOR,
-  LABEL_UNKNOWN,
-} from "@neverquest/data/general";
+import { LABEL_EMPTY, LABEL_SEPARATOR, LABEL_UNKNOWN } from "@neverquest/data/general";
 import { NUDIST_DODGE_BONUS } from "@neverquest/data/traits";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconAgility from "@neverquest/icons/agility.svg?react";
@@ -66,7 +61,7 @@ export function DodgeChance() {
                 <PopoverBody>
                   <DetailsTable>
                     <tr>
-                      <td className={CLASS_TABLE_CELL_ITALIC}>
+                      <td>
                         <IconDisplay Icon={IconAgility} iconProps={{ className: "small" }}>
                           <span>Agility:</span>
                         </IconDisplay>
@@ -104,7 +99,7 @@ export function DodgeChance() {
 
                     {isTraitAcquiredNudist && isUnarmored(armorValue) && (
                       <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>
+                        <td>
                           <IconDisplay Icon={IconNudist} iconProps={{ className: "small" }}>
                             <span>Nudist:</span>
                           </IconDisplay>
@@ -118,7 +113,7 @@ export function DodgeChance() {
 
                     {isShowingDodgePenalty ? (
                       <tr>
-                        <td className={CLASS_TABLE_CELL_ITALIC}>
+                        <td>
                           <IconDisplay Icon={IconDodgePenalty} iconProps={{ className: "small" }}>
                             <span>Armor penalty:</span>
                           </IconDisplay>

@@ -1,7 +1,6 @@
 import { atom, atomFamily, selector } from "recoil";
 
-import { CREW } from "@neverquest/data/caravan";
-import { MONOLOGUE_EMPTY } from "@neverquest/data/general";
+import { CREW, MONOLOGUE_EMPTY } from "@neverquest/data/caravan";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import type { Armor, Melee, MerchantInventoryItem, Ranged, Shield } from "@neverquest/types";
 import { CREW_TYPES, type Crew, type CrewStatus } from "@neverquest/types/unions";

@@ -3,12 +3,12 @@ import { Button, Modal, ModalBody, ModalHeader, ModalTitle, Stack } from "react-
 import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { Infusion } from "@neverquest/components/Inventory/Inheritable/Infusion";
+import { EssenceBonus } from "@neverquest/components/Inventory/Inheritable/Infusion/EssenceBonus";
 import { HatchingProgress } from "@neverquest/components/Inventory/Inheritable/Infusion/HatchingProgress";
-import { Infuse } from "@neverquest/components/Inventory/Inheritable/Infusion/Infuse";
 import { InfusionLevel } from "@neverquest/components/Inventory/Inheritable/Infusion/InfusionLevel";
 import { InfusionProgress } from "@neverquest/components/Inventory/Inheritable/Infusion/InfusionProgress";
-import { EssenceBonus } from "@neverquest/components/Statistics/EssenceBonus";
-import { PowerBonusBoost } from "@neverquest/components/Statistics/PowerBonusBoost";
+import { PowerBonusBoost } from "@neverquest/components/Inventory/Inheritable/Infusion/PowerBonusBoost";
 import { INFUSABLES } from "@neverquest/data/items";
 import { canInfuseMysteriousEgg } from "@neverquest/state/inventory";
 import type { Infusable } from "@neverquest/types/unions";
@@ -63,7 +63,7 @@ export function InfusionInspect({ infusable }: { infusable: Infusable }) {
 
                 <InfusionProgress infusable={infusable} />
 
-                <Infuse infusable={infusable} />
+                <Infusion infusable={infusable} />
               </Stack>
             </Stack>
           </ModalBody>

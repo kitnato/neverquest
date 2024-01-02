@@ -3,14 +3,15 @@ import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { Hatch } from "@neverquest/components/Inventory/Inheritable/Infusion/Hatch";
-import { INFUSION_DELTA, LABEL_NO_ESSENCE, LEVELLING_MAXIMUM } from "@neverquest/data/general";
+import { LABEL_NO_ESSENCE } from "@neverquest/data/general";
+import { INFUSION_DELTA } from "@neverquest/data/items";
 import { useInfuse } from "@neverquest/hooks/actions/useInfuse";
 import { useAnimation } from "@neverquest/hooks/useAnimation";
-import { infusionLevel, infusionStep } from "@neverquest/state/items";
+import { infusionStep, isInfusionAtMaximum } from "@neverquest/state/items";
 import type { Infusable } from "@neverquest/types/unions";
 
-export function Infuse({ infusable }: { infusable: Infusable }) {
-  const infusionLevelValue = useRecoilValue(infusionLevel(infusable));
+export function Infusion({ infusable }: { infusable: Infusable }) {
+  const isInfusionAtMaximumValue = useRecoilValue(isInfusionAtMaximum(infusable));
   const infusionStepValue = useRecoilValue(infusionStep(infusable));
 
   const [isInfusing, setIsInfusing] = useState(false);
@@ -18,12 +19,12 @@ export function Infuse({ infusable }: { infusable: Infusable }) {
 
   const infuse = useInfuse();
 
-  const isInfusionAtMaximum = infusionLevelValue >= LEVELLING_MAXIMUM;
   const isInfusionPossible = infusionStepValue > 0;
-  const canInfuse = isInfusionPossible && !isInfusionAtMaximum;
+  const canInfuse = isInfusionPossible && !isInfusionAtMaximumValue;
 
   const onStop = () => {
     setIsInfusing(false);
+    setInfusionDelta(0);
   };
 
   useAnimation({
@@ -40,13 +41,12 @@ export function Infuse({ infusable }: { infusable: Infusable }) {
   });
 
   useEffect(() => {
-    if (!isInfusing || isInfusionAtMaximum || !isInfusionPossible) {
-      setIsInfusing(false);
-      setInfusionDelta(0);
+    if (!isInfusing || isInfusionAtMaximumValue || !isInfusionPossible) {
+      onStop();
     }
-  }, [isInfusing, isInfusionAtMaximum, isInfusionPossible]);
+  }, [isInfusing, isInfusionAtMaximumValue, isInfusionPossible]);
 
-  return isInfusionAtMaximum && infusable === "mysterious egg" ? (
+  return isInfusionAtMaximumValue && infusable === "mysterious egg" ? (
     <Hatch />
   ) : (
     <OverlayTrigger
@@ -54,7 +54,7 @@ export function Infuse({ infusable }: { infusable: Infusable }) {
         <Tooltip>
           {!isInfusionPossible && <div>{LABEL_NO_ESSENCE}</div>}
 
-          {isInfusionAtMaximum && <div>Infusion limit reached.</div>}
+          {isInfusionAtMaximumValue && <div>Infusion limit reached.</div>}
         </Tooltip>
       }
       trigger={canInfuse ? [] : ["focus", "hover"]}

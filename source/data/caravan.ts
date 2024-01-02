@@ -8,7 +8,6 @@ import type {
 import {
   GROWTH_MAXIMUM,
   LEVELLING_MAXIMUM,
-  MONOLOGUE_EMPTY,
   RETIREMENT_STAGE_MINIMUM,
 } from "@neverquest/data/general";
 import { INFUSABLES, TRINKETS } from "@neverquest/data/items";
@@ -26,6 +25,8 @@ import type { SVGIcon } from "@neverquest/types/components";
 import type { Crew, Grip } from "@neverquest/types/unions";
 
 export const AMMUNITION_PRICE = 5;
+
+export const MONOLOGUE_EMPTY = "...";
 
 export const CREW: Record<
   Crew,

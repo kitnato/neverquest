@@ -184,10 +184,12 @@ export function getGearElementalEffects({
         damage: Math.round(
           effector * getFromRange({ factor: (amount - 1) / (GEMS_MAXIMUM - 1), ...damage }),
         ),
-        duration: getFromRange({
-          factor: (amount - 1) / (GEMS_MAXIMUM - 1),
-          ...duration,
-        }),
+        duration: Math.round(
+          getFromRange({
+            factor: (amount - 1) / (GEMS_MAXIMUM - 1),
+            ...duration,
+          }),
+        ),
       };
     }
 
@@ -209,9 +211,7 @@ export function getGearElementalEffects({
 }
 
 export function getFromRange({ factor, maximum, minimum }: GeneratorRange & { factor?: number }) {
-  const value = (factor ?? Math.random()) * (maximum - minimum) + minimum;
-
-  return Number.isInteger(minimum) && Number.isInteger(maximum) ? Math.round(value) : value;
+  return (factor ?? Math.random()) * (maximum - minimum) + minimum;
 }
 
 export function getGearPrice({
@@ -227,7 +227,9 @@ export function getGearPrice({
 }
 
 export function getGemFittingCost(fitted: number) {
-  return getFromRange({ factor: fitted / (GEMS_MAXIMUM - 1), ...GEM_FITTING_COST_RANGE });
+  return Math.round(
+    getFromRange({ factor: fitted / (GEMS_MAXIMUM - 1), ...GEM_FITTING_COST_RANGE }),
+  );
 }
 
 export function getLinearMapping({ offset, stage }: { offset: number; stage: number }) {
@@ -299,20 +301,11 @@ export function getRange({
   modifier?: number;
   ranges: [GeneratorRange, GeneratorRange];
 }): GeneratorRange {
-  const maximumResult =
-    getFromRange({ factor, maximum: ranges[1].maximum, minimum: ranges[0].maximum }) * modifier;
-  const minimumResult =
-    getFromRange({ factor, maximum: ranges[1].minimum, minimum: ranges[0].minimum }) * modifier;
-
   return {
     maximum:
-      Number.isInteger(ranges[0].maximum) && Number.isInteger(ranges[1].maximum)
-        ? Math.round(maximumResult)
-        : maximumResult,
+      getFromRange({ factor, maximum: ranges[1].maximum, minimum: ranges[0].maximum }) * modifier,
     minimum:
-      Number.isInteger(ranges[0].minimum) && Number.isInteger(ranges[1].minimum)
-        ? Math.round(minimumResult)
-        : minimumResult,
+      getFromRange({ factor, maximum: ranges[1].minimum, minimum: ranges[0].minimum }) * modifier,
   };
 }
 
@@ -390,9 +383,9 @@ export function getShieldRanges({ factor, gearClass }: { factor: number; gearCla
 }
 
 // https://en.wikipedia.org/wiki/Sigmoid_function
-// f(1) = ~0, f(38) = ~0.43, f(50) = ~0.78, f(GROWTH_MAXIMUM) = ~1
+// f(0-1) = ~0, f(38) = ~0.43, f(50) = ~0.78, f(GROWTH_MAXIMUM) = ~1
 export function getSigmoid(x: number) {
-  return 1 / (1 + Math.pow(Math.E, -0.13 * (x - 40))) - 0.006;
+  return 1 / (1 + Math.pow(Math.E, -0.13 * (x - 45)) - 0.016);
 }
 
 export function getSnapshotGetter({ getLoadable }: Snapshot) {

@@ -1,9 +1,8 @@
-import { atom, selector } from "recoil";
+import { atom, atomFamily, selector } from "recoil";
 
 import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
-import { gems } from "@neverquest/state/items";
-import type { Armor, Shield, Weapon } from "@neverquest/types";
+import type { Armor, GemItem, Shield, Weapon } from "@neverquest/types";
 import { getGearElementalEffects, getTotalElementalEffects } from "@neverquest/utilities/getters";
 import { withStateKey } from "@neverquest/utilities/helpers";
 
@@ -58,6 +57,14 @@ export const armor = withStateKey("armor", (key) =>
   atom<Armor | typeof ARMOR_NONE>({
     default: ARMOR_NONE,
     effects: [handleLocalStorage({ key })],
+    key,
+  }),
+);
+
+export const gems = withStateKey("gems", (key) =>
+  atomFamily<GemItem[], string>({
+    default: [],
+    effects: (ID) => [handleLocalStorage({ key, parameter: ID })],
     key,
   }),
 );

@@ -14,7 +14,7 @@ export function InfusionLevel({ infusable }: { infusable: Infusable }) {
 
   return (
     <Stack direction="horizontal" gap={1}>
-      <InfusionLevelDisplay infusable={infusable} overlayPlacement="top" />
+      <InfusionLevelDisplay infusable={infusable} />
 
       <DeltasDisplay delta="infusionLevel" />
     </Stack>

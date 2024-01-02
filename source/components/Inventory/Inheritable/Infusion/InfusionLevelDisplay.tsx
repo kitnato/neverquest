@@ -9,7 +9,7 @@ import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function InfusionLevelDisplay({
   infusable,
-  overlayPlacement = "bottom",
+  overlayPlacement,
 }: {
   infusable: Infusable;
   overlayPlacement?: Placement;

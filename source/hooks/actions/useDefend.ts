@@ -30,7 +30,7 @@ import {
   monsterElement,
   poisonChance,
 } from "@neverquest/state/monster";
-import { blight, isPoisoned, poisonDuration, poisonLength } from "@neverquest/state/reserves";
+import { blight, isPoisoned, poison, poisonDuration } from "@neverquest/state/reserves";
 import {
   blockChance,
   deflectionChance,
@@ -286,7 +286,7 @@ export function useDefend() {
             } else {
               progressQuest({ quest: "poisoning" });
 
-              set(poisonDuration, get(poisonLength));
+              set(poison, get(poisonDuration));
 
               deltaHealth.push({
                 color: "text-muted",

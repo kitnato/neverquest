@@ -18,6 +18,7 @@ export const CONQUEST_TYPES = [
   "killing",
   "looting",
   "blocking",
+  "killingBoss",
   "staggering",
   "bleeding",
   "bleedingKill",
@@ -28,9 +29,9 @@ export const CONQUEST_TYPES = [
   "dodging",
   "critical",
   "criticalKilling",
+  "exhausting",
   "executing",
   "bandaging",
-  "killingBoss",
   "burning",
   "freezing",
   "shocking",
@@ -108,6 +109,9 @@ export type Delta =
 
 export const ELEMENTAL_TYPES = ["lightning", "fire", "ice"] as const;
 export type Elemental = (typeof ELEMENTAL_TYPES)[number];
+
+export const FINALITY_TYPES = ["res cogitans", "res dominus"] as const;
+export type Finality = (typeof FINALITY_TYPES)[number];
 
 export const GEAR_TYPES = ["weapon", "armor", "shield"] as const;
 export type Gear = (typeof GEAR_TYPES)[number];
@@ -202,7 +206,6 @@ export const ROUTINE_TYPES = [
   "retiring",
   "purgingEssence",
   "purgingMemories",
-  "acquiringAntiqueCoin",
   "traits",
 ] as const;
 export type Routine = (typeof ROUTINE_TYPES)[number];
@@ -284,7 +287,6 @@ export type StateKey =
   | "bleedingDeltaLength"
   | "bleedRating"
   | "blight"
-  | "blightAmount"
   | "blightChance"
   | "blightMagnitude"
   | "blockChance"
@@ -305,6 +307,7 @@ export type StateKey =
   | "criticalStrike"
   | "damage"
   | "damagePerSecond"
+  | "defeatedFinality"
   | "deflectionChance"
   | "deltas"
   | "distance"
@@ -321,7 +324,6 @@ export type StateKey =
   | "expandedMasteries"
   | "fletcherInventory"
   | "gems"
-  | "hasDefeatedFinality"
   | "hasEnoughAmmunition"
   | "hasLooted"
   | "hasMonsterClosed"
@@ -342,6 +344,7 @@ export type StateKey =
   | "isGameOver"
   | "isHealthAtMaximum"
   | "isHealthLow"
+  | "isInfusionAtMaximum"
   | "isInventoryOpen"
   | "isInvulnerable"
   | "isLootAvailable"
@@ -391,9 +394,9 @@ export type StateKey =
   | "parryChance"
   | "parryDamage"
   | "parryRating"
+  | "poison"
   | "poisonChance"
   | "poisonDuration"
-  | "poisonLength"
   | "poisonMagnitude"
   | "powerLevel"
   | "progress"
@@ -465,7 +468,6 @@ export const TRIUMPH_TYPES = [
   "survivingNoAttributes",
   "killingOneStrike",
   "killingStage",
-  "exhausting",
   "damage",
   "protection",
   "essenceCount",
@@ -475,9 +477,10 @@ export const TRIUMPH_TYPES = [
   "skillsAll",
   "masteriesAll",
   "traitsAll",
+  "acquiringAntiqueCoin",
+  "killingResDominus",
   "powerLevelUltra",
   "stagesEnd",
-  "killingResDominus",
   "acquiringFamiliar",
   "killingResCogitans",
   "deciding",

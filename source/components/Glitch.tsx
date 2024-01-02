@@ -73,14 +73,16 @@ export function Glitch() {
   );
   const interval = useMemo(
     () =>
-      getFromRange(
-        getRange({
-          factor,
-          ranges: [
-            { maximum: 60_000, minimum: 55_000 },
-            { maximum: 12_000, minimum: 10_000 },
-          ],
-        }),
+      Math.round(
+        getFromRange(
+          getRange({
+            factor,
+            ranges: [
+              { maximum: 60_000, minimum: 55_000 },
+              { maximum: 12_000, minimum: 10_000 },
+            ],
+          }),
+        ),
       ),
     [factor],
   );
@@ -100,14 +102,16 @@ export function Glitch() {
             setGlitchingElements((elements) => ({
               ...elements,
               [nanoid()]: {
-                duration: getFromRange(
-                  getRange({
-                    factor,
-                    ranges: [
-                      { maximum: 600, minimum: 400 },
-                      { maximum: 3200, minimum: 2800 },
-                    ],
-                  }),
+                duration: Math.round(
+                  getFromRange(
+                    getRange({
+                      factor,
+                      ranges: [
+                        { maximum: 600, minimum: 400 },
+                        { maximum: 3200, minimum: 2800 },
+                      ],
+                    }),
+                  ),
                 ),
                 element,
                 latency: LATENCY,

@@ -48,8 +48,14 @@ export function useAcquireItem() {
           progressQuest({ quest: "acquiringGems" });
         }
 
-        if (isTrinketItem(item) && item.name === "antique coin") {
-          progressQuest({ quest: "acquiringAntiqueCoin" });
+        if (isTrinketItem(item)) {
+          if (item.name === "antique coin") {
+            progressQuest({ quest: "acquiringAntiqueCoin" });
+          }
+
+          if (item.name === "familiar") {
+            progressQuest({ quest: "acquiringFamiliar" });
+          }
         }
 
         set(inventory, (currentInventory) => [...currentInventory, item]);

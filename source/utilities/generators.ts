@@ -50,9 +50,11 @@ export function generateArmor({
       factor,
       ...ARMOR_SPECIFICATIONS[gearClass],
     }),
-    protection: getFromRange(protection),
-    staminaCost: isGeneratorRange(staminaCost) ? getFromRange(staminaCost) : staminaCost,
-    weight: getFromRange(weight),
+    protection: Math.round(getFromRange(protection)),
+    staminaCost: isGeneratorRange(staminaCost)
+      ? Math.round(getFromRange(staminaCost))
+      : staminaCost,
+    weight: Math.round(getFromRange(weight)),
   };
 }
 
@@ -75,7 +77,7 @@ export function generateMeleeWeapon({
 
   return {
     abilityChance: getFromRange(abilityChance),
-    damage: getFromRange(damage),
+    damage: Math.round(getFromRange(damage)),
     gearClass,
     grip,
     ID: nanoid(),
@@ -89,9 +91,9 @@ export function generateMeleeWeapon({
       ...generatorParameters,
     }),
     price: getGearPrice({ factor, ...WEAPON_BASE }),
-    rate: getFromRange(rate),
-    staminaCost: getFromRange(staminaCost),
-    weight: getFromRange(weight),
+    rate: Math.round(getFromRange(rate)),
+    staminaCost: Math.round(getFromRange(staminaCost)),
+    weight: Math.round(getFromRange(weight)),
   };
 }
 
@@ -112,8 +114,8 @@ export function generateRangedWeapon({
 
   return {
     abilityChance: getFromRange(abilityChance),
-    ammunitionCost: getFromRange(ammunitionCost),
-    damage: getFromRange(damage),
+    ammunitionCost: Math.round(getFromRange(ammunitionCost)),
+    damage: Math.round(getFromRange(damage)),
     gearClass,
     ID: nanoid(),
     level,
@@ -126,10 +128,10 @@ export function generateRangedWeapon({
       ...generatorParameters,
     }),
     price: getGearPrice({ factor, ...WEAPON_BASE }),
-    range: getFromRange(range),
-    rate: getFromRange(rate),
-    staminaCost: getFromRange(staminaCost),
-    weight: getFromRange(weight),
+    range: Math.round(getFromRange(range)),
+    rate: Math.round(getFromRange(rate)),
+    staminaCost: Math.round(getFromRange(staminaCost)),
+    weight: Math.round(getFromRange(weight)),
   };
 }
 
@@ -163,8 +165,8 @@ export function generateShield({
       factor,
       ...SHIELD_SPECIFICATIONS[gearClass],
     }),
-    stagger: stagger === undefined ? 0 : getFromRange(stagger),
-    staminaCost: getFromRange(staminaCost),
-    weight: getFromRange(weight),
+    stagger: stagger === undefined ? 0 : Math.round(getFromRange(stagger)),
+    staminaCost: Math.round(getFromRange(staminaCost)),
+    weight: Math.round(getFromRange(weight)),
   };
 }

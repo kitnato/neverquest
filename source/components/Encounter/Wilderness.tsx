@@ -17,24 +17,22 @@ export function Wilderness() {
   const isStageStartedValue = useRecoilValue(isStageStarted);
   const isStageCompletedValue = useRecoilValue(isStageCompleted);
 
-  if (encounterValue === "void") {
-    return (
-      <Card className={getAnimationClass({ animation: "flipInX" })}>
-        <CardBody>
-          <IconDisplay gap={5} Icon={IconVoid} tooltip="Void">
-            <span className="fst-italic">A shattering emptiness lingers ...</span>
-          </IconDisplay>
-        </CardBody>
-      </Card>
-    );
-  }
-
   if (isStageCompletedValue) {
     return (
       <Card className={getAnimationClass({ animation: "flipInX" })}>
         <CardBody>
           <IconDisplay gap={5} Icon={IconRemains} tooltip="Remains">
             <span className="fst-italic">Everything is dead.</span>
+          </IconDisplay>
+        </CardBody>
+      </Card>
+    );
+  } else if (encounterValue === "void") {
+    return (
+      <Card className={getAnimationClass({ animation: "flipInX" })}>
+        <CardBody>
+          <IconDisplay gap={5} Icon={IconVoid} tooltip="Void">
+            <span className="fst-italic">A shattering emptiness lingers ...</span>
           </IconDisplay>
         </CardBody>
       </Card>

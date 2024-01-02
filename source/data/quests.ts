@@ -26,6 +26,8 @@ export const QUEST_CLASS_ICONS: Record<QuestClass, SVGIcon> = {
 
 export const QUEST_COMPLETION_BONUS = 0.01;
 
+export const QUEST_NOTIFICATION_DURATION = 5000;
+
 export const QUEST_REQUIREMENTS = {
   damage: 1500,
   essenceCount: 777,
@@ -87,12 +89,12 @@ export const QUESTS: Record<
   attributesIncreasingAll: {
     description: "Increase all attributes at least once.",
     progression: [ATTRIBUTE_TYPES.length],
-    title: "Jack of all",
+    title: "Polymath",
   },
   attributesUnlockingAll: {
     description: "Unlock all attributes.",
     progression: [ATTRIBUTE_TYPES.length],
-    title: "Jack of one",
+    title: "Jack of all",
   },
   bandaging: {
     description: "Use @ bandages.",
@@ -279,7 +281,7 @@ export const QUESTS: Record<
   killingResDominus: {
     description: "Defeat the dominant being.",
     progression: [1],
-    title: "Come back to reality",
+    title: "Back to reality",
   },
   killingStage: {
     description: "Kill @ monsters in one stage.",
@@ -391,7 +393,7 @@ export const QUESTS: Record<
     title: "What? Who? Where?",
   },
   resurrecting: {
-    description: "Resurrect with a phylactery.",
+    description: "Resurrect with phylacteries @ time(s).",
     progression: [1, 3],
     title: "Lich king",
   },
@@ -482,7 +484,7 @@ export const QUESTS: Record<
   traits: {
     description: "Acquire @ traits.",
     progression: [3, 6],
-    title: "Tattoo artiste",
+    title: "Getting ink done",
   },
   traitsAll: {
     description: "Acquire all traits.",

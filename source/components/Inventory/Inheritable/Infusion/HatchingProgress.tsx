@@ -23,6 +23,7 @@ export function HatchingProgress() {
     <Stack direction="horizontal" gap={1}>
       <IconDisplay Icon={IconHatchingProgress} tooltip="Hatching progress">
         {formatNumber({
+          decimals: infusionEffectValue >= 1 ? 0 : 2,
           format: "percentage",
           value: infusionEffectValue,
         })}

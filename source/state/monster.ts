@@ -31,7 +31,7 @@ import {
 import { ownedItem } from "@neverquest/state/inventory";
 import { infusionEffect } from "@neverquest/state/items";
 import { range } from "@neverquest/state/statistics";
-import type { MonsterAilment } from "@neverquest/types/unions";
+import { FINALITY_TYPES, type MonsterAilment } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import {
   getDamagePerRate,
@@ -72,7 +72,7 @@ export const blightChance = withStateKey("blightChance", (key) =>
         return 0;
       }
 
-      if (encounterValue === "res cogitans" || encounterValue === "res dominus") {
+      if (new Set<string>(FINALITY_TYPES).has(encounterValue)) {
         return finality;
       }
 
@@ -119,7 +119,7 @@ export const monsterAttackRate = withStateKey("monsterAttackRate", (key) =>
       const encounterValue = get(encounter);
       const factor = getTriangular(get(stage)) / attenuation;
 
-      if (encounterValue === "res cogitans" || encounterValue === "res dominus") {
+      if (new Set<string>(FINALITY_TYPES).has(encounterValue)) {
         return finality;
       }
 
@@ -142,7 +142,7 @@ export const monsterDamage = withStateKey("monsterDamage", (key) =>
       const encounterValue = get(encounter);
       const factor = getTriangular(get(stage)) / attenuation;
 
-      if (encounterValue === "res cogitans" || encounterValue === "res dominus") {
+      if (new Set<string>(FINALITY_TYPES).has(encounterValue)) {
         return finality;
       }
 
@@ -190,7 +190,7 @@ export const monsterHealthMaximum = withStateKey("monsterHealthMaximum", (key) =
       const encounterValue = get(encounter);
       const factor = getTriangular(get(stage)) / attenuation;
 
-      if (encounterValue === "res cogitans" || encounterValue === "res dominus") {
+      if (new Set<string>(FINALITY_TYPES).has(encounterValue)) {
         return finality;
       }
 
@@ -206,7 +206,6 @@ export const monsterHealthMaximum = withStateKey("monsterHealthMaximum", (key) =
 export const monsterLoot = withStateKey("monsterLoot", (key) =>
   selector({
     get: ({ get }) => {
-      const { base: tornManuscriptDropChanceBase, increment } = TORN_MANUSCRIPT_DROP_CHANCE;
       const { attenuation, base: essenceBase, bonus, boss } = ESSENCE;
 
       const encounterValue = get(encounter);
@@ -249,7 +248,8 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
                 ownedItemMysteriousEgg !== undefined &&
                 !merchantInventoryValue.some(({ name }) => name === "torn manuscript") &&
                 get(ownedItem("torn manuscript")) === undefined &&
-                Math.random() <= tornManuscriptDropChanceBase + increment * stageValue
+                Math.random() <=
+                  getFromRange({ factor: getSigmoid(stageValue), ...TORN_MANUSCRIPT_DROP_CHANCE })
               ? { ...TRINKETS["torn manuscript"].item, ID: nanoid() }
               : undefined,
       };
@@ -275,7 +275,7 @@ export const poisonChance = withStateKey("poisonChance", (key) =>
         return 0;
       }
 
-      if (encounterValue === "res cogitans" || encounterValue === "res dominus") {
+      if (new Set<string>(FINALITY_TYPES).has(encounterValue)) {
         return finality;
       }
 

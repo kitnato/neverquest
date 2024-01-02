@@ -24,11 +24,6 @@ export type AttributeOrMasteryBaseData = {
   increment: number;
 };
 
-export type BlightMagnitude = {
-  amount: number;
-  percentage: number;
-};
-
 export type ConsumableItem = ItemBase & {
   description: string;
   name: Consumable;

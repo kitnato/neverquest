@@ -22,7 +22,6 @@ import {
   staminaMaximum,
   staminaMaximumBlighted,
 } from "@neverquest/state/reserves";
-import type { BlightMagnitude } from "@neverquest/types";
 import type { Reserve } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
@@ -30,9 +29,7 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
   const isHealth = reserve === "health";
   const reserveMaximum = isHealth ? healthMaximum : staminaMaximum;
 
-  const ailmentValue = useRecoilValue<BlightMagnitude | number>(
-    isHealth ? poisonDuration : blightMagnitude,
-  );
+  const ailmentValue = useRecoilValue(isHealth ? poisonDuration : blightMagnitude);
   const isAiling = useRecoilValue(isHealth ? isPoisoned : isBlighted);
   const reserveValue = useRecoilValue(isHealth ? health : stamina);
   const reserveMaximumValue = useRecoilValue(reserveMaximum);
@@ -88,12 +85,12 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
               iconProps={{ className: "small stencilled" }}
             >
               <span>
-                {typeof ailmentValue === "number"
+                {isHealth
                   ? formatNumber({ format: "time", value: ailmentValue })
                   : formatNumber({
                       decimals: 0,
                       format: "percentage",
-                      value: ailmentValue.percentage,
+                      value: ailmentValue,
                     })}
               </span>
             </IconDisplay>

@@ -4,16 +4,17 @@ import { useRecoilValue } from "recoil";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LABEL_EMPTY, LABEL_MAXIMUM, PERCENTAGE_POINTS } from "@neverquest/data/general";
+import { BLIGHT } from "@neverquest/data/monster";
 import IconBlight from "@neverquest/icons/blight.svg?react";
 import IconStamina from "@neverquest/icons/stamina.svg?react";
 import { blightChance } from "@neverquest/state/monster";
-import { blightAmount, isPoisoned } from "@neverquest/state/reserves";
+import { blightMagnitude, isPoisoned } from "@neverquest/state/reserves";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function MonsterBlightRating() {
-  const blightAmountValue = useRecoilValue(blightAmount);
   const blightChanceValue = useRecoilValue(blightChance);
+  const blightMagnitudeValue = useRecoilValue(blightMagnitude);
   const isPoisonedValue = useRecoilValue(isPoisoned);
 
   if (blightChanceValue > 0) {
@@ -51,7 +52,7 @@ export function MonsterBlightRating() {
 
                     <td>
                       <Stack direction="horizontal" gap={1}>
-                        <span>{-formatNumber({ value: blightAmountValue })}</span>
+                        <span>{-formatNumber({ value: BLIGHT.increment })}</span>
 
                         <IconDisplay Icon={IconStamina} iconProps={{ className: "small" }}>
                           <span>{LABEL_MAXIMUM}</span>
@@ -67,7 +68,9 @@ export function MonsterBlightRating() {
         >
           <span>
             {isPoisonedValue
-              ? formatNumber({ value: blightChanceValue * blightAmountValue * PERCENTAGE_POINTS })
+              ? formatNumber({
+                  value: blightChanceValue * blightMagnitudeValue * PERCENTAGE_POINTS,
+                })
               : LABEL_EMPTY}
           </span>
         </OverlayTrigger>

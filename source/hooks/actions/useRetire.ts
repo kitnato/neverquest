@@ -13,7 +13,7 @@ import {
 } from "@neverquest/state/caravan";
 import { attackDuration, name } from "@neverquest/state/character";
 import {
-  hasDefeatedFinality,
+  defeatedFinality,
   isStageStarted,
   location,
   progress,
@@ -21,10 +21,12 @@ import {
   stage,
   stageMaximum,
 } from "@neverquest/state/encounter";
+import { armor, shield, weapon } from "@neverquest/state/gear";
 import { inventory } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { masteryProgress, masteryRank } from "@neverquest/state/masteries";
 import { questProgress } from "@neverquest/state/quests";
+import { blight, poison } from "@neverquest/state/reserves";
 import { essence } from "@neverquest/state/resources";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { isTraitAcquired, selectedTrait } from "@neverquest/state/traits";
@@ -64,13 +66,18 @@ export function useRetire() {
         set(isShowing("traits"), true);
         set(progressReduction, getProgressReduction(get(stage)));
 
+        reset(armor);
+        reset(blight);
+        reset(poison);
         reset(essence);
+        reset(defeatedFinality);
         reset(isStageStarted);
         reset(progress);
         reset(location);
         reset(name);
+        reset(shield);
         reset(stage);
-        reset(hasDefeatedFinality);
+        reset(weapon);
         reset(questProgress("attributesIncreasingAll"));
         reset(questProgress("attributesUnlockingAll"));
         reset(questProgress("hiringAll"));
@@ -113,6 +120,26 @@ export function useRetire() {
 
         if (get(name) !== LABEL_UNKNOWN) {
           progressQuest({ quest: "settingName" });
+        }
+
+        const defeatedFinalityValue = get(defeatedFinality);
+
+        if (defeatedFinalityValue === "res cogitans") {
+          progressQuest({ quest: "killingResCogitans" });
+        }
+
+        if (defeatedFinalityValue === "res dominus") {
+          progressQuest({ quest: "killingResDominus" });
+        }
+
+        for (const { name } of get(inventory)) {
+          if (name === "antique coin") {
+            progressQuest({ quest: "acquiringAntiqueCoin" });
+          }
+
+          if (name === "familiar") {
+            progressQuest({ quest: "acquiringFamiliar" });
+          }
         }
 
         progressQuest({ quest: "retiring" });

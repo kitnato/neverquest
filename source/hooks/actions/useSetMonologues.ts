@@ -1,7 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
-import { CREW, MERCHANT_OFFERS } from "@neverquest/data/caravan";
-import { MONOLOGUE_EMPTY } from "@neverquest/data/general";
+import { CREW, MERCHANT_OFFERS, MONOLOGUE_EMPTY } from "@neverquest/data/caravan";
 import { merchantInventory, monologue } from "@neverquest/state/caravan";
 import { stage, stageMaximum } from "@neverquest/state/encounter";
 import { isInheritableItem } from "@neverquest/types/type-guards";

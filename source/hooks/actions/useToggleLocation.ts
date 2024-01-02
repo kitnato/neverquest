@@ -6,6 +6,7 @@ import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness
 import { useSetMonologues } from "@neverquest/hooks/actions/useSetMonologues";
 import {
   consciousness,
+  defeatedFinality,
   encounter,
   isStageCompleted,
   isStageStarted,
@@ -14,6 +15,7 @@ import {
   stageMaximum,
 } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
+import { FINALITY_TYPES, type Finality } from "@neverquest/types/unions";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useToggleLocation() {
@@ -27,8 +29,14 @@ export function useToggleLocation() {
       () => {
         const get = getSnapshotGetter(snapshot);
 
+        const encounterValue = get(encounter);
+
         if (get(location) === "wilderness") {
-          if (get(encounter) === "res cogitans") {
+          if (new Set<string>(FINALITY_TYPES).has(encounterValue)) {
+            set(defeatedFinality, encounterValue as Finality);
+          }
+
+          if (encounterValue === "res cogitans") {
             set(consciousness, "vigilans");
           }
 

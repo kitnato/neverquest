@@ -1,11 +1,16 @@
 import { atom, atomFamily, selectorFamily } from "recoil";
 
-import { INFUSION_DELTA, INFUSION_DURATION } from "@neverquest/data/general";
-import { AMMUNITION_CAPACITY, INFUSABLES, INFUSION_BASE } from "@neverquest/data/items";
+import { LEVELLING_MAXIMUM } from "@neverquest/data/general";
+import {
+  AMMUNITION_CAPACITY,
+  INFUSABLES,
+  INFUSION_BASE,
+  INFUSION_DELTA,
+  INFUSION_DURATION,
+} from "@neverquest/data/items";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { ownedItem } from "@neverquest/state/inventory";
 import { essence } from "@neverquest/state/resources";
-import type { GemItem } from "@neverquest/types";
 import type { Infusable } from "@neverquest/types/unions";
 import { getFromRange, getSigmoid, getTriangular } from "@neverquest/utilities/getters";
 import { withStateKey } from "@neverquest/utilities/helpers";
@@ -50,6 +55,16 @@ export const infusionStep = withStateKey("infusionStep", (key) =>
   }),
 );
 
+export const isInfusionAtMaximum = withStateKey("isInfusionAtMaximum", (key) =>
+  selectorFamily({
+    get:
+      (infusable: Infusable) =>
+      ({ get }) =>
+        get(infusionMaximum(infusable)) >= LEVELLING_MAXIMUM,
+    key,
+  }),
+);
+
 // ATOMS
 
 export const ammunition = withStateKey("ammunition", (key) =>
@@ -68,18 +83,10 @@ export const ammunitionCapacity = withStateKey("ammunitionCapacity", (key) =>
   }),
 );
 
-export const gems = withStateKey("gems", (key) =>
-  atomFamily<GemItem[], string>({
-    default: [],
-    effects: [handleLocalStorage({ key })],
-    key,
-  }),
-);
-
 export const infusion = withStateKey("infusion", (key) =>
   atomFamily<number, Infusable>({
     default: 0,
-    effects: [handleLocalStorage({ key })],
+    effects: (infusable) => [handleLocalStorage({ key, parameter: infusable })],
     key,
   }),
 );
@@ -87,7 +94,7 @@ export const infusion = withStateKey("infusion", (key) =>
 export const infusionLevel = withStateKey("infusionLevel", (key) =>
   atomFamily<number, Infusable>({
     default: 0,
-    effects: [handleLocalStorage({ key })],
+    effects: (infusable) => [handleLocalStorage({ key, parameter: infusable })],
     key,
   }),
 );

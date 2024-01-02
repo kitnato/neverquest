@@ -1,6 +1,6 @@
 import { nanoid } from "nanoid";
 import { type SetStateAction, useEffect, useState } from "react";
-import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
+import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilState } from "recoil";
 
 import { SelectGem } from "@neverquest/components/Caravan/Alchemist/SelectGem";
@@ -53,21 +53,19 @@ export function TransmuteGems() {
   }, [result, source]);
 
   return (
-    <Stack gap={3}>
-      <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-        <SelectGem gem={source} onSelect={onSelect(setSource)} />
+    <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
+      <SelectGem gem={source} onSelect={onSelect(setSource)} />
 
-        <IconImage Icon={IconTransmute} />
+      <IconImage Icon={IconTransmute} />
 
-        <SelectGem gem={result} omit={source} onSelect={onSelect(setResult)} />
-      </div>
+      <SelectGem gem={result} omit={source} onSelect={onSelect(setResult)} />
 
       <OverlayTrigger
         overlay={<Tooltip>Insufficient source gems.</Tooltip>}
         placement="bottom"
         trigger={isAffordable ? [] : ["focus", "hover"]}
       >
-        <div className="mx-auto">
+        <div>
           <Button
             disabled={!isAffordable}
             onClick={() => {
@@ -98,6 +96,6 @@ export function TransmuteGems() {
           </Button>
         </div>
       </OverlayTrigger>
-    </Stack>
+    </div>
   );
 }

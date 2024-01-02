@@ -5,6 +5,7 @@ import { LEVELLING_MAXIMUM } from "@neverquest/data/general";
 import { BOSS_STAGE_INTERVAL, BOSS_STAGE_START } from "@neverquest/data/monster";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { ownedItem } from "@neverquest/state/inventory";
+import type { Finality } from "@neverquest/types/unions";
 import { getFromRange, getSigmoid } from "@neverquest/utilities/getters";
 import { withStateKey } from "@neverquest/utilities/helpers";
 
@@ -16,7 +17,7 @@ export const encounter = withStateKey("encounter", (key) =>
       const stageValue = get(stage);
 
       if (stageValue === LEVELLING_MAXIMUM) {
-        if (get(hasDefeatedFinality)) {
+        if (get(defeatedFinality) !== undefined) {
           return "void";
         }
 
@@ -33,7 +34,7 @@ export const encounter = withStateKey("encounter", (key) =>
 
 export const isStageCompleted = withStateKey("isStageCompleted", (key) =>
   selector({
-    get: ({ get }) => get(encounter) === "void" || get(progress) === get(progressMaximum),
+    get: ({ get }) => get(progress) === get(progressMaximum),
     key,
   }),
 );
@@ -56,29 +57,19 @@ export const progressMaximum = withStateKey("progressMaximum", (key) =>
     get: ({ get }) => {
       const { maximum, minimum } = PROGRESS;
 
-      switch (get(encounter)) {
-        case "boss":
-        case "res cogitans":
-        case "res dominus": {
-          return 1;
+      if (get(encounter) === "monster") {
+        if (get(stage) < get(stageMaximum)) {
+          return Number.POSITIVE_INFINITY;
         }
 
-        case "monster": {
-          if (get(stage) < get(stageMaximum)) {
-            return Number.POSITIVE_INFINITY;
-          }
+        const reducedMaximum =
+          getFromRange({ factor: getSigmoid(get(stage)), maximum, minimum }) *
+          (1 - get(progressReduction));
 
-          const reducedMaximum =
-            getFromRange({ factor: getSigmoid(get(stage)), maximum, minimum }) *
-            (1 - get(progressReduction));
-
-          return reducedMaximum < 1 ? 1 : Math.round(reducedMaximum);
-        }
-
-        case "void": {
-          return 0;
-        }
+        return reducedMaximum < 1 ? 1 : Math.round(reducedMaximum);
       }
+
+      return 1;
     },
     key,
   }),
@@ -101,9 +92,9 @@ export const consciousness = withStateKey("consciousness", (key) =>
   }),
 );
 
-export const hasDefeatedFinality = withStateKey("hasDefeatedFinality", (key) =>
-  atom({
-    default: false,
+export const defeatedFinality = withStateKey("defeatedFinality", (key) =>
+  atom<Finality | undefined>({
+    default: undefined,
     effects: [handleLocalStorage({ key })],
     key,
   }),

@@ -19,9 +19,6 @@ const KEY_STORAGE_PREFIX = "neverquest";
 export const KEY_SESSION = `${KEY_STORAGE_PREFIX}-session`;
 export const KEY_SETTINGS = `${KEY_STORAGE_PREFIX}-settings`;
 
-export const INFUSION_DELTA = FRAMERATE * 2;
-export const INFUSION_DURATION = 1000;
-
 export const LABEL_EMPTY = "--";
 export const LABEL_FULL_HEALTH = "Already at full health.";
 export const LABEL_MAXIMUM = "MAX";
@@ -35,13 +32,9 @@ export const LABEL_UNKNOWN = "???";
 
 export const LEVELLING_MAXIMUM = 77;
 
-export const MONOLOGUE_EMPTY = "...";
-
 export const NAME_LENGTH_MAXIMUM = 50;
 
 export const PERCENTAGE_POINTS = 100;
-
-export const QUEST_NOTIFICATION_DURATION = 5000;
 
 export const RETIREMENT_STAGE_MINIMUM = 40;
 

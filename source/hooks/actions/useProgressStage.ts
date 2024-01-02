@@ -33,7 +33,9 @@ export function useProgressStage() {
               ...GEM_BASE,
               ID: nanoid(),
               name:
-                GEM_TYPES[getFromRange({ maximum: GEM_TYPES.length - 1, minimum: 0 })] ?? "ruby",
+                GEM_TYPES[
+                  Math.round(getFromRange({ maximum: GEM_TYPES.length - 1, minimum: 0 }))
+                ] ?? "ruby",
             })),
           );
         }

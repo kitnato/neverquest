@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LABEL_SEPARATOR } from "@neverquest/data/general";
 import { ELEMENTALS, GEMS, GEMS_MAXIMUM } from "@neverquest/data/items";
-import { gems } from "@neverquest/state/items";
+import { gems } from "@neverquest/state/gear";
 import type { GearItem, GearItemUnequipped } from "@neverquest/types";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getGearElementalEffects } from "@neverquest/utilities/getters";

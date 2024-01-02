@@ -3,8 +3,8 @@ import { Toast, ToastBody, ToastContainer, ToastHeader } from "react-bootstrap";
 import { useRecoilState, useResetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { LABEL_UNKNOWN, QUEST_NOTIFICATION_DURATION } from "@neverquest/data/general";
-import { QUEST_CLASS_ICONS } from "@neverquest/data/quests";
+import { LABEL_UNKNOWN } from "@neverquest/data/general";
+import { QUEST_CLASS_ICONS, QUEST_NOTIFICATION_DURATION } from "@neverquest/data/quests";
 import { questNotifications } from "@neverquest/state/quests";
 
 export function QuestNotifications() {

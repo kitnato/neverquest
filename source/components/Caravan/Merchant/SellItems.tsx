@@ -58,9 +58,7 @@ export function SellItems() {
           {equippedGear.map((gearItem) => {
             return (
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={gearItem.ID}>
-                <Stack direction="horizontal" gap={1}>
-                  <ItemDisplay isEquipped item={gearItem} />
-                </Stack>
+                <ItemDisplay isEquipped item={gearItem} />
 
                 <SellItem item={gearItem} />
               </div>

@@ -1,3 +1,4 @@
+import { FRAMERATE } from "@neverquest/data/general";
 import IconAmmunitionPouch from "@neverquest/icons/ammunition-pouch.svg?react";
 import IconAntidote from "@neverquest/icons/antidote.svg?react";
 import IconAntiqueCoin from "@neverquest/icons/antique-coin.svg?react";
@@ -146,6 +147,9 @@ export const GEMS_MAXIMUM = 5;
 
 export const INFUSION_BASE = 2;
 
+export const INFUSION_DELTA = FRAMERATE * 2;
+export const INFUSION_DURATION = 1000;
+
 export const INFUSABLES: Record<
   Infusable,
   {
@@ -194,8 +198,8 @@ export const INFUSABLES: Record<
 export const KNAPSACK_CAPACITY = 15;
 
 export const TORN_MANUSCRIPT_DROP_CHANCE = {
-  base: 0.01,
-  increment: 0.0063,
+  maximum: 0.25,
+  minimum: 0.01,
 };
 
 export const TRINKETS: Record<

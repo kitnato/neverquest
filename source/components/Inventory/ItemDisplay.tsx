@@ -59,7 +59,7 @@ export function ItemDisplay({
 
     return (
       <IconDisplay
-        description={<InfusionLevelDisplay infusable={name} />}
+        description={<InfusionLevelDisplay infusable={name} overlayPlacement="bottom" />}
         Icon={INFUSABLES[name].Icon}
         tooltip="Infusable trinket"
       >

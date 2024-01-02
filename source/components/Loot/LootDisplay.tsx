@@ -7,7 +7,12 @@ import { EssenceLoot } from "@neverquest/components/Loot/EssenceLoot";
 import IconLooted from "@neverquest/icons/looted.svg?react";
 import { progress } from "@neverquest/state/encounter";
 import { isLootAvailable, itemsLoot } from "@neverquest/state/resources";
-import { isGearItem, isStackableItem, isTrinketItem } from "@neverquest/types/type-guards";
+import {
+  isGearItem,
+  isInfusableItem,
+  isStackableItem,
+  isTrinketItem,
+} from "@neverquest/types/type-guards";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 import { stackItems } from "@neverquest/utilities/helpers";
 
@@ -28,6 +33,11 @@ export function LootDisplay() {
                 ...stackItems(
                   itemsLootValue
                     .filter(isGearItem)
+                    .toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2)),
+                ),
+                ...stackItems(
+                  itemsLootValue
+                    .filter(isInfusableItem)
                     .toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2)),
                 ),
                 ...stackItems(

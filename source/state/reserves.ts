@@ -6,30 +6,15 @@ import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attri
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { stage } from "@neverquest/state/encounter";
 import { questsBonus } from "@neverquest/state/quests";
-import type { BlightMagnitude } from "@neverquest/types";
 import type { Reserve } from "@neverquest/types/unions";
 import { getFromRange, getLinearMapping, getSigmoid } from "@neverquest/utilities/getters";
 import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
 
-export const blightAmount = withStateKey("blightAmount", (key) =>
-  selector({
-    get: ({ get }) => Math.round(BLIGHT.increment * get(staminaMaximum)),
-    key,
-  }),
-);
-
 export const blightMagnitude = withStateKey("blightMagnitude", (key) =>
-  selector<BlightMagnitude>({
-    get: ({ get }) => {
-      const blightValue = get(blight);
-
-      return {
-        amount: Math.min(blightValue * get(blightAmount), get(staminaMaximum)),
-        percentage: Math.min(blightValue * BLIGHT.increment, 1),
-      };
-    },
+  selector({
+    get: ({ get }) => get(blight) * BLIGHT.increment,
     key,
   }),
 );
@@ -54,7 +39,7 @@ export const healthMaximumPoisoned = withStateKey("healthMaximumPoisoned", (key)
       return Math.max(
         healthMaximumValue -
           Math.ceil(
-            healthMaximumValue * get(poisonMagnitude) * (get(poisonDuration) / get(poisonLength)),
+            healthMaximumValue * get(poisonMagnitude) * (get(poison) / get(poisonDuration)),
           ),
         AILING_RESERVE_MINIMUM,
       );
@@ -86,7 +71,7 @@ export const isHealthLow = withStateKey("isHealthLow", (key) =>
 
 export const isPoisoned = withStateKey("isPoisoned", (key) =>
   selector({
-    get: ({ get }) => get(poisonDuration) > 0,
+    get: ({ get }) => get(poison) > 0,
     key,
   }),
 );
@@ -108,7 +93,7 @@ export const isStaminaAtMaximum = withStateKey("isStaminaAtMaximum", (key) =>
   }),
 );
 
-export const poisonLength = withStateKey("poisonLength", (key) =>
+export const poisonDuration = withStateKey("poisonDuration", (key) =>
   selector({
     get: ({ get }) => {
       const {
@@ -206,7 +191,10 @@ export const staminaMaximum = withStateKey("staminaMaximum", (key) =>
 export const staminaMaximumBlighted = withStateKey("staminaMaximumBlighted", (key) =>
   selector({
     get: ({ get }) =>
-      Math.max(get(staminaMaximum) - get(blightMagnitude).amount, AILING_RESERVE_MINIMUM),
+      Math.max(
+        get(staminaMaximum) - get(staminaMaximum) * get(blightMagnitude),
+        AILING_RESERVE_MINIMUM,
+      ),
     key,
   }),
 );
@@ -245,7 +233,7 @@ export const isInvulnerable = withStateKey("isInvulnerable", (key) =>
   }),
 );
 
-export const poisonDuration = withStateKey("poisonDuration", (key) =>
+export const poison = withStateKey("poison", (key) =>
   atom({
     default: 0,
     effects: [handleLocalStorage({ key })],

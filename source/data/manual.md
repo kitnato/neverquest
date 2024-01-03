@@ -34,7 +34,7 @@ Health is [regenerated](#health-regeneration) over time.
 
 #### Stamina
 
-Several combat actions require stamina to execute them successfully. Most [gear](#gear) has a stamina cost for an associated action. For instance, when wielding a [weapon](#weapons) with a stamina cost, it is paid with every attack.
+Several combat actions require stamina to execute them successfully. Most [gear](#gear) has a burden for an associated action which translate to a stamina cost that must be paid to be successful. For instance, when wielding a [weapon](#weapons) with burden 3, 3 stamina is paid on every hit. Wearing armor has a passive burden that is paid when struck.
 
 When there is not enough stamina available for an attack, [parrying](#parry-rating), [dodging](#dodge-chance) or [blocking](#block-chance), exhaustion occurs in which none of these actions are possible until sufficient stamina is [regenerated](#stamina-regeneration).
 
@@ -130,7 +130,7 @@ Requires the [armorcraft](#armorcraft) skill.
 
 #### Dodge chance
 
-A percentage determining the chance of when defending, all damage is avoided entirely. [Reinforced](#reinforced-armor) armor incurs a stamina cost for dodging, and [heavy](#heavy-armor) removes the ability to dodge altogether.
+A percentage determining the chance of when defending, all damage is avoided entirely. Any equipped armor's burden incurs a stamina cost.
 
 The dodge chance can be increased with the [agility](#agility) attribute.
 
@@ -306,7 +306,7 @@ The [merchant](#merchant) sells one of each gear type of various levels. To acqu
 
 #### Weapons
 
-Weapons are the main way of fighting monsters. Every weapon type and class has specific modifiers, as well as various tradeoffs for wielding them.
+Weapons are the main way of fighting monsters. Every weapon type and class has specific modifiers, as well as various tradeoffs for wielding them. Taking 2 slots mean an [shield](#shields) can no longer be equipped.
 
 ##### Melee weapons
 
@@ -315,9 +315,11 @@ Close-quarter combat starts the moment the monster is engaged, with either party
 ###### One-handed
 
 - 1 slot
-- Low damage
+- Medium damage
 - High attack rate
-- Low stamina requirement
+- Low burden
+- Low purchase & crafting cost
+- Low weight
 
 ###### Two-handed
 
@@ -325,15 +327,25 @@ Takes up both the main and [shield](#shields) slots.
 
 - 2 slots
 - High damage
-- Low attack rate
-- High stamina requirement
-- Chance to execute monsters at 20% health or under
+- Medium attack rate
+- High burden
+- High purchase & crafting cost
+- High weight
+
+There is also a chance to [execute](#execution-threshold) monsters when at or under a certain health threshold or under.
 
 ##### Ranged weapons
 
-All ranged weapons take up both main and [shield](#shields) slots and have a certain [range](#range) that determines how long the monster must travel before it can start attacking once it's engaged.
+- 2 slots
+- Low damage
+- Low attack rate
+- Medium burden
+- Medium purchase & crafting cost
+- Medium weight
 
-Ranged weapons require finite ammunition, which can be purchased from the [fletcher](#fletcher) if the ammunition pouch has been acquired from the [merchant](#merchant).
+There is also a certain [range](#range) that delays contact with the monster.
+
+They require finite ammunition as part of the second slot, which can be purchased from the [fletcher](#fletcher) once the correct trinket has been acquired from the [merchant](#merchant).
 
 Requires the [archery](#archery) skill.
 
@@ -372,20 +384,21 @@ No initial modifiers.
 ##### Light armor
 
 - Low protection
+- Low burden
 - Low purchase & crafting cost
 
 ##### Reinforced armor
 
 - Medium protection
-- Dodging costs stamina
 - Low [deflection](#deflection-chance) chance
+- Medium burden
 - Medium purchase & crafting cost
 
 ##### Heavy armor
 
 - High protection
-- Cannot dodge
 - High deflection chance
+- High burden
 - High purchase & crafting cost
 
 #### Shields
@@ -396,18 +409,21 @@ Grants a percentage chance to [block](#block-chance) all incoming damage. Also g
 
 - Low chance to block
 - Low stagger chance
+- Low burden
 - Low purchase & crafting cost
 
 ##### Medium shields
 
-- Medium chance to block with low stamina cost
+- Medium chance to block
 - Medium stagger chance
+- Medium burden
 - Medium purchase & crafting cost
 
 ##### Tower shields
 
-- High chance to block with high stamina cost
+- High chance to block
 - High stagger chance
+- High burden
 - High purchase & crafting cost
 
 #### Gems

@@ -204,14 +204,14 @@ export const WEAPON_BASE: GearRangeBase & {
 };
 
 export const WEAPON_MODIFIER = {
-  "one-handed": { ability: 1, damage: 1, price: 1, rate: 1, stamina: 1, weight: 1 },
-  ranged: { ability: 1, damage: 0.8, price: 1.1, rate: 1.3, stamina: 1.05, weight: 1.15 },
+  "one-handed": { ability: 1, burden: 1, damage: 1, price: 1, rate: 1, weight: 1 },
+  ranged: { ability: 1, burden: 1.05, damage: 0.8, price: 1.1, rate: 1.3, weight: 1.15 },
   "two-handed": {
     ability: 1.1,
+    burden: 1.15,
     damage: 1.25,
     price: 1.2,
     rate: 1.2,
-    stamina: 1.15,
     weight: 1.2,
   },
 };

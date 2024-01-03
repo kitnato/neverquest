@@ -250,9 +250,9 @@ export function getMeleeRanges({
 }) {
   const {
     ability: abilityModifier,
+    burden: burdenModifier,
     damage: damageModifier,
     rate: rateModifier,
-    stamina: staminaModifier,
     weight: weightModifier,
   } = WEAPON_MODIFIER[grip];
   const { burden, damage, rate, weight } = WEAPON_BASE;
@@ -260,7 +260,7 @@ export function getMeleeRanges({
 
   return {
     abilityChance: getRange({ factor, modifier: abilityModifier, ranges: abilityChance }),
-    burden: getRange({ factor, isRounded: true, modifier: staminaModifier, ranges: burden }),
+    burden: getRange({ factor, isRounded: true, modifier: burdenModifier, ranges: burden }),
     damage: getRange({ factor, isRounded: true, modifier: damageModifier, ranges: damage }),
     rate: getRange({ factor, isRounded: true, modifier: rateModifier, ranges: rate }),
     weight: getRange({ factor, isRounded: true, modifier: weightModifier, ranges: weight }),
@@ -305,9 +305,9 @@ export function getRange({
 export function getRangedRanges({ factor, gearClass }: { factor: number; gearClass: WeaponClass }) {
   const {
     ability: abilityModifier,
+    burden: burdenModifier,
     damage: damageModifier,
     rate: rateModifier,
-    stamina: staminaModifier,
     weight: weightModifier,
   } = WEAPON_MODIFIER.ranged;
   const { ammunitionCost, burden, damage, range, rate, weight } = WEAPON_BASE;
@@ -316,7 +316,7 @@ export function getRangedRanges({ factor, gearClass }: { factor: number; gearCla
   return {
     abilityChance: getRange({ factor, modifier: abilityModifier, ranges: abilityChance }),
     ammunitionCost: getRange({ factor, isRounded: true, ranges: ammunitionCost }),
-    burden: getRange({ factor, isRounded: true, modifier: staminaModifier, ranges: burden }),
+    burden: getRange({ factor, isRounded: true, modifier: burdenModifier, ranges: burden }),
     damage: getRange({ factor, isRounded: true, modifier: damageModifier, ranges: damage }),
     range: getRange({ factor, isRounded: true, ranges: range }),
     rate: getRange({ factor, isRounded: true, modifier: rateModifier, ranges: rate }),

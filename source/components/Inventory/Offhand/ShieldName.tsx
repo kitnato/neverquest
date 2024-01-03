@@ -12,7 +12,6 @@ import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
 import { type SHIELD_NONE, SHIELD_SPECIFICATIONS } from "@neverquest/data/gear";
 import { LABEL_UNKNOWN } from "@neverquest/data/general";
 import IconBlock from "@neverquest/icons/block.svg?react";
-import IconNone from "@neverquest/icons/none.svg?react";
 import IconStagger from "@neverquest/icons/stagger.svg?react";
 import { shield as shieldEquipped } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
@@ -33,6 +32,7 @@ export function ShieldName({
   const shieldcraftSkill = useRecoilValue(isSkillAcquired("shieldcraft"));
 
   const { block, burden, ID, level, name, stagger, weight } = shield;
+  const isShieldUnequipped = isUnshielded(shield);
   const showComparison = ID !== shieldEquippedValue.ID;
 
   return (
@@ -88,7 +88,7 @@ export function ShieldName({
                 }
               />
 
-              {level !== 0 && (
+              {!isShieldUnequipped && (
                 <tr>
                   {isShowingGearClass ? (
                     <>
@@ -98,14 +98,6 @@ export function ShieldName({
 
                       <td>
                         {(() => {
-                          if (isUnshielded(shield)) {
-                            return (
-                              <IconDisplay Icon={IconNone} iconProps={{ className: "small" }}>
-                                <span>None</span>
-                              </IconDisplay>
-                            );
-                          }
-
                           const { gearClass } = shield;
                           const { Icon } = SHIELD_SPECIFICATIONS[gearClass];
 
@@ -156,7 +148,7 @@ export function ShieldName({
                 </tr>
               )}
 
-              {!isUnshielded(shield) && (
+              {!isShieldUnequipped && (
                 <WeightDetail
                   comparison={
                     showComparison && { showing: "offhand", subtrahend: shieldEquippedValue.weight }

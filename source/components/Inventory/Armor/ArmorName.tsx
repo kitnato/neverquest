@@ -2,10 +2,10 @@ import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "reac
 import type { Placement } from "react-bootstrap/esm/types";
 import { useRecoilValue } from "recoil";
 
-import { BurdenDetail } from "../BurdenDetail";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { AppliedGems } from "@neverquest/components/Inventory/AppliedGems";
+import { BurdenDetail } from "@neverquest/components/Inventory/BurdenDetail";
 import { GearComparison } from "@neverquest/components/Inventory/GearComparison";
 import { GearLevelDetail } from "@neverquest/components/Inventory/GearLevelDetail";
 import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
@@ -31,7 +31,7 @@ export function ArmorName({
   const isShowingGearClass = useRecoilValue(isShowing("gearClass"));
 
   const { burden, deflection, ID, level, name, protection, weight } = armor;
-  const isArmorUnarmored = isUnarmored(armor);
+  const isArmorUnequipped = isUnarmored(armor);
   const showComparison = ID !== armorEquippedValue.ID;
 
   return (
@@ -84,7 +84,7 @@ export function ArmorName({
 
               <AppliedGems gearItem={armor} />
 
-              {!isArmorUnarmored && (
+              {!isArmorUnequipped && (
                 <tr>
                   {isShowingGearClass ? (
                     <>
@@ -144,7 +144,7 @@ export function ArmorName({
                 </tr>
               )}
 
-              {!isArmorUnarmored && (
+              {!isArmorUnequipped && (
                 <WeightDetail
                   comparison={
                     showComparison && { showing: "armor", subtrahend: armorEquippedValue.weight }

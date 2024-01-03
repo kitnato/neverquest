@@ -139,9 +139,9 @@ export function useDefend() {
           const protectionValue = get(protection);
 
           const deltaMonsterHealth: DeltaDisplay[] = [];
-          const totalDamage = protectionValue - monsterDamageAilingValue;
+          const totalDamage = monsterDamageAilingValue - protectionValue;
 
-          let healthDamage = totalDamage < 0 ? totalDamage : 0;
+          let healthDamage = totalDamage > 0 ? totalDamage : 0;
           let monsterHealthDamage = 0;
 
           // If parrying occurs, check & apply stamina cost.
@@ -149,7 +149,7 @@ export function useDefend() {
             if (get(canAttackOrParry)) {
               const parryReflected = Math.round(monsterDamageAilingValue * get(parryDamage));
 
-              healthDamage -= Math.round(healthDamage * get(parryAbsorption));
+              healthDamage += Math.round(healthDamage * get(parryAbsorption));
               monsterHealthDamage += parryReflected;
 
               progressQuest({ quest: "parrying" });
@@ -172,7 +172,7 @@ export function useDefend() {
                 },
                 {
                   color: "text-danger",
-                  value: `${healthDamage}`,
+                  value: -healthDamage,
                 },
               );
             } else {
@@ -238,7 +238,7 @@ export function useDefend() {
           if (!hasBlocked && !hasParried) {
             deltaHealth.push({
               color: "text-danger",
-              value: healthDamage,
+              value: -healthDamage,
             });
 
             if (protectionValue > 0) {
@@ -308,20 +308,23 @@ export function useDefend() {
               },
               {
                 color: "text-danger",
-                value: `-${thornsValue}`,
+                value: -thornsValue,
               },
             );
           }
 
           // Take any damage and show any stamina costs.
-          changeHealth({ delta: deltaHealth, value: healthDamage });
+          changeHealth({ delta: deltaHealth, value: -healthDamage });
 
           addDelta({
             contents: deltaStamina,
             delta: "stamina",
           });
 
-          trainMastery("resilience");
+          if (healthDamage > 0) {
+            trainMastery("resilience");
+          }
+
           trainMastery("stability");
 
           // Inflict any armor elemental effects.
@@ -353,6 +356,14 @@ export function useDefend() {
           set(monsterAttackDuration, get(monsterAttackRate));
         }
       },
-    [changeHealth, changeMonsterHealth, changeStamina, trainMastery, progressQuest],
+    [
+      addDelta,
+      changeHealth,
+      changeMonsterHealth,
+      changeStamina,
+      trainMastery,
+      inflictElementalAilment,
+      progressQuest,
+    ],
   );
 }

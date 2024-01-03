@@ -1,30 +1,21 @@
-import { type FunctionComponent, useState } from "react";
+import { useState } from "react";
 import { Button, Modal, ModalBody, ModalHeader, ModalTitle, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { Infusion } from "@neverquest/components/Inventory/Inheritable/Infusion";
-import { EssenceBonus } from "@neverquest/components/Inventory/Inheritable/Infusion/EssenceBonus";
-import { HatchingProgress } from "@neverquest/components/Inventory/Inheritable/Infusion/HatchingProgress";
+import { InfusionEffect } from "@neverquest/components/Inventory/Inheritable/Infusion/InfusionEffect";
 import { InfusionLevel } from "@neverquest/components/Inventory/Inheritable/Infusion/InfusionLevel";
 import { InfusionProgress } from "@neverquest/components/Inventory/Inheritable/Infusion/InfusionProgress";
-import { PowerBonusBoost } from "@neverquest/components/Inventory/Inheritable/Infusion/PowerBonusBoost";
 import { INFUSABLES } from "@neverquest/data/items";
 import { canInfuseMysteriousEgg } from "@neverquest/state/inventory";
 import type { Infusable } from "@neverquest/types/unions";
-
-const EFFECT_COMPONENT: Record<Infusable, FunctionComponent> = {
-  "monkey paw": EssenceBonus,
-  "mysterious egg": HatchingProgress,
-  "tome of power": PowerBonusBoost,
-};
 
 export function InfusionInspect({ infusable }: { infusable: Infusable }) {
   const canInfuseMysteriousEggValue = useRecoilValue(canInfuseMysteriousEgg);
 
   const [isShowingInfusion, setIsShowingInfusion] = useState(false);
 
-  const EffectComponent = EFFECT_COMPONENT[infusable];
   const { Icon } = INFUSABLES[infusable];
 
   if (canInfuseMysteriousEggValue || infusable !== "mysterious egg") {
@@ -56,7 +47,7 @@ export function InfusionInspect({ infusable }: { infusable: Infusable }) {
 
           <ModalBody>
             <Stack gap={3}>
-              <EffectComponent />
+              <InfusionEffect infusable={infusable} />
 
               <Stack direction="horizontal" gap={3}>
                 <InfusionLevel infusable={infusable} />

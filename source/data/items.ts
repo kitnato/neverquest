@@ -6,8 +6,10 @@ import IconBandages from "@neverquest/icons/bandages.svg?react";
 import IconCompass from "@neverquest/icons/compass.svg?react";
 import IconElixir from "@neverquest/icons/elixir.svg?react";
 import IconEnderHook from "@neverquest/icons/ender-hook.svg?react";
+import IconEssenceBonus from "@neverquest/icons/essence-bonus.svg?react";
 import IconFamiliar from "@neverquest/icons/familiar.svg?react";
 import IconFire from "@neverquest/icons/fire.svg?react";
+import IconHatchingProgress from "@neverquest/icons/hatching-progress.svg?react";
 import IconStone from "@neverquest/icons/hearthstone.svg?react";
 import IconIce from "@neverquest/icons/ice.svg?react";
 import IconJournal from "@neverquest/icons/journal.svg?react";
@@ -16,6 +18,7 @@ import IconLightning from "@neverquest/icons/lightning.svg?react";
 import IconMonkeyPaw from "@neverquest/icons/monkey-paw.svg?react";
 import IconMysteriousEgg from "@neverquest/icons/mysterious-egg.svg?react";
 import IconPhylactery from "@neverquest/icons/phylactery.svg?react";
+import IconPowerBonusBoost from "@neverquest/icons/power-bonus-boost.svg?react";
 import IconRuby from "@neverquest/icons/ruby.svg?react";
 import IconSalve from "@neverquest/icons/salve.svg?react";
 import IconSapphire from "@neverquest/icons/sapphire.svg?react";
@@ -26,6 +29,7 @@ import type { ConsumableItem, GeneratorRange, InfusableItem, TrinketItem } from 
 import type { SVGIcon } from "@neverquest/types/components";
 import type {
   Consumable,
+  Delta,
   Elemental,
   Gem,
   Infusable,
@@ -153,11 +157,16 @@ export const INFUSION_DURATION = 1000;
 export const INFUSABLES: Record<
   Infusable,
   {
+    delta: Delta;
+    EffectIcon: SVGIcon;
     Icon: SVGIcon;
     item: Omit<InfusableItem, "ID">;
+    tooltip: string;
   }
 > = {
   "monkey paw": {
+    delta: "essenceBonus",
+    EffectIcon: IconEssenceBonus,
     Icon: IconMonkeyPaw,
     item: {
       description: "Boosts amount of essence looted.",
@@ -169,8 +178,11 @@ export const INFUSABLES: Record<
       price: 500,
       weight: 4,
     },
+    tooltip: "Essence loot bonus",
   },
   "mysterious egg": {
+    delta: "hatchingProgress",
+    EffectIcon: IconHatchingProgress,
     Icon: IconMysteriousEgg,
     item: {
       description: "A perplexing ovum emanating otherworldly energy.",
@@ -179,8 +191,11 @@ export const INFUSABLES: Record<
       price: 1000,
       weight: 7,
     },
+    tooltip: "Hatching progress",
   },
   "tome of power": {
+    delta: "powerBonusBoost",
+    EffectIcon: IconPowerBonusBoost,
     Icon: IconTomeOfPower,
     item: {
       description: "Boosts all attribute effects based on power level.",
@@ -192,6 +207,7 @@ export const INFUSABLES: Record<
       price: 2500,
       weight: 10,
     },
+    tooltip: "Power bonus boost",
   },
 };
 

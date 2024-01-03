@@ -216,7 +216,7 @@ export const MERCHANT_OFFERS: Record<
   },
   4: {
     item: TRINKETS.knapsack.item,
-    monologue: "You must be over-burdened. I can help with that.",
+    monologue: "You need a way to manage your possessions. I can help with that.",
   },
   6: {
     gearClass: "slashing",
@@ -260,7 +260,7 @@ export const MERCHANT_OFFERS: Record<
   },
   35: {
     item: TRINKETS["ender hook"].item,
-    monologue: "I've happened upon an artifact for your reaping burdens.",
+    monologue: "I've happened upon an artifact to ease your grind.",
   },
   39: { item: TRINKETS.journal.item, monologue: "You wouldn't be a scribe, would you?" },
   70: {

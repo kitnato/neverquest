@@ -3,33 +3,37 @@ import { useRecoilValue } from "recoil";
 
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { INFUSABLES } from "@neverquest/data/items";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import IconHatchingProgress from "@neverquest/icons/hatching-progress.svg?react";
 import { infusionEffect } from "@neverquest/state/items";
+import type { Infusable } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
-export function HatchingProgress() {
-  const infusionEffectMysteriousEgg = infusionEffect("mysterious egg");
+export function InfusionEffect({ infusable }: { infusable: Infusable }) {
+  const infusionEffectState = infusionEffect(infusable);
 
-  const infusionEffectValue = useRecoilValue(infusionEffectMysteriousEgg);
+  const infusionEffectValue = useRecoilValue(infusionEffectState);
+
+  const { delta, EffectIcon, tooltip } = INFUSABLES[infusable];
 
   useDeltaText({
-    delta: "hatchingProgress",
+    delta,
     format: "percentage",
-    state: infusionEffectMysteriousEgg,
+    state: infusionEffectState,
   });
 
   return (
     <Stack direction="horizontal" gap={1}>
-      <IconDisplay Icon={IconHatchingProgress} tooltip="Hatching progress">
+      <IconDisplay Icon={EffectIcon} tooltip={tooltip}>
+        +
         {formatNumber({
-          decimals: infusionEffectValue >= 1 ? 0 : 2,
+          decimals: infusable === "mysterious egg" && infusionEffectValue >= 1 ? 0 : 2,
           format: "percentage",
           value: infusionEffectValue,
         })}
       </IconDisplay>
 
-      <DeltasDisplay delta="hatchingProgress" />
+      <DeltasDisplay delta={delta} />
     </Stack>
   );
 }

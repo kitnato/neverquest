@@ -5,9 +5,9 @@ import { useRecoilValue } from "recoil";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { AppliedGems } from "@neverquest/components/Inventory/AppliedGems";
+import { BurdenDetail } from "@neverquest/components/Inventory/BurdenDetail";
 import { GearComparison } from "@neverquest/components/Inventory/GearComparison";
 import { GearLevelDetail } from "@neverquest/components/Inventory/GearLevelDetail";
-import { StaminaCostDetail } from "@neverquest/components/Inventory/StaminaCostDetail";
 import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
 import { type SHIELD_NONE, SHIELD_SPECIFICATIONS } from "@neverquest/data/gear";
 import { LABEL_UNKNOWN } from "@neverquest/data/general";
@@ -32,7 +32,7 @@ export function ShieldName({
   const shieldEquippedValue = useRecoilValue(shieldEquipped);
   const shieldcraftSkill = useRecoilValue(isSkillAcquired("shieldcraft"));
 
-  const { block, ID, level, name, stagger, staminaCost, weight } = shield;
+  const { block, burden, ID, level, name, stagger, weight } = shield;
   const showComparison = ID !== shieldEquippedValue.ID;
 
   return (
@@ -78,14 +78,14 @@ export function ShieldName({
                 </td>
               </tr>
 
-              <StaminaCostDetail
+              <BurdenDetail
+                burden={burden}
                 comparison={
                   showComparison && {
                     showing: "offhand",
-                    subtrahend: shieldEquippedValue.staminaCost,
+                    subtrahend: shieldEquippedValue.burden,
                   }
                 }
-                cost={staminaCost}
               />
 
               {level !== 0 && (

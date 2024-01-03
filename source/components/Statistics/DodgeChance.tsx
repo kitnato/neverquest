@@ -4,18 +4,18 @@ import { useRecoilValue } from "recoil";
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { DodgePenaltyContents } from "@neverquest/components/Inventory/Armor/DodgePenaltyContents";
-import { LABEL_EMPTY, LABEL_SEPARATOR, LABEL_UNKNOWN } from "@neverquest/data/general";
+import { LABEL_EMPTY, LABEL_NO_PENALTY, LABEL_SEPARATOR } from "@neverquest/data/general";
 import { NUDIST_DODGE_BONUS } from "@neverquest/data/traits";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconAgility from "@neverquest/icons/agility.svg?react";
-import IconDodgePenalty from "@neverquest/icons/dodge-penalty.svg?react";
+import IconBurden from "@neverquest/icons/burden.svg?react";
 import IconDodge from "@neverquest/icons/dodge.svg?react";
 import IconNudist from "@neverquest/icons/nudist.svg?react";
+import IconStalwart from "@neverquest/icons/stalwart.svg?react";
+import IconStamina from "@neverquest/icons/stamina.svg?react";
 import IconTomeOfPower from "@neverquest/icons/tome-of-power.svg?react";
 import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
 import { armor } from "@neverquest/state/gear";
-import { ownedItem } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { dodgeChance } from "@neverquest/state/statistics";
@@ -30,12 +30,11 @@ export function DodgeChance() {
   const agility = useRecoilValue(attributeStatistic("agility"));
   const dodgeChanceValue = useRecoilValue(dodgeChance);
   const isShowingDodgeChance = useRecoilValue(isShowing("dodgeChance"));
-  const isShowingDodgePenalty = useRecoilValue(isShowing("dodgePenalty"));
   const isSkillAcquiredEvasion = useRecoilValue(isSkillAcquired("evasion"));
   const isTraitAcquiredNudist = useRecoilValue(isTraitAcquired("nudist"));
-  const ownedItemTomeOfPower = useRecoilValue(ownedItem("tome of power"));
+  const isTraitAcquiredStalwart = useRecoilValue(isTraitAcquired("stalwart"));
 
-  const { staminaCost } = armorValue;
+  const { burden } = armorValue;
 
   useDeltaText({
     delta: "dodgeChance",
@@ -111,36 +110,34 @@ export function DodgeChance() {
                       </tr>
                     )}
 
-                    {isShowingDodgePenalty ? (
+                    {burden > 0 && (
                       <tr>
                         <td>
-                          <IconDisplay Icon={IconDodgePenalty} iconProps={{ className: "small" }}>
-                            <span>Armor penalty:</span>
+                          <IconDisplay Icon={IconBurden} iconProps={{ className: "small" }}>
+                            <span>On dodge:</span>
                           </IconDisplay>
                         </td>
 
                         <td>
-                          <DodgePenaltyContents staminaCost={staminaCost} />
+                          {isTraitAcquiredStalwart ? (
+                            <IconDisplay Icon={IconStalwart} iconProps={{ className: "small" }}>
+                              <span>{LABEL_NO_PENALTY}</span>
+                            </IconDisplay>
+                          ) : (
+                            <IconDisplay Icon={IconStamina} iconProps={{ className: "small" }}>
+                              <span>-{formatNumber({ value: burden })}</span>
+                            </IconDisplay>
+                          )}
                         </td>
                       </tr>
-                    ) : (
-                      <td className="text-end">
-                        <span>{LABEL_UNKNOWN}</span>
-                      </td>
                     )}
                   </DetailsTable>
                 </PopoverBody>
               </Popover>
             }
-            trigger={
-              isSkillAcquiredEvasion &&
-              (isShowingDodgePenalty || ownedItemTomeOfPower !== undefined)
-                ? ["focus", "hover"]
-                : []
-            }
           >
             <span>
-              {isSkillAcquiredEvasion && staminaCost !== Number.POSITIVE_INFINITY
+              {isSkillAcquiredEvasion
                 ? formatNumber({ format: "percentage", value: dodgeChanceValue })
                 : LABEL_EMPTY}
             </span>

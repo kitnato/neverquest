@@ -12,30 +12,33 @@ import IconShieldSmall from "@neverquest/icons/shield-small.svg?react";
 import IconShieldTower from "@neverquest/icons/shield-tower.svg?react";
 import IconSlashing from "@neverquest/icons/slashing.svg?react";
 import IconStun from "@neverquest/icons/stun.svg?react";
-import type { Armor, GearBase, GeneratorRange, Melee, Shield } from "@neverquest/types";
+import type { Armor, GearRangeBase, GeneratorRange, Melee, Shield } from "@neverquest/types";
 import type { SVGIcon } from "@neverquest/types/components";
 import type { WeaponAbility } from "@neverquest/types/unions";
 
 export const ARMOR_NONE: Omit<Armor, "gearClass" | "price"> = {
+  burden: 0,
   deflection: 0,
   ID: "ARMOR_NONE",
   level: 1,
   name: "Unarmored",
   protection: 0,
-  staminaCost: 0,
   weight: 0,
 };
 
 export const ARMOR_SPECIFICATIONS: Record<
   ArmorClass,
-  Omit<GearBase, "staminaCost"> & {
+  GearRangeBase & {
     deflection?: [GeneratorRange, GeneratorRange];
     Icon: SVGIcon;
     protection: [GeneratorRange, GeneratorRange];
-    staminaCost: number | [GeneratorRange, GeneratorRange];
   }
 > = {
   heavy: {
+    burden: [
+      { maximum: 9, minimum: 6 },
+      { maximum: 45, minimum: 40 },
+    ],
     deflection: [
       { maximum: 0.25, minimum: 0.2 },
       { maximum: 0.65, minimum: 0.6 },
@@ -46,26 +49,32 @@ export const ARMOR_SPECIFICATIONS: Record<
       { maximum: 10, minimum: 8 },
       { maximum: 1000, minimum: 950 },
     ],
-    staminaCost: Number.POSITIVE_INFINITY,
     weight: [
       { maximum: 7, minimum: 5 },
       { maximum: 100, minimum: 90 },
     ],
   },
   light: {
+    burden: [
+      { maximum: 2, minimum: 1 },
+      { maximum: 20, minimum: 15 },
+    ],
     Icon: IconArmorLight,
     price: { maximum: 5000, minimum: 1 },
     protection: [
       { maximum: 2, minimum: 1 },
       { maximum: 500, minimum: 450 },
     ],
-    staminaCost: 0,
     weight: [
       { maximum: 2, minimum: 1 },
       { maximum: 60, minimum: 55 },
     ],
   },
   reinforced: {
+    burden: [
+      { maximum: 5, minimum: 3 },
+      { maximum: 30, minimum: 35 },
+    ],
     deflection: [
       { maximum: 0.15, minimum: 0.1 },
       { maximum: 0.35, minimum: 0.3 },
@@ -75,10 +84,6 @@ export const ARMOR_SPECIFICATIONS: Record<
     protection: [
       { maximum: 6, minimum: 4 },
       { maximum: 700, minimum: 650 },
-    ],
-    staminaCost: [
-      { maximum: 3, minimum: 1 },
-      { maximum: 35, minimum: 30 },
     ],
     weight: [
       { maximum: 5, minimum: 3 },
@@ -91,17 +96,17 @@ export const GEAR_LEVEL_RANGE_MAXIMUM = 3;
 
 export const SHIELD_NONE: Omit<Shield, "gearClass" | "price"> = {
   block: 0,
+  burden: 0,
   ID: "SHIELD_NONE",
   level: 1,
   name: "Unshielded",
   stagger: 0,
-  staminaCost: 0,
   weight: 0,
 };
 
 export const SHIELD_SPECIFICATIONS: Record<
   ShieldClass,
-  GearBase & {
+  GearRangeBase & {
     block: [GeneratorRange, GeneratorRange];
     Icon: SVGIcon;
     stagger?: [GeneratorRange, GeneratorRange];
@@ -112,15 +117,15 @@ export const SHIELD_SPECIFICATIONS: Record<
       { maximum: 0.16, minimum: 0.15 },
       { maximum: 0.3, minimum: 0.28 },
     ],
+    burden: [
+      { maximum: 4, minimum: 3 },
+      { maximum: 25, minimum: 20 },
+    ],
     Icon: IconShieldMedium,
     price: { maximum: 4000, minimum: 4 },
     stagger: [
       { maximum: 0.45, minimum: 0.4 },
       { maximum: 0.55, minimum: 0.53 },
-    ],
-    staminaCost: [
-      { maximum: 4, minimum: 3 },
-      { maximum: 30, minimum: 25 },
     ],
     weight: [
       { maximum: 5, minimum: 3 },
@@ -132,12 +137,12 @@ export const SHIELD_SPECIFICATIONS: Record<
       { maximum: 0.11, minimum: 0.1 },
       { maximum: 0.2, minimum: 0.18 },
     ],
+    burden: [
+      { maximum: 2, minimum: 1 },
+      { maximum: 15, minimum: 10 },
+    ],
     Icon: IconShieldSmall,
     price: { maximum: 2000, minimum: 2 },
-    staminaCost: [
-      { maximum: 2, minimum: 1 },
-      { maximum: 20, minimum: 15 },
-    ],
     weight: [
       { maximum: 2, minimum: 1 },
       { maximum: 35, minimum: 30 },
@@ -148,15 +153,15 @@ export const SHIELD_SPECIFICATIONS: Record<
       { maximum: 0.3, minimum: 0.29 },
       { maximum: 0.5, minimum: 0.48 },
     ],
+    burden: [
+      { maximum: 7, minimum: 6 },
+      { maximum: 35, minimum: 30 },
+    ],
     Icon: IconShieldTower,
     price: { maximum: 5500, minimum: 7 },
     stagger: [
       { maximum: 0.65, minimum: 0.6 },
       { maximum: 0.95, minimum: 0.93 },
-    ],
-    staminaCost: [
-      { maximum: 7, minimum: 6 },
-      { maximum: 40, minimum: 35 },
     ],
     weight: [
       { maximum: 9, minimum: 6 },
@@ -165,7 +170,7 @@ export const SHIELD_SPECIFICATIONS: Record<
   },
 };
 
-export const WEAPON_BASE: GearBase & {
+export const WEAPON_BASE: GearRangeBase & {
   ammunitionCost: [GeneratorRange, GeneratorRange];
   damage: [GeneratorRange, GeneratorRange];
   range: [GeneratorRange, GeneratorRange];
@@ -174,6 +179,10 @@ export const WEAPON_BASE: GearBase & {
   ammunitionCost: [
     { maximum: 2, minimum: 1 },
     { maximum: 25, minimum: 22 },
+  ],
+  burden: [
+    { maximum: 2, minimum: 1 },
+    { maximum: 40, minimum: 35 },
   ],
   damage: [
     { maximum: 15, minimum: 14 },
@@ -187,10 +196,6 @@ export const WEAPON_BASE: GearBase & {
   rate: [
     { maximum: 3000, minimum: 2900 },
     { maximum: 1600, minimum: 1500 },
-  ],
-  staminaCost: [
-    { maximum: 2, minimum: 1 },
-    { maximum: 50, minimum: 45 },
   ],
   weight: [
     { maximum: 2, minimum: 1 },
@@ -213,6 +218,7 @@ export const WEAPON_MODIFIER = {
 
 export const WEAPON_NONE: Omit<Melee, "price"> = {
   abilityChance: 0,
+  burden: 0,
   damage: 10,
   gearClass: "blunt",
   grip: "one-handed",
@@ -220,7 +226,6 @@ export const WEAPON_NONE: Omit<Melee, "price"> = {
   level: 1,
   name: "Unarmed",
   rate: 2000,
-  staminaCost: 0,
   weight: 0,
 };
 

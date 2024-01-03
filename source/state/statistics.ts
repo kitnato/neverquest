@@ -152,7 +152,7 @@ export const deflectionChance = withStateKey("deflectionChance", (key) =>
 export const dodgeChance = withStateKey("dodgeChance", (key) =>
   selector({
     get: ({ get }) =>
-      (get(armor).staminaCost === Number.POSITIVE_INFINITY && !get(isTraitAcquired("stalwart"))) ||
+      (get(armor).burden === Number.POSITIVE_INFINITY && !get(isTraitAcquired("stalwart"))) ||
       !get(isSkillAcquired("evasion"))
         ? 0
         : Math.min(

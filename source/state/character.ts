@@ -13,21 +13,21 @@ import { withStateKey } from "@neverquest/utilities/helpers";
 
 export const canAttackOrParry = withStateKey("canAttackOrParry", (key) =>
   selector({
-    get: ({ get }) => get(stamina) >= get(weapon).staminaCost,
+    get: ({ get }) => get(stamina) >= get(weapon).burden,
     key,
   }),
 );
 
 export const canBlock = withStateKey("canBlock", (key) =>
   selector({
-    get: ({ get }) => get(stamina) >= get(shield).staminaCost,
+    get: ({ get }) => get(stamina) >= get(shield).burden,
     key,
   }),
 );
 
 export const canDodge = withStateKey("canDodge", (key) =>
   selector({
-    get: ({ get }) => get(isTraitAcquired("stalwart")) || get(stamina) >= get(armor).staminaCost,
+    get: ({ get }) => get(isTraitAcquired("stalwart")) || get(stamina) >= get(armor).burden,
     key,
   }),
 );

@@ -1,11 +1,14 @@
-import { Stack } from "react-bootstrap";
+import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 
+import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconBlock from "@neverquest/icons/block.svg?react";
-import { weapon } from "@neverquest/state/gear";
+import IconBurden from "@neverquest/icons/burden.svg?react";
+import IconStamina from "@neverquest/icons/stamina.svg?react";
+import { shield, weapon } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
 import { blockChance } from "@neverquest/state/statistics";
 import { isTraitAcquired } from "@neverquest/state/traits";
@@ -17,6 +20,7 @@ export function Block() {
   const blockChanceValue = useRecoilValue(blockChance);
   const isShowingBlockChance = useRecoilValue(isShowing("blockChance"));
   const isTraitAcquiredColossus = useRecoilValue(isTraitAcquired("colossus"));
+  const { burden } = useRecoilValue(shield);
   const weaponValue = useRecoilValue(weapon);
 
   const isEmpty =
@@ -39,7 +43,35 @@ export function Block() {
         tooltip="Total block chance"
       >
         <Stack direction="horizontal" gap={1}>
-          <span>{formatNumber({ format: "percentage", value: blockChanceValue })}</span>
+          <OverlayTrigger
+            overlay={
+              <Popover>
+                <PopoverHeader className="text-center">
+                  <span>Block chance details</span>
+                </PopoverHeader>
+
+                <PopoverBody>
+                  <DetailsTable>
+                    <tr>
+                      <td>
+                        <IconDisplay Icon={IconBurden} iconProps={{ className: "small" }}>
+                          <span>On block:</span>
+                        </IconDisplay>
+                      </td>
+
+                      <td>
+                        <IconDisplay Icon={IconStamina} iconProps={{ className: "small" }}>
+                          <span>-{formatNumber({ value: burden })}</span>
+                        </IconDisplay>
+                      </td>
+                    </tr>
+                  </DetailsTable>
+                </PopoverBody>
+              </Popover>
+            }
+          >
+            <span>{formatNumber({ format: "percentage", value: blockChanceValue })}</span>
+          </OverlayTrigger>
 
           <DeltasDisplay delta="blockChance" />
         </Stack>

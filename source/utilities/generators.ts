@@ -14,7 +14,6 @@ import type { Grip } from "@neverquest/types/unions";
 import {
   getArmorRanges,
   getFromRange,
-  getGearPrice,
   getMeleeRanges,
   getRangedRanges,
   getShieldRanges,
@@ -30,12 +29,13 @@ export function generateArmor({
   level: number;
 }): Armor {
   const factor = getSigmoid(level);
-  const { deflection, protection, staminaCost, weight } = getArmorRanges({
+  const { burden, deflection, protection, weight } = getArmorRanges({
     factor,
     gearClass,
   });
 
   return {
+    burden: isGeneratorRange(burden) ? Math.round(getFromRange(burden)) : burden,
     deflection: deflection === undefined ? 0 : getFromRange(deflection),
     gearClass,
     ID: nanoid(),
@@ -46,14 +46,13 @@ export function generateArmor({
       },
       ...generatorParameters,
     }),
-    price: getGearPrice({
-      factor,
-      ...ARMOR_SPECIFICATIONS[gearClass],
-    }),
+    price: Math.round(
+      getFromRange({
+        factor,
+        ...ARMOR_SPECIFICATIONS[gearClass].price,
+      }),
+    ),
     protection: Math.round(getFromRange(protection)),
-    staminaCost: isGeneratorRange(staminaCost)
-      ? Math.round(getFromRange(staminaCost))
-      : staminaCost,
     weight: Math.round(getFromRange(weight)),
   };
 }
@@ -69,7 +68,7 @@ export function generateMeleeWeapon({
   level: number;
 }): Melee {
   const factor = getSigmoid(level);
-  const { abilityChance, damage, rate, staminaCost, weight } = getMeleeRanges({
+  const { abilityChance, burden, damage, rate, weight } = getMeleeRanges({
     factor,
     gearClass,
     grip,
@@ -77,6 +76,7 @@ export function generateMeleeWeapon({
 
   return {
     abilityChance: getFromRange(abilityChance),
+    burden: Math.round(getFromRange(burden)),
     damage: Math.round(getFromRange(damage)),
     gearClass,
     grip,
@@ -90,9 +90,8 @@ export function generateMeleeWeapon({
       },
       ...generatorParameters,
     }),
-    price: getGearPrice({ factor, ...WEAPON_BASE }),
+    price: Math.round(getFromRange({ factor, ...WEAPON_BASE.price })),
     rate: Math.round(getFromRange(rate)),
-    staminaCost: Math.round(getFromRange(staminaCost)),
     weight: Math.round(getFromRange(weight)),
   };
 }
@@ -106,15 +105,15 @@ export function generateRangedWeapon({
   level: number;
 }): Ranged {
   const factor = getSigmoid(level);
-  const { abilityChance, ammunitionCost, damage, range, rate, staminaCost, weight } =
-    getRangedRanges({
-      factor,
-      gearClass,
-    });
+  const { abilityChance, ammunitionCost, burden, damage, range, rate, weight } = getRangedRanges({
+    factor,
+    gearClass,
+  });
 
   return {
     abilityChance: getFromRange(abilityChance),
     ammunitionCost: Math.round(getFromRange(ammunitionCost)),
+    burden: Math.round(getFromRange(burden)),
     damage: Math.round(getFromRange(damage)),
     gearClass,
     ID: nanoid(),
@@ -127,10 +126,9 @@ export function generateRangedWeapon({
       },
       ...generatorParameters,
     }),
-    price: getGearPrice({ factor, ...WEAPON_BASE }),
+    price: Math.round(getFromRange({ factor, ...WEAPON_BASE.price })),
     range: Math.round(getFromRange(range)),
     rate: Math.round(getFromRange(rate)),
-    staminaCost: Math.round(getFromRange(staminaCost)),
     weight: Math.round(getFromRange(weight)),
   };
 }
@@ -144,13 +142,14 @@ export function generateShield({
   level: number;
 }): Shield {
   const factor = getSigmoid(level);
-  const { block, stagger, staminaCost, weight } = getShieldRanges({
+  const { block, burden, stagger, weight } = getShieldRanges({
     factor,
     gearClass,
   });
 
   return {
     block: getFromRange(block),
+    burden: Math.round(getFromRange(burden)),
     gearClass,
     ID: nanoid(),
     level,
@@ -161,12 +160,13 @@ export function generateShield({
       },
       ...generatorParameters,
     }),
-    price: getGearPrice({
-      factor,
-      ...SHIELD_SPECIFICATIONS[gearClass],
-    }),
+    price: Math.round(
+      getFromRange({
+        factor,
+        ...SHIELD_SPECIFICATIONS[gearClass].price,
+      }),
+    ),
     stagger: stagger === undefined ? 0 : Math.round(getFromRange(stagger)),
-    staminaCost: Math.round(getFromRange(staminaCost)),
     weight: Math.round(getFromRange(weight)),
   };
 }

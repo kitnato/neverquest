@@ -10,9 +10,9 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { GEAR_LEVEL_RANGE_MAXIMUM, SHIELD_SPECIFICATIONS } from "@neverquest/data/gear";
 import { GROWTH_MAXIMUM, LABEL_TRAINING_REQUIRED, LABEL_UNKNOWN } from "@neverquest/data/general";
 import IconBlock from "@neverquest/icons/block.svg?react";
+import IconBurden from "@neverquest/icons/burden.svg?react";
 import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react";
 import IconStagger from "@neverquest/icons/stagger.svg?react";
-import IconStamina from "@neverquest/icons/stamina.svg?react";
 import IconUnknown from "@neverquest/icons/unknown.svg?react";
 import { blacksmithInventory } from "@neverquest/state/caravan";
 import { stage } from "@neverquest/state/encounter";
@@ -22,7 +22,7 @@ import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 import { generateShield } from "@neverquest/utilities/generators";
 import {
   getAffixStructure,
-  getGearPrice,
+  getFromRange,
   getShieldRanges,
   getSigmoid,
 } from "@neverquest/utilities/getters";
@@ -38,7 +38,7 @@ export function ShieldOptions() {
 
   const factor = getSigmoid(shieldLevel);
   const maximumShieldLevel = Math.min(stageValue + GEAR_LEVEL_RANGE_MAXIMUM, GROWTH_MAXIMUM);
-  const { block, stagger, staminaCost, weight } = getShieldRanges({
+  const { block, burden, stagger, weight } = getShieldRanges({
     factor,
     gearClass: shieldClass,
   });
@@ -96,14 +96,10 @@ export function ShieldOptions() {
           </IconDisplay>
         )}
 
-        <IconDisplay
-          Icon={IconStamina}
-          iconProps={{ overlayPlacement: "left" }}
-          tooltip="Stamina cost"
-        >
-          {formatNumber({ value: staminaCost.minimum })}&nbsp;-&nbsp;
+        <IconDisplay Icon={IconBurden} iconProps={{ overlayPlacement: "left" }} tooltip="Burden">
+          {formatNumber({ value: burden.minimum })}&nbsp;-&nbsp;
           {formatNumber({
-            value: staminaCost.maximum,
+            value: burden.maximum,
           })}
         </IconDisplay>
 
@@ -142,10 +138,12 @@ export function ShieldOptions() {
               }),
             }));
           }}
-          price={getGearPrice({
-            factor,
-            ...SHIELD_SPECIFICATIONS[shieldClass],
-          })}
+          price={Math.round(
+            getFromRange({
+              factor,
+              ...SHIELD_SPECIFICATIONS[shieldClass].price,
+            }),
+          )}
         />
       ) : (
         <CraftedGear

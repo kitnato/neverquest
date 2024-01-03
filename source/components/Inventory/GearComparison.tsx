@@ -9,11 +9,11 @@ import type { Showing } from "@neverquest/types/unions";
 
 export function GearComparison({
   difference,
-  isDownPositive = false,
+  lowerIsPositive = false,
   showing,
 }: {
   difference: number;
-  isDownPositive?: boolean;
+  lowerIsPositive?: boolean;
   showing: Showing;
 }) {
   const isShowingGearComparison = useRecoilValue(isShowing(showing));
@@ -21,7 +21,7 @@ export function GearComparison({
 
   // NaN here is produced by subtracting Infinity from Infinity.
   const isDifferenceEqual = Number.isNaN(difference) || difference === 0;
-  const isPositive = isDownPositive ? difference < 0 : difference > 0;
+  const isPositive = lowerIsPositive ? difference < 0 : difference > 0;
 
   if (isShowingGearComparison && showGearComparisonValue) {
     return (

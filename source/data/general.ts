@@ -25,6 +25,7 @@ export const LABEL_MAXIMUM = "MAX";
 export const LABEL_NO_ESSENCE = "Insufficient essence.";
 export const LABEL_NONE = "None.";
 export const LABEL_NONE_AVAILABLE = "None available.";
+export const LABEL_NO_PENALTY = "No penalty.";
 export const LABEL_OVER_ENCUMBERED = "Too heavy.";
 export const LABEL_SEPARATOR = "·";
 export const LABEL_TRAINING_REQUIRED = "Cannot use without training.";

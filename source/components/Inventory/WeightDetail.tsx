@@ -37,7 +37,7 @@ export function WeightDetail({
               {comparison !== undefined && comparison !== false && (
                 <GearComparison
                   difference={weight - comparison.subtrahend}
-                  isDownPositive
+                  lowerIsPositive
                   showing={comparison.showing}
                 />
               )}

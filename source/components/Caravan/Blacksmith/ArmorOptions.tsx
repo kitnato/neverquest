@@ -7,18 +7,16 @@ import { CraftedGear } from "@neverquest/components/Caravan/CraftedGear";
 import { CraftGear } from "@neverquest/components/Caravan/CraftGear";
 import { SetGearLevel } from "@neverquest/components/Caravan/SetGearLevel";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { DodgePenaltyContents } from "@neverquest/components/Inventory/Armor/DodgePenaltyContents";
 import { ARMOR_SPECIFICATIONS, GEAR_LEVEL_RANGE_MAXIMUM } from "@neverquest/data/gear";
 import { GROWTH_MAXIMUM, LABEL_TRAINING_REQUIRED, LABEL_UNKNOWN } from "@neverquest/data/general";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
+import IconBurden from "@neverquest/icons/burden.svg?react";
 import IconDeflection from "@neverquest/icons/deflection.svg?react";
-import IconDodgePenalty from "@neverquest/icons/dodge-penalty.svg?react";
 import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react";
 import IconArmorProtection from "@neverquest/icons/protection.svg?react";
 import IconUnknown from "@neverquest/icons/unknown.svg?react";
 import { blacksmithInventory } from "@neverquest/state/caravan";
 import { stage } from "@neverquest/state/encounter";
-import { isShowing } from "@neverquest/state/isShowing";
 import { allowProfanity } from "@neverquest/state/settings";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
@@ -26,14 +24,13 @@ import { generateArmor } from "@neverquest/utilities/generators";
 import {
   getAffixStructure,
   getArmorRanges,
-  getGearPrice,
+  getFromRange,
   getSigmoid,
 } from "@neverquest/utilities/getters";
 
 export function ArmorOptions() {
   const [{ armor: craftedArmor }, setBlacksmithInventory] = useRecoilState(blacksmithInventory);
   const allowProfanityValue = useRecoilValue(allowProfanity);
-  const isShowingDodgeChance = useRecoilValue(isShowing("dodgeChance"));
   const armorcraftValue = useRecoilValue(isSkillAcquired("armorcraft"));
   const stageValue = useRecoilValue(stage);
 
@@ -43,7 +40,7 @@ export function ArmorOptions() {
   const progressQuest = useProgressQuest();
 
   const factor = getSigmoid(armorLevel);
-  const { deflection, protection, staminaCost, weight } = getArmorRanges({
+  const { burden, deflection, protection, weight } = getArmorRanges({
     factor,
     gearClass: armorClass,
   });
@@ -99,19 +96,12 @@ export function ArmorOptions() {
           </IconDisplay>
         )}
 
-        {staminaCost !== 0 && (
-          <IconDisplay
-            Icon={isShowingDodgeChance ? IconDodgePenalty : IconUnknown}
-            iconProps={{ overlayPlacement: "left" }}
-            tooltip={isShowingDodgeChance ? "Dodge penalty" : LABEL_UNKNOWN}
-          >
-            {isShowingDodgeChance ? (
-              <DodgePenaltyContents staminaCost={staminaCost} />
-            ) : (
-              LABEL_UNKNOWN
-            )}
-          </IconDisplay>
-        )}
+        <IconDisplay Icon={IconBurden} iconProps={{ overlayPlacement: "left" }} tooltip="Burden">
+          {formatNumber({ value: burden.minimum })}&nbsp;-&nbsp;
+          {formatNumber({
+            value: burden.maximum,
+          })}
+        </IconDisplay>
 
         <IconDisplay
           Icon={IconEncumbrance}
@@ -150,10 +140,12 @@ export function ArmorOptions() {
 
             progressQuest({ quest: "crafting" });
           }}
-          price={getGearPrice({
-            factor,
-            ...ARMOR_SPECIFICATIONS[armorClass],
-          })}
+          price={Math.round(
+            getFromRange({
+              factor,
+              ...ARMOR_SPECIFICATIONS[armorClass].price,
+            }),
+          )}
         />
       ) : (
         <CraftedGear

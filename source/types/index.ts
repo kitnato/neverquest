@@ -11,10 +11,10 @@ import type {
 } from "@neverquest/types/unions";
 
 export type Armor = GearItemBase & {
+  burden: number;
   deflection: number;
   gearClass: ArmorClass;
   protection: number;
-  staminaCost: number;
 };
 
 export type AttributeOrMasteryBaseData = {
@@ -29,12 +29,6 @@ export type ConsumableItem = ItemBase & {
   name: Consumable;
 };
 
-export type GearBase = {
-  price: GeneratorRange;
-  staminaCost: [GeneratorRange, GeneratorRange];
-  weight: [GeneratorRange, GeneratorRange];
-};
-
 export type GearItem = Armor | Shield | Weapon;
 
 type GearItemBase = ItemBase & {
@@ -44,6 +38,12 @@ type GearItemBase = ItemBase & {
 };
 
 export type GearItemUnequipped = typeof ARMOR_NONE | typeof SHIELD_NONE | typeof WEAPON_NONE;
+
+export type GearRangeBase = {
+  burden: [GeneratorRange, GeneratorRange];
+  price: GeneratorRange;
+  weight: [GeneratorRange, GeneratorRange];
+};
 
 export type GemItem = ItemBase & {
   name: Gem;
@@ -97,9 +97,9 @@ export type Ranged = WeaponBase & {
 
 export type Shield = GearItemBase & {
   block: number;
+  burden: number;
   gearClass: ShieldClass;
   stagger: number;
-  staminaCost: number;
 };
 
 export type StackableItem = ConsumableItem | GemItem;
@@ -113,8 +113,8 @@ export type Weapon = Melee | Ranged;
 
 type WeaponBase = GearItemBase & {
   abilityChance: number;
+  burden: number;
   damage: number;
   gearClass: WeaponClass;
   rate: number;
-  staminaCost: number;
 };

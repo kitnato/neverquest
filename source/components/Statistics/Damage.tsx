@@ -13,7 +13,9 @@ import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconBrawler from "@neverquest/icons/brawler.svg?react";
 import IconBruiser from "@neverquest/icons/bruiser.svg?react";
+import IconBurden from "@neverquest/icons/burden.svg?react";
 import IconDamage from "@neverquest/icons/damage.svg?react";
+import IconStamina from "@neverquest/icons/stamina.svg?react";
 import IconStrength from "@neverquest/icons/strength.svg?react";
 import IconTomeOfPower from "@neverquest/icons/tome-of-power.svg?react";
 import IconWeaponDamage from "@neverquest/icons/weapon-damage.svg?react";
@@ -43,7 +45,7 @@ export function Damage() {
 
   const progressQuest = useProgressQuest();
 
-  const { damage: weaponDamage } = weaponValue;
+  const { burden, damage: weaponDamage } = weaponValue;
 
   useDeltaText({
     delta: "damage",
@@ -166,6 +168,22 @@ export function Damage() {
                           <span>
                             +{formatNumber({ format: "percentage", value: BRAWLER_DAMAGE_BONUS })}
                           </span>
+                        </td>
+                      </tr>
+                    )}
+
+                    {burden > 0 && (
+                      <tr>
+                        <td>
+                          <IconDisplay Icon={IconBurden} iconProps={{ className: "small" }}>
+                            <span>On hit:</span>
+                          </IconDisplay>
+                        </td>
+
+                        <td>
+                          <IconDisplay Icon={IconStamina} iconProps={{ className: "small" }}>
+                            <span>-{formatNumber({ value: burden })}</span>
+                          </IconDisplay>
                         </td>
                       </tr>
                     )}

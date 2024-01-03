@@ -44,7 +44,7 @@ export const ATTRIBUTES: Record<
     base: RESERVES.stamina.baseAmount,
     description: "Increases maximum stamina.",
     Icon: IconEndurance,
-    increment: 10,
+    increment: 15,
     powerBonus: 0.02,
     shows: ["stamina", "staminaDetails"],
   },

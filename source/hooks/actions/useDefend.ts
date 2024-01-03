@@ -64,6 +64,7 @@ export function useDefend() {
 
         set(isShowing("monsterOffense"), true);
 
+        const { burden } = get(armor);
         const deltaHealth: DeltaDisplay[] = [];
         const deltaStamina: DeltaDisplay[] = [];
         const statusElementValue = get(statusElement);
@@ -93,8 +94,6 @@ export function useDefend() {
 
         // If attack is dodged, all damage is negated.
         if (Math.random() <= get(dodgeChance)) {
-          const armorStaminaCost = get(armor).staminaCost;
-
           if (get(canDodge)) {
             progressQuest({ quest: "dodging" });
 
@@ -107,7 +106,7 @@ export function useDefend() {
             });
 
             if (!get(isTraitAcquired("stalwart"))) {
-              changeStamina({ value: -armorStaminaCost });
+              changeStamina({ value: -burden });
             }
 
             isNegated = true;
@@ -119,7 +118,7 @@ export function useDefend() {
               },
               {
                 color: "text-danger",
-                value: `(${armorStaminaCost})`,
+                value: `(${burden})`,
               },
             );
 
@@ -128,7 +127,6 @@ export function useDefend() {
         }
 
         if (!isNegated) {
-          const { staminaCost: shieldStaminaCost } = get(shield);
           const hasParried = Math.random() <= get(parryChance);
           const hasBlocked = !hasParried && Math.random() <= get(blockChance);
           const thornsValue = get(thorns);
@@ -144,7 +142,7 @@ export function useDefend() {
           let healthDamage = totalDamage > 0 ? totalDamage : 0;
           let monsterHealthDamage = 0;
 
-          // If parrying occurs, check & apply stamina cost.
+          // If parrying occurs, check & apply burden.
           if (hasParried) {
             if (get(canAttackOrParry)) {
               const parryReflected = Math.round(monsterDamageAilingValue * get(parryDamage));
@@ -183,7 +181,7 @@ export function useDefend() {
                 },
                 {
                   color: "text-danger",
-                  value: `(${get(weapon).staminaCost})`,
+                  value: `(${get(weapon).burden})`,
                 },
               );
 
@@ -191,8 +189,10 @@ export function useDefend() {
             }
           }
 
-          // If not parried and blocking occurs, check & apply stamina cost.
+          // If not parried and blocking occurs, check & apply burden.
           if (hasBlocked) {
+            const { burden } = get(shield);
+
             if (get(canBlock)) {
               healthDamage = 0;
 
@@ -203,7 +203,7 @@ export function useDefend() {
                 value: "BLOCKED",
               });
 
-              changeStamina({ value: -shieldStaminaCost });
+              changeStamina({ value: -burden });
 
               if (Math.random() <= get(staggerChance)) {
                 set(monsterAilmentDuration("staggered"), get(masteryStatistic("stability")));
@@ -226,7 +226,7 @@ export function useDefend() {
                 },
                 {
                   color: "text-danger",
-                  value: `(${shieldStaminaCost})`,
+                  value: `(${burden})`,
                 },
               );
 
@@ -247,6 +247,10 @@ export function useDefend() {
                 // In the case of 0 health damage, show only inflicted.
                 value: `(${Math.min(protectionValue, monsterDamageAilingValue)})`,
               });
+            }
+
+            if (!get(isTraitAcquired("stalwart"))) {
+              changeStamina({ value: -burden });
             }
           }
 

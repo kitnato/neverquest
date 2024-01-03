@@ -222,7 +222,6 @@ export const SHOWING_TYPES = [
   "damageDetails",
   "deflection",
   "dodgeChance",
-  "dodgePenalty",
   "essence",
   "gameOver",
   "gearClass",

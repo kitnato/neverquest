@@ -28,7 +28,7 @@ export function useToggleEquipGear() {
         const shieldValue = get(shield);
         const weaponValue = get(weapon);
 
-        const { gearClass, ID, staminaCost } = gearItem;
+        const { burden, gearClass, ID } = gearItem;
         const isWeaponRanged = isRanged(gearItem);
         // eslint-disable-next-line unicorn/consistent-destructuring
         const isWeaponTwoHanded = isMelee(gearItem) && gearItem.grip === "two-handed";
@@ -65,7 +65,7 @@ export function useToggleEquipGear() {
             return;
           }
 
-          if (staminaCost > 0) {
+          if (burden > 0) {
             set(isShowing("stamina"), true);
           }
 

@@ -83,15 +83,15 @@ export function getAnimationClass({
 }
 
 export function getArmorRanges({ factor, gearClass }: { factor: number; gearClass: ArmorClass }) {
-  const { deflection, protection, staminaCost, weight } = ARMOR_SPECIFICATIONS[gearClass];
+  const { burden, deflection, protection, weight } = ARMOR_SPECIFICATIONS[gearClass];
 
   return {
+    burden: isGeneratorRanges(burden)
+      ? getRange({ factor, isRounded: true, ranges: burden })
+      : burden,
     deflection: deflection === undefined ? undefined : getRange({ factor, ranges: deflection }),
-    protection: getRange({ factor, ranges: protection }),
-    staminaCost: isGeneratorRanges(staminaCost)
-      ? getRange({ factor, ranges: staminaCost })
-      : staminaCost,
-    weight: getRange({ factor, ranges: weight }),
+    protection: getRange({ factor, isRounded: true, ranges: protection }),
+    weight: getRange({ factor, isRounded: true, ranges: weight }),
   };
 }
 
@@ -214,18 +214,6 @@ export function getFromRange({ factor, maximum, minimum }: GeneratorRange & { fa
   return (factor ?? Math.random()) * (maximum - minimum) + minimum;
 }
 
-export function getGearPrice({
-  factor,
-  modifier = 1,
-  price,
-}: {
-  factor: number;
-  modifier?: number;
-  price: GeneratorRange;
-}) {
-  return Math.round((price.minimum + price.maximum * factor) * modifier);
-}
-
 export function getGemFittingCost(fitted: number) {
   return Math.round(
     getFromRange({ factor: fitted / (GEMS_MAXIMUM - 1), ...GEM_FITTING_COST_RANGE }),
@@ -267,15 +255,15 @@ export function getMeleeRanges({
     stamina: staminaModifier,
     weight: weightModifier,
   } = WEAPON_MODIFIER[grip];
-  const { damage, rate, staminaCost, weight } = WEAPON_BASE;
+  const { burden, damage, rate, weight } = WEAPON_BASE;
   const { abilityChance } = WEAPON_SPECIFICATIONS[gearClass];
 
   return {
     abilityChance: getRange({ factor, modifier: abilityModifier, ranges: abilityChance }),
-    damage: getRange({ factor, modifier: damageModifier, ranges: damage }),
-    rate: getRange({ factor, modifier: rateModifier, ranges: rate }),
-    staminaCost: getRange({ factor, modifier: staminaModifier, ranges: staminaCost }),
-    weight: getRange({ factor, modifier: weightModifier, ranges: weight }),
+    burden: getRange({ factor, isRounded: true, modifier: staminaModifier, ranges: burden }),
+    damage: getRange({ factor, isRounded: true, modifier: damageModifier, ranges: damage }),
+    rate: getRange({ factor, isRounded: true, modifier: rateModifier, ranges: rate }),
+    weight: getRange({ factor, isRounded: true, modifier: weightModifier, ranges: weight }),
   };
 }
 
@@ -294,18 +282,23 @@ export function getQuestsData(quest: Quest): QuestData[] {
 
 export function getRange({
   factor,
+  isRounded = false,
   modifier = 1,
   ranges,
 }: {
   factor: number;
+  isRounded?: boolean;
   modifier?: number;
   ranges: [GeneratorRange, GeneratorRange];
 }): GeneratorRange {
+  const maximum =
+    getFromRange({ factor, maximum: ranges[1].maximum, minimum: ranges[0].maximum }) * modifier;
+  const minimum =
+    getFromRange({ factor, maximum: ranges[1].minimum, minimum: ranges[0].minimum }) * modifier;
+
   return {
-    maximum:
-      getFromRange({ factor, maximum: ranges[1].maximum, minimum: ranges[0].maximum }) * modifier,
-    minimum:
-      getFromRange({ factor, maximum: ranges[1].minimum, minimum: ranges[0].minimum }) * modifier,
+    maximum: isRounded ? Math.round(maximum) : maximum,
+    minimum: isRounded ? Math.round(minimum) : minimum,
   };
 }
 
@@ -317,17 +310,17 @@ export function getRangedRanges({ factor, gearClass }: { factor: number; gearCla
     stamina: staminaModifier,
     weight: weightModifier,
   } = WEAPON_MODIFIER.ranged;
-  const { ammunitionCost, damage, range, rate, staminaCost, weight } = WEAPON_BASE;
+  const { ammunitionCost, burden, damage, range, rate, weight } = WEAPON_BASE;
   const { abilityChance } = WEAPON_SPECIFICATIONS[gearClass];
 
   return {
     abilityChance: getRange({ factor, modifier: abilityModifier, ranges: abilityChance }),
-    ammunitionCost: getRange({ factor, ranges: ammunitionCost }),
-    damage: getRange({ factor, modifier: damageModifier, ranges: damage }),
-    range: getRange({ factor, ranges: range }),
-    rate: getRange({ factor, modifier: rateModifier, ranges: rate }),
-    staminaCost: getRange({ factor, modifier: staminaModifier, ranges: staminaCost }),
-    weight: getRange({ factor, modifier: weightModifier, ranges: weight }),
+    ammunitionCost: getRange({ factor, isRounded: true, ranges: ammunitionCost }),
+    burden: getRange({ factor, isRounded: true, modifier: staminaModifier, ranges: burden }),
+    damage: getRange({ factor, isRounded: true, modifier: damageModifier, ranges: damage }),
+    range: getRange({ factor, isRounded: true, ranges: range }),
+    rate: getRange({ factor, isRounded: true, modifier: rateModifier, ranges: rate }),
+    weight: getRange({ factor, isRounded: true, modifier: weightModifier, ranges: weight }),
   };
 }
 
@@ -372,20 +365,20 @@ export function getSellPrice({ gemsFitted, item }: { gemsFitted?: number; item: 
 }
 
 export function getShieldRanges({ factor, gearClass }: { factor: number; gearClass: ShieldClass }) {
-  const { block, stagger, staminaCost, weight } = SHIELD_SPECIFICATIONS[gearClass];
+  const { block, burden, stagger, weight } = SHIELD_SPECIFICATIONS[gearClass];
 
   return {
     block: getRange({ factor, ranges: block }),
+    burden: getRange({ factor, isRounded: true, ranges: burden }),
     stagger: stagger === undefined ? undefined : getRange({ factor, ranges: stagger }),
-    staminaCost: getRange({ factor, ranges: staminaCost }),
-    weight: getRange({ factor, ranges: weight }),
+    weight: getRange({ factor, isRounded: true, ranges: weight }),
   };
 }
 
 // https://en.wikipedia.org/wiki/Sigmoid_function
 // f(0-1) = ~0, f(38) = ~0.43, f(50) = ~0.78, f(GROWTH_MAXIMUM) = ~1
 export function getSigmoid(x: number) {
-  return 1 / (1 + Math.pow(Math.E, -0.13 * (x - 45)) - 0.016);
+  return 1 / (1 + Math.pow(Math.E, -0.15 * (x - 45)) - 0.009);
 }
 
 export function getSnapshotGetter({ getLoadable }: Snapshot) {

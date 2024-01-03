@@ -94,7 +94,7 @@ export const SKILLS: Record<
     descriptionIcons: [IconDodge],
     Icon: IconEvasion,
     requiredCrew: "merchant",
-    shows: ["dodgeChance", "dodgePenalty"],
+    shows: ["dodgeChance"],
   },
   shieldcraft: {
     description: "Grants the use of # tower shields & the ability to # stagger monsters.",

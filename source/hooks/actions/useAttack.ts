@@ -72,8 +72,8 @@ export function useAttack() {
         }
 
         if (canAttackOrParryValue && hasEnoughAmmunitionValue) {
-          if (weaponValue.staminaCost > 0) {
-            changeStamina({ value: -weaponValue.staminaCost });
+          if (weaponValue.burden > 0) {
+            changeStamina({ value: -weaponValue.burden });
           }
 
           if (monsterElementValue !== null) {
@@ -181,7 +181,7 @@ export function useAttack() {
                 },
                 {
                   color: "text-danger",
-                  value: `(${weaponValue.staminaCost})`,
+                  value: `(${weaponValue.burden})`,
                 },
               ],
               delta: "stamina",

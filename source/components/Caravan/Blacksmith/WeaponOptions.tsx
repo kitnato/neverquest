@@ -15,9 +15,9 @@ import {
 } from "@neverquest/data/gear";
 import { GROWTH_MAXIMUM, LABEL_UNKNOWN } from "@neverquest/data/general";
 import { WEAPON_ABILITY_SKILLS } from "@neverquest/data/skills";
+import IconBurden from "@neverquest/icons/burden.svg?react";
 import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react";
 import IconGrip from "@neverquest/icons/grip.svg?react";
-import IconStamina from "@neverquest/icons/stamina.svg?react";
 import IconUnknown from "@neverquest/icons/unknown.svg?react";
 import IconWeaponAttackRate from "@neverquest/icons/weapon-attack-rate.svg?react";
 import IconWeaponDamage from "@neverquest/icons/weapon-damage.svg?react";
@@ -30,7 +30,7 @@ import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 import { generateMeleeWeapon } from "@neverquest/utilities/generators";
 import {
   getAffixStructure,
-  getGearPrice,
+  getFromRange,
   getMeleeRanges,
   getSigmoid,
 } from "@neverquest/utilities/getters";
@@ -50,7 +50,7 @@ export function WeaponOptions() {
   const skillValue = useRecoilValue(isSkillAcquired(WEAPON_ABILITY_SKILLS[ability]));
 
   const factor = getSigmoid(weaponLevel);
-  const { abilityChance, damage, rate, staminaCost, weight } = getMeleeRanges({
+  const { abilityChance, burden, damage, rate, weight } = getMeleeRanges({
     factor,
     gearClass: weaponClass,
     grip: weaponGrip,
@@ -130,14 +130,10 @@ export function WeaponOptions() {
             : LABEL_UNKNOWN}
         </IconDisplay>
 
-        <IconDisplay
-          Icon={IconStamina}
-          iconProps={{ overlayPlacement: "left" }}
-          tooltip="Stamina cost"
-        >
-          {formatNumber({ value: staminaCost.minimum })}&nbsp;-&nbsp;
+        <IconDisplay Icon={IconBurden} iconProps={{ overlayPlacement: "left" }} tooltip="Burden">
+          {formatNumber({ value: burden.minimum })}&nbsp;-&nbsp;
           {formatNumber({
-            value: staminaCost.maximum,
+            value: burden.maximum,
           })}
         </IconDisplay>
 
@@ -175,11 +171,12 @@ export function WeaponOptions() {
               }),
             }));
           }}
-          price={getGearPrice({
-            factor,
-            ...WEAPON_BASE,
-            modifier: WEAPON_MODIFIER[weaponGrip].price,
-          })}
+          price={Math.round(
+            getFromRange({
+              factor,
+              ...WEAPON_BASE.price,
+            }) * WEAPON_MODIFIER[weaponGrip].price,
+          )}
         />
       ) : (
         <CraftedGear

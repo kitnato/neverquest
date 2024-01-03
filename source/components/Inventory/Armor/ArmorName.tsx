@@ -2,17 +2,16 @@ import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "reac
 import type { Placement } from "react-bootstrap/esm/types";
 import { useRecoilValue } from "recoil";
 
+import { BurdenDetail } from "../BurdenDetail";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { AppliedGems } from "@neverquest/components/Inventory/AppliedGems";
-import { DodgePenaltyContents } from "@neverquest/components/Inventory/Armor/DodgePenaltyContents";
 import { GearComparison } from "@neverquest/components/Inventory/GearComparison";
 import { GearLevelDetail } from "@neverquest/components/Inventory/GearLevelDetail";
 import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
 import { type ARMOR_NONE, ARMOR_SPECIFICATIONS } from "@neverquest/data/gear";
 import { LABEL_UNKNOWN } from "@neverquest/data/general";
 import IconDeflection from "@neverquest/icons/deflection.svg?react";
-import IconNone from "@neverquest/icons/none.svg?react";
 import IconProtection from "@neverquest/icons/protection.svg?react";
 import { armor as armorEquipped } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
@@ -29,10 +28,9 @@ export function ArmorName({
 }) {
   const armorEquippedValue = useRecoilValue(armorEquipped);
   const isShowingDeflection = useRecoilValue(isShowing("deflection"));
-  const isShowingDodgePenalty = useRecoilValue(isShowing("dodgePenalty"));
   const isShowingGearClass = useRecoilValue(isShowing("gearClass"));
 
-  const { deflection, ID, level, name, protection, staminaCost, weight } = armor;
+  const { burden, deflection, ID, level, name, protection, weight } = armor;
   const isArmorUnarmored = isUnarmored(armor);
   const showComparison = ID !== armorEquippedValue.ID;
 
@@ -74,6 +72,16 @@ export function ArmorName({
                 </td>
               </tr>
 
+              <BurdenDetail
+                burden={burden}
+                comparison={
+                  showComparison && {
+                    showing: "armor",
+                    subtrahend: armorEquippedValue.burden,
+                  }
+                }
+              />
+
               <AppliedGems gearItem={armor} />
 
               {!isArmorUnarmored && (
@@ -86,14 +94,6 @@ export function ArmorName({
 
                       <td>
                         {(() => {
-                          if (isUnarmored(armor)) {
-                            return (
-                              <IconDisplay Icon={IconNone} iconProps={{ className: "small" }}>
-                                <span>None</span>
-                              </IconDisplay>
-                            );
-                          }
-
                           const { gearClass } = armor;
                           const { Icon } = ARMOR_SPECIFICATIONS[gearClass];
 
@@ -130,36 +130,6 @@ export function ArmorName({
                           {showComparison && (
                             <GearComparison
                               difference={deflection - armorEquippedValue.deflection}
-                              showing="armor"
-                            />
-                          )}
-                        </Stack>
-                      </td>
-                    </>
-                  ) : (
-                    <td className="text-end">
-                      <span>{LABEL_UNKNOWN}</span>
-                    </td>
-                  )}
-                </tr>
-              )}
-
-              {staminaCost > 0 && (
-                <tr>
-                  {isShowingDodgePenalty ? (
-                    <>
-                      <td>
-                        <span>Dodge penalty:</span>
-                      </td>
-
-                      <td>
-                        <Stack direction="horizontal" gap={1}>
-                          <DodgePenaltyContents staminaCost={staminaCost} />
-
-                          {showComparison && (
-                            <GearComparison
-                              difference={staminaCost - armorEquippedValue.staminaCost}
-                              isDownPositive
                               showing="armor"
                             />
                           )}

@@ -16,9 +16,9 @@ import {
 import { GROWTH_MAXIMUM, LABEL_TRAINING_REQUIRED, LABEL_UNKNOWN } from "@neverquest/data/general";
 import { WEAPON_ABILITY_SKILLS } from "@neverquest/data/skills";
 import IconAmmunition from "@neverquest/icons/ammunition.svg?react";
+import IconBurden from "@neverquest/icons/burden.svg?react";
 import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react";
 import IconRange from "@neverquest/icons/range.svg?react";
-import IconStamina from "@neverquest/icons/stamina.svg?react";
 import IconUnknown from "@neverquest/icons/unknown.svg?react";
 import IconWeaponAttackRate from "@neverquest/icons/weapon-attack-rate.svg?react";
 import IconWeaponDamage from "@neverquest/icons/weapon-damage.svg?react";
@@ -30,7 +30,7 @@ import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 import { generateRangedWeapon } from "@neverquest/utilities/generators";
 import {
   getAffixStructure,
-  getGearPrice,
+  getFromRange,
   getRangedRanges,
   getSigmoid,
 } from "@neverquest/utilities/getters";
@@ -50,11 +50,10 @@ export function RangedWeaponOptions() {
   const skillValue = useRecoilValue(isSkillAcquired(WEAPON_ABILITY_SKILLS[ability]));
 
   const factor = getSigmoid(weaponLevel);
-  const { abilityChance, ammunitionCost, damage, range, rate, staminaCost, weight } =
-    getRangedRanges({
-      factor,
-      gearClass: weaponClass,
-    });
+  const { abilityChance, ammunitionCost, burden, damage, range, rate, weight } = getRangedRanges({
+    factor,
+    gearClass: weaponClass,
+  });
   const maximumWeaponLevel = Math.min(stageValue + GEAR_LEVEL_RANGE_MAXIMUM, GROWTH_MAXIMUM);
 
   return (
@@ -134,14 +133,10 @@ export function RangedWeaponOptions() {
             : LABEL_UNKNOWN}
         </IconDisplay>
 
-        <IconDisplay
-          Icon={IconStamina}
-          iconProps={{ overlayPlacement: "left" }}
-          tooltip="Stamina cost"
-        >
-          {formatNumber({ value: staminaCost.minimum })}&nbsp;-&nbsp;
+        <IconDisplay Icon={IconBurden} iconProps={{ overlayPlacement: "left" }} tooltip="Burden">
+          {formatNumber({ value: burden.minimum })}&nbsp;-&nbsp;
           {formatNumber({
-            value: staminaCost.maximum,
+            value: burden.maximum,
           })}
         </IconDisplay>
 
@@ -178,11 +173,12 @@ export function RangedWeaponOptions() {
                 }),
               );
             }}
-            price={getGearPrice({
-              factor,
-              ...WEAPON_BASE,
-              modifier: WEAPON_MODIFIER.ranged.price,
-            })}
+            price={Math.round(
+              getFromRange({
+                factor,
+                ...WEAPON_BASE.price,
+              }) * WEAPON_MODIFIER.ranged.price,
+            )}
           />
         ) : (
           <CraftedGear gearItem={fletcherInventoryValue} onTransfer={resetFletcherInventory} />

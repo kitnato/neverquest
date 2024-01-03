@@ -5,9 +5,9 @@ import { useRecoilValue } from "recoil";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { AppliedGems } from "@neverquest/components/Inventory/AppliedGems";
+import { BurdenDetail } from "@neverquest/components/Inventory/BurdenDetail";
 import { GearComparison } from "@neverquest/components/Inventory/GearComparison";
 import { GearLevelDetail } from "@neverquest/components/Inventory/GearLevelDetail";
-import { StaminaCostDetail } from "@neverquest/components/Inventory/StaminaCostDetail";
 import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
 import { type WEAPON_NONE, WEAPON_SPECIFICATIONS } from "@neverquest/data/gear";
 import { LABEL_UNKNOWN } from "@neverquest/data/general";
@@ -38,7 +38,7 @@ export function WeaponName({
   const showDamagePerSecondValue = useRecoilValue(showDamagePerSecond);
   const weaponEquippedValue = useRecoilValue(weaponEquipped);
 
-  const { abilityChance, damage, gearClass, ID, level, name, rate, staminaCost, weight } = weapon;
+  const { abilityChance, burden, damage, gearClass, ID, level, name, rate, weight } = weapon;
   const { ability, IconAbility, IconGearClass } = WEAPON_SPECIFICATIONS[gearClass];
   const damagePerSecond = getDamagePerRate({
     damage,
@@ -105,7 +105,7 @@ export function WeaponName({
                     {showComparison && (
                       <GearComparison
                         difference={rate - weaponEquippedValue.rate}
-                        isDownPositive
+                        lowerIsPositive
                         showing="weapon"
                       />
                     )}
@@ -175,14 +175,14 @@ export function WeaponName({
                 </tr>
               )}
 
-              <StaminaCostDetail
+              <BurdenDetail
+                burden={burden}
                 comparison={
                   showComparison && {
                     showing: "weapon",
-                    subtrahend: weaponEquippedValue.staminaCost,
+                    subtrahend: weaponEquippedValue.burden,
                   }
                 }
-                cost={staminaCost}
               />
 
               <tr>

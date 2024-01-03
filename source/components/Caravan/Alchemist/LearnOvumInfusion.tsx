@@ -1,5 +1,5 @@
 import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { OVUM_INFUSION_PRICE } from "@neverquest/data/caravan";
@@ -7,7 +7,7 @@ import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_NO_ESSENCE } from "@neverquest/data/g
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import IconEssence from "@neverquest/icons/essence.svg?react";
 import IconOvumInfusion from "@neverquest/icons/ovum-infusion.svg?react";
-import { canInfuseMysteriousEgg, ownedItem } from "@neverquest/state/inventory";
+import { canInfuseMysteriousEgg, inventory, ownedItem } from "@neverquest/state/inventory";
 import { essence } from "@neverquest/state/resources";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
@@ -16,6 +16,7 @@ export function LearnOvumInfusion() {
     useRecoilState(canInfuseMysteriousEgg);
   const essenceValue = useRecoilValue(essence);
   const ownedItemTornManuscript = useRecoilValue(ownedItem("torn manuscript"));
+  const setInventory = useSetRecoilState(inventory);
 
   const transactEssence = useTransactEssence();
 
@@ -49,7 +50,11 @@ export function LearnOvumInfusion() {
                   disabled={!isAffordable}
                   onClick={() => {
                     transactEssence(-OVUM_INFUSION_PRICE);
+
                     setCanInfuseMysteriousEgg(true);
+                    setInventory((currentInventory) =>
+                      currentInventory.filter(({ ID }) => ID !== ownedItemTornManuscript.ID),
+                    );
                   }}
                   variant="outline-dark"
                 >

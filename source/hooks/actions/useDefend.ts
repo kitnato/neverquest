@@ -264,7 +264,7 @@ export function useDefend() {
 
               deltaStamina.push({
                 color: "text-success",
-                value: "DEFLECTED",
+                value: "DEFLECTED BLIGHT",
               });
             } else {
               progressQuest({ quest: "blighting" });
@@ -285,7 +285,7 @@ export function useDefend() {
 
               deltaHealth.push({
                 color: "text-success",
-                value: "DEFLECTED",
+                value: "DEFLECTED POISON",
               });
             } else {
               progressQuest({ quest: "poisoning" });

@@ -1,9 +1,9 @@
 import { nanoid } from "nanoid";
 import { useRecoilCallback } from "recoil";
 
-import { ownedItem } from "@neverquest/state/inventory";
+import { QUESTS } from "@neverquest/data/quests";
 import {
-  canUseJournal,
+  canTrackQuests,
   questNotifications,
   questProgress,
   questStatuses,
@@ -18,22 +18,18 @@ export function useProgressQuest() {
       ({ amount = 1, quest }: { amount?: number; quest: Quest }) => {
         const get = getSnapshotGetter(snapshot);
 
-        if (!get(canUseJournal) || get(ownedItem("journal")) === undefined) {
+        if (QUESTS[quest].requiresJournal && !get(canTrackQuests)) {
           return;
         }
 
+        const achievedQuests: QuestNotification[] = [];
         const questProgressState = questProgress(quest);
-        const questStatusesState = questStatuses(quest);
-
         const quests = getQuestsData(quest);
-
         const newProgress = get(questProgressState) + amount;
 
         set(questProgressState, newProgress);
 
-        const achievedQuests: QuestNotification[] = [];
-
-        set(questStatusesState, (statuses) =>
+        set(questStatuses(quest), (statuses) =>
           statuses.map((status, index) => {
             const currentQuest = quests[index];
 

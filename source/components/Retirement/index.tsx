@@ -8,28 +8,20 @@ import {
   ModalTitle,
   Stack,
 } from "react-bootstrap";
-import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { ItemsInherited } from "@neverquest/components/Retirement/ItemsInherited";
 import { ProgressReduction } from "@neverquest/components/Retirement/ProgressReduction";
 import { ResetDetails } from "@neverquest/components/Retirement/ResetDetails";
 import { TraitSelection } from "@neverquest/components/Retirement/TraitSelection";
-import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useRetire } from "@neverquest/hooks/actions/useRetire";
 import IconRetire from "@neverquest/icons/retire.svg?react";
-import { ownedItem } from "@neverquest/state/inventory";
-import { canUseJournal } from "@neverquest/state/quests";
 
 export function Retirement({
   state: [isShowing, setIsShowing],
 }: {
   state: [boolean, Dispatch<SetStateAction<boolean>>];
 }) {
-  const ownedItemJournal = useRecoilValue(ownedItem("journal"));
-  const setCanUseJournal = useSetRecoilState(canUseJournal);
-
-  const progressQuest = useProgressQuest();
   const retire = useRetire();
 
   const onHide = () => {
@@ -68,12 +60,6 @@ export function Retirement({
         <Button
           onClick={() => {
             onHide();
-
-            if (ownedItemJournal !== undefined) {
-              setCanUseJournal(true);
-              progressQuest({ quest: "decipheringJournal" });
-            }
-
             retire();
           }}
           variant="outline-dark"

@@ -28,7 +28,7 @@ import {
   stage,
   stageMaximum,
 } from "@neverquest/state/encounter";
-import { ownedItem } from "@neverquest/state/inventory";
+import { canInfuseMysteriousEgg, ownedItem } from "@neverquest/state/inventory";
 import { infusionEffect } from "@neverquest/state/items";
 import { range } from "@neverquest/state/statistics";
 import { FINALITY_TYPES, type MonsterAilment } from "@neverquest/types/unions";
@@ -237,14 +237,16 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
                 .reduce<number>((sum, gemCount) => sum + gemCount, 0)
             : 0,
         trinket:
-          // Mysterious egg drops only if Res Dominus has just been defeated while carrying the antique coin and if the egg is neither carried nor sold.
+          // Mysterious egg drops only if Res Dominus has just been defeated while carrying the antique coin and if the egg nor the familiar is neither carried nor sold.
           get(ownedItem("antique coin")) !== undefined &&
           encounterValue === "res dominus" &&
           ownedItemMysteriousEgg === undefined &&
+          get(ownedItem("familiar")) === undefined &&
           !merchantInventoryValue.some(({ name }) => name === "mysterious egg")
             ? { ...INFUSABLES["mysterious egg"].item, ID: nanoid() }
-            : // Torn manuscript drops only if it's not currently carried or sold, the antique coin & mysterious egg are both carried, and if the drop chance is reached.
+            : // Torn manuscript drops only if it's not currently carried or sold, the antique coin & mysterious egg are both carried, it can't yet be infused and if the drop chance is reached.
               get(ownedItem("antique coin")) !== undefined &&
+                !get(canInfuseMysteriousEgg) &&
                 ownedItemMysteriousEgg !== undefined &&
                 !merchantInventoryValue.some(({ name }) => name === "torn manuscript") &&
                 get(ownedItem("torn manuscript")) === undefined &&

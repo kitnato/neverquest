@@ -1,6 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
-import { LABEL_UNKNOWN, RETIREMENT_STAGE_MINIMUM } from "@neverquest/data/general";
+import { RETIREMENT_STAGE_MINIMUM } from "@neverquest/data/general";
 import { useInitialize } from "@neverquest/hooks/actions/useInitialize";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useResetAttributes } from "@neverquest/hooks/actions/useResetAttributes";
@@ -22,10 +22,10 @@ import {
   stageMaximum,
 } from "@neverquest/state/encounter";
 import { armor, shield, weapon } from "@neverquest/state/gear";
-import { inventory } from "@neverquest/state/inventory";
+import { inventory, ownedItem } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
 import { masteryProgress, masteryRank } from "@neverquest/state/masteries";
-import { questProgress } from "@neverquest/state/quests";
+import { hasDecipheredJournal, questProgress } from "@neverquest/state/quests";
 import { blight, poison } from "@neverquest/state/reserves";
 import { essence } from "@neverquest/state/resources";
 import { isSkillAcquired } from "@neverquest/state/skills";
@@ -66,22 +66,28 @@ export function useRetire() {
         set(isShowing("traits"), true);
         set(progressReduction, getProgressReduction(get(stage)));
 
+        resetAttributes();
+
         reset(armor);
+        reset(attackDuration);
+        reset(blacksmithInventory);
         reset(blight);
         reset(poison);
         reset(essence);
         reset(defeatedFinality);
+        reset(fletcherInventory);
         reset(isStageStarted);
         reset(progress);
         reset(location);
+        reset(merchantInventory);
         reset(name);
         reset(shield);
         reset(stage);
         reset(weapon);
+
         reset(questProgress("attributesIncreasingAll"));
         reset(questProgress("attributesUnlockingAll"));
         reset(questProgress("hiringAll"));
-        reset(questProgress("infusingMaximum"));
         reset(questProgress("masteriesAll"));
         reset(questProgress("masteriesRankMaximum"));
         reset(questProgress("powerLevel"));
@@ -92,14 +98,6 @@ export function useRetire() {
         reset(questProgress("skillsAll"));
         reset(questProgress("survivingNoAttributes"));
         reset(questProgress("survivingNoGear"));
-
-        resetAttributes();
-
-        reset(attackDuration);
-
-        reset(blacksmithInventory);
-        reset(fletcherInventory);
-        reset(merchantInventory);
 
         for (const crew of CREW_TYPES) {
           reset(monologue(crew));
@@ -118,28 +116,10 @@ export function useRetire() {
           currentInventory.filter((currentItem) => isInheritableItem(currentItem)),
         );
 
-        if (get(name) !== LABEL_UNKNOWN) {
-          progressQuest({ quest: "settingName" });
-        }
+        if (get(ownedItem("journal")) !== undefined) {
+          set(hasDecipheredJournal, true);
 
-        const defeatedFinalityValue = get(defeatedFinality);
-
-        if (defeatedFinalityValue === "res cogitans") {
-          progressQuest({ quest: "killingResCogitans" });
-        }
-
-        if (defeatedFinalityValue === "res dominus") {
-          progressQuest({ quest: "killingResDominus" });
-        }
-
-        for (const { name } of get(inventory)) {
-          if (name === "antique coin") {
-            progressQuest({ quest: "acquiringAntiqueCoin" });
-          }
-
-          if (name === "familiar") {
-            progressQuest({ quest: "acquiringFamiliar" });
-          }
+          progressQuest({ quest: "decipheringJournal" });
         }
 
         progressQuest({ quest: "retiring" });

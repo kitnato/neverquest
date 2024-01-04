@@ -8,7 +8,7 @@ import IconConquest from "@neverquest/icons/conquest.svg?react";
 import IconRoutine from "@neverquest/icons/routine.svg?react";
 import IconTriumph from "@neverquest/icons/triumph.svg?react";
 import { isShowing } from "@neverquest/state/isShowing";
-import { canUseJournal } from "@neverquest/state/quests";
+import { hasDecipheredJournal } from "@neverquest/state/quests";
 import type { TabsData } from "@neverquest/types/components";
 import { QUEST_BONUS_TYPES } from "@neverquest/types/unions";
 
@@ -31,13 +31,13 @@ const TABS: TabsData = [
 ];
 
 export function Quests() {
-  const canUseJournalValue = useRecoilValue(canUseJournal);
+  const canUseJournalValue = useRecoilValue(hasDecipheredJournal);
   const isShowingQuestBonus = useRecoilValue(isShowing("questBonus"));
 
   if (!canUseJournalValue) {
     return (
       <span className="fst-italic">
-        This tome is undecipherable. Perhaps the progeny can make better use of it ...
+        This tome is undecipherable. Perhaps there will be time in retirement ...
       </span>
     );
   }

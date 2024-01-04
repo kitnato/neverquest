@@ -760,7 +760,7 @@ Toggles icons in the [gear](#gear) details overlays that indicate upgrades or do
 
 Default: on.
 
-### Show gear powerLevel
+### Show gear level
 
 Toggles between showing and hiding the gear level.
 

@@ -135,6 +135,8 @@ export function Layout() {
       return (
         <Container className="mb-4">
           <Awakening />
+
+          <QuestNotifications />
         </Container>
       );
     }

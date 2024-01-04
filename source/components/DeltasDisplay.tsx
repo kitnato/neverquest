@@ -1,6 +1,5 @@
-import { useEffect } from "react";
 import { Stack } from "react-bootstrap";
-import { useRecoilState, useResetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 
 import { deltas } from "@neverquest/state/deltas";
 import type { Delta } from "@neverquest/types/unions";
@@ -10,9 +9,6 @@ export function DeltasDisplay({ delta }: { delta: Delta }) {
   const deltasState = deltas(delta);
 
   const [deltasValue, setDeltas] = useRecoilState(deltasState);
-  const resetDeltas = useResetRecoilState(deltasState);
-
-  useEffect(() => resetDeltas, [resetDeltas]);
 
   return (
     <div className="d-flex flex-nowrap text-floating pe-none position-relative">

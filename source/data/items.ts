@@ -300,7 +300,8 @@ export const TRINKETS: Record<
   "torn manuscript": {
     Icon: IconTornManuscript,
     item: {
-      description: "Describes alchemical methodologies beyond comprehension.",
+      description:
+        "Describes theurgical methodologies beyond comprehension. Perhaps it is of use to an alchemist?",
       name: "torn manuscript",
       price: 5000,
       weight: 3,

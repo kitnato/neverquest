@@ -1,4 +1,4 @@
-import { atom, atomFamily, selectorFamily } from "recoil";
+import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
 import {
   QUESTS,
@@ -63,6 +63,13 @@ export const canCompleteQuests = withStateKey("canCompleteQuests", (key) =>
   }),
 );
 
+export const canTrackQuests = withStateKey("canTrackQuests", (key) =>
+  selector({
+    get: ({ get }) => get(hasDecipheredJournal) && get(ownedItem("journal")) !== undefined,
+    key,
+  }),
+);
+
 export const completedQuestsCount = withStateKey("completedQuestsCount", (key) =>
   selectorFamily({
     get:
@@ -87,22 +94,22 @@ export const questsBonus = withStateKey("questsBonus", (key) =>
     get:
       (questBonus: QuestBonus) =>
       ({ get }) =>
-        !get(canUseJournal) || get(ownedItem("journal")) === undefined
-          ? 0
-          : QUEST_TYPES.reduce(
+        get(canTrackQuests)
+          ? QUEST_TYPES.reduce(
               (sum, quest) =>
                 sum +
                 Object.values(get(questStatuses(quest))).filter((status) => questBonus === status)
                   .length,
               0,
-            ) * QUEST_COMPLETION_BONUS,
+            ) * QUEST_COMPLETION_BONUS
+          : 0,
     key,
   }),
 );
 
 // ATOMS
 
-export const canUseJournal = withStateKey("canUseJournal", (key) =>
+export const hasDecipheredJournal = withStateKey("hasDecipheredJournal", (key) =>
   atom<boolean>({
     default: false,
     effects: [handleLocalStorage({ key })],

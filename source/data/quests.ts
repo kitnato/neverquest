@@ -319,7 +319,7 @@ export const QUESTS: Record<
     description: `Defeat ${LABEL_UNKNOWN}`,
     hidden: "the thinking being.",
     progression: [1],
-    requiresJournal: true,
+    requiresJournal: false,
     title: "Veritas tenebris",
   },
   killingResDominus: {
@@ -575,6 +575,12 @@ export const QUESTS: Record<
     progression: [TRAIT_TYPES.length],
     requiresJournal: false,
     title: "Come at me",
+  },
+  visitingVoid: {
+    description: "Visit nothingness.",
+    progression: [1],
+    requiresJournal: true,
+    title: "Voidseeker",
   },
   warpingCaravan: {
     description: "Warp to the caravan @ times.",

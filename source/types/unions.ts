@@ -479,6 +479,7 @@ export const TRIUMPH_TYPES = [
   "traitsAll",
   "acquiringAntiqueCoin",
   "killingResDominus",
+  "visitingVoid",
   "powerLevelUltra",
   "stagesEnd",
   "acquiringFamiliar",

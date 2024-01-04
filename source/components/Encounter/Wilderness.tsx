@@ -1,9 +1,11 @@
+import { useEffect } from "react";
 import { Card, CardBody } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { Monster } from "@neverquest/components/Monster";
 import { LABEL_UNKNOWN } from "@neverquest/data/general";
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import IconBossHiding from "@neverquest/icons/boss-hiding.svg?react";
 import IconFinality from "@neverquest/icons/finality.svg?react";
 import IconMonsterHiding from "@neverquest/icons/monster-hiding.svg?react";
@@ -16,6 +18,14 @@ export function Wilderness() {
   const encounterValue = useRecoilValue(encounter);
   const isStageStartedValue = useRecoilValue(isStageStarted);
   const isStageCompletedValue = useRecoilValue(isStageCompleted);
+
+  const progressQuest = useProgressQuest();
+
+  useEffect(() => {
+    if (encounterValue === "void") {
+      progressQuest({ quest: "visitingVoid" });
+    }
+  }, [encounterValue, progressQuest]);
 
   if (isStageCompletedValue) {
     return (

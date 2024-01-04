@@ -1,4 +1,4 @@
-import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
+import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
@@ -47,10 +47,6 @@ export function CriticalRating() {
           <OverlayTrigger
             overlay={
               <Popover>
-                <PopoverHeader className="text-center">
-                  <span>Critical rating details</span>
-                </PopoverHeader>
-
                 <PopoverBody>
                   <DetailsTable>
                     <tr>

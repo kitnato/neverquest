@@ -1,4 +1,4 @@
-import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
+import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
@@ -53,10 +53,6 @@ export function DodgeChance() {
           <OverlayTrigger
             overlay={
               <Popover>
-                <PopoverHeader className="text-center">
-                  <span>Dodge chance details</span>
-                </PopoverHeader>
-
                 <PopoverBody>
                   <DetailsTable>
                     <tr>

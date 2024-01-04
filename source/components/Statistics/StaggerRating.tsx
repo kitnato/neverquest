@@ -1,10 +1,9 @@
-import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
+import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconStability from "@neverquest/icons/stability.svg?react";
 import IconStaggerRating from "@neverquest/icons/stagger-rating.svg?react";
@@ -49,10 +48,6 @@ export function StaggerRating() {
           <OverlayTrigger
             overlay={
               <Popover>
-                <PopoverHeader className="text-center">
-                  <span>Stagger rating details</span>
-                </PopoverHeader>
-
                 <PopoverBody>
                   <DetailsTable>
                     <tr>

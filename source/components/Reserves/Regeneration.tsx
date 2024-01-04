@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
+import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
@@ -55,7 +55,6 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
   const {
     baseRegenerationAmount,
     baseRegenerationRate,
-    label,
     regenerationDeltaAmount,
     regenerationDeltaRate,
   } = RESERVES[reserve];
@@ -93,10 +92,6 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
       <OverlayTrigger
         overlay={
           <Popover>
-            <PopoverHeader className="text-center">
-              <span>{label} regeneration details</span>
-            </PopoverHeader>
-
             <PopoverBody>
               <DetailsTable>
                 <tr>

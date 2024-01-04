@@ -10,7 +10,6 @@ export const RESERVES: Record<
     baseAmount: number;
     baseRegenerationAmount: number;
     baseRegenerationRate: number;
-    label: string;
     regenerationDeltaAmount: Delta;
     regenerationDeltaRate: Delta;
   }
@@ -19,7 +18,6 @@ export const RESERVES: Record<
     baseAmount: 50,
     baseRegenerationAmount: 3,
     baseRegenerationRate: 3300,
-    label: "Health",
     regenerationDeltaAmount: "healthRegenerationAmount",
     regenerationDeltaRate: "healthRegenerationRate",
   },
@@ -27,7 +25,6 @@ export const RESERVES: Record<
     baseAmount: 25,
     baseRegenerationAmount: 1,
     baseRegenerationRate: 3000,
-    label: "Stamina",
     regenerationDeltaAmount: "staminaRegenerationAmount",
     regenerationDeltaRate: "staminaRegenerationRate",
   },

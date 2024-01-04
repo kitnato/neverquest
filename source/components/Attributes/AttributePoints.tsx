@@ -28,11 +28,13 @@ export function AttributePoints() {
               <PopoverHeader className="text-center">Attribute point cost</PopoverHeader>
 
               <PopoverBody>
-                <div className="d-flex justify-content-center">
-                  <IconDisplay Icon={IconEssence} iconProps={{ className: "small" }}>
-                    <span>{formatNumber({ value: getAttributePointCost(powerLevelValue) })}</span>
-                  </IconDisplay>
-                </div>
+                <IconDisplay
+                  className="justify-content-center"
+                  Icon={IconEssence}
+                  iconProps={{ className: "small" }}
+                >
+                  <span>{formatNumber({ value: getAttributePointCost(powerLevelValue) })}</span>
+                </IconDisplay>
               </PopoverBody>
             </Popover>
           }

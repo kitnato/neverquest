@@ -1,4 +1,4 @@
-import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
+import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
@@ -26,10 +26,6 @@ export function MonsterPoisonRating() {
         <OverlayTrigger
           overlay={
             <Popover>
-              <PopoverHeader className="text-center">
-                <span>Poison rating details</span>
-              </PopoverHeader>
-
               <PopoverBody>
                 <DetailsTable>
                   <tr>

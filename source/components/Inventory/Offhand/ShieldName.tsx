@@ -1,4 +1,4 @@
-import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
+import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap";
 import type { Placement } from "react-bootstrap/esm/types";
 import { useRecoilValue } from "recoil";
 
@@ -39,10 +39,6 @@ export function ShieldName({
     <OverlayTrigger
       overlay={
         <Popover>
-          <PopoverHeader className="text-center">
-            <span>{name}</span>
-          </PopoverHeader>
-
           <PopoverBody>
             <DetailsTable>
               <GearLevelDetail

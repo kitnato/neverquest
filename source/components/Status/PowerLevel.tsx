@@ -29,7 +29,11 @@ export function PowerLevel() {
               </PopoverHeader>
 
               <PopoverBody>
-                <IconDisplay Icon={IconEssence} iconProps={{ className: "small" }}>
+                <IconDisplay
+                  className="justify-content-center"
+                  Icon={IconEssence}
+                  iconProps={{ className: "small" }}
+                >
                   <span>{formatNumber({ value: absorbedEssenceValue })}</span>
                 </IconDisplay>
               </PopoverBody>

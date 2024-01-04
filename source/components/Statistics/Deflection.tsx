@@ -1,4 +1,4 @@
-import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
+import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
@@ -39,10 +39,6 @@ export function Deflection() {
           <OverlayTrigger
             overlay={
               <Popover>
-                <PopoverHeader className="text-center">
-                  <span>Deflection details</span>
-                </PopoverHeader>
-
                 <PopoverBody>
                   <DetailsTable>
                     <tr>

@@ -1,4 +1,4 @@
-import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
+import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { GemDescription } from "@neverquest/components/Inventory/GemDescription";
@@ -19,16 +19,11 @@ export function ItemName({
   ) : (
     <span>{item.description}</span>
   );
-  const displayName = capitalizeAll(item.name);
 
   return (
     <OverlayTrigger
       overlay={
         <Popover>
-          <PopoverHeader className="text-center">
-            <span>{displayName}</span>
-          </PopoverHeader>
-
           <PopoverBody className="text-center">
             <Stack gap={2}>
               {description}
@@ -43,7 +38,7 @@ export function ItemName({
       placement="right"
     >
       <span className="fitted">
-        {displayName}
+        {capitalizeAll(item.name)}
         {amount !== undefined && amount > 1 ? ` ×${formatNumber({ value: amount })}` : ""}
         &nbsp;
       </span>

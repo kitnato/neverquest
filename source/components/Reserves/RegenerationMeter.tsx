@@ -4,7 +4,6 @@ import { useRecoilValue } from "recoil";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { PERCENTAGE_POINTS } from "@neverquest/data/general";
-import { RESERVES } from "@neverquest/data/reserves";
 import IconHealth from "@neverquest/icons/health.svg?react";
 import IconStamina from "@neverquest/icons/stamina.svg?react";
 import { isRecovering } from "@neverquest/state/character";
@@ -14,7 +13,7 @@ import {
   regenerationRate,
 } from "@neverquest/state/reserves";
 import type { Reserve } from "@neverquest/types/unions";
-import { formatNumber } from "@neverquest/utilities/formatters";
+import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 
 export function RegenerationMeter({ reserve }: { reserve: Reserve }) {
   const isHealth = reserve === "health";
@@ -24,7 +23,6 @@ export function RegenerationMeter({ reserve }: { reserve: Reserve }) {
   const regenerationRateValue = useRecoilValue(regenerationRate(reserve));
   const isRecoveringValue = useRecoilValue(isRecovering);
 
-  const { label } = RESERVES[reserve];
   const Icon = isHealth ? IconHealth : IconStamina;
   const regenerationProgress =
     regenerationDurationValue === 0 ? 0 : regenerationRateValue - regenerationDurationValue;
@@ -45,7 +43,7 @@ export function RegenerationMeter({ reserve }: { reserve: Reserve }) {
         if (regenerationProgress === 0) {
           return (
             <Stack>
-              <span>{`${label} regeneration`}</span>
+              <span>{capitalizeAll(reserve)}&nbsp;regeneration</span>
 
               <IconDisplay Icon={Icon} iconProps={{ className: "small" }}>
                 <span>

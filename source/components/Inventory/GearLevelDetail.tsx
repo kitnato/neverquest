@@ -12,30 +12,28 @@ import { formatNumber } from "@neverquest/utilities/formatters";
 export function GearLevelDetail({ comparison, level }: { comparison: Comparison; level: number }) {
   const showGearLevelValue = useRecoilValue(showGearLevel);
 
-  if (level === 0 || !showGearLevelValue) {
-    return;
+  if (showGearLevelValue) {
+    return (
+      <tr>
+        <td>
+          <span>Gear level:</span>
+        </td>
+
+        <td>
+          <Stack direction="horizontal" gap={1}>
+            <IconDisplay Icon={IconGearLevel} iconProps={{ className: "small" }}>
+              <span>{formatNumber({ value: level })}</span>
+            </IconDisplay>
+
+            {comparison !== false && (
+              <GearComparison
+                difference={level - comparison.subtrahend}
+                showing={comparison.showing}
+              />
+            )}
+          </Stack>
+        </td>
+      </tr>
+    );
   }
-
-  return (
-    <tr>
-      <td>
-        <span>Gear level:</span>
-      </td>
-
-      <td>
-        <Stack direction="horizontal" gap={1}>
-          <IconDisplay Icon={IconGearLevel} iconProps={{ className: "small" }}>
-            <span>{formatNumber({ value: level })}</span>
-          </IconDisplay>
-
-          {comparison !== false && (
-            <GearComparison
-              difference={level - comparison.subtrahend}
-              showing={comparison.showing}
-            />
-          )}
-        </Stack>
-      </td>
-    </tr>
-  );
 }

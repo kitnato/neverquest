@@ -13,7 +13,6 @@ import {
 import { useRecoilValue } from "recoil";
 
 import { SettingsSwitch } from "@neverquest/components/Header/SettingsSwitch";
-import { ShowEverything } from "@neverquest/components/Header/ShowEverything";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import IconSettings from "@neverquest/icons/settings.svg?react";
@@ -77,8 +76,6 @@ export function Settings() {
               <SettingsSwitch label="Show gear level" state={showGearLevel} />
 
               <SettingsSwitch label="Allow profanity" state={allowProfanity} />
-
-              <ShowEverything />
             </Stack>
           </Form>
         </ModalBody>

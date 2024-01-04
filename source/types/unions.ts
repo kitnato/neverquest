@@ -213,32 +213,20 @@ export type Routine = (typeof ROUTINE_TYPES)[number];
 export const SHOWING_TYPES = [
   "armor",
   "attackRate",
-  "attackRateDetails",
-  "attributes",
-  "blockChance",
+  "capabilities",
   "crewHiring",
-  "criticalRating",
   "damage",
-  "damageDetails",
-  "deflection",
-  "dodgeChance",
   "essence",
   "gameOver",
   "gearClass",
   "grip",
   "health",
-  "healthDetails",
   "location",
-  "masteries",
   "monsterOffense",
   "protection",
-  "questBonus",
   "recovery",
   "offhand",
-  "skills",
   "stamina",
-  "staminaDetails",
-  "traits",
   "weapon",
   "weight",
   "wildernessStatus",
@@ -357,8 +345,7 @@ export type StateKey =
   | "isRecovering"
   | "isRegenerating"
   | "isShowing"
-  | "isShowingEverything"
-  | "isShowingStatistics"
+  | "isShowingQuestBonus"
   | "isSkillAcquired"
   | "isStageCompleted"
   | "isStageStarted"

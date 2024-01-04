@@ -64,7 +64,6 @@ export const SKILLS: Record<
     descriptionIcons: [IconArmorHeavy, IconDeflection, IconRecovery],
     Icon: IconArmorcraft,
     requiredCrew: "blacksmith",
-    shows: ["deflection"],
   },
   assassination: {
     description:
@@ -72,7 +71,6 @@ export const SKILLS: Record<
     descriptionIcons: [IconCriticalRating, IconCriticalChance, IconCriticalDamage],
     Icon: IconAssassination,
     requiredCrew: "merchant",
-    shows: ["criticalRating"],
   },
   calisthenics: {
     description:
@@ -80,7 +78,7 @@ export const SKILLS: Record<
     descriptionIcons: [IconRegenerationAmount, IconRegenerationRate, IconHealth, IconStamina],
     Icon: IconCalisthenics,
     requiredCrew: "merchant",
-    shows: ["health", "healthDetails", "stamina", "staminaDetails"],
+    shows: ["health", "stamina"],
   },
   escrime: {
     description:
@@ -94,7 +92,6 @@ export const SKILLS: Record<
     descriptionIcons: [IconDodge],
     Icon: IconEvasion,
     requiredCrew: "merchant",
-    shows: ["dodgeChance"],
   },
   shieldcraft: {
     description: "Grants the use of # tower shields & the ability to # stagger monsters.",

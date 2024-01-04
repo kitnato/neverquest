@@ -11,20 +11,17 @@ import IconRange from "@neverquest/icons/range.svg?react";
 import IconRanged from "@neverquest/icons/ranged.svg?react";
 import { weapon } from "@neverquest/state/gear";
 import { masteryStatistic } from "@neverquest/state/masteries";
-import { isSkillAcquired } from "@neverquest/state/skills";
 import { range } from "@neverquest/state/statistics";
-import { isRanged } from "@neverquest/types/type-guards";
+import type { Ranged } from "@neverquest/types";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function CombatRange() {
   const marksmanshipValue = useRecoilValue(masteryStatistic("marksmanship"));
-  const archeryValue = useRecoilValue(isSkillAcquired("archery"));
   const rangeValue = useRecoilValue(range);
   const weaponValue = useRecoilValue(weapon);
 
-  const isWeaponRanged = isRanged(weaponValue);
-  const isEmpty = !archeryValue || !isWeaponRanged || rangeValue === 0;
+  const isEmpty = rangeValue === 0;
 
   useDeltaText({
     delta: "range",
@@ -53,7 +50,9 @@ export function CombatRange() {
 
                       <td>
                         <IconDisplay Icon={IconRanged} iconProps={{ className: "small" }}>
-                          <span>{formatNumber({ format: "time", value: weaponValue.range })}</span>
+                          <span>
+                            {formatNumber({ format: "time", value: (weaponValue as Ranged).range })}
+                          </span>
                         </IconDisplay>
                       </td>
                     </tr>

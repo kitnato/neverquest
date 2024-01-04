@@ -4,31 +4,31 @@ import { useRecoilValue } from "recoil";
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { LABEL_EMPTY } from "@neverquest/data/general";
 import { INOCULATED_DEFLECTION_BASE } from "@neverquest/data/traits";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconDeflection from "@neverquest/icons/deflection.svg?react";
 import IconInoculated from "@neverquest/icons/inoculated.svg?react";
 import { armor } from "@neverquest/state/gear";
-import { isShowing } from "@neverquest/state/isShowing";
 import { deflectionChance } from "@neverquest/state/statistics";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-export function Deflection() {
+export function DeflectionChance() {
   const { deflection } = useRecoilValue(armor);
   const deflectionChanceValue = useRecoilValue(deflectionChance);
-  const isShowingDeflection = useRecoilValue(isShowing("deflection"));
   const isTraitAcquiredInoculated = useRecoilValue(isTraitAcquired("inoculated"));
+
+  const isEmpty = deflectionChanceValue === 0;
 
   useDeltaText({
     delta: "deflectionChance",
     format: "percentage",
     state: deflectionChance,
+    stop: () => isEmpty,
   });
 
-  if (isShowingDeflection) {
+  if (!isEmpty) {
     return (
       <IconDisplay
         className={getAnimationClass({ animation: "flipInX" })}
@@ -76,11 +76,7 @@ export function Deflection() {
             }
             trigger={isTraitAcquiredInoculated ? ["focus", "hover"] : []}
           >
-            <span>
-              {deflectionChanceValue === 0
-                ? LABEL_EMPTY
-                : formatNumber({ format: "percentage", value: deflectionChanceValue })}
-            </span>
+            <span>{formatNumber({ format: "percentage", value: deflectionChanceValue })}</span>
           </OverlayTrigger>
 
           <DeltasDisplay delta="deflectionChance" />

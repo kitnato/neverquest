@@ -18,6 +18,8 @@ import { areAttributesAffordable } from "@neverquest/state/attributes";
 import { isAttacking, isGameOver } from "@neverquest/state/character";
 import { isStageStarted } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
+import { acquiredSkills } from "@neverquest/state/skills";
+import { acquiredTraits } from "@neverquest/state/traits";
 import type { TabsData } from "@neverquest/types/components";
 import { formatEnumeration } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
@@ -32,20 +34,22 @@ const BASE_TAB: TabsData = [
 const BASE_TOOLTIP = ["Attributes"];
 
 export function Capabilities() {
+  const acquiredSkillsValue = useRecoilValue(acquiredSkills);
+  const acquiredTraitsValue = useRecoilValue(acquiredTraits);
   const areAttributesIncreasableValue = useRecoilValue(areAttributesAffordable);
   const isAttackingValue = useRecoilValue(isAttacking);
   const isGameOverValue = useRecoilValue(isGameOver);
   const isStageStartedValue = useRecoilValue(isStageStarted);
-  const isShowingAttributes = useRecoilValue(isShowing("attributes"));
-  const isShowingSkills = useRecoilValue(isShowing("skills"));
-  const isShowingTraits = useRecoilValue(isShowing("traits"));
+  const isShowingCapabilities = useRecoilValue(isShowing("capabilities"));
 
   const [isScreenShowing, setScreenShowing] = useState(false);
 
-  const isShowingSkillsOrTraits = isShowingSkills || isShowingTraits;
-
   let tabs: TabsData = [...BASE_TAB];
   let tooltip = [...BASE_TOOLTIP];
+
+  const isShowingSkills = Object.values(acquiredSkillsValue).some(Boolean);
+  const isShowingTraits = Object.values(acquiredTraitsValue).some(Boolean);
+  const isShowingSkillsOrTraits = isShowingSkills || isShowingTraits;
 
   if (isShowingSkills) {
     tabs = [
@@ -71,7 +75,7 @@ export function Capabilities() {
     tooltip = [...tooltip, "traits"];
   }
 
-  if (isShowingAttributes || isShowingSkills || isShowingTraits) {
+  if (isShowingCapabilities) {
     return (
       <>
         <OverlayTrigger overlay={<Tooltip>{formatEnumeration(tooltip)}</Tooltip>}>

@@ -24,7 +24,7 @@ export function CollectLoot() {
   const progressMaximumValue = useRecoilValue(progressMaximum);
   const resetEssenceLoot = useResetRecoilState(essenceLoot);
   const setHasLooted = useSetRecoilState(hasLooted);
-  const setIsShowingAttributes = useSetRecoilState(isShowing("attributes"));
+  const setIsShowingCapabilities = useSetRecoilState(isShowing("capabilities"));
 
   const acquireItem = useAcquireItem();
   const progressQuest = useProgressQuest();
@@ -48,7 +48,7 @@ export function CollectLoot() {
             onClick={() => {
               transactEssence(essenceLootValue);
 
-              setIsShowingAttributes(true);
+              setIsShowingCapabilities(true);
 
               if (itemsLootValue.length > 0) {
                 const acquiredItemIDs = new Set(

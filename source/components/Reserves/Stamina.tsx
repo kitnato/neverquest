@@ -21,10 +21,10 @@ export function Stamina() {
   const attributePowerBonusEndurance = useRecoilValue(attributePowerBonus("endurance"));
   const attributeStatisticEndurance = useRecoilValue(attributeStatistic("endurance"));
   const isShowingStamina = useRecoilValue(isShowing("stamina"));
-  const isShowingStaminaDetails = useRecoilValue(isShowing("staminaDetails"));
   const questsBonusStamina = useRecoilValue(questsBonus("staminaBonus"));
 
   const { baseAmount } = RESERVES.stamina;
+  const enduranceBonus = attributeStatisticEndurance - baseAmount;
 
   if (isShowingStamina) {
     return (
@@ -52,44 +52,46 @@ export function Stamina() {
                         </td>
                       </tr>
 
-                      <tr>
-                        <td>
-                          <IconDisplay Icon={IconEndurance} iconProps={{ className: "small" }}>
-                            <span>Endurance:</span>
-                          </IconDisplay>
-                        </td>
-
-                        <td>
-                          <Stack direction="horizontal" gap={1}>
-                            <IconDisplay Icon={IconStamina} iconProps={{ className: "small" }}>
-                              <span>
-                                +
-                                {formatNumber({
-                                  value: attributeStatisticEndurance - baseAmount,
-                                })}
-                              </span>
+                      {enduranceBonus > 0 && (
+                        <tr>
+                          <td>
+                            <IconDisplay Icon={IconEndurance} iconProps={{ className: "small" }}>
+                              <span>Endurance:</span>
                             </IconDisplay>
+                          </td>
 
-                            {attributePowerBonusEndurance > 0 && (
-                              <>
-                                {LABEL_SEPARATOR}
+                          <td>
+                            <Stack direction="horizontal" gap={1}>
+                              <IconDisplay Icon={IconStamina} iconProps={{ className: "small" }}>
+                                <span>
+                                  +
+                                  {formatNumber({
+                                    value: enduranceBonus,
+                                  })}
+                                </span>
+                              </IconDisplay>
 
-                                <IconDisplay
-                                  Icon={IconTomeOfPower}
-                                  iconProps={{ className: "small" }}
-                                >
-                                  <span>
-                                    {formatNumber({
-                                      format: "multiplier",
-                                      value: attributePowerBonusEndurance,
-                                    })}
-                                  </span>
-                                </IconDisplay>
-                              </>
-                            )}
-                          </Stack>
-                        </td>
-                      </tr>
+                              {attributePowerBonusEndurance > 0 && (
+                                <>
+                                  {LABEL_SEPARATOR}
+
+                                  <IconDisplay
+                                    Icon={IconTomeOfPower}
+                                    iconProps={{ className: "small" }}
+                                  >
+                                    <span>
+                                      {formatNumber({
+                                        format: "multiplier",
+                                        value: attributePowerBonusEndurance,
+                                      })}
+                                    </span>
+                                  </IconDisplay>
+                                </>
+                              )}
+                            </Stack>
+                          </td>
+                        </tr>
+                      )}
 
                       {questsBonusStamina > 0 && (
                         <tr>
@@ -116,7 +118,11 @@ export function Stamina() {
                 </Popover>
               }
               placement="right"
-              trigger={isShowingStaminaDetails ? ["focus", "hover"] : []}
+              trigger={
+                attributePowerBonusEndurance > 0 || enduranceBonus > 0 || questsBonusStamina > 0
+                  ? ["focus", "hover"]
+                  : []
+              }
             >
               <div className="w-100">
                 <ReserveMeter reserve="stamina" />

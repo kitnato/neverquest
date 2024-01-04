@@ -8,12 +8,11 @@ const SEPARATOR = ".";
 const TEXT_DELAY = 100;
 
 export function Typewriter({ children, delay = TEXT_DELAY }: { children: string; delay?: number }) {
+  const deltaCursorReference = useRef(0);
+  const deltaDelayReference = useRef(0);
   const [cursor, setCursor] = useState(CURSOR);
   const [index, setIndex] = useState(0);
   const [text, setText] = useState("");
-
-  const deltaCursorReference = useRef(0);
-  const deltaDelayReference = useRef(0);
 
   useAnimation({
     onFrame: (elapsed) => {

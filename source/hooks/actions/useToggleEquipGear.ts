@@ -49,9 +49,7 @@ export function useToggleEquipGear() {
             return;
           }
 
-          set(isShowing("blockChance"), true);
           set(isShowing("offhand"), true);
-          set(isShowing("stamina"), true);
 
           progressQuest({ quest: "equippingShield" });
         }
@@ -65,19 +63,17 @@ export function useToggleEquipGear() {
             return;
           }
 
-          if (burden > 0) {
-            set(isShowing("stamina"), true);
-          }
-
           if (isWeaponRanged || isWeaponTwoHanded) {
             set(isShowing("offhand"), true);
           }
 
-          set(isShowing("attackRateDetails"), true);
-          set(isShowing("damageDetails"), true);
           set(isShowing("weapon"), true);
 
           progressQuest({ quest: "equippingWeapon" });
+        }
+
+        if (burden > 0) {
+          set(isShowing("stamina"), true);
         }
 
         reset(questProgress("survivingNoGear"));

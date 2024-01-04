@@ -38,7 +38,6 @@ export function AttackRate() {
   const isMonsterDeadValue = useRecoilValue(isMonsterDead);
   const isRecoveringValue = useRecoilValue(isRecovering);
   const isShowingAttackRate = useRecoilValue(isShowing("attackRate"));
-  const isShowingAttackRateDetails = useRecoilValue(isShowing("attackRateDetails"));
   const weaponValue = useRecoilValue(weapon);
   const setAttackDuration = useSetRecoilState(attackDuration);
 
@@ -62,82 +61,85 @@ export function AttackRate() {
     stop: ({ current, previous }) => Math.abs((previous ?? 0) - current) < 1,
   });
 
-  if (!isShowingAttackRate) {
-    return;
+  if (isShowingAttackRate) {
+    return (
+      <IconDisplay
+        className={getAnimationClass({ animation: "flipInX" })}
+        Icon={IconAttackRate}
+        tooltip="Total attack rate"
+      >
+        <Stack className="w-100" direction="horizontal">
+          <OverlayTrigger
+            overlay={
+              <Popover>
+                <PopoverBody>
+                  <DetailsTable>
+                    <tr>
+                      <td>
+                        <span>{`${isUnarmed(weaponValue) ? "Base" : "Weapon"}:`}</span>
+                      </td>
+
+                      <td>
+                        <IconDisplay Icon={IconWeaponAttackRate} iconProps={{ className: "small" }}>
+                          <span>{formatNumber({ format: "time", value: weaponValue.rate })}</span>
+                        </IconDisplay>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <IconDisplay Icon={IconWeaponSpeed} iconProps={{ className: "small" }}>
+                          <span>Speed:</span>
+                        </IconDisplay>
+                      </td>
+
+                      <td>
+                        <Stack direction="horizontal" gap={1}>
+                          <span>
+                            -
+                            {formatNumber({
+                              decimals: 0,
+                              format: "percentage",
+                              value: attributeStatisticSpeed,
+                            })}
+                          </span>
+
+                          {attributePowerBonusSpeed > 0 && (
+                            <>
+                              {LABEL_SEPARATOR}
+
+                              <IconDisplay
+                                Icon={IconTomeOfPower}
+                                iconProps={{ className: "small" }}
+                              >
+                                <span>
+                                  {formatNumber({
+                                    format: "multiplier",
+                                    value: attributePowerBonusSpeed,
+                                  })}
+                                </span>
+                              </IconDisplay>
+                            </>
+                          )}
+                        </Stack>
+                      </td>
+                    </tr>
+                  </DetailsTable>
+                </PopoverBody>
+              </Popover>
+            }
+            trigger={
+              attributeStatisticSpeed > 0 || attributePowerBonusSpeed > 0 ? ["focus", "hover"] : []
+            }
+          >
+            <div className="w-100">
+              <AttackMeter />
+            </div>
+          </OverlayTrigger>
+
+          <DeltasDisplay delta="attackRate" />
+        </Stack>
+      </IconDisplay>
+    );
   }
-
-  return (
-    <IconDisplay
-      className={getAnimationClass({ animation: "flipInX" })}
-      Icon={IconAttackRate}
-      tooltip="Total attack rate"
-    >
-      <Stack className="w-100" direction="horizontal">
-        <OverlayTrigger
-          overlay={
-            <Popover>
-              <PopoverBody>
-                <DetailsTable>
-                  <tr>
-                    <td>
-                      <span>{`${isUnarmed(weaponValue) ? "Base" : "Weapon"}:`}</span>
-                    </td>
-
-                    <td>
-                      <IconDisplay Icon={IconWeaponAttackRate} iconProps={{ className: "small" }}>
-                        <span>{formatNumber({ format: "time", value: weaponValue.rate })}</span>
-                      </IconDisplay>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td>
-                      <IconDisplay Icon={IconWeaponSpeed} iconProps={{ className: "small" }}>
-                        <span>Speed:</span>
-                      </IconDisplay>
-                    </td>
-
-                    <td>
-                      <Stack direction="horizontal" gap={1}>
-                        <span>
-                          -
-                          {formatNumber({
-                            decimals: 0,
-                            format: "percentage",
-                            value: attributeStatisticSpeed,
-                          })}
-                        </span>
-
-                        {attributePowerBonusSpeed > 0 && (
-                          <>
-                            {LABEL_SEPARATOR}
-
-                            <IconDisplay Icon={IconTomeOfPower} iconProps={{ className: "small" }}>
-                              <span>
-                                {formatNumber({
-                                  format: "multiplier",
-                                  value: attributePowerBonusSpeed,
-                                })}
-                              </span>
-                            </IconDisplay>
-                          </>
-                        )}
-                      </Stack>
-                    </td>
-                  </tr>
-                </DetailsTable>
-              </PopoverBody>
-            </Popover>
-          }
-          trigger={isShowingAttackRateDetails ? ["focus", "hover"] : []}
-        >
-          <div className="w-100">
-            <AttackMeter />
-          </div>
-        </OverlayTrigger>
-
-        <DeltasDisplay delta="attackRate" />
-      </Stack>
-    </IconDisplay>
-  );
 }

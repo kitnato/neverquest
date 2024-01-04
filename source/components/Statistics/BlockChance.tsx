@@ -8,25 +8,16 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconBlock from "@neverquest/icons/block.svg?react";
 import IconBurden from "@neverquest/icons/burden.svg?react";
 import IconStamina from "@neverquest/icons/stamina.svg?react";
-import { shield, weapon } from "@neverquest/state/gear";
-import { isShowing } from "@neverquest/state/isShowing";
+import { shield } from "@neverquest/state/gear";
 import { blockChance } from "@neverquest/state/statistics";
-import { isTraitAcquired } from "@neverquest/state/traits";
-import { isMelee, isRanged } from "@neverquest/types/type-guards";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-export function Block() {
+export function BlockChance() {
   const blockChanceValue = useRecoilValue(blockChance);
-  const isShowingBlockChance = useRecoilValue(isShowing("blockChance"));
-  const isTraitAcquiredColossus = useRecoilValue(isTraitAcquired("colossus"));
-  const { burden } = useRecoilValue(shield);
-  const weaponValue = useRecoilValue(weapon);
+  const shieldValue = useRecoilValue(shield);
 
-  const isEmpty =
-    !isShowingBlockChance ||
-    isRanged(weaponValue) ||
-    (isMelee(weaponValue) && !isTraitAcquiredColossus && weaponValue.grip === "two-handed");
+  const isEmpty = blockChanceValue === 0;
 
   useDeltaText({
     delta: "blockChance",
@@ -57,7 +48,7 @@ export function Block() {
 
                       <td>
                         <IconDisplay Icon={IconStamina} iconProps={{ className: "small" }}>
-                          <span>-{formatNumber({ value: burden })}</span>
+                          <span>-{formatNumber({ value: shieldValue.burden })}</span>
                         </IconDisplay>
                       </td>
                     </tr>

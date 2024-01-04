@@ -7,7 +7,7 @@ import { QuestTabsNav } from "@neverquest/components/Quests/QuestTabsNav";
 import IconConquest from "@neverquest/icons/conquest.svg?react";
 import IconRoutine from "@neverquest/icons/routine.svg?react";
 import IconTriumph from "@neverquest/icons/triumph.svg?react";
-import { isShowing } from "@neverquest/state/isShowing";
+import { isShowingQuestBonus } from "@neverquest/state/isShowing";
 import { hasDecipheredJournal } from "@neverquest/state/quests";
 import type { TabsData } from "@neverquest/types/components";
 import { QUEST_BONUS_TYPES } from "@neverquest/types/unions";
@@ -32,7 +32,7 @@ const TABS: TabsData = [
 
 export function Quests() {
   const canUseJournalValue = useRecoilValue(hasDecipheredJournal);
-  const isShowingQuestBonus = useRecoilValue(isShowing("questBonus"));
+  const isShowingQuestBonusValue = useRecoilValue(isShowingQuestBonus);
 
   if (!canUseJournalValue) {
     return (
@@ -44,7 +44,7 @@ export function Quests() {
 
   return (
     <Stack className="journal overflow-y-hidden" gap={3}>
-      {isShowingQuestBonus && (
+      {isShowingQuestBonusValue && (
         <>
           <h6>Completion bonus</h6>
 
@@ -56,7 +56,7 @@ export function Quests() {
         </>
       )}
 
-      {isShowingQuestBonus && <h6>Quests</h6>}
+      {isShowingQuestBonusValue && <h6>Quests</h6>}
 
       <TabContainer defaultActiveKey={TABS[0].label}>
         <Stack className="overflow-y-hidden" gap={1}>

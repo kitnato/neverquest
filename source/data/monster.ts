@@ -51,7 +51,7 @@ export const ESSENCE = {
 
 export const MONSTER_ATTACK_RATE = {
   attenuation: 4000,
-  base: 4000,
+  base: 4200,
   bonus: 0.01,
   boss: 1.1,
   finality: 1777,

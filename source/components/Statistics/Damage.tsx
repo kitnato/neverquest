@@ -34,7 +34,6 @@ export function Damage() {
   const attributeStatisticStrength = useRecoilValue(attributeStatistic("strength"));
   const damageValue = useRecoilValue(damage);
   const isShowingDamage = useRecoilValue(isShowing("damage"));
-  const isShowingDamageDetails = useRecoilValue(isShowing("damageDetails"));
   const isTraitAcquiredBrawler = useRecoilValue(isTraitAcquired("brawler"));
   const isTraitAcquiredBruiser = useRecoilValue(isTraitAcquired("bruiser"));
   const questsBonusDamage = useRecoilValue(questsBonus("damageBonus"));
@@ -80,42 +79,44 @@ export function Damage() {
 
                     <ElementalDetails slot="weapon" />
 
-                    <tr>
-                      <td>
-                        <IconDisplay Icon={IconStrength} iconProps={{ className: "small" }}>
-                          <span>Strength:</span>
-                        </IconDisplay>
-                      </td>
+                    {attributeStatisticStrength > 0 && (
+                      <tr>
+                        <td>
+                          <IconDisplay Icon={IconStrength} iconProps={{ className: "small" }}>
+                            <span>Strength:</span>
+                          </IconDisplay>
+                        </td>
 
-                      <td>
-                        <Stack direction="horizontal" gap={1}>
-                          <span>
-                            +
-                            {formatNumber({
-                              value: attributeStatisticStrength,
-                            })}
-                          </span>
+                        <td>
+                          <Stack direction="horizontal" gap={1}>
+                            <span>
+                              +
+                              {formatNumber({
+                                value: attributeStatisticStrength,
+                              })}
+                            </span>
 
-                          {attributePowerBonusStrength > 0 && (
-                            <>
-                              {LABEL_SEPARATOR}
+                            {attributePowerBonusStrength > 0 && (
+                              <>
+                                {LABEL_SEPARATOR}
 
-                              <IconDisplay
-                                Icon={IconTomeOfPower}
-                                iconProps={{ className: "small" }}
-                              >
-                                <span>
-                                  {formatNumber({
-                                    format: "multiplier",
-                                    value: attributePowerBonusStrength,
-                                  })}
-                                </span>
-                              </IconDisplay>
-                            </>
-                          )}
-                        </Stack>
-                      </td>
-                    </tr>
+                                <IconDisplay
+                                  Icon={IconTomeOfPower}
+                                  iconProps={{ className: "small" }}
+                                >
+                                  <span>
+                                    {formatNumber({
+                                      format: "multiplier",
+                                      value: attributePowerBonusStrength,
+                                    })}
+                                  </span>
+                                </IconDisplay>
+                              </>
+                            )}
+                          </Stack>
+                        </td>
+                      </tr>
+                    )}
 
                     {questsBonusDamage > 0 && (
                       <tr>
@@ -172,7 +173,7 @@ export function Damage() {
                       <tr>
                         <td>
                           <IconDisplay Icon={IconBurden} iconProps={{ className: "small" }}>
-                            <span>On hit:</span>
+                            <span>On attack:</span>
                           </IconDisplay>
                         </td>
 
@@ -187,7 +188,7 @@ export function Damage() {
                 </PopoverBody>
               </Popover>
             }
-            trigger={isShowingDamageDetails ? ["focus", "hover"] : []}
+            trigger={burden > 0 || damageValue !== weaponDamage ? ["focus", "hover"] : []}
           >
             <span>{formatNumber({ value: damageValue })}</span>
           </OverlayTrigger>

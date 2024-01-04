@@ -15,6 +15,7 @@ import IconDeflection from "@neverquest/icons/deflection.svg?react";
 import IconProtection from "@neverquest/icons/protection.svg?react";
 import { armor as armorEquipped } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
+import { isSkillAcquired } from "@neverquest/state/skills";
 import type { Armor } from "@neverquest/types";
 import { isUnarmored } from "@neverquest/types/type-guards";
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
@@ -27,8 +28,8 @@ export function ArmorName({
   overlayPlacement: Placement;
 }) {
   const armorEquippedValue = useRecoilValue(armorEquipped);
-  const isShowingDeflection = useRecoilValue(isShowing("deflection"));
   const isShowingGearClass = useRecoilValue(isShowing("gearClass"));
+  const isSkillAcquiredArmorcraft = useRecoilValue(isSkillAcquired("armorcraft"));
 
   const { burden, deflection, ID, level, name, protection, weight } = armor;
   const isArmorUnequipped = isUnarmored(armor);
@@ -111,7 +112,7 @@ export function ArmorName({
 
               {deflection > 0 && (
                 <tr>
-                  {isShowingDeflection ? (
+                  {isSkillAcquiredArmorcraft ? (
                     <>
                       <td>
                         <span>Deflection chance:</span>

@@ -38,7 +38,7 @@ export function Name() {
 
       setCanEdit(!isModalOpen);
       setIsEditing(false);
-    }).observe(document.body, { attributes: true });
+    }).observe(document.body, { attributeFilter: ["class"] });
   }, []);
 
   return (

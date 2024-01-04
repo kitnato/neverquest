@@ -1,12 +1,12 @@
+import { useLayoutEffect, useRef, useState } from "react";
 import { Card, CardBody, Col, Row, Stack } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
 
 import { BleedRating } from "@neverquest/components/Statistics/BleedRating";
-import { Block } from "@neverquest/components/Statistics/Block";
+import { BlockChance } from "@neverquest/components/Statistics/BlockChance";
 import { CombatRange } from "@neverquest/components/Statistics/CombatRange";
 import { CriticalRating } from "@neverquest/components/Statistics/CriticalRating";
 import { Damage } from "@neverquest/components/Statistics/Damage";
-import { Deflection } from "@neverquest/components/Statistics/Deflection";
+import { DeflectionChance } from "@neverquest/components/Statistics/DeflectionChance";
 import { DodgeChance } from "@neverquest/components/Statistics/DodgeChance";
 import { ExecutionThreshold } from "@neverquest/components/Statistics/ExecutionThreshold";
 import { ParryRating } from "@neverquest/components/Statistics/ParryRating";
@@ -14,57 +14,76 @@ import { Protection } from "@neverquest/components/Statistics/Protection";
 import { StaggerRating } from "@neverquest/components/Statistics/StaggerRating";
 import { StunRating } from "@neverquest/components/Statistics/StunRating";
 import { Thorns } from "@neverquest/components/Statistics/Thorns";
-import { isShowingStatistics } from "@neverquest/state/isShowing";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Statistics() {
-  const isShowingStatisticsValue = useRecoilValue(isShowingStatistics);
+  const element = useRef<HTMLDivElement | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
-  if (isShowingStatisticsValue) {
-    return (
-      <Card className={getAnimationClass({ animation: "flipInX" })}>
-        <CardBody>
-          <Row>
-            <Col>
-              <Stack gap={3}>
-                <Damage />
+  const setVisibleOnText = () => {
+    const { current } = element;
 
-                <CriticalRating />
+    if (current?.textContent?.trim() !== "") {
+      setIsVisible(true);
+    }
+  };
 
-                <StunRating />
+  useLayoutEffect(() => {
+    const { current } = element;
 
-                <BleedRating />
+    if (current !== null) {
+      new MutationObserver(setVisibleOnText).observe(current, { childList: true, subtree: true });
 
-                <ParryRating />
+      setVisibleOnText();
+    }
+  }, []);
 
-                <ExecutionThreshold />
+  return (
+    <Card
+      className={`${isVisible ? "" : "d-none "}${getAnimationClass({ animation: "flipInX" })}`}
+      ref={element}
+    >
+      <CardBody>
+        <Row>
+          <Col>
+            <Stack gap={3}>
+              <Damage />
 
-                <CombatRange />
-              </Stack>
-            </Col>
+              <CriticalRating />
 
-            <Col>
-              <Stack gap={3}>
-                <Protection />
+              <StunRating />
 
-                <Thorns />
+              <BleedRating />
 
-                <Deflection />
+              <ParryRating />
 
-                <DodgeChance />
-              </Stack>
-            </Col>
+              <ExecutionThreshold />
 
-            <Col>
-              <Stack gap={3}>
-                <Block />
+              <CombatRange />
+            </Stack>
+          </Col>
 
-                <StaggerRating />
-              </Stack>
-            </Col>
-          </Row>
-        </CardBody>
-      </Card>
-    );
-  }
+          <Col>
+            <Stack gap={3}>
+              <Protection />
+
+              <Thorns />
+
+              <DeflectionChance />
+
+              <DodgeChance />
+            </Stack>
+          </Col>
+
+          <Col>
+            <Stack gap={3}>
+              <BlockChance />
+
+              <StaggerRating />
+            </Stack>
+          </Col>
+        </Row>
+      </CardBody>
+    </Card>
+  );
 }

@@ -64,7 +64,14 @@ export const bleedRating = withStateKey("bleedRating", (key) =>
 
 export const blockChance = withStateKey("blockChance", (key) =>
   selector({
-    get: ({ get }) => get(shield).block,
+    get: ({ get }) => {
+      const weaponValue = get(weapon);
+
+      return !isRanged(weaponValue) &&
+        (weaponValue.grip === "one-handed" || get(isTraitAcquired("colossus")))
+        ? get(shield).block
+        : 0;
+    },
     key,
   }),
 );
@@ -82,7 +89,9 @@ export const criticalChance = withStateKey("criticalChance", (key) =>
 export const criticalDamage = withStateKey("criticalDamage", (key) =>
   selector({
     get: ({ get }) =>
-      get(attributeStatistic("perception")) * (1 + get(attributePowerBonus("perception"))),
+      get(isSkillAcquired("assassination"))
+        ? get(attributeStatistic("perception")) * (1 + get(attributePowerBonus("perception")))
+        : 0,
     key,
   }),
 );
@@ -152,15 +161,14 @@ export const deflectionChance = withStateKey("deflectionChance", (key) =>
 export const dodgeChance = withStateKey("dodgeChance", (key) =>
   selector({
     get: ({ get }) =>
-      (get(armor).burden === Number.POSITIVE_INFINITY && !get(isTraitAcquired("stalwart"))) ||
-      !get(isSkillAcquired("evasion"))
-        ? 0
-        : Math.min(
+      get(isSkillAcquired("evasion"))
+        ? Math.min(
             get(attributeStatistic("agility")) *
               (1 + get(attributePowerBonus("agility"))) *
               (get(isTraitAcquired("nudist")) && isUnarmored(get(armor)) ? NUDIST_DODGE_BONUS : 1),
             ATTRIBUTES.agility.maximum ?? Number.POSITIVE_INFINITY,
-          ),
+          )
+        : 0,
     key,
   }),
 );
@@ -246,7 +254,7 @@ export const range = withStateKey("range", (key) =>
     get: ({ get }) => {
       const weaponValue = get(weapon);
 
-      return isRanged(weaponValue)
+      return get(isSkillAcquired("archery")) && isRanged(weaponValue)
         ? weaponValue.range * (1 + get(masteryStatistic("marksmanship")))
         : 0;
     },

@@ -23,7 +23,6 @@ import {
 } from "@neverquest/state/encounter";
 import { armor, shield, weapon } from "@neverquest/state/gear";
 import { inventory, ownedItem } from "@neverquest/state/inventory";
-import { isShowing } from "@neverquest/state/isShowing";
 import { masteryProgress, masteryRank } from "@neverquest/state/masteries";
 import { hasDecipheredJournal, questProgress } from "@neverquest/state/quests";
 import { blight, poison } from "@neverquest/state/reserves";
@@ -55,15 +54,10 @@ export function useRetire() {
           set(isTraitAcquired(selectedTraitValue), true);
           reset(selectedTrait);
 
-          if (selectedTraitValue === "inoculated") {
-            set(isShowing("deflection"), true);
-          }
-
           progressQuest({ quest: "traits" });
           progressQuest({ quest: "traitsAll" });
         }
 
-        set(isShowing("traits"), true);
         set(progressReduction, getProgressReduction(get(stage)));
 
         resetAttributes();

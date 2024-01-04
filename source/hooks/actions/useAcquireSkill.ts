@@ -26,7 +26,6 @@ export function useAcquireSkill() {
           .map(([mastery]) => mastery as Mastery);
 
         set(isSkillAcquired(skill), true);
-        set(isShowing("skills"), true);
 
         if (shows !== undefined) {
           for (const show of shows) {
@@ -35,8 +34,6 @@ export function useAcquireSkill() {
         }
 
         if (newUnlockedMasteries.length > 0) {
-          set(isShowing("masteries"), true);
-
           for (const _ of newUnlockedMasteries) {
             progressQuest({ quest: "masteries" });
             progressQuest({ quest: "masteriesAll" });

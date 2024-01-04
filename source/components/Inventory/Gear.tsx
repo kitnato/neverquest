@@ -13,27 +13,25 @@ export function Gear() {
   const isShowingOffhand = useRecoilValue(isShowing("offhand"));
   const isShowingWeapon = useRecoilValue(isShowing("weapon"));
 
-  if (!isShowingArmor && !isShowingOffhand && !isShowingWeapon) {
-    return;
+  if (isShowingArmor || isShowingOffhand || isShowingWeapon) {
+    return (
+      <Card className={getAnimationClass({ animation: "flipInX" })}>
+        <CardBody>
+          <Row className="align-items-center">
+            <Col>
+              <WeaponEquipped />
+            </Col>
+
+            <Col>
+              <ArmorEquipped />
+            </Col>
+
+            <Col>
+              <OffhandEquipped />
+            </Col>
+          </Row>
+        </CardBody>
+      </Card>
+    );
   }
-
-  return (
-    <Card className={getAnimationClass({ animation: "flipInX" })}>
-      <CardBody>
-        <Row className="align-items-center">
-          <Col>
-            <WeaponEquipped />
-          </Col>
-
-          <Col>
-            <ArmorEquipped />
-          </Col>
-
-          <Col>
-            <OffhandEquipped />
-          </Col>
-        </Row>
-      </CardBody>
-    </Card>
-  );
 }

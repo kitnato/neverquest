@@ -5,17 +5,15 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { MasteryDisplay } from "@neverquest/components/Masteries/MasteryDisplay";
 import { ACCORDION_EVENT_KEY } from "@neverquest/data/general";
 import IconMasteries from "@neverquest/icons/masteries.svg?react";
-import { isShowing } from "@neverquest/state/isShowing";
 import { unlockedMasteries } from "@neverquest/state/masteries";
 import { expandedMasteries } from "@neverquest/state/settings";
 import type { Mastery } from "@neverquest/types/unions";
 
 export function Masteries() {
   const [expandedMasteriesValue, setExpandedMasteries] = useRecoilState(expandedMasteries);
-  const isShowingMasteries = useRecoilValue(isShowing("masteries"));
   const unlockedMasteriesValue = useRecoilValue(unlockedMasteries);
 
-  if (isShowingMasteries) {
+  if (Object.values(unlockedMasteriesValue).some(Boolean)) {
     return (
       <Accordion
         activeKey={expandedMasteriesValue ? ACCORDION_EVENT_KEY : undefined}

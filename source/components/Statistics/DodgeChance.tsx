@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { LABEL_EMPTY, LABEL_NO_PENALTY, LABEL_SEPARATOR } from "@neverquest/data/general";
+import { LABEL_NO_PENALTY, LABEL_SEPARATOR } from "@neverquest/data/general";
 import { NUDIST_DODGE_BONUS } from "@neverquest/data/traits";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconAgility from "@neverquest/icons/agility.svg?react";
@@ -16,8 +16,6 @@ import IconStamina from "@neverquest/icons/stamina.svg?react";
 import IconTomeOfPower from "@neverquest/icons/tome-of-power.svg?react";
 import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
 import { armor } from "@neverquest/state/gear";
-import { isShowing } from "@neverquest/state/isShowing";
-import { isSkillAcquired } from "@neverquest/state/skills";
 import { dodgeChance } from "@neverquest/state/statistics";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import { isUnarmored } from "@neverquest/types/type-guards";
@@ -29,8 +27,6 @@ export function DodgeChance() {
   const attributePowerBonusAgility = useRecoilValue(attributePowerBonus("agility"));
   const agility = useRecoilValue(attributeStatistic("agility"));
   const dodgeChanceValue = useRecoilValue(dodgeChance);
-  const isShowingDodgeChance = useRecoilValue(isShowing("dodgeChance"));
-  const isSkillAcquiredEvasion = useRecoilValue(isSkillAcquired("evasion"));
   const isTraitAcquiredNudist = useRecoilValue(isTraitAcquired("nudist"));
   const isTraitAcquiredStalwart = useRecoilValue(isTraitAcquired("stalwart"));
 
@@ -42,7 +38,7 @@ export function DodgeChance() {
     state: dodgeChance,
   });
 
-  if (isShowingDodgeChance) {
+  if (dodgeChanceValue > 0) {
     return (
       <IconDisplay
         className={getAnimationClass({ animation: "flipInX" })}
@@ -132,11 +128,7 @@ export function DodgeChance() {
               </Popover>
             }
           >
-            <span>
-              {isSkillAcquiredEvasion
-                ? formatNumber({ format: "percentage", value: dodgeChanceValue })
-                : LABEL_EMPTY}
-            </span>
+            <span>{formatNumber({ format: "percentage", value: dodgeChanceValue })}</span>
           </OverlayTrigger>
 
           <DeltasDisplay delta="dodgeChance" />

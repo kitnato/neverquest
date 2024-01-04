@@ -4,7 +4,6 @@ import { useRecoilValue } from "recoil";
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { LABEL_EMPTY } from "@neverquest/data/general";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconCriticalChance from "@neverquest/icons/critical-chance.svg?react";
 import IconCriticalDamage from "@neverquest/icons/critical-damage.svg?react";
@@ -14,8 +13,6 @@ import IconDexterity from "@neverquest/icons/dexterity.svg?react";
 import IconPerception from "@neverquest/icons/perception.svg?react";
 import IconTomeOfPower from "@neverquest/icons/tome-of-power.svg?react";
 import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
-import { isShowing } from "@neverquest/state/isShowing";
-import { isSkillAcquired } from "@neverquest/state/skills";
 import { criticalRating, criticalStrike } from "@neverquest/state/statistics";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
@@ -27,16 +24,13 @@ export function CriticalRating() {
   const attributeStatisticPerception = useRecoilValue(attributeStatistic("perception"));
   const criticalRatingValue = useRecoilValue(criticalRating);
   const criticalStrikeValue = useRecoilValue(criticalStrike);
-  const isShowingCriticalRating = useRecoilValue(isShowing("criticalRating"));
-  const assassinationValue = useRecoilValue(isSkillAcquired("assassination"));
 
   useDeltaText({
     delta: "criticalRating",
     state: criticalRating,
-    stop: () => !assassinationValue,
   });
 
-  if (isShowingCriticalRating) {
+  if (criticalRatingValue > 0) {
     return (
       <IconDisplay
         className={getAnimationClass({ animation: "flipInX" })}
@@ -132,11 +126,8 @@ export function CriticalRating() {
                 </PopoverBody>
               </Popover>
             }
-            trigger={assassinationValue ? ["focus", "hover"] : []}
           >
-            <span>
-              {assassinationValue ? formatNumber({ value: criticalRatingValue }) : LABEL_EMPTY}
-            </span>
+            <span>{formatNumber({ value: criticalRatingValue })}</span>
           </OverlayTrigger>
 
           <DeltasDisplay delta="criticalRating" />

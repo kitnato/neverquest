@@ -34,6 +34,4 @@ export function GearComparison({
       />
     );
   }
-
-  return;
 }

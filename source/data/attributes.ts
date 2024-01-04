@@ -19,7 +19,7 @@ export const ATTRIBUTES: Record<
     maximum?: number;
     powerBonus: number;
     requiredSkill?: Skill;
-    shows?: Showing[];
+    shows?: Showing;
   }
 > = {
   agility: {
@@ -46,7 +46,7 @@ export const ATTRIBUTES: Record<
     Icon: IconEndurance,
     increment: 15,
     powerBonus: 0.02,
-    shows: ["stamina", "staminaDetails"],
+    shows: "stamina",
   },
   fortitude: {
     base: 0,
@@ -73,7 +73,7 @@ export const ATTRIBUTES: Record<
     increment: 0.01,
     maximum: 0.75,
     powerBonus: 0.001,
-    shows: ["attackRate", "attackRateDetails"],
+    shows: "attackRate",
   },
   strength: {
     base: 0,
@@ -81,7 +81,7 @@ export const ATTRIBUTES: Record<
     Icon: IconStrength,
     increment: 2,
     powerBonus: 0.01,
-    shows: ["damage", "damageDetails"],
+    shows: "damage",
   },
   vigor: {
     base: 0,
@@ -98,6 +98,6 @@ export const ATTRIBUTES: Record<
     Icon: IconVitality,
     increment: 20,
     powerBonus: 0.01,
-    shows: ["health", "healthDetails"],
+    shows: "health",
   },
 };

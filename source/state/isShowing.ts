@@ -1,30 +1,16 @@
 import { atomFamily, selector } from "recoil";
-import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 
-import { SHOWING_TYPES, type Showing } from "@neverquest/types/unions";
+import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
+import { questsBonus } from "@neverquest/state/quests";
+import { QUEST_BONUS_TYPES, type Showing } from "@neverquest/types/unions";
 import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
 
-export const isShowingEverything = withStateKey("isShowingEverything", (key) =>
-  selector({
-    get: ({ get }) => Object.values(SHOWING_TYPES).every((showing) => get(isShowing(showing))),
-    key,
-  }),
-);
-
-export const isShowingStatistics = withStateKey("isShowingStatistics", (key) =>
+export const isShowingQuestBonus = withStateKey("isShowingQuestBonus", (key) =>
   selector({
     get: ({ get }) =>
-      [
-        "blockChance",
-        "criticalRating",
-        "damage",
-        "damageDetails",
-        "deflection",
-        "dodgeChance",
-        "protection",
-      ].some((showing) => get(isShowing(showing as Showing))),
+      QUEST_BONUS_TYPES.reduce((sum, questBonus) => sum + get(questsBonus(questBonus)), 0) > 0,
     key,
   }),
 );

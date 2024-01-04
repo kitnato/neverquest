@@ -23,12 +23,12 @@ export function Health() {
   const attributePowerBonusVitality = useRecoilValue(attributePowerBonus("vitality"));
   const attributeStatisticVitality = useRecoilValue(attributeStatistic("vitality"));
   const isShowingHealth = useRecoilValue(isShowing("health"));
-  const isShowingHealthDetails = useRecoilValue(isShowing("healthDetails"));
   const isPoisonedValue = useRecoilValue(isPoisoned);
   const questsBonusHealth = useRecoilValue(questsBonus("healthBonus"));
   const setPoison = useSetRecoilState(poison);
 
   const { baseAmount } = RESERVES.health;
+  const vitalityBonus = attributeStatisticVitality - baseAmount;
 
   useTimerDelta({
     delta: setPoison,
@@ -61,44 +61,46 @@ export function Health() {
                         </td>
                       </tr>
 
-                      <tr>
-                        <td>
-                          <IconDisplay Icon={IconVitality} iconProps={{ className: "small" }}>
-                            <span>Vitality:</span>
-                          </IconDisplay>
-                        </td>
-
-                        <td>
-                          <Stack direction="horizontal" gap={1}>
-                            <IconDisplay Icon={IconHealth} iconProps={{ className: "small" }}>
-                              <span>
-                                +
-                                {formatNumber({
-                                  value: attributeStatisticVitality - baseAmount,
-                                })}
-                              </span>
+                      {vitalityBonus > 0 && (
+                        <tr>
+                          <td>
+                            <IconDisplay Icon={IconVitality} iconProps={{ className: "small" }}>
+                              <span>Vitality:</span>
                             </IconDisplay>
+                          </td>
 
-                            {attributePowerBonusVitality > 0 && (
-                              <>
-                                {LABEL_SEPARATOR}
+                          <td>
+                            <Stack direction="horizontal" gap={1}>
+                              <IconDisplay Icon={IconHealth} iconProps={{ className: "small" }}>
+                                <span>
+                                  +
+                                  {formatNumber({
+                                    value: vitalityBonus,
+                                  })}
+                                </span>
+                              </IconDisplay>
 
-                                <IconDisplay
-                                  Icon={IconTomeOfPower}
-                                  iconProps={{ className: "small" }}
-                                >
-                                  <span>
-                                    {formatNumber({
-                                      format: "multiplier",
-                                      value: attributePowerBonusVitality,
-                                    })}
-                                  </span>
-                                </IconDisplay>
-                              </>
-                            )}
-                          </Stack>
-                        </td>
-                      </tr>
+                              {attributePowerBonusVitality > 0 && (
+                                <>
+                                  {LABEL_SEPARATOR}
+
+                                  <IconDisplay
+                                    Icon={IconTomeOfPower}
+                                    iconProps={{ className: "small" }}
+                                  >
+                                    <span>
+                                      {formatNumber({
+                                        format: "multiplier",
+                                        value: attributePowerBonusVitality,
+                                      })}
+                                    </span>
+                                  </IconDisplay>
+                                </>
+                              )}
+                            </Stack>
+                          </td>
+                        </tr>
+                      )}
 
                       {questsBonusHealth > 0 && (
                         <tr>
@@ -125,7 +127,11 @@ export function Health() {
                 </Popover>
               }
               placement="right"
-              trigger={isShowingHealthDetails ? ["focus", "hover"] : []}
+              trigger={
+                attributePowerBonusVitality > 0 || questsBonusHealth > 0 || vitalityBonus > 0
+                  ? ["focus", "hover"]
+                  : []
+              }
             >
               <div className="w-100">
                 <ReserveMeter reserve="health" />

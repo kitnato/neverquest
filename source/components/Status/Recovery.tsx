@@ -35,62 +35,60 @@ export function Recovery() {
     state: recoveryRate,
   });
 
-  if (!isShowingRecovery) {
-    return;
+  if (isShowingRecovery) {
+    return (
+      <IconDisplay
+        className={getAnimationClass({ animation: "flipInX" })}
+        Icon={IconRecovery}
+        tooltip="Recovery rate"
+      >
+        <Stack className="w-100" direction="horizontal">
+          <OverlayTrigger
+            overlay={
+              <Popover>
+                <PopoverBody>
+                  <DetailsTable>
+                    <tr>
+                      <td>
+                        <span>Base:</span>
+                      </td>
+
+                      <td>
+                        <span>{formatNumber({ format: "time", value: RECOVERY_RATE })}</span>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <IconDisplay Icon={IconResilience} iconProps={{ className: "small" }}>
+                          <span>Resilience:</span>
+                        </IconDisplay>
+                      </td>
+
+                      <td>
+                        <span>
+                          -
+                          {formatNumber({
+                            format: "percentage",
+                            value: resilienceValue,
+                          })}
+                        </span>
+                      </td>
+                    </tr>
+                  </DetailsTable>
+                </PopoverBody>
+              </Popover>
+            }
+            trigger={resilienceValue > 0 ? ["focus", "hover"] : []}
+          >
+            <div className="w-100">
+              <RecoveryMeter />
+            </div>
+          </OverlayTrigger>
+
+          <DeltasDisplay delta="recoveryRate" />
+        </Stack>
+      </IconDisplay>
+    );
   }
-
-  return (
-    <IconDisplay
-      className={getAnimationClass({ animation: "flipInX" })}
-      Icon={IconRecovery}
-      tooltip="Recovery rate"
-    >
-      <Stack className="w-100" direction="horizontal">
-        <OverlayTrigger
-          overlay={
-            <Popover>
-              <PopoverBody>
-                <DetailsTable>
-                  <tr>
-                    <td>
-                      <span>Base:</span>
-                    </td>
-
-                    <td>
-                      <span>{formatNumber({ format: "time", value: RECOVERY_RATE })}</span>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td>
-                      <IconDisplay Icon={IconResilience} iconProps={{ className: "small" }}>
-                        <span>Resilience:</span>
-                      </IconDisplay>
-                    </td>
-
-                    <td>
-                      <span>
-                        -
-                        {formatNumber({
-                          format: "percentage",
-                          value: resilienceValue,
-                        })}
-                      </span>
-                    </td>
-                  </tr>
-                </DetailsTable>
-              </PopoverBody>
-            </Popover>
-          }
-          trigger={resilienceValue > 0 ? ["focus", "hover"] : []}
-        >
-          <div className="w-100">
-            <RecoveryMeter />
-          </div>
-        </OverlayTrigger>
-
-        <DeltasDisplay delta="recoveryRate" />
-      </Stack>
-    </IconDisplay>
-  );
 }

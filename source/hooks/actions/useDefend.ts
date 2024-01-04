@@ -67,6 +67,7 @@ export function useDefend() {
         const { burden } = get(armor);
         const deltaHealth: DeltaDisplay[] = [];
         const deltaStamina: DeltaDisplay[] = [];
+        const incursArmorBurden = !get(isTraitAcquired("stalwart")) && burden > 0;
         const statusElementValue = get(statusElement);
 
         let isNegated = false;
@@ -105,7 +106,7 @@ export function useDefend() {
               delta: "health",
             });
 
-            if (!get(isTraitAcquired("stalwart"))) {
+            if (incursArmorBurden) {
               changeStamina({ value: -burden });
             }
 
@@ -249,7 +250,7 @@ export function useDefend() {
               });
             }
 
-            if (!get(isTraitAcquired("stalwart"))) {
+            if (incursArmorBurden) {
               changeStamina({ value: -burden });
             }
           }

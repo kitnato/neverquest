@@ -8,36 +8,24 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconStability from "@neverquest/icons/stability.svg?react";
 import IconStaggerRating from "@neverquest/icons/stagger-rating.svg?react";
 import IconStagger from "@neverquest/icons/stagger.svg?react";
-import { shield, weapon } from "@neverquest/state/gear";
+import { shield } from "@neverquest/state/gear";
 import { masteryStatistic } from "@neverquest/state/masteries";
-import { isSkillAcquired } from "@neverquest/state/skills";
 import { staggerRating } from "@neverquest/state/statistics";
-import { isTraitAcquired } from "@neverquest/state/traits";
-import { isMelee, isRanged } from "@neverquest/types/type-guards";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function StaggerRating() {
-  const isTraitAcquiredColossus = useRecoilValue(isTraitAcquired("colossus"));
   const stabilityValue = useRecoilValue(masteryStatistic("stability"));
   const { stagger } = useRecoilValue(shield);
-  const shieldcraftValue = useRecoilValue(isSkillAcquired("shieldcraft"));
   const staggerRatingValue = useRecoilValue(staggerRating);
-  const weaponValue = useRecoilValue(weapon);
-
-  const isEmpty =
-    isRanged(weaponValue) ||
-    (isMelee(weaponValue) && !isTraitAcquiredColossus && weaponValue.grip === "two-handed") ||
-    !shieldcraftValue ||
-    staggerRatingValue === 0;
 
   useDeltaText({
     delta: "staggerRating",
     state: staggerRating,
-    stop: () => isEmpty,
+    stop: () => staggerRatingValue === 0,
   });
 
-  if (!isEmpty) {
+  if (staggerRatingValue > 0) {
     return (
       <IconDisplay
         className={getAnimationClass({ animation: "flipInX" })}

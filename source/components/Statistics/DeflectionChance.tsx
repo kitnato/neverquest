@@ -19,16 +19,14 @@ export function DeflectionChance() {
   const deflectionChanceValue = useRecoilValue(deflectionChance);
   const isTraitAcquiredInoculated = useRecoilValue(isTraitAcquired("inoculated"));
 
-  const isEmpty = deflectionChanceValue === 0;
-
   useDeltaText({
     delta: "deflectionChance",
     format: "percentage",
     state: deflectionChance,
-    stop: () => isEmpty,
+    stop: () => deflectionChanceValue === 0,
   });
 
-  if (!isEmpty) {
+  if (deflectionChanceValue > 0) {
     return (
       <IconDisplay
         className={getAnimationClass({ animation: "flipInX" })}

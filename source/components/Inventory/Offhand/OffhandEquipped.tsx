@@ -4,7 +4,7 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { Ammunition } from "@neverquest/components/Inventory/Offhand/Ammunition";
 import { ShieldName } from "@neverquest/components/Inventory/Offhand/ShieldName";
 import IconFist from "@neverquest/icons/fist.svg?react";
-import IconMelee from "@neverquest/icons/melee.svg?react";
+import IconOneHanded from "@neverquest/icons/one-handed.svg?react";
 import IconShield from "@neverquest/icons/shield.svg?react";
 import { shield, weapon } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
@@ -26,7 +26,7 @@ export function OffhandEquipped() {
     if (!isTraitAcquiredColossus && weaponValue.grip === "two-handed") {
       return (
         <span className="opacity-50">
-          <IconDisplay className={getAnimationClass({ animation: "flipInX" })} Icon={IconMelee}>
+          <IconDisplay className={getAnimationClass({ animation: "flipInX" })} Icon={IconOneHanded}>
             {weaponValue.name}
           </IconDisplay>
         </span>

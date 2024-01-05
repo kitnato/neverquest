@@ -17,16 +17,14 @@ export function BlockChance() {
   const blockChanceValue = useRecoilValue(blockChance);
   const shieldValue = useRecoilValue(shield);
 
-  const isEmpty = blockChanceValue === 0;
-
   useDeltaText({
     delta: "blockChance",
     format: "percentage",
     state: blockChance,
-    stop: () => isEmpty,
+    stop: () => blockChanceValue === 0,
   });
 
-  if (!isEmpty) {
+  if (blockChanceValue > 0) {
     return (
       <IconDisplay
         className={getAnimationClass({ animation: "flipInX" })}

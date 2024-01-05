@@ -6,7 +6,7 @@ import { BRUISER_STUN_CHANCE } from "@neverquest/data/traits";
 import { elementalEffects, shield, weapon } from "@neverquest/state/gear";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { isTraitAcquired } from "@neverquest/state/traits";
-import { isUnarmed } from "@neverquest/types/type-guards";
+import { isUnarmed, isUnshielded } from "@neverquest/types/type-guards";
 import {
   ELEMENTAL_TYPES,
   MONSTER_AILMENT_TYPES,
@@ -79,7 +79,13 @@ export const canReceiveAilments = withStateKey("canReceiveAilments", (key) =>
 
 export const staggerChance = withStateKey("staggerChance", (key) =>
   selector({
-    get: ({ get }) => (get(isSkillAcquired("shieldcraft")) ? get(shield).stagger : 0),
+    get: ({ get }) => {
+      const shieldValue = get(shield);
+
+      return get(isSkillAcquired("shieldcraft")) && !isUnshielded(shieldValue)
+        ? get(shield).stagger
+        : 0;
+    },
     key,
   }),
 );

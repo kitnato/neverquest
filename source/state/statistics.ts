@@ -178,7 +178,9 @@ export const executionThreshold = withStateKey("executionThreshold", (key) =>
     get: ({ get }) => {
       const weaponValue = get(weapon);
 
-      return isMelee(weaponValue) && weaponValue.grip === "two-handed"
+      return get(isSkillAcquired("siegecraft")) &&
+        isMelee(weaponValue) &&
+        weaponValue.grip === "two-handed"
         ? get(masteryStatistic("butchery"))
         : 0;
     },
@@ -264,14 +266,16 @@ export const range = withStateKey("range", (key) =>
 
 export const staggerRating = withStateKey("staggerRating", (key) =>
   selector({
-    get: ({ get }) => Math.round(get(staggerChance) * get(masteryStatistic("stability"))),
+    get: ({ get }) =>
+      Math.round(get(staggerChance) * get(masteryStatistic("stability")) * PERCENTAGE_POINTS),
     key,
   }),
 );
 
 export const stunRating = withStateKey("stunRating", (key) =>
   selector({
-    get: ({ get }) => Math.round(get(stunChance) * get(masteryStatistic("might"))),
+    get: ({ get }) =>
+      Math.round(get(stunChance) * get(masteryStatistic("might")) * PERCENTAGE_POINTS),
     key,
   }),
 );

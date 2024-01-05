@@ -44,10 +44,10 @@ export const ARMOR_SPECIFICATIONS: Record<
       { maximum: 0.65, minimum: 0.6 },
     ],
     Icon: IconArmorHeavy,
-    price: { maximum: 10_000, minimum: 8 },
+    price: { maximum: 10_000, minimum: 50 },
     protection: [
       { maximum: 10, minimum: 8 },
-      { maximum: 1000, minimum: 950 },
+      { maximum: 900, minimum: 850 },
     ],
     weight: [
       { maximum: 7, minimum: 5 },
@@ -60,10 +60,10 @@ export const ARMOR_SPECIFICATIONS: Record<
       { maximum: 20, minimum: 15 },
     ],
     Icon: IconArmorLight,
-    price: { maximum: 5000, minimum: 1 },
+    price: { maximum: 4000, minimum: 1 },
     protection: [
       { maximum: 2, minimum: 1 },
-      { maximum: 500, minimum: 450 },
+      { maximum: 450, minimum: 400 },
     ],
     weight: [
       { maximum: 2, minimum: 1 },
@@ -80,10 +80,10 @@ export const ARMOR_SPECIFICATIONS: Record<
       { maximum: 0.35, minimum: 0.3 },
     ],
     Icon: IconReinforced,
-    price: { maximum: 7500, minimum: 3 },
+    price: { maximum: 7500, minimum: 25 },
     protection: [
       { maximum: 6, minimum: 4 },
-      { maximum: 700, minimum: 650 },
+      { maximum: 650, minimum: 600 },
     ],
     weight: [
       { maximum: 5, minimum: 3 },
@@ -178,15 +178,15 @@ export const WEAPON_BASE: GearRangeBase & {
 } = {
   ammunitionCost: [
     { maximum: 2, minimum: 1 },
-    { maximum: 25, minimum: 22 },
+    { maximum: 30, minimum: 25 },
   ],
   burden: [
     { maximum: 2, minimum: 1 },
-    { maximum: 40, minimum: 35 },
+    { maximum: 45, minimum: 40 },
   ],
   damage: [
-    { maximum: 15, minimum: 14 },
-    { maximum: 800, minimum: 750 },
+    { maximum: 15, minimum: 13 },
+    { maximum: 900, minimum: 850 },
   ],
   price: { maximum: 7000, minimum: 1 },
   range: [
@@ -194,8 +194,8 @@ export const WEAPON_BASE: GearRangeBase & {
     { maximum: 4000, minimum: 3500 },
   ],
   rate: [
-    { maximum: 3000, minimum: 2900 },
-    { maximum: 1600, minimum: 1500 },
+    { maximum: 3100, minimum: 2900 },
+    { maximum: 1800, minimum: 1500 },
   ],
   weight: [
     { maximum: 2, minimum: 1 },
@@ -219,7 +219,7 @@ export const WEAPON_MODIFIER = {
 export const WEAPON_NONE: Omit<Melee, "price"> = {
   abilityChance: 0,
   burden: 0,
-  damage: 10,
+  damage: 7,
   gearClass: "blunt",
   grip: "one-handed",
   ID: "WEAPON_NONE",

@@ -44,7 +44,7 @@ export const TRAITS: Record<
     Icon: IconBruiser,
   },
   colossus: {
-    description: "Two-handed melee weapons are used as one-handed.",
+    description: "Two-handed melee weapons are wielded in one hand.",
     Icon: IconColossus,
   },
   executioner: {

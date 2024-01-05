@@ -42,7 +42,7 @@ export const BLIGHT = {
 };
 
 export const ESSENCE = {
-  attenuation: 10,
+  attenuation: 9,
   base: 5,
   bonus: 0.02,
   boss: 1.15,
@@ -51,7 +51,7 @@ export const ESSENCE = {
 
 export const MONSTER_ATTACK_RATE = {
   attenuation: 4000,
-  base: 4200,
+  base: 4100,
   bonus: 0.01,
   boss: 1.1,
   finality: 1777,
@@ -59,10 +59,10 @@ export const MONSTER_ATTACK_RATE = {
 };
 
 export const MONSTER_DAMAGE = {
-  attenuation: 18,
+  attenuation: 35,
   base: 7,
   bonus: 0.01,
-  boss: 1.2,
+  boss: 1.15,
   finality: 1777,
 };
 

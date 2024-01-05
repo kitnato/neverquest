@@ -21,16 +21,14 @@ export function CombatRange() {
   const rangeValue = useRecoilValue(range);
   const weaponValue = useRecoilValue(weapon);
 
-  const isEmpty = rangeValue === 0;
-
   useDeltaText({
     delta: "range",
     format: "time",
     state: range,
-    stop: () => isEmpty,
+    stop: () => rangeValue === 0,
   });
 
-  if (!isEmpty) {
+  if (rangeValue > 0) {
     return (
       <IconDisplay
         className={getAnimationClass({ animation: "flipInX" })}

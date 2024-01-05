@@ -11,9 +11,7 @@ import IconBleed from "@neverquest/icons/bleed.svg?react";
 import IconBleeding from "@neverquest/icons/bleeding.svg?react";
 import IconCruelty from "@neverquest/icons/cruelty.svg?react";
 import { bleed, bleedChance } from "@neverquest/state/ailments";
-import { weapon } from "@neverquest/state/gear";
 import { masteryStatistic } from "@neverquest/state/masteries";
-import { isSkillAcquired } from "@neverquest/state/skills";
 import { bleedRating, damage } from "@neverquest/state/statistics";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
@@ -23,19 +21,15 @@ export function BleedRating() {
   const bleedChanceValue = useRecoilValue(bleedChance);
   const bleedRatingValue = useRecoilValue(bleedRating);
   const damageValue = useRecoilValue(damage);
-  const crueltyValue = useRecoilValue(masteryStatistic("cruelty"));
-  const anatomyValue = useRecoilValue(isSkillAcquired("anatomy"));
-  const { gearClass } = useRecoilValue(weapon);
-
-  const isEmpty = !anatomyValue || gearClass !== "piercing" || bleedRatingValue === 0;
+  const masteryStatisticCruelty = useRecoilValue(masteryStatistic("cruelty"));
 
   useDeltaText({
     delta: "bleedRating",
     state: bleedRating,
-    stop: () => isEmpty,
+    stop: () => bleedRatingValue === 0,
   });
 
-  if (!isEmpty) {
+  if (bleedRatingValue > 0) {
     return (
       <IconDisplay
         className={getAnimationClass({ animation: "flipInX" })}
@@ -73,7 +67,7 @@ export function BleedRating() {
                         <span>
                           {formatNumber({
                             format: "percentage",
-                            value: crueltyValue,
+                            value: masteryStatisticCruelty,
                           })}
                           &nbsp;of total damage
                         </span>
@@ -89,7 +83,7 @@ export function BleedRating() {
                         <IconDisplay Icon={IconBleeding} iconProps={{ className: "small" }}>
                           <span>
                             {formatNumber({
-                              value: damageValue * crueltyValue,
+                              value: damageValue * masteryStatisticCruelty,
                             })}
                             &nbsp;over&nbsp;
                             {formatNumber({

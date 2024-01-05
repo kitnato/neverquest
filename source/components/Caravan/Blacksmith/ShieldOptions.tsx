@@ -15,7 +15,7 @@ import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react";
 import IconStagger from "@neverquest/icons/stagger.svg?react";
 import IconUnknown from "@neverquest/icons/unknown.svg?react";
 import { blacksmithInventory } from "@neverquest/state/caravan";
-import { stage } from "@neverquest/state/encounter";
+import { stageMaximum } from "@neverquest/state/encounter";
 import { allowProfanity } from "@neverquest/state/settings";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
@@ -31,13 +31,13 @@ export function ShieldOptions() {
   const allowProfanityValue = useRecoilValue(allowProfanity);
   const [{ shield: craftedShield }, setBlacksmithInventory] = useRecoilState(blacksmithInventory);
   const shieldcraftValue = useRecoilValue(isSkillAcquired("shieldcraft"));
-  const stageValue = useRecoilValue(stage);
+  const stageMaximumValue = useRecoilValue(stageMaximum);
 
   const [shieldClass, setShieldClass] = useState<ShieldClass>("small");
-  const [shieldLevel, setShieldLevel] = useState(Math.min(stageValue, GROWTH_MAXIMUM));
+  const [shieldLevel, setShieldLevel] = useState(Math.min(stageMaximumValue, GROWTH_MAXIMUM));
 
   const factor = getSigmoid(shieldLevel);
-  const maximumShieldLevel = Math.min(stageValue + GEAR_LEVEL_RANGE_MAXIMUM, GROWTH_MAXIMUM);
+  const maximumShieldLevel = Math.min(stageMaximumValue + GEAR_LEVEL_RANGE_MAXIMUM, GROWTH_MAXIMUM);
   const { block, burden, stagger, weight } = getShieldRanges({
     factor,
     gearClass: shieldClass,

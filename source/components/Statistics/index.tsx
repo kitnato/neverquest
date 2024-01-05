@@ -20,7 +20,7 @@ export function Statistics() {
   const element = useRef<HTMLDivElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
 
-  const setVisibleOnText = () => {
+  const setVisibleOnTextChange = () => {
     const { current } = element;
 
     if (current?.textContent?.trim() !== "") {
@@ -32,9 +32,12 @@ export function Statistics() {
     const { current } = element;
 
     if (current !== null) {
-      new MutationObserver(setVisibleOnText).observe(current, { childList: true, subtree: true });
+      new MutationObserver(setVisibleOnTextChange).observe(current, {
+        childList: true,
+        subtree: true,
+      });
 
-      setVisibleOnText();
+      setVisibleOnTextChange();
     }
   }, []);
 

@@ -23,7 +23,7 @@ import IconUnknown from "@neverquest/icons/unknown.svg?react";
 import IconWeaponAttackRate from "@neverquest/icons/weapon-attack-rate.svg?react";
 import IconWeaponDamage from "@neverquest/icons/weapon-damage.svg?react";
 import { fletcherInventory } from "@neverquest/state/caravan";
-import { stage } from "@neverquest/state/encounter";
+import { stageMaximum } from "@neverquest/state/encounter";
 import { allowProfanity } from "@neverquest/state/settings";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
@@ -39,11 +39,11 @@ export function RangedWeaponOptions() {
   const [fletcherInventoryValue, setFletcherInventory] = useRecoilState(fletcherInventory);
   const allowProfanityValue = useRecoilValue(allowProfanity);
   const isSkillAcquiredArchery = useRecoilValue(isSkillAcquired("archery"));
-  const stageValue = useRecoilValue(stage);
+  const stageMaximumValue = useRecoilValue(stageMaximum);
   const resetFletcherInventory = useResetRecoilState(fletcherInventory);
 
   const [weaponClass, setWeaponClass] = useState<WeaponClass>("blunt");
-  const [weaponLevel, setWeaponLevel] = useState(Math.min(stageValue, GROWTH_MAXIMUM));
+  const [weaponLevel, setWeaponLevel] = useState(Math.min(stageMaximumValue, GROWTH_MAXIMUM));
 
   const { ability, IconAbility, IconGearClass } = WEAPON_SPECIFICATIONS[weaponClass];
 
@@ -54,7 +54,7 @@ export function RangedWeaponOptions() {
     factor,
     gearClass: weaponClass,
   });
-  const maximumWeaponLevel = Math.min(stageValue + GEAR_LEVEL_RANGE_MAXIMUM, GROWTH_MAXIMUM);
+  const maximumWeaponLevel = Math.min(stageMaximumValue + GEAR_LEVEL_RANGE_MAXIMUM, GROWTH_MAXIMUM);
 
   return (
     <Stack className="mx-auto w-50">

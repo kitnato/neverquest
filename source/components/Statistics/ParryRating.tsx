@@ -10,29 +10,23 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconFinesse from "@neverquest/icons/finesse.svg?react";
 import IconParryRating from "@neverquest/icons/parry-rating.svg?react";
 import IconParry from "@neverquest/icons/parry.svg?react";
-import { weapon } from "@neverquest/state/gear";
 import { masteryStatistic } from "@neverquest/state/masteries";
-import { isSkillAcquired } from "@neverquest/state/skills";
 import { parryChance, parryRating } from "@neverquest/state/statistics";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function ParryRating() {
-  const escrimeValue = useRecoilValue(isSkillAcquired("escrime"));
   const finesseValue = useRecoilValue(masteryStatistic("finesse"));
   const parryChanceValue = useRecoilValue(parryChance);
   const parryRatingValue = useRecoilValue(parryRating);
-  const { gearClass } = useRecoilValue(weapon);
-
-  const isEmpty = !escrimeValue || gearClass !== "slashing" || parryRatingValue === 0;
 
   useDeltaText({
     delta: "parryRating",
     state: parryRating,
-    stop: () => isEmpty,
+    stop: () => parryRatingValue === 0,
   });
 
-  if (!isEmpty) {
+  if (parryRatingValue > 0) {
     return (
       <IconDisplay
         className={getAnimationClass({ animation: "flipInX" })}

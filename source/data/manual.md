@@ -110,7 +110,7 @@ Requires the [anatomy](#anatomy) skill.
 
 #### Block chance
 
-A percentage determining the chance that when defending, all incoming damage is negated. Blocking triggers [recovery](#recovery) and may also inflict [stagger].
+A percentage determining the chance that when defending, all incoming damage is avoided. Blocking triggers [recovery](#recovery) and may also inflict [stagger].
 
 Determined by the equipped [shield](#shields).
 

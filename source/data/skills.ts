@@ -88,7 +88,7 @@ export const SKILLS: Record<
     requiredCrew: "merchant",
   },
   evasion: {
-    description: "Grants the ability to # dodge attacks, negating all damage.",
+    description: "Grants the ability to # dodge attacks, avoiding all damage.",
     descriptionIcons: [IconDodge],
     Icon: IconEvasion,
     requiredCrew: "merchant",

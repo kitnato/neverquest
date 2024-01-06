@@ -70,7 +70,7 @@ export function useDefend() {
         const incursArmorBurden = !get(isTraitAcquired("stalwart")) && burden > 0;
         const statusElementValue = get(statusElement);
 
-        let isNegated = false;
+        let isAvoided = false;
 
         if (statusElementValue !== null) {
           animateElement({
@@ -90,10 +90,10 @@ export function useDefend() {
             delta: "health",
           });
 
-          isNegated = true;
+          isAvoided = true;
         }
 
-        // If attack is dodged, all damage is negated.
+        // If attack is dodged, all damage is avoided.
         if (Math.random() <= get(dodgeChance)) {
           if (get(canDodge)) {
             progressQuest({ quest: "dodging" });
@@ -110,7 +110,7 @@ export function useDefend() {
               changeStamina({ value: -burden });
             }
 
-            isNegated = true;
+            isAvoided = true;
           } else {
             deltaStamina.push(
               {
@@ -127,7 +127,7 @@ export function useDefend() {
           }
         }
 
-        if (!isNegated) {
+        if (!isAvoided) {
           const hasParried = Math.random() <= get(parryChance);
           const hasBlocked = !hasParried && Math.random() <= get(blockChance);
           const thornsValue = get(thorns);

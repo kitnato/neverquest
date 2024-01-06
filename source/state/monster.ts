@@ -28,8 +28,9 @@ import {
   stage,
   stageMaximum,
 } from "@neverquest/state/encounter";
-import { canInfuseMysteriousEgg, ownedItem } from "@neverquest/state/inventory";
+import { ownedItem } from "@neverquest/state/inventory";
 import { infusionEffect } from "@neverquest/state/items";
+import { isSkillAcquired } from "@neverquest/state/skills";
 import { range } from "@neverquest/state/statistics";
 import { FINALITY_TYPES, type MonsterAilment } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
@@ -246,7 +247,7 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
             ? { ...INFUSABLES["mysterious egg"].item, ID: nanoid() }
             : // Torn manuscript drops only if it's not currently carried or sold, the antique coin & mysterious egg are both carried, it can't yet be infused and if the drop chance is reached.
               get(ownedItem("antique coin")) !== undefined &&
-                !get(canInfuseMysteriousEgg) &&
+                !get(isSkillAcquired("incubation")) &&
                 ownedItemMysteriousEgg !== undefined &&
                 !merchantInventoryValue.some(({ name }) => name === "torn manuscript") &&
                 get(ownedItem("torn manuscript")) === undefined &&

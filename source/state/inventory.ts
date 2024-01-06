@@ -4,7 +4,7 @@ import { ENCUMBRANCE_CAPACITY, KNAPSACK_CAPACITY } from "@neverquest/data/items"
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import type { ConsumableItem, InheritableItem, InventoryItem } from "@neverquest/types";
 import { isConsumableItem, isInheritableItem } from "@neverquest/types/type-guards";
-import type { Consumable, Infusable, Trinket } from "@neverquest/types/unions";
+import type { Consumable, Inheritable } from "@neverquest/types/unions";
 import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
@@ -39,7 +39,7 @@ export const encumbranceMaximum = withStateKey("encumbranceMaximum", (key) =>
 export const ownedItem = withStateKey("ownedItem", (key) =>
   selectorFamily({
     get:
-      (itemName: Consumable | Infusable | Trinket) =>
+      (itemName: Consumable | Inheritable) =>
       ({ get }): ConsumableItem | InheritableItem | undefined => {
         const inventoryValue = get(inventory);
 
@@ -57,14 +57,6 @@ export const ownedItem = withStateKey("ownedItem", (key) =>
 export const acquiredItems = withStateKey("acquiredItems", (key) =>
   atom<InventoryItem[]>({
     default: [],
-    effects: [handleLocalStorage({ key })],
-    key,
-  }),
-);
-
-export const canInfuseMysteriousEgg = withStateKey("canInfuseMysteriousEgg", (key) =>
-  atom({
-    default: false,
     effects: [handleLocalStorage({ key })],
     key,
   }),

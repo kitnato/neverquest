@@ -236,7 +236,7 @@ The [merchant](#merchant) is always present from the start. Other crew members c
 
 #### Alchemist
 
-Offers conversion of [gems](#gems) between one another. Also offers arcane alchemical training under certain circumstances.
+Offers conversion of [gems](#gems) between one another. Also offers special alchemical training under certain circumstances.
 
 #### Blacksmith
 

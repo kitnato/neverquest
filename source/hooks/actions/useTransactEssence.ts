@@ -18,6 +18,8 @@ export function useTransactEssence() {
           const newEssence = get(essence) + difference;
 
           set(essence, newEssence);
+
+          set(isShowing("capabilities"), true);
           set(isShowing("essence"), true);
 
           if (difference < 0) {

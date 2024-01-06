@@ -16,13 +16,13 @@ import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function MasteryDisplay({ mastery }: { mastery: Mastery }) {
   const canTrainMasteryValue = useRecoilValue(canTrainMastery(mastery));
-  const isSkillAcquiredValue = useRecoilValue(isSkillAcquired(MASTERIES[mastery].requiredSkill));
+  const isSkillAcquiredRequired = useRecoilValue(isSkillAcquired(MASTERIES[mastery].requiredSkill));
 
   const { description, Icon } = MASTERIES[mastery];
 
   return (
     <div className={getAnimationClass({ animation: "flipInX" })}>
-      {isSkillAcquiredValue ? (
+      {isSkillAcquiredRequired ? (
         <IconDisplay
           className={`${canTrainMasteryValue ? "" : "opacity-50"}`}
           description={

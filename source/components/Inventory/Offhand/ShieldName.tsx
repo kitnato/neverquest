@@ -29,7 +29,7 @@ export function ShieldName({
 }) {
   const isShowingGearClass = useRecoilValue(isShowing("gearClass"));
   const shieldEquippedValue = useRecoilValue(shieldEquipped);
-  const shieldcraftSkill = useRecoilValue(isSkillAcquired("shieldcraft"));
+  const isSkillAcquiredShieldcraft = useRecoilValue(isSkillAcquired("shieldcraft"));
 
   const { block, burden, ID, level, name, stagger, weight } = shield;
   const isShieldUnequipped = isUnshielded(shield);
@@ -115,7 +115,7 @@ export function ShieldName({
 
               {stagger > 0 && (
                 <tr>
-                  {shieldcraftSkill ? (
+                  {isSkillAcquiredShieldcraft ? (
                     <>
                       <td>
                         <span>Stagger chance:</span>

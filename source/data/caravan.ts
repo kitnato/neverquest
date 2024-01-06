@@ -40,7 +40,7 @@ export const CREW: Record<
   }
 > = {
   alchemist: {
-    description: "Converts gems between one another.",
+    description: "Converts gems between one another and teaches venerable techniques.",
     Icon: IconAlchemist,
     interaction: "Transmute",
     monologues: {
@@ -181,8 +181,6 @@ export const OCCULTIST_PURGE_PRICE_MULTIPLIER = {
   quests: 500,
 };
 
-export const OVUM_INFUSION_PRICE = 7171;
-
 export const MEDIC_PRICE_SURGERY = 25;
 
 export const MERCHANT_OFFERS: Record<
@@ -274,7 +272,9 @@ export const TAILORING = {
   knapsack: { amount: 3, priceMaximum: 350 },
 };
 
-export const TRANSMUTE_COST = 3;
-export const TRANSMUTE_YIELD = 1;
+export const TRANSMUTATION = {
+  gemCost: 3,
+  gemYield: 1,
+};
 
 export const WITCH_POTIONS = ["elixir", "antidote", "salve"] as const;

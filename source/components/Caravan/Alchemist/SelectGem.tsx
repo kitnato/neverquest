@@ -1,7 +1,7 @@
 import { FormSelect, Stack } from "react-bootstrap";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { TRANSMUTE_COST, TRANSMUTE_YIELD } from "@neverquest/data/caravan";
+import { TRANSMUTATION } from "@neverquest/data/caravan";
 import { GEMS } from "@neverquest/data/items";
 import { GEM_TYPES, type Gem } from "@neverquest/types/unions";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
@@ -15,6 +15,8 @@ export function SelectGem({
   omit?: Gem;
   onSelect: (gem: Gem) => void;
 }) {
+  const { gemCost, gemYield } = TRANSMUTATION;
+
   return (
     <Stack direction="horizontal" gap={1}>
       <IconDisplay Icon={GEMS[gem].Icon} tooltip="Gem">
@@ -35,7 +37,7 @@ export function SelectGem({
         </FormSelect>
       </IconDisplay>
 
-      <span>x{omit === undefined ? TRANSMUTE_COST : TRANSMUTE_YIELD}</span>
+      <span>×{omit === undefined ? gemCost : gemYield}</span>
     </Stack>
   );
 }

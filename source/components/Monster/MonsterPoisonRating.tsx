@@ -7,13 +7,13 @@ import { LABEL_MAXIMUM } from "@neverquest/data/general";
 import IconHealth from "@neverquest/icons/health.svg?react";
 import IconPoison from "@neverquest/icons/poison.svg?react";
 import { poisonChance } from "@neverquest/state/monster";
-import { poison, poisonMagnitude } from "@neverquest/state/reserves";
+import { poisonDuration, poisonMagnitude } from "@neverquest/state/reserves";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function MonsterPoisonRating() {
-  const poisonValue = useRecoilValue(poison);
   const poisonChanceValue = useRecoilValue(poisonChance);
+  const poisonDurationValue = useRecoilValue(poisonDuration);
   const poisonMagnitudeValue = useRecoilValue(poisonMagnitude);
 
   if (poisonChanceValue > 0) {
@@ -68,7 +68,7 @@ export function MonsterPoisonRating() {
                     </td>
 
                     <td>
-                      <span>{formatNumber({ format: "time", value: poisonValue })}</span>
+                      <span>{formatNumber({ format: "time", value: poisonDurationValue })}</span>
                     </td>
                   </tr>
                 </DetailsTable>
@@ -78,7 +78,7 @@ export function MonsterPoisonRating() {
         >
           <span>
             {formatNumber({
-              value: poisonChanceValue * poisonMagnitudeValue * poisonValue,
+              value: poisonChanceValue * poisonMagnitudeValue * poisonDurationValue,
             })}
           </span>
         </OverlayTrigger>

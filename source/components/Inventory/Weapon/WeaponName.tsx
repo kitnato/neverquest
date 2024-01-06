@@ -46,7 +46,7 @@ export function WeaponName({
   });
   const showComparison = ID !== weaponEquippedValue.ID;
 
-  const skillValue = useRecoilValue(isSkillAcquired(WEAPON_ABILITY_SKILLS[ability]));
+  const isSkillAcquiredAbility = useRecoilValue(isSkillAcquired(WEAPON_ABILITY_SKILLS[ability]));
 
   return (
     <OverlayTrigger
@@ -202,7 +202,7 @@ export function WeaponName({
               </tr>
 
               <tr>
-                {skillValue ? (
+                {isSkillAcquiredAbility ? (
                   <>
                     <td>
                       <span>{capitalizeAll(ability)} chance:</span>

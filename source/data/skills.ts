@@ -1,3 +1,4 @@
+import { INFUSABLES, TRINKETS } from "@neverquest/data/items";
 import IconAnatomy from "@neverquest/icons/anatomy.svg?react";
 import IconArchery from "@neverquest/icons/archery.svg?react";
 import IconArmorHeavy from "@neverquest/icons/armor-heavy.svg?react";
@@ -16,6 +17,8 @@ import IconEvasion from "@neverquest/icons/evasion.svg?react";
 import IconExecution from "@neverquest/icons/execution.svg?react";
 import IconGrip from "@neverquest/icons/grip.svg?react";
 import IconHealth from "@neverquest/icons/health.svg?react";
+import IconIncubation from "@neverquest/icons/incubation.svg?react";
+import IconMemetics from "@neverquest/icons/memetics.svg?react";
 import IconParry from "@neverquest/icons/parry.svg?react";
 import IconPiercing from "@neverquest/icons/piercing.svg?react";
 import IconRanged from "@neverquest/icons/ranged.svg?react";
@@ -31,7 +34,7 @@ import IconStamina from "@neverquest/icons/stamina.svg?react";
 import IconStunned from "@neverquest/icons/stunned.svg?react";
 import IconTraumatology from "@neverquest/icons/traumatology.svg?react";
 import type { SVGIcon } from "@neverquest/types/components";
-import type { Crew, Showing, Skill, WeaponAbility } from "@neverquest/types/unions";
+import type { Crew, Inheritable, Showing, Skill, WeaponAbility } from "@neverquest/types/unions";
 
 export const SKILL_PRICE_BASE = 60;
 export const SKILL_PRICE_FACTOR = 1.8;
@@ -42,76 +45,117 @@ export const SKILLS: Record<
     description: string;
     descriptionIcons: SVGIcon[];
     Icon: SVGIcon;
+    isInheritable: boolean;
     requiredCrew: Crew;
+    requiredInheritable?: Inheritable;
     shows?: Showing[];
+    trainer: Crew;
   }
 > = {
   anatomy: {
     description: "Grants the ability to inflict # bleeding with # piercing weapons.",
     descriptionIcons: [IconBleeding, IconPiercing],
     Icon: IconAnatomy,
+    isInheritable: false,
     requiredCrew: "merchant",
+    trainer: "mercenary",
   },
   archery: {
     description: "Grants the use of # ranged weapons.",
     descriptionIcons: [IconRanged],
     Icon: IconArchery,
+    isInheritable: false,
     requiredCrew: "fletcher",
+    trainer: "mercenary",
   },
   armorcraft: {
     description:
       "Grants the use of # heavy armor alongside the ability to # deflect ailments. Also improves # recovery.",
     descriptionIcons: [IconArmorHeavy, IconDeflection, IconRecovery],
     Icon: IconArmorcraft,
+    isInheritable: false,
     requiredCrew: "blacksmith",
+    trainer: "mercenary",
   },
   assassination: {
     description:
       "Grants the ability to deal # critical strikes alongside attributes that determine their # chance & # damage.",
     descriptionIcons: [IconCriticalRating, IconCriticalChance, IconCriticalDamage],
     Icon: IconAssassination,
+    isInheritable: false,
     requiredCrew: "merchant",
+    trainer: "mercenary",
   },
   calisthenics: {
     description:
       "Grants attributes that improve regeneration # amount & # rate for both # health & # stamina.",
     descriptionIcons: [IconRegenerationAmount, IconRegenerationRate, IconHealth, IconStamina],
     Icon: IconCalisthenics,
+    isInheritable: false,
     requiredCrew: "merchant",
     shows: ["health", "stamina"],
+    trainer: "mercenary",
   },
   escrime: {
     description:
       "Grants the ability to # parry attacks with # slashing weapons, partially reflecting damage.",
     descriptionIcons: [IconParry, IconSlashing],
     Icon: IconEscrime,
+    isInheritable: false,
     requiredCrew: "merchant",
+    trainer: "mercenary",
   },
   evasion: {
     description: "Grants the ability to # dodge attacks, avoiding all damage.",
     descriptionIcons: [IconDodge],
     Icon: IconEvasion,
+    isInheritable: false,
     requiredCrew: "merchant",
+    trainer: "mercenary",
+  },
+  incubation: {
+    description: "Acquire the ancient knowledge of hatching # mysterious eggs.",
+    descriptionIcons: [INFUSABLES["mysterious egg"].Icon],
+    Icon: IconIncubation,
+    isInheritable: true,
+    requiredCrew: "merchant",
+    requiredInheritable: "mysterious egg",
+    trainer: "alchemist",
+  },
+  memetics: {
+    description: "Acquire the ability to decipher and inscribe the # journal.",
+    descriptionIcons: [TRINKETS.journal.Icon],
+    Icon: IconMemetics,
+    isInheritable: true,
+    requiredCrew: "merchant",
+    requiredInheritable: "journal",
+    trainer: "alchemist",
   },
   shieldcraft: {
     description: "Grants the use of # tower shields & the ability to # stagger monsters.",
     descriptionIcons: [IconShieldTower, IconStaggered],
     Icon: IconShieldcraft,
+    isInheritable: false,
     requiredCrew: "blacksmith",
+    trainer: "mercenary",
   },
   siegecraft: {
     description:
       "Grants the use of # two-handed melee weapons that have a chance to # execute monsters.",
     descriptionIcons: [IconGrip, IconExecution],
     Icon: IconSiegecraft,
+    isInheritable: false,
     requiredCrew: "blacksmith",
     shows: ["grip"],
+    trainer: "mercenary",
   },
   traumatology: {
     description: "Grants the ability to # stun monsters with # blunt weapons.",
     descriptionIcons: [IconStunned, IconBlunt],
     Icon: IconTraumatology,
+    isInheritable: false,
     requiredCrew: "merchant",
+    trainer: "mercenary",
   },
 };
 

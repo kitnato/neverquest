@@ -31,7 +31,7 @@ import {
 export function ArmorOptions() {
   const [{ armor: craftedArmor }, setBlacksmithInventory] = useRecoilState(blacksmithInventory);
   const allowProfanityValue = useRecoilValue(allowProfanity);
-  const armorcraftValue = useRecoilValue(isSkillAcquired("armorcraft"));
+  const isSkillAcquiredArmorcraft = useRecoilValue(isSkillAcquired("armorcraft"));
   const stageMaximumValue = useRecoilValue(stageMaximum);
 
   const [armorClass, setArmorClass] = useState<ArmorClass>("light");
@@ -83,11 +83,11 @@ export function ArmorOptions() {
 
         {deflection !== undefined && (
           <IconDisplay
-            Icon={armorcraftValue ? IconDeflection : IconUnknown}
+            Icon={isSkillAcquiredArmorcraft ? IconDeflection : IconUnknown}
             iconProps={{ overlayPlacement: "left" }}
-            tooltip={armorcraftValue ? "Deflection chance" : LABEL_UNKNOWN}
+            tooltip={isSkillAcquiredArmorcraft ? "Deflection chance" : LABEL_UNKNOWN}
           >
-            {armorcraftValue
+            {isSkillAcquiredArmorcraft
               ? `${formatNumber({
                   format: "percentage",
                   value: deflection.minimum,
@@ -117,7 +117,7 @@ export function ArmorOptions() {
 
       <hr />
 
-      {!armorcraftValue && armorClass === "heavy" ? (
+      {!isSkillAcquiredArmorcraft && armorClass === "heavy" ? (
         <span className="fst-italic text-center">{LABEL_TRAINING_REQUIRED}</span>
       ) : craftedArmor === undefined ? (
         <CraftGear

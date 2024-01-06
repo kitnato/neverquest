@@ -125,6 +125,8 @@ export type Grip = (typeof GRIP_TYPES)[number];
 export const INFUSABLE_TYPES = ["monkey paw", "mysterious egg", "tome of power"] as const;
 export type Infusable = (typeof INFUSABLE_TYPES)[number];
 
+export type Inheritable = Infusable | Trinket;
+
 export const MASTERY_TYPES = [
   "butchery",
   "cruelty",
@@ -244,6 +246,8 @@ export const SKILL_TYPES = [
   "shieldcraft",
   "siegecraft",
   "archery",
+  "memetics",
+  "incubation",
 ] as const;
 export type Skill = (typeof SKILL_TYPES)[number];
 
@@ -281,7 +285,6 @@ export type StateKey =
   | "canBlock"
   | "canCompleteQuests"
   | "canDodge"
-  | "canInfuseMysteriousEgg"
   | "canReceiveAilment"
   | "canReceiveAilments"
   | "canTrackQuests"
@@ -311,7 +314,6 @@ export type StateKey =
   | "expandedMasteries"
   | "fletcherInventory"
   | "gems"
-  | "hasDecipheredJournal"
   | "hasEnoughAmmunition"
   | "hasLooted"
   | "hasMonsterClosed"

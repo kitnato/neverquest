@@ -8,17 +8,17 @@ import { InfusionEffect } from "@neverquest/components/Inventory/Inheritable/Inf
 import { InfusionLevel } from "@neverquest/components/Inventory/Inheritable/Infusion/InfusionLevel";
 import { InfusionProgress } from "@neverquest/components/Inventory/Inheritable/Infusion/InfusionProgress";
 import { INFUSABLES } from "@neverquest/data/items";
-import { canInfuseMysteriousEgg } from "@neverquest/state/inventory";
+import { isSkillAcquired } from "@neverquest/state/skills";
 import type { Infusable } from "@neverquest/types/unions";
 
 export function InfusionInspect({ infusable }: { infusable: Infusable }) {
-  const canInfuseMysteriousEggValue = useRecoilValue(canInfuseMysteriousEgg);
+  const isSkillAcquiredIncubation = useRecoilValue(isSkillAcquired("incubation"));
 
   const [isShowingInfusion, setIsShowingInfusion] = useState(false);
 
   const { Icon } = INFUSABLES[infusable];
 
-  if (canInfuseMysteriousEggValue || infusable !== "mysterious egg") {
+  if (isSkillAcquiredIncubation || infusable !== "mysterious egg") {
     return (
       <>
         <Button

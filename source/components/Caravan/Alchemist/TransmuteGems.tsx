@@ -5,7 +5,7 @@ import { useRecoilState } from "recoil";
 
 import { SelectGem } from "@neverquest/components/Caravan/Alchemist/SelectGem";
 import { IconImage } from "@neverquest/components/IconImage";
-import { TRANSMUTE_COST } from "@neverquest/data/caravan";
+import { TRANSMUTATION } from "@neverquest/data/caravan";
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general";
 import { GEM_BASE } from "@neverquest/data/items";
 import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
@@ -25,6 +25,7 @@ export function TransmuteGems() {
   const acquireItem = useAcquireItem();
   const progressQuest = useProgressQuest();
 
+  const { gemCost, gemYield } = TRANSMUTATION;
   const gems = stackItems(
     inventoryValue
       .filter(isGemItem)
@@ -36,7 +37,7 @@ export function TransmuteGems() {
     transmutation[gem] = gems.find(({ item: { name } }) => name === gem)?.amount ?? 0;
   }
 
-  const isAffordable = transmutation[source] >= TRANSMUTE_COST;
+  const isAffordable = transmutation[source] >= gemCost;
 
   const onSelect = (setSelection: (value: SetStateAction<Gem>) => void) => (gem: Gem) => {
     setSelection(gem);
@@ -74,18 +75,20 @@ export function TransmuteGems() {
                   inventoryValue
                     .filter((item) => isGemItem(item) && item.name === source)
                     .map(({ ID }) => ID)
-                    .slice(0, TRANSMUTE_COST),
+                    .slice(0, gemCost),
                 );
 
                 setInventory((currentInventory) =>
                   currentInventory.filter(({ ID }) => !gemIDs.has(ID)),
                 );
 
-                acquireItem({
-                  ...GEM_BASE,
-                  ID: nanoid(),
-                  name: result,
-                });
+                for (let yieldedGems = 0; yieldedGems < gemYield; yieldedGems++) {
+                  acquireItem({
+                    ...GEM_BASE,
+                    ID: nanoid(),
+                    name: result,
+                  });
+                }
 
                 progressQuest({ quest: "gemsTransmuting" });
               }

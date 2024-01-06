@@ -30,7 +30,7 @@ import {
 export function ShieldOptions() {
   const allowProfanityValue = useRecoilValue(allowProfanity);
   const [{ shield: craftedShield }, setBlacksmithInventory] = useRecoilState(blacksmithInventory);
-  const shieldcraftValue = useRecoilValue(isSkillAcquired("shieldcraft"));
+  const isSkillAcquiredShieldcraft = useRecoilValue(isSkillAcquired("shieldcraft"));
   const stageMaximumValue = useRecoilValue(stageMaximum);
 
   const [shieldClass, setShieldClass] = useState<ShieldClass>("small");
@@ -81,11 +81,11 @@ export function ShieldOptions() {
 
         {stagger !== undefined && (
           <IconDisplay
-            Icon={shieldcraftValue ? IconStagger : IconUnknown}
+            Icon={isSkillAcquiredShieldcraft ? IconStagger : IconUnknown}
             iconProps={{ overlayPlacement: "left" }}
-            tooltip={shieldcraftValue ? "Stagger chance" : LABEL_UNKNOWN}
+            tooltip={isSkillAcquiredShieldcraft ? "Stagger chance" : LABEL_UNKNOWN}
           >
-            {shieldcraftValue
+            {isSkillAcquiredShieldcraft
               ? `${formatNumber({ format: "percentage", value: stagger.minimum })} - ${formatNumber(
                   {
                     format: "percentage",
@@ -117,7 +117,7 @@ export function ShieldOptions() {
 
       <hr />
 
-      {!shieldcraftValue && shieldClass === "tower" ? (
+      {!isSkillAcquiredShieldcraft && shieldClass === "tower" ? (
         <span className="fst-italic text-center">{LABEL_TRAINING_REQUIRED}</span>
       ) : craftedShield === undefined ? (
         <CraftGear

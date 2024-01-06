@@ -47,7 +47,7 @@ export function RangedWeaponOptions() {
 
   const { ability, IconAbility, IconGearClass } = WEAPON_SPECIFICATIONS[weaponClass];
 
-  const skillValue = useRecoilValue(isSkillAcquired(WEAPON_ABILITY_SKILLS[ability]));
+  const isSkillAcquiredAbility = useRecoilValue(isSkillAcquired(WEAPON_ABILITY_SKILLS[ability]));
 
   const factor = getSigmoid(weaponLevel);
   const { abilityChance, ammunitionCost, burden, damage, range, rate, weight } = getRangedRanges({
@@ -121,11 +121,11 @@ export function RangedWeaponOptions() {
         </IconDisplay>
 
         <IconDisplay
-          Icon={skillValue ? IconAbility : IconUnknown}
+          Icon={isSkillAcquiredAbility ? IconAbility : IconUnknown}
           iconProps={{ overlayPlacement: "left" }}
-          tooltip={skillValue ? `${capitalizeAll(ability)} chance` : LABEL_UNKNOWN}
+          tooltip={isSkillAcquiredAbility ? `${capitalizeAll(ability)} chance` : LABEL_UNKNOWN}
         >
-          {skillValue
+          {isSkillAcquiredAbility
             ? `${formatNumber({
                 format: "percentage",
                 value: abilityChance.minimum,

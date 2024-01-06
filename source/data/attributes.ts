@@ -63,7 +63,7 @@ export const ATTRIBUTES: Record<
     Icon: IconPerception,
     increment: 0.03,
     maximum: 2.5,
-    powerBonus: 0.002,
+    powerBonus: 0.0005,
     requiredSkill: "assassination",
   },
   speed: {

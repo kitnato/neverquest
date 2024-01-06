@@ -8,7 +8,8 @@ import IconConquest from "@neverquest/icons/conquest.svg?react";
 import IconRoutine from "@neverquest/icons/routine.svg?react";
 import IconTriumph from "@neverquest/icons/triumph.svg?react";
 import { isShowingQuestBonus } from "@neverquest/state/isShowing";
-import { hasDecipheredJournal } from "@neverquest/state/quests";
+import { canTrackQuests } from "@neverquest/state/quests";
+import { isSkillAcquired } from "@neverquest/state/skills";
 import type { TabsData } from "@neverquest/types/components";
 import { QUEST_BONUS_TYPES } from "@neverquest/types/unions";
 
@@ -31,15 +32,20 @@ const TABS: TabsData = [
 ];
 
 export function Quests() {
-  const canUseJournalValue = useRecoilValue(hasDecipheredJournal);
+  const canTrackQuestsValue = useRecoilValue(canTrackQuests);
+  const isSkillAcquiredMemetics = useRecoilValue(isSkillAcquired("memetics"));
   const isShowingQuestBonusValue = useRecoilValue(isShowingQuestBonus);
 
-  if (!canUseJournalValue) {
+  if (!isSkillAcquiredMemetics) {
     return (
       <span className="fst-italic">
-        This tome is undecipherable. Perhaps there will be time in retirement ...
+        This tome is undecipherable. Perhaps someone versed in the sage arts can help ...
       </span>
     );
+  }
+
+  if (!canTrackQuestsValue) {
+    return <span className="fst-italic">The time for retirement and study has come.</span>;
   }
 
   return (

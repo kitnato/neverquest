@@ -67,6 +67,7 @@ export function useToggleEquipGear() {
             set(isShowing("offhand"), true);
           }
 
+          set(isShowing("damage"), true);
           set(isShowing("weapon"), true);
 
           progressQuest({ quest: "equippingWeapon" });

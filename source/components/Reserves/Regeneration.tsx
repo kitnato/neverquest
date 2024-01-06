@@ -48,7 +48,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
   );
   const isRecoveringValue = useRecoilValue(isRecovering);
   const isRegeneratingValue = useRecoilValue(isRegenerating(reserve));
-  const calisthenicsValue = useRecoilValue(isSkillAcquired("calisthenics"));
+  const isSkillAcquiredCalisthenics = useRecoilValue(isSkillAcquired("calisthenics"));
   const setRegenerationDuration = useSetRecoilState(regenerationDuration(reserve));
   const regenerationRateValue = useRecoilValue(regenerateRateState);
 
@@ -186,7 +186,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
           </Popover>
         }
         placement="right"
-        trigger={calisthenicsValue ? ["focus", "hover"] : []}
+        trigger={isSkillAcquiredCalisthenics ? ["focus", "hover"] : []}
       >
         <div className="w-100">
           <RegenerationMeter reserve={reserve} />

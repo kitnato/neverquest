@@ -14,9 +14,7 @@ import type { Skill } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function TrainableSkill({ skill }: { skill: Skill }) {
-  const { requiredCrew } = SKILLS[skill];
-
-  const hireStatusValue = useRecoilValue(hireStatus(requiredCrew));
+  const hireStatusValue = useRecoilValue(hireStatus(SKILLS[skill].requiredCrew));
   const isSkillAcquiredValue = useRecoilValue(isSkillAcquired(skill));
   const skillPriceValue = useRecoilValue(skillPrice);
 

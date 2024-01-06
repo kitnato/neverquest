@@ -125,7 +125,7 @@ svg {
 
 .popover,
 .tooltip {
-  // Workaround for https://github.com/react-bootstrap/react-bootstrap/issues/6563;Workaroundforhttps
+  // Workaround for https://github.com/react-bootstrap/react-bootstrap/issues/6563;
   position: fixed;
 
   // Tooltip doesn't have a box-shadow variable, and $popover-box-shadow doesn't control this way.
@@ -167,18 +167,18 @@ svg {
   }
 }
 
-.table-details {
-  tr {
-    vertical-align: middle;
-  }
-
-  td:first-child {
+.table-details td {
+  &:first-child {
     font-style: italic;
     text-align: end;
 
     .icon-display {
       justify-content: end;
     }
+  }
+
+  &:nth-child(2) {
+    vertical-align: middle;
   }
 }
 

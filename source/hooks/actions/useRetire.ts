@@ -1,6 +1,8 @@
 import { useRecoilCallback } from "recoil";
 
 import { RETIREMENT_STAGE_MINIMUM } from "@neverquest/data/general";
+import { SKILLS } from "@neverquest/data/skills";
+import { useAcquireSkill } from "@neverquest/hooks/actions/useAcquireSkill";
 import { useInitialize } from "@neverquest/hooks/actions/useInitialize";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useResetAttributes } from "@neverquest/hooks/actions/useResetAttributes";
@@ -22,9 +24,9 @@ import {
   stageMaximum,
 } from "@neverquest/state/encounter";
 import { armor, shield, weapon } from "@neverquest/state/gear";
-import { inventory, ownedItem } from "@neverquest/state/inventory";
+import { inventory } from "@neverquest/state/inventory";
 import { masteryProgress, masteryRank } from "@neverquest/state/masteries";
-import { hasDecipheredJournal, questProgress } from "@neverquest/state/quests";
+import { questProgress } from "@neverquest/state/quests";
 import { blight, poison } from "@neverquest/state/reserves";
 import { essence } from "@neverquest/state/resources";
 import { isSkillAcquired } from "@neverquest/state/skills";
@@ -34,6 +36,7 @@ import { CREW_TYPES, MASTERY_TYPES, SKILL_TYPES } from "@neverquest/types/unions
 import { getProgressReduction, getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useRetire() {
+  const acquireSkill = useAcquireSkill();
   const initialize = useInitialize();
   const progressQuest = useProgressQuest();
   const resetAttributes = useResetAttributes();
@@ -103,16 +106,16 @@ export function useRetire() {
         }
 
         for (const skill of SKILL_TYPES) {
-          reset(isSkillAcquired(skill));
+          if (!SKILLS[skill].isInheritable) {
+            reset(isSkillAcquired(skill));
+          }
         }
 
         set(inventory, (currentInventory) =>
           currentInventory.filter((currentItem) => isInheritableItem(currentItem)),
         );
 
-        if (get(ownedItem("journal")) !== undefined) {
-          set(hasDecipheredJournal, true);
-
+        if (get(isSkillAcquired("memetics"))) {
           progressQuest({ quest: "decipheringJournal" });
         }
 
@@ -121,6 +124,6 @@ export function useRetire() {
         resetWilderness();
         initialize(true);
       },
-    [initialize, progressQuest, resetAttributes, resetWilderness],
+    [acquireSkill, initialize, progressQuest, resetAttributes, resetWilderness],
   );
 }

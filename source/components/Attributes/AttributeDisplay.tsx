@@ -19,7 +19,7 @@ import { capitalizeAll } from "@neverquest/utilities/formatters";
 export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
   const areAttributesAffordableValue = useRecoilValue(areAttributesAffordable);
   const isAttributeAtMaximumValue = useRecoilValue(isAttributeAtMaximum(attribute));
-  const isSkillAcquiredValue = useRecoilValue(
+  const isSkillAcquiredRequiredSkill = useRecoilValue(
     isSkillAcquired(ATTRIBUTES[attribute].requiredSkill ?? "none"),
   );
 
@@ -28,7 +28,7 @@ export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
   const { description, Icon } = ATTRIBUTES[attribute];
   const name = capitalizeAll(attribute);
 
-  if (isSkillAcquiredValue) {
+  if (isSkillAcquiredRequiredSkill) {
     return (
       <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
         <IconDisplay description={description} Icon={Icon} tooltip="Attribute">

@@ -8,7 +8,6 @@ import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence
 import IconLoot from "@neverquest/icons/loot.svg?react";
 import { isAttacking, isGameOver, isLooting } from "@neverquest/state/character";
 import { isStageCompleted, location, progressMaximum } from "@neverquest/state/encounter";
-import { isShowing } from "@neverquest/state/isShowing";
 import { essenceLoot, hasLooted, isLootAvailable, itemsLoot } from "@neverquest/state/resources";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
@@ -24,7 +23,6 @@ export function CollectLoot() {
   const progressMaximumValue = useRecoilValue(progressMaximum);
   const resetEssenceLoot = useResetRecoilState(essenceLoot);
   const setHasLooted = useSetRecoilState(hasLooted);
-  const setIsShowingCapabilities = useSetRecoilState(isShowing("capabilities"));
 
   const acquireItem = useAcquireItem();
   const progressQuest = useProgressQuest();
@@ -47,8 +45,6 @@ export function CollectLoot() {
             disabled={isAttackingValue || isLootingValue || isGameOverValue}
             onClick={() => {
               transactEssence(essenceLootValue);
-
-              setIsShowingCapabilities(true);
 
               if (itemsLootValue.length > 0) {
                 const acquiredItemIDs = new Set(

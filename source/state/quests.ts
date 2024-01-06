@@ -1,5 +1,6 @@
 import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
+import { isSkillAcquired } from "./skills";
 import {
   QUESTS,
   QUEST_COMPLETION_BONUS,
@@ -65,7 +66,10 @@ export const canCompleteQuests = withStateKey("canCompleteQuests", (key) =>
 
 export const canTrackQuests = withStateKey("canTrackQuests", (key) =>
   selector({
-    get: ({ get }) => get(hasDecipheredJournal) && get(ownedItem("journal")) !== undefined,
+    get: ({ get }) =>
+      get(isSkillAcquired("memetics")) &&
+      get(ownedItem("journal")) !== undefined &&
+      get(questStatuses("decipheringJournal"))[0] !== "incomplete",
     key,
   }),
 );
@@ -94,7 +98,7 @@ export const questsBonus = withStateKey("questsBonus", (key) =>
     get:
       (questBonus: QuestBonus) =>
       ({ get }) =>
-        get(canTrackQuests)
+        get(isSkillAcquired("memetics"))
           ? QUEST_TYPES.reduce(
               (sum, quest) =>
                 sum +
@@ -108,14 +112,6 @@ export const questsBonus = withStateKey("questsBonus", (key) =>
 );
 
 // ATOMS
-
-export const hasDecipheredJournal = withStateKey("hasDecipheredJournal", (key) =>
-  atom<boolean>({
-    default: false,
-    effects: [handleLocalStorage({ key })],
-    key,
-  }),
-);
 
 export const questNotifications = withStateKey("questNotifications", (key) =>
   atom<QuestNotification[]>({

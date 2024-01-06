@@ -38,7 +38,7 @@ import {
 export function WeaponOptions() {
   const [{ weapon: craftedWeapon }, setBlacksmithInventory] = useRecoilState(blacksmithInventory);
   const allowProfanityValue = useRecoilValue(allowProfanity);
-  const siegecraftValue = useRecoilValue(isSkillAcquired("siegecraft"));
+  const isSkillAcquiredSiegecraft = useRecoilValue(isSkillAcquired("siegecraft"));
   const stageMaximumValue = useRecoilValue(stageMaximum);
 
   const [weaponClass, setWeaponClass] = useState<WeaponClass>("blunt");
@@ -47,7 +47,7 @@ export function WeaponOptions() {
 
   const { ability, IconAbility, IconGearClass } = WEAPON_SPECIFICATIONS[weaponClass];
 
-  const skillValue = useRecoilValue(isSkillAcquired(WEAPON_ABILITY_SKILLS[ability]));
+  const isSkillAcquiredAbility = useRecoilValue(isSkillAcquired(WEAPON_ABILITY_SKILLS[ability]));
 
   const factor = getSigmoid(weaponLevel);
   const { abilityChance, burden, damage, rate, weight } = getMeleeRanges({
@@ -77,7 +77,7 @@ export function WeaponOptions() {
           </FormSelect>
         </IconDisplay>
 
-        {siegecraftValue && (
+        {isSkillAcquiredSiegecraft && (
           <IconDisplay Icon={IconGrip} iconProps={{ overlayPlacement: "left" }} tooltip="Grip">
             <FormSelect
               onChange={({ target: { value } }) => {
@@ -118,11 +118,11 @@ export function WeaponOptions() {
         </IconDisplay>
 
         <IconDisplay
-          Icon={skillValue ? IconAbility : IconUnknown}
+          Icon={isSkillAcquiredAbility ? IconAbility : IconUnknown}
           iconProps={{ overlayPlacement: "left" }}
-          tooltip={skillValue ? `${capitalizeAll(ability)} chance` : LABEL_UNKNOWN}
+          tooltip={isSkillAcquiredAbility ? `${capitalizeAll(ability)} chance` : LABEL_UNKNOWN}
         >
-          {skillValue
+          {isSkillAcquiredAbility
             ? `${formatNumber({
                 format: "percentage",
                 value: abilityChance.minimum,

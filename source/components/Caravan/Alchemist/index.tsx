@@ -1,7 +1,7 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { LearnOvumInfusion } from "@neverquest/components/Caravan/Alchemist/LearnOvumInfusion";
+import { LearnTechniques } from "@neverquest/components/Caravan/Alchemist/LearnTechniques";
 import { TransmuteGems } from "@neverquest/components/Caravan/Alchemist/TransmuteGems";
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
 import { LABEL_NONE_AVAILABLE } from "@neverquest/data/general";
@@ -21,7 +21,7 @@ export function Alchemist() {
   return (
     <Stack gap={5}>
       <Stack gap={3}>
-        <h6>Inventory</h6>
+        <h6>Stored gems</h6>
 
         {storedGemsStack.length === 0 ? (
           <span className="fst-italic">{LABEL_NONE_AVAILABLE}</span>
@@ -38,7 +38,7 @@ export function Alchemist() {
         <TransmuteGems />
       </Stack>
 
-      <LearnOvumInfusion />
+      <LearnTechniques />
     </Stack>
   );
 }

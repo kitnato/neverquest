@@ -13,7 +13,7 @@ import IconTailoring from "@neverquest/icons/tailoring.svg?react";
 import { knapsackCapacity } from "@neverquest/state/inventory";
 import { essence } from "@neverquest/state/resources";
 import { formatNumber } from "@neverquest/utilities/formatters";
-import { getSigmoid } from "@neverquest/utilities/getters";
+import { getFromRange, getSigmoid } from "@neverquest/utilities/getters";
 
 export function ExpandKnapsack() {
   const [knapsackCapacityValue, setKnapsackCapacity] = useRecoilState(knapsackCapacity);
@@ -22,12 +22,12 @@ export function ExpandKnapsack() {
   const progressQuest = useProgressQuest();
   const transactEssence = useTransactEssence();
 
-  const { amount, priceMaximum } = TAILORING.knapsack;
+  const { amount, priceRange } = TAILORING.knapsack;
 
-  const price = Math.ceil(
-    priceMaximum *
-      getSigmoid(Math.ceil((knapsackCapacityValue - (KNAPSACK_CAPACITY - 1)) / amount)),
-  );
+  const price = getFromRange({
+    factor: getSigmoid((knapsackCapacityValue - (KNAPSACK_CAPACITY - 1)) / amount),
+    ...priceRange,
+  });
   const isAffordable = price <= essenceValue;
 
   return (

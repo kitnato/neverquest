@@ -16,7 +16,7 @@ import {
   healthMaximumPoisoned,
   isBlighted,
   isPoisoned,
-  poisonDuration,
+  poison,
   regenerationDuration,
   stamina,
   staminaMaximum,
@@ -29,7 +29,7 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
   const isHealth = reserve === "health";
   const reserveMaximum = isHealth ? healthMaximum : staminaMaximum;
 
-  const ailmentValue = useRecoilValue(isHealth ? poisonDuration : blightMagnitude);
+  const ailmentValue = useRecoilValue(isHealth ? poison : blightMagnitude);
   const isAiling = useRecoilValue(isHealth ? isPoisoned : isBlighted);
   const reserveValue = useRecoilValue(isHealth ? health : stamina);
   const reserveMaximumValue = useRecoilValue(reserveMaximum);

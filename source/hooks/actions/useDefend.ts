@@ -45,6 +45,7 @@ import {
 import { isTraitAcquired } from "@neverquest/state/traits";
 import type { DeltaDisplay } from "@neverquest/types/ui";
 import { ELEMENTAL_TYPES } from "@neverquest/types/unions";
+import { formatNumber } from "@neverquest/utilities/formatters";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 import { animateElement } from "@neverquest/utilities/helpers";
 
@@ -160,7 +161,7 @@ export function useDefend() {
                 },
                 {
                   color: "text-danger",
-                  value: `-${parryReflected}`,
+                  value: `-${formatNumber({ value: parryReflected })}`,
                 },
               );
 
@@ -171,7 +172,7 @@ export function useDefend() {
                 },
                 {
                   color: "text-danger",
-                  value: -healthDamage,
+                  value: `-${formatNumber({ value: healthDamage })}`,
                 },
               );
             } else {
@@ -239,14 +240,16 @@ export function useDefend() {
           if (!hasBlocked && !hasParried) {
             deltaHealth.push({
               color: "text-danger",
-              value: -healthDamage,
+              value: `-${formatNumber({ value: healthDamage })}`,
             });
 
             if (protectionValue > 0) {
               deltaHealth.push({
                 color: "text-muted",
                 // In the case of 0 health damage, show only inflicted.
-                value: `(${Math.min(protectionValue, monsterDamageAilingValue)})`,
+                value: `(${formatNumber({
+                  value: Math.min(protectionValue, monsterDamageAilingValue),
+                })}`,
               });
             }
 
@@ -313,7 +316,7 @@ export function useDefend() {
               },
               {
                 color: "text-danger",
-                value: -thornsValue,
+                value: `-${formatNumber({ value: thornsValue })}`,
               },
             );
           }

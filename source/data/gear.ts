@@ -37,17 +37,17 @@ export const ARMOR_SPECIFICATIONS: Record<
   heavy: {
     burden: [
       { maximum: 9, minimum: 6 },
-      { maximum: 45, minimum: 40 },
+      { maximum: 55, minimum: 50 },
     ],
     deflection: [
-      { maximum: 0.25, minimum: 0.2 },
-      { maximum: 0.65, minimum: 0.6 },
+      { maximum: 0.3, minimum: 0.28 },
+      { maximum: 0.7, minimum: 0.66 },
     ],
     Icon: IconArmorHeavy,
-    price: { maximum: 10_000, minimum: 50 },
+    price: { maximum: 12_000, minimum: 50 },
     protection: [
       { maximum: 10, minimum: 8 },
-      { maximum: 900, minimum: 850 },
+      { maximum: 3500, minimum: 3000 },
     ],
     weight: [
       { maximum: 7, minimum: 5 },
@@ -57,13 +57,13 @@ export const ARMOR_SPECIFICATIONS: Record<
   light: {
     burden: [
       { maximum: 2, minimum: 1 },
-      { maximum: 20, minimum: 15 },
+      { maximum: 25, minimum: 20 },
     ],
     Icon: IconArmorLight,
-    price: { maximum: 4000, minimum: 1 },
+    price: { maximum: 5000, minimum: 1 },
     protection: [
       { maximum: 2, minimum: 1 },
-      { maximum: 450, minimum: 400 },
+      { maximum: 1500, minimum: 1400 },
     ],
     weight: [
       { maximum: 2, minimum: 1 },
@@ -73,17 +73,17 @@ export const ARMOR_SPECIFICATIONS: Record<
   reinforced: {
     burden: [
       { maximum: 5, minimum: 3 },
-      { maximum: 30, minimum: 35 },
+      { maximum: 40, minimum: 35 },
     ],
     deflection: [
       { maximum: 0.15, minimum: 0.1 },
-      { maximum: 0.35, minimum: 0.3 },
+      { maximum: 0.35, minimum: 0.31 },
     ],
     Icon: IconReinforced,
-    price: { maximum: 7500, minimum: 25 },
+    price: { maximum: 8000, minimum: 25 },
     protection: [
       { maximum: 6, minimum: 4 },
-      { maximum: 650, minimum: 600 },
+      { maximum: 2500, minimum: 2200 },
     ],
     weight: [
       { maximum: 5, minimum: 3 },
@@ -114,7 +114,7 @@ export const SHIELD_SPECIFICATIONS: Record<
 > = {
   medium: {
     block: [
-      { maximum: 0.16, minimum: 0.15 },
+      { maximum: 0.13, minimum: 0.12 },
       { maximum: 0.3, minimum: 0.28 },
     ],
     burden: [
@@ -125,7 +125,7 @@ export const SHIELD_SPECIFICATIONS: Record<
     price: { maximum: 4000, minimum: 4 },
     stagger: [
       { maximum: 0.45, minimum: 0.4 },
-      { maximum: 0.55, minimum: 0.53 },
+      { maximum: 0.5, minimum: 0.5 },
     ],
     weight: [
       { maximum: 5, minimum: 3 },
@@ -134,8 +134,8 @@ export const SHIELD_SPECIFICATIONS: Record<
   },
   small: {
     block: [
-      { maximum: 0.11, minimum: 0.1 },
-      { maximum: 0.2, minimum: 0.18 },
+      { maximum: 0.1, minimum: 0.09 },
+      { maximum: 0.22, minimum: 0.19 },
     ],
     burden: [
       { maximum: 2, minimum: 1 },
@@ -151,11 +151,11 @@ export const SHIELD_SPECIFICATIONS: Record<
   tower: {
     block: [
       { maximum: 0.3, minimum: 0.29 },
-      { maximum: 0.5, minimum: 0.48 },
+      { maximum: 0.55, minimum: 0.5 },
     ],
     burden: [
       { maximum: 7, minimum: 6 },
-      { maximum: 35, minimum: 30 },
+      { maximum: 40, minimum: 35 },
     ],
     Icon: IconShieldTower,
     price: { maximum: 5500, minimum: 7 },
@@ -182,20 +182,20 @@ export const WEAPON_BASE: GearRangeBase & {
   ],
   burden: [
     { maximum: 2, minimum: 1 },
-    { maximum: 45, minimum: 40 },
+    { maximum: 35, minimum: 30 },
   ],
   damage: [
     { maximum: 15, minimum: 13 },
-    { maximum: 900, minimum: 850 },
+    { maximum: 1700, minimum: 1500 },
   ],
-  price: { maximum: 7000, minimum: 1 },
+  price: { maximum: 10_000, minimum: 1 },
   range: [
     { maximum: 2000, minimum: 1500 },
     { maximum: 4000, minimum: 3500 },
   ],
   rate: [
     { maximum: 3100, minimum: 2900 },
-    { maximum: 1800, minimum: 1500 },
+    { maximum: 1800, minimum: 1700 },
   ],
   weight: [
     { maximum: 2, minimum: 1 },
@@ -205,12 +205,12 @@ export const WEAPON_BASE: GearRangeBase & {
 
 export const WEAPON_MODIFIER = {
   "one-handed": { ability: 1, burden: 1, damage: 1, price: 1, rate: 1, weight: 1 },
-  ranged: { ability: 1, burden: 1.05, damage: 0.8, price: 1.1, rate: 1.3, weight: 1.15 },
+  ranged: { ability: 1, burden: 1.05, damage: 0.8, price: 1.2, rate: 1.3, weight: 1.15 },
   "two-handed": {
     ability: 1.1,
     burden: 1.15,
     damage: 1.25,
-    price: 1.2,
+    price: 1.3,
     rate: 1.2,
     weight: 1.2,
   },

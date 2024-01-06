@@ -54,21 +54,21 @@ export const MONSTER_ATTACK_RATE = {
   base: 4100,
   bonus: 0.01,
   boss: 1.1,
-  finality: 1777,
+  finality: 1765,
   minimum: 1800,
 };
 
 export const MONSTER_DAMAGE = {
-  attenuation: 35,
-  base: 7,
+  attenuation: 5.5,
+  base: 5,
   bonus: 0.01,
   boss: 1.15,
-  finality: 1777,
+  finality: 3737,
 };
 
 export const MONSTER_HEALTH = {
   attenuation: 20,
-  base: 17,
+  base: 15,
   bonus: 0.01,
   boss: 1.8,
   finality: 17_777,

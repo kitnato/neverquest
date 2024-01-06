@@ -4,7 +4,6 @@ import type {
   ConsumableItem,
   GearItem,
   GemItem,
-  GeneratorRange,
   InfusableItem,
   InheritableItem,
   Melee,
@@ -56,14 +55,6 @@ export function isGemItem(thing: unknown): thing is GemItem {
   return (
     isObject(thing) && typeof thing.name === "string" && new Set<string>(GEM_TYPES).has(thing.name)
   );
-}
-
-export function isGeneratorRange(thing: unknown): thing is GeneratorRange {
-  return isObject(thing) && typeof thing.minimum === "number" && typeof thing.maximum === "number";
-}
-
-export function isGeneratorRanges(thing: unknown): thing is [GeneratorRange, GeneratorRange] {
-  return Array.isArray(thing) && isGeneratorRange(thing[0]) && isGeneratorRange(thing[1]);
 }
 
 export function isInfusableItem(thing: unknown): thing is InfusableItem {

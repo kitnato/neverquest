@@ -9,7 +9,6 @@ import { nanoid } from "nanoid";
 
 import { ARMOR_SPECIFICATIONS, SHIELD_SPECIFICATIONS, WEAPON_BASE } from "@neverquest/data/gear";
 import type { Armor, Melee, Ranged, Shield } from "@neverquest/types";
-import { isGeneratorRange } from "@neverquest/types/type-guards";
 import type { Grip } from "@neverquest/types/unions";
 import {
   getArmorRanges,
@@ -35,7 +34,7 @@ export function generateArmor({
   });
 
   return {
-    burden: isGeneratorRange(burden) ? Math.round(getFromRange(burden)) : burden,
+    burden: getFromRange(burden),
     deflection: deflection === undefined ? 0 : getFromRange(deflection),
     gearClass,
     ID: nanoid(),
@@ -166,7 +165,7 @@ export function generateShield({
         ...SHIELD_SPECIFICATIONS[gearClass].price,
       }),
     ),
-    stagger: stagger === undefined ? 0 : Math.round(getFromRange(stagger)),
+    stagger: stagger === undefined ? 0 : getFromRange(stagger),
     weight: Math.round(getFromRange(weight)),
   };
 }

@@ -201,7 +201,7 @@ export const INFUSABLES: Record<
       description: "Boosts all attribute effects based on power level.",
       effect: {
         maximum: 1.5,
-        minimum: 0.05,
+        minimum: 0,
       },
       name: "tome of power",
       price: 2500,

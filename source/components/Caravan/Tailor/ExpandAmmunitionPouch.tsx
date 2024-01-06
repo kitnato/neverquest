@@ -12,7 +12,7 @@ import IconTailoring from "@neverquest/icons/tailoring.svg?react";
 import { ammunitionCapacity } from "@neverquest/state/items";
 import { essence } from "@neverquest/state/resources";
 import { formatNumber } from "@neverquest/utilities/formatters";
-import { getSigmoid } from "@neverquest/utilities/getters";
+import { getFromRange, getSigmoid } from "@neverquest/utilities/getters";
 
 export function ExpandAmmunitionPouch() {
   const [ammunitionCapacityValue, setAmmunitionCapacity] = useRecoilState(ammunitionCapacity);
@@ -20,11 +20,11 @@ export function ExpandAmmunitionPouch() {
 
   const transactEssence = useTransactEssence();
 
-  const { amount, priceMaximum } = TAILORING["ammunition pouch"];
-  const price = Math.ceil(
-    priceMaximum *
-      getSigmoid(Math.ceil(ammunitionCapacityValue - (AMMUNITION_CAPACITY - amount)) / amount),
-  );
+  const { amount, priceRange } = TAILORING["ammunition pouch"];
+  const price = getFromRange({
+    factor: getSigmoid(ammunitionCapacityValue - (AMMUNITION_CAPACITY - amount) / amount),
+    ...priceRange,
+  });
   const isAffordable = price <= essenceValue;
 
   return (

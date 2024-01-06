@@ -60,7 +60,7 @@ export const isInfusionAtMaximum = withStateKey("isInfusionAtMaximum", (key) =>
     get:
       (infusable: Infusable) =>
       ({ get }) =>
-        get(infusionMaximum(infusable)) >= LEVELLING_MAXIMUM,
+        get(infusionLevel(infusable)) >= LEVELLING_MAXIMUM,
     key,
   }),
 );

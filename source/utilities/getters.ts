@@ -52,7 +52,6 @@ import {
   isArmor,
   isConquest,
   isGearItem,
-  isGeneratorRanges,
   isRoutine,
   isWeapon,
 } from "@neverquest/types/type-guards";
@@ -86,9 +85,7 @@ export function getArmorRanges({ factor, gearClass }: { factor: number; gearClas
   const { burden, deflection, protection, weight } = ARMOR_SPECIFICATIONS[gearClass];
 
   return {
-    burden: isGeneratorRanges(burden)
-      ? getRange({ factor, isRounded: true, ranges: burden })
-      : burden,
+    burden: getRange({ factor, isRounded: true, ranges: burden }),
     deflection: deflection === undefined ? undefined : getRange({ factor, ranges: deflection }),
     protection: getRange({ factor, isRounded: true, ranges: protection }),
     weight: getRange({ factor, isRounded: true, ranges: weight }),
@@ -378,7 +375,7 @@ export function getShieldRanges({ factor, gearClass }: { factor: number; gearCla
 // https://en.wikipedia.org/wiki/Sigmoid_function
 // f(0-1) = ~0, f(38) = ~0.43, f(50) = ~0.78, f(GROWTH_MAXIMUM) = ~1
 export function getSigmoid(x: number) {
-  return 1 / (1 + Math.pow(Math.E, -0.15 * (x - 45)) - 0.009);
+  return 1 / (1 + Math.pow(Math.E, -0.15 * (x - 45)) - 0.011) - 0.0012;
 }
 
 export function getSnapshotGetter({ getLoadable }: Snapshot) {

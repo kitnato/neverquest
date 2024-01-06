@@ -5,6 +5,7 @@ import { WeaponName } from "@neverquest/components/Inventory/Weapon/WeaponName";
 import IconUnequipped from "@neverquest/icons/fist.svg?react";
 import IconOneHanded from "@neverquest/icons/one-handed.svg?react";
 import IconRanged from "@neverquest/icons/ranged.svg?react";
+import IconTwoHanded from "@neverquest/icons/two-handed.svg?react";
 import { weapon } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isMelee, isUnarmed } from "@neverquest/types/type-guards";
@@ -20,7 +21,15 @@ export function WeaponEquipped() {
     return (
       <IconDisplay
         className={getAnimationClass({ animation: "flipInX" })}
-        Icon={isWeaponUnarmed ? IconUnequipped : isMelee(weaponValue) ? IconOneHanded : IconRanged}
+        Icon={
+          isWeaponUnarmed
+            ? IconUnequipped
+            : isMelee(weaponValue)
+              ? weaponValue.grip === "one-handed"
+                ? IconOneHanded
+                : IconTwoHanded
+              : IconRanged
+        }
         iconProps={{ isMirrored: isWeaponUnarmed }}
         tooltip="Equipped weapon"
       >

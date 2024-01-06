@@ -125,8 +125,7 @@ svg {
 
 .popover,
 .tooltip {
-  // Workaround for https://github.com/react-bootstrap/react-bootstrap/issues/6563;
-  position: fixed;
+  position: fixed; // Workaround for https://github.com/react-bootstrap/react-bootstrap/issues/6563
 
   // Tooltip doesn't have a box-shadow variable, and $popover-box-shadow doesn't control this way.
   &.show,

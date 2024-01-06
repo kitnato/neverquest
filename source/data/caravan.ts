@@ -268,8 +268,8 @@ export const MERCHANT_OFFERS: Record<
 };
 
 export const TAILORING = {
-  "ammunition pouch": { amount: 20, priceMaximum: 500 },
-  knapsack: { amount: 3, priceMaximum: 350 },
+  "ammunition pouch": { amount: 20, priceRange: { maximum: 300, minimum: 5 } },
+  knapsack: { amount: 3, priceRange: { maximum: 250, minimum: 3 } },
 };
 
 export const TRANSMUTATION = {

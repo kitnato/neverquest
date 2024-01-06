@@ -18,7 +18,7 @@ export function GameOver() {
   };
 
   return (
-    <Modal onHide={onHide} show={isGameOverValue && isShowingGameOver}>
+    <Modal backdrop="static" onHide={onHide} show={isGameOverValue && isShowingGameOver}>
       <ModalHeader closeButton>
         <ModalTitle>
           <IconDisplay Icon={IconDead}>

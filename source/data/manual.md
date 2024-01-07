@@ -1,6 +1,6 @@
 # Neverquest
 
-_An irreverent UI-based incremental action RPG._
+_An irreverent UI-based incremental Souls-like._
 
 > This manual contains content spoilers. It is best used to reference an aspect of the game as needed.
 
@@ -470,7 +470,19 @@ In addition to potentially providing a [static](#static-trinkets) effect, these 
 
 ##### Infusable trinkets
 
-Some of usable trinkets are infusable, meaning they allow [essence](#essence) to be spent on them to upgrade their effect.
+Some of usable trinkets are infusable, meaning they allow [essence](#essence) to be spent on them to upgrade their effect via infusion levels.
+
+###### Tome of Power
+
+This infusable trinket, while carried in the [knapsack](#knapsack), provides a bonus to all attributes by their respective percentage amount (each extent of which is shown when increasing [attributes](#attributes)) multiplied by your current power level.
+
+For example, if you are carrying a level 0 Tome of Power, your power level is 25, the attribute in question is at rank 5, a given attribute rank would increase a given statistic by 10, and the boosted percentage is 1%, the statistic value is calculated as follows:
+
+> 5 attribute ranks × 10 + 25 power levels × 1% bonus per rank = 62.5 (50 if no Tome was owned)
+
+Additionally, each infusion level boosts this bonus percentage. In case the Tome is infused to grant a bonus boost of +5%, the calculation would be as follows:
+
+> 5 × 10 + 25 × 1.05% = 63.125
 
 ### Consumables
 

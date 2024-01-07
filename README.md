@@ -38,20 +38,13 @@ The linter config can be viewed in `.eslintrc.json`, `.stylelintrc.json` and `.p
 
 ## Implementation
 
-- Written in [TypeScript](https://www.typescriptlang.org).
-
 - Icons and art assets are provided under [CC BY 3.0](https://creativecommons.org/licenses/by/3.0) by the talented [authors](https://game-icons.net/about.html#authors) of [game-icons.net](https://game-icons.net).
-
+- Written in [TypeScript](https://www.typescriptlang.org) using [React](https://react.dev/).
 - UI framework is [Bootstrap](https://react-bootstrap.github.io).
-
 - State management library is [Recoil](https://recoiljs.org).
-
 - Animation library is [Animate.css](https://animate.style).
-
 - Runs on [Vite](https://vitejs.dev).
-
 - Code style & linting is provided by [eslint](https://eslint.org), [stylelint](https://stylelint.io) and [prettier](https://prettier.io), using [@kitnato/eslint-config-succinct](https://github.com/kitnato/eslint-config-succinct).
-
 - Automation is provided by [husky](https://typicode.github.io/husky) and [lint-staged](https://www.npmjs.com/package/lint-staged).
 
 ## License
@@ -72,7 +65,7 @@ This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareA
 - High character build variety
 - Manage an economy of resources and character builds with trade-offs
 
-### 2. [Warren Spector's 6+2+1 questions](https://www.gamedeveloper.com/design/warren-spector-traces-i-deus-ex-i-s-development-back-to-a-game-of-d-d)
+### 2. Warren Spector's 6+2+1 [questions](https://www.gamedeveloper.com/design/warren-spector-traces-i-deus-ex-i-s-development-back-to-a-game-of-d-d)
 
 1. What's the core idea? Can you describe the core of the game in 2-3 sentences?
    - An incremental action role-playing game, focusing on active player engagement, which can be played in any browser on any system. Exploring and fighting through the hostile world yields its secrets, with the only respite being a gradually growing repertoire of goods and services that enhance, expand and upgrade gameplay.

@@ -87,6 +87,7 @@ export function BleedRating() {
                             })}
                             &nbsp;over&nbsp;
                             {formatNumber({
+                              decimals: 0,
                               format: "time",
                               value: duration,
                             })}

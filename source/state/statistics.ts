@@ -57,7 +57,7 @@ export const bleedDamage = withStateKey("bleedDamage", (key) =>
 
 export const bleedRating = withStateKey("bleedRating", (key) =>
   selector({
-    get: ({ get }) => Math.round(get(bleedDamage) * get(bleedChance) * PERCENTAGE_POINTS),
+    get: ({ get }) => Math.round(get(bleedDamage) * get(bleedChance) * PERCENTAGE_POINTS * 10),
     key,
   }),
 );
@@ -266,8 +266,7 @@ export const range = withStateKey("range", (key) =>
 
 export const staggerRating = withStateKey("staggerRating", (key) =>
   selector({
-    get: ({ get }) =>
-      Math.round(get(staggerChance) * get(masteryStatistic("stability")) * PERCENTAGE_POINTS),
+    get: ({ get }) => Math.round(get(staggerChance) * get(masteryStatistic("stability"))),
     key,
   }),
 );

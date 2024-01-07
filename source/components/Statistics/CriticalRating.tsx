@@ -13,7 +13,7 @@ import IconDexterity from "@neverquest/icons/dexterity.svg?react";
 import IconPerception from "@neverquest/icons/perception.svg?react";
 import IconTomeOfPower from "@neverquest/icons/tome-of-power.svg?react";
 import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
-import { criticalRating, criticalStrike } from "@neverquest/state/statistics";
+import { criticalChance, criticalRating, criticalStrike } from "@neverquest/state/statistics";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
@@ -22,6 +22,7 @@ export function CriticalRating() {
   const attributePowerBonusPerception = useRecoilValue(attributePowerBonus("perception"));
   const attributeStatisticDexterity = useRecoilValue(attributeStatistic("dexterity"));
   const attributeStatisticPerception = useRecoilValue(attributeStatistic("perception"));
+  const criticalChanceValue = useRecoilValue(criticalChance);
   const criticalRatingValue = useRecoilValue(criticalRating);
   const criticalStrikeValue = useRecoilValue(criticalStrike);
 
@@ -114,13 +115,22 @@ export function CriticalRating() {
 
                     <tr>
                       <td>
-                        <span>Critical strike damage:</span>
+                        <span>Critical strike:</span>
                       </td>
 
                       <td>
-                        <IconDisplay Icon={IconDamage} iconProps={{ className: "small" }}>
-                          <span>{formatNumber({ value: criticalStrikeValue })}</span>
-                        </IconDisplay>
+                        <Stack direction="horizontal" gap={1}>
+                          {criticalChanceValue !== attributeStatisticDexterity && (
+                            <span>
+                              {formatNumber({ format: "percentage", value: criticalChanceValue })}
+                              &nbsp;chance for&nbsp;
+                            </span>
+                          )}
+
+                          <IconDisplay Icon={IconDamage} iconProps={{ className: "small" }}>
+                            <span>{formatNumber({ value: criticalStrikeValue })}</span>
+                          </IconDisplay>
+                        </Stack>
                       </td>
                     </tr>
                   </DetailsTable>

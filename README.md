@@ -2,7 +2,7 @@
 
 _An irreverent UI-based incremental Souls-like._
 
-`[SCREENSHOT]`
+![neverquest screenshot](/public/screenshot.png?raw=true)
 
 **For a full breakdown of gameplay, please consult the [manual](./source/data/manual.md).**
 

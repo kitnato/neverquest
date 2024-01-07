@@ -1,4 +1,4 @@
-# Neverquest
+# neverquest
 
 _An irreverent UI-based incremental Souls-like._
 
@@ -790,7 +790,7 @@ Once toggled, all elements of the UI will be shown at once instead of being unlo
 
 ## Roadmap
 
-Neverquest is a work-in-progress. Several features are pending ideation, refinement and implementation.
+neverquest is a work-in-progress. Several features are pending ideation, refinement and implementation.
 
 ### Activated skills
 

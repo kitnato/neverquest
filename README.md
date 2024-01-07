@@ -1,4 +1,4 @@
-# Neverquest
+# neverquest
 
 _An irreverent UI-based incremental Souls-like._
 

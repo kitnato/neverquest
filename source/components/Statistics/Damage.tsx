@@ -7,7 +7,7 @@ import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { DamagePerSecond } from "@neverquest/components/Statistics/DamagePerSecond";
 import { ElementalDetails } from "@neverquest/components/Statistics/ElementalDetails";
-import { LABEL_SEPARATOR } from "@neverquest/data/general";
+import { LABEL_SEPARATOR, POPOVER_TRIGGER } from "@neverquest/data/general";
 import { BRAWLER_DAMAGE_BONUS } from "@neverquest/data/traits";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
@@ -188,7 +188,7 @@ export function Damage() {
                 </PopoverBody>
               </Popover>
             }
-            trigger={burden > 0 || damageValue !== weaponDamage ? ["focus", "hover"] : []}
+            trigger={burden > 0 || damageValue !== weaponDamage ? POPOVER_TRIGGER : []}
           >
             <span>{formatNumber({ value: damageValue })}</span>
           </OverlayTrigger>

@@ -2,7 +2,7 @@ import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { LABEL_NO_ESSENCE } from "@neverquest/data/general";
+import { LABEL_NO_ESSENCE, POPOVER_TRIGGER } from "@neverquest/data/general";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import IconEssence from "@neverquest/icons/essence.svg?react";
 import { essence } from "@neverquest/state/resources";
@@ -23,7 +23,7 @@ export function CraftGear({ onCraft, price }: { onCraft: () => void; price: numb
 
       <OverlayTrigger
         overlay={<Tooltip>{LABEL_NO_ESSENCE}</Tooltip>}
-        trigger={isAffordable ? [] : ["focus", "hover"]}
+        trigger={isAffordable ? [] : POPOVER_TRIGGER}
       >
         <div>
           <Button

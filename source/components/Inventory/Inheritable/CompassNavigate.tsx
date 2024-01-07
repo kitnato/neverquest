@@ -12,7 +12,7 @@ import {
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { LABEL_SEPARATOR } from "@neverquest/data/general";
+import { LABEL_SEPARATOR, POPOVER_TRIGGER } from "@neverquest/data/general";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness";
 import IconCompass from "@neverquest/icons/compass.svg?react";
@@ -38,7 +38,7 @@ export function CompassNavigate() {
     <>
       <OverlayTrigger
         overlay={<Tooltip>The needle is spinning.</Tooltip>}
-        trigger={canNavigate ? [] : ["focus", "hover"]}
+        trigger={canNavigate ? [] : POPOVER_TRIGGER}
       >
         <div>
           <Button

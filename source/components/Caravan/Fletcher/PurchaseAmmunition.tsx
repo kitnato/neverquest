@@ -18,6 +18,7 @@ import {
   CLASS_FULL_WIDTH_JUSTIFIED,
   LABEL_MAXIMUM,
   LABEL_NO_ESSENCE,
+  POPOVER_TRIGGER,
 } from "@neverquest/data/general";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import IconAmmunition from "@neverquest/icons/ammunition.svg?react";
@@ -60,7 +61,7 @@ export function PurchaseAmmunition() {
                   {isFull && <div>Ammunition pouch is full.</div>}
                 </Tooltip>
               }
-              trigger={canPurchase ? [] : ["focus", "hover"]}
+              trigger={canPurchase ? [] : POPOVER_TRIGGER}
             >
               <div>
                 <Dropdown as={ButtonGroup}>

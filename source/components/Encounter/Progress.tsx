@@ -3,6 +3,7 @@ import { useRecoilValue } from "recoil";
 
 import { ProgressMeter } from "@neverquest/components/Encounter/ProgressMeter";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { POPOVER_TRIGGER } from "@neverquest/data/general";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconProgressReduction from "@neverquest/icons/progress-reduction.svg?react";
 import IconProgress from "@neverquest/icons/progress.svg?react";
@@ -50,7 +51,7 @@ export function Progress() {
             </Popover>
           }
           placement="bottom"
-          trigger={progressReductionValue > 0 ? ["focus", "hover"] : []}
+          trigger={progressReductionValue > 0 ? POPOVER_TRIGGER : []}
         >
           <div className="w-100">
             <ProgressMeter />

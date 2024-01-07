@@ -1,6 +1,7 @@
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
 
+import { POPOVER_TRIGGER } from "@neverquest/data/general";
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { inventory } from "@neverquest/state/inventory";
@@ -17,7 +18,7 @@ export function Salve({ ID }: { ID: string }) {
   return (
     <OverlayTrigger
       overlay={<Tooltip>Not blighted.</Tooltip>}
-      trigger={isBlightedValue ? [] : ["focus", "hover"]}
+      trigger={isBlightedValue ? [] : POPOVER_TRIGGER}
     >
       <div>
         <Button

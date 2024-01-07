@@ -1,5 +1,6 @@
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
+import { POPOVER_TRIGGER } from "@neverquest/data/general";
 import type { IconImageProperties } from "@neverquest/types/components";
 
 export function IconImage({
@@ -15,7 +16,7 @@ export function IconImage({
     <OverlayTrigger
       overlay={<Tooltip>{tooltip}</Tooltip>}
       placement={overlayPlacement}
-      trigger={tooltip === undefined ? [] : ["focus", "hover"]}
+      trigger={tooltip === undefined ? [] : POPOVER_TRIGGER}
     >
       <div className="align-bottom d-inline-flex" onClick={onClick}>
         <Icon

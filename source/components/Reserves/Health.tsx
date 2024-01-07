@@ -6,7 +6,7 @@ import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { Regeneration } from "@neverquest/components/Reserves/Regeneration";
 import { ReserveMeter } from "@neverquest/components/Reserves/ReserveMeter";
-import { LABEL_SEPARATOR } from "@neverquest/data/general";
+import { LABEL_SEPARATOR, POPOVER_TRIGGER } from "@neverquest/data/general";
 import { RESERVES } from "@neverquest/data/reserves";
 import { useTimerDelta } from "@neverquest/hooks/useTimerDelta";
 import IconHealth from "@neverquest/icons/health.svg?react";
@@ -129,7 +129,7 @@ export function Health() {
               placement="right"
               trigger={
                 attributePowerBonusVitality > 0 || questsBonusHealth > 0 || vitalityBonus > 0
-                  ? ["focus", "hover"]
+                  ? POPOVER_TRIGGER
                   : []
               }
             >

@@ -1,7 +1,7 @@
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { LABEL_NO_ESSENCE, LABEL_OVER_ENCUMBERED } from "@neverquest/data/general";
+import { LABEL_NO_ESSENCE, LABEL_OVER_ENCUMBERED, POPOVER_TRIGGER } from "@neverquest/data/general";
 import { useCanFit } from "@neverquest/hooks/actions/useCanFit";
 import { essence } from "@neverquest/state/resources";
 import type { InventoryItem } from "@neverquest/types";
@@ -32,7 +32,7 @@ export function PurchaseItemButton({
           {!canFitItem && <div>{LABEL_OVER_ENCUMBERED}</div>}
         </Tooltip>
       }
-      trigger={isPurchasable ? [] : ["focus", "hover"]}
+      trigger={isPurchasable ? [] : POPOVER_TRIGGER}
     >
       <div>
         <Button disabled={!isPurchasable} onClick={onPurchase} variant="outline-dark">

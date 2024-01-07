@@ -4,7 +4,11 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { Encumbrance } from "@neverquest/components/Inventory/Encumbrance";
 import { TAILORING } from "@neverquest/data/caravan";
-import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_NO_ESSENCE } from "@neverquest/data/general";
+import {
+  CLASS_FULL_WIDTH_JUSTIFIED,
+  LABEL_NO_ESSENCE,
+  POPOVER_TRIGGER,
+} from "@neverquest/data/general";
 import { KNAPSACK_CAPACITY } from "@neverquest/data/items";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
@@ -52,7 +56,7 @@ export function ExpandKnapsack() {
 
           <OverlayTrigger
             overlay={<Tooltip>{LABEL_NO_ESSENCE}</Tooltip>}
-            trigger={isAffordable ? [] : ["focus", "hover"]}
+            trigger={isAffordable ? [] : POPOVER_TRIGGER}
           >
             <div>
               <Button

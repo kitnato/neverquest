@@ -1,6 +1,7 @@
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
 
+import { POPOVER_TRIGGER } from "@neverquest/data/general";
 import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { inventory } from "@neverquest/state/inventory";
@@ -17,7 +18,7 @@ export function Antidote({ ID }: { ID: string }) {
   return (
     <OverlayTrigger
       overlay={<Tooltip>Not poisoned.</Tooltip>}
-      trigger={isPoisonedValue ? [] : ["focus", "hover"]}
+      trigger={isPoisonedValue ? [] : POPOVER_TRIGGER}
     >
       <div>
         <Button

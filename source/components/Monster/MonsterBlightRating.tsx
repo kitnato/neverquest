@@ -3,7 +3,12 @@ import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { LABEL_EMPTY, LABEL_MAXIMUM, PERCENTAGE_POINTS } from "@neverquest/data/general";
+import {
+  LABEL_EMPTY,
+  LABEL_MAXIMUM,
+  PERCENTAGE_POINTS,
+  POPOVER_TRIGGER,
+} from "@neverquest/data/general";
 import { BLIGHT } from "@neverquest/data/monster";
 import IconBlight from "@neverquest/icons/blight.svg?react";
 import IconStamina from "@neverquest/icons/stamina.svg?react";
@@ -60,7 +65,7 @@ export function MonsterBlightRating() {
               </PopoverBody>
             </Popover>
           }
-          trigger={isPoisonedValue ? ["focus", "hover"] : []}
+          trigger={isPoisonedValue ? POPOVER_TRIGGER : []}
         >
           <span>
             {isPoisonedValue

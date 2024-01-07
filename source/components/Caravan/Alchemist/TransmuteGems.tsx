@@ -6,7 +6,7 @@ import { useRecoilState } from "recoil";
 import { SelectGem } from "@neverquest/components/Caravan/Alchemist/SelectGem";
 import { IconImage } from "@neverquest/components/IconImage";
 import { TRANSMUTATION } from "@neverquest/data/caravan";
-import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general";
+import { CLASS_FULL_WIDTH_JUSTIFIED, POPOVER_TRIGGER } from "@neverquest/data/general";
 import { GEM_BASE } from "@neverquest/data/items";
 import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
@@ -64,7 +64,7 @@ export function TransmuteGems() {
       <OverlayTrigger
         overlay={<Tooltip>Insufficient source gems.</Tooltip>}
         placement="bottom"
-        trigger={isAffordable ? [] : ["focus", "hover"]}
+        trigger={isAffordable ? [] : POPOVER_TRIGGER}
       >
         <div>
           <Button

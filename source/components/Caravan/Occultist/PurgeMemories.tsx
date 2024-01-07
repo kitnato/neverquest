@@ -3,7 +3,11 @@ import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { OCCULTIST_PURGE_PRICE_MULTIPLIER } from "@neverquest/data/caravan";
-import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_NO_ESSENCE } from "@neverquest/data/general";
+import {
+  CLASS_FULL_WIDTH_JUSTIFIED,
+  LABEL_NO_ESSENCE,
+  POPOVER_TRIGGER,
+} from "@neverquest/data/general";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useResetCompletedQuests } from "@neverquest/hooks/actions/useResetCompletedQuests";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
@@ -54,7 +58,7 @@ export function PurgeMemories() {
                 {price === 0 && <div>No completed quests to reset.</div>}
               </Tooltip>
             }
-            trigger={isPurchasable ? [] : ["focus", "hover"]}
+            trigger={isPurchasable ? [] : POPOVER_TRIGGER}
           >
             <div>
               <Button

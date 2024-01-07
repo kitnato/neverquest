@@ -5,7 +5,7 @@ import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { AttackMeter } from "@neverquest/components/Status/AttackMeter";
-import { LABEL_SEPARATOR } from "@neverquest/data/general";
+import { LABEL_SEPARATOR, POPOVER_TRIGGER } from "@neverquest/data/general";
 import { useAttack } from "@neverquest/hooks/actions/useAttack";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { useTimerDelta } from "@neverquest/hooks/useTimerDelta";
@@ -129,7 +129,7 @@ export function AttackRate() {
               </Popover>
             }
             trigger={
-              attributeStatisticSpeed > 0 || attributePowerBonusSpeed > 0 ? ["focus", "hover"] : []
+              attributeStatisticSpeed > 0 || attributePowerBonusSpeed > 0 ? POPOVER_TRIGGER : []
             }
           >
             <div className="w-100">

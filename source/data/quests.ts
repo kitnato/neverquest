@@ -153,6 +153,12 @@ export const QUESTS: Record<
     requiresTracking: true,
     title: "Completionist",
   },
+  consumingCorpse: {
+    description: "Consume @ corpse(s).",
+    progression: [1, 3, 5],
+    requiresTracking: true,
+    title: "Necrophage",
+  },
   crafting: {
     description: "Craft @ items.",
     progression: [3, 10, 25, 50],
@@ -241,6 +247,12 @@ export const QUESTS: Record<
     progression: [3, 10, 25, 50],
     requiresTracking: true,
     title: "Out of breath",
+  },
+  flatlining: {
+    description: "Die @ time(s).",
+    progression: [1, 3, 5],
+    requiresTracking: true,
+    title: "Flatliner",
   },
   freezing: {
     description: "Inflict frozen @ times.",

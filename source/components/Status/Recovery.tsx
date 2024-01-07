@@ -6,6 +6,7 @@ import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { RecoveryMeter } from "@neverquest/components/Status/RecoveryMeter";
 
+import { POPOVER_TRIGGER } from "@neverquest/data/general";
 import { RECOVERY_RATE } from "@neverquest/data/statistics";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { useTimerDelta } from "@neverquest/hooks/useTimerDelta";
@@ -79,7 +80,7 @@ export function Recovery() {
                 </PopoverBody>
               </Popover>
             }
-            trigger={resilienceValue > 0 ? ["focus", "hover"] : []}
+            trigger={resilienceValue > 0 ? POPOVER_TRIGGER : []}
           >
             <div className="w-100">
               <RecoveryMeter />

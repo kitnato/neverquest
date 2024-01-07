@@ -4,6 +4,7 @@ import { useRecoilValue } from "recoil";
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { POPOVER_TRIGGER } from "@neverquest/data/general";
 import { INOCULATED_DEFLECTION_BASE } from "@neverquest/data/traits";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconDeflection from "@neverquest/icons/deflection.svg?react";
@@ -72,7 +73,7 @@ export function DeflectionChance() {
                 </PopoverBody>
               </Popover>
             }
-            trigger={isTraitAcquiredInoculated ? ["focus", "hover"] : []}
+            trigger={isTraitAcquiredInoculated ? POPOVER_TRIGGER : []}
           >
             <span>{formatNumber({ format: "percentage", value: deflectionChanceValue })}</span>
           </OverlayTrigger>

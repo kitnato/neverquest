@@ -4,7 +4,11 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { AmmunitionPouchCapacity } from "@neverquest/components/Caravan/Tailor/AmmunitionPouchCapacity";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { TAILORING } from "@neverquest/data/caravan";
-import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_NO_ESSENCE } from "@neverquest/data/general";
+import {
+  CLASS_FULL_WIDTH_JUSTIFIED,
+  LABEL_NO_ESSENCE,
+  POPOVER_TRIGGER,
+} from "@neverquest/data/general";
 import { AMMUNITION_CAPACITY } from "@neverquest/data/items";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import IconEssence from "@neverquest/icons/essence.svg?react";
@@ -49,7 +53,7 @@ export function ExpandAmmunitionPouch() {
 
           <OverlayTrigger
             overlay={<Tooltip> {LABEL_NO_ESSENCE}</Tooltip>}
-            trigger={isAffordable ? [] : ["focus", "hover"]}
+            trigger={isAffordable ? [] : POPOVER_TRIGGER}
           >
             <div>
               <Button

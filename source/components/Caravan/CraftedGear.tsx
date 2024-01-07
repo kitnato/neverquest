@@ -1,7 +1,7 @@
 import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
-import { LABEL_OVER_ENCUMBERED } from "@neverquest/data/general";
+import { LABEL_OVER_ENCUMBERED, POPOVER_TRIGGER } from "@neverquest/data/general";
 import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
 import { useCanFit } from "@neverquest/hooks/actions/useCanFit";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
@@ -30,7 +30,7 @@ export function CraftedGear({
 
       <OverlayTrigger
         overlay={<Tooltip>{LABEL_OVER_ENCUMBERED}</Tooltip>}
-        trigger={canFitItem ? [] : ["focus", "hover"]}
+        trigger={canFitItem ? [] : POPOVER_TRIGGER}
       >
         <div>
           <Button

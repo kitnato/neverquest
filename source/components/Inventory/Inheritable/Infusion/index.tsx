@@ -3,7 +3,7 @@ import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { Hatch } from "@neverquest/components/Inventory/Inheritable/Infusion/Hatch";
-import { LABEL_NO_ESSENCE } from "@neverquest/data/general";
+import { LABEL_NO_ESSENCE, POPOVER_TRIGGER } from "@neverquest/data/general";
 import { INFUSION_DELTA } from "@neverquest/data/items";
 import { useInfuse } from "@neverquest/hooks/actions/useInfuse";
 import { useAnimation } from "@neverquest/hooks/useAnimation";
@@ -57,7 +57,7 @@ export function Infusion({ infusable }: { infusable: Infusable }) {
           {isInfusionAtMaximumValue && <div>Infusion limit reached.</div>}
         </Tooltip>
       }
-      trigger={canInfuse ? [] : ["focus", "hover"]}
+      trigger={canInfuse ? [] : POPOVER_TRIGGER}
     >
       <div>
         <Button

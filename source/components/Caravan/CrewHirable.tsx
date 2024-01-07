@@ -7,6 +7,7 @@ import {
   CLASS_FULL_WIDTH_JUSTIFIED,
   LABEL_NO_ESSENCE,
   LABEL_UNKNOWN,
+  POPOVER_TRIGGER,
 } from "@neverquest/data/general";
 import { useHireCrew } from "@neverquest/hooks/actions/useHireCrew";
 import IconEssence from "@neverquest/icons/essence.svg?react";
@@ -40,7 +41,7 @@ export function CrewHirable({ crew }: { crew: Crew }) {
 
           <OverlayTrigger
             overlay={<Tooltip>{LABEL_NO_ESSENCE}</Tooltip>}
-            trigger={isAffordable ? [] : ["focus", "hover"]}
+            trigger={isAffordable ? [] : POPOVER_TRIGGER}
           >
             <div>
               <Button

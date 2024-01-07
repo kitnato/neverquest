@@ -6,7 +6,7 @@ import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { RegenerationMeter } from "@neverquest/components/Reserves/RegenerationMeter";
-import { LABEL_SEPARATOR } from "@neverquest/data/general";
+import { LABEL_SEPARATOR, POPOVER_TRIGGER } from "@neverquest/data/general";
 import { RESERVES } from "@neverquest/data/reserves";
 import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth";
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
@@ -186,7 +186,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
           </Popover>
         }
         placement="right"
-        trigger={isSkillAcquiredCalisthenics ? ["focus", "hover"] : []}
+        trigger={isSkillAcquiredCalisthenics ? POPOVER_TRIGGER : []}
       >
         <div className="w-100">
           <RegenerationMeter reserve={reserve} />

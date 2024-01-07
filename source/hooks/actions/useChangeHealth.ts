@@ -62,6 +62,8 @@ export function useChangeHealth() {
           if (phylactery === undefined) {
             newHealth = 0;
 
+            progressQuest({ quest: "flatlining" });
+
             set(corpse, {
               essence: Math.round((get(essence) + get(absorbedEssence)) * CORPSE_TAX),
               stage: get(stage),

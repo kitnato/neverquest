@@ -2,7 +2,11 @@ import { nanoid } from "nanoid";
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
-import { LABEL_OVER_ENCUMBERED, LEVELLING_MAXIMUM } from "@neverquest/data/general";
+import {
+  LABEL_OVER_ENCUMBERED,
+  LEVELLING_MAXIMUM,
+  POPOVER_TRIGGER,
+} from "@neverquest/data/general";
 import { TRINKETS } from "@neverquest/data/items";
 import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
 import { useCanFit } from "@neverquest/hooks/actions/useCanFit";
@@ -25,7 +29,7 @@ export function Hatch() {
     ownedItemMysteriousEgg !== undefined && (
       <OverlayTrigger
         overlay={<Tooltip>{LABEL_OVER_ENCUMBERED}</Tooltip>}
-        trigger={canFitFamiliar ? [] : ["focus", "hover"]}
+        trigger={canFitFamiliar ? [] : POPOVER_TRIGGER}
       >
         <div>
           <Button

@@ -6,7 +6,7 @@ import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { Regeneration } from "@neverquest/components/Reserves/Regeneration";
 import { ReserveMeter } from "@neverquest/components/Reserves/ReserveMeter";
-import { LABEL_SEPARATOR } from "@neverquest/data/general";
+import { LABEL_SEPARATOR, POPOVER_TRIGGER } from "@neverquest/data/general";
 import { RESERVES } from "@neverquest/data/reserves";
 import IconEndurance from "@neverquest/icons/endurance.svg?react";
 import IconStamina from "@neverquest/icons/stamina.svg?react";
@@ -120,7 +120,7 @@ export function Stamina() {
               placement="right"
               trigger={
                 attributePowerBonusEndurance > 0 || enduranceBonus > 0 || questsBonusStamina > 0
-                  ? ["focus", "hover"]
+                  ? POPOVER_TRIGGER
                   : []
               }
             >

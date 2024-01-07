@@ -7,6 +7,7 @@ import {
   CLASS_FULL_WIDTH_JUSTIFIED,
   LABEL_FULL_HEALTH,
   LABEL_NO_ESSENCE,
+  POPOVER_TRIGGER,
 } from "@neverquest/data/general";
 import { useHeal } from "@neverquest/hooks/actions/useHeal";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
@@ -50,7 +51,7 @@ export function ReceiveHealing() {
                 {isHealthAtMaximumValue && <div>{LABEL_FULL_HEALTH}</div>}
               </Tooltip>
             }
-            trigger={isPurchasable ? [] : ["focus", "hover"]}
+            trigger={isPurchasable ? [] : POPOVER_TRIGGER}
           >
             <div>
               <Button

@@ -1,6 +1,7 @@
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue, useResetRecoilState } from "recoil";
 
+import { POPOVER_TRIGGER } from "@neverquest/data/general";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useToggleLocation } from "@neverquest/hooks/actions/useToggleLocation";
 import { isAttacking } from "@neverquest/state/character";
@@ -20,7 +21,7 @@ export function HearthstoneWarp() {
   return (
     <OverlayTrigger
       overlay={<Tooltip>The hearthstone is cold.</Tooltip>}
-      trigger={canWarp ? [] : ["focus", "hover"]}
+      trigger={canWarp ? [] : POPOVER_TRIGGER}
     >
       <div>
         <Button

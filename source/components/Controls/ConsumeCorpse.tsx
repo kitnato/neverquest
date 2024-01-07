@@ -3,6 +3,7 @@ import { useRecoilValue, useResetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import IconCorpse from "@neverquest/icons/corpse.svg?react";
 import IconEssence from "@neverquest/icons/essence.svg?react";
@@ -16,6 +17,7 @@ export function ConsumeCorpse() {
   const stageValue = useRecoilValue(stage);
   const resetCorpse = useResetRecoilState(corpse);
 
+  const progressQuest = useProgressQuest();
   const transactEssence = useTransactEssence();
 
   if (corpseValue !== undefined) {
@@ -47,6 +49,8 @@ export function ConsumeCorpse() {
               className={getAnimationClass({ animation: "pulse", isInfinite: true })}
               onClick={() => {
                 transactEssence(essence);
+                progressQuest({ quest: "consumingCorpse" });
+
                 resetCorpse();
               }}
               variant="outline-dark"

@@ -1,7 +1,7 @@
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
-import { LABEL_FULL_HEALTH } from "@neverquest/data/general";
+import { LABEL_FULL_HEALTH, POPOVER_TRIGGER } from "@neverquest/data/general";
 import { useHeal } from "@neverquest/hooks/actions/useHeal";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { inventory } from "@neverquest/state/inventory";
@@ -17,7 +17,7 @@ export function Bandages({ ID }: { ID: string }) {
   return (
     <OverlayTrigger
       overlay={<Tooltip>{LABEL_FULL_HEALTH}</Tooltip>}
-      trigger={isHealthAtMaximumValue ? ["focus", "hover"] : []}
+      trigger={isHealthAtMaximumValue ? POPOVER_TRIGGER : []}
     >
       <div>
         <Button

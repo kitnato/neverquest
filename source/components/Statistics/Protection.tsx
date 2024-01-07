@@ -5,7 +5,7 @@ import { useRecoilValue, useResetRecoilState } from "recoil";
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { LABEL_EMPTY, LABEL_NO_PENALTY } from "@neverquest/data/general";
+import { LABEL_EMPTY, LABEL_NO_PENALTY, POPOVER_TRIGGER } from "@neverquest/data/general";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconArmor from "@neverquest/icons/armor.svg?react";
@@ -121,7 +121,7 @@ export function Protection() {
                 </PopoverBody>
               </Popover>
             }
-            trigger={burden > 0 || isTraitAcquiredTank ? ["focus", "hover"] : []}
+            trigger={burden > 0 || isTraitAcquiredTank ? POPOVER_TRIGGER : []}
           >
             <span>{formatNumber({ value: protectionValue })}</span>
           </OverlayTrigger>

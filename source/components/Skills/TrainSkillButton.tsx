@@ -1,7 +1,7 @@
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { LABEL_NO_ESSENCE } from "@neverquest/data/general";
+import { LABEL_NO_ESSENCE, POPOVER_TRIGGER } from "@neverquest/data/general";
 import { useAcquireSkill } from "@neverquest/hooks/actions/useAcquireSkill";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import { essence } from "@neverquest/state/resources";
@@ -20,7 +20,7 @@ export function TrainSkillButton({ skill }: { skill: Skill }) {
   return (
     <OverlayTrigger
       overlay={<Tooltip>{LABEL_NO_ESSENCE}</Tooltip>}
-      trigger={isAffordable ? [] : ["focus", "hover"]}
+      trigger={isAffordable ? [] : POPOVER_TRIGGER}
     >
       <div>
         <Button

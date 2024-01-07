@@ -2,7 +2,7 @@ import { Badge, Container, Nav, Navbar, NavbarBrand, Stack } from "react-bootstr
 
 import { About } from "@neverquest/components/Header/About";
 import { Ouroboros } from "@neverquest/components/Header/Ouroboros";
-import { Restart } from "@neverquest/components/Header/Restart";
+import { Reset } from "@neverquest/components/Header/Reset";
 import { Settings } from "@neverquest/components/Header/Settings";
 import { version } from "@neverquest/config";
 
@@ -28,7 +28,7 @@ export function Header() {
 
             <Settings />
 
-            <Restart />
+            <Reset />
           </Stack>
         </Nav>
       </Container>

@@ -4,7 +4,7 @@ import { LABEL_UNKNOWN } from "@neverquest/data/general";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { armor, shield, weapon } from "@neverquest/state/gear";
 import { ammunition } from "@neverquest/state/items";
-import { stamina } from "@neverquest/state/reserves";
+import { health, stamina } from "@neverquest/state/reserves";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import { isRanged } from "@neverquest/types/type-guards";
 import { withStateKey } from "@neverquest/utilities/helpers";
@@ -43,6 +43,13 @@ export const hasEnoughAmmunition = withStateKey("hasEnoughAmmunition", (key) =>
   }),
 );
 
+export const isFlatlined = withStateKey("isFlatlined", (key) =>
+  selector({
+    get: ({ get }) => get(health) === 0,
+    key,
+  }),
+);
+
 export const isLooting = withStateKey("isLooting", (key) =>
   selector({
     get: ({ get }) => get(lootingDuration) > 0,
@@ -68,14 +75,6 @@ export const attackDuration = withStateKey("attackDuration", (key) =>
 );
 
 export const isAttacking = withStateKey("isAttacking", (key) =>
-  atom({
-    default: false,
-    effects: [handleLocalStorage({ key })],
-    key,
-  }),
-);
-
-export const isGameOver = withStateKey("isGameOver", (key) =>
   atom({
     default: false,
     effects: [handleLocalStorage({ key })],

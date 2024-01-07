@@ -92,6 +92,14 @@ export const consciousness = withStateKey("consciousness", (key) =>
   }),
 );
 
+export const corpse = withStateKey("corpse", (key) =>
+  atom<{ essence: number; stage: number } | undefined>({
+    default: undefined,
+    effects: [handleLocalStorage({ key })],
+    key,
+  }),
+);
+
 export const defeatedFinality = withStateKey("defeatedFinality", (key) =>
   atom<Finality | undefined>({
     default: undefined,

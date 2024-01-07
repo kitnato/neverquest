@@ -1,11 +1,13 @@
 import { useRecoilCallback } from "recoil";
 
+import { CORPSE_TAX } from "@neverquest/data/encounter";
 import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useToggleAttacking } from "@neverquest/hooks/actions/useToggleAttacking";
-import { isAttacking, isGameOver } from "@neverquest/state/character";
+import { absorbedEssence } from "@neverquest/state/attributes";
+import { isAttacking } from "@neverquest/state/character";
+import { corpse, stage } from "@neverquest/state/encounter";
 import { inventory, ownedItem } from "@neverquest/state/inventory";
-import { isShowing } from "@neverquest/state/isShowing";
 import {
   health,
   healthMaximumPoisoned,
@@ -13,6 +15,7 @@ import {
   regenerationAmount,
   regenerationDuration,
 } from "@neverquest/state/reserves";
+import { essence } from "@neverquest/state/resources";
 import type { DeltaDisplay, DeltaReserve } from "@neverquest/types/ui";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
@@ -52,11 +55,17 @@ export function useChangeHealth() {
         if (newHealth <= 0) {
           const phylactery = get(ownedItem("phylactery"));
 
+          if (get(isAttacking)) {
+            toggleAttacking();
+          }
+
           if (phylactery === undefined) {
             newHealth = 0;
 
-            set(isGameOver, true);
-            set(isShowing("gameOver"), true);
+            set(corpse, {
+              essence: Math.round((get(essence) + get(absorbedEssence)) * CORPSE_TAX),
+              stage: get(stage),
+            });
           } else {
             newHealth = healthMaximumPoisonedValue;
 
@@ -68,10 +77,6 @@ export function useChangeHealth() {
               delta: "health",
             });
 
-            if (get(isAttacking)) {
-              toggleAttacking();
-            }
-
             set(inventory, (currentInventory) =>
               currentInventory.filter(({ ID: itemID }) => itemID !== phylactery.ID),
             );
@@ -82,6 +87,7 @@ export function useChangeHealth() {
 
         if (newHealth >= healthMaximumPoisonedValue) {
           newHealth = healthMaximumPoisonedValue;
+
           reset(regenerationDuration("health"));
         }
 

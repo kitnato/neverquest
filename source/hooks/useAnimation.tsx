@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef } from "react";
 import { useRecoilValue } from "recoil";
 
-import { isGameOver } from "@neverquest/state/character";
+import { isFlatlined } from "@neverquest/state/character";
 
 export function useAnimation({
   onFrame,
@@ -10,7 +10,7 @@ export function useAnimation({
   onFrame: (elapsed: number) => void;
   stop?: boolean;
 }) {
-  const isGameOverValue = useRecoilValue(isGameOver);
+  const isFlatlinedValue = useRecoilValue(isFlatlined);
   const frameReference = useRef(-1);
   const previousTimeReference = useRef(0);
 
@@ -24,7 +24,7 @@ export function useAnimation({
   );
 
   useEffect(() => {
-    if (isGameOverValue || stop) {
+    if (isFlatlinedValue || stop) {
       cancelAnimationFrame(frameReference.current);
       previousTimeReference.current = 0;
     } else {
@@ -34,5 +34,5 @@ export function useAnimation({
     return () => {
       cancelAnimationFrame(frameReference.current);
     };
-  }, [animate, isGameOverValue, stop]);
+  }, [animate, isFlatlinedValue, stop]);
 }

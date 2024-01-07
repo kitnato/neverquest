@@ -141,7 +141,8 @@ export const monsterDamage = withStateKey("monsterDamage", (key) =>
     get: ({ get }) => {
       const { attenuation, base, bonus, boss, finality } = MONSTER_DAMAGE;
       const encounterValue = get(encounter);
-      const factor = getTriangular(get(stage)) / attenuation;
+      const stageValue = get(stage);
+      const factor = getTriangular(stageValue) / attenuation;
 
       if (new Set<string>(FINALITY_TYPES).has(encounterValue)) {
         return finality;
@@ -149,7 +150,8 @@ export const monsterDamage = withStateKey("monsterDamage", (key) =>
 
       return Math.round(
         (base + base * factor * (1 + get(progress) * bonus)) *
-          (encounterValue === "boss" ? boss : 1),
+          (encounterValue === "boss" ? boss : 1) *
+          (1 + stageValue / 100),
       );
     },
     key,
@@ -189,7 +191,8 @@ export const monsterHealthMaximum = withStateKey("monsterHealthMaximum", (key) =
     get: ({ get }) => {
       const { attenuation, base, bonus, boss, finality } = MONSTER_HEALTH;
       const encounterValue = get(encounter);
-      const factor = getTriangular(get(stage)) / attenuation;
+      const stageValue = get(stage);
+      const factor = getTriangular(stageValue) / attenuation;
 
       if (new Set<string>(FINALITY_TYPES).has(encounterValue)) {
         return finality;
@@ -197,7 +200,8 @@ export const monsterHealthMaximum = withStateKey("monsterHealthMaximum", (key) =
 
       return Math.round(
         (base + base * factor * (1 + get(progress) * bonus)) *
-          (encounterValue === "boss" ? boss : 1),
+          (encounterValue === "boss" ? boss : 1) *
+          (1 + stageValue / 100),
       );
     },
     key,

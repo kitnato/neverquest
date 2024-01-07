@@ -1,11 +1,13 @@
 import type { AffixStructure } from "@kitnato/locran/build/types";
 
 export const AFFIX_STRUCTURE_WEIGHTS: [AffixStructure, number][] = [
-  ["none", 0.05],
-  ["prefixAndSuffix", 0.1],
-  ["suffix", 0.2],
+  ["none", 0.025],
+  ["prefixAndSuffix", 0.075],
+  ["suffix", 0.25],
   ["prefix", 0.65],
 ];
+
+export const CORPSE_TAX = 0.1;
 
 export const PROGRESS = {
   maximum: 30,

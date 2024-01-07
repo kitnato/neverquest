@@ -3,7 +3,7 @@ import { type SetterOrUpdater, useRecoilValue } from "recoil";
 import { clearInterval, setInterval } from "worker-timers";
 
 import { FRAMERATE } from "@neverquest/data/general";
-import { isGameOver } from "@neverquest/state/character";
+import { isFlatlined } from "@neverquest/state/character";
 
 export function useTimerDelta({
   delta,
@@ -16,7 +16,7 @@ export function useTimerDelta({
   onDelta?: () => void;
   stop: boolean;
 }) {
-  const isGameOverValue = useRecoilValue(isGameOver);
+  const isFlatlinedValue = useRecoilValue(isFlatlined);
 
   const interval = useRef(-1);
   const previousTime = useRef(0);
@@ -43,7 +43,7 @@ export function useTimerDelta({
   }, [hasTicked, onDelta]);
 
   useEffect(() => {
-    if (isGameOverValue || stop) {
+    if (isFlatlinedValue || stop) {
       clear();
     } else if (interval.current === -1) {
       interval.current = setInterval(() => {
@@ -66,5 +66,5 @@ export function useTimerDelta({
     }
 
     return clear;
-  }, [delta, factor, isGameOverValue, stop]);
+  }, [delta, factor, isFlatlinedValue, stop]);
 }

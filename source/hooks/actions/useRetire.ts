@@ -6,29 +6,13 @@ import { useAcquireSkill } from "@neverquest/hooks/actions/useAcquireSkill";
 import { useInitialize } from "@neverquest/hooks/actions/useInitialize";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useResetAttributes } from "@neverquest/hooks/actions/useResetAttributes";
+import { useResetCharacter } from "@neverquest/hooks/actions/useResetCharacter";
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness";
-import {
-  blacksmithInventory,
-  fletcherInventory,
-  merchantInventory,
-  monologue,
-} from "@neverquest/state/caravan";
-import { attackDuration, name } from "@neverquest/state/character";
-import {
-  defeatedFinality,
-  isStageStarted,
-  location,
-  progress,
-  progressReduction,
-  stage,
-  stageMaximum,
-} from "@neverquest/state/encounter";
-import { armor, shield, weapon } from "@neverquest/state/gear";
+import { monologue } from "@neverquest/state/caravan";
+import { progressReduction, stage, stageMaximum } from "@neverquest/state/encounter";
 import { inventory } from "@neverquest/state/inventory";
 import { masteryProgress, masteryRank } from "@neverquest/state/masteries";
 import { questProgress } from "@neverquest/state/quests";
-import { blight, poison } from "@neverquest/state/reserves";
-import { essence } from "@neverquest/state/resources";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { isTraitAcquired, selectedTrait } from "@neverquest/state/traits";
 import { isInheritableItem } from "@neverquest/types/type-guards";
@@ -40,6 +24,7 @@ export function useRetire() {
   const initialize = useInitialize();
   const progressQuest = useProgressQuest();
   const resetAttributes = useResetAttributes();
+  const resetCharacter = useResetCharacter();
   const resetWilderness = useResetWilderness();
 
   return useRecoilCallback(
@@ -64,23 +49,7 @@ export function useRetire() {
         set(progressReduction, getProgressReduction(get(stage)));
 
         resetAttributes();
-
-        reset(armor);
-        reset(attackDuration);
-        reset(blacksmithInventory);
-        reset(blight);
-        reset(poison);
-        reset(essence);
-        reset(defeatedFinality);
-        reset(fletcherInventory);
-        reset(isStageStarted);
-        reset(progress);
-        reset(location);
-        reset(merchantInventory);
-        reset(name);
-        reset(shield);
-        reset(stage);
-        reset(weapon);
+        resetCharacter();
 
         reset(questProgress("attributesIncreasingAll"));
         reset(questProgress("attributesUnlockingAll"));
@@ -124,6 +93,6 @@ export function useRetire() {
         resetWilderness();
         initialize(true);
       },
-    [acquireSkill, initialize, progressQuest, resetAttributes, resetWilderness],
+    [acquireSkill, initialize, progressQuest, resetAttributes, resetCharacter, resetWilderness],
   );
 }

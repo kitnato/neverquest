@@ -219,7 +219,6 @@ export const SHOWING_TYPES = [
   "crewHiring",
   "damage",
   "essence",
-  "gameOver",
   "gearClass",
   "grip",
   "health",
@@ -291,6 +290,7 @@ export type StateKey =
   | "canTrainMastery"
   | "completedQuestsCount"
   | "consciousness"
+  | "corpse"
   | "criticalChance"
   | "criticalDamage"
   | "criticalRating"
@@ -331,7 +331,7 @@ export type StateKey =
   | "isAttributeAtMaximum"
   | "isBlighted"
   | "isCaravanHired"
-  | "isGameOver"
+  | "isFlatlined"
   | "isHealthAtMaximum"
   | "isHealthLow"
   | "isInfusionAtMaximum"

@@ -52,7 +52,7 @@ export const ATTRIBUTES: Record<
     base: 0,
     description: "Increases health & stamina regeneration amount.",
     Icon: IconFortitude,
-    increment: 2,
+    increment: 3,
     maximum: 120,
     powerBonus: 0.01,
     requiredSkill: "calisthenics",

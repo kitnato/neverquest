@@ -15,7 +15,7 @@ import IconSkills from "@neverquest/icons/skills.svg?react";
 import IconTraits from "@neverquest/icons/traits.svg?react";
 import IconUpgrade from "@neverquest/icons/upgrade.svg?react";
 import { areAttributesAffordable } from "@neverquest/state/attributes";
-import { isAttacking, isGameOver } from "@neverquest/state/character";
+import { isAttacking, isFlatlined } from "@neverquest/state/character";
 import { isStageStarted } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
 import { acquiredSkills } from "@neverquest/state/skills";
@@ -38,7 +38,7 @@ export function Capabilities() {
   const acquiredTraitsValue = useRecoilValue(acquiredTraits);
   const areAttributesIncreasableValue = useRecoilValue(areAttributesAffordable);
   const isAttackingValue = useRecoilValue(isAttacking);
-  const isGameOverValue = useRecoilValue(isGameOver);
+  const isFlatlinedValue = useRecoilValue(isFlatlined);
   const isStageStartedValue = useRecoilValue(isStageStarted);
   const isShowingCapabilities = useRecoilValue(isShowing("capabilities"));
 
@@ -89,7 +89,7 @@ export function Capabilities() {
                     })}`
                   : ""
               }`}
-              disabled={isAttackingValue || isGameOverValue}
+              disabled={isAttackingValue || isFlatlinedValue}
               onClick={() => {
                 setScreenShowing(true);
               }}

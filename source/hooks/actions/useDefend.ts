@@ -246,10 +246,10 @@ export function useDefend() {
             if (protectionValue > 0) {
               deltaHealth.push({
                 color: "text-muted",
-                // In the case of 0 health damage, show only inflicted.
+                // In the case of 0 health damage, show only inflicted damage.
                 value: `(${formatNumber({
                   value: Math.min(protectionValue, monsterDamageAilingValue),
-                })}`,
+                })})`,
               });
             }
 

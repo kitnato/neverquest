@@ -6,7 +6,7 @@ import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import IconLoot from "@neverquest/icons/loot.svg?react";
-import { isAttacking, isGameOver, isLooting } from "@neverquest/state/character";
+import { isAttacking, isFlatlined, isLooting } from "@neverquest/state/character";
 import { isStageCompleted, location, progressMaximum } from "@neverquest/state/encounter";
 import { essenceLoot, hasLooted, isLootAvailable, itemsLoot } from "@neverquest/state/resources";
 import { getAnimationClass } from "@neverquest/utilities/getters";
@@ -15,7 +15,7 @@ export function CollectLoot() {
   const [itemsLootValue, setItemsLoot] = useRecoilState(itemsLoot);
   const essenceLootValue = useRecoilValue(essenceLoot);
   const isAttackingValue = useRecoilValue(isAttacking);
-  const isGameOverValue = useRecoilValue(isGameOver);
+  const isFlatlinedValue = useRecoilValue(isFlatlined);
   const isLootAvailableValue = useRecoilValue(isLootAvailable);
   const isLootingValue = useRecoilValue(isLooting);
   const isStageCompletedValue = useRecoilValue(isStageCompleted);
@@ -42,7 +42,7 @@ export function CollectLoot() {
                 ? `${getAnimationClass({ animation: "pulse", isInfinite: true })}`
                 : undefined
             }
-            disabled={isAttackingValue || isLootingValue || isGameOverValue}
+            disabled={isAttackingValue || isLootingValue || isFlatlinedValue}
             onClick={() => {
               transactEssence(essenceLootValue);
 

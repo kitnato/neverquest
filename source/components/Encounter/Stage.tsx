@@ -1,14 +1,16 @@
-import { Stack } from "react-bootstrap";
+import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { POPOVER_TRIGGER } from "@neverquest/data/general";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconStage from "@neverquest/icons/stage.svg?react";
-import { stage } from "@neverquest/state/encounter";
+import { corpse, stage } from "@neverquest/state/encounter";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function Stage() {
+  const corpseValue = useRecoilValue(corpse);
   const stageValue = useRecoilValue(stage);
 
   useDeltaText({
@@ -20,7 +22,31 @@ export function Stage() {
   return (
     <IconDisplay Icon={IconStage} iconProps={{ overlayPlacement: "bottom" }} tooltip="Stage">
       <Stack direction="horizontal" gap={1}>
-        <span>{formatNumber({ value: stageValue })}</span>
+        <OverlayTrigger
+          overlay={
+            <Popover>
+              <PopoverHeader className="text-center">
+                <span>Corpse location</span>
+              </PopoverHeader>
+
+              <PopoverBody>
+                <IconDisplay
+                  className="justify-content-center"
+                  Icon={IconStage}
+                  iconProps={{ className: "small" }}
+                >
+                  <span>
+                    {formatNumber({ value: corpseValue === undefined ? 0 : corpseValue.stage })}
+                  </span>
+                </IconDisplay>
+              </PopoverBody>
+            </Popover>
+          }
+          placement="right"
+          trigger={corpseValue === undefined ? [] : POPOVER_TRIGGER}
+        >
+          <span>{formatNumber({ value: stageValue })}</span>
+        </OverlayTrigger>
 
         <DeltasDisplay delta="stage" />
       </Stack>

@@ -1,3 +1,5 @@
+import type { OverlayTriggerType } from "react-bootstrap/esm/OverlayTrigger";
+
 export const ACCORDION_EVENT_KEY = "0";
 
 export const CLASS_ANIMATE_PREFIX = "animate__";
@@ -36,6 +38,8 @@ export const LEVELLING_MAXIMUM = 77;
 export const NAME_LENGTH_MAXIMUM = 50;
 
 export const PERCENTAGE_POINTS = 100;
+
+export const POPOVER_TRIGGER: OverlayTriggerType[] = ["focus", "hover"];
 
 export const RETIREMENT_STAGE_MINIMUM = 40;
 

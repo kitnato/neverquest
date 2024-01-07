@@ -41,7 +41,7 @@ export function PowerLevel() {
           }
           placement="right"
         >
-          <span>{powerLevelValue}</span>
+          <span>{formatNumber({ value: powerLevelValue })}</span>
         </OverlayTrigger>
 
         <DeltasDisplay delta="powerLevel" />

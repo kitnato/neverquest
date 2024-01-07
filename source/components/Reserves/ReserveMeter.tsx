@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 import { ProgressBar, Stack } from "react-bootstrap";
-import { useRecoilValue, useResetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { PERCENTAGE_POINTS } from "@neverquest/data/general";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
+import { usePreviousValue } from "@neverquest/hooks/usePreviousValue";
 import IconBlight from "@neverquest/icons/blight.svg?react";
 import IconPoison from "@neverquest/icons/poison.svg?react";
 import {
@@ -29,9 +30,9 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
   const isHealth = reserve === "health";
   const reserveMaximum = isHealth ? healthMaximum : staminaMaximum;
 
+  const [reserveValue, setReserve] = useRecoilState(isHealth ? health : stamina);
   const ailmentValue = useRecoilValue(isHealth ? poison : blightMagnitude);
   const isAiling = useRecoilValue(isHealth ? isPoisoned : isBlighted);
-  const reserveValue = useRecoilValue(isHealth ? health : stamina);
   const reserveMaximumValue = useRecoilValue(reserveMaximum);
   const reserveMaximumAilingValue = useRecoilValue(
     isHealth ? healthMaximumPoisoned : staminaMaximumBlighted,
@@ -48,6 +49,16 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
     delta: deltaReserveMaximum,
     state: reserveMaximum,
   });
+
+  // Have health and stamina increase equally to maxima and consistently while at full health.
+  const reserveMaximumDifference =
+    reserveMaximumAilingValue - (usePreviousValue(reserveMaximumAilingValue) ?? 0);
+
+  useEffect(() => {
+    if (reserveMaximumDifference > 0) {
+      setReserve((currentReserve) => currentReserve + reserveMaximumDifference);
+    }
+  }, [reserveMaximumDifference, setReserve]);
 
   // Catches attribute resets and poison/blight penalties.
   useEffect(() => {

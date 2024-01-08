@@ -7,7 +7,6 @@ import { hireStatus } from "@neverquest/state/caravan";
 import { stage, wildernesses } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
 import { questProgress } from "@neverquest/state/quests";
-import { allowProfanity } from "@neverquest/state/settings";
 import { CREW_TYPES } from "@neverquest/types/unions";
 import { getAffixStructure, getSnapshotGetter } from "@neverquest/utilities/getters";
 
@@ -37,10 +36,7 @@ export function useIncreaseStage() {
 
         set(wildernesses, (currentWildernesses) => [
           ...currentWildernesses,
-          generateLocation({
-            affixStructure: getAffixStructure(),
-            allowProfanity: get(allowProfanity),
-          }),
+          generateLocation({ affixStructure: getAffixStructure() }),
         ]);
 
         set(stage, nextStage);

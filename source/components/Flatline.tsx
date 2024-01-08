@@ -22,11 +22,9 @@ import { hasFlatlined } from "@neverquest/state/character";
 import { wildernesses } from "@neverquest/state/encounter";
 import { armor, shield, weapon } from "@neverquest/state/gear";
 import { inventory } from "@neverquest/state/inventory";
-import { allowProfanity } from "@neverquest/state/settings";
 import { getAffixStructure } from "@neverquest/utilities/getters";
 
 export function Flatline() {
-  const allowProfanityValue = useRecoilValue(allowProfanity);
   const hasFlatlinedValue = useRecoilValue(hasFlatlined);
   const setInventory = useSetRecoilState(inventory);
   const setWildernesses = useSetRecoilState(wildernesses);
@@ -82,12 +80,7 @@ export function Flatline() {
             setInventory((currentInventory) =>
               currentInventory.filter(({ ID }) => !equippedGearIDs.has(ID)),
             );
-            setWildernesses([
-              generateLocation({
-                affixStructure: getAffixStructure(),
-                allowProfanity: allowProfanityValue,
-              }),
-            ]);
+            setWildernesses([generateLocation({ affixStructure: getAffixStructure() })]);
 
             resetCharacter();
             resetWilderness();

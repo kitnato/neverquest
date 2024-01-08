@@ -5,14 +5,6 @@ import { withStateKey } from "@neverquest/utilities/helpers";
 
 // ATOMS
 
-export const allowProfanity = withStateKey("allowProfanity", (key) =>
-  atom({
-    default: false,
-    effects: [handleLocalStorage({ isSetting: true, key })],
-    key,
-  }),
-);
-
 export const autoEquip = withStateKey("autoEquip", (key) =>
   atom({
     default: true,

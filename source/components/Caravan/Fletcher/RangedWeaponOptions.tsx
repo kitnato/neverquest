@@ -24,7 +24,6 @@ import IconWeaponAttackRate from "@neverquest/icons/weapon-attack-rate.svg?react
 import IconWeaponDamage from "@neverquest/icons/weapon-damage.svg?react";
 import { fletcherInventory } from "@neverquest/state/caravan";
 import { stageMaximum } from "@neverquest/state/encounter";
-import { allowProfanity } from "@neverquest/state/settings";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 import { generateRangedWeapon } from "@neverquest/utilities/generators";
@@ -37,7 +36,6 @@ import {
 
 export function RangedWeaponOptions() {
   const [fletcherInventoryValue, setFletcherInventory] = useRecoilState(fletcherInventory);
-  const allowProfanityValue = useRecoilValue(allowProfanity);
   const isSkillAcquiredArchery = useRecoilValue(isSkillAcquired("archery"));
   const stageMaximumValue = useRecoilValue(stageMaximum);
   const resetFletcherInventory = useResetRecoilState(fletcherInventory);
@@ -161,7 +159,6 @@ export function RangedWeaponOptions() {
               setFletcherInventory(
                 generateRangedWeapon({
                   affixStructure: getAffixStructure(),
-                  allowProfanity: allowProfanityValue,
                   gearClass: weaponClass,
                   level: weaponLevel,
                   prefixTags:

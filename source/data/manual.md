@@ -778,12 +778,6 @@ Toggles between showing and hiding the gear level.
 
 Default: off.
 
-### Allow profanity
-
-Toggles the generation of not-safe-for-work words when generating [monster](#monster), [wilderness](#wilderness) and [item](#item) names.
-
-Default: off.
-
 ### Show everything
 
 Once toggled, all elements of the UI will be shown at once instead of being unlocked gradually as gameplay progresses and become relevant. Suitable for veteran players starting a new run.

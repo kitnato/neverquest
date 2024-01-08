@@ -260,7 +260,6 @@ export type StateKey =
   | "acquiredTraits"
   | "activeCrew"
   | "activeQuests"
-  | "allowProfanity"
   | "ammunition"
   | "ammunitionCapacity"
   | "areAttributesAffordable"

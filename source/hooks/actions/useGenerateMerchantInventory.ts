@@ -6,7 +6,6 @@ import { MERCHANT_OFFERS } from "@neverquest/data/caravan";
 import { merchantInventory } from "@neverquest/state/caravan";
 import { stage, stageMaximum } from "@neverquest/state/encounter";
 import { ownedItem } from "@neverquest/state/inventory";
-import { allowProfanity } from "@neverquest/state/settings";
 import type { InheritableItem } from "@neverquest/types";
 import { isInheritableItem } from "@neverquest/types/type-guards";
 import {
@@ -38,7 +37,6 @@ export function useGenerateMerchantInventory() {
         ) {
           const gearSettings: GeneratorParameters & { level: number } = {
             affixStructure: "prefix",
-            allowProfanity: get(allowProfanity),
             level: stageValue,
             prefixTags: ["lowQuality"],
           };

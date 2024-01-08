@@ -6,17 +6,14 @@ import { CREW } from "@neverquest/data/caravan";
 import { KEY_SESSION } from "@neverquest/data/general";
 import { hireStatus } from "@neverquest/state/caravan";
 import { wildernesses } from "@neverquest/state/encounter";
-import { allowProfanity } from "@neverquest/state/settings";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { CREW_TYPES } from "@neverquest/types/unions";
-import { getAffixStructure, getSnapshotGetter } from "@neverquest/utilities/getters";
+import { getAffixStructure } from "@neverquest/utilities/getters";
 
 export function useInitialize() {
   return useRecoilCallback(
-    ({ set, snapshot }) =>
+    ({ set }) =>
       (isRetirement?: boolean) => {
-        const get = getSnapshotGetter(snapshot);
-
         const isStoreEmpty = ls.get(KEY_SESSION) === null;
 
         if (isRetirement ?? isStoreEmpty) {
@@ -33,12 +30,7 @@ export function useInitialize() {
             initialStore[`hireStatus-${crew}`] = status;
           }
 
-          const newWilderness = [
-            generateLocation({
-              affixStructure: getAffixStructure(),
-              allowProfanity: get(allowProfanity),
-            }),
-          ];
+          const newWilderness = [generateLocation({ affixStructure: getAffixStructure() })];
 
           set(wildernesses, newWilderness);
 

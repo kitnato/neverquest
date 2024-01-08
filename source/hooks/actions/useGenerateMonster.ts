@@ -12,7 +12,6 @@ import {
   monsterHealth,
   monsterName,
 } from "@neverquest/state/monster";
-import { allowProfanity } from "@neverquest/state/settings";
 import { MONSTER_AILMENT_TYPES } from "@neverquest/types/unions";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 import { getAffixStructure, getSnapshotGetter } from "@neverquest/utilities/getters";
@@ -23,23 +22,16 @@ export function useGenerateMonster() {
       () => {
         const get = getSnapshotGetter(snapshot);
 
-        const allowProfanityValue = get(allowProfanity);
         const encounterValue = get(encounter);
 
         switch (encounterValue) {
           case "boss": {
-            set(monsterName, generateName({ allowProfanity: allowProfanityValue, hasTitle: true }));
+            set(monsterName, generateName({ hasTitle: true }));
             break;
           }
 
           case "monster": {
-            set(
-              monsterName,
-              generateCreature({
-                affixStructure: getAffixStructure(),
-                allowProfanity: allowProfanityValue,
-              }),
-            );
+            set(monsterName, generateCreature({ affixStructure: getAffixStructure() }));
             break;
           }
 

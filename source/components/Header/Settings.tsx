@@ -18,7 +18,6 @@ import { IconImage } from "@neverquest/components/IconImage";
 import IconSettings from "@neverquest/icons/settings.svg?react";
 import { ownedItem } from "@neverquest/state/inventory";
 import {
-  allowProfanity,
   autoEquip,
   lowHealthWarning,
   showDamagePerSecond,
@@ -74,8 +73,6 @@ export function Settings() {
               <SettingsSwitch label="Show gear comparisons" state={showGearComparison} />
 
               <SettingsSwitch label="Show gear level" state={showGearLevel} />
-
-              <SettingsSwitch label="Allow profanity" state={allowProfanity} />
             </Stack>
           </Form>
         </ModalBody>

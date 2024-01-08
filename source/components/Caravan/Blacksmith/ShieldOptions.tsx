@@ -16,7 +16,6 @@ import IconStagger from "@neverquest/icons/stagger.svg?react";
 import IconUnknown from "@neverquest/icons/unknown.svg?react";
 import { blacksmithInventory } from "@neverquest/state/caravan";
 import { stageMaximum } from "@neverquest/state/encounter";
-import { allowProfanity } from "@neverquest/state/settings";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 import { generateShield } from "@neverquest/utilities/generators";
@@ -28,7 +27,6 @@ import {
 } from "@neverquest/utilities/getters";
 
 export function ShieldOptions() {
-  const allowProfanityValue = useRecoilValue(allowProfanity);
   const [{ shield: craftedShield }, setBlacksmithInventory] = useRecoilState(blacksmithInventory);
   const isSkillAcquiredShieldcraft = useRecoilValue(isSkillAcquired("shieldcraft"));
   const stageMaximumValue = useRecoilValue(stageMaximum);
@@ -126,7 +124,6 @@ export function ShieldOptions() {
               ...currentBlacksmithInventory,
               shield: generateShield({
                 affixStructure: getAffixStructure(),
-                allowProfanity: allowProfanityValue,
                 gearClass: shieldClass,
                 level: shieldLevel,
                 prefixTags:

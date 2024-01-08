@@ -17,7 +17,6 @@ import IconArmorProtection from "@neverquest/icons/protection.svg?react";
 import IconUnknown from "@neverquest/icons/unknown.svg?react";
 import { blacksmithInventory } from "@neverquest/state/caravan";
 import { stageMaximum } from "@neverquest/state/encounter";
-import { allowProfanity } from "@neverquest/state/settings";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 import { generateArmor } from "@neverquest/utilities/generators";
@@ -30,7 +29,6 @@ import {
 
 export function ArmorOptions() {
   const [{ armor: craftedArmor }, setBlacksmithInventory] = useRecoilState(blacksmithInventory);
-  const allowProfanityValue = useRecoilValue(allowProfanity);
   const isSkillAcquiredArmorcraft = useRecoilValue(isSkillAcquired("armorcraft"));
   const stageMaximumValue = useRecoilValue(stageMaximum);
 
@@ -126,7 +124,6 @@ export function ArmorOptions() {
               ...currentBlacksmithInventory,
               armor: generateArmor({
                 affixStructure: getAffixStructure(),
-                allowProfanity: allowProfanityValue,
                 gearClass: armorClass,
                 level: armorLevel,
                 prefixTags:

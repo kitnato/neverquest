@@ -97,7 +97,7 @@ export function DodgeChance() {
                         </td>
 
                         <td>
-                          <span>x{NUDIST_DODGE_BONUS}</span>
+                          <span>×{NUDIST_DODGE_BONUS}</span>
                         </td>
                       </tr>
                     )}

@@ -8,7 +8,7 @@ import { CraftGear } from "@neverquest/components/Caravan/CraftGear";
 import { SetGearLevel } from "@neverquest/components/Caravan/SetGearLevel";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { ARMOR_SPECIFICATIONS, GEAR_LEVEL_RANGE_MAXIMUM } from "@neverquest/data/gear";
-import { GROWTH_MAXIMUM, LABEL_TRAINING_REQUIRED, LABEL_UNKNOWN } from "@neverquest/data/general";
+import { GROWTH_MAXIMUM, LABEL_SKILL_REQUIRED, LABEL_UNKNOWN } from "@neverquest/data/general";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import IconBurden from "@neverquest/icons/burden.svg?react";
 import IconDeflection from "@neverquest/icons/deflection.svg?react";
@@ -118,7 +118,7 @@ export function ArmorOptions() {
       <hr />
 
       {!isSkillAcquiredArmorcraft && armorClass === "heavy" ? (
-        <span className="fst-italic text-center">{LABEL_TRAINING_REQUIRED}</span>
+        <span className="fst-italic text-center">{LABEL_SKILL_REQUIRED}</span>
       ) : craftedArmor === undefined ? (
         <CraftGear
           onCraft={() => {

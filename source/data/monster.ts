@@ -67,11 +67,16 @@ export const MONSTER_DAMAGE = {
 };
 
 export const MONSTER_HEALTH = {
-  attenuation: 20,
+  attenuation: 30,
   base: 15,
   bonus: 0.01,
   boss: 1.8,
   finality: 17_777,
+};
+
+export const MONSTER_REGENERATION = {
+  duration: 40_000,
+  ticks: 30,
 };
 
 export const POISON = {

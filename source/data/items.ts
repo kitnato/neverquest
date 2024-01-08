@@ -106,8 +106,8 @@ export const ELEMENTALS: Record<
     color: "text-orange",
     damage: { maximum: 1, minimum: 0.1 },
     damageModification: "high",
-    duration: { maximum: 5000, minimum: 2500 },
-    durationCap: 10_000,
+    duration: { maximum: 3000, minimum: 1500 },
+    durationCap: 7500,
     gem: "ruby",
     Icon: IconFire,
   },
@@ -116,7 +116,7 @@ export const ELEMENTALS: Record<
     color: "text-blue",
     damage: { maximum: 0.5, minimum: 0.05 },
     damageModification: "low",
-    duration: { maximum: 2000, minimum: 800 },
+    duration: { maximum: 2000, minimum: 900 },
     durationCap: 3000,
     gem: "sapphire",
     Icon: IconIce,
@@ -139,7 +139,7 @@ export const GEM_BASE = {
   price: 250,
   weight: 1,
 };
-export const GEM_DROP_CHANCE = { equalStage: 1, lowerStage: 0.5 };
+export const GEM_DROP_CHANCE = { equalStage: 1, lowerStage: 0.25 };
 export const GEM_ENHANCEMENT_RANGE = { maximum: 1, minimum: 0.1 };
 export const GEM_FITTING_COST_RANGE = { maximum: 300, minimum: 10 };
 export const GEMS: Record<Gem, { elemental: Elemental; Icon: SVGIcon }> = {

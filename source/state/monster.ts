@@ -15,6 +15,7 @@ import {
   MONSTER_ATTACK_RATE,
   MONSTER_DAMAGE,
   MONSTER_HEALTH,
+  MONSTER_REGENERATION,
   POISON,
 } from "@neverquest/data/monster";
 import { AILMENT_PENALTY } from "@neverquest/data/statistics";
@@ -102,6 +103,13 @@ export const isMonsterAiling = withStateKey("isMonsterAiling", (key) =>
       (ailment: MonsterAilment) =>
       ({ get }) =>
         get(monsterAilmentDuration(ailment)) > 0,
+    key,
+  }),
+);
+
+export const isMonsterAtFullHealth = withStateKey("isMonsterAtFullHealth", (key) =>
+  selector({
+    get: ({ get }) => get(monsterHealth) === get(monsterHealthMaximum),
     key,
   }),
 );
@@ -251,7 +259,7 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
             ? { ...INFUSABLES["mysterious egg"].item, ID: nanoid() }
             : // Torn manuscript drops only if it's not currently carried or sold, the antique coin & mysterious egg are both carried, it can't yet be infused and if the drop chance is reached.
               get(ownedItem("antique coin")) !== undefined &&
-                !get(isSkillAcquired("incubation")) &&
+                !get(isSkillAcquired("meditation")) &&
                 ownedItemMysteriousEgg !== undefined &&
                 !merchantInventoryValue.some(({ name }) => name === "torn manuscript") &&
                 get(ownedItem("torn manuscript")) === undefined &&
@@ -360,6 +368,14 @@ export const monsterHealth = withStateKey("monsterHealth", (key) =>
 export const monsterName = withStateKey("monsterName", (key) =>
   atom<string | undefined>({
     default: undefined,
+    effects: [handleLocalStorage({ key })],
+    key,
+  }),
+);
+
+export const monsterRegenerationDelta = withStateKey("monsterRegenerationDelta", (key) =>
+  atom({
+    default: Math.round(MONSTER_REGENERATION.duration / MONSTER_REGENERATION.ticks),
     effects: [handleLocalStorage({ key })],
     key,
   }),

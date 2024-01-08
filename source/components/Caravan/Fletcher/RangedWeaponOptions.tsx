@@ -13,7 +13,7 @@ import {
   WEAPON_MODIFIER,
   WEAPON_SPECIFICATIONS,
 } from "@neverquest/data/gear";
-import { GROWTH_MAXIMUM, LABEL_TRAINING_REQUIRED, LABEL_UNKNOWN } from "@neverquest/data/general";
+import { GROWTH_MAXIMUM, LABEL_SKILL_REQUIRED, LABEL_UNKNOWN } from "@neverquest/data/general";
 import { WEAPON_ABILITY_SKILLS } from "@neverquest/data/skills";
 import IconAmmunition from "@neverquest/icons/ammunition.svg?react";
 import IconBurden from "@neverquest/icons/burden.svg?react";
@@ -184,7 +184,7 @@ export function RangedWeaponOptions() {
           <CraftedGear gearItem={fletcherInventoryValue} onTransfer={resetFletcherInventory} />
         )
       ) : (
-        <span className="fst-italic text-center">{LABEL_TRAINING_REQUIRED}</span>
+        <span className="fst-italic text-center">{LABEL_SKILL_REQUIRED}</span>
       )}
     </Stack>
   );

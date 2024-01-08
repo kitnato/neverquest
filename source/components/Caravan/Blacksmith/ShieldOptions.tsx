@@ -8,7 +8,7 @@ import { CraftGear } from "@neverquest/components/Caravan/CraftGear";
 import { SetGearLevel } from "@neverquest/components/Caravan/SetGearLevel";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { GEAR_LEVEL_RANGE_MAXIMUM, SHIELD_SPECIFICATIONS } from "@neverquest/data/gear";
-import { GROWTH_MAXIMUM, LABEL_TRAINING_REQUIRED, LABEL_UNKNOWN } from "@neverquest/data/general";
+import { GROWTH_MAXIMUM, LABEL_SKILL_REQUIRED, LABEL_UNKNOWN } from "@neverquest/data/general";
 import IconBlock from "@neverquest/icons/block.svg?react";
 import IconBurden from "@neverquest/icons/burden.svg?react";
 import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react";
@@ -118,7 +118,7 @@ export function ShieldOptions() {
       <hr />
 
       {!isSkillAcquiredShieldcraft && shieldClass === "tower" ? (
-        <span className="fst-italic text-center">{LABEL_TRAINING_REQUIRED}</span>
+        <span className="fst-italic text-center">{LABEL_SKILL_REQUIRED}</span>
       ) : craftedShield === undefined ? (
         <CraftGear
           onCraft={() => {

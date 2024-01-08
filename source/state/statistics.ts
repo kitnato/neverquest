@@ -24,7 +24,7 @@ import {
   isUnarmored,
   isUnshielded,
 } from "@neverquest/types/type-guards";
-import { getDamagePerRate, getDamagePerTick } from "@neverquest/utilities/getters";
+import { getAmountPerTick, getDamagePerRate } from "@neverquest/utilities/getters";
 import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
@@ -44,8 +44,8 @@ export const bleedDamage = withStateKey("bleedDamage", (key) =>
       const { duration, ticks } = get(bleed);
 
       return Math.round(
-        getDamagePerTick({
-          damage: get(damage) * get(masteryStatistic("cruelty")),
+        getAmountPerTick({
+          amount: get(damage) * get(masteryStatistic("cruelty")),
           duration,
           ticks,
         }),

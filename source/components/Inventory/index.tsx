@@ -12,7 +12,11 @@ import { CompassNavigate } from "@neverquest/components/Inventory/Inheritable/Co
 import { HearthstoneWarp } from "@neverquest/components/Inventory/Inheritable/HearthstoneWarp";
 import { InfusionInspect } from "@neverquest/components/Inventory/Inheritable/Infusion/InfusionInspect";
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
-import { CLASS_FULL_WIDTH_JUSTIFIED, POPOVER_TRIGGER } from "@neverquest/data/general";
+import {
+  CLASS_FULL_WIDTH_JUSTIFIED,
+  LABEL_SKILL_REQUIRED,
+  POPOVER_TRIGGER,
+} from "@neverquest/data/general";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
 import { armor, shield, weapon } from "@neverquest/state/gear";
 import { inventory } from "@neverquest/state/inventory";
@@ -136,7 +140,7 @@ export function Inventory() {
 
                 <Stack className="ms-2" direction="horizontal" gap={3}>
                   <OverlayTrigger
-                    overlay={<Tooltip>Skill required.</Tooltip>}
+                    overlay={<Tooltip>{LABEL_SKILL_REQUIRED}</Tooltip>}
                     trigger={canEquipGear ? [] : POPOVER_TRIGGER}
                   >
                     <div>

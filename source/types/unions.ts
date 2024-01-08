@@ -248,7 +248,7 @@ export const SKILL_TYPES = [
   "siegecraft",
   "archery",
   "memetics",
-  "incubation",
+  "meditation",
 ] as const;
 export type Skill = (typeof SKILL_TYPES)[number];
 
@@ -343,6 +343,7 @@ export type StateKey =
   | "isLooting"
   | "isMasteryAtMaximum"
   | "isMonsterAiling"
+  | "isMonsterAtFullHealth"
   | "isMonsterDead"
   | "isMonsterNew"
   | "isPoisoned"
@@ -378,6 +379,7 @@ export type StateKey =
   | "monsterHealthMaximum"
   | "monsterLoot"
   | "monsterName"
+  | "monsterRegenerationDelta"
   | "name"
   | "notifyOverEncumbrance"
   | "ownedItem"

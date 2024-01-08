@@ -1,8 +1,12 @@
-import { Dropdown, Stack } from "react-bootstrap";
+import { Dropdown } from "react-bootstrap";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_MAXIMUM } from "@neverquest/data/general";
+import {
+  CLASS_FULL_WIDTH_JUSTIFIED,
+  LABEL_MAXIMUM,
+  LABEL_NO_ESSENCE,
+} from "@neverquest/data/general";
 import { GEMS_MAXIMUM } from "@neverquest/data/items";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
@@ -29,27 +33,24 @@ export function ApplyGem({ gem }: { gem: GemItem }) {
 
   const gemFitting = {
     armor: {
-      canApply:
-        armorGemsValue.length < GEMS_MAXIMUM &&
-        getGemFittingCost(armorGemsValue.length) <= essenceValue,
+      canFit: armorGemsValue.length < GEMS_MAXIMUM,
       gear: armorValue,
       gemsFitted: armorGemsValue.length,
+      isAffordable: getGemFittingCost(armorGemsValue.length) <= essenceValue,
       setGems: setArmorGems,
     },
     shield: {
-      canApply:
-        shieldGemsValue.length < GEMS_MAXIMUM &&
-        getGemFittingCost(shieldGemsValue.length) <= essenceValue,
+      canFit: shieldGemsValue.length < GEMS_MAXIMUM,
       gear: shieldValue,
       gemsFitted: shieldGemsValue.length,
+      isAffordable: getGemFittingCost(shieldGemsValue.length) <= essenceValue,
       setGems: setShieldGems,
     },
     weapon: {
-      canApply:
-        weaponGemsValue.length < GEMS_MAXIMUM &&
-        getGemFittingCost(weaponGemsValue.length) <= essenceValue,
+      canFit: weaponGemsValue.length < GEMS_MAXIMUM,
       gear: weaponValue,
       gemsFitted: weaponGemsValue.length,
+      isAffordable: getGemFittingCost(weaponGemsValue.length) <= essenceValue,
       setGems: setWeaponGems,
     },
   };
@@ -60,7 +61,7 @@ export function ApplyGem({ gem }: { gem: GemItem }) {
   return (
     <Dropdown
       onSelect={(slot) => {
-        if (isGear(slot) && gemFitting[slot].canApply) {
+        if (isGear(slot)) {
           const { gemsFitted, setGems } = gemFitting[slot];
 
           setGems((currentGems) => [...currentGems, gem]);
@@ -86,24 +87,30 @@ export function ApplyGem({ gem }: { gem: GemItem }) {
       <Dropdown.Menu>
         {GEAR_TYPES.map((gearType) => {
           const {
-            canApply,
+            canFit,
             gear: { name },
+            gemsFitted,
+            isAffordable,
           } = gemFitting[gearType];
+
+          const canApply = canFit && isAffordable;
 
           return (
             <Dropdown.Item disabled={!canApply} eventKey={gearType} key={gearType}>
               <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
                 <span>{capitalizeAll(name)}</span>
 
-                <Stack className="ms-2" direction="horizontal" gap={1}>
-                  {canApply ? (
+                <div className="ms-2">
+                  {canApply && (
                     <IconDisplay Icon={IconEssence} iconProps={{ className: "small" }}>
-                      <span>{getGemFittingCost(length)}</span>
+                      <span>{getGemFittingCost(gemsFitted)}</span>
                     </IconDisplay>
-                  ) : (
-                    <span>{LABEL_MAXIMUM}</span>
                   )}
-                </Stack>
+
+                  {!canFit && <span>{LABEL_MAXIMUM}</span>}
+
+                  {canFit && !isAffordable && <span>{LABEL_NO_ESSENCE}</span>}
+                </div>
               </div>
             </Dropdown.Item>
           );

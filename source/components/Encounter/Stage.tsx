@@ -36,7 +36,7 @@ export function Stage() {
                   iconProps={{ className: "small" }}
                 >
                   <span>
-                    {formatNumber({ value: corpseValue === undefined ? 0 : corpseValue.stage })}
+                    +{formatNumber({ value: corpseValue === undefined ? 0 : corpseValue.stage })}
                   </span>
                 </IconDisplay>
               </PopoverBody>

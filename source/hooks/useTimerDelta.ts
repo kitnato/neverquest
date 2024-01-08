@@ -23,7 +23,7 @@ export function useTimerDelta({
 
   const [hasTicked, setHasTicked] = useState(false);
 
-  const clear = () => {
+  const terminate = () => {
     if (interval.current !== -1) {
       clearInterval(interval.current);
 
@@ -44,7 +44,7 @@ export function useTimerDelta({
 
   useEffect(() => {
     if (isFlatlinedValue || stop) {
-      clear();
+      terminate();
     } else if (interval.current === -1) {
       interval.current = setInterval(() => {
         const now = Date.now();
@@ -65,6 +65,6 @@ export function useTimerDelta({
       }, FRAMERATE);
     }
 
-    return clear;
+    return terminate;
   }, [delta, factor, isFlatlinedValue, stop]);
 }

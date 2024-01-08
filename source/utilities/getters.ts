@@ -67,6 +67,18 @@ export function getAffixStructure(): AffixStructure {
   return result === undefined ? "none" : result[0];
 }
 
+export function getAmountPerTick({
+  amount,
+  duration,
+  ticks,
+}: {
+  amount: number;
+  duration: number;
+  ticks: number;
+}) {
+  return Math.ceil((amount / duration) * (duration / ticks));
+}
+
 export function getAnimationClass({
   animation,
   isInfinite,
@@ -123,18 +135,6 @@ export function getDamagePerRate({
     (damage * (1 - damageModifierChance) + damage * damageModifierChance * damageModifier) /
     (rate / MILLISECONDS_IN_SECOND)
   );
-}
-
-export function getDamagePerTick({
-  damage,
-  duration,
-  ticks,
-}: {
-  damage: number;
-  duration: number;
-  ticks: number;
-}) {
-  return Math.ceil((damage / duration) * (duration / ticks));
 }
 
 export function getGearElementalEffects({

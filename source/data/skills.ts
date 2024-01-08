@@ -1,4 +1,4 @@
-import { INFUSABLES, TRINKETS } from "@neverquest/data/items";
+import { TRINKETS } from "@neverquest/data/items";
 import IconAnatomy from "@neverquest/icons/anatomy.svg?react";
 import IconArchery from "@neverquest/icons/archery.svg?react";
 import IconArmorHeavy from "@neverquest/icons/armor-heavy.svg?react";
@@ -17,7 +17,8 @@ import IconEvasion from "@neverquest/icons/evasion.svg?react";
 import IconExecution from "@neverquest/icons/execution.svg?react";
 import IconGrip from "@neverquest/icons/grip.svg?react";
 import IconHealth from "@neverquest/icons/health.svg?react";
-import IconIncubation from "@neverquest/icons/incubation.svg?react";
+import IconInfusionLevel from "@neverquest/icons/infusion-level.svg?react";
+import IconMeditation from "@neverquest/icons/meditation.svg?react";
 import IconMemetics from "@neverquest/icons/memetics.svg?react";
 import IconParry from "@neverquest/icons/parry.svg?react";
 import IconPiercing from "@neverquest/icons/piercing.svg?react";
@@ -34,7 +35,7 @@ import IconStamina from "@neverquest/icons/stamina.svg?react";
 import IconStunned from "@neverquest/icons/stunned.svg?react";
 import IconTraumatology from "@neverquest/icons/traumatology.svg?react";
 import type { SVGIcon } from "@neverquest/types/components";
-import type { Crew, Inheritable, Showing, Skill, WeaponAbility } from "@neverquest/types/unions";
+import type { Crew, Showing, Skill, WeaponAbility } from "@neverquest/types/unions";
 
 export const SKILL_PRICE_BASE = 60;
 export const SKILL_PRICE_FACTOR = 1.8;
@@ -47,7 +48,6 @@ export const SKILLS: Record<
     Icon: SVGIcon;
     isInheritable: boolean;
     requiredCrew: Crew;
-    requiredInheritable?: Inheritable;
     shows?: Showing[];
     trainer: Crew;
   }
@@ -113,22 +113,20 @@ export const SKILLS: Record<
     requiredCrew: "merchant",
     trainer: "mercenary",
   },
-  incubation: {
-    description: "Acquire the ancient knowledge of hatching # mysterious eggs.",
-    descriptionIcons: [INFUSABLES["mysterious egg"].Icon],
-    Icon: IconIncubation,
+  meditation: {
+    description: "Grants the ancient technique of artifact # infusion.",
+    descriptionIcons: [IconInfusionLevel],
+    Icon: IconMeditation,
     isInheritable: true,
     requiredCrew: "merchant",
-    requiredInheritable: "mysterious egg",
     trainer: "alchemist",
   },
   memetics: {
-    description: "Acquire the ability to decipher and inscribe the # journal.",
+    description: "Grants the ability to decipher and inscribe the # journal.",
     descriptionIcons: [TRINKETS.journal.Icon],
     Icon: IconMemetics,
     isInheritable: true,
     requiredCrew: "merchant",
-    requiredInheritable: "journal",
     trainer: "alchemist",
   },
   shieldcraft: {

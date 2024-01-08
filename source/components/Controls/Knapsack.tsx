@@ -9,7 +9,7 @@ import { IconImage } from "@neverquest/components/IconImage";
 import { Inventory } from "@neverquest/components/Inventory";
 import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react";
 import IconInventory from "@neverquest/icons/knapsack.svg?react";
-import { isAttacking, isFlatlined } from "@neverquest/state/character";
+import { hasFlatlined, isAttacking } from "@neverquest/state/character";
 import {
   encumbranceExtent,
   isInventoryOpen,
@@ -23,7 +23,7 @@ export function Knapsack() {
   const encumbranceExtentValue = useRecoilValue(encumbranceExtent);
   const [isInventoryOpenValue, setIsInventoryOpen] = useRecoilState(isInventoryOpen);
   const isAttackingValue = useRecoilValue(isAttacking);
-  const isFlatlinedValue = useRecoilValue(isFlatlined);
+  const hasFlatlinedValue = useRecoilValue(hasFlatlined);
   const notifyOverEncumbranceValue = useRecoilValue(notifyOverEncumbrance);
   const resetNotifyEncumbranceValue = useResetRecoilState(notifyOverEncumbrance);
   const ownedItemKnapsack = useRecoilValue(ownedItem("knapsack"));
@@ -48,7 +48,7 @@ export function Knapsack() {
         <OverlayTrigger overlay={<Tooltip>Inventory</Tooltip>}>
           <div className={getAnimationClass({ animation: "bounceIn" })}>
             <Button
-              disabled={isAttackingValue || isFlatlinedValue}
+              disabled={isAttackingValue || hasFlatlinedValue}
               onClick={() => {
                 setIsInventoryOpen(true);
               }}

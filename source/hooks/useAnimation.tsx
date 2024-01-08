@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef } from "react";
 import { useRecoilValue } from "recoil";
 
-import { isFlatlined } from "@neverquest/state/character";
+import { hasFlatlined } from "@neverquest/state/character";
 
 export function useAnimation({
   onFrame,
@@ -10,7 +10,7 @@ export function useAnimation({
   onFrame: (elapsed: number) => void;
   stop?: boolean;
 }) {
-  const isFlatlinedValue = useRecoilValue(isFlatlined);
+  const hasFlatlinedValue = useRecoilValue(hasFlatlined);
   const frameReference = useRef(-1);
   const previousTimeReference = useRef(0);
 
@@ -24,7 +24,7 @@ export function useAnimation({
   );
 
   useEffect(() => {
-    if (isFlatlinedValue || stop) {
+    if (hasFlatlinedValue || stop) {
       cancelAnimationFrame(frameReference.current);
       previousTimeReference.current = 0;
     } else {
@@ -34,5 +34,5 @@ export function useAnimation({
     return () => {
       cancelAnimationFrame(frameReference.current);
     };
-  }, [animate, isFlatlinedValue, stop]);
+  }, [animate, hasFlatlinedValue, stop]);
 }

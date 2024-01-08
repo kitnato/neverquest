@@ -43,7 +43,7 @@ export const hasEnoughAmmunition = withStateKey("hasEnoughAmmunition", (key) =>
   }),
 );
 
-export const isFlatlined = withStateKey("isFlatlined", (key) =>
+export const hasFlatlined = withStateKey("hasFlatlined", (key) =>
   selector({
     get: ({ get }) => get(health) === 0,
     key,

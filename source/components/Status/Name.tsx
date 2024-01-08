@@ -7,10 +7,10 @@ import { LABEL_UNKNOWN, NAME_LENGTH_MAXIMUM } from "@neverquest/data/general";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import IconDead from "@neverquest/icons/dead.svg?react";
 import IconAlive from "@neverquest/icons/name.svg?react";
-import { isFlatlined, name } from "@neverquest/state/character";
+import { hasFlatlined, name } from "@neverquest/state/character";
 
 export function Name() {
-  const isFlatlinedValue = useRecoilValue(isFlatlined);
+  const hasFlatlinedValue = useRecoilValue(hasFlatlined);
   const [nameValue, setName] = useRecoilState(name);
 
   const [canEdit, setCanEdit] = useState(true);
@@ -42,7 +42,7 @@ export function Name() {
   }, []);
 
   return (
-    <IconDisplay Icon={isFlatlinedValue ? IconDead : IconAlive} tooltip="Name">
+    <IconDisplay Icon={hasFlatlinedValue ? IconDead : IconAlive} tooltip="Name">
       {isEditing ? (
         <FormControl
           onBlur={({ currentTarget: { value } }) => {

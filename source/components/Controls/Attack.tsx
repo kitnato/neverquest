@@ -14,7 +14,7 @@ import IconAttack from "@neverquest/icons/attack.svg?react";
 import IconResting from "@neverquest/icons/resting.svg?react";
 import IconRetreat from "@neverquest/icons/retreat.svg?react";
 import { areAttributesAffordable } from "@neverquest/state/attributes";
-import { hasEnoughAmmunition, isAttacking, isFlatlined } from "@neverquest/state/character";
+import { hasEnoughAmmunition, hasFlatlined, isAttacking } from "@neverquest/state/character";
 import { isStageCompleted, location } from "@neverquest/state/encounter";
 import { isHealthLow } from "@neverquest/state/reserves";
 import { lowHealthWarning } from "@neverquest/state/settings";
@@ -25,7 +25,7 @@ export function Attack() {
   const areAttributesIncreasableValue = useRecoilValue(areAttributesAffordable);
   const isAttackingValue = useRecoilValue(isAttacking);
   const isHealthLowValue = useRecoilValue(isHealthLow);
-  const isFlatlinedValue = useRecoilValue(isFlatlined);
+  const hasFlatlinedValue = useRecoilValue(hasFlatlined);
   const isStageCompletedValue = useRecoilValue(isStageCompleted);
   const hasEnoughAmmunitionValue = useRecoilValue(hasEnoughAmmunition);
   const locationValue = useRecoilValue(location);
@@ -37,7 +37,7 @@ export function Attack() {
     animation: "pulse",
     isInfinite: true,
   });
-  const isResting = isFlatlinedValue || isStageCompletedValue || locationValue === "caravan";
+  const isResting = hasFlatlinedValue || isStageCompletedValue || locationValue === "caravan";
   const showWarning =
     isAttackingValue && isHealthLowValue && !isResting && showLowHealthWarningValue;
 

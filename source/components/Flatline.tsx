@@ -18,7 +18,7 @@ import IconCorpse from "@neverquest/icons/corpse.svg?react";
 import IconDead from "@neverquest/icons/dead.svg?react";
 import IconEssence from "@neverquest/icons/essence.svg?react";
 import IconGear from "@neverquest/icons/gear.svg?react";
-import { isFlatlined } from "@neverquest/state/character";
+import { hasFlatlined } from "@neverquest/state/character";
 import { wildernesses } from "@neverquest/state/encounter";
 import { armor, shield, weapon } from "@neverquest/state/gear";
 import { inventory } from "@neverquest/state/inventory";
@@ -27,7 +27,7 @@ import { getAffixStructure } from "@neverquest/utilities/getters";
 
 export function Flatline() {
   const allowProfanityValue = useRecoilValue(allowProfanity);
-  const isFlatlinedValue = useRecoilValue(isFlatlined);
+  const hasFlatlinedValue = useRecoilValue(hasFlatlined);
   const setInventory = useSetRecoilState(inventory);
   const setWildernesses = useSetRecoilState(wildernesses);
 
@@ -41,7 +41,7 @@ export function Flatline() {
   const resetWilderness = useResetWilderness();
 
   return (
-    <Modal backdrop="static" show={isFlatlinedValue}>
+    <Modal backdrop="static" show={hasFlatlinedValue}>
       <ModalHeader>
         <ModalTitle>
           <IconDisplay Icon={IconDead}>

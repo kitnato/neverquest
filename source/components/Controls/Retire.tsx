@@ -6,12 +6,12 @@ import { IconImage } from "@neverquest/components/IconImage";
 import { Retirement } from "@neverquest/components/Retirement";
 import { RETIREMENT_STAGE_MINIMUM } from "@neverquest/data/general";
 import IconRetire from "@neverquest/icons/retire.svg?react";
-import { isFlatlined } from "@neverquest/state/character";
+import { hasFlatlined } from "@neverquest/state/character";
 import { location, stageMaximum } from "@neverquest/state/encounter";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Retire() {
-  const isFlatlinedValue = useRecoilValue(isFlatlined);
+  const hasFlatlinedValue = useRecoilValue(hasFlatlined);
   const locationValue = useRecoilValue(location);
   const stageMaximumValue = useRecoilValue(stageMaximum);
 
@@ -28,7 +28,7 @@ export function Retire() {
           }`}
         >
           <Button
-            disabled={isFlatlinedValue || locationValue === "wilderness"}
+            disabled={hasFlatlinedValue || locationValue === "wilderness"}
             onClick={() => {
               setIsShowingRetire(true);
             }}

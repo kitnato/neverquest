@@ -3,7 +3,7 @@ import { type SetterOrUpdater, useRecoilValue } from "recoil";
 import { clearInterval, setInterval } from "worker-timers";
 
 import { FRAMERATE } from "@neverquest/data/general";
-import { isFlatlined } from "@neverquest/state/character";
+import { hasFlatlined } from "@neverquest/state/character";
 
 export function useTimerDelta({
   delta,
@@ -16,7 +16,7 @@ export function useTimerDelta({
   onDelta?: () => void;
   stop: boolean;
 }) {
-  const isFlatlinedValue = useRecoilValue(isFlatlined);
+  const hasFlatlinedValue = useRecoilValue(hasFlatlined);
 
   const interval = useRef(-1);
   const previousTime = useRef(0);
@@ -43,7 +43,7 @@ export function useTimerDelta({
   }, [hasTicked, onDelta]);
 
   useEffect(() => {
-    if (isFlatlinedValue || stop) {
+    if (hasFlatlinedValue || stop) {
       terminate();
     } else if (interval.current === -1) {
       interval.current = setInterval(() => {
@@ -66,5 +66,5 @@ export function useTimerDelta({
     }
 
     return terminate;
-  }, [delta, factor, isFlatlinedValue, stop]);
+  }, [delta, factor, hasFlatlinedValue, stop]);
 }

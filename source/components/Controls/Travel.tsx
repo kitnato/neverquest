@@ -6,7 +6,7 @@ import { LABEL_UNKNOWN } from "@neverquest/data/general";
 import { useToggleLocation } from "@neverquest/hooks/actions/useToggleLocation";
 import IconFinalTravel from "@neverquest/icons/final-travel.svg?react";
 import IconTravel from "@neverquest/icons/travel.svg?react";
-import { isAttacking, isFlatlined } from "@neverquest/state/character";
+import { hasFlatlined, isAttacking } from "@neverquest/state/character";
 import { encounter, location } from "@neverquest/state/encounter";
 import { encumbranceExtent } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
@@ -18,7 +18,7 @@ export function Travel() {
   const encumbranceExtentValue = useRecoilValue(encumbranceExtent);
   const hasLootedValue = useRecoilValue(hasLooted);
   const isAttackingValue = useRecoilValue(isAttacking);
-  const isFlatlinedValue = useRecoilValue(isFlatlined);
+  const hasFlatlinedValue = useRecoilValue(hasFlatlined);
   const isShowingLocation = useRecoilValue(isShowing("location"));
   const locationValue = useRecoilValue(location);
 
@@ -54,7 +54,7 @@ export function Travel() {
                 ? getAnimationClass({ animation: "pulse", isInfinite: true })
                 : undefined
             }
-            disabled={isAttackingValue || isFlatlinedValue || isOverEncumbered}
+            disabled={isAttackingValue || hasFlatlinedValue || isOverEncumbered}
             onClick={toggleLocation}
             variant="outline-dark"
           >

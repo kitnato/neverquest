@@ -30,11 +30,6 @@ import { isSkillAcquired } from "@neverquest/state/skills";
 import type { Reserve } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
-const RESERVE_CHANGE = {
-  health: useChangeHealth,
-  stamina: useChangeStamina,
-};
-
 export function Regeneration({ reserve }: { reserve: Reserve }) {
   const attributeStatisticFortitudeState = attributeStatistic("fortitude");
   const regenerateRateState = regenerationRate(reserve);
@@ -59,7 +54,10 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
     regenerationDeltaRate,
   } = RESERVES[reserve];
 
-  const changeReserve = RESERVE_CHANGE[reserve]();
+  const changeReserve = {
+    health: useChangeHealth,
+    stamina: useChangeStamina,
+  }[reserve]();
 
   useTimerDelta({
     delta: setRegenerationDuration,

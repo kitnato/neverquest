@@ -38,7 +38,7 @@ export function ConsumeCorpse() {
                   Icon={IconEssence}
                   iconProps={{ className: "small" }}
                 >
-                  <span>{formatNumber({ value: essence })}</span>
+                  <span>+{formatNumber({ value: essence })}</span>
                 </IconDisplay>
               </PopoverBody>
             </Popover>

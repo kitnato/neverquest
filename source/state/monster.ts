@@ -373,7 +373,7 @@ export const monsterName = withStateKey("monsterName", (key) =>
   }),
 );
 
-export const monsterRegenerationDelta = withStateKey("monsterRegenerationDelta", (key) =>
+export const monsterRegenerationDuration = withStateKey("monsterRegenerationDuration", (key) =>
   atom({
     default: Math.round(MONSTER_REGENERATION.duration / MONSTER_REGENERATION.ticks),
     effects: [handleLocalStorage({ key })],

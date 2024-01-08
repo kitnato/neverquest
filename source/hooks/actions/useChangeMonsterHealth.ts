@@ -13,6 +13,7 @@ import {
   monsterAttackDuration,
   monsterHealth,
   monsterHealthMaximum,
+  monsterRegenerationDuration,
 } from "@neverquest/state/monster";
 import type { DeltaDisplay, DeltaReserveBase } from "@neverquest/types/ui";
 import { formatNumber } from "@neverquest/utilities/formatters";
@@ -42,7 +43,8 @@ export function useChangeMonsterHealth() {
         const formattedValue = formatNumber({ value: totalValue });
         const monsterHealthValue = get(monsterHealth);
         const monsterHealthMaximumValue = get(monsterHealthMaximum);
-        const newHealth = Math.min(monsterHealthValue + totalValue, monsterHealthMaximumValue);
+
+        let newHealth = Math.min(monsterHealthValue + totalValue, monsterHealthMaximumValue);
 
         addDelta({
           contents:
@@ -56,10 +58,11 @@ export function useChangeMonsterHealth() {
         });
 
         if (newHealth <= 0) {
-          set(monsterHealth, 0);
+          newHealth = 0;
 
           reset(attackDuration);
           reset(monsterAttackDuration);
+          reset(monsterRegenerationDuration);
 
           if (get(ownedItem("ender hook")) === undefined) {
             set(lootingDuration, LOOTING_RATE);
@@ -129,9 +132,15 @@ export function useChangeMonsterHealth() {
               }
             }
           }
-        } else {
-          set(monsterHealth, newHealth);
         }
+
+        if (newHealth >= monsterHealthMaximumValue) {
+          newHealth = monsterHealthMaximumValue;
+
+          reset(monsterRegenerationDuration);
+        }
+
+        set(monsterHealth, newHealth);
       },
     [addDelta, progressQuest, progressStage],
   );

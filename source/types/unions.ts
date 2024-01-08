@@ -379,7 +379,7 @@ export type StateKey =
   | "monsterHealthMaximum"
   | "monsterLoot"
   | "monsterName"
-  | "monsterRegenerationDelta"
+  | "monsterRegenerationDuration"
   | "name"
   | "notifyOverEncumbrance"
   | "ownedItem"

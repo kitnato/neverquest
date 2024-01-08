@@ -13,6 +13,7 @@ export function MonsterHealthMeter() {
 
   return (
     <LabelledProgressBar
+      attachment="below"
       value={(monsterHealthValue / monsterHealthMaximumValue) * PERCENTAGE_POINTS}
       variant="dark"
     >

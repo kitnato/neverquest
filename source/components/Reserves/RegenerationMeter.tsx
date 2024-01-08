@@ -37,7 +37,7 @@ export function RegenerationMeter({ reserve }: { reserve: Reserve }) {
     >
       {(() => {
         if (isRecoveringValue) {
-          return "Recovering ...";
+          return <span>Recovering ...</span>;
         }
 
         if (regenerationProgress === 0) {
@@ -60,7 +60,7 @@ export function RegenerationMeter({ reserve }: { reserve: Reserve }) {
 
         return (
           <Stack>
-            {`Regenerating ${reserve}`}
+            <span>Regenerating&nbsp;{reserve}</span>
 
             <IconDisplay Icon={Icon} iconProps={{ className: "small" }}>
               <span>

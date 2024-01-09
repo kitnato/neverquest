@@ -4,8 +4,6 @@ import { useRecoilState, useResetRecoilState } from "recoil";
 import { IconImage } from "@neverquest/components/IconImage";
 import { CONSUMABLES, GEMS, INFUSABLES, TRINKETS } from "@neverquest/data/items";
 import IconArmor from "@neverquest/icons/armor.svg?react";
-import IconOneHanded from "@neverquest/icons/one-handed.svg?react";
-import IconRanged from "@neverquest/icons/ranged.svg?react";
 import IconShield from "@neverquest/icons/shield.svg?react";
 import IconUnknown from "@neverquest/icons/unknown.svg?react";
 import { acquiredItems } from "@neverquest/state/inventory";
@@ -14,12 +12,11 @@ import {
   isConsumableItem,
   isGemItem,
   isInfusableItem,
-  isMelee,
   isShield,
   isTrinketItem,
   isWeapon,
 } from "@neverquest/types/type-guards";
-import { getAnimationClass } from "@neverquest/utilities/getters";
+import { getAnimationClass, getWeaponIcon } from "@neverquest/utilities/getters";
 
 export function ItemAcquisition() {
   const [acquiredItemsValue, setAcquiredItems] = useRecoilState(acquiredItems);
@@ -73,11 +70,7 @@ export function ItemAcquisition() {
                 }
 
                 if (isWeapon(acquiredItem)) {
-                  if (isMelee(acquiredItem)) {
-                    return IconOneHanded;
-                  }
-
-                  return IconRanged;
+                  return getWeaponIcon(acquiredItem);
                 }
 
                 return IconUnknown;

@@ -187,7 +187,7 @@ export const ROUTINE_TYPES = [
   "warpingWilderness",
   "warpingCaravan",
   "flatlining",
-  "consumingCorpse",
+  "scavengingCorpse",
   "hiring",
   "hiringAll",
   "crafting",
@@ -442,7 +442,7 @@ export type Trait = (typeof TRAIT_TYPES)[number];
 
 export const TRINKET_TYPES = [
   "ammunition pouch",
-  "antique coin",
+  "memento",
   "compass",
   "ender hook",
   "hearthstone",
@@ -469,7 +469,7 @@ export const TRIUMPH_TYPES = [
   "skillsAll",
   "masteriesAll",
   "traitsAll",
-  "acquiringAntiqueCoin",
+  "acquiringMemento",
   "killingResDominus",
   "visitingVoid",
   "powerLevelUltra",

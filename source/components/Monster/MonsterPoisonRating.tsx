@@ -35,7 +35,8 @@ export function MonsterPoisonRating() {
 
                     <td>
                       <span>
-                        {formatNumber({ format: "percentage", value: poisonChanceValue })}
+                        {formatNumber({ format: "percentage", value: poisonChanceValue })}&nbsp; on
+                        hit
                       </span>
                     </td>
                   </tr>

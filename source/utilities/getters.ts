@@ -37,6 +37,10 @@ import {
   GEM_FITTING_COST_RANGE,
 } from "@neverquest/data/items";
 import { QUESTS } from "@neverquest/data/quests";
+import IconHand from "@neverquest/icons/hand.svg?react";
+import IconOneHanded from "@neverquest/icons/one-handed.svg?react";
+import IconRanged from "@neverquest/icons/ranged.svg?react";
+import IconTwoHanded from "@neverquest/icons/two-handed.svg?react";
 import type {
   Armor,
   GearItem,
@@ -52,7 +56,9 @@ import {
   isArmor,
   isConquest,
   isGearItem,
+  isMelee,
   isRoutine,
+  isUnarmed,
   isWeapon,
 } from "@neverquest/types/type-guards";
 import type { Animation, AnimationSpeed } from "@neverquest/types/ui";
@@ -400,4 +406,14 @@ export function getTotalElementalEffects({
 // https://en.wikipedia.org/wiki/Triangular_number
 export function getTriangular(x: number) {
   return (x * (x + 1)) / 2;
+}
+
+export function getWeaponIcon(weapon: Weapon | typeof WEAPON_NONE) {
+  return isUnarmed(weapon)
+    ? IconHand
+    : isMelee(weapon)
+      ? weapon.grip === "one-handed"
+        ? IconOneHanded
+        : IconTwoHanded
+      : IconRanged;
 }

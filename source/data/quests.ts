@@ -56,12 +56,6 @@ export const QUESTS: Record<
     title: string;
   }
 > = {
-  acquiringAntiqueCoin: {
-    description: "Acquire the antique coin.",
-    progression: [1],
-    requiresTracking: false,
-    title: "Now what?",
-  },
   acquiringArcheryFirst: {
     description: "Acquire archery as the first skill.",
     progression: [1],
@@ -80,6 +74,12 @@ export const QUESTS: Record<
     progression: [1, 10, 25],
     requiresTracking: true,
     title: "Shiny",
+  },
+  acquiringMemento: {
+    description: "Acquire the memento.",
+    progression: [1],
+    requiresTracking: false,
+    title: "Now what?",
   },
   acquiringRanged: {
     description: "Acquire a ranged weapon.",
@@ -152,12 +152,6 @@ export const QUESTS: Record<
     progression: [0],
     requiresTracking: true,
     title: "Completionist",
-  },
-  consumingCorpse: {
-    description: "Consume @ corpse(s).",
-    progression: [1, 3, 5],
-    requiresTracking: true,
-    title: "Necrophage",
   },
   crafting: {
     description: "Craft @ items.",
@@ -481,6 +475,12 @@ export const QUESTS: Record<
     progression: [3, 6, TRAIT_TYPES.length],
     requiresTracking: false,
     title: "Getting too old for this",
+  },
+  scavengingCorpse: {
+    description: "Scavenge @ corpse(s).",
+    progression: [1, 3, 5],
+    requiresTracking: true,
+    title: "Necrophage",
   },
   selling: {
     description: "Sell an item.",

@@ -2,11 +2,7 @@ import { Dropdown } from "react-bootstrap";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import {
-  CLASS_FULL_WIDTH_JUSTIFIED,
-  LABEL_MAXIMUM,
-  LABEL_NO_ESSENCE,
-} from "@neverquest/data/general";
+import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_MAXIMUM } from "@neverquest/data/general";
 import { GEMS_MAXIMUM } from "@neverquest/data/items";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
@@ -101,15 +97,13 @@ export function ApplyGem({ gem }: { gem: GemItem }) {
                 <span>{capitalizeAll(name)}</span>
 
                 <div className="ms-2">
-                  {canApply && (
+                  {canFit ? (
                     <IconDisplay Icon={IconEssence} iconProps={{ className: "small" }}>
                       <span>{getGemFittingCost(gemsFitted)}</span>
                     </IconDisplay>
+                  ) : (
+                    <span>{LABEL_MAXIMUM}</span>
                   )}
-
-                  {!canFit && <span>{LABEL_MAXIMUM}</span>}
-
-                  {canFit && !isAffordable && <span>{LABEL_NO_ESSENCE}</span>}
                 </div>
               </div>
             </Dropdown.Item>

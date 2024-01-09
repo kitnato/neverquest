@@ -1,3 +1,4 @@
+import { RETIREMENT_STAGE_MINIMUM } from "./general";
 import { AILMENT_PENALTY } from "@neverquest/data/statistics";
 import type { MonsterAilment } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
@@ -42,8 +43,8 @@ export const BLIGHT = {
 };
 
 export const ESSENCE = {
-  attenuation: 9,
-  base: 5,
+  attenuation: 12,
+  base: 4,
   bonus: 0.02,
   boss: 1.15,
   finality: 7777,
@@ -62,16 +63,26 @@ export const MONSTER_DAMAGE = {
   attenuation: 18,
   base: 7,
   bonus: 0.01,
-  boss: 1.1,
+  boss: 1.15,
   finality: 4747,
+  menace: {
+    maximum: 0.5,
+    minimum: 0.1,
+    requiredStage: RETIREMENT_STAGE_MINIMUM,
+  },
 };
 
 export const MONSTER_HEALTH = {
-  attenuation: 28,
+  attenuation: 27,
   base: 15,
   bonus: 0.01,
   boss: 1.8,
   finality: 17_777,
+  menace: {
+    maximum: 0.7,
+    minimum: 0.2,
+    requiredStage: RETIREMENT_STAGE_MINIMUM,
+  },
 };
 
 export const MONSTER_REGENERATION = {

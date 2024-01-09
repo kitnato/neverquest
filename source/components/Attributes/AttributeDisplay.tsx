@@ -6,7 +6,12 @@ import { AttributeRank } from "@neverquest/components/Attributes/AttributeRank";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
-import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_MAXIMUM, LABEL_UNKNOWN } from "@neverquest/data/general";
+import {
+  CLASS_FULL_WIDTH_JUSTIFIED,
+  LABEL_MAXIMUM,
+  LABEL_SKILL_REQUIRED,
+  LABEL_UNKNOWN,
+} from "@neverquest/data/general";
 import { useIncreaseAttribute } from "@neverquest/hooks/actions/useIncreaseAttribute";
 import IconWait from "@neverquest/icons/hourglass.svg?react";
 import IconIncrease from "@neverquest/icons/increase.svg?react";
@@ -74,11 +79,7 @@ export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
   }
 
   return (
-    <IconDisplay
-      description="Unlocked by acquiring a skill."
-      Icon={IconUnknown}
-      tooltip="Attribute"
-    >
+    <IconDisplay description={LABEL_SKILL_REQUIRED} Icon={IconUnknown} tooltip="Attribute">
       <span>{LABEL_UNKNOWN}</span>
     </IconDisplay>
   );

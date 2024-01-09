@@ -62,13 +62,13 @@ export function Protection() {
                   <DetailsTable>
                     <tr>
                       <td>
-                        <span>Armor:</span>
+                        <IconDisplay Icon={IconArmor} iconProps={{ className: "small" }}>
+                          <span>Armor:</span>
+                        </IconDisplay>
                       </td>
 
                       <td>
-                        <IconDisplay Icon={IconArmor} iconProps={{ className: "small" }}>
-                          <span>{formatNumber({ value: armorProtection })}</span>
-                        </IconDisplay>
+                        <span>{formatNumber({ value: armorProtection })}</span>
                       </td>
                     </tr>
 
@@ -100,7 +100,7 @@ export function Protection() {
                       <tr>
                         <td>
                           <IconDisplay Icon={IconBurden} iconProps={{ className: "small" }}>
-                            <span>When damaged:</span>
+                            <span>When struck:</span>
                           </IconDisplay>
                         </td>
 

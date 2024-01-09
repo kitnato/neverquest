@@ -24,8 +24,9 @@ export function useChangeStamina() {
           : deltaReserve.value;
         const formattedValue = formatNumber({ value });
         const isPositive = value > 0;
-        const newStamina = get(stamina) + value;
         const staminaMaximumBlightedValue = get(staminaMaximumBlighted);
+
+        let newStamina = get(stamina) + value;
 
         addDelta({
           contents:
@@ -41,11 +42,11 @@ export function useChangeStamina() {
         });
 
         if (newStamina <= 0) {
-          set(stamina, 0);
+          newStamina = 0;
         }
 
         if (newStamina >= staminaMaximumBlightedValue) {
-          set(stamina, staminaMaximumBlightedValue);
+          newStamina = staminaMaximumBlightedValue;
           reset(regenerationDuration("stamina"));
         }
 

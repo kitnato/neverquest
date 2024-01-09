@@ -43,15 +43,15 @@ export function CombatRange() {
                   <DetailsTable>
                     <tr>
                       <td>
-                        <span>Weapon:</span>
+                        <IconDisplay Icon={IconRanged} iconProps={{ className: "small" }}>
+                          <span>Weapon:</span>
+                        </IconDisplay>
                       </td>
 
                       <td>
-                        <IconDisplay Icon={IconRanged} iconProps={{ className: "small" }}>
-                          <span>
-                            {formatNumber({ format: "time", value: (weaponValue as Ranged).range })}
-                          </span>
-                        </IconDisplay>
+                        <span>
+                          {formatNumber({ format: "time", value: (weaponValue as Ranged).range })}
+                        </span>
                       </td>
                     </tr>
 

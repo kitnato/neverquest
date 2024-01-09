@@ -63,7 +63,7 @@ export function CrewHirable({ crew }: { crew: Crew }) {
   if (hireStatusValue === "hidden") {
     return (
       <IconDisplay
-        description={`Unlocks at stage ${requiredStage}.`}
+        description={`Found on stage ${requiredStage}.`}
         Icon={IconUnknown}
         tooltip="Caravan crew"
       >

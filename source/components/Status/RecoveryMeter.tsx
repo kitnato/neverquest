@@ -1,5 +1,7 @@
+import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { PERCENTAGE_POINTS } from "@neverquest/data/general";
 import { isRecovering, recoveryDuration } from "@neverquest/state/character";
@@ -20,9 +22,13 @@ export function RecoveryMeter() {
       }
       variant="secondary"
     >
-      <span>
-        {formatNumber({ format: "time", value: recoveryDurationValue || recoveryRateValue })}
-      </span>
+      <Stack direction="horizontal" gap={1}>
+        <span>
+          {formatNumber({ format: "time", value: recoveryDurationValue || recoveryRateValue })}
+        </span>
+
+        <DeltasDisplay delta="recoveryRate" />
+      </Stack>
     </LabelledProgressBar>
   );
 }

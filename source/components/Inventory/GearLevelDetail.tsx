@@ -12,7 +12,7 @@ import { formatNumber } from "@neverquest/utilities/formatters";
 export function GearLevelDetail({ comparison, level }: { comparison: Comparison; level: number }) {
   const showGearLevelValue = useRecoilValue(showGearLevel);
 
-  if (showGearLevelValue) {
+  if (showGearLevelValue && level > 0) {
     return (
       <tr>
         <td>

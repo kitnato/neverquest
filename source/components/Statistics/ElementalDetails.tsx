@@ -4,6 +4,7 @@ import { useRecoilValue } from "recoil";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LABEL_SEPARATOR } from "@neverquest/data/general";
 import { ELEMENTALS, GEMS } from "@neverquest/data/items";
+import IconElemental from "@neverquest/icons/elemental.svg?react";
 import { armor, elementalEffects, gems, weapon } from "@neverquest/state/gear";
 import type { GearItem, GearItemUnequipped } from "@neverquest/types";
 import { formatNumber } from "@neverquest/utilities/formatters";
@@ -19,7 +20,9 @@ export function ElementalDetails({ slot }: { slot: "armor" | "weapon" }) {
     return (
       <tr>
         <td>
-          <span>Elemental:</span>
+          <IconDisplay Icon={IconElemental} iconProps={{ className: "small" }}>
+            <span>Elemental:</span>
+          </IconDisplay>
         </td>
 
         <td>
@@ -34,7 +37,7 @@ export function ElementalDetails({ slot }: { slot: "armor" | "weapon" }) {
 
               return (
                 <Stack direction="horizontal" gap={1} key={ID}>
-                  <span className={color}>+{damage}</span>
+                  <span className={color}>+{formatNumber({ value: damage })}</span>
 
                   {LABEL_SEPARATOR}
 

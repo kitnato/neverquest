@@ -47,7 +47,7 @@ export const ARMOR_SPECIFICATIONS: Record<
     price: { maximum: 12_000, minimum: 50 },
     protection: [
       { maximum: 10, minimum: 8 },
-      { maximum: 3500, minimum: 3000 },
+      { maximum: 2500, minimum: 2400 },
     ],
     weight: [
       { maximum: 7, minimum: 5 },
@@ -83,7 +83,7 @@ export const ARMOR_SPECIFICATIONS: Record<
     price: { maximum: 8000, minimum: 25 },
     protection: [
       { maximum: 6, minimum: 4 },
-      { maximum: 2500, minimum: 2200 },
+      { maximum: 2000, minimum: 1900 },
     ],
     weight: [
       { maximum: 5, minimum: 3 },

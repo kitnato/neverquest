@@ -123,14 +123,22 @@ svg {
   z-index: calc($zindex-modal-backdrop + 1);
 }
 
+// Workaround for https://github.com/react-bootstrap/react-bootstrap/issues/6563.
 .popover,
 .tooltip {
-  position: fixed; // Workaround for https://github.com/react-bootstrap/react-bootstrap/issues/6563
+  position: fixed;
+}
 
-  // Tooltip doesn't have a box-shadow variable, and $popover-box-shadow doesn't control this way.
-  &.show,
-  &.show > .tooltip-inner {
-    box-shadow: 0 0 4px 1px rgb(0 0 0 / 20%);
+// Tooltip doesn't have a box-shadow variable, and $popover-box-shadow doesn't control this way.
+.popover.show {
+  box-shadow: 0 0 4px 1px rgb(0 0 0 / 20%);
+}
+
+.tooltip-inner {
+  box-shadow: 0 0 4px 1px rgb(0 0 0 / 30%);
+
+  .icon-display {
+    justify-content: center;
   }
 }
 
@@ -179,10 +187,6 @@ svg {
   &:nth-child(2) {
     vertical-align: middle;
   }
-}
-
-.tooltip.tooltip.show > .tooltip-inner .icon-display {
-  justify-content: center;
 }
 
 .text-blue {

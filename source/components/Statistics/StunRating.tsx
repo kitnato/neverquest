@@ -12,12 +12,12 @@ import { weapon } from "@neverquest/state/gear";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import { stunRating } from "@neverquest/state/statistics";
 import { formatNumber } from "@neverquest/utilities/formatters";
-import { getAnimationClass } from "@neverquest/utilities/getters";
+import { getAnimationClass, getWeaponIcon } from "@neverquest/utilities/getters";
 
 export function StunRating() {
   const mightValue = useRecoilValue(masteryStatistic("might"));
   const stunRatingValue = useRecoilValue(stunRating);
-  const { abilityChance } = useRecoilValue(weapon);
+  const weaponValue = useRecoilValue(weapon);
 
   useDeltaText({
     delta: "stunRating",
@@ -40,13 +40,21 @@ export function StunRating() {
                   <DetailsTable>
                     <tr>
                       <td>
-                        <span>Chance:</span>
+                        <IconDisplay
+                          Icon={getWeaponIcon(weaponValue)}
+                          iconProps={{ className: "small" }}
+                        >
+                          <span>Chance:</span>
+                        </IconDisplay>
                       </td>
 
                       <td>
                         <IconDisplay Icon={IconStun} iconProps={{ className: "small" }}>
                           <span>
-                            {formatNumber({ format: "percentage", value: abilityChance })}
+                            {formatNumber({
+                              format: "percentage",
+                              value: weaponValue.abilityChance,
+                            })}
                           </span>
                         </IconDisplay>
                       </td>

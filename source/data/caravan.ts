@@ -40,17 +40,16 @@ export const CREW: Record<
   }
 > = {
   alchemist: {
-    description: "Converts gems between one another and teaches venerable techniques.",
+    description: "Converts gems between one another and may teach venerable techniques.",
     Icon: IconAlchemist,
-    interaction: "Transmute",
+    interaction: "Visit",
     monologues: {
       1: "Things are not always what they seem.",
-      34: "Come across any arcane writs lately?",
       [GROWTH_MAXIMUM]: MONOLOGUE_EMPTY,
       [LEVELLING_MAXIMUM]: "Nothing makes any sense.",
     },
     price: 400,
-    requiredStage: 30,
+    requiredStage: 24,
   },
   blacksmith: {
     description: "Crafts superior armor, weapons and shields.",
@@ -74,7 +73,7 @@ export const CREW: Record<
       [LEVELLING_MAXIMUM]: "There's too many of them.",
     },
     price: 150,
-    requiredStage: 20,
+    requiredStage: 18,
   },
   medic: {
     description: "Heals wounds and sells bandages.",
@@ -149,17 +148,16 @@ export const CREW: Record<
       [LEVELLING_MAXIMUM]: "I can't see any more.",
     },
     price: 650,
-    requiredStage: 35,
+    requiredStage: 27,
   },
   tailor: {
     description: "Expands inventory space.",
     Icon: IconTailor,
-    interaction: "Tailoring",
+    interaction: "Stitch",
     monologues: {
-      1: "Allow me to deepen your pockets.",
+      1: "Always leave some extra space for unexpected finds.",
       [GROWTH_MAXIMUM]: MONOLOGUE_EMPTY,
       [LEVELLING_MAXIMUM]: "Fate has been mis-weaved.",
-      [RETIREMENT_STAGE_MINIMUM]: "Always leave some extra space for unexpected finds.",
     },
     price: 35,
     requiredStage: 8,
@@ -174,7 +172,7 @@ export const CREW: Record<
       [LEVELLING_MAXIMUM]: "The spirits have gone silent.",
     },
     price: 300,
-    requiredStage: 25,
+    requiredStage: 21,
   },
 };
 
@@ -246,27 +244,23 @@ export const MERCHANT_OFFERS: Record<
     item: TRINKETS.hearthstone.item,
     monologue: "A trinket that allows safe passage. Would that be of interest?",
   },
-  20: {
-    item: INFUSABLES["monkey paw"].item,
-    monologue: "I recently came into possession of a fine curiosity.",
-  },
   [CREW.fletcher.requiredStage]: {
     item: TRINKETS["ammunition pouch"].item,
     monologue: "I have something suitable for marksmen.",
   },
+  25: {
+    item: INFUSABLES["monkey paw"].item,
+    monologue: "I recently came into possession of a fine curiosity.",
+  },
   30: {
     item: INFUSABLES["tome of power"].item,
-    monologue: "A dark wanderer passed by and sold me a strange book ...",
+    monologue: "A dark wanderer passed through and sold me a strange book ...",
   },
   35: {
     item: TRINKETS["ender hook"].item,
     monologue: "I've happened upon an artifact to ease your grind.",
   },
   39: { item: TRINKETS.journal.item, monologue: "You wouldn't be a scribe, would you?" },
-  70: {
-    item: TRINKETS["antique coin"].item,
-    monologue: "Extraordinary discoveries reveal themselves only to the lucky few.",
-  },
 };
 
 export const TAILORING = {

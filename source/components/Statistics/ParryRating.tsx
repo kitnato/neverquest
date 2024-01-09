@@ -10,15 +10,17 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconFinesse from "@neverquest/icons/finesse.svg?react";
 import IconParryRating from "@neverquest/icons/parry-rating.svg?react";
 import IconParry from "@neverquest/icons/parry.svg?react";
+import { weapon } from "@neverquest/state/gear";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import { parryChance, parryRating } from "@neverquest/state/statistics";
 import { formatNumber } from "@neverquest/utilities/formatters";
-import { getAnimationClass } from "@neverquest/utilities/getters";
+import { getAnimationClass, getWeaponIcon } from "@neverquest/utilities/getters";
 
 export function ParryRating() {
   const finesseValue = useRecoilValue(masteryStatistic("finesse"));
   const parryChanceValue = useRecoilValue(parryChance);
   const parryRatingValue = useRecoilValue(parryRating);
+  const weaponValue = useRecoilValue(weapon);
 
   useDeltaText({
     delta: "parryRating",
@@ -41,7 +43,12 @@ export function ParryRating() {
                   <DetailsTable>
                     <tr>
                       <td>
-                        <span>Chance on hit:</span>
+                        <IconDisplay
+                          Icon={getWeaponIcon(weaponValue)}
+                          iconProps={{ className: "small" }}
+                        >
+                          <span>Chance:</span>
+                        </IconDisplay>
                       </td>
 
                       <td>

@@ -11,10 +11,11 @@ import IconBleed from "@neverquest/icons/bleed.svg?react";
 import IconBleeding from "@neverquest/icons/bleeding.svg?react";
 import IconCruelty from "@neverquest/icons/cruelty.svg?react";
 import { bleed, bleedChance } from "@neverquest/state/ailments";
+import { weapon } from "@neverquest/state/gear";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import { bleedRating, damage } from "@neverquest/state/statistics";
 import { formatNumber } from "@neverquest/utilities/formatters";
-import { getAnimationClass } from "@neverquest/utilities/getters";
+import { getAnimationClass, getWeaponIcon } from "@neverquest/utilities/getters";
 
 export function BleedRating() {
   const { duration } = useRecoilValue(bleed);
@@ -22,6 +23,7 @@ export function BleedRating() {
   const bleedRatingValue = useRecoilValue(bleedRating);
   const damageValue = useRecoilValue(damage);
   const masteryStatisticCruelty = useRecoilValue(masteryStatistic("cruelty"));
+  const weaponValue = useRecoilValue(weapon);
 
   useDeltaText({
     delta: "bleedRating",
@@ -44,7 +46,12 @@ export function BleedRating() {
                   <DetailsTable>
                     <tr>
                       <td>
-                        <span>Chance on hit:</span>
+                        <IconDisplay
+                          Icon={getWeaponIcon(weaponValue)}
+                          iconProps={{ className: "small" }}
+                        >
+                          <span>Chance:</span>
+                        </IconDisplay>
                       </td>
 
                       <td>

@@ -114,7 +114,7 @@ export const SKILLS: Record<
     trainer: "mercenary",
   },
   meditation: {
-    description: "Grants the ancient technique of artifact # infusion.",
+    description: "Grants the ancient technique of relic # infusion.",
     descriptionIcons: [IconInfusionLevel],
     Icon: IconMeditation,
     isInheritable: true,

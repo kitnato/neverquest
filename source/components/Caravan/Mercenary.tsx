@@ -1,7 +1,6 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { Skills } from "@neverquest/components/Skills";
 import { TrainableSkill } from "@neverquest/components/Skills/TrainableSkill";
 import { LABEL_NONE_AVAILABLE } from "@neverquest/data/general";
 import { SKILLS } from "@neverquest/data/skills";
@@ -16,22 +15,14 @@ export function Mercenary() {
   );
 
   return (
-    <Stack gap={5}>
-      <Stack gap={3}>
-        <h6>Acquire skills</h6>
+    <Stack gap={3}>
+      <h6>Acquire skills</h6>
 
-        {trainableSkills.length === 0 ? (
-          <span className="fst-italic">{LABEL_NONE_AVAILABLE}</span>
-        ) : (
-          trainableSkills.map((skill) => <TrainableSkill key={skill} skill={skill} />)
-        )}
-      </Stack>
-
-      <Stack gap={3}>
-        <h6>Trained skills</h6>
-
-        <Skills />
-      </Stack>
+      {trainableSkills.length === 0 ? (
+        <span className="fst-italic">{LABEL_NONE_AVAILABLE}</span>
+      ) : (
+        trainableSkills.map((skill) => <TrainableSkill key={skill} skill={skill} />)
+      )}
     </Stack>
   );
 }

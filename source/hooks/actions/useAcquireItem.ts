@@ -49,8 +49,8 @@ export function useAcquireItem() {
         }
 
         if (isTrinketItem(item)) {
-          if (item.name === "antique coin") {
-            progressQuest({ quest: "acquiringAntiqueCoin" });
+          if (item.name === "memento") {
+            progressQuest({ quest: "acquiringMemento" });
           }
 
           if (item.name === "familiar") {

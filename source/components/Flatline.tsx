@@ -87,7 +87,7 @@ export function Flatline() {
           }}
           variant="outline-dark"
         >
-          Retry
+          Rebirth
         </Button>
       </ModalFooter>
     </Modal>

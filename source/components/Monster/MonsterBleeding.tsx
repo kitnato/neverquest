@@ -13,6 +13,7 @@ import {
   monsterAilmentDuration,
 } from "@neverquest/state/monster";
 import { bleedDamage } from "@neverquest/state/statistics";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function MonsterBleeding() {
   const { duration } = useRecoilValue(bleed);
@@ -49,7 +50,11 @@ export function MonsterBleeding() {
 
   if (canReceiveAilmentBleeding) {
     return (
-      <IconDisplay Icon={IconBleeding} tooltip="Bleeding">
+      <IconDisplay
+        className={getAnimationClass({ animation: "flipInX" })}
+        Icon={IconBleeding}
+        tooltip="Bleeding"
+      >
         <MonsterAilmentMeter ailment="bleeding" totalDuration={duration} />
       </IconDisplay>
     );

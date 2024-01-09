@@ -1,12 +1,7 @@
 import { nanoid } from "nanoid";
 import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
-import {
-  GEM_DROP_CHANCE,
-  INFUSABLES,
-  TORN_MANUSCRIPT_DROP_CHANCE,
-  TRINKETS,
-} from "@neverquest/data/items";
+import { GEM_DROP_CHANCE, INFUSABLES, TRINKETS, TRINKET_DROP_CHANCE } from "@neverquest/data/items";
 import {
   BLIGHT,
   BOSS_STAGE_INTERVAL,
@@ -31,7 +26,6 @@ import {
 } from "@neverquest/state/encounter";
 import { ownedItem } from "@neverquest/state/inventory";
 import { infusionEffect } from "@neverquest/state/items";
-import { isSkillAcquired } from "@neverquest/state/skills";
 import { range } from "@neverquest/state/statistics";
 import { FINALITY_TYPES, type MonsterAilment } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
@@ -147,7 +141,14 @@ export const monsterAttackRate = withStateKey("monsterAttackRate", (key) =>
 export const monsterDamage = withStateKey("monsterDamage", (key) =>
   selector({
     get: ({ get }) => {
-      const { attenuation, base, bonus, boss, finality } = MONSTER_DAMAGE;
+      const {
+        attenuation,
+        base,
+        bonus,
+        boss,
+        finality,
+        menace: { maximum, minimum, requiredStage },
+      } = MONSTER_DAMAGE;
       const encounterValue = get(encounter);
       const stageValue = get(stage);
       const factor = getTriangular(stageValue) / attenuation;
@@ -159,7 +160,16 @@ export const monsterDamage = withStateKey("monsterDamage", (key) =>
       return Math.round(
         (base + base * factor * (1 + get(progress) * bonus)) *
           (encounterValue === "boss" ? boss : 1) *
-          (1 + stageValue / 100),
+          (1 +
+            (stageValue >= requiredStage
+              ? getFromRange({
+                  factor: getSigmoid(
+                    getLinearMapping({ offset: requiredStage, stage: stageValue }),
+                  ),
+                  maximum,
+                  minimum,
+                })
+              : 0)),
       );
     },
     key,
@@ -197,7 +207,14 @@ export const monsterDamageAilingPerSecond = withStateKey("monsterDamageAilingPer
 export const monsterHealthMaximum = withStateKey("monsterHealthMaximum", (key) =>
   selector({
     get: ({ get }) => {
-      const { attenuation, base, bonus, boss, finality } = MONSTER_HEALTH;
+      const {
+        attenuation,
+        base,
+        bonus,
+        boss,
+        finality,
+        menace: { maximum, minimum, requiredStage },
+      } = MONSTER_HEALTH;
       const encounterValue = get(encounter);
       const stageValue = get(stage);
       const factor = getTriangular(stageValue) / attenuation;
@@ -209,7 +226,16 @@ export const monsterHealthMaximum = withStateKey("monsterHealthMaximum", (key) =
       return Math.round(
         (base + base * factor * (1 + get(progress) * bonus)) *
           (encounterValue === "boss" ? boss : 1) *
-          (1 + stageValue / 100),
+          (1 +
+            (stageValue >= requiredStage
+              ? getFromRange({
+                  factor: getSigmoid(
+                    getLinearMapping({ offset: requiredStage, stage: stageValue }),
+                  ),
+                  maximum,
+                  minimum,
+                })
+              : 0)),
       );
     },
     key,
@@ -223,7 +249,6 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
 
       const encounterValue = get(encounter);
       const merchantInventoryValue = get(merchantInventory);
-      const ownedItemMysteriousEgg = get(ownedItem("mysterious egg"));
       const stageValue = get(stage);
       const stageMaximumValue = get(stageMaximum);
 
@@ -250,23 +275,35 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
                 .reduce<number>((sum, gemCount) => sum + gemCount, 0)
             : 0,
         trinket:
-          // Mysterious egg drops only if Res Dominus has just been defeated while carrying the antique coin and if the egg nor the familiar is neither carried nor sold.
-          get(ownedItem("antique coin")) !== undefined &&
-          encounterValue === "res dominus" &&
-          ownedItemMysteriousEgg === undefined &&
-          get(ownedItem("familiar")) === undefined &&
-          !merchantInventoryValue.some(({ name }) => name === "mysterious egg")
-            ? { ...INFUSABLES["mysterious egg"].item, ID: nanoid() }
-            : // Torn manuscript drops only if it's not currently carried or sold, the antique coin & mysterious egg are both carried, it can't yet be infused and if the drop chance is reached.
-              get(ownedItem("antique coin")) !== undefined &&
-                !get(isSkillAcquired("meditation")) &&
-                ownedItemMysteriousEgg !== undefined &&
-                !merchantInventoryValue.some(({ name }) => name === "torn manuscript") &&
-                get(ownedItem("torn manuscript")) === undefined &&
-                Math.random() <=
-                  getFromRange({ factor: getSigmoid(stageValue), ...TORN_MANUSCRIPT_DROP_CHANCE })
-              ? { ...TRINKETS["torn manuscript"].item, ID: nanoid() }
-              : undefined,
+          encounterValue === "boss"
+            ? undefined
+            : // Mysterious egg drops if Res Dominus has just been defeated while carrying the memento and only if the egg and the familiar are neither carried nor sold.
+              get(ownedItem("memento")) !== undefined &&
+                encounterValue === "res dominus" &&
+                get(ownedItem("mysterious egg")) === undefined &&
+                get(ownedItem("familiar")) === undefined &&
+                !merchantInventoryValue.some(({ name }) => name === "mysterious egg")
+              ? { ...INFUSABLES["mysterious egg"].item, ID: nanoid() }
+              : // Torn manuscript drops if it's neither currently carried nor sold, if the memento is carried, and if the drop chance is reached.
+                get(ownedItem("memento")) !== undefined &&
+                  !merchantInventoryValue.some(({ name }) => name === "torn manuscript") &&
+                  get(ownedItem("torn manuscript")) === undefined &&
+                  Math.random() <=
+                    getFromRange({
+                      factor: getSigmoid(stageValue),
+                      ...TRINKET_DROP_CHANCE["torn manuscript"],
+                    })
+                ? { ...TRINKETS["torn manuscript"].item, ID: nanoid() }
+                : // Memento drops if it's neither currently carried nor sold and if the drop chance is reached.
+                  get(ownedItem("memento")) === undefined &&
+                    !merchantInventoryValue.some(({ name }) => name === "memento") &&
+                    Math.random() <=
+                      getFromRange({
+                        factor: getSigmoid(stageValue),
+                        ...TRINKET_DROP_CHANCE.memento,
+                      })
+                  ? { ...TRINKETS.memento.item, ID: nanoid() }
+                  : undefined,
       };
     },
     key,

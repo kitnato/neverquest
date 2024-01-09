@@ -7,7 +7,7 @@ export const AFFIX_STRUCTURE_WEIGHTS: [AffixStructure, number][] = [
   ["prefix", 0.65],
 ];
 
-export const CORPSE_TAX = 0.25;
+export const CORPSE_TAX = 0.4;
 
 export const PROGRESS = {
   maximum: 30,

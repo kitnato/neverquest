@@ -5,6 +5,7 @@ import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
+import IconShield from "@neverquest/icons/shield.svg?react";
 import IconStability from "@neverquest/icons/stability.svg?react";
 import IconStaggerRating from "@neverquest/icons/stagger-rating.svg?react";
 import IconStagger from "@neverquest/icons/stagger.svg?react";
@@ -40,7 +41,9 @@ export function StaggerRating() {
                   <DetailsTable>
                     <tr>
                       <td>
-                        <span>Chance:</span>
+                        <IconDisplay Icon={IconShield} iconProps={{ className: "small" }}>
+                          <span>Chance:</span>
+                        </IconDisplay>
                       </td>
 
                       <td>

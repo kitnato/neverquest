@@ -41,7 +41,8 @@ export function MonsterBlightRating() {
 
                     <td>
                       <span>
-                        {formatNumber({ format: "percentage", value: blightChanceValue })}
+                        {formatNumber({ format: "percentage", value: blightChanceValue })}&nbsp;on
+                        hit (if poisoned)
                       </span>
                     </td>
                   </tr>

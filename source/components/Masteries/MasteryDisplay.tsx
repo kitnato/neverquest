@@ -5,7 +5,7 @@ import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { MasteryProgress } from "@neverquest/components/Masteries/MasteryProgress";
 import { MasteryRank } from "@neverquest/components/Masteries/MasteryRank";
-import { LABEL_UNKNOWN } from "@neverquest/data/general";
+import { LABEL_SKILL_REQUIRED, LABEL_UNKNOWN } from "@neverquest/data/general";
 import { MASTERIES } from "@neverquest/data/masteries";
 import IconUnknown from "@neverquest/icons/unknown.svg?react";
 import { canTrainMastery } from "@neverquest/state/masteries";
@@ -51,11 +51,7 @@ export function MasteryDisplay({ mastery }: { mastery: Mastery }) {
           </OverlayTrigger>
         </IconDisplay>
       ) : (
-        <IconDisplay
-          description="Unlocked by acquiring a skill."
-          Icon={IconUnknown}
-          tooltip="Mastery"
-        >
+        <IconDisplay description={LABEL_SKILL_REQUIRED} Icon={IconUnknown} tooltip="Mastery">
           <span>{LABEL_UNKNOWN}</span>
         </IconDisplay>
       )}

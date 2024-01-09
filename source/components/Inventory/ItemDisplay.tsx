@@ -9,20 +9,17 @@ import { ShieldName } from "@neverquest/components/Inventory/Offhand/ShieldName"
 import { WeaponName } from "@neverquest/components/Inventory/Weapon/WeaponName";
 import { CONSUMABLES, GEMS, INFUSABLES, TRINKETS } from "@neverquest/data/items";
 import IconArmor from "@neverquest/icons/armor.svg?react";
-import IconOneHanded from "@neverquest/icons/one-handed.svg?react";
-import IconRanged from "@neverquest/icons/ranged.svg?react";
 import IconShield from "@neverquest/icons/shield.svg?react";
-import IconTwoHanded from "@neverquest/icons/two-handed.svg?react";
 import type { InventoryItem } from "@neverquest/types";
 import {
   isArmor,
   isConsumableItem,
   isInfusableItem,
-  isMelee,
   isShield,
   isTrinketItem,
   isWeapon,
 } from "@neverquest/types/type-guards";
+import { getWeaponIcon } from "@neverquest/utilities/getters";
 
 export function ItemDisplay({
   amount,
@@ -96,18 +93,10 @@ export function ItemDisplay({
   }
 
   if (isWeapon(item)) {
-    const isItemMelee = isMelee(item);
-
     return (
       <IconDisplay
         description={isEquipped ? "Equipped" : undefined}
-        Icon={
-          isItemMelee && item.grip === "one-handed"
-            ? IconOneHanded
-            : isItemMelee && item.grip === "two-handed"
-              ? IconTwoHanded
-              : IconRanged
-        }
+        Icon={getWeaponIcon(item)}
         tooltip="Weapon"
       >
         <WeaponName overlayPlacement={overlayPlacement} weapon={item} />

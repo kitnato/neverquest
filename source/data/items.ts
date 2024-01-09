@@ -1,7 +1,6 @@
 import { FRAMERATE } from "@neverquest/data/general";
 import IconAmmunitionPouch from "@neverquest/icons/ammunition-pouch.svg?react";
 import IconAntidote from "@neverquest/icons/antidote.svg?react";
-import IconAntiqueCoin from "@neverquest/icons/antique-coin.svg?react";
 import IconBandages from "@neverquest/icons/bandages.svg?react";
 import IconCompass from "@neverquest/icons/compass.svg?react";
 import IconElixir from "@neverquest/icons/elixir.svg?react";
@@ -12,9 +11,10 @@ import IconFire from "@neverquest/icons/fire.svg?react";
 import IconHatchingProgress from "@neverquest/icons/hatching-progress.svg?react";
 import IconStone from "@neverquest/icons/hearthstone.svg?react";
 import IconIce from "@neverquest/icons/ice.svg?react";
-import IconJournal from "@neverquest/icons/journal.svg?react";
+import IconJournalTrinket from "@neverquest/icons/journal-trinket.svg?react";
 import IconKnapsack from "@neverquest/icons/knapsack.svg?react";
 import IconLightning from "@neverquest/icons/lightning.svg?react";
+import IconMemento from "@neverquest/icons/memento.svg?react";
 import IconMonkeyPaw from "@neverquest/icons/monkey-paw.svg?react";
 import IconMysteriousEgg from "@neverquest/icons/mysterious-egg.svg?react";
 import IconPhylactery from "@neverquest/icons/phylactery.svg?react";
@@ -172,7 +172,7 @@ export const INFUSABLES: Record<
       description: "Boosts amount of essence looted.",
       effect: {
         maximum: 2,
-        minimum: 0.025,
+        minimum: 0,
       },
       name: "monkey paw",
       price: 500,
@@ -213,9 +213,9 @@ export const INFUSABLES: Record<
 
 export const KNAPSACK_CAPACITY = 15;
 
-export const TORN_MANUSCRIPT_DROP_CHANCE = {
-  maximum: 0.25,
-  minimum: 0.01,
+export const TRINKET_DROP_CHANCE = {
+  memento: { maximum: 0.5, minimum: 0.01 },
+  "torn manuscript": { maximum: 0.33, minimum: 0.03 },
 };
 
 export const TRINKETS: Record<
@@ -232,15 +232,6 @@ export const TRINKETS: Record<
       name: "ammunition pouch",
       price: 250,
       weight: 6,
-    },
-  },
-  "antique coin": {
-    Icon: IconAntiqueCoin,
-    item: {
-      description: "The wielder is bestowed with lucky finds.",
-      name: "antique coin",
-      price: 77,
-      weight: 2,
     },
   },
   compass: {
@@ -280,7 +271,7 @@ export const TRINKETS: Record<
     },
   },
   journal: {
-    Icon: IconJournal,
+    Icon: IconJournalTrinket,
     item: {
       description: "A compendium of quests.",
       name: "journal",
@@ -297,11 +288,20 @@ export const TRINKETS: Record<
       weight: 0,
     },
   },
+  memento: {
+    Icon: IconMemento,
+    item: {
+      description: "Priceless flashbacks eventually lead to extraordinary discoveries.",
+      name: "memento",
+      price: 154,
+      weight: 2,
+    },
+  },
   "torn manuscript": {
     Icon: IconTornManuscript,
     item: {
       description:
-        "Describes theurgical methodologies beyond comprehension. Perhaps it is of use to an alchemist?",
+        "Describes theurgical methodologies beyond comprehension. Of use only to the alchemically inclined.",
       name: "torn manuscript",
       price: 5000,
       weight: 3,

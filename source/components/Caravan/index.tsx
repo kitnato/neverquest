@@ -14,7 +14,6 @@ import { Occultist } from "@neverquest/components/Caravan/Occultist";
 import { Tailor } from "@neverquest/components/Caravan/Tailor";
 import { Witch } from "@neverquest/components/Caravan/Witch";
 import { DismissableScreen } from "@neverquest/components/DismissableScreen";
-import { LABEL_NONE_AVAILABLE } from "@neverquest/data/general";
 import { activeCrew, isCaravanHired } from "@neverquest/state/caravan";
 import { isShowing } from "@neverquest/state/isShowing";
 import { CREW_TYPES, type Crew } from "@neverquest/types/unions";
@@ -40,6 +39,8 @@ export function Caravan() {
 
   const [isScreenShowing, setScreenShowing] = useState(false);
 
+  const showHiring = isShowingCrewHiring && !isCaravanHiredValue;
+
   const toggleCrewActive = (isShowing: boolean, member?: Crew) => {
     setScreenShowing(isShowing);
     setCrewActive(member ?? undefined);
@@ -51,7 +52,7 @@ export function Caravan() {
         <CardBody>
           <Stack gap={5}>
             <Stack gap={3}>
-              {isShowingCrewHiring && <h6>Hired crew</h6>}
+              {showHiring && <h6>Hired crew</h6>}
 
               {CREW_TYPES.map((crew, index) => (
                 <CrewHired
@@ -64,11 +65,9 @@ export function Caravan() {
               ))}
             </Stack>
 
-            {isShowingCrewHiring && (
+            {showHiring && (
               <Stack gap={3}>
                 <h6>Crew for hire</h6>
-
-                {isCaravanHiredValue && <span className="fst-italic">{LABEL_NONE_AVAILABLE}</span>}
 
                 {CREW_TYPES.map((crew, index) => (
                   <CrewHirable crew={crew} key={index} />

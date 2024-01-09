@@ -7,12 +7,14 @@ import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import IconCorpse from "@neverquest/icons/corpse.svg?react";
 import IconEssence from "@neverquest/icons/essence.svg?react";
+import { isAttacking } from "@neverquest/state/character";
 import { corpse, location, stage } from "@neverquest/state/encounter";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-export function ConsumeCorpse() {
+export function ScavengeCorpse() {
   const corpseValue = useRecoilValue(corpse);
+  const isAttackingValue = useRecoilValue(isAttacking);
   const locationValue = useRecoilValue(location);
   const stageValue = useRecoilValue(stage);
   const resetCorpse = useResetRecoilState(corpse);
@@ -29,7 +31,7 @@ export function ConsumeCorpse() {
           overlay={
             <Popover>
               <PopoverHeader className="text-center">
-                <span>Consume corpse</span>
+                <span>Scavenge corpse</span>
               </PopoverHeader>
 
               <PopoverBody>
@@ -46,10 +48,15 @@ export function ConsumeCorpse() {
         >
           <div className={getAnimationClass({ animation: "bounceIn" })}>
             <Button
-              className={getAnimationClass({ animation: "pulse", isInfinite: true })}
+              className={
+                isAttackingValue
+                  ? undefined
+                  : getAnimationClass({ animation: "pulse", isInfinite: true })
+              }
+              disabled={isAttackingValue}
               onClick={() => {
                 transactEssence(essence);
-                progressQuest({ quest: "consumingCorpse" });
+                progressQuest({ quest: "scavengingCorpse" });
 
                 resetCorpse();
               }}

@@ -1,11 +1,9 @@
-import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap";
+import { OverlayTrigger, Popover, PopoverBody } from "react-bootstrap";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { RecoveryMeter } from "@neverquest/components/Status/RecoveryMeter";
-
 import { POPOVER_TRIGGER } from "@neverquest/data/general";
 import { RECOVERY_RATE } from "@neverquest/data/statistics";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
@@ -43,52 +41,48 @@ export function Recovery() {
         Icon={IconRecovery}
         tooltip="Recovery rate"
       >
-        <Stack className="w-100" direction="horizontal">
-          <OverlayTrigger
-            overlay={
-              <Popover>
-                <PopoverBody>
-                  <DetailsTable>
-                    <tr>
-                      <td>
-                        <span>Base:</span>
-                      </td>
+        <OverlayTrigger
+          overlay={
+            <Popover>
+              <PopoverBody>
+                <DetailsTable>
+                  <tr>
+                    <td>
+                      <span>Base:</span>
+                    </td>
 
-                      <td>
-                        <span>{formatNumber({ format: "time", value: RECOVERY_RATE })}</span>
-                      </td>
-                    </tr>
+                    <td>
+                      <span>{formatNumber({ format: "time", value: RECOVERY_RATE })}</span>
+                    </td>
+                  </tr>
 
-                    <tr>
-                      <td>
-                        <IconDisplay Icon={IconResilience} iconProps={{ className: "small" }}>
-                          <span>Resilience:</span>
-                        </IconDisplay>
-                      </td>
+                  <tr>
+                    <td>
+                      <IconDisplay Icon={IconResilience} iconProps={{ className: "small" }}>
+                        <span>Resilience:</span>
+                      </IconDisplay>
+                    </td>
 
-                      <td>
-                        <span>
-                          -
-                          {formatNumber({
-                            format: "percentage",
-                            value: resilienceValue,
-                          })}
-                        </span>
-                      </td>
-                    </tr>
-                  </DetailsTable>
-                </PopoverBody>
-              </Popover>
-            }
-            trigger={resilienceValue > 0 ? POPOVER_TRIGGER : []}
-          >
-            <div className="w-100">
-              <RecoveryMeter />
-            </div>
-          </OverlayTrigger>
-
-          <DeltasDisplay delta="recoveryRate" />
-        </Stack>
+                    <td>
+                      <span>
+                        -
+                        {formatNumber({
+                          format: "percentage",
+                          value: resilienceValue,
+                        })}
+                      </span>
+                    </td>
+                  </tr>
+                </DetailsTable>
+              </PopoverBody>
+            </Popover>
+          }
+          trigger={resilienceValue > 0 ? POPOVER_TRIGGER : []}
+        >
+          <div className="w-100">
+            <RecoveryMeter />
+          </div>
+        </OverlayTrigger>
       </IconDisplay>
     );
   }

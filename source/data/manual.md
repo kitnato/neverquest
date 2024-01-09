@@ -804,7 +804,7 @@ Cast spells with immediate and/or over-time effects. Acquired from the [sorcerer
 
 ### Energy
 
-A [reserve](#reserves), Consumed when activating [skills](#skills), [auras](#auras) and [sorceries](#sorceries), regenerated over time.
+A [reserve](#reserves), consumed when activating [skills](#skills), [auras](#auras) and [sorceries](#sorceries), regenerated over time.
 
 ### New attributes
 

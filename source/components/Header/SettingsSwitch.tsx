@@ -1,27 +1,29 @@
 import { Form } from "react-bootstrap";
-import { type RecoilState, useRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 
+import { isSettingActive } from "@neverquest/state/settings";
+import type { Setting } from "@neverquest/types/unions";
 import { formatKebabCase } from "@neverquest/utilities/formatters";
 
 export function SettingsSwitch({
   isDisabled = false,
   label,
-  state,
+  setting,
 }: {
   isDisabled?: boolean;
   label: string;
-  state: RecoilState<boolean>;
+  setting: Setting;
 }) {
-  const [toggledValue, setToggle] = useRecoilState(state);
+  const [isSettingActiveValue, setIsSettingActive] = useRecoilState(isSettingActive(setting));
 
   return (
     <Form.Switch
-      defaultChecked={toggledValue}
+      defaultChecked={isSettingActiveValue}
       disabled={isDisabled}
       id={formatKebabCase(label)}
       label={label}
       onChange={({ target: { checked } }) => {
-        setToggle(checked);
+        setIsSettingActive(checked);
       }}
     />
   );

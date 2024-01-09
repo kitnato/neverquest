@@ -15,15 +15,10 @@ import { useRecoilValue } from "recoil";
 import { SettingsSwitch } from "@neverquest/components/Header/SettingsSwitch";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
+import { SETTINGS } from "@neverquest/data/settings";
 import IconSettings from "@neverquest/icons/settings.svg?react";
 import { ownedItem } from "@neverquest/state/inventory";
-import {
-  autoEquip,
-  lowHealthWarning,
-  showDamagePerSecond,
-  showGearComparison,
-  showGearLevel,
-} from "@neverquest/state/settings";
+import { SETTINGS_TYPES } from "@neverquest/types/unions";
 
 export function Settings() {
   const ownedItemKnapsack = useRecoilValue(ownedItem("knapsack"));
@@ -60,19 +55,18 @@ export function Settings() {
         <ModalBody>
           <Form>
             <Stack gap={3}>
-              <SettingsSwitch label="Low-health warning" state={lowHealthWarning} />
+              {SETTINGS_TYPES.map((setting) => {
+                const { label } = SETTINGS[setting];
 
-              <SettingsSwitch
-                isDisabled={ownedItemKnapsack === undefined}
-                label="Auto-equip new gear"
-                state={autoEquip}
-              />
-
-              <SettingsSwitch label="Show damage per second" state={showDamagePerSecond} />
-
-              <SettingsSwitch label="Show gear comparisons" state={showGearComparison} />
-
-              <SettingsSwitch label="Show gear level" state={showGearLevel} />
+                return (
+                  <SettingsSwitch
+                    isDisabled={setting === "autoEquip" ? ownedItemKnapsack === undefined : false}
+                    key={setting}
+                    label={label}
+                    setting={setting}
+                  />
+                );
+              })}
             </Stack>
           </Form>
         </ModalBody>

@@ -3,13 +3,13 @@ import { useRecoilValue } from "recoil";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import IconDamagePerSecond from "@neverquest/icons/damage-per-second.svg?react";
 import { monsterDamageAilingPerSecond } from "@neverquest/state/monster";
-import { showDamagePerSecond } from "@neverquest/state/settings";
+import { isSettingActive } from "@neverquest/state/settings";
 
 export function MonsterDamagePerSecond() {
+  const isSettingActiveValue = useRecoilValue(isSettingActive("damagePerSecond"));
   const monsterDamageAilingPerSecondValue = useRecoilValue(monsterDamageAilingPerSecond);
-  const showDamagePerSecondValue = useRecoilValue(showDamagePerSecond);
 
-  if (showDamagePerSecondValue) {
+  if (isSettingActiveValue) {
     return (
       <IconDisplay
         className="text-nowrap"

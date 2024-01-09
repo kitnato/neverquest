@@ -5,7 +5,7 @@ import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { armor, shield, weapon } from "@neverquest/state/gear";
 import { acquiredItems, inventory, notifyOverEncumbrance } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
-import { autoEquip } from "@neverquest/state/settings";
+import { isSettingActive } from "@neverquest/state/settings";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import type { InventoryItem } from "@neverquest/types";
@@ -29,13 +29,13 @@ export function useAcquireItem() {
 
   return useRecoilCallback(
     ({ set, snapshot }) =>
-      (item: InventoryItem): "autoEquip" | "noFit" | "success" => {
+      (item: InventoryItem): "equip" | "failure" | "success" => {
         const get = getSnapshotGetter(snapshot);
 
         if (!canFit(item.weight)) {
           set(notifyOverEncumbrance, true);
 
-          return "noFit";
+          return "failure";
         }
 
         if (isTrinketItem(item) && item.name === "knapsack") {
@@ -73,7 +73,7 @@ export function useAcquireItem() {
           }
 
           if (
-            get(autoEquip) &&
+            get(isSettingActive("autoEquip")) &&
             ((isUnarmored(get(armor)) && isArmor(item)) ||
               // Acquiring a shield while no shield equipped and not wielding a ranged or two-handed weapon (unless colossus).
               (isShieldUnshielded && isShield(item) && !isRanged(weaponValue)) ||
@@ -86,7 +86,7 @@ export function useAcquireItem() {
                     (get(isSkillAcquired("archery")) && isRanged(item))) &&
                     isShieldUnshielded))))
           ) {
-            return "autoEquip";
+            return "equip";
           }
         }
 

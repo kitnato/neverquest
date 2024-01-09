@@ -39,13 +39,13 @@ export function CraftedGear({
             onClick={() => {
               const acquisitionStatus = acquireItem(gearItem);
 
-              if (acquisitionStatus === "noFit") {
+              if (acquisitionStatus === "failure") {
                 return;
               }
 
               onTransfer();
 
-              if (acquisitionStatus === "autoEquip") {
+              if (acquisitionStatus === "equip") {
                 toggleEquipGear(gearItem);
               }
             }}

@@ -50,7 +50,7 @@ export function Flatline() {
 
       <ModalBody>
         <Stack gap={1}>
-          <span>Memories are retained.</span>
+          <span>Memories and possessions are retained.</span>
 
           <div>
             <span>Unspent&nbsp;</span>

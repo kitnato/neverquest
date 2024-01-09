@@ -31,7 +31,7 @@ export function PurchaseItem({ merchantItem }: { merchantItem: MerchantInventory
 
         const acquisitionStatus = acquireItem(item);
 
-        if (acquisitionStatus === "noFit") {
+        if (acquisitionStatus === "failure") {
           return;
         }
 
@@ -39,7 +39,7 @@ export function PurchaseItem({ merchantItem }: { merchantItem: MerchantInventory
 
         transactEssence(-price);
 
-        if (acquisitionStatus === "autoEquip" && isGearItem(item)) {
+        if (acquisitionStatus === "equip" && isGearItem(item)) {
           toggleEquipGear(item);
         }
 

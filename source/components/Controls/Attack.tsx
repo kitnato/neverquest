@@ -17,7 +17,7 @@ import { areAttributesAffordable } from "@neverquest/state/attributes";
 import { hasEnoughAmmunition, hasFlatlined, isAttacking } from "@neverquest/state/character";
 import { isStageCompleted, location } from "@neverquest/state/encounter";
 import { isHealthLow } from "@neverquest/state/reserves";
-import { lowHealthWarning } from "@neverquest/state/settings";
+import { isSettingActive } from "@neverquest/state/settings";
 import type { SVGIcon } from "@neverquest/types/components";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
@@ -25,11 +25,11 @@ export function Attack() {
   const areAttributesIncreasableValue = useRecoilValue(areAttributesAffordable);
   const isAttackingValue = useRecoilValue(isAttacking);
   const isHealthLowValue = useRecoilValue(isHealthLow);
+  const isSettingActiveLowHealthWarning = useRecoilValue(isSettingActive("lowHealthWarning"));
   const hasFlatlinedValue = useRecoilValue(hasFlatlined);
   const isStageCompletedValue = useRecoilValue(isStageCompleted);
   const hasEnoughAmmunitionValue = useRecoilValue(hasEnoughAmmunition);
   const locationValue = useRecoilValue(location);
-  const showLowHealthWarningValue = useRecoilValue(lowHealthWarning);
 
   const toggleAttacking = useToggleAttacking();
 
@@ -39,7 +39,7 @@ export function Attack() {
   });
   const isResting = hasFlatlinedValue || isStageCompletedValue || locationValue === "caravan";
   const showWarning =
-    isAttackingValue && isHealthLowValue && !isResting && showLowHealthWarningValue;
+    isAttackingValue && isHealthLowValue && !isResting && isSettingActiveLowHealthWarning;
 
   const { animation, Icon, tooltip }: { animation?: string; Icon: SVGIcon; tooltip: string } =
     (() => {

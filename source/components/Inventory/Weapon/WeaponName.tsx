@@ -19,7 +19,7 @@ import IconWeaponDamagePerSecond from "@neverquest/icons/weapon-damage-per-secon
 import IconWeaponDamage from "@neverquest/icons/weapon-damage.svg?react";
 import { weapon as weaponEquipped } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
-import { showDamagePerSecond } from "@neverquest/state/settings";
+import { isSettingActive } from "@neverquest/state/settings";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import type { Weapon } from "@neverquest/types";
 import { isMelee, isRanged, isUnarmed } from "@neverquest/types/type-guards";
@@ -35,7 +35,7 @@ export function WeaponName({
 }) {
   const isShowingGearClass = useRecoilValue(isShowing("gearClass"));
   const isShowingGrip = useRecoilValue(isShowing("grip"));
-  const showDamagePerSecondValue = useRecoilValue(showDamagePerSecond);
+  const isSettingActiveDamagePerSecond = useRecoilValue(isSettingActive("damagePerSecond"));
   const weaponEquippedValue = useRecoilValue(weaponEquipped);
 
   const { abilityChance, burden, damage, gearClass, ID, level, name, rate, weight } = weapon;
@@ -109,7 +109,7 @@ export function WeaponName({
                 </td>
               </tr>
 
-              {showDamagePerSecondValue && (
+              {isSettingActiveDamagePerSecond && (
                 <tr>
                   <td>
                     <span>Damage per second:</span>

@@ -1,22 +1,16 @@
-import { atom } from "recoil";
+import { atom, atomFamily } from "recoil";
+import { SETTINGS } from "@neverquest/data/settings";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 
+import type { Setting } from "@neverquest/types/unions";
 import { withStateKey } from "@neverquest/utilities/helpers";
 
 // ATOMS
 
-export const autoEquip = withStateKey("autoEquip", (key) =>
-  atom({
-    default: true,
-    effects: [handleLocalStorage({ isSetting: true, key })],
-    key,
-  }),
-);
-
 export const expandedBuyback = withStateKey("expandedBuyback", (key) =>
   atom({
     default: true,
-    effects: [handleLocalStorage({ isSetting: true, key })],
+    effects: [handleLocalStorage({ key })],
     key,
   }),
 );
@@ -24,39 +18,15 @@ export const expandedBuyback = withStateKey("expandedBuyback", (key) =>
 export const expandedMasteries = withStateKey("expandedMasteries", (key) =>
   atom({
     default: true,
-    effects: [handleLocalStorage({ isSetting: true, key })],
+    effects: [handleLocalStorage({ key })],
     key,
   }),
 );
 
-export const lowHealthWarning = withStateKey("lowHealthWarning", (key) =>
-  atom({
-    default: true,
-    effects: [handleLocalStorage({ isSetting: true, key })],
-    key,
-  }),
-);
-
-export const showDamagePerSecond = withStateKey("showDamagePerSecond", (key) =>
-  atom({
-    default: false,
-    effects: [handleLocalStorage({ isSetting: true, key })],
-    key,
-  }),
-);
-
-export const showGearComparison = withStateKey("showGearComparison", (key) =>
-  atom({
-    default: true,
-    effects: [handleLocalStorage({ isSetting: true, key })],
-    key,
-  }),
-);
-
-export const showGearLevel = withStateKey("showGearLevel", (key) =>
-  atom({
-    default: false,
-    effects: [handleLocalStorage({ isSetting: true, key })],
+export const isSettingActive = withStateKey("isSettingActive", (key) =>
+  atomFamily<boolean, Setting>({
+    default: (setting) => SETTINGS[setting].isActive,
+    effects: (setting) => [handleLocalStorage({ isSetting: true, key, parameter: setting })],
     key,
   }),
 );

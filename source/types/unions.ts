@@ -252,6 +252,15 @@ export const SKILL_TYPES = [
 ] as const;
 export type Skill = (typeof SKILL_TYPES)[number];
 
+export const SETTINGS_TYPES = [
+  "lowHealthWarning",
+  "autoEquip",
+  "damagePerSecond",
+  "gearComparison",
+  "gearLevel",
+] as const;
+export type Setting = (typeof SETTINGS_TYPES)[number];
+
 export type StateKey =
   | Gear
   | "absorbedEssence"
@@ -269,7 +278,6 @@ export type StateKey =
   | "attributePowerBonus"
   | "attributeRank"
   | "attributeStatistic"
-  | "autoEquip"
   | "blacksmithInventory"
   | "bleed"
   | "bleedChance"
@@ -348,6 +356,7 @@ export type StateKey =
   | "isPoisoned"
   | "isRecovering"
   | "isRegenerating"
+  | "isSettingActive"
   | "isShowing"
   | "isShowingQuestBonus"
   | "isSkillAcquired"
@@ -360,7 +369,6 @@ export type StateKey =
   | "location"
   | "locationName"
   | "lootingDuration"
-  | "lowHealthWarning"
   | "masteryCost"
   | "masteryProgress"
   | "masteryRank"
@@ -407,9 +415,6 @@ export type StateKey =
   | "regenerationRate"
   | "reserveRegenerationRateReduction"
   | "selectedTrait"
-  | "showDamagePerSecond"
-  | "showGearComparison"
-  | "showGearLevel"
   | "skillPrice"
   | "stability"
   | "stage"

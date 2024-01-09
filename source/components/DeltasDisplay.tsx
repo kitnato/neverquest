@@ -15,7 +15,7 @@ export function DeltasDisplay({ delta }: { delta: Delta }) {
   useEffect(() => resetDeltas, [resetDeltas]);
 
   return (
-    <div className="d-flex flex-nowrap text-floating pe-none position-relative">
+    <div className="d-flex flex-nowrap text-floating position-relative">
       {deltasValue.map(({ display, ID }) => (
         <div className="position-absolute top-50 start-100 translate-middle-y" key={ID}>
           <Stack

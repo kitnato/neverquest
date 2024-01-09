@@ -26,7 +26,7 @@ export function LabelledProgressBar({
 
   return (
     <div
-      className={`progress-labelled position-relative w-100${
+      className={`progress-labelled w-100${isSmall ? "" : " position-relative"}${
         disableTransitions ? " transitions-none" : ""
       }`}
     >

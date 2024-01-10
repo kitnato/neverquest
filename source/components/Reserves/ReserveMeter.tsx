@@ -60,7 +60,7 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
     }
   }, [isAiling, reserveMaximumDifference, setReserve]);
 
-  // Catches attribute resets and poisonDuration/blight penalties.
+  // Catches attribute resets and poison/blight penalties.
   useEffect(() => {
     if (reserveValue > reserveMaximumAilingValue) {
       resetReserve();

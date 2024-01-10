@@ -45,7 +45,7 @@ export function Quests() {
   }
 
   if (!canTrackQuestsValue) {
-    return <span className="fst-italic">The time for retirement and study has come.</span>;
+    return <span className="fst-italic">Time for retirement and contemplation must be made.</span>;
   }
 
   return (

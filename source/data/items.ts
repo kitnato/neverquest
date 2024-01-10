@@ -5,7 +5,6 @@ import IconBandages from "@neverquest/icons/bandages.svg?react";
 import IconCompass from "@neverquest/icons/compass.svg?react";
 import IconElixir from "@neverquest/icons/elixir.svg?react";
 import IconEnderHook from "@neverquest/icons/ender-hook.svg?react";
-import IconEssenceBonus from "@neverquest/icons/essence-bonus.svg?react";
 import IconFamiliar from "@neverquest/icons/familiar.svg?react";
 import IconFire from "@neverquest/icons/fire.svg?react";
 import IconHatchingProgress from "@neverquest/icons/hatching-progress.svg?react";
@@ -15,7 +14,6 @@ import IconJournalTrinket from "@neverquest/icons/journal-trinket.svg?react";
 import IconKnapsack from "@neverquest/icons/knapsack.svg?react";
 import IconLightning from "@neverquest/icons/lightning.svg?react";
 import IconMemento from "@neverquest/icons/memento.svg?react";
-import IconMonkeyPaw from "@neverquest/icons/monkey-paw.svg?react";
 import IconMysteriousEgg from "@neverquest/icons/mysterious-egg.svg?react";
 import IconPhylactery from "@neverquest/icons/phylactery.svg?react";
 import IconPowerBonusBoost from "@neverquest/icons/power-bonus-boost.svg?react";
@@ -164,36 +162,7 @@ export const INFUSABLES: Record<
     tooltip: string;
   }
 > = {
-  "monkey paw": {
-    delta: "essenceBonus",
-    EffectIcon: IconEssenceBonus,
-    Icon: IconMonkeyPaw,
-    item: {
-      description: "Boosts amount of essence looted.",
-      effect: {
-        maximum: 2,
-        minimum: 0.1,
-      },
-      name: "monkey paw",
-      price: 500,
-      weight: 4,
-    },
-    tooltip: "Essence loot bonus",
-  },
-  "mysterious egg": {
-    delta: "hatchingProgress",
-    EffectIcon: IconHatchingProgress,
-    Icon: IconMysteriousEgg,
-    item: {
-      description: "A perplexing ovum emanating otherworldly energy.",
-      effect: { maximum: 1, minimum: 0 },
-      name: "mysterious egg",
-      price: 1000,
-      weight: 7,
-    },
-    tooltip: "Hatching progress",
-  },
-  "tome of power": {
+  "eldritch codex": {
     delta: "powerBonusBoost",
     EffectIcon: IconPowerBonusBoost,
     Icon: IconTomeOfPower,
@@ -203,19 +172,32 @@ export const INFUSABLES: Record<
         maximum: 1.5,
         minimum: 0,
       },
-      name: "tome of power",
+      name: "eldritch codex",
       price: 2500,
       weight: 10,
     },
     tooltip: "Power bonus boost",
+  },
+  "mysterious egg": {
+    delta: "hatchingProgress",
+    EffectIcon: IconHatchingProgress,
+    Icon: IconMysteriousEgg,
+    item: {
+      description: "A perplexing ovum emanating otherworldly energy.",
+      effect: { maximum: 1, minimum: 0 },
+      name: "mysterious egg",
+      price: 1554,
+      weight: 7,
+    },
+    tooltip: "Hatching progress",
   },
 };
 
 export const KNAPSACK_CAPACITY = 15;
 
 export const TRINKET_DROP_CHANCE = {
-  memento: { maximum: 0.5, minimum: 0.01 },
-  "torn manuscript": { maximum: 0.33, minimum: 0.03 },
+  memento: { maximum: 0.2, minimum: 0.01 },
+  "torn manuscript": { maximum: 0.1, minimum: 0.03 },
 };
 
 export const TRINKETS: Record<

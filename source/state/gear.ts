@@ -61,6 +61,7 @@ export const armor = withStateKey("armor", (key) =>
   }),
 );
 
+// TODO - using UIDs as parameters causes memory leaks; they cannot be deleted once the UID reference is lost (e.g. discarding item).
 export const gems = withStateKey("gems", (key) =>
   atomFamily<GemItem[], string>({
     default: [],

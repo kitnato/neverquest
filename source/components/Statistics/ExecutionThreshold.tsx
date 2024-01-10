@@ -17,7 +17,6 @@ export function ExecutionThreshold() {
     delta: "executionThreshold",
     format: "percentage",
     state: executionThreshold,
-    stop: () => executionValue === 0,
   });
 
   if (executionValue > 0) {

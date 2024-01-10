@@ -29,10 +29,10 @@ export const QUEST_COMPLETION_BONUS = 0.01;
 export const QUEST_NOTIFICATION_DURATION = 5000;
 
 export const QUEST_REQUIREMENTS = {
-  damage: 1500,
+  damage: 2000,
   essenceCount: 777,
   monstersKilled: 77,
-  protection: 1000,
+  protection: 1500,
   skillsCraft: ["armorcraft", "shieldcraft", "siegecraft"] as Skill[],
   survivingNoAttributes: 7,
   survivingNoGear: 7,

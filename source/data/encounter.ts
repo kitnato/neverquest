@@ -14,7 +14,13 @@ export const PROGRESS = {
   minimum: 3,
 };
 
-export const PROGRESS_REDUCTION = {
-  maximum: 0.75,
-  minimum: 0.3,
+export const PERKS = {
+  essenceBonus: {
+    maximum: 1.5,
+    minimum: 0.5,
+  },
+  monsterReduction: {
+    maximum: 0.75,
+    minimum: 0.33,
+  },
 };

@@ -21,7 +21,6 @@ export function BlockChance() {
     delta: "blockChance",
     format: "percentage",
     state: blockChance,
-    stop: () => blockChanceValue === 0,
   });
 
   if (blockChanceValue > 0) {

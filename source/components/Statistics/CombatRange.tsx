@@ -25,7 +25,6 @@ export function CombatRange() {
     delta: "range",
     format: "time",
     state: range,
-    stop: () => rangeValue === 0,
   });
 
   if (rangeValue > 0) {

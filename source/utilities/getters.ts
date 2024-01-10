@@ -8,7 +8,7 @@ import { nanoid } from "nanoid";
 import type { RecoilValue, Snapshot } from "recoil";
 
 import { ATTRIBUTE_COST_BASE } from "@neverquest/data/attributes";
-import { AFFIX_STRUCTURE_WEIGHTS, PROGRESS_REDUCTION } from "@neverquest/data/encounter";
+import { AFFIX_STRUCTURE_WEIGHTS, PERKS } from "@neverquest/data/encounter";
 import {
   type ARMOR_NONE,
   ARMOR_SPECIFICATIONS,
@@ -62,7 +62,7 @@ import {
   isWeapon,
 } from "@neverquest/types/type-guards";
 import type { Animation, AnimationSpeed } from "@neverquest/types/ui";
-import type { Elemental, Grip, Quest } from "@neverquest/types/unions";
+import type { Elemental, Grip, Perk, Quest } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { stackItems } from "@neverquest/utilities/helpers";
 
@@ -184,7 +184,7 @@ export function getGearElementalEffects({
       const { damage, duration } = ELEMENTALS[elemental];
 
       effects[elemental] = {
-        damage: Math.round(
+        damage: Math.ceil(
           effector * getFromRange({ factor: (amount - 1) / (GEMS_MAXIMUM - 1), ...damage }),
         ),
         duration: Math.round(
@@ -225,21 +225,6 @@ export function getGemFittingCost(fitted: number) {
 
 export function getLinearMapping({ offset, stage }: { offset: number; stage: number }) {
   return ((stage - offset) * (GROWTH_MAXIMUM - 1)) / (GROWTH_MAXIMUM - offset - 1) + 1;
-}
-
-export function getProgressReduction(stage: number) {
-  const { maximum, minimum } = PROGRESS_REDUCTION;
-
-  return getFromRange({
-    factor: getSigmoid(
-      getLinearMapping({
-        offset: RETIREMENT_STAGE_MINIMUM,
-        stage,
-      }),
-    ),
-    maximum,
-    minimum,
-  });
 }
 
 export function getMeleeRanges({
@@ -325,6 +310,21 @@ export function getRangedRanges({ factor, gearClass }: { factor: number; gearCla
     rate: getRange({ factor, isRounded: true, modifier: rateModifier, ranges: rate }),
     weight: getRange({ factor, isRounded: true, modifier: weightModifier, ranges: weight }),
   };
+}
+
+export function getPerkEffect({ perk, stage }: { perk: Perk; stage: number }) {
+  const { maximum, minimum } = PERKS[perk];
+
+  return getFromRange({
+    factor: getSigmoid(
+      getLinearMapping({
+        offset: RETIREMENT_STAGE_MINIMUM,
+        stage,
+      }),
+    ),
+    maximum,
+    minimum,
+  });
 }
 
 function getRomanNumeral(value: number) {

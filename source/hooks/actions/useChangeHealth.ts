@@ -14,6 +14,7 @@ import {
   isInvulnerable,
   regenerationAmount,
   regenerationDuration,
+  regenerationRate,
 } from "@neverquest/state/reserves";
 import { essence } from "@neverquest/state/resources";
 import type { DeltaDisplay, DeltaReserve } from "@neverquest/types/ui";
@@ -91,6 +92,10 @@ export function useChangeHealth() {
           newHealth = healthMaximumPoisonedValue;
 
           reset(regenerationDuration("health"));
+        }
+
+        if (newHealth < healthMaximumPoisonedValue) {
+          set(regenerationDuration("health"), get(regenerationRate("health")));
         }
 
         set(health, newHealth);

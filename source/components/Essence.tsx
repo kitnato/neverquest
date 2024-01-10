@@ -1,10 +1,13 @@
-import { Card, Stack } from "react-bootstrap";
+import { Card, OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { POPOVER_TRIGGER } from "@neverquest/data/general";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
+import IconEssenceBonus from "@neverquest/icons/essence-bonus.svg?react";
 import IconEssence from "@neverquest/icons/essence.svg?react";
+import { perkEffect } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
 import { essence } from "@neverquest/state/resources";
 import { formatNumber } from "@neverquest/utilities/formatters";
@@ -13,11 +16,11 @@ import { getAnimationClass } from "@neverquest/utilities/getters";
 export function Essence() {
   const essenceValue = useRecoilValue(essence);
   const isShowingEssence = useRecoilValue(isShowing("essence"));
+  const perkEffectEssenceBonus = useRecoilValue(perkEffect("essenceBonus"));
 
   useDeltaText({
     delta: "essence",
     state: essence,
-    stop: ({ current }) => current === 0,
   });
 
   return (
@@ -34,7 +37,33 @@ export function Essence() {
           iconProps={{ overlayPlacement: "bottom" }}
           tooltip="Essence"
         >
-          {formatNumber({ value: essenceValue })}
+          <OverlayTrigger
+            overlay={
+              <Popover>
+                <PopoverHeader className="text-center">Essence loot bonus</PopoverHeader>
+
+                <PopoverBody>
+                  <Stack className="justify-content-center" direction="horizontal" gap={1}>
+                    <IconDisplay
+                      Icon={IconEssenceBonus}
+                      iconProps={{ className: "small" }}
+                      tooltip="Essence bonus"
+                    >
+                      +
+                      {formatNumber({
+                        format: "percentage",
+                        value: perkEffectEssenceBonus,
+                      })}
+                    </IconDisplay>
+                  </Stack>
+                </PopoverBody>
+              </Popover>
+            }
+            placement="bottom"
+            trigger={perkEffectEssenceBonus > 0 ? POPOVER_TRIGGER : []}
+          >
+            <span>{formatNumber({ value: essenceValue })}</span>
+          </OverlayTrigger>
         </IconDisplay>
 
         <DeltasDisplay delta="essence" />

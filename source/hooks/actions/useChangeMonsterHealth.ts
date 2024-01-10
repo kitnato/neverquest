@@ -1,5 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
+import { MONSTER_REGENERATION } from "@neverquest/data/monster";
 import { AILMENT_PENALTY, LOOTING_RATE } from "@neverquest/data/statistics";
 import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
@@ -35,6 +36,7 @@ export function useChangeMonsterHealth() {
       }) => {
         const get = getSnapshotGetter(snapshot);
 
+        const { duration, ticks } = MONSTER_REGENERATION;
         const isPositive = value > 0;
         const totalValue =
           !isPositive && get(isMonsterAiling("staggered"))
@@ -137,6 +139,10 @@ export function useChangeMonsterHealth() {
           newHealth = monsterHealthMaximumValue;
 
           reset(monsterRegenerationDuration);
+        }
+
+        if (newHealth < monsterHealthMaximumValue) {
+          set(monsterRegenerationDuration, Math.round(duration / ticks));
         }
 
         set(monsterHealth, newHealth);

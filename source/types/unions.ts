@@ -78,7 +78,6 @@ export type Delta =
   | "dodgeChance"
   | "encumbranceMaximum"
   | "essence"
-  | "essenceBonus"
   | "essenceLoot"
   | "executionThreshold"
   | "finesseProgress"
@@ -122,7 +121,7 @@ export type Gem = (typeof GEM_TYPES)[number];
 export const GRIP_TYPES = ["one-handed", "two-handed"] as const;
 export type Grip = (typeof GRIP_TYPES)[number];
 
-export const INFUSABLE_TYPES = ["monkey paw", "mysterious egg", "tome of power"] as const;
+export const INFUSABLE_TYPES = ["mysterious egg", "eldritch codex"] as const;
 export type Infusable = (typeof INFUSABLE_TYPES)[number];
 
 export type Inheritable = Infusable | Trinket;
@@ -157,6 +156,9 @@ export type NumberFormat =
   | "multiplier"
   | "percentage"
   | "time";
+
+export const PERK_TYPES = ["essenceBonus", "monsterReduction"] as const;
+export type Perk = (typeof PERK_TYPES)[number];
 
 export type Quest = Conquest | Routine | Triumph;
 
@@ -394,6 +396,7 @@ export type StateKey =
   | "parryChance"
   | "parryDamage"
   | "parryRating"
+  | "perkEffect"
   | "poisonChance"
   | "poisonDuration"
   | "poisonLength"
@@ -401,7 +404,6 @@ export type StateKey =
   | "powerLevel"
   | "progress"
   | "progressMaximum"
-  | "progressReduction"
   | "protection"
   | "questNotifications"
   | "questProgress"

@@ -33,14 +33,8 @@ export function MonsterRegeneration() {
     delta: setMonsterRegenerationDuration,
     onDelta: () => {
       changeMonsterHealth({ value: regenerationAmount });
-
-      setMonsterRegenerationDuration(Math.round(duration / ticks));
     },
-    stop:
-      isMonsterAtFullHealthValue ||
-      isMonsterBurning ||
-      isMonsterDeadValue ||
-      regenerationAmount === 0,
+    stop: isMonsterAtFullHealthValue || isMonsterBurning || isMonsterDeadValue,
   });
 
   return <MonsterRegenerationMeter amount={regenerationAmount} />;

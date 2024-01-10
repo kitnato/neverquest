@@ -58,7 +58,6 @@ export function AttackRate() {
     delta: "attackRate",
     format: "time",
     state: attackRate,
-    stop: ({ current, previous }) => Math.abs((previous ?? 0) - current) < 1,
   });
 
   if (isShowingAttackRate) {

@@ -37,10 +37,12 @@ export const healthMaximumPoisoned = withStateKey("healthMaximumPoisoned", (key)
       const healthMaximumValue = get(healthMaximum);
 
       return Math.max(
-        healthMaximumValue -
-          Math.ceil(
-            healthMaximumValue * get(poisonMagnitude) * (get(poisonDuration) / get(poisonLength)),
-          ),
+        Math.round(
+          healthMaximumValue -
+            Math.ceil(
+              healthMaximumValue * get(poisonMagnitude) * (get(poisonDuration) / get(poisonLength)),
+            ),
+        ),
         AILING_RESERVE_MINIMUM,
       );
     },
@@ -192,7 +194,7 @@ export const staminaMaximumBlighted = withStateKey("staminaMaximumBlighted", (ke
   selector({
     get: ({ get }) =>
       Math.max(
-        get(staminaMaximum) - get(staminaMaximum) * get(blightMagnitude),
+        Math.round(get(staminaMaximum) - get(staminaMaximum) * get(blightMagnitude)),
         AILING_RESERVE_MINIMUM,
       ),
     key,

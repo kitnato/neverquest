@@ -119,8 +119,8 @@ export const CREW: Record<
       16: "The grind beckons.",
       20: "May our hearth be a beacon for your replenishment.",
       26: "Always a sight for sore eyes.",
-      31: "Yet you return for more punishment?",
-      36: "Your headway in the wilderness is helping business.",
+      30: "Yet you return for more punishment?",
+      31: "Your headway in the wilderness is helping business.",
       51: "Still you press on. There must be an answer.",
       71: "Gloomy portents signal that dark tides are coming.",
       74: "I fear the end is imminent.",
@@ -133,7 +133,7 @@ export const CREW: Record<
       [LEVELLING_MAXIMUM + 16]: "Inescapable. Unfathomable. Inside everything.",
       [LEVELLING_MAXIMUM + 20]: "Please ... the pain ...",
       [RETIREMENT_STAGE_MINIMUM]: "Retirement? Pretty sure you're trapped here with us.",
-      [RETIREMENT_STAGE_MINIMUM + 1]: "A sea of monsters ... but is it endless?",
+      [RETIREMENT_STAGE_MINIMUM + 1]: "A sea of monsters ... is it endless?",
     },
     price: 1,
     requiredStage: 1,
@@ -214,7 +214,7 @@ export const MERCHANT_OFFERS: Record<
   },
   4: {
     item: TRINKETS.knapsack.item,
-    monologue: "You need a way to manage your possessions. I can help with that.",
+    monologue: "Need a way to manage your possessions?",
   },
   6: {
     gearClass: "slashing",
@@ -228,7 +228,7 @@ export const MERCHANT_OFFERS: Record<
   },
   8: {
     item: TRINKETS.compass.item,
-    monologue: "Wouldn't it be useful to retread old ground? I have just the thing.",
+    monologue: "I've happened upon a relic to retread old ground.",
   },
   9: {
     gearClass: "medium",
@@ -249,18 +249,14 @@ export const MERCHANT_OFFERS: Record<
     monologue: "I have something suitable for marksmen.",
   },
   25: {
-    item: INFUSABLES["monkey paw"].item,
-    monologue: "I recently came into possession of a fine curiosity.",
-  },
-  30: {
-    item: INFUSABLES["tome of power"].item,
+    item: INFUSABLES["eldritch codex"].item,
     monologue: "A dark wanderer passed through and sold me a strange book ...",
   },
-  35: {
+  30: {
     item: TRINKETS["ender hook"].item,
-    monologue: "I've happened upon an artifact to ease your grind.",
+    monologue: "I recently came into possession of a fine curiosity.",
   },
-  39: { item: TRINKETS.journal.item, monologue: "You wouldn't be a scribe, would you?" },
+  34: { item: TRINKETS.journal.item, monologue: "You wouldn't be a scribe, would you?" },
 };
 
 export const TAILORING = {

@@ -20,7 +20,6 @@ export function MasteryProgress({ mastery }: { mastery: Mastery }) {
   useDeltaText({
     delta,
     state: masteryProgressState,
-    stop: ({ current }) => current === 0,
   });
 
   return (

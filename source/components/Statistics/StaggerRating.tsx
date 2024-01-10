@@ -23,7 +23,6 @@ export function StaggerRating() {
   useDeltaText({
     delta: "staggerRating",
     state: staggerRating,
-    stop: () => staggerRatingValue === 0,
   });
 
   if (staggerRatingValue > 0) {

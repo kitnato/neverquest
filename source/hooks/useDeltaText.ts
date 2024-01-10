@@ -10,12 +10,10 @@ export function useDeltaText({
   delta,
   format = "integer",
   state,
-  stop = () => false,
 }: {
   delta: Delta;
   format?: NumberFormat;
   state: RecoilValueReadOnly<number>;
-  stop?: ({ current, previous }: { current: number; previous: number | undefined }) => boolean;
 }) {
   const currentValue = useRecoilValue(state);
 
@@ -25,13 +23,18 @@ export function useDeltaText({
   const isTime = format === "time";
 
   useEffect(() => {
-    if (previousValue === undefined || stop({ current: currentValue, previous: previousValue })) {
+    if (previousValue === undefined) {
       return;
     }
 
     const difference = currentValue - previousValue;
 
-    if (difference >= 0 && difference < 0.0005) {
+    if (
+      (format === "float" && Math.abs(difference) < 0.005) ||
+      (format === "integer" && difference === 0) ||
+      (format === "percentage" && Math.abs(difference) < 0.0005) ||
+      (isTime && Math.abs(difference) < 10)
+    ) {
       return;
     }
 
@@ -53,5 +56,5 @@ export function useDeltaText({
       },
       delta,
     });
-  }, [addDelta, currentValue, delta, format, isTime, previousValue, stop]);
+  }, [addDelta, currentValue, delta, format, isTime, previousValue]);
 }

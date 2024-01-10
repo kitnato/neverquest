@@ -1,7 +1,6 @@
-import { Nav, NavItem, NavLink, Stack } from "react-bootstrap";
+import { Badge, Nav, NavItem, NavLink, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { IconBadge } from "@neverquest/components/IconBadge";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import IconAttention from "@neverquest/icons/attention.svg?react";
@@ -33,9 +32,9 @@ export function QuestTabsNav({ tabs }: { tabs: TabsData }) {
                       isInfinite: true,
                     })}
                   >
-                    <IconBadge>
+                    <Badge bg="secondary" className="align-middle">
                       <IconImage className="small" Icon={IconAttention} />
-                    </IconBadge>
+                    </Badge>
                   </div>
                 )}
               </Stack>

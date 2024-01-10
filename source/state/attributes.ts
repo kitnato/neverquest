@@ -57,7 +57,7 @@ export const attributePowerBonus = withStateKey("attributePowerBonus", (key) =>
     get:
       (attribute: Attribute) =>
       ({ get }) => {
-        const infusionEffectValue = get(infusionEffect("tome of power"));
+        const infusionEffectValue = get(infusionEffect("eldritch codex"));
 
         return get(attributeRank(attribute)) === 0 || infusionEffectValue === 0
           ? 0

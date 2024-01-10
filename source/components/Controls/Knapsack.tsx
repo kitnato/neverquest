@@ -1,10 +1,9 @@
 import { useEffect, useRef } from "react";
-import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Badge, Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
 import { ItemAcquisition } from "@neverquest/components/Controls/ItemAcquisition";
 import { DismissableScreen } from "@neverquest/components/DismissableScreen";
-import { IconBadge } from "@neverquest/components/IconBadge";
 import { IconImage } from "@neverquest/components/IconImage";
 import { Inventory } from "@neverquest/components/Inventory";
 import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react";
@@ -57,10 +56,10 @@ export function Knapsack() {
               <IconImage Icon={IconInventory} />
 
               {(encumbranceExtentValue !== "none" || notifyOverEncumbranceValue) && (
-                <div ref={badgeElement}>
-                  <IconBadge alignToButton>
+                <div className="position-absolute top-50 start-100 translate-middle">
+                  <Badge bg="secondary" ref={badgeElement}>
                     <IconImage className="small" Icon={IconEncumbrance} />
-                  </IconBadge>
+                  </Badge>
                 </div>
               )}
 

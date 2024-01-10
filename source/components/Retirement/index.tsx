@@ -11,7 +11,7 @@ import {
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { ItemsInherited } from "@neverquest/components/Retirement/ItemsInherited";
-import { ProgressReduction } from "@neverquest/components/Retirement/ProgressReduction";
+import { Perks } from "@neverquest/components/Retirement/Perks";
 import { ResetDetails } from "@neverquest/components/Retirement/ResetDetails";
 import { TraitSelection } from "@neverquest/components/Retirement/TraitSelection";
 import { useRetire } from "@neverquest/hooks/actions/useRetire";
@@ -41,14 +41,14 @@ export function Retirement({
       <ModalBody>
         <Stack gap={5}>
           <span>
-            Retiring starts a new quest with reduced monster density per stage. A powerful trait can
-            also be chosen, bestowing a permanent boon. Certain items are inherited for the new
-            quest.
+            Retiring starts a new quest with reduced monster density and increased essence loot. A
+            powerful trait can also be chosen, bestowing a permanent boon. Certain items are
+            inherited for the new quest.
           </span>
 
           <ResetDetails />
 
-          <ProgressReduction />
+          <Perks />
 
           <ItemsInherited />
 

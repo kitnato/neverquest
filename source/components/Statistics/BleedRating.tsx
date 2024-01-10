@@ -28,7 +28,6 @@ export function BleedRating() {
   useDeltaText({
     delta: "bleedRating",
     state: bleedRating,
-    stop: () => bleedRatingValue === 0,
   });
 
   if (bleedRatingValue > 0) {

@@ -1,11 +1,11 @@
-import { atom, selector } from "recoil";
+import { atom, atomFamily, selector } from "recoil";
 
 import { PROGRESS } from "@neverquest/data/encounter";
 import { LEVELLING_MAXIMUM } from "@neverquest/data/general";
 import { BOSS_STAGE_INTERVAL, BOSS_STAGE_START } from "@neverquest/data/monster";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { ownedItem } from "@neverquest/state/inventory";
-import type { Finality } from "@neverquest/types/unions";
+import type { Finality, Perk } from "@neverquest/types/unions";
 import { getFromRange, getSigmoid } from "@neverquest/utilities/getters";
 import { withStateKey } from "@neverquest/utilities/helpers";
 
@@ -64,7 +64,7 @@ export const progressMaximum = withStateKey("progressMaximum", (key) =>
 
         const reducedMaximum =
           getFromRange({ factor: getSigmoid(get(stage)), maximum, minimum }) *
-          (1 - get(progressReduction));
+          (1 - get(perkEffect("monsterReduction")));
 
         return reducedMaximum < 1 ? 1 : Math.round(reducedMaximum);
       }
@@ -132,10 +132,10 @@ export const progress = withStateKey("progress", (key) =>
   }),
 );
 
-export const progressReduction = withStateKey("progressReduction", (key) =>
-  atom({
+export const perkEffect = withStateKey("perkEffect", (key) =>
+  atomFamily<number, Perk>({
     default: 0,
-    effects: [handleLocalStorage({ key })],
+    effects: (perk) => [handleLocalStorage({ key, parameter: perk })],
     key,
   }),
 );

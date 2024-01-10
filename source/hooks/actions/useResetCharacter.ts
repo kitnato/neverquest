@@ -1,11 +1,12 @@
 import { useRecoilCallback } from "recoil";
 
+import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear";
 import {
   blacksmithInventory,
   fletcherInventory,
   merchantInventory,
 } from "@neverquest/state/caravan";
-import { attackDuration, name } from "@neverquest/state/character";
+import { attackDuration, name, recoveryDuration } from "@neverquest/state/character";
 import {
   defeatedFinality,
   isStageStarted,
@@ -13,7 +14,7 @@ import {
   progress,
   stage,
 } from "@neverquest/state/encounter";
-import { armor, shield, weapon } from "@neverquest/state/gear";
+import { armor, gems, shield, weapon } from "@neverquest/state/gear";
 import {
   blight,
   health,
@@ -37,6 +38,9 @@ export function useResetCharacter() {
         reset(essence);
         reset(defeatedFinality);
         reset(fletcherInventory);
+        reset(gems(ARMOR_NONE.ID));
+        reset(gems(SHIELD_NONE.ID));
+        reset(gems(WEAPON_NONE.ID));
         reset(health);
         reset(isStageStarted);
         reset(poisonDuration);
@@ -44,6 +48,7 @@ export function useResetCharacter() {
         reset(location);
         reset(merchantInventory);
         reset(name);
+        reset(recoveryDuration);
         reset(regenerationDuration("health"));
         reset(regenerationDuration("stamina"));
         reset(shield);

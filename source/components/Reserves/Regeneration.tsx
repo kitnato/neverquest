@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
@@ -21,7 +20,6 @@ import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attri
 import { isRecovering } from "@neverquest/state/character";
 import {
   isHealthAtMaximum,
-  isRegenerating,
   isStaminaAtMaximum,
   regenerationDuration,
   regenerationRate,
@@ -42,10 +40,8 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
     reserve === "health" ? isHealthAtMaximum : isStaminaAtMaximum,
   );
   const isRecoveringValue = useRecoilValue(isRecovering);
-  const isRegeneratingValue = useRecoilValue(isRegenerating(reserve));
   const isSkillAcquiredCalisthenics = useRecoilValue(isSkillAcquired("calisthenics"));
   const setRegenerationDuration = useSetRecoilState(regenerationDuration(reserve));
-  const regenerationRateValue = useRecoilValue(regenerateRateState);
 
   const {
     baseRegenerationAmount,
@@ -76,14 +72,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
     delta: regenerationDeltaRate,
     format: "time",
     state: regenerateRateState,
-    stop: ({ current, previous }) => (previous ?? 0) - current < 10,
   });
-
-  useEffect(() => {
-    if (!isReserveAtMaximum && !isRegeneratingValue) {
-      setRegenerationDuration(regenerationRateValue);
-    }
-  }, [isRegeneratingValue, isReserveAtMaximum, regenerationRateValue, setRegenerationDuration]);
 
   return (
     <Stack direction="horizontal">

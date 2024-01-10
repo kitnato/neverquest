@@ -24,7 +24,6 @@ export function DeflectionChance() {
     delta: "deflectionChance",
     format: "percentage",
     state: deflectionChance,
-    stop: () => deflectionChanceValue === 0,
   });
 
   if (deflectionChanceValue > 0) {

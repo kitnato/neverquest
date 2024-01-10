@@ -5,19 +5,18 @@ import { ProgressMeter } from "@neverquest/components/Encounter/ProgressMeter";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { POPOVER_TRIGGER } from "@neverquest/data/general";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import IconProgressReduction from "@neverquest/icons/progress-reduction.svg?react";
+import IconMonsterReduction from "@neverquest/icons/monster-reduction.svg?react";
 import IconProgress from "@neverquest/icons/progress.svg?react";
-import { location, progress, progressReduction } from "@neverquest/state/encounter";
+import { location, perkEffect, progress } from "@neverquest/state/encounter";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function Progress() {
   const locationValue = useRecoilValue(location);
-  const progressReductionValue = useRecoilValue(progressReduction);
+  const perkEffectMonsterReduction = useRecoilValue(perkEffect("monsterReduction"));
 
   useDeltaText({
     delta: "progress",
     state: progress,
-    stop: ({ current }) => current === 0,
   });
 
   if (locationValue === "wilderness") {
@@ -31,19 +30,19 @@ export function Progress() {
         <OverlayTrigger
           overlay={
             <Popover>
-              <PopoverHeader className="text-center">Monster density</PopoverHeader>
+              <PopoverHeader className="text-center">Monster reduction</PopoverHeader>
 
               <PopoverBody>
                 <Stack className="justify-content-center" direction="horizontal" gap={1}>
                   <IconDisplay
-                    Icon={IconProgressReduction}
+                    Icon={IconMonsterReduction}
                     iconProps={{ className: "small", isFlipped: true }}
-                    tooltip="Monster density"
+                    tooltip="Monster reduction"
                   >
                     -
                     {formatNumber({
                       format: "percentage",
-                      value: progressReductionValue,
+                      value: perkEffectMonsterReduction,
                     })}
                   </IconDisplay>
                 </Stack>
@@ -51,7 +50,7 @@ export function Progress() {
             </Popover>
           }
           placement="bottom"
-          trigger={progressReductionValue > 0 ? POPOVER_TRIGGER : []}
+          trigger={perkEffectMonsterReduction > 0 ? POPOVER_TRIGGER : []}
         >
           <div className="w-100">
             <ProgressMeter />

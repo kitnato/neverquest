@@ -50,6 +50,10 @@ export const canCompleteQuests = withStateKey("canCompleteQuests", (key) =>
     get:
       (questClass: QuestClass) =>
       ({ get }) => {
+        if (!get(canTrackQuests)) {
+          return false;
+        }
+
         let currentCanCompleteQuests = false;
 
         for (const quest of QUEST_TYPES_BY_CLASS[questClass]) {

@@ -29,7 +29,6 @@ export function CriticalRating() {
   useDeltaText({
     delta: "criticalRating",
     state: criticalRating,
-    stop: () => criticalRatingValue === 0,
   });
 
   if (criticalRatingValue > 0) {

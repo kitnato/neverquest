@@ -17,12 +17,15 @@ import IconGrip from "@neverquest/icons/grip.svg?react";
 import IconWeaponAttackRate from "@neverquest/icons/weapon-attack-rate.svg?react";
 import IconWeaponDamagePerSecond from "@neverquest/icons/weapon-damage-per-second.svg?react";
 import IconWeaponDamage from "@neverquest/icons/weapon-damage.svg?react";
+import { bleedChance, stunChance } from "@neverquest/state/ailments";
 import { weapon as weaponEquipped } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/isShowing";
 import { isSettingActive } from "@neverquest/state/settings";
 import { isSkillAcquired } from "@neverquest/state/skills";
+import { parryChance } from "@neverquest/state/statistics";
 import type { Weapon } from "@neverquest/types";
 import { isMelee, isRanged, isUnarmed } from "@neverquest/types/type-guards";
+import type { WeaponAbility } from "@neverquest/types/unions";
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 import { getDamagePerRate } from "@neverquest/utilities/getters";
 
@@ -33,6 +36,11 @@ export function WeaponName({
   overlayPlacement: Placement;
   weapon: Weapon | typeof WEAPON_NONE;
 }) {
+  const abilityChances: Record<WeaponAbility, number> = {
+    bleed: useRecoilValue(bleedChance),
+    parry: useRecoilValue(parryChance),
+    stun: useRecoilValue(stunChance),
+  };
   const isShowingGearClass = useRecoilValue(isShowing("gearClass"));
   const isShowingGrip = useRecoilValue(isShowing("grip"));
   const isSettingActiveDamagePerSecond = useRecoilValue(isSettingActive("damagePerSecond"));
@@ -44,7 +52,7 @@ export function WeaponName({
     damage,
     rate,
   });
-  const showComparison = ID !== weaponEquippedValue.ID;
+  const isEquipped = ID === weaponEquippedValue.ID;
 
   const isSkillAcquiredAbility = useRecoilValue(isSkillAcquired(WEAPON_ABILITY_SKILLS[ability]));
 
@@ -56,7 +64,7 @@ export function WeaponName({
             <DetailsTable>
               <GearLevelDetail
                 comparison={
-                  showComparison && {
+                  !isEquipped && {
                     showing: "weapon",
                     subtrahend: weaponEquippedValue.level,
                   }
@@ -75,7 +83,7 @@ export function WeaponName({
                       <span>{formatNumber({ value: damage })}</span>
                     </IconDisplay>
 
-                    {showComparison && (
+                    {!isEquipped && (
                       <GearComparison
                         difference={damage - weaponEquippedValue.damage}
                         showing="weapon"
@@ -98,7 +106,7 @@ export function WeaponName({
                       <span>{formatNumber({ format: "time", value: rate })}</span>
                     </IconDisplay>
 
-                    {showComparison && (
+                    {!isEquipped && (
                       <GearComparison
                         difference={rate - weaponEquippedValue.rate}
                         lowerIsPositive
@@ -124,7 +132,7 @@ export function WeaponName({
                         <span>{formatNumber({ format: "float", value: damagePerSecond })}</span>
                       </IconDisplay>
 
-                      {showComparison && (
+                      {!isEquipped && (
                         <GearComparison
                           difference={
                             damagePerSecond -
@@ -174,7 +182,7 @@ export function WeaponName({
               <BurdenDetail
                 burden={burden}
                 comparison={
-                  showComparison && {
+                  !isEquipped && {
                     showing: "weapon",
                     subtrahend: weaponEquippedValue.burden,
                   }
@@ -212,11 +220,14 @@ export function WeaponName({
                       <Stack direction="horizontal" gap={1}>
                         <IconDisplay Icon={IconAbility} iconProps={{ className: "small" }}>
                           <span>
-                            {formatNumber({ format: "percentage", value: abilityChance })}
+                            {formatNumber({
+                              format: "percentage",
+                              value: isEquipped ? abilityChances[ability] : abilityChance,
+                            })}
                           </span>
                         </IconDisplay>
 
-                        {showComparison && gearClass === weaponEquippedValue.gearClass && (
+                        {!isEquipped && gearClass === weaponEquippedValue.gearClass && (
                           <GearComparison
                             difference={abilityChance - weaponEquippedValue.abilityChance}
                             showing="weapon"
@@ -235,7 +246,7 @@ export function WeaponName({
               {!isUnarmed(weapon) && (
                 <WeightDetail
                   comparison={
-                    showComparison && { showing: "weapon", subtrahend: weaponEquippedValue.weight }
+                    !isEquipped && { showing: "weapon", subtrahend: weaponEquippedValue.weight }
                   }
                   weight={weight}
                 />

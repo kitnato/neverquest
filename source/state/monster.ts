@@ -19,12 +19,12 @@ import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage
 import {
   encounter,
   isStageStarted,
+  perkEffect,
   progress,
   stage,
   stageMaximum,
 } from "@neverquest/state/encounter";
 import { ownedItem } from "@neverquest/state/inventory";
-import { infusionEffect } from "@neverquest/state/items";
 import { range } from "@neverquest/state/statistics";
 import { FINALITY_TYPES, type MonsterAilment } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
@@ -253,11 +253,9 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
 
       return {
         essence: Math.round(
-          (essenceBase + (essenceBase * getTriangular(stageValue)) / attenuation) * 1 +
-            get(progress) *
-              bonus *
-              (encounterValue === "boss" ? boss : 1) *
-              (1 + get(infusionEffect("monkey paw"))),
+          ((essenceBase + (essenceBase * getTriangular(stageValue)) / attenuation) * 1 +
+            get(progress) * bonus * (encounterValue === "boss" ? boss : 1)) *
+            (1 + get(perkEffect("essenceBonus"))),
         ),
         gems:
           encounterValue === "boss"

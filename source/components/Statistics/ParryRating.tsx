@@ -25,7 +25,6 @@ export function ParryRating() {
   useDeltaText({
     delta: "parryRating",
     state: parryRating,
-    stop: () => parryRatingValue === 0,
   });
 
   if (parryRatingValue > 0) {

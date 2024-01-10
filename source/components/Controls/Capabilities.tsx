@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Badge, Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { Attributes } from "@neverquest/components/Attributes";
 import { DismissableScreen } from "@neverquest/components/DismissableScreen";
-import { IconBadge } from "@neverquest/components/IconBadge";
 import { IconImage } from "@neverquest/components/IconImage";
 import { IconTabs } from "@neverquest/components/IconTabs";
 import { Skills } from "@neverquest/components/Skills";
@@ -98,9 +97,12 @@ export function Capabilities() {
               <IconImage Icon={IconCapabilities} />
 
               {areAttributesIncreasableValue && (
-                <IconBadge alignToButton>
+                <Badge
+                  bg="secondary"
+                  className="position-absolute top-50 start-100 translate-middle"
+                >
                   <IconImage className="small" Icon={IconUpgrade} />
-                </IconBadge>
+                </Badge>
               )}
             </Button>
           </div>

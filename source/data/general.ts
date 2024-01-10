@@ -30,7 +30,7 @@ export const LABEL_NONE_AVAILABLE = "None available.";
 export const LABEL_NO_PENALTY = "No penalty.";
 export const LABEL_OVER_ENCUMBERED = "Too heavy.";
 export const LABEL_SEPARATOR = "·";
-export const LABEL_SKILL_REQUIRED = "Skill required.";
+export const LABEL_SKILL_REQUIRED = "Requires a skill.";
 export const LABEL_UNKNOWN = "???";
 
 export const LEVELLING_MAXIMUM = 77;
@@ -41,7 +41,7 @@ export const PERCENTAGE_POINTS = 100;
 
 export const POPOVER_TRIGGER: OverlayTriggerType[] = ["focus", "hover"];
 
-export const RETIREMENT_STAGE_MINIMUM = 40;
+export const RETIREMENT_STAGE_MINIMUM = 35;
 
 export const ROMAN_NUMERAL_MAXIMUM = 3999;
 export const ROMAN_NUMERALS = [

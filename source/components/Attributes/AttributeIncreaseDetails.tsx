@@ -19,8 +19,8 @@ import type { Attribute } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function AttributeIncreaseDetails({ attribute }: { attribute: Attribute }) {
-  const infusionEffectTomeOfPower = useRecoilValue(infusionEffect("tome of power"));
-  const ownedItemTomeOfPower = useRecoilValue(ownedItem("tome of power"));
+  const infusionEffectTomeOfPower = useRecoilValue(infusionEffect("eldritch codex"));
+  const ownedItemTomeOfPower = useRecoilValue(ownedItem("eldritch codex"));
 
   const { increment, powerBonus } = ATTRIBUTES[attribute];
   const Icon = {

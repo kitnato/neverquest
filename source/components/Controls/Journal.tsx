@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Badge, Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { DismissableScreen } from "@neverquest/components/DismissableScreen";
-import { IconBadge } from "@neverquest/components/IconBadge";
 import { IconImage } from "@neverquest/components/IconImage";
 import { Quests } from "@neverquest/components/Quests";
 import IconAttention from "@neverquest/icons/attention.svg?react";
@@ -49,9 +48,12 @@ export function Journal() {
               <IconImage Icon={IconJournal} />
 
               {canCompleteQuest && (
-                <IconBadge alignToButton>
+                <Badge
+                  bg="secondary"
+                  className="position-absolute top-50 start-100 translate-middle"
+                >
                   <IconImage className="small" Icon={IconAttention} />
-                </IconBadge>
+                </Badge>
               )}
             </Button>
           </div>

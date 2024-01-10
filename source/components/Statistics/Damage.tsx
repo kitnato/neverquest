@@ -154,7 +154,7 @@ export function Damage() {
                         </td>
 
                         <td>
-                          <span>+{staminaValue}</span>
+                          <span>+{formatNumber({ value: staminaValue })}</span>
                         </td>
                       </tr>
                     )}

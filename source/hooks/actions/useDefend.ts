@@ -30,7 +30,7 @@ import {
   monsterElement,
   poisonChance,
 } from "@neverquest/state/monster";
-import { blight, isPoisoned, poison, poisonDuration } from "@neverquest/state/reserves";
+import { blight, isPoisoned, poisonDuration, poisonLength } from "@neverquest/state/reserves";
 import {
   blockChance,
   deflectionChance,
@@ -282,7 +282,7 @@ export function useDefend() {
             }
           }
 
-          // If poisoning occurs, check if has been deflected, otherwise apply poison.
+          // If poisoning occurs, check if has been deflected, otherwise apply poisonDuration.
           if (Math.random() <= get(poisonChance)) {
             if (Math.random() <= deflectionChanceValue) {
               progressQuest({ quest: "deflecting" });
@@ -294,7 +294,7 @@ export function useDefend() {
             } else {
               progressQuest({ quest: "poisoning" });
 
-              set(poison, get(poisonDuration));
+              set(poisonDuration, get(poisonLength));
 
               deltaHealth.push({
                 color: "text-muted",

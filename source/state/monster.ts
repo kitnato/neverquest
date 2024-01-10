@@ -10,7 +10,6 @@ import {
   MONSTER_ATTACK_RATE,
   MONSTER_DAMAGE,
   MONSTER_HEALTH,
-  MONSTER_REGENERATION,
   POISON,
 } from "@neverquest/data/monster";
 import { AILMENT_PENALTY } from "@neverquest/data/statistics";
@@ -412,7 +411,7 @@ export const monsterName = withStateKey("monsterName", (key) =>
 
 export const monsterRegenerationDuration = withStateKey("monsterRegenerationDuration", (key) =>
   atom({
-    default: Math.round(MONSTER_REGENERATION.duration / MONSTER_REGENERATION.ticks),
+    default: 0,
     effects: [handleLocalStorage({ key })],
     key,
   }),

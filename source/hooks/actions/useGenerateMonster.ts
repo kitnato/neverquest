@@ -1,7 +1,7 @@
 import { generateCreature, generateName } from "@kitnato/locran";
 import { useRecoilCallback } from "recoil";
 
-import { isAttacking } from "@neverquest/state/character";
+import { attackDuration, isAttacking } from "@neverquest/state/character";
 import { encounter } from "@neverquest/state/encounter";
 import {
   distance,
@@ -12,6 +12,7 @@ import {
   monsterHealth,
   monsterName,
 } from "@neverquest/state/monster";
+import { attackRate } from "@neverquest/state/statistics";
 import { MONSTER_AILMENT_TYPES } from "@neverquest/types/unions";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 import { getAffixStructure, getSnapshotGetter } from "@neverquest/utilities/getters";
@@ -50,6 +51,7 @@ export function useGenerateMonster() {
         set(isMonsterNew, true);
 
         if (get(isAttacking)) {
+          set(attackDuration, get(attackRate));
           set(monsterAttackDuration, get(monsterAttackRate));
         }
       },

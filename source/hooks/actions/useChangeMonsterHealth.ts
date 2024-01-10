@@ -64,11 +64,10 @@ export function useChangeMonsterHealth() {
           reset(monsterAttackDuration);
           reset(monsterRegenerationDuration);
 
-          if (get(ownedItem("ender hook")) === undefined) {
-            set(lootingDuration, LOOTING_RATE);
-          } else {
-            progressStage();
-          }
+          set(
+            lootingDuration,
+            LOOTING_RATE[get(ownedItem("ender hook")) === undefined ? "base" : "ender hook"],
+          );
 
           switch (get(encounter)) {
             case "boss": {

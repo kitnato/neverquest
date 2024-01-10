@@ -39,7 +39,7 @@ export const healthMaximumPoisoned = withStateKey("healthMaximumPoisoned", (key)
       return Math.max(
         healthMaximumValue -
           Math.ceil(
-            healthMaximumValue * get(poisonMagnitude) * (get(poison) / get(poisonDuration)),
+            healthMaximumValue * get(poisonMagnitude) * (get(poisonDuration) / get(poisonLength)),
           ),
         AILING_RESERVE_MINIMUM,
       );
@@ -71,7 +71,7 @@ export const isHealthLow = withStateKey("isHealthLow", (key) =>
 
 export const isPoisoned = withStateKey("isPoisoned", (key) =>
   selector({
-    get: ({ get }) => get(poison) > 0,
+    get: ({ get }) => get(poisonDuration) > 0,
     key,
   }),
 );
@@ -93,7 +93,7 @@ export const isStaminaAtMaximum = withStateKey("isStaminaAtMaximum", (key) =>
   }),
 );
 
-export const poisonDuration = withStateKey("poisonDuration", (key) =>
+export const poisonLength = withStateKey("poisonLength", (key) =>
   selector({
     get: ({ get }) => {
       const {
@@ -233,7 +233,7 @@ export const isInvulnerable = withStateKey("isInvulnerable", (key) =>
   }),
 );
 
-export const poison = withStateKey("poison", (key) =>
+export const poisonDuration = withStateKey("poisonDuration", (key) =>
   atom({
     default: 0,
     effects: [handleLocalStorage({ key })],

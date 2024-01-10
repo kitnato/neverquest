@@ -6,11 +6,14 @@ export const AILMENT_PENALTY = {
 };
 
 export const BLEED = {
-  default: { duration: 5000, ticks: 40 },
+  base: { duration: 5000, ticks: 40 },
   shredder: { duration: 100, ticks: 1 },
 };
 
-export const LOOTING_RATE = 2000;
+export const LOOTING_RATE = {
+  base: 2300,
+  "ender hook": 600,
+};
 
 export const PARRY_ABSORPTION = 0.33;
 export const PARRY_DAMAGE = 0.25;

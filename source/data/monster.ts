@@ -1,4 +1,4 @@
-import { RETIREMENT_STAGE_MINIMUM } from "./general";
+import { RETIREMENT_STAGE_MINIMUM } from "@neverquest/data/general";
 import { AILMENT_PENALTY } from "@neverquest/data/statistics";
 import type { MonsterAilment } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";

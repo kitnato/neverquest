@@ -18,7 +18,7 @@ import { withStateKey } from "@neverquest/utilities/helpers";
 
 export const bleed = withStateKey("bleed", (key) =>
   selector({
-    get: ({ get }) => BLEED[get(isTraitAcquired("shredder")) ? "shredder" : "default"],
+    get: ({ get }) => BLEED[get(isTraitAcquired("shredder")) ? "shredder" : "base"],
     key,
   }),
 );

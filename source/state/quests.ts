@@ -1,6 +1,5 @@
 import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
-import { isSkillAcquired } from "./skills";
 import {
   QUESTS,
   QUEST_COMPLETION_BONUS,
@@ -9,6 +8,7 @@ import {
 } from "@neverquest/data/quests";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { ownedItem } from "@neverquest/state/inventory";
+import { isSkillAcquired } from "@neverquest/state/skills";
 import type { QuestNotification } from "@neverquest/types";
 import {
   QUEST_BONUS_TYPES,

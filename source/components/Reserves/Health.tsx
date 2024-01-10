@@ -15,7 +15,7 @@ import IconVitality from "@neverquest/icons/vitality.svg?react";
 import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
 import { isShowing } from "@neverquest/state/isShowing";
 import { questsBonus } from "@neverquest/state/quests";
-import { isPoisoned, poison } from "@neverquest/state/reserves";
+import { isPoisoned, poisonDuration } from "@neverquest/state/reserves";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
@@ -25,7 +25,7 @@ export function Health() {
   const isShowingHealth = useRecoilValue(isShowing("health"));
   const isPoisonedValue = useRecoilValue(isPoisoned);
   const questsBonusHealth = useRecoilValue(questsBonus("healthBonus"));
-  const setPoison = useSetRecoilState(poison);
+  const setPoison = useSetRecoilState(poisonDuration);
 
   const { baseAmount } = RESERVES.health;
   const vitalityBonus = attributeStatisticVitality - baseAmount;

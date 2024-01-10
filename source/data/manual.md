@@ -492,7 +492,7 @@ A single-use item.
 
 Sold by the [medic](#medic).
 
-Fully restores health on use. Does not affect [poison](#poison).
+Fully restores health on use. Does not affect [poisonDuration](#poisonDuration).
 
 #### Potions
 
@@ -500,7 +500,7 @@ Sold by the [witch](#witch).
 
 ##### Antidote
 
-Cures and removes [poison](#poison).
+Cures and removes [poisonDuration](#poisonDuration).
 
 ##### Elixir
 
@@ -630,11 +630,11 @@ This effect can be cured by a [salve](#salve). It can also be avoided if an atta
 
 #### Poison
 
-Certain successful attacks by the monster can afflict you with poison, reducing maximum [health](#health) by a certain percentage. The magnitude of the health reduction and chance of inflicting poison is proportional to the wilderness stage in which the monster resides.
+Certain successful attacks by the monster can afflict you with poisonDuration, reducing maximum [health](#health) by a certain percentage. The magnitude of the health reduction and chance of inflicting poisonDuration is proportional to the wilderness stage in which the monster resides.
 
 The effect gradually wears off as maximum health is restored over time, during which all healing effects can only restore health up to the currently-reduced maximum.
 
-Monsters won't exhibit poison until later [wilderness](#wilderness) stages. Once poisoned, there is also a chance for certain monsters to inflict [blight](#blight).
+Monsters won't exhibit poisonDuration until later [wilderness](#wilderness) stages. Once poisoned, there is also a chance for certain monsters to inflict [blight](#blight).
 
 This effect can be cured by an [antidote](#antidote). It can also be avoided if an attack is successfully [deflected](#deflection-chance).
 

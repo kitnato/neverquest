@@ -17,7 +17,7 @@ import {
   healthMaximumPoisoned,
   isBlighted,
   isPoisoned,
-  poison,
+  poisonDuration,
   regenerationDuration,
   stamina,
   staminaMaximum,
@@ -31,7 +31,7 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
   const reserveMaximum = isHealth ? healthMaximum : staminaMaximum;
 
   const [reserveValue, setReserve] = useRecoilState(isHealth ? health : stamina);
-  const ailmentValue = useRecoilValue(isHealth ? poison : blightMagnitude);
+  const ailmentValue = useRecoilValue(isHealth ? poisonDuration : blightMagnitude);
   const isAiling = useRecoilValue(isHealth ? isPoisoned : isBlighted);
   const reserveMaximumValue = useRecoilValue(reserveMaximum);
   const reserveMaximumAilingValue = useRecoilValue(
@@ -60,7 +60,7 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
     }
   }, [reserveMaximumDifference, setReserve]);
 
-  // Catches attribute resets and poison/blight penalties.
+  // Catches attribute resets and poisonDuration/blight penalties.
   useEffect(() => {
     if (reserveValue > reserveMaximumAilingValue) {
       resetReserve();

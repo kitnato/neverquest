@@ -5,11 +5,11 @@ import { POPOVER_TRIGGER } from "@neverquest/data/general";
 import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { inventory } from "@neverquest/state/inventory";
-import { isPoisoned, poison } from "@neverquest/state/reserves";
+import { isPoisoned, poisonDuration } from "@neverquest/state/reserves";
 
 export function Antidote({ ID }: { ID: string }) {
   const isPoisonedValue = useRecoilValue(isPoisoned);
-  const resetPoison = useResetRecoilState(poison);
+  const resetPoison = useResetRecoilState(poisonDuration);
   const setInventory = useSetRecoilState(inventory);
 
   const changeHealth = useChangeHealth();

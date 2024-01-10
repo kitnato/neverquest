@@ -1,4 +1,4 @@
-import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { MonsterRegenerationMeter } from "@neverquest/components/Monster/MonsterRegenerationMeter";
 import { MONSTER_REGENERATION } from "@neverquest/data/monster";
@@ -18,7 +18,6 @@ export function MonsterRegeneration() {
   const isMonsterDeadValue = useRecoilValue(isMonsterDead);
   const isMonsterAtFullHealthValue = useRecoilValue(isMonsterAtFullHealth);
   const monsterHealthMaximumValue = useRecoilValue(monsterHealthMaximum);
-  const resetMonsterRegenerationDuration = useResetRecoilState(monsterRegenerationDuration);
   const setMonsterRegenerationDuration = useSetRecoilState(monsterRegenerationDuration);
 
   const changeMonsterHealth = useChangeMonsterHealth();
@@ -35,7 +34,7 @@ export function MonsterRegeneration() {
     onDelta: () => {
       changeMonsterHealth({ value: regenerationAmount });
 
-      resetMonsterRegenerationDuration();
+      setMonsterRegenerationDuration(Math.round(duration / ticks));
     },
     stop:
       isMonsterAtFullHealthValue ||

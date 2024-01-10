@@ -4,10 +4,8 @@ import { attackDuration, isAttacking } from "@neverquest/state/character";
 import { isStageCompleted, isStageStarted } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
 import {
-  bleedingDelta,
   distance,
   isMonsterDead,
-  monsterAilmentDuration,
   monsterAttackDuration,
   monsterAttackRate,
 } from "@neverquest/state/monster";
@@ -37,11 +35,7 @@ export function useToggleAttacking() {
           reset(monsterAttackDuration);
 
           if (!get(isMonsterDead)) {
-            reset(monsterAilmentDuration("bleeding"));
-            reset(bleedingDelta);
             reset(distance);
-
-            // Regeneration is triggered in MonsterHealth.
           }
         } else {
           set(isStageStarted, true);

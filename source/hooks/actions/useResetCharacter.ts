@@ -14,7 +14,13 @@ import {
   stage,
 } from "@neverquest/state/encounter";
 import { armor, shield, weapon } from "@neverquest/state/gear";
-import { blight, health, poison, regenerationDuration, stamina } from "@neverquest/state/reserves";
+import {
+  blight,
+  health,
+  poisonDuration,
+  regenerationDuration,
+  stamina,
+} from "@neverquest/state/reserves";
 import { essence } from "@neverquest/state/resources";
 import { expandedBuyback, expandedMasteries } from "@neverquest/state/settings";
 
@@ -33,7 +39,7 @@ export function useResetCharacter() {
         reset(fletcherInventory);
         reset(health);
         reset(isStageStarted);
-        reset(poison);
+        reset(poisonDuration);
         reset(progress);
         reset(location);
         reset(merchantInventory);

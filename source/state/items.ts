@@ -49,7 +49,7 @@ export const infusionStep = withStateKey("infusionStep", (key) =>
       ({ get }) =>
         Math.min(
           get(essence),
-          (get(infusionMaximum(infusable)) / INFUSION_DURATION) * INFUSION_DELTA,
+          Math.round((get(infusionMaximum(infusable)) / INFUSION_DURATION) * INFUSION_DELTA),
         ),
     key,
   }),

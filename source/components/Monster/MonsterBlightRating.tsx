@@ -13,14 +13,15 @@ import { BLIGHT } from "@neverquest/data/monster";
 import IconBlight from "@neverquest/icons/blight.svg?react";
 import IconStamina from "@neverquest/icons/stamina.svg?react";
 import { blightChance } from "@neverquest/state/monster";
-import { blightMagnitude, isPoisoned } from "@neverquest/state/reserves";
+import { isPoisoned } from "@neverquest/state/reserves";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function MonsterBlightRating() {
   const blightChanceValue = useRecoilValue(blightChance);
-  const blightMagnitudeValue = useRecoilValue(blightMagnitude);
   const isPoisonedValue = useRecoilValue(isPoisoned);
+
+  const { increment } = BLIGHT;
 
   if (blightChanceValue > 0) {
     return (
@@ -42,7 +43,7 @@ export function MonsterBlightRating() {
                     <td>
                       <span>
                         {formatNumber({ format: "percentage", value: blightChanceValue })}&nbsp;on
-                        hit (if poisoned)
+                        hit (while poisoned)
                       </span>
                     </td>
                   </tr>
@@ -54,7 +55,7 @@ export function MonsterBlightRating() {
 
                     <td>
                       <Stack direction="horizontal" gap={1}>
-                        <span>{-formatNumber({ value: BLIGHT.increment })}</span>
+                        <span>-{formatNumber({ format: "percentage", value: increment })}</span>
 
                         <IconDisplay Icon={IconStamina} iconProps={{ className: "small" }}>
                           <span>{LABEL_MAXIMUM}</span>
@@ -71,7 +72,12 @@ export function MonsterBlightRating() {
           <span>
             {isPoisonedValue
               ? formatNumber({
-                  value: blightChanceValue * blightMagnitudeValue * PERCENTAGE_POINTS,
+                  value:
+                    blightChanceValue *
+                    PERCENTAGE_POINTS *
+                    increment *
+                    PERCENTAGE_POINTS *
+                    PERCENTAGE_POINTS,
                 })
               : LABEL_EMPTY}
           </span>

@@ -285,8 +285,8 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
               ? { ...INFUSABLES["mysterious egg"].item, ID: nanoid() }
               : // Torn manuscript drops if it's neither currently carried nor sold, if the memento is carried, and if the drop chance is reached.
                 get(ownedItem("memento")) !== undefined &&
-                  !merchantInventoryValue.some(({ name }) => name === "torn manuscript") &&
                   get(ownedItem("torn manuscript")) === undefined &&
+                  !merchantInventoryValue.some(({ name }) => name === "torn manuscript") &&
                   Math.random() <=
                     getFromRange({
                       factor: getSigmoid(stageValue),

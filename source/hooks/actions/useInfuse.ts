@@ -37,7 +37,6 @@ export function useInfuse() {
         const infusionLevelState = infusionLevel(infusable);
         const infusionValue = get(infusionState);
         const newInfusion = infusionValue + infusionStepValue;
-        const wholeDifference = Math.round(newInfusion) - Math.round(infusionValue);
 
         if (newInfusion >= get(infusionMaximum(infusable))) {
           const newLevel = get(infusionLevelState) + 1;
@@ -55,9 +54,7 @@ export function useInfuse() {
           set(infusionState, newInfusion);
         }
 
-        if (wholeDifference > 0) {
-          transactEssence(-wholeDifference);
-        }
+        transactEssence(-(newInfusion - infusionValue));
       },
     [progressQuest, transactEssence],
   );

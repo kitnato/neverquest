@@ -59,7 +59,7 @@ export const attributePowerBonus = withStateKey("attributePowerBonus", (key) =>
       ({ get }) => {
         const infusionEffectValue = get(infusionEffect("tome of power"));
 
-        return infusionEffectValue === 0
+        return get(attributeRank(attribute)) === 0 || infusionEffectValue === 0
           ? 0
           : get(powerLevel) * ATTRIBUTES[attribute].powerBonus * (1 + infusionEffectValue);
       },

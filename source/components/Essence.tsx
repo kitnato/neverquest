@@ -17,6 +17,7 @@ export function Essence() {
   useDeltaText({
     delta: "essence",
     state: essence,
+    stop: ({ current }) => current === 0,
   });
 
   return (

@@ -172,7 +172,7 @@ export const INFUSABLES: Record<
       description: "Boosts amount of essence looted.",
       effect: {
         maximum: 2,
-        minimum: 0,
+        minimum: 0.1,
       },
       name: "monkey paw",
       price: 500,

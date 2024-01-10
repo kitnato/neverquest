@@ -57,7 +57,7 @@ export function InfusionInspect({ infusable }: { infusable: Infusable }) {
         <ModalHeader closeButton>
           <ModalTitle>
             <IconDisplay Icon={Icon}>
-              <span>Essence infusion</span>
+              <span>Infusion</span>
             </IconDisplay>
           </ModalTitle>
         </ModalHeader>

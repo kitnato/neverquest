@@ -29,7 +29,7 @@ export function InfusionEffect({ infusable }: { infusable: Infusable }) {
         {formatNumber({
           decimals: infusable === "mysterious egg" && infusionEffectValue >= 1 ? 0 : 2,
           format: "percentage",
-          value: infusionEffectValue,
+          value: Math.abs(infusionEffectValue),
         })}
       </IconDisplay>
 

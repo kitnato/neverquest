@@ -9,7 +9,7 @@ import { useResetAttributes } from "@neverquest/hooks/actions/useResetAttributes
 import { useResetCharacter } from "@neverquest/hooks/actions/useResetCharacter";
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness";
 import { monologue } from "@neverquest/state/caravan";
-import { progressReduction, stage, stageMaximum } from "@neverquest/state/encounter";
+import { corpse, progressReduction, stage, stageMaximum } from "@neverquest/state/encounter";
 import { inventory } from "@neverquest/state/inventory";
 import { masteryProgress, masteryRank } from "@neverquest/state/masteries";
 import { questProgress } from "@neverquest/state/quests";
@@ -50,6 +50,7 @@ export function useRetire() {
 
         resetAttributes();
         resetCharacter();
+        reset(corpse);
 
         reset(questProgress("attributesIncreasingAll"));
         reset(questProgress("attributesUnlockingAll"));

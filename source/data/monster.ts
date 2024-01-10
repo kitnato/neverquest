@@ -44,7 +44,7 @@ export const BLIGHT = {
 
 export const ESSENCE = {
   attenuation: 12,
-  base: 4,
+  base: 7,
   bonus: 0.02,
   boss: 1.15,
   finality: 7777,
@@ -64,10 +64,10 @@ export const MONSTER_DAMAGE = {
   base: 7,
   bonus: 0.01,
   boss: 1.15,
-  finality: 4747,
+  finality: 3737,
   menace: {
-    maximum: 0.5,
-    minimum: 0.1,
+    maximum: 1.2,
+    minimum: 0.2,
     requiredStage: RETIREMENT_STAGE_MINIMUM,
   },
 };
@@ -79,7 +79,7 @@ export const MONSTER_HEALTH = {
   boss: 1.8,
   finality: 17_777,
   menace: {
-    maximum: 0.7,
+    maximum: 0.8,
     minimum: 0.2,
     requiredStage: RETIREMENT_STAGE_MINIMUM,
   },

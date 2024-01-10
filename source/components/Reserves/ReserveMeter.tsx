@@ -55,10 +55,10 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
     reserveMaximumAilingValue - (usePreviousValue(reserveMaximumAilingValue) ?? 0);
 
   useEffect(() => {
-    if (reserveMaximumDifference > 0) {
+    if (!isAiling && reserveMaximumDifference > 0) {
       setReserve((currentReserve) => currentReserve + reserveMaximumDifference);
     }
-  }, [reserveMaximumDifference, setReserve]);
+  }, [isAiling, reserveMaximumDifference, setReserve]);
 
   // Catches attribute resets and poisonDuration/blight penalties.
   useEffect(() => {
@@ -99,7 +99,7 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
                 {isHealth
                   ? formatNumber({ format: "time", value: ailmentValue })
                   : formatNumber({
-                      decimals: 0,
+                      decimals: 1,
                       format: "percentage",
                       value: ailmentValue,
                     })}

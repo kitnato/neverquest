@@ -2,8 +2,12 @@ import { nanoid } from "nanoid";
 import { useRecoilCallback } from "recoil";
 
 import { QUESTS } from "@neverquest/data/quests";
-import { questNotifications, questProgress, questStatuses } from "@neverquest/state/quests";
-import { isSkillAcquired } from "@neverquest/state/skills";
+import {
+  canTrackQuests,
+  questNotifications,
+  questProgress,
+  questStatuses,
+} from "@neverquest/state/quests";
 import type { QuestNotification } from "@neverquest/types";
 import type { Quest } from "@neverquest/types/unions";
 import { getQuestsData, getSnapshotGetter } from "@neverquest/utilities/getters";
@@ -14,7 +18,7 @@ export function useProgressQuest() {
       ({ amount = 1, quest }: { amount?: number; quest: Quest }) => {
         const get = getSnapshotGetter(snapshot);
 
-        if (QUESTS[quest].requiresTracking && !get(isSkillAcquired("memetics"))) {
+        if (QUESTS[quest].requiresTracking && !get(canTrackQuests)) {
           return;
         }
 

@@ -102,7 +102,7 @@ export const questsBonus = withStateKey("questsBonus", (key) =>
     get:
       (questBonus: QuestBonus) =>
       ({ get }) =>
-        get(isSkillAcquired("memetics"))
+        get(canTrackQuests)
           ? QUEST_TYPES.reduce(
               (sum, quest) =>
                 sum +

@@ -192,11 +192,14 @@ export const staminaMaximum = withStateKey("staminaMaximum", (key) =>
 
 export const staminaMaximumBlighted = withStateKey("staminaMaximumBlighted", (key) =>
   selector({
-    get: ({ get }) =>
-      Math.max(
-        Math.round(get(staminaMaximum) - get(staminaMaximum) * get(blightMagnitude)),
+    get: ({ get }) => {
+      const staminaMaximumValue = get(staminaMaximum);
+
+      return Math.max(
+        Math.round(staminaMaximumValue - staminaMaximumValue * get(blightMagnitude)),
         AILING_RESERVE_MINIMUM,
-      ),
+      );
+    },
     key,
   }),
 );

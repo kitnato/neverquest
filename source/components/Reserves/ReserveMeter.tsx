@@ -50,9 +50,12 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
     state: reserveMaximum,
   });
 
-  // Have health and stamina increase equally to maxima and consistently while at full health.
+  // Have current health and stamina increase the same if the maximum is increased (e.g. via attribute).
+  const previousReserveMaximumAiling = usePreviousValue(reserveMaximumAilingValue);
   const reserveMaximumDifference =
-    reserveMaximumAilingValue - (usePreviousValue(reserveMaximumAilingValue) ?? 0);
+    previousReserveMaximumAiling === undefined
+      ? 0
+      : reserveMaximumAilingValue - previousReserveMaximumAiling;
 
   useEffect(() => {
     if (!isAiling && reserveMaximumDifference > 0) {

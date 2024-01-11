@@ -41,6 +41,14 @@ export const blacksmithInventory = withStateKey("blacksmithInventory", (key) =>
   }),
 );
 
+export const expandedBuyback = withStateKey("expandedBuyback", (key) =>
+  atom({
+    default: true,
+    effects: [handleLocalStorage({ key })],
+    key,
+  }),
+);
+
 export const fletcherInventory = withStateKey("fletcherInventory", (key) =>
   atom<Ranged | undefined>({
     default: undefined,

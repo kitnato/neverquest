@@ -5,7 +5,6 @@ import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { armor, shield, weapon } from "@neverquest/state/gear";
 import { acquiredItems, inventory, notifyOverEncumbrance } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
-import { isSettingActive } from "@neverquest/state/settings";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import type { InventoryItem } from "@neverquest/types";
@@ -73,18 +72,17 @@ export function useAcquireItem() {
           }
 
           if (
-            get(isSettingActive("autoEquip")) &&
-            ((isUnarmored(get(armor)) && isArmor(item)) ||
-              // Acquiring a shield while no shield equipped and not wielding a ranged or two-handed weapon (unless colossus).
-              (isShieldUnshielded && isShield(item) && !isRanged(weaponValue)) ||
-              get(isTraitAcquired("colossus")) ||
-              // Acquiring a weapon while no weapon equipped, and if ranged or two-handed, no shield equipped.
-              (isUnarmed(weaponValue) &&
-                ((isMelee(item) && item.grip === "one-handed") ||
-                  get(isTraitAcquired("colossus")) ||
-                  (((isMelee(item) && item.grip === "two-handed") ||
-                    (get(isSkillAcquired("archery")) && isRanged(item))) &&
-                    isShieldUnshielded))))
+            (isUnarmored(get(armor)) && isArmor(item)) ||
+            // Acquiring a shield while no shield equipped and not wielding a ranged or two-handed weapon (unless colossus).
+            (isShieldUnshielded && isShield(item) && !isRanged(weaponValue)) ||
+            get(isTraitAcquired("colossus")) ||
+            // Acquiring a weapon while no weapon equipped, and if ranged or two-handed, no shield equipped.
+            (isUnarmed(weaponValue) &&
+              ((isMelee(item) && item.grip === "one-handed") ||
+                get(isTraitAcquired("colossus")) ||
+                (((isMelee(item) && item.grip === "two-handed") ||
+                  (get(isSkillAcquired("archery")) && isRanged(item))) &&
+                  isShieldUnshielded)))
           ) {
             return "equip";
           }

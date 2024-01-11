@@ -22,7 +22,7 @@ import IconTailor from "@neverquest/icons/tailor.svg?react";
 import IconWitch from "@neverquest/icons/witch.svg?react";
 import type { InheritableItem } from "@neverquest/types";
 import type { SVGIcon } from "@neverquest/types/components";
-import type { Crew, Grip } from "@neverquest/types/unions";
+import type { Crew, Grip, Showing } from "@neverquest/types/unions";
 
 export const AMMUNITION_PRICE = 5;
 
@@ -37,6 +37,7 @@ export const CREW: Record<
     monologues: Record<number, string | undefined>;
     price: number;
     requiredStage: number;
+    shows?: Showing[];
   }
 > = {
   alchemist: {
@@ -62,6 +63,7 @@ export const CREW: Record<
     },
     price: 50,
     requiredStage: 12,
+    shows: ["gearClass", "gearLevel"],
   },
   fletcher: {
     description: "Crafts ranged weapons and provides ammunition.",
@@ -113,7 +115,7 @@ export const CREW: Record<
       7: "Plenty of monsters out there.",
       9: "There is something dark looming on the horizon ...",
       10: "I can't believe you came out of that in one piece.",
-      11: "Have you appraised all my offerings?",
+      13: "Have you appraised all my offerings?",
       14: "There's more trouble ahead.",
       15: "Once again you emerge victorious!",
       16: "The grind beckons.",
@@ -239,6 +241,10 @@ export const MERCHANT_OFFERS: Record<
     grip: "one-handed",
     modality: "melee",
     type: "weapon",
+  },
+  12: {
+    item: TRINKETS["thaumaturgic goggles"].item,
+    monologue: "Fine craftsmanship in this little gadget ...",
   },
   14: {
     item: TRINKETS.hearthstone.item,

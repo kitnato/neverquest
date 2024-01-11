@@ -1,4 +1,4 @@
-import { atomFamily, selector, selectorFamily } from "recoil";
+import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
 import { LEVELLING_MAXIMUM } from "@neverquest/data/general";
 import { MASTERIES, MASTERY_COST_BASE } from "@neverquest/data/masteries";
@@ -105,6 +105,14 @@ export const unlockedMasteries = withStateKey("unlockedMasteries", (key) =>
 );
 
 // ATOMS
+
+export const expandedMasteries = withStateKey("expandedMasteries", (key) =>
+  atom({
+    default: true,
+    effects: [handleLocalStorage({ key })],
+    key,
+  }),
+);
 
 export const masteryProgress = withStateKey("masteryProgress", (key) =>
   atomFamily<number, Mastery>({

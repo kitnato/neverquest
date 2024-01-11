@@ -9,8 +9,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 
 import { PurchasableItems } from "@neverquest/components/Caravan/Merchant/PurchasableItems";
 import { ACCORDION_EVENT_KEY } from "@neverquest/data/general";
-import { merchantInventory } from "@neverquest/state/caravan";
-import { expandedBuyback } from "@neverquest/state/settings";
+import { expandedBuyback, merchantInventory } from "@neverquest/state/caravan";
 
 export function BuybackItems() {
   const [expandedBuybackValue, setExpandBuyback] = useRecoilState(expandedBuyback);

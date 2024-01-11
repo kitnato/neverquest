@@ -2,14 +2,14 @@ import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import IconDamagePerSecond from "@neverquest/icons/damage-per-second.svg?react";
+import { ownedItem } from "@neverquest/state/inventory";
 import { monsterDamageAilingPerSecond } from "@neverquest/state/monster";
-import { isSettingActive } from "@neverquest/state/settings";
 
 export function MonsterDamagePerSecond() {
-  const isSettingActiveValue = useRecoilValue(isSettingActive("damagePerSecond"));
+  const ownedItemThaumaturgicGoggles = useRecoilValue(ownedItem("thaumaturgic goggles"));
   const monsterDamageAilingPerSecondValue = useRecoilValue(monsterDamageAilingPerSecond);
 
-  if (isSettingActiveValue) {
+  if (ownedItemThaumaturgicGoggles !== undefined) {
     return (
       <IconDisplay
         className="text-nowrap"

@@ -21,6 +21,7 @@ import IconRuby from "@neverquest/icons/ruby.svg?react";
 import IconSalve from "@neverquest/icons/salve.svg?react";
 import IconSapphire from "@neverquest/icons/sapphire.svg?react";
 import IconSpinningWheel from "@neverquest/icons/spinning-wheel.svg?react";
+import IconThaumaturgicGoggles from "@neverquest/icons/thaumaturgic-goggles.svg?react";
 import IconTomeOfPower from "@neverquest/icons/tome-of-power.svg?react";
 import IconTopaz from "@neverquest/icons/topaz.svg?react";
 import IconTornManuscript from "@neverquest/icons/torn-manuscript.svg?react";
@@ -288,6 +289,16 @@ export const TRINKETS: Record<
       name: "spinning wheel",
       price: 7500,
       weight: 20,
+    },
+  },
+  "thaumaturgic goggles": {
+    Icon: IconThaumaturgicGoggles,
+    item: {
+      description:
+        "Allows the wearer to see unprecedented detail concerning the lethality of themselves and their opponents.",
+      name: "thaumaturgic goggles",
+      price: 100,
+      weight: 4,
     },
   },
   "torn manuscript": {

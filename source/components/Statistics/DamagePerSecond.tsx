@@ -5,14 +5,14 @@ import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconDamagePerSecond from "@neverquest/icons/damage-per-second.svg?react";
-import { isSettingActive } from "@neverquest/state/settings";
+import { ownedItem } from "@neverquest/state/inventory";
 import { damagePerSecond } from "@neverquest/state/statistics";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function DamagePerSecond() {
   const damagePerSecondValue = useRecoilValue(damagePerSecond);
-  const isSettingActiveDamagePerSecond = useRecoilValue(isSettingActive("damagePerSecond"));
+  const ownedItemThaumaturgicGoggles = useRecoilValue(ownedItem("thaumaturgic goggles"));
 
   useDeltaText({
     delta: "damagePerSecond",
@@ -20,7 +20,7 @@ export function DamagePerSecond() {
     state: damagePerSecond,
   });
 
-  if (isSettingActiveDamagePerSecond) {
+  if (ownedItemThaumaturgicGoggles !== undefined) {
     return (
       <IconDisplay
         className={getAnimationClass({ animation: "flipInX" })}

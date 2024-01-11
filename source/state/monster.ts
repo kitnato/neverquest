@@ -272,7 +272,7 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
                 .reduce<number>((sum, gemCount) => sum + gemCount, 0)
             : 0,
         trinket:
-          encounterValue === "boss"
+          encounterValue === "boss" || get(ownedItem("knapsack")) === undefined
             ? undefined
             : // Mysterious egg drops if Res Dominus has just been defeated while carrying the memento and only if the egg and the familiar are neither carried nor sold.
               get(ownedItem("memento")) !== undefined &&

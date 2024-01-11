@@ -94,7 +94,7 @@ Derived from [attributes](#attributes), [gear](#gear), [skills](#skills), [maste
 
 Displays the expected damage per second (DPS) you (and the monster) can deal, taking into account [attack rate](#attack-rate), current [total damage](#total-damage) and [critical](#critical-rating) strikes.
 
-Requires toggling on in the global [settings](#settings) for it to show.
+Requires the acquisition of a certain [trinket](#trinkets).
 
 #### Attack rate
 
@@ -743,44 +743,6 @@ Tracks all non-combat-related activities.
 #### Triumphs
 
 A collection of challenges and hard-to-reach goals.
-
-## Settings
-
-These are accessible via the page header. They allow the activation and deactivation of certain gameplay features.
-
-### Low health warning
-
-Toggles a popover warning to prompt a retreat when you's [health](#health) drops below 33% of its maximum.
-
-Default: on.
-
-### Auto-equip new gear
-
-Toggles the automatic equipping of [weapons](#weapons), [armor](#armor) and [shields](#shields) once they are acquired. Cannot be set to off until the [knapsack](#knapsack) is acquired.
-
-Default: on.
-
-### Show damage per second (DPS)
-
-Toggles DPS displays for you, weapons and [monster](#monster).
-
-Default: off.
-
-### Show gear comparisons
-
-Toggles icons in the [gear](#gear) details overlays that indicate upgrades or downgrades for each of the properties.
-
-Default: on.
-
-### Show gear level
-
-Toggles between showing and hiding the gear level.
-
-Default: off.
-
-### Show everything
-
-Once toggled, all elements of the UI will be shown at once instead of being unlocked gradually as gameplay progresses and become relevant. Suitable for veteran players starting a new run.
 
 ## Roadmap
 

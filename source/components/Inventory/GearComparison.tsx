@@ -4,7 +4,6 @@ import { IconImage } from "@neverquest/components/IconImage";
 import IconEquals from "@neverquest/icons/equals.svg?react";
 import IconIncrease from "@neverquest/icons/increase.svg?react";
 import { isShowing } from "@neverquest/state/isShowing";
-import { isSettingActive } from "@neverquest/state/settings";
 import type { Showing } from "@neverquest/types/unions";
 
 export function GearComparison({
@@ -16,14 +15,13 @@ export function GearComparison({
   lowerIsPositive?: boolean;
   showing: Showing;
 }) {
-  const isSettingActiveGearComparison = useRecoilValue(isSettingActive("gearComparison"));
   const isShowingGearComparison = useRecoilValue(isShowing(showing));
 
   // NaN here is produced by subtracting Infinity from Infinity.
   const isDifferenceEqual = Number.isNaN(difference) || difference === 0;
   const isPositive = lowerIsPositive ? difference < 0 : difference > 0;
 
-  if (isSettingActiveGearComparison && isShowingGearComparison) {
+  if (isShowingGearComparison) {
     return (
       <IconImage
         className={`small ${

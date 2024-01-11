@@ -17,9 +17,7 @@ export const GLITCH_STAGE_MINIMUM = 57;
 
 export const GROWTH_MAXIMUM = 100;
 
-const KEY_STORAGE_PREFIX = "neverquest";
-export const KEY_SESSION = `${KEY_STORAGE_PREFIX}-session`;
-export const KEY_SETTINGS = `${KEY_STORAGE_PREFIX}-settings`;
+export const KEY_SESSION = "neverquest-session";
 
 export const LABEL_EMPTY = "--";
 export const LABEL_FULL_HEALTH = "Already at full health.";

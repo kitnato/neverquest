@@ -1,5 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
+import { CREW } from "@neverquest/data/caravan";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import { hireStatus } from "@neverquest/state/caravan";
@@ -16,6 +17,7 @@ export function useHireCrew() {
       ({ crew, price }: { crew: Crew; price: number }) => {
         const get = getSnapshotGetter(snapshot);
 
+        const { shows } = CREW[crew];
         const otherHirableCrew = CREW_TYPES.filter(
           (crewType) => crewType !== crew || crewType !== "merchant",
         );
@@ -23,8 +25,10 @@ export function useHireCrew() {
         set(hireStatus(crew), "hired");
         transactEssence(-price);
 
-        if (crew === "blacksmith") {
-          set(isShowing("gearClass"), true);
+        if (shows !== undefined) {
+          for (const show of shows) {
+            set(isShowing(show), true);
+          }
         }
 
         progressQuest({ quest: "hiring" });

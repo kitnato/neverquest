@@ -216,27 +216,26 @@ export const ROUTINE_TYPES = [
 ] as const;
 export type Routine = (typeof ROUTINE_TYPES)[number];
 
-export const SHOWING_TYPES = [
-  "armor",
-  "attackRate",
-  "capabilities",
-  "crewHiring",
-  "damage",
-  "essence",
-  "gearClass",
-  "grip",
-  "health",
-  "location",
-  "monsterOffense",
-  "protection",
-  "recovery",
-  "offhand",
-  "stamina",
-  "weapon",
-  "weight",
-  "wildernessStatus",
-] as const;
-export type Showing = (typeof SHOWING_TYPES)[number];
+export type Showing =
+  | "armor"
+  | "attackRate"
+  | "capabilities"
+  | "crewHiring"
+  | "damage"
+  | "essence"
+  | "gearClass"
+  | "gearLevel"
+  | "grip"
+  | "health"
+  | "location"
+  | "monsterOffense"
+  | "offhand"
+  | "protection"
+  | "recovery"
+  | "stamina"
+  | "weapon"
+  | "weight"
+  | "wildernessStatus";
 
 export const SKILL_TYPES = [
   "anatomy",
@@ -253,15 +252,6 @@ export const SKILL_TYPES = [
   "meditation",
 ] as const;
 export type Skill = (typeof SKILL_TYPES)[number];
-
-export const SETTINGS_TYPES = [
-  "lowHealthWarning",
-  "autoEquip",
-  "damagePerSecond",
-  "gearComparison",
-  "gearLevel",
-] as const;
-export type Setting = (typeof SETTINGS_TYPES)[number];
 
 export type StateKey =
   | Gear
@@ -359,7 +349,6 @@ export type StateKey =
   | "isPoisoned"
   | "isRecovering"
   | "isRegenerating"
-  | "isSettingActive"
   | "isShowing"
   | "isShowingQuestBonus"
   | "isSkillAcquired"
@@ -459,6 +448,7 @@ export const TRINKET_TYPES = [
   "knapsack",
   "memento",
   "spinning wheel",
+  "thaumaturgic goggles",
   "torn manuscript",
 ] as const;
 export type Trinket = (typeof TRINKET_TYPES)[number];

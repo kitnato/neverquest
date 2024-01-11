@@ -5,8 +5,7 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { MasteryDisplay } from "@neverquest/components/Masteries/MasteryDisplay";
 import { ACCORDION_EVENT_KEY } from "@neverquest/data/general";
 import IconMasteries from "@neverquest/icons/masteries.svg?react";
-import { unlockedMasteries } from "@neverquest/state/masteries";
-import { expandedMasteries } from "@neverquest/state/settings";
+import { expandedMasteries, unlockedMasteries } from "@neverquest/state/masteries";
 import type { Mastery } from "@neverquest/types/unions";
 
 export function Masteries() {

@@ -19,8 +19,8 @@ import IconWeaponDamagePerSecond from "@neverquest/icons/weapon-damage-per-secon
 import IconWeaponDamage from "@neverquest/icons/weapon-damage.svg?react";
 import { bleedChance, stunChance } from "@neverquest/state/ailments";
 import { weapon as weaponEquipped } from "@neverquest/state/gear";
+import { ownedItem } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
-import { isSettingActive } from "@neverquest/state/settings";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { parryChance } from "@neverquest/state/statistics";
 import type { Weapon } from "@neverquest/types";
@@ -43,7 +43,7 @@ export function WeaponName({
   };
   const isShowingGearClass = useRecoilValue(isShowing("gearClass"));
   const isShowingGrip = useRecoilValue(isShowing("grip"));
-  const isSettingActiveDamagePerSecond = useRecoilValue(isSettingActive("damagePerSecond"));
+  const ownedItemThaumaturgicGoggles = useRecoilValue(ownedItem("thaumaturgic goggles"));
   const weaponEquippedValue = useRecoilValue(weaponEquipped);
 
   const { abilityChance, burden, damage, gearClass, ID, level, name, rate, weight } = weapon;
@@ -117,7 +117,7 @@ export function WeaponName({
                 </td>
               </tr>
 
-              {isSettingActiveDamagePerSecond && (
+              {ownedItemThaumaturgicGoggles !== undefined && (
                 <tr>
                   <td>
                     <span>Damage per second:</span>

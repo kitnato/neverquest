@@ -3,6 +3,7 @@ import { useRecoilCallback } from "recoil";
 import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear";
 import {
   blacksmithInventory,
+  expandedBuyback,
   fletcherInventory,
   merchantInventory,
 } from "@neverquest/state/caravan";
@@ -16,6 +17,7 @@ import {
 } from "@neverquest/state/encounter";
 import { armor, gems, shield, weapon } from "@neverquest/state/gear";
 import { isSpinning } from "@neverquest/state/items";
+import { expandedMasteries } from "@neverquest/state/masteries";
 import {
   blight,
   health,
@@ -24,7 +26,6 @@ import {
   stamina,
 } from "@neverquest/state/reserves";
 import { essence } from "@neverquest/state/resources";
-import { expandedBuyback, expandedMasteries } from "@neverquest/state/settings";
 
 export function useResetCharacter() {
   return useRecoilCallback(

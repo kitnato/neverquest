@@ -3,16 +3,15 @@ import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { GearComparison } from "@neverquest/components/Inventory/GearComparison";
-
 import IconGearLevel from "@neverquest/icons/gear-level.svg?react";
-import { isSettingActive } from "@neverquest/state/settings";
+import { isShowing } from "@neverquest/state/isShowing";
 import type { Comparison } from "@neverquest/types/components";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function GearLevelDetail({ comparison, level }: { comparison: Comparison; level: number }) {
-  const isSettingActiveGearLevel = useRecoilValue(isSettingActive("gearLevel"));
+  const isShowingGearLevel = useRecoilValue(isShowing("gearLevel"));
 
-  if (isSettingActiveGearLevel && level > 0) {
+  if (isShowingGearLevel && level > 0) {
     return (
       <tr>
         <td>

@@ -271,6 +271,7 @@ export const TAILORING = {
 export const TRANSMUTATION = {
   gemCost: 3,
   gemYield: 1,
+  price: 100,
 };
 
 export const WITCH_POTIONS = ["elixir", "antidote", "salve"] as const;

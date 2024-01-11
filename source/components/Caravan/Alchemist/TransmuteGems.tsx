@@ -1,31 +1,42 @@
 import { nanoid } from "nanoid";
 import { type SetStateAction, useEffect, useState } from "react";
-import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
-import { useRecoilState } from "recoil";
+import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 import { SelectGem } from "@neverquest/components/Caravan/Alchemist/SelectGem";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { TRANSMUTATION } from "@neverquest/data/caravan";
-import { CLASS_FULL_WIDTH_JUSTIFIED, POPOVER_TRIGGER } from "@neverquest/data/general";
+import {
+  CLASS_FULL_WIDTH_JUSTIFIED,
+  LABEL_NO_ESSENCE,
+  POPOVER_TRIGGER,
+} from "@neverquest/data/general";
 import { GEM_BASE } from "@neverquest/data/items";
 import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
+import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
+import IconEssence from "@neverquest/icons/essence.svg?react";
 import IconTransmute from "@neverquest/icons/transmute.svg?react";
 import { inventory } from "@neverquest/state/inventory";
+import { essence } from "@neverquest/state/resources";
 import { isGemItem } from "@neverquest/types/type-guards";
 import { GEM_TYPES, type Gem } from "@neverquest/types/unions";
+import { formatNumber } from "@neverquest/utilities/formatters";
 import { stackItems } from "@neverquest/utilities/helpers";
 
 export function TransmuteGems() {
   const [inventoryValue, setInventory] = useRecoilState(inventory);
+  const essenceValue = useRecoilValue(essence);
 
   const [source, setSource] = useState<Gem>("ruby");
   const [result, setResult] = useState<Gem>("sapphire");
 
   const acquireItem = useAcquireItem();
   const progressQuest = useProgressQuest();
+  const transactEssence = useTransactEssence();
 
-  const { gemCost, gemYield } = TRANSMUTATION;
+  const { gemCost, gemYield, price } = TRANSMUTATION;
   const gems = stackItems(
     inventoryValue
       .filter(isGemItem)
@@ -37,7 +48,9 @@ export function TransmuteGems() {
     transmutation[gem] = gems.find(({ item: { name } }) => name === gem)?.amount ?? 0;
   }
 
-  const isAffordable = transmutation[source] >= gemCost;
+  const hasStock = transmutation[source] >= gemCost;
+  const isAffordable = price <= essenceValue;
+  const canTransmute = hasStock && isAffordable;
 
   const onSelect = (setSelection: (value: SetStateAction<Gem>) => void) => (gem: Gem) => {
     setSelection(gem);
@@ -54,51 +67,67 @@ export function TransmuteGems() {
   }, [result, source]);
 
   return (
-    <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-      <SelectGem gem={source} onSelect={onSelect(setSource)} />
+    <Stack gap={3}>
+      <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
+        <SelectGem gem={source} onSelect={onSelect(setSource)} />
 
-      <IconImage Icon={IconTransmute} />
+        <IconImage Icon={IconTransmute} />
 
-      <SelectGem gem={result} omit={source} onSelect={onSelect(setResult)} />
+        <SelectGem gem={result} omit={source} onSelect={onSelect(setResult)} />
+      </div>
 
-      <OverlayTrigger
-        overlay={<Tooltip>Insufficient source gems.</Tooltip>}
-        placement="bottom"
-        trigger={isAffordable ? [] : POPOVER_TRIGGER}
-      >
-        <div>
-          <Button
-            disabled={!isAffordable}
-            onClick={() => {
-              if (isAffordable) {
-                const gemIDs = new Set(
-                  inventoryValue
-                    .filter((item) => isGemItem(item) && item.name === source)
-                    .map(({ ID }) => ID)
-                    .slice(0, gemCost),
-                );
+      <Stack className="justify-content-center" direction="horizontal" gap={3}>
+        <IconDisplay Icon={IconEssence} tooltip="Cost">
+          {formatNumber({ value: price })}
+        </IconDisplay>
 
-                setInventory((currentInventory) =>
-                  currentInventory.filter(({ ID }) => !gemIDs.has(ID)),
-                );
+        <OverlayTrigger
+          overlay={
+            <Tooltip>
+              {!hasStock && <div>Insufficient source gems.</div>}
 
-                for (let yieldedGems = 0; yieldedGems < gemYield; yieldedGems++) {
-                  acquireItem({
-                    ...GEM_BASE,
-                    ID: nanoid(),
-                    name: result,
-                  });
+              {!isAffordable && <div>{LABEL_NO_ESSENCE}</div>}
+            </Tooltip>
+          }
+          placement="bottom"
+          trigger={canTransmute ? [] : POPOVER_TRIGGER}
+        >
+          <div>
+            <Button
+              disabled={!canTransmute}
+              onClick={() => {
+                if (canTransmute) {
+                  const gemIDs = new Set(
+                    inventoryValue
+                      .filter((item) => isGemItem(item) && item.name === source)
+                      .map(({ ID }) => ID)
+                      .slice(0, gemCost),
+                  );
+
+                  setInventory((currentInventory) =>
+                    currentInventory.filter(({ ID }) => !gemIDs.has(ID)),
+                  );
+
+                  for (let yieldedGems = 0; yieldedGems < gemYield; yieldedGems++) {
+                    acquireItem({
+                      ...GEM_BASE,
+                      ID: nanoid(),
+                      name: result,
+                    });
+                  }
+
+                  transactEssence(-price);
+
+                  progressQuest({ quest: "gemsTransmuting" });
                 }
-
-                progressQuest({ quest: "gemsTransmuting" });
-              }
-            }}
-            variant="outline-dark"
-          >
-            Transmute
-          </Button>
-        </div>
-      </OverlayTrigger>
-    </div>
+              }}
+              variant="outline-dark"
+            >
+              Transmute
+            </Button>
+          </div>
+        </OverlayTrigger>
+      </Stack>
+    </Stack>
   );
 }

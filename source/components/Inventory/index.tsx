@@ -1,3 +1,4 @@
+import type { FunctionComponent } from "react";
 import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
@@ -11,6 +12,7 @@ import { Encumbrance } from "@neverquest/components/Inventory/Encumbrance";
 import { CompassNavigate } from "@neverquest/components/Inventory/Inheritable/CompassNavigate";
 import { HearthstoneWarp } from "@neverquest/components/Inventory/Inheritable/HearthstoneWarp";
 import { InfusionInspect } from "@neverquest/components/Inventory/Inheritable/Infusion/InfusionInspect";
+import { SpinningWheelToggle } from "@neverquest/components/Inventory/Inheritable/SpinningWheelToggle";
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
 import {
   CLASS_FULL_WIDTH_JUSTIFIED,
@@ -37,7 +39,14 @@ import {
   isUnshielded,
   isWeapon,
 } from "@neverquest/types/type-guards";
+import type { Trinket } from "@neverquest/types/unions";
 import { stackItems } from "@neverquest/utilities/helpers";
+
+const TRINKET_ACTIONS: Partial<Record<Trinket, FunctionComponent>> = {
+  compass: CompassNavigate,
+  hearthstone: HearthstoneWarp,
+  "spinning wheel": SpinningWheelToggle,
+};
 
 export function Inventory() {
   const armorValue = useRecoilValue(armor);
@@ -167,27 +176,14 @@ export function Inventory() {
           .toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2))
           .map((trinketItem) => {
             const { ID, name } = trinketItem;
+            const Action = TRINKET_ACTIONS[name];
 
             return (
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
                 <ItemDisplay item={trinketItem} />
 
                 <Stack className="ms-2" direction="horizontal" gap={3}>
-                  {(() => {
-                    switch (name) {
-                      case "compass": {
-                        return <CompassNavigate />;
-                      }
-
-                      case "hearthstone": {
-                        return <HearthstoneWarp />;
-                      }
-
-                      default: {
-                        return;
-                      }
-                    }
-                  })()}
+                  {Action !== undefined && <Action />}
 
                   <DiscardItem ID={ID} name={name} />
                 </Stack>

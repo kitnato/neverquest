@@ -4,7 +4,6 @@ import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
 import { useAcquireSkill } from "@neverquest/hooks/actions/useAcquireSkill";
 import { useGenerateMerchantInventory } from "@neverquest/hooks/actions/useGenerateMerchantInventory";
 import { useIncreaseStage } from "@neverquest/hooks/actions/useIncreaseStage";
-import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness";
 import { useSetMonologues } from "@neverquest/hooks/actions/useSetMonologues";
 import { useToggleLocation } from "@neverquest/hooks/actions/useToggleLocation";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
@@ -32,7 +31,6 @@ export function CheatQuest() {
   const acquireSkill = useAcquireSkill();
   const generateMerchantInventory = useGenerateMerchantInventory();
   const increaseStage = useIncreaseStage();
-  const resetWilderness = useResetWilderness();
   const setMonologues = useSetMonologues();
   const toggleLocation = useToggleLocation();
   const transactEssence = useTransactEssence();
@@ -79,8 +77,6 @@ export function CheatQuest() {
               increaseStage();
             }
 
-            resetWilderness();
-
             if (locationValue === "wilderness") {
               setIsAttacking(false);
               resetEssenceLoot();
@@ -105,7 +101,6 @@ export function CheatQuest() {
     stageValue,
     progressMaximumValue,
     resetEssenceLoot,
-    resetWilderness,
     setProgress,
     setIsAttacking,
     setIsInvulnerable,

@@ -1,4 +1,4 @@
-import { atom, atomFamily, selectorFamily } from "recoil";
+import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
 import { LEVELLING_MAXIMUM } from "@neverquest/data/general";
 import {
@@ -16,6 +16,13 @@ import { getFromRange, getSigmoid, getTriangular } from "@neverquest/utilities/g
 import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
+
+export const canAutoProgress = withStateKey("canAutoProgress", (key) =>
+  selector({
+    get: ({ get }) => get(ownedItem("spinning wheel")) !== undefined && get(isSpinning),
+    key,
+  }),
+);
 
 export const infusionEffect = withStateKey("infusionEffect", (key) =>
   selectorFamily({
@@ -95,6 +102,14 @@ export const infusionLevel = withStateKey("infusionLevel", (key) =>
   atomFamily<number, Infusable>({
     default: 0,
     effects: (infusable) => [handleLocalStorage({ key, parameter: infusable })],
+    key,
+  }),
+);
+
+export const isSpinning = withStateKey("isSpinning", (key) =>
+  atom({
+    default: false,
+    effects: [handleLocalStorage({ key })],
     key,
   }),
 );

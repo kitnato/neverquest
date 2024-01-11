@@ -9,10 +9,12 @@ import { formatNumber } from "@neverquest/utilities/formatters";
 export function useDeltaText({
   delta,
   format = "integer",
+  ignoreZero = false,
   state,
 }: {
   delta: Delta;
   format?: NumberFormat;
+  ignoreZero?: boolean;
   state: RecoilValueReadOnly<number>;
 }) {
   const currentValue = useRecoilValue(state);
@@ -24,6 +26,10 @@ export function useDeltaText({
 
   useEffect(() => {
     if (previousValue === undefined) {
+      return;
+    }
+
+    if (ignoreZero && currentValue === 0) {
       return;
     }
 
@@ -56,5 +62,5 @@ export function useDeltaText({
       },
       delta,
     });
-  }, [addDelta, currentValue, delta, format, isTime, previousValue]);
+  }, [addDelta, currentValue, delta, format, ignoreZero, isTime, previousValue]);
 }

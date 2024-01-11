@@ -16,6 +16,7 @@ export function Progress() {
 
   useDeltaText({
     delta: "progress",
+    ignoreZero: true,
     state: progress,
   });
 

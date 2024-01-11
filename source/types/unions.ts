@@ -292,6 +292,7 @@ export type StateKey =
   | "blightMagnitude"
   | "blockChance"
   | "canAttackOrParry"
+  | "canAutoProgress"
   | "canBlock"
   | "canCompleteQuests"
   | "canDodge"
@@ -362,6 +363,7 @@ export type StateKey =
   | "isShowing"
   | "isShowingQuestBonus"
   | "isSkillAcquired"
+  | "isSpinning"
   | "isStageCompleted"
   | "isStageStarted"
   | "isStaminaAtMaximum"
@@ -449,13 +451,14 @@ export type Trait = (typeof TRAIT_TYPES)[number];
 
 export const TRINKET_TYPES = [
   "ammunition pouch",
-  "memento",
   "compass",
   "ender hook",
-  "hearthstone",
   "familiar",
+  "hearthstone",
   "journal",
   "knapsack",
+  "memento",
+  "spinning wheel",
   "torn manuscript",
 ] as const;
 export type Trinket = (typeof TRINKET_TYPES)[number];

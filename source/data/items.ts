@@ -20,6 +20,7 @@ import IconPowerBonusBoost from "@neverquest/icons/power-bonus-boost.svg?react";
 import IconRuby from "@neverquest/icons/ruby.svg?react";
 import IconSalve from "@neverquest/icons/salve.svg?react";
 import IconSapphire from "@neverquest/icons/sapphire.svg?react";
+import IconSpinningWheel from "@neverquest/icons/spinning-wheel.svg?react";
 import IconTomeOfPower from "@neverquest/icons/tome-of-power.svg?react";
 import IconTopaz from "@neverquest/icons/topaz.svg?react";
 import IconTornManuscript from "@neverquest/icons/torn-manuscript.svg?react";
@@ -277,6 +278,16 @@ export const TRINKETS: Record<
       name: "memento",
       price: 154,
       weight: 2,
+    },
+  },
+  "spinning wheel": {
+    Icon: IconSpinningWheel,
+    item: {
+      description:
+        "Once started, automatically collect all loot and pass to the next stage once it is cleared of monsters.",
+      name: "spinning wheel",
+      price: 7500,
+      weight: 20,
     },
   },
   "torn manuscript": {

@@ -34,7 +34,7 @@ export const encounter = withStateKey("encounter", (key) =>
 
 export const isStageCompleted = withStateKey("isStageCompleted", (key) =>
   selector({
-    get: ({ get }) => get(progress) === get(progressMaximum),
+    get: ({ get }) => get(progress) >= get(progressMaximum),
     key,
   }),
 );

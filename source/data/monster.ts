@@ -60,7 +60,7 @@ export const MONSTER_ATTACK_RATE = {
 };
 
 export const MONSTER_DAMAGE = {
-  attenuation: 18,
+  attenuation: 15,
   base: 7,
   bonus: 0.01,
   boss: 1.15,
@@ -73,7 +73,7 @@ export const MONSTER_DAMAGE = {
 };
 
 export const MONSTER_HEALTH = {
-  attenuation: 27,
+  attenuation: 25,
   base: 15,
   bonus: 0.01,
   boss: 1.8,

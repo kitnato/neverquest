@@ -9,15 +9,17 @@ import {
   OverlayTrigger,
   Tooltip,
 } from "react-bootstrap";
-import { useSetRecoilState } from "recoil";
+import { useResetRecoilState, useSetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import IconDiscard from "@neverquest/icons/discard.svg?react";
 import { inventory } from "@neverquest/state/inventory";
+import { isSpinning } from "@neverquest/state/items";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 
 export function DiscardItem({ ID, name }: { ID: string; name: string }) {
+  const resetIsSpinning = useResetRecoilState(isSpinning);
   const setInventoryValue = useSetRecoilState(inventory);
 
   const [isShowingModal, setIsShowingModal] = useState(false);
@@ -56,6 +58,10 @@ export function DiscardItem({ ID, name }: { ID: string; name: string }) {
               setInventoryValue((currentInventory) =>
                 currentInventory.filter(({ ID: currentItemID }) => currentItemID !== ID),
               );
+
+              if (name === "spinning wheel") {
+                resetIsSpinning();
+              }
 
               onHide();
             }}

@@ -121,7 +121,7 @@ export const CREW: Record<
       26: "Always a sight for sore eyes.",
       30: "Yet you return for more punishment?",
       31: "Your headway in the wilderness is helping business.",
-      51: "Still you press on. There must be an answer.",
+      41: "Still you press on. There must be an answer.",
       71: "Gloomy portents signal that dark tides are coming.",
       74: "I fear the end is imminent.",
       [GROWTH_MAXIMUM]: "All is truly lost.",
@@ -257,6 +257,10 @@ export const MERCHANT_OFFERS: Record<
     monologue: "I recently came into possession of a fine curiosity.",
   },
   34: { item: TRINKETS.journal.item, monologue: "You wouldn't be a scribe, would you?" },
+  40: {
+    item: TRINKETS["spinning wheel"].item,
+    monologue: "Here's a device that should ease up the grind.",
+  },
 };
 
 export const TAILORING = {

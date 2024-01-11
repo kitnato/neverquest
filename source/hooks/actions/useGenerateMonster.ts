@@ -11,6 +11,7 @@ import {
   monsterAttackRate,
   monsterHealth,
   monsterName,
+  monsterRegenerationDuration,
 } from "@neverquest/state/monster";
 import { attackRate } from "@neverquest/state/statistics";
 import { MONSTER_AILMENT_TYPES } from "@neverquest/types/unions";
@@ -42,6 +43,7 @@ export function useGenerateMonster() {
         }
 
         reset(monsterHealth);
+        reset(monsterRegenerationDuration);
         reset(distance);
 
         for (const ailment of MONSTER_AILMENT_TYPES) {
@@ -53,6 +55,8 @@ export function useGenerateMonster() {
         if (get(isAttacking)) {
           set(attackDuration, get(attackRate));
           set(monsterAttackDuration, get(monsterAttackRate));
+        } else {
+          reset(monsterAttackDuration);
         }
       },
     [],

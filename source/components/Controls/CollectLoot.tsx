@@ -1,19 +1,15 @@
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
-import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
-import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
-import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
-import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
+import { useCollectLoot } from "@neverquest/hooks/actions/useCollectLoot";
 import IconLoot from "@neverquest/icons/loot.svg?react";
 import { hasFlatlined, isAttacking, isLooting } from "@neverquest/state/character";
 import { isStageCompleted, location, progressMaximum } from "@neverquest/state/encounter";
-import { essenceLoot, hasLooted, isLootAvailable, itemsLoot } from "@neverquest/state/resources";
+import { isLootAvailable } from "@neverquest/state/resources";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function CollectLoot() {
-  const [itemsLootValue, setItemsLoot] = useRecoilState(itemsLoot);
-  const essenceLootValue = useRecoilValue(essenceLoot);
   const isAttackingValue = useRecoilValue(isAttacking);
   const hasFlatlinedValue = useRecoilValue(hasFlatlined);
   const isLootAvailableValue = useRecoilValue(isLootAvailable);
@@ -21,12 +17,8 @@ export function CollectLoot() {
   const isStageCompletedValue = useRecoilValue(isStageCompleted);
   const locationValue = useRecoilValue(location);
   const progressMaximumValue = useRecoilValue(progressMaximum);
-  const resetEssenceLoot = useResetRecoilState(essenceLoot);
-  const setHasLooted = useSetRecoilState(hasLooted);
 
-  const acquireItem = useAcquireItem();
-  const progressQuest = useProgressQuest();
-  const transactEssence = useTransactEssence();
+  const collectLoot = useCollectLoot();
 
   if (
     isLootAvailableValue &&
@@ -43,26 +35,7 @@ export function CollectLoot() {
                 : undefined
             }
             disabled={isAttackingValue || isLootingValue || hasFlatlinedValue}
-            onClick={() => {
-              transactEssence(essenceLootValue);
-
-              if (itemsLootValue.length > 0) {
-                const acquiredItemIDs = new Set(
-                  itemsLootValue
-                    .filter((item) => acquireItem(item) === "success")
-                    .map(({ ID }) => ID),
-                );
-
-                setItemsLoot((currentItemsLoot) =>
-                  currentItemsLoot.filter(({ ID }) => !acquiredItemIDs.has(ID)),
-                );
-              }
-
-              resetEssenceLoot();
-              setHasLooted(true);
-
-              progressQuest({ quest: "looting" });
-            }}
+            onClick={collectLoot}
             variant="outline-dark"
           >
             <IconImage Icon={IconLoot} />

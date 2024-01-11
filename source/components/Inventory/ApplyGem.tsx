@@ -9,6 +9,7 @@ import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence
 import IconEssence from "@neverquest/icons/essence.svg?react";
 import { armor, gems, shield, weapon } from "@neverquest/state/gear";
 import { inventory } from "@neverquest/state/inventory";
+import { isShowing } from "@neverquest/state/isShowing";
 import { essence } from "@neverquest/state/resources";
 import type { GemItem } from "@neverquest/types";
 import { isGear } from "@neverquest/types/type-guards";
@@ -22,6 +23,11 @@ export function ApplyGem({ gem }: { gem: GemItem }) {
   const weaponValue = useRecoilValue(weapon);
   const essenceValue = useRecoilValue(essence);
   const setInventory = useSetRecoilState(inventory);
+  const setIsShowing = {
+    armor: useSetRecoilState(isShowing("armor")),
+    shield: useSetRecoilState(isShowing("offhand")),
+    weapon: useSetRecoilState(isShowing("weapon")),
+  };
 
   const [armorGemsValue, setArmorGems] = useRecoilState(gems(armorValue.ID));
   const [shieldGemsValue, setShieldGems] = useRecoilState(gems(shieldValue.ID));
@@ -64,6 +70,8 @@ export function ApplyGem({ gem }: { gem: GemItem }) {
           setInventory((currentInventory) =>
             currentInventory.filter(({ ID: itemID }) => itemID !== gem.ID),
           );
+
+          setIsShowing[slot](true);
 
           transactEssence(-getGemFittingCost(gemsFitted));
           progressQuest({ quest: "gemsApplying" });

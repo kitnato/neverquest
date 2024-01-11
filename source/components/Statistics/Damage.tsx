@@ -169,7 +169,12 @@ export function Damage() {
 
                         <td>
                           <span>
-                            +{formatNumber({ format: "percentage", value: BRAWLER_DAMAGE_BONUS })}
+                            +
+                            {formatNumber({
+                              decimals: 0,
+                              format: "percentage",
+                              value: BRAWLER_DAMAGE_BONUS,
+                            })}
                           </span>
                         </td>
                       </tr>

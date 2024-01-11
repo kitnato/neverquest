@@ -1,4 +1,5 @@
 import {
+  Badge,
   Button,
   OverlayTrigger,
   Popover,
@@ -13,9 +14,11 @@ import { useToggleAttacking } from "@neverquest/hooks/actions/useToggleAttacking
 import IconAttack from "@neverquest/icons/attack.svg?react";
 import IconResting from "@neverquest/icons/resting.svg?react";
 import IconRetreat from "@neverquest/icons/retreat.svg?react";
+import IconSpinningWheel from "@neverquest/icons/spinning-wheel.svg?react";
 import { areAttributesAffordable } from "@neverquest/state/attributes";
 import { hasEnoughAmmunition, hasFlatlined, isAttacking } from "@neverquest/state/character";
 import { isStageCompleted, location } from "@neverquest/state/encounter";
+import { canAutoProgress } from "@neverquest/state/items";
 import { isHealthLow } from "@neverquest/state/reserves";
 import { isSettingActive } from "@neverquest/state/settings";
 import type { SVGIcon } from "@neverquest/types/components";
@@ -23,12 +26,13 @@ import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Attack() {
   const areAttributesIncreasableValue = useRecoilValue(areAttributesAffordable);
+  const canAutoProgressValue = useRecoilValue(canAutoProgress);
+  const hasEnoughAmmunitionValue = useRecoilValue(hasEnoughAmmunition);
+  const hasFlatlinedValue = useRecoilValue(hasFlatlined);
   const isAttackingValue = useRecoilValue(isAttacking);
   const isHealthLowValue = useRecoilValue(isHealthLow);
   const isSettingActiveLowHealthWarning = useRecoilValue(isSettingActive("lowHealthWarning"));
-  const hasFlatlinedValue = useRecoilValue(hasFlatlined);
   const isStageCompletedValue = useRecoilValue(isStageCompleted);
-  const hasEnoughAmmunitionValue = useRecoilValue(hasEnoughAmmunition);
   const locationValue = useRecoilValue(location);
 
   const toggleAttacking = useToggleAttacking();
@@ -88,6 +92,12 @@ export function Attack() {
           variant="outline-dark"
         >
           <IconImage Icon={Icon} />
+
+          {canAutoProgressValue && !isResting && (
+            <Badge bg="secondary" className="position-absolute top-50 start-100 translate-middle">
+              <IconImage className="small" Icon={IconSpinningWheel} />
+            </Badge>
+          )}
         </Button>
       </div>
     </OverlayTrigger>

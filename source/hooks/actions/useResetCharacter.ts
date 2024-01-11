@@ -15,6 +15,7 @@ import {
   stage,
 } from "@neverquest/state/encounter";
 import { armor, gems, shield, weapon } from "@neverquest/state/gear";
+import { isSpinning } from "@neverquest/state/items";
 import {
   blight,
   health,
@@ -42,6 +43,7 @@ export function useResetCharacter() {
         reset(gems(SHIELD_NONE.ID));
         reset(gems(WEAPON_NONE.ID));
         reset(health);
+        reset(isSpinning);
         reset(isStageStarted);
         reset(poisonDuration);
         reset(progress);

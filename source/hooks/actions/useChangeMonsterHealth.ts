@@ -4,7 +4,6 @@ import { MONSTER_REGENERATION } from "@neverquest/data/monster";
 import { AILMENT_PENALTY, LOOTING_RATE } from "@neverquest/data/statistics";
 import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
-import { useProgressStage } from "@neverquest/hooks/actions/useProgressStage";
 import { powerLevel } from "@neverquest/state/attributes";
 import { attackDuration, lootingDuration } from "@neverquest/state/character";
 import { encounter, stage } from "@neverquest/state/encounter";
@@ -23,7 +22,6 @@ import { getSnapshotGetter } from "@neverquest/utilities/getters";
 export function useChangeMonsterHealth() {
   const addDelta = useAddDelta();
   const progressQuest = useProgressQuest();
-  const progressStage = useProgressStage();
 
   return useRecoilCallback(
     ({ reset, set, snapshot }) =>
@@ -147,6 +145,6 @@ export function useChangeMonsterHealth() {
 
         set(monsterHealth, newHealth);
       },
-    [addDelta, progressQuest, progressStage],
+    [addDelta, progressQuest],
   );
 }

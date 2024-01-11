@@ -5,6 +5,7 @@ import { useRecoilValue } from "recoil";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { Monster } from "@neverquest/components/Monster";
 import { LABEL_UNKNOWN } from "@neverquest/data/general";
+import { useAutoProgression } from "@neverquest/hooks/actions/useAutoProgression";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import IconBossHiding from "@neverquest/icons/boss-hiding.svg?react";
 import IconFinality from "@neverquest/icons/finality.svg?react";
@@ -19,6 +20,7 @@ export function Wilderness() {
   const isStageStartedValue = useRecoilValue(isStageStarted);
   const isStageCompletedValue = useRecoilValue(isStageCompleted);
 
+  const autoProgression = useAutoProgression();
   const progressQuest = useProgressQuest();
 
   useEffect(() => {
@@ -26,6 +28,12 @@ export function Wilderness() {
       progressQuest({ quest: "visitingVoid" });
     }
   }, [encounterValue, progressQuest]);
+
+  useEffect(() => {
+    if (isStageCompletedValue) {
+      autoProgression();
+    }
+  }, [autoProgression, isStageCompletedValue]);
 
   if (isStageCompletedValue) {
     return (

@@ -3,6 +3,7 @@ import { useRecoilCallback } from "recoil";
 
 import { CREW } from "@neverquest/data/caravan";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
+import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness";
 import { hireStatus } from "@neverquest/state/caravan";
 import { stage, wildernesses } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
@@ -12,6 +13,7 @@ import { getAffixStructure, getSnapshotGetter } from "@neverquest/utilities/gett
 
 export function useIncreaseStage() {
   const progressQuest = useProgressQuest();
+  const resetWilderness = useResetWilderness();
 
   return useRecoilCallback(
     ({ set, snapshot }) =>
@@ -34,13 +36,6 @@ export function useIncreaseStage() {
           }
         }
 
-        set(wildernesses, (currentWildernesses) => [
-          ...currentWildernesses,
-          generateLocation({ affixStructure: getAffixStructure() }),
-        ]);
-
-        set(stage, nextStage);
-
         progressQuest({ quest: "stages" });
         progressQuest({ quest: "stagesEnd" });
 
@@ -51,7 +46,15 @@ export function useIncreaseStage() {
         if (stageValue === get(questProgress("survivingNoGear")) + 1) {
           progressQuest({ quest: "survivingNoGear" });
         }
+
+        set(wildernesses, (currentWildernesses) => [
+          ...currentWildernesses,
+          generateLocation({ affixStructure: getAffixStructure() }),
+        ]);
+
+        set(stage, nextStage);
+        resetWilderness();
       },
-    [progressQuest],
+    [progressQuest, resetWilderness],
   );
 }

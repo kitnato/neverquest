@@ -14,7 +14,7 @@ Both you and monster will keep attacking one another until either you **retreat*
 
 Upon a monster's death, the stage's **progress** is incremented, its remains are its remains are **looted** for [essence](#essence) and any [gems](#gems) and the next monster is engaged immediately, unless you retreat.
 
-Once the wilderness is cleared of monsters, all looted resources can be **collected** and you enter a **resting** state. At this point, **travel** to the [caravan](#caravan) becomes possible.
+Once the wilderness is cleared of monsters, all looted resources can be **collected** and you enter a **resting** state. At this point, **traveling** to the [caravan](#caravan) becomes possible.
 
 The caravan allows interacting with a crew that provides essential services like accessing higher stages and unlocking new capabilities.
 
@@ -492,7 +492,7 @@ A single-use item.
 
 Sold by the [medic](#medic).
 
-Fully restores health on use. Does not affect [poisonDuration](#poisonDuration).
+Fully restores health on use. Does not affect [poison](#poison).
 
 #### Potions
 
@@ -500,7 +500,7 @@ Sold by the [witch](#witch).
 
 ##### Antidote
 
-Cures and removes [poisonDuration](#poisonDuration).
+Cures and removes [poison](#poison).
 
 ##### Elixir
 
@@ -630,11 +630,11 @@ This effect can be cured by a [salve](#salve). It can also be avoided if an atta
 
 #### Poison
 
-Certain successful attacks by the monster can afflict you with poisonDuration, reducing maximum [health](#health) by a certain percentage. The magnitude of the health reduction and chance of inflicting poisonDuration is proportional to the wilderness stage in which the monster resides.
+Certain successful attacks by the monster can afflict you with poison, reducing maximum [health](#health) by a certain percentage. The magnitude of the health reduction and chance of inflicting poison is proportional to the wilderness stage in which the monster resides.
 
 The effect gradually wears off as maximum health is restored over time, during which all healing effects can only restore health up to the currently-reduced maximum.
 
-Monsters won't exhibit poisonDuration until later [wilderness](#wilderness) stages. Once poisoned, there is also a chance for certain monsters to inflict [blight](#blight).
+Monsters won't exhibit poison until later [wilderness](#wilderness) stages. Once poisoned, there is also a chance for certain monsters to inflict [blight](#blight).
 
 This effect can be cured by an [antidote](#antidote). It can also be avoided if an attack is successfully [deflected](#deflection-chance).
 

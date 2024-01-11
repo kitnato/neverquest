@@ -2,6 +2,7 @@ import { Badge, Container, Nav, Navbar, NavbarBrand, Stack } from "react-bootstr
 
 import { About } from "@neverquest/components/Header/About";
 import { Ouroboros } from "@neverquest/components/Header/Ouroboros";
+import { Repository } from "@neverquest/components/Header/Repository";
 import { Reset } from "@neverquest/components/Header/Reset";
 import { Settings } from "@neverquest/components/Header/Settings";
 import { version } from "@neverquest/config";
@@ -24,6 +25,8 @@ export function Header() {
 
         <Nav>
           <Stack direction="horizontal" gap={3}>
+            <Repository />
+
             <About />
 
             <Settings />

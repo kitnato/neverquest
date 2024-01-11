@@ -7,7 +7,7 @@
   "homepage": "https://kitnato.github.io/neverquest",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kitnato/neverquest.git"
+    "url": "https://github.com/kitnato/neverquest.git"
   },
   "private": true,
   "type": "module",

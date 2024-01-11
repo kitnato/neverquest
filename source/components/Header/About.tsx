@@ -53,17 +53,22 @@ export function About() {
 
         <ModalBody>
           <ReactMarkdown
-            components={Object.fromEntries(
-              HEADERS.map((Current) => [
-                Current,
-                ({ children, ...properties }: JSX.IntrinsicElements[typeof Current]) => (
-                  <Current
-                    id={typeof children === "string" ? formatKebabCase(children) : undefined}
-                    {...{ children, ...properties }}
-                  />
-                ),
-              ]),
-            )}
+            components={{
+              ...Object.fromEntries(
+                HEADERS.map((Current) => [
+                  Current,
+                  ({ children, ...properties }: JSX.IntrinsicElements[typeof Current]) => (
+                    <Current
+                      id={typeof children === "string" ? formatKebabCase(children) : undefined}
+                      {...{ children, ...properties }}
+                    />
+                  ),
+                ]),
+              ),
+              blockquote: ({ children }) => (
+                <blockquote className="blockquote text-center">{children}</blockquote>
+              ),
+            }}
           >
             {manual}
           </ReactMarkdown>

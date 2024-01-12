@@ -285,7 +285,7 @@ export const TRINKETS: Record<
     Icon: IconSpinningWheel,
     item: {
       description:
-        "Once started, automatically collect all loot and pass to the next stage once it is cleared of monsters.",
+        "Once running, automatically collect all loot and pass to the next stage once it is cleared of monsters.",
       name: "spinning wheel",
       price: 7500,
       weight: 20,
@@ -295,7 +295,7 @@ export const TRINKETS: Record<
     Icon: IconThaumaturgicGoggles,
     item: {
       description:
-        "Allows the wearer to see unprecedented detail concerning the lethality of themselves and their opponents.",
+        "Allows the wearer to discern detailed lethality of themselves and their opponents.",
       name: "thaumaturgic goggles",
       price: 100,
       weight: 4,

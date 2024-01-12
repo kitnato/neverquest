@@ -14,7 +14,7 @@ import { useToggleAttacking } from "@neverquest/hooks/actions/useToggleAttacking
 import IconAttack from "@neverquest/icons/attack.svg?react";
 import IconResting from "@neverquest/icons/resting.svg?react";
 import IconRetreat from "@neverquest/icons/retreat.svg?react";
-import IconSpinningWheel from "@neverquest/icons/spinning-wheel.svg?react";
+import IconSpinning from "@neverquest/icons/spinning.svg?react";
 import { areAttributesAffordable } from "@neverquest/state/attributes";
 import { hasEnoughAmmunition, hasFlatlined, isAttacking } from "@neverquest/state/character";
 import { isStageCompleted, location } from "@neverquest/state/encounter";
@@ -92,7 +92,7 @@ export function Attack() {
 
           {canAutoProgressValue && !isResting && (
             <Badge bg="secondary" className="position-absolute top-50 start-100 translate-middle">
-              <IconImage className="small" Icon={IconSpinningWheel} />
+              <IconImage className="small" Icon={IconSpinning} />
             </Badge>
           )}
         </Button>

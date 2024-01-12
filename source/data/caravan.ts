@@ -150,7 +150,7 @@ export const CREW: Record<
       [LEVELLING_MAXIMUM]: "I can't see any more.",
     },
     price: 650,
-    requiredStage: 27,
+    requiredStage: 21,
   },
   tailor: {
     description: "Expands inventory space.",
@@ -174,7 +174,7 @@ export const CREW: Record<
       [LEVELLING_MAXIMUM]: "The spirits have gone silent.",
     },
     price: 300,
-    requiredStage: 21,
+    requiredStage: 27,
   },
 };
 

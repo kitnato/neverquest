@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 import { ProgressBar, Stack } from "react-bootstrap";
-import { useRecoilValue, useResetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { PERCENTAGE_POINTS } from "@neverquest/data/general";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
+import { usePreviousValue } from "@neverquest/hooks/usePreviousValue";
 import IconBlight from "@neverquest/icons/blight.svg?react";
 import IconPoison from "@neverquest/icons/poison.svg?react";
 import {
@@ -29,7 +30,7 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
   const isHealth = reserve === "health";
   const reserveMaximum = isHealth ? healthMaximum : staminaMaximum;
 
-  const reserveValue = useRecoilValue(isHealth ? health : stamina);
+  const [reserveValue, setReserve] = useRecoilState(isHealth ? health : stamina);
   const ailmentValue = useRecoilValue(isHealth ? poisonDuration : blightMagnitude);
   const isAiling = useRecoilValue(isHealth ? isPoisoned : isBlighted);
   const reserveMaximumValue = useRecoilValue(reserveMaximum);
@@ -48,6 +49,19 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
     delta: deltaReserveMaximum,
     state: reserveMaximum,
   });
+
+  // Have current health and stamina increase the same if the maximum is increased (e.g. via attribute).
+  const previousReserveMaximumAiling = usePreviousValue(reserveMaximumAilingValue);
+  const reserveMaximumDifference =
+    previousReserveMaximumAiling === undefined
+      ? 0
+      : reserveMaximumAilingValue - previousReserveMaximumAiling;
+
+  useEffect(() => {
+    if (!isAiling && reserveMaximumDifference > 0 && reserveValue < reserveMaximumAilingValue) {
+      setReserve((currentReserve) => currentReserve + reserveMaximumDifference);
+    }
+  }, [isAiling, reserveMaximumAilingValue, reserveMaximumDifference, reserveValue, setReserve]);
 
   // Catches attribute resets and poison/blight penalties.
   useEffect(() => {

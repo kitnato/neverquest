@@ -1,8 +1,7 @@
 import { atom, atomFamily, selector } from "recoil";
 
 import { PROGRESS } from "@neverquest/data/encounter";
-import { LEVELLING_MAXIMUM } from "@neverquest/data/general";
-import { BOSS_STAGE_INTERVAL, BOSS_STAGE_START } from "@neverquest/data/monster";
+import { BOSS_STAGE_INTERVAL, BOSS_STAGE_START, FINALITY_STAGE } from "@neverquest/data/monster";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { ownedItem } from "@neverquest/state/inventory";
 import type { Finality, Perk } from "@neverquest/types/unions";
@@ -16,12 +15,20 @@ export const encounter = withStateKey("encounter", (key) =>
     get: ({ get }) => {
       const stageValue = get(stage);
 
-      if (stageValue === LEVELLING_MAXIMUM) {
-        if (get(defeatedFinality) !== undefined) {
+      if (stageValue === FINALITY_STAGE["res cogitans"]) {
+        if (get(defeatedFinality) === "res cogitans" || get(ownedItem("familiar")) === undefined) {
           return "void";
         }
 
-        return get(ownedItem("familiar")) === undefined ? "res dominus" : "res cogitans";
+        return "res cogitans";
+      }
+
+      if (stageValue === FINALITY_STAGE["res dominus"]) {
+        if (get(defeatedFinality) === "res dominus") {
+          return "void";
+        }
+
+        return "res dominus";
       }
 
       return stageValue >= BOSS_STAGE_START && stageValue % BOSS_STAGE_INTERVAL === 0

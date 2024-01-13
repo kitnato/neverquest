@@ -70,7 +70,6 @@ export function useCheatQuest() {
                   toggleAttack();
                 }
 
-                set(progress, progressMaximumValue);
                 reset(essenceLoot);
                 toggleLocation();
               }

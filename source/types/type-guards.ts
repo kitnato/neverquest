@@ -24,6 +24,8 @@ import {
   GRIP_TYPES,
   type Gear,
   INFUSABLE_TYPES,
+  QUEST_BONUS_TYPES,
+  type QuestBonus,
   ROUTINE_TYPES,
   type Routine,
   TRINKET_TYPES,
@@ -63,6 +65,10 @@ export function isGemItem(thing: unknown): thing is GemItem {
   );
 }
 
+export function isInheritableItem(thing: unknown): thing is InheritableItem {
+  return isInfusableItem(thing) || isTrinketItem(thing);
+}
+
 export function isInfusableItem(thing: unknown): thing is InfusableItem {
   return (
     isObject(thing) &&
@@ -79,6 +85,10 @@ export function isMelee(thing: unknown): thing is Melee {
   return (
     isObject(thing) && typeof thing.grip === "string" && new Set<string>(GRIP_TYPES).has(thing.grip)
   );
+}
+
+export function isQuestBonus(thing: unknown): thing is QuestBonus {
+  return typeof thing === "string" && new Set<string>(QUEST_BONUS_TYPES).has(thing);
 }
 
 export function isRanged(thing: unknown): thing is Ranged {
@@ -115,10 +125,6 @@ export function isUnarmored(thing: unknown): thing is typeof ARMOR_NONE {
 
 export function isUnshielded(thing: unknown): thing is typeof SHIELD_NONE {
   return isGearItem(thing) && thing.ID === SHIELD_NONE.ID;
-}
-
-export function isInheritableItem(thing: unknown): thing is InheritableItem {
-  return isInfusableItem(thing) || isTrinketItem(thing);
 }
 
 export function isWeapon(thing: unknown): thing is Weapon {

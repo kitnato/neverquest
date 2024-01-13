@@ -17,7 +17,7 @@ import IconRetreat from "@neverquest/icons/retreat.svg?react";
 import IconSpinning from "@neverquest/icons/spinning.svg?react";
 import { areAttributesAffordable } from "@neverquest/state/attributes";
 import { hasEnoughAmmunition, hasFlatlined, isAttacking } from "@neverquest/state/character";
-import { isStageCompleted, location } from "@neverquest/state/encounter";
+import { encounter, isStageCompleted, location } from "@neverquest/state/encounter";
 import { canAutoProgress } from "@neverquest/state/items";
 import { isHealthLow } from "@neverquest/state/reserves";
 import type { SVGIcon } from "@neverquest/types/components";
@@ -26,6 +26,7 @@ import { getAnimationClass } from "@neverquest/utilities/getters";
 export function Attack() {
   const areAttributesIncreasableValue = useRecoilValue(areAttributesAffordable);
   const canAutoProgressValue = useRecoilValue(canAutoProgress);
+  const encounterValue = useRecoilValue(encounter);
   const hasEnoughAmmunitionValue = useRecoilValue(hasEnoughAmmunition);
   const hasFlatlinedValue = useRecoilValue(hasFlatlined);
   const isAttackingValue = useRecoilValue(isAttacking);
@@ -39,7 +40,11 @@ export function Attack() {
     animation: "pulse",
     isInfinite: true,
   });
-  const isResting = hasFlatlinedValue || isStageCompletedValue || locationValue === "caravan";
+  const isResting =
+    hasFlatlinedValue ||
+    isStageCompletedValue ||
+    locationValue === "caravan" ||
+    encounterValue === "void";
   const showWarning = isAttackingValue && isHealthLowValue && !isResting;
 
   const { animation, Icon, tooltip }: { animation?: string; Icon: SVGIcon; tooltip: string } =

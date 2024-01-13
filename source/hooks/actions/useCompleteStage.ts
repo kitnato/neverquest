@@ -10,7 +10,7 @@ import {
   encounter,
   isStageCompleted,
 } from "@neverquest/state/encounter";
-import { FINALITY_TYPES, type Finality } from "@neverquest/types/unions";
+import { isFinality } from "@neverquest/types/type-guards";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useCompleteStage() {
@@ -26,8 +26,8 @@ export function useCompleteStage() {
         const encounterValue = get(encounter);
         const isAttackingValue = get(isAttacking);
 
-        if (new Set<string>(FINALITY_TYPES).has(encounterValue)) {
-          set(defeatedFinality, encounterValue as Finality);
+        if (isFinality(encounterValue)) {
+          set(defeatedFinality, encounterValue);
         }
 
         if (get(isStageCompleted)) {

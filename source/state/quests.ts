@@ -10,13 +10,8 @@ import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage
 import { ownedItem } from "@neverquest/state/inventory";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import type { QuestNotification } from "@neverquest/types";
-import {
-  QUEST_BONUS_TYPES,
-  type Quest,
-  type QuestBonus,
-  type QuestClass,
-  type QuestStatus,
-} from "@neverquest/types/unions";
+import { isQuestBonus } from "@neverquest/types/type-guards";
+import type { Quest, QuestBonus, QuestClass, QuestStatus } from "@neverquest/types/unions";
 import { getQuestsData } from "@neverquest/utilities/getters";
 import { withStateKey } from "@neverquest/utilities/helpers";
 
@@ -82,17 +77,12 @@ export const completedQuestsCount = withStateKey("completedQuestsCount", (key) =
   selectorFamily({
     get:
       (questClass: QuestClass) =>
-      ({ get }) => {
-        const questBonusTypes = new Set<string>(QUEST_BONUS_TYPES);
-
-        return QUEST_TYPES_BY_CLASS[questClass].reduce(
+      ({ get }) =>
+        QUEST_TYPES_BY_CLASS[questClass].reduce(
           (sum, quest) =>
-            sum +
-            Object.values(get(questStatuses(quest))).filter((status) => questBonusTypes.has(status))
-              .length,
+            sum + Object.values(get(questStatuses(quest))).filter(isQuestBonus).length,
           0,
-        );
-      },
+        ),
     key,
   }),
 );

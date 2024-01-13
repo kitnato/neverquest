@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { MonsterRegenerationMeter } from "@neverquest/components/Monster/MonsterRegenerationMeter";
@@ -8,6 +9,7 @@ import {
   isMonsterAiling,
   isMonsterAtFullHealth,
   isMonsterDead,
+  isMonsterRegenerating,
   monsterHealthMaximum,
   monsterRegenerationDuration,
 } from "@neverquest/state/monster";
@@ -17,6 +19,7 @@ export function MonsterRegeneration() {
   const isMonsterBurning = useRecoilValue(isMonsterAiling("burning"));
   const isMonsterDeadValue = useRecoilValue(isMonsterDead);
   const isMonsterAtFullHealthValue = useRecoilValue(isMonsterAtFullHealth);
+  const isMonsterRegeneratingValue = useRecoilValue(isMonsterRegenerating);
   const monsterHealthMaximumValue = useRecoilValue(monsterHealthMaximum);
   const setMonsterRegenerationDuration = useSetRecoilState(monsterRegenerationDuration);
 
@@ -36,6 +39,18 @@ export function MonsterRegeneration() {
     },
     stop: isMonsterAtFullHealthValue || isMonsterBurning || isMonsterDeadValue,
   });
+
+  useEffect(() => {
+    if (!isMonsterAtFullHealthValue && !isMonsterRegeneratingValue) {
+      setMonsterRegenerationDuration(Math.round(duration / ticks));
+    }
+  }, [
+    duration,
+    isMonsterAtFullHealthValue,
+    isMonsterRegeneratingValue,
+    setMonsterRegenerationDuration,
+    ticks,
+  ]);
 
   return <MonsterRegenerationMeter amount={regenerationAmount} />;
 }

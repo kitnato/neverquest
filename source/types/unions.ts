@@ -347,6 +347,7 @@ export type StateKey =
   | "isMonsterAtFullHealth"
   | "isMonsterDead"
   | "isMonsterNew"
+  | "isMonsterRegenerating"
   | "isPoisoned"
   | "isRecovering"
   | "isRegenerating"

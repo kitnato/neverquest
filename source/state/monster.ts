@@ -30,7 +30,7 @@ import { ownedItem } from "@neverquest/state/inventory";
 import { infusionEffect } from "@neverquest/state/items";
 import { range } from "@neverquest/state/statistics";
 import { isFinality } from "@neverquest/types/type-guards";
-import { FINALITY_TYPES, type MonsterAilment } from "@neverquest/types/unions";
+import type { MonsterAilment } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import {
   getDamagePerRate,
@@ -71,8 +71,8 @@ export const blightChance = withStateKey("blightChance", (key) =>
         return 0;
       }
 
-      if (new Set<string>(FINALITY_TYPES).has(encounterValue)) {
-        return finality;
+      if (isFinality(encounterValue)) {
+        return finality[encounterValue];
       }
 
       return (
@@ -142,6 +142,13 @@ export const isMonsterDead = withStateKey("isMonsterDead", (key) =>
   }),
 );
 
+export const isMonsterRegenerating = withStateKey("isMonsterRegenerating", (key) =>
+  selector({
+    get: ({ get }) => get(monsterRegenerationDuration) > 0,
+    key,
+  }),
+);
+
 export const monsterAttackRate = withStateKey("monsterAttackRate", (key) =>
   selector({
     get: ({ get }) => {
@@ -149,8 +156,8 @@ export const monsterAttackRate = withStateKey("monsterAttackRate", (key) =>
       const encounterValue = get(encounter);
       const factor = getTriangular(get(stage)) / attenuation;
 
-      if (new Set<string>(FINALITY_TYPES).has(encounterValue)) {
-        return finality;
+      if (isFinality(encounterValue)) {
+        return finality[encounterValue];
       }
 
       return Math.round(
@@ -180,8 +187,8 @@ export const monsterDamage = withStateKey("monsterDamage", (key) =>
       const stageValue = get(stage);
       const factor = getTriangular(stageValue) / attenuation;
 
-      if (new Set<string>(FINALITY_TYPES).has(encounterValue)) {
-        return finality;
+      if (isFinality(encounterValue)) {
+        return finality[encounterValue];
       }
 
       return Math.round(
@@ -247,8 +254,8 @@ export const monsterHealthMaximum = withStateKey("monsterHealthMaximum", (key) =
       const stageValue = get(stage);
       const factor = getTriangular(stageValue) / attenuation;
 
-      if (new Set<string>(FINALITY_TYPES).has(encounterValue)) {
-        return finality;
+      if (isFinality(encounterValue)) {
+        return finality[encounterValue];
       }
 
       return Math.round(
@@ -354,8 +361,8 @@ export const poisonChance = withStateKey("poisonChance", (key) =>
         return 0;
       }
 
-      if (new Set<string>(FINALITY_TYPES).has(encounterValue)) {
-        return finality;
+      if (isFinality(encounterValue)) {
+        return finality[encounterValue];
       }
 
       return (

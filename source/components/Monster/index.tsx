@@ -2,9 +2,10 @@ import { useEffect, useRef } from "react";
 import { Card, CardBody, Stack } from "react-bootstrap";
 import { useRecoilState, useResetRecoilState } from "recoil";
 
+import { Distance } from "@neverquest/components/Monster/Distance";
+import { Frailty } from "@neverquest/components/Monster/Frailty";
 import { MonsterAilments } from "@neverquest/components/Monster/MonsterAilments";
 import { MonsterAttackRate } from "@neverquest/components/Monster/MonsterAttackRate";
-import { MonsterDistance } from "@neverquest/components/Monster/MonsterDistance";
 import { MonsterHealth } from "@neverquest/components/Monster/MonsterHealth";
 import { MonsterName } from "@neverquest/components/Monster/MonsterName";
 import { MonsterOffense } from "@neverquest/components/Monster/MonsterOffense";
@@ -53,11 +54,13 @@ export function Monster() {
             <MonsterAttackRate />
 
             <MonsterOffense />
+
+            <Frailty />
           </Stack>
         </CardBody>
       </Card>
 
-      <MonsterDistance />
+      <Distance />
 
       <MonsterAilments />
     </Stack>

@@ -3,6 +3,7 @@ import { type RecoilValueReadOnly, useRecoilValue } from "recoil";
 
 import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta";
 import { usePreviousValue } from "@neverquest/hooks/usePreviousValue";
+import type { DeltaDisplay } from "@neverquest/types/ui";
 import type { Delta, NumberFormat } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
@@ -11,11 +12,13 @@ export function useDeltaText({
   format = "integer",
   ignoreZero = false,
   state,
+  suffix,
 }: {
   delta: Delta;
   format?: NumberFormat;
   ignoreZero?: boolean;
   state: RecoilValueReadOnly<number>;
+  suffix?: string;
 }) {
   const currentValue = useRecoilValue(state);
 
@@ -45,9 +48,8 @@ export function useDeltaText({
     }
 
     const isPositive = difference > 0;
-
-    addDelta({
-      contents: {
+    const deltaContents: DeltaDisplay[] = [
+      {
         color: isPositive
           ? isTime
             ? "text-danger"
@@ -60,7 +62,18 @@ export function useDeltaText({
           value: difference,
         })}`,
       },
+    ];
+
+    if (suffix !== undefined) {
+      deltaContents.push({
+        color: "text-muted",
+        value: suffix,
+      });
+    }
+
+    addDelta({
+      contents: deltaContents,
       delta,
     });
-  }, [addDelta, currentValue, delta, format, ignoreZero, isTime, previousValue]);
+  }, [addDelta, currentValue, delta, format, ignoreZero, isTime, previousValue, suffix]);
 }

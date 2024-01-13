@@ -5,7 +5,7 @@ import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
-import { PERCENTAGE_POINTS } from "@neverquest/data/general";
+import { LABEL_MAXIMUM, PERCENTAGE_POINTS } from "@neverquest/data/general";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { usePreviousValue } from "@neverquest/hooks/usePreviousValue";
 import IconBlight from "@neverquest/icons/blight.svg?react";
@@ -28,16 +28,17 @@ import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function ReserveMeter({ reserve }: { reserve: Reserve }) {
   const isHealth = reserve === "health";
+  const reserveState = isHealth ? health : stamina;
   const reserveMaximum = isHealth ? healthMaximum : staminaMaximum;
 
-  const [reserveValue, setReserve] = useRecoilState(isHealth ? health : stamina);
+  const [reserveValue, setReserve] = useRecoilState(reserveState);
   const ailmentValue = useRecoilValue(isHealth ? poisonDuration : blightMagnitude);
   const isAiling = useRecoilValue(isHealth ? isPoisoned : isBlighted);
   const reserveMaximumValue = useRecoilValue(reserveMaximum);
   const reserveMaximumAilingValue = useRecoilValue(
     isHealth ? healthMaximumPoisoned : staminaMaximumBlighted,
   );
-  const resetReserve = useResetRecoilState(isHealth ? health : stamina);
+  const resetReserve = useResetRecoilState(reserveState);
   const resetRegenerationDuration = useResetRecoilState(regenerationDuration(reserve));
 
   const deltaReserveMaximum = isHealth ? "healthMaximum" : "staminaMaximum";
@@ -48,6 +49,7 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
   useDeltaText({
     delta: deltaReserveMaximum,
     state: reserveMaximum,
+    suffix: LABEL_MAXIMUM,
   });
 
   // Have current health and stamina increase the same if the maximum is increased (e.g. via attribute).
@@ -111,7 +113,11 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
           </>
         )}
 
-        <DeltasDisplay delta={deltaReserveMaximum} />
+        <Stack direction="horizontal">
+          <DeltasDisplay delta={isHealth ? "health" : "stamina"} />
+
+          <DeltasDisplay delta={deltaReserveMaximum} />
+        </Stack>
       </Stack>
     </LabelledProgressBar>
   );

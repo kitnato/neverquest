@@ -1,9 +1,9 @@
 import { Col, Row } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { MonsterBlightRating } from "@neverquest/components/Monster/MonsterBlightRating";
+import { BlightRating } from "@neverquest/components/Monster/BlightRating";
 import { MonsterDamage } from "@neverquest/components/Monster/MonsterDamage";
-import { MonsterPoisonRating } from "@neverquest/components/Monster/MonsterPoisonRating";
+import { PoisonRating } from "@neverquest/components/Monster/PoisonRating";
 import { isShowing } from "@neverquest/state/isShowing";
 
 export function MonsterOffense() {
@@ -17,11 +17,11 @@ export function MonsterOffense() {
         </Col>
 
         <Col>
-          <MonsterPoisonRating />
+          <PoisonRating />
         </Col>
 
         <Col>
-          <MonsterBlightRating />
+          <BlightRating />
         </Col>
       </Row>
     );

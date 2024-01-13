@@ -1,4 +1,3 @@
-import { RETIREMENT_STAGE_MINIMUM } from "@neverquest/data/general";
 import { AILMENT_PENALTY } from "@neverquest/data/statistics";
 import type { MonsterAilment } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
@@ -50,6 +49,14 @@ export const ESSENCE = {
   finality: 7777,
 };
 
+export const FRAILTY = {
+  familiar: 0.15,
+  "mysterious egg": {
+    maximum: 0.1,
+    minimum: 0.01,
+  },
+};
+
 export const MONSTER_ATTACK_RATE = {
   attenuation: 4000,
   base: 4100,
@@ -60,28 +67,28 @@ export const MONSTER_ATTACK_RATE = {
 };
 
 export const MONSTER_DAMAGE = {
-  attenuation: 15,
+  attenuation: 13,
   base: 7,
   bonus: 0.01,
   boss: 1.15,
   finality: 3737,
   menace: {
-    maximum: 1.2,
-    minimum: 0.2,
-    requiredStage: RETIREMENT_STAGE_MINIMUM + 1,
+    maximum: 2,
+    minimum: 0.1,
+    requiredStage: 26,
   },
 };
 
 export const MONSTER_HEALTH = {
-  attenuation: 25,
+  attenuation: 24,
   base: 15,
   bonus: 0.01,
   boss: 1.8,
   finality: 17_777,
   menace: {
-    maximum: 0.8,
+    maximum: 2.5,
     minimum: 0.2,
-    requiredStage: RETIREMENT_STAGE_MINIMUM + 1,
+    requiredStage: 26,
   },
 };
 

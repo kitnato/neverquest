@@ -1,7 +1,6 @@
 import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
-import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { Regeneration } from "@neverquest/components/Reserves/Regeneration";
@@ -43,103 +42,99 @@ export function Health() {
         tooltip="Health"
       >
         <Stack>
-          <Stack direction="horizontal">
-            <OverlayTrigger
-              overlay={
-                <Popover>
-                  <PopoverBody>
-                    <DetailsTable>
+          <OverlayTrigger
+            overlay={
+              <Popover>
+                <PopoverBody>
+                  <DetailsTable>
+                    <tr>
+                      <td>
+                        <span>Base:</span>
+                      </td>
+
+                      <td>
+                        <IconDisplay Icon={IconHealth} iconProps={{ className: "small" }}>
+                          <span>{baseAmount}</span>
+                        </IconDisplay>
+                      </td>
+                    </tr>
+
+                    {vitalityBonus > 0 && (
                       <tr>
                         <td>
-                          <span>Base:</span>
+                          <IconDisplay Icon={IconVitality} iconProps={{ className: "small" }}>
+                            <span>Vitality:</span>
+                          </IconDisplay>
                         </td>
 
                         <td>
-                          <IconDisplay Icon={IconHealth} iconProps={{ className: "small" }}>
-                            <span>{baseAmount}</span>
-                          </IconDisplay>
-                        </td>
-                      </tr>
-
-                      {vitalityBonus > 0 && (
-                        <tr>
-                          <td>
-                            <IconDisplay Icon={IconVitality} iconProps={{ className: "small" }}>
-                              <span>Vitality:</span>
-                            </IconDisplay>
-                          </td>
-
-                          <td>
-                            <Stack direction="horizontal" gap={1}>
-                              <IconDisplay Icon={IconHealth} iconProps={{ className: "small" }}>
-                                <span>
-                                  +
-                                  {formatNumber({
-                                    value: vitalityBonus,
-                                  })}
-                                </span>
-                              </IconDisplay>
-
-                              {attributePowerBonusVitality > 0 && (
-                                <>
-                                  {LABEL_SEPARATOR}
-
-                                  <IconDisplay
-                                    Icon={IconTomeOfPower}
-                                    iconProps={{ className: "small" }}
-                                  >
-                                    <span>
-                                      {formatNumber({
-                                        format: "multiplier",
-                                        value: attributePowerBonusVitality,
-                                      })}
-                                    </span>
-                                  </IconDisplay>
-                                </>
-                              )}
-                            </Stack>
-                          </td>
-                        </tr>
-                      )}
-
-                      {questsBonusHealth > 0 && (
-                        <tr>
-                          <td>
-                            <span>Quest bonus:</span>
-                          </td>
-
-                          <td>
+                          <Stack direction="horizontal" gap={1}>
                             <IconDisplay Icon={IconHealth} iconProps={{ className: "small" }}>
                               <span>
                                 +
                                 {formatNumber({
-                                  decimals: 0,
-                                  format: "percentage",
-                                  value: questsBonusHealth,
+                                  value: vitalityBonus,
                                 })}
                               </span>
                             </IconDisplay>
-                          </td>
-                        </tr>
-                      )}
-                    </DetailsTable>
-                  </PopoverBody>
-                </Popover>
-              }
-              placement="right"
-              trigger={
-                attributePowerBonusVitality > 0 || questsBonusHealth > 0 || vitalityBonus > 0
-                  ? POPOVER_TRIGGER
-                  : []
-              }
-            >
-              <div className="w-100">
-                <ReserveMeter reserve="health" />
-              </div>
-            </OverlayTrigger>
 
-            <DeltasDisplay delta="health" />
-          </Stack>
+                            {attributePowerBonusVitality > 0 && (
+                              <>
+                                {LABEL_SEPARATOR}
+
+                                <IconDisplay
+                                  Icon={IconTomeOfPower}
+                                  iconProps={{ className: "small" }}
+                                >
+                                  <span>
+                                    {formatNumber({
+                                      format: "multiplier",
+                                      value: attributePowerBonusVitality,
+                                    })}
+                                  </span>
+                                </IconDisplay>
+                              </>
+                            )}
+                          </Stack>
+                        </td>
+                      </tr>
+                    )}
+
+                    {questsBonusHealth > 0 && (
+                      <tr>
+                        <td>
+                          <span>Quest bonus:</span>
+                        </td>
+
+                        <td>
+                          <IconDisplay Icon={IconHealth} iconProps={{ className: "small" }}>
+                            <span>
+                              +
+                              {formatNumber({
+                                decimals: 0,
+                                format: "percentage",
+                                value: questsBonusHealth,
+                              })}
+                            </span>
+                          </IconDisplay>
+                        </td>
+                      </tr>
+                    )}
+                  </DetailsTable>
+                </PopoverBody>
+              </Popover>
+            }
+            placement="right"
+            trigger={
+              attributePowerBonusVitality > 0 || questsBonusHealth > 0 || vitalityBonus > 0
+                ? POPOVER_TRIGGER
+                : []
+            }
+          >
+            <div className="w-100">
+              <ReserveMeter reserve="health" />
+            </div>
+          </OverlayTrigger>
 
           <Regeneration reserve="health" />
         </Stack>

@@ -17,6 +17,8 @@ import {
   CONQUEST_TYPES,
   CONSUMABLE_TYPES,
   type Conquest,
+  FINALITY_TYPES,
+  type Finality,
   GEAR_TYPES,
   GEM_TYPES,
   GRIP_TYPES,
@@ -41,6 +43,10 @@ export function isConsumableItem(thing: unknown): thing is ConsumableItem {
     typeof thing.name === "string" &&
     new Set<string>(CONSUMABLE_TYPES).has(thing.name)
   );
+}
+
+export function isFinality(thing: unknown): thing is Finality {
+  return typeof thing === "string" && new Set<string>(FINALITY_TYPES).has(thing);
 }
 
 export function isGear(thing: unknown): thing is Gear {

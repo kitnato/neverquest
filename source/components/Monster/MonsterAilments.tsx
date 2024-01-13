@@ -1,10 +1,10 @@
 import { Card, CardBody, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { MonsterBleeding } from "@neverquest/components/Monster/MonsterBleeding";
+import { Bleeding } from "@neverquest/components/Monster/Bleeding";
 import { MonsterElementalAilment } from "@neverquest/components/Monster/MonsterElementalAilment";
-import { MonsterStaggered } from "@neverquest/components/Monster/MonsterStaggered";
-import { MonsterStunned } from "@neverquest/components/Monster/MonsterStunned";
+import { Staggered } from "@neverquest/components/Monster/Staggered";
+import { Stunned } from "@neverquest/components/Monster/Stunned";
 import { canReceiveAilments } from "@neverquest/state/ailments";
 import { ELEMENTAL_TYPES } from "@neverquest/types/unions";
 
@@ -20,11 +20,11 @@ export function MonsterAilments() {
               <MonsterElementalAilment elemental={elemental} key={elemental} />
             ))}
 
-            <MonsterStunned />
+            <Stunned />
 
-            <MonsterStaggered />
+            <Staggered />
 
-            <MonsterBleeding />
+            <Bleeding />
           </Stack>
         </CardBody>
       </Card>

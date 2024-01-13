@@ -66,12 +66,14 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
   useDeltaText({
     delta: regenerationDeltaAmount,
     state: attributeStatisticFortitudeState,
+    suffix: "amount",
   });
 
   useDeltaText({
     delta: regenerationDeltaRate,
     format: "time",
     state: regenerateRateState,
+    suffix: "rate",
   });
 
   return (

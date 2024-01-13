@@ -50,27 +50,27 @@ export function Flatline() {
 
       <ModalBody>
         <Stack gap={1}>
-          <span>Memories and possessions are retained.</span>
-
-          <div>
-            <span>Unspent&nbsp;</span>
+          <Stack direction="horizontal" gap={1}>
+            <span>Unspent</span>
 
             <IconImage className="small" Icon={IconEssence} />
 
-            <span>&nbsp;essence and&nbsp;</span>
+            <span>essence and equipped</span>
 
             <IconImage className="small" Icon={IconGear} />
 
-            <span>&nbsp;gear are lost.</span>
-          </div>
+            <span>gear are lost.</span>
+          </Stack>
 
-          <div>
-            <span>A&nbsp;</span>
+          <span>Memories and possessions are retained.</span>
+
+          <Stack direction="horizontal" gap={1}>
+            <span>A</span>
 
             <IconImage className="small" Icon={IconCorpse} />
 
-            <span>&nbsp;corpse decorates the battlefield, ripe for scavenging.</span>
-          </div>
+            <span>corpse decorates the battlefield, ripe for scavenging.</span>
+          </Stack>
         </Stack>
       </ModalBody>
 

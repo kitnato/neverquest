@@ -1,7 +1,7 @@
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { MonsterDistanceMeter } from "@neverquest/components/Monster/MonsterDistanceMeter";
+import { DistanceMeter } from "@neverquest/components/Monster/DistanceMeter";
 import { AILMENT_PENALTY } from "@neverquest/data/statistics";
 import { useTimerDelta } from "@neverquest/hooks/useTimerDelta";
 import IconDistance from "@neverquest/icons/distance.svg?react";
@@ -16,7 +16,7 @@ import {
 import { isRanged } from "@neverquest/types/type-guards";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-export function MonsterDistance() {
+export function Distance() {
   const hasMonsterClosedValue = useRecoilValue(hasMonsterClosed);
   const isAttackingValue = useRecoilValue(isAttacking);
   const isMonsterFrozen = useRecoilValue(isMonsterAiling("frozen"));
@@ -37,7 +37,7 @@ export function MonsterDistance() {
         Icon={IconDistance}
         tooltip="Distance"
       >
-        <MonsterDistanceMeter />
+        <DistanceMeter />
       </IconDisplay>
     );
   }

@@ -3,32 +3,32 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { MonsterAilmentMeter } from "@neverquest/components/Monster/MonsterAilmentMeter";
 import { useTimerDelta } from "@neverquest/hooks/useTimerDelta";
-import IconStaggered from "@neverquest/icons/staggered.svg?react";
+import IconStunned from "@neverquest/icons/stunned.svg?react";
 import { canReceiveAilment } from "@neverquest/state/ailments";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import { isMonsterAiling, isMonsterDead, monsterAilmentDuration } from "@neverquest/state/monster";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-export function MonsterStaggered() {
-  const canReceiveAilmentStaggered = useRecoilValue(canReceiveAilment("staggered"));
-  const isMonsterStaggered = useRecoilValue(isMonsterAiling("staggered"));
+export function Stunned() {
+  const canReceiveAilmentStunned = useRecoilValue(canReceiveAilment("stunned"));
   const isMonsterDeadValue = useRecoilValue(isMonsterDead);
-  const stabilityValue = useRecoilValue(masteryStatistic("stability"));
-  const setMonsterStaggerDuration = useSetRecoilState(monsterAilmentDuration("staggered"));
+  const isMonsterStunned = useRecoilValue(isMonsterAiling("stunned"));
+  const mightValue = useRecoilValue(masteryStatistic("might"));
+  const setMonsterStunDuration = useSetRecoilState(monsterAilmentDuration("stunned"));
 
   useTimerDelta({
-    delta: setMonsterStaggerDuration,
-    stop: !isMonsterStaggered || isMonsterDeadValue,
+    delta: setMonsterStunDuration,
+    stop: !isMonsterStunned || isMonsterDeadValue,
   });
 
-  if (canReceiveAilmentStaggered) {
+  if (canReceiveAilmentStunned) {
     return (
       <IconDisplay
         className={getAnimationClass({ animation: "flipInX" })}
-        Icon={IconStaggered}
-        tooltip="Staggered"
+        Icon={IconStunned}
+        tooltip="Stunned"
       >
-        <MonsterAilmentMeter ailment="staggered" totalDuration={stabilityValue} />
+        <MonsterAilmentMeter ailment="stunned" totalDuration={mightValue} />
       </IconDisplay>
     );
   }

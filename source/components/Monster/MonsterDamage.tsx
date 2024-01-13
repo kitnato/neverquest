@@ -1,9 +1,11 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { MonsterDamagePerSecond } from "@neverquest/components/Monster/MonsterDamagePerSecond";
 import { LABEL_SEPARATOR } from "@neverquest/data/general";
+import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconMonsterDamage from "@neverquest/icons/monster-damage.svg?react";
 import { monsterDamage, monsterDamageAiling } from "@neverquest/state/monster";
 import { formatNumber } from "@neverquest/utilities/formatters";
@@ -12,6 +14,11 @@ import { getAnimationClass } from "@neverquest/utilities/getters";
 export function MonsterDamage() {
   const monsterDamageValue = useRecoilValue(monsterDamage);
   const monsterDamageAilingValue = useRecoilValue(monsterDamageAiling);
+
+  useDeltaText({
+    delta: "monsterDamageAiling",
+    state: monsterDamageAiling,
+  });
 
   return (
     <IconDisplay
@@ -30,6 +37,8 @@ export function MonsterDamage() {
             <span>{`(${formatNumber({ value: monsterDamageValue })})`}</span>
           </>
         )}
+
+        <DeltasDisplay delta="monsterDamageAiling" />
       </Stack>
     </IconDisplay>
   );

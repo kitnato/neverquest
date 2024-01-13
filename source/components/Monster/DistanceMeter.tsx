@@ -6,7 +6,7 @@ import { distance, isMonsterAiling } from "@neverquest/state/monster";
 import { range } from "@neverquest/state/statistics";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
-export function MonsterDistanceMeter() {
+export function DistanceMeter() {
   const isMonsterFrozen = useRecoilValue(isMonsterAiling("frozen"));
   const distanceValue = useRecoilValue(distance);
   const rangeValue = useRecoilValue(range);

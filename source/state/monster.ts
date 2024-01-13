@@ -7,6 +7,7 @@ import {
   BOSS_STAGE_INTERVAL,
   BOSS_STAGE_START,
   ESSENCE,
+  FRAILTY,
   MONSTER_ATTACK_RATE,
   MONSTER_DAMAGE,
   MONSTER_HEALTH,
@@ -25,7 +26,9 @@ import {
   stageMaximum,
 } from "@neverquest/state/encounter";
 import { ownedItem } from "@neverquest/state/inventory";
+import { infusionEffect } from "@neverquest/state/items";
 import { range } from "@neverquest/state/statistics";
+import { isFinality } from "@neverquest/types/type-guards";
 import { FINALITY_TYPES, type MonsterAilment } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import {
@@ -78,6 +81,30 @@ export const blightChance = withStateKey("blightChance", (key) =>
           minimum,
         }) * (encounterValue === "boss" ? boss : 1)
       );
+    },
+    key,
+  }),
+);
+
+export const frailty = withStateKey("frailty", (key) =>
+  selector({
+    get: ({ get }) => {
+      if (isFinality(get(encounter))) {
+        return 0;
+      }
+
+      if (get(ownedItem("familiar")) !== undefined) {
+        return FRAILTY.familiar;
+      }
+
+      if (get(ownedItem("mysterious egg")) !== undefined) {
+        return getFromRange({
+          factor: getSigmoid(get(infusionEffect("mysterious egg"))),
+          ...FRAILTY["mysterious egg"],
+        });
+      }
+
+      return 0;
     },
     key,
   }),
@@ -168,7 +195,8 @@ export const monsterDamage = withStateKey("monsterDamage", (key) =>
                   maximum,
                   minimum,
                 })
-              : 0)),
+              : 0)) *
+          (1 - get(frailty)),
       );
     },
     key,
@@ -234,7 +262,8 @@ export const monsterHealthMaximum = withStateKey("monsterHealthMaximum", (key) =
                   maximum,
                   minimum,
                 })
-              : 0)),
+              : 0)) *
+          (1 - get(frailty)),
       );
     },
     key,

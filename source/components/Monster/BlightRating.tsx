@@ -17,7 +17,7 @@ import { isPoisoned } from "@neverquest/state/reserves";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-export function MonsterBlightRating() {
+export function BlightRating() {
   const blightChanceValue = useRecoilValue(blightChance);
   const isPoisonedValue = useRecoilValue(isPoisoned);
 

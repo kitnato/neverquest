@@ -15,7 +15,7 @@ import {
 import { bleedDamage } from "@neverquest/state/statistics";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-export function MonsterBleeding() {
+export function Bleeding() {
   const { duration } = useRecoilValue(bleed);
   const bleedDamageValue = useRecoilValue(bleedDamage);
   const canReceiveAilmentBleeding = useRecoilValue(canReceiveAilment("bleeding"));

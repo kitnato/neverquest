@@ -11,7 +11,7 @@ import { poisonLength, poisonMagnitude } from "@neverquest/state/reserves";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-export function MonsterPoisonRating() {
+export function PoisonRating() {
   const poisonChanceValue = useRecoilValue(poisonChance);
   const poisonLengthValue = useRecoilValue(poisonLength);
   const poisonMagnitudeValue = useRecoilValue(poisonMagnitude);

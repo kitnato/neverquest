@@ -270,7 +270,7 @@ export const MERCHANT_OFFERS: Record<
 };
 
 export const TAILORING = {
-  "ammunition pouch": { amount: 20, priceRange: { maximum: 300, minimum: 5 } },
+  "ammunition pouch": { amount: 20, priceRange: { maximum: 300, minimum: 10 } },
   knapsack: { amount: 3, priceRange: { maximum: 250, minimum: 3 } },
 };
 

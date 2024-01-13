@@ -13,7 +13,11 @@ import { withStateKey } from "@neverquest/utilities/helpers";
 
 export const canAttackOrParry = withStateKey("canAttackOrParry", (key) =>
   selector({
-    get: ({ get }) => get(stamina) >= get(weapon).burden,
+    get: ({ get }) => {
+      const staminaValue = get(stamina);
+
+      return staminaValue > 0 && staminaValue >= get(weapon).burden;
+    },
     key,
   }),
 );

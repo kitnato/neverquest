@@ -10,8 +10,8 @@ import IconCriticalDamage from "@neverquest/icons/critical-damage.svg?react";
 import IconCriticalRating from "@neverquest/icons/critical-rating.svg?react";
 import IconDamage from "@neverquest/icons/damage.svg?react";
 import IconDexterity from "@neverquest/icons/dexterity.svg?react";
+import IconEldritchCodex from "@neverquest/icons/eldritch-codex.svg?react";
 import IconPerception from "@neverquest/icons/perception.svg?react";
-import IconTomeOfPower from "@neverquest/icons/tome-of-power.svg?react";
 import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
 import { criticalChance, criticalRating, criticalStrike } from "@neverquest/state/statistics";
 import { formatNumber } from "@neverquest/utilities/formatters";
@@ -65,7 +65,10 @@ export function CriticalRating() {
                           </IconDisplay>
 
                           {attributePowerBonusDexterity > 0 && (
-                            <IconDisplay Icon={IconTomeOfPower} iconProps={{ className: "small" }}>
+                            <IconDisplay
+                              Icon={IconEldritchCodex}
+                              iconProps={{ className: "small" }}
+                            >
                               <span>
                                 {formatNumber({
                                   format: "multiplier",
@@ -99,7 +102,10 @@ export function CriticalRating() {
                           </IconDisplay>
 
                           {attributePowerBonusPerception > 0 && (
-                            <IconDisplay Icon={IconTomeOfPower} iconProps={{ className: "small" }}>
+                            <IconDisplay
+                              Icon={IconEldritchCodex}
+                              iconProps={{ className: "small" }}
+                            >
                               <span>
                                 {formatNumber({
                                   format: "multiplier",

@@ -4,7 +4,12 @@ import { useGenerateMerchantInventory } from "@neverquest/hooks/actions/useGener
 import { useSetMonologues } from "@neverquest/hooks/actions/useSetMonologues";
 import { useToggleAttacking } from "@neverquest/hooks/actions/useToggleAttacking";
 import { isAttacking } from "@neverquest/state/character";
-import { consciousness, defeatedFinality, encounter } from "@neverquest/state/encounter";
+import {
+  consciousness,
+  defeatedFinality,
+  encounter,
+  isStageCompleted,
+} from "@neverquest/state/encounter";
 import { FINALITY_TYPES, type Finality } from "@neverquest/types/unions";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
@@ -25,8 +30,10 @@ export function useCompleteStage() {
           set(defeatedFinality, encounterValue as Finality);
         }
 
-        generateMerchantInventory();
-        setMonologues();
+        if (get(isStageCompleted)) {
+          generateMerchantInventory();
+          setMonologues();
+        }
 
         if (encounterValue === "res cogitans") {
           set(consciousness, "vigilans");

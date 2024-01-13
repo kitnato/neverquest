@@ -10,8 +10,8 @@ import { useAttack } from "@neverquest/hooks/actions/useAttack";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { useTimerDelta } from "@neverquest/hooks/useTimerDelta";
 import IconAttackRate from "@neverquest/icons/attack-rate.svg?react";
+import IconEldritchCodex from "@neverquest/icons/eldritch-codex.svg?react";
 import IconWeaponSpeed from "@neverquest/icons/speed.svg?react";
-import IconTomeOfPower from "@neverquest/icons/tome-of-power.svg?react";
 import IconWeaponAttackRate from "@neverquest/icons/weapon-attack-rate.svg?react";
 import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
 import {
@@ -108,7 +108,7 @@ export function AttackRate() {
                               {LABEL_SEPARATOR}
 
                               <IconDisplay
-                                Icon={IconTomeOfPower}
+                                Icon={IconEldritchCodex}
                                 iconProps={{ className: "small" }}
                               >
                                 <span>

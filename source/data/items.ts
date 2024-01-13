@@ -3,6 +3,7 @@ import IconAmmunitionPouch from "@neverquest/icons/ammunition-pouch.svg?react";
 import IconAntidote from "@neverquest/icons/antidote.svg?react";
 import IconBandages from "@neverquest/icons/bandages.svg?react";
 import IconCompass from "@neverquest/icons/compass.svg?react";
+import IconEldritchCodex from "@neverquest/icons/eldritch-codex.svg?react";
 import IconElixir from "@neverquest/icons/elixir.svg?react";
 import IconEnderHook from "@neverquest/icons/ender-hook.svg?react";
 import IconFamiliar from "@neverquest/icons/familiar.svg?react";
@@ -22,7 +23,6 @@ import IconSalve from "@neverquest/icons/salve.svg?react";
 import IconSapphire from "@neverquest/icons/sapphire.svg?react";
 import IconSpinningWheel from "@neverquest/icons/spinning-wheel.svg?react";
 import IconThaumaturgicGoggles from "@neverquest/icons/thaumaturgic-goggles.svg?react";
-import IconTomeOfPower from "@neverquest/icons/tome-of-power.svg?react";
 import IconTopaz from "@neverquest/icons/topaz.svg?react";
 import IconTornManuscript from "@neverquest/icons/torn-manuscript.svg?react";
 import type { ConsumableItem, GeneratorRange, InfusableItem, TrinketItem } from "@neverquest/types";
@@ -167,7 +167,7 @@ export const INFUSABLES: Record<
   "eldritch codex": {
     delta: "powerBonusBoost",
     EffectIcon: IconPowerBonusBoost,
-    Icon: IconTomeOfPower,
+    Icon: IconEldritchCodex,
     item: {
       description: "Boosts all attribute effects based on power level.",
       effect: {

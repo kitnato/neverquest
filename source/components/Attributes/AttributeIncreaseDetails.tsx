@@ -8,19 +8,19 @@ import IconCriticalChance from "@neverquest/icons/critical-chance.svg?react";
 import IconCriticalDamage from "@neverquest/icons/critical-damage.svg?react";
 import IconDamage from "@neverquest/icons/damage.svg?react";
 import IconDodge from "@neverquest/icons/dodge.svg?react";
+import IconEldritchCodex from "@neverquest/icons/eldritch-codex.svg?react";
 import IconHealth from "@neverquest/icons/health.svg?react";
 import IconRegenerationAmount from "@neverquest/icons/regeneration-amount.svg?react";
 import IconRegenerationRate from "@neverquest/icons/regeneration-rate.svg?react";
 import IconStamina from "@neverquest/icons/stamina.svg?react";
-import IconTomeOfPower from "@neverquest/icons/tome-of-power.svg?react";
 import { ownedItem } from "@neverquest/state/inventory";
 import { infusionEffect } from "@neverquest/state/items";
 import type { Attribute } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function AttributeIncreaseDetails({ attribute }: { attribute: Attribute }) {
-  const infusionEffectTomeOfPower = useRecoilValue(infusionEffect("eldritch codex"));
-  const ownedItemTomeOfPower = useRecoilValue(ownedItem("eldritch codex"));
+  const infusionEffectEldritchCodex = useRecoilValue(infusionEffect("eldritch codex"));
+  const ownedItemEldritchCodex = useRecoilValue(ownedItem("eldritch codex"));
 
   const { increment, powerBonus } = ATTRIBUTES[attribute];
   const Icon = {
@@ -46,13 +46,13 @@ export function AttributeIncreaseDetails({ attribute }: { attribute: Attribute }
         </span>
       </IconDisplay>
 
-      {ownedItemTomeOfPower !== undefined && (
-        <IconDisplay Icon={IconTomeOfPower} iconProps={{ className: "small" }}>
+      {ownedItemEldritchCodex !== undefined && (
+        <IconDisplay Icon={IconEldritchCodex} iconProps={{ className: "small" }}>
           <span>
             +
             {formatNumber({
               format: "percentage",
-              value: powerBonus * (1 + infusionEffectTomeOfPower),
+              value: powerBonus * (1 + infusionEffectEldritchCodex),
             })}
           </span>
         </IconDisplay>

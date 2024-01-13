@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { ProgressBar, Stack } from "react-bootstrap";
-import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
 
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
@@ -17,8 +17,10 @@ import {
   healthMaximumPoisoned,
   isBlighted,
   isPoisoned,
+  isRegenerating,
   poisonDuration,
   regenerationDuration,
+  regenerationRate,
   stamina,
   staminaMaximum,
   staminaMaximumBlighted,
@@ -34,12 +36,15 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
   const [reserveValue, setReserve] = useRecoilState(reserveState);
   const ailmentValue = useRecoilValue(isHealth ? poisonDuration : blightMagnitude);
   const isAiling = useRecoilValue(isHealth ? isPoisoned : isBlighted);
+  const regenerationRateValue = useRecoilValue(regenerationRate(isHealth ? "health" : "stamina"));
+  const isRegeneratingValue = useRecoilValue(isRegenerating(isHealth ? "health" : "stamina"));
   const reserveMaximumValue = useRecoilValue(reserveMaximum);
   const reserveMaximumAilingValue = useRecoilValue(
     isHealth ? healthMaximumPoisoned : staminaMaximumBlighted,
   );
   const resetReserve = useResetRecoilState(reserveState);
   const resetRegenerationDuration = useResetRecoilState(regenerationDuration(reserve));
+  const setRegenerationDuration = useSetRecoilState(regenerationDuration(reserve));
 
   const deltaReserveMaximum = isHealth ? "healthMaximum" : "staminaMaximum";
   const penalty = Math.round(
@@ -72,6 +77,19 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
       resetRegenerationDuration();
     }
   }, [reserveMaximumAilingValue, reserveValue, resetRegenerationDuration, resetReserve]);
+
+  // Always trigger regeneration if lower than ailing maximum.
+  useEffect(() => {
+    if (!isRegeneratingValue && reserveValue < reserveMaximumAilingValue) {
+      setRegenerationDuration(regenerationRateValue);
+    }
+  }, [
+    isRegeneratingValue,
+    regenerationRateValue,
+    reserveMaximumAilingValue,
+    reserveValue,
+    setRegenerationDuration,
+  ]);
 
   return (
     <LabelledProgressBar

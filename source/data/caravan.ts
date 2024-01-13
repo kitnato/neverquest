@@ -149,7 +149,7 @@ export const CREW: Record<
       [GROWTH_MAXIMUM]: MONOLOGUE_EMPTY,
       [LEVELLING_MAXIMUM]: "I can't see any more.",
     },
-    price: 650,
+    price: 300,
     requiredStage: 21,
   },
   tailor: {
@@ -165,7 +165,7 @@ export const CREW: Record<
     requiredStage: 8,
   },
   witch: {
-    description: "Sells potions that cure ailments.",
+    description: "Sells potions that restore reserves and cure ailments.",
     Icon: IconWitch,
     interaction: "Brew",
     monologues: {
@@ -173,7 +173,7 @@ export const CREW: Record<
       [GROWTH_MAXIMUM]: MONOLOGUE_EMPTY,
       [LEVELLING_MAXIMUM]: "The spirits have gone silent.",
     },
-    price: 300,
+    price: 650,
     requiredStage: 27,
   },
 };

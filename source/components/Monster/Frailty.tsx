@@ -1,6 +1,7 @@
 import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { INFUSABLES, TRINKETS } from "@neverquest/data/items";
@@ -19,7 +20,7 @@ export function Frailty() {
 
   const { Icon } =
     ownedItemFamiliar === undefined ? INFUSABLES["mysterious egg"] : TRINKETS.familiar;
-  const formattedValue = formatNumber({ value: frailtyValue });
+  const formattedValue = formatNumber({ format: "percentage", value: frailtyValue });
 
   useDeltaText({
     delta: "frailty",
@@ -38,31 +39,38 @@ export function Frailty() {
             overlay={
               <Popover>
                 <PopoverBody>
-                  <Stack direction="horizontal" gap={1}>
-                    <span>The</span>
+                  <Stack gap={1}>
+                    <div>
+                      <span>The&nbsp;</span>
 
-                    <IconImage className="small" Icon={Icon} />
+                      <IconImage className="small" Icon={Icon} />
 
-                    <span>{ownedItemFamiliar === undefined ? "Mysterious Egg" : "Familiar"}</span>
+                      <span>
+                        &nbsp;{ownedItemFamiliar === undefined ? "Mysterious Egg" : "Familiar"}
+                      </span>
 
-                    <span>seems to be withering its resolve.</span>
-                  </Stack>
+                      <span>&nbsp;seems to be withering its resolve.</span>
+                    </div>
 
-                  <Stack direction="horizontal" gap={1}>
-                    <span>{formattedValue}&nbsp;reduced</span>
+                    <div>
+                      <IconImage className="small" Icon={IconMonsterHealth} />
 
-                    <IconImage className="small" Icon={IconMonsterHealth} />
+                      <span>&nbsp;and&nbsp;</span>
 
-                    <span>&</span>
+                      <IconImage className="small" Icon={IconMonsterDamage} />
 
-                    <IconImage className="small" Icon={IconMonsterDamage} />
+                      <span>&nbsp;are reduced by&nbsp;{formattedValue}.</span>
+                    </div>
                   </Stack>
                 </PopoverBody>
               </Popover>
             }
+            placement="right"
           >
-            <span>-{formattedValue}</span>
+            <span style={{ width: "max-content" }}>-{formattedValue}</span>
           </OverlayTrigger>
+
+          <DeltasDisplay delta="frailty" />
         </Stack>
       </IconDisplay>
     );

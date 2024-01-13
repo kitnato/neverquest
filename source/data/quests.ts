@@ -71,7 +71,7 @@ export const QUESTS: Record<
   },
   acquiringGems: {
     description: "Acquire @ gem(s).",
-    progression: [1, 10, 25],
+    progression: [1, 3, 10, 25],
     requiresTracking: true,
     title: "Shiny",
   },
@@ -214,7 +214,7 @@ export const QUESTS: Record<
     description: "Equip a shield.",
     progression: [1],
     requiresTracking: true,
-    title: "Stop, drop & roll",
+    title: "This doesn't give protection?",
   },
   equippingWeapon: {
     description: "Equip a weapon.",
@@ -255,7 +255,7 @@ export const QUESTS: Record<
     title: "Air conditioning",
   },
   gemsApplying: {
-    description: "Socket @ gem.",
+    description: "Socket @ gem(s).",
     progression: [1, 3, 10, 25],
     requiresTracking: true,
     title: "Jeweller",
@@ -294,7 +294,7 @@ export const QUESTS: Record<
     description: "Infuse items by @ levels.",
     progression: [3, 10, 25, 50],
     requiresTracking: false,
-    title: "Shaman",
+    title: "Voodoo",
   },
   infusingMaximum: {
     description: "Infuse an item to its maximum level.",
@@ -306,7 +306,7 @@ export const QUESTS: Record<
     description: "Kill @ monsters.",
     progression: [3, 10, 25, 50, 100, 250],
     requiresTracking: true,
-    title: "Murder",
+    title: "Monstrocide",
   },
   killingBoss: {
     description: "Kill @ boss monsters.",
@@ -338,7 +338,7 @@ export const QUESTS: Record<
     description: "Kill @ monsters in one stage.",
     progression: [QUEST_REQUIREMENTS.monstersKilled],
     requiresTracking: true,
-    title: "Monstrocide",
+    title: "Killing spree",
   },
   knapsackExpanding: {
     description: "Expand knapsack capacity by @.",
@@ -395,7 +395,7 @@ export const QUESTS: Record<
     title: "Just a cough",
   },
   potions: {
-    description: "Consume @ witch's concoctions.",
+    description: "Consume the witch's concoctions @ times.",
     progression: [3, 10, 25],
     requiresTracking: true,
     title: "Intestinal discomfort",
@@ -422,51 +422,33 @@ export const QUESTS: Record<
     requiresTracking: true,
     title: "I like turtles",
   },
-  purchasingArmor: {
-    description: "Purchase armor.",
+  purchasingConsumable: {
+    description: "Purchase @ consumable item(s).",
     progression: [1, 3, 10],
     requiresTracking: true,
-    title: "Tight fit",
+    title: "Target customer",
   },
-  purchasingInfusable: {
-    description: "Purchase an infusable trinket.",
-    progression: [1],
-    requiresTracking: true,
-    title: "Voodoo",
-  },
-  purchasingShield: {
-    description: "Purchase a shield.",
+  purchasingItem: {
+    description: "Purchase @ piece(s) of gear or trinket(s).",
     progression: [1, 3, 10],
     requiresTracking: true,
-    title: "This doesn't give protection?",
-  },
-  purchasingTrinket: {
-    description: "Purchase a trinket.",
-    progression: [1, 3, 10],
-    requiresTracking: true,
-    title: "Objets d'art",
-  },
-  purchasingWeapon: {
-    description: "Purchase a weapon.",
-    progression: [1, 3, 10],
-    requiresTracking: true,
-    title: "Pointy end first",
+    title: "Reliquary",
   },
   purgingEssence: {
-    description: "Undergo an essence purge.",
+    description: "Undergo the essence purge ritual @ time(s).",
     progression: [1, 3],
     requiresTracking: true,
     title: "Clean as a whistle",
   },
   purgingMemories: {
-    description: "Undergo a memory purge.",
+    description: "Undergo the memory purge ritual @ time(s).",
     progression: [1, 3],
     requiresTracking: true,
     title: "What? Who? Where?",
   },
   resurrecting: {
-    description: "Resurrect with phylacteries @ time(s).",
-    progression: [1, 3],
+    description: "Resurrect with a phylactery @ time(s).",
+    progression: [1, 3, 10],
     requiresTracking: true,
     title: "Lich king",
   },
@@ -577,8 +559,8 @@ export const QUESTS: Record<
     title: "Blue-shelling",
   },
   traits: {
-    description: "Acquire @ traits.",
-    progression: [3, 6],
+    description: "Acquire @ trait(s).",
+    progression: [1, 3, 6],
     requiresTracking: false,
     title: "Getting ink done",
   },

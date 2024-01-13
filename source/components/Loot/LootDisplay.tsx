@@ -23,7 +23,7 @@ export function LootDisplay() {
 
   if (progressValue > 0) {
     return (
-      <Card className={getAnimationClass({ animation: "flipInX" })}>
+      <Card>
         <CardBody>
           {isLootAvailableValue ? (
             <Stack gap={3}>
@@ -51,11 +51,18 @@ export function LootDisplay() {
                     .toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2)),
                 ),
               ].map(({ amount, item }) => (
-                <ItemDisplay amount={amount} item={item} key={item.ID} />
+                <div className={getAnimationClass({ animation: "flipInX" })} key={item.ID}>
+                  <ItemDisplay amount={amount} item={item} />
+                </div>
               ))}
             </Stack>
           ) : (
-            <IconDisplay gap={5} Icon={IconLooted} tooltip="Loot">
+            <IconDisplay
+              className={getAnimationClass({ animation: "flipInX" })}
+              gap={5}
+              Icon={IconLooted}
+              tooltip="Loot"
+            >
               <span className="fst-italic">Nothing remains.</span>
             </IconDisplay>
           )}

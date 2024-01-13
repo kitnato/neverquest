@@ -7,13 +7,7 @@ import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import { merchantInventory } from "@neverquest/state/caravan";
 import type { MerchantInventoryItem } from "@neverquest/types";
-import {
-  isArmor,
-  isGearItem,
-  isInfusableItem,
-  isShield,
-  isWeapon,
-} from "@neverquest/types/type-guards";
+import { isConsumableItem, isGearItem } from "@neverquest/types/type-guards";
 
 export function PurchaseItem({ merchantItem }: { merchantItem: MerchantInventoryItem }) {
   const setMerchantInventory = useSetRecoilState(merchantInventory);
@@ -52,15 +46,7 @@ export function PurchaseItem({ merchantItem }: { merchantItem: MerchantInventory
         }
 
         progressQuest({
-          quest: isArmor(item)
-            ? "purchasingArmor"
-            : isShield(item)
-              ? "purchasingShield"
-              : isWeapon(item)
-                ? "purchasingWeapon"
-                : isInfusableItem(item)
-                  ? "purchasingInfusable"
-                  : "purchasingTrinket",
+          quest: isConsumableItem(item) ? "purchasingConsumable" : "purchasingItem",
         });
       }}
     />

@@ -29,9 +29,10 @@ export function PurgeMemories() {
   const resetCompletedQuests = useResetCompletedQuests();
   const transactEssence = useTransactEssence();
 
+  const hasCompletedQuests = allCompletedQuestsCount > 0;
   const price = Math.round(allCompletedQuestsCount * OCCULTIST_PURGE_PRICE_MULTIPLIER.quests);
   const isAffordable = price <= essenceValue;
-  const isPurchasable = isAffordable && allCompletedQuestsCount > 0;
+  const isPurchasable = hasCompletedQuests && isAffordable;
 
   if (canTrackQuestsValue) {
     return (
@@ -55,7 +56,7 @@ export function PurgeMemories() {
               <Tooltip>
                 {!isAffordable && <div>{LABEL_NO_ESSENCE}</div>}
 
-                {price === 0 && <div>No completed quests to reset.</div>}
+                {!hasCompletedQuests && <div>No completed quests to purge.</div>}
               </Tooltip>
             }
             trigger={isPurchasable ? [] : POPOVER_TRIGGER}

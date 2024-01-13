@@ -54,7 +54,7 @@ export function useInfuse() {
           set(infusionState, newInfusion);
         }
 
-        transactEssence(-(newInfusion - infusionValue));
+        transactEssence(-(Math.round(newInfusion) - Math.round(infusionValue)));
       },
     [progressQuest, transactEssence],
   );

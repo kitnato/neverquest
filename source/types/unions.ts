@@ -175,17 +175,14 @@ export type QuestStatus = QuestBonus | "achieved" | "incomplete";
 export type Reserve = "health" | "stamina";
 
 export const ROUTINE_TYPES = [
-  "purchasingWeapon",
+  "purchasingItem",
   "equippingWeapon",
-  "purchasingArmor",
   "equippingArmor",
-  "purchasingShield",
   "equippingShield",
-  "knapsackExpanding",
   "stages",
+  "knapsackExpanding",
   "powerLevel",
-  "purchasingTrinket",
-  "purchasingInfusable",
+  "purchasingConsumable",
   "selling",
   "buyingBack",
   "spendingEssence",

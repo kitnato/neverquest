@@ -6,8 +6,6 @@ import { OffhandEquipped } from "@neverquest/components/Inventory/Offhand/Offhan
 import { WeaponEquipped } from "@neverquest/components/Inventory/Weapon/WeaponEquipped";
 import { isShowing } from "@neverquest/state/isShowing";
 
-import { getAnimationClass } from "@neverquest/utilities/getters";
-
 export function Gear() {
   const isShowingArmor = useRecoilValue(isShowing("armor"));
   const isShowingOffhand = useRecoilValue(isShowing("offhand"));
@@ -15,7 +13,7 @@ export function Gear() {
 
   if (isShowingArmor || isShowingOffhand || isShowingWeapon) {
     return (
-      <Card className={getAnimationClass({ animation: "flipInX" })}>
+      <Card>
         <CardBody>
           <Row className="align-items-center">
             <Col>

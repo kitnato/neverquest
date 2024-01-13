@@ -7,9 +7,9 @@ import { Regeneration } from "@neverquest/components/Reserves/Regeneration";
 import { ReserveMeter } from "@neverquest/components/Reserves/ReserveMeter";
 import { LABEL_SEPARATOR, POPOVER_TRIGGER } from "@neverquest/data/general";
 import { RESERVES } from "@neverquest/data/reserves";
+import IconEldritchCodex from "@neverquest/icons/eldritch-codex.svg?react";
 import IconEndurance from "@neverquest/icons/endurance.svg?react";
 import IconStamina from "@neverquest/icons/stamina.svg?react";
-import IconTomeOfPower from "@neverquest/icons/tome-of-power.svg?react";
 import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
 import { isShowing } from "@neverquest/state/isShowing";
 import { questsBonus } from "@neverquest/state/quests";
@@ -74,7 +74,7 @@ export function Stamina() {
                                 {LABEL_SEPARATOR}
 
                                 <IconDisplay
-                                  Icon={IconTomeOfPower}
+                                  Icon={IconEldritchCodex}
                                   iconProps={{ className: "small" }}
                                 >
                                   <span>

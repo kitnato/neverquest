@@ -22,7 +22,7 @@ export const blightMagnitude = withStateKey("blightMagnitude", (key) =>
 export const healthMaximum = withStateKey("healthMaximum", (key) =>
   selector({
     get: ({ get }) =>
-      Math.round(
+      Math.ceil(
         get(attributeStatistic("vitality")) *
           (1 + get(attributePowerBonus("vitality"))) *
           (1 + get(questsBonus("healthBonus"))),
@@ -181,7 +181,7 @@ export const reserveRegenerationRateReduction = withStateKey(
 export const staminaMaximum = withStateKey("staminaMaximum", (key) =>
   selector({
     get: ({ get }) =>
-      Math.round(
+      Math.ceil(
         get(attributeStatistic("endurance")) *
           (1 + get(attributePowerBonus("endurance"))) *
           (1 + get(questsBonus("staminaBonus"))),
@@ -222,14 +222,6 @@ export const health = withStateKey("health", (key) =>
   }),
 );
 
-export const regenerationDuration = withStateKey("regenerationDuration", (key) =>
-  atomFamily<number, Reserve>({
-    default: 0,
-    effects: (reserve) => [handleLocalStorage({ key, parameter: reserve })],
-    key,
-  }),
-);
-
 export const isInvulnerable = withStateKey("isInvulnerable", (key) =>
   atom({
     default: false,
@@ -242,6 +234,14 @@ export const poisonDuration = withStateKey("poisonDuration", (key) =>
   atom({
     default: 0,
     effects: [handleLocalStorage({ key })],
+    key,
+  }),
+);
+
+export const regenerationDuration = withStateKey("regenerationDuration", (key) =>
+  atomFamily<number, Reserve>({
+    default: 0,
+    effects: (reserve) => [handleLocalStorage({ key, parameter: reserve })],
     key,
   }),
 );

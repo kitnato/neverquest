@@ -4,7 +4,6 @@ import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta";
 import {
   regenerationAmount,
   regenerationDuration,
-  regenerationRate,
   stamina,
   staminaMaximumBlighted,
 } from "@neverquest/state/reserves";
@@ -48,11 +47,8 @@ export function useChangeStamina() {
 
         if (newStamina >= staminaMaximumBlightedValue) {
           newStamina = staminaMaximumBlightedValue;
-          reset(regenerationDuration("stamina"));
-        }
 
-        if (newStamina < staminaMaximumBlightedValue) {
-          set(regenerationDuration("stamina"), get(regenerationRate("stamina")));
+          reset(regenerationDuration("stamina"));
         }
 
         set(stamina, newStamina);

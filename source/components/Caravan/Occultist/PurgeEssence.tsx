@@ -25,9 +25,10 @@ export function PurgeEssence() {
   const resetAttributes = useResetAttributes();
   const transactEssence = useTransactEssence();
 
+  const hasAbsorbedEssence = absorbedEssenceValue > 0;
   const price = Math.ceil(absorbedEssenceValue * OCCULTIST_PURGE_PRICE_MULTIPLIER.essence);
   const isAffordable = price <= essenceValue;
-  const isPurchasable = absorbedEssenceValue > 0;
+  const isPurchasable = hasAbsorbedEssence && isAffordable;
 
   return (
     <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
@@ -50,7 +51,7 @@ export function PurgeEssence() {
             <Tooltip>
               {!isAffordable && <div>{LABEL_NO_ESSENCE}</div>}
 
-              {!isPurchasable && <div>No essence to purge.</div>}
+              {!hasAbsorbedEssence && <div>No essence to purge.</div>}
             </Tooltip>
           }
           trigger={isPurchasable ? [] : POPOVER_TRIGGER}

@@ -73,8 +73,12 @@ export function useAcquireItem() {
 
           if (
             (isUnarmored(get(armor)) && isArmor(item)) ||
-            // Acquiring a shield while no shield equipped and not wielding a ranged or two-handed weapon (unless colossus).
-            (isShieldUnshielded && isShield(item) && !isRanged(weaponValue)) ||
+            // Acquiring a shield while no shield equipped and not wielding a ranged weapon nor two-handed weapon (unless colossus).
+            (isShieldUnshielded &&
+              isShield(item) &&
+              !isRanged(weaponValue) &&
+              isMelee(weaponValue) &&
+              weaponValue.grip === "one-handed") ||
             get(isTraitAcquired("colossus")) ||
             // Acquiring a weapon while no weapon equipped, and if ranged or two-handed, no shield equipped.
             (isUnarmed(weaponValue) &&

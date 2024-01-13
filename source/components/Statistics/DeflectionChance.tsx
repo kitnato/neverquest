@@ -7,6 +7,7 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { POPOVER_TRIGGER } from "@neverquest/data/general";
 import { INOCULATED_DEFLECTION_BASE } from "@neverquest/data/traits";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
+import IconArmor from "@neverquest/icons/armor.svg?react";
 import IconDeflection from "@neverquest/icons/deflection.svg?react";
 import IconInoculated from "@neverquest/icons/inoculated.svg?react";
 import { armor } from "@neverquest/state/gear";
@@ -41,7 +42,9 @@ export function DeflectionChance() {
                   <DetailsTable>
                     <tr>
                       <td>
-                        <span>Armor:</span>
+                        <IconDisplay Icon={IconArmor} iconProps={{ className: "small" }}>
+                          <span>Armor:</span>
+                        </IconDisplay>
                       </td>
 
                       <td>
@@ -62,6 +65,7 @@ export function DeflectionChance() {
                         <span>
                           +
                           {formatNumber({
+                            decimals: 0,
                             format: "percentage",
                             value: INOCULATED_DEFLECTION_BASE,
                           })}

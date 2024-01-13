@@ -67,13 +67,13 @@ export const MONSTER_ATTACK_RATE = {
 };
 
 export const MONSTER_DAMAGE = {
-  attenuation: 13,
+  attenuation: 15,
   base: 7,
   bonus: 0.01,
   boss: 1.15,
-  finality: 3737,
+  finality: 2727,
   menace: {
-    maximum: 2,
+    maximum: 0.7,
     minimum: 0.1,
     requiredStage: 26,
   },
@@ -84,9 +84,9 @@ export const MONSTER_HEALTH = {
   base: 15,
   bonus: 0.01,
   boss: 1.8,
-  finality: 17_777,
+  finality: 7777,
   menace: {
-    maximum: 2.5,
+    maximum: 2,
     minimum: 0.2,
     requiredStage: 26,
   },
@@ -109,7 +109,7 @@ export const POISON = {
   },
   finality: 0.5777,
   magnitude: {
-    maximum: 0.16,
+    maximum: 0.2,
     minimum: 0.02,
   },
   requiredStage: 45,

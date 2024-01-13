@@ -8,16 +8,11 @@ import {
   merchantInventory,
 } from "@neverquest/state/caravan";
 import { attackDuration, name, recoveryDuration } from "@neverquest/state/character";
-import {
-  defeatedFinality,
-  isStageStarted,
-  location,
-  progress,
-  stage,
-} from "@neverquest/state/encounter";
+import { isStageStarted, location, progress, stage } from "@neverquest/state/encounter";
 import { armor, gems, shield, weapon } from "@neverquest/state/gear";
 import { isSpinning } from "@neverquest/state/items";
 import { expandedMasteries } from "@neverquest/state/masteries";
+import { questProgress } from "@neverquest/state/quests";
 import {
   blight,
   health,
@@ -38,7 +33,6 @@ export function useResetCharacter() {
         reset(expandedBuyback);
         reset(expandedMasteries);
         reset(essence);
-        reset(defeatedFinality);
         reset(fletcherInventory);
         reset(gems(ARMOR_NONE.ID));
         reset(gems(SHIELD_NONE.ID));
@@ -51,6 +45,10 @@ export function useResetCharacter() {
         reset(location);
         reset(merchantInventory);
         reset(name);
+        reset(questProgress("stages"));
+        reset(questProgress("stagesEnd"));
+        reset(questProgress("survivingNoAttributes"));
+        reset(questProgress("survivingNoGear"));
         reset(recoveryDuration);
         reset(regenerationDuration("health"));
         reset(regenerationDuration("stamina"));

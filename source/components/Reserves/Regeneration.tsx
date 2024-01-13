@@ -11,10 +11,10 @@ import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth";
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { useTimerDelta } from "@neverquest/hooks/useTimerDelta";
+import IconEldritchCodex from "@neverquest/icons/eldritch-codex.svg?react";
 import IconFortitude from "@neverquest/icons/fortitude.svg?react";
 import IconRegenerationAmount from "@neverquest/icons/regeneration-amount.svg?react";
 import IconRegenerationRate from "@neverquest/icons/regeneration-rate.svg?react";
-import IconTomeOfPower from "@neverquest/icons/tome-of-power.svg?react";
 import IconVigor from "@neverquest/icons/vigor.svg?react";
 import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
 import { isRecovering } from "@neverquest/state/character";
@@ -66,14 +66,12 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
   useDeltaText({
     delta: regenerationDeltaAmount,
     state: attributeStatisticFortitudeState,
-    suffix: "amount",
   });
 
   useDeltaText({
     delta: regenerationDeltaRate,
     format: "time",
     state: regenerateRateState,
-    suffix: "rate",
   });
 
   return (
@@ -116,7 +114,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
                         <>
                           {LABEL_SEPARATOR}
 
-                          <IconDisplay Icon={IconTomeOfPower} iconProps={{ className: "small" }}>
+                          <IconDisplay Icon={IconEldritchCodex} iconProps={{ className: "small" }}>
                             <span>
                               {formatNumber({
                                 format: "multiplier",
@@ -157,7 +155,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
                         <>
                           {LABEL_SEPARATOR}
 
-                          <IconDisplay Icon={IconTomeOfPower} iconProps={{ className: "small" }}>
+                          <IconDisplay Icon={IconEldritchCodex} iconProps={{ className: "small" }}>
                             <span>
                               {formatNumber({
                                 format: "multiplier",

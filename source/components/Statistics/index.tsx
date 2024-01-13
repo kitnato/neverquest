@@ -14,7 +14,6 @@ import { Protection } from "@neverquest/components/Statistics/Protection";
 import { StaggerRating } from "@neverquest/components/Statistics/StaggerRating";
 import { StunRating } from "@neverquest/components/Statistics/StunRating";
 import { Thorns } from "@neverquest/components/Statistics/Thorns";
-import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Statistics() {
   const element = useRef<HTMLDivElement | null>(null);
@@ -42,10 +41,7 @@ export function Statistics() {
   }, []);
 
   return (
-    <Card
-      className={`${isVisible ? "" : "d-none "}${getAnimationClass({ animation: "flipInX" })}`}
-      ref={element}
-    >
+    <Card className={isVisible ? "" : "d-none "} ref={element}>
       <CardBody>
         <Row>
           <Col>

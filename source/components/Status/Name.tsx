@@ -8,6 +8,7 @@ import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import IconDead from "@neverquest/icons/dead.svg?react";
 import IconAlive from "@neverquest/icons/name.svg?react";
 import { hasFlatlined, name } from "@neverquest/state/character";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Name() {
   const hasFlatlinedValue = useRecoilValue(hasFlatlined);
@@ -42,7 +43,11 @@ export function Name() {
   }, []);
 
   return (
-    <IconDisplay Icon={hasFlatlinedValue ? IconDead : IconAlive} tooltip="Name">
+    <IconDisplay
+      className={getAnimationClass({ animation: "flipInX" })}
+      Icon={hasFlatlinedValue ? IconDead : IconAlive}
+      tooltip="Name"
+    >
       {isEditing ? (
         <FormControl
           onBlur={({ currentTarget: { value } }) => {

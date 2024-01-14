@@ -70,7 +70,7 @@ export function getAffixStructure(): AffixStructure {
   let chance = Math.random();
   const result = AFFIX_STRUCTURE_WEIGHTS.find(([_, probability]) => (chance -= probability) <= 0);
 
-  return result === undefined ? "none" : result[0];
+  return result === undefined ? "noAffix" : result[0];
 }
 
 export function getAmountPerTick({

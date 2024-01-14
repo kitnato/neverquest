@@ -1,7 +1,7 @@
 import type { AffixStructure } from "@kitnato/locran/build/types";
 
 export const AFFIX_STRUCTURE_WEIGHTS: [AffixStructure, number][] = [
-  ["none", 0.025],
+  ["noAffix", 0.025],
   ["prefixAndSuffix", 0.075],
   ["suffix", 0.25],
   ["prefix", 0.65],

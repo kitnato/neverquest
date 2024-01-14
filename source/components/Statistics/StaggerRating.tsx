@@ -7,8 +7,8 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconShield from "@neverquest/icons/shield.svg?react";
 import IconStability from "@neverquest/icons/stability.svg?react";
+import IconStaggerChance from "@neverquest/icons/stagger-chance.svg?react";
 import IconStaggerRating from "@neverquest/icons/stagger-rating.svg?react";
-import IconStagger from "@neverquest/icons/stagger.svg?react";
 import { shield } from "@neverquest/state/gear";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import { staggerRating } from "@neverquest/state/statistics";
@@ -46,7 +46,7 @@ export function StaggerRating() {
                       </td>
 
                       <td>
-                        <IconDisplay Icon={IconStagger} iconProps={{ className: "small" }}>
+                        <IconDisplay Icon={IconStaggerChance} iconProps={{ className: "small" }}>
                           <span>{formatNumber({ format: "percentage", value: stagger })}</span>
                         </IconDisplay>
                       </td>

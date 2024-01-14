@@ -35,7 +35,7 @@ export function TrainableSkill({ skill }: { skill: Skill }) {
           </>
         ) : (
           <IconDisplay
-            description="Requires a certain crewMember member."
+            description="Requires a certain crew member."
             Icon={IconUnknown}
             tooltip="Skill"
           >

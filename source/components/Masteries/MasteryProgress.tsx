@@ -1,7 +1,8 @@
 import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
-import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
+import { IconImage } from "@neverquest/components/IconImage";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { LABEL_MAXIMUM, PERCENTAGE_POINTS } from "@neverquest/data/general";
 import { MASTERIES } from "@neverquest/data/masteries";
@@ -15,6 +16,7 @@ export function MasteryProgress({ mastery }: { mastery: Mastery }) {
   const masteryCostValue = useRecoilValue(masteryCost(mastery));
   const masteryProgressValue = useRecoilValue(masteryProgressState);
 
+  const { instructionIcon, instructions } = MASTERIES[mastery];
   const delta: Delta = `${mastery}Progress`;
 
   useDeltaText({
@@ -27,7 +29,19 @@ export function MasteryProgress({ mastery }: { mastery: Mastery }) {
       <OverlayTrigger
         overlay={
           <Popover>
-            <PopoverBody>{MASTERIES[mastery].instructions}</PopoverBody>
+            <PopoverBody>
+              {instructions.split("#").map((part, index) =>
+                index === 0 || instructionIcon === undefined ? (
+                  <span key={index}>{part}</span>
+                ) : (
+                  <div key={index}>
+                    <IconImage className="small" Icon={instructionIcon} />
+
+                    <span>{part}</span>
+                  </div>
+                ),
+              )}
+            </PopoverBody>
           </Popover>
         }
       >

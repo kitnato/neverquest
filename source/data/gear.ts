@@ -3,15 +3,15 @@ import type { ArmorClass, ShieldClass, WeaponClass } from "@kitnato/locran/build
 import IconArmorHeavy from "@neverquest/icons/armor-heavy.svg?react";
 import IconArmorLight from "@neverquest/icons/armor-light.svg?react";
 import IconReinforced from "@neverquest/icons/armor-reinforced.svg?react";
-import IconBleed from "@neverquest/icons/bleed.svg?react";
+import IconBleedChance from "@neverquest/icons/bleed-chance.svg?react";
 import IconBlunt from "@neverquest/icons/blunt.svg?react";
-import IconParry from "@neverquest/icons/parry.svg?react";
+import IconParryChance from "@neverquest/icons/parry-chance.svg?react";
 import IconPiercing from "@neverquest/icons/piercing.svg?react";
 import IconShieldMedium from "@neverquest/icons/shield-medium.svg?react";
 import IconShieldSmall from "@neverquest/icons/shield-small.svg?react";
 import IconShieldTower from "@neverquest/icons/shield-tower.svg?react";
 import IconSlashing from "@neverquest/icons/slashing.svg?react";
-import IconStun from "@neverquest/icons/stun.svg?react";
+import IconStunChance from "@neverquest/icons/stun-chance.svg?react";
 import type { Armor, GearRangeBase, GeneratorRange, Melee, Shield } from "@neverquest/types";
 import type { SVGIcon } from "@neverquest/types/components";
 import type { WeaponAbility } from "@neverquest/types/unions";
@@ -244,7 +244,7 @@ export const WEAPON_SPECIFICATIONS: Record<
       { maximum: 0.2, minimum: 0.15 },
       { maximum: 0.5, minimum: 0.48 },
     ],
-    IconAbility: IconStun,
+    IconAbility: IconStunChance,
     IconGearClass: IconBlunt,
   },
   piercing: {
@@ -253,7 +253,7 @@ export const WEAPON_SPECIFICATIONS: Record<
       { maximum: 0.3, minimum: 0.25 },
       { maximum: 0.6, minimum: 0.58 },
     ],
-    IconAbility: IconBleed,
+    IconAbility: IconBleedChance,
     IconGearClass: IconPiercing,
   },
   slashing: {
@@ -262,7 +262,7 @@ export const WEAPON_SPECIFICATIONS: Record<
       { maximum: 0.23, minimum: 0.2 },
       { maximum: 0.4, minimum: 0.38 },
     ],
-    IconAbility: IconParry,
+    IconAbility: IconParryChance,
     IconGearClass: IconSlashing,
   },
 };

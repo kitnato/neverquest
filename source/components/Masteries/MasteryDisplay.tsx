@@ -1,8 +1,10 @@
+import { Fragment } from "react";
 import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { IconImage } from "@neverquest/components/IconImage";
 import { MasteryProgress } from "@neverquest/components/Masteries/MasteryProgress";
 import { MasteryRank } from "@neverquest/components/Masteries/MasteryRank";
 import { LABEL_SKILL_REQUIRED, LABEL_UNKNOWN } from "@neverquest/data/general";
@@ -18,7 +20,7 @@ export function MasteryDisplay({ mastery }: { mastery: Mastery }) {
   const canTrainMasteryValue = useRecoilValue(canTrainMastery(mastery));
   const isSkillAcquiredRequired = useRecoilValue(isSkillAcquired(MASTERIES[mastery].requiredSkill));
 
-  const { description, Icon } = MASTERIES[mastery];
+  const { description, descriptionIcon, Icon } = MASTERIES[mastery];
 
   return (
     <div className={getAnimationClass({ animation: "flipInX" })}>
@@ -42,7 +44,19 @@ export function MasteryDisplay({ mastery }: { mastery: Mastery }) {
           <OverlayTrigger
             overlay={
               <Popover>
-                <PopoverBody>{description}</PopoverBody>
+                <PopoverBody>
+                  {description.split("#").map((part, index) =>
+                    index > 0 ? (
+                      <span key={index}>{part}</span>
+                    ) : (
+                      <Fragment key={index}>
+                        <span>{part}</span>
+
+                        <IconImage className="small" Icon={descriptionIcon} />
+                      </Fragment>
+                    ),
+                  )}
+                </PopoverBody>
               </Popover>
             }
             placement="right"

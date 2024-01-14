@@ -8,8 +8,8 @@ import { LABEL_SEPARATOR } from "@neverquest/data/general";
 import { PARRY_ABSORPTION, PARRY_DAMAGE } from "@neverquest/data/statistics";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconFinesse from "@neverquest/icons/finesse.svg?react";
+import IconParryChance from "@neverquest/icons/parry-chance.svg?react";
 import IconParryRating from "@neverquest/icons/parry-rating.svg?react";
-import IconParry from "@neverquest/icons/parry.svg?react";
 import { weapon } from "@neverquest/state/gear";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import { parryChance, parryRating } from "@neverquest/state/statistics";
@@ -51,7 +51,7 @@ export function ParryRating() {
                       </td>
 
                       <td>
-                        <IconDisplay Icon={IconParry} iconProps={{ className: "small" }}>
+                        <IconDisplay Icon={IconParryChance} iconProps={{ className: "small" }}>
                           <span>
                             {formatNumber({ format: "percentage", value: parryChanceValue })}
                           </span>

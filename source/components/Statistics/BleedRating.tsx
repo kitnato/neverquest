@@ -6,8 +6,8 @@ import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LABEL_EMPTY } from "@neverquest/data/general";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
+import IconBleedChance from "@neverquest/icons/bleed-chance.svg?react";
 import IconBleedRating from "@neverquest/icons/bleed-rating.svg?react";
-import IconBleed from "@neverquest/icons/bleed.svg?react";
 import IconBleeding from "@neverquest/icons/bleeding.svg?react";
 import IconCruelty from "@neverquest/icons/cruelty.svg?react";
 import { bleed, bleedChance } from "@neverquest/state/ailments";
@@ -54,7 +54,7 @@ export function BleedRating() {
                       </td>
 
                       <td>
-                        <IconDisplay Icon={IconBleed} iconProps={{ className: "small" }}>
+                        <IconDisplay Icon={IconBleedChance} iconProps={{ className: "small" }}>
                           {bleedChanceValue === 0
                             ? LABEL_EMPTY
                             : formatNumber({ format: "percentage", value: bleedChanceValue })}

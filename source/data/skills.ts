@@ -20,7 +20,7 @@ import IconHealth from "@neverquest/icons/health.svg?react";
 import IconInfusionLevel from "@neverquest/icons/infusion-level.svg?react";
 import IconMeditation from "@neverquest/icons/meditation.svg?react";
 import IconMemetics from "@neverquest/icons/memetics.svg?react";
-import IconParry from "@neverquest/icons/parry.svg?react";
+import IconParryChance from "@neverquest/icons/parry-chance.svg?react";
 import IconPiercing from "@neverquest/icons/piercing.svg?react";
 import IconRanged from "@neverquest/icons/ranged.svg?react";
 import IconRecovery from "@neverquest/icons/recovery.svg?react";
@@ -99,7 +99,7 @@ export const SKILLS: Record<
   escrime: {
     description:
       "Grants the ability to # parry attacks with # slashing weapons, partially reflecting damage.",
-    descriptionIcons: [IconParry, IconSlashing],
+    descriptionIcons: [IconParryChance, IconSlashing],
     Icon: IconEscrime,
     isInheritable: false,
     requiredCrewMember: "merchant",

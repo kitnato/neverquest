@@ -6,8 +6,8 @@ import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconMight from "@neverquest/icons/might.svg?react";
+import IconStunChance from "@neverquest/icons/stun-chance.svg?react";
 import IconStunRating from "@neverquest/icons/stun-rating.svg?react";
-import IconStun from "@neverquest/icons/stun.svg?react";
 import { stunChance } from "@neverquest/state/ailments";
 import { weapon } from "@neverquest/state/gear";
 import { masteryStatistic } from "@neverquest/state/masteries";
@@ -50,7 +50,7 @@ export function StunRating() {
                       </td>
 
                       <td>
-                        <IconDisplay Icon={IconStun} iconProps={{ className: "small" }}>
+                        <IconDisplay Icon={IconStunChance} iconProps={{ className: "small" }}>
                           <span>
                             {formatNumber({
                               format: "percentage",

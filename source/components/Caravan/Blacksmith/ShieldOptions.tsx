@@ -12,7 +12,7 @@ import { GROWTH_MAXIMUM, LABEL_SKILL_REQUIRED, LABEL_UNKNOWN } from "@neverquest
 import IconBlock from "@neverquest/icons/block.svg?react";
 import IconBurden from "@neverquest/icons/burden.svg?react";
 import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react";
-import IconStagger from "@neverquest/icons/stagger.svg?react";
+import IconStaggerChance from "@neverquest/icons/stagger-chance.svg?react";
 import IconUnknown from "@neverquest/icons/unknown.svg?react";
 import { blacksmithInventory } from "@neverquest/state/caravan";
 import { stageMaximum } from "@neverquest/state/encounter";
@@ -79,7 +79,7 @@ export function ShieldOptions() {
 
         {stagger !== undefined && (
           <IconDisplay
-            Icon={isSkillAcquiredShieldcraft ? IconStagger : IconUnknown}
+            Icon={isSkillAcquiredShieldcraft ? IconStaggerChance : IconUnknown}
             iconProps={{ overlayPlacement: "left" }}
             tooltip={isSkillAcquiredShieldcraft ? "Stagger chance" : LABEL_UNKNOWN}
           >

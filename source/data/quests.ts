@@ -72,7 +72,7 @@ export const QUESTS: Record<
     title: "Companionship",
   },
   acquiringGems: {
-    description: "Acquire @ gem(s).",
+    description: "Acquire gems: @.",
     progression: [1, 3, 10, 25],
     requiresTracking: true,
     title: "Shiny",
@@ -245,7 +245,7 @@ export const QUESTS: Record<
     title: "Out of breath",
   },
   flatlining: {
-    description: "Die @ time(s).",
+    description: "Die: @.",
     progression: [1, 3, 5],
     requiresTracking: true,
     title: "Flatliner",
@@ -257,7 +257,7 @@ export const QUESTS: Record<
     title: "Air conditioning",
   },
   gemsApplying: {
-    description: "Socket @ gem(s).",
+    description: "Socket gems: 1.",
     progression: [1, 3, 10, 25],
     requiresTracking: true,
     title: "Jeweller",
@@ -275,7 +275,7 @@ export const QUESTS: Record<
     title: "Better than mining",
   },
   hiring: {
-    description: "Hire caravan @ crewMember members.",
+    description: "Hire @ caravan crew members.",
     progression: [3, 10, 25],
     requiresTracking: true,
     title: "Don't forget the doctor",
@@ -355,8 +355,8 @@ export const QUESTS: Record<
     title: "Hoarding",
   },
   masteries: {
-    description: "Unlock a mastery.",
-    progression: [1],
+    description: "Unlock masteries: @.",
+    progression: [1, 3],
     requiresTracking: true,
     title: "Apprentice",
   },
@@ -425,31 +425,31 @@ export const QUESTS: Record<
     title: "I like turtles",
   },
   purchasingConsumable: {
-    description: "Purchase @ consumable item(s).",
+    description: "Purchase consumable items: @.",
     progression: [1, 3, 10],
     requiresTracking: true,
     title: "Target customer",
   },
   purchasingItem: {
-    description: "Purchase @ piece(s) of gear or trinket(s).",
+    description: "Purchase pieces of gear or trinkets: @.",
     progression: [1, 3, 10],
     requiresTracking: true,
     title: "Reliquary",
   },
   purgingEssence: {
-    description: "Undergo the essence purge ritual @ time(s).",
+    description: "Undergo the essence purge ritual: @.",
     progression: [1, 3],
     requiresTracking: true,
     title: "Clean as a whistle",
   },
   purgingMemories: {
-    description: "Undergo the memory purge ritual @ time(s).",
+    description: "Undergo the memory purge ritual: @.",
     progression: [1, 3],
     requiresTracking: true,
     title: "What? Who? Where?",
   },
   resurrecting: {
-    description: "Resurrect with a phylactery @ time(s).",
+    description: "Resurrect with a phylactery: @.",
     progression: [1, 3, 10],
     requiresTracking: true,
     title: "Lich king",
@@ -461,7 +461,7 @@ export const QUESTS: Record<
     title: "Getting too old for this",
   },
   scavengingCorpse: {
-    description: "Scavenge @ corpse(s).",
+    description: "Scavenge corpses: @.",
     progression: [1, 3, 5],
     requiresTracking: true,
     title: "Necrophage",
@@ -486,7 +486,7 @@ export const QUESTS: Record<
   },
   skills: {
     description: "Acquire @ skills.",
-    progression: [3, 10, 25],
+    progression: [1, 3, 7],
     requiresTracking: true,
     title: "Future prodigy",
   },
@@ -561,7 +561,7 @@ export const QUESTS: Record<
     title: "Blue-shelling",
   },
   traits: {
-    description: "Acquire @ trait(s).",
+    description: "Acquire traits: @.",
     progression: [1, 3, 6],
     requiresTracking: false,
     title: "Getting ink done",

@@ -166,7 +166,8 @@ export type Quest = Conquest | Routine | Triumph;
 export const QUEST_BONUS_TYPES = ["healthBonus", "staminaBonus", "damageBonus"] as const;
 export type QuestBonus = (typeof QUEST_BONUS_TYPES)[number];
 
-export type QuestClass = "conquest" | "routine" | "triumph";
+export const QUEST_CLASS_TYPES = ["conquest", "routine", "triumph"] as const;
+export type QuestClass = (typeof QUEST_CLASS_TYPES)[number];
 
 export type QuestStatus = QuestBonus | "achieved" | "incomplete";
 

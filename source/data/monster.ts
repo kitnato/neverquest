@@ -91,15 +91,15 @@ export const MONSTER_DAMAGE = {
     "res dominus": 1717,
   },
   menace: {
-    maximum: 0.7,
-    minimum: 0.15,
-    requiredStage: 26,
+    maximum: 1.25,
+    minimum: 0.25,
+    requiredStage: 35,
   },
 };
 
 export const MONSTER_HEALTH = {
-  attenuation: 23,
-  base: 15,
+  attenuation: 20,
+  base: 14,
   bonus: 0.0075,
   boss: 1.8,
   finality: {
@@ -107,9 +107,9 @@ export const MONSTER_HEALTH = {
     "res dominus": 7777,
   },
   menace: {
-    maximum: 2,
-    minimum: 0.2,
-    requiredStage: 26,
+    maximum: 2.5,
+    minimum: 0.3,
+    requiredStage: 35,
   },
 };
 

@@ -15,14 +15,14 @@ import { QUEST_BONUS_TYPES } from "@neverquest/types/unions";
 
 const TABS: TabsData = [
   {
-    Component: () => <QuestTab questClass="conquest" />,
-    Icon: IconConquest,
-    label: "conquests",
-  },
-  {
     Component: () => <QuestTab questClass="routine" />,
     Icon: IconRoutine,
     label: "routines",
+  },
+  {
+    Component: () => <QuestTab questClass="conquest" />,
+    Icon: IconConquest,
+    label: "conquests",
   },
   {
     Component: () => <QuestTab questClass="triumph" />,
@@ -45,7 +45,7 @@ export function Quests() {
   }
 
   if (!canTrackQuestsValue) {
-    return <span className="fst-italic">Time for retirement and contemplation must be made.</span>;
+    return <span className="fst-italic">Time for contemplation must be made in retirement.</span>;
   }
 
   return (

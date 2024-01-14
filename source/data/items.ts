@@ -198,7 +198,7 @@ export const INFUSABLES: Record<
 export const KNAPSACK_CAPACITY = 15;
 
 export const TRINKET_DROP_CHANCE = {
-  memento: { maximum: 0.2, minimum: 0.01 },
+  memento: { maximum: 0.1, minimum: 0.01 },
   "torn manuscript": { maximum: 0.1, minimum: 0.03 },
 };
 

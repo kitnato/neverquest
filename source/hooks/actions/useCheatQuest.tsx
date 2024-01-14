@@ -3,6 +3,7 @@ import { useRecoilCallback } from "recoil";
 import { useAcquireSkill } from "@neverquest/hooks/actions/useAcquireSkill";
 import { useGenerateMerchantInventory } from "@neverquest/hooks/actions/useGenerateMerchantInventory";
 import { useIncreaseStage } from "@neverquest/hooks/actions/useIncreaseStage";
+import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness";
 import { useSetMonologues } from "@neverquest/hooks/actions/useSetMonologues";
 import { useToggleAttacking } from "@neverquest/hooks/actions/useToggleAttacking";
 import { useToggleLocation } from "@neverquest/hooks/actions/useToggleLocation";
@@ -18,6 +19,7 @@ export function useCheatQuest() {
   const acquireSkill = useAcquireSkill();
   const generateMerchantInventory = useGenerateMerchantInventory();
   const increaseStage = useIncreaseStage();
+  const resetWilderness = useResetWilderness();
   const setMonologues = useSetMonologues();
   const toggleAttack = useToggleAttacking();
   const toggleLocation = useToggleLocation();
@@ -85,6 +87,8 @@ export function useCheatQuest() {
                 setMonologues();
                 increaseStage();
               }
+
+              resetWilderness();
             }
 
             break;
@@ -100,6 +104,7 @@ export function useCheatQuest() {
       acquireSkill,
       generateMerchantInventory,
       increaseStage,
+      resetWilderness,
       setMonologues,
       toggleAttack,
       toggleLocation,

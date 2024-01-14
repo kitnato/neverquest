@@ -24,7 +24,11 @@ export const QUEST_CLASS_ICONS: Record<QuestClass, SVGIcon> = {
   triumph: IconTriumph,
 };
 
-export const QUEST_COMPLETION_BONUS = 0.01;
+export const QUEST_COMPLETION_BONUS = {
+  conquest: 0.02,
+  routine: 0.01,
+  triumph: 0.03,
+};
 
 export const QUEST_NOTIFICATION_DURATION = 5000;
 
@@ -43,8 +47,6 @@ export const QUEST_TYPES_BY_CLASS = {
   routine: ROUTINE_TYPES,
   triumph: TRIUMPH_TYPES,
 };
-
-export const QUEST_TYPES = Object.values(QUEST_TYPES_BY_CLASS).flat();
 
 export const QUESTS: Record<
   Quest,

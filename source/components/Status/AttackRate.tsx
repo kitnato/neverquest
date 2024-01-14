@@ -85,50 +85,54 @@ export function AttackRate() {
                       </td>
                     </tr>
 
-                    <tr>
-                      <td>
-                        <IconDisplay Icon={IconWeaponSpeed} iconProps={{ className: "small" }}>
-                          <span>Speed:</span>
-                        </IconDisplay>
-                      </td>
+                    {attributeStatisticSpeed > 0 && (
+                      <tr>
+                        <td>
+                          <IconDisplay Icon={IconWeaponSpeed} iconProps={{ className: "small" }}>
+                            <span>Speed:</span>
+                          </IconDisplay>
+                        </td>
 
-                      <td>
-                        <Stack direction="horizontal" gap={1}>
-                          <span>
-                            -
-                            {formatNumber({
-                              decimals: 0,
-                              format: "percentage",
-                              value: attributeStatisticSpeed,
-                            })}
-                          </span>
+                        <td>
+                          <Stack direction="horizontal" gap={1}>
+                            <span>
+                              -
+                              {formatNumber({
+                                decimals: 0,
+                                format: "percentage",
+                                value: attributeStatisticSpeed,
+                              })}
+                            </span>
 
-                          {attributePowerBonusSpeed > 0 && (
-                            <>
-                              {LABEL_SEPARATOR}
+                            {attributePowerBonusSpeed > 0 && (
+                              <>
+                                {LABEL_SEPARATOR}
 
-                              <IconDisplay
-                                Icon={IconEldritchCodex}
-                                iconProps={{ className: "small" }}
-                              >
-                                <span>
-                                  {formatNumber({
-                                    format: "multiplier",
-                                    value: attributePowerBonusSpeed,
-                                  })}
-                                </span>
-                              </IconDisplay>
-                            </>
-                          )}
-                        </Stack>
-                      </td>
-                    </tr>
+                                <IconDisplay
+                                  Icon={IconEldritchCodex}
+                                  iconProps={{ className: "small" }}
+                                >
+                                  <span>
+                                    {formatNumber({
+                                      format: "multiplier",
+                                      value: attributePowerBonusSpeed,
+                                    })}
+                                  </span>
+                                </IconDisplay>
+                              </>
+                            )}
+                          </Stack>
+                        </td>
+                      </tr>
+                    )}
                   </DetailsTable>
                 </PopoverBody>
               </Popover>
             }
             trigger={
-              attributeStatisticSpeed > 0 || attributePowerBonusSpeed > 0 ? POPOVER_TRIGGER : []
+              attributeStatisticSpeed > 0 || attributePowerBonusSpeed > 0 || !canAttackOrParryValue
+                ? POPOVER_TRIGGER
+                : []
             }
           >
             <div className="w-100">

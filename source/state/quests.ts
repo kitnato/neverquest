@@ -1,17 +1,18 @@
 import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
-import {
-  QUESTS,
-  QUEST_COMPLETION_BONUS,
-  QUEST_TYPES,
-  QUEST_TYPES_BY_CLASS,
-} from "@neverquest/data/quests";
+import { QUESTS, QUEST_COMPLETION_BONUS, QUEST_TYPES_BY_CLASS } from "@neverquest/data/quests";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { ownedItem } from "@neverquest/state/inventory";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import type { QuestNotification } from "@neverquest/types";
 import { isQuestBonus } from "@neverquest/types/type-guards";
-import type { Quest, QuestBonus, QuestClass, QuestStatus } from "@neverquest/types/unions";
+import {
+  QUEST_CLASS_TYPES,
+  type Quest,
+  type QuestBonus,
+  type QuestClass,
+  type QuestStatus,
+} from "@neverquest/types/unions";
 import { getQuestsData } from "@neverquest/utilities/getters";
 import { withStateKey } from "@neverquest/utilities/helpers";
 
@@ -91,16 +92,23 @@ export const questsBonus = withStateKey("questsBonus", (key) =>
   selectorFamily({
     get:
       (questBonus: QuestBonus) =>
-      ({ get }) =>
-        get(canTrackQuests)
-          ? QUEST_TYPES.reduce(
-              (sum, quest) =>
-                sum +
-                Object.values(get(questStatuses(quest))).filter((status) => questBonus === status)
-                  .length,
-              0,
-            ) * QUEST_COMPLETION_BONUS
-          : 0,
+      ({ get }) => {
+        if (!get(canTrackQuests)) {
+          return 0;
+        }
+
+        let bonus = 0;
+
+        for (const questClass of QUEST_CLASS_TYPES) {
+          for (const quest of QUEST_TYPES_BY_CLASS[questClass]) {
+            bonus +=
+              Object.values(get(questStatuses(quest))).filter((status) => questBonus === status)
+                .length * QUEST_COMPLETION_BONUS[questClass];
+          }
+        }
+
+        return bonus;
+      },
     key,
   }),
 );

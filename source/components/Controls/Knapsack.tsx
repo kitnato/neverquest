@@ -55,7 +55,7 @@ export function Knapsack() {
             >
               <IconImage Icon={IconInventory} />
 
-              {(encumbranceExtentValue !== "none" || notifyOverEncumbranceValue) && (
+              {(encumbranceExtentValue !== undefined || notifyOverEncumbranceValue) && (
                 <div className="position-absolute top-50 start-100 translate-middle">
                   <Badge bg="secondary" ref={badgeElement}>
                     <IconImage className="small" Icon={IconEncumbrance} />

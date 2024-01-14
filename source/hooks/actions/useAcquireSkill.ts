@@ -7,7 +7,7 @@ import { SKILLS } from "@neverquest/data/skills";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { isShowing } from "@neverquest/state/isShowing";
 import { acquiredSkills, isSkillAcquired } from "@neverquest/state/skills";
-import type { Mastery, Skill } from "@neverquest/types/unions";
+import type { Skill } from "@neverquest/types/unions";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useAcquireSkill() {
@@ -21,9 +21,6 @@ export function useAcquireSkill() {
         const { skillsCraft } = QUEST_REQUIREMENTS;
         const { shows } = SKILLS[skill];
         const acquiredSkillsValue = get(acquiredSkills);
-        const newUnlockedMasteries = Object.entries(MASTERIES)
-          .filter(([_, { requiredSkill }]) => requiredSkill === skill)
-          .map(([mastery]) => mastery as Mastery);
 
         set(isSkillAcquired(skill), true);
 
@@ -33,11 +30,13 @@ export function useAcquireSkill() {
           }
         }
 
-        if (newUnlockedMasteries.length > 0) {
-          for (const _ of newUnlockedMasteries) {
-            progressQuest({ quest: "masteries" });
-            progressQuest({ quest: "masteriesAll" });
-          }
+        if (Object.values(ATTRIBUTES).some(({ requiredSkill }) => requiredSkill === skill)) {
+          progressQuest({ quest: "attributesUnlocking" });
+        }
+
+        if (Object.values(MASTERIES).some(({ requiredSkill }) => requiredSkill === skill)) {
+          progressQuest({ quest: "masteries" });
+          progressQuest({ quest: "masteriesAll" });
         }
 
         if (
@@ -45,24 +44,6 @@ export function useAcquireSkill() {
           skill === "archery"
         ) {
           progressQuest({ quest: "acquiringArcheryFirst" });
-        }
-
-        if (
-          [
-            ...Object.entries(acquiredSkillsValue)
-              .filter(([_, hasAcquiredSkill]) => hasAcquiredSkill)
-              .map(([currentSkill]) => currentSkill),
-            skill,
-          ]
-            .toSorted((skill1, skill2) => skill1.localeCompare(skill2))
-            .toString() ===
-          Object.values(ATTRIBUTES)
-            .map(({ requiredSkill }) => requiredSkill)
-            .filter((currentSkill): currentSkill is Skill => currentSkill !== undefined)
-            .toSorted((skill1, skill2) => skill1.localeCompare(skill2))
-            .toString()
-        ) {
-          progressQuest({ quest: "attributesUnlockingAll" });
         }
 
         progressQuest({ quest: "skills" });

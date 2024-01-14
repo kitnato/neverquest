@@ -67,7 +67,7 @@ export function Frailty() {
             }
             placement="right"
           >
-            <span style={{ width: "max-content" }}>-{formattedValue}</span>
+            <span className="fitted">-{formattedValue}</span>
           </OverlayTrigger>
 
           <DeltasDisplay delta="frailty" />

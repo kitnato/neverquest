@@ -19,6 +19,7 @@ export function useInitialize() {
         if (isRetirement ?? isStoreEmpty) {
           const initialStore: Record<string, string[] | boolean | string> = {};
 
+          // TODO - limitation of hooks since requiredSkill is checked for every attribute, if an attribute has none, it must still call isSkillAcquired for a non-existent skill.
           set(isSkillAcquired("none"), true);
           initialStore["isSkillAcquired-none"] = true;
 
@@ -26,14 +27,12 @@ export function useInitialize() {
             const status = CREW[crew].requiredStage === 1 ? "hired" : "hidden";
 
             set(hireStatus(crew), status);
-
             initialStore[`hireStatus-${crew}`] = status;
           }
 
           const newWilderness = [generateLocation({ affixStructure: getAffixStructure() })];
 
           set(wildernesses, newWilderness);
-
           initialStore.wildernesses = newWilderness;
 
           if (isStoreEmpty) {

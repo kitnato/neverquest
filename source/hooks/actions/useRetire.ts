@@ -1,5 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
+import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { RETIREMENT_STAGE_MINIMUM } from "@neverquest/data/general";
 import { SKILLS } from "@neverquest/data/skills";
 import { useAcquireSkill } from "@neverquest/hooks/actions/useAcquireSkill";
@@ -16,7 +17,13 @@ import { questProgress } from "@neverquest/state/quests";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { isTraitAcquired, selectedTrait } from "@neverquest/state/traits";
 import { isInheritableItem } from "@neverquest/types/type-guards";
-import { CREW_TYPES, MASTERY_TYPES, PERK_TYPES, SKILL_TYPES } from "@neverquest/types/unions";
+import {
+  ATTRIBUTE_TYPES,
+  CREW_TYPES,
+  MASTERY_TYPES,
+  PERK_TYPES,
+  SKILL_TYPES,
+} from "@neverquest/types/unions";
 import { getPerkEffect, getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useRetire() {
@@ -51,8 +58,8 @@ export function useRetire() {
         resetCharacter();
         reset(corpse);
 
-        reset(questProgress("attributesIncreasingAll"));
-        reset(questProgress("attributesUnlockingAll"));
+        reset(questProgress("attributesIncreasing"));
+        reset(questProgress("attributesUnlocking"));
         reset(questProgress("hiringAll"));
         reset(questProgress("masteriesAll"));
         reset(questProgress("masteriesRankMaximum"));
@@ -64,6 +71,12 @@ export function useRetire() {
         reset(questProgress("skillsAll"));
         reset(questProgress("survivingNoAttributes"));
         reset(questProgress("survivingNoGear"));
+
+        for (const attribute of ATTRIBUTE_TYPES) {
+          if (ATTRIBUTES[attribute].requiredSkill === undefined) {
+            progressQuest({ quest: "attributesUnlocking" });
+          }
+        }
 
         for (const crew of CREW_TYPES) {
           reset(monologue(crew));

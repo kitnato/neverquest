@@ -23,7 +23,7 @@ export const encumbranceExtent = withStateKey("encumbranceExtent", (key) =>
         ? "encumbered"
         : get(encumbrance) > get(encumbranceMaximum)
           ? "over-encumbered"
-          : "none",
+          : undefined,
     key,
   }),
 );

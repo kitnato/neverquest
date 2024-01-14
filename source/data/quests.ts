@@ -93,13 +93,13 @@ export const QUESTS: Record<
     requiresTracking: true,
     title: "Highlander",
   },
-  attributesIncreasingAll: {
+  attributesIncreasing: {
     description: "Increase all attributes at least once.",
     progression: [ATTRIBUTE_TYPES.length],
     requiresTracking: true,
     title: "Polymath",
   },
-  attributesUnlockingAll: {
+  attributesUnlocking: {
     description: "Unlock all attributes.",
     progression: [ATTRIBUTE_TYPES.length],
     requiresTracking: true,

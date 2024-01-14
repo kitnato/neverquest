@@ -71,6 +71,8 @@ export function Flatline() {
 
             <span>corpse decorates the battlefield, ripe for scavenging.</span>
           </Stack>
+
+          <span>The wilderness is shifting ...</span>
         </Stack>
       </ModalBody>
 

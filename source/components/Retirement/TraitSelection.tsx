@@ -25,7 +25,7 @@ export function TraitSelection() {
         <Stack gap={3}>
           <FormCheck
             checked={selectedTraitValue === undefined}
-            id="none"
+            id="noTrait"
             label={<span className="fst-italic">{LABEL_NONE}</span>}
             name={FORM_NAME}
             onChange={resetSelectedTrait}

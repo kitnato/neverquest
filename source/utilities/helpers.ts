@@ -6,21 +6,17 @@ import type { StateKey } from "@neverquest/types/unions";
 export function animateElement({
   animation,
   element,
-  onEnd,
+  onAnimationEnd,
   speed,
 }: {
   animation: Animation;
   element: HTMLElement;
-  onEnd?: () => void;
+  onAnimationEnd?: () => void;
   speed?: AnimationSpeed;
 }) {
   const { classList } = element;
   const animationName = `${CLASS_ANIMATE_PREFIX}${animation}`;
   const animationSpeedClass = speed ? `${CLASS_ANIMATE_PREFIX}${speed}` : undefined;
-
-  if (classList.contains("d-none")) {
-    classList.remove("d-none");
-  }
 
   classList.add(CLASS_ANIMATED, animationName);
 
@@ -32,14 +28,15 @@ export function animateElement({
     "animationend",
     (event: AnimationEvent) => {
       event.stopPropagation();
+
       classList.remove(CLASS_ANIMATED, animationName);
 
       if (animationSpeedClass !== undefined) {
         classList.remove(animationSpeedClass);
       }
 
-      if (onEnd !== undefined) {
-        onEnd();
+      if (onAnimationEnd !== undefined) {
+        onAnimationEnd();
       }
     },
     { once: true },

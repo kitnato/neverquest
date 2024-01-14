@@ -36,7 +36,7 @@ export const skillPrice = withStateKey("skillPrice", (key) =>
 // ATOMS
 
 export const isSkillAcquired = withStateKey("isSkillAcquired", (key) =>
-  atomFamily<boolean, Skill | "none">({
+  atomFamily<boolean, Skill>({
     default: false,
     effects: (skill) => [handleLocalStorage({ key, parameter: skill })],
     key,

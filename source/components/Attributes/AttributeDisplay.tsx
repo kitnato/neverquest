@@ -17,23 +17,21 @@ import IconWait from "@neverquest/icons/hourglass.svg?react";
 import IconIncrease from "@neverquest/icons/increase.svg?react";
 import IconUnknown from "@neverquest/icons/unknown.svg?react";
 import { areAttributesAffordable, isAttributeAtMaximum } from "@neverquest/state/attributes";
-import { isSkillAcquired } from "@neverquest/state/skills";
+import { acquiredSkills } from "@neverquest/state/skills";
 import type { Attribute } from "@neverquest/types/unions";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 
 export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
+  const acquiredSkillsValue = useRecoilValue(acquiredSkills);
   const areAttributesAffordableValue = useRecoilValue(areAttributesAffordable);
   const isAttributeAtMaximumValue = useRecoilValue(isAttributeAtMaximum(attribute));
-  const isSkillAcquiredRequiredSkill = useRecoilValue(
-    isSkillAcquired(ATTRIBUTES[attribute].requiredSkill ?? "none"),
-  );
 
   const increaseAttribute = useIncreaseAttribute();
 
-  const { description, Icon } = ATTRIBUTES[attribute];
+  const { description, Icon, requiredSkill } = ATTRIBUTES[attribute];
   const name = capitalizeAll(attribute);
 
-  if (isSkillAcquiredRequiredSkill) {
+  if (requiredSkill === undefined || acquiredSkillsValue[requiredSkill]) {
     return (
       <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
         <IconDisplay description={description} Icon={Icon} tooltip="Attribute">

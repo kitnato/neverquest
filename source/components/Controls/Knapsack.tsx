@@ -36,7 +36,7 @@ export function Knapsack() {
       animateElement({
         animation: "heartBeat",
         element: current,
-        onEnd: resetNotifyEncumbranceValue,
+        onAnimationEnd: resetNotifyEncumbranceValue,
       });
     }
   }, [notifyOverEncumbranceValue, resetNotifyEncumbranceValue]);

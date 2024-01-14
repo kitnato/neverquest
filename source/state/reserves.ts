@@ -222,6 +222,14 @@ export const health = withStateKey("health", (key) =>
   }),
 );
 
+export const isInexhaustible = withStateKey("isInexhaustible", (key) =>
+  atom({
+    default: false,
+    effects: [handleLocalStorage({ key })],
+    key,
+  }),
+);
+
 export const isInvulnerable = withStateKey("isInvulnerable", (key) =>
   atom({
     default: false,

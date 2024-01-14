@@ -2,6 +2,7 @@ import { useRecoilCallback } from "recoil";
 
 import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta";
 import {
+  isInexhaustible,
   regenerationAmount,
   regenerationDuration,
   stamina,
@@ -26,7 +27,7 @@ export function useChangeStamina() {
         const isPositive = value > 0;
         const staminaMaximumBlightedValue = get(staminaMaximumBlighted);
 
-        let newStamina = get(stamina) + value;
+        let newStamina = get(stamina) + (get(isInexhaustible) ? (isPositive ? value : 0) : value);
 
         addDelta({
           contents:

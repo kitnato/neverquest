@@ -337,6 +337,7 @@ export type StateKey =
   | "isCaravanHired"
   | "isHealthAtMaximum"
   | "isHealthLow"
+  | "isInexhaustible"
   | "isInfusionAtMaximum"
   | "isInventoryOpen"
   | "isInvulnerable"

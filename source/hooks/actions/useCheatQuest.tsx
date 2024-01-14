@@ -9,7 +9,7 @@ import { useToggleLocation } from "@neverquest/hooks/actions/useToggleLocation";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import { isAttacking } from "@neverquest/state/character";
 import { location, progress, progressMaximum, stage } from "@neverquest/state/encounter";
-import { isInvulnerable } from "@neverquest/state/reserves";
+import { isInexhaustible, isInvulnerable } from "@neverquest/state/reserves";
 import { essenceLoot } from "@neverquest/state/resources";
 import { SKILL_TYPES, type Skill } from "@neverquest/types/unions";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
@@ -32,6 +32,12 @@ export function useCheatQuest() {
         const progressMaximumValue = get(progressMaximum);
 
         switch (cheat) {
+          // Deus Ex
+          case "allenergy": {
+            set(isInexhaustible, (isCurrentlyInexhaustible) => !isCurrentlyInexhaustible);
+
+            break;
+          }
           // Doom
           case "IDBEHOLDV": {
             set(isInvulnerable, (isCurrentlyInvulnerable) => !isCurrentlyInvulnerable);

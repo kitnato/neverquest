@@ -28,22 +28,20 @@ export function Travel() {
   const isOverEncumbered =
     locationValue === "caravan" && encumbranceExtentValue === "over-encumbered";
 
-  if (hasLootedValue || locationValue === "caravan") {
+  if (encounterValue === "void" || hasLootedValue || locationValue === "caravan") {
     return (
       <OverlayTrigger
         overlay={
           <Tooltip>
             {isOverEncumbered
               ? "Over-encumbered - cannot move."
-              : `${
-                  locationValue === "wilderness"
-                    ? `Go to ${
-                        !isShowingLocation || encounterValue === "res cogitans"
-                          ? LABEL_UNKNOWN
-                          : "caravan"
-                      }`
-                    : "Return to wilderness"
-                }`}
+              : locationValue === "wilderness"
+                ? `Go to ${
+                    !isShowingLocation || encounterValue === "res cogitans"
+                      ? LABEL_UNKNOWN
+                      : "caravan"
+                  }`
+                : "Return to wilderness"}
           </Tooltip>
         }
       >

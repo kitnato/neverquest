@@ -8,20 +8,20 @@ import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_UNKNOWN } from "@neverquest/data/gene
 import { SKILLS } from "@neverquest/data/skills";
 import IconEssence from "@neverquest/icons/essence.svg?react";
 import IconUnknown from "@neverquest/icons/unknown.svg?react";
-import { hireStatus } from "@neverquest/state/caravan";
+import { isHired } from "@neverquest/state/caravan";
 import { isSkillAcquired, skillPrice } from "@neverquest/state/skills";
 import type { Skill } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function TrainableSkill({ skill }: { skill: Skill }) {
-  const hireStatusValue = useRecoilValue(hireStatus(SKILLS[skill].requiredCrew));
+  const isHiredValue = useRecoilValue(isHired(SKILLS[skill].requiredCrewMember));
   const isSkillAcquiredValue = useRecoilValue(isSkillAcquired(skill));
   const skillPriceValue = useRecoilValue(skillPrice);
 
   if (!isSkillAcquiredValue) {
     return (
       <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-        {hireStatusValue === "hired" ? (
+        {isHiredValue ? (
           <>
             <SkillDisplay skill={skill} />
 
@@ -35,7 +35,7 @@ export function TrainableSkill({ skill }: { skill: Skill }) {
           </>
         ) : (
           <IconDisplay
-            description="Requires a certain crew member."
+            description="Requires a certain crewMember member."
             Icon={IconUnknown}
             tooltip="Skill"
           >

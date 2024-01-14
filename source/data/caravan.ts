@@ -22,14 +22,14 @@ import IconTailor from "@neverquest/icons/tailor.svg?react";
 import IconWitch from "@neverquest/icons/witch.svg?react";
 import type { InheritableItem } from "@neverquest/types";
 import type { SVGIcon } from "@neverquest/types/components";
-import type { Crew, Grip, Showing } from "@neverquest/types/unions";
+import type { CrewMember, Grip, Showing } from "@neverquest/types/unions";
 
 export const AMMUNITION_PRICE = 5;
 
 export const MONOLOGUE_EMPTY = "...";
 
 export const CREW: Record<
-  Crew,
+  CrewMember,
   {
     description: string;
     Icon: SVGIcon;

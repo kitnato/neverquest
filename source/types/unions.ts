@@ -42,7 +42,7 @@ export const CONQUEST_TYPES = [
 ] as const;
 export type Conquest = (typeof CONQUEST_TYPES)[number];
 
-export const CREW_TYPES = [
+export const CREW_MEMBER_TYPES = [
   "merchant",
   "medic",
   "tailor",
@@ -53,9 +53,7 @@ export const CREW_TYPES = [
   "alchemist",
   "occultist",
 ] as const;
-export type Crew = (typeof CREW_TYPES)[number];
-
-export type CrewStatus = "hidden" | "hirable" | "hired";
+export type CrewMember = (typeof CREW_MEMBER_TYPES)[number];
 
 export type Delta =
   | Attribute
@@ -220,7 +218,7 @@ export type Showing =
   | "armor"
   | "attackRate"
   | "capabilities"
-  | "crewHiring"
+  | "crewMemberHiring"
   | "damage"
   | "essence"
   | "gearClass"
@@ -259,7 +257,7 @@ export type StateKey =
   | "acquiredItems"
   | "acquiredSkills"
   | "acquiredTraits"
-  | "activeCrew"
+  | "activeCrewMember"
   | "activeQuests"
   | "ammunition"
   | "ammunitionCapacity"
@@ -324,7 +322,6 @@ export type StateKey =
   | "health"
   | "healthMaximum"
   | "healthMaximumPoisoned"
-  | "hireStatus"
   | "infusion"
   | "infusionEffect"
   | "infusionLevel"
@@ -337,6 +334,7 @@ export type StateKey =
   | "isCaravanHired"
   | "isHealthAtMaximum"
   | "isHealthLow"
+  | "isHired"
   | "isInexhaustible"
   | "isInfusionAtMaximum"
   | "isInventoryOpen"

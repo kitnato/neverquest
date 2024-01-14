@@ -35,7 +35,7 @@ import IconStamina from "@neverquest/icons/stamina.svg?react";
 import IconStunned from "@neverquest/icons/stunned.svg?react";
 import IconTraumatology from "@neverquest/icons/traumatology.svg?react";
 import type { SVGIcon } from "@neverquest/types/components";
-import type { Crew, Showing, Skill, WeaponAbility } from "@neverquest/types/unions";
+import type { CrewMember, Showing, Skill, WeaponAbility } from "@neverquest/types/unions";
 
 export const SKILL_PRICE_BASE = 60;
 export const SKILL_PRICE_FACTOR = 1.8;
@@ -47,9 +47,9 @@ export const SKILLS: Record<
     descriptionIcons: SVGIcon[];
     Icon: SVGIcon;
     isInheritable: boolean;
-    requiredCrew: Crew;
+    requiredCrewMember: CrewMember;
     shows?: Showing[];
-    trainer: Crew;
+    trainer: CrewMember;
   }
 > = {
   anatomy: {
@@ -57,7 +57,7 @@ export const SKILLS: Record<
     descriptionIcons: [IconBleeding, IconPiercing],
     Icon: IconAnatomy,
     isInheritable: false,
-    requiredCrew: "merchant",
+    requiredCrewMember: "merchant",
     trainer: "mercenary",
   },
   archery: {
@@ -65,7 +65,7 @@ export const SKILLS: Record<
     descriptionIcons: [IconRanged],
     Icon: IconArchery,
     isInheritable: false,
-    requiredCrew: "fletcher",
+    requiredCrewMember: "fletcher",
     trainer: "mercenary",
   },
   armorcraft: {
@@ -74,7 +74,7 @@ export const SKILLS: Record<
     descriptionIcons: [IconArmorHeavy, IconDeflection, IconRecovery],
     Icon: IconArmorcraft,
     isInheritable: false,
-    requiredCrew: "blacksmith",
+    requiredCrewMember: "blacksmith",
     trainer: "mercenary",
   },
   assassination: {
@@ -83,7 +83,7 @@ export const SKILLS: Record<
     descriptionIcons: [IconCriticalRating, IconCriticalChance, IconCriticalDamage],
     Icon: IconAssassination,
     isInheritable: false,
-    requiredCrew: "merchant",
+    requiredCrewMember: "merchant",
     trainer: "mercenary",
   },
   calisthenics: {
@@ -92,7 +92,7 @@ export const SKILLS: Record<
     descriptionIcons: [IconRegenerationAmount, IconRegenerationRate, IconHealth, IconStamina],
     Icon: IconCalisthenics,
     isInheritable: false,
-    requiredCrew: "merchant",
+    requiredCrewMember: "merchant",
     shows: ["health", "stamina"],
     trainer: "mercenary",
   },
@@ -102,7 +102,7 @@ export const SKILLS: Record<
     descriptionIcons: [IconParry, IconSlashing],
     Icon: IconEscrime,
     isInheritable: false,
-    requiredCrew: "merchant",
+    requiredCrewMember: "merchant",
     trainer: "mercenary",
   },
   evasion: {
@@ -110,7 +110,7 @@ export const SKILLS: Record<
     descriptionIcons: [IconDodge],
     Icon: IconEvasion,
     isInheritable: false,
-    requiredCrew: "merchant",
+    requiredCrewMember: "merchant",
     trainer: "mercenary",
   },
   meditation: {
@@ -118,7 +118,7 @@ export const SKILLS: Record<
     descriptionIcons: [IconInfusionLevel],
     Icon: IconMeditation,
     isInheritable: true,
-    requiredCrew: "merchant",
+    requiredCrewMember: "merchant",
     trainer: "alchemist",
   },
   memetics: {
@@ -126,7 +126,7 @@ export const SKILLS: Record<
     descriptionIcons: [TRINKETS.journal.Icon],
     Icon: IconMemetics,
     isInheritable: true,
-    requiredCrew: "merchant",
+    requiredCrewMember: "merchant",
     trainer: "alchemist",
   },
   shieldcraft: {
@@ -134,7 +134,7 @@ export const SKILLS: Record<
     descriptionIcons: [IconShieldTower, IconStaggered],
     Icon: IconShieldcraft,
     isInheritable: false,
-    requiredCrew: "blacksmith",
+    requiredCrewMember: "blacksmith",
     trainer: "mercenary",
   },
   siegecraft: {
@@ -143,7 +143,7 @@ export const SKILLS: Record<
     descriptionIcons: [IconGrip, IconExecution],
     Icon: IconSiegecraft,
     isInheritable: false,
-    requiredCrew: "blacksmith",
+    requiredCrewMember: "blacksmith",
     shows: ["grip"],
     trainer: "mercenary",
   },
@@ -152,7 +152,7 @@ export const SKILLS: Record<
     descriptionIcons: [IconStunned, IconBlunt],
     Icon: IconTraumatology,
     isInheritable: false,
-    requiredCrew: "merchant",
+    requiredCrewMember: "merchant",
     trainer: "mercenary",
   },
 };

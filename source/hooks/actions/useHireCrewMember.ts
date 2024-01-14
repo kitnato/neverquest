@@ -3,26 +3,23 @@ import { useRecoilCallback } from "recoil";
 import { CREW } from "@neverquest/data/caravan";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
-import { hireStatus } from "@neverquest/state/caravan";
+import { isHired } from "@neverquest/state/caravan";
 import { isShowing } from "@neverquest/state/isShowing";
-import { CREW_TYPES, type Crew } from "@neverquest/types/unions";
+import { CREW_MEMBER_TYPES, type CrewMember } from "@neverquest/types/unions";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
-export function useHireCrew() {
+export function useHireCrewMember() {
   const progressQuest = useProgressQuest();
   const transactEssence = useTransactEssence();
 
   return useRecoilCallback(
     ({ set, snapshot }) =>
-      ({ crew, price }: { crew: Crew; price: number }) => {
+      ({ crewMember, price }: { crewMember: CrewMember; price: number }) => {
         const get = getSnapshotGetter(snapshot);
 
-        const { shows } = CREW[crew];
-        const otherHirableCrew = CREW_TYPES.filter(
-          (crewType) => crewType !== crew || crewType !== "merchant",
-        );
+        const { shows } = CREW[crewMember];
 
-        set(hireStatus(crew), "hired");
+        set(isHired(crewMember), true);
         transactEssence(-price);
 
         if (shows !== undefined) {
@@ -34,7 +31,12 @@ export function useHireCrew() {
         progressQuest({ quest: "hiring" });
         progressQuest({ quest: "hiringAll" });
 
-        if (otherHirableCrew.every((hirableCrew) => get(hireStatus(hirableCrew)) !== "hired")) {
+        if (
+          crewMember === "blacksmith" &&
+          CREW_MEMBER_TYPES.filter(
+            (crewMemberType) => crewMemberType !== crewMember && crewMemberType !== "merchant",
+          ).every((hirableCrewMember) => !get(isHired(hirableCrewMember)))
+        ) {
           progressQuest({ quest: "hiringBlacksmithFirst" });
         }
       },

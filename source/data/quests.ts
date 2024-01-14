@@ -6,7 +6,7 @@ import type { SVGIcon } from "@neverquest/types/components";
 import {
   ATTRIBUTE_TYPES,
   CONQUEST_TYPES,
-  CREW_TYPES,
+  CREW_MEMBER_TYPES,
   MASTERY_TYPES,
   type Quest,
   type QuestClass,
@@ -273,19 +273,19 @@ export const QUESTS: Record<
     title: "Better than mining",
   },
   hiring: {
-    description: "Hire caravan @ crew members.",
+    description: "Hire caravan @ crewMember members.",
     progression: [3, 10, 25],
     requiresTracking: true,
     title: "Don't forget the doctor",
   },
   hiringAll: {
-    description: "Hire all caravan crew.",
-    progression: [CREW_TYPES.length],
+    description: "Hire all caravan crewMember.",
+    progression: [CREW_MEMBER_TYPES.length],
     requiresTracking: true,
     title: "Haven't died of dysentery",
   },
   hiringBlacksmithFirst: {
-    description: "Hire the blacksmith as the first crew member.",
+    description: "Hire the blacksmith as the first crewMember member.",
     progression: [1],
     requiresTracking: true,
     title: "Straight to the good stuff",

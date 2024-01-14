@@ -3,22 +3,22 @@ import { atom, atomFamily, selector } from "recoil";
 import { CREW, MONOLOGUE_EMPTY } from "@neverquest/data/caravan";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import type { Armor, Melee, MerchantInventoryItem, Ranged, Shield } from "@neverquest/types";
-import { CREW_TYPES, type Crew, type CrewStatus } from "@neverquest/types/unions";
+import { CREW_MEMBER_TYPES, type CrewMember } from "@neverquest/types/unions";
 import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
 
 export const isCaravanHired = withStateKey("isCaravanHired", (key) =>
   selector({
-    get: ({ get }) => CREW_TYPES.every((crew) => get(hireStatus(crew)) === "hired"),
+    get: ({ get }) => CREW_MEMBER_TYPES.every((crewMember) => get(isHired(crewMember))),
     key,
   }),
 );
 
 // ATOMS
 
-export const activeCrew = withStateKey("activeCrew", (key) =>
-  atom<Crew | undefined>({
+export const activeCrewMember = withStateKey("activeCrewMember", (key) =>
+  atom<CrewMember | undefined>({
     default: undefined,
     effects: [handleLocalStorage({ key })],
     key,
@@ -57,10 +57,10 @@ export const fletcherInventory = withStateKey("fletcherInventory", (key) =>
   }),
 );
 
-export const hireStatus = withStateKey("hireStatus", (key) =>
-  atomFamily<CrewStatus, Crew>({
-    default: "hidden",
-    effects: (crew) => [handleLocalStorage({ key, parameter: crew })],
+export const isHired = withStateKey("isHired", (key) =>
+  atomFamily<boolean, CrewMember>({
+    default: false,
+    effects: (crewMember) => [handleLocalStorage({ key, parameter: crewMember })],
     key,
   }),
 );
@@ -74,9 +74,9 @@ export const merchantInventory = withStateKey("merchantInventory", (key) =>
 );
 
 export const monologue = withStateKey("monologue", (key) =>
-  atomFamily<string, Crew>({
-    default: (crew) => CREW[crew].monologues[1] ?? MONOLOGUE_EMPTY,
-    effects: (crew) => [handleLocalStorage({ key, parameter: crew })],
+  atomFamily<string, CrewMember>({
+    default: (crewMember) => CREW[crewMember].monologues[1] ?? MONOLOGUE_EMPTY,
+    effects: (crewMember) => [handleLocalStorage({ key, parameter: crewMember })],
     key,
   }),
 );

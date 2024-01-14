@@ -16,7 +16,7 @@ Upon a monster's death, the stage's **progress** is incremented, its remains are
 
 Once the wilderness is cleared of monsters, all looted resources can be **collected** and you enter a **resting** state. At this point, **traveling** to the [caravan](#caravan) becomes possible.
 
-The caravan allows interacting with a crew that provides essential services like accessing higher stages and unlocking new capabilities.
+The caravan allows interacting with a crewMember that provides essential services like accessing higher stages and unlocking new capabilities.
 
 ## You
 
@@ -230,9 +230,9 @@ A monster that is much more powerful than a standard monster of that stage. They
 
 Encountered after completing the current [wilderness](#wilderness) stage.
 
-All goods and services offered by the caravan crew are purchasable with [essence](#essence). Once at the caravan, the only other option apart from interacting with the crew is to return to the wilderness, which will increase the stage (if the previous wilderness was left at the maximum stage).
+All goods and services offered by the caravan crewMember are purchasable with [essence](#essence). Once at the caravan, the only other option apart from interacting with the crewMember is to return to the wilderness, which will increase the stage (if the previous wilderness was left at the maximum stage).
 
-The [merchant](#merchant) is always present from the start. Other crew members can be hired at a cost of essence, who then offer different goods and services. More crew become available for hire as the stage increases.
+The [merchant](#merchant) is always present from the start. Other crewMember members can be hired at a cost of essence, who then offer different goods and services. More crewMember become available for hire as the stage increases.
 
 #### Alchemist
 
@@ -678,7 +678,7 @@ Requires the [traumatology](#traumatology) skill.
 
 ## Retirement
 
-When reaching a certain stage, retirement is unlocked. This restarts the quest from stage 1 with power level 0, no essence, no skills and no gear. However, all hired caravan crew are retained, and so are certain [trinkets](#trinkets). A [trait](#traits) can be also chosen that confers a permanent bonus.
+When reaching a certain stage, retirement is unlocked. This restarts the quest from stage 1 with power level 0, no essence, no skills and no gear. However, all hired caravan crewMember are retained, and so are certain [trinkets](#trinkets). A [trait](#traits) can be also chosen that confers a permanent bonus.
 
 ### Traits
 
@@ -782,9 +782,9 @@ Affects energy regeneration rate.
 
 Affects total [energy](#energy).
 
-### New caravan crew
+### New caravan crewMember
 
-Along with two more additional hires, the entire crew monologue system needs to be overhauled and expanded to allow for better storytelling.
+Along with two more additional hires, the entire crewMember monologue system needs to be overhauled and expanded to allow for better storytelling.
 
 #### Cook
 

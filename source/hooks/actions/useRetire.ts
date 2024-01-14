@@ -19,7 +19,7 @@ import { isTraitAcquired, selectedTrait } from "@neverquest/state/traits";
 import { isInheritableItem } from "@neverquest/types/type-guards";
 import {
   ATTRIBUTE_TYPES,
-  CREW_TYPES,
+  CREW_MEMBER_TYPES,
   MASTERY_TYPES,
   PERK_TYPES,
   SKILL_TYPES,
@@ -78,8 +78,8 @@ export function useRetire() {
           }
         }
 
-        for (const crew of CREW_TYPES) {
-          reset(monologue(crew));
+        for (const crewMember of CREW_MEMBER_TYPES) {
+          reset(monologue(crewMember));
         }
 
         for (const mastery of MASTERY_TYPES) {

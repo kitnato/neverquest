@@ -26,7 +26,7 @@ export function Distance() {
 
   useTimerDelta({
     delta: setMonsterDistance,
-    factor: isMonsterFrozen ? AILMENT_PENALTY.frozen : 1,
+    factor: isMonsterFrozen ? 1 - AILMENT_PENALTY.frozen : 1,
     stop: !isAttackingValue || isMonsterDeadValue || hasMonsterClosedValue,
   });
 

@@ -131,15 +131,17 @@ export function getDamagePerRate({
   damageModifier = 0,
   damageModifierChance = 0,
   rate,
+  rateModifier = 0,
 }: {
   damage: number;
   damageModifier?: number;
   damageModifierChance?: number;
   rate: number;
+  rateModifier?: number;
 }) {
   return (
     (damage * (1 - damageModifierChance) + damage * damageModifierChance * damageModifier) /
-    (rate / MILLISECONDS_IN_SECOND)
+    (rate / (MILLISECONDS_IN_SECOND * (1 - rateModifier)))
   );
 }
 

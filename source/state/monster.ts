@@ -215,7 +215,7 @@ export const monsterDamageAiling = withStateKey("monsterDamageAiling", (key) =>
   selector({
     get: ({ get }) =>
       Math.round(
-        get(monsterDamage) * (get(isMonsterAiling("shocked")) ? AILMENT_PENALTY.shocked : 1),
+        get(monsterDamage) * (get(isMonsterAiling("shocked")) ? 1 - AILMENT_PENALTY.shocked : 1),
       ),
     key,
   }),
@@ -223,18 +223,20 @@ export const monsterDamageAiling = withStateKey("monsterDamageAiling", (key) =>
 
 export const monsterDamageAilingPerSecond = withStateKey("monsterDamageAilingPerSecond", (key) =>
   selector({
-    get: ({ get }) =>
-      formatNumber({
+    get: ({ get }) => {
+      const { frozen, stunned } = AILMENT_PENALTY;
+
+      return formatNumber({
         format: "float",
         value: getDamagePerRate({
           damage: get(monsterDamageAiling),
           damageModifier: 0,
-          damageModifierChance: get(isMonsterAiling("stunned"))
-            ? AILMENT_PENALTY.stunned
-            : undefined,
+          damageModifierChance: get(isMonsterAiling("stunned")) ? stunned : undefined,
           rate: get(monsterAttackRate),
+          rateModifier: get(isMonsterAiling("frozen")) ? frozen : undefined,
         }),
-      }),
+      });
+    },
     key,
   }),
 );

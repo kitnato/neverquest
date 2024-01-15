@@ -25,7 +25,7 @@ export function MonsterAttackRate() {
 
   useTimerDelta({
     delta: setMonsterAttackDuration,
-    factor: isMonsterFrozen ? AILMENT_PENALTY.frozen : 1,
+    factor: isMonsterFrozen ? 1 - AILMENT_PENALTY.frozen : 1,
     onDelta: defend,
     stop: !isAttackingValue || !hasMonsterClosedValue || isMonsterDeadValue,
   });

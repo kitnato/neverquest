@@ -25,7 +25,7 @@ export const AILMENT_DESCRIPTION: Record<
     description: `Dealing ${formatNumber({
       decimals: 0,
       format: "percentage",
-      value: 1 - AILMENT_PENALTY.shocked,
+      value: AILMENT_PENALTY.shocked,
     })} decreased # damage.`,
     descriptionIcons: [IconMonsterDamage],
   },

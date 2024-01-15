@@ -1,6 +1,7 @@
 import { nanoid } from "nanoid";
 import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
+import { PROGRESS } from "@neverquest/data/encounter";
 import { LEVELLING_MAXIMUM } from "@neverquest/data/general";
 import { GEM_DROP_CHANCE, INFUSABLES, TRINKETS, TRINKET_DROP_CHANCE } from "@neverquest/data/items";
 import {
@@ -163,7 +164,10 @@ export const monsterAttackRate = withStateKey("monsterAttackRate", (key) =>
       return Math.round(
         Math.max(
           base -
-            base * factor * (1 + get(progress) * bonus) * (encounterValue === "boss" ? boss : 1),
+            base *
+              factor *
+              ((1 + Math.min(get(progress), PROGRESS.maximum)) * bonus) *
+              (encounterValue === "boss" ? boss : 1),
           minimum,
         ),
       );
@@ -192,7 +196,7 @@ export const monsterDamage = withStateKey("monsterDamage", (key) =>
       }
 
       return Math.round(
-        (base + base * factor * (1 + get(progress) * bonus)) *
+        (base + base * factor * (1 + Math.min(get(progress), PROGRESS.maximum) * bonus)) *
           (encounterValue === "boss" ? boss : 1) *
           (1 +
             (stageValue >= requiredStage
@@ -261,7 +265,7 @@ export const monsterHealthMaximum = withStateKey("monsterHealthMaximum", (key) =
       }
 
       return Math.round(
-        (base + base * factor * (1 + get(progress) * bonus)) *
+        (base + base * factor * (1 + Math.min(get(progress), PROGRESS.maximum) * bonus)) *
           (encounterValue === "boss" ? boss : 1) *
           (1 +
             (stageValue >= requiredStage
@@ -293,7 +297,9 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
       return {
         essence: Math.round(
           ((essenceBase + (essenceBase * getTriangular(stageValue)) / attenuation) * 1 +
-            get(progress) * bonus * (encounterValue === "boss" ? boss : 1)) *
+            (1 + Math.min(get(progress), PROGRESS.maximum)) *
+              bonus *
+              (encounterValue === "boss" ? boss : 1)) *
             (1 + get(perkEffect("essenceBonus"))),
         ),
         gems:

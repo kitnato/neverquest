@@ -10,7 +10,7 @@ import {
   LEVELLING_MAXIMUM,
   RETIREMENT_STAGE_MINIMUM,
 } from "@neverquest/data/general";
-import { INFUSABLES, TRINKETS } from "@neverquest/data/items";
+import { INFUSABLES, RELICS } from "@neverquest/data/items";
 import IconAlchemist from "@neverquest/icons/alchemist.svg?react";
 import IconBlacksmith from "@neverquest/icons/blacksmith.svg?react";
 import IconFletcher from "@neverquest/icons/fletcher.svg?react";
@@ -217,7 +217,7 @@ export const MERCHANT_OFFERS: Record<
     type: "shield",
   },
   4: {
-    item: TRINKETS.knapsack.item,
+    item: RELICS.knapsack.item,
     monologue: "Need a way to manage your possessions?",
   },
   6: {
@@ -231,7 +231,7 @@ export const MERCHANT_OFFERS: Record<
     type: "armor",
   },
   8: {
-    item: TRINKETS.compass.item,
+    item: RELICS.compass.item,
     monologue: "I've happened upon a relic allowing you to retread old ground.",
   },
   9: {
@@ -245,15 +245,15 @@ export const MERCHANT_OFFERS: Record<
     type: "weapon",
   },
   11: {
-    item: TRINKETS["thaumaturgic goggles"].item,
+    item: RELICS["thaumaturgic goggles"].item,
     monologue: "Fine craftsmanship in this little gadget ...",
   },
   14: {
-    item: TRINKETS.hearthstone.item,
-    monologue: "A trinket that allows safe passage. Would that be of interest?",
+    item: RELICS.hearthstone.item,
+    monologue: "A relic that allows safe passage. Would that be of interest?",
   },
   [CREW.fletcher.requiredStage]: {
-    item: TRINKETS["ammunition pouch"].item,
+    item: RELICS["ammunition pouch"].item,
     monologue: "I have something suitable for marksmen.",
   },
   25: {
@@ -261,12 +261,12 @@ export const MERCHANT_OFFERS: Record<
     monologue: "A dark wanderer passed through and sold me a strange book ...",
   },
   30: {
-    item: TRINKETS["ender hook"].item,
+    item: RELICS["ender hook"].item,
     monologue: "I recently came into possession of a fine curiosity.",
   },
-  34: { item: TRINKETS.journal.item, monologue: "You wouldn't be a scribe, would you?" },
+  34: { item: RELICS.journal.item, monologue: "You wouldn't be a scribe, would you?" },
   40: {
-    item: TRINKETS["spinning wheel"].item,
+    item: RELICS["spinning wheel"].item,
     monologue: "Here's a device that should ease up the grind.",
   },
 };

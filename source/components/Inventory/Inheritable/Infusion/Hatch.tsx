@@ -7,7 +7,7 @@ import {
   LEVELLING_MAXIMUM,
   POPOVER_TRIGGER,
 } from "@neverquest/data/general";
-import { TRINKETS } from "@neverquest/data/items";
+import { RELICS } from "@neverquest/data/items";
 import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
 import { useCanFit } from "@neverquest/hooks/actions/useCanFit";
 import { inventory, ownedItem } from "@neverquest/state/inventory";
@@ -21,7 +21,7 @@ export function Hatch() {
   const acquireItem = useAcquireItem();
   const canFit = useCanFit();
 
-  const { item: familiarItem } = TRINKETS.familiar;
+  const { item: familiarItem } = RELICS.familiar;
   const canFitFamiliar = canFit(familiarItem.weight);
 
   return (

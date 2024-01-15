@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
-import { INFUSABLES, TRINKETS } from "@neverquest/data/items";
+import { INFUSABLES, RELICS } from "@neverquest/data/items";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconFrailty from "@neverquest/icons/frailty.svg?react";
 import IconMonsterDamage from "@neverquest/icons/monster-damage.svg?react";
@@ -18,8 +18,7 @@ export function Frailty() {
   const frailtyValue = useRecoilValue(frailty);
   const ownedItemFamiliar = useRecoilValue(ownedItem("familiar"));
 
-  const { Icon } =
-    ownedItemFamiliar === undefined ? INFUSABLES["mysterious egg"] : TRINKETS.familiar;
+  const { Icon } = ownedItemFamiliar === undefined ? INFUSABLES["mysterious egg"] : RELICS.familiar;
   const formattedValue = formatNumber({ format: "percentage", value: frailtyValue });
 
   useDeltaText({

@@ -32,17 +32,17 @@ import {
   isInfusableItem,
   isMelee,
   isRanged,
+  isRelicItem,
   isShield,
-  isTrinketItem,
   isUnarmed,
   isUnarmored,
   isUnshielded,
   isWeapon,
 } from "@neverquest/types/type-guards";
-import type { Trinket } from "@neverquest/types/unions";
+import type { Relic } from "@neverquest/types/unions";
 import { stackItems } from "@neverquest/utilities/helpers";
 
-const TRINKET_ACTIONS: Partial<Record<Trinket, FunctionComponent>> = {
+const RELIC_ACTIONS: Partial<Record<Relic, FunctionComponent>> = {
   compass: CompassNavigate,
   hearthstone: HearthstoneWarp,
   "spinning wheel": SpinningWheelToggle,
@@ -172,15 +172,15 @@ export function Inventory() {
           })}
 
         {storedItems
-          .filter(isTrinketItem)
+          .filter(isRelicItem)
           .toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2))
-          .map((trinketItem) => {
-            const { ID, name } = trinketItem;
-            const Action = TRINKET_ACTIONS[name];
+          .map((relicItem) => {
+            const { ID, name } = relicItem;
+            const Action = RELIC_ACTIONS[name];
 
             return (
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
-                <ItemDisplay item={trinketItem} />
+                <ItemDisplay item={relicItem} />
 
                 <Stack className="ms-2" direction="horizontal" gap={3}>
                   {Action !== undefined && <Action />}

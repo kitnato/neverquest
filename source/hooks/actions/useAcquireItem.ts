@@ -14,8 +14,8 @@ import {
   isGemItem,
   isMelee,
   isRanged,
+  isRelicItem,
   isShield,
-  isTrinketItem,
   isUnarmed,
   isUnarmored,
   isUnshielded,
@@ -37,7 +37,7 @@ export function useAcquireItem() {
           return "failure";
         }
 
-        if (isTrinketItem(item) && item.name === "knapsack") {
+        if (isRelicItem(item) && item.name === "knapsack") {
           set(isShowing("weight"), true);
         } else {
           set(acquiredItems, (currentAcquiredItems) => [...currentAcquiredItems, item]);
@@ -47,7 +47,7 @@ export function useAcquireItem() {
           progressQuest({ quest: "acquiringGems" });
         }
 
-        if (isTrinketItem(item)) {
+        if (isRelicItem(item)) {
           if (item.name === "memento") {
             progressQuest({ quest: "acquiringMemento" });
           }

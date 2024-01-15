@@ -1,4 +1,4 @@
-import { TRINKETS } from "@neverquest/data/items";
+import { RELICS } from "@neverquest/data/items";
 import IconAnatomy from "@neverquest/icons/anatomy.svg?react";
 import IconArchery from "@neverquest/icons/archery.svg?react";
 import IconArmorHeavy from "@neverquest/icons/armor-heavy.svg?react";
@@ -123,7 +123,7 @@ export const SKILLS: Record<
   },
   memetics: {
     description: "Grants the ability to decipher and inscribe the # journal.",
-    descriptionIcons: [TRINKETS.journal.Icon],
+    descriptionIcons: [RELICS.journal.Icon],
     Icon: IconMemetics,
     isInheritable: true,
     requiredCrewMember: "merchant",

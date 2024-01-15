@@ -7,7 +7,7 @@ import { ItemName } from "@neverquest/components/Inventory/ItemName";
 import { AmmunitionPouchStatus } from "@neverquest/components/Inventory/Offhand/AmmunitionPouchStatus";
 import { ShieldName } from "@neverquest/components/Inventory/Offhand/ShieldName";
 import { WeaponName } from "@neverquest/components/Inventory/Weapon/WeaponName";
-import { CONSUMABLES, GEMS, INFUSABLES, TRINKETS } from "@neverquest/data/items";
+import { CONSUMABLES, GEMS, INFUSABLES, RELICS } from "@neverquest/data/items";
 import IconArmor from "@neverquest/icons/armor.svg?react";
 import IconShield from "@neverquest/icons/shield.svg?react";
 import type { InventoryItem } from "@neverquest/types";
@@ -15,8 +15,8 @@ import {
   isArmor,
   isConsumableItem,
   isInfusableItem,
+  isRelicItem,
   isShield,
-  isTrinketItem,
   isWeapon,
 } from "@neverquest/types/type-guards";
 import { getWeaponIcon } from "@neverquest/utilities/getters";
@@ -59,7 +59,7 @@ export function ItemDisplay({
       <IconDisplay
         description={<InfusionLevelDisplay infusable={name} overlayPlacement="bottom" />}
         Icon={INFUSABLES[name].Icon}
-        tooltip="Infusable trinket"
+        tooltip="Infusable relic"
       >
         <ItemName item={item} />
       </IconDisplay>
@@ -78,14 +78,14 @@ export function ItemDisplay({
     );
   }
 
-  if (isTrinketItem(item)) {
+  if (isRelicItem(item)) {
     const { name } = item;
 
     return (
       <IconDisplay
         description={name === "ammunition pouch" ? <AmmunitionPouchStatus /> : undefined}
-        Icon={TRINKETS[name].Icon}
-        tooltip="Trinket"
+        Icon={RELICS[name].Icon}
+        tooltip="Relic"
       >
         <ItemName item={item} />
       </IconDisplay>

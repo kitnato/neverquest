@@ -431,7 +431,7 @@ export const QUESTS: Record<
     title: "Target customer",
   },
   purchasingItem: {
-    description: "Purchase pieces of gear or trinkets: @.",
+    description: "Purchase pieces of gear or relics: @.",
     progression: [1, 3, 10],
     requiresTracking: true,
     title: "Reliquary",

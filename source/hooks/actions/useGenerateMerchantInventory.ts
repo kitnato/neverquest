@@ -26,7 +26,7 @@ export function useGenerateMerchantInventory() {
 
         const offer = MERCHANT_OFFERS[stageValue];
 
-        // Only add offer if it's the currently highest stage (to avoid regenerating older gear offers), and in the case of being a trinket or infusable, if it's not in any inventory.
+        // Only add offer if it's the currently highest stage (to avoid regenerating older gear offers), and in the case of being a relic or infusable, if it's not in any inventory.
         if (
           offer !== undefined &&
           stageValue === get(stageMaximum) &&

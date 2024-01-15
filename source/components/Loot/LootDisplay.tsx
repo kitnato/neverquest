@@ -10,8 +10,8 @@ import { isLootAvailable, itemsLoot } from "@neverquest/state/resources";
 import {
   isGearItem,
   isInfusableItem,
+  isRelicItem,
   isStackableItem,
-  isTrinketItem,
 } from "@neverquest/types/type-guards";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 import { stackItems } from "@neverquest/utilities/helpers";
@@ -42,7 +42,7 @@ export function LootDisplay() {
                 ),
                 ...stackItems(
                   itemsLootValue
-                    .filter(isTrinketItem)
+                    .filter(isRelicItem)
                     .toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2)),
                 ),
                 ...stackItems(

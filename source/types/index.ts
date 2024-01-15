@@ -1,14 +1,7 @@
 import type { ArmorClass, ShieldClass, WeaponClass } from "@kitnato/locran/build/types";
 import type { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear";
 import type { SVGIcon } from "@neverquest/types/components";
-import type {
-  Consumable,
-  Gem,
-  Grip,
-  Infusable,
-  QuestClass,
-  Trinket,
-} from "@neverquest/types/unions";
+import type { Consumable, Gem, Grip, Infusable, QuestClass, Relic } from "@neverquest/types/unions";
 
 export type Armor = GearItemBase & {
   burden: number;
@@ -60,7 +53,7 @@ export type InfusableItem = ItemBase & {
   name: Infusable;
 };
 
-export type InheritableItem = InfusableItem | TrinketItem;
+export type InheritableItem = InfusableItem | RelicItem;
 
 export type InventoryItem = GearItem | InheritableItem | StackableItem;
 
@@ -104,9 +97,9 @@ export type Shield = GearItemBase & {
 
 export type StackableItem = ConsumableItem | GemItem;
 
-export type TrinketItem = ItemBase & {
+export type RelicItem = ItemBase & {
   description: string;
-  name: Trinket;
+  name: Relic;
 };
 
 export type Weapon = Melee | Ranged;

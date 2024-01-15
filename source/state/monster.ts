@@ -3,7 +3,7 @@ import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
 import { PROGRESS } from "@neverquest/data/encounter";
 import { LEVELLING_MAXIMUM } from "@neverquest/data/general";
-import { GEM_DROP_CHANCE, INFUSABLES, TRINKETS, TRINKET_DROP_CHANCE } from "@neverquest/data/items";
+import { GEM_DROP_CHANCE, INFUSABLES, RELICS, RELIC_DROP_CHANCE } from "@neverquest/data/items";
 import {
   BLIGHT,
   BOSS_STAGE_INTERVAL,
@@ -316,7 +316,7 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
                 })
                 .reduce<number>((sum, gemCount) => sum + gemCount, 0)
             : 0,
-        trinket:
+        relic:
           encounterValue === "boss" || get(ownedItem("knapsack")) === undefined
             ? undefined
             : // Mysterious egg drops if Res Dominus has just been defeated while carrying the memento and only if the egg and the familiar are neither carried nor sold.
@@ -333,18 +333,18 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
                   Math.random() <=
                     getFromRange({
                       factor: getSigmoid(stageValue),
-                      ...TRINKET_DROP_CHANCE["torn manuscript"],
+                      ...RELIC_DROP_CHANCE["torn manuscript"],
                     })
-                ? { ...TRINKETS["torn manuscript"].item, ID: nanoid() }
+                ? { ...RELICS["torn manuscript"].item, ID: nanoid() }
                 : // Memento drops if it's neither currently carried nor sold and if the drop chance is reached.
                   get(ownedItem("memento")) === undefined &&
                     !merchantInventoryValue.some(({ name }) => name === "memento") &&
                     Math.random() <=
                       getFromRange({
                         factor: getSigmoid(stageValue),
-                        ...TRINKET_DROP_CHANCE.memento,
+                        ...RELIC_DROP_CHANCE.memento,
                       })
-                  ? { ...TRINKETS.memento.item, ID: nanoid() }
+                  ? { ...RELICS.memento.item, ID: nanoid() }
                   : undefined,
       };
     },

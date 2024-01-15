@@ -125,7 +125,7 @@ export type Grip = (typeof GRIP_TYPES)[number];
 export const INFUSABLE_TYPES = ["mysterious egg", "eldritch codex"] as const;
 export type Infusable = (typeof INFUSABLE_TYPES)[number];
 
-export type Inheritable = Infusable | Trinket;
+export type Inheritable = Infusable | Relic;
 
 export const MASTERY_TYPES = [
   "butchery",
@@ -440,7 +440,7 @@ export const TRAIT_TYPES = [
 ] as const;
 export type Trait = (typeof TRAIT_TYPES)[number];
 
-export const TRINKET_TYPES = [
+export const RELIC_TYPES = [
   "ammunition pouch",
   "compass",
   "ender hook",
@@ -453,7 +453,7 @@ export const TRINKET_TYPES = [
   "thaumaturgic goggles",
   "torn manuscript",
 ] as const;
-export type Trinket = (typeof TRINKET_TYPES)[number];
+export type Relic = (typeof RELIC_TYPES)[number];
 
 export const TRIUMPH_TYPES = [
   "decipheringJournal",

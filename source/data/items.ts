@@ -11,7 +11,7 @@ import IconFire from "@neverquest/icons/fire.svg?react";
 import IconHatchingProgress from "@neverquest/icons/hatching-progress.svg?react";
 import IconStone from "@neverquest/icons/hearthstone.svg?react";
 import IconIce from "@neverquest/icons/ice.svg?react";
-import IconJournalTrinket from "@neverquest/icons/journal-trinket.svg?react";
+import IconJournalRelic from "@neverquest/icons/journal-relic.svg?react";
 import IconKnapsack from "@neverquest/icons/knapsack.svg?react";
 import IconLightning from "@neverquest/icons/lightning.svg?react";
 import IconMemento from "@neverquest/icons/memento.svg?react";
@@ -25,7 +25,7 @@ import IconSpinningWheel from "@neverquest/icons/spinning-wheel.svg?react";
 import IconThaumaturgicGoggles from "@neverquest/icons/thaumaturgic-goggles.svg?react";
 import IconTopaz from "@neverquest/icons/topaz.svg?react";
 import IconTornManuscript from "@neverquest/icons/torn-manuscript.svg?react";
-import type { ConsumableItem, GeneratorRange, InfusableItem, TrinketItem } from "@neverquest/types";
+import type { ConsumableItem, GeneratorRange, InfusableItem, RelicItem } from "@neverquest/types";
 import type { SVGIcon } from "@neverquest/types/components";
 import type {
   Consumable,
@@ -34,7 +34,7 @@ import type {
   Gem,
   Infusable,
   MonsterAilmentElemental,
-  Trinket,
+  Relic,
 } from "@neverquest/types/unions";
 
 export const AMMUNITION_CAPACITY = 100;
@@ -197,16 +197,16 @@ export const INFUSABLES: Record<
 
 export const KNAPSACK_CAPACITY = 15;
 
-export const TRINKET_DROP_CHANCE = {
+export const RELIC_DROP_CHANCE = {
   memento: { maximum: 0.1, minimum: 0.01 },
   "torn manuscript": { maximum: 0.1, minimum: 0.03 },
 };
 
-export const TRINKETS: Record<
-  Trinket,
+export const RELICS: Record<
+  Relic,
   {
     Icon: SVGIcon;
-    item: Omit<TrinketItem, "ID">;
+    item: Omit<RelicItem, "ID">;
   }
 > = {
   "ammunition pouch": {
@@ -221,7 +221,7 @@ export const TRINKETS: Record<
   compass: {
     Icon: IconCompass,
     item: {
-      description: "Navigate the wilderness to freely explore previous locations.",
+      description: "The wilderness can be navigated freely to explore previous locations.",
       name: "compass",
       price: 30,
       weight: 2,
@@ -239,7 +239,7 @@ export const TRINKETS: Record<
   familiar: {
     Icon: IconFamiliar,
     item: {
-      description: "Blessed with the ability to see beyond the grim entity.",
+      description: "Blessed with the ability to see beyond the final entity.",
       name: "familiar",
       price: 1,
       weight: 17,
@@ -248,14 +248,15 @@ export const TRINKETS: Record<
   hearthstone: {
     Icon: IconStone,
     item: {
-      description: "Travel back to the caravan even when there are still lurking monsters.",
+      description:
+        "Traveling back to the caravan is possible even when there are still lurking monsters.",
       name: "hearthstone",
       price: 60,
       weight: 3,
     },
   },
   journal: {
-    Icon: IconJournalTrinket,
+    Icon: IconJournalRelic,
     item: {
       description: "A compendium of quests.",
       name: "journal",
@@ -266,7 +267,7 @@ export const TRINKETS: Record<
   knapsack: {
     Icon: IconKnapsack,
     item: {
-      description: "Carry more items and manage gear.",
+      description: "Provides space for items and the ability to manage gear.",
       name: "knapsack",
       price: 10,
       weight: 0,
@@ -285,7 +286,7 @@ export const TRINKETS: Record<
     Icon: IconSpinningWheel,
     item: {
       description:
-        "Once running, automatically collect all loot and pass to the next stage once it is cleared of monsters.",
+        "Once running, automatically collects all loot and passes to the next stage once it is cleared of monsters.",
       name: "spinning wheel",
       price: 7500,
       weight: 20,
@@ -294,8 +295,7 @@ export const TRINKETS: Record<
   "thaumaturgic goggles": {
     Icon: IconThaumaturgicGoggles,
     item: {
-      description:
-        "Allows the wearer to discern detailed lethality of themselves and their opponents.",
+      description: "Discerns the lethality of creatures.",
       name: "thaumaturgic goggles",
       price: 100,
       weight: 4,

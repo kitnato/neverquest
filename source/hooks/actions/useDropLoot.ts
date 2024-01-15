@@ -14,7 +14,7 @@ export function useDropLoot() {
       () => {
         const get = getSnapshotGetter(snapshot);
 
-        const { essence, gems, trinket } = get(monsterLoot);
+        const { essence, gems, relic } = get(monsterLoot);
 
         if (essence > 0) {
           set(essenceLoot, (currentEssenceLoot) => currentEssenceLoot + essence);
@@ -35,8 +35,8 @@ export function useDropLoot() {
           );
         }
 
-        if (trinket !== undefined) {
-          lootedItems.push(trinket);
+        if (relic !== undefined) {
+          lootedItems.push(relic);
         }
 
         if (lootedItems.length > 0) {

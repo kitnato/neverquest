@@ -42,7 +42,7 @@ When there is not enough stamina available for an attack, [parrying](#parry-rati
 
 Collected by looting dead monsters.
 
-Primarily spent on acquiring attribute ranks. Also used to trade at the [caravan](#caravan) and pay for [gems](#gems) and [infusions](#infusable-trinkets). Essence cost increases for every allocation of an attribute rank.
+Primarily spent on acquiring attribute ranks. Also used to trade at the [caravan](#caravan) and pay for [gems](#gems) and [infusions](#infusable-relics). Essence cost increases for every allocation of an attribute rank.
 
 ### Attributes
 
@@ -94,7 +94,7 @@ Derived from [attributes](#attributes), [gear](#gear), [skills](#skills), [maste
 
 Displays the expected damage per second (DPS) you (and the monster) can deal, taking into account [attack rate](#attack-rate), current [total damage](#total-damage) and [critical](#critical-rating) strikes.
 
-Requires the acquisition of a certain [trinket](#trinkets).
+Requires the acquisition of a certain [relic](#relics).
 
 #### Attack rate
 
@@ -224,7 +224,7 @@ A creature with a randomly generated name that will continuously attack you as s
 
 #### Bosses
 
-A monster that is much more powerful than a standard monster of that stage. They appear every 5 stages, starting at stage 10. It's the only monster on that stage, and once defeated, it drops a [gem](#gems) and under special circumstances it may also drop a [trinket](#trinkets).
+A monster that is much more powerful than a standard monster of that stage. They appear every 5 stages, starting at stage 10. It's the only monster on that stage, and once defeated, it drops a [gem](#gems) and under special circumstances it may also drop a [relic](#relics).
 
 ### Caravan
 
@@ -284,7 +284,7 @@ An item can either be;
 
 - a) a piece of [gear](#gear), or
 - b) a consumable like a [potion](#potions), or
-- c) a [trinket](#trinkets) that grants a special effect and/or an action while part of the inventory, such as the ammunition pouch.
+- c) a [relic](#relics) that grants a special effect and/or an action while part of the inventory, such as the ammunition pouch.
 
 Every item, apart from the [knapsack](#knapsack), has an associated weight that affects [encumbrance](#encumbrance).
 
@@ -345,7 +345,7 @@ There is also a chance to [execute](#execution-threshold) monsters when at or un
 
 There is also a certain [range](#range) that delays contact with the monster.
 
-They require finite ammunition as part of the second slot, which can be purchased from the [fletcher](#fletcher) once the correct trinket has been acquired from the [merchant](#merchant).
+They require finite ammunition as part of the second slot, which can be purchased from the [fletcher](#fletcher) once the correct relic has been acquired from the [merchant](#merchant).
 
 Requires the [archery](#archery) skill.
 
@@ -456,25 +456,25 @@ The elemental damage types are the following, associated with their correspondin
 
 A monster can be afflicted by any combination of elemental ailment, the severity of which is determined by the number of gems applied to gear.
 
-#### Trinkets
+#### Relics
 
-Trinkets enable various actions or grant certain effects if they are carried in the [inventory](#inventory).
+Relics enable various actions or grant certain effects if they are carried in the [inventory](#inventory).
 
-##### Static trinkets
+##### Static relics
 
 These provide a permanent effect of some sort while they are carried in the inventory. If one is sold or lost, the effect disappears alongside it.
 
-##### Usable trinkets
+##### Usable relics
 
-In addition to potentially providing a [static](#static-trinkets) effect, these trinkets also allow direct interaction, usually granting a new action.
+In addition to potentially providing a [static](#static-relics) effect, these relics also allow direct interaction, usually granting a new action.
 
-##### Infusable trinkets
+##### Infusable relics
 
-Some of usable trinkets are infusable, meaning they allow [essence](#essence) to be spent on them to upgrade their effect via infusion levels.
+Some of usable relics are infusable, meaning they allow [essence](#essence) to be spent on them to upgrade their effect via infusion levels.
 
 ###### Tome of Power
 
-This infusable trinket, while carried in the [knapsack](#knapsack), provides a bonus to all attributes by their respective percentage amount (each extent of which is shown when increasing [attributes](#attributes)) multiplied by your current power level.
+This infusable relic, while carried in the [knapsack](#knapsack), provides a bonus to all attributes by their respective percentage amount (each extent of which is shown when increasing [attributes](#attributes)) multiplied by your current power level.
 
 For example, if you are carrying a level 0 Tome of Power, your power level is 25, the attribute in question is at rank 5, a given attribute rank would increase a given statistic by 10, and the boosted percentage is 1%, the statistic value is calculated as follows:
 
@@ -678,7 +678,7 @@ Requires the [traumatology](#traumatology) skill.
 
 ## Retirement
 
-When reaching a certain stage, retirement is unlocked. This restarts the quest from stage 1 with power level 0, no essence, no skills and no gear. However, all hired caravan crewMember are retained, and so are certain [trinkets](#trinkets). A [trait](#traits) can be also chosen that confers a permanent bonus.
+When reaching a certain stage, retirement is unlocked. This restarts the quest from stage 1 with power level 0, no essence, no skills and no gear. However, all hired caravan crewMember are retained, and so are certain [relics](#relics). A [trait](#traits) can be also chosen that confers a permanent bonus.
 
 ### Traits
 
@@ -726,7 +726,7 @@ Total [protection](#protection) is increased by the equipped shield's block chan
 
 ### Quests
 
-Quests are similar to achievements in that they have a set of requirements and progress based on certain gameplay actions and states. They are unlocked only once the journal [trinket](#usable-trinkets) is acquired, then going into [retirement](#retirement) at least once.
+Quests are similar to achievements in that they have a set of requirements and progress based on certain gameplay actions and states. They are unlocked only once the journal [relic](#usable-relics) is acquired, then going into [retirement](#retirement) at least once.
 
 Once a quest's requirements are achieved, the quest can be completed by choosing a permanent bonus to either [health](#health), [stamina](#stamina) or [total damage](#total-damage) that persists through retirement and while the journal is in the inventory.
 

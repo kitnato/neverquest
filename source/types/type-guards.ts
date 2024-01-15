@@ -8,9 +8,9 @@ import type {
   InheritableItem,
   Melee,
   Ranged,
+  RelicItem,
   Shield,
   StackableItem,
-  TrinketItem,
   Weapon,
 } from "@neverquest/types";
 import {
@@ -26,9 +26,9 @@ import {
   INFUSABLE_TYPES,
   QUEST_BONUS_TYPES,
   type QuestBonus,
+  RELIC_TYPES,
   ROUTINE_TYPES,
   type Routine,
-  TRINKET_TYPES,
 } from "@neverquest/types/unions";
 
 export function isArmor(thing: unknown): thing is Armor {
@@ -66,7 +66,7 @@ export function isGemItem(thing: unknown): thing is GemItem {
 }
 
 export function isInheritableItem(thing: unknown): thing is InheritableItem {
-  return isInfusableItem(thing) || isTrinketItem(thing);
+  return isInfusableItem(thing) || isRelicItem(thing);
 }
 
 export function isInfusableItem(thing: unknown): thing is InfusableItem {
@@ -107,11 +107,11 @@ export function isStackableItem(thing: unknown): thing is StackableItem {
   return isConsumableItem(thing) || isGemItem(thing);
 }
 
-export function isTrinketItem(thing: unknown): thing is TrinketItem {
+export function isRelicItem(thing: unknown): thing is RelicItem {
   return (
     isObject(thing) &&
     typeof thing.name === "string" &&
-    new Set<string>(TRINKET_TYPES).has(thing.name)
+    new Set<string>(RELIC_TYPES).has(thing.name)
   );
 }
 

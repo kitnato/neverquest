@@ -6,13 +6,15 @@ import { OCCULTIST_PURGE_PRICE_MULTIPLIER } from "@neverquest/data/caravan";
 import {
   CLASS_FULL_WIDTH_JUSTIFIED,
   LABEL_NO_ESSENCE,
+  LABEL_UNKNOWN,
   POPOVER_TRIGGER,
 } from "@neverquest/data/general";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useResetCompletedQuests } from "@neverquest/hooks/actions/useResetCompletedQuests";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import IconEssence from "@neverquest/icons/essence.svg?react";
-import IconRitual from "@neverquest/icons/ritual.svg?react";
+import IconPurgeMemories from "@neverquest/icons/purge-memories.svg?react";
+import IconUnknown from "@neverquest/icons/unknown.svg?react";
 import { canTrackQuests, completedQuestsCount } from "@neverquest/state/quests";
 import { essence } from "@neverquest/state/resources";
 import { formatNumber } from "@neverquest/utilities/formatters";
@@ -39,8 +41,7 @@ export function PurgeMemories() {
       <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
         <IconDisplay
           description="Resets the bonus of all completed quests, allowing for new choices."
-          Icon={IconRitual}
-          iconProps={{ isFlipped: true }}
+          Icon={IconPurgeMemories}
           tooltip="Ritual"
         >
           Purge memories
@@ -79,4 +80,14 @@ export function PurgeMemories() {
       </div>
     );
   }
+
+  return (
+    <IconDisplay
+      description="Requires a certain relic and deeper knowledge."
+      Icon={IconUnknown}
+      tooltip="Ritual"
+    >
+      <span>{LABEL_UNKNOWN}</span>
+    </IconDisplay>
+  );
 }

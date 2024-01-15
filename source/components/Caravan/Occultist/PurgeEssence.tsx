@@ -12,7 +12,7 @@ import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useResetAttributes } from "@neverquest/hooks/actions/useResetAttributes";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import IconEssence from "@neverquest/icons/essence.svg?react";
-import IconRitual from "@neverquest/icons/ritual.svg?react";
+import IconPurgeEssence from "@neverquest/icons/purge-essence.svg?react";
 import { absorbedEssence } from "@neverquest/state/attributes";
 import { essence } from "@neverquest/state/resources";
 import { formatNumber } from "@neverquest/utilities/formatters";
@@ -34,8 +34,7 @@ export function PurgeEssence() {
     <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
       <IconDisplay
         description="Resets power level to 0, refunding all absorbed essence."
-        Icon={IconRitual}
-        iconProps={{ isFlipped: true }}
+        Icon={IconPurgeEssence}
         tooltip="Ritual"
       >
         Purge essence

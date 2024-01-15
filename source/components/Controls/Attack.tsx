@@ -12,6 +12,7 @@ import { useRecoilValue } from "recoil";
 import { IconImage } from "@neverquest/components/IconImage";
 import { useToggleAttacking } from "@neverquest/hooks/actions/useToggleAttacking";
 import IconAttack from "@neverquest/icons/attack.svg?react";
+import IconHealth from "@neverquest/icons/health.svg?react";
 import IconResting from "@neverquest/icons/resting.svg?react";
 import IconRetreat from "@neverquest/icons/retreat.svg?react";
 import IconSpinning from "@neverquest/icons/spinning.svg?react";
@@ -74,10 +75,14 @@ export function Attack() {
       overlay={
         showWarning ? (
           <Popover>
-            <PopoverHeader className="text-center">Low health</PopoverHeader>
+            <PopoverHeader className="text-center">
+              Low&nbsp;
+              <IconImage className="small" Icon={IconHealth} />
+              &nbsp;health
+            </PopoverHeader>
 
             <PopoverBody>
-              <span>Retreat now!</span>
+              <span>Death is inevitable.</span>
             </PopoverBody>
           </Popover>
         ) : (

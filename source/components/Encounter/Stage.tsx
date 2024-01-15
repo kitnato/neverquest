@@ -3,8 +3,10 @@ import { useRecoilValue } from "recoil";
 
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { IconImage } from "@neverquest/components/IconImage";
 import { POPOVER_TRIGGER } from "@neverquest/data/general";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
+import IconCorpse from "@neverquest/icons/corpse.svg?react";
 import IconStage from "@neverquest/icons/stage.svg?react";
 import { corpse, stage } from "@neverquest/state/encounter";
 import { formatNumber } from "@neverquest/utilities/formatters";
@@ -25,7 +27,10 @@ export function Stage() {
           overlay={
             <Popover>
               <PopoverHeader className="text-center">
-                <span>Corpse location</span>
+                <span>
+                  <IconImage className="small" Icon={IconCorpse} />
+                  &nbsp;Corpse location
+                </span>
               </PopoverHeader>
 
               <PopoverBody>

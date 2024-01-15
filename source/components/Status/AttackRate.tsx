@@ -98,7 +98,6 @@ export function AttackRate() {
                             <span>
                               -
                               {formatNumber({
-                                decimals: 0,
                                 format: "percentage",
                                 value: attributeStatisticSpeed,
                               })}

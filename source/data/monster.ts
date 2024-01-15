@@ -1,31 +1,48 @@
-import { LEVELLING_MAXIMUM } from "./general";
+import { LEVELLING_MAXIMUM } from "@neverquest/data/general";
 import { AILMENT_PENALTY } from "@neverquest/data/statistics";
+import IconDistance from "@neverquest/icons/distance.svg?react";
+import IconMonsterAttackRate from "@neverquest/icons/monster-attack-rate.svg?react";
+import IconMonsterDamage from "@neverquest/icons/monster-damage.svg?react";
+import type { SVGIcon } from "@neverquest/types/components";
 import type { MonsterAilment } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
-export const AILMENT_DESCRIPTION: Record<MonsterAilment, string> = {
-  bleeding: "Suffering periodic damage.",
-  burning: "Cannot regenerate.",
-  frozen: `Attack rate & movement speed slowed by ${formatNumber({
-    decimals: 0,
-    format: "percentage",
-    value: AILMENT_PENALTY.frozen,
-  })}.`,
-  shocked: `Dealing ${formatNumber({
-    decimals: 0,
-    format: "percentage",
-    value: 1 - AILMENT_PENALTY.shocked,
-  })} decreased damage.`,
-  staggered: `Taking ${formatNumber({
-    decimals: 0,
-    format: "percentage",
-    value: AILMENT_PENALTY.staggered,
-  })} increased damage.`,
-  stunned: `Hit chance reduced to ${formatNumber({
-    decimals: 0,
-    format: "percentage",
-    value: AILMENT_PENALTY.stunned,
-  })}.`,
+export const AILMENT_DESCRIPTION: Record<
+  MonsterAilment,
+  { description: string; descriptionIcons?: SVGIcon[] }
+> = {
+  bleeding: { description: "Suffering periodic damage." },
+  burning: { description: "Cannot regenerate." },
+  frozen: {
+    description: `Attack # rate & # speed slowed by ${formatNumber({
+      decimals: 0,
+      format: "percentage",
+      value: AILMENT_PENALTY.frozen,
+    })}.`,
+    descriptionIcons: [IconMonsterAttackRate, IconDistance],
+  },
+  shocked: {
+    description: `Dealing ${formatNumber({
+      decimals: 0,
+      format: "percentage",
+      value: 1 - AILMENT_PENALTY.shocked,
+    })} decreased # damage.`,
+    descriptionIcons: [IconMonsterDamage],
+  },
+  staggered: {
+    description: `Taking ${formatNumber({
+      decimals: 0,
+      format: "percentage",
+      value: AILMENT_PENALTY.staggered,
+    })} increased damage.`,
+  },
+  stunned: {
+    description: `Hit chance reduced to ${formatNumber({
+      decimals: 0,
+      format: "percentage",
+      value: AILMENT_PENALTY.stunned,
+    })}.`,
+  },
 };
 
 export const BOSS_STAGE_INTERVAL = 5;
@@ -82,10 +99,10 @@ export const MONSTER_ATTACK_RATE = {
 };
 
 export const MONSTER_DAMAGE = {
-  attenuation: 14,
-  base: 7,
+  attenuation: 17,
+  base: 6,
   bonus: 0.005,
-  boss: 1.15,
+  boss: 1.05,
   finality: {
     "res cogitans": 3737,
     "res dominus": 1717,
@@ -98,8 +115,8 @@ export const MONSTER_DAMAGE = {
 };
 
 export const MONSTER_HEALTH = {
-  attenuation: 20,
-  base: 14,
+  attenuation: 22,
+  base: 15,
   bonus: 0.0075,
   boss: 1.8,
   finality: {
@@ -114,7 +131,7 @@ export const MONSTER_HEALTH = {
 };
 
 export const MONSTER_REGENERATION = {
-  duration: 30_000,
+  duration: 35_000,
   ticks: 20,
 };
 

@@ -194,7 +194,7 @@ export const WEAPON_BASE: GearRangeBase & {
     { maximum: 4000, minimum: 3500 },
   ],
   rate: [
-    { maximum: 3100, minimum: 2900 },
+    { maximum: 3000, minimum: 2900 },
     { maximum: 1800, minimum: 1700 },
   ],
   weight: [

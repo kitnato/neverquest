@@ -94,7 +94,7 @@ export const CREW: Record<
     Icon: IconMercenary,
     interaction: "Train",
     monologues: {
-      1: "Perhaps I can teach you something.",
+      1: "I can teach, if you can learn.",
       [GROWTH_MAXIMUM]: MONOLOGUE_EMPTY,
       [LEVELLING_MAXIMUM]: "Overbearing darkness ...",
     },
@@ -115,7 +115,7 @@ export const CREW: Record<
       7: "Plenty of monsters out there.",
       9: "There is something dark looming on the horizon ...",
       10: "I can't believe you came out of that in one piece.",
-      13: "Have you appraised all my offerings?",
+      12: "Have you appraised all my offerings?",
       14: "There's more trouble ahead.",
       15: "Once again you emerge victorious!",
       16: "The grind beckons.",
@@ -232,7 +232,7 @@ export const MERCHANT_OFFERS: Record<
   },
   8: {
     item: TRINKETS.compass.item,
-    monologue: "I've happened upon a relic to retread old ground.",
+    monologue: "I've happened upon a relic allowing you to retread old ground.",
   },
   9: {
     gearClass: "medium",
@@ -244,7 +244,7 @@ export const MERCHANT_OFFERS: Record<
     modality: "melee",
     type: "weapon",
   },
-  12: {
+  11: {
     item: TRINKETS["thaumaturgic goggles"].item,
     monologue: "Fine craftsmanship in this little gadget ...",
   },

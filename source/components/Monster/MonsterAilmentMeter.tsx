@@ -1,6 +1,8 @@
+import { Fragment } from "react";
 import { OverlayTrigger, Popover, PopoverBody } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
+import { IconImage } from "@neverquest/components/IconImage";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { LABEL_EMPTY, PERCENTAGE_POINTS } from "@neverquest/data/general";
 import { AILMENT_DESCRIPTION } from "@neverquest/data/monster";
@@ -18,11 +20,33 @@ export function MonsterAilmentMeter({
   const isMonsterAilingValue = useRecoilValue(isMonsterAiling(ailment));
   const monsterAilmentDurationValue = useRecoilValue(monsterAilmentDuration(ailment));
 
+  const { description, descriptionIcons } = AILMENT_DESCRIPTION[ailment];
+
   return (
     <OverlayTrigger
       overlay={
         <Popover>
-          <PopoverBody className="text-center">{AILMENT_DESCRIPTION[ailment]}</PopoverBody>
+          <PopoverBody className="text-center">
+            {description.split("#").map((part, index) => {
+              if (descriptionIcons?.[index] === undefined) {
+                return <span key={index}>{part}</span>;
+              }
+
+              const descriptionIcon = descriptionIcons[index];
+
+              if (descriptionIcon !== undefined) {
+                return (
+                  <Fragment key={index}>
+                    <span>{part}</span>
+
+                    {descriptionIcons[index] !== undefined && (
+                      <IconImage className="small" Icon={descriptionIcon} />
+                    )}
+                  </Fragment>
+                );
+              }
+            })}
+          </PopoverBody>
         </Popover>
       }
     >

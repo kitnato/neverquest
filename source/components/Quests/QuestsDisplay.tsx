@@ -31,7 +31,7 @@ const TABS: TabsData = [
   },
 ];
 
-export function Quests() {
+export function QuestsDisplay() {
   const canTrackQuestsValue = useRecoilValue(canTrackQuests);
   const isSkillAcquiredMemetics = useRecoilValue(isSkillAcquired("memetics"));
   const isShowingQuestBonusValue = useRecoilValue(isShowingQuestBonus);

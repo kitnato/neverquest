@@ -87,7 +87,7 @@ export type Delta =
   | "infusionLevel"
   | "marksmanshipProgress"
   | "mightProgress"
-  | "monsterDamageAiling"
+  | "monsterDamage"
   | "monsterHealth"
   | "monsterHealthMaximum"
   | "parryRating"

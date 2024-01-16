@@ -11,7 +11,7 @@ import IconFire from "@neverquest/icons/fire.svg?react";
 import IconHatchingProgress from "@neverquest/icons/hatching-progress.svg?react";
 import IconStone from "@neverquest/icons/hearthstone.svg?react";
 import IconIce from "@neverquest/icons/ice.svg?react";
-import IconJournalRelic from "@neverquest/icons/journal-relic.svg?react";
+import IconJournal from "@neverquest/icons/journal.svg?react";
 import IconKnapsack from "@neverquest/icons/knapsack.svg?react";
 import IconLightning from "@neverquest/icons/lightning.svg?react";
 import IconMemento from "@neverquest/icons/memento.svg?react";
@@ -104,7 +104,7 @@ export const ELEMENTALS: Record<
   fire: {
     ailment: "burning",
     color: "text-orange",
-    damage: { maximum: 1, minimum: 0.1 },
+    damage: { maximum: 0.8, minimum: 0.1 },
     damageModification: "high",
     duration: { maximum: 3000, minimum: 1500 },
     durationCap: 7500,
@@ -114,7 +114,7 @@ export const ELEMENTALS: Record<
   ice: {
     ailment: "frozen",
     color: "text-blue",
-    damage: { maximum: 0.5, minimum: 0.05 },
+    damage: { maximum: 0.4, minimum: 0.05 },
     damageModification: "low",
     duration: { maximum: 2000, minimum: 900 },
     durationCap: 3000,
@@ -124,7 +124,7 @@ export const ELEMENTALS: Record<
   lightning: {
     ailment: "shocked",
     color: "text-yellow",
-    damage: { maximum: 0.8, minimum: 0.075 },
+    damage: { maximum: 0.6, minimum: 0.075 },
     damageModification: "medium",
     duration: { maximum: 2500, minimum: 1000 },
     durationCap: 5000,
@@ -198,8 +198,8 @@ export const INFUSABLES: Record<
 export const KNAPSACK_CAPACITY = 15;
 
 export const RELIC_DROP_CHANCE = {
-  memento: { maximum: 0.1, minimum: 0.01 },
-  "torn manuscript": { maximum: 0.1, minimum: 0.03 },
+  memento: { maximum: 0.08, minimum: 0.01 },
+  "torn manuscript": { maximum: 0.05, minimum: 0.01 },
 };
 
 export const RELICS: Record<
@@ -256,7 +256,7 @@ export const RELICS: Record<
     },
   },
   journal: {
-    Icon: IconJournalRelic,
+    Icon: IconJournal,
     item: {
       description: "A compendium of quests.",
       name: "journal",

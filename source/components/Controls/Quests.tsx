@@ -4,16 +4,16 @@ import { useRecoilValue } from "recoil";
 
 import { DismissableScreen } from "@neverquest/components/DismissableScreen";
 import { IconImage } from "@neverquest/components/IconImage";
-import { Quests } from "@neverquest/components/Quests";
+import { QuestsDisplay } from "@neverquest/components/Quests/QuestsDisplay";
 import IconAttention from "@neverquest/icons/attention.svg?react";
-import IconJournal from "@neverquest/icons/journal.svg?react";
+import IconQuests from "@neverquest/icons/quests.svg?react";
 import { isAttacking } from "@neverquest/state/character";
 import { isStageStarted } from "@neverquest/state/encounter";
 import { ownedItem } from "@neverquest/state/inventory";
 import { canCompleteQuests } from "@neverquest/state/quests";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-export function Journal() {
+export function Quests() {
   const canCompleteConquests = useRecoilValue(canCompleteQuests("conquest"));
   const canCompleteRoutines = useRecoilValue(canCompleteQuests("routine"));
   const canCompleteTriumphs = useRecoilValue(canCompleteQuests("triumph"));
@@ -21,14 +21,14 @@ export function Journal() {
   const isStageStartedValue = useRecoilValue(isStageStarted);
   const ownedItemJournal = useRecoilValue(ownedItem("journal"));
 
-  const [isJournalOpenValue, setIsJournalOpen] = useState(false);
+  const [isQuestsDisplayOpen, setIsQuestsDisplayOpen] = useState(false);
 
   const canCompleteQuest = canCompleteConquests || canCompleteRoutines || canCompleteTriumphs;
 
   if (ownedItemJournal !== undefined) {
     return (
       <>
-        <OverlayTrigger overlay={<Tooltip>Journal</Tooltip>}>
+        <OverlayTrigger overlay={<Tooltip>Quests</Tooltip>}>
           <div className={getAnimationClass({ animation: "bounceIn" })}>
             <Button
               className={`position-relative${
@@ -41,11 +41,11 @@ export function Journal() {
               }`}
               disabled={isAttackingValue}
               onClick={() => {
-                setIsJournalOpen(true);
+                setIsQuestsDisplayOpen(true);
               }}
               variant="outline-dark"
             >
-              <IconImage Icon={IconJournal} />
+              <IconImage Icon={IconQuests} />
 
               {canCompleteQuest && (
                 <Badge
@@ -61,13 +61,13 @@ export function Journal() {
 
         <DismissableScreen
           hideOverflow
-          isShowing={isJournalOpenValue}
+          isShowing={isQuestsDisplayOpen}
           onClose={() => {
-            setIsJournalOpen(false);
+            setIsQuestsDisplayOpen(false);
           }}
-          title="Journal"
+          title="Quests"
         >
-          <Quests />
+          <QuestsDisplay />
         </DismissableScreen>
       </>
     );

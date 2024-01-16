@@ -16,8 +16,8 @@ export function MonsterDamage() {
   const monsterDamageAilingValue = useRecoilValue(monsterDamageAiling);
 
   useDeltaText({
-    delta: "monsterDamageAiling",
-    state: monsterDamageAiling,
+    delta: "monsterDamage",
+    state: monsterDamage,
   });
 
   return (
@@ -38,7 +38,7 @@ export function MonsterDamage() {
           </>
         )}
 
-        <DeltasDisplay delta="monsterDamageAiling" />
+        <DeltasDisplay delta="monsterDamage" />
       </Stack>
     </IconDisplay>
   );

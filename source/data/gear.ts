@@ -37,7 +37,7 @@ export const ARMOR_SPECIFICATIONS: Record<
   heavy: {
     burden: [
       { maximum: 9, minimum: 4 },
-      { maximum: 55, minimum: 50 },
+      { maximum: 60, minimum: 55 },
     ],
     deflection: [
       { maximum: 0.3, minimum: 0.28 },
@@ -73,7 +73,7 @@ export const ARMOR_SPECIFICATIONS: Record<
   reinforced: {
     burden: [
       { maximum: 5, minimum: 3 },
-      { maximum: 40, minimum: 35 },
+      { maximum: 45, minimum: 40 },
     ],
     deflection: [
       { maximum: 0.15, minimum: 0.1 },
@@ -114,12 +114,12 @@ export const SHIELD_SPECIFICATIONS: Record<
 > = {
   medium: {
     block: [
-      { maximum: 0.13, minimum: 0.12 },
-      { maximum: 0.3, minimum: 0.28 },
+      { maximum: 0.14, minimum: 0.13 },
+      { maximum: 0.35, minimum: 0.33 },
     ],
     burden: [
       { maximum: 4, minimum: 3 },
-      { maximum: 25, minimum: 20 },
+      { maximum: 30, minimum: 25 },
     ],
     Icon: IconShieldMedium,
     price: { maximum: 4000, minimum: 4 },
@@ -135,7 +135,7 @@ export const SHIELD_SPECIFICATIONS: Record<
   small: {
     block: [
       { maximum: 0.1, minimum: 0.09 },
-      { maximum: 0.22, minimum: 0.19 },
+      { maximum: 0.25, minimum: 0.23 },
     ],
     burden: [
       { maximum: 2, minimum: 1 },
@@ -150,15 +150,15 @@ export const SHIELD_SPECIFICATIONS: Record<
   },
   tower: {
     block: [
-      { maximum: 0.3, minimum: 0.29 },
-      { maximum: 0.55, minimum: 0.5 },
+      { maximum: 0.25, minimum: 0.24 },
+      { maximum: 0.6, minimum: 0.58 },
     ],
     burden: [
       { maximum: 7, minimum: 6 },
-      { maximum: 40, minimum: 35 },
+      { maximum: 45, minimum: 30 },
     ],
     Icon: IconShieldTower,
-    price: { maximum: 5500, minimum: 7 },
+    price: { maximum: 6000, minimum: 7 },
     stagger: [
       { maximum: 0.65, minimum: 0.6 },
       { maximum: 0.95, minimum: 0.93 },
@@ -182,7 +182,7 @@ export const WEAPON_BASE: GearRangeBase & {
   ],
   burden: [
     { maximum: 2, minimum: 1 },
-    { maximum: 35, minimum: 30 },
+    { maximum: 40, minimum: 35 },
   ],
   damage: [
     { maximum: 15, minimum: 13 },
@@ -208,7 +208,7 @@ export const WEAPON_MODIFIER = {
   ranged: { ability: 1, burden: 1.05, damage: 0.8, price: 1.2, rate: 1.3, weight: 1.15 },
   "two-handed": {
     ability: 1.1,
-    burden: 1.15,
+    burden: 1.2,
     damage: 1.25,
     price: 1.3,
     rate: 1.2,

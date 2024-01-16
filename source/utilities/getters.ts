@@ -114,6 +114,24 @@ export function getAttributePointCost(powerLevel: number) {
   return getTriangular(ATTRIBUTE_COST_BASE + powerLevel);
 }
 
+export function getAttributePoints({
+  essence,
+  powerLevel,
+}: {
+  essence: number;
+  powerLevel: number;
+}) {
+  let points = 0;
+  let requiredEssence = getAttributePointCost(powerLevel);
+
+  while (requiredEssence <= essence) {
+    points += 1;
+    requiredEssence += getAttributePointCost(powerLevel + points);
+  }
+
+  return points;
+}
+
 export function getComputedStatistic({
   amount,
   base,

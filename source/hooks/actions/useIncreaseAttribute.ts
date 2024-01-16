@@ -36,6 +36,7 @@ export function useIncreaseAttribute() {
         }
 
         set(attributeRank(attribute), newRank);
+        set(isShowing("lootedEssenceProgress"), true);
 
         transactEssence(-getAttributePointCost(get(powerLevel)));
 

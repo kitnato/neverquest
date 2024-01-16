@@ -44,7 +44,7 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
     antidote: {
       Icon: IconAntidote,
       item: {
-        description: "Cures poisonDuration.",
+        description: "Cures poison.",
         name: "antidote",
         price: 120,
         weight: 5,
@@ -297,7 +297,7 @@ export const RELICS: Record<
     item: {
       description: "Discerns the lethality of creatures.",
       name: "thaumaturgic goggles",
-      price: 100,
+      price: 150,
       weight: 4,
     },
   },

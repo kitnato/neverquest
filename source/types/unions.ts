@@ -227,6 +227,7 @@ export type Showing =
   | "grip"
   | "health"
   | "location"
+  | "lootedEssenceProgress"
   | "monsterOffense"
   | "offhand"
   | "protection"

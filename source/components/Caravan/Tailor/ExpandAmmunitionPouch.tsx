@@ -25,10 +25,12 @@ export function ExpandAmmunitionPouch() {
   const transactEssence = useTransactEssence();
 
   const { amount, priceRange } = TAILORING["ammunition pouch"];
-  const price = getFromRange({
-    factor: getSigmoid((ammunitionCapacityValue - (AMMUNITION_CAPACITY - amount)) / amount),
-    ...priceRange,
-  });
+  const price = Math.ceil(
+    getFromRange({
+      factor: getSigmoid((ammunitionCapacityValue - (AMMUNITION_CAPACITY - amount)) / amount),
+      ...priceRange,
+    }),
+  );
   const isAffordable = price <= essenceValue;
 
   return (

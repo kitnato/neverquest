@@ -28,10 +28,12 @@ export function ExpandKnapsack() {
 
   const { amount, priceRange } = TAILORING.knapsack;
 
-  const price = getFromRange({
-    factor: getSigmoid((knapsackCapacityValue - (KNAPSACK_CAPACITY - 1)) / amount),
-    ...priceRange,
-  });
+  const price = Math.ceil(
+    getFromRange({
+      factor: getSigmoid((knapsackCapacityValue - (KNAPSACK_CAPACITY - 1)) / amount),
+      ...priceRange,
+    }),
+  );
   const isAffordable = price <= essenceValue;
 
   return (

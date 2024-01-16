@@ -5,7 +5,11 @@ import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage
 import { infusionEffect } from "@neverquest/state/items";
 import { essence } from "@neverquest/state/resources";
 import { ATTRIBUTE_TYPES, type Attribute } from "@neverquest/types/unions";
-import { getAttributePointCost, getComputedStatistic } from "@neverquest/utilities/getters";
+import {
+  getAttributePointCost,
+  getAttributePoints,
+  getComputedStatistic,
+} from "@neverquest/utilities/getters";
 import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
@@ -34,20 +38,7 @@ export const areAttributesAffordable = withStateKey("areAttributesAffordable", (
 
 export const attributePoints = withStateKey("attributePoints", (key) =>
   selector({
-    get: ({ get }) => {
-      const essenceValue = get(essence);
-      const powerLevelValue = get(powerLevel);
-
-      let points = 0;
-      let requiredEssence = getAttributePointCost(powerLevelValue);
-
-      while (requiredEssence <= essenceValue) {
-        points += 1;
-        requiredEssence += getAttributePointCost(powerLevelValue + points);
-      }
-
-      return points;
-    },
+    get: ({ get }) => getAttributePoints({ essence: get(essence), powerLevel: get(powerLevel) }),
     key,
   }),
 );

@@ -1,7 +1,7 @@
 import { useRecoilCallback } from "recoil";
 
 import { useAcquireSkill } from "@neverquest/hooks/actions/useAcquireSkill";
-import { useGenerateMerchantInventory } from "@neverquest/hooks/actions/useGenerateMerchantInventory";
+import { useGenerateMerchantOffer } from "@neverquest/hooks/actions/useGenerateMerchantOffer";
 import { useIncreaseStage } from "@neverquest/hooks/actions/useIncreaseStage";
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness";
 import { useSetMonologues } from "@neverquest/hooks/actions/useSetMonologues";
@@ -17,7 +17,7 @@ import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useCheatQuest() {
   const acquireSkill = useAcquireSkill();
-  const generateMerchantInventory = useGenerateMerchantInventory();
+  const generateMerchantOffer = useGenerateMerchantOffer();
   const increaseStage = useIncreaseStage();
   const resetWilderness = useResetWilderness();
   const setMonologues = useSetMonologues();
@@ -83,7 +83,7 @@ export function useCheatQuest() {
               }
 
               for (let step = 0; step < difference; step++) {
-                generateMerchantInventory();
+                generateMerchantOffer();
                 setMonologues();
                 increaseStage();
               }
@@ -102,7 +102,7 @@ export function useCheatQuest() {
       },
     [
       acquireSkill,
-      generateMerchantInventory,
+      generateMerchantOffer,
       increaseStage,
       resetWilderness,
       setMonologues,

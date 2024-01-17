@@ -15,26 +15,29 @@ import {
 } from "@neverquest/utilities/generators";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
-export function useGenerateMerchantInventory() {
+export function useGenerateMerchantOffer() {
   return useRecoilCallback(
     ({ set, snapshot }) =>
       () => {
         const get = getSnapshotGetter(snapshot);
 
-        const merchantInventoryCurrent = [...get(merchantInventory)];
+        const newMerchantInventory = [...get(merchantInventory)];
         const stageValue = get(stage);
 
         const offer = MERCHANT_OFFERS[stageValue];
 
-        // Only add offer if it's the currently highest stage (to avoid regenerating older gear offers), and in the case of being a relic or infusable, if it's not in any inventory.
-        if (
-          offer !== undefined &&
-          stageValue === get(stageMaximum) &&
-          ("item" in offer && isInheritableItem(offer.item)
-            ? !merchantInventoryCurrent.some(({ name }) => name === offer.item.name) &&
-              get(ownedItem(offer.item.name)) === undefined
-            : true)
-        ) {
+        // Only add offer if it's the currently highest stage to avoid regenerating older gear offers.
+        if (offer !== undefined && stageValue === get(stageMaximum)) {
+          // In the case of being a relic or infusable, make sure it's not in any inventory.
+          if (
+            "item" in offer &&
+            isInheritableItem(offer.item) &&
+            (newMerchantInventory.some(({ name }) => name === offer.item.name) ||
+              get(ownedItem(offer.item.name)) !== undefined)
+          ) {
+            return;
+          }
+
           const gearSettings: GeneratorParameters & { level: number } = {
             affixStructure: "prefix",
             level: stageValue,
@@ -70,13 +73,13 @@ export function useGenerateMerchantInventory() {
             return { ...offer.item, ID: nanoid() } as InheritableItem;
           })();
 
-          merchantInventoryCurrent.push({
+          newMerchantInventory.push({
             ...item,
             isEradicated: false,
             isReturned: false,
           });
 
-          set(merchantInventory, merchantInventoryCurrent);
+          set(merchantInventory, newMerchantInventory);
         }
       },
     [],

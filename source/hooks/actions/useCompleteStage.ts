@@ -1,6 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
-import { useGenerateMerchantInventory } from "@neverquest/hooks/actions/useGenerateMerchantInventory";
+import { useGenerateMerchantOffer } from "@neverquest/hooks/actions/useGenerateMerchantOffer";
 import { useSetMonologues } from "@neverquest/hooks/actions/useSetMonologues";
 import { useToggleAttacking } from "@neverquest/hooks/actions/useToggleAttacking";
 import { isAttacking } from "@neverquest/state/character";
@@ -14,7 +14,7 @@ import { isFinality } from "@neverquest/types/type-guards";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useCompleteStage() {
-  const generateMerchantInventory = useGenerateMerchantInventory();
+  const generateMerchantOffer = useGenerateMerchantOffer();
   const setMonologues = useSetMonologues();
   const toggleAttacking = useToggleAttacking();
 
@@ -31,7 +31,7 @@ export function useCompleteStage() {
         }
 
         if (get(isStageCompleted)) {
-          generateMerchantInventory();
+          generateMerchantOffer();
           setMonologues();
         }
 
@@ -43,6 +43,6 @@ export function useCompleteStage() {
           }
         }
       },
-    [generateMerchantInventory, setMonologues, toggleAttacking],
+    [generateMerchantOffer, setMonologues, toggleAttacking],
   );
 }

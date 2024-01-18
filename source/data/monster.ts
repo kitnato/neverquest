@@ -101,7 +101,7 @@ export const MONSTER_ATTACK_RATE = {
 export const MONSTER_DAMAGE = {
   attenuation: 16,
   base: 7,
-  bonus: 0.005,
+  bonus: 0.01,
   boss: 1.05,
   finality: {
     "res cogitans": 1777,
@@ -112,7 +112,7 @@ export const MONSTER_DAMAGE = {
 export const MONSTER_HEALTH = {
   attenuation: 12,
   base: 15,
-  bonus: 0.0075,
+  bonus: 0.02,
   boss: 1.8,
   finality: {
     "res cogitans": 7777,

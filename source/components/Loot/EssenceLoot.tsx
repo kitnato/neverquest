@@ -2,7 +2,7 @@ import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { AttributePointProgress } from "@neverquest/components/Attributes/AttributePointProgress";
-import { AttributePointsIncrease } from "@neverquest/components/Attributes/AttributePointsIncrease";
+import { NewAttributePoints } from "@neverquest/components/Attributes/NewAttributePoints";
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
@@ -36,7 +36,7 @@ export function EssenceLoot() {
           <AttributePointProgress extraEssence={essenceLootValue} />
         )}
 
-        {isShowingLootedEssenceProgress && <AttributePointsIncrease />}
+        {isShowingLootedEssenceProgress && <NewAttributePoints />}
       </Stack>
     );
   }

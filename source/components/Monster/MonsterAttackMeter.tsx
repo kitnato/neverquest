@@ -1,5 +1,7 @@
+import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { PERCENTAGE_POINTS } from "@neverquest/data/general";
 import {
@@ -7,7 +9,6 @@ import {
   monsterAttackDuration,
   monsterAttackRate,
 } from "@neverquest/state/monster";
-
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function MonsterAttackMeter() {
@@ -28,12 +29,16 @@ export function MonsterAttackMeter() {
       }
       variant="secondary"
     >
-      <span>
-        {formatNumber({
-          format: "time",
-          value: monsterAttackDurationValue || monsterAttackRateValue,
-        })}
-      </span>
+      <Stack direction="horizontal" gap={1}>
+        <span>
+          {formatNumber({
+            format: "time",
+            value: monsterAttackDurationValue || monsterAttackRateValue,
+          })}
+        </span>
+
+        <DeltasDisplay delta="monsterAttackRate" />
+      </Stack>
     </LabelledProgressBar>
   );
 }

@@ -8,7 +8,7 @@ import { essence, essenceLoot } from "@neverquest/state/resources";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAttributePoints } from "@neverquest/utilities/getters";
 
-export function AttributePointsIncrease() {
+export function NewAttributePoints() {
   const attributePointsValue = useRecoilValue(attributePoints);
   const essenceValue = useRecoilValue(essence);
   const essenceLootValue = useRecoilValue(essenceLoot);

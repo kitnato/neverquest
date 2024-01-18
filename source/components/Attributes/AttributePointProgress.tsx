@@ -34,12 +34,15 @@ export function AttributePointProgress({ extraEssence }: { extraEssence?: number
       overlay={
         <Tooltip>
           {extraEssence === undefined ? "Current essence" : "Essence after looting"}&nbsp;and
-          essence required for next attribute point.
+          required essence for next attribute point.
         </Tooltip>
       }
     >
       <div className="w-100">
-        <LabelledProgressBar value={(totalEssence / nextTotalCost) * PERCENTAGE_POINTS}>
+        <LabelledProgressBar
+          value={(totalEssence / nextTotalCost) * PERCENTAGE_POINTS}
+          variant="secondary"
+        >
           <IconDisplay Icon={IconEssence} iconProps={{ className: "small stencilled" }}>
             <span>
               {formatNumber({ value: totalEssence })}&nbsp;/&nbsp;

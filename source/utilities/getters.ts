@@ -22,7 +22,7 @@ import {
 import {
   CLASS_ANIMATED,
   CLASS_ANIMATE_PREFIX,
-  GROWTH_MAXIMUM,
+  LEVELLING_CUTOFF,
   MILLISECONDS_IN_SECOND,
   RETIREMENT_STAGE_MINIMUM,
   ROMAN_NUMERALS,
@@ -244,7 +244,7 @@ export function getGemFittingCost(fitted: number) {
 }
 
 export function getLinearMapping({ offset, stage }: { offset: number; stage: number }) {
-  return ((stage - offset) * (GROWTH_MAXIMUM - 1)) / (GROWTH_MAXIMUM - offset - 1) + 1;
+  return ((stage - offset) * (LEVELLING_CUTOFF - 1)) / (LEVELLING_CUTOFF - offset - 1) + 1;
 }
 
 export function getMeleeRanges({
@@ -399,9 +399,12 @@ export function getShieldRanges({ factor, gearClass }: { factor: number; gearCla
 }
 
 // https://en.wikipedia.org/wiki/Sigmoid_function
-// f(0-1) = ~0, f(38) = ~0.43, f(50) = ~0.78, f(GROWTH_MAXIMUM) = ~1
+// f(0-1) = ~0, f(38) = ~0.5, f(50) = ~0.75, f(77) = ~1
 export function getSigmoid(x: number) {
-  return 1 / (1 + Math.pow(Math.E, -0.15 * (x - 45)) - 0.011) - 0.0012;
+  return (
+    (1 / (1 + Math.pow(Math.E, -0.15 * (x - 45)) - 0.011) - 0.0012) *
+    (9 * Math.pow(Math.E, -(Math.LN2 / 5) * x) + 1)
+  );
 }
 
 export function getSnapshotGetter({ getLoadable }: Snapshot) {

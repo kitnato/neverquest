@@ -8,7 +8,7 @@ import { CraftGear } from "@neverquest/components/Caravan/CraftGear";
 import { SetGearLevel } from "@neverquest/components/Caravan/SetGearLevel";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { GEAR_LEVEL_RANGE_MAXIMUM, SHIELD_SPECIFICATIONS } from "@neverquest/data/gear";
-import { GROWTH_MAXIMUM, LABEL_SKILL_REQUIRED, LABEL_UNKNOWN } from "@neverquest/data/general";
+import { LABEL_SKILL_REQUIRED, LABEL_UNKNOWN, LEVELLING_MAXIMUM } from "@neverquest/data/general";
 import IconBlock from "@neverquest/icons/block.svg?react";
 import IconBurden from "@neverquest/icons/burden.svg?react";
 import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react";
@@ -32,10 +32,13 @@ export function ShieldOptions() {
   const stageMaximumValue = useRecoilValue(stageMaximum);
 
   const [shieldClass, setShieldClass] = useState<ShieldClass>("small");
-  const [shieldLevel, setShieldLevel] = useState(Math.min(stageMaximumValue, GROWTH_MAXIMUM));
+  const [shieldLevel, setShieldLevel] = useState(Math.min(stageMaximumValue, LEVELLING_MAXIMUM));
 
   const factor = getSigmoid(shieldLevel);
-  const maximumShieldLevel = Math.min(stageMaximumValue + GEAR_LEVEL_RANGE_MAXIMUM, GROWTH_MAXIMUM);
+  const maximumShieldLevel = Math.min(
+    stageMaximumValue + GEAR_LEVEL_RANGE_MAXIMUM,
+    LEVELLING_MAXIMUM,
+  );
   const { block, burden, stagger, weight } = getShieldRanges({
     factor,
     gearClass: shieldClass,

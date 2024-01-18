@@ -164,11 +164,8 @@ export const monsterAttackRate = withStateKey("monsterAttackRate", (key) =>
 
       return Math.round(
         Math.max(
-          base -
-            base *
-              factor *
-              ((1 + Math.min(get(progress), PROGRESS.maximum)) * bonus) *
-              (encounterValue === "boss" ? boss : 1),
+          (base - base * factor * (1 + Math.min(get(progress), PROGRESS.maximum) * bonus)) *
+            (encounterValue === "boss" ? boss : 1),
           minimum,
         ),
       );
@@ -180,14 +177,7 @@ export const monsterAttackRate = withStateKey("monsterAttackRate", (key) =>
 export const monsterDamage = withStateKey("monsterDamage", (key) =>
   selector({
     get: ({ get }) => {
-      const {
-        attenuation,
-        base,
-        bonus,
-        boss,
-        finality,
-        menace: { maximum, minimum, requiredStage },
-      } = MONSTER_DAMAGE;
+      const { attenuation, base, bonus, boss, finality } = MONSTER_DAMAGE;
       const encounterValue = get(encounter);
       const stageValue = get(stage);
       const factor = getTriangular(stageValue) / attenuation;
@@ -199,16 +189,6 @@ export const monsterDamage = withStateKey("monsterDamage", (key) =>
       return Math.round(
         (base + base * factor * (1 + Math.min(get(progress), PROGRESS.maximum) * bonus)) *
           (encounterValue === "boss" ? boss : 1) *
-          (1 +
-            (stageValue >= requiredStage
-              ? getFromRange({
-                  factor: getSigmoid(
-                    getLinearMapping({ offset: requiredStage, stage: stageValue }),
-                  ),
-                  maximum,
-                  minimum,
-                })
-              : 0)) *
           (1 - get(frailty)),
       );
     },
@@ -249,14 +229,7 @@ export const monsterDamageAilingPerSecond = withStateKey("monsterDamageAilingPer
 export const monsterHealthMaximum = withStateKey("monsterHealthMaximum", (key) =>
   selector({
     get: ({ get }) => {
-      const {
-        attenuation,
-        base,
-        bonus,
-        boss,
-        finality,
-        menace: { maximum, minimum, requiredStage },
-      } = MONSTER_HEALTH;
+      const { attenuation, base, bonus, boss, finality } = MONSTER_HEALTH;
       const encounterValue = get(encounter);
       const stageValue = get(stage);
       const factor = getTriangular(stageValue) / attenuation;
@@ -268,16 +241,6 @@ export const monsterHealthMaximum = withStateKey("monsterHealthMaximum", (key) =
       return Math.round(
         (base + base * factor * (1 + Math.min(get(progress), PROGRESS.maximum) * bonus)) *
           (encounterValue === "boss" ? boss : 1) *
-          (1 +
-            (stageValue >= requiredStage
-              ? getFromRange({
-                  factor: getSigmoid(
-                    getLinearMapping({ offset: requiredStage, stage: stageValue }),
-                  ),
-                  maximum,
-                  minimum,
-                })
-              : 0)) *
           (1 - get(frailty)),
       );
     },

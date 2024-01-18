@@ -5,8 +5,9 @@ import type {
   WeaponClass,
   WeaponModality,
 } from "@kitnato/locran/build/types";
+import { BLIGHT, POISON } from "./monster";
 import {
-  GROWTH_MAXIMUM,
+  LEVELLING_CUTOFF,
   LEVELLING_MAXIMUM,
   RETIREMENT_STAGE_MINIMUM,
 } from "@neverquest/data/general";
@@ -46,7 +47,7 @@ export const CREW: Record<
     interaction: "Visit",
     monologues: {
       1: "Things are not always what they seem.",
-      [GROWTH_MAXIMUM]: MONOLOGUE_EMPTY,
+      [LEVELLING_CUTOFF]: MONOLOGUE_EMPTY,
       [LEVELLING_MAXIMUM]: "Nothing makes any sense.",
     },
     price: 400,
@@ -58,7 +59,7 @@ export const CREW: Record<
     interaction: "Craft",
     monologues: {
       1: "In need of better gear?",
-      [GROWTH_MAXIMUM]: MONOLOGUE_EMPTY,
+      [LEVELLING_CUTOFF]: MONOLOGUE_EMPTY,
       [LEVELLING_MAXIMUM]: "Doesn't make a difference.",
     },
     price: 50,
@@ -71,7 +72,7 @@ export const CREW: Record<
     interaction: "Craft",
     monologues: {
       1: "Tired of monster breath?",
-      [GROWTH_MAXIMUM]: MONOLOGUE_EMPTY,
+      [LEVELLING_CUTOFF]: MONOLOGUE_EMPTY,
       [LEVELLING_MAXIMUM]: "There's too many of them.",
     },
     price: 150,
@@ -83,7 +84,7 @@ export const CREW: Record<
     interaction: "Treat",
     monologues: {
       1: "Allow me to patch you up.",
-      [GROWTH_MAXIMUM]: MONOLOGUE_EMPTY,
+      [LEVELLING_CUTOFF]: MONOLOGUE_EMPTY,
       [LEVELLING_MAXIMUM]: "Never-ending madness. Only pain.",
     },
     price: 20,
@@ -95,7 +96,7 @@ export const CREW: Record<
     interaction: "Train",
     monologues: {
       1: "I can teach, if you can learn.",
-      [GROWTH_MAXIMUM]: MONOLOGUE_EMPTY,
+      [LEVELLING_CUTOFF]: MONOLOGUE_EMPTY,
       [LEVELLING_MAXIMUM]: "Overbearing darkness ...",
     },
     price: 75,
@@ -124,11 +125,17 @@ export const CREW: Record<
       30: "Yet you return for more punishment?",
       31: "Your headway in the wilderness is helping business.",
       41: "Still you press on. There must be an answer.",
+      [POISON.requiredStage - 1]:
+        "Beware, some monsters have been seen witnessed spewing venomous ichor.",
+      [POISON.requiredStage]: "You are resilient to put yourself through this.",
+      [BLIGHT.requiredStage - 1]:
+        "These abominations are becoming ever more pestilent. Be prepared.",
+      [BLIGHT.requiredStage]: "Your bravery is unmatched. Will it be enough?",
       56: "Dark tides are impending.",
-      57: "Gloomy portents are everywhere ...",
-      58: "Delving further must be our only salvation.",
+      57: "The portents are truly dire ...",
+      58: "Delving further must be our salvation.",
       74: "I fear the end is imminent.",
-      [GROWTH_MAXIMUM]: "All is truly lost.",
+      [LEVELLING_CUTOFF]: "All is truly lost.",
       [LEVELLING_MAXIMUM - 1]: "Something's wrong.",
       [LEVELLING_MAXIMUM]: "How are you still here?",
       [LEVELLING_MAXIMUM + 4]: "Please go back to where you came from.",
@@ -148,7 +155,7 @@ export const CREW: Record<
     interaction: "Ritual",
     monologues: {
       1: "Prepared to transcend your limits?",
-      [GROWTH_MAXIMUM]: MONOLOGUE_EMPTY,
+      [LEVELLING_CUTOFF]: MONOLOGUE_EMPTY,
       [LEVELLING_MAXIMUM]: "I can't see any more.",
     },
     price: 300,
@@ -160,7 +167,7 @@ export const CREW: Record<
     interaction: "Stitch",
     monologues: {
       1: "Always leave some extra space for unexpected finds.",
-      [GROWTH_MAXIMUM]: MONOLOGUE_EMPTY,
+      [LEVELLING_CUTOFF]: MONOLOGUE_EMPTY,
       [LEVELLING_MAXIMUM]: "Fate has been mis-weaved.",
     },
     price: 35,
@@ -172,7 +179,7 @@ export const CREW: Record<
     interaction: "Brew",
     monologues: {
       1: "Gaze into my cauldron ...",
-      [GROWTH_MAXIMUM]: MONOLOGUE_EMPTY,
+      [LEVELLING_CUTOFF]: MONOLOGUE_EMPTY,
       [LEVELLING_MAXIMUM]: "The spirits have gone silent.",
     },
     price: 650,

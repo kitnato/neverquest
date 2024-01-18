@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { LABEL_MAXIMUM, PERCENTAGE_POINTS } from "@neverquest/data/general";
+import { LABEL_MAXIMUM } from "@neverquest/data/general";
 import IconHealth from "@neverquest/icons/health.svg?react";
 import IconPoison from "@neverquest/icons/poison.svg?react";
 import { poisonChance } from "@neverquest/state/monster";
@@ -79,8 +79,7 @@ export function PoisonRating() {
         >
           <span>
             {formatNumber({
-              value:
-                poisonChanceValue * poisonMagnitudeValue * poisonLengthValue * PERCENTAGE_POINTS,
+              value: poisonChanceValue * poisonMagnitudeValue * poisonLengthValue,
             })}
           </span>
         </OverlayTrigger>

@@ -15,8 +15,6 @@ export const FRAMERATE = MILLISECONDS_IN_SECOND / 60;
 export const GLITCH_NUMBER = 7;
 export const GLITCH_STAGE_MINIMUM = 57;
 
-export const GROWTH_MAXIMUM = 100;
-
 export const KEY_SESSION = "neverquest-session";
 
 export const LABEL_EMPTY = "--";
@@ -31,6 +29,7 @@ export const LABEL_SEPARATOR = "·";
 export const LABEL_SKILL_REQUIRED = "Requires a skill.";
 export const LABEL_UNKNOWN = "???";
 
+export const LEVELLING_CUTOFF = 100;
 export const LEVELLING_MAXIMUM = 77;
 
 export const NAME_LENGTH_MAXIMUM = 50;

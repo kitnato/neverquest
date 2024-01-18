@@ -7,7 +7,7 @@ import { merchantInventory } from "@neverquest/state/caravan";
 import { stage, stageMaximum } from "@neverquest/state/encounter";
 import { ownedItem } from "@neverquest/state/inventory";
 import type { InheritableItem } from "@neverquest/types";
-import { isInheritableItem } from "@neverquest/types/type-guards";
+import { isGearItem, isInheritableItem } from "@neverquest/types/type-guards";
 import {
   generateArmor,
   generateMeleeWeapon,
@@ -72,6 +72,10 @@ export function useGenerateMerchantOffer() {
 
             return { ...offer.item, ID: nanoid() } as InheritableItem;
           })();
+
+          if (isGearItem(item)) {
+            item.price = Math.round(item.price / 2);
+          }
 
           newMerchantInventory.push({
             ...item,

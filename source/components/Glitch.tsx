@@ -2,7 +2,7 @@ import { nanoid } from "nanoid";
 import { useMemo, useState } from "react";
 import { useRecoilValue } from "recoil";
 
-import { GLITCH_NUMBER, GLITCH_STAGE_MINIMUM, GROWTH_MAXIMUM } from "@neverquest/data/general";
+import { GLITCH_NUMBER, GLITCH_STAGE_MINIMUM, LEVELLING_CUTOFF } from "@neverquest/data/general";
 import { useAnimation } from "@neverquest/hooks/useAnimation";
 import { stage } from "@neverquest/state/encounter";
 import { getFromRange, getLinearMapping, getRange } from "@neverquest/utilities/getters";
@@ -29,25 +29,23 @@ function getGlitchingElement() {
 function glitchElementAt({ element, originalText }: { element: Element; originalText: string }) {
   const { textContent } = element;
 
-  if (textContent === null) {
-    return;
+  if (textContent !== null) {
+    element.textContent = [...textContent]
+      .map((_, index) => {
+        const glitchChance = Math.random();
+
+        if (glitchChance <= 0.2) {
+          return CHARACTERS[Math.floor(Math.random() * CHARACTERS.length)];
+        }
+
+        if (glitchChance <= 0.6) {
+          return GLITCH_NUMBER;
+        }
+
+        return originalText[index];
+      })
+      .join("");
   }
-
-  element.textContent = [...textContent]
-    .map((_, index) => {
-      const glitchChance = Math.random();
-
-      if (glitchChance <= 0.2) {
-        return CHARACTERS[Math.floor(Math.random() * CHARACTERS.length)];
-      }
-
-      if (glitchChance <= 0.6) {
-        return GLITCH_NUMBER;
-      }
-
-      return originalText[index];
-    })
-    .join("");
 }
 
 export function Glitch() {
@@ -68,7 +66,7 @@ export function Glitch() {
   const [intervalElapsed, setIntervalElapsed] = useState(0);
 
   const factor = useMemo(
-    () => getLinearMapping({ offset: GLITCH_STAGE_MINIMUM, stage: stageValue }) / GROWTH_MAXIMUM,
+    () => getLinearMapping({ offset: GLITCH_STAGE_MINIMUM, stage: stageValue }) / LEVELLING_CUTOFF,
     [stageValue],
   );
   const interval = useMemo(

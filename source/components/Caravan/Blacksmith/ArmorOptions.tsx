@@ -8,7 +8,7 @@ import { CraftGear } from "@neverquest/components/Caravan/CraftGear";
 import { SetGearLevel } from "@neverquest/components/Caravan/SetGearLevel";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { ARMOR_SPECIFICATIONS, GEAR_LEVEL_RANGE_MAXIMUM } from "@neverquest/data/gear";
-import { GROWTH_MAXIMUM, LABEL_SKILL_REQUIRED, LABEL_UNKNOWN } from "@neverquest/data/general";
+import { LABEL_SKILL_REQUIRED, LABEL_UNKNOWN, LEVELLING_MAXIMUM } from "@neverquest/data/general";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import IconBurden from "@neverquest/icons/burden.svg?react";
 import IconDeflection from "@neverquest/icons/deflection.svg?react";
@@ -33,7 +33,7 @@ export function ArmorOptions() {
   const stageMaximumValue = useRecoilValue(stageMaximum);
 
   const [armorClass, setArmorClass] = useState<ArmorClass>("light");
-  const [armorLevel, setArmorLevel] = useState(Math.min(stageMaximumValue, GROWTH_MAXIMUM));
+  const [armorLevel, setArmorLevel] = useState(Math.min(stageMaximumValue, LEVELLING_MAXIMUM));
 
   const progressQuest = useProgressQuest();
 
@@ -42,7 +42,10 @@ export function ArmorOptions() {
     factor,
     gearClass: armorClass,
   });
-  const maximumArmorLevel = Math.min(stageMaximumValue + GEAR_LEVEL_RANGE_MAXIMUM, GROWTH_MAXIMUM);
+  const maximumArmorLevel = Math.min(
+    stageMaximumValue + GEAR_LEVEL_RANGE_MAXIMUM,
+    LEVELLING_MAXIMUM,
+  );
 
   return (
     <Stack className="mx-auto w-50">

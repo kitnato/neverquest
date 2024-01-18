@@ -13,7 +13,7 @@ import {
   WEAPON_MODIFIER,
   WEAPON_SPECIFICATIONS,
 } from "@neverquest/data/gear";
-import { GROWTH_MAXIMUM, LABEL_SKILL_REQUIRED, LABEL_UNKNOWN } from "@neverquest/data/general";
+import { LABEL_SKILL_REQUIRED, LABEL_UNKNOWN, LEVELLING_MAXIMUM } from "@neverquest/data/general";
 import { WEAPON_ABILITY_SKILLS } from "@neverquest/data/skills";
 import IconAmmunition from "@neverquest/icons/ammunition.svg?react";
 import IconBurden from "@neverquest/icons/burden.svg?react";
@@ -41,7 +41,7 @@ export function RangedWeaponOptions() {
   const resetFletcherInventory = useResetRecoilState(fletcherInventory);
 
   const [weaponClass, setWeaponClass] = useState<WeaponClass>("blunt");
-  const [weaponLevel, setWeaponLevel] = useState(Math.min(stageMaximumValue, GROWTH_MAXIMUM));
+  const [weaponLevel, setWeaponLevel] = useState(Math.min(stageMaximumValue, LEVELLING_MAXIMUM));
 
   const { ability, IconAbility, IconGearClass } = WEAPON_SPECIFICATIONS[weaponClass];
 
@@ -52,7 +52,10 @@ export function RangedWeaponOptions() {
     factor,
     gearClass: weaponClass,
   });
-  const maximumWeaponLevel = Math.min(stageMaximumValue + GEAR_LEVEL_RANGE_MAXIMUM, GROWTH_MAXIMUM);
+  const maximumWeaponLevel = Math.min(
+    stageMaximumValue + GEAR_LEVEL_RANGE_MAXIMUM,
+    LEVELLING_MAXIMUM,
+  );
 
   return (
     <Stack className="mx-auto w-50">

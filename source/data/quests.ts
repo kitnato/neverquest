@@ -1,5 +1,5 @@
 import { TAILORING } from "@neverquest/data/caravan";
-import { GROWTH_MAXIMUM, LABEL_UNKNOWN, LEVELLING_MAXIMUM } from "@neverquest/data/general";
+import { LABEL_UNKNOWN, LEVELLING_CUTOFF, LEVELLING_MAXIMUM } from "@neverquest/data/general";
 import IconConquest from "@neverquest/icons/conquest.svg?react";
 import IconRoutine from "@neverquest/icons/routine.svg?react";
 import IconTriumph from "@neverquest/icons/triumph.svg?react";
@@ -417,9 +417,9 @@ export const QUESTS: Record<
   },
   powerLevelUltra: {
     description: `Reach power level ${formatNumber({
-      value: GROWTH_MAXIMUM,
+      value: LEVELLING_CUTOFF,
     })}.`,
-    progression: [GROWTH_MAXIMUM],
+    progression: [LEVELLING_CUTOFF],
     requiresTracking: true,
     title: `It's over ${formatNumber({ value: 9000 })}!`,
   },
@@ -522,10 +522,10 @@ export const QUESTS: Record<
     title: "Sisyphean expedition",
   },
   stagesEnd: {
-    description: `Reach stage ${formatNumber({ value: GROWTH_MAXIMUM })}.`,
-    progression: [GROWTH_MAXIMUM],
+    description: `Reach stage ${formatNumber({ value: LEVELLING_CUTOFF })}.`,
+    progression: [LEVELLING_CUTOFF],
     requiresTracking: true,
-    title: "Where does it end?",
+    title: "Does it end?",
   },
   staggering: {
     description: "Stagger monsters.",

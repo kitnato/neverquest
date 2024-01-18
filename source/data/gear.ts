@@ -44,10 +44,10 @@ export const ARMOR_SPECIFICATIONS: Record<
       { maximum: 0.7, minimum: 0.66 },
     ],
     Icon: IconArmorHeavy,
-    price: { maximum: 15_000, minimum: 50 },
+    price: { maximum: 20_000, minimum: 50 },
     protection: [
       { maximum: 9, minimum: 7 },
-      { maximum: 2200, minimum: 2100 },
+      { maximum: 1500, minimum: 1400 },
     ],
     weight: [
       { maximum: 7, minimum: 5 },
@@ -60,10 +60,10 @@ export const ARMOR_SPECIFICATIONS: Record<
       { maximum: 25, minimum: 20 },
     ],
     Icon: IconArmorLight,
-    price: { maximum: 6000, minimum: 1 },
+    price: { maximum: 7000, minimum: 1 },
     protection: [
       { maximum: 2, minimum: 1 },
-      { maximum: 1400, minimum: 1300 },
+      { maximum: 600, minimum: 550 },
     ],
     weight: [
       { maximum: 2, minimum: 1 },
@@ -80,10 +80,10 @@ export const ARMOR_SPECIFICATIONS: Record<
       { maximum: 0.35, minimum: 0.31 },
     ],
     Icon: IconReinforced,
-    price: { maximum: 10_000, minimum: 25 },
+    price: { maximum: 12_000, minimum: 25 },
     protection: [
       { maximum: 6, minimum: 3 },
-      { maximum: 1700, minimum: 1600 },
+      { maximum: 1000, minimum: 950 },
     ],
     weight: [
       { maximum: 5, minimum: 3 },
@@ -158,7 +158,7 @@ export const SHIELD_SPECIFICATIONS: Record<
       { maximum: 45, minimum: 30 },
     ],
     Icon: IconShieldTower,
-    price: { maximum: 6000, minimum: 7 },
+    price: { maximum: 7000, minimum: 7 },
     stagger: [
       { maximum: 0.65, minimum: 0.6 },
       { maximum: 0.95, minimum: 0.93 },
@@ -186,12 +186,12 @@ export const WEAPON_BASE: GearRangeBase & {
   ],
   damage: [
     { maximum: 15, minimum: 13 },
-    { maximum: 1700, minimum: 1500 },
+    { maximum: 1000, minimum: 900 },
   ],
   price: { maximum: 10_000, minimum: 1 },
   range: [
-    { maximum: 2000, minimum: 1500 },
-    { maximum: 4000, minimum: 3500 },
+    { maximum: 1800, minimum: 1500 },
+    { maximum: 3500, minimum: 3300 },
   ],
   rate: [
     { maximum: 3000, minimum: 2900 },

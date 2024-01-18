@@ -54,7 +54,7 @@ export function HirableCrewMember({ crewMember }: { crewMember: CrewMember }) {
                   }}
                   variant="outline-dark"
                 >
-                  Hire
+                  <span>Hire</span>
                 </Button>
               </div>
             </OverlayTrigger>

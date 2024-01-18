@@ -114,7 +114,7 @@ export const CREW: Record<
       5: "Heard there are other travelers looking to sell their services.",
       6: "New gear for sale, if you care to peruse.",
       7: "Plenty of monsters out there.",
-      9: "There is something dark looming on the horizon ...",
+      9: "There is something looming on the horizon ...",
       10: "I can't believe you came out of that in one piece.",
       12: "Have you appraised all my offerings?",
       14: "There's more trouble ahead.",

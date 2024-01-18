@@ -21,10 +21,7 @@ export function Encumbrance() {
 
   return (
     <IconDisplay className="w-100" Icon={IconEncumbrance} tooltip="Encumbrance">
-      <LabelledProgressBar
-        value={(encumbranceValue / encumbranceMaximumValue) * PERCENTAGE_POINTS}
-        variant="dark"
-      >
+      <LabelledProgressBar value={(encumbranceValue / encumbranceMaximumValue) * PERCENTAGE_POINTS}>
         <Stack direction="horizontal" gap={1}>
           <span>
             {formatNumber({ value: encumbranceValue })}&nbsp;/&nbsp;

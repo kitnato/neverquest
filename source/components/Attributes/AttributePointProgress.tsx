@@ -30,12 +30,16 @@ export function AttributePointProgress({ extraEssence }: { extraEssence?: number
   const totalEssence = extraEssence === undefined ? essenceValue : essenceValue + extraEssence;
 
   return (
-    <OverlayTrigger overlay={<Tooltip>Essence required for next attribute point.</Tooltip>}>
+    <OverlayTrigger
+      overlay={
+        <Tooltip>
+          {extraEssence === undefined ? "Current essence" : "Essence after looting"}&nbsp;and
+          essence required for next attribute point.
+        </Tooltip>
+      }
+    >
       <div className="w-100">
-        <LabelledProgressBar
-          value={(totalEssence / nextTotalCost) * PERCENTAGE_POINTS}
-          variant="secondary"
-        >
+        <LabelledProgressBar value={(totalEssence / nextTotalCost) * PERCENTAGE_POINTS}>
           <IconDisplay Icon={IconEssence} iconProps={{ className: "small stencilled" }}>
             <span>
               {formatNumber({ value: totalEssence })}&nbsp;/&nbsp;

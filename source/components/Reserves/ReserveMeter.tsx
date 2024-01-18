@@ -100,7 +100,6 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
         ) : undefined
       }
       value={(reserveValue / reserveMaximumAilingValue) * (PERCENTAGE_POINTS - penalty)}
-      variant="dark"
     >
       <Stack direction="horizontal" gap={1}>
         <span>

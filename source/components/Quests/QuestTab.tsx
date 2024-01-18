@@ -26,10 +26,7 @@ export function QuestTab({ questClass }: { questClass: QuestClass }) {
     <Stack className="overflow-y-hidden" gap={3}>
       <hr />
 
-      <LabelledProgressBar
-        value={(completedQuestsValue / questCount) * PERCENTAGE_POINTS}
-        variant="dark"
-      >
+      <LabelledProgressBar value={(completedQuestsValue / questCount) * PERCENTAGE_POINTS}>
         <Stack direction="horizontal" gap={1}>
           <span>
             {completedQuestsValue}&nbsp;/&nbsp;{questCount}

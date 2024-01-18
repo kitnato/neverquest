@@ -21,10 +21,7 @@ export function AmmunitionPouchCapacity() {
 
   return (
     <IconDisplay Icon={IconAmmunitionPouch} tooltip="Ammunition capacity">
-      <LabelledProgressBar
-        value={(ammunitionValue / ammunitionCapacityValue) * PERCENTAGE_POINTS}
-        variant="dark"
-      >
+      <LabelledProgressBar value={(ammunitionValue / ammunitionCapacityValue) * PERCENTAGE_POINTS}>
         <Stack direction="horizontal" gap={1}>
           <span>
             {formatNumber({ value: ammunitionValue })}&nbsp;/&nbsp;

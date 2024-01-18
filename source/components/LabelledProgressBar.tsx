@@ -11,7 +11,7 @@ export function LabelledProgressBar({
   isStriped = false,
   sibling,
   value,
-  variant,
+  variant = "dark",
 }: {
   attachment?: UIAttachment;
   children: ReactNode;
@@ -20,7 +20,7 @@ export function LabelledProgressBar({
   isStriped?: boolean;
   sibling?: ReactNode;
   value: number;
-  variant: BootstrapColorVariant;
+  variant?: BootstrapColorVariant;
 }) {
   const progressAppearance = isStriped ? { animated: true, striped: true } : {};
 

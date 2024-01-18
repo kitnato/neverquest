@@ -1,7 +1,7 @@
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { MonsterAilmentMeter } from "@neverquest/components/Monster/MonsterAilmentMeter";
+import { AilmentMeter } from "@neverquest/components/Monster/AilmentMeter";
 import { useTimerDelta } from "@neverquest/hooks/useTimerDelta";
 import IconStunned from "@neverquest/icons/stunned.svg?react";
 import { canReceiveAilment } from "@neverquest/state/ailments";
@@ -28,7 +28,7 @@ export function Stunned() {
         Icon={IconStunned}
         tooltip="Stunned"
       >
-        <MonsterAilmentMeter ailment="stunned" totalDuration={mightValue} />
+        <AilmentMeter ailment="stunned" totalDuration={mightValue} />
       </IconDisplay>
     );
   }

@@ -14,6 +14,7 @@ import {
   MONSTER_DAMAGE,
   MONSTER_HEALTH,
   POISON,
+  RAGE,
 } from "@neverquest/data/monster";
 import { AILMENT_PENALTY } from "@neverquest/data/statistics";
 import { bleed } from "@neverquest/state/ailments";
@@ -32,7 +33,7 @@ import { infusionEffect } from "@neverquest/state/items";
 import { questProgress } from "@neverquest/state/quests";
 import { range } from "@neverquest/state/statistics";
 import { isFinality } from "@neverquest/types/type-guards";
-import type { MonsterAilment } from "@neverquest/types/unions";
+import type { Ailment } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import {
   getDamagePerRate,
@@ -123,7 +124,7 @@ export const hasMonsterClosed = withStateKey("hasMonsterClosed", (key) =>
 export const isMonsterAiling = withStateKey("isMonsterAiling", (key) =>
   selectorFamily({
     get:
-      (ailment: MonsterAilment) =>
+      (ailment: Ailment) =>
       ({ get }) =>
         get(monsterAilmentDuration(ailment)) > 0,
     key,
@@ -151,6 +152,13 @@ export const isMonsterRegenerating = withStateKey("isMonsterRegenerating", (key)
   }),
 );
 
+export const isRaging = withStateKey("isRaging", (key) =>
+  selector({
+    get: ({ get }) => get(rage) === RAGE.maximum,
+    key,
+  }),
+);
+
 export const monsterAttackRate = withStateKey("monsterAttackRate", (key) =>
   selector({
     get: ({ get }) => {
@@ -167,7 +175,7 @@ export const monsterAttackRate = withStateKey("monsterAttackRate", (key) =>
           (base - base * factor * (1 + Math.min(get(progress), PROGRESS.maximum) * bonus)) *
             (encounterValue === "boss" ? boss : 1),
           minimum,
-        ),
+        ) * (get(isRaging) ? RAGE.effect : 1),
       );
     },
     key,
@@ -377,7 +385,7 @@ export const isMonsterNew = withStateKey("isMonsterNew", (key) =>
 );
 
 export const monsterAilmentDuration = withStateKey("monsterAilmentDuration", (key) =>
-  atomFamily<number, MonsterAilment>({
+  atomFamily<number, Ailment>({
     default: 0,
     effects: (ailment) => [handleLocalStorage({ key, parameter: ailment })],
     key,
@@ -418,6 +426,14 @@ export const monsterName = withStateKey("monsterName", (key) =>
 );
 
 export const monsterRegenerationDuration = withStateKey("monsterRegenerationDuration", (key) =>
+  atom({
+    default: 0,
+    effects: [handleLocalStorage({ key })],
+    key,
+  }),
+);
+
+export const rage = withStateKey("rage", (key) =>
   atom({
     default: 0,
     effects: [handleLocalStorage({ key })],

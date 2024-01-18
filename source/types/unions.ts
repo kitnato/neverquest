@@ -1,3 +1,14 @@
+const ELEMENTAL_AILMENT_TYPES = ["burning", "frozen", "shocked"] as const;
+export type ElementalAilment = (typeof ELEMENTAL_AILMENT_TYPES)[number];
+
+export const AILMENT_TYPES = [
+  "bleeding",
+  "staggered",
+  "stunned",
+  ...ELEMENTAL_AILMENT_TYPES,
+] as const;
+
+export type Ailment = (typeof AILMENT_TYPES)[number];
 export const ATTRIBUTE_TYPES = [
   "strength",
   "speed",
@@ -96,6 +107,7 @@ export type Delta =
   | "powerLevel"
   | "progress"
   | "protection"
+  | "rage"
   | "range"
   | "recoveryRate"
   | "resilienceProgress"
@@ -138,18 +150,6 @@ export const MASTERY_TYPES = [
   "stability",
 ] as const;
 export type Mastery = (typeof MASTERY_TYPES)[number];
-
-const MONSTER_AILMENT_ELEMENTAL_TYPES = ["burning", "frozen", "shocked"] as const;
-export type MonsterAilmentElemental = (typeof MONSTER_AILMENT_ELEMENTAL_TYPES)[number];
-
-export const MONSTER_AILMENT_TYPES = [
-  "bleeding",
-  "staggered",
-  "stunned",
-  ...MONSTER_AILMENT_ELEMENTAL_TYPES,
-] as const;
-
-export type MonsterAilment = (typeof MONSTER_AILMENT_TYPES)[number];
 
 export type NumberFormat =
   | "abbreviated"
@@ -351,6 +351,7 @@ export type StateKey =
   | "isMonsterNew"
   | "isMonsterRegenerating"
   | "isPoisoned"
+  | "isRaging"
   | "isRecovering"
   | "isRegenerating"
   | "isShowing"
@@ -404,6 +405,7 @@ export type StateKey =
   | "questProgress"
   | "questsBonus"
   | "questStatuses"
+  | "rage"
   | "range"
   | "recoveryDuration"
   | "recoveryRate"

@@ -1,7 +1,7 @@
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { MonsterAilmentMeter } from "@neverquest/components/Monster/MonsterAilmentMeter";
+import { AilmentMeter } from "@neverquest/components/Monster/AilmentMeter";
 import { ELEMENTALS } from "@neverquest/data/items";
 import { useTimerDelta } from "@neverquest/hooks/useTimerDelta";
 import { elementalEffects } from "@neverquest/state/gear";
@@ -10,16 +10,16 @@ import type { Elemental } from "@neverquest/types/unions";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-export function MonsterElementalAilment({ elemental }: { elemental: Elemental }) {
+export function ElementalAilment({ elemental }: { elemental: Elemental }) {
   const { ailment, durationCap, Icon } = ELEMENTALS[elemental];
 
   const isMonsterAilingValue = useRecoilValue(isMonsterAiling(ailment));
   const isMonsterDeadValue = useRecoilValue(isMonsterDead);
   const { armor, weapon } = useRecoilValue(elementalEffects);
-  const setMonsterAilment = useSetRecoilState(monsterAilmentDuration(ailment));
+  const setAilment = useSetRecoilState(monsterAilmentDuration(ailment));
 
   useTimerDelta({
-    delta: setMonsterAilment,
+    delta: setAilment,
     stop: !isMonsterAilingValue || isMonsterDeadValue,
   });
 
@@ -30,7 +30,7 @@ export function MonsterElementalAilment({ elemental }: { elemental: Elemental })
         Icon={Icon}
         tooltip={capitalizeAll(ailment)}
       >
-        <MonsterAilmentMeter ailment={ailment} totalDuration={durationCap} />
+        <AilmentMeter ailment={ailment} totalDuration={durationCap} />
       </IconDisplay>
     );
   }

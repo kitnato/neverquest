@@ -4,11 +4,11 @@ import IconDistance from "@neverquest/icons/distance.svg?react";
 import IconMonsterAttackRate from "@neverquest/icons/monster-attack-rate.svg?react";
 import IconMonsterDamage from "@neverquest/icons/monster-damage.svg?react";
 import type { SVGIcon } from "@neverquest/types/components";
-import type { MonsterAilment } from "@neverquest/types/unions";
+import type { Ailment } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export const AILMENT_DESCRIPTION: Record<
-  MonsterAilment,
+  Ailment,
   { description: string; descriptionIcons?: SVGIcon[] }
 > = {
   bleeding: { description: "Suffering periodic damage." },
@@ -144,4 +144,11 @@ export const POISON = {
     minimum: 0.02,
   },
   requiredStage: 45,
+};
+
+export const RAGE = {
+  effect: 0.5,
+  increment: 1,
+  maximum: 4,
+  requiredStage: 21,
 };

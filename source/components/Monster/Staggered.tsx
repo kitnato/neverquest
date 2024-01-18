@@ -1,7 +1,7 @@
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { MonsterAilmentMeter } from "@neverquest/components/Monster/MonsterAilmentMeter";
+import { AilmentMeter } from "@neverquest/components/Monster/AilmentMeter";
 import { useTimerDelta } from "@neverquest/hooks/useTimerDelta";
 import IconStaggered from "@neverquest/icons/staggered.svg?react";
 import { canReceiveAilment } from "@neverquest/state/ailments";
@@ -28,7 +28,7 @@ export function Staggered() {
         Icon={IconStaggered}
         tooltip="Staggered"
       >
-        <MonsterAilmentMeter ailment="staggered" totalDuration={stabilityValue} />
+        <AilmentMeter ailment="staggered" totalDuration={stabilityValue} />
       </IconDisplay>
     );
   }

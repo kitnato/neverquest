@@ -12,9 +12,10 @@ import {
   monsterHealth,
   monsterName,
   monsterRegenerationDuration,
+  rage,
 } from "@neverquest/state/monster";
 import { attackRate } from "@neverquest/state/statistics";
-import { MONSTER_AILMENT_TYPES } from "@neverquest/types/unions";
+import { AILMENT_TYPES } from "@neverquest/types/unions";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 import { getAffixStructure, getSnapshotGetter } from "@neverquest/utilities/getters";
 
@@ -42,11 +43,12 @@ export function useGenerateMonster() {
           }
         }
 
+        reset(distance);
         reset(monsterHealth);
         reset(monsterRegenerationDuration);
-        reset(distance);
+        reset(rage);
 
-        for (const ailment of MONSTER_AILMENT_TYPES) {
+        for (const ailment of AILMENT_TYPES) {
           reset(monsterAilmentDuration(ailment));
         }
 

@@ -31,9 +31,9 @@ import type {
   Consumable,
   Delta,
   Elemental,
+  ElementalAilment,
   Gem,
   Infusable,
-  MonsterAilmentElemental,
   Relic,
 } from "@neverquest/types/unions";
 
@@ -91,7 +91,7 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
 export const ELEMENTALS: Record<
   Elemental,
   {
-    ailment: MonsterAilmentElemental;
+    ailment: ElementalAilment;
     color: string;
     damage: GeneratorRange;
     damageModification: string;

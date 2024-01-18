@@ -1,7 +1,7 @@
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { MonsterAilmentMeter } from "@neverquest/components/Monster/MonsterAilmentMeter";
+import { AilmentMeter } from "@neverquest/components/Monster/AilmentMeter";
 import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth";
 import { useTimerDelta } from "@neverquest/hooks/useTimerDelta";
 import IconBleeding from "@neverquest/icons/bleeding.svg?react";
@@ -55,7 +55,7 @@ export function Bleeding() {
         Icon={IconBleeding}
         tooltip="Bleeding"
       >
-        <MonsterAilmentMeter ailment="bleeding" totalDuration={duration} />
+        <AilmentMeter ailment="bleeding" totalDuration={duration} />
       </IconDisplay>
     );
   }

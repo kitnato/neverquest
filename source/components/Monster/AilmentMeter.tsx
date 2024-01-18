@@ -7,14 +7,14 @@ import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
 import { LABEL_EMPTY, PERCENTAGE_POINTS } from "@neverquest/data/general";
 import { AILMENT_DESCRIPTION } from "@neverquest/data/monster";
 import { isMonsterAiling, monsterAilmentDuration } from "@neverquest/state/monster";
-import type { MonsterAilment } from "@neverquest/types/unions";
+import type { Ailment } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
-export function MonsterAilmentMeter({
+export function AilmentMeter({
   ailment,
   totalDuration,
 }: {
-  ailment: MonsterAilment;
+  ailment: Ailment;
   totalDuration: number;
 }) {
   const isMonsterAilingValue = useRecoilValue(isMonsterAiling(ailment));

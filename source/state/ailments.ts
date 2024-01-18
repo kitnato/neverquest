@@ -7,11 +7,7 @@ import { elementalEffects, shield, weapon } from "@neverquest/state/gear";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import { isUnarmed, isUnshielded } from "@neverquest/types/type-guards";
-import {
-  ELEMENTAL_TYPES,
-  MONSTER_AILMENT_TYPES,
-  type MonsterAilment,
-} from "@neverquest/types/unions";
+import { AILMENT_TYPES, type Ailment, ELEMENTAL_TYPES } from "@neverquest/types/unions";
 import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
@@ -37,7 +33,7 @@ export const bleedChance = withStateKey("bleedChance", (key) =>
 export const canReceiveAilment = withStateKey("canReceiveAilment", (key) =>
   selectorFamily({
     get:
-      (ailment: MonsterAilment) =>
+      (ailment: Ailment) =>
       ({ get }) => {
         switch (ailment) {
           case "bleeding": {
@@ -72,7 +68,7 @@ export const canReceiveAilment = withStateKey("canReceiveAilment", (key) =>
 
 export const canReceiveAilments = withStateKey("canReceiveAilments", (key) =>
   selector({
-    get: ({ get }) => MONSTER_AILMENT_TYPES.some((ailment) => get(canReceiveAilment(ailment))),
+    get: ({ get }) => AILMENT_TYPES.some((ailment) => get(canReceiveAilment(ailment))),
     key,
   }),
 );

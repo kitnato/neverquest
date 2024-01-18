@@ -5,13 +5,13 @@ import type {
   WeaponClass,
   WeaponModality,
 } from "@kitnato/locran/build/types";
-import { BLIGHT, POISON } from "./monster";
 import {
   LEVELLING_CUTOFF,
   LEVELLING_MAXIMUM,
   RETIREMENT_STAGE_MINIMUM,
 } from "@neverquest/data/general";
 import { INFUSABLES, RELICS } from "@neverquest/data/items";
+import { BLIGHT, POISON, RAGE } from "@neverquest/data/monster";
 import IconAlchemist from "@neverquest/icons/alchemist.svg?react";
 import IconBlacksmith from "@neverquest/icons/blacksmith.svg?react";
 import IconFletcher from "@neverquest/icons/fletcher.svg?react";
@@ -121,6 +121,7 @@ export const CREW: Record<
       15: "Once again you emerge victorious!",
       16: "The grind beckons.",
       20: "May our hearth be a beacon for your replenishment.",
+      [RAGE.requiredStage]: "The foul creatures seem even more irate than usual.",
       26: "Always a sight for sore eyes.",
       30: "Yet you return for more punishment?",
       31: "Your headway in the wilderness is helping business.",
@@ -135,16 +136,16 @@ export const CREW: Record<
       57: "The portents are truly dire ...",
       58: "Delving further must be our salvation.",
       74: "I fear the end is imminent.",
-      [LEVELLING_CUTOFF]: "All is truly lost.",
       [LEVELLING_MAXIMUM - 1]: "Something's wrong.",
-      [LEVELLING_MAXIMUM]: "How are you still here?",
+      [LEVELLING_CUTOFF]: "All is truly lost.",
       [LEVELLING_MAXIMUM + 4]: "Please go back to where you came from.",
       [LEVELLING_MAXIMUM + 8]: "This is all wrong. I don't understand.",
       [LEVELLING_MAXIMUM + 12]: "Why? Emptiness never-ending ...",
       [LEVELLING_MAXIMUM + 16]: "Inescapable. Unfathomable. Inside everything.",
       [LEVELLING_MAXIMUM + 20]: "Please ... the pain ...",
-      [RETIREMENT_STAGE_MINIMUM]: "Retirement? Pretty sure you're trapped here with us.",
+      [LEVELLING_MAXIMUM]: "How are you still here?",
       [RETIREMENT_STAGE_MINIMUM + 1]: "A sea of monsters ... is it endless?",
+      [RETIREMENT_STAGE_MINIMUM]: "Retirement? Pretty sure you're trapped here with us.",
     },
     price: 1,
     requiredStage: 1,

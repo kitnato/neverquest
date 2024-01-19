@@ -1,4 +1,4 @@
-import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import { OverlayTrigger, Popover, PopoverBody } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
@@ -32,10 +32,12 @@ export function AttributePointProgress({ extraEssence }: { extraEssence?: number
   return (
     <OverlayTrigger
       overlay={
-        <Tooltip>
-          {extraEssence === undefined ? "Current essence" : "Essence after looting"}&nbsp;and
-          required essence for next attribute point.
-        </Tooltip>
+        <Popover>
+          <PopoverBody>
+            {extraEssence === undefined ? "Current essence" : "Essence after looting"}&nbsp;and
+            required essence for next attribute point.
+          </PopoverBody>
+        </Popover>
       }
     >
       <div className="w-100">

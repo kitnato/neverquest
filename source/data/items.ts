@@ -123,7 +123,7 @@ export const ELEMENTALS: Record<
   },
   lightning: {
     ailment: "shocked",
-    color: "text-yellow",
+    color: "text-indigo",
     damage: { maximum: 0.6, minimum: 0.075 },
     damageModification: "medium",
     duration: { maximum: 2500, minimum: 1000 },

@@ -1,17 +1,13 @@
 {
   "name": "neverquest",
   "short_name": "neverquest",
-  "description": "An irreverent UI-based incremental action RPG.",
+  "description": "An irreverent UI-based incremental Souls-like.",
   "icons": [
-    {
-      "src": "/android-chrome-192x192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
     {
       "src": "/android-chrome-512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "/apple-touch-icon.png",
@@ -26,7 +22,7 @@
       "purpose": "maskable"
     }
   ],
-  "theme_color": "#ffffff",
+  "theme_color": "#000000",
   "background_color": "#ffffff",
   "display": "standalone",
   "orientation": "landscape",

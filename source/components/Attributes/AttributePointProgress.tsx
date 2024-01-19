@@ -34,7 +34,7 @@ export function AttributePointProgress({ extraEssence }: { extraEssence?: number
       overlay={
         <Popover>
           <PopoverBody>
-            {extraEssence === undefined ? "Current essence" : "Essence after looting"}&nbsp;and
+            {extraEssence === undefined ? "Current essence" : "Essence after collecting loot"}, and
             required essence for next attribute point.
           </PopoverBody>
         </Popover>

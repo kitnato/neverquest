@@ -193,7 +193,7 @@ export const OCCULTIST_PURGE_PRICE_MULTIPLIER = {
   quests: 500,
 };
 
-export const MEDIC_PRICE_SURGERY = 25;
+export const MEDIC_PRICE_SURGERY = 10;
 
 export const MERCHANT_OFFERS: Record<
   number,

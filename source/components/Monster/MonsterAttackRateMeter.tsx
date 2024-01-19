@@ -11,7 +11,7 @@ import {
 } from "@neverquest/state/monster";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
-export function MonsterAttackMeter() {
+export function MonsterAttackRateMeter() {
   const monsterAttackDurationValue = useRecoilValue(monsterAttackDuration);
   const monsterAttackRateValue = useRecoilValue(monsterAttackRate);
   const isMonsterFrozen = useRecoilValue(isMonsterAiling("frozen"));

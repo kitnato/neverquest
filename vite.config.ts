@@ -22,12 +22,7 @@ export default defineConfig({
     svgr(),
     tsconfigPaths(),
     VitePWA({
-      includeAssets: [
-        "favicon.ico",
-        "apple-touch-icon.png",
-        "android-chrome-512x512.png",
-        "mstile-310x310.png",
-      ],
+      includeAssets: ["apple-touch-icon.png", "android-chrome-512x512.png", "mstile-310x310.png"],
       registerType: "autoUpdate",
     }),
   ],

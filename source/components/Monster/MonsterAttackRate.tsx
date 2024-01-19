@@ -1,7 +1,7 @@
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { MonsterAttackMeter } from "@neverquest/components/Monster/MonsterAttackMeter";
+import { MonsterAttackRateMeter } from "@neverquest/components/Monster/MonsterAttackRateMeter";
 import { AILMENT_PENALTY } from "@neverquest/data/statistics";
 import { useDefend } from "@neverquest/hooks/actions/useDefend";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
@@ -40,7 +40,7 @@ export function MonsterAttackRate() {
 
   return (
     <IconDisplay Icon={IconMonsterAttackRate} tooltip="Monster attack rate">
-      <MonsterAttackMeter />
+      <MonsterAttackRateMeter />
     </IconDisplay>
   );
 }

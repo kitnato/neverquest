@@ -121,6 +121,13 @@ export const hasMonsterClosed = withStateKey("hasMonsterClosed", (key) =>
   }),
 );
 
+export const isEnraged = withStateKey("isEnraged", (key) =>
+  selector({
+    get: ({ get }) => get(rage) === RAGE.maximum,
+    key,
+  }),
+);
+
 export const isMonsterAiling = withStateKey("isMonsterAiling", (key) =>
   selectorFamily({
     get:
@@ -152,13 +159,6 @@ export const isMonsterRegenerating = withStateKey("isMonsterRegenerating", (key)
   }),
 );
 
-export const isRaging = withStateKey("isRaging", (key) =>
-  selector({
-    get: ({ get }) => get(rage) === RAGE.maximum,
-    key,
-  }),
-);
-
 export const monsterAttackRate = withStateKey("monsterAttackRate", (key) =>
   selector({
     get: ({ get }) => {
@@ -175,7 +175,7 @@ export const monsterAttackRate = withStateKey("monsterAttackRate", (key) =>
           (base - base * factor * (1 + Math.min(get(progress), PROGRESS.maximum) * bonus)) *
             (encounterValue === "boss" ? boss : 1),
           minimum,
-        ) * (get(isRaging) ? RAGE.effect : 1),
+        ) * (get(isEnraged) ? RAGE.effect : 1),
       );
     },
     key,

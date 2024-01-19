@@ -6,8 +6,8 @@ import { isStageCompleted, isStageStarted, stage } from "@neverquest/state/encou
 import { isShowing } from "@neverquest/state/isShowing";
 import {
   distance,
+  isEnraged,
   isMonsterDead,
-  isRaging,
   monsterAttackDuration,
   monsterAttackRate,
   rage,
@@ -39,7 +39,7 @@ export function useToggleAttacking() {
           reset(monsterAttackDuration);
 
           if (!get(isMonsterDead)) {
-            if (!get(isRaging) && get(stage) >= requiredStage) {
+            if (!get(isEnraged) && get(stage) >= requiredStage) {
               set(rage, (currentRage) => currentRage + increment);
             }
 

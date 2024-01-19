@@ -5,18 +5,18 @@ import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { PERCENTAGE_POINTS } from "@neverquest/data/general";
 import { RAGE } from "@neverquest/data/monster";
-import { isRaging, rage } from "@neverquest/state/monster";
+import { isEnraged, rage } from "@neverquest/state/monster";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function RageMeter() {
-  const isRagingValue = useRecoilValue(isRaging);
+  const isEnragedValue = useRecoilValue(isEnraged);
   const rageValue = useRecoilValue(rage);
 
   const { maximum } = RAGE;
 
   return (
     <LabelledProgressBar
-      isStriped={isRagingValue}
+      isStriped={isEnragedValue}
       value={(rageValue / maximum) * PERCENTAGE_POINTS}
       variant="secondary"
     >
@@ -24,6 +24,10 @@ export function RageMeter() {
         <span>
           {formatNumber({
             value: rageValue,
+          })}
+          &nbsp;/&nbsp;
+          {formatNumber({
+            value: maximum,
           })}
         </span>
 

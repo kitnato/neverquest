@@ -121,7 +121,7 @@ export const CREW: Record<
       15: "Once again you emerge victorious!",
       16: "The grind beckons.",
       20: "May our hearth be a beacon for your replenishment.",
-      [RAGE.requiredStage]: "The foul creatures seem even more irate than usual.",
+      [RAGE.requiredStage - 1]: "The foul creatures seem even more irate than usual.",
       26: "Always a sight for sore eyes.",
       30: "Yet you return for more punishment?",
       31: "Your headway in the wilderness is helping business.",

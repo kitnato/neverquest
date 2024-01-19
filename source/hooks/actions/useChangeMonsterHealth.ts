@@ -8,6 +8,7 @@ import { attackDuration, lootingDuration } from "@neverquest/state/character";
 import { encounter, stage } from "@neverquest/state/encounter";
 import { ownedItem } from "@neverquest/state/inventory";
 import {
+  isEnraged,
   isMonsterAiling,
   monsterAttackDuration,
   monsterHealth,
@@ -66,6 +67,10 @@ export function useChangeMonsterHealth() {
             lootingDuration,
             LOOTING_RATE[get(ownedItem("ender hook")) === undefined ? "base" : "ender hook"],
           );
+
+          if (get(isEnraged)) {
+            progressQuest({ quest: "killingEnraged" });
+          }
 
           switch (get(encounter)) {
             case "boss": {

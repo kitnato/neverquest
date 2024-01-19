@@ -30,6 +30,7 @@ export const CONQUEST_TYPES = [
   "looting",
   "blocking",
   "killingBoss",
+  "killingEnraged",
   "staggering",
   "bleeding",
   "bleedingKill",

@@ -13,7 +13,7 @@ import { useHireCrewMember } from "@neverquest/hooks/actions/useHireCrewMember";
 import IconEssence from "@neverquest/icons/essence.svg?react";
 import IconUnknown from "@neverquest/icons/unknown.svg?react";
 import { isHired } from "@neverquest/state/caravan";
-import { stage } from "@neverquest/state/encounter";
+import { stageMaximum } from "@neverquest/state/encounter";
 import { essence } from "@neverquest/state/resources";
 import type { CrewMember } from "@neverquest/types/unions";
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
@@ -21,7 +21,7 @@ import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 export function HirableCrewMember({ crewMember }: { crewMember: CrewMember }) {
   const isHiredValue = useRecoilValue(isHired(crewMember));
   const essenceValue = useRecoilValue(essence);
-  const stageValue = useRecoilValue(stage);
+  const stageMaximumValue = useRecoilValue(stageMaximum);
 
   const hireCrewMember = useHireCrewMember();
 
@@ -30,10 +30,10 @@ export function HirableCrewMember({ crewMember }: { crewMember: CrewMember }) {
   const name = capitalizeAll(crewMember);
 
   if (!isHiredValue) {
-    if (stageValue >= requiredStage) {
+    if (stageMaximumValue >= requiredStage) {
       return (
         <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-          <IconDisplay description={description} Icon={Icon} tooltip="Caravan member">
+          <IconDisplay description={description} Icon={Icon} tooltip="Caravan crew member">
             {name}
           </IconDisplay>
 
@@ -67,7 +67,7 @@ export function HirableCrewMember({ crewMember }: { crewMember: CrewMember }) {
       <IconDisplay
         description={`Found on stage ${requiredStage}.`}
         Icon={IconUnknown}
-        tooltip="Caravan member"
+        tooltip="Caravan crew member"
       >
         <span>{LABEL_UNKNOWN}</span>
       </IconDisplay>

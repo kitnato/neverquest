@@ -15,7 +15,7 @@ import IconTraits from "@neverquest/icons/traits.svg?react";
 import IconUpgrade from "@neverquest/icons/upgrade.svg?react";
 import { areAttributesAffordable } from "@neverquest/state/attributes";
 import { hasFlatlined, isAttacking } from "@neverquest/state/character";
-import { isStageStarted } from "@neverquest/state/encounter";
+import { location } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
 import { acquiredSkills } from "@neverquest/state/skills";
 import { acquiredTraits } from "@neverquest/state/traits";
@@ -35,11 +35,11 @@ const BASE_TOOLTIP = ["Attributes"];
 export function Capabilities() {
   const acquiredSkillsValue = useRecoilValue(acquiredSkills);
   const acquiredTraitsValue = useRecoilValue(acquiredTraits);
-  const areAttributesIncreasableValue = useRecoilValue(areAttributesAffordable);
+  const areAttributesAffordableValue = useRecoilValue(areAttributesAffordable);
   const isAttackingValue = useRecoilValue(isAttacking);
   const hasFlatlinedValue = useRecoilValue(hasFlatlined);
-  const isStageStartedValue = useRecoilValue(isStageStarted);
   const isShowingCapabilities = useRecoilValue(isShowing("capabilities"));
+  const locationValue = useRecoilValue(location);
 
   const [isScreenShowing, setScreenShowing] = useState(false);
 
@@ -81,7 +81,7 @@ export function Capabilities() {
           <div className={getAnimationClass({ animation: "bounceIn" })}>
             <Button
               className={`position-relative${
-                areAttributesIncreasableValue && !isStageStartedValue
+                areAttributesAffordableValue && locationValue === "caravan"
                   ? ` ${getAnimationClass({
                       animation: "pulse",
                       isInfinite: true,
@@ -96,7 +96,7 @@ export function Capabilities() {
             >
               <IconImage Icon={IconCapabilities} />
 
-              {areAttributesIncreasableValue && (
+              {areAttributesAffordableValue && (
                 <Badge
                   bg="secondary"
                   className="position-absolute top-50 start-100 translate-middle"

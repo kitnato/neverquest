@@ -16,7 +16,7 @@ Upon a monster's death, the stage's **progress** is incremented, its remains are
 
 Once the wilderness is cleared of monsters, all looted resources can be **collected** and you enter a **resting** state. At this point, **traveling** to the [caravan](#caravan) becomes possible.
 
-The caravan allows interacting with a crewMember that provides essential services like accessing higher stages and unlocking new capabilities.
+The caravan allows interacting with crew members that each provide essential services like accessing higher stages and unlocking new capabilities.
 
 ## You
 
@@ -34,7 +34,7 @@ Health is [regenerated](#health-regeneration) over time.
 
 #### Stamina
 
-Several combat actions require stamina to execute them successfully. Most [gear](#gear) has a burden for an associated action which translate to a stamina cost that must be paid to be successful. For instance, when wielding a [weapon](#weapons) with burden 3, 3 stamina is paid on every hit. Wearing armor has a passive burden that is paid when struck.
+Several combat actions require stamina to execute them successfully. Most [gear](#gear) has a burden for an associated action which translate to a stamina cost that must be paid to be successful. For instance, when wielding a [weapon](#weapons) with burden 3, every attack will spend 3 stamina. Wearing armor incurs a burden that is paid when struck.
 
 When there is not enough stamina available for an attack, [parrying](#parry-rating), [dodging](#dodge-chance) or [blocking](#block-chance), exhaustion occurs in which none of these actions are possible until sufficient stamina is [regenerated](#stamina-regeneration).
 
@@ -90,9 +90,9 @@ Affects maximum total [health](#health).
 
 Derived from [attributes](#attributes), [gear](#gear), [skills](#skills), [masteries](#masteries), [traits](#traits) and any current [ailments](#character-ailments).
 
-#### Damage per second (DPS)
+#### Damage per second
 
-Displays the expected damage per second (DPS) you (and the monster) can deal, taking into account [attack rate](#attack-rate), current [total damage](#total-damage) and [critical](#critical-rating) strikes.
+Displays the expected damage per second you (and the monster) can deal, taking into account [attack rate](#attack-rate), current [total damage](#total-damage) and [critical](#critical-rating) strikes.
 
 Requires the acquisition of a certain [relic](#relics).
 
@@ -208,6 +208,10 @@ Requires the [calisthenics](#calisthenics) skill.
 
 The damage from the equipped [weapon](#weapons) in addition to [strength](#strength) along with any other bonuses that together are inflicted with every attack.
 
+### Death
+
+When your [health](#health) reaches 0, you can be reborn on stage 1 with your [power level](#attributes) intact, but having lost all equipped gear and unspent [essence](#essence). Once reaching the stage again in which you previously died, you may scavenge your corpse for a fraction of the lost essence.
+
 ## Encounter
 
 The panel to the right of the screen. It changes based on one of the two possible locations, [wilderness](#wilderness) and [caravan](#caravan).
@@ -230,9 +234,9 @@ A monster that is much more powerful than a standard monster of that stage. They
 
 Encountered after completing the current [wilderness](#wilderness) stage.
 
-All goods and services offered by the caravan crewMember are purchasable with [essence](#essence). Once at the caravan, the only other option apart from interacting with the crewMember is to return to the wilderness, which will increase the stage (if the previous wilderness was left at the maximum stage).
+All goods and services offered by caravan crew members are purchasable with [essence](#essence). Once at the caravan, the only other option apart from interacting with the crew is to return to the wilderness, which increases the stage if the previous wilderness was completed at the maximum stage.
 
-The [merchant](#merchant) is always present from the start. Other crewMember members can be hired at a cost of essence, who then offer different goods and services. More crewMember become available for hire as the stage increases.
+The [merchant](#merchant) is always present from the start. Other crew members can be hired at a cost of essence, who then offer different goods and services. More crew members become available for hire as the stage increases.
 
 #### Alchemist
 
@@ -262,11 +266,11 @@ Purchase and sell [items](#item). The merchant's inventory of items will grow an
 
 #### Occultist
 
-Offers purging rituals, such as resetting your power level that refunds all spent essence. Also sells phylacteries that resurrect you upon death.
+Offers purging rituals, such as resetting your power level that refunds all spent essence. Also sells phylacteries that resurrect you upon [death](#death).
 
 #### Tailor
 
-Sells upgrades for increasing maximum [encumbrance](#encumbrance). Also offers expansion of the ammunition pouch.
+Sells upgrades for increasing maximum [encumbrance](#encumbrance). Also offers expansion of the [ammunition pouch](#ranged-weapons).
 
 #### Witch
 
@@ -284,7 +288,7 @@ An item can either be;
 
 - a) a piece of [gear](#gear), or
 - b) a consumable like a [potion](#potions), or
-- c) a [relic](#relics) that grants a special effect and/or an action while part of the inventory, such as the ammunition pouch.
+- c) a [relic](#relics) that grants a special effect and/or a manual action while carried.
 
 Every item, apart from the [knapsack](#knapsack), has an associated weight that affects [encumbrance](#encumbrance).
 
@@ -332,7 +336,7 @@ Takes up both the main and [shield](#shields) slots.
 - High purchase & crafting cost
 - High weight
 
-There is also a chance to [execute](#execution-threshold) monsters when at or under a certain health threshold or under.
+Also provides a chance to [execute](#execution-threshold) monsters when at or under a certain health threshold or under.
 
 ##### Ranged weapons
 
@@ -343,19 +347,19 @@ There is also a chance to [execute](#execution-threshold) monsters when at or un
 - Medium purchase & crafting cost
 - Medium weight
 
-There is also a certain [range](#range) that delays contact with the monster.
+Also provides a certain [range](#range) that delays contact with the monster.
 
-They require finite ammunition as part of the second slot, which can be purchased from the [fletcher](#fletcher) once the correct relic has been acquired from the [merchant](#merchant).
+Requires finite ammunition as part of the second slot, which can be purchased from the [fletcher](#fletcher) once the ammunition pouch has been acquired from the [merchant](#merchant).
 
 Requires the [archery](#archery) skill.
 
 ##### Weapon class
 
-Whatever its melee or ranged, a weapon additionally falls into one of several classes that intrinsically grants certain modifiers. These modifiers are only relevant if the associated [skill](#skills) is acquired.
+Whatever its melee or ranged, a weapon additionally falls into one of several classes that grants certain modifiers. These modifiers are only applied if the associated [skill](#skills) is acquired.
 
 ###### Blunt weapons
 
-Adds chance to [stun](#stun) for a certain duration. Not wielding any weapon, i.e. being unarmed, is considered as having the blunt class.
+Adds chance to [stun](#stun) for a certain duration. Being unarmed is considered as wielding a blunt weapon.
 
 Stun requires the [traumatology](#traumatology) skill.
 
@@ -373,7 +377,7 @@ Parry requires the [escrime](#escrime) skill.
 
 #### Armor
 
-Armor provides [protection](#protection). When receiving damage, if the armor has thorns, then that damage is simultaneously inflicted upon the attacker.
+Armor provides [protection](#protection). When receiving damage, if the armor has [thorns](#gems), then that damage is simultaneously inflicted upon the attacker.
 
 Each of the following armor classes increases the protection value for certain tradeoffs.
 
@@ -428,9 +432,9 @@ Grants a percentage chance to [block](#block-chance) all incoming damage. Also g
 
 #### Gems
 
-Gems are items that can be applied to gear. They are dropped by [bosses](#bosses), one at stage 10 and one more for each boss encounter after that (resulting in e.g. four gems being dropped by a stage 25 boss).
+Gems are items that can be applied to gear. They are dropped by [bosses](#bosses), one at stage 10 and one more for each boss encounter after that. For example, four gems are dropped by the boss ons stage 25.
 
-Up to 5 gems can be applied to a piece of gear. Once applied, gems are consumed and cannot be removed or moved to a different piece of gear.
+Up to 5 gems can be applied to a piece of gear. Once applied, gems are consumed and cannot be removed or transferred to a different piece of gear.
 
 The gem types are the following, associated with their corresponding [elemental damage](#elemental-damage) types:
 
@@ -440,7 +444,7 @@ The gem types are the following, associated with their corresponding [elemental 
 
 Gems add the following benefits to gear:
 
-- Weapon: adds damage based on base damage. Once an attack hits, the corresponding elemental effect is also applied.
+- Weapon: adds damage based on base damage. Once an attack hits the monster, the corresponding elemental effect is also applied.
 - Armor: adds [thorns](#armor) damage based on protection. If thorns are inflicted, the corresponding elemental effect is applied as well.
 - Shield: increases the potency of the elemental damage and duration of the elemental effect of both armor and weapon gems of the same type.
 
@@ -462,7 +466,7 @@ Relics enable various actions or grant certain effects if they are carried in th
 
 ##### Static relics
 
-These provide a permanent effect of some sort while they are carried in the inventory. If one is sold or lost, the effect disappears alongside it.
+These provide a permanent effect of some sort while they are carried in the inventory. If one is sold or discarded, the effect disappears alongside it.
 
 ##### Usable relics
 
@@ -478,15 +482,15 @@ This infusable relic, while carried in the [knapsack](#knapsack), provides a bon
 
 For example, if you are carrying a level 0 Tome of Power, your power level is 25, the attribute in question is at rank 5, a given attribute rank would increase a given statistic by 10, and the boosted percentage is 1%, the statistic value is calculated as follows:
 
-> 5 attribute ranks × 10 + 25 power levels × 1% bonus per rank = 62.5 (50 if no Tome was owned)
+`5 attribute ranks × 10 + 25 power levels × 1% bonus per rank = 62.5 (50 if no Tome was owned)`
 
 Additionally, each infusion level boosts this bonus percentage. In case the Tome is infused to grant a bonus boost of +5%, the calculation would be as follows:
 
-> 5 × 10 + 25 × 1.05% = 63.125
+`5 × 10 + 25 × 1.05% = 63.125`
 
 ### Consumables
 
-A single-use item.
+A single-use item. [Gems](#gems) are also consumable items.
 
 #### Bandages
 
@@ -514,7 +518,7 @@ Cures and removes [blight](#blight).
 
 Sold by the [occultist](#occultist).
 
-While present in the [inventory](#inventory), automatically revives you upon death. The item is consumed in the process.
+While present in the [inventory](#inventory), automatically revives you upon [death](#death). The item is consumed in the process.
 
 ## Masteries
 
@@ -567,6 +571,8 @@ Requires the [armorcraft](#armorcraft) skill.
 ## Skills
 
 Skills are acquired from the [mercenary](#mercenary) and bestow a permanent ability. They can unlock certain [attributes](#attributes), [statistics](#statistics) or [masteries](#masteries).
+
+Some skills are also trained by other crew members, but require certain pre-conditions.
 
 ### Anatomy
 
@@ -678,7 +684,7 @@ Requires the [traumatology](#traumatology) skill.
 
 ## Retirement
 
-When reaching a certain stage, retirement is unlocked. This restarts the quest from stage 1 with power level 0, no essence, no skills and no gear. However, all hired caravan crewMember are retained, and so are certain [relics](#relics). A [trait](#traits) can be also chosen that confers a permanent bonus.
+When reaching a certain stage, retirement is unlocked. This restarts the quest from stage 1 with power level 0, no essence, no skills and no gear. However, all hired caravan crew members are retained, and so are any carried [relics](#relics). A [trait](#traits) can be also chosen that confers a permanent bonus.
 
 ### Traits
 
@@ -714,7 +720,7 @@ While at [range](#range), all attacks with a [ranged](#ranged-weapons) weapon ar
 
 #### Shredder
 
-[Bleed](#bleed) damage is inflicted all at once (instead of being evenly spread over a certain duration).
+[Bleed](#bleed) damage is inflicted all at once, instead of being evenly spread over a certain duration.
 
 #### Stalwart
 
@@ -726,9 +732,9 @@ Total [protection](#protection) is increased by the equipped shield's block chan
 
 ### Quests
 
-Quests are similar to achievements in that they have a set of requirements and progress based on certain gameplay actions and states. They are unlocked only once the journal [relic](#usable-relics) is acquired, then going into [retirement](#retirement) at least once.
+Quests are similar to achievements in that they have a set of requirements and progress based on certain gameplay actions and states. They are unlocked once the journal [relic](#usable-relics) is acquired, and when having acquired a certain [skill](#skills).
 
-Once a quest's requirements are achieved, the quest can be completed by choosing a permanent bonus to either [health](#health), [stamina](#stamina) or [total damage](#total-damage) that persists through retirement and while the journal is in the inventory.
+Once a quest's requirements are achieved, the quest can be completed by choosing a permanent bonus to either [health](#health), [stamina](#stamina) or [total damage](#total-damage) that persists through retirement and while the journal is carried.
 
 Quests are categorized into the following:
 
@@ -743,63 +749,3 @@ Tracks all non-combat-related activities.
 #### Triumphs
 
 A collection of challenges and hard-to-reach goals.
-
-## Roadmap
-
-neverquest is a work-in-progress. Several features are pending ideation, refinement and implementation.
-
-### Activated skills
-
-Once acquired, activating a skill requires [energy](#energy).
-
-#### Auras
-
-Cast spells that remain active until dispelled. Provides an effect in return for reserving a percentage of energy.
-
-#### Physical (activated)
-
-Combat skills that can be activated during combat. Acquired from the [Mercenary](#mercenary).
-
-#### Sorceries
-
-Cast spells with immediate and/or over-time effects. Acquired from the [sorcerer](#sorcerer).
-
-### Energy
-
-A [reserve](#reserves), consumed when activating [skills](#skills), [auras](#auras) and [sorceries](#sorceries), regenerated over time.
-
-### New attributes
-
-#### Acumen
-
-Affects [sorcery](#sorceries) casting rate.
-
-#### Intellect
-
-Affects energy regeneration rate.
-
-#### Wisdom
-
-Affects total [energy](#energy).
-
-### New caravan crewMember
-
-Along with two more additional hires, the entire crewMember monologue system needs to be overhauled and expanded to allow for better storytelling.
-
-#### Cook
-
-Sells hot meals that restore all [energy](#energy) when used.
-
-Grants a Well Fed bonus for the next stage (+25% [mastery](#masteries) gain).
-
-#### Sorcerer
-
-Acquire [sorceries](#sorceries) and [auras](#auras).
-
-### Log
-
-A toggle-able UI element that displays all stateful activities in real-time, e.g. combat details, transactions etc.
-
-### Venom
-
-A [potion](#potions), that once applied to a weapon, it adds an effect with each strike, applying damage-over-time effects and potentially other ailments. Has a certain number of charges before it is used up.

@@ -60,8 +60,10 @@ export function About() {
                   ({ children, ...properties }: JSX.IntrinsicElements[typeof Current]) => (
                     <Current
                       id={typeof children === "string" ? formatKebabCase(children) : undefined}
-                      {...{ children, ...properties }}
-                    />
+                      {...properties}
+                    >
+                      {children}
+                    </Current>
                   ),
                 ]),
               ),

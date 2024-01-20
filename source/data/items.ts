@@ -221,7 +221,7 @@ export const RELICS: Record<
   compass: {
     Icon: IconCompass,
     item: {
-      description: "The wilderness can be navigated freely to explore previous locations.",
+      description: "Allows free navigation of the wilderness to explore previous locations.",
       name: "compass",
       price: 30,
       weight: 2,
@@ -276,7 +276,7 @@ export const RELICS: Record<
   memento: {
     Icon: IconMemento,
     item: {
-      description: "Priceless flashbacks eventually lead to extraordinary discoveries.",
+      description: "Lost memories eventually lead to extraordinary discoveries.",
       name: "memento",
       price: 154,
       weight: 2,

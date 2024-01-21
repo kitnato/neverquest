@@ -39,6 +39,7 @@ The linter config can be viewed in `.eslintrc.json`, `.stylelintrc.json` and `.p
 ## Implementation
 
 - Icons and art assets are provided under [CC BY 3.0](https://creativecommons.org/licenses/by/3.0) by the talented [authors](https://game-icons.net/about.html#authors) of [game-icons.net](https://game-icons.net).
+- Monster, item & location names provided by the [LOCRAN](https://github.com/kitnato/locran) system.
 - Written in [TypeScript](https://www.typescriptlang.org) using [React](https://react.dev/).
 - UI framework is [Bootstrap](https://react-bootstrap.github.io).
 - State management library is [Recoil](https://recoiljs.org).

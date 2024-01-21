@@ -18,7 +18,7 @@ Once the wilderness is cleared of monsters, all looted resources can be **collec
 
 The caravan allows interacting with crew members that each provide essential services like accessing higher stages and unlocking new capabilities. [Death](#death) is but a temporary setback and **retiring** allows for [fresh start](#retirement) with game-changing bonuses.
 
-Stages will increase indefinitely, and there are many secrets to uncover and unique enemies to fight. Will you be able to piece together the true ending?
+Stages will increase indefinitely with many secrets to uncover and unique enemies to fight. Will you be able to piece together the true ending?
 
 ## You
 
@@ -212,7 +212,7 @@ The damage from the equipped [weapon](#weapons) in addition to [strength](#stren
 
 ### Death
 
-When your [health](#health) reaches 0, you can be reborn on stage 1 with your [power level](#attributes) intact, but having lost all equipped gear and unspent [essence](#essence). Once reaching the stage again in which you previously died, you may scavenge your corpse for a fraction of the lost essence.
+When your [health](#health) reaches 0, you can be reborn on stage 1 with your [power level](#attributes) intact, but having lost all equipped gear and unspent [essence](#essence). Upon reaching the stage again in which you previously died, you may scavenge your corpse to recover a fraction of the lost essence.
 
 ## Encounter
 
@@ -686,7 +686,7 @@ Requires the [traumatology](#traumatology) skill.
 
 ## Retirement
 
-When reaching a certain stage, retirement is unlocked. This restarts the quest from stage 1 with power level 0, no essence, no skills and no gear. However, all hired caravan crew members are retained, and so are any carried [relics](#relics). A [trait](#traits) can be also chosen that confers a permanent bonus.
+When reaching a certain stage, retirement is unlocked. This restarts the quest from stage 1 with power level 0, no essence, no skills, no crew and no gear. However, all carried [relics](#relics) are retained. A [trait](#traits) can be also chosen that confers a permanent bonus.
 
 ### Traits
 

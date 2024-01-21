@@ -1,14 +1,16 @@
 import { useRecoilCallback } from "recoil";
 
+import { useGenerateMonster } from "@neverquest/hooks/actions/useGenerateMonster";
 import { isAttacking } from "@neverquest/state/character";
 import { isStageStarted, progress } from "@neverquest/state/encounter";
 import { canAutoProgress } from "@neverquest/state/items";
-import { isMonsterNew } from "@neverquest/state/monster";
 import { questProgress } from "@neverquest/state/quests";
 import { essenceLoot, hasLooted, itemsLoot } from "@neverquest/state/resources";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useResetWilderness() {
+  const generateMonster = useGenerateMonster();
+
   return useRecoilCallback(
     ({ reset, snapshot }) =>
       () => {
@@ -20,11 +22,12 @@ export function useResetWilderness() {
 
         reset(essenceLoot);
         reset(hasLooted);
-        reset(isMonsterNew);
         reset(itemsLoot);
         reset(progress);
         reset(questProgress("killingStage"));
+
+        generateMonster();
       },
-    [],
+    [generateMonster],
   );
 }

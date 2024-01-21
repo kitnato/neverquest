@@ -85,7 +85,7 @@ export const CREW: Record<
     monologues: {
       1: "Allow me to patch you up.",
       [LEVELLING_CUTOFF]: MONOLOGUE_EMPTY,
-      [LEVELLING_MAXIMUM]: "Never-ending madness. Only pain.",
+      [LEVELLING_MAXIMUM]: "Never-ending madness. Only agony.",
     },
     price: 20,
     requiredStage: 5,

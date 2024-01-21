@@ -44,6 +44,7 @@ export function useGenerateMonster() {
         }
 
         reset(distance);
+        reset(isMonsterNew);
         reset(monsterHealth);
         reset(monsterRegenerationDuration);
         reset(rage);
@@ -51,8 +52,6 @@ export function useGenerateMonster() {
         for (const ailment of AILMENT_TYPES) {
           reset(monsterAilmentDuration(ailment));
         }
-
-        set(isMonsterNew, true);
 
         if (get(isAttacking)) {
           set(attackDuration, get(attackRate));

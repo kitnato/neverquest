@@ -2,21 +2,23 @@
 
 _An irreverent UI-based incremental Souls-like._
 
-> This manual contains content spoilers. It is best used to reference an aspect of the game as needed.
+> This manual has content spoilers.
 
 ## Gameplay
 
-The [wilderness](#wilderness) **stage** initially harbors a lurking [monster](#monster). Choosing to **attack** does so continuously based on the [attack rate](#attack-rate), **engaging** the monster in the process.
+The [wilderness](#wilderness) **stage** initially harbors a lurking [monster](#monster). Choosing to **attack** does so continuously based on your [attack rate](#attack-rate), **engaging** the monster in the process.
 
-While engaged, the monster will also attack continuously, triggering **defense**. When the monster successfully strikes, [recovery](#recovery-rate) is triggered. While recovering, you can't attack or regenerate your [reserves](#reserves).
+While engaged, the monster will also attack continuously, triggering your **defense**. When the monster successfully strikes, [recovery](#recovery-rate) is triggered. While recovering, you can't attack or regenerate your [reserves](#reserves).
 
 Both you and monster will keep attacking one another until either you **retreat**, or either one of you dies (health reaches zero). Retreating will allow the monster to instantaneously regenerate all of its health (if it isn't [ailing](#burning)).
 
-Upon a monster's death, the stage's **progress** is incremented, its remains are its remains are **looted** for [essence](#essence) and any [gems](#gems) and the next monster is engaged immediately, unless you retreat.
+Upon a monster's death, the stage's **progress** is incremented, its remains are its remains are **looted** for [essence](#essence) and any [items](#items) and the next monster is engaged immediately, unless you retreat. Beware of the powerful [boss monsters](#bosses) that lurk at regular intervals.
 
 Once the wilderness is cleared of monsters, all looted resources can be **collected** and you enter a **resting** state. At this point, **traveling** to the [caravan](#caravan) becomes possible.
 
-The caravan allows interacting with crew members that each provide essential services like accessing higher stages and unlocking new capabilities.
+The caravan allows interacting with crew members that each provide essential services like accessing higher stages and unlocking new capabilities. [Death](#death) is but a temporary setback and **retiring** allows for [fresh start](#retirement) with game-changing bonuses.
+
+Stages will increase indefinitely, and there are many secrets to uncover and unique enemies to fight. Will you be able to piece together the true ending?
 
 ## You
 
@@ -262,7 +264,7 @@ Offers training of new [skills](#skills).
 
 #### Merchant
 
-Purchase and sell [items](#item). The merchant's inventory of items will grow and diversify after each new stage.
+Purchase and sell [items](#items). The merchant's inventory of items will grow and diversify after each new stage.
 
 #### Occultist
 
@@ -282,7 +284,7 @@ The inventory is accessible as soon as you acquire the [knapsack](#knapsack) fro
 
 Before acquiring the knapsack, all gear is automatically equipped if possible and [encumbrance](#encumbrance) can't be extended via the [tailor](#tailor).
 
-### Item
+### Items
 
 An item can either be;
 

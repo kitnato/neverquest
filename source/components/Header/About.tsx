@@ -8,7 +8,7 @@ import {
   OverlayTrigger,
   Tooltip,
 } from "react-bootstrap";
-import ReactMarkdown from "react-markdown";
+import ReactMarkdown, { type ExtraProps } from "react-markdown";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
@@ -57,7 +57,11 @@ export function About() {
               ...Object.fromEntries(
                 HEADERS.map((Current) => [
                   Current,
-                  ({ children, ...properties }: JSX.IntrinsicElements[typeof Current]) => (
+                  ({
+                    children,
+                    node: _,
+                    ...properties
+                  }: ExtraProps & JSX.IntrinsicElements[typeof Current]) => (
                     <Current
                       id={typeof children === "string" ? formatKebabCase(children) : undefined}
                       {...properties}

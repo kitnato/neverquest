@@ -5,11 +5,7 @@ import type {
   WeaponClass,
   WeaponModality,
 } from "@kitnato/locran/build/types";
-import {
-  LEVELLING_CUTOFF,
-  LEVELLING_MAXIMUM,
-  RETIREMENT_STAGE_MINIMUM,
-} from "@neverquest/data/general";
+import { LEVELLING_CUTOFF, LEVELLING_MAXIMUM, RETIREMENT_STAGE } from "@neverquest/data/general";
 import { INFUSABLES, RELICS } from "@neverquest/data/items";
 import { BLIGHT, POISON, RAGE } from "@neverquest/data/monster";
 import IconAlchemist from "@neverquest/icons/alchemist.svg?react";
@@ -144,8 +140,8 @@ export const CREW: Record<
       [LEVELLING_MAXIMUM + 16]: "Inescapable. Unfathomable. Inside everything.",
       [LEVELLING_MAXIMUM + 20]: "Please ... the pain ...",
       [LEVELLING_MAXIMUM]: "How are you still here?",
-      [RETIREMENT_STAGE_MINIMUM + 1]: "A sea of monsters ... is it endless?",
-      [RETIREMENT_STAGE_MINIMUM]: "Retirement? Pretty sure you're trapped here with us.",
+      [RETIREMENT_STAGE + 1]: "A sea of monsters ... is it endless?",
+      [RETIREMENT_STAGE]: "Retirement? Pretty sure you're trapped here with us.",
     },
     price: 1,
     requiredStage: 1,

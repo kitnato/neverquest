@@ -1,7 +1,7 @@
 import { useRecoilCallback } from "recoil";
 
 import { ATTRIBUTES } from "@neverquest/data/attributes";
-import { RETIREMENT_STAGE_MINIMUM } from "@neverquest/data/general";
+import { RETIREMENT_STAGE } from "@neverquest/data/general";
 import { SKILLS } from "@neverquest/data/skills";
 import { useAcquireSkill } from "@neverquest/hooks/actions/useAcquireSkill";
 import { useInitialize } from "@neverquest/hooks/actions/useInitialize";
@@ -39,7 +39,7 @@ export function useRetire() {
       () => {
         const get = getSnapshotGetter(snapshot);
 
-        if (get(stageMaximum) < RETIREMENT_STAGE_MINIMUM) {
+        if (get(stageMaximum) < RETIREMENT_STAGE) {
           return;
         }
 

@@ -24,7 +24,7 @@ import {
   CLASS_ANIMATE_PREFIX,
   LEVELLING_CUTOFF,
   MILLISECONDS_IN_SECOND,
-  RETIREMENT_STAGE_MINIMUM,
+  RETIREMENT_STAGE,
   ROMAN_NUMERALS,
   ROMAN_NUMERAL_MAXIMUM,
 } from "@neverquest/data/general";
@@ -338,7 +338,7 @@ export function getPerkEffect({ perk, stage }: { perk: Perk; stage: number }) {
   return getFromRange({
     factor: getSigmoid(
       getLinearMapping({
-        offset: RETIREMENT_STAGE_MINIMUM,
+        offset: RETIREMENT_STAGE,
         stage,
       }),
     ),

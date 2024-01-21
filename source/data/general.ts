@@ -38,7 +38,7 @@ export const PERCENTAGE_POINTS = 100;
 
 export const POPOVER_TRIGGER: OverlayTriggerType[] = ["focus", "hover"];
 
-export const RETIREMENT_STAGE_MINIMUM = 35;
+export const RETIREMENT_STAGE = 35;
 
 export const ROMAN_NUMERAL_MAXIMUM = 3999;
 export const ROMAN_NUMERALS = [

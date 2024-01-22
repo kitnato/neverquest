@@ -16,7 +16,11 @@ export function Bandages({ ID }: { ID: string }) {
 
   return (
     <OverlayTrigger
-      overlay={<Tooltip>{LABEL_FULL_HEALTH}</Tooltip>}
+      overlay={
+        <Tooltip>
+          <span>{LABEL_FULL_HEALTH}</span>
+        </Tooltip>
+      }
       trigger={isHealthAtMaximumValue ? POPOVER_TRIGGER : []}
     >
       <div>

@@ -37,7 +37,11 @@ export function CompassNavigate() {
   return (
     <>
       <OverlayTrigger
-        overlay={<Tooltip>The needle is spinning.</Tooltip>}
+        overlay={
+          <Tooltip>
+            <span>The needle is spinning.</span>
+          </Tooltip>
+        }
         trigger={canNavigate ? [] : POPOVER_TRIGGER}
       >
         <div>

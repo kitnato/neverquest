@@ -1,7 +1,6 @@
 import { Fragment } from "react";
 import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
-import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
@@ -28,14 +27,10 @@ export function MasteryDisplay({ mastery }: { mastery: Mastery }) {
         <IconDisplay
           className={`${canTrainMasteryValue ? "" : "opacity-50"}`}
           description={
-            <Stack direction="horizontal">
-              <Stack className="w-100" direction="horizontal" gap={3}>
-                <MasteryRank mastery={mastery} />
+            <Stack className="w-100" direction="horizontal" gap={3}>
+              <MasteryRank mastery={mastery} />
 
-                <MasteryProgress mastery={mastery} />
-              </Stack>
-
-              <DeltasDisplay delta={mastery} />
+              <MasteryProgress mastery={mastery} />
             </Stack>
           }
           Icon={Icon}

@@ -56,9 +56,11 @@ export function PurchaseAmmunition() {
             <OverlayTrigger
               overlay={
                 <Tooltip>
-                  {!isAffordable && <div>{LABEL_NO_ESSENCE}</div>}
+                  <Stack>
+                    {!isAffordable && <span>{LABEL_NO_ESSENCE}</span>}
 
-                  {isFull && <div>Ammunition pouch is full.</div>}
+                    {isFull && <span>Ammunition pouch is full.</span>}
+                  </Stack>
                 </Tooltip>
               }
               trigger={canPurchase ? [] : POPOVER_TRIGGER}

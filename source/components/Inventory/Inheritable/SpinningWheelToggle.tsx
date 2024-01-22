@@ -13,7 +13,11 @@ export function SpinningWheelToggle() {
 
   return (
     <OverlayTrigger
-      overlay={<Tooltip>The pedal requires wild ground.</Tooltip>}
+      overlay={
+        <Tooltip>
+          <span>The pedal requires wild ground.</span>
+        </Tooltip>
+      }
       trigger={canActivate ? [] : POPOVER_TRIGGER}
     >
       <div>

@@ -55,9 +55,11 @@ export function PurgeMemories() {
           <OverlayTrigger
             overlay={
               <Tooltip>
-                {!isAffordable && <div>{LABEL_NO_ESSENCE}</div>}
+                <Stack>
+                  {!isAffordable && <span>{LABEL_NO_ESSENCE}</span>}
 
-                {!hasCompletedQuests && <div>No completed quests to purge.</div>}
+                  {!hasCompletedQuests && <span>No completed quests to purge.</span>}
+                </Stack>
               </Tooltip>
             }
             trigger={isPurchasable ? [] : POPOVER_TRIGGER}

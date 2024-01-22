@@ -1,4 +1,4 @@
-import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { LABEL_NO_ESSENCE, LABEL_OVER_ENCUMBERED, POPOVER_TRIGGER } from "@neverquest/data/general";
@@ -27,9 +27,11 @@ export function PurchaseItemButton({
     <OverlayTrigger
       overlay={
         <Tooltip>
-          {!isAffordable && <div>{LABEL_NO_ESSENCE}</div>}
+          <Stack>
+            {!isAffordable && <span>{LABEL_NO_ESSENCE}</span>}
 
-          {!canFitItem && <div>{LABEL_OVER_ENCUMBERED}</div>}
+            {!canFitItem && <span>{LABEL_OVER_ENCUMBERED}</span>}
+          </Stack>
         </Tooltip>
       }
       trigger={isPurchasable ? [] : POPOVER_TRIGGER}

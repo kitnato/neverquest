@@ -14,7 +14,11 @@ export function IconImage({
 }: IconImageProperties) {
   return (
     <OverlayTrigger
-      overlay={<Tooltip>{tooltip}</Tooltip>}
+      overlay={
+        <Tooltip>
+          <span>{tooltip}</span>
+        </Tooltip>
+      }
       placement={overlayPlacement}
       trigger={tooltip === undefined ? [] : POPOVER_TRIGGER}
     >

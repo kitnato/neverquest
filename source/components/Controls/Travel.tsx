@@ -33,15 +33,17 @@ export function Travel() {
       <OverlayTrigger
         overlay={
           <Tooltip>
-            {isOverEncumbered
-              ? "Over-encumbered - cannot move."
-              : locationValue === "wilderness"
-                ? `Go to ${
-                    !isShowingLocation || encounterValue === "res cogitans"
-                      ? LABEL_UNKNOWN
-                      : "caravan"
-                  }`
-                : "Return to wilderness"}
+            <span>
+              {isOverEncumbered
+                ? "Over-encumbered - cannot move."
+                : locationValue === "wilderness"
+                  ? `Go to ${
+                      !isShowingLocation || encounterValue === "res cogitans"
+                        ? LABEL_UNKNOWN
+                        : "caravan"
+                    }`
+                  : "Return to wilderness"}
+            </span>
           </Tooltip>
         }
       >

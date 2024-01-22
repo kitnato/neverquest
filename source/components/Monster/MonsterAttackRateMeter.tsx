@@ -4,7 +4,6 @@ import { useRecoilValue } from "recoil";
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { PERCENTAGE_POINTS } from "@neverquest/data/general";
-import { AILMENT_PENALTY } from "@neverquest/data/statistics";
 import {
   isMonsterAiling,
   monsterAttackDuration,
@@ -38,15 +37,6 @@ export function MonsterAttackRateMeter() {
           })}
         </span>
 
-        {isMonsterFrozen && (
-          <span>
-            {` (${formatNumber({
-              decimals: 0,
-              format: "percentage",
-              value: AILMENT_PENALTY.frozen,
-            })})`}
-          </span>
-        )}
         <DeltasDisplay delta="monsterAttackRate" />
       </Stack>
     </LabelledProgressBar>

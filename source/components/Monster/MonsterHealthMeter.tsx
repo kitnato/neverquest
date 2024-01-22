@@ -3,20 +3,13 @@ import { useRecoilValue } from "recoil";
 
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
-import { LABEL_MAXIMUM, PERCENTAGE_POINTS } from "@neverquest/data/general";
-import { useDeltaText } from "@neverquest/hooks/useDeltaText";
+import { PERCENTAGE_POINTS } from "@neverquest/data/general";
 import { monsterHealth, monsterHealthMaximum } from "@neverquest/state/monster";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function MonsterHealthMeter() {
   const monsterHealthValue = useRecoilValue(monsterHealth);
   const monsterHealthMaximumValue = useRecoilValue(monsterHealthMaximum);
-
-  useDeltaText({
-    delta: "monsterHealthMaximum",
-    state: monsterHealthMaximum,
-    suffix: LABEL_MAXIMUM,
-  });
 
   return (
     <LabelledProgressBar

@@ -44,7 +44,13 @@ export function Knapsack() {
   if (ownedItemKnapsack !== undefined) {
     return (
       <>
-        <OverlayTrigger overlay={<Tooltip>Inventory</Tooltip>}>
+        <OverlayTrigger
+          overlay={
+            <Tooltip>
+              <span>Inventory</span>
+            </Tooltip>
+          }
+        >
           <div className={getAnimationClass({ animation: "bounceIn" })}>
             <Button
               disabled={isAttackingValue || hasFlatlinedValue}

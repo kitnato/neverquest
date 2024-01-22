@@ -77,7 +77,13 @@ export function Capabilities() {
   if (isShowingCapabilities) {
     return (
       <>
-        <OverlayTrigger overlay={<Tooltip>{formatEnumeration(tooltip)}</Tooltip>}>
+        <OverlayTrigger
+          overlay={
+            <Tooltip>
+              <span>{formatEnumeration(tooltip)}</span>
+            </Tooltip>
+          }
+        >
           <div className={getAnimationClass({ animation: "bounceIn" })}>
             <Button
               className={`position-relative${

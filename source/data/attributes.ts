@@ -45,7 +45,7 @@ export const ATTRIBUTES: Record<
     description: "Increases maximum stamina.",
     Icon: IconEndurance,
     increment: 20,
-    powerBonus: 0.025,
+    powerBonus: 0.02,
     shows: "stamina",
   },
   fortitude: {
@@ -97,7 +97,7 @@ export const ATTRIBUTES: Record<
     description: "Increases maximum health.",
     Icon: IconVitality,
     increment: 25,
-    powerBonus: 0.03,
+    powerBonus: 0.025,
     shows: "health",
   },
 };

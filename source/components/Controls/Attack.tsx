@@ -93,7 +93,9 @@ export function Attack() {
             </PopoverBody>
           </Popover>
         ) : (
-          <Tooltip>{tooltip}</Tooltip>
+          <Tooltip>
+            <span>{tooltip}</span>
+          </Tooltip>
         )
       }
       show={showWarning || undefined}

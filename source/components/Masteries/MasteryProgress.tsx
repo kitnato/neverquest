@@ -21,49 +21,50 @@ export function MasteryProgress({ mastery }: { mastery: Mastery }) {
 
   useDeltaText({
     delta,
+    ignoreZero: true,
     state: masteryProgressState,
   });
 
   return (
-    <Stack className="w-100" direction="horizontal">
-      <OverlayTrigger
-        overlay={
-          <Popover>
-            <PopoverBody>
-              {instructions.split("#").map((part, index) =>
-                index === 0 || instructionIcon === undefined ? (
-                  <span key={index}>{part}</span>
-                ) : (
-                  <div key={index}>
-                    <IconImage className="small" Icon={instructionIcon} />
+    <OverlayTrigger
+      overlay={
+        <Popover>
+          <PopoverBody>
+            {instructions.split("#").map((part, index) =>
+              index === 0 || instructionIcon === undefined ? (
+                <span key={index}>{part}</span>
+              ) : (
+                <div key={index}>
+                  <IconImage className="small" Icon={instructionIcon} />
 
-                    <span>{part}</span>
-                  </div>
-                ),
-              )}
-            </PopoverBody>
-          </Popover>
-        }
-      >
-        <div className="w-100">
-          <LabelledProgressBar
-            value={
-              isMasteryAtMaximumValue
-                ? PERCENTAGE_POINTS
-                : (masteryProgressValue / masteryCostValue) * PERCENTAGE_POINTS
-            }
-            variant="secondary"
-          >
+                  <span>{part}</span>
+                </div>
+              ),
+            )}
+          </PopoverBody>
+        </Popover>
+      }
+    >
+      <div className="w-100">
+        <LabelledProgressBar
+          value={
+            isMasteryAtMaximumValue
+              ? PERCENTAGE_POINTS
+              : (masteryProgressValue / masteryCostValue) * PERCENTAGE_POINTS
+          }
+          variant="secondary"
+        >
+          <Stack direction="horizontal" gap={1}>
             <span>
               {isMasteryAtMaximumValue
                 ? LABEL_MAXIMUM
                 : `${masteryProgressValue} / ${masteryCostValue}`}
             </span>
-          </LabelledProgressBar>
-        </div>
-      </OverlayTrigger>
 
-      <DeltasDisplay delta={delta} />
-    </Stack>
+            <DeltasDisplay delta={delta} />
+          </Stack>
+        </LabelledProgressBar>
+      </div>
+    </OverlayTrigger>
   );
 }

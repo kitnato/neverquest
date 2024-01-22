@@ -46,9 +46,11 @@ export function ReceiveHealing() {
           <OverlayTrigger
             overlay={
               <Tooltip>
-                {!isAffordable && <div> {LABEL_NO_ESSENCE}</div>}
+                <Stack>
+                  {!isAffordable && <span>{LABEL_NO_ESSENCE}</span>}
 
-                {isHealthAtMaximumValue && <div>{LABEL_FULL_HEALTH}</div>}
+                  {isHealthAtMaximumValue && <span>{LABEL_FULL_HEALTH}</span>}
+                </Stack>
               </Tooltip>
             }
             trigger={isPurchasable ? [] : POPOVER_TRIGGER}

@@ -26,7 +26,13 @@ export function CollectLoot() {
     locationValue === "wilderness"
   ) {
     return (
-      <OverlayTrigger overlay={<Tooltip>Collect loot</Tooltip>}>
+      <OverlayTrigger
+        overlay={
+          <Tooltip>
+            <span>Collect loot</span>
+          </Tooltip>
+        }
+      >
         <div className={getAnimationClass({ animation: "bounceIn" })}>
           <Button
             className={

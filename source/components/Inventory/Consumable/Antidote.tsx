@@ -17,7 +17,11 @@ export function Antidote({ ID }: { ID: string }) {
 
   return (
     <OverlayTrigger
-      overlay={<Tooltip>Not poisoned.</Tooltip>}
+      overlay={
+        <Tooltip>
+          <span>Not poisoned.</span>
+        </Tooltip>
+      }
       trigger={isPoisonedValue ? [] : POPOVER_TRIGGER}
     >
       <div>

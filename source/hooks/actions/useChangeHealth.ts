@@ -1,6 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
-import { CORPSE_TAX } from "@neverquest/data/encounter";
+import { CORPSE_VALUE } from "@neverquest/data/encounter";
 import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useToggleAttacking } from "@neverquest/hooks/actions/useToggleAttacking";
@@ -65,7 +65,7 @@ export function useChangeHealth() {
             progressQuest({ quest: "flatlining" });
 
             set(corpse, {
-              essence: Math.round((get(essence) + get(absorbedEssence)) * CORPSE_TAX),
+              essence: Math.round((get(essence) + get(absorbedEssence)) * CORPSE_VALUE),
               stage: get(stage),
             });
           } else {

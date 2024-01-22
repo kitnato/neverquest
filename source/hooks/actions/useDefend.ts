@@ -71,6 +71,7 @@ export function useDefend() {
         const incursArmorBurden = !get(isTraitAcquired("stalwart")) && burden > 0;
         const statusElementValue = get(statusElement);
 
+        let hasStaggered = false;
         let isAvoided = false;
 
         if (statusElementValue !== null) {
@@ -219,6 +220,8 @@ export function useDefend() {
                   },
                   value: 0,
                 });
+
+                hasStaggered = true;
               }
             } else {
               deltaStamina.push(
@@ -347,7 +350,9 @@ export function useDefend() {
               delta: deltaMonsterHealth,
               value: -monsterHealthDamage,
             });
+          }
 
+          if (hasStaggered || monsterHealthDamage > 0) {
             const monsterElementValue = get(monsterElement);
 
             if (monsterElementValue !== null) {

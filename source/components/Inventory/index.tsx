@@ -149,7 +149,11 @@ export function Inventory() {
 
                 <Stack className="ms-2" direction="horizontal" gap={3}>
                   <OverlayTrigger
-                    overlay={<Tooltip>{LABEL_SKILL_REQUIRED}</Tooltip>}
+                    overlay={
+                      <Tooltip>
+                        <span>{LABEL_SKILL_REQUIRED}</span>
+                      </Tooltip>
+                    }
                     trigger={canEquipGear ? [] : POPOVER_TRIGGER}
                   >
                     <div>

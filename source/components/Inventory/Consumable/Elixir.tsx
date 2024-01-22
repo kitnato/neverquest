@@ -18,7 +18,11 @@ export function Elixir({ ID }: { ID: string }) {
 
   return (
     <OverlayTrigger
-      overlay={<Tooltip>Already at full stamina.</Tooltip>}
+      overlay={
+        <Tooltip>
+          <span>Already at full stamina.</span>
+        </Tooltip>
+      }
       trigger={isStaminaAtMaximumValue ? POPOVER_TRIGGER : []}
     >
       <div>

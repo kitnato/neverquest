@@ -28,7 +28,11 @@ export function Hatch() {
     infusionLevelValue >= LEVELLING_MAXIMUM &&
     ownedItemMysteriousEgg !== undefined && (
       <OverlayTrigger
-        overlay={<Tooltip>{LABEL_OVER_ENCUMBERED}</Tooltip>}
+        overlay={
+          <Tooltip>
+            <span>{LABEL_OVER_ENCUMBERED}</span>
+          </Tooltip>
+        }
         trigger={canFitFamiliar ? [] : POPOVER_TRIGGER}
       >
         <div>

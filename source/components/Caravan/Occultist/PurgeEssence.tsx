@@ -48,9 +48,11 @@ export function PurgeEssence() {
         <OverlayTrigger
           overlay={
             <Tooltip>
-              {!isAffordable && <div>{LABEL_NO_ESSENCE}</div>}
+              <Stack>
+                {!isAffordable && <span>{LABEL_NO_ESSENCE}</span>}
 
-              {!hasAbsorbedEssence && <div>No essence to purge.</div>}
+                {!hasAbsorbedEssence && <span>No essence to purge.</span>}
+              </Stack>
             </Tooltip>
           }
           trigger={isPurchasable ? [] : POPOVER_TRIGGER}

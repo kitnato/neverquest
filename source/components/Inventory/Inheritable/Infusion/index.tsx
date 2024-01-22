@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { Hatch } from "@neverquest/components/Inventory/Inheritable/Infusion/Hatch";
@@ -52,9 +52,11 @@ export function Infusion({ infusable }: { infusable: Infusable }) {
     <OverlayTrigger
       overlay={
         <Tooltip>
-          {!isInfusionPossible && <div>{LABEL_NO_ESSENCE}</div>}
+          <Stack>
+            {!isInfusionPossible && <span>{LABEL_NO_ESSENCE}</span>}
 
-          {isInfusionAtMaximumValue && <div>Infusion limit reached.</div>}
+            {isInfusionAtMaximumValue && <span>Infusion limit reached.</span>}
+          </Stack>
         </Tooltip>
       }
       trigger={canInfuse ? [] : POPOVER_TRIGGER}

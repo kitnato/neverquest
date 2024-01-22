@@ -84,9 +84,11 @@ export function TransmuteGems() {
         <OverlayTrigger
           overlay={
             <Tooltip>
-              {!hasStock && <div>Insufficient source gems.</div>}
+              <Stack>
+                {!hasStock && <span>Insufficient source gems.</span>}
 
-              {!isAffordable && <div>{LABEL_NO_ESSENCE}</div>}
+                {!isAffordable && <span>{LABEL_NO_ESSENCE}</span>}
+              </Stack>
             </Tooltip>
           }
           placement="bottom"

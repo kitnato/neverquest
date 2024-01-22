@@ -114,8 +114,8 @@ export const SHIELD_SPECIFICATIONS: Record<
 > = {
   medium: {
     block: [
-      { maximum: 0.14, minimum: 0.13 },
-      { maximum: 0.35, minimum: 0.33 },
+      { maximum: 0.2, minimum: 0.19 },
+      { maximum: 0.38, minimum: 0.37 },
     ],
     burden: [
       { maximum: 4, minimum: 3 },
@@ -124,8 +124,8 @@ export const SHIELD_SPECIFICATIONS: Record<
     Icon: IconShieldMedium,
     price: { maximum: 4000, minimum: 4 },
     stagger: [
-      { maximum: 0.45, minimum: 0.4 },
-      { maximum: 0.5, minimum: 0.5 },
+      { maximum: 0.3, minimum: 0.25 },
+      { maximum: 0.5, minimum: 0.45 },
     ],
     weight: [
       { maximum: 5, minimum: 3 },
@@ -134,8 +134,8 @@ export const SHIELD_SPECIFICATIONS: Record<
   },
   small: {
     block: [
-      { maximum: 0.1, minimum: 0.09 },
-      { maximum: 0.25, minimum: 0.23 },
+      { maximum: 0.14, minimum: 0.13 },
+      { maximum: 0.28, minimum: 0.27 },
     ],
     burden: [
       { maximum: 2, minimum: 1 },
@@ -150,18 +150,18 @@ export const SHIELD_SPECIFICATIONS: Record<
   },
   tower: {
     block: [
-      { maximum: 0.25, minimum: 0.24 },
-      { maximum: 0.6, minimum: 0.58 },
+      { maximum: 0.33, minimum: 0.32 },
+      { maximum: 0.65, minimum: 0.63 },
     ],
     burden: [
       { maximum: 7, minimum: 6 },
       { maximum: 45, minimum: 30 },
     ],
     Icon: IconShieldTower,
-    price: { maximum: 7000, minimum: 7 },
+    price: { maximum: 7500, minimum: 7 },
     stagger: [
-      { maximum: 0.65, minimum: 0.6 },
-      { maximum: 0.95, minimum: 0.93 },
+      { maximum: 0.55, minimum: 0.5 },
+      { maximum: 0.85, minimum: 0.8 },
     ],
     weight: [
       { maximum: 9, minimum: 6 },
@@ -178,7 +178,7 @@ export const WEAPON_BASE: GearRangeBase & {
 } = {
   ammunitionCost: [
     { maximum: 2, minimum: 1 },
-    { maximum: 30, minimum: 25 },
+    { maximum: 27, minimum: 24 },
   ],
   burden: [
     { maximum: 2, minimum: 1 },
@@ -190,8 +190,8 @@ export const WEAPON_BASE: GearRangeBase & {
   ],
   price: { maximum: 10_000, minimum: 1 },
   range: [
-    { maximum: 1800, minimum: 1500 },
-    { maximum: 3500, minimum: 3300 },
+    { maximum: 2000, minimum: 1800 },
+    { maximum: 3700, minimum: 3500 },
   ],
   rate: [
     { maximum: 3000, minimum: 2900 },
@@ -205,7 +205,7 @@ export const WEAPON_BASE: GearRangeBase & {
 
 export const WEAPON_MODIFIER = {
   "one-handed": { ability: 1, burden: 1, damage: 1, price: 1, rate: 1, weight: 1 },
-  ranged: { ability: 1, burden: 1.05, damage: 0.8, price: 1.2, rate: 1.3, weight: 1.15 },
+  ranged: { ability: 1, burden: 1.05, damage: 0.8, price: 1.2, rate: 1.1, weight: 1.15 },
   "two-handed": {
     ability: 1.1,
     burden: 1.2,

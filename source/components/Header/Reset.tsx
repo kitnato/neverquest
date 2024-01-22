@@ -28,7 +28,14 @@ export function Reset() {
 
   return (
     <>
-      <OverlayTrigger overlay={<Tooltip>Reset</Tooltip>} placement="bottom">
+      <OverlayTrigger
+        overlay={
+          <Tooltip>
+            <span>Reset</span>
+          </Tooltip>
+        }
+        placement="bottom"
+      >
         <Button
           onClick={() => {
             setIsShowingReset(true);

@@ -43,7 +43,11 @@ export function HirableCrewMember({ crewMember }: { crewMember: CrewMember }) {
             </IconDisplay>
 
             <OverlayTrigger
-              overlay={<Tooltip>{LABEL_NO_ESSENCE}</Tooltip>}
+              overlay={
+                <Tooltip>
+                  <span>{LABEL_NO_ESSENCE}</span>
+                </Tooltip>
+              }
               trigger={isAffordable ? [] : POPOVER_TRIGGER}
             >
               <div>

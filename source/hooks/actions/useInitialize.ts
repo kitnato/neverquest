@@ -1,4 +1,4 @@
-import { generateLocation } from "@kitnato/locran";
+import { generateCreature, generateLocation } from "@kitnato/locran";
 import ls from "localstorage-slim";
 import { useRecoilCallback } from "recoil";
 
@@ -6,6 +6,7 @@ import { CREW } from "@neverquest/data/caravan";
 import { KEY_SESSION } from "@neverquest/data/general";
 import { isHired } from "@neverquest/state/caravan";
 import { wildernesses } from "@neverquest/state/encounter";
+import { monsterName } from "@neverquest/state/monster";
 import { CREW_MEMBER_TYPES } from "@neverquest/types/unions";
 import { getAffixStructure } from "@neverquest/utilities/getters";
 
@@ -29,6 +30,11 @@ export function useInitialize() {
 
           set(wildernesses, newWilderness);
           initialStore.wildernesses = newWilderness;
+
+          const newMonsterName = generateCreature({ affixStructure: getAffixStructure() });
+
+          set(monsterName, newMonsterName);
+          initialStore.monsterName = newMonsterName;
 
           if (isStoreEmpty) {
             ls.set(KEY_SESSION, initialStore);

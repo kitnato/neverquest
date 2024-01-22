@@ -17,7 +17,11 @@ export function Salve({ ID }: { ID: string }) {
 
   return (
     <OverlayTrigger
-      overlay={<Tooltip>Not blighted.</Tooltip>}
+      overlay={
+        <Tooltip>
+          <span>Not blighted.</span>
+        </Tooltip>
+      }
       trigger={isBlightedValue ? [] : POPOVER_TRIGGER}
     >
       <div>

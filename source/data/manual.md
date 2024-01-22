@@ -212,7 +212,7 @@ The damage from the equipped [weapon](#weapons) in addition to [strength](#stren
 
 ### Death
 
-When your [health](#health) reaches 0, you can be reborn on stage 1 with your [power level](#attributes) intact, but having lost all equipped gear and unspent [essence](#essence). Upon reaching the stage again in which you previously died, you may scavenge your corpse to recover a fraction of the lost essence.
+When your [health](#health) reaches 0, you can be reborn on stage 1 with your [power level](#attributes) intact, but having lost all equipped gear and unspent [essence](#essence). Upon reaching the stage again in which you previously died, you may scavenge your corpse to recover most of the lost essence.
 
 ## Encounter
 
@@ -686,11 +686,11 @@ Requires the [traumatology](#traumatology) skill.
 
 ## Retirement
 
-When reaching a certain stage, retirement is unlocked. This restarts the quest from stage 1 with power level 0, no essence, no skills, no crew and no gear. However, all carried [relics](#relics) are retained. A [trait](#traits) can be also chosen that confers a permanent bonus.
+When reaching a certain stage, retirement is unlocked. This restarts the game from stage 1 with power level 0, no essence, no skills and no gear. However, all hired crew members are retained, and so are all carried [relics](#relics). A [trait](#traits) can be also chosen that confers a permanent bonus.
 
 ### Traits
 
-Traits are permanent passive abilities acquired upon [retiring](#retirement) for all subsequent new quests. One may be chosen at a time for every retirement.
+Traits are permanent passive abilities acquired upon [retiring](#retirement) for all subsequent new starts. One may be chosen at a time for every retirement.
 
 #### Brawler
 

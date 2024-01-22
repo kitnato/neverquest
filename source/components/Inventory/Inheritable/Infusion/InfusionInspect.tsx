@@ -31,7 +31,11 @@ export function InfusionInspect({ infusable }: { infusable: Infusable }) {
   return (
     <>
       <OverlayTrigger
-        overlay={<Tooltip>{LABEL_SKILL_REQUIRED}</Tooltip>}
+        overlay={
+          <Tooltip>
+            <span>{LABEL_SKILL_REQUIRED}</span>
+          </Tooltip>
+        }
         trigger={isSkillAcquiredMeditation ? [] : POPOVER_TRIGGER}
       >
         <div>

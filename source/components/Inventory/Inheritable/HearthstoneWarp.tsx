@@ -20,7 +20,11 @@ export function HearthstoneWarp() {
 
   return (
     <OverlayTrigger
-      overlay={<Tooltip>The hearthstone is cold.</Tooltip>}
+      overlay={
+        <Tooltip>
+          <span>The hearthstone is cold.</span>
+        </Tooltip>
+      }
       trigger={canWarp ? [] : POPOVER_TRIGGER}
     >
       <div>

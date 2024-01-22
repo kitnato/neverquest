@@ -1,8 +1,10 @@
 import { LEVELLING_MAXIMUM } from "@neverquest/data/general";
 import { AILMENT_PENALTY } from "@neverquest/data/statistics";
+import IconDamage from "@neverquest/icons/damage.svg?react";
 import IconDistance from "@neverquest/icons/distance.svg?react";
 import IconMonsterAttackRate from "@neverquest/icons/monster-attack-rate.svg?react";
 import IconMonsterDamage from "@neverquest/icons/monster-damage.svg?react";
+import IconMonsterHealth from "@neverquest/icons/monster-health.svg?react";
 import type { SVGIcon } from "@neverquest/types/components";
 import type { Ailment } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
@@ -12,7 +14,7 @@ export const AILMENT_DESCRIPTION: Record<
   { description: string; descriptionIcons?: SVGIcon[] }
 > = {
   bleeding: { description: "Suffering periodic damage." },
-  burning: { description: "Cannot regenerate." },
+  burning: { description: "Cannot regenerate # health.", descriptionIcons: [IconMonsterHealth] },
   frozen: {
     description: `Attack # rate & # speed slowed by ${formatNumber({
       decimals: 0,
@@ -34,7 +36,8 @@ export const AILMENT_DESCRIPTION: Record<
       decimals: 0,
       format: "percentage",
       value: AILMENT_PENALTY.staggered,
-    })} increased damage.`,
+    })} increased # damage.`,
+    descriptionIcons: [IconDamage],
   },
   stunned: {
     description: `Hit chance reduced to ${formatNumber({
@@ -66,7 +69,7 @@ export const ESSENCE = {
   attenuation: 13,
   base: 5,
   bonus: 0.01,
-  boss: 1.15,
+  boss: 1.2,
   finality: {
     "res cogitans": 7777,
     "res dominus": 7777,
@@ -99,7 +102,7 @@ export const MONSTER_ATTACK_RATE = {
 };
 
 export const MONSTER_DAMAGE = {
-  attenuation: 23,
+  attenuation: 22,
   base: 7,
   bonus: 0.01,
   boss: 1.05,
@@ -110,8 +113,8 @@ export const MONSTER_DAMAGE = {
 };
 
 export const MONSTER_HEALTH = {
-  attenuation: 14,
-  base: 15,
+  attenuation: 13,
+  base: 16,
   bonus: 0.02,
   boss: 1.8,
   finality: {

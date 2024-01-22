@@ -6,10 +6,11 @@ import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
 import { PERCENTAGE_POINTS } from "@neverquest/data/general";
 import { MONSTER_REGENERATION } from "@neverquest/data/monster";
 import IconMonsterHealth from "@neverquest/icons/monster-health.svg?react";
-import { monsterRegenerationDuration } from "@neverquest/state/monster";
+import { isMonsterAiling, monsterRegenerationDuration } from "@neverquest/state/monster";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function MonsterRegenerationMeter({ amount }: { amount: number }) {
+  const isMonsterBurning = useRecoilValue(isMonsterAiling("burning"));
   const monsterRegenerationDurationValue = useRecoilValue(monsterRegenerationDuration);
 
   const { duration, ticks } = MONSTER_REGENERATION;
@@ -27,35 +28,45 @@ export function MonsterRegenerationMeter({ amount }: { amount: number }) {
       value={(regenerationProgress / regenerationRate) * PERCENTAGE_POINTS}
       variant="secondary"
     >
-      {regenerationProgress === 0 ? (
-        <Stack>
-          <span>Monster regeneration</span>
+      {(() => {
+        if (isMonsterBurning) {
+          return <span>Burning ...</span>;
+        }
 
-          <IconDisplay Icon={IconMonsterHealth} iconProps={{ className: "small" }}>
-            <span>
-              {amount}&nbsp;per&nbsp;
-              {formatNumber({
-                format: "time",
-                value: regenerationRate,
-              })}
-            </span>
-          </IconDisplay>
-        </Stack>
-      ) : (
-        <Stack>
-          <span>Regenerating</span>
+        if (regenerationProgress === 0) {
+          return (
+            <Stack>
+              <span>Monster regeneration</span>
 
-          <IconDisplay Icon={IconMonsterHealth} iconProps={{ className: "small" }}>
-            <span>
-              {amount}&nbsp;in&nbsp;
-              {formatNumber({
-                format: "time",
-                value: regenerationRate - regenerationProgress,
-              })}
-            </span>
-          </IconDisplay>
-        </Stack>
-      )}
+              <IconDisplay Icon={IconMonsterHealth} iconProps={{ className: "small" }}>
+                <span>
+                  {amount}&nbsp;per&nbsp;
+                  {formatNumber({
+                    format: "time",
+                    value: regenerationRate,
+                  })}
+                </span>
+              </IconDisplay>
+            </Stack>
+          );
+        }
+
+        return (
+          <Stack>
+            <span>Regenerating</span>
+
+            <IconDisplay Icon={IconMonsterHealth} iconProps={{ className: "small" }}>
+              <span>
+                {amount}&nbsp;in&nbsp;
+                {formatNumber({
+                  format: "time",
+                  value: regenerationRate - regenerationProgress,
+                })}
+              </span>
+            </IconDisplay>
+          </Stack>
+        );
+      })()}
     </LabelledProgressBar>
   );
 }

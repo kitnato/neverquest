@@ -28,7 +28,13 @@ export function Quests() {
   if (ownedItemJournal !== undefined) {
     return (
       <>
-        <OverlayTrigger overlay={<Tooltip>Quests</Tooltip>}>
+        <OverlayTrigger
+          overlay={
+            <Tooltip>
+              <span>Quests</span>
+            </Tooltip>
+          }
+        >
           <div className={getAnimationClass({ animation: "bounceIn" })}>
             <Button
               className={`position-relative${

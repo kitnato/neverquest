@@ -28,7 +28,13 @@ export function EradicateItem({ ID, name }: { ID: string; name: string }) {
 
   return (
     <>
-      <OverlayTrigger overlay={<Tooltip>Eradicate</Tooltip>}>
+      <OverlayTrigger
+        overlay={
+          <Tooltip>
+            <span>Eradicate</span>
+          </Tooltip>
+        }
+      >
         <Button
           onClick={() => {
             setIsShowingModal(true);

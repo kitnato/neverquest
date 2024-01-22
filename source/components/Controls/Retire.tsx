@@ -19,7 +19,13 @@ export function Retire() {
 
   return (
     <>
-      <OverlayTrigger overlay={<Tooltip>Retire</Tooltip>}>
+      <OverlayTrigger
+        overlay={
+          <Tooltip>
+            <span>Retire</span>
+          </Tooltip>
+        }
+      >
         <div
           className={`${
             stageMaximumValue >= RETIREMENT_STAGE

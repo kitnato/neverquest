@@ -1,4 +1,4 @@
-import type { FunctionComponent, ReactNode, SVGProps } from "react";
+import type { FunctionComponent, SVGProps } from "react";
 import type { Placement } from "react-bootstrap/esm/types";
 
 import type { Showing } from "@neverquest/types/unions";
@@ -17,7 +17,7 @@ export type IconImageProperties = {
   isMirrored?: boolean;
   onClick?: () => void;
   overlayPlacement?: Placement;
-  tooltip?: ReactNode;
+  tooltip?: string;
 };
 
 export type IconImageDOMProperties = Omit<IconImageProperties, "Icon">;

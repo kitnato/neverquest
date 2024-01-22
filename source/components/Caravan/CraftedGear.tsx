@@ -29,7 +29,11 @@ export function CraftedGear({
       </div>
 
       <OverlayTrigger
-        overlay={<Tooltip>{LABEL_OVER_ENCUMBERED}</Tooltip>}
+        overlay={
+          <Tooltip>
+            <span>{LABEL_OVER_ENCUMBERED}</span>
+          </Tooltip>
+        }
         trigger={canFitItem ? [] : POPOVER_TRIGGER}
       >
         <div>

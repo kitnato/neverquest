@@ -45,9 +45,7 @@ export function About() {
       >
         <ModalHeader closeButton>
           <ModalTitle>
-            <IconDisplay Icon={IconAbout}>
-              <span>About</span>
-            </IconDisplay>
+            <IconDisplay Icon={IconAbout}>About</IconDisplay>
           </ModalTitle>
         </ModalHeader>
 

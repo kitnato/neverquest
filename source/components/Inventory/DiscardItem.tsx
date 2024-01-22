@@ -30,7 +30,13 @@ export function DiscardItem({ ID, name }: { ID: string; name: string }) {
 
   return (
     <>
-      <OverlayTrigger overlay={<Tooltip>Discard</Tooltip>}>
+      <OverlayTrigger
+        overlay={
+          <Tooltip>
+            <span>Discard</span>
+          </Tooltip>
+        }
+      >
         <Button
           onClick={() => {
             setIsShowingModal(true);

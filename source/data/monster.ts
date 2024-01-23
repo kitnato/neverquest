@@ -72,7 +72,7 @@ export const ESSENCE = {
   boss: 1.2,
   finality: {
     "res cogitans": 7777,
-    "res dominus": 7777,
+    "res dominus": 17_777,
   },
 };
 
@@ -93,7 +93,7 @@ export const MONSTER_ATTACK_RATE = {
   attenuation: 4000,
   base: 4100,
   bonus: 0.005,
-  boss: 1.1,
+  boss: 1.05,
   finality: {
     "res cogitans": 1765,
     "res dominus": 2765,
@@ -116,7 +116,7 @@ export const MONSTER_HEALTH = {
   attenuation: 13,
   base: 16,
   bonus: 0.02,
-  boss: 1.8,
+  boss: 1.7,
   finality: {
     "res cogitans": 7777,
     "res dominus": 5777,

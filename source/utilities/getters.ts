@@ -12,6 +12,7 @@ import { AFFIX_STRUCTURE_WEIGHTS, PERKS } from "@neverquest/data/encounter";
 import {
   type ARMOR_NONE,
   ARMOR_SPECIFICATIONS,
+  SHIELD_ELEMENTAL_EFFECTS_BASE,
   type SHIELD_NONE,
   SHIELD_SPECIFICATIONS,
   WEAPON_BASE,
@@ -219,7 +220,7 @@ export function getGearElementalEffects({
     return effects;
   }
 
-  const effects = { fire: 0, ice: 0, lightning: 0 };
+  const effects = { ...SHIELD_ELEMENTAL_EFFECTS_BASE };
 
   for (const { amount, item } of stackItems(gems)) {
     const { elemental } = GEMS[item.name];

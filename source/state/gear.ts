@@ -1,8 +1,15 @@
 import { atom, atomFamily, selector } from "recoil";
 
-import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear";
+import { isTraitAcquired } from "./traits";
+import {
+  ARMOR_NONE,
+  SHIELD_ELEMENTAL_EFFECTS_BASE,
+  SHIELD_NONE,
+  WEAPON_NONE,
+} from "@neverquest/data/gear";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import type { Armor, GemItem, Shield, Weapon } from "@neverquest/types";
+import { isMelee } from "@neverquest/types/type-guards";
 import { getGearElementalEffects, getTotalElementalEffects } from "@neverquest/utilities/getters";
 import { withStateKey } from "@neverquest/utilities/helpers";
 
@@ -19,10 +26,15 @@ export const elementalEffects = withStateKey("elementalEffects", (key) =>
         gear: armorValue,
         gems: get(gems(armorValue.ID)),
       });
-      const shieldEffects = getGearElementalEffects({
-        gear: shieldValue,
-        gems: get(gems(shieldValue.ID)),
-      });
+      // Only apply shield effects if it's actively used.
+      const shieldEffects =
+        isMelee(weaponValue) &&
+        (weaponValue.grip === "one-handed" || get(isTraitAcquired("colossus")))
+          ? getGearElementalEffects({
+              gear: shieldValue,
+              gems: get(gems(shieldValue.ID)),
+            })
+          : SHIELD_ELEMENTAL_EFFECTS_BASE;
       const weaponEffects = getGearElementalEffects({
         gear: weaponValue,
         gems: get(gems(weaponValue.ID)),

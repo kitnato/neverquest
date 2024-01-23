@@ -18,7 +18,7 @@ import {
 } from "@neverquest/data/monster";
 import { AILMENT_PENALTY } from "@neverquest/data/statistics";
 import { bleed } from "@neverquest/state/ailments";
-import { merchantInventory } from "@neverquest/state/caravan";
+import { isHired, merchantInventory } from "@neverquest/state/caravan";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import {
   encounter,
@@ -30,7 +30,6 @@ import {
 } from "@neverquest/state/encounter";
 import { ownedItem } from "@neverquest/state/inventory";
 import { infusionEffect } from "@neverquest/state/items";
-import { questProgress } from "@neverquest/state/quests";
 import { range } from "@neverquest/state/statistics";
 import { isFinality } from "@neverquest/types/type-guards";
 import type { Ailment } from "@neverquest/types/unions";
@@ -298,11 +297,11 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
                 get(ownedItem("familiar")) === undefined &&
                 !merchantInventoryValue.some(({ name }) => name === "mysterious egg")
               ? { ...INFUSABLES["mysterious egg"].item, ID: nanoid() }
-              : // Torn manuscript drops if it's neither currently carried nor sold, if the memento is carried, if retirement has been done at least once and if the drop chance is reached.
+              : // Torn manuscript drops if it's neither currently carried nor sold, if the memento is carried, if the alchemist is hired and if the drop chance is reached.
                 get(ownedItem("memento")) !== undefined &&
                   get(ownedItem("torn manuscript")) === undefined &&
                   !merchantInventoryValue.some(({ name }) => name === "torn manuscript") &&
-                  get(questProgress("retiring")) >= 1 &&
+                  get(isHired("alchemist")) &&
                   Math.random() <=
                     getFromRange({
                       factor: getSigmoid(stageValue),

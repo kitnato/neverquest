@@ -16,7 +16,7 @@ import type { Ranged } from "@neverquest/types";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-export function CombatRange() {
+export function Range() {
   const marksmanshipValue = useRecoilValue(masteryStatistic("marksmanship"));
   const rangeValue = useRecoilValue(range);
   const weaponValue = useRecoilValue(weapon);

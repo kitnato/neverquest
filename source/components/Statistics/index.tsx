@@ -3,7 +3,6 @@ import { Card, CardBody, Col, Row, Stack } from "react-bootstrap";
 
 import { BleedRating } from "@neverquest/components/Statistics/BleedRating";
 import { BlockChance } from "@neverquest/components/Statistics/BlockChance";
-import { CombatRange } from "@neverquest/components/Statistics/CombatRange";
 import { CriticalRating } from "@neverquest/components/Statistics/CriticalRating";
 import { Damage } from "@neverquest/components/Statistics/Damage";
 import { DeflectionChance } from "@neverquest/components/Statistics/DeflectionChance";
@@ -11,6 +10,7 @@ import { DodgeChance } from "@neverquest/components/Statistics/DodgeChance";
 import { ExecutionThreshold } from "@neverquest/components/Statistics/ExecutionThreshold";
 import { ParryRating } from "@neverquest/components/Statistics/ParryRating";
 import { Protection } from "@neverquest/components/Statistics/Protection";
+import { Range } from "@neverquest/components/Statistics/Range";
 import { StaggerRating } from "@neverquest/components/Statistics/StaggerRating";
 import { StunRating } from "@neverquest/components/Statistics/StunRating";
 import { Thorns } from "@neverquest/components/Statistics/Thorns";
@@ -58,7 +58,7 @@ export function Statistics() {
 
               <ExecutionThreshold />
 
-              <CombatRange />
+              <Range />
             </Stack>
           </Col>
 

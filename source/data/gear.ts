@@ -94,6 +94,8 @@ export const ARMOR_SPECIFICATIONS: Record<
 
 export const GEAR_LEVEL_RANGE_MAXIMUM = 3;
 
+export const SHIELD_ELEMENTAL_EFFECTS_BASE = { fire: 0, ice: 0, lightning: 0 };
+
 export const SHIELD_NONE: Omit<Shield, "gearClass" | "price"> = {
   block: 0,
   burden: 0,
@@ -190,8 +192,8 @@ export const WEAPON_BASE: GearRangeBase & {
   ],
   price: { maximum: 10_000, minimum: 1 },
   range: [
-    { maximum: 2000, minimum: 1800 },
-    { maximum: 3600, minimum: 3500 },
+    { maximum: 2200, minimum: 2000 },
+    { maximum: 3800, minimum: 3700 },
   ],
   rate: [
     { maximum: 3000, minimum: 2900 },
@@ -205,11 +207,11 @@ export const WEAPON_BASE: GearRangeBase & {
 
 export const WEAPON_MODIFIER = {
   "one-handed": { ability: 1, burden: 1, damage: 1, price: 1, rate: 1, weight: 1 },
-  ranged: { ability: 1, burden: 1.05, damage: 0.8, price: 1.2, rate: 1.1, weight: 1.15 },
+  ranged: { ability: 1, burden: 1.05, damage: 0.9, price: 1.2, rate: 1.1, weight: 1.15 },
   "two-handed": {
     ability: 1.1,
     burden: 1.2,
-    damage: 1.25,
+    damage: 1.2,
     price: 1.3,
     rate: 1.2,
     weight: 1.2,

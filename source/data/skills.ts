@@ -38,7 +38,7 @@ import type { SVGIcon } from "@neverquest/types/components";
 import type { CrewMember, Showing, Skill, WeaponAbility } from "@neverquest/types/unions";
 
 export const SKILL_PRICE_BASE = 60;
-export const SKILL_PRICE_FACTOR = 1.8;
+export const SKILL_PRICE_FACTOR = 1.9;
 
 export const SKILLS: Record<
   Skill,

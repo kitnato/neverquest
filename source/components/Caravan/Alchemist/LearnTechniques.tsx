@@ -30,8 +30,8 @@ export function LearnTechniques() {
       ) : (
         <>
           <span>
-            &quot;These pages were buried by the shadows of time! I can once again weave miracles,
-            but they beckon for the souls of the unwary.&quot;
+            &quot;Pages from the hermetic tomes! I can once again weave miracles, but they hunger
+            for unwary souls.&quot;
           </span>
 
           <>

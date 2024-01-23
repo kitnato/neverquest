@@ -1,9 +1,13 @@
-import { Stack, ToggleButton, ToggleButtonGroup } from "react-bootstrap";
+import { OverlayTrigger, Stack, ToggleButton, ToggleButtonGroup, Tooltip } from "react-bootstrap";
 import { CircularProgressbar } from "react-circular-progressbar";
 import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_UNKNOWN } from "@neverquest/data/general";
+import {
+  CLASS_FULL_WIDTH_JUSTIFIED,
+  LABEL_UNKNOWN,
+  POPOVER_TRIGGER,
+} from "@neverquest/data/general";
 import { QUEST_CLASS_ICONS, QUEST_COMPLETION_BONUS } from "@neverquest/data/quests";
 import { useCompleteQuest } from "@neverquest/hooks/actions/useCompleteQuest";
 import IconDamage from "@neverquest/icons/damage.svg?react";
@@ -71,44 +75,53 @@ export function QuestDisplay({
       </Stack>
 
       {questStatus !== "incomplete" && (
-        <ToggleButtonGroup
-          className="me-1"
-          name={choiceID}
-          onChange={(value) => {
-            completeQuest({
-              bonus: value as QuestBonus,
-              progression: progressionMaximum,
-              quest,
-            });
-          }}
-          type="radio"
-          value={hasCompletedQuest ? questStatus : undefined}
+        <OverlayTrigger
+          overlay={
+            <Tooltip>
+              <span>Choose a quest reward.</span>
+            </Tooltip>
+          }
+          trigger={hasCompletedQuest ? [] : POPOVER_TRIGGER}
         >
-          {[
-            { bonus: "healthBonus", Icon: IconHealth },
-            { bonus: "staminaBonus", Icon: IconStamina },
-            { bonus: "damageBonus", Icon: IconDamage },
-          ].map(({ bonus, Icon }) => (
-            <ToggleButton
-              disabled={hasCompletedQuest}
-              id={`${choiceID}-${bonus}`}
-              key={bonus}
-              value={bonus}
-              variant="outline-dark"
-            >
-              <IconDisplay Icon={Icon} iconProps={{ className: "small" }}>
-                <span>
-                  +
-                  {formatNumber({
-                    decimals: 0,
-                    format: "percentage",
-                    value: QUEST_COMPLETION_BONUS[questClass],
-                  })}
-                </span>
-              </IconDisplay>
-            </ToggleButton>
-          ))}
-        </ToggleButtonGroup>
+          <ToggleButtonGroup
+            className="me-1"
+            name={choiceID}
+            onChange={(value) => {
+              completeQuest({
+                bonus: value as QuestBonus,
+                progression: progressionMaximum,
+                quest,
+              });
+            }}
+            type="radio"
+            value={hasCompletedQuest ? questStatus : undefined}
+          >
+            {[
+              { bonus: "healthBonus", Icon: IconHealth },
+              { bonus: "staminaBonus", Icon: IconStamina },
+              { bonus: "damageBonus", Icon: IconDamage },
+            ].map(({ bonus, Icon }) => (
+              <ToggleButton
+                disabled={hasCompletedQuest}
+                id={`${choiceID}-${bonus}`}
+                key={bonus}
+                value={bonus}
+                variant="outline-dark"
+              >
+                <IconDisplay Icon={Icon} iconProps={{ className: "small" }}>
+                  <span>
+                    +
+                    {formatNumber({
+                      decimals: 0,
+                      format: "percentage",
+                      value: QUEST_COMPLETION_BONUS[questClass],
+                    })}
+                  </span>
+                </IconDisplay>
+              </ToggleButton>
+            ))}
+          </ToggleButtonGroup>
+        </OverlayTrigger>
       )}
     </div>
   );

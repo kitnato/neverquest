@@ -10,7 +10,7 @@ import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useResetAttributes } from "@neverquest/hooks/actions/useResetAttributes";
 import { useResetCharacter } from "@neverquest/hooks/actions/useResetCharacter";
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness";
-import { isHired, monologue } from "@neverquest/state/caravan";
+import { monologue } from "@neverquest/state/caravan";
 import { corpse, perkEffect, stage, stageMaximum } from "@neverquest/state/encounter";
 import { gems } from "@neverquest/state/gear";
 import { inventory } from "@neverquest/state/inventory";
@@ -85,7 +85,6 @@ export function useRetire() {
         }
 
         for (const crewMember of CREW_MEMBER_TYPES) {
-          reset(isHired(crewMember));
           reset(monologue(crewMember));
         }
 

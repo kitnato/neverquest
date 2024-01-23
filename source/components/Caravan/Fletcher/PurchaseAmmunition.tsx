@@ -63,6 +63,7 @@ export function PurchaseAmmunition() {
                   </Stack>
                 </Tooltip>
               }
+              show={canPurchase ? false : undefined}
               trigger={canPurchase ? [] : POPOVER_TRIGGER}
             >
               <div>

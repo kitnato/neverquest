@@ -21,7 +21,7 @@ import type { InheritableItem } from "@neverquest/types";
 import type { SVGIcon } from "@neverquest/types/components";
 import type { CrewMember, Grip, Showing } from "@neverquest/types/unions";
 
-export const AMMUNITION_PRICE = 5;
+export const AMMUNITION_PRICE = 3;
 
 export const MONOLOGUE_EMPTY = "...";
 
@@ -67,7 +67,7 @@ export const CREW: Record<
     Icon: IconFletcher,
     interaction: "Craft",
     monologues: {
-      1: "Tired of monster breath?",
+      1: "Tired of monster breath? Don't forget to rearm.",
       [LEVELLING_CUTOFF]: MONOLOGUE_EMPTY,
       [LEVELLING_MAXIMUM]: "There's too many of them.",
     },

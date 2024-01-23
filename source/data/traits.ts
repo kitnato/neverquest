@@ -64,7 +64,7 @@ export const TRAITS: Record<
     Icon: IconNudist,
   },
   sharpshooter: {
-    description: "While at range, all attacks with a ranged weapon are critical hits.",
+    description: "While at a distance, all attacks with a ranged weapon are critical hits.",
     Icon: IconSharpshooter,
   },
   shredder: {

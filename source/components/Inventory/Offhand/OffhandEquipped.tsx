@@ -18,7 +18,7 @@ export function OffhandEquipped() {
   const shieldValue = useRecoilValue(shield);
   const weaponValue = useRecoilValue(weapon);
 
-  const unshielded = isUnshielded(shieldValue);
+  const isShieldUnequipped = isUnshielded(shieldValue);
 
   if (isShowingOffhand) {
     if (isRanged(weaponValue)) {
@@ -38,8 +38,8 @@ export function OffhandEquipped() {
     return (
       <IconDisplay
         className={getAnimationClass({ animation: "flipInX" })}
-        Icon={unshielded ? IconHand : IconShield}
-        iconProps={{ isMirrored: unshielded }}
+        Icon={isShieldUnequipped ? IconHand : IconShield}
+        iconProps={{ isMirrored: isShieldUnequipped }}
         tooltip="Equipped shield"
       >
         <ShieldName overlayPlacement="top" shield={shieldValue} />

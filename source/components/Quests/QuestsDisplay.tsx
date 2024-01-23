@@ -39,7 +39,7 @@ export function QuestsDisplay() {
   if (!isSkillAcquiredMemetics) {
     return (
       <span className="fst-italic">
-        This tome is undecipherable. Perhaps someone versed in the sage arts can help ...
+        The journal is undecipherable. Perhaps someone versed in the sage arts can help ...
       </span>
     );
   }

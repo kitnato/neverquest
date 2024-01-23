@@ -1,6 +1,5 @@
 import { useRecoilCallback } from "recoil";
 
-import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear";
 import {
   blacksmithInventory,
   expandedBuyback,
@@ -9,8 +8,8 @@ import {
 } from "@neverquest/state/caravan";
 import { attackDuration, name, recoveryDuration } from "@neverquest/state/character";
 import { isStageStarted, location, progress, stage } from "@neverquest/state/encounter";
-import { armor, gems, shield, weapon } from "@neverquest/state/gear";
-import { isSpinning } from "@neverquest/state/items";
+import { armor, shield, weapon } from "@neverquest/state/gear";
+import { ammunition, isSpinning } from "@neverquest/state/items";
 import { expandedMasteries } from "@neverquest/state/masteries";
 import { questProgress } from "@neverquest/state/quests";
 import {
@@ -25,8 +24,7 @@ import { essence } from "@neverquest/state/resources";
 export function useResetCharacter() {
   return useRecoilCallback(
     ({ reset }) =>
-      () => {
-        reset(armor);
+      (resetGear?: boolean) => {
         reset(attackDuration);
         reset(blacksmithInventory);
         reset(blight);
@@ -34,9 +32,6 @@ export function useResetCharacter() {
         reset(expandedMasteries);
         reset(essence);
         reset(fletcherInventory);
-        reset(gems(ARMOR_NONE.ID));
-        reset(gems(SHIELD_NONE.ID));
-        reset(gems(WEAPON_NONE.ID));
         reset(health);
         reset(isSpinning);
         reset(isStageStarted);
@@ -52,10 +47,15 @@ export function useResetCharacter() {
         reset(recoveryDuration);
         reset(regenerationDuration("health"));
         reset(regenerationDuration("stamina"));
-        reset(shield);
         reset(stage);
         reset(stamina);
-        reset(weapon);
+
+        if (resetGear) {
+          reset(ammunition);
+          reset(armor);
+          reset(shield);
+          reset(weapon);
+        }
       },
     [],
   );

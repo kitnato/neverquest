@@ -65,7 +65,7 @@ export function useChangeHealth() {
             progressQuest({ quest: "flatlining" });
 
             set(corpse, {
-              essence: Math.round((get(essence) + get(absorbedEssence)) * CORPSE_VALUE),
+              essence: Math.round(get(essence) + get(absorbedEssence) * CORPSE_VALUE),
               stage: get(stage),
             });
           } else {

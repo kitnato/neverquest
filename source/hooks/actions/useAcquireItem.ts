@@ -59,7 +59,7 @@ export function useAcquireItem() {
 
         set(inventory, (currentInventory) => [...currentInventory, item]);
 
-        const isShieldUnshielded = isUnshielded(get(shield));
+        const isShieldUnequipped = isUnshielded(get(shield));
         const weaponValue = get(weapon);
 
         if (isGearItem(item)) {
@@ -74,7 +74,7 @@ export function useAcquireItem() {
           if (
             (isUnarmored(get(armor)) && isArmor(item)) ||
             // Acquiring a shield while no shield equipped and not wielding a ranged weapon nor two-handed weapon (unless colossus).
-            (isShieldUnshielded &&
+            (isShieldUnequipped &&
               isShield(item) &&
               !isRanged(weaponValue) &&
               isMelee(weaponValue) &&
@@ -86,7 +86,7 @@ export function useAcquireItem() {
                 get(isTraitAcquired("colossus")) ||
                 (((isMelee(item) && item.grip === "two-handed") ||
                   (get(isSkillAcquired("archery")) && isRanged(item))) &&
-                  isShieldUnshielded)))
+                  isShieldUnequipped)))
           ) {
             return "equip";
           }

@@ -12,20 +12,21 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
+import { DEATH_STAGE_PENALTY } from "@neverquest/data/encounter";
 import { useResetCharacter } from "@neverquest/hooks/actions/useResetCharacter";
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness";
 import IconCorpse from "@neverquest/icons/corpse.svg?react";
 import IconDead from "@neverquest/icons/dead.svg?react";
 import IconEssence from "@neverquest/icons/essence.svg?react";
-import IconGear from "@neverquest/icons/gear.svg?react";
 import { hasFlatlined } from "@neverquest/state/character";
-import { wildernesses } from "@neverquest/state/encounter";
+import { stage, wildernesses } from "@neverquest/state/encounter";
 import { armor, shield, weapon } from "@neverquest/state/gear";
 import { inventory } from "@neverquest/state/inventory";
 import { getAffixStructure } from "@neverquest/utilities/getters";
 
 export function Flatline() {
   const hasFlatlinedValue = useRecoilValue(hasFlatlined);
+  const stageValue = useRecoilValue(stage);
   const setInventory = useSetRecoilState(inventory);
   const setWildernesses = useSetRecoilState(wildernesses);
 
@@ -55,11 +56,7 @@ export function Flatline() {
 
             <IconImage className="small" Icon={IconEssence} />
 
-            <span>essence and equipped</span>
-
-            <IconImage className="small" Icon={IconGear} />
-
-            <span>gear are lost.</span>
+            <span>essence is lost.</span>
           </Stack>
 
           <span>Memories and possessions are retained.</span>
@@ -82,7 +79,14 @@ export function Flatline() {
             setInventory((currentInventory) =>
               currentInventory.filter(({ ID }) => !equippedGearIDs.has(ID)),
             );
-            setWildernesses([generateLocation({ affixStructure: getAffixStructure() })]);
+
+            if (stageValue > DEATH_STAGE_PENALTY) {
+              setWildernesses((currentWildernesses) =>
+                currentWildernesses.slice(0, stageValue - DEATH_STAGE_PENALTY),
+              );
+            } else {
+              setWildernesses([generateLocation({ affixStructure: getAffixStructure() })]);
+            }
 
             resetCharacter();
             resetWilderness();

@@ -157,7 +157,7 @@ export const SHIELD_SPECIFICATIONS: Record<
     ],
     burden: [
       { maximum: 7, minimum: 6 },
-      { maximum: 45, minimum: 30 },
+      { maximum: 50, minimum: 45 },
     ],
     Icon: IconShieldTower,
     price: { maximum: 7500, minimum: 7 },
@@ -180,11 +180,11 @@ export const WEAPON_BASE: GearRangeBase & {
 } = {
   ammunitionCost: [
     { maximum: 2, minimum: 1 },
-    { maximum: 27, minimum: 24 },
+    { maximum: 25, minimum: 23 },
   ],
   burden: [
     { maximum: 2, minimum: 1 },
-    { maximum: 40, minimum: 35 },
+    { maximum: 45, minimum: 40 },
   ],
   damage: [
     { maximum: 15, minimum: 13 },
@@ -193,7 +193,7 @@ export const WEAPON_BASE: GearRangeBase & {
   price: { maximum: 10_000, minimum: 1 },
   range: [
     { maximum: 2200, minimum: 2000 },
-    { maximum: 3800, minimum: 3700 },
+    { maximum: 3700, minimum: 3600 },
   ],
   rate: [
     { maximum: 3000, minimum: 2900 },

@@ -212,7 +212,7 @@ The damage from the equipped [weapon](#weapons) in addition to [strength](#stren
 
 ### Death
 
-When your [health](#health) reaches 0, you can be reborn on stage 1 with your [power level](#attributes) intact, but having lost all equipped gear and unspent [essence](#essence). Upon reaching the stage again in which you previously died, you may scavenge your corpse to recover most of the lost essence.
+When your [health](#health) reaches 0, you can be reborn several stages lower with your [power level](#attributes) intact, but having lost all equipped gear and unspent [essence](#essence). Upon reaching the stage again in which you previously died, you may scavenge your corpse to recover the lost unspent essence and an additional fraction of your total absorbed essence at the time of death.
 
 ## Encounter
 

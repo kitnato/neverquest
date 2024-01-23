@@ -1,6 +1,7 @@
 import { useRecoilCallback } from "recoil";
 
 import { ATTRIBUTES } from "@neverquest/data/attributes";
+import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear";
 import { RETIREMENT_STAGE } from "@neverquest/data/general";
 import { SKILLS } from "@neverquest/data/skills";
 import { useAcquireSkill } from "@neverquest/hooks/actions/useAcquireSkill";
@@ -11,6 +12,7 @@ import { useResetCharacter } from "@neverquest/hooks/actions/useResetCharacter";
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness";
 import { isHired, monologue } from "@neverquest/state/caravan";
 import { corpse, perkEffect, stage, stageMaximum } from "@neverquest/state/encounter";
+import { gems } from "@neverquest/state/gear";
 import { inventory } from "@neverquest/state/inventory";
 import { masteryProgress, masteryRank } from "@neverquest/state/masteries";
 import { questProgress } from "@neverquest/state/quests";
@@ -55,8 +57,12 @@ export function useRetire() {
         }
 
         resetAttributes();
-        resetCharacter();
+        resetCharacter(true);
+
         reset(corpse);
+        reset(gems(ARMOR_NONE.ID));
+        reset(gems(SHIELD_NONE.ID));
+        reset(gems(WEAPON_NONE.ID));
 
         reset(questProgress("attributesIncreasing"));
         reset(questProgress("attributesUnlocking"));

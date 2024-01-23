@@ -28,7 +28,18 @@ export function LearnTechniques() {
       ) : learnableTechniques.length === 0 ? (
         <span className="fst-italic">{LABEL_NONE_AVAILABLE}</span>
       ) : (
-        learnableTechniques.map((skill) => <TrainableSkill key={skill} skill={skill} />)
+        <>
+          <span>
+            &quot;These pages were buried by the shadows of time! I can once again weave miracles,
+            but they beckon for the souls of the unwary.&quot;
+          </span>
+
+          <>
+            {learnableTechniques.map((skill) => (
+              <TrainableSkill key={skill} skill={skill} />
+            ))}
+          </>
+        </>
       )}
     </Stack>
   );

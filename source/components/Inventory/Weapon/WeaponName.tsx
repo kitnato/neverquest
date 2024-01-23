@@ -14,6 +14,7 @@ import { LABEL_UNKNOWN } from "@neverquest/data/general";
 import { WEAPON_ABILITY_SKILLS } from "@neverquest/data/skills";
 import IconAmmunition from "@neverquest/icons/ammunition.svg?react";
 import IconGrip from "@neverquest/icons/grip.svg?react";
+import IconRange from "@neverquest/icons/range.svg?react";
 import IconWeaponAttackRate from "@neverquest/icons/weapon-attack-rate.svg?react";
 import IconWeaponDamagePerSecond from "@neverquest/icons/weapon-damage-per-second.svg?react";
 import IconWeaponDamage from "@neverquest/icons/weapon-damage.svg?react";
@@ -165,18 +166,33 @@ export function WeaponName({
               )}
 
               {isRanged(weapon) && (
-                <tr>
-                  <td>
-                    <span>Ammunition cost:</span>
-                  </td>
+                <>
+                  <tr>
+                    <td>
+                      <span>Range:</span>
+                    </td>
 
-                  <td>
-                    <IconDisplay Icon={IconAmmunition} iconProps={{ className: "small" }}>
-                      {/* eslint-disable-next-line unicorn/consistent-destructuring */}
-                      <span>{formatNumber({ value: weapon.ammunitionCost })}</span>
-                    </IconDisplay>
-                  </td>
-                </tr>
+                    <td>
+                      <IconDisplay Icon={IconRange} iconProps={{ className: "small" }}>
+                        {/* eslint-disable-next-line unicorn/consistent-destructuring */}
+                        <span>{formatNumber({ format: "time", value: weapon.range })}</span>
+                      </IconDisplay>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <span>Ammunition cost:</span>
+                    </td>
+
+                    <td>
+                      <IconDisplay Icon={IconAmmunition} iconProps={{ className: "small" }}>
+                        {/* eslint-disable-next-line unicorn/consistent-destructuring */}
+                        <span>{formatNumber({ value: weapon.ammunitionCost })}</span>
+                      </IconDisplay>
+                    </td>
+                  </tr>
+                </>
               )}
 
               <BurdenDetail

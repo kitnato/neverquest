@@ -2,7 +2,12 @@ import { selector } from "recoil";
 
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { PERCENTAGE_POINTS } from "@neverquest/data/general";
-import { PARRY_ABSORPTION, PARRY_DAMAGE, RECOVERY_RATE } from "@neverquest/data/statistics";
+import {
+  DEFLECTION_MAXIMUM,
+  PARRY_ABSORPTION,
+  PARRY_DAMAGE,
+  RECOVERY_RATE,
+} from "@neverquest/data/statistics";
 import {
   BRAWLER_DAMAGE_BONUS,
   INOCULATED_DEFLECTION_BASE,
@@ -151,8 +156,11 @@ export const deflectionChance = withStateKey("deflectionChance", (key) =>
   selector({
     get: ({ get }) =>
       get(isSkillAcquired("armorcraft"))
-        ? get(armor).deflection +
-          (get(isTraitAcquired("inoculated")) ? INOCULATED_DEFLECTION_BASE : 0)
+        ? Math.min(
+            get(armor).deflection +
+              (get(isTraitAcquired("inoculated")) ? INOCULATED_DEFLECTION_BASE : 0),
+            DEFLECTION_MAXIMUM,
+          )
         : 0,
     key,
   }),

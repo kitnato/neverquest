@@ -10,6 +10,8 @@ export const BLEED = {
   shredder: { duration: 100, ticks: 1 },
 };
 
+export const DEFLECTION_MAXIMUM = 0.9;
+
 export const LOOTING_RATE = {
   base: 2300,
   "ender hook": 600,

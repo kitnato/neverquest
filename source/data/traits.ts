@@ -16,7 +16,7 @@ export const BRAWLER_DAMAGE_BONUS = 0.5;
 
 export const BRUISER_STUN_CHANCE = 0.3;
 
-export const INOCULATED_DEFLECTION_BASE = 0.25;
+export const INOCULATED_DEFLECTION_BASE = 0.5;
 
 export const NUDIST_DODGE_BONUS = 2;
 

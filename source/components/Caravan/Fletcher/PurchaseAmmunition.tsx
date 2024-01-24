@@ -32,7 +32,12 @@ export function PurchaseAmmunition() {
   const ammunitionCapacityValue = useRecoilValue(ammunitionCapacity);
   const essenceValue = useRecoilValue(essence);
 
-  const [amount, setAmount] = useState(1);
+  const maximumAffordable = Math.min(
+    Math.floor(essenceValue / AMMUNITION_PRICE),
+    ammunitionCapacityValue - ammunitionValue,
+  );
+
+  const [amount, setAmount] = useState(maximumAffordable);
 
   const transactEssence = useTransactEssence();
 
@@ -49,65 +54,64 @@ export function PurchaseAmmunition() {
 
       <Stack className="ms-2" direction="horizontal" gap={3}>
         <IconDisplay Icon={IconEssence} tooltip="Price">
-          {formatNumber({ value: totalPrice })}
+          <span>{formatNumber({ value: totalPrice })}</span>
         </IconDisplay>
-        {(() => {
-          return (
-            <OverlayTrigger
-              overlay={
-                <Tooltip>
-                  <Stack>
-                    {!isAffordable && <span>{LABEL_NO_ESSENCE}</span>}
 
-                    {isFull && <span>Ammunition pouch is full.</span>}
-                  </Stack>
-                </Tooltip>
-              }
-              show={canPurchase ? false : undefined}
-              trigger={canPurchase ? [] : POPOVER_TRIGGER}
-            >
-              <div>
-                <Dropdown as={ButtonGroup}>
-                  <Button
-                    disabled={!canPurchase}
+        <OverlayTrigger
+          overlay={
+            <Tooltip>
+              <Stack>
+                {!isAffordable && <span>{LABEL_NO_ESSENCE}</span>}
+
+                {isFull && <span>Ammunition pouch is full.</span>}
+              </Stack>
+            </Tooltip>
+          }
+          show={canPurchase ? false : undefined}
+          trigger={canPurchase ? [] : POPOVER_TRIGGER}
+        >
+          <div>
+            <Dropdown as={ButtonGroup}>
+              <Button
+                disabled={!canPurchase}
+                onClick={() => {
+                  if (isAffordable && !isFull) {
+                    transactEssence(-totalPrice);
+
+                    setAmmunition((currentAmmunition) => currentAmmunition + amount);
+                  }
+                }}
+                variant="outline-dark"
+              >
+                Purchase {formatNumber({ value: amount })}
+              </Button>
+
+              <DropdownToggle split variant="outline-dark" />
+
+              <DropdownMenu>
+                {[
+                  { amount: maximumAffordable, label: LABEL_MAXIMUM },
+                  { amount: 1, label: "1" },
+                  { amount: 10, label: "10" },
+                  { amount: 10, label: "25" },
+                  { amount: 50, label: "50" },
+                  { amount: 100, label: "100" },
+                ].map(({ amount, label }) => (
+                  <DropdownItem
+                    key={label}
                     onClick={() => {
-                      if (isAffordable && !isFull) {
-                        transactEssence(-totalPrice);
-
-                        setAmmunition((currentAmmunition) => currentAmmunition + amount);
-                      }
+                      setAmount(amount);
                     }}
-                    variant="outline-dark"
                   >
-                    Purchase {formatNumber({ value: amount })}
-                  </Button>
-
-                  <DropdownToggle split variant="outline-dark" />
-
-                  <DropdownMenu>
-                    {[
-                      { amount: 1, label: "1" },
-                      { amount: 10, label: "10" },
-                      { amount: 50, label: "50" },
-                      { amount: ammunitionCapacityValue - ammunitionValue, label: LABEL_MAXIMUM },
-                    ].map(({ amount, label }) => (
-                      <DropdownItem
-                        key={label}
-                        onClick={() => {
-                          setAmount(amount);
-                        }}
-                      >
-                        <IconDisplay Icon={IconAmmunition} iconProps={{ className: "small" }}>
-                          <span>{label}</span>
-                        </IconDisplay>
-                      </DropdownItem>
-                    ))}
-                  </DropdownMenu>
-                </Dropdown>
-              </div>
-            </OverlayTrigger>
-          );
-        })()}
+                    <IconDisplay Icon={IconAmmunition} iconProps={{ className: "small" }}>
+                      <span>{label}</span>
+                    </IconDisplay>
+                  </DropdownItem>
+                ))}
+              </DropdownMenu>
+            </Dropdown>
+          </div>
+        </OverlayTrigger>
       </Stack>
     </div>
   );

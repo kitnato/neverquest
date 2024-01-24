@@ -52,7 +52,7 @@ export function QuestsDisplay() {
     <Stack className="journal overflow-y-hidden" gap={3}>
       {isShowingQuestBonusValue && (
         <>
-          <h6>Completion bonus</h6>
+          <h6>Rewards</h6>
 
           <Stack className="mx-auto" direction="horizontal" gap={5}>
             {QUEST_BONUS_TYPES.map((questBonus) => (
@@ -62,7 +62,7 @@ export function QuestsDisplay() {
         </>
       )}
 
-      {isShowingQuestBonusValue && <h6>Quests</h6>}
+      {isShowingQuestBonusValue && <h6>Progress</h6>}
 
       <TabContainer defaultActiveKey={TABS[0].label}>
         <Stack className="overflow-y-hidden" gap={1}>

@@ -478,15 +478,15 @@ In addition to potentially providing a [static](#static-relics) effect, these re
 
 Some of usable relics are infusable, meaning they allow [essence](#essence) to be spent on them to upgrade their effect via infusion levels.
 
-###### Tome of Power
+###### Eldritch Codex
 
-This infusable relic, while carried in the [knapsack](#knapsack), provides a bonus to all attributes by their respective percentage amount (each extent of which is shown when increasing [attributes](#attributes)) multiplied by your current power level.
+This infusable relic, while carried in the [knapsack](#knapsack), provides a bonus to all attributes by their respective percentage amount (the extent of each is shown when increasing [attributes](#attributes)) multiplied by your current power level.
 
-For example, if you are carrying a level 0 Tome of Power, your power level is 25, the attribute in question is at rank 5, a given attribute rank would increase a given statistic by 10, and the boosted percentage is 1%, the statistic value is calculated as follows:
+For example, if you are carrying a level 0 Eldritch Codex, your power level is 25, the attribute in question is at rank 5, a given attribute rank would increase a given statistic by 10, and the boosted percentage is 1%, the statistic value is calculated as follows:
 
-`5 attribute ranks × 10 + 25 power levels × 1% bonus per rank = 62.5 (50 if no Tome was owned)`
+`5 attribute ranks × 10 + 25 power levels × 1% bonus per rank = 62.5 (50 if the Codex wasn't owned)`
 
-Additionally, each infusion level boosts this bonus percentage. In case the Tome is infused to grant a bonus boost of +5%, the calculation would be as follows:
+Additionally, each infusion level boosts this bonus percentage. In case the Codex is infused to grant a bonus boost of +5%, the calculation would be as follows:
 
 `5 × 10 + 25 × 1.05% = 63.125`
 

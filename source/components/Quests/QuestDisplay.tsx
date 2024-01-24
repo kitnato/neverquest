@@ -8,7 +8,7 @@ import {
   LABEL_UNKNOWN,
   POPOVER_TRIGGER,
 } from "@neverquest/data/general";
-import { QUEST_CLASS_ICONS, QUEST_COMPLETION_BONUS } from "@neverquest/data/quests";
+import { QUEST_COMPLETION_BONUS } from "@neverquest/data/quests";
 import { useCompleteQuest } from "@neverquest/hooks/actions/useCompleteQuest";
 import IconDamage from "@neverquest/icons/damage.svg?react";
 import IconHealth from "@neverquest/icons/health.svg?react";
@@ -17,7 +17,7 @@ import { questProgress, questStatuses } from "@neverquest/state/quests";
 import type { QuestData } from "@neverquest/types";
 import { isQuestBonus } from "@neverquest/types/type-guards";
 import type { Quest, QuestBonus, QuestClass } from "@neverquest/types/unions";
-import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
+import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function QuestDisplay({
   activeQuest: { description, hidden, progressionIndex, progressionMaximum, title },
@@ -47,7 +47,7 @@ export function QuestDisplay({
   return (
     <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
       <Stack
-        className={hasCompletedQuest ? "opacity-50" : undefined}
+        className={`me-2${hasCompletedQuest ? " opacity-50" : ""}`}
         direction="horizontal"
         gap={3}
       >
@@ -60,18 +60,15 @@ export function QuestDisplay({
           value={cappedProgress}
         />
 
-        <IconDisplay
-          className="me-2"
-          description={
-            hidden !== undefined && isQuestOver
-              ? description.replace(LABEL_UNKNOWN, hidden)
-              : description
-          }
-          Icon={QUEST_CLASS_ICONS[questClass]}
-          tooltip={capitalizeAll(questClass)}
-        >
+        <Stack gap={1}>
           <span>{title}</span>
-        </IconDisplay>
+
+          <div className="small text-muted">
+            {hidden !== undefined && isQuestOver
+              ? description.replace(LABEL_UNKNOWN, hidden)
+              : description}
+          </div>
+        </Stack>
       </Stack>
 
       {questStatus !== "incomplete" && (
@@ -81,6 +78,7 @@ export function QuestDisplay({
               <span>Choose a quest reward.</span>
             </Tooltip>
           }
+          show={hasCompletedQuest ? false : undefined}
           trigger={hasCompletedQuest ? [] : POPOVER_TRIGGER}
         >
           <ToggleButtonGroup

@@ -8,6 +8,7 @@ import { attackDuration, lootingDuration } from "@neverquest/state/character";
 import { encounter, stage } from "@neverquest/state/encounter";
 import { ownedItem } from "@neverquest/state/inventory";
 import {
+  distance,
   isEnraged,
   isMonsterAiling,
   monsterAttackDuration,
@@ -70,6 +71,10 @@ export function useChangeMonsterHealth() {
 
           if (get(isEnraged)) {
             progressQuest({ quest: "killingEnraged" });
+          }
+
+          if (get(distance) > 0) {
+            progressQuest({ quest: "distantKilling" });
           }
 
           switch (get(encounter)) {

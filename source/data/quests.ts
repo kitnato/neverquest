@@ -201,6 +201,12 @@ export const QUESTS: Record<
     requiresTracking: true,
     title: "Incorruptible",
   },
+  distantKilling: {
+    description: "Kill @ distant monsters.",
+    progression: [3, 10, 25],
+    requiresTracking: true,
+    title: "Headshot",
+  },
   dodging: {
     description: "Dodge @ attacks.",
     progression: [3, 10, 25, 50],

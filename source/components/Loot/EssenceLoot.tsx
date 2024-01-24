@@ -26,7 +26,7 @@ export function EssenceLoot() {
       <Stack className={getAnimationClass({ animation: "flipInX" })} direction="horizontal" gap={5}>
         <Stack direction="horizontal" gap={1}>
           <IconDisplay Icon={IconEssence} tooltip="Looted essence">
-            {formatNumber({ value: essenceLootValue })}
+            <span>{formatNumber({ value: essenceLootValue })}</span>
           </IconDisplay>
 
           <DeltasDisplay delta="essenceLoot" />

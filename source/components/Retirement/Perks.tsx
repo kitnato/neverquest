@@ -28,11 +28,13 @@ export function Perks() {
         iconProps={{ isFlipped: true }}
         tooltip="Monster reduction"
       >
-        -
-        {formatNumber({
-          format: "percentage",
-          value: getPerkEffect({ perk: "monsterReduction", stage: stageMaximumValue }),
-        })}
+        <span>
+          -
+          {formatNumber({
+            format: "percentage",
+            value: getPerkEffect({ perk: "monsterReduction", stage: stageMaximumValue }),
+          })}
+        </span>
       </IconDisplay>
     </Stack>
   );

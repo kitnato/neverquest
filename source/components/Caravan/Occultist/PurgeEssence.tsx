@@ -33,7 +33,7 @@ export function PurgeEssence() {
   return (
     <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
       <IconDisplay
-        description="Resets power level to 0, refunding all absorbed essence."
+        description={<span>Resets power level to 0, refunding all absorbed essence.</span>}
         Icon={IconPurgeEssence}
         tooltip="Ritual"
       >

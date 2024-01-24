@@ -78,7 +78,7 @@ export function TransmuteGems() {
 
       <Stack className="justify-content-center" direction="horizontal" gap={3}>
         <IconDisplay Icon={IconEssence} tooltip="Cost">
-          {formatNumber({ value: price })}
+          <span>{formatNumber({ value: price })}</span>
         </IconDisplay>
 
         <OverlayTrigger

@@ -83,9 +83,11 @@ export function Attack() {
         showWarning ? (
           <Popover>
             <PopoverHeader className="text-center">
-              Low&nbsp;
+              <span>Low&nbsp;</span>
+
               <IconImage className="small" Icon={IconHealth} />
-              &nbsp;health
+
+              <span>&nbsp;health</span>
             </PopoverHeader>
 
             <PopoverBody>

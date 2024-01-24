@@ -49,7 +49,7 @@ export function SellItem({ item }: { item: InventoryItem }) {
   return (
     <Stack className="ms-2" direction="horizontal" gap={3}>
       <IconDisplay Icon={IconEssence} tooltip="Value">
-        {formatNumber({ value: getSellPrice({ item }) })}
+        <span>{formatNumber({ value: getSellPrice({ item }) })}</span>
       </IconDisplay>
 
       <Button

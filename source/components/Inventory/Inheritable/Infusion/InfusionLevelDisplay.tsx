@@ -22,7 +22,7 @@ export function InfusionLevelDisplay({
       iconProps={{ className: "small", overlayPlacement }}
       tooltip="Infusion level"
     >
-      {formatNumber({ value: infusionLevelValue })}
+      <span>{formatNumber({ value: infusionLevelValue })}</span>
     </IconDisplay>
   );
 }

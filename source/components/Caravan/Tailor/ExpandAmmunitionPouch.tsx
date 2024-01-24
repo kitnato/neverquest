@@ -41,16 +41,16 @@ export function ExpandAmmunitionPouch() {
 
       <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
         <IconDisplay
-          description={`Increases maximum ammunition by ${amount}.`}
+          description={<span>{`Increases maximum ammunition by ${amount}.`}</span>}
           Icon={IconTailoring}
           tooltip="Tailoring"
         >
-          Add quiver
+          <span>Add quiver</span>
         </IconDisplay>
 
         <Stack className="ms-2" direction="horizontal" gap={3}>
           <IconDisplay Icon={IconEssence} tooltip="Price">
-            {formatNumber({ value: price })}
+            <span>{formatNumber({ value: price })}</span>
           </IconDisplay>
 
           <OverlayTrigger

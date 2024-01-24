@@ -33,8 +33,12 @@ export function HirableCrewMember({ crewMember }: { crewMember: CrewMember }) {
     if (stageMaximumValue >= requiredStage) {
       return (
         <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-          <IconDisplay description={description} Icon={Icon} tooltip="Caravan crew member">
-            {name}
+          <IconDisplay
+            description={<span>{description}</span>}
+            Icon={Icon}
+            tooltip="Caravan crew member"
+          >
+            <span>{name}</span>
           </IconDisplay>
 
           <Stack className="ms-2" direction="horizontal" gap={3}>
@@ -69,7 +73,7 @@ export function HirableCrewMember({ crewMember }: { crewMember: CrewMember }) {
 
     return (
       <IconDisplay
-        description={`Found on stage ${requiredStage}.`}
+        description={<span>{`Found on stage ${requiredStage}.`}</span>}
         Icon={IconUnknown}
         tooltip="Caravan crew member"
       >

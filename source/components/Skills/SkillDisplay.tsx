@@ -26,7 +26,7 @@ export function SkillDisplay({ skill }: { skill: Skill }) {
       Icon={Icon}
       tooltip="Skill"
     >
-      {capitalizeAll(skill)}
+      <span>{capitalizeAll(skill)}</span>
     </IconDisplay>
   );
 }

@@ -40,7 +40,9 @@ export function PurgeMemories() {
     return (
       <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
         <IconDisplay
-          description="Resets the bonus of all completed quests, allowing for new choices."
+          description={
+            <span>Resets the bonus of all completed quests, allowing for new choices.</span>
+          }
           Icon={IconPurgeMemories}
           tooltip="Ritual"
         >
@@ -85,7 +87,7 @@ export function PurgeMemories() {
 
   return (
     <IconDisplay
-      description="Requires a certain relic and deeper knowledge."
+      description={<span>Requires a relic and a skill.</span>}
       Icon={IconUnknown}
       tooltip="Ritual"
     >

@@ -60,7 +60,11 @@ export function MasteryDisplay({ mastery }: { mastery: Mastery }) {
           </OverlayTrigger>
         </IconDisplay>
       ) : (
-        <IconDisplay description={LABEL_SKILL_REQUIRED} Icon={IconUnknown} tooltip="Mastery">
+        <IconDisplay
+          description={<span>{LABEL_SKILL_REQUIRED}</span>}
+          Icon={IconUnknown}
+          tooltip="Mastery"
+        >
           <span>{LABEL_UNKNOWN}</span>
         </IconDisplay>
       )}

@@ -21,7 +21,7 @@ export function AttributeRank({ attribute }: { attribute: Attribute }) {
   return (
     <Stack direction="horizontal" gap={1}>
       <IconDisplay Icon={IconRank} tooltip="Rank">
-        {formatNumber({ value: attributeRankValue })}
+        <span>{formatNumber({ value: attributeRankValue })}</span>
       </IconDisplay>
 
       <DeltasDisplay delta={attribute} />

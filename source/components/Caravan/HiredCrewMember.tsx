@@ -46,11 +46,11 @@ export function HiredCrewMember({ crewMember }: { crewMember: CrewMember }) {
           className={`${CLASS_FULL_WIDTH_JUSTIFIED} ${getAnimationClass({ animation: "flipInX" })}`}
         >
           <IconDisplay
-            description={`"${monologueValue}"`}
+            description={<span>&quot;{monologueValue}&quot;</span>}
             Icon={Icon}
             tooltip="Caravan crew member"
           >
-            {capitalizeAll(crewMember)}
+            <span>{capitalizeAll(crewMember)}</span>
           </IconDisplay>
 
           <Button

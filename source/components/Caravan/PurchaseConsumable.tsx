@@ -33,7 +33,7 @@ export function PurchaseConsumable({ consumable }: { consumable: Consumable }) {
 
       <Stack className="ms-2" direction="horizontal" gap={3}>
         <IconDisplay Icon={IconEssence} tooltip="Price">
-          {formatNumber({ value: price })}
+          <span>{formatNumber({ value: price })}</span>
         </IconDisplay>
 
         <PurchaseItemButton

@@ -15,10 +15,12 @@ export function AmmunitionPouchStatus() {
       iconProps={{ className: "small", overlayPlacement: "bottom" }}
       tooltip="Ammunition"
     >
-      {formatNumber({ value: ammunitionValue })}&nbsp;/&nbsp;
-      {formatNumber({
-        value: ammunitionCapacityValue,
-      })}
+      <span>
+        {formatNumber({ value: ammunitionValue })}&nbsp;/&nbsp;
+        {formatNumber({
+          value: ammunitionCapacityValue,
+        })}
+      </span>
     </IconDisplay>
   );
 }

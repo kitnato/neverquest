@@ -13,7 +13,7 @@ export function ItemsInherited() {
 
   return (
     <Stack gap={3}>
-      <h6>Items inherited</h6>
+      <h6>Inherited relics</h6>
 
       {ownedInheritableItems.length === 0 ? (
         <span className="fst-italic">{LABEL_NONE}</span>

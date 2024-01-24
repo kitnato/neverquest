@@ -84,10 +84,12 @@ export function RangedWeaponOptions() {
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Damage"
         >
-          {formatNumber({ value: damage.minimum })}&nbsp;-&nbsp;
-          {formatNumber({
-            value: damage.maximum,
-          })}
+          <span>
+            {formatNumber({ value: damage.minimum })}&nbsp;-&nbsp;
+            {formatNumber({
+              value: damage.maximum,
+            })}
+          </span>
         </IconDisplay>
 
         <IconDisplay
@@ -95,11 +97,13 @@ export function RangedWeaponOptions() {
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Attack rate"
         >
-          {formatNumber({ format: "time", value: rate.minimum })}&nbsp;-&nbsp;
-          {formatNumber({
-            format: "time",
-            value: rate.maximum,
-          })}
+          <span>
+            {formatNumber({ format: "time", value: rate.minimum })}&nbsp;-&nbsp;
+            {formatNumber({
+              format: "time",
+              value: rate.maximum,
+            })}
+          </span>
         </IconDisplay>
 
         <IconDisplay
@@ -107,18 +111,22 @@ export function RangedWeaponOptions() {
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Ammunition cost"
         >
-          {formatNumber({ value: ammunitionCost.minimum })}&nbsp;-&nbsp;
-          {formatNumber({
-            value: ammunitionCost.maximum,
-          })}
+          <span>
+            {formatNumber({ value: ammunitionCost.minimum })}&nbsp;-&nbsp;
+            {formatNumber({
+              value: ammunitionCost.maximum,
+            })}
+          </span>
         </IconDisplay>
 
         <IconDisplay Icon={IconRange} iconProps={{ overlayPlacement: "left" }} tooltip="Range">
-          {formatNumber({ format: "time", value: range.minimum })}&nbsp;-&nbsp;
-          {formatNumber({
-            format: "time",
-            value: range.maximum,
-          })}
+          <span>
+            {formatNumber({ format: "time", value: range.minimum })}&nbsp;-&nbsp;
+            {formatNumber({
+              format: "time",
+              value: range.maximum,
+            })}
+          </span>
         </IconDisplay>
 
         <IconDisplay
@@ -126,19 +134,23 @@ export function RangedWeaponOptions() {
           iconProps={{ overlayPlacement: "left" }}
           tooltip={isSkillAcquiredAbility ? `${capitalizeAll(ability)} chance` : LABEL_UNKNOWN}
         >
-          {isSkillAcquiredAbility
-            ? `${formatNumber({
-                format: "percentage",
-                value: abilityChance.minimum,
-              })} - ${formatNumber({ format: "percentage", value: abilityChance.maximum })}`
-            : LABEL_UNKNOWN}
+          <span>
+            {isSkillAcquiredAbility
+              ? `${formatNumber({
+                  format: "percentage",
+                  value: abilityChance.minimum,
+                })} - ${formatNumber({ format: "percentage", value: abilityChance.maximum })}`
+              : LABEL_UNKNOWN}
+          </span>
         </IconDisplay>
 
         <IconDisplay Icon={IconBurden} iconProps={{ overlayPlacement: "left" }} tooltip="Burden">
-          {formatNumber({ value: burden.minimum })}&nbsp;-&nbsp;
-          {formatNumber({
-            value: burden.maximum,
-          })}
+          <span>
+            {formatNumber({ value: burden.minimum })}&nbsp;-&nbsp;
+            {formatNumber({
+              value: burden.maximum,
+            })}
+          </span>
         </IconDisplay>
 
         <IconDisplay
@@ -146,10 +158,12 @@ export function RangedWeaponOptions() {
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Weight"
         >
-          {formatNumber({ value: weight.minimum })}&nbsp;-&nbsp;
-          {formatNumber({
-            value: weight.maximum,
-          })}
+          <span>
+            {formatNumber({ value: weight.minimum })}&nbsp;-&nbsp;
+            {formatNumber({
+              value: weight.maximum,
+            })}
+          </span>
         </IconDisplay>
       </Stack>
 

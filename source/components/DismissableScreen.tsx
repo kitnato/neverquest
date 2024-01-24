@@ -20,7 +20,9 @@ export function DismissableScreen({
   return (
     <Offcanvas onHide={onClose} placement={placement} show={isShowing}>
       <OffcanvasHeader closeButton>
-        <OffcanvasTitle>{title}</OffcanvasTitle>
+        <OffcanvasTitle>
+          <span>{title}</span>
+        </OffcanvasTitle>
       </OffcanvasHeader>
 
       <OffcanvasBody className={hideOverflow ? "d-flex overflow-hidden" : "overflow-auto"}>

@@ -98,10 +98,12 @@ export function ShieldOptions() {
         )}
 
         <IconDisplay Icon={IconBurden} iconProps={{ overlayPlacement: "left" }} tooltip="Burden">
-          {formatNumber({ value: burden.minimum })}&nbsp;-&nbsp;
-          {formatNumber({
-            value: burden.maximum,
-          })}
+          <span>
+            {formatNumber({ value: burden.minimum })}&nbsp;-&nbsp;
+            {formatNumber({
+              value: burden.maximum,
+            })}
+          </span>
         </IconDisplay>
 
         <IconDisplay
@@ -109,10 +111,12 @@ export function ShieldOptions() {
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Weight"
         >
-          {formatNumber({ value: weight.minimum })}&nbsp;-&nbsp;
-          {formatNumber({
-            value: weight.maximum,
-          })}
+          <span>
+            {formatNumber({ value: weight.minimum })}&nbsp;-&nbsp;
+            {formatNumber({
+              value: weight.maximum,
+            })}
+          </span>
         </IconDisplay>
       </Stack>
 

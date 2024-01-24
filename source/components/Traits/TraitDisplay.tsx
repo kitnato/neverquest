@@ -8,8 +8,8 @@ export function TraitDisplay({ trait }: { trait: Trait }) {
   const name = capitalizeAll(trait);
 
   return (
-    <IconDisplay description={description} Icon={Icon} tooltip="Trait">
-      {name}
+    <IconDisplay description={<span>{description}</span>} Icon={Icon} tooltip="Trait">
+      <span>{name}</span>
     </IconDisplay>
   );
 }

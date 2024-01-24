@@ -35,7 +35,7 @@ export function ItemDisplay({
   if (isArmor(item)) {
     return (
       <IconDisplay
-        description={isEquipped ? "Equipped" : undefined}
+        description={isEquipped ? <span>Equipped</span> : undefined}
         Icon={IconArmor}
         tooltip="Armor"
       >
@@ -69,7 +69,7 @@ export function ItemDisplay({
   if (isShield(item)) {
     return (
       <IconDisplay
-        description={isEquipped ? "Equipped" : undefined}
+        description={isEquipped ? <span>Equipped</span> : undefined}
         Icon={IconShield}
         tooltip="Shield"
       >
@@ -95,7 +95,7 @@ export function ItemDisplay({
   if (isWeapon(item)) {
     return (
       <IconDisplay
-        description={isEquipped ? "Equipped" : undefined}
+        description={isEquipped ? <span>Equipped</span> : undefined}
         Icon={getWeaponIcon(item)}
         tooltip="Weapon"
       >

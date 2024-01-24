@@ -34,8 +34,8 @@ export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
   if (requiredSkill === undefined || acquiredSkillsValue[requiredSkill]) {
     return (
       <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-        <IconDisplay description={description} Icon={Icon} tooltip="Attribute">
-          {name}
+        <IconDisplay description={<span>{description}</span>} Icon={Icon} tooltip="Attribute">
+          <span>{name}</span>
         </IconDisplay>
 
         <Stack className="ms-2" direction="horizontal" style={{ gap: "7.5rem" }}>
@@ -77,7 +77,11 @@ export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
   }
 
   return (
-    <IconDisplay description={LABEL_SKILL_REQUIRED} Icon={IconUnknown} tooltip="Attribute">
+    <IconDisplay
+      description={<span>{LABEL_SKILL_REQUIRED}</span>}
+      Icon={IconUnknown}
+      tooltip="Attribute"
+    >
       <span>{LABEL_UNKNOWN}</span>
     </IconDisplay>
   );

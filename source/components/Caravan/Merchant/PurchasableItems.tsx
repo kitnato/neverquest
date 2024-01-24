@@ -28,7 +28,7 @@ export function PurchasableItems({
 
             <Stack className="ms-2" direction="horizontal" gap={3}>
               <IconDisplay Icon={IconEssence} tooltip="Price">
-                {formatNumber({ value: price })}
+                <span>{formatNumber({ value: price })}</span>
               </IconDisplay>
 
               <PurchaseItem merchantItem={item} />

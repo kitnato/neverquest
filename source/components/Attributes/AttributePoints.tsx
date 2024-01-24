@@ -25,7 +25,9 @@ export function AttributePoints() {
         <OverlayTrigger
           overlay={
             <Popover>
-              <PopoverHeader className="text-center">Attribute point cost</PopoverHeader>
+              <PopoverHeader className="text-center">
+                <span>Attribute point cost</span>
+              </PopoverHeader>
 
               <PopoverBody>
                 <IconDisplay

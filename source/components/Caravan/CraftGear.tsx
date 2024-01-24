@@ -18,7 +18,7 @@ export function CraftGear({ onCraft, price }: { onCraft: () => void; price: numb
   return (
     <Stack className="mx-auto" direction="horizontal" gap={5}>
       <IconDisplay Icon={IconEssence} tooltip="Cost">
-        {formatNumber({ value: price })}
+        <span>{formatNumber({ value: price })}</span>
       </IconDisplay>
 
       <OverlayTrigger

@@ -27,7 +27,7 @@ export function TrainableSkill({ skill }: { skill: Skill }) {
 
             <Stack className="ms-2" direction="horizontal" gap={3}>
               <IconDisplay Icon={IconEssence} tooltip="Price">
-                {formatNumber({ value: skillPriceValue })}
+                <span>{formatNumber({ value: skillPriceValue })}</span>
               </IconDisplay>
 
               <TrainSkillButton skill={skill} />
@@ -35,7 +35,7 @@ export function TrainableSkill({ skill }: { skill: Skill }) {
           </>
         ) : (
           <IconDisplay
-            description="Requires a certain crew member."
+            description={<span>Requires a crew member.</span>}
             Icon={IconUnknown}
             tooltip="Skill"
           >

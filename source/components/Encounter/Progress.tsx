@@ -31,7 +31,9 @@ export function Progress() {
         <OverlayTrigger
           overlay={
             <Popover>
-              <PopoverHeader className="text-center">Monster reduction</PopoverHeader>
+              <PopoverHeader className="text-center">
+                <span>Monster reduction</span>
+              </PopoverHeader>
 
               <PopoverBody>
                 <Stack className="justify-content-center" direction="horizontal" gap={1}>
@@ -40,11 +42,13 @@ export function Progress() {
                     iconProps={{ className: "small", isFlipped: true }}
                     tooltip="Monster reduction"
                   >
-                    -
-                    {formatNumber({
-                      format: "percentage",
-                      value: perkEffectMonsterReduction,
-                    })}
+                    <span>
+                      -
+                      {formatNumber({
+                        format: "percentage",
+                        value: perkEffectMonsterReduction,
+                      })}
+                    </span>
                   </IconDisplay>
                 </Stack>
               </PopoverBody>

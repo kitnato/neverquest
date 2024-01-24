@@ -44,7 +44,7 @@ export function PurchaseAmmunition() {
   return (
     <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
       <IconDisplay Icon={IconAmmunition} tooltip="Ammunition">
-        Ammunition
+        <span>Ammunition</span>
       </IconDisplay>
 
       <Stack className="ms-2" direction="horizontal" gap={3}>

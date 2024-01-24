@@ -44,16 +44,16 @@ export function ExpandKnapsack() {
 
       <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
         <IconDisplay
-          description={`Increases maximum encumbrance by ${amount}.`}
+          description={<span>{`Increases maximum encumbrance by ${amount}.`}</span>}
           Icon={IconTailoring}
           tooltip="Tailoring"
         >
-          Add pockets
+          <span>Add pockets</span>
         </IconDisplay>
 
         <Stack className="ms-2" direction="horizontal" gap={3}>
           <IconDisplay Icon={IconEssence} tooltip="Price">
-            {formatNumber({ value: price })}
+            <span>{formatNumber({ value: price })}</span>
           </IconDisplay>
 
           <OverlayTrigger

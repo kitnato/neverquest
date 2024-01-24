@@ -35,12 +35,12 @@ export function ReceiveHealing() {
 
       <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
         <IconDisplay Icon={IconHealing} tooltip="Healing">
-          {isHealthLowValue ? "Emergency treatment" : "Minor surgery"}
+          <span>{isHealthLowValue ? "Emergency treatment" : "Minor surgery"}</span>
         </IconDisplay>
 
         <Stack className="ms-2" direction="horizontal" gap={3}>
           <IconDisplay Icon={IconEssence} tooltip="Price">
-            {formatNumber({ value: MEDIC_PRICE_SURGERY })}
+            <span>{formatNumber({ value: MEDIC_PRICE_SURGERY })}</span>
           </IconDisplay>
 
           <OverlayTrigger

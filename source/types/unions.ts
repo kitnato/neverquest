@@ -252,6 +252,7 @@ export const SKILL_TYPES = [
   "archery",
   "memetics",
   "meditation",
+  "impermeability",
 ] as const;
 export type Skill = (typeof SKILL_TYPES)[number];
 
@@ -436,12 +437,12 @@ export const TRAIT_TYPES = [
   "bruiser",
   "colossus",
   "executioner",
-  "inoculated",
   "nudist",
   "sharpshooter",
   "shredder",
   "stalwart",
   "tank",
+  "inoculated",
 ] as const;
 export type Trait = (typeof TRAIT_TYPES)[number];
 

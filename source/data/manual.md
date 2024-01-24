@@ -586,7 +586,7 @@ Allows the use of [ranged weapons](#ranged-weapons). Also unlocks the [marksmans
 
 ### Armorcraft
 
-Allows the use of [heavy](#heavy-armor) armor. Also unlocks the [resilience](#resilience) mastery and the [deflection](#deflection-chance) ability.
+Allows the use of [heavy](#heavy-armor) armor. Also unlocks the [resilience](#resilience) mastery.
 
 ### Assassination
 

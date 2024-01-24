@@ -155,7 +155,7 @@ export const damagePerSecond = withStateKey("damagePerSecond", (key) =>
 export const deflectionChance = withStateKey("deflectionChance", (key) =>
   selector({
     get: ({ get }) =>
-      get(isSkillAcquired("armorcraft"))
+      get(isSkillAcquired("impermeability"))
         ? Math.min(
             get(armor).deflection +
               (get(isTraitAcquired("inoculated")) ? INOCULATED_DEFLECTION_BASE : 0),

@@ -17,6 +17,7 @@ import IconEvasion from "@neverquest/icons/evasion.svg?react";
 import IconExecution from "@neverquest/icons/execution.svg?react";
 import IconGrip from "@neverquest/icons/grip.svg?react";
 import IconHealth from "@neverquest/icons/health.svg?react";
+import IconImpermeability from "@neverquest/icons/impermeability.svg?react";
 import IconInfusionLevel from "@neverquest/icons/infusion-level.svg?react";
 import IconMeditation from "@neverquest/icons/meditation.svg?react";
 import IconMemetics from "@neverquest/icons/memetics.svg?react";
@@ -69,9 +70,8 @@ export const SKILLS: Record<
     trainer: "mercenary",
   },
   armorcraft: {
-    description:
-      "Grants the use of # heavy armor alongside the ability to # deflect ailments. Also improves # recovery.",
-    descriptionIcons: [IconArmorHeavy, IconDeflection, IconRecovery],
+    description: "Grants the use of # heavy armor alongside the ability to improve # recovery.",
+    descriptionIcons: [IconArmorHeavy, IconRecovery],
     Icon: IconArmorcraft,
     isInheritable: false,
     requiredCrewMember: "blacksmith",
@@ -112,6 +112,14 @@ export const SKILLS: Record<
     isInheritable: false,
     requiredCrewMember: "merchant",
     trainer: "mercenary",
+  },
+  impermeability: {
+    description: "Grants the ability to # deflect ailments, avoiding them entirely.",
+    descriptionIcons: [IconDeflection],
+    Icon: IconImpermeability,
+    isInheritable: true,
+    requiredCrewMember: "merchant",
+    trainer: "witch",
   },
   meditation: {
     description: "Grants the ancient technique of relic # infusion.",

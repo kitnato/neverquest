@@ -8,24 +8,24 @@ import { ownedItem } from "@neverquest/state/inventory";
 import { acquiredSkills } from "@neverquest/state/skills";
 import { SKILL_TYPES } from "@neverquest/types/unions";
 
-export function LearnTechniques() {
+export function AcquireAlchemistSkills() {
   const acquiredSkillsValue = useRecoilValue(acquiredSkills);
   const ownedItemTornManuscript = useRecoilValue(ownedItem("torn manuscript"));
 
-  const learnableTechniques = SKILL_TYPES.filter(
+  const acquiredSkillsAlchemist = SKILL_TYPES.filter(
     (skill) => SKILLS[skill].trainer === "alchemist" && !acquiredSkillsValue[skill],
   );
 
   return (
     <Stack gap={3}>
-      <h6>Learn techniques</h6>
+      <h6>Acquire skills</h6>
 
       {ownedItemTornManuscript === undefined ? (
         <span>
           &quot;Alas, most teachings are lost to time. You wouldn&apos;t have come across any arcane
           writs lately?&quot;
         </span>
-      ) : learnableTechniques.length === 0 ? (
+      ) : acquiredSkillsAlchemist.length === 0 ? (
         <span className="fst-italic">{LABEL_NONE_AVAILABLE}</span>
       ) : (
         <>
@@ -35,7 +35,7 @@ export function LearnTechniques() {
           </span>
 
           <>
-            {learnableTechniques.map((skill) => (
+            {acquiredSkillsAlchemist.map((skill) => (
               <TrainableSkill key={skill} skill={skill} />
             ))}
           </>

@@ -29,7 +29,7 @@ export function ArmorName({
 }) {
   const armorEquippedValue = useRecoilValue(armorEquipped);
   const isShowingGearClass = useRecoilValue(isShowing("gearClass"));
-  const isSkillAcquiredArmorcraft = useRecoilValue(isSkillAcquired("armorcraft"));
+  const isSkillAcquireImpermeability = useRecoilValue(isSkillAcquired("impermeability"));
 
   const { burden, deflection, ID, level, name, protection, weight } = armor;
   const isArmorUnequipped = isUnarmored(armor);
@@ -112,7 +112,7 @@ export function ArmorName({
 
               {deflection > 0 && (
                 <tr>
-                  {isSkillAcquiredArmorcraft ? (
+                  {isSkillAcquireImpermeability ? (
                     <>
                       <td>
                         <span>Deflection chance:</span>

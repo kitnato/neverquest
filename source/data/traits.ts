@@ -9,7 +9,7 @@ import IconShredder from "@neverquest/icons/shredder.svg?react";
 import IconStalwart from "@neverquest/icons/stalwart.svg?react";
 import IconTank from "@neverquest/icons/tank.svg?react";
 import type { SVGIcon } from "@neverquest/types/components";
-import type { Trait } from "@neverquest/types/unions";
+import type { Skill, Trait } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export const BRAWLER_DAMAGE_BONUS = 0.5;
@@ -25,6 +25,7 @@ export const TRAITS: Record<
   {
     description: string;
     Icon: SVGIcon;
+    requiredSkill?: Skill;
   }
 > = {
   brawler: {
@@ -58,6 +59,7 @@ export const TRAITS: Record<
       value: INOCULATED_DEFLECTION_BASE,
     })}.`,
     Icon: IconInoculated,
+    requiredSkill: "impermeability",
   },
   nudist: {
     description: "Dodge rate is doubled while not wearing any armor.",

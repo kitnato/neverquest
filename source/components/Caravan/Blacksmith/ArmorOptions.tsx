@@ -30,6 +30,7 @@ import {
 export function ArmorOptions() {
   const [{ armor: craftedArmor }, setBlacksmithInventory] = useRecoilState(blacksmithInventory);
   const isSkillAcquiredArmorcraft = useRecoilValue(isSkillAcquired("armorcraft"));
+  const isSkillAcquiredImpermeability = useRecoilValue(isSkillAcquired("impermeability"));
   const stageMaximumValue = useRecoilValue(stageMaximum);
 
   const [armorClass, setArmorClass] = useState<ArmorClass>("light");
@@ -84,11 +85,11 @@ export function ArmorOptions() {
 
         {deflection !== undefined && (
           <IconDisplay
-            Icon={isSkillAcquiredArmorcraft ? IconDeflection : IconUnknown}
+            Icon={isSkillAcquiredImpermeability ? IconDeflection : IconUnknown}
             iconProps={{ overlayPlacement: "left" }}
-            tooltip={isSkillAcquiredArmorcraft ? "Deflection chance" : LABEL_UNKNOWN}
+            tooltip={isSkillAcquiredImpermeability ? "Deflection chance" : LABEL_UNKNOWN}
           >
-            {isSkillAcquiredArmorcraft
+            {isSkillAcquiredImpermeability
               ? `${formatNumber({
                   format: "percentage",
                   value: deflection.minimum,

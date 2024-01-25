@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 
 import { DismissableScreen } from "@neverquest/components/DismissableScreen";
 import { IconImage } from "@neverquest/components/IconImage";
-import { QuestsDisplay } from "@neverquest/components/Quests/QuestsDisplay";
+import { Quests } from "@neverquest/components/Quests";
 import IconAttention from "@neverquest/icons/attention.svg?react";
 import IconQuests from "@neverquest/icons/quests.svg?react";
 import { isAttacking } from "@neverquest/state/character";
@@ -13,7 +13,7 @@ import { ownedItem } from "@neverquest/state/inventory";
 import { canCompleteQuests } from "@neverquest/state/quests";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-export function Quests() {
+export function Journal() {
   const canCompleteConquests = useRecoilValue(canCompleteQuests("conquest"));
   const canCompleteRoutines = useRecoilValue(canCompleteQuests("routine"));
   const canCompleteTriumphs = useRecoilValue(canCompleteQuests("triumph"));
@@ -21,7 +21,7 @@ export function Quests() {
   const isStageStartedValue = useRecoilValue(isStageStarted);
   const ownedItemJournal = useRecoilValue(ownedItem("journal"));
 
-  const [isQuestsDisplayOpen, setIsQuestsDisplayOpen] = useState(false);
+  const [isQuestsOpen, setIsQuestsOpen] = useState(false);
 
   const canCompleteQuest = canCompleteConquests || canCompleteRoutines || canCompleteTriumphs;
 
@@ -47,7 +47,7 @@ export function Quests() {
               }`}
               disabled={isAttackingValue}
               onClick={() => {
-                setIsQuestsDisplayOpen(true);
+                setIsQuestsOpen(true);
               }}
               variant="outline-dark"
             >
@@ -67,13 +67,13 @@ export function Quests() {
 
         <DismissableScreen
           hideOverflow
-          isShowing={isQuestsDisplayOpen}
+          isShowing={isQuestsOpen}
           onClose={() => {
-            setIsQuestsDisplayOpen(false);
+            setIsQuestsOpen(false);
           }}
           title="Quests"
         >
-          <QuestsDisplay />
+          <Quests />
         </DismissableScreen>
       </>
     );

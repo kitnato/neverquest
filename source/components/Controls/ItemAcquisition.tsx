@@ -25,16 +25,16 @@ export function ItemAcquisition() {
   useEffect(resetAcquiredItems, [resetAcquiredItems]);
 
   return (
-    <div className="position-absolute top-50 start-0 translate-middle">
+    <div className="position-absolute top-50 start-0">
       {acquiredItemsValue.map((acquiredItem) => {
         const { ID } = acquiredItem;
 
         return (
           <div
-            className={getAnimationClass({
+            className={`position-absolute ${getAnimationClass({
               animation: "zoomOut",
               speed: "slower",
-            })}
+            })}`}
             key={ID}
             onAnimationEnd={() => {
               setAcquiredItems((currentAcquiredItems) =>
@@ -43,7 +43,7 @@ export function ItemAcquisition() {
             }}
           >
             <IconImage
-              className="small"
+              className="small translate-middle"
               Icon={(() => {
                 if (isArmor(acquiredItem)) {
                   return IconArmor;

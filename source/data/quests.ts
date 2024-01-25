@@ -358,7 +358,6 @@ export const QUESTS: Record<
   knapsackExpanding: {
     description: "Expand knapsack capacity.",
     progression: [
-      TAILORING.knapsack.amount,
       TAILORING.knapsack.amount * 3,
       TAILORING.knapsack.amount * 10,
       TAILORING.knapsack.amount * 25,

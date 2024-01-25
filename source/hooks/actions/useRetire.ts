@@ -10,11 +10,17 @@ import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useResetAttributes } from "@neverquest/hooks/actions/useResetAttributes";
 import { useResetCharacter } from "@neverquest/hooks/actions/useResetCharacter";
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness";
-import { monologue } from "@neverquest/state/caravan";
+import {
+  blacksmithInventory,
+  expandedBuyback,
+  fletcherInventory,
+  merchantInventory,
+  monologue,
+} from "@neverquest/state/caravan";
 import { corpse, perkEffect, stage, stageMaximum } from "@neverquest/state/encounter";
-import { gems } from "@neverquest/state/gear";
+import { armor, gems, shield, weapon } from "@neverquest/state/gear";
 import { inventory } from "@neverquest/state/inventory";
-import { masteryProgress, masteryRank } from "@neverquest/state/masteries";
+import { expandedMasteries, masteryProgress, masteryRank } from "@neverquest/state/masteries";
 import { questProgress } from "@neverquest/state/quests";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { isTraitAcquired, selectedTrait } from "@neverquest/state/traits";
@@ -57,15 +63,24 @@ export function useRetire() {
         }
 
         resetAttributes();
-        resetCharacter(true);
+        resetCharacter();
 
+        reset(armor);
+        reset(blacksmithInventory);
         reset(corpse);
+        reset(expandedBuyback);
+        reset(expandedMasteries);
+        reset(fletcherInventory);
         reset(gems(ARMOR_NONE.ID));
         reset(gems(SHIELD_NONE.ID));
         reset(gems(WEAPON_NONE.ID));
+        reset(merchantInventory);
+        reset(shield);
+        reset(weapon);
 
         reset(questProgress("attributesIncreasing"));
         reset(questProgress("attributesUnlocking"));
+        reset(questProgress("hiring"));
         reset(questProgress("hiringAll"));
         reset(questProgress("masteriesAll"));
         reset(questProgress("masteriesRankMaximum"));

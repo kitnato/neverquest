@@ -80,22 +80,18 @@ export function ShieldOptions() {
           })}
         </IconDisplay>
 
-        {stagger !== undefined && (
-          <IconDisplay
-            Icon={isSkillAcquiredShieldcraft ? IconStaggerChance : IconUnknown}
-            iconProps={{ overlayPlacement: "left" }}
-            tooltip={isSkillAcquiredShieldcraft ? "Stagger chance" : LABEL_UNKNOWN}
-          >
-            {isSkillAcquiredShieldcraft
-              ? `${formatNumber({ format: "percentage", value: stagger.minimum })} - ${formatNumber(
-                  {
-                    format: "percentage",
-                    value: stagger.maximum,
-                  },
-                )}`
-              : LABEL_UNKNOWN}
-          </IconDisplay>
-        )}
+        <IconDisplay
+          Icon={isSkillAcquiredShieldcraft ? IconStaggerChance : IconUnknown}
+          iconProps={{ overlayPlacement: "left" }}
+          tooltip={isSkillAcquiredShieldcraft ? "Stagger chance" : LABEL_UNKNOWN}
+        >
+          {isSkillAcquiredShieldcraft
+            ? `${formatNumber({ format: "percentage", value: stagger.minimum })} - ${formatNumber({
+                format: "percentage",
+                value: stagger.maximum,
+              })}`
+            : LABEL_UNKNOWN}
+        </IconDisplay>
 
         <IconDisplay Icon={IconBurden} iconProps={{ overlayPlacement: "left" }} tooltip="Burden">
           <span>

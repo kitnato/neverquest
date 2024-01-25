@@ -26,8 +26,8 @@ export const ATTRIBUTES: Record<
     base: 0.03,
     description: "Increases chance to dodge an attack.",
     Icon: IconAgility,
-    increment: 0.03,
-    maximum: 0.99,
+    increment: 0.025,
+    maximum: 0.9,
     powerBonus: 0.005,
     requiredSkill: "evasion",
   },
@@ -50,7 +50,7 @@ export const ATTRIBUTES: Record<
   },
   fortitude: {
     base: 0,
-    description: "Increases health & stamina regeneration amount.",
+    description: "Increases health and stamina regeneration amount.",
     Icon: IconFortitude,
     increment: 1,
     maximum: 120,
@@ -85,7 +85,7 @@ export const ATTRIBUTES: Record<
   },
   vigor: {
     base: 0,
-    description: "Reduces health & stamina regeneration rate.",
+    description: "Reduces health and stamina regeneration rate.",
     Icon: IconVigor,
     increment: 0.015,
     maximum: 0.85,

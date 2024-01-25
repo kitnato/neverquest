@@ -37,7 +37,7 @@ export const ARMOR_SPECIFICATIONS: Record<
   heavy: {
     burden: [
       { maximum: 9, minimum: 4 },
-      { maximum: 75, minimum: 70 },
+      { maximum: 85, minimum: 80 },
     ],
     deflection: [
       { maximum: 0.3, minimum: 0.28 },
@@ -57,7 +57,7 @@ export const ARMOR_SPECIFICATIONS: Record<
   light: {
     burden: [
       { maximum: 2, minimum: 1 },
-      { maximum: 25, minimum: 20 },
+      { maximum: 30, minimum: 25 },
     ],
     Icon: IconArmorLight,
     price: { maximum: 6000, minimum: 1 },
@@ -73,7 +73,7 @@ export const ARMOR_SPECIFICATIONS: Record<
   reinforced: {
     burden: [
       { maximum: 5, minimum: 3 },
-      { maximum: 55, minimum: 45 },
+      { maximum: 60, minimum: 55 },
     ],
     deflection: [
       { maximum: 0.15, minimum: 0.1 },
@@ -111,23 +111,23 @@ export const SHIELD_SPECIFICATIONS: Record<
   GearRangeBase & {
     block: [GeneratorRange, GeneratorRange];
     Icon: SVGIcon;
-    stagger?: [GeneratorRange, GeneratorRange];
+    stagger: [GeneratorRange, GeneratorRange];
   }
 > = {
   medium: {
     block: [
       { maximum: 0.2, minimum: 0.19 },
-      { maximum: 0.38, minimum: 0.37 },
+      { maximum: 0.35, minimum: 0.33 },
     ],
     burden: [
       { maximum: 4, minimum: 3 },
-      { maximum: 30, minimum: 25 },
+      { maximum: 35, minimum: 30 },
     ],
     Icon: IconShieldMedium,
     price: { maximum: 4000, minimum: 4 },
     stagger: [
-      { maximum: 0.3, minimum: 0.25 },
-      { maximum: 0.5, minimum: 0.45 },
+      { maximum: 0.4, minimum: 0.35 },
+      { maximum: 0.65, minimum: 0.6 },
     ],
     weight: [
       { maximum: 5, minimum: 3 },
@@ -136,15 +136,19 @@ export const SHIELD_SPECIFICATIONS: Record<
   },
   small: {
     block: [
-      { maximum: 0.14, minimum: 0.13 },
-      { maximum: 0.28, minimum: 0.27 },
+      { maximum: 0.16, minimum: 0.15 },
+      { maximum: 0.3, minimum: 0.28 },
     ],
     burden: [
       { maximum: 2, minimum: 1 },
-      { maximum: 15, minimum: 10 },
+      { maximum: 20, minimum: 18 },
     ],
     Icon: IconShieldSmall,
     price: { maximum: 2000, minimum: 2 },
+    stagger: [
+      { maximum: 0.15, minimum: 0.1 },
+      { maximum: 0.3, minimum: 0.25 },
+    ],
     weight: [
       { maximum: 2, minimum: 1 },
       { maximum: 35, minimum: 30 },
@@ -163,7 +167,7 @@ export const SHIELD_SPECIFICATIONS: Record<
     price: { maximum: 7500, minimum: 7 },
     stagger: [
       { maximum: 0.55, minimum: 0.5 },
-      { maximum: 0.85, minimum: 0.8 },
+      { maximum: 0.95, minimum: 0.9 },
     ],
     weight: [
       { maximum: 9, minimum: 6 },
@@ -184,7 +188,7 @@ export const WEAPON_BASE: GearRangeBase & {
   ],
   burden: [
     { maximum: 2, minimum: 1 },
-    { maximum: 45, minimum: 40 },
+    { maximum: 50, minimum: 45 },
   ],
   damage: [
     { maximum: 15, minimum: 13 },
@@ -197,7 +201,7 @@ export const WEAPON_BASE: GearRangeBase & {
   ],
   rate: [
     { maximum: 3000, minimum: 2900 },
-    { maximum: 1800, minimum: 1700 },
+    { maximum: 2000, minimum: 1900 },
   ],
   weight: [
     { maximum: 2, minimum: 1 },
@@ -210,10 +214,10 @@ export const WEAPON_MODIFIER = {
   ranged: { ability: 1, burden: 1.05, damage: 0.9, price: 1.2, rate: 1.1, weight: 1.15 },
   "two-handed": {
     ability: 1.1,
-    burden: 1.2,
+    burden: 1.25,
     damage: 1.2,
     price: 1.3,
-    rate: 1.2,
+    rate: 1.15,
     weight: 1.2,
   },
 };

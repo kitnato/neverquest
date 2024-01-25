@@ -6,10 +6,10 @@ import { Awakening } from "@neverquest/components/Awakening";
 import { Attack } from "@neverquest/components/Controls/Attack";
 import { Capabilities } from "@neverquest/components/Controls/Capabilities";
 import { CollectLoot } from "@neverquest/components/Controls/CollectLoot";
-import { Journal } from "@neverquest/components/Controls/Journal";
-import { Knapsack } from "@neverquest/components/Controls/Knapsack";
 import { Retire } from "@neverquest/components/Controls/Retire";
 import { ScavengeCorpse } from "@neverquest/components/Controls/ScavengeCorpse";
+import { ShowInventory } from "@neverquest/components/Controls/ShowInventory";
+import { ShowQuests } from "@neverquest/components/Controls/ShowQuests";
 import { Travel } from "@neverquest/components/Controls/Travel";
 import { Encounter } from "@neverquest/components/Encounter";
 import { WildernessStatus } from "@neverquest/components/Encounter/WildernessStatus";
@@ -106,9 +106,9 @@ export function Layout() {
 
                 <Capabilities />
 
-                <Knapsack />
+                <ShowInventory />
 
-                <Journal />
+                <ShowQuests />
 
                 <ScavengeCorpse />
 

@@ -34,7 +34,7 @@ export function generateArmor({
   });
 
   return {
-    burden: getFromRange(burden),
+    burden: Math.round(getFromRange(burden)),
     deflection: deflection === undefined ? 0 : getFromRange(deflection),
     gearClass,
     ID: nanoid(),
@@ -165,7 +165,7 @@ export function generateShield({
         ...SHIELD_SPECIFICATIONS[gearClass].price,
       }),
     ),
-    stagger: stagger === undefined ? 0 : getFromRange(stagger),
+    stagger: getFromRange(stagger),
     weight: Math.round(getFromRange(weight)),
   };
 }

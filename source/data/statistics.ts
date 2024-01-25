@@ -20,4 +20,4 @@ export const LOOTING_RATE = {
 export const PARRY_ABSORPTION = 0.33;
 export const PARRY_DAMAGE = 0.25;
 
-export const RECOVERY_RATE = 1200;
+export const RECOVERY_RATE = 1300;

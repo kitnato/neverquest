@@ -214,7 +214,7 @@ export const QUESTS: Record<
     title: "Grim fandango",
   },
   equippingArmor: {
-    description: "Equip a piece of armor.",
+    description: "Equip armor.",
     progression: [1],
     requiresTracking: true,
     title: "Locked & loaded",

@@ -79,7 +79,7 @@ export const SKILLS: Record<
   },
   assassination: {
     description:
-      "Grants the ability to deal # critical strikes alongside attributes that determine their # chance & # damage.",
+      "Grants the ability to deal # critical strikes alongside attributes that determine their # chance and # damage.",
     descriptionIcons: [IconCriticalRating, IconCriticalChance, IconCriticalDamage],
     Icon: IconAssassination,
     isInheritable: false,
@@ -88,7 +88,7 @@ export const SKILLS: Record<
   },
   calisthenics: {
     description:
-      "Grants attributes that improve regeneration # amount & # rate for both # health & # stamina.",
+      "Grants attributes that improve regeneration # amount and # rate for both # health and # stamina.",
     descriptionIcons: [IconRegenerationAmount, IconRegenerationRate, IconHealth, IconStamina],
     Icon: IconCalisthenics,
     isInheritable: false,
@@ -138,7 +138,7 @@ export const SKILLS: Record<
     trainer: "alchemist",
   },
   shieldcraft: {
-    description: "Grants the use of # tower shields & the ability to # stagger monsters.",
+    description: "Grants the use of # tower shields and the ability to # stagger monsters.",
     descriptionIcons: [IconShieldTower, IconStaggered],
     Icon: IconShieldcraft,
     isInheritable: false,

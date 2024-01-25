@@ -36,7 +36,7 @@ Health is [regenerated](#health-regeneration) over time.
 
 #### Stamina
 
-Several combat actions require stamina to execute them successfully. Most [gear](#gear) has a burden for an associated action which translate to a stamina cost that must be paid to be successful. For instance, when wielding a [weapon](#weapons) with burden 3, every attack will spend 3 stamina. Wearing armor incurs a burden that is paid when struck.
+Several combat actions require stamina to execute them successfully. Most [gear](#gear) has a burden for an associated action which translate to a stamina cost that must be paid to be successful. For instance, when wielding a [weapon](#weapons) with burden 3, every attack will spend 3 stamina. Similarly, wearing [armor](#armor) incurs a burden that is paid when struck or [dodging](#dodge-chance) and [shields](#shields) incur this burden whenever an attack is [blocked](#block-chance).
 
 When there is not enough stamina available for an attack, [parrying](#parry-rating), [dodging](#dodge-chance) or [blocking](#block-chance), exhaustion occurs in which none of these actions are possible until sufficient stamina is [regenerated](#stamina-regeneration).
 
@@ -132,7 +132,7 @@ Requires the [armorcraft](#armorcraft) skill.
 
 #### Dodge chance
 
-A percentage determining the chance of when defending, all damage is avoided entirely. Any equipped armor's burden incurs a stamina cost.
+A percentage determining the chance of when defending, all damage is avoided entirely. The equipped armor's [burden](#armor) incurs a stamina cost.
 
 The dodge chance can be increased with the [agility](#agility) attribute.
 
@@ -158,7 +158,7 @@ Requires the [calisthenics](#calisthenics) skill.
 
 A value determined by the chance of successfully parrying when defending, along with the damage that is absorbed (after [protection](#protection)) and reflected back as a result. Only applies if a [slashing](#slashing-weapons) weapon is equipped.
 
-The absorbed & reflected damage is increased by mastering [finesse](#finesse).
+The absorbed and reflected damage is increased by mastering [finesse](#finesse).
 
 Requires the [escrime](#escrime) skill.
 
@@ -314,6 +314,8 @@ The [merchant](#merchant) sells one of each gear type of various levels. To acqu
 
 Weapons are the main way of fighting monsters. Every weapon type and class has specific modifiers, as well as various tradeoffs for wielding them. Taking 2 slots mean an [shield](#shields) can no longer be equipped.
 
+An equipped weapon's burden determines how much [stamina](#stamina) is expended whenever an attack is made.
+
 ##### Melee weapons
 
 Close-quarter combat starts the moment the monster is engaged, with either party's [attack rate](#attack-rate) determining the pace of combat.
@@ -324,7 +326,7 @@ Close-quarter combat starts the moment the monster is engaged, with either party
 - Medium damage
 - High attack rate
 - Low burden
-- Low purchase & crafting cost
+- Low purchase and crafting cost
 - Low weight
 
 ###### Two-handed
@@ -335,7 +337,7 @@ Takes up both the main and [shield](#shields) slots.
 - High damage
 - Medium attack rate
 - High burden
-- High purchase & crafting cost
+- High purchase and crafting cost
 - High weight
 
 Also provides a chance to [execute](#execution-threshold) monsters when at or under a certain health threshold or under.
@@ -346,7 +348,7 @@ Also provides a chance to [execute](#execution-threshold) monsters when at or un
 - Low damage
 - Low attack rate
 - Medium burden
-- Medium purchase & crafting cost
+- Medium purchase and crafting cost
 - Medium weight
 
 Also provides a certain [range](#range) that delays contact with the monster.
@@ -379,58 +381,56 @@ Parry requires the [escrime](#escrime) skill.
 
 #### Armor
 
-Armor provides [protection](#protection). When receiving damage, if the armor has [thorns](#gems), then that damage is simultaneously inflicted upon the attacker.
+Armor provides [protection](#protection), but is burdensome. This burden is paid in stamina whenever you are struck or when [dodging](#dodge-chance). When receiving damage, if the armor has [thorns](#gems), then that damage is simultaneously inflicted upon the attacker.
 
 Each of the following armor classes increases the protection value for certain tradeoffs.
-
-##### No armor
-
-No initial modifiers.
 
 ##### Light armor
 
 - Low protection
 - Low burden
-- Low purchase & crafting cost
+- Low purchase and crafting cost
 
 ##### Reinforced armor
 
 - Medium protection
 - Low [deflection](#deflection-chance) chance
 - Medium burden
-- Medium purchase & crafting cost
+- Medium purchase and crafting cost
 
 ##### Heavy armor
 
 - High protection
 - High deflection chance
 - High burden
-- High purchase & crafting cost
+- High purchase and crafting cost
 
 #### Shields
 
-Grants a percentage chance to [block](#block-chance) all incoming damage. Also grants [stagger chance](#stagger) with the acquisition of the [Traumatology](#traumatology) skill.
+Grants a percentage chance to [block](#block-chance) all incoming damage. A shield's burden is paid in [stamina](#stamina) every time you successfully [block](#block-chance).
+
+Also grants [stagger chance](#stagger) with the acquisition of the [Traumatology](#traumatology) skill.
 
 ##### Small shields
 
 - Low chance to block
 - Low stagger chance
 - Low burden
-- Low purchase & crafting cost
+- Low purchase and crafting cost
 
 ##### Medium shields
 
 - Medium chance to block
 - Medium stagger chance
 - Medium burden
-- Medium purchase & crafting cost
+- Medium purchase and crafting cost
 
 ##### Tower shields
 
 - High chance to block
 - High stagger chance
 - High burden
-- High purchase & crafting cost
+- High purchase and crafting cost
 
 #### Gems
 
@@ -542,7 +542,7 @@ Requires the [anatomy](#anatomy) skill.
 
 ### Finesse
 
-Progress is gained by using [slashing](#slashing-weapons) weapons. Each rank increases [parry](#parry-rating) & damage.
+Progress is gained by using [slashing](#slashing-weapons) weapons. Each rank increases [parry](#parry-rating) and damage.
 
 Requires the [escrime](#escrime) skill.
 
@@ -698,7 +698,7 @@ Being unshielded increases one-handed melee damage.
 
 #### Bruiser
 
-Current stamina adds to unarmed damage & unarmed attacks have a chance to [stun](#stun). Stunning requires the [traumatology](#traumatology) skill.
+Current stamina adds to unarmed damage and unarmed attacks have a chance to [stun](#stun). Stunning requires the [traumatology](#traumatology) skill.
 
 #### Colossus
 

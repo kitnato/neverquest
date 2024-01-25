@@ -35,7 +35,7 @@ export function Rage() {
                 <IconImage className="small" Icon={IconMonsterAttackRate} />
 
                 <span>
-                  &nbsp;attack rate is decreased by&nbsp;
+                  &nbsp;attack rate is hastened by&nbsp;
                   {formatNumber({ decimals: 0, format: "percentage", value: effect })}.
                 </span>
               </PopoverBody>

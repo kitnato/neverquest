@@ -18,7 +18,7 @@ import {
 import { getAnimationClass } from "@neverquest/utilities/getters";
 import { animateElement } from "@neverquest/utilities/helpers";
 
-export function Knapsack() {
+export function ShowInventory() {
   const encumbranceExtentValue = useRecoilValue(encumbranceExtent);
   const [isInventoryOpenValue, setIsInventoryOpen] = useRecoilState(isInventoryOpen);
   const isAttackingValue = useRecoilValue(isAttacking);

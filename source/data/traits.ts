@@ -37,7 +37,7 @@ export const TRAITS: Record<
     Icon: IconBrawler,
   },
   bruiser: {
-    description: `Current stamina adds to unarmed damage & unarmed attacks have a ${formatNumber({
+    description: `Current stamina adds to unarmed damage and unarmed attacks have a ${formatNumber({
       decimals: 0,
       format: "percentage",
       value: BRUISER_STUN_CHANCE,

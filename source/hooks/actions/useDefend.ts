@@ -145,12 +145,12 @@ export function useDefend() {
           let healthDamage = totalDamage > 0 ? totalDamage : 0;
           let monsterHealthDamage = 0;
 
-          // If parrying occurs, check & apply burden.
+          // If parrying occurs, check if possible (burden is not applied).
           if (hasParried) {
             if (get(canAttackOrParry)) {
               const parryReflected = Math.round(monsterDamageAilingValue * get(parryDamage));
 
-              healthDamage += Math.round(healthDamage * get(parryAbsorption));
+              healthDamage -= Math.round(healthDamage * get(parryAbsorption));
               monsterHealthDamage += parryReflected;
 
               progressQuest({ quest: "parrying" });

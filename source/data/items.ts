@@ -304,8 +304,7 @@ export const RELICS: Record<
   "torn manuscript": {
     Icon: IconTornManuscript,
     item: {
-      description:
-        "Describes theurgical methodologies beyond comprehension. Of use only to the alchemically inclined.",
+      description: "Describes theurgical methodologies beyond comprehension.",
       name: "torn manuscript",
       price: 5000,
       weight: 3,

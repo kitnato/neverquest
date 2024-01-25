@@ -16,7 +16,7 @@ export const AILMENT_DESCRIPTION: Record<
   bleeding: { description: "Suffering periodic damage." },
   burning: { description: "Cannot regenerate # health.", descriptionIcons: [IconMonsterHealth] },
   frozen: {
-    description: `Attack # rate & # speed slowed by ${formatNumber({
+    description: `Attack # rate and # speed slowed by ${formatNumber({
       decimals: 0,
       format: "percentage",
       value: AILMENT_PENALTY.frozen,
@@ -113,7 +113,7 @@ export const MONSTER_DAMAGE = {
 };
 
 export const MONSTER_HEALTH = {
-  attenuation: 13,
+  attenuation: 14,
   base: 16,
   bonus: 0.02,
   boss: 1.7,

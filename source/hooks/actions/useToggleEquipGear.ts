@@ -38,6 +38,12 @@ export function useToggleEquipGear() {
             return;
           }
 
+          if (ID === get(armor).ID) {
+            reset(armor);
+          } else {
+            set(armor, gearItem);
+          }
+
           set(isShowing("armor"), true);
           set(isShowing("protection"), true);
 
@@ -47,6 +53,22 @@ export function useToggleEquipGear() {
         if (isShield(gearItem)) {
           if (gearClass === "tower" && !get(isSkillAcquired("shieldcraft"))) {
             return;
+          }
+
+          if (ID === shieldValue.ID) {
+            reset(shield);
+          } else {
+            set(shield, gearItem);
+          }
+
+          // Equipping a shield while a ranged or two-handed weapon is equipped un-equips the weapon (unless it's two-handed and the colossus trait is acquired).
+          if (
+            (isMelee(weaponValue) &&
+              weaponValue.grip === "two-handed" &&
+              !get(isTraitAcquired("colossus"))) ||
+            isRanged(weaponValue)
+          ) {
+            reset(weapon);
           }
 
           set(isShowing("offhand"), true);
@@ -61,6 +83,20 @@ export function useToggleEquipGear() {
 
           if (isRanged(gearItem) && !get(isSkillAcquired("archery"))) {
             return;
+          }
+
+          if (ID === weaponValue.ID) {
+            reset(weapon);
+          } else {
+            set(weapon, gearItem);
+          }
+
+          // Equipping a ranged or two-handed weapon while a shield is equipped un-equips the shield.
+          if (
+            (isWeaponRanged || (isWeaponTwoHanded && !get(isTraitAcquired("colossus")))) &&
+            !isUnshielded(shieldValue)
+          ) {
+            reset(shield);
           }
 
           if (isWeaponRanged || isWeaponTwoHanded) {
@@ -78,45 +114,6 @@ export function useToggleEquipGear() {
         }
 
         reset(questProgress("survivingNoGear"));
-
-        if (isArmor(gearItem)) {
-          if (ID === get(armor).ID) {
-            reset(armor);
-          } else {
-            set(armor, gearItem);
-          }
-        }
-
-        if (isShield(gearItem)) {
-          if (ID === shieldValue.ID) {
-            reset(shield);
-          } else {
-            set(shield, gearItem);
-          }
-
-          // Equipping a shield while a ranged or two-handed weapon is equipped un-equips the weapon (unless it's two-handed and the colossus trait is acquired).
-          if (
-            (isMelee(weaponValue) &&
-              weaponValue.grip === "two-handed" &&
-              !get(isTraitAcquired("colossus"))) ||
-            isRanged(weaponValue)
-          ) {
-            reset(weapon);
-          }
-        }
-
-        if (isWeapon(gearItem)) {
-          if (ID === weaponValue.ID) {
-            reset(weapon);
-          } else {
-            set(weapon, gearItem);
-          }
-
-          // Equipping a ranged or two-handed weapon while a shield is equipped un-equips the shield.
-          if ((isWeaponRanged || isWeaponTwoHanded) && !isUnshielded(shieldValue)) {
-            reset(shield);
-          }
-        }
       },
     [progressQuest],
   );

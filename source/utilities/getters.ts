@@ -394,7 +394,7 @@ export function getShieldRanges({ factor, gearClass }: { factor: number; gearCla
   return {
     block: getRange({ factor, ranges: block }),
     burden: getRange({ factor, isRounded: true, ranges: burden }),
-    stagger: stagger === undefined ? undefined : getRange({ factor, ranges: stagger }),
+    stagger: getRange({ factor, ranges: stagger }),
     weight: getRange({ factor, isRounded: true, ranges: weight }),
   };
 }

@@ -30,8 +30,7 @@ export function AcquireAlchemistSkills() {
       ) : (
         <>
           <span>
-            &quot;Pages from the hermetic tome! I can once again weave miracles, but they hunger for
-            unwary souls.&quot;
+            &quot;Pages from the hermetic tome! Allow me to weave miracles for unwary souls.&quot;
           </span>
 
           <>

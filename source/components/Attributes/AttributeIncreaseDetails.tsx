@@ -13,16 +13,18 @@ import IconHealth from "@neverquest/icons/health.svg?react";
 import IconRegenerationAmount from "@neverquest/icons/regeneration-amount.svg?react";
 import IconRegenerationRate from "@neverquest/icons/regeneration-rate.svg?react";
 import IconStamina from "@neverquest/icons/stamina.svg?react";
+import { attributeRank } from "@neverquest/state/attributes";
 import { ownedItem } from "@neverquest/state/inventory";
 import { infusionEffect } from "@neverquest/state/items";
 import type { Attribute } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function AttributeIncreaseDetails({ attribute }: { attribute: Attribute }) {
+  const attributeRankValue = useRecoilValue(attributeRank(attribute));
   const infusionEffectEldritchCodex = useRecoilValue(infusionEffect("eldritch codex"));
   const ownedItemEldritchCodex = useRecoilValue(ownedItem("eldritch codex"));
 
-  const { increment, powerBonus } = ATTRIBUTES[attribute];
+  const { increment, powerBonus, rankBonus } = ATTRIBUTES[attribute];
   const Icon = {
     agility: IconDodge,
     dexterity: IconCriticalChance,
@@ -42,7 +44,9 @@ export function AttributeIncreaseDetails({ attribute }: { attribute: Attribute }
         <span>
           {operand}
 
-          {increment < 1 ? formatNumber({ format: "percentage", value: increment }) : increment}
+          {increment < 1
+            ? formatNumber({ format: "percentage", value: increment })
+            : increment + (rankBonus ?? 0) * attributeRankValue}
         </span>
       </IconDisplay>
 

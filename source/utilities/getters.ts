@@ -134,15 +134,26 @@ export function getAttributePoints({
 }
 
 export function getComputedStatistic({
-  amount,
   base,
+  bonus = 0,
   increment,
+  rank,
 }: {
-  amount: number;
   base: number;
+  bonus?: number;
   increment: number;
+  rank: number;
 }) {
-  return base + increment * amount;
+  if (bonus === 0) {
+    return base + increment * rank;
+  }
+
+  return (
+    Array.from({ length: rank })
+      .map((_, index) => index * bonus)
+      .reduce((sum, bonus) => sum + bonus, base) +
+    increment * rank
+  );
 }
 
 export function getDamagePerRate({

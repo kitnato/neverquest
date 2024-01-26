@@ -63,10 +63,15 @@ export const attributeStatistic = withStateKey("attributeStatistic", (key) =>
     get:
       (attribute: Attribute) =>
       ({ get }) => {
-        const { base, increment } = ATTRIBUTES[attribute];
+        const { base, increment, rankBonus } = ATTRIBUTES[attribute];
         const attributeRankValue = get(attributeRank(attribute));
 
-        return getComputedStatistic({ amount: attributeRankValue, base, increment });
+        return getComputedStatistic({
+          base,
+          bonus: rankBonus,
+          increment,
+          rank: attributeRankValue,
+        });
       },
     key,
   }),

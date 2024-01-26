@@ -83,7 +83,7 @@ export const masteryStatistic = withStateKey("masteryStatistic", (key) =>
         const { base, increment } = MASTERIES[mastery];
         const masteryRankValue = get(masteryRank(mastery));
 
-        return getComputedStatistic({ amount: masteryRankValue, base, increment });
+        return getComputedStatistic({ base, increment, rank: masteryRankValue });
       },
     key,
   }),

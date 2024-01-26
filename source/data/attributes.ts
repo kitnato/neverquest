@@ -18,6 +18,7 @@ export const ATTRIBUTES: Record<
   AttributeOrMasteryBaseData & {
     maximum?: number;
     powerBonus: number;
+    rankBonus?: number;
     requiredSkill?: Skill;
     shows?: Showing;
   }
@@ -44,8 +45,9 @@ export const ATTRIBUTES: Record<
     base: RESERVES.stamina.baseAmount,
     description: "Increases maximum stamina.",
     Icon: IconEndurance,
-    increment: 20,
+    increment: 10,
     powerBonus: 0.02,
+    rankBonus: 5,
     shows: "stamina",
   },
   fortitude: {
@@ -79,8 +81,9 @@ export const ATTRIBUTES: Record<
     base: 0,
     description: "Increases damage.",
     Icon: IconStrength,
-    increment: 4,
+    increment: 2,
     powerBonus: 0.01,
+    rankBonus: 1,
     shows: "damage",
   },
   vigor: {
@@ -96,8 +99,9 @@ export const ATTRIBUTES: Record<
     base: RESERVES.health.baseAmount,
     description: "Increases maximum health.",
     Icon: IconVitality,
-    increment: 25,
+    increment: 15,
     powerBonus: 0.025,
+    rankBonus: 7,
     shows: "health",
   },
 };

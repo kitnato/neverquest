@@ -140,7 +140,7 @@ export function Inventory() {
           .filter(isGearItem)
           .toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2))
           .map((gearItem) => {
-            const { ID, name } = gearItem;
+            const { ID } = gearItem;
             const canEquipGear = equippableItems[ID];
 
             return (
@@ -169,7 +169,7 @@ export function Inventory() {
                     </div>
                   </OverlayTrigger>
 
-                  <DiscardItem ID={ID} name={name} />
+                  <DiscardItem item={gearItem} />
                 </Stack>
               </div>
             );
@@ -189,7 +189,7 @@ export function Inventory() {
                 <Stack className="ms-2" direction="horizontal" gap={3}>
                   {Action !== undefined && <Action />}
 
-                  <DiscardItem ID={ID} name={name} />
+                  <DiscardItem item={relicItem} />
                 </Stack>
               </div>
             );
@@ -208,7 +208,7 @@ export function Inventory() {
                 <Stack className="ms-2" direction="horizontal" gap={3}>
                   <InfusionInspect infusable={name} />
 
-                  <DiscardItem ID={ID} name={name} />
+                  <DiscardItem item={infusableItem} />
                 </Stack>
               </div>
             );
@@ -256,7 +256,7 @@ export function Inventory() {
                   }
                 })()}
 
-                <DiscardItem ID={ID} name={name} />
+                <DiscardItem item={item} />
               </Stack>
             </div>
           );

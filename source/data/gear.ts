@@ -37,7 +37,7 @@ export const ARMOR_SPECIFICATIONS: Record<
   heavy: {
     burden: [
       { maximum: 9, minimum: 4 },
-      { maximum: 85, minimum: 80 },
+      { maximum: 90, minimum: 85 },
     ],
     deflection: [
       { maximum: 0.3, minimum: 0.28 },

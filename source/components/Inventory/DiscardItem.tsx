@@ -9,20 +9,18 @@ import {
   OverlayTrigger,
   Tooltip,
 } from "react-bootstrap";
-import { useResetRecoilState, useSetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
+import { useDiscard } from "@neverquest/hooks/actions/useDiscard";
 import IconDiscard from "@neverquest/icons/discard.svg?react";
-import { inventory } from "@neverquest/state/inventory";
-import { isSpinning } from "@neverquest/state/items";
+import type { InventoryItem } from "@neverquest/types";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 
-export function DiscardItem({ ID, name }: { ID: string; name: string }) {
-  const resetIsSpinning = useResetRecoilState(isSpinning);
-  const setInventoryValue = useSetRecoilState(inventory);
-
+export function DiscardItem({ item }: { item: InventoryItem }) {
   const [isShowingModal, setIsShowingModal] = useState(false);
+
+  const discard = useDiscard();
 
   const onHide = () => {
     setIsShowingModal(false);
@@ -56,18 +54,12 @@ export function DiscardItem({ ID, name }: { ID: string; name: string }) {
           </ModalTitle>
         </ModalHeader>
 
-        <ModalBody>{`"${capitalizeAll(name)}" will be lost forever.`}</ModalBody>
+        <ModalBody>{`"${capitalizeAll(item.name)}" will be lost forever.`}</ModalBody>
 
         <ModalFooter>
           <Button
             onClick={() => {
-              setInventoryValue((currentInventory) =>
-                currentInventory.filter(({ ID: currentItemID }) => currentItemID !== ID),
-              );
-
-              if (name === "spinning wheel") {
-                resetIsSpinning();
-              }
+              discard(item);
 
               onHide();
             }}

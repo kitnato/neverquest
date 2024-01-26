@@ -73,7 +73,7 @@ export const progressMaximum = withStateKey("progressMaximum", (key) =>
           getFromRange({ factor: getSigmoid(get(stage)), maximum, minimum }) *
           (1 - get(perkEffect("monsterReduction")));
 
-        return reducedMaximum < 1 ? 1 : Math.round(reducedMaximum);
+        return Math.max(1, Math.round(reducedMaximum));
       }
 
       return 1;

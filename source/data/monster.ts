@@ -1,4 +1,4 @@
-import { LEVELLING_MAXIMUM } from "@neverquest/data/general";
+import { LEVELLING_MAXIMUM, RETIREMENT_STAGE } from "@neverquest/data/general";
 import { AILMENT_PENALTY } from "@neverquest/data/statistics";
 import IconDamage from "@neverquest/icons/damage.svg?react";
 import IconDistance from "@neverquest/icons/distance.svg?react";
@@ -110,6 +110,11 @@ export const MONSTER_DAMAGE = {
     "res cogitans": 1777,
     "res dominus": 777,
   },
+  menace: {
+    maximum: 1,
+    minimum: 0.1,
+    requiredStage: RETIREMENT_STAGE + 1,
+  },
 };
 
 export const MONSTER_HEALTH = {
@@ -119,7 +124,12 @@ export const MONSTER_HEALTH = {
   boss: 1.7,
   finality: {
     "res cogitans": 7777,
-    "res dominus": 5777,
+    "res dominus": 4777,
+  },
+  menace: {
+    maximum: 2,
+    minimum: 0.2,
+    requiredStage: RETIREMENT_STAGE + 1,
   },
 };
 

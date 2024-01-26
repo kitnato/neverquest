@@ -123,7 +123,7 @@ export const CREW: Record<
       31: "Your headway in the wilderness is helping business.",
       41: "Still you press on. There must be an answer.",
       [POISON.requiredStage - 1]:
-        "Beware, some monsters have been seen witnessed spewing venomous ichor.",
+        "Beware, some monsters have been witnessed spewing venomous ichor.",
       [POISON.requiredStage]: "You are resilient to put yourself through this.",
       [BLIGHT.requiredStage - 1]:
         "These abominations are becoming ever more pestilent. Be prepared.",
@@ -131,7 +131,7 @@ export const CREW: Record<
       56: "Dark tides are impending.",
       57: "The portents are truly dire ...",
       58: "Delving further must be our salvation.",
-      74: "I fear the end is imminent.",
+      76: "I fear the end is imminent.",
       [LEVELLING_MAXIMUM - 1]: "Something's wrong.",
       [LEVELLING_CUTOFF]: "All is truly lost.",
       [LEVELLING_MAXIMUM + 4]: "Please go back to where you came from.",

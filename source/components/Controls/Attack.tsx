@@ -19,7 +19,7 @@ import IconSpinning from "@neverquest/icons/spinning.svg?react";
 import { areAttributesAffordable } from "@neverquest/state/attributes";
 import { hasEnoughAmmunition, hasFlatlined, isAttacking } from "@neverquest/state/character";
 import { encounter, isStageCompleted, location } from "@neverquest/state/encounter";
-import { canAutoProgress } from "@neverquest/state/items";
+import { isSpinning } from "@neverquest/state/items";
 import { isMonsterDead } from "@neverquest/state/monster";
 import { isHealthLow } from "@neverquest/state/reserves";
 import type { SVGIcon } from "@neverquest/types/components";
@@ -27,13 +27,13 @@ import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Attack() {
   const areAttributesAffordableValue = useRecoilValue(areAttributesAffordable);
-  const canAutoProgressValue = useRecoilValue(canAutoProgress);
   const encounterValue = useRecoilValue(encounter);
   const hasEnoughAmmunitionValue = useRecoilValue(hasEnoughAmmunition);
   const hasFlatlinedValue = useRecoilValue(hasFlatlined);
   const isAttackingValue = useRecoilValue(isAttacking);
   const isHealthLowValue = useRecoilValue(isHealthLow);
   const isMonsterDeadValue = useRecoilValue(isMonsterDead);
+  const isSpinningValue = useRecoilValue(isSpinning);
   const isStageCompletedValue = useRecoilValue(isStageCompleted);
   const locationValue = useRecoilValue(location);
 
@@ -111,7 +111,7 @@ export function Attack() {
         >
           <IconImage Icon={Icon} />
 
-          {canAutoProgressValue && !isResting && (
+          {isSpinningValue && !isResting && (
             <Badge bg="secondary" className="position-absolute top-50 start-100 translate-middle">
               <IconImage className="small" Icon={IconSpinning} />
             </Badge>

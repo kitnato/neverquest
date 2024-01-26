@@ -23,6 +23,6 @@ export const PERKS = {
   },
   monsterReduction: {
     maximum: 0.8,
-    minimum: 0.33,
+    minimum: 0.35,
   },
 };

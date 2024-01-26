@@ -175,7 +175,7 @@ export const INFUSABLES: Record<
         minimum: 0,
       },
       name: "eldritch codex",
-      price: 2500,
+      price: 4000,
       weight: 10,
     },
     tooltip: "Power bonus boost",
@@ -214,7 +214,7 @@ export const RELICS: Record<
     item: {
       description: "Stores ammunition for ranged weapons.",
       name: "ammunition pouch",
-      price: 250,
+      price: 300,
       weight: 6,
     },
   },
@@ -223,7 +223,7 @@ export const RELICS: Record<
     item: {
       description: "Allows free navigation of the wilderness to explore previous locations.",
       name: "compass",
-      price: 30,
+      price: 50,
       weight: 2,
     },
   },
@@ -232,7 +232,7 @@ export const RELICS: Record<
     item: {
       description: "Monsters are looted immediately upon death.",
       name: "ender hook",
-      price: 1000,
+      price: 2500,
       weight: 15,
     },
   },
@@ -251,7 +251,7 @@ export const RELICS: Record<
       description:
         "Traveling back to the caravan is possible even when there are still lurking monsters.",
       name: "hearthstone",
-      price: 60,
+      price: 100,
       weight: 3,
     },
   },
@@ -260,7 +260,7 @@ export const RELICS: Record<
     item: {
       description: "A compendium of quests.",
       name: "journal",
-      price: 500,
+      price: 750,
       weight: 5,
     },
   },
@@ -269,7 +269,7 @@ export const RELICS: Record<
     item: {
       description: "Provides space for items and the ability to manage gear.",
       name: "knapsack",
-      price: 10,
+      price: 15,
       weight: 0,
     },
   },
@@ -297,7 +297,7 @@ export const RELICS: Record<
     item: {
       description: "Discerns the lethality of creatures.",
       name: "thaumaturgic goggles",
-      price: 150,
+      price: 250,
       weight: 4,
     },
   },

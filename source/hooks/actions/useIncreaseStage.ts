@@ -2,8 +2,10 @@ import { generateLocation } from "@kitnato/locran";
 import { useRecoilCallback } from "recoil";
 
 import { CREW } from "@neverquest/data/caravan";
+import { FINALITY_STAGE } from "@neverquest/data/monster";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
-import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness";
+import { useToggleAttacking } from "@neverquest/hooks/actions/useToggleAttacking";
+import { isAttacking } from "@neverquest/state/character";
 import { stage, wildernesses } from "@neverquest/state/encounter";
 import { isShowing } from "@neverquest/state/isShowing";
 import { questProgress } from "@neverquest/state/quests";
@@ -11,19 +13,19 @@ import { getAffixStructure, getSnapshotGetter } from "@neverquest/utilities/gett
 
 export function useIncreaseStage() {
   const progressQuest = useProgressQuest();
-  const resetWilderness = useResetWilderness();
+  const toggleAttacking = useToggleAttacking();
 
   return useRecoilCallback(
     ({ set, snapshot }) =>
       () => {
         const get = getSnapshotGetter(snapshot);
 
-        const stageValue = get(stage);
-        const nextStage = stageValue + 1;
         const crewMemberRequiredStage = Object.values(CREW)
           .map(({ requiredStage }) => requiredStage)
           .toSorted((requiredStage1, requiredStage2) => requiredStage1 - requiredStage2)
           .find((requiredStage) => requiredStage > 1);
+        const stageValue = get(stage);
+        const nextStage = stageValue + 1;
 
         if (crewMemberRequiredStage !== undefined && nextStage >= crewMemberRequiredStage) {
           set(isShowing("crewMemberHiring"), true);
@@ -46,8 +48,11 @@ export function useIncreaseStage() {
         ]);
 
         set(stage, nextStage);
-        resetWilderness();
+
+        if (Object.values(FINALITY_STAGE).includes(nextStage) && get(isAttacking)) {
+          toggleAttacking();
+        }
       },
-    [progressQuest, resetWilderness],
+    [progressQuest, toggleAttacking],
   );
 }

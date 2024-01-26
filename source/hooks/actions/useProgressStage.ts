@@ -1,31 +1,42 @@
 import { useRecoilCallback } from "recoil";
 
-import { useGenerateMonster } from "@neverquest/hooks/actions/useGenerateMonster";
+import { useCollectLoot } from "@neverquest/hooks/actions/useCollectLoot";
+import { useCompleteStage } from "@neverquest/hooks/actions/useCompleteStage";
+import { useIncreaseStage } from "@neverquest/hooks/actions/useIncreaseStage";
+import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness";
 import { useToggleAttacking } from "@neverquest/hooks/actions/useToggleAttacking";
 import { isAttacking } from "@neverquest/state/character";
-import { progress, progressMaximum } from "@neverquest/state/encounter";
-import { canAutoProgress } from "@neverquest/state/items";
+import { encounter, isStageCompleted } from "@neverquest/state/encounter";
+import { isSpinning } from "@neverquest/state/items";
+import { isFinality } from "@neverquest/types/type-guards";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useProgressStage() {
-  const generateMonster = useGenerateMonster();
+  const collectLoot = useCollectLoot();
+  const completeStage = useCompleteStage();
+  const increaseStage = useIncreaseStage();
+  const resetWilderness = useResetWilderness();
   const toggleAttacking = useToggleAttacking();
 
   return useRecoilCallback(
-    ({ set, snapshot }) =>
+    ({ snapshot }) =>
       () => {
         const get = getSnapshotGetter(snapshot);
 
-        const nextProgress = get(progress) + 1;
+        if (get(isStageCompleted)) {
+          if (get(isSpinning) && get(isAttacking) && !isFinality(get(encounter))) {
+            const lootCollection = collectLoot();
 
-        set(progress, nextProgress);
-
-        if (nextProgress < get(progressMaximum)) {
-          generateMonster();
-        } else if (get(isAttacking) && !get(canAutoProgress)) {
-          toggleAttacking();
+            if (lootCollection === "success") {
+              completeStage();
+              increaseStage();
+              resetWilderness();
+            }
+          } else if (get(isAttacking)) {
+            toggleAttacking();
+          }
         }
       },
-    [generateMonster, toggleAttacking],
+    [collectLoot, completeStage, increaseStage, resetWilderness, toggleAttacking],
   );
 }

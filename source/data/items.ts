@@ -14,6 +14,7 @@ import IconStone from "@neverquest/icons/hearthstone.svg?react";
 import IconIce from "@neverquest/icons/ice.svg?react";
 import IconJournal from "@neverquest/icons/journal.svg?react";
 import IconKnapsack from "@neverquest/icons/knapsack.svg?react";
+import IconLacrimatory from "@neverquest/icons/lacrimatory.svg?react";
 import IconLightning from "@neverquest/icons/lightning.svg?react";
 import IconMemento from "@neverquest/icons/memento.svg?react";
 import IconMysteriousEgg from "@neverquest/icons/mysterious-egg.svg?react";
@@ -284,6 +285,15 @@ export const RELICS: Record<
       weight: 0,
     },
   },
+  lacrimatory: {
+    Icon: IconLacrimatory,
+    item: {
+      description: "Enables the collection of samples from noxious foes.",
+      name: "lacrimatory",
+      price: 1500,
+      weight: 8,
+    },
+  },
   memento: {
     Icon: IconMemento,
     item: {
@@ -297,7 +307,7 @@ export const RELICS: Record<
     Icon: IconPerpetualLoom,
     item: {
       description:
-        "Once running, automatically collects all loot and passes to the next stage once it is cleared of monsters.",
+        "While weaving, automatically collects all loot and passes to the next stage once it is cleared of monsters.",
       name: "perpetual loom",
       price: 7000,
       weight: 20,
@@ -322,3 +332,5 @@ export const RELICS: Record<
     },
   },
 };
+
+export const TEARS_MAXIMUM = 7;

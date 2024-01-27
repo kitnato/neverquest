@@ -1,7 +1,13 @@
 import { useRecoilCallback } from "recoil";
 
 import { merchantInventory } from "@neverquest/state/caravan";
-import { ammunition, ammunitionCapacity, infusion, infusionLevel } from "@neverquest/state/items";
+import {
+  ammunition,
+  ammunitionCapacity,
+  infusion,
+  infusionLevel,
+  tears,
+} from "@neverquest/state/items";
 import type { MerchantInventoryItem } from "@neverquest/types";
 import { isInfusableItem, isRelicItem } from "@neverquest/types/type-guards";
 
@@ -24,9 +30,15 @@ export function useEradicate() {
           reset(infusionLevel(item.name));
         }
 
-        if (isRelicItem(item) && item.name === "ammunition pouch") {
-          reset(ammunition);
-          reset(ammunitionCapacity);
+        if (isRelicItem(item)) {
+          if (item.name === "ammunition pouch") {
+            reset(ammunition);
+            reset(ammunitionCapacity);
+          }
+
+          if (item.name === "lacrimatory") {
+            reset(tears);
+          }
         }
       },
     [],

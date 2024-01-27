@@ -106,3 +106,11 @@ export const isWeaving = withStateKey("isWeaving", (key) =>
     key,
   }),
 );
+
+export const tears = withStateKey("tears", (key) =>
+  atom({
+    default: 0,
+    effects: [handleLocalStorage({ key })],
+    key,
+  }),
+);

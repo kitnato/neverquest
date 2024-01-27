@@ -8,10 +8,10 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { WITCH_POTIONS } from "@neverquest/data/caravan";
 import { LABEL_UNKNOWN } from "@neverquest/data/general";
 import IconUnknown from "@neverquest/icons/unknown.svg?react";
-import { stage } from "@neverquest/state/encounter";
+import { stageMaximum } from "@neverquest/state/encounter";
 
 export function Witch() {
-  const stageValue = useRecoilValue(stage);
+  const stageMaximumValue = useRecoilValue(stageMaximum);
 
   return (
     <Stack gap={5}>
@@ -20,7 +20,7 @@ export function Witch() {
 
         {WITCH_POTIONS.map(({ consumable, requiredStage }) => (
           <Fragment key={consumable}>
-            {stageValue >= requiredStage ? (
+            {stageMaximumValue >= requiredStage ? (
               <PurchaseConsumable consumable={consumable} />
             ) : (
               <IconDisplay

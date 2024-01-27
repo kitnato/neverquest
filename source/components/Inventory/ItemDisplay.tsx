@@ -3,6 +3,7 @@ import type { Placement } from "react-bootstrap/esm/types";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { ArmorName } from "@neverquest/components/Inventory/Armor/ArmorName";
 import { InfusionLevelDisplay } from "@neverquest/components/Inventory/Inheritable/Infusion/InfusionLevelDisplay";
+import { LacrimatoryStatus } from "@neverquest/components/Inventory/Inheritable/LacrimatoryStatus";
 import { ItemName } from "@neverquest/components/Inventory/ItemName";
 import { AmmunitionPouchStatus } from "@neverquest/components/Inventory/Offhand/AmmunitionPouchStatus";
 import { ShieldName } from "@neverquest/components/Inventory/Offhand/ShieldName";
@@ -83,7 +84,13 @@ export function ItemDisplay({
 
     return (
       <IconDisplay
-        description={name === "ammunition pouch" ? <AmmunitionPouchStatus /> : undefined}
+        description={
+          name === "ammunition pouch" ? (
+            <AmmunitionPouchStatus />
+          ) : name === "lacrimatory" ? (
+            <LacrimatoryStatus />
+          ) : undefined
+        }
         Icon={RELICS[name].Icon}
         tooltip="Relic"
       >

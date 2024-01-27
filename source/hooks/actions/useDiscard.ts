@@ -7,6 +7,7 @@ import {
   infusion,
   infusionLevel,
   isWeaving,
+  tears,
 } from "@neverquest/state/items";
 import type { InventoryItem } from "@neverquest/types";
 import { isInfusableItem, isRelicItem } from "@neverquest/types/type-guards";
@@ -32,6 +33,10 @@ export function useDiscard() {
 
           if (item.name === "perpetual loom") {
             reset(isWeaving);
+          }
+
+          if (item.name === "lacrimatory") {
+            reset(tears);
           }
         }
       },

@@ -178,7 +178,7 @@ export const CREW: Record<
     monologues: {
       1: "Gaze into my cauldron ...",
       [LEVELLING_CUTOFF]: MONOLOGUE_EMPTY,
-      [LEVELLING_MAXIMUM]: "The spirits have gone silent.",
+      [LEVELLING_MAXIMUM]: "The cipher has gone silent.",
     },
     price: 650,
     requiredStage: 27,
@@ -273,6 +273,10 @@ export const MERCHANT_OFFERS: Record<
   40: {
     item: RELICS["perpetual loom"].item,
     monologue: "Here's a intriguing device that should ease up the grind.",
+  },
+  [POISON.requiredStage]: {
+    item: RELICS.lacrimatory.item,
+    monologue: "Allow me to offer a phial to collect your sorrows.",
   },
 };
 

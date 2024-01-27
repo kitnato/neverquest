@@ -429,6 +429,7 @@ export type StateKey =
   | "statusElement"
   | "stunChance"
   | "stunRating"
+  | "tears"
   | "thorns"
   | "unlockedMasteries"
   | "wildernesses";
@@ -456,6 +457,7 @@ export const RELIC_TYPES = [
   "hearthstone",
   "journal",
   "knapsack",
+  "lacrimatory",
   "memento",
   "perpetual loom",
   "thaumaturgic goggles",

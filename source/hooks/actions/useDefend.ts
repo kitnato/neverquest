@@ -1,5 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
+import { TEARS_MAXIMUM } from "@neverquest/data/items";
 import { AILMENT_PENALTY } from "@neverquest/data/statistics";
 import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta";
 import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth";
@@ -18,7 +19,9 @@ import {
   statusElement,
 } from "@neverquest/state/character";
 import { armor, shield, weapon } from "@neverquest/state/gear";
+import { ownedItem } from "@neverquest/state/inventory";
 import { isShowing } from "@neverquest/state/isShowing";
+import { tears } from "@neverquest/state/items";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import {
   blightChance,
@@ -69,7 +72,9 @@ export function useDefend() {
         const deltaHealth: DeltaDisplay[] = [];
         const deltaStamina: DeltaDisplay[] = [];
         const incursArmorBurden = !get(isTraitAcquired("stalwart")) && burden > 0;
+        const ownedItemLacrimatory = get(ownedItem("lacrimatory"));
         const statusElementValue = get(statusElement);
+        const tearsValue = get(tears);
 
         let hasStaggered = false;
         let isAvoided = false;
@@ -274,6 +279,10 @@ export function useDefend() {
                 value: "DEFLECTED BLIGHT",
               });
             } else {
+              if (ownedItemLacrimatory !== undefined && tearsValue < TEARS_MAXIMUM) {
+                set(tears, (currentTears) => currentTears + 1);
+              }
+
               progressQuest({ quest: "blighting" });
 
               set(blight, (currentBlight) => currentBlight + 1);
@@ -295,6 +304,10 @@ export function useDefend() {
                 value: "DEFLECTED POISON",
               });
             } else {
+              if (ownedItemLacrimatory !== undefined && tearsValue < TEARS_MAXIMUM) {
+                set(tears, (currentTears) => currentTears + 1);
+              }
+
               progressQuest({ quest: "poisoning" });
 
               set(poisonDuration, get(poisonLength));

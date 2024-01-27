@@ -3,15 +3,15 @@ import { useRecoilValue } from "recoil";
 
 import { TrainableSkill } from "@neverquest/components/Skills/TrainableSkill";
 import { LABEL_NONE_AVAILABLE } from "@neverquest/data/general";
-import { POISON } from "@neverquest/data/monster";
+import { TEARS_MAXIMUM } from "@neverquest/data/items";
 import { SKILLS } from "@neverquest/data/skills";
-import { stageMaximum } from "@neverquest/state/encounter";
+import { tears } from "@neverquest/state/items";
 import { acquiredSkills } from "@neverquest/state/skills";
 import { SKILL_TYPES } from "@neverquest/types/unions";
 
 export function AcquireWitchSkills() {
   const acquiredSkillsValue = useRecoilValue(acquiredSkills);
-  const stageMaximumValue = useRecoilValue(stageMaximum);
+  const tearsValue = useRecoilValue(tears);
 
   const acquiredSkillsWitch = SKILL_TYPES.filter(
     (skill) => SKILLS[skill].trainer === "witch" && !acquiredSkillsValue[skill],
@@ -21,7 +21,7 @@ export function AcquireWitchSkills() {
     <Stack gap={3}>
       <h6>Acquire skills</h6>
 
-      {stageMaximumValue < POISON.requiredStage ? (
+      {tearsValue < TEARS_MAXIMUM ? (
         <span>
           &quot;Before I can impart protective hexes, you must first taste the bitter tears of
           experience.&quot;
@@ -30,16 +30,11 @@ export function AcquireWitchSkills() {
         <span className="fst-italic">{LABEL_NONE_AVAILABLE}</span>
       ) : (
         <>
-          <span>
-            &quot;Those scars concede your encounters with the most noxious of foes. You are
-            ready.&quot;
-          </span>
+          <span>&quot;Your pernicious traumas sing to the cipher. You are ready.&quot;</span>
 
-          <>
-            {acquiredSkillsWitch.map((skill) => (
-              <TrainableSkill key={skill} skill={skill} />
-            ))}
-          </>
+          {acquiredSkillsWitch.map((skill) => (
+            <TrainableSkill key={skill} skill={skill} />
+          ))}
         </>
       )}
     </Stack>

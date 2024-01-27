@@ -23,7 +23,7 @@ export function AcquireWitchSkills() {
 
       {stageMaximumValue < POISON.requiredStage ? (
         <span>
-          &quot;Before I can impart protective hexes, you must first taste the bitter herbs of
+          &quot;Before I can impart protective hexes, you must first taste the bitter tears of
           experience.&quot;
         </span>
       ) : acquiredSkillsWitch.length === 0 ? (

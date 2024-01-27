@@ -1,17 +1,37 @@
+import { Fragment } from "react";
 import { Stack } from "react-bootstrap";
+import { useRecoilValue } from "recoil";
 
 import { PurchaseConsumable } from "@neverquest/components/Caravan/PurchaseConsumable";
 import { AcquireWitchSkills } from "@neverquest/components/Caravan/Witch/AcquireWitchSkills";
+import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { WITCH_POTIONS } from "@neverquest/data/caravan";
+import { LABEL_UNKNOWN } from "@neverquest/data/general";
+import IconUnknown from "@neverquest/icons/unknown.svg?react";
+import { stage } from "@neverquest/state/encounter";
 
 export function Witch() {
+  const stageValue = useRecoilValue(stage);
+
   return (
     <Stack gap={5}>
       <Stack gap={3}>
         <h6>Purchase potions</h6>
 
-        {WITCH_POTIONS.map((potion) => (
-          <PurchaseConsumable consumable={potion} key={potion} />
+        {WITCH_POTIONS.map(({ consumable, requiredStage }) => (
+          <Fragment key={consumable}>
+            {stageValue >= requiredStage ? (
+              <PurchaseConsumable consumable={consumable} />
+            ) : (
+              <IconDisplay
+                description={<span>Missing samples.</span>}
+                Icon={IconUnknown}
+                tooltip="Consumable"
+              >
+                <span>{LABEL_UNKNOWN}</span>
+              </IconDisplay>
+            )}
+          </Fragment>
         ))}
       </Stack>
 

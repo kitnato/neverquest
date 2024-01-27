@@ -19,7 +19,7 @@ import IconTailor from "@neverquest/icons/tailor.svg?react";
 import IconWitch from "@neverquest/icons/witch.svg?react";
 import type { InheritableItem } from "@neverquest/types";
 import type { SVGIcon } from "@neverquest/types/components";
-import type { CrewMember, Grip, Showing } from "@neverquest/types/unions";
+import type { Consumable, CrewMember, Grip, Showing } from "@neverquest/types/unions";
 
 export const AMMUNITION_PRICE = 3;
 
@@ -287,4 +287,8 @@ export const TRANSMUTATION = {
   price: 100,
 };
 
-export const WITCH_POTIONS = ["elixir", "antidote", "salve"] as const;
+export const WITCH_POTIONS: { consumable: Consumable; requiredStage: number }[] = [
+  { consumable: "elixir", requiredStage: 1 },
+  { consumable: "antidote", requiredStage: POISON.requiredStage },
+  { consumable: "salve", requiredStage: BLIGHT.requiredStage },
+];

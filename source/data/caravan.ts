@@ -7,7 +7,7 @@ import type {
 } from "@kitnato/locran/build/types";
 import { LEVELLING_CUTOFF, LEVELLING_MAXIMUM, RETIREMENT_STAGE } from "@neverquest/data/general";
 import { INFUSABLES, RELICS } from "@neverquest/data/items";
-import { BLIGHT, POISON, RAGE } from "@neverquest/data/monster";
+import { BLIGHT, FINALITY_STAGE, POISON, RAGE } from "@neverquest/data/monster";
 import IconAlchemist from "@neverquest/icons/alchemist.svg?react";
 import IconBlacksmith from "@neverquest/icons/blacksmith.svg?react";
 import IconFletcher from "@neverquest/icons/fletcher.svg?react";
@@ -152,6 +152,7 @@ export const CREW: Record<
     interaction: "Ritual",
     monologues: {
       1: "Prepared to transcend your limits?",
+      [FINALITY_STAGE["res dominus"]]: "The world ends at 77.",
       [LEVELLING_CUTOFF]: MONOLOGUE_EMPTY,
       [LEVELLING_MAXIMUM]: "I can't see any more.",
     },

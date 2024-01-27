@@ -4,6 +4,7 @@ import { useRecoilValue } from "recoil";
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { LABEL_SEPARATOR } from "@neverquest/data/general";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconCriticalChance from "@neverquest/icons/critical-chance.svg?react";
 import IconCriticalDamage from "@neverquest/icons/critical-damage.svg?react";
@@ -126,10 +127,13 @@ export function CriticalRating() {
                       <td>
                         <Stack direction="horizontal" gap={1}>
                           {criticalChanceValue !== attributeStatisticDexterity && (
-                            <span>
-                              {formatNumber({ format: "percentage", value: criticalChanceValue })}
-                              &nbsp;chance for&nbsp;
-                            </span>
+                            <>
+                              <span>
+                                {formatNumber({ format: "percentage", value: criticalChanceValue })}
+                              </span>
+
+                              {LABEL_SEPARATOR}
+                            </>
                           )}
 
                           <IconDisplay Icon={IconDamage} iconProps={{ className: "small" }}>

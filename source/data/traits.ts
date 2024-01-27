@@ -14,7 +14,10 @@ import { formatNumber } from "@neverquest/utilities/formatters";
 
 export const BRAWLER_DAMAGE_BONUS = 0.5;
 
-export const BRUISER_STUN_CHANCE = 0.3;
+export const BRUISER_STUN_CHANCE = {
+  increment: 0.04,
+  maximum: 0.9,
+};
 
 export const INOCULATED_DEFLECTION_BASE = 0.5;
 
@@ -37,11 +40,11 @@ export const TRAITS: Record<
     Icon: IconBrawler,
   },
   bruiser: {
-    description: `Current stamina adds to unarmed damage and unarmed attacks have a ${formatNumber({
+    description: `Unarmed damage is determined by current stamina. Stun chance is ${formatNumber({
       decimals: 0,
       format: "percentage",
-      value: BRUISER_STUN_CHANCE,
-    })} chance to stun.`,
+      value: BRUISER_STUN_CHANCE.increment,
+    })} for each strength attribute rank.`,
     Icon: IconBruiser,
   },
   colossus: {

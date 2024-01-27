@@ -37,7 +37,7 @@ export const ARMOR_SPECIFICATIONS: Record<
   heavy: {
     burden: [
       { maximum: 9, minimum: 4 },
-      { maximum: 90, minimum: 85 },
+      { maximum: 85, minimum: 80 },
     ],
     deflection: [
       { maximum: 0.3, minimum: 0.28 },
@@ -57,7 +57,7 @@ export const ARMOR_SPECIFICATIONS: Record<
   light: {
     burden: [
       { maximum: 2, minimum: 1 },
-      { maximum: 30, minimum: 25 },
+      { maximum: 25, minimum: 20 },
     ],
     Icon: IconArmorLight,
     price: { maximum: 6000, minimum: 1 },
@@ -73,7 +73,7 @@ export const ARMOR_SPECIFICATIONS: Record<
   reinforced: {
     burden: [
       { maximum: 5, minimum: 3 },
-      { maximum: 60, minimum: 55 },
+      { maximum: 55, minimum: 50 },
     ],
     deflection: [
       { maximum: 0.15, minimum: 0.1 },

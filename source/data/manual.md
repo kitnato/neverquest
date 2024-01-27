@@ -698,7 +698,7 @@ Being unshielded increases one-handed melee damage.
 
 #### Bruiser
 
-Current stamina adds to unarmed damage and unarmed attacks have a chance to [stun](#stun). Stunning requires the [traumatology](#traumatology) skill.
+Current stamina adds to unarmed damage and unarmed attacks have a chance to [stun](#stun) for each rank of the [strength](#strength) attribute. Stunning requires the [traumatology](#traumatology) skill.
 
 #### Colossus
 

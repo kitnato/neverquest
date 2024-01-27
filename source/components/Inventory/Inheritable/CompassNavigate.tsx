@@ -78,11 +78,11 @@ export function CompassNavigate() {
               onChange={({ target: { value } }) => {
                 progressQuest({ quest: "warpingWilderness" });
 
-                resetWilderness();
-                setStage(Number(value));
-
                 setIsShowingNavigation(false);
                 resetIsInventoryOpen();
+
+                setStage(Number(value));
+                resetWilderness();
               }}
               value={stageValue}
             >

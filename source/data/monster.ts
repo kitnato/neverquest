@@ -62,7 +62,7 @@ export const BLIGHT = {
     "res dominus": 0.5777,
   },
   increment: 0.025,
-  requiredStage: 55,
+  requiredStage: 50,
 };
 
 export const ESSENCE = {
@@ -72,7 +72,7 @@ export const ESSENCE = {
   boss: 1.2,
   finality: {
     "res cogitans": 7777,
-    "res dominus": 17_777,
+    "res dominus": 7777,
   },
 };
 
@@ -111,7 +111,7 @@ export const MONSTER_DAMAGE = {
     "res dominus": 777,
   },
   menace: {
-    maximum: 1,
+    maximum: 0.75,
     minimum: 0.1,
     requiredStage: RETIREMENT_STAGE + 1,
   },
@@ -123,11 +123,11 @@ export const MONSTER_HEALTH = {
   bonus: 0.02,
   boss: 1.7,
   finality: {
-    "res cogitans": 7777,
-    "res dominus": 4777,
+    "res cogitans": 5777,
+    "res dominus": 3777,
   },
   menace: {
-    maximum: 2,
+    maximum: 1,
     minimum: 0.2,
     requiredStage: RETIREMENT_STAGE + 1,
   },
@@ -142,11 +142,11 @@ export const POISON = {
   boss: 1.25,
   chance: {
     maximum: 0.35,
-    minimum: 0.05,
+    minimum: 0.07,
   },
   duration: {
     maximum: 250_000,
-    minimum: 10_000,
+    minimum: 25_000,
   },
   finality: {
     "res cogitans": 0.7777,
@@ -154,7 +154,7 @@ export const POISON = {
   },
   magnitude: {
     maximum: 0.2,
-    minimum: 0.02,
+    minimum: 0.03,
   },
   requiredStage: 45,
 };

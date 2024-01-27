@@ -6,7 +6,7 @@ import {
   ammunitionCapacity,
   infusion,
   infusionLevel,
-  isSpinning,
+  isWeaving,
 } from "@neverquest/state/items";
 import type { InventoryItem } from "@neverquest/types";
 import { isInfusableItem, isRelicItem } from "@neverquest/types/type-guards";
@@ -30,8 +30,8 @@ export function useDiscard() {
             reset(ammunitionCapacity);
           }
 
-          if (item.name === "spinning wheel") {
-            reset(isSpinning);
+          if (item.name === "perpetual loom") {
+            reset(isWeaving);
           }
         }
       },

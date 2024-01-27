@@ -12,7 +12,7 @@ import { Encumbrance } from "@neverquest/components/Inventory/Encumbrance";
 import { CompassNavigate } from "@neverquest/components/Inventory/Inheritable/CompassNavigate";
 import { HearthstoneWarp } from "@neverquest/components/Inventory/Inheritable/HearthstoneWarp";
 import { InfusionInspect } from "@neverquest/components/Inventory/Inheritable/Infusion/InfusionInspect";
-import { SpinningWheelToggle } from "@neverquest/components/Inventory/Inheritable/SpinningWheelToggle";
+import { PerpetualLoomToggle } from "@neverquest/components/Inventory/Inheritable/PerpetualLoomToggle";
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
 import {
   CLASS_FULL_WIDTH_JUSTIFIED,
@@ -45,7 +45,7 @@ import { stackItems } from "@neverquest/utilities/helpers";
 const RELIC_ACTIONS: Partial<Record<Relic, FunctionComponent>> = {
   compass: CompassNavigate,
   hearthstone: HearthstoneWarp,
-  "spinning wheel": SpinningWheelToggle,
+  "perpetual loom": PerpetualLoomToggle,
 };
 
 export function Inventory() {

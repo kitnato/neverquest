@@ -9,7 +9,7 @@ import IconEssence from "@neverquest/icons/essence.svg?react";
 import { merchantInventory } from "@neverquest/state/caravan";
 import { armor, shield, weapon } from "@neverquest/state/gear";
 import { inventory } from "@neverquest/state/inventory";
-import { isSpinning } from "@neverquest/state/items";
+import { isWeaving } from "@neverquest/state/items";
 import type { InventoryItem } from "@neverquest/types";
 import {
   isArmor,
@@ -28,7 +28,7 @@ export function SellItem({ item }: { item: InventoryItem }) {
   const setMerchantInventory = useSetRecoilState(merchantInventory);
   const shieldValue = useRecoilValue(shield);
   const weaponValue = useRecoilValue(weapon);
-  const resetIsSpinning = useResetRecoilState(isSpinning);
+  const resetIsWeaving = useResetRecoilState(isWeaving);
 
   const progressQuest = useProgressQuest();
   const toggleEquipGear = useToggleEquipGear();
@@ -70,8 +70,8 @@ export function SellItem({ item }: { item: InventoryItem }) {
             { ...item, isEradicated: false, isReturned: true },
           ]);
 
-          if (name === "spinning wheel") {
-            resetIsSpinning();
+          if (name === "perpetual loom") {
+            resetIsWeaving();
           }
 
           progressQuest({ quest: "selling" });

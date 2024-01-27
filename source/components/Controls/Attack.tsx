@@ -15,11 +15,11 @@ import IconAttack from "@neverquest/icons/attack.svg?react";
 import IconHealth from "@neverquest/icons/health.svg?react";
 import IconResting from "@neverquest/icons/resting.svg?react";
 import IconRetreat from "@neverquest/icons/retreat.svg?react";
-import IconSpinning from "@neverquest/icons/spinning.svg?react";
+import IconWeaving from "@neverquest/icons/weaving.svg?react";
 import { areAttributesAffordable } from "@neverquest/state/attributes";
 import { hasEnoughAmmunition, hasFlatlined, isAttacking } from "@neverquest/state/character";
 import { encounter, isStageCompleted, location } from "@neverquest/state/encounter";
-import { isSpinning } from "@neverquest/state/items";
+import { isWeaving } from "@neverquest/state/items";
 import { isMonsterDead } from "@neverquest/state/monster";
 import { isHealthLow } from "@neverquest/state/reserves";
 import type { SVGIcon } from "@neverquest/types/components";
@@ -33,7 +33,7 @@ export function Attack() {
   const isAttackingValue = useRecoilValue(isAttacking);
   const isHealthLowValue = useRecoilValue(isHealthLow);
   const isMonsterDeadValue = useRecoilValue(isMonsterDead);
-  const isSpinningValue = useRecoilValue(isSpinning);
+  const isWeavingValue = useRecoilValue(isWeaving);
   const isStageCompletedValue = useRecoilValue(isStageCompleted);
   const locationValue = useRecoilValue(location);
 
@@ -111,9 +111,9 @@ export function Attack() {
         >
           <IconImage Icon={Icon} />
 
-          {isSpinningValue && !isResting && (
+          {isWeavingValue && !isResting && (
             <Badge bg="secondary" className="position-absolute top-50 start-100 translate-middle">
-              <IconImage className="small" Icon={IconSpinning} />
+              <IconImage className="small" Icon={IconWeaving} />
             </Badge>
           )}
         </Button>

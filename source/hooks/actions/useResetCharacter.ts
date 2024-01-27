@@ -2,7 +2,7 @@ import { useRecoilCallback } from "recoil";
 
 import { attackDuration, name, recoveryDuration } from "@neverquest/state/character";
 import { isStageStarted, location, progress, stage } from "@neverquest/state/encounter";
-import { isSpinning } from "@neverquest/state/items";
+import { isWeaving } from "@neverquest/state/items";
 import {
   blight,
   health,
@@ -20,7 +20,7 @@ export function useResetCharacter() {
         reset(blight);
         reset(essence);
         reset(health);
-        reset(isSpinning);
+        reset(isWeaving);
         reset(isStageStarted);
         reset(poisonDuration);
         reset(progress);

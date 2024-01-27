@@ -3,10 +3,10 @@ import { useRecoilState, useRecoilValue } from "recoil";
 
 import { POPOVER_TRIGGER } from "@neverquest/data/general";
 import { location } from "@neverquest/state/encounter";
-import { isSpinning } from "@neverquest/state/items";
+import { isWeaving } from "@neverquest/state/items";
 
-export function SpinningWheelToggle() {
-  const [isSpinningValue, setIsSpinning] = useRecoilState(isSpinning);
+export function PerpetualLoomToggle() {
+  const [isWeavingValue, setIsWeaving] = useRecoilState(isWeaving);
   const locationValue = useRecoilValue(location);
 
   const canActivate = locationValue === "wilderness";
@@ -24,11 +24,11 @@ export function SpinningWheelToggle() {
         <Button
           disabled={!canActivate}
           onClick={() => {
-            setIsSpinning((isActive) => !isActive);
+            setIsWeaving((isActive) => !isActive);
           }}
           variant="outline-dark"
         >
-          {isSpinningValue ? "Stop" : "Start"}
+          {isWeavingValue ? "Unravel" : "Weave"}
         </Button>
       </div>
     </OverlayTrigger>

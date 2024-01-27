@@ -17,12 +17,12 @@ import IconKnapsack from "@neverquest/icons/knapsack.svg?react";
 import IconLightning from "@neverquest/icons/lightning.svg?react";
 import IconMemento from "@neverquest/icons/memento.svg?react";
 import IconMysteriousEgg from "@neverquest/icons/mysterious-egg.svg?react";
+import IconPerpetualLoom from "@neverquest/icons/perpetual-loom.svg?react";
 import IconPhylactery from "@neverquest/icons/phylactery.svg?react";
 import IconPowerBonusBoost from "@neverquest/icons/power-bonus-boost.svg?react";
 import IconRuby from "@neverquest/icons/ruby.svg?react";
 import IconSalve from "@neverquest/icons/salve.svg?react";
 import IconSapphire from "@neverquest/icons/sapphire.svg?react";
-import IconSpinningWheel from "@neverquest/icons/spinning-wheel.svg?react";
 import IconThaumaturgicGoggles from "@neverquest/icons/thaumaturgic-goggles.svg?react";
 import IconTopaz from "@neverquest/icons/topaz.svg?react";
 import IconTornManuscript from "@neverquest/icons/torn-manuscript.svg?react";
@@ -293,12 +293,12 @@ export const RELICS: Record<
       weight: 2,
     },
   },
-  "spinning wheel": {
-    Icon: IconSpinningWheel,
+  "perpetual loom": {
+    Icon: IconPerpetualLoom,
     item: {
       description:
         "Once running, automatically collects all loot and passes to the next stage once it is cleared of monsters.",
-      name: "spinning wheel",
+      name: "perpetual loom",
       price: 7000,
       weight: 20,
     },

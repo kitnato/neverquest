@@ -360,11 +360,11 @@ export type StateKey =
   | "isShowing"
   | "isShowingQuestBonus"
   | "isSkillAcquired"
-  | "isSpinning"
   | "isStageCompleted"
   | "isStageStarted"
   | "isStaminaAtMaximum"
   | "isTraitAcquired"
+  | "isWeaving"
   | "itemsLoot"
   | "knapsackCapacity"
   | "location"
@@ -457,7 +457,7 @@ export const RELIC_TYPES = [
   "journal",
   "knapsack",
   "memento",
-  "spinning wheel",
+  "perpetual loom",
   "thaumaturgic goggles",
   "torn manuscript",
 ] as const;

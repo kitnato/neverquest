@@ -271,8 +271,8 @@ export const MERCHANT_OFFERS: Record<
   },
   34: { item: RELICS.journal.item, monologue: "You wouldn't be a scribe, would you?" },
   40: {
-    item: RELICS["spinning wheel"].item,
-    monologue: "Here's a device that should ease up the grind.",
+    item: RELICS["perpetual loom"].item,
+    monologue: "Here's a intriguing device that should ease up the grind.",
   },
 };
 

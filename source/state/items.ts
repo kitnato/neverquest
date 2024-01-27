@@ -99,7 +99,7 @@ export const infusionLevel = withStateKey("infusionLevel", (key) =>
   }),
 );
 
-export const isSpinning = withStateKey("isSpinning", (key) =>
+export const isWeaving = withStateKey("isWeaving", (key) =>
   atom({
     default: false,
     effects: [handleLocalStorage({ key })],

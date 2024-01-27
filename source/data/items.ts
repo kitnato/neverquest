@@ -3,6 +3,7 @@ import IconAmmunitionPouch from "@neverquest/icons/ammunition-pouch.svg?react";
 import IconAntidote from "@neverquest/icons/antidote.svg?react";
 import IconBandages from "@neverquest/icons/bandages.svg?react";
 import IconCompass from "@neverquest/icons/compass.svg?react";
+import IconDreamCatcher from "@neverquest/icons/dream-catcher.svg?react";
 import IconEldritchCodex from "@neverquest/icons/eldritch-codex.svg?react";
 import IconElixir from "@neverquest/icons/elixir.svg?react";
 import IconEnderHook from "@neverquest/icons/ender-hook.svg?react";
@@ -198,6 +199,7 @@ export const INFUSABLES: Record<
 export const KNAPSACK_CAPACITY = 15;
 
 export const RELIC_DROP_CHANCE = {
+  "dream catcher": { maximum: 0.06, minimum: 0.005 },
   memento: { maximum: 0.08, minimum: 0.01 },
   "torn manuscript": { maximum: 0.05, minimum: 0.01 },
 };
@@ -225,6 +227,15 @@ export const RELICS: Record<
       name: "compass",
       price: 50,
       weight: 2,
+    },
+  },
+  "dream catcher": {
+    Icon: IconDreamCatcher,
+    item: {
+      description: "Protects the bearer from harm by disengaging from unfavorable encounters.",
+      name: "dream catcher",
+      price: 1554,
+      weight: 10,
     },
   },
   "ender hook": {
@@ -288,7 +299,7 @@ export const RELICS: Record<
       description:
         "Once running, automatically collects all loot and passes to the next stage once it is cleared of monsters.",
       name: "spinning wheel",
-      price: 7500,
+      price: 7000,
       weight: 20,
     },
   },

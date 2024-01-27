@@ -107,11 +107,11 @@ export const MONSTER_DAMAGE = {
   bonus: 0.01,
   boss: 1.05,
   finality: {
-    "res cogitans": 1777,
+    "res cogitans": 1277,
     "res dominus": 777,
   },
   menace: {
-    maximum: 0.75,
+    maximum: 0.7,
     minimum: 0.1,
     requiredStage: RETIREMENT_STAGE + 1,
   },

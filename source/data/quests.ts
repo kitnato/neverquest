@@ -65,6 +65,12 @@ export const QUESTS: Record<
     requiresTracking: true,
     title: "Ranger",
   },
+  acquiringDreamCatcher: {
+    description: "Acquire the dream catcher.",
+    progression: [1],
+    requiresTracking: false,
+    title: "Deceptively useful",
+  },
   acquiringFamiliar: {
     description: `Acquire the ${LABEL_UNKNOWN}`,
     hidden: "familiar.",

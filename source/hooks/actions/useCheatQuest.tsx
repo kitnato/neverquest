@@ -21,7 +21,7 @@ export function useCheatQuest() {
   const increaseStage = useIncreaseStage();
   const resetWilderness = useResetWilderness();
   const setMonologues = useSetMonologues();
-  const toggleAttack = useToggleAttacking();
+  const toggleAttacking = useToggleAttacking();
   const toggleLocation = useToggleLocation();
   const transactEssence = useTransactEssence();
 
@@ -75,7 +75,7 @@ export function useCheatQuest() {
 
               if (get(location) === "wilderness") {
                 if (get(isAttacking)) {
-                  toggleAttack();
+                  toggleAttacking();
                 }
 
                 reset(essenceLoot);
@@ -106,7 +106,7 @@ export function useCheatQuest() {
       increaseStage,
       resetWilderness,
       setMonologues,
-      toggleAttack,
+      toggleAttacking,
       toggleLocation,
       transactEssence,
     ],

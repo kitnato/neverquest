@@ -37,17 +37,17 @@ export const ARMOR_SPECIFICATIONS: Record<
   heavy: {
     burden: [
       { maximum: 9, minimum: 4 },
-      { maximum: 85, minimum: 80 },
+      { maximum: 80, minimum: 75 },
     ],
     deflection: [
       { maximum: 0.3, minimum: 0.28 },
       { maximum: 0.7, minimum: 0.66 },
     ],
     Icon: IconArmorHeavy,
-    price: { maximum: 16_000, minimum: 50 },
+    price: { maximum: 15_000, minimum: 50 },
     protection: [
       { maximum: 8, minimum: 6 },
-      { maximum: 1200, minimum: 1150 },
+      { maximum: 1100, minimum: 1050 },
     ],
     weight: [
       { maximum: 7, minimum: 5 },
@@ -73,17 +73,17 @@ export const ARMOR_SPECIFICATIONS: Record<
   reinforced: {
     burden: [
       { maximum: 5, minimum: 3 },
-      { maximum: 55, minimum: 50 },
+      { maximum: 50, minimum: 45 },
     ],
     deflection: [
       { maximum: 0.15, minimum: 0.1 },
       { maximum: 0.35, minimum: 0.31 },
     ],
     Icon: IconReinforced,
-    price: { maximum: 10_000, minimum: 25 },
+    price: { maximum: 9000, minimum: 25 },
     protection: [
       { maximum: 6, minimum: 3 },
-      { maximum: 800, minimum: 750 },
+      { maximum: 700, minimum: 650 },
     ],
     weight: [
       { maximum: 5, minimum: 3 },
@@ -188,7 +188,7 @@ export const WEAPON_BASE: GearRangeBase & {
   ],
   burden: [
     { maximum: 2, minimum: 1 },
-    { maximum: 50, minimum: 45 },
+    { maximum: 45, minimum: 40 },
   ],
   damage: [
     { maximum: 15, minimum: 13 },

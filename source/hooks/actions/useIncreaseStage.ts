@@ -7,8 +7,8 @@ import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useToggleAttacking } from "@neverquest/hooks/actions/useToggleAttacking";
 import { isAttacking } from "@neverquest/state/character";
 import { stage, wildernesses } from "@neverquest/state/encounter";
-import { isShowing } from "@neverquest/state/isShowing";
 import { questProgress } from "@neverquest/state/quests";
+import { isShowing } from "@neverquest/state/ui";
 import { getAffixStructure, getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useIncreaseStage() {

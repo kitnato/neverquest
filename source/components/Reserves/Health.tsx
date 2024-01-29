@@ -12,9 +12,9 @@ import IconEldritchCodex from "@neverquest/icons/eldritch-codex.svg?react";
 import IconHealth from "@neverquest/icons/health.svg?react";
 import IconVitality from "@neverquest/icons/vitality.svg?react";
 import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
-import { isShowing } from "@neverquest/state/isShowing";
 import { questsBonus } from "@neverquest/state/quests";
 import { isPoisoned, poisonDuration } from "@neverquest/state/reserves";
+import { isShowing } from "@neverquest/state/ui";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 

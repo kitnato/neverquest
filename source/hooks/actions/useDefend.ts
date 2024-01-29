@@ -20,7 +20,6 @@ import {
 } from "@neverquest/state/character";
 import { armor, shield, weapon } from "@neverquest/state/gear";
 import { ownedItem } from "@neverquest/state/inventory";
-import { isShowing } from "@neverquest/state/isShowing";
 import { tears } from "@neverquest/state/items";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import {
@@ -46,6 +45,7 @@ import {
   thorns,
 } from "@neverquest/state/statistics";
 import { isTraitAcquired } from "@neverquest/state/traits";
+import { isShowing } from "@neverquest/state/ui";
 import type { DeltaDisplay } from "@neverquest/types/ui";
 import { ELEMENTAL_TYPES } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";

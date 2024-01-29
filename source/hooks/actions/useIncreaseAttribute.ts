@@ -9,8 +9,8 @@ import {
   isAttributeAtMaximum,
   powerLevel,
 } from "@neverquest/state/attributes";
-import { isShowing } from "@neverquest/state/isShowing";
 import { questProgress } from "@neverquest/state/quests";
+import { isShowing } from "@neverquest/state/ui";
 import type { Attribute } from "@neverquest/types/unions";
 import { getAttributePointCost, getSnapshotGetter } from "@neverquest/utilities/getters";
 

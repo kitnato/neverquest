@@ -5,7 +5,7 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { GearComparison } from "@neverquest/components/Inventory/GearComparison";
 import { LABEL_UNKNOWN } from "@neverquest/data/general";
 import IconBurden from "@neverquest/icons/burden.svg?react";
-import { isShowing } from "@neverquest/state/isShowing";
+import { isShowing } from "@neverquest/state/ui";
 import type { Comparison } from "@neverquest/types/components";
 import { formatNumber } from "@neverquest/utilities/formatters";
 

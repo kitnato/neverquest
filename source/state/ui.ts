@@ -1,4 +1,4 @@
-import { atomFamily, selector } from "recoil";
+import { atom, atomFamily, selector } from "recoil";
 
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import { questsBonus } from "@neverquest/state/quests";
@@ -16,6 +16,14 @@ export const isShowingQuestBonus = withStateKey("isShowingQuestBonus", (key) =>
 );
 
 // ATOMS
+
+export const activeControl = withStateKey("activeControl", (key) =>
+  atom<"capabilities" | "inventory" | "quests" | undefined>({
+    default: undefined,
+    effects: [handleLocalStorage({ key })],
+    key,
+  }),
+);
 
 export const isShowing = withStateKey("isShowing", (key) =>
   atomFamily<boolean, Showing>({

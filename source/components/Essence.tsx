@@ -8,8 +8,8 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconEssenceBonus from "@neverquest/icons/essence-bonus.svg?react";
 import IconEssence from "@neverquest/icons/essence.svg?react";
 import { perkEffect } from "@neverquest/state/encounter";
-import { isShowing } from "@neverquest/state/isShowing";
 import { essence } from "@neverquest/state/resources";
+import { isShowing } from "@neverquest/state/ui";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 

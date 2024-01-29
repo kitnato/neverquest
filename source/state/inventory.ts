@@ -70,14 +70,6 @@ export const inventory = withStateKey("inventory", (key) =>
   }),
 );
 
-export const isInventoryOpen = withStateKey("isInventoryOpen", (key) =>
-  atom({
-    default: false,
-    effects: [handleLocalStorage({ key })],
-    key,
-  }),
-);
-
 export const knapsackCapacity = withStateKey("knapsackCapacity", (key) =>
   atom({
     default: KNAPSACK_CAPACITY,

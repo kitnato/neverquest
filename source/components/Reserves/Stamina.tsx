@@ -11,8 +11,8 @@ import IconEldritchCodex from "@neverquest/icons/eldritch-codex.svg?react";
 import IconEndurance from "@neverquest/icons/endurance.svg?react";
 import IconStamina from "@neverquest/icons/stamina.svg?react";
 import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
-import { isShowing } from "@neverquest/state/isShowing";
 import { questsBonus } from "@neverquest/state/quests";
+import { isShowing } from "@neverquest/state/ui";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 

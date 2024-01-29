@@ -9,8 +9,8 @@ import IconTravel from "@neverquest/icons/travel.svg?react";
 import { hasFlatlined, isAttacking } from "@neverquest/state/character";
 import { encounter, location } from "@neverquest/state/encounter";
 import { encumbranceExtent } from "@neverquest/state/inventory";
-import { isShowing } from "@neverquest/state/isShowing";
 import { hasLooted } from "@neverquest/state/resources";
+import { isShowing } from "@neverquest/state/ui";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Travel() {

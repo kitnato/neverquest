@@ -14,7 +14,6 @@ import {
   isAttacking,
 } from "@neverquest/state/character";
 import { weapon } from "@neverquest/state/gear";
-import { isShowing } from "@neverquest/state/isShowing";
 import { ammunition } from "@neverquest/state/items";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import {
@@ -33,6 +32,7 @@ import {
   executionThreshold,
 } from "@neverquest/state/statistics";
 import { isTraitAcquired } from "@neverquest/state/traits";
+import { isShowing } from "@neverquest/state/ui";
 import { isMelee, isRanged } from "@neverquest/types/type-guards";
 import type { DeltaDisplay } from "@neverquest/types/ui";
 import { ELEMENTAL_TYPES } from "@neverquest/types/unions";

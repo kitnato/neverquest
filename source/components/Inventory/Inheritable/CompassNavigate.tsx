@@ -18,14 +18,14 @@ import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness
 import IconCompass from "@neverquest/icons/compass.svg?react";
 import IconNavigation from "@neverquest/icons/navigation.svg?react";
 import { location, stage, wildernesses } from "@neverquest/state/encounter";
-import { isInventoryOpen } from "@neverquest/state/inventory";
+import { activeControl } from "@neverquest/state/ui";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function CompassNavigate() {
-  const resetIsInventoryOpen = useResetRecoilState(isInventoryOpen);
   const locationValue = useRecoilValue(location);
   const [stageValue, setStage] = useRecoilState(stage);
   const wildernessesValue = useRecoilValue(wildernesses);
+  const resetActiveControl = useResetRecoilState(activeControl);
 
   const [isShowingNavigation, setIsShowingNavigation] = useState(false);
 
@@ -79,7 +79,7 @@ export function CompassNavigate() {
                 progressQuest({ quest: "warpingWilderness" });
 
                 setIsShowingNavigation(false);
-                resetIsInventoryOpen();
+                resetActiveControl();
 
                 setStage(Number(value));
                 resetWilderness();

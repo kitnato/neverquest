@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import { ArmorEquipped } from "@neverquest/components/Inventory/Armor/ArmorEquipped";
 import { OffhandEquipped } from "@neverquest/components/Inventory/Offhand/OffhandEquipped";
 import { WeaponEquipped } from "@neverquest/components/Inventory/Weapon/WeaponEquipped";
-import { isShowing } from "@neverquest/state/isShowing";
+import { isShowing } from "@neverquest/state/ui";
 
 export function Gear() {
   const isShowingArmor = useRecoilValue(isShowing("armor"));

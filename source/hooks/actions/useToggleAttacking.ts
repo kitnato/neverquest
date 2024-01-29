@@ -3,7 +3,6 @@ import { useRecoilCallback } from "recoil";
 import { RAGE } from "@neverquest/data/monster";
 import { attackDuration, isAttacking } from "@neverquest/state/character";
 import { isStageCompleted, isStageStarted, stage } from "@neverquest/state/encounter";
-import { isShowing } from "@neverquest/state/isShowing";
 import {
   distance,
   isEnraged,
@@ -13,6 +12,7 @@ import {
   rage,
 } from "@neverquest/state/monster";
 import { attackRate } from "@neverquest/state/statistics";
+import { isShowing } from "@neverquest/state/ui";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useToggleAttacking() {

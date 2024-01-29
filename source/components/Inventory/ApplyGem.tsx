@@ -9,8 +9,8 @@ import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence
 import IconEssence from "@neverquest/icons/essence.svg?react";
 import { armor, gems, shield, weapon } from "@neverquest/state/gear";
 import { inventory } from "@neverquest/state/inventory";
-import { isShowing } from "@neverquest/state/isShowing";
 import { essence } from "@neverquest/state/resources";
+import { isShowing } from "@neverquest/state/ui";
 import type { GemItem } from "@neverquest/types";
 import { isGear } from "@neverquest/types/type-guards";
 import { GEAR_TYPES } from "@neverquest/types/unions";

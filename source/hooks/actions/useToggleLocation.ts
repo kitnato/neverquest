@@ -5,7 +5,7 @@ import { useIncreaseStage } from "@neverquest/hooks/actions/useIncreaseStage";
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness";
 import { blacksmithOptions, fletcherOptions } from "@neverquest/state/caravan";
 import { isStageCompleted, location, stage, stageMaximum } from "@neverquest/state/encounter";
-import { isShowing } from "@neverquest/state/isShowing";
+import { isShowing } from "@neverquest/state/ui";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useToggleLocation() {

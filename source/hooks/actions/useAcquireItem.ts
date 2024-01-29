@@ -4,9 +4,9 @@ import { useCanFit } from "@neverquest/hooks/actions/useCanFit";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { armor, shield, weapon } from "@neverquest/state/gear";
 import { acquiredItems, inventory, notifyOverEncumbrance } from "@neverquest/state/inventory";
-import { isShowing } from "@neverquest/state/isShowing";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { isTraitAcquired } from "@neverquest/state/traits";
+import { isShowing } from "@neverquest/state/ui";
 import type { InventoryItem } from "@neverquest/types";
 import {
   isArmor,

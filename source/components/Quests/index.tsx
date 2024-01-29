@@ -7,9 +7,9 @@ import { QuestTabsNav } from "@neverquest/components/Quests/QuestTabsNav";
 import IconConquest from "@neverquest/icons/conquest.svg?react";
 import IconRoutine from "@neverquest/icons/routine.svg?react";
 import IconTriumph from "@neverquest/icons/triumph.svg?react";
-import { isShowingQuestBonus } from "@neverquest/state/isShowing";
 import { canTrackQuests } from "@neverquest/state/quests";
 import { isSkillAcquired } from "@neverquest/state/skills";
+import { isShowingQuestBonus } from "@neverquest/state/ui";
 import type { TabsData } from "@neverquest/types/components";
 import { QUEST_BONUS_TYPES } from "@neverquest/types/unions";
 

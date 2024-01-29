@@ -21,9 +21,9 @@ import {
   isRecovering,
 } from "@neverquest/state/character";
 import { weapon } from "@neverquest/state/gear";
-import { isShowing } from "@neverquest/state/isShowing";
 import { isMonsterDead } from "@neverquest/state/monster";
 import { attackRate } from "@neverquest/state/statistics";
+import { isShowing } from "@neverquest/state/ui";
 import { isUnarmed } from "@neverquest/types/type-guards";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";

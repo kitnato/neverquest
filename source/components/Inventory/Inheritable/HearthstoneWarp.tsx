@@ -6,12 +6,12 @@ import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useToggleLocation } from "@neverquest/hooks/actions/useToggleLocation";
 import { isAttacking } from "@neverquest/state/character";
 import { location } from "@neverquest/state/encounter";
-import { isInventoryOpen } from "@neverquest/state/inventory";
+import { activeControl } from "@neverquest/state/ui";
 
 export function HearthstoneWarp() {
   const isAttackingValue = useRecoilValue(isAttacking);
-  const resetIsInventoryOpen = useResetRecoilState(isInventoryOpen);
   const locationValue = useRecoilValue(location);
+  const resetActiveControl = useResetRecoilState(activeControl);
 
   const progressQuest = useProgressQuest();
   const toggleLocation = useToggleLocation();
@@ -32,7 +32,7 @@ export function HearthstoneWarp() {
           disabled={!canWarp}
           onClick={() => {
             progressQuest({ quest: "warpingCaravan" });
-            resetIsInventoryOpen();
+            resetActiveControl();
             toggleLocation();
           }}
           variant="outline-dark"

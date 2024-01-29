@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { WeaponName } from "@neverquest/components/Inventory/Weapon/WeaponName";
 import { weapon } from "@neverquest/state/gear";
-import { isShowing } from "@neverquest/state/isShowing";
+import { isShowing } from "@neverquest/state/ui";
 import { getAnimationClass, getWeaponIcon } from "@neverquest/utilities/getters";
 
 export function WeaponEquipped() {

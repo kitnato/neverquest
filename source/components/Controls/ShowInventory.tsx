@@ -9,23 +9,20 @@ import { Inventory } from "@neverquest/components/Inventory";
 import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react";
 import IconInventory from "@neverquest/icons/knapsack.svg?react";
 import { hasFlatlined, isAttacking } from "@neverquest/state/character";
-import {
-  encumbranceExtent,
-  isInventoryOpen,
-  notifyOverEncumbrance,
-  ownedItem,
-} from "@neverquest/state/inventory";
+import { encumbranceExtent, notifyOverEncumbrance, ownedItem } from "@neverquest/state/inventory";
+import { activeControl } from "@neverquest/state/ui";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 import { animateElement } from "@neverquest/utilities/helpers";
 
 export function ShowInventory() {
+  const [activeControlValue, setActiveControl] = useRecoilState(activeControl);
   const encumbranceExtentValue = useRecoilValue(encumbranceExtent);
-  const [isInventoryOpenValue, setIsInventoryOpen] = useRecoilState(isInventoryOpen);
   const isAttackingValue = useRecoilValue(isAttacking);
   const hasFlatlinedValue = useRecoilValue(hasFlatlined);
   const notifyOverEncumbranceValue = useRecoilValue(notifyOverEncumbrance);
-  const resetNotifyEncumbranceValue = useResetRecoilState(notifyOverEncumbrance);
   const ownedItemKnapsack = useRecoilValue(ownedItem("knapsack"));
+  const resetActiveControl = useResetRecoilState(activeControl);
+  const resetNotifyEncumbranceValue = useResetRecoilState(notifyOverEncumbrance);
 
   const badgeElement = useRef<HTMLDivElement | null>(null);
 
@@ -55,7 +52,7 @@ export function ShowInventory() {
             <Button
               disabled={isAttackingValue || hasFlatlinedValue}
               onClick={() => {
-                setIsInventoryOpen(true);
+                setActiveControl("inventory");
               }}
               variant="outline-dark"
             >
@@ -75,10 +72,8 @@ export function ShowInventory() {
         </OverlayTrigger>
 
         <DismissableScreen
-          isShowing={isInventoryOpenValue}
-          onClose={() => {
-            setIsInventoryOpen(false);
-          }}
+          isShowing={activeControlValue === "inventory"}
+          onClose={resetActiveControl}
           title="Inventory"
         >
           <Inventory />

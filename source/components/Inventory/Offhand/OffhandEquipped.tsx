@@ -7,8 +7,8 @@ import IconHand from "@neverquest/icons/hand.svg?react";
 import IconShield from "@neverquest/icons/shield.svg?react";
 import IconTwoHanded from "@neverquest/icons/two-handed.svg?react";
 import { shield, weapon } from "@neverquest/state/gear";
-import { isShowing } from "@neverquest/state/isShowing";
 import { isTraitAcquired } from "@neverquest/state/traits";
+import { isShowing } from "@neverquest/state/ui";
 import { isRanged, isUnshielded } from "@neverquest/types/type-guards";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 

@@ -2,10 +2,10 @@ import { useRecoilCallback } from "recoil";
 
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { armor, shield, weapon } from "@neverquest/state/gear";
-import { isShowing } from "@neverquest/state/isShowing";
 import { questProgress } from "@neverquest/state/quests";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { isTraitAcquired } from "@neverquest/state/traits";
+import { isShowing } from "@neverquest/state/ui";
 import type { GearItem } from "@neverquest/types";
 import {
   isArmor,

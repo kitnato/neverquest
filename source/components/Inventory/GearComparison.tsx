@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 import { IconImage } from "@neverquest/components/IconImage";
 import IconEquals from "@neverquest/icons/equals.svg?react";
 import IconIncrease from "@neverquest/icons/increase.svg?react";
-import { isShowing } from "@neverquest/state/isShowing";
+import { isShowing } from "@neverquest/state/ui";
 import type { Showing } from "@neverquest/types/unions";
 
 export function GearComparison({

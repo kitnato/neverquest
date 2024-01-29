@@ -7,8 +7,8 @@ import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconEssence from "@neverquest/icons/essence.svg?react";
-import { isShowing } from "@neverquest/state/isShowing";
 import { essenceLoot } from "@neverquest/state/resources";
+import { isShowing } from "@neverquest/state/ui";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 

@@ -11,9 +11,9 @@ import { useTimerDelta } from "@neverquest/hooks/useTimerDelta";
 import IconRecovery from "@neverquest/icons/recovery.svg?react";
 import IconResilience from "@neverquest/icons/resilience.svg?react";
 import { isRecovering, recoveryDuration } from "@neverquest/state/character";
-import { isShowing } from "@neverquest/state/isShowing";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import { recoveryRate } from "@neverquest/state/statistics";
+import { isShowing } from "@neverquest/state/ui";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 

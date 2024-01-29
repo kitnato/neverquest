@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import { HirableCrewMember } from "@neverquest/components/Caravan/HirableCrewMember";
 import { HiredCrewMember } from "@neverquest/components/Caravan/HiredCrewMember";
 import { isCaravanHired } from "@neverquest/state/caravan";
-import { isShowing } from "@neverquest/state/isShowing";
+import { isShowing } from "@neverquest/state/ui";
 import { CREW_MEMBER_TYPES } from "@neverquest/types/unions";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 

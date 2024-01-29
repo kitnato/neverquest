@@ -4,7 +4,7 @@ import { CREW } from "@neverquest/data/caravan";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import { isHired } from "@neverquest/state/caravan";
-import { isShowing } from "@neverquest/state/isShowing";
+import { isShowing } from "@neverquest/state/ui";
 import { CREW_MEMBER_TYPES, type CrewMember } from "@neverquest/types/unions";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 

@@ -1,6 +1,5 @@
-import { useState } from "react";
 import { Badge, Button, OverlayTrigger, Tooltip } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
 import { DismissableScreen } from "@neverquest/components/DismissableScreen";
 import { IconImage } from "@neverquest/components/IconImage";
@@ -11,17 +10,18 @@ import { isAttacking } from "@neverquest/state/character";
 import { isStageStarted } from "@neverquest/state/encounter";
 import { ownedItem } from "@neverquest/state/inventory";
 import { canCompleteQuests } from "@neverquest/state/quests";
+import { activeControl } from "@neverquest/state/ui";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function ShowQuests() {
+  const [activeControlValue, setActiveControl] = useRecoilState(activeControl);
   const canCompleteConquests = useRecoilValue(canCompleteQuests("conquest"));
   const canCompleteRoutines = useRecoilValue(canCompleteQuests("routine"));
   const canCompleteTriumphs = useRecoilValue(canCompleteQuests("triumph"));
   const isAttackingValue = useRecoilValue(isAttacking);
   const isStageStartedValue = useRecoilValue(isStageStarted);
   const ownedItemJournal = useRecoilValue(ownedItem("journal"));
-
-  const [isQuestsOpen, setIsQuestsOpen] = useState(false);
+  const resetActiveControl = useResetRecoilState(activeControl);
 
   const canCompleteQuest = canCompleteConquests || canCompleteRoutines || canCompleteTriumphs;
 
@@ -47,7 +47,7 @@ export function ShowQuests() {
               }`}
               disabled={isAttackingValue}
               onClick={() => {
-                setIsQuestsOpen(true);
+                setActiveControl("quests");
               }}
               variant="outline-dark"
             >
@@ -67,10 +67,8 @@ export function ShowQuests() {
 
         <DismissableScreen
           hideOverflow
-          isShowing={isQuestsOpen}
-          onClose={() => {
-            setIsQuestsOpen(false);
-          }}
+          isShowing={activeControlValue === "quests"}
+          onClose={resetActiveControl}
           title="Quests"
         >
           <Quests />

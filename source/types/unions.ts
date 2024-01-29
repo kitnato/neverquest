@@ -189,6 +189,7 @@ export const ROUTINE_TYPES = [
   "spendingEssence",
   "warpingWilderness",
   "warpingCaravan",
+  "retreating",
   "bandaging",
   "flatlining",
   "scavengingCorpse",

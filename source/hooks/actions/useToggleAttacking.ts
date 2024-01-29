@@ -1,6 +1,7 @@
 import { useRecoilCallback } from "recoil";
 
 import { RAGE } from "@neverquest/data/monster";
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { attackDuration, isAttacking } from "@neverquest/state/character";
 import { isStageCompleted, isStageStarted, stage } from "@neverquest/state/encounter";
 import {
@@ -16,6 +17,8 @@ import { isShowing } from "@neverquest/state/ui";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useToggleAttacking() {
+  const progressQuest = useProgressQuest();
+
   return useRecoilCallback(
     ({ reset, set, snapshot }) =>
       () => {
@@ -28,7 +31,7 @@ export function useToggleAttacking() {
           return;
         }
 
-        set(isAttacking, (isAttackingCurrently) => !isAttackingCurrently);
+        set(isAttacking, (isCurrentlyAttacking) => !isCurrentlyAttacking);
 
         set(isShowing("attackRate"), true);
         set(isShowing("health"), true);
@@ -44,6 +47,8 @@ export function useToggleAttacking() {
             }
 
             reset(distance);
+
+            progressQuest({ quest: "retreating" });
           }
         } else {
           set(isStageStarted, true);
@@ -51,6 +56,6 @@ export function useToggleAttacking() {
           set(monsterAttackDuration, get(monsterAttackRate));
         }
       },
-    [],
+    [progressQuest],
   );
 }

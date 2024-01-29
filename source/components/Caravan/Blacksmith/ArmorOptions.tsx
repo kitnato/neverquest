@@ -1,5 +1,5 @@
 import { ARMOR_CLASS_TYPES, type ArmorClass } from "@kitnato/locran/build/types";
-import { useState } from "react";
+import { useCallback, useEffect } from "react";
 import { FormSelect, Stack } from "react-bootstrap";
 import { useRecoilState, useRecoilValue } from "recoil";
 
@@ -15,7 +15,7 @@ import IconDeflection from "@neverquest/icons/deflection.svg?react";
 import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react";
 import IconArmorProtection from "@neverquest/icons/protection.svg?react";
 import IconUnknown from "@neverquest/icons/unknown.svg?react";
-import { blacksmithInventory } from "@neverquest/state/caravan";
+import { blacksmithInventory, blacksmithOptions } from "@neverquest/state/caravan";
 import { stageMaximum } from "@neverquest/state/encounter";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
@@ -29,40 +29,68 @@ import {
 
 export function ArmorOptions() {
   const [{ armor: craftedArmor }, setBlacksmithInventory] = useRecoilState(blacksmithInventory);
+  const [
+    {
+      armor: { gearClass, level },
+    },
+    setBlacksmithOptions,
+  ] = useRecoilState(blacksmithOptions);
   const isSkillAcquiredArmorcraft = useRecoilValue(isSkillAcquired("armorcraft"));
   const isSkillAcquiredImpermeability = useRecoilValue(isSkillAcquired("impermeability"));
   const stageMaximumValue = useRecoilValue(stageMaximum);
 
-  const [armorClass, setArmorClass] = useState<ArmorClass>("light");
-  const [armorLevel, setArmorLevel] = useState(Math.min(stageMaximumValue, LEVELLING_MAXIMUM));
-
   const progressQuest = useProgressQuest();
 
-  const factor = getSigmoid(armorLevel);
+  const factor = getSigmoid(level);
   const { burden, deflection, protection, weight } = getArmorRanges({
     factor,
-    gearClass: armorClass,
+    gearClass,
   });
   const maximumArmorLevel = Math.min(
     stageMaximumValue + GEAR_LEVEL_RANGE_MAXIMUM,
     LEVELLING_MAXIMUM,
   );
 
+  const setGearLevel = useCallback(
+    (level: number) => {
+      setBlacksmithOptions((options) => ({
+        ...options,
+        armor: {
+          ...options.armor,
+          level,
+        },
+      }));
+    },
+    [setBlacksmithOptions],
+  );
+
+  useEffect(() => {
+    if (level === 0) {
+      setGearLevel(Math.min(stageMaximumValue, LEVELLING_MAXIMUM));
+    }
+  }, [level, setGearLevel, stageMaximumValue]);
+
   return (
     <Stack className="mx-auto w-50">
       <Stack className="mx-auto" gap={3}>
-        <SetGearLevel maximum={maximumArmorLevel} state={[armorLevel, setArmorLevel]} />
+        <SetGearLevel level={level} maximum={maximumArmorLevel} setLevel={setGearLevel} />
 
         <IconDisplay
-          Icon={ARMOR_SPECIFICATIONS[armorClass].Icon}
+          Icon={ARMOR_SPECIFICATIONS[gearClass].Icon}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Class"
         >
           <FormSelect
             onChange={({ target: { value } }) => {
-              setArmorClass(value as ArmorClass);
+              setBlacksmithOptions((options) => ({
+                ...options,
+                armor: {
+                  ...options.armor,
+                  gearClass: value as ArmorClass,
+                },
+              }));
             }}
-            value={armorClass}
+            value={gearClass}
           >
             {ARMOR_CLASS_TYPES.map((currentArmorClass) => (
               <option key={currentArmorClass} value={currentArmorClass}>
@@ -123,7 +151,7 @@ export function ArmorOptions() {
 
       <hr />
 
-      {!isSkillAcquiredArmorcraft && armorClass === "heavy" ? (
+      {!isSkillAcquiredArmorcraft && gearClass === "heavy" ? (
         <span className="fst-italic text-center">{LABEL_SKILL_REQUIRED}</span>
       ) : craftedArmor === undefined ? (
         <CraftGear
@@ -132,12 +160,12 @@ export function ArmorOptions() {
               ...currentBlacksmithInventory,
               armor: generateArmor({
                 affixStructure: getAffixStructure(),
-                gearClass: armorClass,
-                level: armorLevel,
+                gearClass,
+                level,
                 prefixTags:
-                  armorLevel <= maximumArmorLevel - GEAR_LEVEL_RANGE_MAXIMUM * 2
+                  level <= maximumArmorLevel - GEAR_LEVEL_RANGE_MAXIMUM * 2
                     ? ["lowQuality"]
-                    : armorLevel === maximumArmorLevel
+                    : level === maximumArmorLevel
                       ? ["highQuality"]
                       : undefined,
               }),
@@ -148,7 +176,7 @@ export function ArmorOptions() {
           price={Math.round(
             getFromRange({
               factor,
-              ...ARMOR_SPECIFICATIONS[armorClass].price,
+              ...ARMOR_SPECIFICATIONS[gearClass].price,
             }),
           )}
         />

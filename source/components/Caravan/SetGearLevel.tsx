@@ -1,4 +1,3 @@
-import type { Dispatch, SetStateAction } from "react";
 import { FormControl } from "react-bootstrap";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
@@ -6,11 +5,13 @@ import IconGearLevel from "@neverquest/icons/gear-level.svg?react";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function SetGearLevel({
+  level,
   maximum,
-  state: [gearLevel, setGearLevel],
+  setLevel,
 }: {
+  level: number;
   maximum: number;
-  state: [number, Dispatch<SetStateAction<number>>];
+  setLevel: (level: number) => void;
 }) {
   return (
     <IconDisplay Icon={IconGearLevel} iconProps={{ overlayPlacement: "left" }} tooltip="Gear level">
@@ -28,10 +29,10 @@ export function SetGearLevel({
             return;
           }
 
-          setGearLevel(parsedValue);
+          setLevel(parsedValue);
         }}
         type="number"
-        value={formatNumber({ value: gearLevel })}
+        value={formatNumber({ value: level })}
       />
     </IconDisplay>
   );

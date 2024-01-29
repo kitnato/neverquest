@@ -21,8 +21,6 @@ import type { InheritableItem } from "@neverquest/types";
 import type { SVGIcon } from "@neverquest/types/components";
 import type { Consumable, CrewMember, Grip, Showing } from "@neverquest/types/unions";
 
-export const AMMUNITION_PRICE = 3;
-
 export const MONOLOGUE_EMPTY = "...";
 
 export const CREW: Record<
@@ -183,6 +181,11 @@ export const CREW: Record<
     price: 650,
     requiredStage: 27,
   },
+};
+
+export const FLETCHING = {
+  ammunitionPrice: 3,
+  minimumPurchase: 1,
 };
 
 export const OCCULTIST_PURGE_PRICE_MULTIPLIER = {

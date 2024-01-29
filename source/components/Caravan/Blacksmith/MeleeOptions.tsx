@@ -1,5 +1,5 @@
 import { WEAPON_CLASS_TYPES, type WeaponClass } from "@kitnato/locran/build/types";
-import { useState } from "react";
+import { useCallback, useEffect } from "react";
 import { FormSelect, Stack } from "react-bootstrap";
 import { useRecoilState, useRecoilValue } from "recoil";
 
@@ -21,7 +21,7 @@ import IconGrip from "@neverquest/icons/grip.svg?react";
 import IconUnknown from "@neverquest/icons/unknown.svg?react";
 import IconWeaponAttackRate from "@neverquest/icons/weapon-attack-rate.svg?react";
 import IconWeaponDamage from "@neverquest/icons/weapon-damage.svg?react";
-import { blacksmithInventory } from "@neverquest/state/caravan";
+import { blacksmithInventory, blacksmithOptions } from "@neverquest/state/caravan";
 import { stageMaximum } from "@neverquest/state/encounter";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { GRIP_TYPES, type Grip } from "@neverquest/types/unions";
@@ -34,41 +34,68 @@ import {
   getSigmoid,
 } from "@neverquest/utilities/getters";
 
-export function WeaponOptions() {
+export function MeleeOptions() {
   const [{ weapon: craftedWeapon }, setBlacksmithInventory] = useRecoilState(blacksmithInventory);
+  const [
+    {
+      weapon: { gearClass, grip, level },
+    },
+    setBlacksmithOptions,
+  ] = useRecoilState(blacksmithOptions);
   const isSkillAcquiredSiegecraft = useRecoilValue(isSkillAcquired("siegecraft"));
   const stageMaximumValue = useRecoilValue(stageMaximum);
 
-  const [weaponClass, setWeaponClass] = useState<WeaponClass>("blunt");
-  const [weaponGrip, setWeaponGrip] = useState<Grip>("one-handed");
-  const [weaponLevel, setWeaponLevel] = useState(Math.min(stageMaximumValue, LEVELLING_MAXIMUM));
-
-  const { ability, IconAbility, IconGearClass } = WEAPON_SPECIFICATIONS[weaponClass];
+  const { ability, IconAbility, IconGearClass } = WEAPON_SPECIFICATIONS[gearClass];
 
   const isSkillAcquiredAbility = useRecoilValue(isSkillAcquired(WEAPON_ABILITY_SKILLS[ability]));
 
-  const factor = getSigmoid(weaponLevel);
+  const factor = getSigmoid(level);
   const { abilityChance, burden, damage, rate, weight } = getMeleeRanges({
     factor,
-    gearClass: weaponClass,
-    grip: weaponGrip,
+    gearClass,
+    grip,
   });
   const maximumWeaponLevel = Math.min(
     stageMaximumValue + GEAR_LEVEL_RANGE_MAXIMUM,
     LEVELLING_MAXIMUM,
   );
 
+  const setGearLevel = useCallback(
+    (level: number) => {
+      setBlacksmithOptions((options) => ({
+        ...options,
+        weapon: {
+          ...options.weapon,
+          level,
+        },
+      }));
+    },
+    [setBlacksmithOptions],
+  );
+
+  useEffect(() => {
+    if (level === 0) {
+      setGearLevel(Math.min(stageMaximumValue, LEVELLING_MAXIMUM));
+    }
+  }, [level, setGearLevel, stageMaximumValue]);
+
   return (
     <Stack className="mx-auto w-50">
       <Stack className="mx-auto" gap={3}>
-        <SetGearLevel maximum={maximumWeaponLevel} state={[weaponLevel, setWeaponLevel]} />
+        <SetGearLevel level={level} maximum={maximumWeaponLevel} setLevel={setGearLevel} />
 
         <IconDisplay Icon={IconGearClass} iconProps={{ overlayPlacement: "left" }} tooltip="Class">
           <FormSelect
             onChange={({ target: { value } }) => {
-              setWeaponClass(value as WeaponClass);
+              setBlacksmithOptions((options) => ({
+                ...options,
+                weapon: {
+                  ...options.weapon,
+                  gearClass: value as WeaponClass,
+                },
+              }));
             }}
-            value={weaponClass}
+            value={gearClass}
           >
             {WEAPON_CLASS_TYPES.map((currentWeaponClass) => (
               <option key={currentWeaponClass} value={currentWeaponClass}>
@@ -82,9 +109,15 @@ export function WeaponOptions() {
           <IconDisplay Icon={IconGrip} iconProps={{ overlayPlacement: "left" }} tooltip="Grip">
             <FormSelect
               onChange={({ target: { value } }) => {
-                setWeaponGrip(value as Grip);
+                setBlacksmithOptions((options) => ({
+                  ...options,
+                  weapon: {
+                    ...options.weapon,
+                    grip: value as Grip,
+                  },
+                }));
               }}
-              value={weaponGrip}
+              value={grip}
             >
               {GRIP_TYPES.map((grip) => (
                 <option key={grip} value={grip}>
@@ -169,13 +202,13 @@ export function WeaponOptions() {
               ...currentBlacksmithInventory,
               weapon: generateMeleeWeapon({
                 affixStructure: getAffixStructure(),
-                gearClass: weaponClass,
-                grip: weaponGrip,
-                level: weaponLevel,
+                gearClass,
+                grip,
+                level,
                 prefixTags:
-                  weaponLevel <= maximumWeaponLevel - GEAR_LEVEL_RANGE_MAXIMUM * 2
+                  level <= maximumWeaponLevel - GEAR_LEVEL_RANGE_MAXIMUM * 2
                     ? ["lowQuality"]
-                    : weaponLevel === maximumWeaponLevel
+                    : level === maximumWeaponLevel
                       ? ["highQuality"]
                       : undefined,
               }),
@@ -185,7 +218,7 @@ export function WeaponOptions() {
             getFromRange({
               factor,
               ...WEAPON_BASE.price,
-            }) * WEAPON_MODIFIER[weaponGrip].price,
+            }) * WEAPON_MODIFIER[grip].price,
           )}
         />
       ) : (

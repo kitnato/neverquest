@@ -1,5 +1,5 @@
 import { WEAPON_CLASS_TYPES, type WeaponClass } from "@kitnato/locran/build/types";
-import { useState } from "react";
+import { useCallback, useEffect } from "react";
 import { FormSelect, Stack } from "react-bootstrap";
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
@@ -22,7 +22,7 @@ import IconRange from "@neverquest/icons/range.svg?react";
 import IconUnknown from "@neverquest/icons/unknown.svg?react";
 import IconWeaponAttackRate from "@neverquest/icons/weapon-attack-rate.svg?react";
 import IconWeaponDamage from "@neverquest/icons/weapon-damage.svg?react";
-import { fletcherInventory } from "@neverquest/state/caravan";
+import { fletcherInventory, fletcherOptions } from "@neverquest/state/caravan";
 import { stageMaximum } from "@neverquest/state/encounter";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
@@ -34,40 +34,68 @@ import {
   getSigmoid,
 } from "@neverquest/utilities/getters";
 
-export function RangedWeaponOptions() {
+export function RangedOptions() {
   const [fletcherInventoryValue, setFletcherInventory] = useRecoilState(fletcherInventory);
+  const [
+    {
+      ranged: { gearClass, level },
+    },
+    setFletcherOptions,
+  ] = useRecoilState(fletcherOptions);
   const isSkillAcquiredArchery = useRecoilValue(isSkillAcquired("archery"));
   const stageMaximumValue = useRecoilValue(stageMaximum);
   const resetFletcherInventory = useResetRecoilState(fletcherInventory);
 
-  const [weaponClass, setWeaponClass] = useState<WeaponClass>("blunt");
-  const [weaponLevel, setWeaponLevel] = useState(Math.min(stageMaximumValue, LEVELLING_MAXIMUM));
-
-  const { ability, IconAbility, IconGearClass } = WEAPON_SPECIFICATIONS[weaponClass];
+  const { ability, IconAbility, IconGearClass } = WEAPON_SPECIFICATIONS[gearClass];
 
   const isSkillAcquiredAbility = useRecoilValue(isSkillAcquired(WEAPON_ABILITY_SKILLS[ability]));
 
-  const factor = getSigmoid(weaponLevel);
+  const factor = getSigmoid(level);
   const { abilityChance, ammunitionCost, burden, damage, range, rate, weight } = getRangedRanges({
     factor,
-    gearClass: weaponClass,
+    gearClass,
   });
   const maximumWeaponLevel = Math.min(
     stageMaximumValue + GEAR_LEVEL_RANGE_MAXIMUM,
     LEVELLING_MAXIMUM,
   );
 
+  const setGearLevel = useCallback(
+    (level: number) => {
+      setFletcherOptions((options) => ({
+        ...options,
+        ranged: {
+          ...options.ranged,
+          level,
+        },
+      }));
+    },
+    [setFletcherOptions],
+  );
+
+  useEffect(() => {
+    if (level === 0) {
+      setGearLevel(Math.min(stageMaximumValue, LEVELLING_MAXIMUM));
+    }
+  }, [level, setGearLevel, stageMaximumValue]);
+
   return (
     <Stack className="mx-auto w-50">
       <Stack className="mx-auto" gap={3}>
-        <SetGearLevel maximum={maximumWeaponLevel} state={[weaponLevel, setWeaponLevel]} />
+        <SetGearLevel level={level} maximum={maximumWeaponLevel} setLevel={setGearLevel} />
 
         <IconDisplay Icon={IconGearClass} iconProps={{ overlayPlacement: "left" }} tooltip="Class">
           <FormSelect
             onChange={({ target: { value } }) => {
-              setWeaponClass(value as WeaponClass);
+              setFletcherOptions((options) => ({
+                ...options,
+                ranged: {
+                  ...options.ranged,
+                  gearClass: value as WeaponClass,
+                },
+              }));
             }}
-            value={weaponClass}
+            value={gearClass}
           >
             {WEAPON_CLASS_TYPES.filter((weaponClassType) => weaponClassType !== "slashing").map(
               (weaponClassType) => (
@@ -176,12 +204,12 @@ export function RangedWeaponOptions() {
               setFletcherInventory(
                 generateRangedWeapon({
                   affixStructure: getAffixStructure(),
-                  gearClass: weaponClass,
-                  level: weaponLevel,
+                  gearClass,
+                  level,
                   prefixTags:
-                    weaponLevel <= maximumWeaponLevel - GEAR_LEVEL_RANGE_MAXIMUM * 2
+                    level <= maximumWeaponLevel - GEAR_LEVEL_RANGE_MAXIMUM * 2
                       ? ["lowQuality"]
-                      : weaponLevel === maximumWeaponLevel
+                      : level === maximumWeaponLevel
                         ? ["highQuality"]
                         : undefined,
                 }),

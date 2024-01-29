@@ -1,5 +1,5 @@
 import { SHIELD_CLASS_TYPES, type ShieldClass } from "@kitnato/locran/build/types";
-import { useState } from "react";
+import { useCallback, useEffect } from "react";
 import { FormSelect, Stack } from "react-bootstrap";
 import { useRecoilState, useRecoilValue } from "recoil";
 
@@ -14,7 +14,7 @@ import IconBurden from "@neverquest/icons/burden.svg?react";
 import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react";
 import IconStaggerChance from "@neverquest/icons/stagger-chance.svg?react";
 import IconUnknown from "@neverquest/icons/unknown.svg?react";
-import { blacksmithInventory } from "@neverquest/state/caravan";
+import { blacksmithInventory, blacksmithOptions } from "@neverquest/state/caravan";
 import { stageMaximum } from "@neverquest/state/encounter";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
@@ -28,37 +28,65 @@ import {
 
 export function ShieldOptions() {
   const [{ shield: craftedShield }, setBlacksmithInventory] = useRecoilState(blacksmithInventory);
+  const [
+    {
+      shield: { gearClass, level },
+    },
+    setBlacksmithOptions,
+  ] = useRecoilState(blacksmithOptions);
   const isSkillAcquiredShieldcraft = useRecoilValue(isSkillAcquired("shieldcraft"));
   const stageMaximumValue = useRecoilValue(stageMaximum);
 
-  const [shieldClass, setShieldClass] = useState<ShieldClass>("small");
-  const [shieldLevel, setShieldLevel] = useState(Math.min(stageMaximumValue, LEVELLING_MAXIMUM));
-
-  const factor = getSigmoid(shieldLevel);
+  const factor = getSigmoid(level);
   const maximumShieldLevel = Math.min(
     stageMaximumValue + GEAR_LEVEL_RANGE_MAXIMUM,
     LEVELLING_MAXIMUM,
   );
   const { block, burden, stagger, weight } = getShieldRanges({
     factor,
-    gearClass: shieldClass,
+    gearClass,
   });
+
+  const setGearLevel = useCallback(
+    (level: number) => {
+      setBlacksmithOptions((options) => ({
+        ...options,
+        shield: {
+          ...options.shield,
+          level,
+        },
+      }));
+    },
+    [setBlacksmithOptions],
+  );
+
+  useEffect(() => {
+    if (level === 0) {
+      setGearLevel(Math.min(stageMaximumValue, LEVELLING_MAXIMUM));
+    }
+  }, [level, setGearLevel, stageMaximumValue]);
 
   return (
     <Stack className="mx-auto w-50">
       <Stack className="mx-auto" gap={3}>
-        <SetGearLevel maximum={maximumShieldLevel} state={[shieldLevel, setShieldLevel]} />
+        <SetGearLevel level={level} maximum={maximumShieldLevel} setLevel={setGearLevel} />
 
         <IconDisplay
-          Icon={SHIELD_SPECIFICATIONS[shieldClass].Icon}
+          Icon={SHIELD_SPECIFICATIONS[gearClass].Icon}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Class"
         >
           <FormSelect
             onChange={({ target: { value } }) => {
-              setShieldClass(value as ShieldClass);
+              setBlacksmithOptions((options) => ({
+                ...options,
+                shield: {
+                  ...options.shield,
+                  gearClass: value as ShieldClass,
+                },
+              }));
             }}
-            value={shieldClass}
+            value={gearClass}
           >
             {SHIELD_CLASS_TYPES.map((currentShieldClass) => (
               <option key={currentShieldClass} value={currentShieldClass}>
@@ -118,7 +146,7 @@ export function ShieldOptions() {
 
       <hr />
 
-      {!isSkillAcquiredShieldcraft && shieldClass === "tower" ? (
+      {!isSkillAcquiredShieldcraft && gearClass === "tower" ? (
         <span className="fst-italic text-center">{LABEL_SKILL_REQUIRED}</span>
       ) : craftedShield === undefined ? (
         <CraftGear
@@ -127,12 +155,12 @@ export function ShieldOptions() {
               ...currentBlacksmithInventory,
               shield: generateShield({
                 affixStructure: getAffixStructure(),
-                gearClass: shieldClass,
-                level: shieldLevel,
+                gearClass,
+                level,
                 prefixTags:
-                  shieldLevel <= maximumShieldLevel - GEAR_LEVEL_RANGE_MAXIMUM * 2
+                  level <= maximumShieldLevel - GEAR_LEVEL_RANGE_MAXIMUM * 2
                     ? ["lowQuality"]
-                    : shieldLevel === maximumShieldLevel
+                    : level === maximumShieldLevel
                       ? ["highQuality"]
                       : undefined,
               }),
@@ -141,7 +169,7 @@ export function ShieldOptions() {
           price={Math.round(
             getFromRange({
               factor,
-              ...SHIELD_SPECIFICATIONS[shieldClass].price,
+              ...SHIELD_SPECIFICATIONS[gearClass].price,
             }),
           )}
         />

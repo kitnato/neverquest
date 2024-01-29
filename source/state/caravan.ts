@@ -1,9 +1,10 @@
+import type { ArmorClass, ShieldClass, WeaponClass } from "@kitnato/locran/build/types";
 import { atom, atomFamily, selector } from "recoil";
 
 import { CREW, MONOLOGUE_EMPTY } from "@neverquest/data/caravan";
 import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
 import type { Armor, Melee, MerchantInventoryItem, Ranged, Shield } from "@neverquest/types";
-import { CREW_MEMBER_TYPES, type CrewMember } from "@neverquest/types/unions";
+import { CREW_MEMBER_TYPES, type CrewMember, type Grip } from "@neverquest/types/unions";
 import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
@@ -41,6 +42,44 @@ export const blacksmithInventory = withStateKey("blacksmithInventory", (key) =>
   }),
 );
 
+export const blacksmithOptions = withStateKey("blacksmithOptions", (key) =>
+  atom<{
+    activeTab: string;
+    armor: {
+      gearClass: ArmorClass;
+      level: number;
+    };
+    shield: {
+      gearClass: ShieldClass;
+      level: number;
+    };
+    weapon: {
+      gearClass: WeaponClass;
+      grip: Grip;
+      level: number;
+    };
+  }>({
+    default: {
+      activeTab: "armor",
+      armor: {
+        gearClass: "light",
+        level: 0,
+      },
+      shield: {
+        gearClass: "small",
+        level: 0,
+      },
+      weapon: {
+        gearClass: "blunt",
+        grip: "one-handed",
+        level: 0,
+      },
+    },
+    effects: [handleLocalStorage({ key })],
+    key,
+  }),
+);
+
 export const expandedBuyback = withStateKey("expandedBuyback", (key) =>
   atom({
     default: true,
@@ -52,6 +91,28 @@ export const expandedBuyback = withStateKey("expandedBuyback", (key) =>
 export const fletcherInventory = withStateKey("fletcherInventory", (key) =>
   atom<Ranged | undefined>({
     default: undefined,
+    effects: [handleLocalStorage({ key })],
+    key,
+  }),
+);
+
+export const fletcherOptions = withStateKey("fletcherOptions", (key) =>
+  atom<{
+    activeTab: string;
+    ammunition: number;
+    ranged: {
+      gearClass: WeaponClass;
+      level: number;
+    };
+  }>({
+    default: {
+      activeTab: "ranged",
+      ammunition: 0,
+      ranged: {
+        gearClass: "blunt",
+        level: 0,
+      },
+    },
     effects: [handleLocalStorage({ key })],
     key,
   }),

@@ -2,7 +2,7 @@
 /*
 
 # Except these files
-!src
+!source
 !*.json
 !*.js
 !*.md

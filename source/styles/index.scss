@@ -1,0 +1,221 @@
+@import "~animate.css";
+@import "bootstrap-theme";
+@import "~bootstrap/scss/bootstrap";
+@import "~react-circular-progressbar/dist/styles";
+
+::selection {
+  background: $gray-600;
+  color: white;
+}
+
+body {
+  user-select: none;
+}
+
+h6 {
+  font-variant: all-petite-caps;
+}
+
+select {
+  cursor: pointer;
+}
+
+small {
+  small {
+    font-size: inherit;
+  }
+
+  &:empty {
+    display: none;
+  }
+}
+
+svg {
+  /* stylelint-disable-next-line selector-class-pattern */
+  &.CircularProgressbar {
+    max-width: 60px;
+
+    /* stylelint-disable-next-line selector-class-pattern */
+    .CircularProgressbar-path {
+      stroke: $dark;
+    }
+
+    /* stylelint-disable-next-line selector-class-pattern */
+    .CircularProgressbar-text {
+      fill: $dark;
+      font-size: 18px;
+    }
+
+    /* stylelint-disable-next-line selector-class-pattern */
+    .CircularProgressbar-trail {
+      stroke: $body-secondary-bg;
+    }
+  }
+
+  &.icon-image {
+    display: block;
+    fill: currentcolor;
+    width: 3rem;
+
+    &.glowing {
+      filter: drop-shadow(0 0 3px currentcolor);
+    }
+
+    &.small {
+      width: 1.5rem;
+    }
+
+    &.stencilled {
+      filter: drop-shadow(0 0 2px $dark);
+    }
+  }
+}
+
+.accordion-button {
+  box-shadow: none !important;
+}
+
+// Reset button hover styles for toggle button groups to behave like they should.
+.btn-check + .btn:hover {
+  background-color: var(--bs-btn-hover-bg);
+  border-color: var(--bs-btn-hover-border-color);
+  color: var(--bs-btn-hover-color);
+}
+
+.fitted {
+  width: max-content;
+}
+
+.form-check {
+  align-items: center;
+  display: flex;
+  gap: 0.8rem;
+
+  .form-check-input,
+  .form-check-label {
+    cursor: pointer;
+  }
+
+  .form-check-input {
+    margin-top: initial;
+  }
+}
+
+.hover-grow:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  transform-origin: center left;
+  transition: transform 0.5s;
+}
+
+.journal .tab-pane.active {
+  display: flex;
+  flex-direction: column;
+  overflow-y: hidden;
+}
+
+.monospaced {
+  font-family: monospace;
+}
+
+.offcanvas {
+  max-width: 780px;
+}
+
+.overlay-offcanvas {
+  z-index: calc($zindex-offcanvas + 1);
+}
+
+.overlay-modal-backdrop {
+  z-index: calc($zindex-modal-backdrop + 1);
+}
+
+// Workaround for https://github.com/react-bootstrap/react-bootstrap/issues/6563.
+.popover,
+.tooltip {
+  position: fixed;
+}
+
+// Tooltip doesn't have a box-shadow variable, and $popover-box-shadow doesn't control this way.
+.popover.show {
+  box-shadow: 0 0 4px 1px rgb(0 0 0 / 20%);
+}
+
+.tooltip-inner {
+  box-shadow: 0 0 4px 1px rgb(0 0 0 / 30%);
+
+  .icon-display {
+    justify-content: center;
+  }
+}
+
+.progress-labelled {
+  .progress {
+    height: 1.6rem;
+
+    &.attached-above {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+
+    &.attached-below {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    &.small {
+      height: 0.75rem;
+    }
+  }
+
+  &.transitions-none .progress-bar {
+    transition: none;
+  }
+
+  > small {
+    text-shadow:
+      -1px 1px 1px var(--bs-gray-900),
+      1px 1px 1px var(--bs-gray-900),
+      1px -1px 1px var(--bs-gray-900),
+      -1px -1px 1px var(--bs-gray-900);
+  }
+}
+
+.table-details td {
+  &:first-child {
+    font-style: italic;
+    text-align: end;
+
+    .icon-display {
+      justify-content: end;
+    }
+  }
+
+  &:nth-child(2) {
+    vertical-align: middle;
+  }
+}
+
+.text-blue {
+  color: $blue;
+}
+
+.text-floating strong {
+  text-shadow:
+    -1px 1px 0 white,
+    1px 1px 0 white,
+    1px -1px 0 white,
+    -1px -1px 0 white;
+}
+
+.text-indigo {
+  color: $indigo;
+}
+
+.text-orange {
+  color: $orange;
+}
+
+.vstack {
+  align-self: initial;
+}

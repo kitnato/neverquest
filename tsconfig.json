@@ -20,8 +20,8 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "paths": {
-      "@neverquest/*": ["./src/*"],
-      "@neverquest/config": ["./package.json"]
+      "@neverquest/*": ["./source/*"],
+      "@neverquest/config": ["./package.json"],
     },
     "resolveJsonModule": true,
     "skipLibCheck": true,
@@ -29,7 +29,8 @@
     "strictNullChecks": true,
     "target": "esnext",
     "types": ["vite/client", "vite-plugin-svgr/client"],
-    "verbatimModuleSyntax": true
+    "verbatimModuleSyntax": true,
   },
-  "include": ["./src", "./*.ts"]
+  "exclude": ["build", "node_modules"],
+  "include": ["./source", "./*.ts"],
 }

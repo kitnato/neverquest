@@ -2,13 +2,8 @@
 
 _An irreverent UI-based incremental Souls-like._
 
-<p style="display: flex; gap: 16px;">
-  <img alt="neverquest screenshot 1" src="/public/screenshot-1.png" />
-  <img alt="neverquest screenshot 2" src="/public/screenshot-2.png" />
-  <img alt="neverquest screenshot 3" src="/public/screenshot-3.png" />
-</p>
-
-**For a full breakdown of gameplay, please consult the [manual](./source/data/manual.md).**
+> - View [gameplay manual](./source/data/manual.md).
+> - View [screenshots](#3-screenshots).
 
 ## Local set up
 
@@ -102,3 +97,13 @@ This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareA
    - Feels like text-based Diablo/Dark Souls hybrid, but it's a web app.
 1. Do you have something to say?
    - Browser games with only text and a GUI can be just as engaging and can have similar gameplay depth to traditional video games without relying solely on simple deterministic incremental progress.
+
+### 3. Screenshots
+
+![Screenshot 1](./public/screenshot-1.png "Neverquest screenshot")
+
+![Screenshot 2](./public/screenshot-2.png "Neverquest screenshot")
+
+![Screenshot 3](./public/screenshot-3.png "Neverquest screenshot")
+
+![Screenshot 4](./public/screenshot-4.png "Neverquest screenshot")

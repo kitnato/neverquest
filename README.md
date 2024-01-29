@@ -2,7 +2,11 @@
 
 _An irreverent UI-based incremental Souls-like._
 
-![neverquest screenshot](/public/screenshot.png?raw=true)
+<p style="display: flex; gap: 16px;">
+  <img alt="neverquest screenshot 1" src="/public/screenshot-1.png" />
+  <img alt="neverquest screenshot 2" src="/public/screenshot-2.png" />
+  <img alt="neverquest screenshot 3" src="/public/screenshot-3.png" />
+</p>
 
 **For a full breakdown of gameplay, please consult the [manual](./source/data/manual.md).**
 
@@ -38,7 +42,7 @@ The linter config can be viewed in `.eslintrc.json`, `.stylelintrc.json` and `.p
 
 ## Implementation
 
-- Icons and art assets are provided under [CC BY 3.0](https://creativecommons.org/licenses/by/3.0) by the talented [authors](https://game-icons.net/about.html#authors) of [game-icons.net](https://game-icons.net).
+- All art assets (SVG icons & images) are sourced from the talented [authors](https://game-icons.net/about.html#authors) of [game-icons.net](https://game-icons.net) under the [CC BY 3.0](https://creativecommons.org/licenses/by/3.0) license.
 - Monster, item & location names provided by the [LOCRAN](https://github.com/kitnato/locran) system.
 - Written in [TypeScript](https://www.typescriptlang.org) using [React](https://react.dev/).
 - UI framework is [Bootstrap](https://react-bootstrap.github.io).

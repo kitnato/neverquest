@@ -8,7 +8,7 @@ import {
   INFUSION_DELTA,
   INFUSION_DURATION,
 } from "@neverquest/data/items";
-import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
+import { handleStorage } from "@neverquest/state/effects/handleStorage";
 import { ownedItem } from "@neverquest/state/inventory";
 import { essence } from "@neverquest/state/resources";
 import type { Infusable } from "@neverquest/types/unions";
@@ -70,7 +70,7 @@ export const isInfusionAtMaximum = withStateKey("isInfusionAtMaximum", (key) =>
 export const ammunition = withStateKey("ammunition", (key) =>
   atom({
     default: 0,
-    effects: [handleLocalStorage({ key })],
+    effects: [handleStorage({ key })],
     key,
   }),
 );
@@ -78,7 +78,7 @@ export const ammunition = withStateKey("ammunition", (key) =>
 export const ammunitionCapacity = withStateKey("ammunitionCapacity", (key) =>
   atom({
     default: AMMUNITION_CAPACITY,
-    effects: [handleLocalStorage({ key })],
+    effects: [handleStorage({ key })],
     key,
   }),
 );
@@ -86,7 +86,7 @@ export const ammunitionCapacity = withStateKey("ammunitionCapacity", (key) =>
 export const infusion = withStateKey("infusion", (key) =>
   atomFamily<number, Infusable>({
     default: 0,
-    effects: (infusable) => [handleLocalStorage({ key, parameter: infusable })],
+    effects: (infusable) => [handleStorage({ key, parameter: infusable })],
     key,
   }),
 );
@@ -94,7 +94,7 @@ export const infusion = withStateKey("infusion", (key) =>
 export const infusionLevel = withStateKey("infusionLevel", (key) =>
   atomFamily<number, Infusable>({
     default: 0,
-    effects: (infusable) => [handleLocalStorage({ key, parameter: infusable })],
+    effects: (infusable) => [handleStorage({ key, parameter: infusable })],
     key,
   }),
 );
@@ -102,7 +102,7 @@ export const infusionLevel = withStateKey("infusionLevel", (key) =>
 export const isWeaving = withStateKey("isWeaving", (key) =>
   atom({
     default: false,
-    effects: [handleLocalStorage({ key })],
+    effects: [handleStorage({ key })],
     key,
   }),
 );
@@ -110,7 +110,7 @@ export const isWeaving = withStateKey("isWeaving", (key) =>
 export const tears = withStateKey("tears", (key) =>
   atom({
     default: 0,
-    effects: [handleLocalStorage({ key })],
+    effects: [handleStorage({ key })],
     key,
   }),
 );

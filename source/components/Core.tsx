@@ -9,18 +9,13 @@ import { Initializer } from "@neverquest/components/Initializer";
 import { Layout } from "@neverquest/components/Layout";
 import { ScreenMessage } from "@neverquest/components/ScreenMessage";
 import { SeedContext } from "@neverquest/state/seed";
-import { isLocalStorageAvailable } from "@neverquest/utilities/helpers";
 
 export function Core() {
   const [seed, setSeed] = useState(nanoid());
 
-  if (!isLocalStorageAvailable()) {
-    return <ScreenMessage>Requires browser localStorage to be enabled.</ScreenMessage>;
-  }
-
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (window.Worker === undefined) {
-    return <ScreenMessage>Requires Web Workers to be enabled.</ScreenMessage>;
+    return <ScreenMessage>Requires enabled Web Workers.</ScreenMessage>;
   }
 
   return (

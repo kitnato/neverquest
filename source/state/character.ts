@@ -1,7 +1,7 @@
 import { atom, selector } from "recoil";
 
 import { LABEL_UNKNOWN } from "@neverquest/data/general";
-import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
+import { handleStorage } from "@neverquest/state/effects/handleStorage";
 import { armor, shield, weapon } from "@neverquest/state/gear";
 import { ammunition } from "@neverquest/state/items";
 import { health, stamina } from "@neverquest/state/reserves";
@@ -73,7 +73,7 @@ export const isRecovering = withStateKey("isRecovering", (key) =>
 export const attackDuration = withStateKey("attackDuration", (key) =>
   atom({
     default: 0,
-    effects: [handleLocalStorage({ key })],
+    effects: [handleStorage({ key })],
     key,
   }),
 );
@@ -81,7 +81,7 @@ export const attackDuration = withStateKey("attackDuration", (key) =>
 export const isAttacking = withStateKey("isAttacking", (key) =>
   atom({
     default: false,
-    effects: [handleLocalStorage({ key })],
+    effects: [handleStorage({ key })],
     key,
   }),
 );
@@ -89,7 +89,7 @@ export const isAttacking = withStateKey("isAttacking", (key) =>
 export const lootingDuration = withStateKey("lootingDuration", (key) =>
   atom({
     default: 0,
-    effects: [handleLocalStorage({ key })],
+    effects: [handleStorage({ key })],
     key,
   }),
 );
@@ -97,7 +97,7 @@ export const lootingDuration = withStateKey("lootingDuration", (key) =>
 export const name = withStateKey("name", (key) =>
   atom({
     default: LABEL_UNKNOWN,
-    effects: [handleLocalStorage({ key })],
+    effects: [handleStorage({ key })],
     key,
   }),
 );
@@ -105,7 +105,7 @@ export const name = withStateKey("name", (key) =>
 export const recoveryDuration = withStateKey("recoveryDuration", (key) =>
   atom({
     default: 0,
-    effects: [handleLocalStorage({ key })],
+    effects: [handleStorage({ key })],
     key,
   }),
 );
@@ -114,7 +114,7 @@ export const statusElement = withStateKey("statusElement", (key) =>
   atom<HTMLDivElement | null>({
     // eslint-disable-next-line unicorn/no-null
     default: null,
-    effects: [handleLocalStorage({ key })],
+    effects: [handleStorage({ key })],
     key,
   }),
 );

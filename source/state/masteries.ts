@@ -2,7 +2,7 @@ import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
 import { LEVELLING_MAXIMUM } from "@neverquest/data/general";
 import { MASTERIES, MASTERY_COST_BASE } from "@neverquest/data/masteries";
-import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
+import { handleStorage } from "@neverquest/state/effects/handleStorage";
 import { shield, weapon } from "@neverquest/state/gear";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { isMelee, isRanged, isUnshielded } from "@neverquest/types/type-guards";
@@ -109,7 +109,7 @@ export const unlockedMasteries = withStateKey("unlockedMasteries", (key) =>
 export const expandedMasteries = withStateKey("expandedMasteries", (key) =>
   atom({
     default: true,
-    effects: [handleLocalStorage({ key })],
+    effects: [handleStorage({ key })],
     key,
   }),
 );
@@ -117,7 +117,7 @@ export const expandedMasteries = withStateKey("expandedMasteries", (key) =>
 export const masteryProgress = withStateKey("masteryProgress", (key) =>
   atomFamily<number, Mastery>({
     default: 0,
-    effects: (mastery) => [handleLocalStorage({ key, parameter: mastery })],
+    effects: (mastery) => [handleStorage({ key, parameter: mastery })],
     key,
   }),
 );
@@ -125,7 +125,7 @@ export const masteryProgress = withStateKey("masteryProgress", (key) =>
 export const masteryRank = withStateKey("masteryRank", (key) =>
   atomFamily<number, Mastery>({
     default: 0,
-    effects: (mastery) => [handleLocalStorage({ key, parameter: mastery })],
+    effects: (mastery) => [handleStorage({ key, parameter: mastery })],
     key,
   }),
 );

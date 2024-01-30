@@ -3,7 +3,7 @@ import { atom, atomFamily, selector, selectorFamily } from "recoil";
 import { BLIGHT, POISON } from "@neverquest/data/monster";
 import { AILING_RESERVE_MINIMUM, HEALTH_LOW_THRESHOLD, RESERVES } from "@neverquest/data/reserves";
 import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
-import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
+import { handleStorage } from "@neverquest/state/effects/handleStorage";
 import { stage } from "@neverquest/state/encounter";
 import { questsBonus } from "@neverquest/state/quests";
 import type { Reserve } from "@neverquest/types/unions";
@@ -209,7 +209,7 @@ export const staminaMaximumBlighted = withStateKey("staminaMaximumBlighted", (ke
 export const blight = withStateKey("blight", (key) =>
   atom({
     default: 0,
-    effects: [handleLocalStorage({ key })],
+    effects: [handleStorage({ key })],
     key,
   }),
 );
@@ -217,7 +217,7 @@ export const blight = withStateKey("blight", (key) =>
 export const health = withStateKey("health", (key) =>
   atom({
     default: healthMaximumPoisoned,
-    effects: [handleLocalStorage({ key })],
+    effects: [handleStorage({ key })],
     key,
   }),
 );
@@ -225,7 +225,7 @@ export const health = withStateKey("health", (key) =>
 export const isInexhaustible = withStateKey("isInexhaustible", (key) =>
   atom({
     default: false,
-    effects: [handleLocalStorage({ key })],
+    effects: [handleStorage({ key })],
     key,
   }),
 );
@@ -233,7 +233,7 @@ export const isInexhaustible = withStateKey("isInexhaustible", (key) =>
 export const isInvulnerable = withStateKey("isInvulnerable", (key) =>
   atom({
     default: false,
-    effects: [handleLocalStorage({ key })],
+    effects: [handleStorage({ key })],
     key,
   }),
 );
@@ -241,7 +241,7 @@ export const isInvulnerable = withStateKey("isInvulnerable", (key) =>
 export const poisonDuration = withStateKey("poisonDuration", (key) =>
   atom({
     default: 0,
-    effects: [handleLocalStorage({ key })],
+    effects: [handleStorage({ key })],
     key,
   }),
 );
@@ -249,7 +249,7 @@ export const poisonDuration = withStateKey("poisonDuration", (key) =>
 export const regenerationDuration = withStateKey("regenerationDuration", (key) =>
   atomFamily<number, Reserve>({
     default: 0,
-    effects: (reserve) => [handleLocalStorage({ key, parameter: reserve })],
+    effects: (reserve) => [handleStorage({ key, parameter: reserve })],
     key,
   }),
 );
@@ -257,7 +257,7 @@ export const regenerationDuration = withStateKey("regenerationDuration", (key) =
 export const stamina = withStateKey("stamina", (key) =>
   atom({
     default: staminaMaximumBlighted,
-    effects: [handleLocalStorage({ key })],
+    effects: [handleStorage({ key })],
     key,
   }),
 );

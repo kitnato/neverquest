@@ -2,7 +2,7 @@ import { atom, atomFamily, selector } from "recoil";
 
 import { PROGRESS } from "@neverquest/data/encounter";
 import { BOSS_STAGE_INTERVAL, BOSS_STAGE_START, FINALITY_STAGE } from "@neverquest/data/monster";
-import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
+import { handleStorage } from "@neverquest/state/effects/handleStorage";
 import { ownedItem } from "@neverquest/state/inventory";
 import type { Finality, Perk } from "@neverquest/types/unions";
 import { getFromRange, getSigmoid } from "@neverquest/utilities/getters";
@@ -94,7 +94,7 @@ export const stageMaximum = withStateKey("stageMaximum", (key) =>
 export const consciousness = withStateKey("consciousness", (key) =>
   atom<"mors" | "somnium" | "vigilans">({
     default: "somnium",
-    effects: [handleLocalStorage({ key })],
+    effects: [handleStorage({ key })],
     key,
   }),
 );
@@ -102,7 +102,7 @@ export const consciousness = withStateKey("consciousness", (key) =>
 export const corpse = withStateKey("corpse", (key) =>
   atom<{ essence: number; stage: number } | undefined>({
     default: undefined,
-    effects: [handleLocalStorage({ key })],
+    effects: [handleStorage({ key })],
     key,
   }),
 );
@@ -110,7 +110,7 @@ export const corpse = withStateKey("corpse", (key) =>
 export const defeatedFinality = withStateKey("defeatedFinality", (key) =>
   atom<Finality | undefined>({
     default: undefined,
-    effects: [handleLocalStorage({ key })],
+    effects: [handleStorage({ key })],
     key,
   }),
 );
@@ -118,7 +118,7 @@ export const defeatedFinality = withStateKey("defeatedFinality", (key) =>
 export const isStageStarted = withStateKey("isStageStarted", (key) =>
   atom({
     default: false,
-    effects: [handleLocalStorage({ key })],
+    effects: [handleStorage({ key })],
     key,
   }),
 );
@@ -126,7 +126,7 @@ export const isStageStarted = withStateKey("isStageStarted", (key) =>
 export const location = withStateKey("location", (key) =>
   atom<"caravan" | "wilderness">({
     default: "wilderness",
-    effects: [handleLocalStorage({ key })],
+    effects: [handleStorage({ key })],
     key,
   }),
 );
@@ -134,7 +134,7 @@ export const location = withStateKey("location", (key) =>
 export const progress = withStateKey("progress", (key) =>
   atom({
     default: 0,
-    effects: [handleLocalStorage({ key })],
+    effects: [handleStorage({ key })],
     key,
   }),
 );
@@ -142,7 +142,7 @@ export const progress = withStateKey("progress", (key) =>
 export const perkEffect = withStateKey("perkEffect", (key) =>
   atomFamily<number, Perk>({
     default: 0,
-    effects: (perk) => [handleLocalStorage({ key, parameter: perk })],
+    effects: (perk) => [handleStorage({ key, parameter: perk })],
     key,
   }),
 );
@@ -150,7 +150,7 @@ export const perkEffect = withStateKey("perkEffect", (key) =>
 export const stage = withStateKey("stage", (key) =>
   atom({
     default: stageMaximum,
-    effects: [handleLocalStorage({ key })],
+    effects: [handleStorage({ key })],
     key,
   }),
 );
@@ -158,7 +158,7 @@ export const stage = withStateKey("stage", (key) =>
 export const wildernesses = withStateKey("wildernesses", (key) =>
   atom<string[]>({
     default: [],
-    effects: [handleLocalStorage({ key })],
+    effects: [handleStorage({ key })],
     key,
   }),
 );

@@ -2,7 +2,7 @@ import type { ArmorClass, ShieldClass, WeaponClass } from "@kitnato/locran/build
 import { atom, atomFamily, selector } from "recoil";
 
 import { CREW, MONOLOGUE_EMPTY } from "@neverquest/data/caravan";
-import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
+import { handleStorage } from "@neverquest/state/effects/handleStorage";
 import type { Armor, Melee, MerchantInventoryItem, Ranged, Shield } from "@neverquest/types";
 import { CREW_MEMBER_TYPES, type CrewMember, type Grip } from "@neverquest/types/unions";
 import { withStateKey } from "@neverquest/utilities/helpers";
@@ -21,7 +21,7 @@ export const isCaravanHired = withStateKey("isCaravanHired", (key) =>
 export const activeCrewMember = withStateKey("activeCrewMember", (key) =>
   atom<CrewMember | undefined>({
     default: undefined,
-    effects: [handleLocalStorage({ key })],
+    effects: [handleStorage({ key })],
     key,
   }),
 );
@@ -37,7 +37,7 @@ export const blacksmithInventory = withStateKey("blacksmithInventory", (key) =>
       shield: undefined,
       weapon: undefined,
     },
-    effects: [handleLocalStorage({ key })],
+    effects: [handleStorage({ key })],
     key,
   }),
 );
@@ -75,7 +75,7 @@ export const blacksmithOptions = withStateKey("blacksmithOptions", (key) =>
         level: 0,
       },
     },
-    effects: [handleLocalStorage({ key })],
+    effects: [handleStorage({ key })],
     key,
   }),
 );
@@ -83,7 +83,7 @@ export const blacksmithOptions = withStateKey("blacksmithOptions", (key) =>
 export const expandedBuyback = withStateKey("expandedBuyback", (key) =>
   atom({
     default: true,
-    effects: [handleLocalStorage({ key })],
+    effects: [handleStorage({ key })],
     key,
   }),
 );
@@ -91,7 +91,7 @@ export const expandedBuyback = withStateKey("expandedBuyback", (key) =>
 export const fletcherInventory = withStateKey("fletcherInventory", (key) =>
   atom<Ranged | undefined>({
     default: undefined,
-    effects: [handleLocalStorage({ key })],
+    effects: [handleStorage({ key })],
     key,
   }),
 );
@@ -113,7 +113,7 @@ export const fletcherOptions = withStateKey("fletcherOptions", (key) =>
         level: 0,
       },
     },
-    effects: [handleLocalStorage({ key })],
+    effects: [handleStorage({ key })],
     key,
   }),
 );
@@ -121,7 +121,7 @@ export const fletcherOptions = withStateKey("fletcherOptions", (key) =>
 export const isHired = withStateKey("isHired", (key) =>
   atomFamily<boolean, CrewMember>({
     default: false,
-    effects: (crewMember) => [handleLocalStorage({ key, parameter: crewMember })],
+    effects: (crewMember) => [handleStorage({ key, parameter: crewMember })],
     key,
   }),
 );
@@ -129,7 +129,7 @@ export const isHired = withStateKey("isHired", (key) =>
 export const merchantInventory = withStateKey("merchantInventory", (key) =>
   atom<MerchantInventoryItem[]>({
     default: [],
-    effects: [handleLocalStorage({ key })],
+    effects: [handleStorage({ key })],
     key,
   }),
 );
@@ -137,7 +137,7 @@ export const merchantInventory = withStateKey("merchantInventory", (key) =>
 export const monologue = withStateKey("monologue", (key) =>
   atomFamily<string, CrewMember>({
     default: (crewMember) => CREW[crewMember].monologues[1] ?? MONOLOGUE_EMPTY,
-    effects: (crewMember) => [handleLocalStorage({ key, parameter: crewMember })],
+    effects: (crewMember) => [handleStorage({ key, parameter: crewMember })],
     key,
   }),
 );

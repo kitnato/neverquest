@@ -1,7 +1,7 @@
 import { atomFamily, selector, selectorFamily } from "recoil";
 
 import { ATTRIBUTES } from "@neverquest/data/attributes";
-import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
+import { handleStorage } from "@neverquest/state/effects/handleStorage";
 import { infusionEffect } from "@neverquest/state/items";
 import { essence } from "@neverquest/state/resources";
 import { ATTRIBUTE_TYPES, type Attribute } from "@neverquest/types/unions";
@@ -101,7 +101,7 @@ export const powerLevel = withStateKey("powerLevel", (key) =>
 export const attributeRank = withStateKey("attributeRank", (key) =>
   atomFamily<number, Attribute>({
     default: 0,
-    effects: (attribute) => [handleLocalStorage({ key, parameter: attribute })],
+    effects: (attribute) => [handleStorage({ key, parameter: attribute })],
     key,
   }),
 );

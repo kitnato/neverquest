@@ -1,6 +1,6 @@
 import { atomFamily } from "recoil";
 
-import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
+import { handleStorage } from "@neverquest/state/effects/handleStorage";
 import type { DeltaDisplay } from "@neverquest/types/ui";
 import type { Delta } from "@neverquest/types/unions";
 import { withStateKey } from "@neverquest/utilities/helpers";
@@ -10,7 +10,7 @@ import { withStateKey } from "@neverquest/utilities/helpers";
 export const deltas = withStateKey("deltas", (key) =>
   atomFamily<{ display: DeltaDisplay[]; ID: string }[], Delta>({
     default: [],
-    effects: (delta) => [handleLocalStorage({ key, parameter: delta })],
+    effects: (delta) => [handleStorage({ key, parameter: delta })],
     key,
   }),
 );

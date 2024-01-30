@@ -1,3 +1,4 @@
+import ls from "localstorage-slim";
 import { useRef, useState } from "react";
 import {
   Button,
@@ -18,12 +19,14 @@ import IconLoad from "@neverquest/icons/load.svg?react";
 import IconSaveLoad from "@neverquest/icons/save-load.svg?react";
 import IconSave from "@neverquest/icons/save.svg?react";
 import { name } from "@neverquest/state/character";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 const INVALID_FILE = "Invalid file.";
 
 export function SaveLoad() {
   const nameValue = useRecoilValue(name);
 
+  const [isLoading, setIsLoading] = useState(false);
   const [isShowingModal, setIsShowingModal] = useState(false);
 
   const fileInput = useRef<HTMLInputElement>(null);
@@ -45,10 +48,17 @@ export function SaveLoad() {
         </Button>
       </OverlayTrigger>
 
-      <Modal onHide={onHide} show={isShowingModal}>
-        <ModalHeader closeButton>
+      <Modal backdrop={isLoading ? "static" : undefined} onHide={onHide} show={isShowingModal}>
+        <ModalHeader closeButton={!isLoading}>
           <ModalTitle>
-            <IconDisplay Icon={IconSaveLoad}>
+            <IconDisplay
+              Icon={IconSaveLoad}
+              iconProps={{
+                className: isLoading
+                  ? `${getAnimationClass({ animation: "pulse", isInfinite: true, speed: "fast" })}`
+                  : undefined,
+              }}
+            >
               <span>Save & load game</span>
             </IconDisplay>
           </ModalTitle>
@@ -57,8 +67,9 @@ export function SaveLoad() {
         <ModalBody>
           <Stack gap={3}>
             <Button
+              disabled={isLoading}
               onClick={() => {
-                const session = localStorage.getItem(KEY_SESSION);
+                const session = ls.get<string>(KEY_SESSION);
 
                 if (session === null) {
                   throw new Error("Invalid session.");
@@ -89,6 +100,7 @@ export function SaveLoad() {
             </Button>
 
             <Button
+              disabled={isLoading}
               onClick={() => {
                 fileInput.current?.click();
               }}
@@ -101,6 +113,7 @@ export function SaveLoad() {
             <input
               accept=".nq"
               className="invisible position-absolute"
+              disabled={isLoading}
               onChange={({ target: { files } }) => {
                 if (files !== null && files.length === 1) {
                   const [file] = files;
@@ -108,14 +121,18 @@ export function SaveLoad() {
                   if (file === undefined) {
                     throw new Error(INVALID_FILE);
                   } else {
+                    setIsLoading(true);
+
                     file
                       .text()
                       .then((session) => {
-                        localStorage.setItem(KEY_SESSION, session);
+                        ls.set(KEY_SESSION, session);
 
                         location.reload();
                       })
                       .catch(() => {
+                        setIsLoading(false);
+
                         throw new Error(INVALID_FILE);
                       });
                   }

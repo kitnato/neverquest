@@ -1,7 +1,7 @@
 import { atomFamily, selector } from "recoil";
 
 import { SKILL_PRICE_BASE, SKILL_PRICE_FACTOR } from "@neverquest/data/skills";
-import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
+import { handleStorage } from "@neverquest/state/effects/handleStorage";
 import { SKILL_TYPES, type Skill } from "@neverquest/types/unions";
 import { withStateKey } from "@neverquest/utilities/helpers";
 
@@ -38,7 +38,7 @@ export const skillPrice = withStateKey("skillPrice", (key) =>
 export const isSkillAcquired = withStateKey("isSkillAcquired", (key) =>
   atomFamily<boolean, Skill>({
     default: false,
-    effects: (skill) => [handleLocalStorage({ key, parameter: skill })],
+    effects: (skill) => [handleStorage({ key, parameter: skill })],
     key,
   }),
 );

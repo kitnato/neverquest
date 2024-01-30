@@ -7,7 +7,7 @@ import {
   SHIELD_NONE,
   WEAPON_NONE,
 } from "@neverquest/data/gear";
-import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
+import { handleStorage } from "@neverquest/state/effects/handleStorage";
 import type { Armor, GemItem, Shield, Weapon } from "@neverquest/types";
 import { isMelee } from "@neverquest/types/type-guards";
 import { getGearElementalEffects, getTotalElementalEffects } from "@neverquest/utilities/getters";
@@ -68,7 +68,7 @@ export const elementalEffects = withStateKey("elementalEffects", (key) =>
 export const armor = withStateKey("armor", (key) =>
   atom<Armor | typeof ARMOR_NONE>({
     default: ARMOR_NONE,
-    effects: [handleLocalStorage({ key })],
+    effects: [handleStorage({ key })],
     key,
   }),
 );
@@ -77,7 +77,7 @@ export const armor = withStateKey("armor", (key) =>
 export const gems = withStateKey("gems", (key) =>
   atomFamily<GemItem[], string>({
     default: [],
-    effects: (ID) => [handleLocalStorage({ key, parameter: ID })],
+    effects: (ID) => [handleStorage({ key, parameter: ID })],
     key,
   }),
 );
@@ -85,7 +85,7 @@ export const gems = withStateKey("gems", (key) =>
 export const shield = withStateKey("shield", (key) =>
   atom<Shield | typeof SHIELD_NONE>({
     default: SHIELD_NONE,
-    effects: [handleLocalStorage({ key })],
+    effects: [handleStorage({ key })],
     key,
   }),
 );
@@ -93,7 +93,7 @@ export const shield = withStateKey("shield", (key) =>
 export const weapon = withStateKey("weapon", (key) =>
   atom<Weapon | typeof WEAPON_NONE>({
     default: WEAPON_NONE,
-    effects: [handleLocalStorage({ key })],
+    effects: [handleStorage({ key })],
     key,
   }),
 );

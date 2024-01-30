@@ -6,7 +6,6 @@ import { Core } from "@neverquest/components/Core";
 
 import "@neverquest/styles/index.scss";
 
-ls.config.encrypt = true;
 ls.config.secret = 77;
 
 const root = document.querySelector("#root");

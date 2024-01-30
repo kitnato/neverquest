@@ -1,7 +1,7 @@
 import { atom, selector, selectorFamily } from "recoil";
 
 import { ENCUMBRANCE_CAPACITY, KNAPSACK_CAPACITY } from "@neverquest/data/items";
-import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
+import { handleStorage } from "@neverquest/state/effects/handleStorage";
 import type { ConsumableItem, InheritableItem, InventoryItem } from "@neverquest/types";
 import { isConsumableItem, isInheritableItem } from "@neverquest/types/type-guards";
 import type { Consumable, Inheritable } from "@neverquest/types/unions";
@@ -57,7 +57,7 @@ export const ownedItem = withStateKey("ownedItem", (key) =>
 export const acquiredItems = withStateKey("acquiredItems", (key) =>
   atom<InventoryItem[]>({
     default: [],
-    effects: [handleLocalStorage({ key })],
+    effects: [handleStorage({ key })],
     key,
   }),
 );
@@ -65,7 +65,7 @@ export const acquiredItems = withStateKey("acquiredItems", (key) =>
 export const inventory = withStateKey("inventory", (key) =>
   atom<InventoryItem[]>({
     default: [],
-    effects: [handleLocalStorage({ key })],
+    effects: [handleStorage({ key })],
     key,
   }),
 );
@@ -73,7 +73,7 @@ export const inventory = withStateKey("inventory", (key) =>
 export const knapsackCapacity = withStateKey("knapsackCapacity", (key) =>
   atom({
     default: KNAPSACK_CAPACITY,
-    effects: [handleLocalStorage({ key })],
+    effects: [handleStorage({ key })],
     key,
   }),
 );
@@ -81,7 +81,7 @@ export const knapsackCapacity = withStateKey("knapsackCapacity", (key) =>
 export const notifyOverEncumbrance = withStateKey("notifyOverEncumbrance", (key) =>
   atom({
     default: false,
-    effects: [handleLocalStorage({ key })],
+    effects: [handleStorage({ key })],
     key,
   }),
 );

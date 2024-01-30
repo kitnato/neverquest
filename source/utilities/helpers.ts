@@ -43,21 +43,6 @@ export function animateElement({
   );
 }
 
-export function isLocalStorageAvailable() {
-  const storage = window.localStorage;
-
-  try {
-    const test = "NEVERQUEST_LOCAL_STORAGE_TEST";
-
-    storage.setItem(test, test);
-    storage.removeItem(test);
-
-    return true;
-  } catch {
-    return false;
-  }
-}
-
 export function stackItems<ItemType>(items: ItemType[]) {
   const stackedItems: { amount: number; item: ItemType }[] = [];
 

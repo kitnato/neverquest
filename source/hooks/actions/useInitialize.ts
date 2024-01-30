@@ -37,7 +37,7 @@ export function useInitialize() {
           initialStore.monsterName = newMonsterName;
 
           if (isStoreEmpty) {
-            ls.set(KEY_SESSION, initialStore);
+            ls.set(KEY_SESSION, initialStore, { encrypt: true });
           }
         }
       },

@@ -1,7 +1,7 @@
 import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
 import { QUESTS, QUEST_COMPLETION_BONUS, QUEST_TYPES_BY_CLASS } from "@neverquest/data/quests";
-import { handleLocalStorage } from "@neverquest/state/effects/handleLocalStorage";
+import { handleStorage } from "@neverquest/state/effects/handleStorage";
 import { ownedItem } from "@neverquest/state/inventory";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import type { QuestNotification } from "@neverquest/types";
@@ -118,7 +118,7 @@ export const questsBonus = withStateKey("questsBonus", (key) =>
 export const questNotifications = withStateKey("questNotifications", (key) =>
   atom<QuestNotification[]>({
     default: [],
-    effects: [handleLocalStorage({ key })],
+    effects: [handleStorage({ key })],
     key,
   }),
 );
@@ -126,7 +126,7 @@ export const questNotifications = withStateKey("questNotifications", (key) =>
 export const questProgress = withStateKey("questProgress", (key) =>
   atomFamily<number, Quest>({
     default: 0,
-    effects: (quest) => [handleLocalStorage({ key, parameter: quest })],
+    effects: (quest) => [handleStorage({ key, parameter: quest })],
     key,
   }),
 );
@@ -134,7 +134,7 @@ export const questProgress = withStateKey("questProgress", (key) =>
 export const questStatuses = withStateKey("questStatuses", (key) =>
   atomFamily<QuestStatus[], Quest>({
     default: (quest) => Object.keys(QUESTS[quest].progression).map(() => "incomplete"),
-    effects: (quest) => [handleLocalStorage({ key, parameter: quest })],
+    effects: (quest) => [handleStorage({ key, parameter: quest })],
     key,
   }),
 );

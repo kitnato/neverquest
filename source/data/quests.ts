@@ -487,7 +487,7 @@ export const QUESTS: Record<
   retreating: {
     description: "Retreat @ times.",
     progression: [3, 10, 25, 50],
-    requiresTracking: false,
+    requiresTracking: true,
     title: "Thou needeth a wet-nurse",
   },
   scavengingCorpse: {

@@ -10,6 +10,8 @@ export const MILLISECONDS_IN_HOUR = 3_600_000;
 export const MILLISECONDS_IN_MINUTE = 60_000;
 export const MILLISECONDS_IN_SECOND = 1000;
 
+export const FILE_EXTENSION = "nq";
+
 export const FRAMERATE = MILLISECONDS_IN_SECOND / 60;
 
 export const GLITCH_NUMBER = 7;

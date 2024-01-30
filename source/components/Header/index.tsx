@@ -4,6 +4,7 @@ import { About } from "@neverquest/components/Header/About";
 import { Ouroboros } from "@neverquest/components/Header/Ouroboros";
 import { Repository } from "@neverquest/components/Header/Repository";
 import { Reset } from "@neverquest/components/Header/Reset";
+import { SaveLoad } from "@neverquest/components/Header/SaveLoad";
 import { version } from "@neverquest/config";
 
 export function Header() {
@@ -24,9 +25,13 @@ export function Header() {
 
         <Nav>
           <Stack direction="horizontal" gap={3}>
+            <About />
+
             <Repository />
 
-            <About />
+            <div className="text-white vr" />
+
+            <SaveLoad />
 
             <Reset />
           </Stack>

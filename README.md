@@ -35,15 +35,16 @@ Now, every time changes are committed, all the relevant code, markup and style l
 
 The linter config can be viewed in `.eslintrc.json`, `.stylelintrc.json` and `.prettierc.json`.
 
-## Implementation
+## Attribution
 
-- All art assets (SVG icons & images) are sourced from the talented [authors](https://game-icons.net/about.html#authors) of [game-icons.net](https://game-icons.net) under the [CC BY 3.0](https://creativecommons.org/licenses/by/3.0) license.
-- Monster, item & location names provided by the [LOCRAN](https://github.com/kitnato/locran) system.
+- All art assets (SVG icons & images) are sourced from the talented [authors](https://game-icons.net/about.html#authors) of [game-icons.net](https://game-icons.net) under [CC BY 3.0](https://creativecommons.org/licenses/by/3.0).
+- Font is [Aoboshi-Regular](https://github.com/matsuba723/Aoboshi), licensed under [OFL-1.1](https://openfontlicense.org/open-font-license-official-text/).
+- Monster, item & location names provided by the [LOCRAN](https://github.com/kitnato/locran) system under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0).
 - Written in [TypeScript](https://www.typescriptlang.org) using [React](https://react.dev/).
 - UI framework is [Bootstrap](https://react-bootstrap.github.io).
 - State management library is [Recoil](https://recoiljs.org).
 - Animation library is [Animate.css](https://animate.style).
-- Runs on [Vite](https://vitejs.dev).
+- Build system is [Vite](https://vitejs.dev).
 - Code style & linting is provided by [eslint](https://eslint.org), [stylelint](https://stylelint.io) and [prettier](https://prettier.io), using [@kitnato/eslint-config-succinct](https://github.com/kitnato/eslint-config-succinct).
 - Automation is provided by [husky](https://typicode.github.io/husky) and [lint-staged](https://www.npmjs.com/package/lint-staged).
 

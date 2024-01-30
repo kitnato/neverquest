@@ -1,6 +1,6 @@
 import { SHIELD_CLASS_TYPES, type ShieldClass } from "@kitnato/locran/build/types";
 import { useCallback, useEffect } from "react";
-import { FormSelect, Stack } from "react-bootstrap";
+import { DropdownButton, DropdownItem, Stack } from "react-bootstrap";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 import { CraftedGear } from "@neverquest/components/Caravan/CraftedGear";
@@ -76,24 +76,27 @@ export function ShieldOptions() {
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Class"
         >
-          <FormSelect
-            onChange={({ target: { value } }) => {
-              setBlacksmithOptions((options) => ({
-                ...options,
-                shield: {
-                  ...options.shield,
-                  gearClass: value as ShieldClass,
-                },
-              }));
+          <DropdownButton
+            onSelect={(key) => {
+              if (key !== null) {
+                setBlacksmithOptions((options) => ({
+                  ...options,
+                  shield: {
+                    ...options.shield,
+                    gearClass: key as ShieldClass,
+                  },
+                }));
+              }
             }}
-            value={gearClass}
+            title={capitalizeAll(gearClass)}
+            variant="outline-dark"
           >
-            {SHIELD_CLASS_TYPES.map((currentShieldClass) => (
-              <option key={currentShieldClass} value={currentShieldClass}>
-                {capitalizeAll(currentShieldClass)}
-              </option>
+            {SHIELD_CLASS_TYPES.map((shieldClass) => (
+              <DropdownItem as="button" eventKey={shieldClass} key={shieldClass}>
+                {capitalizeAll(shieldClass)}
+              </DropdownItem>
             ))}
-          </FormSelect>
+          </DropdownButton>
         </IconDisplay>
 
         <IconDisplay

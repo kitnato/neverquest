@@ -1,7 +1,8 @@
 import { useState } from "react";
 import {
   Button,
-  FormSelect,
+  DropdownButton,
+  DropdownItem,
   Modal,
   ModalBody,
   ModalHeader,
@@ -12,9 +13,12 @@ import {
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { IconImage } from "@neverquest/components/IconImage";
 import { LABEL_SEPARATOR, POPOVER_TRIGGER } from "@neverquest/data/general";
+import { BOSS_STAGE_INTERVAL, BOSS_STAGE_START } from "@neverquest/data/monster";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness";
+import IconBossHiding from "@neverquest/icons/boss-hiding.svg?react";
 import IconCompass from "@neverquest/icons/compass.svg?react";
 import IconNavigation from "@neverquest/icons/navigation.svg?react";
 import { location, stage, wildernesses } from "@neverquest/state/encounter";
@@ -33,6 +37,32 @@ export function CompassNavigate() {
   const resetWilderness = useResetWilderness();
 
   const canNavigate = locationValue === "wilderness";
+
+  const stageDisplay = (currentStage: number) => {
+    const stageName = wildernessesValue[currentStage - 1];
+
+    if (stageName !== undefined) {
+      return (
+        <>
+          <span>
+            Stage&nbsp;
+            {formatNumber({
+              value: currentStage,
+            })}
+            &nbsp;
+          </span>
+
+          {currentStage >= BOSS_STAGE_START && currentStage % BOSS_STAGE_INTERVAL === 0 ? (
+            <IconImage className="small" Icon={IconBossHiding} />
+          ) : (
+            LABEL_SEPARATOR
+          )}
+
+          <span>&nbsp;{stageName}</span>
+        </>
+      );
+    }
+  };
 
   return (
     <>
@@ -73,35 +103,31 @@ export function CompassNavigate() {
 
         <ModalBody>
           <IconDisplay Icon={IconNavigation} tooltip="Navigation">
-            <FormSelect
-              disabled={!canNavigate}
-              onChange={({ target: { value } }) => {
-                progressQuest({ quest: "warpingWilderness" });
+            <DropdownButton
+              onSelect={(eventKey) => {
+                if (eventKey !== null) {
+                  progressQuest({ quest: "warpingWilderness" });
 
-                setIsShowingNavigation(false);
-                resetActiveControl();
+                  setIsShowingNavigation(false);
+                  resetActiveControl();
 
-                setStage(Number(value));
-                resetWilderness();
+                  setStage(Number(eventKey));
+                  resetWilderness();
+                }
               }}
-              value={stageValue}
+              title={stageDisplay(stageValue)}
+              variant="outline-dark"
             >
               {wildernessesValue.map((name, index) => {
                 const stageIndex = index + 1;
 
                 return (
-                  <option key={name} value={stageIndex}>
-                    Stage&nbsp;
-                    {formatNumber({
-                      value: stageIndex,
-                    })}
-                    &nbsp;
-                    {LABEL_SEPARATOR}&nbsp;
-                    {name}
-                  </option>
+                  <DropdownItem as="button" eventKey={stageIndex} key={name}>
+                    {stageDisplay(stageIndex)}
+                  </DropdownItem>
                 );
               })}
-            </FormSelect>
+            </DropdownButton>
           </IconDisplay>
         </ModalBody>
       </Modal>

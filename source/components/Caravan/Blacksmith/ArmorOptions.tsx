@@ -1,6 +1,6 @@
 import { ARMOR_CLASS_TYPES, type ArmorClass } from "@kitnato/locran/build/types";
 import { useCallback, useEffect } from "react";
-import { FormSelect, Stack } from "react-bootstrap";
+import { DropdownButton, DropdownItem, Stack } from "react-bootstrap";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 import { CraftedGear } from "@neverquest/components/Caravan/CraftedGear";
@@ -80,24 +80,27 @@ export function ArmorOptions() {
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Class"
         >
-          <FormSelect
-            onChange={({ target: { value } }) => {
-              setBlacksmithOptions((options) => ({
-                ...options,
-                armor: {
-                  ...options.armor,
-                  gearClass: value as ArmorClass,
-                },
-              }));
+          <DropdownButton
+            onSelect={(key) => {
+              if (key !== null) {
+                setBlacksmithOptions((options) => ({
+                  ...options,
+                  armor: {
+                    ...options.armor,
+                    gearClass: key as ArmorClass,
+                  },
+                }));
+              }
             }}
-            value={gearClass}
+            title={capitalizeAll(gearClass)}
+            variant="outline-dark"
           >
-            {ARMOR_CLASS_TYPES.map((currentArmorClass) => (
-              <option key={currentArmorClass} value={currentArmorClass}>
-                {capitalizeAll(currentArmorClass)}
-              </option>
+            {ARMOR_CLASS_TYPES.map((armorClassType) => (
+              <DropdownItem as="button" eventKey={armorClassType} key={armorClassType}>
+                {capitalizeAll(armorClassType)}
+              </DropdownItem>
             ))}
-          </FormSelect>
+          </DropdownButton>
         </IconDisplay>
 
         <IconDisplay

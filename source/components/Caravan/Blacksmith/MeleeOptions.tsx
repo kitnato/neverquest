@@ -1,6 +1,6 @@
 import { WEAPON_CLASS_TYPES, type WeaponClass } from "@kitnato/locran/build/types";
 import { useCallback, useEffect } from "react";
-import { FormSelect, Stack } from "react-bootstrap";
+import { DropdownButton, DropdownItem, Stack } from "react-bootstrap";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 import { CraftedGear } from "@neverquest/components/Caravan/CraftedGear";
@@ -85,46 +85,52 @@ export function MeleeOptions() {
         <SetGearLevel level={level} maximum={maximumWeaponLevel} setLevel={setGearLevel} />
 
         <IconDisplay Icon={IconGearClass} iconProps={{ overlayPlacement: "left" }} tooltip="Class">
-          <FormSelect
-            onChange={({ target: { value } }) => {
-              setBlacksmithOptions((options) => ({
-                ...options,
-                weapon: {
-                  ...options.weapon,
-                  gearClass: value as WeaponClass,
-                },
-              }));
-            }}
-            value={gearClass}
-          >
-            {WEAPON_CLASS_TYPES.map((currentWeaponClass) => (
-              <option key={currentWeaponClass} value={currentWeaponClass}>
-                {capitalizeAll(currentWeaponClass)}
-              </option>
-            ))}
-          </FormSelect>
-        </IconDisplay>
-
-        {isSkillAcquiredSiegecraft && (
-          <IconDisplay Icon={IconGrip} iconProps={{ overlayPlacement: "left" }} tooltip="Grip">
-            <FormSelect
-              onChange={({ target: { value } }) => {
+          <DropdownButton
+            onSelect={(key) => {
+              if (key !== null) {
                 setBlacksmithOptions((options) => ({
                   ...options,
                   weapon: {
                     ...options.weapon,
-                    grip: value as Grip,
+                    gearClass: key as WeaponClass,
                   },
                 }));
+              }
+            }}
+            title={capitalizeAll(gearClass)}
+            variant="outline-dark"
+          >
+            {WEAPON_CLASS_TYPES.map((weaponClassType) => (
+              <DropdownItem as="button" eventKey={weaponClassType} key={weaponClassType}>
+                {capitalizeAll(weaponClassType)}
+              </DropdownItem>
+            ))}
+          </DropdownButton>
+        </IconDisplay>
+
+        {isSkillAcquiredSiegecraft && (
+          <IconDisplay Icon={IconGrip} iconProps={{ overlayPlacement: "left" }} tooltip="Grip">
+            <DropdownButton
+              onSelect={(key) => {
+                if (key !== null) {
+                  setBlacksmithOptions((options) => ({
+                    ...options,
+                    weapon: {
+                      ...options.weapon,
+                      grip: key as Grip,
+                    },
+                  }));
+                }
               }}
-              value={grip}
+              title={capitalizeAll(grip)}
+              variant="outline-dark"
             >
-              {GRIP_TYPES.map((grip) => (
-                <option key={grip} value={grip}>
-                  {capitalizeAll(grip)}
-                </option>
+              {GRIP_TYPES.map((gripType) => (
+                <DropdownItem as="button" eventKey={gripType} key={gripType}>
+                  {capitalizeAll(gripType)}
+                </DropdownItem>
               ))}
-            </FormSelect>
+            </DropdownButton>
           </IconDisplay>
         )}
 

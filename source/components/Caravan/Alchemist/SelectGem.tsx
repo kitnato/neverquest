@@ -1,4 +1,4 @@
-import { FormSelect, Stack } from "react-bootstrap";
+import { DropdownButton, DropdownItem, Stack } from "react-bootstrap";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { TRANSMUTATION } from "@neverquest/data/caravan";
@@ -20,21 +20,24 @@ export function SelectGem({
   return (
     <Stack direction="horizontal" gap={1}>
       <IconDisplay Icon={GEMS[gem].Icon} tooltip="Gem">
-        <FormSelect
-          onChange={({ target: { value } }) => {
-            onSelect(value as Gem);
+        <DropdownButton
+          onSelect={(key) => {
+            if (key !== null) {
+              onSelect(key as Gem);
+            }
           }}
-          value={gem}
+          title={capitalizeAll(gem)}
+          variant="outline-dark"
         >
           {GEM_TYPES.map(
-            (gem) =>
-              omit !== gem && (
-                <option key={gem} value={gem}>
-                  {capitalizeAll(gem)}
-                </option>
+            (gemType) =>
+              omit !== gemType && (
+                <DropdownItem as="button" eventKey={gemType} key={gemType}>
+                  {capitalizeAll(gemType)}
+                </DropdownItem>
               ),
           )}
-        </FormSelect>
+        </DropdownButton>
       </IconDisplay>
 
       <span>×{omit === undefined ? gemCost : gemYield}</span>

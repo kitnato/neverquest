@@ -1,6 +1,6 @@
 import { WEAPON_CLASS_TYPES, type WeaponClass } from "@kitnato/locran/build/types";
 import { useCallback, useEffect } from "react";
-import { FormSelect, Stack } from "react-bootstrap";
+import { DropdownButton, DropdownItem, Stack } from "react-bootstrap";
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 
 import { CraftedGear } from "@neverquest/components/Caravan/CraftedGear";
@@ -85,26 +85,27 @@ export function RangedOptions() {
         <SetGearLevel level={level} maximum={maximumWeaponLevel} setLevel={setGearLevel} />
 
         <IconDisplay Icon={IconGearClass} iconProps={{ overlayPlacement: "left" }} tooltip="Class">
-          <FormSelect
-            onChange={({ target: { value } }) => {
-              setFletcherOptions((options) => ({
-                ...options,
-                ranged: {
-                  ...options.ranged,
-                  gearClass: value as WeaponClass,
-                },
-              }));
+          <DropdownButton
+            onSelect={(key) => {
+              if (key !== null) {
+                setFletcherOptions((options) => ({
+                  ...options,
+                  ranged: {
+                    ...options.ranged,
+                    gearClass: key as WeaponClass,
+                  },
+                }));
+              }
             }}
-            value={gearClass}
+            title={capitalizeAll(gearClass)}
+            variant="outline-dark"
           >
-            {WEAPON_CLASS_TYPES.filter((weaponClassType) => weaponClassType !== "slashing").map(
-              (weaponClassType) => (
-                <option key={weaponClassType} value={weaponClassType}>
-                  {capitalizeAll(weaponClassType)}
-                </option>
-              ),
-            )}
-          </FormSelect>
+            {WEAPON_CLASS_TYPES.map((weaponClassType) => (
+              <DropdownItem as="button" eventKey={weaponClassType} key={weaponClassType}>
+                {capitalizeAll(weaponClassType)}
+              </DropdownItem>
+            ))}
+          </DropdownButton>
         </IconDisplay>
 
         <IconDisplay

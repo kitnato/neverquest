@@ -14,7 +14,7 @@ const LATENCY = 70;
 function getGlitchingElement() {
   const textElements = document.body
     .querySelector(".somnium")
-    ?.querySelectorAll("button, h6, option, span, strong");
+    ?.querySelectorAll("h6, span, strong");
 
   if (textElements === undefined) {
     return;

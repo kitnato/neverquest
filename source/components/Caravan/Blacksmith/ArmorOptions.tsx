@@ -104,7 +104,7 @@ export function ArmorOptions() {
           >
             {ARMOR_CLASS_TYPES.map((armorClassType) => (
               <DropdownItem as="button" eventKey={armorClassType} key={armorClassType}>
-                {capitalizeAll(armorClassType)}
+                <span>{capitalizeAll(armorClassType)}</span>
               </DropdownItem>
             ))}
           </DropdownButton>

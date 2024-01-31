@@ -56,7 +56,7 @@ export function CraftedGear({
             }}
             variant="outline-dark"
           >
-            Acquire
+            <span>Acquire</span>
           </Button>
         </div>
       </OverlayTrigger>

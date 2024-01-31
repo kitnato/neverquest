@@ -70,7 +70,7 @@ export function PurgeEssence() {
               }}
               variant="outline-dark"
             >
-              Purge
+              <span>Purge</span>
             </Button>
           </div>
         </OverlayTrigger>

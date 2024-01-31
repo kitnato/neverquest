@@ -76,7 +76,7 @@ export function PurgeMemories() {
                 }}
                 variant="outline-dark"
               >
-                Purge
+                <span>Purge</span>
               </Button>
             </div>
           </OverlayTrigger>

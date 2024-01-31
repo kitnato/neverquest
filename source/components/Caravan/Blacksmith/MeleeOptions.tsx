@@ -109,7 +109,7 @@ export function MeleeOptions() {
           >
             {WEAPON_CLASS_TYPES.map((weaponClassType) => (
               <DropdownItem as="button" eventKey={weaponClassType} key={weaponClassType}>
-                {capitalizeAll(weaponClassType)}
+                <span>{capitalizeAll(weaponClassType)}</span>
               </DropdownItem>
             ))}
           </DropdownButton>
@@ -135,7 +135,7 @@ export function MeleeOptions() {
             >
               {GRIP_TYPES.map((gripType) => (
                 <DropdownItem as="button" eventKey={gripType} key={gripType}>
-                  {capitalizeAll(gripType)}
+                  <span>{capitalizeAll(gripType)}</span>
                 </DropdownItem>
               ))}
             </DropdownButton>

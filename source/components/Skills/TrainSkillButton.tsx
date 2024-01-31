@@ -35,7 +35,7 @@ export function TrainSkillButton({ skill }: { skill: Skill }) {
           }}
           variant="outline-dark"
         >
-          Train
+          <span>Train</span>
         </Button>
       </div>
     </OverlayTrigger>

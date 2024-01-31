@@ -110,7 +110,7 @@ export function RangedOptions() {
             {WEAPON_CLASS_TYPES.filter((weaponClassType) => weaponClassType !== "slashing").map(
               (weaponClassType) => (
                 <DropdownItem as="button" eventKey={weaponClassType} key={weaponClassType}>
-                  {capitalizeAll(weaponClassType)}
+                  <span>{capitalizeAll(weaponClassType)}</span>
                 </DropdownItem>
               ),
             )}

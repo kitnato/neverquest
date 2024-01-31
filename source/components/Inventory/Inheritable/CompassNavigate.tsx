@@ -82,7 +82,7 @@ export function CompassNavigate() {
             }}
             variant="outline-dark"
           >
-            Navigate
+            <span>Navigate</span>
           </Button>
         </div>
       </OverlayTrigger>

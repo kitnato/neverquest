@@ -67,7 +67,7 @@ export function EradicateItem({ item }: { item: MerchantInventoryItem }) {
             }}
             variant="outline-dark"
           >
-            Eradicate
+            <span>Eradicate</span>
           </Button>
         </ModalFooter>
       </Modal>

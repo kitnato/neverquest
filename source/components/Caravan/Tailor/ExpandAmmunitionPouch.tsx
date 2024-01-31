@@ -72,7 +72,7 @@ export function ExpandAmmunitionPouch() {
                 }}
                 variant="outline-dark"
               >
-                Expand
+                <span>Expand</span>
               </Button>
             </div>
           </OverlayTrigger>

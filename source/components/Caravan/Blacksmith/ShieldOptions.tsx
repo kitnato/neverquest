@@ -100,7 +100,7 @@ export function ShieldOptions() {
           >
             {SHIELD_CLASS_TYPES.map((shieldClass) => (
               <DropdownItem as="button" eventKey={shieldClass} key={shieldClass}>
-                {capitalizeAll(shieldClass)}
+                <span>{capitalizeAll(shieldClass)}</span>
               </DropdownItem>
             ))}
           </DropdownButton>

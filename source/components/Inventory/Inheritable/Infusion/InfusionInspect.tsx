@@ -46,7 +46,7 @@ export function InfusionInspect({ infusable }: { infusable: Infusable }) {
             }}
             variant="outline-dark"
           >
-            Inspect
+            <span>Inspect</span>
           </Button>
         </div>
       </OverlayTrigger>

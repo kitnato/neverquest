@@ -53,7 +53,7 @@ export function Elixir({ ID }: { ID: string }) {
           }}
           variant="outline-dark"
         >
-          Drink
+          <span>Drink</span>
         </Button>
       </div>
     </OverlayTrigger>

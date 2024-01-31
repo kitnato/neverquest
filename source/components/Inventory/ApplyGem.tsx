@@ -1,4 +1,4 @@
-import { Dropdown } from "react-bootstrap";
+import { Dropdown, DropdownButton } from "react-bootstrap";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
@@ -61,7 +61,7 @@ export function ApplyGem({ gem }: { gem: GemItem }) {
   const transactEssence = useTransactEssence();
 
   return (
-    <Dropdown
+    <DropdownButton
       onSelect={(slot) => {
         if (isGear(slot)) {
           const { gemsFitted, setGems } = gemFitting[slot];
@@ -85,39 +85,37 @@ export function ApplyGem({ gem }: { gem: GemItem }) {
           }
         }
       }}
+      title="Apply"
+      variant="outline-dark"
     >
-      <Dropdown.Toggle variant="outline-dark">Apply</Dropdown.Toggle>
+      {GEAR_TYPES.map((gearType) => {
+        const {
+          canFit,
+          gear: { name },
+          gemsFitted,
+          isAffordable,
+        } = gemFitting[gearType];
 
-      <Dropdown.Menu>
-        {GEAR_TYPES.map((gearType) => {
-          const {
-            canFit,
-            gear: { name },
-            gemsFitted,
-            isAffordable,
-          } = gemFitting[gearType];
+        const canApply = canFit && isAffordable;
 
-          const canApply = canFit && isAffordable;
+        return (
+          <Dropdown.Item disabled={!canApply} eventKey={gearType} key={gearType}>
+            <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
+              <span>{capitalizeAll(name)}</span>
 
-          return (
-            <Dropdown.Item disabled={!canApply} eventKey={gearType} key={gearType}>
-              <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-                <span>{capitalizeAll(name)}</span>
-
-                <div className="ms-2">
-                  {canFit ? (
-                    <IconDisplay Icon={IconEssence} iconProps={{ className: "small" }}>
-                      <span>{getGemFittingCost(gemsFitted)}</span>
-                    </IconDisplay>
-                  ) : (
-                    <span>{LABEL_MAXIMUM}</span>
-                  )}
-                </div>
+              <div className="ms-2">
+                {canFit ? (
+                  <IconDisplay Icon={IconEssence} iconProps={{ className: "small" }}>
+                    <span>{getGemFittingCost(gemsFitted)}</span>
+                  </IconDisplay>
+                ) : (
+                  <span>{LABEL_MAXIMUM}</span>
+                )}
               </div>
-            </Dropdown.Item>
-          );
-        })}
-      </Dropdown.Menu>
-    </Dropdown>
+            </div>
+          </Dropdown.Item>
+        );
+      })}
+    </DropdownButton>
   );
 }

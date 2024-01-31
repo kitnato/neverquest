@@ -49,7 +49,7 @@ export function Hatch() {
             }}
             variant="outline-dark"
           >
-            Hatch
+            <span>Hatch</span>
           </Button>
         </div>
       </OverlayTrigger>

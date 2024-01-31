@@ -83,7 +83,7 @@ export function Flatline() {
           }}
           variant="outline-dark"
         >
-          Rebirth
+          <span>Rebirth</span>
         </Button>
       </ModalFooter>
     </Modal>

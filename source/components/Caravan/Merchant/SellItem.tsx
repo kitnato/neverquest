@@ -78,7 +78,7 @@ export function SellItem({ item }: { item: InventoryItem }) {
         }}
         variant="outline-dark"
       >
-        Sell
+        <span>Sell</span>
       </Button>
     </Stack>
   );

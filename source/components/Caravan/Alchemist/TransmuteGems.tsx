@@ -125,7 +125,7 @@ export function TransmuteGems() {
               }}
               variant="outline-dark"
             >
-              Transmute
+              <span>Transmute</span>
             </Button>
           </div>
         </OverlayTrigger>

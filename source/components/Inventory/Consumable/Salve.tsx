@@ -46,7 +46,7 @@ export function Salve({ ID }: { ID: string }) {
           }}
           variant="outline-dark"
         >
-          Apply
+          <span>Apply</span>
         </Button>
       </div>
     </OverlayTrigger>

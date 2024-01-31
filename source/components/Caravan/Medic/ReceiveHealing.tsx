@@ -65,7 +65,7 @@ export function ReceiveHealing() {
                 }}
                 variant="outline-dark"
               >
-                Operate
+                <span>Operate</span>
               </Button>
             </div>
           </OverlayTrigger>

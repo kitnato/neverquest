@@ -71,7 +71,7 @@ export function Infusion({ infusable }: { infusable: Infusable }) {
           onMouseUp={onStop}
           variant="outline-dark"
         >
-          Infuse
+          <span>Infuse</span>
         </Button>
       </div>
     </OverlayTrigger>

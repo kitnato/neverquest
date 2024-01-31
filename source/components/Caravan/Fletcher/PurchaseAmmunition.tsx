@@ -111,10 +111,11 @@ export function PurchaseAmmunition() {
               }}
               variant="outline-dark"
             >
-              Purchase&nbsp;
+              <span>Purchase&nbsp;</span>
+
               <IconImage className="small" Icon={IconAmmunition} />
-              &nbsp;
-              {formatNumber({ value: ammunitionAmount })}
+
+              <span>&nbsp;{formatNumber({ value: ammunitionAmount })}</span>
             </Button>
           </div>
         </OverlayTrigger>

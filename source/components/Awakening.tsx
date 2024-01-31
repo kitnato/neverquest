@@ -30,7 +30,7 @@ export function Awakening() {
               }}
               variant="outline-dark"
             >
-              Grind
+              <span>Grind</span>
             </Button>
 
             <Button
@@ -40,7 +40,7 @@ export function Awakening() {
               }}
               variant="outline-dark"
             >
-              Die
+              <span>Die</span>
             </Button>
           </Stack>
         </Stack>

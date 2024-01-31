@@ -39,7 +39,7 @@ export function CraftGear({ onCraft, price }: { onCraft: () => void; price: numb
             }}
             variant="outline-dark"
           >
-            Craft
+            <span>Craft</span>
           </Button>
         </div>
       </OverlayTrigger>

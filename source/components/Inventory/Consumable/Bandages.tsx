@@ -35,7 +35,7 @@ export function Bandages({ ID }: { ID: string }) {
           }}
           variant="outline-dark"
         >
-          Use
+          <span>Use</span>
         </Button>
       </div>
     </OverlayTrigger>

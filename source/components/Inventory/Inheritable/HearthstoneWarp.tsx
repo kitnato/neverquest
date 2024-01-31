@@ -37,7 +37,7 @@ export function HearthstoneWarp() {
           }}
           variant="outline-dark"
         >
-          Warp
+          <span>Warp</span>
         </Button>
       </div>
     </OverlayTrigger>

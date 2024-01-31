@@ -64,7 +64,7 @@ export function Retirement({
           }}
           variant="outline-dark"
         >
-          Retire
+          <span>Retire</span>
         </Button>
       </ModalFooter>
     </Modal>

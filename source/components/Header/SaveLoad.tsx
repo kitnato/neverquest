@@ -96,7 +96,8 @@ export function SaveLoad() {
               variant="outline-dark"
             >
               <IconImage className="small" Icon={IconSave} />
-              &nbsp;<span>Save</span>
+
+              <span>&nbsp;Save</span>
             </Button>
 
             <Button
@@ -107,7 +108,8 @@ export function SaveLoad() {
               variant="outline-dark"
             >
               <IconImage className="small" Icon={IconLoad} />
-              &nbsp;Load
+
+              <span>&nbsp;Load</span>
             </Button>
 
             <input

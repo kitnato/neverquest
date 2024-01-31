@@ -38,7 +38,7 @@ export function PurchaseItemButton({
     >
       <div>
         <Button disabled={!isPurchasable} onClick={onPurchase} variant="outline-dark">
-          Buy
+          <span>Buy</span>
         </Button>
       </div>
     </OverlayTrigger>

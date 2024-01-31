@@ -65,7 +65,7 @@ export function DiscardItem({ item }: { item: InventoryItem }) {
             }}
             variant="outline-dark"
           >
-            Discard
+            <span>Discard</span>
           </Button>
         </ModalFooter>
       </Modal>

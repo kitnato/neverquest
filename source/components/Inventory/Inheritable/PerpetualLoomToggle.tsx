@@ -28,7 +28,7 @@ export function PerpetualLoomToggle() {
           }}
           variant="outline-dark"
         >
-          {isWeavingValue ? "Unravel" : "Weave"}
+          <span>{isWeavingValue ? "Unravel" : "Weave"}</span>
         </Button>
       </div>
     </OverlayTrigger>

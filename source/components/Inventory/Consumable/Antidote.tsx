@@ -46,7 +46,7 @@ export function Antidote({ ID }: { ID: string }) {
           }}
           variant="outline-dark"
         >
-          Drink
+          <span>Drink</span>
         </Button>
       </div>
     </OverlayTrigger>

@@ -124,7 +124,7 @@ export function Inventory() {
                 }}
                 variant="outline-dark"
               >
-                Unequip
+                <span>Unequip</span>
               </Button>
             </div>
           );
@@ -164,7 +164,7 @@ export function Inventory() {
                         }}
                         variant="outline-dark"
                       >
-                        Equip
+                        <span>Equip</span>
                       </Button>
                     </div>
                   </OverlayTrigger>

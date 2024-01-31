@@ -66,7 +66,7 @@ export function Reset() {
             }}
             variant="outline-dark"
           >
-            Reset
+            <span>Reset</span>
           </Button>
         </ModalFooter>
       </Modal>

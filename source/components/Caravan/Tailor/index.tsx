@@ -10,7 +10,7 @@ export function Tailor() {
   const ownedItemKnapsack = useRecoilValue(ownedItem("knapsack"));
 
   if (ownedAmmunitionPouch === undefined && ownedItemKnapsack === undefined) {
-    return <span className="fst-italic">&quot;I&apos;m feeling a bit useless here ...&quot;</span>;
+    return <span>&quot;I&apos;m feeling a bit useless here ...&quot;</span>;
   }
 
   return (

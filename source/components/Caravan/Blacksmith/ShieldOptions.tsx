@@ -38,14 +38,15 @@ export function ShieldOptions() {
   const stageMaximumValue = useRecoilValue(stageMaximum);
 
   const factor = getSigmoid(level);
-  const maximumShieldLevel = Math.min(
-    stageMaximumValue + GEAR_LEVEL_RANGE_MAXIMUM,
-    LEVELLING_MAXIMUM,
-  );
   const { block, burden, stagger, weight } = getShieldRanges({
     factor,
     gearClass,
   });
+  const hasCrafted = craftedShield !== undefined;
+  const maximumShieldLevel = Math.min(
+    stageMaximumValue + GEAR_LEVEL_RANGE_MAXIMUM,
+    LEVELLING_MAXIMUM,
+  );
 
   const setGearLevel = useCallback(
     (level: number) => {
@@ -68,8 +69,13 @@ export function ShieldOptions() {
 
   return (
     <Stack className="mx-auto w-50">
-      <Stack className="mx-auto" gap={3}>
-        <SetGearLevel level={level} maximum={maximumShieldLevel} setLevel={setGearLevel} />
+      <Stack className={`mx-auto${hasCrafted ? " opacity-50" : ""}`} gap={3}>
+        <SetGearLevel
+          isDisabled={hasCrafted}
+          level={level}
+          maximum={maximumShieldLevel}
+          setLevel={setGearLevel}
+        />
 
         <IconDisplay
           Icon={SHIELD_SPECIFICATIONS[gearClass].Icon}
@@ -77,6 +83,7 @@ export function ShieldOptions() {
           tooltip="Class"
         >
           <DropdownButton
+            disabled={hasCrafted}
             onSelect={(key) => {
               if (key !== null) {
                 setBlacksmithOptions((options) => ({
@@ -151,7 +158,17 @@ export function ShieldOptions() {
 
       {!isSkillAcquiredShieldcraft && gearClass === "tower" ? (
         <span className="fst-italic text-center">{LABEL_SKILL_REQUIRED}</span>
-      ) : craftedShield === undefined ? (
+      ) : hasCrafted ? (
+        <CraftedGear
+          gearItem={craftedShield}
+          onTransfer={() => {
+            setBlacksmithInventory((currentBlacksmithInventory) => ({
+              ...currentBlacksmithInventory,
+              shield: undefined,
+            }));
+          }}
+        />
+      ) : (
         <CraftGear
           onCraft={() => {
             setBlacksmithInventory((currentBlacksmithInventory) => ({
@@ -175,16 +192,6 @@ export function ShieldOptions() {
               ...SHIELD_SPECIFICATIONS[gearClass].price,
             }),
           )}
-        />
-      ) : (
-        <CraftedGear
-          gearItem={craftedShield}
-          onTransfer={() => {
-            setBlacksmithInventory((currentBlacksmithInventory) => ({
-              ...currentBlacksmithInventory,
-              shield: undefined,
-            }));
-          }}
         />
       )}
     </Stack>

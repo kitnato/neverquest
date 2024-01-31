@@ -55,6 +55,7 @@ export function MeleeOptions() {
     gearClass,
     grip,
   });
+  const hasCrafted = craftedWeapon !== undefined;
   const maximumWeaponLevel = Math.min(
     stageMaximumValue + GEAR_LEVEL_RANGE_MAXIMUM,
     LEVELLING_MAXIMUM,
@@ -81,11 +82,17 @@ export function MeleeOptions() {
 
   return (
     <Stack className="mx-auto w-50">
-      <Stack className="mx-auto" gap={3}>
-        <SetGearLevel level={level} maximum={maximumWeaponLevel} setLevel={setGearLevel} />
+      <Stack className={`mx-auto${hasCrafted ? " opacity-50" : ""}`} gap={3}>
+        <SetGearLevel
+          isDisabled={hasCrafted}
+          level={level}
+          maximum={maximumWeaponLevel}
+          setLevel={setGearLevel}
+        />
 
         <IconDisplay Icon={IconGearClass} iconProps={{ overlayPlacement: "left" }} tooltip="Class">
           <DropdownButton
+            disabled={hasCrafted}
             onSelect={(key) => {
               if (key !== null) {
                 setBlacksmithOptions((options) => ({
@@ -111,6 +118,7 @@ export function MeleeOptions() {
         {isSkillAcquiredSiegecraft && (
           <IconDisplay Icon={IconGrip} iconProps={{ overlayPlacement: "left" }} tooltip="Grip">
             <DropdownButton
+              disabled={hasCrafted}
               onSelect={(key) => {
                 if (key !== null) {
                   setBlacksmithOptions((options) => ({
@@ -201,7 +209,17 @@ export function MeleeOptions() {
 
       <hr />
 
-      {craftedWeapon === undefined ? (
+      {hasCrafted ? (
+        <CraftedGear
+          gearItem={craftedWeapon}
+          onTransfer={() => {
+            setBlacksmithInventory((currentBlacksmithInventory) => ({
+              ...currentBlacksmithInventory,
+              weapon: undefined,
+            }));
+          }}
+        />
+      ) : (
         <CraftGear
           onCraft={() => {
             setBlacksmithInventory((currentBlacksmithInventory) => ({
@@ -226,16 +244,6 @@ export function MeleeOptions() {
               ...WEAPON_BASE.price,
             }) * WEAPON_MODIFIER[grip].price,
           )}
-        />
-      ) : (
-        <CraftedGear
-          gearItem={craftedWeapon}
-          onTransfer={() => {
-            setBlacksmithInventory((currentBlacksmithInventory) => ({
-              ...currentBlacksmithInventory,
-              weapon: undefined,
-            }));
-          }}
         />
       )}
     </Stack>

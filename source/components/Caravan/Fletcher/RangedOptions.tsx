@@ -55,6 +55,7 @@ export function RangedOptions() {
     factor,
     gearClass,
   });
+  const hasCrafted = fletcherInventoryValue !== undefined;
   const maximumWeaponLevel = Math.min(
     stageMaximumValue + GEAR_LEVEL_RANGE_MAXIMUM,
     LEVELLING_MAXIMUM,
@@ -81,11 +82,17 @@ export function RangedOptions() {
 
   return (
     <Stack className="mx-auto w-50">
-      <Stack className="mx-auto" gap={3}>
-        <SetGearLevel level={level} maximum={maximumWeaponLevel} setLevel={setGearLevel} />
+      <Stack className={`mx-auto${hasCrafted ? " opacity-50" : ""}`} gap={3}>
+        <SetGearLevel
+          isDisabled={hasCrafted}
+          level={level}
+          maximum={maximumWeaponLevel}
+          setLevel={setGearLevel}
+        />
 
         <IconDisplay Icon={IconGearClass} iconProps={{ overlayPlacement: "left" }} tooltip="Class">
           <DropdownButton
+            disabled={hasCrafted}
             onSelect={(key) => {
               if (key !== null) {
                 setFletcherOptions((options) => ({
@@ -201,7 +208,9 @@ export function RangedOptions() {
       <hr />
 
       {isSkillAcquiredArchery ? (
-        fletcherInventoryValue === undefined ? (
+        hasCrafted ? (
+          <CraftedGear gearItem={fletcherInventoryValue} onTransfer={resetFletcherInventory} />
+        ) : (
           <CraftGear
             onCraft={() => {
               setFletcherInventory(
@@ -225,8 +234,6 @@ export function RangedOptions() {
               }) * WEAPON_MODIFIER.ranged.price,
             )}
           />
-        ) : (
-          <CraftedGear gearItem={fletcherInventoryValue} onTransfer={resetFletcherInventory} />
         )
       ) : (
         <span className="fst-italic text-center">{LABEL_SKILL_REQUIRED}</span>

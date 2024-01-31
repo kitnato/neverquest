@@ -5,10 +5,12 @@ import IconGearLevel from "@neverquest/icons/gear-level.svg?react";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function SetGearLevel({
+  isDisabled,
   level,
   maximum,
   setLevel,
 }: {
+  isDisabled: boolean;
   level: number;
   maximum: number;
   setLevel: (level: number) => void;
@@ -16,6 +18,7 @@ export function SetGearLevel({
   return (
     <IconDisplay Icon={IconGearLevel} iconProps={{ overlayPlacement: "left" }} tooltip="Gear level">
       <FormControl
+        disabled={isDisabled}
         max={maximum}
         min={1}
         onChange={({ target: { value } }) => {

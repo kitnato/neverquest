@@ -6,6 +6,7 @@ import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
 import { useCanFit } from "@neverquest/hooks/actions/useCanFit";
 import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
 import type { GearItem } from "@neverquest/types";
+import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function CraftedGear({
   gearItem,
@@ -24,7 +25,7 @@ export function CraftedGear({
 
   return (
     <Stack gap={3}>
-      <div className="mx-auto">
+      <div className={`mx-auto ${getAnimationClass({ animation: "pulse" })}`}>
         <ItemDisplay item={gearItem} />
       </div>
 

@@ -46,6 +46,7 @@ export function ArmorOptions() {
     factor,
     gearClass,
   });
+  const hasCrafted = craftedArmor !== undefined;
   const maximumArmorLevel = Math.min(
     stageMaximumValue + GEAR_LEVEL_RANGE_MAXIMUM,
     LEVELLING_MAXIMUM,
@@ -72,8 +73,13 @@ export function ArmorOptions() {
 
   return (
     <Stack className="mx-auto w-50">
-      <Stack className="mx-auto" gap={3}>
-        <SetGearLevel level={level} maximum={maximumArmorLevel} setLevel={setGearLevel} />
+      <Stack className={`mx-auto${hasCrafted ? " opacity-50" : ""}`} gap={3}>
+        <SetGearLevel
+          isDisabled={hasCrafted}
+          level={level}
+          maximum={maximumArmorLevel}
+          setLevel={setGearLevel}
+        />
 
         <IconDisplay
           Icon={ARMOR_SPECIFICATIONS[gearClass].Icon}
@@ -81,6 +87,7 @@ export function ArmorOptions() {
           tooltip="Class"
         >
           <DropdownButton
+            disabled={hasCrafted}
             onSelect={(key) => {
               if (key !== null) {
                 setBlacksmithOptions((options) => ({
@@ -156,7 +163,17 @@ export function ArmorOptions() {
 
       {!isSkillAcquiredArmorcraft && gearClass === "heavy" ? (
         <span className="fst-italic text-center">{LABEL_SKILL_REQUIRED}</span>
-      ) : craftedArmor === undefined ? (
+      ) : hasCrafted ? (
+        <CraftedGear
+          gearItem={craftedArmor}
+          onTransfer={() => {
+            setBlacksmithInventory((currentBlacksmithInventory) => ({
+              ...currentBlacksmithInventory,
+              armor: undefined,
+            }));
+          }}
+        />
+      ) : (
         <CraftGear
           onCraft={() => {
             setBlacksmithInventory((currentBlacksmithInventory) => ({
@@ -182,16 +199,6 @@ export function ArmorOptions() {
               ...ARMOR_SPECIFICATIONS[gearClass].price,
             }),
           )}
-        />
-      ) : (
-        <CraftedGear
-          gearItem={craftedArmor}
-          onTransfer={() => {
-            setBlacksmithInventory((currentBlacksmithInventory) => ({
-              ...currentBlacksmithInventory,
-              armor: undefined,
-            }));
-          }}
         />
       )}
     </Stack>

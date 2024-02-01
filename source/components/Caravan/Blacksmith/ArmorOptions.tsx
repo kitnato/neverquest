@@ -12,9 +12,9 @@ import { LABEL_SKILL_REQUIRED, LABEL_UNKNOWN, LEVELLING_MAXIMUM } from "@neverqu
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import IconBurden from "@neverquest/icons/burden.svg?react";
 import IconDeflection from "@neverquest/icons/deflection.svg?react";
-import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react";
 import IconArmorProtection from "@neverquest/icons/protection.svg?react";
 import IconUnknown from "@neverquest/icons/unknown.svg?react";
+import IconWeight from "@neverquest/icons/weight.svg?react";
 import { blacksmithInventory, blacksmithOptions } from "@neverquest/state/caravan";
 import { stageMaximum } from "@neverquest/state/encounter";
 import { isSkillAcquired } from "@neverquest/state/skills";
@@ -145,11 +145,7 @@ export function ArmorOptions() {
           </span>
         </IconDisplay>
 
-        <IconDisplay
-          Icon={IconEncumbrance}
-          iconProps={{ overlayPlacement: "left" }}
-          tooltip="Weight"
-        >
+        <IconDisplay Icon={IconWeight} iconProps={{ overlayPlacement: "left" }} tooltip="Weight">
           <span>
             {formatNumber({ value: weight.minimum })}&nbsp;-&nbsp;
             {formatNumber({

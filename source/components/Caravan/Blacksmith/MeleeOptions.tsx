@@ -16,11 +16,11 @@ import {
 import { LABEL_UNKNOWN, LEVELLING_MAXIMUM } from "@neverquest/data/general";
 import { WEAPON_ABILITY_SKILLS } from "@neverquest/data/skills";
 import IconBurden from "@neverquest/icons/burden.svg?react";
-import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react";
 import IconGrip from "@neverquest/icons/grip.svg?react";
 import IconUnknown from "@neverquest/icons/unknown.svg?react";
 import IconWeaponAttackRate from "@neverquest/icons/weapon-attack-rate.svg?react";
 import IconWeaponDamage from "@neverquest/icons/weapon-damage.svg?react";
+import IconWeight from "@neverquest/icons/weight.svg?react";
 import { blacksmithInventory, blacksmithOptions } from "@neverquest/state/caravan";
 import { stageMaximum } from "@neverquest/state/encounter";
 import { isSkillAcquired } from "@neverquest/state/skills";
@@ -193,11 +193,7 @@ export function MeleeOptions() {
           </span>
         </IconDisplay>
 
-        <IconDisplay
-          Icon={IconEncumbrance}
-          iconProps={{ overlayPlacement: "left" }}
-          tooltip="Weight"
-        >
+        <IconDisplay Icon={IconWeight} iconProps={{ overlayPlacement: "left" }} tooltip="Weight">
           <span>
             {formatNumber({ value: weight.minimum })}&nbsp;-&nbsp;
             {formatNumber({

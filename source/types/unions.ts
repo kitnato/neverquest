@@ -327,7 +327,7 @@ export type StateKey =
   | "gems"
   | "hasEnoughAmmunition"
   | "hasFlatlined"
-  | "hasLooted"
+  | "hasLootedEssence"
   | "hasMonsterClosed"
   | "health"
   | "healthMaximum"

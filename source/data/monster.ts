@@ -69,7 +69,7 @@ export const ESSENCE = {
   attenuation: 15,
   base: 5,
   bonus: 0.01,
-  boss: 1.2,
+  boss: 1.5,
   finality: {
     "res cogitans": 7777,
     "res dominus": 7777,
@@ -102,7 +102,7 @@ export const MONSTER_ATTACK_RATE = {
 };
 
 export const MONSTER_DAMAGE = {
-  attenuation: 22,
+  attenuation: 25,
   base: 7,
   bonus: 0.01,
   boss: 1.05,
@@ -118,10 +118,10 @@ export const MONSTER_DAMAGE = {
 };
 
 export const MONSTER_HEALTH = {
-  attenuation: 14,
+  attenuation: 20,
   base: 16,
   bonus: 0.02,
-  boss: 1.7,
+  boss: 1.6,
   finality: {
     "res cogitans": 5777,
     "res dominus": 3777,
@@ -135,6 +135,7 @@ export const MONSTER_HEALTH = {
 
 export const MONSTER_REGENERATION = {
   duration: 40_000,
+  minimum: 1,
   ticks: 20,
 };
 

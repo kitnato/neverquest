@@ -3,6 +3,7 @@ import { selector } from "recoil";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { PERCENTAGE_POINTS } from "@neverquest/data/general";
 import {
+  BLEED,
   DEFLECTION_MAXIMUM,
   PARRY_ABSORPTION,
   PARRY_DAMAGE,
@@ -48,12 +49,15 @@ export const bleedDamage = withStateKey("bleedDamage", (key) =>
     get: ({ get }) => {
       const { duration, ticks } = get(bleed);
 
-      return Math.round(
-        getAmountPerTick({
-          amount: get(damage) * get(masteryStatistic("cruelty")),
-          duration,
-          ticks,
-        }),
+      return Math.max(
+        BLEED.minimum,
+        Math.round(
+          getAmountPerTick({
+            amount: get(damage) * get(masteryStatistic("cruelty")),
+            duration,
+            ticks,
+          }),
+        ),
       );
     },
     key,

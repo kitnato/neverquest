@@ -60,7 +60,7 @@ export const blacksmithOptions = withStateKey("blacksmithOptions", (key) =>
     };
   }>({
     default: {
-      activeTab: "armor",
+      activeTab: "weapon",
       armor: {
         gearClass: "light",
         level: 0,

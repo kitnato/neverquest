@@ -260,8 +260,7 @@ export const RELICS: Record<
   hearthstone: {
     Icon: IconStone,
     item: {
-      description:
-        "Traveling back to the caravan is possible even when there are still lurking monsters.",
+      description: "Instantly travel back to the caravan regardless of any lurking monsters.",
       name: "hearthstone",
       price: 100,
       weight: 3,

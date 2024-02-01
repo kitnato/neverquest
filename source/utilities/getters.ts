@@ -83,7 +83,7 @@ export function getAmountPerTick({
   duration: number;
   ticks: number;
 }) {
-  return Math.ceil((amount / duration) * (duration / ticks));
+  return (amount / duration) * (duration / ticks);
 }
 
 export function getAnimationClass({

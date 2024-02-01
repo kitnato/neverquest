@@ -9,14 +9,14 @@ import IconTravel from "@neverquest/icons/travel.svg?react";
 import { hasFlatlined, isAttacking } from "@neverquest/state/character";
 import { encounter, location } from "@neverquest/state/encounter";
 import { encumbranceExtent } from "@neverquest/state/inventory";
-import { hasLooted } from "@neverquest/state/resources";
+import { hasLootedEssence } from "@neverquest/state/resources";
 import { isShowing } from "@neverquest/state/ui";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Travel() {
   const encounterValue = useRecoilValue(encounter);
   const encumbranceExtentValue = useRecoilValue(encumbranceExtent);
-  const hasLootedValue = useRecoilValue(hasLooted);
+  const hasLootedEssenceValue = useRecoilValue(hasLootedEssence);
   const isAttackingValue = useRecoilValue(isAttacking);
   const hasFlatlinedValue = useRecoilValue(hasFlatlined);
   const isShowingLocation = useRecoilValue(isShowing("location"));
@@ -28,7 +28,7 @@ export function Travel() {
   const isOverEncumbered =
     locationValue === "caravan" && encumbranceExtentValue === "over-encumbered";
 
-  if (encounterValue === "void" || hasLootedValue || locationValue === "caravan") {
+  if (encounterValue === "void" || hasLootedEssenceValue || locationValue === "caravan") {
     return (
       <OverlayTrigger
         overlay={

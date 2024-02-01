@@ -188,13 +188,13 @@ export const WEAPON_BASE: GearRangeBase & {
   ],
   burden: [
     { maximum: 2, minimum: 1 },
-    { maximum: 45, minimum: 40 },
+    { maximum: 50, minimum: 45 },
   ],
   damage: [
     { maximum: 15, minimum: 13 },
     { maximum: 1000, minimum: 900 },
   ],
-  price: { maximum: 10_000, minimum: 1 },
+  price: { maximum: 9000, minimum: 1 },
   range: [
     { maximum: 2200, minimum: 2000 },
     { maximum: 3700, minimum: 3600 },

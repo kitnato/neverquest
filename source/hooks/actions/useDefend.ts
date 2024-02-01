@@ -46,6 +46,7 @@ import {
 } from "@neverquest/state/statistics";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import { isShowing } from "@neverquest/state/ui";
+import { isUnshielded } from "@neverquest/types/type-guards";
 import type { DeltaDisplay } from "@neverquest/types/ui";
 import { ELEMENTAL_TYPES } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
@@ -73,6 +74,7 @@ export function useDefend() {
         const deltaStamina: DeltaDisplay[] = [];
         const incursArmorBurden = !get(isTraitAcquired("stalwart")) && burden > 0;
         const ownedItemLacrimatory = get(ownedItem("lacrimatory"));
+        const shieldValue = get(shield);
         const statusElementValue = get(statusElement);
         const tearsValue = get(tears);
 
@@ -199,12 +201,10 @@ export function useDefend() {
 
           // If not parried and blocking occurs, check & apply burden.
           if (hasBlocked) {
-            const { burden } = get(shield);
+            const { burden } = shieldValue;
 
             if (get(canBlock)) {
               healthDamage = 0;
-
-              progressQuest({ quest: "blocking" });
 
               deltaHealth.push({
                 color: "text-muted",
@@ -212,6 +212,7 @@ export function useDefend() {
               });
 
               changeStamina({ value: -burden });
+              progressQuest({ quest: "blocking" });
 
               if (Math.random() <= get(staggerChance)) {
                 set(monsterAilmentDuration("staggered"), get(masteryStatistic("stability")));
@@ -265,9 +266,6 @@ export function useDefend() {
               changeStamina({ value: -burden });
             }
           }
-
-          set(isShowing("recovery"), true);
-          set(recoveryDuration, get(recoveryRate));
 
           // If already poisoned, check if blighting has occurred and if it's been deflected.
           if (get(isPoisoned) && Math.random() <= get(blightChance)) {
@@ -337,6 +335,19 @@ export function useDefend() {
             );
           }
 
+          if (!hasBlocked) {
+            if (healthDamage > 0) {
+              trainMastery("resilience");
+            }
+
+            set(isShowing("recovery"), true);
+            set(recoveryDuration, get(recoveryRate));
+          }
+
+          if (!isUnshielded(shieldValue)) {
+            trainMastery("stability");
+          }
+
           // Take any damage and show any stamina costs.
           changeHealth({ delta: deltaHealth, value: -healthDamage });
 
@@ -344,12 +355,6 @@ export function useDefend() {
             contents: deltaStamina,
             delta: "stamina",
           });
-
-          if (healthDamage > 0) {
-            trainMastery("resilience");
-          }
-
-          trainMastery("stability");
 
           // Inflict any armor elemental effects.
           for (const elemental of ELEMENTAL_TYPES) {

@@ -11,9 +11,9 @@ import { GEAR_LEVEL_RANGE_MAXIMUM, SHIELD_SPECIFICATIONS } from "@neverquest/dat
 import { LABEL_SKILL_REQUIRED, LABEL_UNKNOWN, LEVELLING_MAXIMUM } from "@neverquest/data/general";
 import IconBlock from "@neverquest/icons/block.svg?react";
 import IconBurden from "@neverquest/icons/burden.svg?react";
-import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react";
 import IconStaggerChance from "@neverquest/icons/stagger-chance.svg?react";
 import IconUnknown from "@neverquest/icons/unknown.svg?react";
+import IconWeight from "@neverquest/icons/weight.svg?react";
 import { blacksmithInventory, blacksmithOptions } from "@neverquest/state/caravan";
 import { stageMaximum } from "@neverquest/state/encounter";
 import { isSkillAcquired } from "@neverquest/state/skills";
@@ -140,11 +140,7 @@ export function ShieldOptions() {
           </span>
         </IconDisplay>
 
-        <IconDisplay
-          Icon={IconEncumbrance}
-          iconProps={{ overlayPlacement: "left" }}
-          tooltip="Weight"
-        >
+        <IconDisplay Icon={IconWeight} iconProps={{ overlayPlacement: "left" }} tooltip="Weight">
           <span>
             {formatNumber({ value: weight.minimum })}&nbsp;-&nbsp;
             {formatNumber({

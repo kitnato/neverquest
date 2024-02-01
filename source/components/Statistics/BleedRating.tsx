@@ -4,24 +4,26 @@ import { useRecoilValue } from "recoil";
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { IconImage } from "@neverquest/components/IconImage";
 import { LABEL_EMPTY } from "@neverquest/data/general";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconBleedChance from "@neverquest/icons/bleed-chance.svg?react";
 import IconBleedRating from "@neverquest/icons/bleed-rating.svg?react";
 import IconBleeding from "@neverquest/icons/bleeding.svg?react";
 import IconCruelty from "@neverquest/icons/cruelty.svg?react";
+import IconDamage from "@neverquest/icons/damage.svg?react";
 import { bleed, bleedChance } from "@neverquest/state/ailments";
 import { weapon } from "@neverquest/state/gear";
 import { masteryStatistic } from "@neverquest/state/masteries";
-import { bleedRating, damage } from "@neverquest/state/statistics";
+import { bleedDamage, bleedRating } from "@neverquest/state/statistics";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAnimationClass, getWeaponIcon } from "@neverquest/utilities/getters";
 
 export function BleedRating() {
-  const { duration } = useRecoilValue(bleed);
+  const { duration, ticks } = useRecoilValue(bleed);
   const bleedChanceValue = useRecoilValue(bleedChance);
+  const bleedDamageValue = useRecoilValue(bleedDamage);
   const bleedRatingValue = useRecoilValue(bleedRating);
-  const damageValue = useRecoilValue(damage);
   const masteryStatisticCruelty = useRecoilValue(masteryStatistic("cruelty"));
   const weaponValue = useRecoilValue(weapon);
 
@@ -75,8 +77,10 @@ export function BleedRating() {
                             format: "percentage",
                             value: masteryStatisticCruelty,
                           })}
-                          &nbsp;of total damage
+                          &nbsp;of&nbsp;
                         </span>
+
+                        <IconImage className="small" Icon={IconDamage} />
                       </td>
                     </tr>
 
@@ -89,7 +93,7 @@ export function BleedRating() {
                         <IconDisplay Icon={IconBleeding} iconProps={{ className: "small" }}>
                           <span>
                             {formatNumber({
-                              value: damageValue * masteryStatisticCruelty,
+                              value: bleedDamageValue * ticks,
                             })}
                             &nbsp;over&nbsp;
                             {formatNumber({

@@ -5,7 +5,7 @@ import { isAttacking } from "@neverquest/state/character";
 import { isStageStarted, progress } from "@neverquest/state/encounter";
 import { isWeaving } from "@neverquest/state/items";
 import { questProgress } from "@neverquest/state/quests";
-import { essenceLoot, hasLooted, itemsLoot } from "@neverquest/state/resources";
+import { essenceLoot, itemsLoot } from "@neverquest/state/resources";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useResetWilderness() {
@@ -21,7 +21,6 @@ export function useResetWilderness() {
         }
 
         reset(essenceLoot);
-        reset(hasLooted);
         reset(itemsLoot);
         reset(progress);
         reset(questProgress("killingStage"));

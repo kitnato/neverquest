@@ -258,7 +258,7 @@ export const MERCHANT_OFFERS: Record<
   },
   14: {
     item: RELICS.hearthstone.item,
-    monologue: "A relic that allows safe passage. Would that be of interest?",
+    monologue: "A relic that grants safe passage. Would that be of interest?",
   },
   [CREW.fletcher.requiredStage]: {
     item: RELICS["ammunition pouch"].item,

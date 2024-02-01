@@ -6,7 +6,8 @@ export const AILMENT_PENALTY = {
 };
 
 export const BLEED = {
-  base: { duration: 5000, ticks: 40 },
+  base: { duration: 4000, ticks: 20 },
+  minimum: 1,
   shredder: { duration: 100, ticks: 1 },
 };
 

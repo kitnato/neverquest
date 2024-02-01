@@ -15,7 +15,6 @@ import IconDodge from "@neverquest/icons/dodge.svg?react";
 import IconEscrime from "@neverquest/icons/escrime.svg?react";
 import IconEvasion from "@neverquest/icons/evasion.svg?react";
 import IconExecution from "@neverquest/icons/execution.svg?react";
-import IconGrip from "@neverquest/icons/grip.svg?react";
 import IconHealth from "@neverquest/icons/health.svg?react";
 import IconImpermeability from "@neverquest/icons/impermeability.svg?react";
 import IconInfusionLevel from "@neverquest/icons/infusion-level.svg?react";
@@ -35,6 +34,7 @@ import IconStaggered from "@neverquest/icons/staggered.svg?react";
 import IconStamina from "@neverquest/icons/stamina.svg?react";
 import IconStunned from "@neverquest/icons/stunned.svg?react";
 import IconTraumatology from "@neverquest/icons/traumatology.svg?react";
+import IconTwoHanded from "@neverquest/icons/two-handed.svg?react";
 import type { SVGIcon } from "@neverquest/types/components";
 import type { CrewMember, Showing, Skill, WeaponAbility } from "@neverquest/types/unions";
 
@@ -148,7 +148,7 @@ export const SKILLS: Record<
   siegecraft: {
     description:
       "Grants the use of # two-handed melee weapons that have a chance to # execute monsters.",
-    descriptionIcons: [IconGrip, IconExecution],
+    descriptionIcons: [IconTwoHanded, IconExecution],
     Icon: IconSiegecraft,
     isInheritable: false,
     requiredCrewMember: "blacksmith",

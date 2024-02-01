@@ -13,14 +13,13 @@ import { useHeal } from "@neverquest/hooks/actions/useHeal";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import IconEssence from "@neverquest/icons/essence.svg?react";
 import IconHealing from "@neverquest/icons/healing.svg?react";
-import { isHealthAtMaximum, isHealthLow } from "@neverquest/state/reserves";
+import { isHealthAtMaximum } from "@neverquest/state/reserves";
 import { essence } from "@neverquest/state/resources";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function ReceiveHealing() {
   const essenceValue = useRecoilValue(essence);
   const isHealthAtMaximumValue = useRecoilValue(isHealthAtMaximum);
-  const isHealthLowValue = useRecoilValue(isHealthLow);
 
   const transactEssence = useTransactEssence();
 
@@ -35,7 +34,7 @@ export function ReceiveHealing() {
 
       <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
         <IconDisplay Icon={IconHealing} tooltip="Healing">
-          <span>{isHealthLowValue ? "Emergency treatment" : "Minor surgery"}</span>
+          <span>Surgery</span>
         </IconDisplay>
 
         <Stack className="ms-2" direction="horizontal" gap={3}>

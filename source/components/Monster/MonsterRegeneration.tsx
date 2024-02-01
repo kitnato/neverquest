@@ -25,12 +25,17 @@ export function MonsterRegeneration() {
 
   const changeMonsterHealth = useChangeMonsterHealth();
 
-  const { duration, ticks } = MONSTER_REGENERATION;
-  const regenerationAmount = getAmountPerTick({
-    amount: monsterHealthMaximumValue,
-    duration,
-    ticks,
-  });
+  const { duration, minimum, ticks } = MONSTER_REGENERATION;
+  const regenerationAmount = Math.max(
+    minimum,
+    Math.round(
+      getAmountPerTick({
+        amount: monsterHealthMaximumValue,
+        duration,
+        ticks,
+      }),
+    ),
+  );
 
   useTimerDelta({
     delta: setMonsterRegenerationDuration,

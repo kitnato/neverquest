@@ -1,4 +1,4 @@
-import { Dropdown, DropdownButton } from "react-bootstrap";
+import { DropdownButton, DropdownItem } from "react-bootstrap";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
@@ -99,7 +99,7 @@ export function ApplyGem({ gem }: { gem: GemItem }) {
         const canApply = canFit && isAffordable;
 
         return (
-          <Dropdown.Item disabled={!canApply} eventKey={gearType} key={gearType}>
+          <DropdownItem disabled={!canApply} eventKey={gearType} key={gearType}>
             <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
               <span>{capitalizeAll(name)}</span>
 
@@ -113,7 +113,7 @@ export function ApplyGem({ gem }: { gem: GemItem }) {
                 )}
               </div>
             </div>
-          </Dropdown.Item>
+          </DropdownItem>
         );
       })}
     </DropdownButton>

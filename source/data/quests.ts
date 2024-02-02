@@ -84,6 +84,13 @@ export const QUESTS: Record<
     requiresTracking: true,
     title: "Shiny",
   },
+  acquiringLogEntry: {
+    description: `Acquire the ${LABEL_UNKNOWN}`,
+    hidden: "log entry.",
+    progression: [1],
+    requiresTracking: false,
+    title: "Subversion",
+  },
   acquiringMemento: {
     description: "Acquire the memento.",
     progression: [1],

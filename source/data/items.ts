@@ -1,3 +1,4 @@
+import { FINALITY_STAGE } from "./monster";
 import { FRAMERATE } from "@neverquest/data/general";
 import IconAmmunitionPouch from "@neverquest/icons/ammunition-pouch.svg?react";
 import IconAntidote from "@neverquest/icons/antidote.svg?react";
@@ -16,6 +17,7 @@ import IconJournal from "@neverquest/icons/journal.svg?react";
 import IconKnapsack from "@neverquest/icons/knapsack.svg?react";
 import IconLacrimatory from "@neverquest/icons/lacrimatory.svg?react";
 import IconLightning from "@neverquest/icons/lightning.svg?react";
+import IconLogEntry from "@neverquest/icons/log-entry.svg?react";
 import IconMemento from "@neverquest/icons/memento.svg?react";
 import IconMysteriousEgg from "@neverquest/icons/mysterious-egg.svg?react";
 import IconPerpetualLoom from "@neverquest/icons/perpetual-loom.svg?react";
@@ -64,9 +66,9 @@ export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<Consuma
     elixir: {
       Icon: IconElixir,
       item: {
-        description: "Restores all stamina.",
+        description: "Fully restores stamina.",
         name: "elixir",
-        price: 25,
+        price: 40,
         weight: 2,
       },
     },
@@ -143,7 +145,7 @@ export const GEM_BASE = {
 };
 export const GEM_DROP_CHANCE = { equalStage: 1, lowerStage: 0.25 };
 export const GEM_ENHANCEMENT_RANGE = { maximum: 1, minimum: 0.1 };
-export const GEM_FITTING_COST_RANGE = { maximum: 300, minimum: 10 };
+export const GEM_FITTING_COST_RANGE = { maximum: 250, minimum: 10 };
 export const GEMS: Record<Gem, { elemental: Elemental; Icon: SVGIcon }> = {
   ruby: { elemental: "fire", Icon: IconRuby },
   sapphire: { elemental: "ice", Icon: IconSapphire },
@@ -200,6 +202,7 @@ export const INFUSABLES: Record<
 export const KNAPSACK_CAPACITY = 15;
 
 export const RELIC_DROP_CHANCE = {
+  "[P71NQ]": { maximum: 0.01, minimum: 0.001, requiredStage: FINALITY_STAGE["res dominus"] + 1 },
   "dream catcher": { maximum: 0.06, minimum: 0.005 },
   memento: { maximum: 0.08, minimum: 0.01 },
   "torn manuscript": { maximum: 0.05, minimum: 0.01 },
@@ -212,6 +215,15 @@ export const RELICS: Record<
     item: Omit<RelicItem, "ID">;
   }
 > = {
+  "[P71NQ]": {
+    Icon: IconLogEntry,
+    item: {
+      description: "",
+      name: "[P71NQ]",
+      price: 14_014,
+      weight: 14,
+    },
+  },
   "ammunition pouch": {
     Icon: IconAmmunitionPouch,
     item: {
@@ -233,7 +245,8 @@ export const RELICS: Record<
   "dream catcher": {
     Icon: IconDreamCatcher,
     item: {
-      description: "Protects the bearer from harm by disengaging from unfavorable encounters.",
+      description:
+        "When worn, protects the bearer from harm by disengaging from overwhelming encounters.",
       name: "dream catcher",
       price: 1554,
       weight: 10,
@@ -308,7 +321,7 @@ export const RELICS: Record<
       description:
         "While weaving, automatically collects all loot and passes to the next stage once it is cleared of monsters.",
       name: "perpetual loom",
-      price: 7000,
+      price: 5000,
       weight: 20,
     },
   },

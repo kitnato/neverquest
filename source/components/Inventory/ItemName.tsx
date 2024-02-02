@@ -4,7 +4,7 @@ import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { GemDescription } from "@neverquest/components/Inventory/GemDescription";
 import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
 import type { ConsumableItem, GemItem, InheritableItem } from "@neverquest/types";
-import { isGemItem } from "@neverquest/types/type-guards";
+import { isGemItem, isRelicItem } from "@neverquest/types/type-guards";
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 
 export function ItemName({
@@ -14,19 +14,31 @@ export function ItemName({
   amount?: number;
   item: ConsumableItem | GemItem | InheritableItem;
 }) {
-  const description = isGemItem(item) ? (
-    <GemDescription gem={item.name} />
-  ) : (
-    <span>{item.description}</span>
-  );
-
   return (
     <OverlayTrigger
       overlay={
         <Popover>
           <PopoverBody className="text-center">
             <Stack gap={2}>
-              {description}
+              {isGemItem(item) ? (
+                <GemDescription gem={item.name} />
+              ) : isRelicItem(item) && item.name === "[P71NQ]" ? (
+                <Stack className="monospaced">
+                  <span>Priority 0 - BREACH IN PROGRESS</span>
+
+                  <span>Location: Outfloor ██-██#7</span>
+
+                  <span>Initializing: CipherBrk-██-███</span>
+
+                  <span>Processing: 7.7% ...</span>
+
+                  <span>Error: Q██nt█m ██████ destabilization</span>
+
+                  <span>LEAKAGE IMMINENT</span>
+                </Stack>
+              ) : (
+                <span>{item.description}</span>
+              )}
 
               <DetailsTable>
                 <WeightDetail amount={amount} weight={item.weight} />

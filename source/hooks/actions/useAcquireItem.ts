@@ -48,12 +48,30 @@ export function useAcquireItem() {
         }
 
         if (isRelicItem(item)) {
-          if (item.name === "memento") {
-            progressQuest({ quest: "acquiringMemento" });
-          }
+          switch (item.name) {
+            case "[P71NQ]": {
+              progressQuest({ quest: "acquiringLogEntry" });
+              break;
+            }
 
-          if (item.name === "familiar") {
-            progressQuest({ quest: "acquiringFamiliar" });
+            case "dream catcher": {
+              progressQuest({ quest: "acquiringDreamCatcher" });
+              break;
+            }
+
+            case "familiar": {
+              progressQuest({ quest: "acquiringFamiliar" });
+              break;
+            }
+
+            case "memento": {
+              progressQuest({ quest: "acquiringMemento" });
+              break;
+            }
+
+            default: {
+              break;
+            }
           }
         }
 

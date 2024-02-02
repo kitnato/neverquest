@@ -19,6 +19,7 @@ import IconLoad from "@neverquest/icons/load.svg?react";
 import IconSaveLoad from "@neverquest/icons/save-load.svg?react";
 import IconSave from "@neverquest/icons/save.svg?react";
 import { name } from "@neverquest/state/character";
+import { formatKebabCase } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 const INVALID_FILE = "Invalid file.";
@@ -83,7 +84,7 @@ export function SaveLoad() {
                 );
                 downloadAnchorNode.setAttribute(
                   "download",
-                  `neverquest-save${nameValue === LABEL_UNKNOWN ? "" : `-${nameValue}`}.${FILE_EXTENSION}`,
+                  `neverquest-save${nameValue === LABEL_UNKNOWN ? "" : `-${formatKebabCase(nameValue)}`}.${FILE_EXTENSION}`,
                 );
 
                 document.body.append(downloadAnchorNode);

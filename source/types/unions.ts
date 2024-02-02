@@ -452,6 +452,7 @@ export const TRAIT_TYPES = [
 export type Trait = (typeof TRAIT_TYPES)[number];
 
 export const RELIC_TYPES = [
+  "[P71NQ]",
   "ammunition pouch",
   "compass",
   "ender hook",
@@ -490,6 +491,7 @@ export const TRIUMPH_TYPES = [
   "visitingVoid",
   "powerLevelUltra",
   "stagesEnd",
+  "acquiringLogEntry",
   "acquiringFamiliar",
   "killingResCogitans",
   "deciding",

@@ -1,21 +1,28 @@
-import type { SelectCallback } from "@restart/ui/types";
 import { Nav, NavItem, NavLink, Stack, TabContainer, TabContent, TabPane } from "react-bootstrap";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import type { TabsData } from "@neverquest/types/components";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 
-export function IconTabs({
+export function IconTabs<TabLabel extends string>({
   activeKey,
   onSelect,
   tabs,
 }: {
-  activeKey?: string;
-  onSelect?: SelectCallback;
-  tabs: TabsData;
+  activeKey?: TabLabel;
+  onSelect?: (key: TabLabel) => void;
+  tabs: TabsData<TabLabel>;
 }) {
   return (
-    <TabContainer activeKey={activeKey ?? tabs[0].label} onSelect={onSelect}>
+    <TabContainer
+      activeKey={activeKey}
+      defaultActiveKey={tabs[0].label}
+      onSelect={(key) => {
+        if (onSelect !== undefined && key !== null) {
+          onSelect(key as TabLabel);
+        }
+      }}
+    >
       <Stack gap={1}>
         <Nav justify variant="pills">
           {tabs.map(({ Icon, label }) => (

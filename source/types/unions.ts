@@ -22,6 +22,8 @@ export const ATTRIBUTE_TYPES = [
 ] as const;
 export type Attribute = (typeof ATTRIBUTE_TYPES)[number];
 
+export type Capability = "attributes" | "skills" | "traits";
+
 export const CONSUMABLE_TYPES = ["antidote", "bandages", "elixir", "salve", "phylactery"] as const;
 export type Consumable = (typeof CONSUMABLE_TYPES)[number];
 
@@ -126,6 +128,8 @@ export type Elemental = (typeof ELEMENTAL_TYPES)[number];
 
 export const FINALITY_TYPES = ["res cogitans", "res dominus"] as const;
 export type Finality = (typeof FINALITY_TYPES)[number];
+
+export type FletcherOption = "ammunition" | "ranged";
 
 export const GEAR_TYPES = ["weapon", "armor", "shield"] as const;
 export type Gear = (typeof GEAR_TYPES)[number];

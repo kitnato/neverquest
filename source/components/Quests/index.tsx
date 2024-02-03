@@ -11,23 +11,23 @@ import { canTrackQuests } from "@neverquest/state/quests";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { isShowingQuestBonus } from "@neverquest/state/ui";
 import type { TabsData } from "@neverquest/types/components";
-import { QUEST_BONUS_TYPES } from "@neverquest/types/unions";
+import { QUEST_BONUS_TYPES, type QuestClass } from "@neverquest/types/unions";
 
-const TABS: TabsData = [
+const TABS: TabsData<QuestClass> = [
   {
     Component: () => <QuestTab questClass="routine" />,
     Icon: IconRoutine,
-    label: "routines",
+    label: "routine",
   },
   {
     Component: () => <QuestTab questClass="conquest" />,
     Icon: IconConquest,
-    label: "conquests",
+    label: "conquest",
   },
   {
     Component: () => <QuestTab questClass="triumph" />,
     Icon: IconTriumph,
-    label: "triumphs",
+    label: "triumph",
   },
 ];
 

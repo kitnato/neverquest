@@ -6,10 +6,11 @@ import { IconImage } from "@neverquest/components/IconImage";
 import IconAttention from "@neverquest/icons/attention.svg?react";
 import { canCompleteQuests } from "@neverquest/state/quests";
 import type { TabsData } from "@neverquest/types/components";
+import type { QuestClass } from "@neverquest/types/unions";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-export function QuestTabsNav({ tabs }: { tabs: TabsData }) {
+export function QuestTabsNav({ tabs }: { tabs: TabsData<QuestClass> }) {
   const canCompleteConquests = useRecoilValue(canCompleteQuests("conquest"));
   const canCompleteRoutines = useRecoilValue(canCompleteQuests("routine"));
   const canCompleteTriumphs = useRecoilValue(canCompleteQuests("triumph"));
@@ -23,9 +24,9 @@ export function QuestTabsNav({ tabs }: { tabs: TabsData }) {
               <Stack direction="horizontal" gap={2}>
                 <span>{capitalizeAll(label)}</span>
 
-                {((label === "conquests" && canCompleteConquests) ||
-                  (label === "routines" && canCompleteRoutines) ||
-                  (label === "triumphs" && canCompleteTriumphs)) && (
+                {((label === "conquest" && canCompleteConquests) ||
+                  (label === "routine" && canCompleteRoutines) ||
+                  (label === "triumph" && canCompleteTriumphs)) && (
                   <div
                     className={getAnimationClass({
                       animation: "pulse",

@@ -19,17 +19,9 @@ import { acquiredSkills } from "@neverquest/state/skills";
 import { acquiredTraits } from "@neverquest/state/traits";
 import { activeControl, isShowing } from "@neverquest/state/ui";
 import type { TabsData } from "@neverquest/types/components";
+import type { Capability } from "@neverquest/types/unions";
 import { formatEnumeration } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
-
-const BASE_TAB: TabsData = [
-  {
-    Component: Attributes,
-    Icon: IconAttributes,
-    label: "attributes",
-  },
-];
-const BASE_TOOLTIP = ["Attributes"];
 
 export function Capabilities() {
   const [activeControlValue, setActiveControl] = useRecoilState(activeControl);
@@ -42,8 +34,14 @@ export function Capabilities() {
   const locationValue = useRecoilValue(location);
   const resetActiveControl = useResetRecoilState(activeControl);
 
-  let tabs: TabsData = [...BASE_TAB];
-  let tooltip = [...BASE_TOOLTIP];
+  let tabs: TabsData<Capability> = [
+    {
+      Component: Attributes,
+      Icon: IconAttributes,
+      label: "attributes",
+    },
+  ];
+  let tooltip: Capability[] = ["attributes"];
 
   const isShowingSkills = Object.values(acquiredSkillsValue).some(Boolean);
   const isShowingTraits = Object.values(acquiredTraitsValue).some(Boolean);

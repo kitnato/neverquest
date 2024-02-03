@@ -9,6 +9,7 @@ import IconArmor from "@neverquest/icons/armor.svg?react";
 import IconCraftWeapon from "@neverquest/icons/craft-weapon.svg?react";
 import IconShield from "@neverquest/icons/shield.svg?react";
 import { blacksmithOptions } from "@neverquest/state/caravan";
+import type { Gear } from "@neverquest/types/unions";
 
 export function Blacksmith() {
   const [{ activeTab }, setBlacksmithOptions] = useRecoilState(blacksmithOptions);
@@ -17,12 +18,10 @@ export function Blacksmith() {
     <Stack gap={3}>
       <h6>Craft gear</h6>
 
-      <IconTabs
+      <IconTabs<Gear>
         activeKey={activeTab}
         onSelect={(key) => {
-          if (key !== null) {
-            setBlacksmithOptions((options) => ({ ...options, activeTab: key }));
-          }
+          setBlacksmithOptions((options) => ({ ...options, activeTab: key as Gear }));
         }}
         tabs={[
           {

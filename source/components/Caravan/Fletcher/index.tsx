@@ -6,17 +6,16 @@ import { IconTabs } from "@neverquest/components/IconTabs";
 import IconAmmunition from "@neverquest/icons/ammunition.svg?react";
 import IconRanged from "@neverquest/icons/ranged.svg?react";
 import { fletcherOptions } from "@neverquest/state/caravan";
+import type { FletcherOption } from "@neverquest/types/unions";
 
 export function Fletcher() {
   const [{ activeTab }, setFletcherOptions] = useRecoilState(fletcherOptions);
 
   return (
-    <IconTabs
+    <IconTabs<FletcherOption>
       activeKey={activeTab}
       onSelect={(key) => {
-        if (key !== null) {
-          setFletcherOptions((options) => ({ ...options, activeTab: key }));
-        }
+        setFletcherOptions((options) => ({ ...options, activeTab: key }));
       }}
       tabs={[
         { Component: RangedOptions, Icon: IconRanged, label: "ranged" },

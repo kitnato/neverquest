@@ -4,7 +4,13 @@ import { atom, atomFamily, selector } from "recoil";
 import { CREW, MONOLOGUE_EMPTY } from "@neverquest/data/caravan";
 import { handleStorage } from "@neverquest/state/effects/handleStorage";
 import type { Armor, Melee, MerchantInventoryItem, Ranged, Shield } from "@neverquest/types";
-import { CREW_MEMBER_TYPES, type CrewMember, type Grip } from "@neverquest/types/unions";
+import {
+  CREW_MEMBER_TYPES,
+  type CrewMember,
+  type FletcherOption,
+  type Gear,
+  type Grip,
+} from "@neverquest/types/unions";
 import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
@@ -44,7 +50,7 @@ export const blacksmithInventory = withStateKey("blacksmithInventory", (key) =>
 
 export const blacksmithOptions = withStateKey("blacksmithOptions", (key) =>
   atom<{
-    activeTab: string;
+    activeTab: Gear;
     armor: {
       gearClass: ArmorClass;
       level: number;
@@ -98,7 +104,7 @@ export const fletcherInventory = withStateKey("fletcherInventory", (key) =>
 
 export const fletcherOptions = withStateKey("fletcherOptions", (key) =>
   atom<{
-    activeTab: string;
+    activeTab: FletcherOption;
     ammunition: number;
     ranged: {
       gearClass: WeaponClass;

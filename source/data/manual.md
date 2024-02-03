@@ -464,7 +464,7 @@ A monster can be afflicted by any combination of elemental ailment, the severity
 
 #### Relics
 
-Relics enable various actions or grant certain effects if they are carried in the [inventory](#inventory).
+Relics enable various actions or grant certain effects if they are carried in the [inventory](#inventory). They can be purchased from the [caravan](#caravan) and certain relics drop from monsters, provided the right circumstances.
 
 ##### Static relics
 
@@ -472,7 +472,7 @@ These provide a permanent effect of some sort while they are carried in the inve
 
 ##### Usable relics
 
-In addition to potentially providing a [static](#static-relics) effect, these relics also allow direct interaction, usually granting a new action.
+These relics allow direct interaction, usually granting a new action. Some can be equipped for their effect to be granted.
 
 ##### Infusable relics
 

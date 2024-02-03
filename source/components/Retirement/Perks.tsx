@@ -13,7 +13,7 @@ export function Perks() {
 
   return (
     <Stack gap={3}>
-      <h6>Retirement perks</h6>
+      <h6>Perks</h6>
 
       <IconDisplay Icon={IconEssenceBonus} tooltip="Essence loot bonus">
         +

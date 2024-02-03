@@ -14,7 +14,7 @@ import IconStage from "@neverquest/icons/stage.svg?react";
 export function ResetDetails() {
   return (
     <Stack gap={3}>
-      <h6>A new beginning</h6>
+      <h6>Reset</h6>
 
       <ListGroup>
         <ListGroupItem>
@@ -44,9 +44,12 @@ export function ResetDetails() {
         <ListGroupItem>
           <IconDisplay Icon={IconSkills} iconProps={{ className: "small" }}>
             <span>
-              Skills acquired from the&nbsp;
-              <IconImage className="small text-muted" Icon={IconMercenary} />
-              &nbsp;Mercenary
+              Skills&nbsp;
+              <span className="small">
+                acquired from the&nbsp;
+                <IconImage className="small text-muted" Icon={IconMercenary} />
+                &nbsp;Mercenary
+              </span>
             </span>
           </IconDisplay>
         </ListGroupItem>

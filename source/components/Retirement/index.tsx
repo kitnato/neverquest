@@ -40,11 +40,7 @@ export function Retirement({
 
       <ModalBody>
         <Stack gap={5}>
-          <span>
-            Retiring restarts from the beginning with reduced monster density and increased essence
-            loot. A powerful trait can also be chosen, bestowing a permanent boon. All acquired
-            relics are inherited.
-          </span>
+          <span className="fst-italic">Weary bones find quiescence to foster a new beginning.</span>
 
           <ResetDetails />
 

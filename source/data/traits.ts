@@ -15,7 +15,7 @@ import { formatNumber } from "@neverquest/utilities/formatters";
 export const BRAWLER_DAMAGE_BONUS = 0.5;
 
 export const BRUISER_STUN_CHANCE = {
-  increment: 0.04,
+  increment: 0.05,
   maximum: 0.9,
 };
 
@@ -44,7 +44,7 @@ export const TRAITS: Record<
       decimals: 0,
       format: "percentage",
       value: BRUISER_STUN_CHANCE.increment,
-    })} for each strength attribute rank.`,
+    })} per strength attribute rank.`,
     Icon: IconBruiser,
   },
   colossus: {
@@ -81,7 +81,7 @@ export const TRAITS: Record<
     Icon: IconStalwart,
   },
   tank: {
-    description: "Total protection is increased by the equipped shield's block chance.",
+    description: "Protection is increased by the equipped shield's block chance.",
     Icon: IconTank,
   },
 };

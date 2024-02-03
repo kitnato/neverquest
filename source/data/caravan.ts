@@ -91,7 +91,7 @@ export const CREW: Record<
     monologues: {
       1: "I can teach, if you can learn.",
       [LEVELLING_CUTOFF]: MONOLOGUE_EMPTY,
-      [LEVELLING_MAXIMUM]: "Overbearing darkness ...",
+      [LEVELLING_MAXIMUM]: "Why do they bleed? How?",
     },
     price: 75,
     requiredStage: 15,
@@ -262,24 +262,28 @@ export const MERCHANT_OFFERS: Record<
   },
   [CREW.fletcher.requiredStage]: {
     item: RELICS["ammunition pouch"].item,
-    monologue: "I have something suitable for marksmen.",
+    monologue: "Here is something suitable for marksmen.",
   },
   25: {
-    item: INFUSABLES["eldritch codex"].item,
-    monologue: "A dark wanderer passed through and sold me a strange book ...",
-  },
-  30: {
     item: RELICS["ender hook"].item,
     monologue: "I recently came into possession of a fine curiosity.",
+  },
+  30: {
+    item: INFUSABLES["eldritch codex"].item,
+    monologue: "A dark wanderer passed through and sold me a strange book ...",
   },
   34: { item: RELICS.journal.item, monologue: "You wouldn't be a scribe, would you?" },
   40: {
     item: RELICS["perpetual loom"].item,
-    monologue: "Here's a intriguing device that should ease up the grind.",
+    monologue: "Here's an intriguing device that should ease up the grind.",
   },
   [POISON.requiredStage]: {
     item: RELICS.lacrimatory.item,
     monologue: "Allow me to offer a phial to collect your sorrows.",
+  },
+  55: {
+    item: RELICS["dream catcher"].item,
+    monologue: "There is a bizarre texture in the air. Maybe this will help.",
   },
 };
 

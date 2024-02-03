@@ -40,7 +40,7 @@ export function Awakening() {
               }}
               variant="outline-dark"
             >
-              <span>Die</span>
+              <span className="monospaced">Die</span>
             </Button>
           </Stack>
         </Stack>

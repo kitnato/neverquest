@@ -4,8 +4,8 @@ import { useGenerateMerchantOffer } from "@neverquest/hooks/actions/useGenerateM
 import { useSetMonologues } from "@neverquest/hooks/actions/useSetMonologues";
 import {
   consciousness,
-  defeatedFinality,
   encounter,
+  hasDefeatedFinality,
   isStageCompleted,
 } from "@neverquest/state/encounter";
 import { isFinality } from "@neverquest/types/type-guards";
@@ -24,7 +24,7 @@ export function useCompleteStage() {
           const encounterValue = get(encounter);
 
           if (isFinality(encounterValue)) {
-            set(defeatedFinality, encounterValue);
+            set(hasDefeatedFinality(encounterValue), true);
 
             if (encounterValue === "res cogitans") {
               set(consciousness, "vigilans");

@@ -69,10 +69,10 @@ export function useDefend() {
 
         set(isShowing("monsterOffense"), true);
 
-        const { burden } = get(armor);
+        const { burden: armorBurden } = get(armor);
         const deltaHealth: DeltaDisplay[] = [];
         const deltaStamina: DeltaDisplay[] = [];
-        const incursArmorBurden = !get(isTraitAcquired("stalwart")) && burden > 0;
+        const incursArmorBurden = !get(isTraitAcquired("stalwart")) && armorBurden > 0;
         const ownedItemLacrimatory = get(ownedItem("lacrimatory"));
         const shieldValue = get(shield);
         const statusElementValue = get(statusElement);
@@ -116,7 +116,7 @@ export function useDefend() {
             });
 
             if (incursArmorBurden) {
-              changeStamina({ value: -burden });
+              changeStamina({ value: -armorBurden });
             }
 
             isAvoided = true;
@@ -128,7 +128,7 @@ export function useDefend() {
               },
               {
                 color: "text-danger",
-                value: `(${burden})`,
+                value: `(${armorBurden})`,
               },
             );
 
@@ -201,7 +201,7 @@ export function useDefend() {
 
           // If not parried and blocking occurs, check & apply burden.
           if (hasBlocked) {
-            const { burden } = shieldValue;
+            const { burden: shieldBurden } = shieldValue;
 
             if (get(canBlock)) {
               healthDamage = 0;
@@ -211,7 +211,7 @@ export function useDefend() {
                 value: "BLOCKED",
               });
 
-              changeStamina({ value: -burden });
+              changeStamina({ value: -shieldBurden });
               progressQuest({ quest: "blocking" });
 
               if (Math.random() <= get(staggerChance)) {
@@ -237,7 +237,7 @@ export function useDefend() {
                 },
                 {
                   color: "text-danger",
-                  value: `(${burden})`,
+                  value: `(${shieldBurden})`,
                 },
               );
 
@@ -263,7 +263,7 @@ export function useDefend() {
             }
 
             if (incursArmorBurden) {
-              changeStamina({ value: -burden });
+              changeStamina({ value: -armorBurden });
             }
           }
 

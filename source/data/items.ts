@@ -1,4 +1,3 @@
-import { FINALITY_STAGE } from "./monster";
 import { FRAMERATE } from "@neverquest/data/general";
 import IconAmmunitionPouch from "@neverquest/icons/ammunition-pouch.svg?react";
 import IconAntidote from "@neverquest/icons/antidote.svg?react";
@@ -202,8 +201,6 @@ export const INFUSABLES: Record<
 export const KNAPSACK_CAPACITY = 15;
 
 export const RELIC_DROP_CHANCE = {
-  "[P71NQ]": { maximum: 0.01, minimum: 0.001, requiredStage: FINALITY_STAGE["res dominus"] + 1 },
-  "dream catcher": { maximum: 0.06, minimum: 0.005 },
   memento: { maximum: 0.08, minimum: 0.01 },
   "torn manuscript": { maximum: 0.05, minimum: 0.01 },
 };
@@ -248,7 +245,7 @@ export const RELICS: Record<
       description:
         "When worn, protects the bearer from harm by disengaging from overwhelming encounters.",
       name: "dream catcher",
-      price: 1554,
+      price: 1500,
       weight: 10,
     },
   },
@@ -345,4 +342,4 @@ export const RELICS: Record<
   },
 };
 
-export const TEARS_MAXIMUM = 7;
+export const TEARS_MAXIMUM = 21;

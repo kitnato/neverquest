@@ -17,7 +17,13 @@ import {
   merchantInventory,
   monologue,
 } from "@neverquest/state/caravan";
-import { corpse, perkEffect, stage, stageMaximum } from "@neverquest/state/encounter";
+import {
+  corpse,
+  hasDefeatedFinality,
+  perkEffect,
+  stage,
+  stageMaximum,
+} from "@neverquest/state/encounter";
 import { armor, gems, shield, weapon } from "@neverquest/state/gear";
 import { inventory } from "@neverquest/state/inventory";
 import { expandedMasteries, masteryProgress, masteryRank } from "@neverquest/state/masteries";
@@ -70,6 +76,7 @@ export function useRetire() {
         reset(corpse);
         reset(expandedBuyback);
         reset(expandedMasteries);
+        reset(hasDefeatedFinality("res dominus"));
         reset(fletcherInventory);
         reset(gems(ARMOR_NONE.ID));
         reset(gems(SHIELD_NONE.ID));

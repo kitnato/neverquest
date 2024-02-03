@@ -16,7 +16,7 @@ export const encounter = withStateKey("encounter", (key) =>
       const stageValue = get(stage);
 
       if (stageValue === FINALITY_STAGE["res cogitans"]) {
-        if (get(defeatedFinality) === "res cogitans" || get(ownedItem("familiar")) === undefined) {
+        if (get(hasDefeatedFinality("res cogitans")) || get(ownedItem("familiar")) === undefined) {
           return "void";
         }
 
@@ -24,7 +24,7 @@ export const encounter = withStateKey("encounter", (key) =>
       }
 
       if (stageValue === FINALITY_STAGE["res dominus"]) {
-        if (get(defeatedFinality) === "res dominus") {
+        if (get(hasDefeatedFinality("res dominus"))) {
           return "void";
         }
 
@@ -107,10 +107,10 @@ export const corpse = withStateKey("corpse", (key) =>
   }),
 );
 
-export const defeatedFinality = withStateKey("defeatedFinality", (key) =>
-  atom<Finality | undefined>({
-    default: undefined,
-    effects: [handleStorage({ key })],
+export const hasDefeatedFinality = withStateKey("hasDefeatedFinality", (key) =>
+  atomFamily<boolean, Finality>({
+    default: false,
+    effects: (finality) => [handleStorage({ key, parameter: finality })],
     key,
   }),
 );

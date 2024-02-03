@@ -1,10 +1,17 @@
 import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap";
 
+import { Description } from "@neverquest/components/Description";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { GemDescription } from "@neverquest/components/Inventory/GemDescription";
 import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
+import { CONSUMABLES, INFUSABLES, RELICS } from "@neverquest/data/items";
 import type { ConsumableItem, GemItem, InheritableItem } from "@neverquest/types";
-import { isGemItem, isRelicItem } from "@neverquest/types/type-guards";
+import {
+  isConsumableItem,
+  isGemItem,
+  isInfusableItem,
+  isRelicItem,
+} from "@neverquest/types/type-guards";
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 
 export function ItemName({
@@ -37,7 +44,16 @@ export function ItemName({
                   <span>LEAKAGE IMMINENT</span>
                 </Stack>
               ) : (
-                <span>{item.description}</span>
+                <Description
+                  description={item.description}
+                  descriptionIcons={
+                    isConsumableItem(item)
+                      ? CONSUMABLES[item.name].descriptionIcons
+                      : isInfusableItem(item)
+                        ? INFUSABLES[item.name].descriptionIcons
+                        : RELICS[item.name].descriptionIcons
+                  }
+                />
               )}
 
               <DetailsTable>

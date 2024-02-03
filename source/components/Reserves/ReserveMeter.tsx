@@ -8,8 +8,8 @@ import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
 import { LABEL_MAXIMUM, PERCENTAGE_POINTS } from "@neverquest/data/general";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { usePreviousValue } from "@neverquest/hooks/usePreviousValue";
-import IconBlight from "@neverquest/icons/blight.svg?react";
-import IconPoison from "@neverquest/icons/poison.svg?react";
+import IconBlighted from "@neverquest/icons/blighted.svg?react";
+import IconPoisoned from "@neverquest/icons/poisoned.svg?react";
 import {
   blightMagnitude,
   health,
@@ -114,7 +114,7 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
             <span>{` (${formatNumber({ value: reserveMaximumValue })})`}</span>
 
             <IconDisplay
-              Icon={isHealth ? IconPoison : IconBlight}
+              Icon={isHealth ? IconPoisoned : IconBlighted}
               iconProps={{ className: "small stencilled" }}
             >
               <span>

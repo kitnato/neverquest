@@ -17,8 +17,8 @@ import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useResetCharacter } from "@neverquest/hooks/actions/useResetCharacter";
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness";
 import IconCorpse from "@neverquest/icons/corpse.svg?react";
-import IconDead from "@neverquest/icons/dead.svg?react";
 import IconEssence from "@neverquest/icons/essence.svg?react";
+import IconFlatlined from "@neverquest/icons/flatlined.svg?react";
 import { hasFlatlined } from "@neverquest/state/character";
 import { stage, wildernesses } from "@neverquest/state/encounter";
 import { getAffixStructure } from "@neverquest/utilities/getters";
@@ -36,7 +36,7 @@ export function Flatline() {
     <Modal backdrop="static" show={hasFlatlinedValue}>
       <ModalHeader>
         <ModalTitle>
-          <IconDisplay Icon={IconDead}>
+          <IconDisplay Icon={IconFlatlined}>
             <span>Flatline</span>
           </IconDisplay>
         </ModalTitle>

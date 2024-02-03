@@ -5,7 +5,7 @@ import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LABEL_MAXIMUM } from "@neverquest/data/general";
 import IconHealth from "@neverquest/icons/health.svg?react";
-import IconPoison from "@neverquest/icons/poison.svg?react";
+import IconPoisonRating from "@neverquest/icons/poison-rating.svg?react";
 import { poisonChance } from "@neverquest/state/monster";
 import { poisonLength, poisonMagnitude } from "@neverquest/state/reserves";
 import { formatNumber } from "@neverquest/utilities/formatters";
@@ -20,7 +20,7 @@ export function PoisonRating() {
     return (
       <IconDisplay
         className={getAnimationClass({ animation: "flipInX" })}
-        Icon={IconPoison}
+        Icon={IconPoisonRating}
         tooltip="Poison rating"
       >
         <OverlayTrigger

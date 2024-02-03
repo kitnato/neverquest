@@ -10,7 +10,7 @@ import {
   POPOVER_TRIGGER,
 } from "@neverquest/data/general";
 import { BLIGHT } from "@neverquest/data/monster";
-import IconBlight from "@neverquest/icons/blight.svg?react";
+import IconBlightRating from "@neverquest/icons/blight-rating.svg?react";
 import IconStamina from "@neverquest/icons/stamina.svg?react";
 import { blightChance } from "@neverquest/state/monster";
 import { isPoisoned } from "@neverquest/state/reserves";
@@ -27,7 +27,7 @@ export function BlightRating() {
     return (
       <IconDisplay
         className={getAnimationClass({ animation: "flipInX" })}
-        Icon={IconBlight}
+        Icon={IconBlightRating}
         tooltip="Blight rating"
       >
         <OverlayTrigger

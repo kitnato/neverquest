@@ -5,8 +5,8 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LABEL_UNKNOWN, NAME_LENGTH_MAXIMUM } from "@neverquest/data/general";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
-import IconDead from "@neverquest/icons/dead.svg?react";
-import IconAlive from "@neverquest/icons/name.svg?react";
+import IconFlatlined from "@neverquest/icons/flatlined.svg?react";
+import IconName from "@neverquest/icons/name.svg?react";
 import { hasFlatlined, name } from "@neverquest/state/character";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
@@ -45,7 +45,7 @@ export function Name() {
   return (
     <IconDisplay
       className={getAnimationClass({ animation: "flipInX" })}
-      Icon={hasFlatlinedValue ? IconDead : IconAlive}
+      Icon={hasFlatlinedValue ? IconFlatlined : IconName}
       tooltip="Name"
     >
       {isEditing ? (

@@ -7,16 +7,18 @@ import { POPOVER_TRIGGER } from "@neverquest/data/general";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconEssenceBonus from "@neverquest/icons/essence-bonus.svg?react";
 import IconEssence from "@neverquest/icons/essence.svg?react";
-import { perkEffect } from "@neverquest/state/encounter";
+import { retirementStage } from "@neverquest/state/encounter";
 import { essence } from "@neverquest/state/resources";
 import { isShowing } from "@neverquest/state/ui";
 import { formatNumber } from "@neverquest/utilities/formatters";
-import { getAnimationClass } from "@neverquest/utilities/getters";
+import { getAnimationClass, getPerkEffect } from "@neverquest/utilities/getters";
 
 export function Essence() {
   const essenceValue = useRecoilValue(essence);
   const isShowingEssence = useRecoilValue(isShowing("essence"));
-  const perkEffectEssenceBonus = useRecoilValue(perkEffect("essenceBonus"));
+  const retirementStageValue = useRecoilValue(retirementStage);
+
+  const essenceBonus = getPerkEffect({ perk: "essenceBonus", stage: retirementStageValue });
 
   useDeltaText({
     delta: "essence",
@@ -52,7 +54,7 @@ export function Essence() {
                       +
                       {formatNumber({
                         format: "percentage",
-                        value: perkEffectEssenceBonus,
+                        value: essenceBonus,
                       })}
                     </IconDisplay>
                   </Stack>
@@ -60,7 +62,7 @@ export function Essence() {
               </Popover>
             }
             placement="bottom"
-            trigger={perkEffectEssenceBonus > 0 ? POPOVER_TRIGGER : []}
+            trigger={essenceBonus > 0 ? POPOVER_TRIGGER : []}
           >
             <span>{formatNumber({ value: essenceValue })}</span>
           </OverlayTrigger>

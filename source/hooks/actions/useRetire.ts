@@ -20,7 +20,7 @@ import {
 import {
   corpse,
   hasDefeatedFinality,
-  perkEffect,
+  retirementStage,
   stage,
   stageMaximum,
 } from "@neverquest/state/encounter";
@@ -35,10 +35,9 @@ import {
   ATTRIBUTE_TYPES,
   CREW_MEMBER_TYPES,
   MASTERY_TYPES,
-  PERK_TYPES,
   SKILL_TYPES,
 } from "@neverquest/types/unions";
-import { getPerkEffect, getSnapshotGetter } from "@neverquest/utilities/getters";
+import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
 export function useRetire() {
   const acquireSkill = useAcquireSkill();
@@ -115,15 +114,13 @@ export function useRetire() {
           reset(masteryRank(mastery));
         }
 
-        for (const perk of PERK_TYPES) {
-          set(perkEffect(perk), getPerkEffect({ perk, stage: stageValue }));
-        }
-
         for (const skill of SKILL_TYPES) {
           if (!SKILLS[skill].isInheritable) {
             reset(isSkillAcquired(skill));
           }
         }
+
+        set(retirementStage, stageValue);
 
         set(inventory, (currentInventory) =>
           currentInventory.filter((currentItem) => isInheritableItem(currentItem)),

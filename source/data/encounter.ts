@@ -19,7 +19,7 @@ export const PROGRESS = {
 export const PERKS = {
   essenceBonus: {
     maximum: 2,
-    minimum: 0.6,
+    minimum: 0.65,
   },
   monsterReduction: {
     maximum: 0.9,

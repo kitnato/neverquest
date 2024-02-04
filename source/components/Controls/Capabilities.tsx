@@ -41,7 +41,7 @@ export function Capabilities() {
       label: "attributes",
     },
   ];
-  let tooltip: Capability[] = ["attributes"];
+  let tooltip = ["Attributes"];
 
   const isShowingSkills = Object.values(acquiredSkillsValue).some(Boolean);
   const isShowingTraits = Object.values(acquiredTraitsValue).some(Boolean);

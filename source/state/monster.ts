@@ -23,8 +23,8 @@ import { handleStorage } from "@neverquest/state/effects/handleStorage";
 import {
   encounter,
   isStageStarted,
-  perkEffect,
   progress,
+  retirementStage,
   stage,
   stageMaximum,
 } from "@neverquest/state/encounter";
@@ -38,6 +38,7 @@ import {
   getDamagePerRate,
   getFromRange,
   getLinearMapping,
+  getPerkEffect,
   getSigmoid,
   getTriangular,
 } from "@neverquest/utilities/getters";
@@ -306,7 +307,7 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
             (1 + Math.min(get(progress), PROGRESS.maximum)) *
               bonus *
               (encounterValue === "boss" ? boss : 1)) *
-            (1 + get(perkEffect("essenceBonus"))),
+            (1 + getPerkEffect({ perk: "essenceBonus", stage: get(retirementStage) })),
         ),
         gems:
           encounterValue === "boss"

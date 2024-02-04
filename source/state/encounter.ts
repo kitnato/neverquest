@@ -4,8 +4,8 @@ import { PROGRESS } from "@neverquest/data/encounter";
 import { BOSS_STAGE_INTERVAL, BOSS_STAGE_START, FINALITY_STAGE } from "@neverquest/data/monster";
 import { handleStorage } from "@neverquest/state/effects/handleStorage";
 import { ownedItem } from "@neverquest/state/inventory";
-import type { Finality, Perk } from "@neverquest/types/unions";
-import { getFromRange, getSigmoid } from "@neverquest/utilities/getters";
+import type { Finality } from "@neverquest/types/unions";
+import { getFromRange, getPerkEffect, getSigmoid } from "@neverquest/utilities/getters";
 import { withStateKey } from "@neverquest/utilities/helpers";
 
 // SELECTORS
@@ -71,7 +71,7 @@ export const progressMaximum = withStateKey("progressMaximum", (key) =>
 
         const reducedMaximum =
           getFromRange({ factor: getSigmoid(get(stage)), maximum, minimum }) *
-          (1 - get(perkEffect("monsterReduction")));
+          (1 - getPerkEffect({ perk: "monsterReduction", stage: get(retirementStage) }));
 
         return Math.max(1, Math.round(reducedMaximum));
       }
@@ -139,10 +139,10 @@ export const progress = withStateKey("progress", (key) =>
   }),
 );
 
-export const perkEffect = withStateKey("perkEffect", (key) =>
-  atomFamily<number, Perk>({
+export const retirementStage = withStateKey("retirementStage", (key) =>
+  atom<number>({
     default: 0,
-    effects: (perk) => [handleStorage({ key, parameter: perk })],
+    effects: [handleStorage({ key })],
     key,
   }),
 );

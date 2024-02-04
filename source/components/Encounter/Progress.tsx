@@ -7,12 +7,15 @@ import { POPOVER_TRIGGER } from "@neverquest/data/general";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconMonsterReduction from "@neverquest/icons/monster-reduction.svg?react";
 import IconProgress from "@neverquest/icons/progress.svg?react";
-import { location, perkEffect, progress } from "@neverquest/state/encounter";
+import { location, progress, retirementStage } from "@neverquest/state/encounter";
 import { formatNumber } from "@neverquest/utilities/formatters";
+import { getPerkEffect } from "@neverquest/utilities/getters";
 
 export function Progress() {
   const locationValue = useRecoilValue(location);
-  const perkEffectMonsterReduction = useRecoilValue(perkEffect("monsterReduction"));
+  const retirementStageValue = useRecoilValue(retirementStage);
+
+  const monsterReduction = getPerkEffect({ perk: "monsterReduction", stage: retirementStageValue });
 
   useDeltaText({
     delta: "progress",
@@ -46,7 +49,7 @@ export function Progress() {
                       -
                       {formatNumber({
                         format: "percentage",
-                        value: perkEffectMonsterReduction,
+                        value: monsterReduction,
                       })}
                     </span>
                   </IconDisplay>
@@ -55,7 +58,7 @@ export function Progress() {
             </Popover>
           }
           placement="bottom"
-          trigger={perkEffectMonsterReduction > 0 ? POPOVER_TRIGGER : []}
+          trigger={monsterReduction > 0 ? POPOVER_TRIGGER : []}
         >
           <div className="w-100">
             <ProgressMeter />

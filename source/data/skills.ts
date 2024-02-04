@@ -122,12 +122,12 @@ export const SKILLS: Record<
     trainer: "witch",
   },
   meditation: {
-    description: "Grants the ancient technique of relic # infusion.",
+    description: "Grants the recondite technique of relic # infusion.",
     descriptionIcons: [IconInfusionLevel],
     Icon: IconMeditation,
     isInheritable: true,
     requiredCrewMember: "merchant",
-    trainer: "alchemist",
+    trainer: "occultist",
   },
   memetics: {
     description: "Grants the ability to decipher and inscribe the # journal.",

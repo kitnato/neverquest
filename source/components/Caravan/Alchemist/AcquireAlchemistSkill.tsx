@@ -8,7 +8,7 @@ import { ownedItem } from "@neverquest/state/inventory";
 import { acquiredSkills } from "@neverquest/state/skills";
 import { SKILL_TYPES } from "@neverquest/types/unions";
 
-export function AcquireAlchemistSkills() {
+export function AcquireAlchemistSkill() {
   const acquiredSkillsValue = useRecoilValue(acquiredSkills);
   const ownedItemTornManuscript = useRecoilValue(ownedItem("torn manuscript"));
 
@@ -18,7 +18,7 @@ export function AcquireAlchemistSkills() {
 
   return (
     <Stack gap={3}>
-      <h6>Acquire skills</h6>
+      <h6>Acquire skill</h6>
 
       {ownedItemTornManuscript === undefined ? (
         <span>

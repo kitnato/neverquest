@@ -3,7 +3,7 @@ import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { PurchaseConsumable } from "@neverquest/components/Caravan/PurchaseConsumable";
-import { AcquireWitchSkills } from "@neverquest/components/Caravan/Witch/AcquireWitchSkills";
+import { AcquireWitchSkill } from "@neverquest/components/Caravan/Witch/AcquireWitchSkill";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { WITCH_POTIONS } from "@neverquest/data/caravan";
 import { LABEL_UNKNOWN } from "@neverquest/data/general";
@@ -35,7 +35,7 @@ export function Witch() {
         ))}
       </Stack>
 
-      <AcquireWitchSkills />
+      <AcquireWitchSkill />
     </Stack>
   );
 }

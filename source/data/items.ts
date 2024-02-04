@@ -25,6 +25,7 @@ import IconKnapsack from "@neverquest/icons/knapsack.svg?react";
 import IconLacrimatory from "@neverquest/icons/lacrimatory.svg?react";
 import IconLightning from "@neverquest/icons/lightning.svg?react";
 import IconLogEntry from "@neverquest/icons/log-entry.svg?react";
+import IconLoot from "@neverquest/icons/loot.svg?react";
 import IconLooting from "@neverquest/icons/looting.svg?react";
 import IconMemento from "@neverquest/icons/memento.svg?react";
 import IconMonsterLurking from "@neverquest/icons/monster-lurking.svg?react";
@@ -41,6 +42,7 @@ import IconRanged from "@neverquest/icons/ranged.svg?react";
 import IconRuby from "@neverquest/icons/ruby.svg?react";
 import IconSalve from "@neverquest/icons/salve.svg?react";
 import IconSapphire from "@neverquest/icons/sapphire.svg?react";
+import IconStage from "@neverquest/icons/stage.svg?react";
 import IconStamina from "@neverquest/icons/stamina.svg?react";
 import IconThaumaturgicGoggles from "@neverquest/icons/thaumaturgic-goggles.svg?react";
 import IconTopaz from "@neverquest/icons/topaz.svg?react";
@@ -50,6 +52,7 @@ import type { ConsumableItem, GeneratorRange, InfusableItem, RelicItem } from "@
 import type { SVGIcon } from "@neverquest/types/components";
 import type {
   Consumable,
+  CrewMember,
   Delta,
   Elemental,
   ElementalAilment,
@@ -228,8 +231,9 @@ export const INFUSABLES: Record<
 export const KNAPSACK_CAPACITY = 15;
 
 export const RELIC_DROP_CHANCE = {
+  "dream catcher": { maximum: 0.1, minimum: 0.02, requiredCrew: "occultist" as CrewMember },
   memento: { maximum: 0.08, minimum: 0.01 },
-  "torn manuscript": { maximum: 0.05, minimum: 0.01 },
+  "torn manuscript": { maximum: 0.05, minimum: 0.01, requiredCrew: "alchemist" as CrewMember },
 };
 
 export const RELICS: Record<
@@ -348,11 +352,11 @@ export const RELICS: Record<
     },
   },
   "perpetual loom": {
-    descriptionIcons: [IconCaravan, IconMonsterLurking],
+    descriptionIcons: [IconLoot, IconStage],
     Icon: IconPerpetualLoom,
     item: {
       description:
-        "While equipped, automatically # collects all loot and passes to the next # stage once it is cleared of monsters.",
+        "While equipped, collects all # loot and passes to the next # stage once it is cleared of monsters.",
       name: "perpetual loom",
       price: 5000,
       weight: 20,

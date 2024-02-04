@@ -1,7 +1,7 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { AcquireAlchemistSkills } from "@neverquest/components/Caravan/Alchemist/AcquireAlchemistSkills";
+import { AcquireAlchemistSkill } from "@neverquest/components/Caravan/Alchemist/AcquireAlchemistSkill";
 import { TransmuteGems } from "@neverquest/components/Caravan/Alchemist/TransmuteGems";
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
 import { LABEL_NONE_AVAILABLE } from "@neverquest/data/general";
@@ -38,7 +38,7 @@ export function Alchemist() {
         <TransmuteGems />
       </Stack>
 
-      <AcquireAlchemistSkills />
+      <AcquireAlchemistSkill />
     </Stack>
   );
 }

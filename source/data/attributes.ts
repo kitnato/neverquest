@@ -72,7 +72,7 @@ export const ATTRIBUTES: Record<
     base: 0,
     description: "Reduces attack rate.",
     Icon: IconSpeed,
-    increment: 0.015,
+    increment: 0.018,
     maximum: 0.75,
     powerBonus: 0.001,
     shows: "attackRate",

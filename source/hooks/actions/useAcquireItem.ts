@@ -4,6 +4,7 @@ import { useCanFit } from "@neverquest/hooks/actions/useCanFit";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { armor, shield, weapon } from "@neverquest/state/gear";
 import { acquiredItems, inventory, notifyOverEncumbrance } from "@neverquest/state/inventory";
+import { hasLootedLogEntry } from "@neverquest/state/items";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import { isShowing } from "@neverquest/state/ui";
@@ -50,6 +51,8 @@ export function useAcquireItem() {
         if (isRelicItem(item)) {
           switch (item.name) {
             case "[P71NQ]": {
+              set(hasLootedLogEntry, true);
+
               progressQuest({ quest: "acquiringLogEntry" });
               break;
             }

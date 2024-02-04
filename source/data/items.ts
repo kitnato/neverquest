@@ -231,9 +231,9 @@ export const INFUSABLES: Record<
 export const KNAPSACK_CAPACITY = 15;
 
 export const RELIC_DROP_CHANCE = {
-  "dream catcher": { maximum: 0.1, minimum: 0.02, requiredCrew: "occultist" as CrewMember },
-  memento: { maximum: 0.08, minimum: 0.01 },
-  "torn manuscript": { maximum: 0.05, minimum: 0.01, requiredCrew: "alchemist" as CrewMember },
+  "dream catcher": { maximum: 0.2, minimum: 0.05, requiredCrew: "occultist" as CrewMember },
+  memento: { maximum: 0.1, minimum: 0.01 },
+  "torn manuscript": { maximum: 0.2, minimum: 0.05, requiredCrew: "alchemist" as CrewMember },
 };
 
 export const RELICS: Record<

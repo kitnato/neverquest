@@ -29,7 +29,7 @@ import {
   stageMaximum,
 } from "@neverquest/state/encounter";
 import { ownedItem } from "@neverquest/state/inventory";
-import { infusionEffect } from "@neverquest/state/items";
+import { hasLootedLogEntry, infusionEffect } from "@neverquest/state/items";
 import { range } from "@neverquest/state/statistics";
 import { isFinality } from "@neverquest/types/type-guards";
 import type { Ailment } from "@neverquest/types/unions";
@@ -335,11 +335,8 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
                   ["familiar", "mysterious egg"].includes(name),
                 )
               ? { ...INFUSABLES["mysterious egg"].item, ID: nanoid() }
-              : // Log Entry only drops after defeating Res Dominus while carrying the Memento and if it's neither currently carried nor sold.
-                encounterValue === "res dominus" &&
-                  isMementoOwned &&
-                  get(ownedItem("[P71NQ]")) === undefined &&
-                  !merchantInventoryValue.some(({ name }) => name === "[P71NQ]")
+              : // Log Entry only drops after defeating Res Dominus while carrying the Memento and if it's never been looted before.
+                encounterValue === "res dominus" && isMementoOwned && !get(hasLootedLogEntry)
                 ? { ...RELICS["[P71NQ]"].item, ID: nanoid() }
                 : // Torn manuscript drops if it's neither currently carried nor sold, if the memento is carried, if the correct crew member is hired and if the drop chance is reached.
                   isMementoOwned &&

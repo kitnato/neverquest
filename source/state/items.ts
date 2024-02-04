@@ -83,6 +83,14 @@ export const ammunitionCapacity = withStateKey("ammunitionCapacity", (key) =>
   }),
 );
 
+export const hasLootedLogEntry = withStateKey("hasLootedLogEntry", (key) =>
+  atom({
+    default: false,
+    effects: [handleStorage({ key })],
+    key,
+  }),
+);
+
 export const infusion = withStateKey("infusion", (key) =>
   atomFamily<number, Infusable>({
     default: 0,

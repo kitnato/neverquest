@@ -7,7 +7,7 @@ import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness
 import { useToggleAttacking } from "@neverquest/hooks/actions/useToggleAttacking";
 import { isAttacking } from "@neverquest/state/character";
 import { encounter, isStageCompleted } from "@neverquest/state/encounter";
-import { isWeaving } from "@neverquest/state/items";
+import { isRelicEquipped } from "@neverquest/state/items";
 import { isFinality } from "@neverquest/types/type-guards";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
@@ -24,7 +24,11 @@ export function useProgressStage() {
         const get = getSnapshotGetter(snapshot);
 
         if (get(isStageCompleted)) {
-          if (get(isWeaving) && get(isAttacking) && !isFinality(get(encounter))) {
+          if (
+            get(isRelicEquipped("automincer")) &&
+            get(isAttacking) &&
+            !isFinality(get(encounter))
+          ) {
             const lootCollection = collectLoot();
 
             if (lootCollection === "success") {

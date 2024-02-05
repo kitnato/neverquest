@@ -40,7 +40,9 @@ export function Retirement({
 
       <ModalBody>
         <Stack gap={5}>
-          <span className="fst-italic">Weary bones find quiescence to foster a new beginning.</span>
+          <span className="fst-italic">
+            Weary bones yearn for quiescence to foster a new beginning.
+          </span>
 
           <ResetDetails />
 

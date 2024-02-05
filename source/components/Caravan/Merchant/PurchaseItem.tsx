@@ -3,7 +3,7 @@ import { useSetRecoilState } from "recoil";
 import { PurchaseItemButton } from "@neverquest/components/Caravan/PurchaseItemButton";
 import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
-import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
+import { useToggleEquipItem } from "@neverquest/hooks/actions/useToggleEquipItem";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import { merchantInventory } from "@neverquest/state/caravan";
 import type { MerchantInventoryItem } from "@neverquest/types";
@@ -14,14 +14,14 @@ export function PurchaseItem({ merchantItem }: { merchantItem: MerchantInventory
 
   const acquireItem = useAcquireItem();
   const progressQuest = useProgressQuest();
-  const toggleEquipGear = useToggleEquipGear();
+  const toggleEquipItem = useToggleEquipItem();
   const transactEssence = useTransactEssence();
 
   return (
     <PurchaseItemButton
       item={merchantItem}
       onPurchase={() => {
-        const { isEradicated: _, isReturned, ...item } = merchantItem;
+        const { isReturned, ...item } = merchantItem;
 
         const acquisitionStatus = acquireItem(item);
 
@@ -34,7 +34,7 @@ export function PurchaseItem({ merchantItem }: { merchantItem: MerchantInventory
         transactEssence(-price);
 
         if (acquisitionStatus === "equip" && isGearItem(item)) {
-          toggleEquipGear(item);
+          toggleEquipItem({ item });
         }
 
         setMerchantInventory((currentMerchantInventory) =>

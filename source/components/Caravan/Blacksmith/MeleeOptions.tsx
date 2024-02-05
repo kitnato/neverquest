@@ -207,7 +207,7 @@ export function MeleeOptions() {
 
       {hasCrafted ? (
         <CraftedGear
-          gearItem={craftedWeapon}
+          item={craftedWeapon}
           onTransfer={() => {
             setBlacksmithInventory((currentBlacksmithInventory) => ({
               ...currentBlacksmithInventory,

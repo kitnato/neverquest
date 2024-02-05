@@ -9,18 +9,24 @@ import {
   OverlayTrigger,
   Tooltip,
 } from "react-bootstrap";
+import { useSetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
-import { useEradicate } from "@neverquest/hooks/actions/useEradicate";
+import { useNeutralize } from "@neverquest/hooks/actions/useNeutralize";
 import IconEradicate from "@neverquest/icons/eradicate.svg?react";
+import { merchantInventory } from "@neverquest/state/caravan";
 import type { MerchantInventoryItem } from "@neverquest/types";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 
 export function EradicateItem({ item }: { item: MerchantInventoryItem }) {
+  const setMerchantInventory = useSetRecoilState(merchantInventory);
+
   const [isShowingModal, setIsShowingModal] = useState(false);
 
-  const eradicate = useEradicate();
+  const { ID, name } = item;
+
+  const neutralize = useNeutralize();
 
   const onHide = () => {
     setIsShowingModal(false);
@@ -54,14 +60,16 @@ export function EradicateItem({ item }: { item: MerchantInventoryItem }) {
           </ModalTitle>
         </ModalHeader>
 
-        <ModalBody>{`"${capitalizeAll(
-          item.name,
-        )}" will no longer be available for purchase.`}</ModalBody>
+        <ModalBody>{`"${capitalizeAll(name)}" will be irretrievably destroyed.`}</ModalBody>
 
         <ModalFooter>
           <Button
             onClick={() => {
-              eradicate(item);
+              setMerchantInventory((currentInventory) =>
+                currentInventory.filter(({ ID: currentItemID }) => currentItemID !== ID),
+              );
+
+              neutralize({ isEradicated: true, item });
 
               onHide();
             }}

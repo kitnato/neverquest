@@ -15,9 +15,7 @@ export function BuybackItems() {
   const [expandedBuybackValue, setExpandBuyback] = useRecoilState(expandedBuyback);
   const merchantInventoryValue = useRecoilValue(merchantInventory);
 
-  const returnedItems = merchantInventoryValue.filter(
-    ({ isEradicated, isReturned }) => !isEradicated && isReturned,
-  );
+  const returnedItems = merchantInventoryValue.filter(({ isReturned }) => isReturned);
 
   if (returnedItems.length > 0) {
     return (

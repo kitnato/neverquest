@@ -3,6 +3,7 @@ import IconAlchemist from "@neverquest/icons/alchemist.svg?react";
 import IconAmmunitionPouch from "@neverquest/icons/ammunition-pouch.svg?react";
 import IconAmmunition from "@neverquest/icons/ammunition.svg?react";
 import IconAntidote from "@neverquest/icons/antidote.svg?react";
+import IconAutomincer from "@neverquest/icons/automincer.svg?react";
 import IconBandages from "@neverquest/icons/bandages.svg?react";
 import IconBlighted from "@neverquest/icons/blighted.svg?react";
 import IconCaravan from "@neverquest/icons/caravan.svg?react";
@@ -16,6 +17,7 @@ import IconFamiliar from "@neverquest/icons/familiar.svg?react";
 import IconFire from "@neverquest/icons/fire.svg?react";
 import IconFlatlined from "@neverquest/icons/flatlined.svg?react";
 import IconGear from "@neverquest/icons/gear.svg?react";
+import IconGrinding from "@neverquest/icons/grinding.svg?react";
 import IconHatchingProgress from "@neverquest/icons/hatching-progress.svg?react";
 import IconHealth from "@neverquest/icons/health.svg?react";
 import IconStone from "@neverquest/icons/hearthstone.svg?react";
@@ -31,12 +33,12 @@ import IconMemento from "@neverquest/icons/memento.svg?react";
 import IconMonsterLurking from "@neverquest/icons/monster-lurking.svg?react";
 import IconMysteriousEgg from "@neverquest/icons/mysterious-egg.svg?react";
 import IconNavigation from "@neverquest/icons/navigation.svg?react";
-import IconPerpetualLoom from "@neverquest/icons/perpetual-loom.svg?react";
 import IconPhylactery from "@neverquest/icons/phylactery.svg?react";
 import IconPoisonRating from "@neverquest/icons/poison-rating.svg?react";
 import IconPoisoned from "@neverquest/icons/poisoned.svg?react";
 import IconPowerBonusBoost from "@neverquest/icons/power-bonus-boost.svg?react";
 import IconPowerLevel from "@neverquest/icons/power-level.svg?react";
+import IconProtected from "@neverquest/icons/protected.svg?react";
 import IconQuests from "@neverquest/icons/quests.svg?react";
 import IconRanged from "@neverquest/icons/ranged.svg?react";
 import IconRuby from "@neverquest/icons/ruby.svg?react";
@@ -263,6 +265,17 @@ export const RELICS: Record<
       weight: 6,
     },
   },
+  automincer: {
+    descriptionIcons: [IconGrinding, IconLoot, IconStage],
+    Icon: IconAutomincer,
+    item: {
+      description:
+        "While # equipped, collects all # loot and passes to the next # stage once it is cleared of monsters.",
+      name: "automincer",
+      price: 5000,
+      weight: 20,
+    },
+  },
   compass: {
     descriptionIcons: [IconNavigation, IconWilderness],
     Icon: IconCompass,
@@ -274,10 +287,11 @@ export const RELICS: Record<
     },
   },
   "dream catcher": {
+    descriptionIcons: [IconProtected],
     Icon: IconDreamCatcher,
     item: {
       description:
-        "While equipped, protects the bearer from harm by disengaging from overwhelming encounters.",
+        "While # equipped, protects the bearer from harm by disengaging from overwhelming encounters.",
       name: "dream catcher",
       price: 1500,
       weight: 10,
@@ -349,17 +363,6 @@ export const RELICS: Record<
       name: "memento",
       price: 154,
       weight: 2,
-    },
-  },
-  "perpetual loom": {
-    descriptionIcons: [IconLoot, IconStage],
-    Icon: IconPerpetualLoom,
-    item: {
-      description:
-        "While equipped, collects all # loot and passes to the next # stage once it is cleared of monsters.",
-      name: "perpetual loom",
-      price: 5000,
-      weight: 20,
     },
   },
   "thaumaturgic goggles": {

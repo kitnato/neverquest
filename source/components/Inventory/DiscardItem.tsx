@@ -9,18 +9,24 @@ import {
   OverlayTrigger,
   Tooltip,
 } from "react-bootstrap";
+import { useSetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
-import { useDiscard } from "@neverquest/hooks/actions/useDiscard";
+import { useNeutralize } from "@neverquest/hooks/actions/useNeutralize";
 import IconDiscard from "@neverquest/icons/discard.svg?react";
+import { inventory } from "@neverquest/state/inventory";
 import type { InventoryItem } from "@neverquest/types";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 
 export function DiscardItem({ item }: { item: InventoryItem }) {
+  const setInventory = useSetRecoilState(inventory);
+
   const [isShowingModal, setIsShowingModal] = useState(false);
 
-  const discard = useDiscard();
+  const { ID, name } = item;
+
+  const neutralize = useNeutralize();
 
   const onHide = () => {
     setIsShowingModal(false);
@@ -54,12 +60,16 @@ export function DiscardItem({ item }: { item: InventoryItem }) {
           </ModalTitle>
         </ModalHeader>
 
-        <ModalBody>{`"${capitalizeAll(item.name)}" will be lost forever.`}</ModalBody>
+        <ModalBody>{`"${capitalizeAll(name)}" will be lost forever.`}</ModalBody>
 
         <ModalFooter>
           <Button
             onClick={() => {
-              discard(item);
+              setInventory((currentInventory) =>
+                currentInventory.filter(({ ID: currentItemID }) => currentItemID !== ID),
+              );
+
+              neutralize({ item });
 
               onHide();
             }}

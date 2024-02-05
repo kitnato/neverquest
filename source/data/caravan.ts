@@ -274,7 +274,7 @@ export const MERCHANT_OFFERS: Record<
   },
   34: { item: RELICS.journal.item, monologue: "You wouldn't be a scribe, would you?" },
   40: {
-    item: RELICS["perpetual loom"].item,
+    item: RELICS.automincer.item,
     monologue: "Here's an intriguing device that should ease up the grind.",
   },
   [POISON.requiredStage]: {
@@ -283,7 +283,7 @@ export const MERCHANT_OFFERS: Record<
   },
   55: {
     item: RELICS["dream catcher"].item,
-    monologue: "There is a bizarre texture in the air. Maybe this will help.",
+    monologue: "The air is bizarrely palpable. Maybe this will make sense of it.",
   },
 };
 

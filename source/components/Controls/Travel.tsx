@@ -35,7 +35,7 @@ export function Travel() {
           <Tooltip>
             <span>
               {isOverEncumbered
-                ? "Over-encumbered - cannot move."
+                ? "Over-encumbered."
                 : locationValue === "wilderness"
                   ? `Go to ${
                       !isShowingLocation || encounterValue === "res cogitans"

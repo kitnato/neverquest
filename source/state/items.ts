@@ -11,7 +11,7 @@ import {
 import { handleStorage } from "@neverquest/state/effects/handleStorage";
 import { ownedItem } from "@neverquest/state/inventory";
 import { essence } from "@neverquest/state/resources";
-import type { Infusable } from "@neverquest/types/unions";
+import type { Infusable, Relic } from "@neverquest/types/unions";
 import { getFromRange, getSigmoid, getTriangular } from "@neverquest/utilities/getters";
 import { withStateKey } from "@neverquest/utilities/helpers";
 
@@ -107,10 +107,10 @@ export const infusionLevel = withStateKey("infusionLevel", (key) =>
   }),
 );
 
-export const isWeaving = withStateKey("isWeaving", (key) =>
-  atom({
+export const isRelicEquipped = withStateKey("isRelicEquipped", (key) =>
+  atomFamily<boolean, Relic>({
     default: false,
-    effects: [handleStorage({ key })],
+    effects: (relic) => [handleStorage({ key, parameter: relic })],
     key,
   }),
 );

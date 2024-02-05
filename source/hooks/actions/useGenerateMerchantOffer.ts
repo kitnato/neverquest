@@ -79,7 +79,6 @@ export function useGenerateMerchantOffer() {
 
           newMerchantInventory.push({
             ...item,
-            isEradicated: false,
             isReturned: false,
           });
 

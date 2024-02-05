@@ -2,46 +2,62 @@ import { useRecoilCallback } from "recoil";
 
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { armor, shield, weapon } from "@neverquest/state/gear";
+import { isRelicEquipped } from "@neverquest/state/items";
 import { questProgress } from "@neverquest/state/quests";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import { isShowing } from "@neverquest/state/ui";
-import type { GearItem } from "@neverquest/types";
+import type { GearItem, RelicItem } from "@neverquest/types";
 import {
   isArmor,
   isMelee,
   isRanged,
+  isRelicItem,
   isShield,
   isUnshielded,
   isWeapon,
 } from "@neverquest/types/type-guards";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
-export function useToggleEquipGear() {
+export function useToggleEquipItem() {
   const progressQuest = useProgressQuest();
 
   return useRecoilCallback(
     ({ reset, set, snapshot }) =>
-      (gearItem: GearItem) => {
+      ({ forceEquip, item }: { forceEquip?: boolean; item: GearItem | RelicItem }) => {
         const get = getSnapshotGetter(snapshot);
+
+        if (isRelicItem(item)) {
+          set(isRelicEquipped(item.name), (isEquipped) => forceEquip ?? !isEquipped);
+
+          return;
+        }
 
         const shieldValue = get(shield);
         const weaponValue = get(weapon);
 
-        const { burden, gearClass, ID } = gearItem;
-        const isWeaponRanged = isRanged(gearItem);
+        const { burden, gearClass, ID } = item;
+        const isWeaponRanged = isRanged(item);
         // eslint-disable-next-line unicorn/consistent-destructuring
-        const isWeaponTwoHanded = isMelee(gearItem) && gearItem.grip === "two-handed";
+        const isWeaponTwoHanded = isMelee(item) && item.grip === "two-handed";
 
-        if (isArmor(gearItem)) {
+        if (isArmor(item)) {
           if (gearClass === "heavy" && !get(isSkillAcquired("armorcraft"))) {
             return;
           }
 
-          if (ID === get(armor).ID) {
-            reset(armor);
+          if (forceEquip === undefined) {
+            if (ID === get(armor).ID) {
+              reset(armor);
+            } else {
+              set(armor, item);
+            }
           } else {
-            set(armor, gearItem);
+            if (forceEquip) {
+              set(armor, item);
+            } else {
+              reset(armor);
+            }
           }
 
           set(isShowing("armor"), true);
@@ -50,15 +66,23 @@ export function useToggleEquipGear() {
           progressQuest({ quest: "equippingArmor" });
         }
 
-        if (isShield(gearItem)) {
+        if (isShield(item)) {
           if (gearClass === "tower" && !get(isSkillAcquired("shieldcraft"))) {
             return;
           }
 
-          if (ID === shieldValue.ID) {
-            reset(shield);
+          if (forceEquip === undefined) {
+            if (ID === shieldValue.ID) {
+              reset(shield);
+            } else {
+              set(shield, item);
+            }
           } else {
-            set(shield, gearItem);
+            if (forceEquip) {
+              set(shield, item);
+            } else {
+              reset(shield);
+            }
           }
 
           // Equipping a shield while a ranged or two-handed weapon is equipped un-equips the weapon (unless it's two-handed and the colossus trait is acquired).
@@ -76,19 +100,27 @@ export function useToggleEquipGear() {
           progressQuest({ quest: "equippingShield" });
         }
 
-        if (isWeapon(gearItem)) {
+        if (isWeapon(item)) {
           if (isWeaponTwoHanded && !get(isSkillAcquired("siegecraft"))) {
             return;
           }
 
-          if (isRanged(gearItem) && !get(isSkillAcquired("archery"))) {
+          if (isRanged(item) && !get(isSkillAcquired("archery"))) {
             return;
           }
 
-          if (ID === weaponValue.ID) {
-            reset(weapon);
+          if (forceEquip === undefined) {
+            if (ID === weaponValue.ID) {
+              reset(weapon);
+            } else {
+              set(weapon, item);
+            }
           } else {
-            set(weapon, gearItem);
+            if (forceEquip) {
+              set(weapon, item);
+            } else {
+              reset(weapon);
+            }
           }
 
           // Equipping a ranged or two-handed weapon while a shield is equipped un-equips the shield.

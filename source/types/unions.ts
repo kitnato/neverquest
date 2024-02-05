@@ -365,6 +365,7 @@ export type StateKey =
   | "isPoisoned"
   | "isRecovering"
   | "isRegenerating"
+  | "isRelicEquipped"
   | "isShowing"
   | "isShowingQuestBonus"
   | "isSkillAcquired"
@@ -372,7 +373,6 @@ export type StateKey =
   | "isStageStarted"
   | "isStaminaAtMaximum"
   | "isTraitAcquired"
-  | "isWeaving"
   | "itemsLoot"
   | "knapsackCapacity"
   | "location"
@@ -459,6 +459,7 @@ export type Trait = (typeof TRAIT_TYPES)[number];
 export const RELIC_TYPES = [
   "[P71NQ]",
   "ammunition pouch",
+  "automincer",
   "compass",
   "ender hook",
   "dream catcher",
@@ -468,7 +469,6 @@ export const RELIC_TYPES = [
   "knapsack",
   "lacrimatory",
   "memento",
-  "perpetual loom",
   "thaumaturgic goggles",
   "torn manuscript",
 ] as const;

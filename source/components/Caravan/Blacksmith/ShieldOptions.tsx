@@ -156,7 +156,7 @@ export function ShieldOptions() {
         <span className="fst-italic text-center">{LABEL_SKILL_REQUIRED}</span>
       ) : hasCrafted ? (
         <CraftedGear
-          gearItem={craftedShield}
+          item={craftedShield}
           onTransfer={() => {
             setBlacksmithInventory((currentBlacksmithInventory) => ({
               ...currentBlacksmithInventory,

@@ -7,9 +7,7 @@ import { merchantInventory } from "@neverquest/state/caravan";
 export function PurchaseItems() {
   const merchantInventoryValue = useRecoilValue(merchantInventory);
 
-  const newItems = merchantInventoryValue.filter(
-    ({ isEradicated, isReturned }) => !isEradicated && !isReturned,
-  );
+  const newItems = merchantInventoryValue.filter(({ isReturned }) => !isReturned);
 
   return (
     <Stack gap={3}>

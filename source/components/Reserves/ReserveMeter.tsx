@@ -25,19 +25,20 @@ import {
   staminaMaximum,
   staminaMaximumBlighted,
 } from "@neverquest/state/reserves";
+import type { SVGIcon } from "@neverquest/types/components";
 import type { Reserve } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
-export function ReserveMeter({ reserve }: { reserve: Reserve }) {
+export function ReserveMeter({ PrefixIcon, reserve }: { PrefixIcon?: SVGIcon; reserve: Reserve }) {
   const isHealth = reserve === "health";
   const reserveState = isHealth ? health : stamina;
   const reserveMaximum = isHealth ? healthMaximum : staminaMaximum;
 
   const [reserveValue, setReserve] = useRecoilState(reserveState);
-  const ailmentValue = useRecoilValue(isHealth ? poisonDuration : blightMagnitude);
+  const ailmentExtent = useRecoilValue(isHealth ? poisonDuration : blightMagnitude);
   const isAiling = useRecoilValue(isHealth ? isPoisoned : isBlighted);
-  const regenerationRateValue = useRecoilValue(regenerationRate(isHealth ? "health" : "stamina"));
   const isRegeneratingValue = useRecoilValue(isRegenerating(isHealth ? "health" : "stamina"));
+  const regenerationRateValue = useRecoilValue(regenerationRate(isHealth ? "health" : "stamina"));
   const reserveMaximumValue = useRecoilValue(reserveMaximum);
   const reserveMaximumAilingValue = useRecoilValue(
     isHealth ? healthMaximumPoisoned : staminaMaximumBlighted,
@@ -102,6 +103,8 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
       value={(reserveValue / reserveMaximumAilingValue) * (PERCENTAGE_POINTS - penalty)}
     >
       <Stack direction="horizontal" gap={1}>
+        {PrefixIcon !== undefined && <PrefixIcon />}
+
         <span>
           {formatNumber({ value: reserveValue })}&nbsp;/&nbsp;
           {formatNumber({
@@ -119,11 +122,11 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
             >
               <span>
                 {isHealth
-                  ? formatNumber({ format: "time", value: ailmentValue })
+                  ? formatNumber({ format: "time", value: ailmentExtent })
                   : formatNumber({
                       decimals: 1,
                       format: "percentage",
-                      value: ailmentValue,
+                      value: ailmentExtent,
                     })}
               </span>
             </IconDisplay>

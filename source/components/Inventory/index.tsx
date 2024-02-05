@@ -10,16 +10,16 @@ import { Salve } from "@neverquest/components/Inventory/Consumable/Salve";
 import { DiscardItem } from "@neverquest/components/Inventory/DiscardItem";
 import { Encumbrance } from "@neverquest/components/Inventory/Encumbrance";
 import { CompassNavigate } from "@neverquest/components/Inventory/Inheritable/CompassNavigate";
+import { EquipRelic } from "@neverquest/components/Inventory/Inheritable/EquipRelic";
 import { HearthstoneWarp } from "@neverquest/components/Inventory/Inheritable/HearthstoneWarp";
 import { InfusionInspect } from "@neverquest/components/Inventory/Inheritable/Infusion/InfusionInspect";
-import { PerpetualLoomToggle } from "@neverquest/components/Inventory/Inheritable/PerpetualLoomToggle";
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
 import {
   CLASS_FULL_WIDTH_JUSTIFIED,
   LABEL_SKILL_REQUIRED,
   POPOVER_TRIGGER,
 } from "@neverquest/data/general";
-import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
+import { useToggleEquipItem } from "@neverquest/hooks/actions/useToggleEquipItem";
 import { armor, shield, weapon } from "@neverquest/state/gear";
 import { inventory } from "@neverquest/state/inventory";
 import { isSkillAcquired } from "@neverquest/state/skills";
@@ -43,9 +43,10 @@ import type { Relic } from "@neverquest/types/unions";
 import { stackItems } from "@neverquest/utilities/helpers";
 
 const RELIC_ACTIONS: Partial<Record<Relic, FunctionComponent>> = {
+  automincer: () => <EquipRelic relic="automincer" />,
   compass: CompassNavigate,
+  "dream catcher": () => <EquipRelic relic="dream catcher" />,
   hearthstone: HearthstoneWarp,
-  "perpetual loom": PerpetualLoomToggle,
 };
 
 export function Inventory() {
@@ -85,7 +86,7 @@ export function Inventory() {
     equippableItems[item.ID] = canEquip;
   }
 
-  const toggleEquipGear = useToggleEquipGear();
+  const toggleEquipItem = useToggleEquipItem();
 
   const equippedGear = [weaponValue, armorValue, shieldValue].filter((gearItem) =>
     isArmor(gearItem)
@@ -110,17 +111,17 @@ export function Inventory() {
 
         {equippedGear.length === 0 && <span className="fst-italic">Nothing equipped.</span>}
 
-        {equippedGear.map((gearItem) => {
-          const { ID } = gearItem;
+        {equippedGear.map((item) => {
+          const { ID } = item;
 
           return (
             <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
-              <ItemDisplay item={gearItem} />
+              <ItemDisplay item={item} />
 
               <Button
                 className="ms-2"
                 onClick={() => {
-                  toggleEquipGear(gearItem);
+                  toggleEquipItem({ item });
                 }}
                 variant="outline-dark"
               >
@@ -139,13 +140,13 @@ export function Inventory() {
         {storedItems
           .filter(isGearItem)
           .toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2))
-          .map((gearItem) => {
-            const { ID } = gearItem;
+          .map((item) => {
+            const { ID } = item;
             const canEquipGear = equippableItems[ID];
 
             return (
               <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
-                <ItemDisplay item={gearItem} />
+                <ItemDisplay item={item} />
 
                 <Stack className="ms-2" direction="horizontal" gap={3}>
                   <OverlayTrigger
@@ -160,7 +161,7 @@ export function Inventory() {
                       <Button
                         disabled={!canEquipGear}
                         onClick={() => {
-                          toggleEquipGear(gearItem);
+                          toggleEquipItem({ item });
                         }}
                         variant="outline-dark"
                       >
@@ -169,7 +170,7 @@ export function Inventory() {
                     </div>
                   </OverlayTrigger>
 
-                  <DiscardItem item={gearItem} />
+                  <DiscardItem item={item} />
                 </Stack>
               </div>
             );

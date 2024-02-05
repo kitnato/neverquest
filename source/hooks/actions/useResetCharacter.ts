@@ -2,7 +2,7 @@ import { useRecoilCallback } from "recoil";
 
 import { attackDuration, name, recoveryDuration } from "@neverquest/state/character";
 import { isStageStarted, location, progress, stage } from "@neverquest/state/encounter";
-import { isWeaving } from "@neverquest/state/items";
+import { isRelicEquipped } from "@neverquest/state/items";
 import {
   blight,
   health,
@@ -11,6 +11,7 @@ import {
   stamina,
 } from "@neverquest/state/reserves";
 import { essence } from "@neverquest/state/resources";
+import { RELIC_TYPES } from "@neverquest/types/unions";
 
 export function useResetCharacter() {
   return useRecoilCallback(
@@ -20,7 +21,6 @@ export function useResetCharacter() {
         reset(blight);
         reset(essence);
         reset(health);
-        reset(isWeaving);
         reset(isStageStarted);
         reset(poisonDuration);
         reset(progress);
@@ -31,6 +31,10 @@ export function useResetCharacter() {
         reset(regenerationDuration("stamina"));
         reset(stage);
         reset(stamina);
+
+        for (const relic of RELIC_TYPES) {
+          reset(isRelicEquipped(relic));
+        }
       },
     [],
   );

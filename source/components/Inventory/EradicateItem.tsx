@@ -18,6 +18,7 @@ import IconEradicate from "@neverquest/icons/eradicate.svg?react";
 import { merchantInventory } from "@neverquest/state/caravan";
 import type { MerchantInventoryItem } from "@neverquest/types";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
+import { getItemIcon } from "@neverquest/utilities/getters";
 
 export function EradicateItem({ item }: { item: MerchantInventoryItem }) {
   const setMerchantInventory = useSetRecoilState(merchantInventory);
@@ -60,7 +61,11 @@ export function EradicateItem({ item }: { item: MerchantInventoryItem }) {
           </ModalTitle>
         </ModalHeader>
 
-        <ModalBody>{`"${capitalizeAll(name)}" will be irretrievably destroyed.`}</ModalBody>
+        <ModalBody>
+          <IconImage className="small" Icon={getItemIcon(item)} />
+
+          <span>{` ${capitalizeAll(name)} will be irretrievably destroyed.`}</span>
+        </ModalBody>
 
         <ModalFooter>
           <Button
@@ -69,7 +74,7 @@ export function EradicateItem({ item }: { item: MerchantInventoryItem }) {
                 currentInventory.filter(({ ID: currentItemID }) => currentItemID !== ID),
               );
 
-              neutralize({ isEradicated: true, item });
+              neutralize({ item });
 
               onHide();
             }}

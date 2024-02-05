@@ -30,18 +30,24 @@ import {
   ROMAN_NUMERAL_MAXIMUM,
 } from "@neverquest/data/general";
 import {
+  CONSUMABLES,
   ELEMENTALS,
   GEMS,
   GEMS_MAXIMUM,
   GEM_BASE,
   GEM_ENHANCEMENT_RANGE,
   GEM_FITTING_COST_RANGE,
+  INFUSABLES,
+  RELICS,
 } from "@neverquest/data/items";
 import { QUESTS } from "@neverquest/data/quests";
+import IconArmor from "@neverquest/icons/armor.svg?react";
 import IconHand from "@neverquest/icons/hand.svg?react";
 import IconOneHanded from "@neverquest/icons/one-handed.svg?react";
 import IconRanged from "@neverquest/icons/ranged.svg?react";
+import IconShield from "@neverquest/icons/shield.svg?react";
 import IconTwoHanded from "@neverquest/icons/two-handed.svg?react";
+import IconUnknown from "@neverquest/icons/unknown.svg?react";
 import type {
   Armor,
   GearItem,
@@ -56,9 +62,14 @@ import type {
 import {
   isArmor,
   isConquest,
+  isConsumableItem,
   isGearItem,
+  isGemItem,
+  isInfusableItem,
   isMelee,
+  isRelicItem,
   isRoutine,
+  isShield,
   isUnarmed,
   isWeapon,
 } from "@neverquest/types/type-guards";
@@ -253,6 +264,38 @@ export function getGemFittingCost(fitted: number) {
   return Math.round(
     getFromRange({ factor: fitted / (GEMS_MAXIMUM - 1), ...GEM_FITTING_COST_RANGE }),
   );
+}
+
+export function getItemIcon(item: InventoryItem) {
+  if (isArmor(item)) {
+    return IconArmor;
+  }
+
+  if (isConsumableItem(item)) {
+    return CONSUMABLES[item.name].Icon;
+  }
+
+  if (isGemItem(item)) {
+    return GEMS[item.name].Icon;
+  }
+
+  if (isInfusableItem(item)) {
+    return INFUSABLES[item.name].Icon;
+  }
+
+  if (isShield(item)) {
+    return IconShield;
+  }
+
+  if (isRelicItem(item)) {
+    return RELICS[item.name].Icon;
+  }
+
+  if (isWeapon(item)) {
+    return getWeaponIcon(item);
+  }
+
+  return IconUnknown;
 }
 
 export function getLinearMapping({ offset, stage }: { offset: number; stage: number }) {

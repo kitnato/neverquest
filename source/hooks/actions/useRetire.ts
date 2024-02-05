@@ -126,7 +126,7 @@ export function useRetire() {
         );
 
         for (const item of get(merchantInventory)) {
-          neutralize({ isEradicated: true, item });
+          neutralize({ item });
         }
 
         reset(merchantInventory);

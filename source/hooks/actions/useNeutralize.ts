@@ -17,8 +17,8 @@ export function useNeutralize() {
 
   return useRecoilCallback(
     ({ reset }) =>
-      ({ isEradicated = false, item }: { isEradicated?: boolean; item: InventoryItem }) => {
-        if (isInfusableItem(item) && isEradicated) {
+      ({ item }: { item: InventoryItem }) => {
+        if (isInfusableItem(item)) {
           const { name } = item;
 
           reset(infusion(name));
@@ -30,19 +30,17 @@ export function useNeutralize() {
 
           toggleEquipItem({ forceEquip: false, item });
 
-          if (isEradicated) {
-            if (name === "ammunition pouch") {
-              reset(ammunition);
-              reset(ammunitionCapacity);
-            }
+          if (name === "ammunition pouch") {
+            reset(ammunition);
+            reset(ammunitionCapacity);
+          }
 
-            if (name === "knapsack") {
-              reset(knapsackCapacity);
-            }
+          if (name === "knapsack") {
+            reset(knapsackCapacity);
+          }
 
-            if (name === "lacrimatory") {
-              reset(tears);
-            }
+          if (name === "lacrimatory") {
+            reset(tears);
           }
         }
       },

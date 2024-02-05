@@ -18,6 +18,7 @@ import IconDiscard from "@neverquest/icons/discard.svg?react";
 import { inventory } from "@neverquest/state/inventory";
 import type { InventoryItem } from "@neverquest/types";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
+import { getItemIcon } from "@neverquest/utilities/getters";
 
 export function DiscardItem({ item }: { item: InventoryItem }) {
   const setInventory = useSetRecoilState(inventory);
@@ -60,7 +61,11 @@ export function DiscardItem({ item }: { item: InventoryItem }) {
           </ModalTitle>
         </ModalHeader>
 
-        <ModalBody>{`The ${capitalizeAll(name)} will be lost forever.`}</ModalBody>
+        <ModalBody>
+          <IconDisplay Icon={getItemIcon(item)} iconProps={{ className: "small" }}>
+            <span>{`${capitalizeAll(name)} will be lost forever.`}</span>
+          </IconDisplay>
+        </ModalBody>
 
         <ModalFooter>
           <Button

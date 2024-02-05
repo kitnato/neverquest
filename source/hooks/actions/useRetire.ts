@@ -6,6 +6,7 @@ import { RETIREMENT_STAGE } from "@neverquest/data/general";
 import { SKILLS } from "@neverquest/data/skills";
 import { useAcquireSkill } from "@neverquest/hooks/actions/useAcquireSkill";
 import { useInitialize } from "@neverquest/hooks/actions/useInitialize";
+import { useNeutralize } from "@neverquest/hooks/actions/useNeutralize";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useResetAttributes } from "@neverquest/hooks/actions/useResetAttributes";
 import { useResetCharacter } from "@neverquest/hooks/actions/useResetCharacter";
@@ -42,6 +43,7 @@ import { getSnapshotGetter } from "@neverquest/utilities/getters";
 export function useRetire() {
   const acquireSkill = useAcquireSkill();
   const initialize = useInitialize();
+  const neutralize = useNeutralize();
   const progressQuest = useProgressQuest();
   const resetAttributes = useResetAttributes();
   const resetCharacter = useResetCharacter();
@@ -80,7 +82,6 @@ export function useRetire() {
         reset(gems(ARMOR_NONE.ID));
         reset(gems(SHIELD_NONE.ID));
         reset(gems(WEAPON_NONE.ID));
-        reset(merchantInventory);
         reset(shield);
         reset(weapon);
 
@@ -120,11 +121,17 @@ export function useRetire() {
           }
         }
 
-        set(retirementStage, stageValue);
-
         set(inventory, (currentInventory) =>
           currentInventory.filter((currentItem) => isInheritableItem(currentItem)),
         );
+
+        for (const item of get(merchantInventory)) {
+          neutralize({ isEradicated: true, item });
+        }
+
+        reset(merchantInventory);
+
+        set(retirementStage, stageValue);
 
         if (get(isSkillAcquired("memetics"))) {
           progressQuest({ quest: "decipheringJournal" });
@@ -135,6 +142,14 @@ export function useRetire() {
         resetWilderness();
         initialize(true);
       },
-    [acquireSkill, initialize, progressQuest, resetAttributes, resetCharacter, resetWilderness],
+    [
+      acquireSkill,
+      initialize,
+      neutralize,
+      progressQuest,
+      resetAttributes,
+      resetCharacter,
+      resetWilderness,
+    ],
   );
 }

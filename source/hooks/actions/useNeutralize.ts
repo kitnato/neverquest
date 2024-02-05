@@ -1,6 +1,7 @@
 import { useRecoilCallback } from "recoil";
 
 import { useToggleEquipItem } from "@neverquest/hooks/actions/useToggleEquipItem";
+import { knapsackCapacity } from "@neverquest/state/inventory";
 import {
   ammunition,
   ammunitionCapacity,
@@ -33,6 +34,10 @@ export function useNeutralize() {
             if (name === "ammunition pouch") {
               reset(ammunition);
               reset(ammunitionCapacity);
+            }
+
+            if (name === "knapsack") {
+              reset(knapsackCapacity);
             }
 
             if (name === "lacrimatory") {

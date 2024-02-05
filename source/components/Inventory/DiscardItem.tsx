@@ -60,7 +60,7 @@ export function DiscardItem({ item }: { item: InventoryItem }) {
           </ModalTitle>
         </ModalHeader>
 
-        <ModalBody>{`"${capitalizeAll(name)}" will be lost forever.`}</ModalBody>
+        <ModalBody>{`The ${capitalizeAll(name)} will be lost forever.`}</ModalBody>
 
         <ModalFooter>
           <Button

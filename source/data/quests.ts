@@ -214,6 +214,12 @@ export const QUESTS: Record<
     requiresTracking: true,
     title: "Incorruptible",
   },
+  discarding: {
+    description: "Discard @ items.",
+    progression: [3, 7],
+    requiresTracking: true,
+    title: "Litterbug",
+  },
   distantKilling: {
     description: "Kill @ distant monsters.",
     progression: [3, 10, 25],
@@ -243,6 +249,12 @@ export const QUESTS: Record<
     progression: [1],
     requiresTracking: true,
     title: "Armed & dangerous",
+  },
+  eradicating: {
+    description: "Eradicate @ items.",
+    progression: [3, 7],
+    requiresTracking: true,
+    title: "Vanishing act",
   },
   essenceCount: {
     description: `Have exactly ${formatNumber({
@@ -341,6 +353,12 @@ export const QUESTS: Record<
     progression: [3, 10, 25],
     requiresTracking: true,
     title: "Tranquilizer",
+  },
+  killingLowHealth: {
+    description: "Kill @ monsters while at low health.",
+    progression: [3, 10, 25],
+    requiresTracking: true,
+    title: "Against all odds",
   },
   killingOneStrike: {
     description:

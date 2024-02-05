@@ -14,6 +14,7 @@ import { useSetRecoilState } from "recoil";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { useNeutralize } from "@neverquest/hooks/actions/useNeutralize";
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import IconEradicate from "@neverquest/icons/eradicate.svg?react";
 import { merchantInventory } from "@neverquest/state/caravan";
 import type { MerchantInventoryItem } from "@neverquest/types";
@@ -28,6 +29,7 @@ export function EradicateItem({ item }: { item: MerchantInventoryItem }) {
   const { ID, name } = item;
 
   const neutralize = useNeutralize();
+  const progressQuest = useProgressQuest();
 
   const onHide = () => {
     setIsShowingModal(false);
@@ -75,6 +77,7 @@ export function EradicateItem({ item }: { item: MerchantInventoryItem }) {
               );
 
               neutralize({ item });
+              progressQuest({ quest: "eradicating" });
 
               onHide();
             }}

@@ -16,6 +16,7 @@ import {
   monsterHealthMaximum,
   monsterRegenerationDuration,
 } from "@neverquest/state/monster";
+import { isHealthLow } from "@neverquest/state/reserves";
 import type { DeltaDisplay, DeltaReserveBase } from "@neverquest/types/ui";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
@@ -69,12 +70,16 @@ export function useChangeMonsterHealth() {
             LOOTING_RATE[get(ownedItem("ender hook")) === undefined ? "base" : "ender hook"],
           );
 
+          if (get(distance) > 0) {
+            progressQuest({ quest: "distantKilling" });
+          }
+
           if (get(isEnraged)) {
             progressQuest({ quest: "killingEnraged" });
           }
 
-          if (get(distance) > 0) {
-            progressQuest({ quest: "distantKilling" });
+          if (get(isHealthLow)) {
+            progressQuest({ quest: "killingLowHealth" });
           }
 
           switch (get(encounter)) {

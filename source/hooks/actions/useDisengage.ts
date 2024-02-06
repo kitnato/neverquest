@@ -2,7 +2,7 @@ import { useRecoilCallback } from "recoil";
 
 import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta";
 import { useToggleAttacking } from "@neverquest/hooks/actions/useToggleAttacking";
-import { isAttacking } from "@neverquest/state/character";
+import { hasFlatlined, isAttacking } from "@neverquest/state/character";
 import { ownedItem } from "@neverquest/state/inventory";
 import { isHealthLow } from "@neverquest/state/reserves";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
@@ -16,7 +16,12 @@ export function useDisengage() {
       () => {
         const get = getSnapshotGetter(snapshot);
 
-        if (get(isAttacking) && get(isHealthLow) && get(ownedItem("dream catcher")) !== undefined) {
+        if (
+          get(isAttacking) &&
+          get(isHealthLow) &&
+          !get(hasFlatlined) &&
+          get(ownedItem("dream catcher")) !== undefined
+        ) {
           toggleAttacking();
 
           addDelta({

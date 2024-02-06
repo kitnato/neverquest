@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { ProgressBar, Stack } from "react-bootstrap";
 import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
 
+import { IconImage } from "../IconImage";
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
@@ -103,7 +104,7 @@ export function ReserveMeter({ PrefixIcon, reserve }: { PrefixIcon?: SVGIcon; re
       value={(reserveValue / reserveMaximumAilingValue) * (PERCENTAGE_POINTS - penalty)}
     >
       <Stack direction="horizontal" gap={1}>
-        {PrefixIcon !== undefined && <PrefixIcon />}
+        {PrefixIcon !== undefined && <IconImage className="small stencilled" Icon={PrefixIcon} />}
 
         <span>
           {formatNumber({ value: reserveValue })}&nbsp;/&nbsp;

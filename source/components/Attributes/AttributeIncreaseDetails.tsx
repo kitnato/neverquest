@@ -7,7 +7,7 @@ import IconAttackRate from "@neverquest/icons/attack-rate.svg?react";
 import IconCriticalChance from "@neverquest/icons/critical-chance.svg?react";
 import IconCriticalDamage from "@neverquest/icons/critical-damage.svg?react";
 import IconDamage from "@neverquest/icons/damage.svg?react";
-import IconDodge from "@neverquest/icons/dodge.svg?react";
+import IconDodgeChance from "@neverquest/icons/dodge-chance.svg?react";
 import IconEldritchCodex from "@neverquest/icons/eldritch-codex.svg?react";
 import IconHealth from "@neverquest/icons/health.svg?react";
 import IconRegenerationAmount from "@neverquest/icons/regeneration-amount.svg?react";
@@ -26,7 +26,7 @@ export function AttributeIncreaseDetails({ attribute }: { attribute: Attribute }
 
   const { increment, powerBonus, rankBonus } = ATTRIBUTES[attribute];
   const Icon = {
-    agility: IconDodge,
+    agility: IconDodgeChance,
     dexterity: IconCriticalChance,
     endurance: IconStamina,
     fortitude: IconRegenerationAmount,

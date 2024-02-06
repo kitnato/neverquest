@@ -1,4 +1,5 @@
 import type { Placement } from "react-bootstrap/esm/types";
+import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { ArmorName } from "@neverquest/components/Inventory/Armor/ArmorName";
@@ -11,6 +12,7 @@ import { WeaponName } from "@neverquest/components/Inventory/Weapon/WeaponName";
 import { CONSUMABLES, GEMS, INFUSABLES, RELICS } from "@neverquest/data/items";
 import IconArmor from "@neverquest/icons/armor.svg?react";
 import IconShield from "@neverquest/icons/shield.svg?react";
+import { isRelicEquipped } from "@neverquest/state/items";
 import type { InventoryItem } from "@neverquest/types";
 import {
   isArmor,
@@ -20,6 +22,7 @@ import {
   isShield,
   isWeapon,
 } from "@neverquest/types/type-guards";
+import type { Relic } from "@neverquest/types/unions";
 import { getWeaponIcon } from "@neverquest/utilities/getters";
 
 export function ItemDisplay({
@@ -33,6 +36,11 @@ export function ItemDisplay({
   item: InventoryItem;
   overlayPlacement?: Placement;
 }) {
+  const equippedRelics: Partial<Record<Relic, boolean>> = {
+    automincer: useRecoilValue(isRelicEquipped("automincer")),
+    "dream catcher": useRecoilValue(isRelicEquipped("dream catcher")),
+  };
+
   if (isArmor(item)) {
     return (
       <IconDisplay
@@ -89,6 +97,8 @@ export function ItemDisplay({
             <AmmunitionPouchStatus />
           ) : name === "lacrimatory" ? (
             <LacrimatoryStatus />
+          ) : equippedRelics[name] ? (
+            <span>Equipped</span>
           ) : undefined
         }
         Icon={RELICS[name].Icon}

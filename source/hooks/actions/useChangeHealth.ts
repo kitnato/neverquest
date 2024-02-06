@@ -30,6 +30,10 @@ export function useChangeHealth() {
       (deltaReserve: DeltaReserve) => {
         const get = getSnapshotGetter(snapshot);
 
+        if (get(health) === 0) {
+          return;
+        }
+
         const healthMaximumPoisonedValue = get(healthMaximumPoisoned);
         const value = deltaReserve.isRegeneration
           ? get(regenerationAmount("health"))

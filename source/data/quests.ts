@@ -25,11 +25,7 @@ export const QUEST_CLASS_ICONS: Record<QuestClass, SVGIcon> = {
   triumph: IconTriumph,
 };
 
-export const QUEST_COMPLETION_BONUS = {
-  conquest: 0.02,
-  routine: 0.01,
-  triumph: 0.03,
-};
+export const QUEST_COMPLETION_BONUS = 0.01;
 
 export const QUEST_NOTIFICATION_DURATION = 5000;
 
@@ -118,7 +114,7 @@ export const QUESTS: Record<
   attributesUnlocking: {
     description: "Unlock all attributes.",
     progression: [ATTRIBUTE_TYPES.length],
-    requiresTracking: true,
+    requiresTracking: false,
     title: "Jack of all",
   },
   bandaging: {
@@ -365,7 +361,7 @@ export const QUESTS: Record<
       "Kill a monster in one strike while at equal or lower power level than the current stage.",
     progression: [1],
     requiresTracking: true,
-    title: "One Punch Person",
+    title: "One Punch",
   },
   killingResCogitans: {
     description: `Defeat ${LABEL_UNKNOWN}`,
@@ -530,7 +526,7 @@ export const QUESTS: Record<
   settingName: {
     description: "Set a name.",
     progression: [1],
-    requiresTracking: false,
+    requiresTracking: true,
     title: "Humble beginnings",
   },
   shocking: {
@@ -542,13 +538,13 @@ export const QUESTS: Record<
   skills: {
     description: "Acquire skills.",
     progression: [1, 3, 7],
-    requiresTracking: true,
+    requiresTracking: false,
     title: "Prodigy",
   },
   skillsAll: {
     description: "Acquire all skills.",
     progression: [SKILL_TYPES.length],
-    requiresTracking: true,
+    requiresTracking: false,
     title: "The GOAT",
   },
   skillsCraft: {
@@ -558,7 +554,7 @@ export const QUESTS: Record<
     title: "Warcraft",
   },
   spendingEssence: {
-    description: "Spend essence.",
+    description: "Spend @ essence.",
     progression: [100, 500, 1000, 2500, 5000, 10_000, 25_000],
     requiresTracking: true,
     title: "High roller",

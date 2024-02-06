@@ -45,7 +45,7 @@ export const ATTRIBUTES: Record<
     base: RESERVES.stamina.baseAmount,
     description: "Increases maximum stamina.",
     Icon: IconEndurance,
-    increment: 7,
+    increment: 5,
     powerBonus: 0.02,
     rankBonus: 5,
     shows: "stamina",
@@ -101,7 +101,7 @@ export const ATTRIBUTES: Record<
     Icon: IconVitality,
     increment: 15,
     powerBonus: 0.025,
-    rankBonus: 7,
+    rankBonus: 10,
     shows: "health",
   },
 };

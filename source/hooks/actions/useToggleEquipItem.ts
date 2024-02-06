@@ -32,7 +32,7 @@ export function useToggleEquipItem() {
 
           return;
         }
-
+        const armorValue = get(armor);
         const shieldValue = get(shield);
         const weaponValue = get(weapon);
 
@@ -47,7 +47,7 @@ export function useToggleEquipItem() {
           }
 
           if (forceEquip === undefined) {
-            if (ID === get(armor).ID) {
+            if (ID === armorValue.ID) {
               reset(armor);
             } else {
               set(armor, item);
@@ -56,7 +56,9 @@ export function useToggleEquipItem() {
             if (forceEquip) {
               set(armor, item);
             } else {
-              reset(armor);
+              if (ID === armorValue.ID) {
+                reset(armor);
+              }
             }
           }
 
@@ -81,7 +83,9 @@ export function useToggleEquipItem() {
             if (forceEquip) {
               set(shield, item);
             } else {
-              reset(shield);
+              if (ID === shieldValue.ID) {
+                reset(shield);
+              }
             }
           }
 
@@ -119,7 +123,9 @@ export function useToggleEquipItem() {
             if (forceEquip) {
               set(weapon, item);
             } else {
-              reset(weapon);
+              if (ID === weaponValue.ID) {
+                reset(weapon);
+              }
             }
           }
 

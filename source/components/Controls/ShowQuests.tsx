@@ -7,7 +7,7 @@ import { Quests } from "@neverquest/components/Quests";
 import IconAttention from "@neverquest/icons/attention.svg?react";
 import IconQuests from "@neverquest/icons/quests.svg?react";
 import { isAttacking } from "@neverquest/state/character";
-import { isStageStarted } from "@neverquest/state/encounter";
+import { location } from "@neverquest/state/encounter";
 import { ownedItem } from "@neverquest/state/inventory";
 import { canCompleteQuests } from "@neverquest/state/quests";
 import { activeControl } from "@neverquest/state/ui";
@@ -18,8 +18,8 @@ export function ShowQuests() {
   const canCompleteConquests = useRecoilValue(canCompleteQuests("conquest"));
   const canCompleteRoutines = useRecoilValue(canCompleteQuests("routine"));
   const canCompleteTriumphs = useRecoilValue(canCompleteQuests("triumph"));
+  const locationValue = useRecoilValue(location);
   const isAttackingValue = useRecoilValue(isAttacking);
-  const isStageStartedValue = useRecoilValue(isStageStarted);
   const ownedItemJournal = useRecoilValue(ownedItem("journal"));
   const resetActiveControl = useResetRecoilState(activeControl);
 
@@ -38,7 +38,7 @@ export function ShowQuests() {
           <div className={getAnimationClass({ animation: "bounceIn" })}>
             <Button
               className={`position-relative${
-                canCompleteQuest && !isStageStartedValue
+                canCompleteQuest && locationValue === "caravan"
                   ? ` ${getAnimationClass({
                       animation: "pulse",
                       isInfinite: true,

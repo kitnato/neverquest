@@ -215,7 +215,7 @@ export function RangedOptions() {
                   gearClass,
                   level,
                   prefixTags:
-                    level <= maximumWeaponLevel - GEAR_LEVEL_RANGE_MAXIMUM * 2
+                    level < maximumWeaponLevel - GEAR_LEVEL_RANGE_MAXIMUM * 2
                       ? ["lowQuality"]
                       : level === maximumWeaponLevel
                         ? ["highQuality"]

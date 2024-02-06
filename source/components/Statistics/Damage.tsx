@@ -16,6 +16,7 @@ import IconBruiser from "@neverquest/icons/bruiser.svg?react";
 import IconBurden from "@neverquest/icons/burden.svg?react";
 import IconDamage from "@neverquest/icons/damage.svg?react";
 import IconEldritchCodex from "@neverquest/icons/eldritch-codex.svg?react";
+import IconQuests from "@neverquest/icons/quests.svg?react";
 import IconStamina from "@neverquest/icons/stamina.svg?react";
 import IconStrength from "@neverquest/icons/strength.svg?react";
 import IconWeaponDamage from "@neverquest/icons/weapon-damage.svg?react";
@@ -88,6 +89,27 @@ export function Damage() {
                       </td>
                     </tr>
 
+                    {isTraitAcquiredBrawler && isUnshielded(shieldValue) && (
+                      <tr>
+                        <td>
+                          <IconDisplay Icon={IconBrawler} iconProps={{ className: "small" }}>
+                            <span>Brawler:</span>
+                          </IconDisplay>
+                        </td>
+
+                        <td>
+                          <span>
+                            +
+                            {formatNumber({
+                              decimals: 0,
+                              format: "percentage",
+                              value: BRAWLER_DAMAGE_BONUS,
+                            })}
+                          </span>
+                        </td>
+                      </tr>
+                    )}
+
                     <ElementalDetails slot="weapon" />
 
                     {attributeStatisticStrength > 0 && (
@@ -129,27 +151,6 @@ export function Damage() {
                       </tr>
                     )}
 
-                    {questsBonusDamage > 0 && (
-                      <tr>
-                        <td>
-                          <span>Quest bonus:</span>
-                        </td>
-
-                        <td>
-                          <IconDisplay Icon={IconDamage} iconProps={{ className: "small" }}>
-                            <span>
-                              +
-                              {formatNumber({
-                                decimals: 0,
-                                format: "percentage",
-                                value: questsBonusDamage,
-                              })}
-                            </span>
-                          </IconDisplay>
-                        </td>
-                      </tr>
-                    )}
-
                     {isTraitAcquiredBruiser && isUnarmed(weaponValue) && (
                       <tr>
                         <td>
@@ -164,23 +165,25 @@ export function Damage() {
                       </tr>
                     )}
 
-                    {isTraitAcquiredBrawler && isUnshielded(shieldValue) && (
+                    {questsBonusDamage > 0 && (
                       <tr>
                         <td>
-                          <IconDisplay Icon={IconBrawler} iconProps={{ className: "small" }}>
-                            <span>Brawler:</span>
+                          <IconDisplay Icon={IconQuests} iconProps={{ className: "small" }}>
+                            <span>Quest bonus:</span>
                           </IconDisplay>
                         </td>
 
                         <td>
-                          <span>
-                            +
-                            {formatNumber({
-                              decimals: 0,
-                              format: "percentage",
-                              value: BRAWLER_DAMAGE_BONUS,
-                            })}
-                          </span>
+                          <IconDisplay Icon={IconDamage} iconProps={{ className: "small" }}>
+                            <span>
+                              +
+                              {formatNumber({
+                                decimals: 0,
+                                format: "percentage",
+                                value: questsBonusDamage,
+                              })}
+                            </span>
+                          </IconDisplay>
                         </td>
                       </tr>
                     )}

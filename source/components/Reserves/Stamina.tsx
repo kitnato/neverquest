@@ -9,6 +9,7 @@ import { LABEL_SEPARATOR, POPOVER_TRIGGER } from "@neverquest/data/general";
 import { RESERVES } from "@neverquest/data/reserves";
 import IconEldritchCodex from "@neverquest/icons/eldritch-codex.svg?react";
 import IconEndurance from "@neverquest/icons/endurance.svg?react";
+import IconQuests from "@neverquest/icons/quests.svg?react";
 import IconStamina from "@neverquest/icons/stamina.svg?react";
 import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
 import { questsBonus } from "@neverquest/state/quests";
@@ -94,7 +95,9 @@ export function Stamina() {
                     {questsBonusStamina > 0 && (
                       <tr>
                         <td>
-                          <span>Quest bonus:</span>
+                          <IconDisplay Icon={IconQuests} iconProps={{ className: "small" }}>
+                            <span>Quest bonus:</span>
+                          </IconDisplay>
                         </td>
 
                         <td>

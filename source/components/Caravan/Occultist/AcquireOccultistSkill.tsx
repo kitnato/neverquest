@@ -12,7 +12,7 @@ export function AcquireOccultistSkill() {
   const acquiredSkillsValue = useRecoilValue(acquiredSkills);
   const ownedItemDreamCatcher = useRecoilValue(ownedItem("dream catcher"));
 
-  const acquiredSkillsOccultist = SKILL_TYPES.filter(
+  const availableSkills = SKILL_TYPES.filter(
     (skill) => SKILLS[skill].trainer === "occultist" && !acquiredSkillsValue[skill],
   );
 
@@ -20,18 +20,18 @@ export function AcquireOccultistSkill() {
     <Stack gap={3}>
       <h6>Acquire skill</h6>
 
-      {ownedItemDreamCatcher === undefined ? (
+      {availableSkills.length === 0 ? (
+        <span className="fst-italic">{LABEL_NONE_AVAILABLE}</span>
+      ) : ownedItemDreamCatcher === undefined ? (
         <span>
           &quot;There exists tremendous power in dreams, one must but find a medium to harness
           them.&quot;
         </span>
-      ) : acquiredSkillsOccultist.length === 0 ? (
-        <span className="fst-italic">{LABEL_NONE_AVAILABLE}</span>
       ) : (
         <>
           <span>&quot;The cipher sings.&quot;</span>
 
-          {acquiredSkillsOccultist.map((skill) => (
+          {availableSkills.map((skill) => (
             <TrainableSkill key={skill} skill={skill} />
           ))}
         </>

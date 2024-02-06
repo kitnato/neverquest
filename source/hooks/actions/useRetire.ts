@@ -18,6 +18,7 @@ import {
   merchantInventory,
   monologue,
 } from "@neverquest/state/caravan";
+import { name } from "@neverquest/state/character";
 import {
   corpse,
   hasDefeatedFinality,
@@ -82,6 +83,7 @@ export function useRetire() {
         reset(gems(ARMOR_NONE.ID));
         reset(gems(SHIELD_NONE.ID));
         reset(gems(WEAPON_NONE.ID));
+        reset(name);
         reset(shield);
         reset(weapon);
 
@@ -96,7 +98,6 @@ export function useRetire() {
         reset(questProgress("stages"));
         reset(questProgress("stagesEnd"));
         reset(questProgress("skillsCraft"));
-        reset(questProgress("skillsAll"));
         reset(questProgress("survivingNoAttributes"));
         reset(questProgress("survivingNoGear"));
 
@@ -118,6 +119,11 @@ export function useRetire() {
         for (const skill of SKILL_TYPES) {
           if (!SKILLS[skill].isInheritable) {
             reset(isSkillAcquired(skill));
+
+            if (get(isSkillAcquired(skill))) {
+              progressQuest({ amount: -1, quest: "skills" });
+              progressQuest({ amount: -1, quest: "skillsAll" });
+            }
           }
         }
 

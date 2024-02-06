@@ -12,7 +12,7 @@ import type { SVGIcon } from "@neverquest/types/components";
 import type { Skill, Trait } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
-export const BRAWLER_DAMAGE_BONUS = 0.5;
+export const BRAWLER_DAMAGE_BONUS = 0.35;
 
 export const BRUISER_STUN_CHANCE = {
   increment: 0.05,
@@ -32,7 +32,7 @@ export const TRAITS: Record<
   }
 > = {
   brawler: {
-    description: `Being unshielded increases one-handed melee damage by ${formatNumber({
+    description: `Being unshielded increases one-handed melee weapon damage by ${formatNumber({
       decimals: 0,
       format: "percentage",
       value: BRAWLER_DAMAGE_BONUS,

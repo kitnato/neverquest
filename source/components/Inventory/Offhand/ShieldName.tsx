@@ -11,7 +11,7 @@ import { GearLevelDetail } from "@neverquest/components/Inventory/GearLevelDetai
 import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
 import { type SHIELD_NONE, SHIELD_SPECIFICATIONS } from "@neverquest/data/gear";
 import { LABEL_UNKNOWN } from "@neverquest/data/general";
-import IconBlock from "@neverquest/icons/block.svg?react";
+import IconBlockChance from "@neverquest/icons/block-chance.svg?react";
 import IconStaggerChance from "@neverquest/icons/stagger-chance.svg?react";
 import { shield as shieldEquipped } from "@neverquest/state/gear";
 import { isSkillAcquired } from "@neverquest/state/skills";
@@ -60,7 +60,7 @@ export function ShieldName({
 
                 <td>
                   <Stack direction="horizontal" gap={1}>
-                    <IconDisplay Icon={IconBlock} iconProps={{ className: "small" }}>
+                    <IconDisplay Icon={IconBlockChance} iconProps={{ className: "small" }}>
                       <span>{formatNumber({ format: "percentage", value: block })}</span>
                     </IconDisplay>
 

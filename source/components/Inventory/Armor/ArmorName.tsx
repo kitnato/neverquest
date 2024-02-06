@@ -11,7 +11,7 @@ import { GearLevelDetail } from "@neverquest/components/Inventory/GearLevelDetai
 import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
 import { type ARMOR_NONE, ARMOR_SPECIFICATIONS } from "@neverquest/data/gear";
 import { LABEL_UNKNOWN } from "@neverquest/data/general";
-import IconDeflection from "@neverquest/icons/deflection.svg?react";
+import IconDeflectionChance from "@neverquest/icons/deflection-chance.svg?react";
 import IconProtection from "@neverquest/icons/protection.svg?react";
 import { armor as armorEquipped } from "@neverquest/state/gear";
 import { isSkillAcquired } from "@neverquest/state/skills";
@@ -120,7 +120,10 @@ export function ArmorName({
 
                       <td>
                         <Stack direction="horizontal" gap={1}>
-                          <IconDisplay Icon={IconDeflection} iconProps={{ className: "small" }}>
+                          <IconDisplay
+                            Icon={IconDeflectionChance}
+                            iconProps={{ className: "small" }}
+                          >
                             <span>{formatNumber({ format: "percentage", value: deflection })}</span>
                           </IconDisplay>
 

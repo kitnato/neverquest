@@ -9,7 +9,7 @@ import { NUDIST_DODGE_BONUS } from "@neverquest/data/traits";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconAgility from "@neverquest/icons/agility.svg?react";
 import IconBurden from "@neverquest/icons/burden.svg?react";
-import IconDodge from "@neverquest/icons/dodge.svg?react";
+import IconDodgeChance from "@neverquest/icons/dodge-chance.svg?react";
 import IconEldritchCodex from "@neverquest/icons/eldritch-codex.svg?react";
 import IconNudist from "@neverquest/icons/nudist.svg?react";
 import IconStalwart from "@neverquest/icons/stalwart.svg?react";
@@ -42,7 +42,7 @@ export function DodgeChance() {
     return (
       <IconDisplay
         className={getAnimationClass({ animation: "flipInX" })}
-        Icon={IconDodge}
+        Icon={IconDodgeChance}
         tooltip="Dodge chance"
       >
         <Stack direction="horizontal" gap={1}>

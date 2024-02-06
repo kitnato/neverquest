@@ -189,8 +189,8 @@ export const FLETCHING = {
 };
 
 export const OCCULTIST_PURGE_PRICE_MULTIPLIER = {
-  essence: 0.15,
-  quests: 500,
+  essence: 0.3,
+  quests: 250,
 };
 
 export const MEDIC_PRICE_SURGERY = 15;
@@ -268,22 +268,18 @@ export const MERCHANT_OFFERS: Record<
     item: RELICS["ender hook"].item,
     monologue: "I recently came into possession of a fine curiosity.",
   },
-  30: {
-    item: INFUSABLES["eldritch codex"].item,
-    monologue: "A dark wanderer passed through and sold me a strange book ...",
-  },
-  34: { item: RELICS.journal.item, monologue: "You wouldn't be a scribe, would you?" },
-  40: {
+  30: { item: RELICS.journal.item, monologue: "You wouldn't be a scribe, would you?" },
+  36: {
     item: RELICS.automincer.item,
     monologue: "Here's an intriguing device that should ease up the grind.",
+  },
+  40: {
+    item: INFUSABLES["eldritch codex"].item,
+    monologue: "A dark wanderer passed through and sold me a strange book ...",
   },
   [POISON.requiredStage]: {
     item: RELICS.lacrimatory.item,
     monologue: "Allow me to offer a phial to collect your sorrows.",
-  },
-  55: {
-    item: RELICS["dream catcher"].item,
-    monologue: "The air is bizarrely palpable. Maybe this will make sense of it.",
   },
 };
 

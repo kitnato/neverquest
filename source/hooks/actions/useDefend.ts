@@ -344,7 +344,7 @@ export function useDefend() {
             set(recoveryDuration, get(recoveryRate));
           }
 
-          if (!isUnshielded(shieldValue)) {
+          if (!isUnshielded(shieldValue) && healthDamage > 0) {
             trainMastery("stability");
           }
 

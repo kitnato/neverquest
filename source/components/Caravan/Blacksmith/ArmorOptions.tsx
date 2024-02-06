@@ -11,7 +11,7 @@ import { ARMOR_SPECIFICATIONS, GEAR_LEVEL_RANGE_MAXIMUM } from "@neverquest/data
 import { LABEL_SKILL_REQUIRED, LABEL_UNKNOWN, LEVELLING_MAXIMUM } from "@neverquest/data/general";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import IconBurden from "@neverquest/icons/burden.svg?react";
-import IconDeflection from "@neverquest/icons/deflection.svg?react";
+import IconDeflectionChance from "@neverquest/icons/deflection-chance.svg?react";
 import IconArmorProtection from "@neverquest/icons/protection.svg?react";
 import IconUnknown from "@neverquest/icons/unknown.svg?react";
 import IconWeight from "@neverquest/icons/weight.svg?react";
@@ -123,7 +123,7 @@ export function ArmorOptions() {
 
         {deflection !== undefined && (
           <IconDisplay
-            Icon={isSkillAcquiredImpermeability ? IconDeflection : IconUnknown}
+            Icon={isSkillAcquiredImpermeability ? IconDeflectionChance : IconUnknown}
             iconProps={{ overlayPlacement: "left" }}
             tooltip={isSkillAcquiredImpermeability ? "Deflection chance" : LABEL_UNKNOWN}
           >
@@ -179,7 +179,7 @@ export function ArmorOptions() {
                 gearClass,
                 level,
                 prefixTags:
-                  level <= maximumArmorLevel - GEAR_LEVEL_RANGE_MAXIMUM * 2
+                  level < maximumArmorLevel - GEAR_LEVEL_RANGE_MAXIMUM * 2
                     ? ["lowQuality"]
                     : level === maximumArmorLevel
                       ? ["highQuality"]

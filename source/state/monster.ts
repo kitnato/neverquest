@@ -1,6 +1,7 @@
 import { nanoid } from "nanoid";
 import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
+import { isSkillAcquired } from "./skills";
 import { PROGRESS } from "@neverquest/data/encounter";
 import { LEVELLING_MAXIMUM } from "@neverquest/data/general";
 import { GEM_DROP_CHANCE, INFUSABLES, RELICS, RELIC_DROP_CHANCE } from "@neverquest/data/items";
@@ -338,11 +339,12 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
               : // Log Entry only drops after defeating Res Dominus while carrying the Memento and if it's never been looted before.
                 encounterValue === "res dominus" && isMementoOwned && !get(hasLootedLogEntry)
                 ? { ...RELICS["[P71NQ]"].item, ID: nanoid() }
-                : // Torn manuscript drops if it's neither currently carried nor sold, if the memento is carried, if the correct crew member is hired and if the drop chance is reached.
+                : // Torn manuscript drops if it's neither currently carried nor sold, if the memento is carried, if the correct crew member is hired, if the associated skill hasn't been trained and if the drop chance is reached.
                   isMementoOwned &&
                     get(ownedItem("torn manuscript")) === undefined &&
                     !merchantInventoryValue.some(({ name }) => name === "torn manuscript") &&
-                    get(isHired(RELIC_DROP_CHANCE["torn manuscript"].requiredCrew)) &&
+                    get(isHired("alchemist")) &&
+                    !get(isSkillAcquired("memetics")) &&
                     Math.random() <=
                       getFromRange({
                         factor: getSigmoid(stageValue),
@@ -353,7 +355,7 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
                     isMementoOwned &&
                       get(ownedItem("dream catcher")) === undefined &&
                       !merchantInventoryValue.some(({ name }) => name === "dream catcher") &&
-                      get(isHired(RELIC_DROP_CHANCE["dream catcher"].requiredCrew)) &&
+                      get(isHired("occultist")) &&
                       Math.random() <=
                         getFromRange({
                           factor: getSigmoid(stageValue),

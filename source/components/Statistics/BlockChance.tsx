@@ -5,7 +5,7 @@ import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import IconBlock from "@neverquest/icons/block.svg?react";
+import IconBlockChance from "@neverquest/icons/block-chance.svg?react";
 import IconBurden from "@neverquest/icons/burden.svg?react";
 import IconStamina from "@neverquest/icons/stamina.svg?react";
 import { shield } from "@neverquest/state/gear";
@@ -27,7 +27,7 @@ export function BlockChance() {
     return (
       <IconDisplay
         className={getAnimationClass({ animation: "flipInX" })}
-        Icon={IconBlock}
+        Icon={IconBlockChance}
         tooltip="Total block chance"
       >
         <Stack direction="horizontal" gap={1}>

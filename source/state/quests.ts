@@ -103,7 +103,7 @@ export const questsBonus = withStateKey("questsBonus", (key) =>
           for (const quest of QUEST_TYPES_BY_CLASS[questClass]) {
             bonus +=
               Object.values(get(questStatuses(quest))).filter((status) => questBonus === status)
-                .length * QUEST_COMPLETION_BONUS[questClass];
+                .length * QUEST_COMPLETION_BONUS;
           }
         }
 

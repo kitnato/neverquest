@@ -1,11 +1,13 @@
 import { LEVELLING_MAXIMUM } from "@neverquest/data/general";
 import IconBleeding from "@neverquest/icons/bleeding.svg?react";
+import IconBlockChance from "@neverquest/icons/block-chance.svg?react";
 import IconBlunt from "@neverquest/icons/blunt.svg?react";
 import IconButchery from "@neverquest/icons/butchery.svg?react";
 import IconCruelty from "@neverquest/icons/cruelty.svg?react";
 import IconDistance from "@neverquest/icons/distance.svg?react";
 import IconExecution from "@neverquest/icons/execution.svg?react";
 import IconFinesse from "@neverquest/icons/finesse.svg?react";
+import IconHealth from "@neverquest/icons/health.svg?react";
 import IconMarksmanship from "@neverquest/icons/marksmanship.svg?react";
 import IconMight from "@neverquest/icons/might.svg?react";
 import IconParryChance from "@neverquest/icons/parry-chance.svg?react";
@@ -26,79 +28,81 @@ import type { Mastery, Skill } from "@neverquest/types/unions";
 export const MASTERIES: Record<
   Mastery,
   AttributeOrMasteryBaseData & {
-    descriptionIcon: SVGIcon;
-    instructionIcon?: SVGIcon;
+    descriptionIcons: SVGIcon[];
+    instructionIcons: SVGIcon[];
     instructions: string;
     requiredSkill: Skill;
   }
 > = {
   butchery: {
-    base: 0.2,
+    base: 0.16,
     description: "Affects # execution threshold.",
-    descriptionIcon: IconExecution,
+    descriptionIcons: [IconExecution],
     Icon: IconButchery,
-    increment: 0.3 / LEVELLING_MAXIMUM,
-    instructionIcon: IconTwoHanded,
+    increment: 0.5 / LEVELLING_MAXIMUM,
+    instructionIcons: [IconTwoHanded],
     instructions: "Trains when dealing damage with a # two-handed weapon.",
     requiredSkill: "siegecraft",
   },
   cruelty: {
     base: 0.3,
     description: "Affects # bleed damage.",
-    descriptionIcon: IconBleeding,
+    descriptionIcons: [IconBleeding],
     Icon: IconCruelty,
-    increment: 1 / LEVELLING_MAXIMUM,
-    instructionIcon: IconPiercing,
+    increment: 1.5 / LEVELLING_MAXIMUM,
+    instructionIcons: [IconPiercing],
     instructions: "Trains when dealing damage with a # piercing weapon.",
     requiredSkill: "anatomy",
   },
   finesse: {
     base: 0,
     description: "Affects damage absorbed and reflected when # parrying.",
-    descriptionIcon: IconParryChance,
+    descriptionIcons: [IconParryChance],
     Icon: IconFinesse,
-    increment: 0.8 / LEVELLING_MAXIMUM,
-    instructionIcon: IconSlashing,
+    increment: 1 / LEVELLING_MAXIMUM,
+    instructionIcons: [IconSlashing],
     instructions: "Trains when dealing damage with a # slashing weapon.",
     requiredSkill: "escrime",
   },
   marksmanship: {
     base: 0,
     description: "Affects the # distance a monster must close before it can attack.",
-    descriptionIcon: IconDistance,
+    descriptionIcons: [IconDistance],
     Icon: IconMarksmanship,
-    increment: 0.7 / LEVELLING_MAXIMUM,
-    instructionIcon: IconRanged,
+    increment: 0.8 / LEVELLING_MAXIMUM,
+    instructionIcons: [IconRanged],
     instructions: "Trains when dealing damage with a # ranged weapon.",
     requiredSkill: "archery",
   },
   might: {
-    base: 2000,
+    base: 1800,
     description: "Affects # stun duration.",
-    descriptionIcon: IconStunned,
+    descriptionIcons: [IconStunned],
     Icon: IconMight,
-    increment: Math.round(3000 / LEVELLING_MAXIMUM),
-    instructionIcon: IconBlunt,
+    increment: Math.round(4000 / LEVELLING_MAXIMUM),
+    instructionIcons: [IconBlunt],
     instructions: "Trains when dealing damage with a # blunt weapon.",
     requiredSkill: "traumatology",
   },
   resilience: {
     base: 0,
     description: "Affects # recovery rate.",
-    descriptionIcon: IconRecovery,
+    descriptionIcons: [IconRecovery],
     Icon: IconResilience,
     increment: 1 / LEVELLING_MAXIMUM,
-    instructions: "Trains when getting struck.",
+    instructionIcons: [IconHealth],
+    instructions: "Trains when losing # health from attacks.",
     requiredSkill: "armorcraft",
   },
   stability: {
-    base: 2000,
+    base: 1800,
     description: "Affects # stagger duration.",
-    descriptionIcon: IconStaggered,
+    descriptionIcons: [IconStaggered],
     Icon: IconStability,
-    increment: Math.round(3000 / LEVELLING_MAXIMUM),
-    instructionIcon: IconShield,
-    instructions: "Trains when getting struck while having a # shield equipped.",
+    increment: Math.round(4000 / LEVELLING_MAXIMUM),
+    instructionIcons: [IconHealth, IconShield, IconBlockChance],
+    instructions:
+      "Trains when losing # health from attacks while having a # shield equipped, as well as by # blocking.",
     requiredSkill: "shieldcraft",
   },
 };

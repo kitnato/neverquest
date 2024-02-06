@@ -136,7 +136,7 @@ export const SHIELD_SPECIFICATIONS: Record<
   },
   small: {
     block: [
-      { maximum: 0.16, minimum: 0.15 },
+      { maximum: 0.13, minimum: 0.12 },
       { maximum: 0.3, minimum: 0.28 },
     ],
     burden: [
@@ -200,8 +200,8 @@ export const WEAPON_BASE: GearRangeBase & {
     { maximum: 3700, minimum: 3600 },
   ],
   rate: [
-    { maximum: 3000, minimum: 2900 },
-    { maximum: 2000, minimum: 1900 },
+    { maximum: 3100, minimum: 3000 },
+    { maximum: 2100, minimum: 2000 },
   ],
   weight: [
     { maximum: 2, minimum: 1 },
@@ -211,11 +211,11 @@ export const WEAPON_BASE: GearRangeBase & {
 
 export const WEAPON_MODIFIER = {
   "one-handed": { ability: 1, burden: 1, damage: 1, price: 1, rate: 1, weight: 1 },
-  ranged: { ability: 1, burden: 1.05, damage: 0.9, price: 1.2, rate: 1.1, weight: 1.15 },
+  ranged: { ability: 1.1, burden: 1.1, damage: 0.9, price: 1.2, rate: 1.1, weight: 1.15 },
   "two-handed": {
-    ability: 1.1,
-    burden: 1.25,
-    damage: 1.2,
+    ability: 1.2,
+    burden: 1.3,
+    damage: 1.1,
     price: 1.3,
     rate: 1.15,
     weight: 1.2,
@@ -231,7 +231,7 @@ export const WEAPON_NONE: Omit<Melee, "price"> = {
   ID: "WEAPON_NONE",
   level: 0,
   name: "Unarmed",
-  rate: 2000,
+  rate: 2200,
   weight: 0,
 };
 
@@ -247,8 +247,8 @@ export const WEAPON_SPECIFICATIONS: Record<
   blunt: {
     ability: "stun",
     abilityChance: [
-      { maximum: 0.2, minimum: 0.15 },
-      { maximum: 0.5, minimum: 0.48 },
+      { maximum: 0.2, minimum: 0.16 },
+      { maximum: 0.55, minimum: 0.53 },
     ],
     IconAbility: IconStunChance,
     IconGearClass: IconBlunt,
@@ -256,8 +256,8 @@ export const WEAPON_SPECIFICATIONS: Record<
   piercing: {
     ability: "bleed",
     abilityChance: [
-      { maximum: 0.3, minimum: 0.25 },
-      { maximum: 0.6, minimum: 0.58 },
+      { maximum: 0.3, minimum: 0.26 },
+      { maximum: 0.65, minimum: 0.63 },
     ],
     IconAbility: IconBleedChance,
     IconGearClass: IconPiercing,

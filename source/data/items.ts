@@ -54,7 +54,6 @@ import type { ConsumableItem, GeneratorRange, InfusableItem, RelicItem } from "@
 import type { SVGIcon } from "@neverquest/types/components";
 import type {
   Consumable,
-  CrewMember,
   Delta,
   Elemental,
   ElementalAilment,
@@ -233,9 +232,9 @@ export const INFUSABLES: Record<
 export const KNAPSACK_CAPACITY = 15;
 
 export const RELIC_DROP_CHANCE = {
-  "dream catcher": { maximum: 0.2, minimum: 0.05, requiredCrew: "occultist" as CrewMember },
+  "dream catcher": { maximum: 0.1, minimum: 0.025 },
   memento: { maximum: 0.1, minimum: 0.01 },
-  "torn manuscript": { maximum: 0.2, minimum: 0.05, requiredCrew: "alchemist" as CrewMember },
+  "torn manuscript": { maximum: 0.1, minimum: 0.025 },
 };
 
 export const RELICS: Record<
@@ -287,11 +286,11 @@ export const RELICS: Record<
     },
   },
   "dream catcher": {
-    descriptionIcons: [IconProtected],
+    descriptionIcons: [IconProtected, IconHealth],
     Icon: IconDreamCatcher,
     item: {
       description:
-        "While # equipped, protects the bearer from harm by disengaging from overwhelming encounters.",
+        "While # equipped and attacking, disengages the bearer once reaching low # health.",
       name: "dream catcher",
       price: 1500,
       weight: 10,

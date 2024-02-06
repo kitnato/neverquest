@@ -38,7 +38,7 @@ export function QuestTab({ questClass }: { questClass: QuestClass }) {
 
       <Stack className="overflow-y-auto" gap={3}>
         {QUEST_TYPES_BY_CLASS[questClass].map((quest) => (
-          <QuestListing key={quest} quest={quest} questClass={questClass} />
+          <QuestListing key={quest} quest={quest} />
         ))}
       </Stack>
     </Stack>

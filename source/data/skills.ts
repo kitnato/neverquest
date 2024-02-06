@@ -10,8 +10,8 @@ import IconCalisthenics from "@neverquest/icons/calisthenics.svg?react";
 import IconCriticalChance from "@neverquest/icons/critical-chance.svg?react";
 import IconCriticalDamage from "@neverquest/icons/critical-damage.svg?react";
 import IconCriticalRating from "@neverquest/icons/critical-rating.svg?react";
-import IconDeflection from "@neverquest/icons/deflection.svg?react";
-import IconDodge from "@neverquest/icons/dodge.svg?react";
+import IconDeflectionChance from "@neverquest/icons/deflection-chance.svg?react";
+import IconDodgeChance from "@neverquest/icons/dodge-chance.svg?react";
 import IconEscrime from "@neverquest/icons/escrime.svg?react";
 import IconEvasion from "@neverquest/icons/evasion.svg?react";
 import IconExecution from "@neverquest/icons/execution.svg?react";
@@ -39,7 +39,7 @@ import type { SVGIcon } from "@neverquest/types/components";
 import type { CrewMember, Showing, Skill, WeaponAbility } from "@neverquest/types/unions";
 
 export const SKILL_PRICE_BASE = 60;
-export const SKILL_PRICE_FACTOR = 1.9;
+export const SKILL_PRICE_FACTOR = 2.05;
 
 export const SKILLS: Record<
   Skill,
@@ -107,7 +107,7 @@ export const SKILLS: Record<
   },
   evasion: {
     description: "Grants the ability to # dodge attacks, avoiding all damage.",
-    descriptionIcons: [IconDodge],
+    descriptionIcons: [IconDodgeChance],
     Icon: IconEvasion,
     isInheritable: false,
     requiredCrewMember: "merchant",
@@ -115,7 +115,7 @@ export const SKILLS: Record<
   },
   impermeability: {
     description: "Grants the ability to # deflect ailments, avoiding them entirely.",
-    descriptionIcons: [IconDeflection],
+    descriptionIcons: [IconDeflectionChance],
     Icon: IconImpermeability,
     isInheritable: true,
     requiredCrewMember: "merchant",

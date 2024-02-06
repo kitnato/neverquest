@@ -13,7 +13,7 @@ export function AcquireWitchSkill() {
   const acquiredSkillsValue = useRecoilValue(acquiredSkills);
   const tearsValue = useRecoilValue(tears);
 
-  const acquiredSkillsWitch = SKILL_TYPES.filter(
+  const availableSkills = SKILL_TYPES.filter(
     (skill) => SKILLS[skill].trainer === "witch" && !acquiredSkillsValue[skill],
   );
 
@@ -21,18 +21,18 @@ export function AcquireWitchSkill() {
     <Stack gap={3}>
       <h6>Acquire skill</h6>
 
-      {tearsValue < TEARS_MAXIMUM ? (
+      {availableSkills.length === 0 ? (
+        <span className="fst-italic">{LABEL_NONE_AVAILABLE}</span>
+      ) : tearsValue < TEARS_MAXIMUM ? (
         <span>
           &quot;Before I can impart protective hexes, you must first taste the bitter tears of
           experience.&quot;
         </span>
-      ) : acquiredSkillsWitch.length === 0 ? (
-        <span className="fst-italic">{LABEL_NONE_AVAILABLE}</span>
       ) : (
         <>
           <span>&quot;Your pernicious traumas sing to the cipher. You are ready.&quot;</span>
 
-          {acquiredSkillsWitch.map((skill) => (
+          {availableSkills.map((skill) => (
             <TrainableSkill key={skill} skill={skill} />
           ))}
         </>

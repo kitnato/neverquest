@@ -16,17 +16,15 @@ import IconStamina from "@neverquest/icons/stamina.svg?react";
 import { questProgress, questStatuses } from "@neverquest/state/quests";
 import type { QuestData } from "@neverquest/types";
 import { isQuestBonus } from "@neverquest/types/type-guards";
-import type { Quest, QuestBonus, QuestClass } from "@neverquest/types/unions";
+import type { Quest, QuestBonus } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
 export function QuestDisplay({
   activeQuest: { description, hidden, progressionIndex, progressionMaximum, title },
   quest,
-  questClass,
 }: {
   activeQuest: QuestData;
   quest: Quest;
-  questClass: QuestClass;
 }) {
   const questProgressValue = useRecoilValue(questProgress(quest));
   const questStatusesValue = useRecoilValue(questStatuses(quest));
@@ -82,7 +80,7 @@ export function QuestDisplay({
           trigger={hasCompletedQuest ? [] : POPOVER_TRIGGER}
         >
           <ToggleButtonGroup
-            className="me-1"
+            className={`me-1${hasCompletedQuest ? " opacity-50" : ""}`}
             name={choiceID}
             onChange={(value) => {
               completeQuest({
@@ -112,7 +110,7 @@ export function QuestDisplay({
                     {formatNumber({
                       decimals: 0,
                       format: "percentage",
-                      value: QUEST_COMPLETION_BONUS[questClass],
+                      value: QUEST_COMPLETION_BONUS,
                     })}
                   </span>
                 </IconDisplay>

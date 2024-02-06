@@ -2,6 +2,7 @@ import { generateCreature, generateLocation } from "@kitnato/locran";
 import ls from "localstorage-slim";
 import { useRecoilCallback } from "recoil";
 
+import { useProgressQuest } from "./useProgressQuest";
 import { CREW } from "@neverquest/data/caravan";
 import { KEY_SESSION } from "@neverquest/data/general";
 import { isHired } from "@neverquest/state/caravan";
@@ -11,6 +12,8 @@ import { CREW_MEMBER_TYPES } from "@neverquest/types/unions";
 import { getAffixStructure } from "@neverquest/utilities/getters";
 
 export function useInitialize() {
+  const progressQuest = useProgressQuest();
+
   return useRecoilCallback(
     ({ set }) =>
       (isRetirement?: boolean) => {
@@ -24,6 +27,9 @@ export function useInitialize() {
 
             set(isHired(crewMember), isCrewMemberMemberHired);
             initialStore[`isHired-${crewMember}`] = isCrewMemberMemberHired;
+
+            progressQuest({ quest: "hiring" });
+            progressQuest({ quest: "hiringAll" });
           }
 
           const newWilderness = [generateLocation({ affixStructure: getAffixStructure() })];
@@ -41,6 +47,6 @@ export function useInitialize() {
           }
         }
       },
-    [],
+    [progressQuest],
   );
 }

@@ -9,7 +9,7 @@ import { DEFLECTION_MAXIMUM } from "@neverquest/data/statistics";
 import { INOCULATED_DEFLECTION_BASE } from "@neverquest/data/traits";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconArmor from "@neverquest/icons/armor.svg?react";
-import IconDeflection from "@neverquest/icons/deflection.svg?react";
+import IconDeflectionChance from "@neverquest/icons/deflection-chance.svg?react";
 import IconInoculated from "@neverquest/icons/inoculated.svg?react";
 import { armor } from "@neverquest/state/gear";
 import { deflectionChance } from "@neverquest/state/statistics";
@@ -32,7 +32,7 @@ export function DeflectionChance() {
     return (
       <IconDisplay
         className={getAnimationClass({ animation: "flipInX" })}
-        Icon={IconDeflection}
+        Icon={IconDeflectionChance}
         tooltip="Total deflection chance"
       >
         <Stack direction="horizontal" gap={1}>
@@ -49,7 +49,7 @@ export function DeflectionChance() {
                       </td>
 
                       <td>
-                        <IconDisplay Icon={IconDeflection} iconProps={{ className: "small" }}>
+                        <IconDisplay Icon={IconDeflectionChance} iconProps={{ className: "small" }}>
                           <span>{formatNumber({ format: "percentage", value: deflection })}</span>
                         </IconDisplay>
                       </td>

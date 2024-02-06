@@ -128,14 +128,14 @@ export const damage = withStateKey("damage", (key) =>
       return Math.ceil(
         (weaponValue.damage +
           get(attributeStatistic("strength")) * (1 + get(attributePowerBonus("strength"))) +
-          Object.values(get(elementalEffects).weapon).reduce((sum, { damage }) => sum + damage, 0) +
+          Object.values(get(elementalEffects).weapon).reduce((sum, { damage }) => sum + damage, 0) *
+            (get(isTraitAcquired("brawler")) &&
+            isUnshielded(get(shield)) &&
+            isMelee(weaponValue) &&
+            (weaponValue.grip === "one-handed" || get(isTraitAcquired("colossus")))
+              ? 1 + BRAWLER_DAMAGE_BONUS
+              : 1) +
           (get(isTraitAcquired("bruiser")) && isUnarmed(weaponValue) ? get(stamina) : 0)) *
-          (get(isTraitAcquired("brawler")) &&
-          isUnshielded(get(shield)) &&
-          isMelee(weaponValue) &&
-          (weaponValue.grip === "one-handed" || get(isTraitAcquired("colossus")))
-            ? 1 + BRAWLER_DAMAGE_BONUS
-            : 1) *
           (1 + get(questsBonus("damageBonus"))),
       );
     },

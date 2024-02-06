@@ -12,7 +12,7 @@ export function AcquireAlchemistSkill() {
   const acquiredSkillsValue = useRecoilValue(acquiredSkills);
   const ownedItemTornManuscript = useRecoilValue(ownedItem("torn manuscript"));
 
-  const acquiredSkillsAlchemist = SKILL_TYPES.filter(
+  const availableSkills = SKILL_TYPES.filter(
     (skill) => SKILLS[skill].trainer === "alchemist" && !acquiredSkillsValue[skill],
   );
 
@@ -20,21 +20,22 @@ export function AcquireAlchemistSkill() {
     <Stack gap={3}>
       <h6>Acquire skill</h6>
 
-      {ownedItemTornManuscript === undefined ? (
+      {availableSkills.length === 0 ? (
+        <span className="fst-italic">{LABEL_NONE_AVAILABLE}</span>
+      ) : ownedItemTornManuscript === undefined ? (
         <span>
           &quot;Alas, most teachings are lost to time. You wouldn&apos;t have come across any arcane
           writs lately?&quot;
         </span>
-      ) : acquiredSkillsAlchemist.length === 0 ? (
-        <span className="fst-italic">{LABEL_NONE_AVAILABLE}</span>
       ) : (
         <>
           <span>
-            &quot;Pages from the hermetic tome! Allow me to weave miracles for unwary souls.&quot;
+            &quot;Pages from the hermetic tome! Let&apos;s see if I can still weave miracles
+            ...&quot;
           </span>
 
           <>
-            {acquiredSkillsAlchemist.map((skill) => (
+            {availableSkills.map((skill) => (
               <TrainableSkill key={skill} skill={skill} />
             ))}
           </>

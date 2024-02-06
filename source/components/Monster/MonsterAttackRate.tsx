@@ -40,7 +40,7 @@ export function MonsterAttackRate() {
       defend();
       disengage();
     },
-    stop: !isAttackingValue || !hasMonsterClosedValue || isMonsterDeadValue,
+    stop: !hasMonsterClosedValue || !isAttackingValue || isMonsterDeadValue,
   });
 
   return (

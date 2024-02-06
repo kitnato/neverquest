@@ -11,6 +11,7 @@ import { useTimerDelta } from "@neverquest/hooks/useTimerDelta";
 import IconEldritchCodex from "@neverquest/icons/eldritch-codex.svg?react";
 import IconHealth from "@neverquest/icons/health.svg?react";
 import IconProtected from "@neverquest/icons/protected.svg?react";
+import IconQuests from "@neverquest/icons/quests.svg?react";
 import IconVitality from "@neverquest/icons/vitality.svg?react";
 import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
 import { isRelicEquipped } from "@neverquest/state/items";
@@ -106,7 +107,9 @@ export function Health() {
                     {questsBonusHealth > 0 && (
                       <tr>
                         <td>
-                          <span>Quest bonus:</span>
+                          <IconDisplay Icon={IconQuests} iconProps={{ className: "small" }}>
+                            <span>Quest bonus:</span>
+                          </IconDisplay>
                         </td>
 
                         <td>

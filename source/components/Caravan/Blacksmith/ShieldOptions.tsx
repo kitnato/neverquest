@@ -9,7 +9,7 @@ import { SetGearLevel } from "@neverquest/components/Caravan/SetGearLevel";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { GEAR_LEVEL_RANGE_MAXIMUM, SHIELD_SPECIFICATIONS } from "@neverquest/data/gear";
 import { LABEL_SKILL_REQUIRED, LABEL_UNKNOWN, LEVELLING_MAXIMUM } from "@neverquest/data/general";
-import IconBlock from "@neverquest/icons/block.svg?react";
+import IconBlockChance from "@neverquest/icons/block-chance.svg?react";
 import IconBurden from "@neverquest/icons/burden.svg?react";
 import IconStaggerChance from "@neverquest/icons/stagger-chance.svg?react";
 import IconUnknown from "@neverquest/icons/unknown.svg?react";
@@ -107,7 +107,7 @@ export function ShieldOptions() {
         </IconDisplay>
 
         <IconDisplay
-          Icon={IconBlock}
+          Icon={IconBlockChance}
           iconProps={{ overlayPlacement: "left" }}
           tooltip="Block chance"
         >
@@ -174,7 +174,7 @@ export function ShieldOptions() {
                 gearClass,
                 level,
                 prefixTags:
-                  level <= maximumShieldLevel - GEAR_LEVEL_RANGE_MAXIMUM * 2
+                  level < maximumShieldLevel - GEAR_LEVEL_RANGE_MAXIMUM * 2
                     ? ["lowQuality"]
                     : level === maximumShieldLevel
                       ? ["highQuality"]

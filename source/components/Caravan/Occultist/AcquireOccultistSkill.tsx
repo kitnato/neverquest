@@ -1,9 +1,11 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
+import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { TrainableSkill } from "@neverquest/components/Skills/TrainableSkill";
 import { LABEL_NONE_AVAILABLE } from "@neverquest/data/general";
 import { SKILLS } from "@neverquest/data/skills";
+import IconDreamCatcher from "@neverquest/icons/dream-catcher.svg?react";
 import { ownedItem } from "@neverquest/state/inventory";
 import { acquiredSkills } from "@neverquest/state/skills";
 import { SKILL_TYPES } from "@neverquest/types/unions";
@@ -29,7 +31,9 @@ export function AcquireOccultistSkill() {
         </span>
       ) : (
         <>
-          <span>&quot;The cipher sings.&quot;</span>
+          <IconDisplay Icon={IconDreamCatcher} iconProps={{ className: "small" }}>
+            <span>&quot;The cipher sings.&quot;</span>
+          </IconDisplay>
 
           {availableSkills.map((skill) => (
             <TrainableSkill key={skill} skill={skill} />

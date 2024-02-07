@@ -72,6 +72,11 @@ export function useAcquireItem() {
               break;
             }
 
+            case "torn manuscript": {
+              progressQuest({ quest: "acquiringTornManuscript" });
+              break;
+            }
+
             default: {
               break;
             }

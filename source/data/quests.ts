@@ -62,7 +62,8 @@ export const QUESTS: Record<
     title: "Ranger",
   },
   acquiringDreamCatcher: {
-    description: "Acquire the dream catcher.",
+    description: `Acquire the ${LABEL_UNKNOWN}.`,
+    hidden: "dream catcher.",
     progression: [1],
     requiresTracking: false,
     title: "Deceptively useful",
@@ -88,7 +89,8 @@ export const QUESTS: Record<
     title: "Subversion",
   },
   acquiringMemento: {
-    description: "Acquire the memento.",
+    description: `Acquire the ${LABEL_UNKNOWN}.`,
+    hidden: "memento.",
     progression: [1],
     requiresTracking: false,
     title: "Now what?",
@@ -98,6 +100,13 @@ export const QUESTS: Record<
     progression: [1],
     requiresTracking: true,
     title: "Sniper",
+  },
+  acquiringTornManuscript: {
+    description: `Acquire the ${LABEL_UNKNOWN}.`,
+    hidden: "torn manuscript.",
+    progression: [1],
+    requiresTracking: false,
+    title: "What is the cipher?",
   },
   acquiringTwoHanded: {
     description: "Acquire a two-handed weapon.",

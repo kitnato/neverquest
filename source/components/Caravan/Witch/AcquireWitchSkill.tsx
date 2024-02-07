@@ -1,10 +1,12 @@
 import { Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
+import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { TrainableSkill } from "@neverquest/components/Skills/TrainableSkill";
 import { LABEL_NONE_AVAILABLE } from "@neverquest/data/general";
 import { TEARS_MAXIMUM } from "@neverquest/data/items";
 import { SKILLS } from "@neverquest/data/skills";
+import IconLacrimatory from "@neverquest/icons/lacrimatory.svg?react";
 import { tears } from "@neverquest/state/items";
 import { acquiredSkills } from "@neverquest/state/skills";
 import { SKILL_TYPES } from "@neverquest/types/unions";
@@ -30,7 +32,11 @@ export function AcquireWitchSkill() {
         </span>
       ) : (
         <>
-          <span>&quot;Your pernicious traumas sing to the cipher. You are ready.&quot;</span>
+          <IconDisplay Icon={IconLacrimatory} iconProps={{ className: "small" }}>
+            <span>
+              &quot;Your pernicious traumas resonate with the cipher. You are ready.&quot;
+            </span>
+          </IconDisplay>
 
           {availableSkills.map((skill) => (
             <TrainableSkill key={skill} skill={skill} />

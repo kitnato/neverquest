@@ -494,6 +494,7 @@ export const TRIUMPH_TYPES = [
   "masteriesAll",
   "traitsAll",
   "acquiringMemento",
+  "acquiringTornManuscript",
   "acquiringDreamCatcher",
   "killingResDominus",
   "visitingVoid",

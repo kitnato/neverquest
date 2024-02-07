@@ -299,7 +299,9 @@ export function getItemIcon(item: InventoryItem) {
 }
 
 export function getLinearMapping({ offset, stage }: { offset: number; stage: number }) {
-  return ((stage - offset) * (LEVELLING_CUTOFF - 1)) / (LEVELLING_CUTOFF - offset - 1) + 1;
+  return stage < offset
+    ? 0
+    : ((stage - offset) * (LEVELLING_CUTOFF - 1)) / (LEVELLING_CUTOFF - offset - 1) + 1;
 }
 
 export function getMeleeRanges({
@@ -389,6 +391,10 @@ export function getRangedRanges({ factor, gearClass }: { factor: number; gearCla
 
 export function getPerkEffect({ perk, stage }: { perk: Perk; stage: number }) {
   const { maximum, minimum } = PERKS[perk];
+
+  if (stage < RETIREMENT_STAGE) {
+    return 0;
+  }
 
   return getFromRange({
     factor: getSigmoid(

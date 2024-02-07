@@ -47,7 +47,7 @@ export const ARMOR_SPECIFICATIONS: Record<
     price: { maximum: 15_000, minimum: 50 },
     protection: [
       { maximum: 8, minimum: 6 },
-      { maximum: 1100, minimum: 1050 },
+      { maximum: 1000, minimum: 950 },
     ],
     weight: [
       { maximum: 7, minimum: 5 },
@@ -63,7 +63,7 @@ export const ARMOR_SPECIFICATIONS: Record<
     price: { maximum: 6000, minimum: 1 },
     protection: [
       { maximum: 2, minimum: 1 },
-      { maximum: 500, minimum: 450 },
+      { maximum: 450, minimum: 400 },
     ],
     weight: [
       { maximum: 2, minimum: 1 },
@@ -83,7 +83,7 @@ export const ARMOR_SPECIFICATIONS: Record<
     price: { maximum: 9000, minimum: 25 },
     protection: [
       { maximum: 6, minimum: 3 },
-      { maximum: 700, minimum: 650 },
+      { maximum: 600, minimum: 550 },
     ],
     weight: [
       { maximum: 5, minimum: 3 },
@@ -136,8 +136,8 @@ export const SHIELD_SPECIFICATIONS: Record<
   },
   small: {
     block: [
-      { maximum: 0.13, minimum: 0.12 },
-      { maximum: 0.3, minimum: 0.28 },
+      { maximum: 0.11, minimum: 0.1 },
+      { maximum: 0.25, minimum: 0.23 },
     ],
     burden: [
       { maximum: 2, minimum: 1 },
@@ -157,7 +157,7 @@ export const SHIELD_SPECIFICATIONS: Record<
   tower: {
     block: [
       { maximum: 0.33, minimum: 0.32 },
-      { maximum: 0.65, minimum: 0.63 },
+      { maximum: 0.5, minimum: 0.48 },
     ],
     burden: [
       { maximum: 7, minimum: 6 },
@@ -192,7 +192,7 @@ export const WEAPON_BASE: GearRangeBase & {
   ],
   damage: [
     { maximum: 15, minimum: 13 },
-    { maximum: 1000, minimum: 900 },
+    { maximum: 900, minimum: 800 },
   ],
   price: { maximum: 9000, minimum: 1 },
   range: [

@@ -101,12 +101,10 @@ export const CREW: Record<
     Icon: IconMerchant,
     interaction: "Trade",
     monologues: {
-      1: "Greetings. I have what you're looking for.",
-      2: "Hello again. Some protection, perhaps?",
-      3: "Ah, you're back. Care for something to fend off attacks?",
+      1: "Greetings. What are you looking for?",
       4: "Good to have you back.",
       5: "Heard there are other travelers looking to sell their services.",
-      6: "New gear for sale, if you care to peruse.",
+      6: "Peruse at your leisure.",
       7: "Plenty of monsters out there.",
       9: "There is something looming on the horizon ...",
       10: "I can't believe you came out of that in one piece.",
@@ -197,89 +195,84 @@ export const MEDIC_PRICE_SURGERY = 15;
 
 export const MERCHANT_OFFERS: Record<
   number,
-  | { item: Omit<InheritableItem, "ID">; monologue: string }
-  | (ArtifactType<"armor"> & {
-      gearClass: ArmorClass;
-    })
-  | (ArtifactType<"shield"> & {
-      gearClass: ShieldClass;
-    })
-  | (ArtifactType<"weapon"> & {
-      gearClass: WeaponClass;
-      grip: Grip;
-      modality: WeaponModality;
-    })
+  {
+    monologue?: string;
+    offer:
+      | Omit<InheritableItem, "ID">
+      | (ArtifactType<"armor"> & {
+          gearClass: ArmorClass;
+        })
+      | (ArtifactType<"shield"> & {
+          gearClass: ShieldClass;
+        })
+      | (ArtifactType<"weapon"> & {
+          gearClass: WeaponClass;
+          grip: Grip;
+          modality: WeaponModality;
+        });
+  }
 > = {
   1: {
-    gearClass: "piercing",
-    grip: "one-handed",
-    modality: "melee",
-    type: "weapon",
+    monologue: "Greetings. I have what you're looking for.",
+    offer: { gearClass: "piercing", grip: "one-handed", modality: "melee", type: "weapon" },
   },
   2: {
-    gearClass: "light",
-    type: "armor",
+    monologue: "Hello again. Some protection, perhaps?",
+    offer: { gearClass: "light", type: "armor" },
   },
   3: {
-    gearClass: "small",
-    type: "shield",
+    monologue: "Ah, you're back. Care for something to fend off attacks?",
+    offer: { gearClass: "small", type: "shield" },
   },
   4: {
-    item: RELICS.knapsack.item,
     monologue: "Need a way to manage your possessions?",
+    offer: RELICS.knapsack.item,
   },
   6: {
-    gearClass: "slashing",
-    grip: "one-handed",
-    modality: "melee",
-    type: "weapon",
+    monologue: "New gear for sale, if you care to peruse.",
+    offer: { gearClass: "slashing", grip: "one-handed", modality: "melee", type: "weapon" },
   },
   7: {
-    gearClass: "reinforced",
-    type: "armor",
+    offer: { gearClass: "reinforced", type: "armor" },
   },
   8: {
-    item: RELICS.compass.item,
     monologue: "I've happened upon a relic allowing you to retread old ground.",
+    offer: RELICS.compass.item,
   },
   9: {
-    gearClass: "medium",
-    type: "shield",
+    offer: { gearClass: "medium", type: "shield" },
   },
   10: {
-    gearClass: "blunt",
-    grip: "one-handed",
-    modality: "melee",
-    type: "weapon",
+    offer: { gearClass: "blunt", grip: "one-handed", modality: "melee", type: "weapon" },
   },
   11: {
-    item: RELICS["thaumaturgic goggles"].item,
     monologue: "Fine craftsmanship in this little gadget ...",
+    offer: RELICS["thaumaturgic goggles"].item,
   },
   14: {
-    item: RELICS.hearthstone.item,
     monologue: "A relic that grants safe passage. Would that be of interest?",
+    offer: RELICS.hearthstone.item,
   },
   [CREW.fletcher.requiredStage]: {
-    item: RELICS["ammunition pouch"].item,
     monologue: "Here is something suitable for marksmen.",
+    offer: RELICS["ammunition pouch"].item,
   },
   25: {
-    item: RELICS["ender hook"].item,
     monologue: "I recently came into possession of a fine curiosity.",
+    offer: RELICS["ender hook"].item,
   },
-  30: { item: RELICS.journal.item, monologue: "You wouldn't be a scribe, would you?" },
+  30: { monologue: "You wouldn't be a scribe, would you?", offer: RELICS.journal.item },
   36: {
-    item: RELICS.automincer.item,
     monologue: "Here's an intriguing device that should ease up the grind.",
+    offer: RELICS.automincer.item,
   },
   40: {
-    item: INFUSABLES["eldritch codex"].item,
     monologue: "A dark wanderer passed through and sold me a strange book ...",
+    offer: INFUSABLES["eldritch codex"].item,
   },
   [POISON.requiredStage]: {
-    item: RELICS.lacrimatory.item,
     monologue: "Allow me to offer a phial to collect your sorrows.",
+    offer: RELICS.lacrimatory.item,
   },
 };
 

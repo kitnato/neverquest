@@ -65,15 +65,19 @@ export const progressMaximum = withStateKey("progressMaximum", (key) =>
       const { maximum, minimum } = PROGRESS;
 
       if (get(encounter) === "monster") {
-        if (get(stage) < get(stageMaximum)) {
+        const stageValue = get(stage);
+
+        if (stageValue < get(stageMaximum)) {
           return Number.POSITIVE_INFINITY;
         }
 
-        const reducedMaximum =
-          getFromRange({ factor: getSigmoid(get(stage)), maximum, minimum }) *
-          (1 - getPerkEffect({ perk: "monsterReduction", stage: get(retirementStage) }));
-
-        return Math.max(1, Math.round(reducedMaximum));
+        return Math.max(
+          1,
+          Math.round(
+            getFromRange({ factor: getSigmoid(stageValue), maximum, minimum }) *
+              (1 - getPerkEffect({ perk: "monsterReduction", stage: get(retirementStage) })),
+          ),
+        );
       }
 
       return 1;

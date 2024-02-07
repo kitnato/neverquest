@@ -9,6 +9,7 @@ import { absorbedEssence } from "@neverquest/state/attributes";
 import { isAttacking } from "@neverquest/state/character";
 import { corpse, stage } from "@neverquest/state/encounter";
 import { inventory, ownedItem } from "@neverquest/state/inventory";
+import { isRelicEquipped } from "@neverquest/state/items";
 import {
   health,
   healthMaximumPoisoned,
@@ -100,10 +101,11 @@ export function useChangeHealth() {
         }
 
         if (
+          !deltaReserve.isRegeneration &&
           newHealth > 0 &&
           newHealth <= healthMaximumPoisonedValue * HEALTH_LOW_THRESHOLD &&
           isAttackingValue &&
-          get(ownedItem("dream catcher")) !== undefined
+          get(isRelicEquipped("dream catcher"))
         ) {
           toggleAttacking();
 

@@ -232,9 +232,9 @@ export const INFUSABLES: Record<
 export const KNAPSACK_CAPACITY = 15;
 
 export const RELIC_DROP_CHANCE = {
-  "dream catcher": { maximum: 0.1, minimum: 0.025 },
-  memento: { maximum: 0.1, minimum: 0.01 },
-  "torn manuscript": { maximum: 0.1, minimum: 0.025 },
+  "dream catcher": { maximum: 0.1, minimum: 0.02 },
+  memento: { maximum: 0.1, minimum: 0.005 },
+  "torn manuscript": { maximum: 0.1, minimum: 0.02 },
 };
 
 export const RELICS: Record<

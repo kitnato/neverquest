@@ -4,7 +4,7 @@ import { useRecoilCallback } from "recoil";
 
 import { MERCHANT_OFFERS } from "@neverquest/data/caravan";
 import { merchantInventory } from "@neverquest/state/caravan";
-import { stage, stageMaximum } from "@neverquest/state/encounter";
+import { corpse, stage, stageMaximum } from "@neverquest/state/encounter";
 import { ownedItem } from "@neverquest/state/inventory";
 import type { InheritableItem } from "@neverquest/types";
 import { isGearItem, isInheritableItem } from "@neverquest/types/type-guards";
@@ -21,19 +21,25 @@ export function useGenerateMerchantOffer() {
       () => {
         const get = getSnapshotGetter(snapshot);
 
+        const corpseValue = get(corpse);
         const newMerchantInventory = [...get(merchantInventory)];
         const stageValue = get(stage);
 
-        const offer = MERCHANT_OFFERS[stageValue];
+        const merchantOffer = MERCHANT_OFFERS[stageValue];
 
-        // Only add offer if it's the currently highest stage to avoid regenerating older gear offers.
-        if (offer !== undefined && stageValue === get(stageMaximum)) {
+        // Only add offer if it's the currently highest stage and it's not been generated before to avoid regenerating older gear offers.
+        if (
+          merchantOffer !== undefined &&
+          stageValue === get(stageMaximum) &&
+          (corpseValue === undefined || stageValue > corpseValue.stage)
+        ) {
+          const { offer } = merchantOffer;
+
           // In the case of being a relic or infusable, make sure it's not in any inventory.
           if (
-            "item" in offer &&
-            isInheritableItem(offer.item) &&
-            (newMerchantInventory.some(({ name }) => name === offer.item.name) ||
-              get(ownedItem(offer.item.name)) !== undefined)
+            isInheritableItem(offer) &&
+            (newMerchantInventory.some(({ name }) => name === offer.name) ||
+              get(ownedItem(offer.name)) !== undefined)
           ) {
             return;
           }
@@ -70,7 +76,7 @@ export function useGenerateMerchantOffer() {
               }
             }
 
-            return { ...offer.item, ID: nanoid() } as InheritableItem;
+            return { ...offer, ID: nanoid() } as InheritableItem;
           })();
 
           if (isGearItem(item)) {

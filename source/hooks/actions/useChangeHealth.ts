@@ -1,6 +1,7 @@
 import { useRecoilCallback } from "recoil";
 
 import { CORPSE_VALUE } from "@neverquest/data/encounter";
+import { HEALTH_LOW_THRESHOLD } from "@neverquest/data/reserves";
 import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useToggleAttacking } from "@neverquest/hooks/actions/useToggleAttacking";
@@ -35,6 +36,7 @@ export function useChangeHealth() {
         }
 
         const healthMaximumPoisonedValue = get(healthMaximumPoisoned);
+        const isAttackingValue = get(isAttacking);
         const value = deltaReserve.isRegeneration
           ? get(regenerationAmount("health"))
           : deltaReserve.value;
@@ -59,7 +61,7 @@ export function useChangeHealth() {
         if (newHealth <= 0) {
           const phylactery = get(ownedItem("phylactery"));
 
-          if (get(isAttacking)) {
+          if (isAttackingValue) {
             toggleAttacking();
           }
 
@@ -95,6 +97,23 @@ export function useChangeHealth() {
           newHealth = healthMaximumPoisonedValue;
 
           reset(regenerationDuration("health"));
+        }
+
+        if (
+          newHealth > 0 &&
+          newHealth <= healthMaximumPoisonedValue * HEALTH_LOW_THRESHOLD &&
+          isAttackingValue &&
+          get(ownedItem("dream catcher")) !== undefined
+        ) {
+          toggleAttacking();
+
+          addDelta({
+            contents: {
+              color: "text-muted",
+              value: "CAUGHT",
+            },
+            delta: "health",
+          });
         }
 
         set(health, newHealth);

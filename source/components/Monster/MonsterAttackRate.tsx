@@ -4,7 +4,6 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { MonsterAttackRateMeter } from "@neverquest/components/Monster/MonsterAttackRateMeter";
 import { AILMENT_PENALTY } from "@neverquest/data/statistics";
 import { useDefend } from "@neverquest/hooks/actions/useDefend";
-import { useDisengage } from "@neverquest/hooks/actions/useDisengage";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { useTimerDelta } from "@neverquest/hooks/useTimerDelta";
 import IconMonsterAttackRate from "@neverquest/icons/monster-attack-rate.svg?react";
@@ -25,7 +24,6 @@ export function MonsterAttackRate() {
   const setMonsterAttackDuration = useSetRecoilState(monsterAttackDuration);
 
   const defend = useDefend();
-  const disengage = useDisengage();
 
   useDeltaText({
     delta: "monsterAttackRate",
@@ -36,10 +34,7 @@ export function MonsterAttackRate() {
   useTimerDelta({
     delta: setMonsterAttackDuration,
     factor: isMonsterFrozen ? 1 - AILMENT_PENALTY.frozen : 1,
-    onDelta: () => {
-      defend();
-      disengage();
-    },
+    onDelta: defend,
     stop: !hasMonsterClosedValue || !isAttackingValue || isMonsterDeadValue,
   });
 

@@ -15,6 +15,7 @@ import {
   blacksmithInventory,
   expandedBuyback,
   fletcherInventory,
+  hasGeneratedOffer,
   merchantInventory,
   monologue,
 } from "@neverquest/state/caravan";
@@ -55,12 +56,13 @@ export function useRetire() {
       () => {
         const get = getSnapshotGetter(snapshot);
 
-        if (get(stageMaximum) < RETIREMENT_STAGE) {
-          return;
-        }
-
         const selectedTraitValue = get(selectedTrait);
         const stageValue = get(stage);
+        const stageMaximumValue = get(stageMaximum);
+
+        if (stageMaximumValue < RETIREMENT_STAGE) {
+          return;
+        }
 
         if (selectedTraitValue !== undefined) {
           set(isTraitAcquired(selectedTraitValue), true);
@@ -109,6 +111,10 @@ export function useRetire() {
 
         for (const crewMember of CREW_MEMBER_TYPES) {
           reset(monologue(crewMember));
+        }
+
+        for (let index = 1; index <= stageMaximumValue; index++) {
+          reset(hasGeneratedOffer(index));
         }
 
         for (const mastery of MASTERY_TYPES) {

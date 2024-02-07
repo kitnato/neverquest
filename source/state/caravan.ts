@@ -124,6 +124,14 @@ export const fletcherOptions = withStateKey("fletcherOptions", (key) =>
   }),
 );
 
+export const hasGeneratedOffer = withStateKey("hasGeneratedOffer", (key) =>
+  atomFamily<boolean, number>({
+    default: false,
+    effects: (stage) => [handleStorage({ key, parameter: stage })],
+    key,
+  }),
+);
+
 export const isHired = withStateKey("isHired", (key) =>
   atomFamily<boolean, CrewMember>({
     default: false,

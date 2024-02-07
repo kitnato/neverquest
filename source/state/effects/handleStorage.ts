@@ -9,7 +9,7 @@ export function handleStorage<ValueType>({
   parameter,
 }: {
   key: StateKey;
-  parameter?: string;
+  parameter?: number | string;
 }): AtomEffect<ValueType> {
   return ({ onSet, setSelf }) => {
     type Store = Record<string, ValueType>;

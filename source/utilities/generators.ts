@@ -154,7 +154,6 @@ export function generateShield({
     level,
     name: generateArtifact({
       query: {
-        subtype: gearClass,
         type: "shield",
       },
       ...generatorParameters,

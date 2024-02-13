@@ -33,7 +33,7 @@ export function AcquireAlchemistSkill() {
         <>
           <IconDisplay Icon={IconTornManuscript} iconProps={{ className: "small" }}>
             <span>
-              &quot;Pages from the hermetic tome! Let&apos;s see if I can still weave miracles
+              &quot;Pages from the hermetic almanac! Let&apos;s see if I can still weave miracles
               ...&quot;
             </span>
           </IconDisplay>

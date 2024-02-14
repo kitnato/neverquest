@@ -5,29 +5,26 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { PERCENTAGE_POINTS } from "@neverquest/data/general";
 import IconEssence from "@neverquest/icons/essence.svg?react";
-import { attributePoints, powerLevel } from "@neverquest/state/attributes";
-import { essence } from "@neverquest/state/resources";
+import { powerLevel } from "@neverquest/state/attributes";
+import { essence, essenceLoot } from "@neverquest/state/resources";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAttributePointCost, getAttributePoints } from "@neverquest/utilities/getters";
 
-export function AttributePointProgress({ extraEssence }: { extraEssence?: number }) {
-  const attributePointsValue = useRecoilValue(attributePoints);
+export function AttributePointProgress({ isLoot }: { isLoot?: boolean }) {
   const essenceValue = useRecoilValue(essence);
+  const essenceLootValue = useRecoilValue(essenceLoot);
   const powerLevelValue = useRecoilValue(powerLevel);
 
-  const extraAttributePoints =
-    getAttributePoints({
-      essence: essenceValue + (extraEssence ?? 0),
+  const totalEssence = essenceValue + (isLoot ? essenceLootValue : 0);
+  const nextTotalCost = Array.from<undefined>({
+    length: getAttributePoints({
+      essence: totalEssence,
       powerLevel: powerLevelValue,
-    }) - attributePointsValue;
-  const extraLevels = powerLevelValue + (extraEssence === undefined ? 0 : extraAttributePoints);
-  const nextTotalCost =
-    getAttributePointCost(extraLevels) +
-    Array.from<undefined>({ length: attributePointsValue + extraAttributePoints }).reduce(
-      (sum, _, index) => sum + getAttributePointCost(extraLevels + index + 1),
-      0,
-    );
-  const totalEssence = extraEssence === undefined ? essenceValue : essenceValue + extraEssence;
+    }),
+  }).reduce(
+    (sum, _, index) => sum + getAttributePointCost(powerLevelValue + index + 1),
+    getAttributePointCost(powerLevelValue),
+  );
 
   return (
     <OverlayTrigger
@@ -35,8 +32,8 @@ export function AttributePointProgress({ extraEssence }: { extraEssence?: number
         <Popover>
           <PopoverBody>
             <span>
-              {extraEssence === undefined ? "Current essence" : "Essence after collecting loot"},
-              and required essence for next attribute point.
+              {isLoot ? "Essence after collecting loot" : "Current essence"},&nbsp;and required
+              essence for next attribute point.
             </span>
           </PopoverBody>
         </Popover>

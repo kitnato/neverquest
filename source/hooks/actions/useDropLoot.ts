@@ -17,7 +17,7 @@ export function useDropLoot() {
         const { essence, gems, relic } = get(monsterLoot);
 
         if (essence > 0) {
-          set(essenceLoot, (currentEssenceLoot) => currentEssenceLoot + essence);
+          set(essenceLoot, (currentEssence) => currentEssence + essence);
         }
 
         const lootedItems: InventoryItem[] = [];

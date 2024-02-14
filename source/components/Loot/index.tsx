@@ -6,7 +6,7 @@ import { Looting } from "@neverquest/components/Loot/Looting";
 import { useDropLoot } from "@neverquest/hooks/actions/useDropLoot";
 import { useProgression } from "@neverquest/hooks/actions/useProgression";
 import { useProgressStage } from "@neverquest/hooks/actions/useProgressStage";
-import { useTimerDelta } from "@neverquest/hooks/useTimerDelta";
+import { useTimer } from "@neverquest/hooks/useTimer";
 import { isLooting, lootingDuration } from "@neverquest/state/character";
 
 export function Loot() {
@@ -17,13 +17,13 @@ export function Loot() {
   const progression = useProgression();
   const progressStage = useProgressStage();
 
-  useTimerDelta({
-    delta: setLootingDuration,
-    onDelta: () => {
+  useTimer({
+    onElapsed: () => {
       dropLoot();
       progression();
       progressStage();
     },
+    setTick: setLootingDuration,
     stop: !isLootingValue,
   });
 

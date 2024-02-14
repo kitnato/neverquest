@@ -7,7 +7,7 @@ import { AttackRateMeter } from "@neverquest/components/Status/AttackRateMeter";
 import { LABEL_SEPARATOR, POPOVER_TRIGGER } from "@neverquest/data/general";
 import { useAttack } from "@neverquest/hooks/actions/useAttack";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { useTimerDelta } from "@neverquest/hooks/useTimerDelta";
+import { useTimer } from "@neverquest/hooks/useTimer";
 import IconAttackRate from "@neverquest/icons/attack-rate.svg?react";
 import IconEldritchCodex from "@neverquest/icons/eldritch-codex.svg?react";
 import IconWeaponSpeed from "@neverquest/icons/speed.svg?react";
@@ -42,9 +42,9 @@ export function AttackRate() {
 
   const attack = useAttack();
 
-  useTimerDelta({
-    delta: setAttackDuration,
-    onDelta: attack,
+  useTimer({
+    onElapsed: attack,
+    setTick: setAttackDuration,
     stop:
       !canAttackOrParryValue ||
       !isAttackingValue ||

@@ -10,7 +10,7 @@ import { RESERVES } from "@neverquest/data/reserves";
 import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth";
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { useTimerDelta } from "@neverquest/hooks/useTimerDelta";
+import { useTimer } from "@neverquest/hooks/useTimer";
 import IconEldritchCodex from "@neverquest/icons/eldritch-codex.svg?react";
 import IconFortitude from "@neverquest/icons/fortitude.svg?react";
 import IconRegenerationAmount from "@neverquest/icons/regeneration-amount.svg?react";
@@ -55,11 +55,11 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
     stamina: useChangeStamina,
   }[reserve]();
 
-  useTimerDelta({
-    delta: setRegenerationDuration,
-    onDelta: () => {
+  useTimer({
+    onElapsed: () => {
       changeReserve({ isRegeneration: true });
     },
+    setTick: setRegenerationDuration,
     stop: isRecoveringValue || isReserveAtMaximum,
   });
 

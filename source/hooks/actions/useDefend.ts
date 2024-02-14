@@ -74,9 +74,9 @@ export function useDefend() {
         const deltaStamina: DeltaDisplay[] = [];
         const incursArmorBurden = !get(isTraitAcquired("stalwart")) && armorBurden > 0;
         const ownedItemLacrimatory = get(ownedItem("lacrimatory"));
+        const canGatherTears = ownedItemLacrimatory !== undefined && get(tears) < TEARS_MAXIMUM;
         const shieldValue = get(shield);
         const statusElementValue = get(statusElement);
-        const tearsValue = get(tears);
 
         let hasStaggered = false;
         let isAvoided = false;
@@ -277,7 +277,7 @@ export function useDefend() {
                 value: "DEFLECTED BLIGHT",
               });
             } else {
-              if (ownedItemLacrimatory !== undefined && tearsValue < TEARS_MAXIMUM) {
+              if (canGatherTears) {
                 set(tears, (currentTears) => currentTears + 1);
               }
 
@@ -302,7 +302,7 @@ export function useDefend() {
                 value: "DEFLECTED POISON",
               });
             } else {
-              if (ownedItemLacrimatory !== undefined && tearsValue < TEARS_MAXIMUM) {
+              if (canGatherTears) {
                 set(tears, (currentTears) => currentTears + 1);
               }
 

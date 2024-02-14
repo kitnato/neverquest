@@ -5,15 +5,15 @@ import { clearInterval, setInterval } from "worker-timers";
 import { FRAMERATE } from "@neverquest/data/general";
 import { hasFlatlined } from "@neverquest/state/character";
 
-export function useTimerDelta({
-  delta,
+export function useTimer({
   factor = 1,
-  onDelta,
+  onElapsed,
+  setTick,
   stop,
 }: {
-  delta: SetterOrUpdater<number>;
   factor?: number;
-  onDelta?: () => void;
+  onElapsed?: () => void;
+  setTick: SetterOrUpdater<number>;
   stop: boolean;
 }) {
   const hasFlatlinedValue = useRecoilValue(hasFlatlined);
@@ -34,13 +34,13 @@ export function useTimerDelta({
 
   useEffect(() => {
     if (hasTicked) {
-      if (onDelta !== undefined) {
-        onDelta();
+      if (onElapsed !== undefined) {
+        onElapsed();
       }
 
       setHasTicked(false);
     }
-  }, [hasTicked, onDelta]);
+  }, [hasTicked, onElapsed]);
 
   useEffect(() => {
     if (hasFlatlinedValue || stop) {
@@ -49,10 +49,11 @@ export function useTimerDelta({
       interval.current = setInterval(() => {
         const now = Date.now();
 
-        delta((elapsed) => {
+        setTick((elapsed) => {
           const newDelta = elapsed - (now - (previousTime.current || now)) * factor;
 
           if (newDelta <= 0) {
+            // Cannot invoke setTick() here due to rules of hooks (state updates at top level only).
             setHasTicked(true);
 
             return 0;
@@ -66,5 +67,5 @@ export function useTimerDelta({
     }
 
     return terminate;
-  }, [delta, factor, hasFlatlinedValue, stop]);
+  }, [factor, hasFlatlinedValue, setTick, stop]);
 }

@@ -3,7 +3,7 @@ import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { AilmentMeter } from "@neverquest/components/Monster/AilmentMeter";
 import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth";
-import { useTimerDelta } from "@neverquest/hooks/useTimerDelta";
+import { useTimer } from "@neverquest/hooks/useTimer";
 import IconBleeding from "@neverquest/icons/bleeding.svg?react";
 import { bleed, canReceiveAilment } from "@neverquest/state/ailments";
 import {
@@ -29,9 +29,8 @@ export function Bleeding() {
 
   const hasStoppedBleeding = !isMonsterBleedingValue || isMonsterDeadValue;
 
-  useTimerDelta({
-    delta: setMonsterBleedingDelta,
-    onDelta: () => {
+  useTimer({
+    onElapsed: () => {
       changeMonsterHealth({
         damageType: "bleeding",
         value: -bleedDamageValue,
@@ -39,12 +38,13 @@ export function Bleeding() {
 
       resetMonsterBleedingDelta();
     },
+    setTick: setMonsterBleedingDelta,
     stop: hasStoppedBleeding,
   });
 
-  useTimerDelta({
-    delta: setMonsterBleedingDuration,
-    onDelta: resetMonsterBleedingDelta,
+  useTimer({
+    onElapsed: resetMonsterBleedingDelta,
+    setTick: setMonsterBleedingDuration,
     stop: hasStoppedBleeding,
   });
 

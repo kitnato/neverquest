@@ -7,7 +7,7 @@ import { RecoveryMeter } from "@neverquest/components/Status/RecoveryMeter";
 import { POPOVER_TRIGGER } from "@neverquest/data/general";
 import { RECOVERY_RATE } from "@neverquest/data/statistics";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { useTimerDelta } from "@neverquest/hooks/useTimerDelta";
+import { useTimer } from "@neverquest/hooks/useTimer";
 import IconRecovery from "@neverquest/icons/recovery.svg?react";
 import IconResilience from "@neverquest/icons/resilience.svg?react";
 import { isRecovering, recoveryDuration } from "@neverquest/state/character";
@@ -23,8 +23,8 @@ export function Recovery() {
   const resilienceValue = useRecoilValue(masteryStatistic("resilience"));
   const setRecoveryDuration = useSetRecoilState(recoveryDuration);
 
-  useTimerDelta({
-    delta: setRecoveryDuration,
+  useTimer({
+    setTick: setRecoveryDuration,
     stop: !isRecoveringValue,
   });
 

@@ -32,9 +32,7 @@ export function EssenceLoot() {
           <DeltasDisplay delta="essenceLoot" />
         </Stack>
 
-        {isShowingLootedEssenceProgress && (
-          <AttributePointProgress extraEssence={essenceLootValue} />
-        )}
+        {isShowingLootedEssenceProgress && <AttributePointProgress isLoot />}
 
         {isShowingLootedEssenceProgress && <NewAttributePoints />}
       </Stack>

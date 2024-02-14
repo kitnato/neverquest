@@ -7,7 +7,7 @@ import { Regeneration } from "@neverquest/components/Reserves/Regeneration";
 import { ReserveMeter } from "@neverquest/components/Reserves/ReserveMeter";
 import { LABEL_SEPARATOR, POPOVER_TRIGGER } from "@neverquest/data/general";
 import { RESERVES } from "@neverquest/data/reserves";
-import { useTimerDelta } from "@neverquest/hooks/useTimerDelta";
+import { useTimer } from "@neverquest/hooks/useTimer";
 import IconEldritchCodex from "@neverquest/icons/eldritch-codex.svg?react";
 import IconHealth from "@neverquest/icons/health.svg?react";
 import IconProtected from "@neverquest/icons/protected.svg?react";
@@ -33,8 +33,8 @@ export function Health() {
   const { baseAmount } = RESERVES.health;
   const vitalityBonus = attributeStatisticVitality - baseAmount;
 
-  useTimerDelta({
-    delta: setPoison,
+  useTimer({
+    setTick: setPoison,
     stop: !isPoisonedValue,
   });
 

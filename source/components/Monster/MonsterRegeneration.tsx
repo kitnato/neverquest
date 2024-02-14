@@ -4,7 +4,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { MonsterRegenerationMeter } from "@neverquest/components/Monster/MonsterRegenerationMeter";
 import { MONSTER_REGENERATION } from "@neverquest/data/monster";
 import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth";
-import { useTimerDelta } from "@neverquest/hooks/useTimerDelta";
+import { useTimer } from "@neverquest/hooks/useTimer";
 import {
   isMonsterAiling,
   isMonsterAtFullHealth,
@@ -37,11 +37,11 @@ export function MonsterRegeneration() {
     ),
   );
 
-  useTimerDelta({
-    delta: setMonsterRegenerationDuration,
-    onDelta: () => {
+  useTimer({
+    onElapsed: () => {
       changeMonsterHealth({ value: regenerationAmount });
     },
+    setTick: setMonsterRegenerationDuration,
     stop: isMonsterAtFullHealthValue || isMonsterBurning || isMonsterDeadValue,
   });
 

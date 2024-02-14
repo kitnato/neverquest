@@ -2,7 +2,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { AilmentMeter } from "@neverquest/components/Monster/AilmentMeter";
-import { useTimerDelta } from "@neverquest/hooks/useTimerDelta";
+import { useTimer } from "@neverquest/hooks/useTimer";
 import IconStunned from "@neverquest/icons/stunned.svg?react";
 import { canReceiveAilment } from "@neverquest/state/ailments";
 import { masteryStatistic } from "@neverquest/state/masteries";
@@ -16,8 +16,8 @@ export function Stunned() {
   const mightValue = useRecoilValue(masteryStatistic("might"));
   const setMonsterStunDuration = useSetRecoilState(monsterAilmentDuration("stunned"));
 
-  useTimerDelta({
-    delta: setMonsterStunDuration,
+  useTimer({
+    setTick: setMonsterStunDuration,
     stop: !isMonsterStunned || isMonsterDeadValue,
   });
 

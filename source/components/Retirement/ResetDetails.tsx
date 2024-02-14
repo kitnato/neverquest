@@ -45,9 +45,9 @@ export function ResetDetails() {
           <IconDisplay Icon={IconSkills} iconProps={{ className: "small" }}>
             <span>
               Skills&nbsp;
-              <span className="small">
+              <span className="small text-muted">
                 acquired from the&nbsp;
-                <IconImage className="small text-muted" Icon={IconMercenary} />
+                <IconImage className="small" Icon={IconMercenary} />
                 &nbsp;Mercenary
               </span>
             </span>

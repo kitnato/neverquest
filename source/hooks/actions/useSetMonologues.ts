@@ -24,7 +24,7 @@ export function useSetMonologues() {
               // If it's the merchant, only change the monologue to the item's if it was generated (i.e. not inherited or sold), otherwise set the current stage's monologue if it exists or the most recent one.
               crewMember === "merchant" &&
                 merchantOffer !== undefined &&
-                !get(hasGeneratedOffer(stageValue)) &&
+                get(hasGeneratedOffer(stageValue)) &&
                 merchantOffer.monologue !== undefined
                 ? merchantOffer.monologue
                 : monologues[stageValue] ??

@@ -102,7 +102,7 @@ export const MONSTER_ATTACK_RATE = {
 };
 
 export const MONSTER_DAMAGE = {
-  attenuation: 27,
+  attenuation: 25,
   base: 7,
   bonus: 0.01,
   boss: 1.05,
@@ -111,8 +111,8 @@ export const MONSTER_DAMAGE = {
     "res dominus": 777,
   },
   menace: {
-    maximum: 1,
-    minimum: 0.1,
+    maximum: 2,
+    minimum: 0.25,
     requiredStage: RETIREMENT_STAGE + 1,
   },
 };
@@ -143,7 +143,7 @@ export const POISON = {
   boss: 1.25,
   chance: {
     maximum: 0.35,
-    minimum: 0.07,
+    minimum: 0.1,
   },
   duration: {
     maximum: 250_000,

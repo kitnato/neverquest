@@ -181,6 +181,7 @@ export type QuestStatus = QuestBonus | "achieved" | "incomplete";
 export type Reserve = "health" | "stamina";
 
 export const ROUTINE_TYPES = [
+  "settingName",
   "purchasingItem",
   "equippingWeapon",
   "equippingArmor",
@@ -480,7 +481,7 @@ export type Relic = (typeof RELIC_TYPES)[number];
 
 export const TRIUMPH_TYPES = [
   "decipheringJournal",
-  "settingName",
+  "settingPatientName",
   "survivingNoGear",
   "survivingNoAttributes",
   "killingOneStrike",

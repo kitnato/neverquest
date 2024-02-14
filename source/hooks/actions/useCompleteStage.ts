@@ -31,8 +31,8 @@ export function useCompleteStage() {
             }
           }
 
-          setMonologues();
           generateMerchantOffer();
+          setMonologues();
         }
       },
     [generateMerchantOffer, setMonologues],

@@ -155,10 +155,10 @@ export function useDefend() {
           // If parrying occurs, check if possible (burden is not applied).
           if (hasParried) {
             if (get(canAttackOrParry)) {
-              const parryReflected = Math.round(monsterDamageAilingValue * get(parryDamage));
+              const reflectedDamage = Math.round(monsterDamageAilingValue * get(parryDamage));
 
               healthDamage -= Math.round(healthDamage * get(parryAbsorption));
-              monsterHealthDamage += parryReflected;
+              monsterHealthDamage += reflectedDamage;
 
               progressQuest({ quest: "parrying" });
 
@@ -169,7 +169,7 @@ export function useDefend() {
                 },
                 {
                   color: "text-danger",
-                  value: `-${formatNumber({ value: parryReflected })}`,
+                  value: `-${formatNumber({ value: reflectedDamage })}`,
                 },
               );
 
@@ -340,8 +340,10 @@ export function useDefend() {
               trainMastery("resilience");
             }
 
-            set(isShowing("recovery"), true);
-            set(recoveryDuration, get(recoveryRate));
+            if (!hasParried) {
+              set(isShowing("recovery"), true);
+              set(recoveryDuration, get(recoveryRate));
+            }
           }
 
           if (!isUnshielded(shieldValue) && healthDamage > 0) {

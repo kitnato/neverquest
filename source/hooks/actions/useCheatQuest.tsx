@@ -83,8 +83,8 @@ export function useCheatQuest() {
               }
 
               for (let step = 0; step < difference; step++) {
-                setMonologues();
                 generateMerchantOffer();
+                setMonologues();
                 increaseStage();
               }
 

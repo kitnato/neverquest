@@ -58,6 +58,10 @@ export function Name() {
             } else {
               setName(trimmedValue);
               progressQuest({ quest: "settingName" });
+
+              if (trimmedValue.toLowerCase().replaceAll(/[^\da-z]/g, "") === "patient7") {
+                progressQuest({ quest: "settingPatientName" });
+              }
             }
 
             setIsEditing(false);

@@ -31,8 +31,8 @@ function formatFloat({ decimals = 2, value }: { decimals?: number; value: number
 
 export function formatKebabCase(words: string) {
   return words
-    .replaceAll(/^\s+|\s+$/g, "")
     .toLowerCase()
+    .replaceAll(/^\s+|\s+$/g, "")
     .replaceAll(/[^\d a-z-]/g, "")
     .replaceAll(/\s+/g, "-")
     .replaceAll(/-+/g, "-");

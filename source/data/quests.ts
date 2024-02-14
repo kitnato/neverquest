@@ -538,6 +538,12 @@ export const QUESTS: Record<
     requiresTracking: true,
     title: "Humble beginnings",
   },
+  settingPatientName: {
+    description: "Set the true name.",
+    progression: [1],
+    requiresTracking: true,
+    title: "Red pill",
+  },
   shocking: {
     description: "Inflict the shocking ailment @ times.",
     progression: [3, 10, 25, 50, 100],

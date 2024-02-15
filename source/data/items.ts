@@ -173,7 +173,7 @@ export const GEM_BASE = {
 };
 export const GEM_DROP_CHANCE = { equalStage: 1, lowerStage: 0.25 };
 export const GEM_ENHANCEMENT_RANGE = { maximum: 1, minimum: 0.1 };
-export const GEM_FITTING_COST_RANGE = { maximum: 250, minimum: 10 };
+export const GEM_FITTING_COST_RANGE = { maximum: 150, minimum: 10 };
 export const GEMS: Record<Gem, { elemental: Elemental; Icon: SVGIcon }> = {
   ruby: { elemental: "fire", Icon: IconRuby },
   sapphire: { elemental: "ice", Icon: IconSapphire },

@@ -26,8 +26,8 @@ export function AcquireAlchemistSkill() {
         <span className="fst-italic">{LABEL_NONE_AVAILABLE}</span>
       ) : ownedItemTornManuscript === undefined ? (
         <span>
-          &quot;Alas, most teachings are lost to time. You wouldn&apos;t have come across any arcane
-          writs lately?&quot;
+          &quot;Alas, the sage teachings are lost to time. Have you come across any arcane writs
+          lately?&quot;
         </span>
       ) : (
         <>

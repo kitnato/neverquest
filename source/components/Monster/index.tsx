@@ -31,10 +31,11 @@ export function Monster() {
       animateElement({
         animation: "zoomInRight",
         element: monsterElementValue,
+        onAnimationEnd: () => {
+          setMonsterNew(false);
+        },
         speed: "faster",
       });
-
-      setMonsterNew(false);
     }
   }, [isMonsterNewValue, monsterElementValue, setMonsterNew]);
 

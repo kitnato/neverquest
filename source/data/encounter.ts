@@ -12,7 +12,7 @@ export const CORPSE_VALUE = 0.3;
 export const DEATH_STAGE_PENALTY = 3;
 
 export const PROGRESS = {
-  maximum: 27,
+  maximum: 20,
   minimum: 3,
 };
 

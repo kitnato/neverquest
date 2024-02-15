@@ -44,7 +44,7 @@ export const ARMOR_SPECIFICATIONS: Record<
       { maximum: 0.7, minimum: 0.66 },
     ],
     Icon: IconArmorHeavy,
-    price: { maximum: 15_000, minimum: 50 },
+    price: { maximum: 13_000, minimum: 50 },
     protection: [
       { maximum: 8, minimum: 6 },
       { maximum: 900, minimum: 850 },
@@ -60,7 +60,7 @@ export const ARMOR_SPECIFICATIONS: Record<
       { maximum: 25, minimum: 20 },
     ],
     Icon: IconArmorLight,
-    price: { maximum: 6000, minimum: 1 },
+    price: { maximum: 5000, minimum: 1 },
     protection: [
       { maximum: 2, minimum: 1 },
       { maximum: 450, minimum: 400 },
@@ -80,7 +80,7 @@ export const ARMOR_SPECIFICATIONS: Record<
       { maximum: 0.35, minimum: 0.31 },
     ],
     Icon: IconReinforced,
-    price: { maximum: 9000, minimum: 25 },
+    price: { maximum: 8000, minimum: 25 },
     protection: [
       { maximum: 6, minimum: 3 },
       { maximum: 600, minimum: 550 },
@@ -124,7 +124,7 @@ export const SHIELD_SPECIFICATIONS: Record<
       { maximum: 35, minimum: 30 },
     ],
     Icon: IconShieldMedium,
-    price: { maximum: 4000, minimum: 4 },
+    price: { maximum: 3500, minimum: 4 },
     stagger: [
       { maximum: 0.4, minimum: 0.35 },
       { maximum: 0.65, minimum: 0.6 },
@@ -144,7 +144,7 @@ export const SHIELD_SPECIFICATIONS: Record<
       { maximum: 20, minimum: 18 },
     ],
     Icon: IconShieldSmall,
-    price: { maximum: 2000, minimum: 2 },
+    price: { maximum: 1500, minimum: 2 },
     stagger: [
       { maximum: 0.15, minimum: 0.1 },
       { maximum: 0.3, minimum: 0.25 },
@@ -164,7 +164,7 @@ export const SHIELD_SPECIFICATIONS: Record<
       { maximum: 50, minimum: 45 },
     ],
     Icon: IconShieldTower,
-    price: { maximum: 7500, minimum: 7 },
+    price: { maximum: 7000, minimum: 7 },
     stagger: [
       { maximum: 0.55, minimum: 0.5 },
       { maximum: 0.95, minimum: 0.9 },
@@ -194,13 +194,13 @@ export const WEAPON_BASE: GearRangeBase & {
     { maximum: 15, minimum: 13 },
     { maximum: 900, minimum: 800 },
   ],
-  price: { maximum: 9000, minimum: 1 },
+  price: { maximum: 8000, minimum: 1 },
   range: [
     { maximum: 2200, minimum: 2000 },
     { maximum: 3700, minimum: 3600 },
   ],
   rate: [
-    { maximum: 3100, minimum: 3000 },
+    { maximum: 3000, minimum: 2900 },
     { maximum: 2100, minimum: 2000 },
   ],
   weight: [

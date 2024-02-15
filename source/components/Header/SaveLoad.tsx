@@ -56,7 +56,7 @@ export function SaveLoad() {
               Icon={IconSaveLoad}
               iconProps={{
                 className: isLoading
-                  ? `${getAnimationClass({ animation: "pulse", isInfinite: true, speed: "fast" })}`
+                  ? getAnimationClass({ animation: "pulse", isInfinite: true, speed: "fast" })
                   : undefined,
               }}
             >

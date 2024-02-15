@@ -27,11 +27,11 @@ export function Retire() {
         }
       >
         <div
-          className={`${
+          className={
             stageMaximumValue >= RETIREMENT_STAGE
               ? getAnimationClass({ animation: "bounceIn" })
               : "invisible"
-          }`}
+          }
         >
           <Button
             disabled={hasFlatlinedValue || locationValue === "wilderness"}

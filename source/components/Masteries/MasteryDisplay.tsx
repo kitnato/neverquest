@@ -24,7 +24,7 @@ export function MasteryDisplay({ mastery }: { mastery: Mastery }) {
     <div className={getAnimationClass({ animation: "flipInX" })}>
       {isSkillAcquiredRequired ? (
         <IconDisplay
-          className={`${canTrainMasteryValue ? "" : "opacity-50"}`}
+          className={canTrainMasteryValue ? "" : "opacity-50"}
           description={
             <Stack className="w-100" direction="horizontal" gap={3}>
               <MasteryRank mastery={mastery} />

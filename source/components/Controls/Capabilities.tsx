@@ -114,7 +114,7 @@ export function Capabilities() {
         <DismissableScreen
           isShowing={activeControlValue === "capabilities"}
           onClose={resetActiveControl}
-          title={`${isShowingSkillsOrTraits ? "Capabilities" : "Attributes"}`}
+          title={isShowingSkillsOrTraits ? "Capabilities" : "Attributes"}
         >
           {isShowingSkillsOrTraits ? <IconTabs tabs={tabs} /> : <Attributes />}
         </DismissableScreen>

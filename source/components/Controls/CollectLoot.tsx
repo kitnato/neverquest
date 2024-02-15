@@ -37,7 +37,7 @@ export function CollectLoot() {
           <Button
             className={
               isStageCompletedValue
-                ? `${getAnimationClass({ animation: "pulse", isInfinite: true })}`
+                ? getAnimationClass({ animation: "pulse", isInfinite: true })
                 : undefined
             }
             disabled={isAttackingValue || isLootingValue || hasFlatlinedValue}

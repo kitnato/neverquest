@@ -1,6 +1,5 @@
 import { atom, atomFamily, selector } from "recoil";
 
-import { isTraitAcquired } from "./traits";
 import {
   ARMOR_NONE,
   SHIELD_ELEMENTAL_EFFECTS_BASE,
@@ -8,6 +7,7 @@ import {
   WEAPON_NONE,
 } from "@neverquest/data/gear";
 import { handleStorage } from "@neverquest/state/effects/handleStorage";
+import { isTraitAcquired } from "@neverquest/state/traits";
 import type { Armor, GemItem, Shield, Weapon } from "@neverquest/types";
 import { isMelee } from "@neverquest/types/type-guards";
 import { getGearElementalEffects, getTotalElementalEffects } from "@neverquest/utilities/getters";

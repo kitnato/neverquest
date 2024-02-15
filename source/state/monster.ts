@@ -1,7 +1,6 @@
 import { nanoid } from "nanoid";
 import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
-import { isSkillAcquired } from "./skills";
 import { PROGRESS } from "@neverquest/data/encounter";
 import { LEVELLING_MAXIMUM } from "@neverquest/data/general";
 import { GEM_DROP_CHANCE, INFUSABLES, RELICS, RELIC_DROP_CHANCE } from "@neverquest/data/items";
@@ -31,6 +30,7 @@ import {
 } from "@neverquest/state/encounter";
 import { ownedItem } from "@neverquest/state/inventory";
 import { hasLootedLogEntry, infusionEffect } from "@neverquest/state/items";
+import { isSkillAcquired } from "@neverquest/state/skills";
 import { range } from "@neverquest/state/statistics";
 import { isFinality } from "@neverquest/types/type-guards";
 import type { Ailment } from "@neverquest/types/unions";

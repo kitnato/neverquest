@@ -2,9 +2,9 @@ import { generateCreature, generateLocation } from "@kitnato/locran";
 import ls from "localstorage-slim";
 import { useRecoilCallback } from "recoil";
 
-import { useProgressQuest } from "./useProgressQuest";
 import { CREW } from "@neverquest/data/caravan";
 import { KEY_SESSION } from "@neverquest/data/general";
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { isHired } from "@neverquest/state/caravan";
 import { wildernesses } from "@neverquest/state/encounter";
 import { monsterName } from "@neverquest/state/monster";

@@ -1,13 +1,33 @@
+import IconArmorNone from "@neverquest/icons/armor-none.svg?react";
+import IconArmor from "@neverquest/icons/armor.svg?react";
+import IconBleeding from "@neverquest/icons/bleeding.svg?react";
+import IconBlockChance from "@neverquest/icons/block-chance.svg?react";
 import IconBrawler from "@neverquest/icons/brawler.svg?react";
 import IconBruiser from "@neverquest/icons/bruiser.svg?react";
+import IconBurden from "@neverquest/icons/burden.svg?react";
 import IconColossus from "@neverquest/icons/colossus.svg?react";
+import IconCriticalRating from "@neverquest/icons/critical-rating.svg?react";
+import IconDamage from "@neverquest/icons/damage.svg?react";
+import IconDeflectionChance from "@neverquest/icons/deflection-chance.svg?react";
+import IconDistance from "@neverquest/icons/distance.svg?react";
+import IconDodgeChance from "@neverquest/icons/dodge-chance.svg?react";
+import IconEmptyHanded from "@neverquest/icons/empty-handed.svg?react";
+import IconExecution from "@neverquest/icons/execution.svg?react";
 import IconExecutioner from "@neverquest/icons/executioner.svg?react";
 import IconInoculated from "@neverquest/icons/inoculated.svg?react";
 import IconNudist from "@neverquest/icons/nudist.svg?react";
+import IconOneHanded from "@neverquest/icons/one-handed.svg?react";
+import IconProtection from "@neverquest/icons/protection.svg?react";
+import IconRanged from "@neverquest/icons/ranged.svg?react";
 import IconSharpshooter from "@neverquest/icons/sharpshooter.svg?react";
 import IconShredder from "@neverquest/icons/shredder.svg?react";
 import IconStalwart from "@neverquest/icons/stalwart.svg?react";
+import IconStamina from "@neverquest/icons/stamina.svg?react";
+import IconStrength from "@neverquest/icons/strength.svg?react";
+import IconStunChance from "@neverquest/icons/stun-chance.svg?react";
 import IconTank from "@neverquest/icons/tank.svg?react";
+import IconTwoHanded from "@neverquest/icons/two-handed.svg?react";
+import IconWeaponDamage from "@neverquest/icons/weapon-damage.svg?react";
 import type { SVGIcon } from "@neverquest/types/components";
 import type { Description } from "@neverquest/types/ui";
 import type { Skill, Trait } from "@neverquest/types/unions";
@@ -32,60 +52,71 @@ export const TRAITS: Record<
   }
 > = {
   brawler: {
-    description: `Being unshielded increases one-handed melee weapon damage by ${formatNumber({
+    description: `Being # unshielded increases # weapon damage by ${formatNumber({
       decimals: 0,
       format: "percentage",
       value: BRAWLER_DAMAGE_BONUS,
-    })}.`,
+    })} while wielding a # one-handed weapon (also applies to the # colossus trait).`,
+    descriptionIcons: [IconEmptyHanded, IconWeaponDamage, IconOneHanded, IconColossus],
     Icon: IconBrawler,
   },
   bruiser: {
-    description: `While unarmed, damage is increased by ${formatNumber({
+    description: `While # unarmed, # damage is increased by ${formatNumber({
       decimals: 0,
       format: "percentage",
       value: BRUISER.damage,
-    })} of current stamina and stun chance is ${formatNumber({
+    })} of current # stamina and # stun chance is ${formatNumber({
       decimals: 0,
       format: "percentage",
       value: BRUISER.stun.increment,
-    })} per strength attribute rank.`,
+    })} per # strength attribute rank.`,
+    descriptionIcons: [IconEmptyHanded, IconDamage, IconStamina, IconStunChance, IconStrength],
     Icon: IconBruiser,
   },
   colossus: {
-    description: "Two-handed melee weapons are wielded in one hand.",
+    description: "# Two-handed melee weapons are wielded in one hand instead of both.",
+    descriptionIcons: [IconTwoHanded],
     Icon: IconColossus,
   },
   executioner: {
-    description: "Critical strikes with a two-handed weapon always execute the monster.",
+    description: "# Critical strikes with a # two-handed weapon always perform an # execution.",
+    descriptionIcons: [IconCriticalRating, IconTwoHanded, IconExecution],
     Icon: IconExecutioner,
   },
   inoculated: {
-    description: `Base deflection chance is ${formatNumber({
+    description: `Base # deflection chance is ${formatNumber({
       decimals: 0,
       format: "percentage",
       value: INOCULATED_DEFLECTION_BASE,
     })}.`,
+    descriptionIcons: [IconDeflectionChance],
     Icon: IconInoculated,
     requiredSkill: "impermeability",
   },
   nudist: {
-    description: "Dodge rate is doubled while not wearing any armor.",
+    description: "While # unarmored, # dodge chance is doubled.",
+    descriptionIcons: [IconArmorNone, IconDodgeChance],
     Icon: IconNudist,
   },
   sharpshooter: {
-    description: "While at a distance, all attacks with a ranged weapon are critical hits.",
+    description:
+      "While at a # distance, all attacks with a # ranged weapon are # critical strikes.",
+    descriptionIcons: [IconDistance, IconRanged, IconCriticalRating],
     Icon: IconSharpshooter,
   },
   shredder: {
-    description: "Bleed damage is inflicted all at once.",
+    description: "# Bleed damage is inflicted all at once.",
+    descriptionIcons: [IconBleeding],
     Icon: IconShredder,
   },
   stalwart: {
-    description: "There are no stamina penalties when wearing armor.",
+    description: "Wearing # armor no longer incurs its # burden.",
+    descriptionIcons: [IconArmor, IconBurden],
     Icon: IconStalwart,
   },
   tank: {
-    description: "Protection is increased by the equipped shield's block chance.",
+    description: "# Protection is increased by the current # block chance.",
+    descriptionIcons: [IconProtection, IconBlockChance],
     Icon: IconTank,
   },
 };

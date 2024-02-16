@@ -1,5 +1,6 @@
 import { useRecoilValue } from "recoil";
 
+import { DescriptionDisplay } from "@neverquest/components/DescriptionDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LABEL_SKILL_REQUIRED, LABEL_UNKNOWN } from "@neverquest/data/general";
 import { TRAITS } from "@neverquest/data/traits";
@@ -11,12 +12,18 @@ import { capitalizeAll } from "@neverquest/utilities/formatters";
 export function TraitDisplay({ trait }: { trait: Trait }) {
   const acquiredSkillsValue = useRecoilValue(acquiredSkills);
 
-  const { description, Icon, requiredSkill } = TRAITS[trait];
+  const { description, descriptionIcons, Icon, requiredSkill } = TRAITS[trait];
   const name = capitalizeAll(trait);
 
   if (requiredSkill === undefined || acquiredSkillsValue[requiredSkill]) {
     return (
-      <IconDisplay description={<span>{description}</span>} Icon={Icon} tooltip="Trait">
+      <IconDisplay
+        description={
+          <DescriptionDisplay description={description} descriptionIcons={descriptionIcons} />
+        }
+        Icon={Icon}
+        tooltip="Trait"
+      >
         <span>{name}</span>
       </IconDisplay>
     );

@@ -3,6 +3,7 @@ import { useRecoilValue } from "recoil";
 
 import { AttributeIncreaseDetails } from "@neverquest/components/Attributes/AttributeIncreaseDetails";
 import { AttributeRank } from "@neverquest/components/Attributes/AttributeRank";
+import { DescriptionDisplay } from "@neverquest/components/DescriptionDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
@@ -28,13 +29,19 @@ export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
 
   const increaseAttribute = useIncreaseAttribute();
 
-  const { description, Icon, requiredSkill } = ATTRIBUTES[attribute];
+  const { description, descriptionIcons, Icon, requiredSkill } = ATTRIBUTES[attribute];
   const name = capitalizeAll(attribute);
 
   if (requiredSkill === undefined || acquiredSkillsValue[requiredSkill]) {
     return (
       <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-        <IconDisplay description={<span>{description}</span>} Icon={Icon} tooltip="Attribute">
+        <IconDisplay
+          description={
+            <DescriptionDisplay description={description} descriptionIcons={descriptionIcons} />
+          }
+          Icon={Icon}
+          tooltip="Attribute"
+        >
           <span>{name}</span>
         </IconDisplay>
 

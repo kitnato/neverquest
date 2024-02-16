@@ -1,10 +1,19 @@
 import { RESERVES } from "@neverquest/data/reserves";
 import IconAgility from "@neverquest/icons/agility.svg?react";
+import IconAttackRate from "@neverquest/icons/attack-rate.svg?react";
+import IconCriticalChance from "@neverquest/icons/critical-chance.svg?react";
+import IconCriticalDamage from "@neverquest/icons/critical-damage.svg?react";
+import IconDamage from "@neverquest/icons/damage.svg?react";
 import IconDexterity from "@neverquest/icons/dexterity.svg?react";
+import IconDodgeChance from "@neverquest/icons/dodge-chance.svg?react";
 import IconEndurance from "@neverquest/icons/endurance.svg?react";
 import IconFortitude from "@neverquest/icons/fortitude.svg?react";
+import IconHealth from "@neverquest/icons/health.svg?react";
 import IconPerception from "@neverquest/icons/perception.svg?react";
+import IconRegenerationAmount from "@neverquest/icons/regeneration-amount.svg?react";
+import IconRegenerationRate from "@neverquest/icons/regeneration-rate.svg?react";
 import IconSpeed from "@neverquest/icons/speed.svg?react";
+import IconStamina from "@neverquest/icons/stamina.svg?react";
 import IconStrength from "@neverquest/icons/strength.svg?react";
 import IconVigor from "@neverquest/icons/vigor.svg?react";
 import IconVitality from "@neverquest/icons/vitality.svg?react";
@@ -25,7 +34,8 @@ export const ATTRIBUTES: Record<
 > = {
   agility: {
     base: 0.03,
-    description: "Increases chance to dodge an attack.",
+    description: "Increases chance to # dodge an attack.",
+    descriptionIcons: [IconDodgeChance],
     Icon: IconAgility,
     increment: 0.025,
     maximum: 0.9,
@@ -34,7 +44,8 @@ export const ATTRIBUTES: Record<
   },
   dexterity: {
     base: 0.03,
-    description: "Increases critical strike chance.",
+    description: "Increases # critical strike chance.",
+    descriptionIcons: [IconCriticalChance],
     Icon: IconDexterity,
     increment: 0.0066,
     maximum: 0.5,
@@ -43,7 +54,8 @@ export const ATTRIBUTES: Record<
   },
   endurance: {
     base: RESERVES.stamina.baseAmount,
-    description: "Increases maximum stamina.",
+    description: "Increases maximum # stamina.",
+    descriptionIcons: [IconStamina],
     Icon: IconEndurance,
     increment: 5,
     powerBonus: 0.02,
@@ -52,7 +64,8 @@ export const ATTRIBUTES: Record<
   },
   fortitude: {
     base: 0,
-    description: "Increases health and stamina regeneration amount.",
+    description: "Increases health and stamina # regeneration amount.",
+    descriptionIcons: [IconRegenerationAmount],
     Icon: IconFortitude,
     increment: 1,
     maximum: 120,
@@ -61,7 +74,8 @@ export const ATTRIBUTES: Record<
   },
   perception: {
     base: 1.2,
-    description: "Increases critical strike damage.",
+    description: "Increases # critical strike damage.",
+    descriptionIcons: [IconCriticalDamage],
     Icon: IconPerception,
     increment: 0.03,
     maximum: 2.5,
@@ -70,7 +84,8 @@ export const ATTRIBUTES: Record<
   },
   speed: {
     base: 0,
-    description: "Reduces attack rate.",
+    description: "Reduces # attack rate.",
+    descriptionIcons: [IconAttackRate],
     Icon: IconSpeed,
     increment: 0.018,
     maximum: 0.75,
@@ -79,7 +94,8 @@ export const ATTRIBUTES: Record<
   },
   strength: {
     base: 0,
-    description: "Increases damage.",
+    description: "Increases # damage.",
+    descriptionIcons: [IconDamage],
     Icon: IconStrength,
     increment: 2,
     powerBonus: 0.01,
@@ -88,7 +104,8 @@ export const ATTRIBUTES: Record<
   },
   vigor: {
     base: 0,
-    description: "Reduces health and stamina regeneration rate.",
+    description: "Reduces health and stamina # regeneration rate.",
+    descriptionIcons: [IconRegenerationRate],
     Icon: IconVigor,
     increment: 0.015,
     maximum: 0.85,
@@ -97,7 +114,8 @@ export const ATTRIBUTES: Record<
   },
   vitality: {
     base: RESERVES.health.baseAmount,
-    description: "Increases maximum health.",
+    description: "Increases maximum # health.",
+    descriptionIcons: [IconHealth],
     Icon: IconVitality,
     increment: 15,
     powerBonus: 0.025,

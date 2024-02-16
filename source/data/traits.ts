@@ -9,14 +9,15 @@ import IconShredder from "@neverquest/icons/shredder.svg?react";
 import IconStalwart from "@neverquest/icons/stalwart.svg?react";
 import IconTank from "@neverquest/icons/tank.svg?react";
 import type { SVGIcon } from "@neverquest/types/components";
+import type { Description } from "@neverquest/types/ui";
 import type { Skill, Trait } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
 
-export const BRAWLER_DAMAGE_BONUS = 0.35;
+export const BRAWLER_DAMAGE_BONUS = 0.25;
 
-export const BRUISER_STUN_CHANCE = {
-  increment: 0.05,
-  maximum: 0.9,
+export const BRUISER = {
+  damage: 0.35,
+  stun: { increment: 0.03, maximum: 0.9 },
 };
 
 export const INOCULATED_DEFLECTION_BASE = 0.5;
@@ -25,8 +26,7 @@ export const NUDIST_DODGE_BONUS = 2;
 
 export const TRAITS: Record<
   Trait,
-  {
-    description: string;
+  Description & {
     Icon: SVGIcon;
     requiredSkill?: Skill;
   }
@@ -40,10 +40,14 @@ export const TRAITS: Record<
     Icon: IconBrawler,
   },
   bruiser: {
-    description: `Unarmed damage is determined by current stamina. Stun chance is ${formatNumber({
+    description: `While unarmed, damage is increased by ${formatNumber({
       decimals: 0,
       format: "percentage",
-      value: BRUISER_STUN_CHANCE.increment,
+      value: BRUISER.damage,
+    })} of current stamina and stun chance is ${formatNumber({
+      decimals: 0,
+      format: "percentage",
+      value: BRUISER.stun.increment,
     })} per strength attribute rank.`,
     Icon: IconBruiser,
   },

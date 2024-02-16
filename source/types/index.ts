@@ -1,6 +1,7 @@
 import type { ArmorClass, ShieldClass, WeaponClass } from "@kitnato/locran/build/types";
 import type { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear";
 import type { SVGIcon } from "@neverquest/types/components";
+import type { Description } from "@neverquest/types/ui";
 import type { Consumable, Gem, Grip, Infusable, QuestClass, Relic } from "@neverquest/types/unions";
 
 export type Armor = GearItemBase & {
@@ -10,15 +11,13 @@ export type Armor = GearItemBase & {
   protection: number;
 };
 
-export type AttributeOrMasteryBaseData = {
+export type AttributeOrMasteryBaseData = Description & {
   base: number;
-  description: string;
   Icon: SVGIcon;
   increment: number;
 };
 
 export type ConsumableItem = ItemBase & {
-  description: string;
   name: Consumable;
 };
 
@@ -48,7 +47,6 @@ export type GeneratorRange = {
 };
 
 export type InfusableItem = ItemBase & {
-  description: string;
   effect: GeneratorRange;
   name: Infusable;
 };
@@ -97,7 +95,6 @@ export type Shield = GearItemBase & {
 export type StackableItem = ConsumableItem | GemItem;
 
 export type RelicItem = ItemBase & {
-  description: string;
   name: Relic;
 };
 

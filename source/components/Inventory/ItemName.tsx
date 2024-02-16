@@ -1,6 +1,6 @@
 import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap";
 
-import { Description } from "@neverquest/components/Description";
+import { DescriptionDisplay } from "@neverquest/components/DescriptionDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { GemDescription } from "@neverquest/components/Inventory/GemDescription";
 import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
@@ -44,16 +44,20 @@ export function ItemName({
                   <span>LEAKAGE IMMINENT</span>
                 </Stack>
               ) : (
-                <Description
-                  description={item.description}
-                  descriptionIcons={
-                    isConsumableItem(item)
-                      ? CONSUMABLES[item.name].descriptionIcons
-                      : isInfusableItem(item)
-                        ? INFUSABLES[item.name].descriptionIcons
-                        : RELICS[item.name].descriptionIcons
-                  }
-                />
+                (() => {
+                  const { description, descriptionIcons } = isConsumableItem(item)
+                    ? CONSUMABLES[item.name]
+                    : isInfusableItem(item)
+                      ? INFUSABLES[item.name]
+                      : RELICS[item.name];
+
+                  return (
+                    <DescriptionDisplay
+                      description={description}
+                      descriptionIcons={descriptionIcons}
+                    />
+                  );
+                })()
               )}
 
               <DetailsTable>

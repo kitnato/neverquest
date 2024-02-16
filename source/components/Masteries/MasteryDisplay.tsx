@@ -1,7 +1,7 @@
 import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { Description } from "@neverquest/components/Description";
+import { DescriptionDisplay } from "@neverquest/components/DescriptionDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { MasteryProgress } from "@neverquest/components/Masteries/MasteryProgress";
 import { MasteryRank } from "@neverquest/components/Masteries/MasteryRank";
@@ -39,7 +39,10 @@ export function MasteryDisplay({ mastery }: { mastery: Mastery }) {
             overlay={
               <Popover>
                 <PopoverBody>
-                  <Description description={description} descriptionIcons={descriptionIcons} />
+                  <DescriptionDisplay
+                    description={description}
+                    descriptionIcons={descriptionIcons}
+                  />
                 </PopoverBody>
               </Popover>
             }

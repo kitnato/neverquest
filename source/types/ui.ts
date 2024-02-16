@@ -1,3 +1,5 @@
+import type { SVGIcon } from "@neverquest/types/components";
+
 export type Animation =
   | "bounceIn"
   | "fadeOutUp"
@@ -25,6 +27,11 @@ export type DeltaReserve =
 export type DeltaReserveBase = {
   delta?: DeltaDisplay | DeltaDisplay[];
   value: number;
+};
+
+export type Description = {
+  description: string;
+  descriptionIcons?: SVGIcon[];
 };
 
 export type UIAttachment = "above" | "below";

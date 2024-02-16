@@ -1,15 +1,9 @@
 import { Fragment } from "react";
 
 import { IconImage } from "@neverquest/components/IconImage";
-import type { SVGIcon } from "@neverquest/types/components";
+import type { Description } from "@neverquest/types/ui";
 
-export function Description({
-  description,
-  descriptionIcons,
-}: {
-  description: string;
-  descriptionIcons?: SVGIcon[];
-}) {
+export function DescriptionDisplay({ description, descriptionIcons }: Description) {
   return (
     <div>
       {description.split("#").map((part, index) => {

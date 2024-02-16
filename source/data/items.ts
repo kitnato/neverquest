@@ -52,6 +52,7 @@ import IconTornManuscript from "@neverquest/icons/torn-manuscript.svg?react";
 import IconWilderness from "@neverquest/icons/wilderness.svg?react";
 import type { ConsumableItem, GeneratorRange, InfusableItem, RelicItem } from "@neverquest/types";
 import type { SVGIcon } from "@neverquest/types/components";
+import type { Description } from "@neverquest/types/ui";
 import type {
   Consumable,
   Delta,
@@ -66,53 +67,53 @@ export const AMMUNITION_CAPACITY = 100;
 
 export const CONSUMABLES: Record<
   Consumable,
-  { descriptionIcons: SVGIcon[]; Icon: SVGIcon; item: Omit<ConsumableItem, "ID"> }
+  Description & { Icon: SVGIcon; item: Omit<ConsumableItem, "ID"> }
 > = {
   antidote: {
+    description: "Cures # poison.",
     descriptionIcons: [IconPoisoned],
     Icon: IconAntidote,
     item: {
-      description: "Cures # poison.",
       name: "antidote",
       price: 120,
       weight: 5,
     },
   },
   bandages: {
+    description: "Fully restores # health.",
     descriptionIcons: [IconHealth],
     Icon: IconBandages,
     item: {
-      description: "Fully restores # health.",
       name: "bandages",
       price: 30,
       weight: 1,
     },
   },
   elixir: {
+    description: "Fully restores # stamina.",
     descriptionIcons: [IconStamina],
     Icon: IconElixir,
     item: {
-      description: "Fully restores # stamina.",
       name: "elixir",
       price: 40,
       weight: 2,
     },
   },
   phylactery: {
+    description: "Resurrects the bearer upon # death.",
     descriptionIcons: [IconFlatlined],
     Icon: IconPhylactery,
     item: {
-      description: "Resurrects the bearer upon # death.",
       name: "phylactery",
       price: 500,
       weight: 10,
     },
   },
   salve: {
+    description: "Cures # blight.",
     descriptionIcons: [IconBlighted],
     Icon: IconSalve,
     item: {
-      description: "Cures # blight.",
       name: "salve",
       price: 80,
       weight: 3,
@@ -188,9 +189,8 @@ export const INFUSION_DURATION = 1000;
 
 export const INFUSABLES: Record<
   Infusable,
-  {
+  Description & {
     delta: Delta;
-    descriptionIcons?: SVGIcon[];
     EffectIcon: SVGIcon;
     Icon: SVGIcon;
     item: Omit<InfusableItem, "ID">;
@@ -199,11 +199,11 @@ export const INFUSABLES: Record<
 > = {
   "eldritch codex": {
     delta: "powerBonusBoost",
+    description: "Boosts all attribute effects based on # power level.",
     descriptionIcons: [IconPowerLevel],
     EffectIcon: IconPowerBonusBoost,
     Icon: IconEldritchCodex,
     item: {
-      description: "Boosts all attribute effects based on # power level.",
       effect: {
         maximum: 1.5,
         minimum: 0,
@@ -216,10 +216,10 @@ export const INFUSABLES: Record<
   },
   "mysterious egg": {
     delta: "hatchingProgress",
+    description: "A perplexing ovum emanating otherworldly energy.",
     EffectIcon: IconHatchingProgress,
     Icon: IconMysteriousEgg,
     item: {
-      description: "A perplexing ovum emanating otherworldly energy.",
       effect: { maximum: 1, minimum: 0 },
       name: "mysterious egg",
       price: 1554,
@@ -233,152 +233,151 @@ export const KNAPSACK_CAPACITY = 15;
 
 export const RELIC_DROP_CHANCE = {
   "dream catcher": { maximum: 0.1, minimum: 0.02 },
-  memento: { maximum: 0.1, minimum: 0.005 },
+  memento: { maximum: 0.1, minimum: 0.01 },
   "torn manuscript": { maximum: 0.1, minimum: 0.02 },
 };
 
 export const RELICS: Record<
   Relic,
-  {
-    descriptionIcons?: SVGIcon[];
+  Description & {
     Icon: SVGIcon;
     item: Omit<RelicItem, "ID">;
   }
 > = {
   "[P71NQ]": {
+    description: "",
     Icon: IconLogEntry,
     item: {
-      description: "",
       name: "[P71NQ]",
       price: 14_014,
       weight: 14,
     },
   },
   "ammunition pouch": {
+    description: "Stores # ammunition for # ranged weapons.",
     descriptionIcons: [IconAmmunition, IconRanged],
     Icon: IconAmmunitionPouch,
     item: {
-      description: "Stores # ammunition for # ranged weapons.",
       name: "ammunition pouch",
       price: 300,
       weight: 6,
     },
   },
   automincer: {
+    description:
+      "While # equipped, collects all # loot and passes to the next # stage once it is cleared of monsters.",
     descriptionIcons: [IconGrinding, IconLoot, IconStage],
     Icon: IconAutomincer,
     item: {
-      description:
-        "While # equipped, collects all # loot and passes to the next # stage once it is cleared of monsters.",
       name: "automincer",
       price: 5000,
       weight: 20,
     },
   },
   compass: {
+    description: "Allows # navigation of the # wilderness to explore previous locations.",
     descriptionIcons: [IconNavigation, IconWilderness],
     Icon: IconCompass,
     item: {
-      description: "Allows # navigation of the # wilderness to explore previous locations.",
       name: "compass",
       price: 50,
       weight: 2,
     },
   },
   "dream catcher": {
+    description:
+      "While # equipped and attacking, disengages the bearer once reaching low # health.",
     descriptionIcons: [IconProtected, IconHealth],
     Icon: IconDreamCatcher,
     item: {
-      description:
-        "While # equipped and attacking, disengages the bearer once reaching low # health.",
       name: "dream catcher",
       price: 1500,
       weight: 10,
     },
   },
   "ender hook": {
+    description: "Monsters are # looted immediately.",
     descriptionIcons: [IconLooting],
     Icon: IconEnderHook,
     item: {
-      description: "Monsters are # looted immediately.",
       name: "ender hook",
       price: 2500,
       weight: 15,
     },
   },
   familiar: {
+    description: "Compels the manifestation of the final entity.",
     Icon: IconFamiliar,
     item: {
-      description: "Compels the manifestation of the final entity.",
       name: "familiar",
       price: 1,
       weight: 17,
     },
   },
   hearthstone: {
+    description: "Instantly travel back to the # caravan regardless of any # lurking monsters.",
     descriptionIcons: [IconCaravan, IconMonsterLurking],
     Icon: IconStone,
     item: {
-      description: "Instantly travel back to the # caravan regardless of any # lurking monsters.",
       name: "hearthstone",
       price: 100,
       weight: 3,
     },
   },
   journal: {
+    description: "A compendium of # quests.",
     descriptionIcons: [IconQuests],
     Icon: IconJournal,
     item: {
-      description: "A compendium of # quests.",
       name: "journal",
       price: 750,
       weight: 5,
     },
   },
   knapsack: {
+    description: "Provides space for items and the ability to manage # gear.",
     descriptionIcons: [IconGear],
     Icon: IconKnapsack,
     item: {
-      description: "Provides space for items and the ability to manage # gear.",
       name: "knapsack",
       price: 15,
       weight: 0,
     },
   },
   lacrimatory: {
+    description: "Enables the collection of samples from # noxious foes.",
     descriptionIcons: [IconPoisonRating],
     Icon: IconLacrimatory,
     item: {
-      description: "Enables the collection of samples from # noxious foes.",
       name: "lacrimatory",
       price: 1500,
       weight: 8,
     },
   },
   memento: {
+    description: "Lost memories eventually lead to extraordinary discoveries.",
     Icon: IconMemento,
     item: {
-      description: "Lost memories eventually lead to extraordinary discoveries.",
       name: "memento",
       price: 154,
       weight: 2,
     },
   },
   "thaumaturgic goggles": {
+    description: "Discerns the # lethality of creatures.",
     descriptionIcons: [IconDamagePerSecond],
     Icon: IconThaumaturgicGoggles,
     item: {
-      description: "Discerns the # lethality of creatures.",
       name: "thaumaturgic goggles",
       price: 250,
       weight: 4,
     },
   },
   "torn manuscript": {
+    description: "Describes # theurgical methodologies beyond comprehension.",
     descriptionIcons: [IconAlchemist],
     Icon: IconTornManuscript,
     item: {
-      description: "Describes # theurgical methodologies beyond comprehension.",
       name: "torn manuscript",
       price: 5000,
       weight: 3,

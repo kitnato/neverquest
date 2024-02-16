@@ -36,6 +36,7 @@ import IconStunned from "@neverquest/icons/stunned.svg?react";
 import IconTraumatology from "@neverquest/icons/traumatology.svg?react";
 import IconTwoHanded from "@neverquest/icons/two-handed.svg?react";
 import type { SVGIcon } from "@neverquest/types/components";
+import type { Description } from "@neverquest/types/ui";
 import type { CrewMember, Showing, Skill, WeaponAbility } from "@neverquest/types/unions";
 
 export const SKILL_PRICE_BASE = 60;
@@ -43,9 +44,7 @@ export const SKILL_PRICE_FACTOR = 2.05;
 
 export const SKILLS: Record<
   Skill,
-  {
-    description: string;
-    descriptionIcons: SVGIcon[];
+  Description & {
     Icon: SVGIcon;
     isInheritable: boolean;
     requiredCrewMember: CrewMember;

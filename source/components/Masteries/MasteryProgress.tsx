@@ -2,7 +2,7 @@ import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
-import { Description } from "@neverquest/components/Description";
+import { DescriptionDisplay } from "@neverquest/components/DescriptionDisplay";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { LABEL_MAXIMUM, PERCENTAGE_POINTS } from "@neverquest/data/general";
 import { MASTERIES } from "@neverquest/data/masteries";
@@ -30,7 +30,7 @@ export function MasteryProgress({ mastery }: { mastery: Mastery }) {
       overlay={
         <Popover>
           <PopoverBody>
-            <Description description={instructions} descriptionIcons={instructionIcons} />
+            <DescriptionDisplay description={instructions} descriptionIcons={instructionIcons} />
           </PopoverBody>
         </Popover>
       }

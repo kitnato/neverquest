@@ -11,6 +11,7 @@ import {
 } from "@neverquest/data/statistics";
 import {
   BRAWLER_DAMAGE_BONUS,
+  BRUISER,
   INOCULATED_DEFLECTION_BASE,
   NUDIST_DODGE_BONUS,
 } from "@neverquest/data/traits";
@@ -135,7 +136,9 @@ export const damage = withStateKey("damage", (key) =>
             (weaponValue.grip === "one-handed" || get(isTraitAcquired("colossus")))
               ? 1 + BRAWLER_DAMAGE_BONUS
               : 1) +
-          (get(isTraitAcquired("bruiser")) && isUnarmed(weaponValue) ? get(stamina) : 0)) *
+          (get(isTraitAcquired("bruiser")) && isUnarmed(weaponValue)
+            ? get(stamina) * BRUISER.damage
+            : 0)) *
           (1 + get(questsBonus("damageBonus"))),
       );
     },

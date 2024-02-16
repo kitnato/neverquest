@@ -1,6 +1,7 @@
 import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
+import { DescriptionDisplay } from "@neverquest/components/DescriptionDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { MEDIC_PRICE_SURGERY } from "@neverquest/data/caravan";
 import {
@@ -13,6 +14,7 @@ import { useHeal } from "@neverquest/hooks/actions/useHeal";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import IconEssence from "@neverquest/icons/essence.svg?react";
 import IconHealing from "@neverquest/icons/healing.svg?react";
+import IconHealth from "@neverquest/icons/health.svg?react";
 import { isHealthAtMaximum } from "@neverquest/state/reserves";
 import { essence } from "@neverquest/state/resources";
 import { formatNumber } from "@neverquest/utilities/formatters";
@@ -33,7 +35,16 @@ export function ReceiveHealing() {
       <h6>Receive healing</h6>
 
       <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-        <IconDisplay Icon={IconHealing} tooltip="Healing">
+        <IconDisplay
+          description={
+            <DescriptionDisplay
+              description="Fully restores # health."
+              descriptionIcons={[IconHealth]}
+            />
+          }
+          Icon={IconHealing}
+          tooltip="Healing"
+        >
           <span>Surgery</span>
         </IconDisplay>
 

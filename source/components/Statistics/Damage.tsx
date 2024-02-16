@@ -8,7 +8,7 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { DamagePerSecond } from "@neverquest/components/Statistics/DamagePerSecond";
 import { ElementalDetails } from "@neverquest/components/Statistics/ElementalDetails";
 import { LABEL_SEPARATOR, POPOVER_TRIGGER } from "@neverquest/data/general";
-import { BRAWLER_DAMAGE_BONUS } from "@neverquest/data/traits";
+import { BRAWLER_DAMAGE_BONUS, BRUISER } from "@neverquest/data/traits";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconBrawler from "@neverquest/icons/brawler.svg?react";
@@ -160,7 +160,7 @@ export function Damage() {
                         </td>
 
                         <td>
-                          <span>+{formatNumber({ value: staminaValue })}</span>
+                          <span>+{formatNumber({ value: staminaValue * BRUISER.damage })}</span>
                         </td>
                       </tr>
                     )}

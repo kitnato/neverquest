@@ -1,7 +1,7 @@
 import { OverlayTrigger, Popover, PopoverBody } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { Description } from "@neverquest/components/Description";
+import { DescriptionDisplay } from "@neverquest/components/DescriptionDisplay";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { LABEL_EMPTY, PERCENTAGE_POINTS } from "@neverquest/data/general";
 import { AILMENT_DESCRIPTION } from "@neverquest/data/monster";
@@ -26,7 +26,7 @@ export function AilmentMeter({
       overlay={
         <Popover>
           <PopoverBody className="text-center">
-            <Description description={description} descriptionIcons={descriptionIcons} />
+            <DescriptionDisplay description={description} descriptionIcons={descriptionIcons} />
           </PopoverBody>
         </Popover>
       }

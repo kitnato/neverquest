@@ -1,6 +1,7 @@
 import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useRecoilState, useRecoilValue } from "recoil";
 
+import { DescriptionDisplay } from "@neverquest/components/DescriptionDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { Encumbrance } from "@neverquest/components/Inventory/Encumbrance";
 import { TAILORING } from "@neverquest/data/caravan";
@@ -12,6 +13,7 @@ import {
 import { KNAPSACK_CAPACITY } from "@neverquest/data/items";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
+import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react";
 import IconEssence from "@neverquest/icons/essence.svg?react";
 import IconTailoring from "@neverquest/icons/tailoring.svg?react";
 import { knapsackCapacity } from "@neverquest/state/inventory";
@@ -44,7 +46,12 @@ export function ExpandKnapsack() {
 
       <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
         <IconDisplay
-          description={<span>{`Increases maximum encumbrance by ${amount}.`}</span>}
+          description={
+            <DescriptionDisplay
+              description={`Increases maximum # encumbrance by ${amount}.`}
+              descriptionIcons={[IconEncumbrance]}
+            />
+          }
           Icon={IconTailoring}
           tooltip="Tailoring"
         >

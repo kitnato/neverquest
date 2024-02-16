@@ -1,6 +1,7 @@
 import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
+import { DescriptionDisplay } from "@neverquest/components/DescriptionDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { CREW } from "@neverquest/data/caravan";
 import {
@@ -11,6 +12,7 @@ import {
 } from "@neverquest/data/general";
 import { useHireCrewMember } from "@neverquest/hooks/actions/useHireCrewMember";
 import IconEssence from "@neverquest/icons/essence.svg?react";
+import IconStage from "@neverquest/icons/stage.svg?react";
 import IconUnknown from "@neverquest/icons/unknown.svg?react";
 import { isHired } from "@neverquest/state/caravan";
 import { stageMaximum } from "@neverquest/state/encounter";
@@ -73,7 +75,12 @@ export function HirableCrewMember({ crewMember }: { crewMember: CrewMember }) {
 
     return (
       <IconDisplay
-        description={<span>{`Found on stage ${requiredStage}.`}</span>}
+        description={
+          <DescriptionDisplay
+            description={`Found on # stage ${requiredStage}.`}
+            descriptionIcons={[IconStage]}
+          />
+        }
         Icon={IconUnknown}
         tooltip="Caravan crew member"
       >

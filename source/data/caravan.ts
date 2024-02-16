@@ -19,14 +19,14 @@ import IconTailor from "@neverquest/icons/tailor.svg?react";
 import IconWitch from "@neverquest/icons/witch.svg?react";
 import type { InheritableItem } from "@neverquest/types";
 import type { SVGIcon } from "@neverquest/types/components";
+import type { Description } from "@neverquest/types/ui";
 import type { Consumable, CrewMember, Grip, Showing } from "@neverquest/types/unions";
 
 export const MONOLOGUE_EMPTY = "...";
 
 export const CREW: Record<
   CrewMember,
-  {
-    description: string;
+  Description & {
     Icon: SVGIcon;
     interaction: string;
     monologues: Record<number, string | undefined>;
@@ -73,7 +73,7 @@ export const CREW: Record<
     requiredStage: 18,
   },
   medic: {
-    description: "Heals wounds and sells bandages.",
+    description: "Offers healing and sells bandages.",
     Icon: IconMedic,
     interaction: "Treat",
     monologues: {
@@ -156,7 +156,7 @@ export const CREW: Record<
     requiredStage: 21,
   },
   tailor: {
-    description: "Expands inventory space.",
+    description: "Expands knapsack encumbrance and the capacity of certain items.",
     Icon: IconTailor,
     interaction: "Stitch",
     monologues: {

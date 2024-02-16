@@ -2,6 +2,7 @@ import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 import { AmmunitionPouchCapacity } from "@neverquest/components/Caravan/Tailor/AmmunitionPouchCapacity";
+import { DescriptionDisplay } from "@neverquest/components/DescriptionDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { TAILORING } from "@neverquest/data/caravan";
 import {
@@ -11,6 +12,7 @@ import {
 } from "@neverquest/data/general";
 import { AMMUNITION_CAPACITY } from "@neverquest/data/items";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
+import IconAmmunition from "@neverquest/icons/ammunition.svg?react";
 import IconEssence from "@neverquest/icons/essence.svg?react";
 import IconTailoring from "@neverquest/icons/tailoring.svg?react";
 import { ammunitionCapacity } from "@neverquest/state/items";
@@ -41,7 +43,12 @@ export function ExpandAmmunitionPouch() {
 
       <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
         <IconDisplay
-          description={<span>{`Increases maximum ammunition by ${amount}.`}</span>}
+          description={
+            <DescriptionDisplay
+              description={`Increases maximum # ammunition by ${amount}.`}
+              descriptionIcons={[IconAmmunition]}
+            />
+          }
           Icon={IconTailoring}
           tooltip="Tailoring"
         >

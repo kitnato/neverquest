@@ -1,4 +1,4 @@
-import { Description } from "@neverquest/components/Description";
+import { DescriptionDisplay } from "@neverquest/components/DescriptionDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { SKILLS } from "@neverquest/data/skills";
 import type { Skill } from "@neverquest/types/unions";
@@ -9,7 +9,9 @@ export function SkillDisplay({ skill }: { skill: Skill }) {
 
   return (
     <IconDisplay
-      description={<Description description={description} descriptionIcons={descriptionIcons} />}
+      description={
+        <DescriptionDisplay description={description} descriptionIcons={descriptionIcons} />
+      }
       Icon={Icon}
       tooltip="Skill"
     >

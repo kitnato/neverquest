@@ -2,7 +2,7 @@ import { selector, selectorFamily } from "recoil";
 
 import { ELEMENTALS } from "@neverquest/data/items";
 import { BLEED } from "@neverquest/data/statistics";
-import { BRUISER_STUN_CHANCE } from "@neverquest/data/traits";
+import { BRUISER } from "@neverquest/data/traits";
 import { attributeRank } from "@neverquest/state/attributes";
 import { elementalEffects, shield, weapon } from "@neverquest/state/gear";
 import { isSkillAcquired } from "@neverquest/state/skills";
@@ -92,7 +92,9 @@ export const stunChance = withStateKey("stunChance", (key) =>
     get: ({ get }) => {
       const weaponValue = get(weapon);
       const { abilityChance, gearClass } = weaponValue;
-      const { increment, maximum } = BRUISER_STUN_CHANCE;
+      const {
+        stun: { increment, maximum },
+      } = BRUISER;
 
       return get(isSkillAcquired("traumatology")) && gearClass === "blunt"
         ? get(isTraitAcquired("bruiser")) && isUnarmed(weaponValue)

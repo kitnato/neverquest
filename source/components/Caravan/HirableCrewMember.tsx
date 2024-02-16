@@ -27,7 +27,7 @@ export function HirableCrewMember({ crewMember }: { crewMember: CrewMember }) {
 
   const hireCrewMember = useHireCrewMember();
 
-  const { description, Icon, price, requiredStage } = CREW[crewMember];
+  const { description, descriptionIcons, Icon, price, requiredStage } = CREW[crewMember];
   const isAffordable = price <= essenceValue;
   const name = capitalizeAll(crewMember);
 
@@ -36,7 +36,9 @@ export function HirableCrewMember({ crewMember }: { crewMember: CrewMember }) {
       return (
         <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
           <IconDisplay
-            description={<span>{description}</span>}
+            description={
+              <DescriptionDisplay description={description} descriptionIcons={descriptionIcons} />
+            }
             Icon={Icon}
             tooltip="Caravan crew member"
           >

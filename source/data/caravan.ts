@@ -9,12 +9,24 @@ import { LEVELLING_CUTOFF, LEVELLING_MAXIMUM, RETIREMENT_STAGE } from "@neverque
 import { INFUSABLES, RELICS } from "@neverquest/data/items";
 import { BLIGHT, FINALITY_STAGE, POISON, RAGE } from "@neverquest/data/monster";
 import IconAlchemist from "@neverquest/icons/alchemist.svg?react";
+import IconAmmunition from "@neverquest/icons/ammunition.svg?react";
+import IconAttributes from "@neverquest/icons/attributes.svg?react";
+import IconBandages from "@neverquest/icons/bandages.svg?react";
 import IconBlacksmith from "@neverquest/icons/blacksmith.svg?react";
+import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react";
 import IconFletcher from "@neverquest/icons/fletcher.svg?react";
+import IconGear from "@neverquest/icons/gear.svg?react";
+import IconGems from "@neverquest/icons/gems.svg?react";
+import IconHealth from "@neverquest/icons/health.svg?react";
 import IconMedic from "@neverquest/icons/medic.svg?react";
 import IconMercenary from "@neverquest/icons/mercenary.svg?react";
 import IconMerchant from "@neverquest/icons/merchant.svg?react";
 import IconOccultist from "@neverquest/icons/occultist.svg?react";
+import IconPhylactery from "@neverquest/icons/phylactery.svg?react";
+import IconPotions from "@neverquest/icons/potions.svg?react";
+import IconRanged from "@neverquest/icons/ranged.svg?react";
+import IconRituals from "@neverquest/icons/rituals.svg?react";
+import IconSkills from "@neverquest/icons/skills.svg?react";
 import IconTailor from "@neverquest/icons/tailor.svg?react";
 import IconWitch from "@neverquest/icons/witch.svg?react";
 import type { InheritableItem } from "@neverquest/types";
@@ -36,7 +48,8 @@ export const CREW: Record<
   }
 > = {
   alchemist: {
-    description: "Converts gems between one another and may teach venerable techniques.",
+    description: "Converts # gems between one another and may teach venerable # skills.",
+    descriptionIcons: [IconGems, IconSkills],
     Icon: IconAlchemist,
     interaction: "Visit",
     monologues: {
@@ -48,7 +61,8 @@ export const CREW: Record<
     requiredStage: 24,
   },
   blacksmith: {
-    description: "Crafts superior armor, weapons and shields.",
+    description: "Crafts superior # armor, weapons and shields.",
+    descriptionIcons: [IconGear],
     Icon: IconBlacksmith,
     interaction: "Craft",
     monologues: {
@@ -61,7 +75,8 @@ export const CREW: Record<
     shows: ["gearClass", "gearLevel"],
   },
   fletcher: {
-    description: "Crafts ranged weapons and provides ammunition.",
+    description: "Crafts # ranged weapons and provides # ammunition.",
+    descriptionIcons: [IconRanged, IconAmmunition],
     Icon: IconFletcher,
     interaction: "Craft",
     monologues: {
@@ -73,7 +88,8 @@ export const CREW: Record<
     requiredStage: 18,
   },
   medic: {
-    description: "Offers healing and sells bandages.",
+    description: "Offers immediate # healing and sells # bandages.",
+    descriptionIcons: [IconHealth, IconBandages],
     Icon: IconMedic,
     interaction: "Treat",
     monologues: {
@@ -85,7 +101,8 @@ export const CREW: Record<
     requiredStage: 5,
   },
   mercenary: {
-    description: "Trains new skills and attributes.",
+    description: "Trains new # skills and # attributes.",
+    descriptionIcons: [IconSkills, IconAttributes],
     Icon: IconMercenary,
     interaction: "Train",
     monologues: {
@@ -143,7 +160,8 @@ export const CREW: Record<
     requiredStage: 1,
   },
   occultist: {
-    description: "Sells phylacteries and offers purging rituals.",
+    description: "Sells # phylacteries and offers purging # rituals. May teach forbidden # skills.",
+    descriptionIcons: [IconPhylactery, IconRituals, IconSkills],
     Icon: IconOccultist,
     interaction: "Ritual",
     monologues: {
@@ -156,7 +174,8 @@ export const CREW: Record<
     requiredStage: 21,
   },
   tailor: {
-    description: "Expands knapsack encumbrance and the capacity of certain items.",
+    description: "Expands # encumbrance and the capacity of certain items.",
+    descriptionIcons: [IconEncumbrance],
     Icon: IconTailor,
     interaction: "Stitch",
     monologues: {
@@ -168,7 +187,9 @@ export const CREW: Record<
     requiredStage: 8,
   },
   witch: {
-    description: "Sells potions that restore reserves and cure ailments.",
+    description:
+      "Sells # potions that restore reserves and cure ailments. May teach mystical # skills.",
+    descriptionIcons: [IconPotions, IconSkills],
     Icon: IconWitch,
     interaction: "Brew",
     monologues: {

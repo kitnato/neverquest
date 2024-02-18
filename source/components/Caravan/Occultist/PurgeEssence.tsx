@@ -1,6 +1,7 @@
 import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
+import { DescriptionDisplay } from "@neverquest/components/DescriptionDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { OCCULTIST_PURGE_PRICE_MULTIPLIER } from "@neverquest/data/caravan";
 import {
@@ -12,6 +13,7 @@ import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useResetAttributes } from "@neverquest/hooks/actions/useResetAttributes";
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import IconEssence from "@neverquest/icons/essence.svg?react";
+import IconPowerLevel from "@neverquest/icons/power-level.svg?react";
 import IconPurgeEssence from "@neverquest/icons/purge-essence.svg?react";
 import { absorbedEssence } from "@neverquest/state/attributes";
 import { essence } from "@neverquest/state/resources";
@@ -33,7 +35,12 @@ export function PurgeEssence() {
   return (
     <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
       <IconDisplay
-        description={<span>Resets power level to 0, refunding all absorbed essence.</span>}
+        description={
+          <DescriptionDisplay
+            description="Resets # power level to 0, refunding all absorbed # essence."
+            descriptionIcons={[IconPowerLevel, IconEssence]}
+          />
+        }
         Icon={IconPurgeEssence}
         tooltip="Ritual"
       >

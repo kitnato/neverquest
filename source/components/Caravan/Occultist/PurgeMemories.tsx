@@ -1,6 +1,7 @@
 import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
+import { DescriptionDisplay } from "@neverquest/components/DescriptionDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { OCCULTIST_PURGE_PRICE_MULTIPLIER } from "@neverquest/data/caravan";
 import {
@@ -14,6 +15,7 @@ import { useResetCompletedQuests } from "@neverquest/hooks/actions/useResetCompl
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
 import IconEssence from "@neverquest/icons/essence.svg?react";
 import IconPurgeMemories from "@neverquest/icons/purge-memories.svg?react";
+import IconQuests from "@neverquest/icons/quests.svg?react";
 import IconUnknown from "@neverquest/icons/unknown.svg?react";
 import { canTrackQuests, completedQuestsCount } from "@neverquest/state/quests";
 import { essence } from "@neverquest/state/resources";
@@ -41,7 +43,10 @@ export function PurgeMemories() {
       <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
         <IconDisplay
           description={
-            <span>Resets the bonus of all completed quests, allowing for new choices.</span>
+            <DescriptionDisplay
+              description="Resets the chosen rewards of all completed # quests, allowing for new choices."
+              descriptionIcons={[IconQuests]}
+            />
           }
           Icon={IconPurgeMemories}
           tooltip="Ritual"

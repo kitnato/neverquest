@@ -121,7 +121,7 @@ export const SKILLS: Record<
     trainer: "witch",
   },
   meditation: {
-    description: "Grants the recondite technique of relic # infusion.",
+    description: "Grants the ability to perform relic # infusion.",
     descriptionIcons: [IconInfusionLevel],
     Icon: IconMeditation,
     isInheritable: true,

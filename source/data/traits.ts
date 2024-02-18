@@ -16,10 +16,10 @@ import IconExecution from "@neverquest/icons/execution.svg?react";
 import IconExecutioner from "@neverquest/icons/executioner.svg?react";
 import IconInoculated from "@neverquest/icons/inoculated.svg?react";
 import IconNudist from "@neverquest/icons/nudist.svg?react";
-import IconOneHanded from "@neverquest/icons/one-handed.svg?react";
 import IconProtection from "@neverquest/icons/protection.svg?react";
 import IconRanged from "@neverquest/icons/ranged.svg?react";
 import IconSharpshooter from "@neverquest/icons/sharpshooter.svg?react";
+import IconShield from "@neverquest/icons/shield.svg?react";
 import IconShredder from "@neverquest/icons/shredder.svg?react";
 import IconStalwart from "@neverquest/icons/stalwart.svg?react";
 import IconStamina from "@neverquest/icons/stamina.svg?react";
@@ -56,8 +56,8 @@ export const TRAITS: Record<
       decimals: 0,
       format: "percentage",
       value: BRAWLER_DAMAGE_BONUS,
-    })} while wielding a # one-handed weapon (also applies to the # colossus trait).`,
-    descriptionIcons: [IconEmptyHanded, IconWeaponDamage, IconOneHanded, IconColossus],
+    })}.`,
+    descriptionIcons: [IconEmptyHanded, IconWeaponDamage],
     Icon: IconBrawler,
   },
   bruiser: {
@@ -74,8 +74,8 @@ export const TRAITS: Record<
     Icon: IconBruiser,
   },
   colossus: {
-    description: "# Two-handed melee weapons are wielded in one hand instead of both.",
-    descriptionIcons: [IconTwoHanded],
+    description: "# Two-handed melee weapons can be wielded alongside a # shield.",
+    descriptionIcons: [IconTwoHanded, IconShield],
     Icon: IconColossus,
   },
   executioner: {

@@ -127,18 +127,23 @@ export const damage = withStateKey("damage", (key) =>
       const weaponValue = get(weapon);
 
       return Math.ceil(
-        (weaponValue.damage +
+        // Weapon damage multiplied by brawler trait bonus, if applicable.
+        (weaponValue.damage *
+          (get(isTraitAcquired("brawler")) &&
+          isUnshielded(get(shield)) &&
+          isMelee(weaponValue) &&
+          (weaponValue.grip === "one-handed" || get(isTraitAcquired("colossus")))
+            ? 1 + BRAWLER_DAMAGE_BONUS
+            : 1) +
+          // Strength effect multiplied by its eldritch codex power, if applicable.
           get(attributeStatistic("strength")) * (1 + get(attributePowerBonus("strength"))) +
-          Object.values(get(elementalEffects).weapon).reduce((sum, { damage }) => sum + damage, 0) *
-            (get(isTraitAcquired("brawler")) &&
-            isUnshielded(get(shield)) &&
-            isMelee(weaponValue) &&
-            (weaponValue.grip === "one-handed" || get(isTraitAcquired("colossus")))
-              ? 1 + BRAWLER_DAMAGE_BONUS
-              : 1) +
+          // Elemental damage from any gems.
+          Object.values(get(elementalEffects).weapon).reduce((sum, { damage }) => sum + damage, 0) +
+          // Current stamina portion from bruiser trait, if applicable.
           (get(isTraitAcquired("bruiser")) && isUnarmed(weaponValue)
             ? get(stamina) * BRUISER.damage
             : 0)) *
+          // All multiplied by total damage bonus from quest rewards.
           (1 + get(questsBonus("damageBonus"))),
       );
     },

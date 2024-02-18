@@ -265,7 +265,7 @@ export const RELICS: Record<
   },
   automincer: {
     description:
-      "While # equipped, collects all # loot and passes to the next # stage once it is cleared of monsters.",
+      "While # equipped, collects # loot and passes to the next # stage once clear of monsters.",
     descriptionIcons: [IconGrinding, IconLoot, IconStage],
     Icon: IconAutomincer,
     item: {
@@ -285,8 +285,7 @@ export const RELICS: Record<
     },
   },
   "dream catcher": {
-    description:
-      "While # equipped and attacking, disengages the bearer once reaching low # health.",
+    description: "While # equipped and attacking, disengages the bearer if at low # health.",
     descriptionIcons: [IconProtected, IconHealth],
     Icon: IconDreamCatcher,
     item: {
@@ -315,7 +314,8 @@ export const RELICS: Record<
     },
   },
   hearthstone: {
-    description: "Instantly travel back to the # caravan regardless of any # lurking monsters.",
+    description:
+      "Allows for instant travel back to the # caravan regardless of any # lurking monsters.",
     descriptionIcons: [IconCaravan, IconMonsterLurking],
     Icon: IconStone,
     item: {
@@ -355,7 +355,7 @@ export const RELICS: Record<
     },
   },
   memento: {
-    description: "Lost memories eventually lead to extraordinary discoveries.",
+    description: "Lost memories kept safe facilitate extraordinary discoveries.",
     Icon: IconMemento,
     item: {
       name: "memento",
@@ -364,7 +364,7 @@ export const RELICS: Record<
     },
   },
   "thaumaturgic goggles": {
-    description: "Discerns the # lethality of creatures.",
+    description: "Discerns # damage per second of oneself and all encounters.",
     descriptionIcons: [IconDamagePerSecond],
     Icon: IconThaumaturgicGoggles,
     item: {

@@ -86,14 +86,14 @@ export const QUESTS: Record<
     hidden: "log entry.",
     progression: [1],
     requiresTracking: false,
-    title: "Subversion",
+    title: "[ABNORMAL SEQUENCE TERMINATION]",
   },
   acquiringMemento: {
     description: `Acquire the ${LABEL_UNKNOWN}.`,
     hidden: "memento.",
     progression: [1],
     requiresTracking: false,
-    title: "Now what?",
+    title: "Subversive",
   },
   acquiringRanged: {
     description: "Acquire a ranged weapon.",

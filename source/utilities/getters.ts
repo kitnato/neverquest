@@ -42,12 +42,12 @@ import {
 } from "@neverquest/data/items";
 import { QUESTS } from "@neverquest/data/quests";
 import IconArmor from "@neverquest/icons/armor.svg?react";
-import IconEmptyHanded from "@neverquest/icons/empty-handed.svg?react";
 import IconOneHanded from "@neverquest/icons/one-handed.svg?react";
 import IconRanged from "@neverquest/icons/ranged.svg?react";
 import IconShield from "@neverquest/icons/shield.svg?react";
 import IconTwoHanded from "@neverquest/icons/two-handed.svg?react";
 import IconUnknown from "@neverquest/icons/unknown.svg?react";
+import IconWeaponNone from "@neverquest/icons/weapon-none.svg?react";
 import type {
   Armor,
   GearItem,
@@ -494,7 +494,7 @@ export function getTriangular(x: number) {
 
 export function getWeaponIcon(weapon: Weapon | typeof WEAPON_NONE) {
   return isUnarmed(weapon)
-    ? IconEmptyHanded
+    ? IconWeaponNone
     : isMelee(weapon)
       ? weapon.grip === "one-handed"
         ? IconOneHanded

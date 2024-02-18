@@ -11,7 +11,6 @@ import IconDamage from "@neverquest/icons/damage.svg?react";
 import IconDeflectionChance from "@neverquest/icons/deflection-chance.svg?react";
 import IconDistance from "@neverquest/icons/distance.svg?react";
 import IconDodgeChance from "@neverquest/icons/dodge-chance.svg?react";
-import IconEmptyHanded from "@neverquest/icons/empty-handed.svg?react";
 import IconExecution from "@neverquest/icons/execution.svg?react";
 import IconExecutioner from "@neverquest/icons/executioner.svg?react";
 import IconInoculated from "@neverquest/icons/inoculated.svg?react";
@@ -19,6 +18,7 @@ import IconNudist from "@neverquest/icons/nudist.svg?react";
 import IconProtection from "@neverquest/icons/protection.svg?react";
 import IconRanged from "@neverquest/icons/ranged.svg?react";
 import IconSharpshooter from "@neverquest/icons/sharpshooter.svg?react";
+import IconShieldNone from "@neverquest/icons/shield-none.svg?react";
 import IconShield from "@neverquest/icons/shield.svg?react";
 import IconShredder from "@neverquest/icons/shredder.svg?react";
 import IconStalwart from "@neverquest/icons/stalwart.svg?react";
@@ -28,6 +28,7 @@ import IconStunChance from "@neverquest/icons/stun-chance.svg?react";
 import IconTank from "@neverquest/icons/tank.svg?react";
 import IconTwoHanded from "@neverquest/icons/two-handed.svg?react";
 import IconWeaponDamage from "@neverquest/icons/weapon-damage.svg?react";
+import IconWeaponNone from "@neverquest/icons/weapon-none.svg?react";
 import type { SVGIcon } from "@neverquest/types/components";
 import type { Description } from "@neverquest/types/ui";
 import type { Skill, Trait } from "@neverquest/types/unions";
@@ -57,11 +58,11 @@ export const TRAITS: Record<
       format: "percentage",
       value: BRAWLER_DAMAGE_BONUS,
     })}.`,
-    descriptionIcons: [IconEmptyHanded, IconWeaponDamage],
+    descriptionIcons: [IconShieldNone, IconWeaponDamage],
     Icon: IconBrawler,
   },
   bruiser: {
-    description: `While # unarmed, # damage is increased by ${formatNumber({
+    description: `While # unarmed, # total damage is increased by ${formatNumber({
       decimals: 0,
       format: "percentage",
       value: BRUISER.damage,
@@ -70,7 +71,7 @@ export const TRAITS: Record<
       format: "percentage",
       value: BRUISER.stun.increment,
     })} per # strength attribute rank.`,
-    descriptionIcons: [IconEmptyHanded, IconDamage, IconStamina, IconStunChance, IconStrength],
+    descriptionIcons: [IconWeaponNone, IconDamage, IconStamina, IconStunChance, IconStrength],
     Icon: IconBruiser,
   },
   colossus: {

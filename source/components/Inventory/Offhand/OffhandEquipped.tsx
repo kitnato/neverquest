@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { Ammunition } from "@neverquest/components/Inventory/Offhand/Ammunition";
 import { ShieldName } from "@neverquest/components/Inventory/Offhand/ShieldName";
-import IconEmptyHanded from "@neverquest/icons/empty-handed.svg?react";
+import IconShieldNone from "@neverquest/icons/shield-none.svg?react";
 import IconShield from "@neverquest/icons/shield.svg?react";
 import IconTwoHanded from "@neverquest/icons/two-handed.svg?react";
 import { shield, weapon } from "@neverquest/state/gear";
@@ -38,8 +38,7 @@ export function OffhandEquipped() {
     return (
       <IconDisplay
         className={getAnimationClass({ animation: "flipInX" })}
-        Icon={isShieldUnequipped ? IconEmptyHanded : IconShield}
-        iconProps={{ isMirrored: isShieldUnequipped }}
+        Icon={isShieldUnequipped ? IconShieldNone : IconShield}
         tooltip="Equipped shield"
       >
         <ShieldName overlayPlacement="top" shield={shieldValue} />

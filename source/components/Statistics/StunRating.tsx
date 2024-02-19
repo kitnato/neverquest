@@ -13,7 +13,7 @@ import { weapon } from "@neverquest/state/gear";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import { stunRating } from "@neverquest/state/statistics";
 import { formatNumber } from "@neverquest/utilities/formatters";
-import { getAnimationClass, getWeaponIcon } from "@neverquest/utilities/getters";
+import { getAnimationClass, getGearIcon } from "@neverquest/utilities/getters";
 
 export function StunRating() {
   const mightValue = useRecoilValue(masteryStatistic("might"));
@@ -42,7 +42,7 @@ export function StunRating() {
                     <tr>
                       <td>
                         <IconDisplay
-                          Icon={getWeaponIcon(weaponValue)}
+                          Icon={getGearIcon(weaponValue)}
                           iconProps={{ className: "small" }}
                         >
                           <span>Chance:</span>

@@ -41,9 +41,11 @@ import {
   RELICS,
 } from "@neverquest/data/items";
 import { QUESTS } from "@neverquest/data/quests";
+import IconArmorNone from "@neverquest/icons/armor-none.svg?react";
 import IconArmor from "@neverquest/icons/armor.svg?react";
 import IconOneHanded from "@neverquest/icons/one-handed.svg?react";
 import IconRanged from "@neverquest/icons/ranged.svg?react";
+import IconShieldNone from "@neverquest/icons/shield-none.svg?react";
 import IconShield from "@neverquest/icons/shield.svg?react";
 import IconTwoHanded from "@neverquest/icons/two-handed.svg?react";
 import IconUnknown from "@neverquest/icons/unknown.svg?react";
@@ -71,6 +73,8 @@ import {
   isRoutine,
   isShield,
   isUnarmed,
+  isUnarmored,
+  isUnshielded,
   isWeapon,
 } from "@neverquest/types/type-guards";
 import type { Animation, AnimationSpeed } from "@neverquest/types/ui";
@@ -214,13 +218,16 @@ export function getGearElementalEffects({
   gear: GearItem | GearItemUnequipped;
   gems: GemItem[];
 }) {
-  if (isArmor(gear) || isWeapon(gear)) {
+  const isArmorLike = isArmor(gear) || isUnarmored(gear);
+  const isWeaponLike = isWeapon(gear) || isUnarmed(gear);
+
+  if (isArmorLike || isWeaponLike) {
     const effects = {
       fire: { damage: 0, duration: 0 },
       ice: { damage: 0, duration: 0 },
       lightning: { damage: 0, duration: 0 },
     };
-    const effector = isArmor(gear) ? gear.protection : gear.damage;
+    const effector = isArmorLike ? gear.protection : gear.damage;
 
     for (const { amount, item } of stackItems(gems)) {
       const { elemental } = GEMS[item.name];
@@ -256,6 +263,38 @@ export function getGearElementalEffects({
   return effects;
 }
 
+export function getGearIcon(gearItem: GearItem | GearItemUnequipped) {
+  if (isArmor(gearItem)) {
+    return IconArmor;
+  }
+
+  if (isShield(gearItem)) {
+    return IconShield;
+  }
+
+  if (isUnarmed(gearItem)) {
+    return IconWeaponNone;
+  }
+
+  if (isUnarmored(gearItem)) {
+    return IconArmorNone;
+  }
+
+  if (isUnshielded(gearItem)) {
+    return IconShieldNone;
+  }
+
+  if (isWeapon(gearItem)) {
+    return isMelee(gearItem)
+      ? gearItem.grip === "one-handed"
+        ? IconOneHanded
+        : IconTwoHanded
+      : IconRanged;
+  }
+
+  return IconUnknown;
+}
+
 export function getFromRange({ factor, maximum, minimum }: GeneratorRange & { factor?: number }) {
   return (factor ?? Math.random()) * (maximum - minimum) + minimum;
 }
@@ -267,12 +306,12 @@ export function getGemFittingCost(fitted: number) {
 }
 
 export function getItemIcon(item: InventoryItem) {
-  if (isArmor(item)) {
-    return IconArmor;
-  }
-
   if (isConsumableItem(item)) {
     return CONSUMABLES[item.name].Icon;
+  }
+
+  if (isGearItem(item)) {
+    return getGearIcon(item);
   }
 
   if (isGemItem(item)) {
@@ -283,16 +322,8 @@ export function getItemIcon(item: InventoryItem) {
     return INFUSABLES[item.name].Icon;
   }
 
-  if (isShield(item)) {
-    return IconShield;
-  }
-
   if (isRelicItem(item)) {
     return RELICS[item.name].Icon;
-  }
-
-  if (isWeapon(item)) {
-    return getWeaponIcon(item);
   }
 
   return IconUnknown;
@@ -490,14 +521,4 @@ export function getTotalElementalEffects({
 // https://en.wikipedia.org/wiki/Triangular_number
 export function getTriangular(x: number) {
   return (x * (x + 1)) / 2;
-}
-
-export function getWeaponIcon(weapon: Weapon | typeof WEAPON_NONE) {
-  return isUnarmed(weapon)
-    ? IconWeaponNone
-    : isMelee(weapon)
-      ? weapon.grip === "one-handed"
-        ? IconOneHanded
-        : IconTwoHanded
-      : IconRanged;
 }

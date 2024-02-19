@@ -85,15 +85,17 @@ export function useAcquireItem() {
 
         set(inventory, (currentInventory) => [...currentInventory, item]);
 
+        const isItemMelee = isMelee(item);
+        const isItemRanged = isRanged(item);
         const isShieldUnequipped = isUnshielded(get(shield));
         const weaponValue = get(weapon);
 
         if (isGearItem(item)) {
-          if (isMelee(item) && item.grip === "two-handed") {
+          if (isItemMelee && item.grip === "two-handed") {
             progressQuest({ quest: "acquiringTwoHanded" });
           }
 
-          if (isRanged(item)) {
+          if (isItemRanged) {
             progressQuest({ quest: "acquiringRanged" });
           }
 
@@ -107,10 +109,10 @@ export function useAcquireItem() {
               (weaponValue.grip === "one-handed" || get(isTraitAcquired("colossus")))) ||
             // Acquiring a weapon while no weapon equipped, and if ranged or two-handed, no shield equipped.
             (isUnarmed(weaponValue) &&
-              ((isMelee(item) && item.grip === "one-handed") ||
+              ((isItemMelee && item.grip === "one-handed") ||
                 get(isTraitAcquired("colossus")) ||
-                (((isMelee(item) && item.grip === "two-handed") ||
-                  (get(isSkillAcquired("archery")) && isRanged(item))) &&
+                (((isItemMelee && item.grip === "two-handed") ||
+                  (get(isSkillAcquired("archery")) && isItemRanged)) &&
                   isShieldUnequipped)))
           ) {
             return "equip";

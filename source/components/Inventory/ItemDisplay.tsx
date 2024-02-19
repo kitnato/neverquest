@@ -23,7 +23,7 @@ import {
   isWeapon,
 } from "@neverquest/types/type-guards";
 import type { Relic } from "@neverquest/types/unions";
-import { getWeaponIcon } from "@neverquest/utilities/getters";
+import { getGearIcon } from "@neverquest/utilities/getters";
 
 export function ItemDisplay({
   amount,
@@ -113,7 +113,7 @@ export function ItemDisplay({
     return (
       <IconDisplay
         description={isEquipped ? <span>Equipped</span> : undefined}
-        Icon={getWeaponIcon(item)}
+        Icon={getGearIcon(item)}
         tooltip="Weapon"
       >
         <WeaponName overlayPlacement={overlayPlacement} weapon={item} />

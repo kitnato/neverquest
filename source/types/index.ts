@@ -23,10 +23,9 @@ export type ConsumableItem = ItemBase & {
 
 export type GearItem = Armor | Shield | Weapon;
 
-type GearItemBase = ItemBase & {
+export type GearItemBase = ItemBase & {
   level: number;
   name: string;
-  price: number;
 };
 
 export type GearItemUnequipped = typeof ARMOR_NONE | typeof SHIELD_NONE | typeof WEAPON_NONE;
@@ -55,7 +54,7 @@ export type InheritableItem = InfusableItem | RelicItem;
 
 export type InventoryItem = GearItem | InheritableItem | StackableItem;
 
-type ItemBase = {
+export type ItemBase = {
   ID: string;
   price: number;
   weight: number;
@@ -100,7 +99,7 @@ export type RelicItem = ItemBase & {
 
 export type Weapon = Melee | Ranged;
 
-type WeaponBase = GearItemBase & {
+export type WeaponBase = GearItemBase & {
   abilityChance: number;
   burden: number;
   damage: number;

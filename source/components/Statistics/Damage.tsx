@@ -29,7 +29,7 @@ import { isTraitAcquired } from "@neverquest/state/traits";
 import { isShowing } from "@neverquest/state/ui";
 import { isUnarmed, isUnshielded } from "@neverquest/types/type-guards";
 import { formatNumber } from "@neverquest/utilities/formatters";
-import { getAnimationClass, getWeaponIcon } from "@neverquest/utilities/getters";
+import { getAnimationClass, getGearIcon } from "@neverquest/utilities/getters";
 
 export function Damage() {
   const attributePowerBonusStrength = useRecoilValue(attributePowerBonus("strength"));
@@ -75,7 +75,7 @@ export function Damage() {
                     <tr>
                       <td>
                         <IconDisplay
-                          Icon={getWeaponIcon(weaponValue)}
+                          Icon={getGearIcon(weaponValue)}
                           iconProps={{ className: "small" }}
                         >
                           <span>{isUnarmed(weaponValue) ? "Base" : "Weapon"}:</span>

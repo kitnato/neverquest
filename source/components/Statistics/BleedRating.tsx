@@ -17,7 +17,7 @@ import { weapon } from "@neverquest/state/gear";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import { bleedDamage, bleedRating } from "@neverquest/state/statistics";
 import { formatNumber } from "@neverquest/utilities/formatters";
-import { getAnimationClass, getWeaponIcon } from "@neverquest/utilities/getters";
+import { getAnimationClass, getGearIcon } from "@neverquest/utilities/getters";
 
 export function BleedRating() {
   const { duration, ticks } = useRecoilValue(bleed);
@@ -48,7 +48,7 @@ export function BleedRating() {
                     <tr>
                       <td>
                         <IconDisplay
-                          Icon={getWeaponIcon(weaponValue)}
+                          Icon={getGearIcon(weaponValue)}
                           iconProps={{ className: "small" }}
                         >
                           <span>Chance:</span>

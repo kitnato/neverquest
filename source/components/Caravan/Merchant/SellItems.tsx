@@ -14,9 +14,7 @@ import {
   isGemItem,
   isInheritableItem,
   isShield,
-  isUnarmed,
-  isUnarmored,
-  isUnshielded,
+  isWeapon,
 } from "@neverquest/types/type-guards";
 import { stackItems } from "@neverquest/utilities/helpers";
 
@@ -26,12 +24,8 @@ export function SellItems() {
   const shieldValue = useRecoilValue(shield);
   const weaponValue = useRecoilValue(weapon);
 
-  const equippedGear = [weaponValue, armorValue, shieldValue].filter((gearItem) =>
-    isArmor(gearItem)
-      ? !isUnarmored(gearItem)
-      : isShield(gearItem)
-        ? !isUnshielded(gearItem)
-        : !isUnarmed(gearItem),
+  const equippedGear = [weaponValue, armorValue, shieldValue].filter(
+    (gearItem) => isArmor(gearItem) || isShield(gearItem) || isWeapon(gearItem),
   ) as (Armor | Shield | Weapon)[];
   const equippedGearIDs = new Set(equippedGear.map(({ ID }) => ID));
   const storedItems = inventoryValue.filter((item) => !equippedGearIDs.has(item.ID));

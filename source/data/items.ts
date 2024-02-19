@@ -127,7 +127,6 @@ export const ELEMENTALS: Record<
     ailment: ElementalAilment;
     color: string;
     damage: GeneratorRange;
-    damageModification: string;
     duration: GeneratorRange;
     durationCap: number;
     gem: Gem;
@@ -138,7 +137,6 @@ export const ELEMENTALS: Record<
     ailment: "burning",
     color: "text-orange",
     damage: { maximum: 0.8, minimum: 0.1 },
-    damageModification: "high",
     duration: { maximum: 2500, minimum: 1200 },
     durationCap: 7500,
     gem: "ruby",
@@ -148,7 +146,6 @@ export const ELEMENTALS: Record<
     ailment: "frozen",
     color: "text-blue",
     damage: { maximum: 0.4, minimum: 0.05 },
-    damageModification: "low",
     duration: { maximum: 2000, minimum: 900 },
     durationCap: 3000,
     gem: "sapphire",
@@ -158,7 +155,6 @@ export const ELEMENTALS: Record<
     ailment: "shocked",
     color: "text-indigo",
     damage: { maximum: 0.6, minimum: 0.075 },
-    damageModification: "medium",
     duration: { maximum: 2200, minimum: 1000 },
     durationCap: 5000,
     gem: "topaz",
@@ -172,7 +168,7 @@ export const GEM_BASE = {
   price: 250,
   weight: 1,
 };
-export const GEM_DROP_CHANCE = { equalStage: 1, lowerStage: 0.25 };
+export const GEM_DROP_CHANCE = { equalStage: 1, lowerStage: 0.33 };
 export const GEM_ENHANCEMENT_RANGE = { maximum: 1, minimum: 0.1 };
 export const GEM_FITTING_COST_RANGE = { maximum: 150, minimum: 10 };
 export const GEMS: Record<Gem, { elemental: Elemental; Icon: SVGIcon }> = {

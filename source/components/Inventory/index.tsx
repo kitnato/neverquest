@@ -2,7 +2,6 @@ import type { FunctionComponent } from "react";
 import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
-import { ApplyGem } from "@neverquest/components/Inventory/ApplyGem";
 import { Antidote } from "@neverquest/components/Inventory/Consumable/Antidote";
 import { Bandages } from "@neverquest/components/Inventory/Consumable/Bandages";
 import { Elixir } from "@neverquest/components/Inventory/Consumable/Elixir";
@@ -14,6 +13,7 @@ import { EquipRelic } from "@neverquest/components/Inventory/Inheritable/EquipRe
 import { HearthstoneWarp } from "@neverquest/components/Inventory/Inheritable/HearthstoneWarp";
 import { InfusionInspect } from "@neverquest/components/Inventory/Inheritable/Infusion/InfusionInspect";
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
+import { SocketGem } from "@neverquest/components/Inventory/SocketGem";
 import {
   CLASS_FULL_WIDTH_JUSTIFIED,
   LABEL_SKILL_REQUIRED,
@@ -34,9 +34,6 @@ import {
   isRanged,
   isRelicItem,
   isShield,
-  isUnarmed,
-  isUnarmored,
-  isUnshielded,
   isWeapon,
 } from "@neverquest/types/type-guards";
 import type { Relic } from "@neverquest/types/unions";
@@ -88,12 +85,8 @@ export function Inventory() {
 
   const toggleEquipItem = useToggleEquipItem();
 
-  const equippedGear = [weaponValue, armorValue, shieldValue].filter((gearItem) =>
-    isArmor(gearItem)
-      ? !isUnarmored(gearItem)
-      : isShield(gearItem)
-        ? !isUnshielded(gearItem)
-        : !isUnarmed(gearItem),
+  const equippedGear = [weaponValue, armorValue, shieldValue].filter(
+    (gearItem) => isArmor(gearItem) || isShield(gearItem) || isWeapon(gearItem),
   ) as (Armor | Shield | Weapon)[];
   const equippedGearIDs = new Set(equippedGear.map(({ ID }) => ID));
   const storedItems = inventoryValue.filter(
@@ -252,7 +245,7 @@ export function Inventory() {
                       return;
                     }
                     default: {
-                      return <ApplyGem gem={item} />;
+                      return <SocketGem gem={item} />;
                     }
                   }
                 })()}

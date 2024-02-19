@@ -1,17 +1,26 @@
+import {
+  ARMOR_CLASS_TYPES,
+  SHIELD_CLASS_TYPES,
+  WEAPON_CLASS_TYPES,
+} from "@kitnato/locran/build/types";
 import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear";
 import type {
   Armor,
   ConsumableItem,
   GearItem,
+  GearItemBase,
   GemItem,
+  GeneratorRange,
   InfusableItem,
   InheritableItem,
+  ItemBase,
   Melee,
   Ranged,
   RelicItem,
   Shield,
   StackableItem,
   Weapon,
+  WeaponBase,
 } from "@neverquest/types";
 import {
   CONQUEST_TYPES,
@@ -32,7 +41,18 @@ import {
 } from "@neverquest/types/unions";
 
 export function isArmor(thing: unknown): thing is Armor {
-  return isObject(thing) && typeof thing.protection === "number";
+  return (
+    isGearItemBase(thing) &&
+    "burden" in thing &&
+    typeof thing.burden === "number" &&
+    "deflection" in thing &&
+    typeof thing.burden === "number" &&
+    "gearClass" in thing &&
+    typeof thing.gearClass === "string" &&
+    new Set<string>(ARMOR_CLASS_TYPES).has(thing.gearClass) &&
+    "protection" in thing &&
+    typeof thing.protection === "number"
+  );
 }
 
 export function isConquest(thing: unknown): thing is Conquest {
@@ -40,11 +60,7 @@ export function isConquest(thing: unknown): thing is Conquest {
 }
 
 export function isConsumableItem(thing: unknown): thing is ConsumableItem {
-  return (
-    isObject(thing) &&
-    typeof thing.name === "string" &&
-    new Set<string>(CONSUMABLE_TYPES).has(thing.name)
-  );
+  return isItem(thing) && new Set<string>(CONSUMABLE_TYPES).has(thing.name);
 }
 
 export function isFinality(thing: unknown): thing is Finality {
@@ -55,13 +71,25 @@ export function isGear(thing: unknown): thing is Gear {
   return typeof thing === "string" && new Set<string>(GEAR_TYPES).has(thing);
 }
 
+function isGearItemBase(thing: unknown): thing is GearItemBase {
+  return isItem(thing) && "level" in thing && typeof thing.level === "number";
+}
+
 export function isGearItem(thing: unknown): thing is GearItem {
-  return isObject(thing) && (isArmor(thing) || isShield(thing) || isWeapon(thing));
+  return isArmor(thing) || isShield(thing) || isWeapon(thing);
 }
 
 export function isGemItem(thing: unknown): thing is GemItem {
+  return isItem(thing) && new Set<string>(GEM_TYPES).has(thing.name);
+}
+
+function isGeneratorRange(thing: unknown): thing is GeneratorRange {
   return (
-    isObject(thing) && typeof thing.name === "string" && new Set<string>(GEM_TYPES).has(thing.name)
+    isValidObject(thing) &&
+    "maximum" in thing &&
+    typeof thing.maximum === "number" &&
+    "minimum" in thing &&
+    typeof thing.minimum === "number"
   );
 }
 
@@ -71,20 +99,38 @@ export function isInheritableItem(thing: unknown): thing is InheritableItem {
 
 export function isInfusableItem(thing: unknown): thing is InfusableItem {
   return (
-    isObject(thing) &&
-    typeof thing.name === "string" &&
+    isItem(thing) &&
+    "effect" in thing &&
+    isGeneratorRange(thing.effect) &&
     new Set<string>(INFUSABLE_TYPES).has(thing.name)
   );
 }
 
-function isObject(thing: unknown): thing is Record<string, unknown> {
-  return typeof thing === "object" && thing !== null && Object.keys(thing).length > 0;
+function isItem(thing: unknown): thing is ItemBase & { name: string } {
+  return (
+    isValidObject(thing) &&
+    "ID" in thing &&
+    typeof thing.ID === "string" &&
+    "name" in thing &&
+    typeof thing.name === "string" &&
+    "price" in thing &&
+    typeof thing.price === "number" &&
+    "weight" in thing &&
+    typeof thing.weight === "number"
+  );
 }
 
 export function isMelee(thing: unknown): thing is Melee {
   return (
-    isObject(thing) && typeof thing.grip === "string" && new Set<string>(GRIP_TYPES).has(thing.grip)
+    isWeaponBase(thing) &&
+    "grip" in thing &&
+    typeof thing.grip === "string" &&
+    new Set<string>(GRIP_TYPES).has(thing.grip)
   );
+}
+
+function isValidObject(thing: unknown): thing is Record<string, unknown> {
+  return typeof thing === "object" && thing !== null && Object.keys(thing).length > 0;
 }
 
 export function isQuestBonus(thing: unknown): thing is QuestBonus {
@@ -92,7 +138,13 @@ export function isQuestBonus(thing: unknown): thing is QuestBonus {
 }
 
 export function isRanged(thing: unknown): thing is Ranged {
-  return isObject(thing) && typeof thing.range === "number";
+  return (
+    isWeaponBase(thing) &&
+    "ammunitionCost" in thing &&
+    typeof thing.ammunitionCost === "number" &&
+    "range" in thing &&
+    typeof thing.range === "number"
+  );
 }
 
 export function isRoutine(thing: unknown): thing is Routine {
@@ -100,7 +152,18 @@ export function isRoutine(thing: unknown): thing is Routine {
 }
 
 export function isShield(thing: unknown): thing is Shield {
-  return isObject(thing) && typeof thing.block === "number";
+  return (
+    isGearItemBase(thing) &&
+    "block" in thing &&
+    typeof thing.block === "number" &&
+    "burden" in thing &&
+    typeof thing.burden === "string" &&
+    "gearClass" in thing &&
+    typeof thing.gearClass === "string" &&
+    new Set<string>(SHIELD_CLASS_TYPES).has(thing.gearClass) &&
+    "stagger" in thing &&
+    typeof thing.stagger === "number"
+  );
 }
 
 export function isStackableItem(thing: unknown): thing is StackableItem {
@@ -109,24 +172,42 @@ export function isStackableItem(thing: unknown): thing is StackableItem {
 
 export function isRelicItem(thing: unknown): thing is RelicItem {
   return (
-    isObject(thing) &&
+    isItem(thing) &&
+    "name" in thing &&
     typeof thing.name === "string" &&
     new Set<string>(RELIC_TYPES).has(thing.name)
   );
 }
 
 export function isUnarmed(thing: unknown): thing is typeof WEAPON_NONE {
-  return isGearItem(thing) && thing.ID === WEAPON_NONE.ID;
+  return thing === WEAPON_NONE;
 }
 
 export function isUnarmored(thing: unknown): thing is typeof ARMOR_NONE {
-  return isGearItem(thing) && thing.ID === ARMOR_NONE.ID;
+  return thing === ARMOR_NONE;
 }
 
 export function isUnshielded(thing: unknown): thing is typeof SHIELD_NONE {
-  return isGearItem(thing) && thing.ID === SHIELD_NONE.ID;
+  return thing === SHIELD_NONE;
 }
 
 export function isWeapon(thing: unknown): thing is Weapon {
   return isMelee(thing) || isRanged(thing);
+}
+
+function isWeaponBase(thing: unknown): thing is WeaponBase {
+  return (
+    isGearItemBase(thing) &&
+    "abilityChance" in thing &&
+    typeof thing.abilityChance === "string" &&
+    "burden" in thing &&
+    typeof thing.burden === "string" &&
+    "damage" in thing &&
+    typeof thing.damage === "string" &&
+    "gearClass" in thing &&
+    typeof thing.gearClass === "string" &&
+    new Set<string>(WEAPON_CLASS_TYPES).has(thing.gearClass) &&
+    "rate" in thing &&
+    typeof thing.rate === "string"
+  );
 }

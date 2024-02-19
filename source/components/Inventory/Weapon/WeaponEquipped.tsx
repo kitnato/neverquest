@@ -4,7 +4,7 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { WeaponName } from "@neverquest/components/Inventory/Weapon/WeaponName";
 import { weapon } from "@neverquest/state/gear";
 import { isShowing } from "@neverquest/state/ui";
-import { getAnimationClass, getWeaponIcon } from "@neverquest/utilities/getters";
+import { getAnimationClass, getGearIcon } from "@neverquest/utilities/getters";
 
 export function WeaponEquipped() {
   const isShowingWeapon = useRecoilValue(isShowing("weapon"));
@@ -14,7 +14,7 @@ export function WeaponEquipped() {
     return (
       <IconDisplay
         className={getAnimationClass({ animation: "flipInX" })}
-        Icon={getWeaponIcon(weaponValue)}
+        Icon={getGearIcon(weaponValue)}
         tooltip="Equipped weapon"
       >
         <WeaponName overlayPlacement="top" weapon={weaponValue} />

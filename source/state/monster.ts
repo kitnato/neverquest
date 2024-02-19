@@ -295,6 +295,7 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
   selector({
     get: ({ get }) => {
       const { attenuation, base: essenceBase, bonus, boss } = ESSENCE;
+      const { equalStage, lowerStage } = GEM_DROP_CHANCE;
 
       const encounterValue = get(encounter);
       const isMementoOwned = get(ownedItem("memento")) !== undefined;
@@ -312,17 +313,16 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
         ),
         gems:
           encounterValue === "boss"
-            ? Array.from({
+            ? Array.from<undefined>({
                 length: 1 + Math.floor((stageValue - BOSS_STAGE_START) / BOSS_STAGE_INTERVAL),
-              })
-                .map(() => {
-                  const { equalStage, lowerStage } = GEM_DROP_CHANCE;
-
-                  return Math.random() <= (stageValue < stageMaximumValue ? lowerStage : equalStage)
-                    ? 1
-                    : 0;
-                })
-                .reduce<number>((sum, gemCount) => sum + gemCount, 0)
+                // eslint-disable-next-line unicorn/no-array-reduce
+              }).reduce<number>(
+                (sum, _) =>
+                  Math.random() <= (stageValue < stageMaximumValue ? lowerStage : equalStage)
+                    ? sum + 1
+                    : sum,
+                0,
+              )
             : 0,
         relic:
           encounterValue === "boss" || get(ownedItem("knapsack")) === undefined

@@ -14,7 +14,7 @@ import { weapon } from "@neverquest/state/gear";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import { parryChance, parryRating } from "@neverquest/state/statistics";
 import { formatNumber } from "@neverquest/utilities/formatters";
-import { getAnimationClass, getWeaponIcon } from "@neverquest/utilities/getters";
+import { getAnimationClass, getGearIcon } from "@neverquest/utilities/getters";
 
 export function ParryRating() {
   const finesseValue = useRecoilValue(masteryStatistic("finesse"));
@@ -43,7 +43,7 @@ export function ParryRating() {
                     <tr>
                       <td>
                         <IconDisplay
-                          Icon={getWeaponIcon(weaponValue)}
+                          Icon={getGearIcon(weaponValue)}
                           iconProps={{ className: "small" }}
                         >
                           <span>Chance:</span>

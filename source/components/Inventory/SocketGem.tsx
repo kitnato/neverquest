@@ -15,9 +15,9 @@ import type { GemItem } from "@neverquest/types";
 import { isGear } from "@neverquest/types/type-guards";
 import { GEAR_TYPES } from "@neverquest/types/unions";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
-import { getGemFittingCost } from "@neverquest/utilities/getters";
+import { getGearIcon, getGemFittingCost } from "@neverquest/utilities/getters";
 
-export function ApplyGem({ gem }: { gem: GemItem }) {
+export function SocketGem({ gem }: { gem: GemItem }) {
   const armorValue = useRecoilValue(armor);
   const shieldValue = useRecoilValue(shield);
   const weaponValue = useRecoilValue(weapon);
@@ -85,23 +85,20 @@ export function ApplyGem({ gem }: { gem: GemItem }) {
           }
         }
       }}
-      title="Apply"
+      title="Socket"
       variant="outline-dark"
     >
       {GEAR_TYPES.map((gearType) => {
-        const {
-          canFit,
-          gear: { name },
-          gemsFitted,
-          isAffordable,
-        } = gemFitting[gearType];
+        const { canFit, gear, gemsFitted, isAffordable } = gemFitting[gearType];
 
         const canApply = canFit && isAffordable;
 
         return (
           <DropdownItem disabled={!canApply} eventKey={gearType} key={gearType}>
             <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-              <span>{capitalizeAll(name)}</span>
+              <IconDisplay Icon={getGearIcon(gear)} iconProps={{ className: "small" }}>
+                <span>{capitalizeAll(gear.name)}</span>
+              </IconDisplay>
 
               <div className="ms-2">
                 {canFit ? (

@@ -27,7 +27,7 @@ export const ATTRIBUTES: Record<
   AttributeOrMasteryBaseData & {
     maximum?: number;
     powerBonus: number;
-    rankBonus?: number;
+    rankBonus?: { increment: number; maximum: number };
     requiredSkill?: Skill;
     shows?: Showing;
   }
@@ -59,7 +59,7 @@ export const ATTRIBUTES: Record<
     Icon: IconEndurance,
     increment: 5,
     powerBonus: 0.02,
-    rankBonus: 5,
+    rankBonus: { increment: 5, maximum: 60 },
     shows: "stamina",
   },
   fortitude: {
@@ -99,7 +99,7 @@ export const ATTRIBUTES: Record<
     Icon: IconStrength,
     increment: 2,
     powerBonus: 0.01,
-    rankBonus: 1,
+    rankBonus: { increment: 1, maximum: 25 },
     shows: "damage",
   },
   vigor: {
@@ -119,7 +119,7 @@ export const ATTRIBUTES: Record<
     Icon: IconVitality,
     increment: 15,
     powerBonus: 0.025,
-    rankBonus: 10,
+    rankBonus: { increment: 10, maximum: 200 },
     shows: "health",
   },
 };

@@ -61,7 +61,7 @@ export const CREW: Record<
     requiredStage: 24,
   },
   blacksmith: {
-    description: "Crafts superior # armor, weapons and shields.",
+    description: "Crafts superior # gear.",
     descriptionIcons: [IconGear],
     Icon: IconBlacksmith,
     interaction: "Craft",

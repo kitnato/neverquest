@@ -151,23 +151,26 @@ export function getAttributePoints({
 
 export function getComputedStatistic({
   base,
-  bonus = 0,
+  bonus = { increment: 0, maximum: 0 },
   increment,
   rank,
 }: {
   base: number;
-  bonus?: number;
+  bonus?: { increment: number; maximum: number };
   increment: number;
   rank: number;
 }) {
-  if (bonus === 0) {
+  if (bonus.increment === 0) {
     return base + increment * rank;
   }
 
   return (
-    Array.from({ length: rank })
-      .map((_, index) => index * bonus)
-      .reduce((sum, bonus) => sum + bonus, base) +
+    Math.min(
+      Array.from({ length: rank })
+        .map((_, index) => index * bonus.increment)
+        .reduce((sum, bonus) => sum + bonus, base),
+      bonus.maximum,
+    ) +
     increment * rank
   );
 }

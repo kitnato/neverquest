@@ -46,7 +46,10 @@ export function AttributeIncreaseDetails({ attribute }: { attribute: Attribute }
 
           {increment < 1
             ? formatNumber({ format: "percentage", value: increment })
-            : increment + (rankBonus ?? 0) * attributeRankValue}
+            : increment +
+              (rankBonus === undefined
+                ? 0
+                : Math.min(rankBonus.increment * attributeRankValue, rankBonus.maximum))}
         </span>
       </IconDisplay>
 

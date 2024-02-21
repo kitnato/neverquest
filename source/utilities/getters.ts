@@ -32,6 +32,7 @@ import {
 import {
   CONSUMABLES,
   ELEMENTALS,
+  ELEMENTAL_GEAR_EFFECT,
   GEMS,
   GEMS_MAXIMUM,
   GEM_BASE,
@@ -193,41 +194,46 @@ export function getDamagePerRate({
 export function getGearElementalEffects({
   gear,
   gems,
+  powerLevel,
 }: {
   gear: Armor | Weapon | typeof ARMOR_NONE | typeof WEAPON_NONE;
   gems: GemItem[];
+  powerLevel: number;
 }): Record<Elemental, { damage: number; duration: number }>;
 export function getGearElementalEffects({
   gear,
   gems,
+  powerLevel,
 }: {
   gear: Shield | typeof SHIELD_NONE;
   gems: GemItem[];
+  powerLevel: number;
 }): Record<Elemental, number>;
 export function getGearElementalEffects({
   gear,
   gems,
+  powerLevel,
 }: {
   gear: GearItem | GearItemUnequipped;
   gems: GemItem[];
+  powerLevel: number;
 }): Record<Elemental, { damage: number; duration: number }> | Record<Elemental, number>;
 export function getGearElementalEffects({
   gear,
   gems,
+  powerLevel,
 }: {
   gear: GearItem | GearItemUnequipped;
   gems: GemItem[];
+  powerLevel: number;
 }) {
-  const isArmorLike = isArmor(gear) || isUnarmored(gear);
-  const isWeaponLike = isWeapon(gear) || isUnarmed(gear);
-
-  if (isArmorLike || isWeaponLike) {
+  if (isArmor(gear) || isUnarmed(gear) || isUnarmored(gear) || isWeapon(gear)) {
+    const { base, multiplier } = ELEMENTAL_GEAR_EFFECT;
     const effects = {
       fire: { damage: 0, duration: 0 },
       ice: { damage: 0, duration: 0 },
       lightning: { damage: 0, duration: 0 },
     };
-    const effector = isArmorLike ? gear.protection : gear.damage;
 
     for (const { amount, item } of stackItems(gems)) {
       const { elemental } = GEMS[item.name];
@@ -235,7 +241,8 @@ export function getGearElementalEffects({
 
       effects[elemental] = {
         damage: Math.ceil(
-          effector * getFromRange({ factor: (amount - 1) / (GEMS_MAXIMUM - 1), ...damage }),
+          (powerLevel * multiplier + base) *
+            getFromRange({ factor: (amount - 1) / (GEMS_MAXIMUM - 1), ...damage }),
         ),
         duration: Math.round(
           getFromRange({

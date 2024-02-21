@@ -6,6 +6,7 @@ import {
   SHIELD_NONE,
   WEAPON_NONE,
 } from "@neverquest/data/gear";
+import { powerLevel } from "@neverquest/state/attributes";
 import { handleStorage } from "@neverquest/state/effects/handleStorage";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import type { Armor, GemItem, Shield, Weapon } from "@neverquest/types";
@@ -19,12 +20,14 @@ export const elementalEffects = withStateKey("elementalEffects", (key) =>
   selector({
     get: ({ get }) => {
       const armorValue = get(armor);
+      const powerLevelValue = get(powerLevel);
       const shieldValue = get(shield);
       const weaponValue = get(weapon);
 
       const armorEffects = getGearElementalEffects({
         gear: armorValue,
         gems: get(gems(armorValue.ID)),
+        powerLevel: powerLevelValue,
       });
       // Only apply shield effects if they're actively used.
       const shieldEffects =
@@ -33,11 +36,13 @@ export const elementalEffects = withStateKey("elementalEffects", (key) =>
           ? getGearElementalEffects({
               gear: shieldValue,
               gems: get(gems(shieldValue.ID)),
+              powerLevel: powerLevelValue,
             })
           : SHIELD_ELEMENTAL_EFFECTS_BASE;
       const weaponEffects = getGearElementalEffects({
         gear: weaponValue,
         gems: get(gems(weaponValue.ID)),
+        powerLevel: powerLevelValue,
       });
 
       return {

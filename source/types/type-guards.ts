@@ -147,6 +147,15 @@ export function isRanged(thing: unknown): thing is Ranged {
   );
 }
 
+export function isRelicItem(thing: unknown): thing is RelicItem {
+  return (
+    isItem(thing) &&
+    "name" in thing &&
+    typeof thing.name === "string" &&
+    new Set<string>(RELIC_TYPES).has(thing.name)
+  );
+}
+
 export function isRoutine(thing: unknown): thing is Routine {
   return typeof thing === "string" && new Set<string>(ROUTINE_TYPES).has(thing);
 }
@@ -157,7 +166,7 @@ export function isShield(thing: unknown): thing is Shield {
     "block" in thing &&
     typeof thing.block === "number" &&
     "burden" in thing &&
-    typeof thing.burden === "string" &&
+    typeof thing.burden === "number" &&
     "gearClass" in thing &&
     typeof thing.gearClass === "string" &&
     new Set<string>(SHIELD_CLASS_TYPES).has(thing.gearClass) &&
@@ -168,15 +177,6 @@ export function isShield(thing: unknown): thing is Shield {
 
 export function isStackableItem(thing: unknown): thing is StackableItem {
   return isConsumableItem(thing) || isGemItem(thing);
-}
-
-export function isRelicItem(thing: unknown): thing is RelicItem {
-  return (
-    isItem(thing) &&
-    "name" in thing &&
-    typeof thing.name === "string" &&
-    new Set<string>(RELIC_TYPES).has(thing.name)
-  );
 }
 
 export function isUnarmed(thing: unknown): thing is typeof WEAPON_NONE {
@@ -199,15 +199,15 @@ function isWeaponBase(thing: unknown): thing is WeaponBase {
   return (
     isGearItemBase(thing) &&
     "abilityChance" in thing &&
-    typeof thing.abilityChance === "string" &&
+    typeof thing.abilityChance === "number" &&
     "burden" in thing &&
-    typeof thing.burden === "string" &&
+    typeof thing.burden === "number" &&
     "damage" in thing &&
-    typeof thing.damage === "string" &&
+    typeof thing.damage === "number" &&
     "gearClass" in thing &&
     typeof thing.gearClass === "string" &&
     new Set<string>(WEAPON_CLASS_TYPES).has(thing.gearClass) &&
     "rate" in thing &&
-    typeof thing.rate === "string"
+    typeof thing.rate === "number"
   );
 }

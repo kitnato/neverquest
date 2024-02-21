@@ -48,9 +48,9 @@ Primarily spent on acquiring attribute ranks. Also used to trade at the [caravan
 
 ### Attributes
 
-For each rank of its ranks, an attribute provides an increasingly powerful effect and raises your power level by 1.
+For each of its ranks, an attribute provides an increasingly powerful effect and raises your power level by 1.
 
-[Essence](#essence) is used to allocate attribute ranks. The cost of allocation is increased for every attribute based on your power.
+[Essence](#essence) is used to allocate attribute ranks. This allocation cost is increased for every attribute based on your power.
 
 #### Agility
 
@@ -268,7 +268,7 @@ Purchase and sell [items](#items). The merchant's inventory of items will grow a
 
 #### Occultist
 
-Offers purging rituals, such as resetting your power level that refunds all spent essence. Also sells phylacteries that resurrect you upon [death](#death).
+Offers purging rituals, such as resetting your [power level](#attributes) that refunds all spent essence. Also sells phylacteries that resurrect you upon [death](#death).
 
 #### Tailor
 
@@ -480,7 +480,7 @@ Some of usable relics are infusable, meaning they allow [essence](#essence) to b
 
 ###### Eldritch Codex
 
-This infusable relic, while carried in the [knapsack](#knapsack), provides a bonus to all attributes by their respective percentage amount (the extent of each is shown when increasing [attributes](#attributes)) multiplied by your current power level.
+This infusable relic, while carried in the [knapsack](#knapsack), provides a bonus to all attributes by their respective percentage amount (the extent of each is shown when increasing [attributes](#attributes)) multiplied by your current [power level](#attributes).
 
 For example, if you are carrying a level 0 Eldritch Codex, your power level is 25, the attribute in question is at rank 5, a given attribute rank would increase a given statistic by 10, and the boosted percentage is 1%, the statistic value is calculated as follows:
 
@@ -686,7 +686,7 @@ Requires the [traumatology](#traumatology) skill.
 
 ## Retirement
 
-When reaching a certain stage, retirement is unlocked. This restarts the game from stage 1 with power level 0, no essence, no skills and no gear. However, all hired crew members are retained, and so are all carried [relics](#relics). A [trait](#traits) can be also chosen that confers a permanent bonus.
+When reaching a certain stage, retirement is unlocked. This restarts the game from stage 1 with [power level](#attributes) 0, no essence, no skills and no gear. However, all hired crew members are retained, and so are all carried [relics](#relics). A [trait](#traits) can be also chosen that confers a permanent bonus.
 
 ### Traits
 

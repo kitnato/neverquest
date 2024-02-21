@@ -101,10 +101,12 @@ This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareA
 
 ### 3. Screenshots
 
-![Screenshot 1](./public/screenshot-1.png "Neverquest screenshot")
+![Screenshot 1](./public/nq-screenshot-1.png "neverquest screenshot start")
 
-![Screenshot 2](./public/screenshot-2.png "Neverquest screenshot")
+![Screenshot 2](./public/nq-screenshot-2.png "neverquest screenshot caravan")
 
-![Screenshot 3](./public/screenshot-3.png "Neverquest screenshot")
+![Screenshot 3](./public/nq-screenshot-3.png "neverquest screenshot ranged")
 
-![Screenshot 4](./public/screenshot-4.png "Neverquest screenshot")
+![Screenshot 4](./public/nq-screenshot-4.png "neverquest screenshot melee")
+
+![Screenshot 5](./public/nq-screenshot-5.png "neverquest screenshot quests")

@@ -139,8 +139,8 @@ export const MONSTER_REGENERATION = {
 export const POISON = {
   boss: 1.25,
   chance: {
-    maximum: 0.35,
-    minimum: 0.1,
+    maximum: 0.4,
+    minimum: 0.15,
   },
   duration: {
     maximum: 250_000,

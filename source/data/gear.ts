@@ -211,7 +211,7 @@ export const WEAPON_BASE: GearRangeBase & {
 
 export const WEAPON_MODIFIER = {
   "one-handed": { ability: 1, burden: 1, damage: 1, price: 1, rate: 1, weight: 1 },
-  ranged: { ability: 1.1, burden: 1.1, damage: 1.1, price: 1.2, rate: 1.1, weight: 1.15 },
+  ranged: { ability: 1.1, burden: 0.85, damage: 1.1, price: 1.2, rate: 1.1, weight: 1.15 },
   "two-handed": {
     ability: 1.2,
     burden: 1.3,

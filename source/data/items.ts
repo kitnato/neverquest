@@ -128,7 +128,7 @@ export const CONSUMABLES: Record<
 
 export const ELEMENTAL_GEAR_EFFECT = {
   base: 5,
-  multiplier: 7,
+  multiplier: 3,
 };
 export const ELEMENTALS: Record<
   Elemental,

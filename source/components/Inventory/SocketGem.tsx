@@ -10,18 +10,20 @@ import IconEssence from "@neverquest/icons/essence.svg?react";
 import { armor, gems, shield, weapon } from "@neverquest/state/gear";
 import { inventory } from "@neverquest/state/inventory";
 import { essence } from "@neverquest/state/resources";
+import { isTraitAcquired } from "@neverquest/state/traits";
 import { isShowing } from "@neverquest/state/ui";
 import type { GemItem } from "@neverquest/types";
-import { isGear } from "@neverquest/types/type-guards";
+import { isGear, isMelee, isRanged, isUnarmed } from "@neverquest/types/type-guards";
 import { GEAR_TYPES } from "@neverquest/types/unions";
 import { capitalizeAll } from "@neverquest/utilities/formatters";
 import { getGearIcon, getGemFittingCost } from "@neverquest/utilities/getters";
 
 export function SocketGem({ gem }: { gem: GemItem }) {
   const armorValue = useRecoilValue(armor);
+  const essenceValue = useRecoilValue(essence);
+  const isTraitAcquiredColossus = useRecoilValue(isTraitAcquired("colossus"));
   const shieldValue = useRecoilValue(shield);
   const weaponValue = useRecoilValue(weapon);
-  const essenceValue = useRecoilValue(essence);
   const setInventory = useSetRecoilState(inventory);
   const setIsShowing = {
     armor: useSetRecoilState(isShowing("armor")),
@@ -88,7 +90,14 @@ export function SocketGem({ gem }: { gem: GemItem }) {
       title="Socket"
       variant="outline-dark"
     >
-      {GEAR_TYPES.map((gearType) => {
+      {GEAR_TYPES.filter((gearType) =>
+        gearType === "shield"
+          ? (((isMelee(weaponValue) || isUnarmed(weaponValue)) &&
+              weaponValue.grip === "one-handed") ||
+              isTraitAcquiredColossus) &&
+            !isRanged(weaponValue)
+          : true,
+      ).map((gearType) => {
         const { canFit, gear, gemsFitted, isAffordable } = gemFitting[gearType];
 
         const canApply = canFit && isAffordable;

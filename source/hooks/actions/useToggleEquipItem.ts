@@ -24,11 +24,11 @@ export function useToggleEquipItem() {
 
   return useRecoilCallback(
     ({ reset, set, snapshot }) =>
-      ({ forceEquip, item }: { forceEquip?: boolean; item: GearItem | RelicItem }) => {
+      ({ forceUnequip, item }: { forceUnequip?: boolean; item: GearItem | RelicItem }) => {
         const get = getSnapshotGetter(snapshot);
 
         if (isRelicItem(item)) {
-          set(isRelicEquipped(item.name), (isEquipped) => forceEquip ?? !isEquipped);
+          set(isRelicEquipped(item.name), (isEquipped) => forceUnequip ?? !isEquipped);
 
           return;
         }
@@ -38,7 +38,6 @@ export function useToggleEquipItem() {
 
         const { burden, gearClass, ID } = item;
         const isWeaponRanged = isRanged(item);
-        // eslint-disable-next-line unicorn/consistent-destructuring
         const isWeaponTwoHanded = isMelee(item) && item.grip === "two-handed";
 
         if (isArmor(item)) {
@@ -46,26 +45,16 @@ export function useToggleEquipItem() {
             return;
           }
 
-          if (forceEquip === undefined) {
-            if (ID === armorValue.ID) {
-              reset(armor);
-            } else {
-              set(armor, item);
-            }
-          } else {
-            if (forceEquip) {
-              set(armor, item);
-            } else {
-              if (ID === armorValue.ID) {
-                reset(armor);
-              }
-            }
+          if (ID === armorValue.ID) {
+            reset(armor);
+          } else if (forceUnequip !== true) {
+            set(armor, item);
+
+            set(isShowing("armor"), true);
+            set(isShowing("protection"), true);
+
+            progressQuest({ quest: "equippingArmor" });
           }
-
-          set(isShowing("armor"), true);
-          set(isShowing("protection"), true);
-
-          progressQuest({ quest: "equippingArmor" });
         }
 
         if (isShield(item)) {
@@ -73,35 +62,25 @@ export function useToggleEquipItem() {
             return;
           }
 
-          if (forceEquip === undefined) {
-            if (ID === shieldValue.ID) {
-              reset(shield);
-            } else {
-              set(shield, item);
+          if (ID === shieldValue.ID) {
+            reset(shield);
+          } else if (forceUnequip !== true) {
+            set(shield, item);
+
+            // Equipping a shield while a ranged or two-handed weapon is equipped un-equips the weapon (unless it's two-handed and the colossus trait is acquired).
+            if (
+              (isMelee(weaponValue) &&
+                weaponValue.grip === "two-handed" &&
+                !get(isTraitAcquired("colossus"))) ||
+              isRanged(weaponValue)
+            ) {
+              reset(weapon);
             }
-          } else {
-            if (forceEquip) {
-              set(shield, item);
-            } else {
-              if (ID === shieldValue.ID) {
-                reset(shield);
-              }
-            }
+
+            set(isShowing("offhand"), true);
+
+            progressQuest({ quest: "equippingShield" });
           }
-
-          // Equipping a shield while a ranged or two-handed weapon is equipped un-equips the weapon (unless it's two-handed and the colossus trait is acquired).
-          if (
-            (isMelee(weaponValue) &&
-              weaponValue.grip === "two-handed" &&
-              !get(isTraitAcquired("colossus"))) ||
-            isRanged(weaponValue)
-          ) {
-            reset(weapon);
-          }
-
-          set(isShowing("offhand"), true);
-
-          progressQuest({ quest: "equippingShield" });
         }
 
         if (isWeapon(item)) {
@@ -113,38 +92,28 @@ export function useToggleEquipItem() {
             return;
           }
 
-          if (forceEquip === undefined) {
-            if (ID === weaponValue.ID) {
-              reset(weapon);
-            } else {
-              set(weapon, item);
+          if (ID === weaponValue.ID) {
+            reset(weapon);
+          } else if (forceUnequip !== true) {
+            set(weapon, item);
+
+            // Equipping a ranged or two-handed weapon while a shield is equipped un-equips the shield.
+            if (
+              (isWeaponRanged || (isWeaponTwoHanded && !get(isTraitAcquired("colossus")))) &&
+              !isUnshielded(shieldValue)
+            ) {
+              reset(shield);
             }
-          } else {
-            if (forceEquip) {
-              set(weapon, item);
-            } else {
-              if (ID === weaponValue.ID) {
-                reset(weapon);
-              }
+
+            if (isWeaponRanged || isWeaponTwoHanded) {
+              set(isShowing("offhand"), true);
             }
+
+            set(isShowing("damage"), true);
+            set(isShowing("weapon"), true);
+
+            progressQuest({ quest: "equippingWeapon" });
           }
-
-          // Equipping a ranged or two-handed weapon while a shield is equipped un-equips the shield.
-          if (
-            (isWeaponRanged || (isWeaponTwoHanded && !get(isTraitAcquired("colossus")))) &&
-            !isUnshielded(shieldValue)
-          ) {
-            reset(shield);
-          }
-
-          if (isWeaponRanged || isWeaponTwoHanded) {
-            set(isShowing("offhand"), true);
-          }
-
-          set(isShowing("damage"), true);
-          set(isShowing("weapon"), true);
-
-          progressQuest({ quest: "equippingWeapon" });
         }
 
         if (burden > 0) {

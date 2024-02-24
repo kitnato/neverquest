@@ -48,11 +48,11 @@ export function PurchaseAmmunition() {
 
   return (
     <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-      <Stack direction="horizontal" gap={3}>
-        <IconDisplay Icon={IconAmmunition} tooltip="Ammunition">
-          <span>Ammunition</span>
-        </IconDisplay>
+      <IconDisplay Icon={IconAmmunition} tooltip="Ammunition">
+        <span>Ammunition</span>
+      </IconDisplay>
 
+      <Stack className="ms-2" direction="horizontal" gap={3}>
         <span>{minimumPurchase}</span>
 
         <Form.Range

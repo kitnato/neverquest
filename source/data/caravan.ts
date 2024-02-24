@@ -219,7 +219,7 @@ export const MERCHANT_OFFERS: Record<
   {
     monologue?: string;
     offer:
-      | Omit<InheritableItem, "ID">
+      | InheritableItem
       | (ArtifactType<"armor"> & {
           gearClass: ArmorClass;
         })

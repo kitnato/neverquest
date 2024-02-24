@@ -67,13 +67,14 @@ export const AMMUNITION_CAPACITY = 100;
 
 export const CONSUMABLES: Record<
   Consumable,
-  Description & { Icon: SVGIcon; item: Omit<ConsumableItem, "ID"> }
+  Description & { Icon: SVGIcon; item: ConsumableItem }
 > = {
   antidote: {
     description: "Cures # poison.",
     descriptionIcons: [IconPoisoned],
     Icon: IconAntidote,
     item: {
+      ID: "",
       name: "antidote",
       price: 120,
       weight: 5,
@@ -84,6 +85,7 @@ export const CONSUMABLES: Record<
     descriptionIcons: [IconHealth],
     Icon: IconBandages,
     item: {
+      ID: "",
       name: "bandages",
       price: 30,
       weight: 1,
@@ -94,6 +96,7 @@ export const CONSUMABLES: Record<
     descriptionIcons: [IconStamina],
     Icon: IconElixir,
     item: {
+      ID: "",
       name: "elixir",
       price: 40,
       weight: 2,
@@ -104,6 +107,7 @@ export const CONSUMABLES: Record<
     descriptionIcons: [IconFlatlined],
     Icon: IconPhylactery,
     item: {
+      ID: "",
       name: "phylactery",
       price: 500,
       weight: 10,
@@ -114,6 +118,7 @@ export const CONSUMABLES: Record<
     descriptionIcons: [IconBlighted],
     Icon: IconSalve,
     item: {
+      ID: "",
       name: "salve",
       price: 80,
       weight: 3,
@@ -193,7 +198,7 @@ export const INFUSABLES: Record<
     delta: Delta;
     EffectIcon: SVGIcon;
     Icon: SVGIcon;
-    item: Omit<InfusableItem, "ID">;
+    item: InfusableItem;
     tooltip: string;
   }
 > = {
@@ -208,6 +213,7 @@ export const INFUSABLES: Record<
         maximum: 1.5,
         minimum: 0,
       },
+      ID: "",
       name: "eldritch codex",
       price: 4000,
       weight: 10,
@@ -221,6 +227,7 @@ export const INFUSABLES: Record<
     Icon: IconMysteriousEgg,
     item: {
       effect: { maximum: 1, minimum: 0 },
+      ID: "",
       name: "mysterious egg",
       price: 1554,
       weight: 7,
@@ -232,22 +239,23 @@ export const INFUSABLES: Record<
 export const KNAPSACK_CAPACITY = 15;
 
 export const RELIC_DROP_CHANCE = {
-  "dream catcher": { maximum: 0.1, minimum: 0.02 },
+  "dream catcher": { maximum: 0.1, minimum: 0.03 },
   memento: { maximum: 0.1, minimum: 0.01 },
-  "torn manuscript": { maximum: 0.1, minimum: 0.02 },
+  "torn manuscript": { maximum: 0.1, minimum: 0.03 },
 };
 
 export const RELICS: Record<
   Relic,
   Description & {
     Icon: SVGIcon;
-    item: Omit<RelicItem, "ID">;
+    item: RelicItem;
   }
 > = {
   "[P71NQ]": {
     description: "",
     Icon: IconLogEntry,
     item: {
+      ID: "",
       name: "[P71NQ]",
       price: 14_014,
       weight: 14,
@@ -258,6 +266,7 @@ export const RELICS: Record<
     descriptionIcons: [IconAmmunition, IconRanged],
     Icon: IconAmmunitionPouch,
     item: {
+      ID: "",
       name: "ammunition pouch",
       price: 300,
       weight: 6,
@@ -269,6 +278,7 @@ export const RELICS: Record<
     descriptionIcons: [IconGrinding, IconLoot, IconStage],
     Icon: IconAutomincer,
     item: {
+      ID: "",
       name: "automincer",
       price: 5000,
       weight: 20,
@@ -279,6 +289,7 @@ export const RELICS: Record<
     descriptionIcons: [IconNavigation, IconWilderness],
     Icon: IconCompass,
     item: {
+      ID: "",
       name: "compass",
       price: 50,
       weight: 2,
@@ -289,6 +300,7 @@ export const RELICS: Record<
     descriptionIcons: [IconProtected, IconHealth],
     Icon: IconDreamCatcher,
     item: {
+      ID: "",
       name: "dream catcher",
       price: 1500,
       weight: 10,
@@ -299,6 +311,7 @@ export const RELICS: Record<
     descriptionIcons: [IconLooting],
     Icon: IconEnderHook,
     item: {
+      ID: "",
       name: "ender hook",
       price: 2500,
       weight: 15,
@@ -308,6 +321,7 @@ export const RELICS: Record<
     description: "Compels the manifestation of the final entity.",
     Icon: IconFamiliar,
     item: {
+      ID: "",
       name: "familiar",
       price: 1,
       weight: 17,
@@ -319,6 +333,7 @@ export const RELICS: Record<
     descriptionIcons: [IconCaravan, IconMonsterLurking],
     Icon: IconStone,
     item: {
+      ID: "",
       name: "hearthstone",
       price: 100,
       weight: 3,
@@ -329,6 +344,7 @@ export const RELICS: Record<
     descriptionIcons: [IconQuests],
     Icon: IconJournal,
     item: {
+      ID: "",
       name: "journal",
       price: 750,
       weight: 5,
@@ -339,6 +355,7 @@ export const RELICS: Record<
     descriptionIcons: [IconGear],
     Icon: IconKnapsack,
     item: {
+      ID: "",
       name: "knapsack",
       price: 15,
       weight: 0,
@@ -349,6 +366,7 @@ export const RELICS: Record<
     descriptionIcons: [IconPoisonRating],
     Icon: IconLacrimatory,
     item: {
+      ID: "",
       name: "lacrimatory",
       price: 1500,
       weight: 8,
@@ -358,6 +376,7 @@ export const RELICS: Record<
     description: "Lost memories kept safe facilitate extraordinary discoveries.",
     Icon: IconMemento,
     item: {
+      ID: "",
       name: "memento",
       price: 154,
       weight: 2,
@@ -368,6 +387,7 @@ export const RELICS: Record<
     descriptionIcons: [IconDamagePerSecond],
     Icon: IconThaumaturgicGoggles,
     item: {
+      ID: "",
       name: "thaumaturgic goggles",
       price: 250,
       weight: 4,
@@ -378,6 +398,7 @@ export const RELICS: Record<
     descriptionIcons: [IconAlchemist],
     Icon: IconTornManuscript,
     item: {
+      ID: "",
       name: "torn manuscript",
       price: 5000,
       weight: 3,

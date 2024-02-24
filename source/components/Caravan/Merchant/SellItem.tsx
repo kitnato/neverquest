@@ -34,7 +34,7 @@ export function SellItem({ item }: { item: InventoryItem }) {
           transactEssence(getSellPrice({ item }));
 
           if (isGearItem(item) || isRelicItem(item)) {
-            toggleEquipItem({ forceEquip: false, item });
+            toggleEquipItem({ forceUnequip: true, item });
           }
 
           setInventory((currentInventory) =>

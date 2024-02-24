@@ -105,15 +105,15 @@ export function useAcquireItem() {
             (isShieldUnequipped &&
               isShield(item) &&
               !isRanged(weaponValue) &&
-              isMelee(weaponValue) &&
+              (isMelee(weaponValue) || isUnarmed(weaponValue)) &&
               (weaponValue.grip === "one-handed" || get(isTraitAcquired("colossus")))) ||
-            // Acquiring a weapon while no weapon equipped, and if ranged or two-handed, no shield equipped.
+            // Acquiring a weapon while no weapon equipped, and if it's ranged or two-handed, having no shield equipped.
             (isUnarmed(weaponValue) &&
               ((isItemMelee && item.grip === "one-handed") ||
                 get(isTraitAcquired("colossus")) ||
-                (((isItemMelee && item.grip === "two-handed") ||
-                  (get(isSkillAcquired("archery")) && isItemRanged)) &&
-                  isShieldUnequipped)))
+                (isShieldUnequipped &&
+                  ((isItemMelee && item.grip === "two-handed") ||
+                    (get(isSkillAcquired("archery")) && isItemRanged)))))
           ) {
             return "equip";
           }

@@ -34,7 +34,7 @@ export const MASTERIES: Record<
   }
 > = {
   butchery: {
-    base: 0.16,
+    base: 0.2,
     description: "Affects # execution threshold.",
     descriptionIcons: [IconExecution],
     Icon: IconButchery,

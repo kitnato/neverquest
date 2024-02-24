@@ -33,7 +33,7 @@ export function PurchaseItem({ merchantItem }: { merchantItem: MerchantInventory
 
         transactEssence(-price);
 
-        if (acquisitionStatus === "equip" && isGearItem(item)) {
+        if (isGearItem(item) && acquisitionStatus === "equip") {
           toggleEquipItem({ item });
         }
 

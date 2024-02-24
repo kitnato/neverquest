@@ -59,7 +59,7 @@ export const ATTRIBUTES: Record<
     Icon: IconEndurance,
     increment: 5,
     powerBonus: 0.02,
-    rankBonus: { increment: 5, maximum: 60 },
+    rankBonus: { increment: 5, maximum: 100 },
     shows: "stamina",
   },
   fortitude: {
@@ -87,7 +87,7 @@ export const ATTRIBUTES: Record<
     description: "Reduces # attack rate.",
     descriptionIcons: [IconAttackRate],
     Icon: IconSpeed,
-    increment: 0.018,
+    increment: 0.015,
     maximum: 0.75,
     powerBonus: 0.001,
     shows: "attackRate",
@@ -99,7 +99,7 @@ export const ATTRIBUTES: Record<
     Icon: IconStrength,
     increment: 2,
     powerBonus: 0.01,
-    rankBonus: { increment: 1, maximum: 25 },
+    rankBonus: { increment: 1, maximum: 30 },
     shows: "damage",
   },
   vigor: {

@@ -95,7 +95,7 @@ export const MONSTER_ATTACK_RATE = {
     "res cogitans": 1765,
     "res dominus": 2765,
   },
-  minimum: 1800,
+  minimum: 2000,
 };
 
 export const MONSTER_DAMAGE = {

@@ -197,11 +197,11 @@ export const WEAPON_BASE: GearRangeBase & {
   price: { maximum: 8000, minimum: 1 },
   range: [
     { maximum: 2200, minimum: 2000 },
-    { maximum: 3700, minimum: 3600 },
+    { maximum: 3500, minimum: 3400 },
   ],
   rate: [
     { maximum: 3000, minimum: 2900 },
-    { maximum: 2100, minimum: 2000 },
+    { maximum: 2200, minimum: 2100 },
   ],
   weight: [
     { maximum: 2, minimum: 1 },

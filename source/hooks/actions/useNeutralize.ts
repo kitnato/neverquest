@@ -28,7 +28,7 @@ export function useNeutralize() {
         if (isRelicItem(item)) {
           const { name } = item;
 
-          toggleEquipItem({ forceEquip: false, item });
+          toggleEquipItem({ forceUnequip: true, item });
 
           if (name === "ammunition pouch") {
             reset(ammunition);

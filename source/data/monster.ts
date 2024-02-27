@@ -79,9 +79,9 @@ export const FINALITY_STAGE = {
 };
 
 export const FRAILTY = {
-  familiar: 0.15,
+  familiar: 0.25,
   "mysterious egg": {
-    maximum: 0.1,
+    maximum: 0.15,
     minimum: 0.01,
   },
 };
@@ -99,33 +99,33 @@ export const MONSTER_ATTACK_RATE = {
 };
 
 export const MONSTER_DAMAGE = {
-  attenuation: 30,
+  attenuation: 27,
   base: 7,
   bonus: 0.01,
   boss: 1.05,
   finality: {
-    "res cogitans": 1277,
-    "res dominus": 777,
+    "res cogitans": 2077,
+    "res dominus": 1077,
   },
   menace: {
-    maximum: 2,
-    minimum: 0.25,
+    maximum: 2.5,
+    minimum: 0.5,
     requiredStage: RETIREMENT_STAGE + 1,
   },
 };
 
 export const MONSTER_HEALTH = {
-  attenuation: 25,
+  attenuation: 24,
   base: 18,
   bonus: 0.02,
-  boss: 1.65,
+  boss: 1.7,
   finality: {
-    "res cogitans": 5777,
-    "res dominus": 3777,
+    "res cogitans": 7777,
+    "res dominus": 5777,
   },
   menace: {
-    maximum: 2,
-    minimum: 0.25,
+    maximum: 2.5,
+    minimum: 0.35,
     requiredStage: RETIREMENT_STAGE + 1,
   },
 };
@@ -139,12 +139,12 @@ export const MONSTER_REGENERATION = {
 export const POISON = {
   boss: 1.25,
   chance: {
-    maximum: 0.4,
+    maximum: 0.5,
     minimum: 0.15,
   },
   duration: {
-    maximum: 250_000,
-    minimum: 25_000,
+    maximum: 300_000,
+    minimum: 30_000,
   },
   finality: {
     "res cogitans": 0.7777,
@@ -152,7 +152,7 @@ export const POISON = {
   },
   magnitude: {
     maximum: 0.2,
-    minimum: 0.03,
+    minimum: 0.05,
   },
   requiredStage: 45,
 };

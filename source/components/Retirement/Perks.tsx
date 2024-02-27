@@ -16,11 +16,13 @@ export function Perks() {
       <h6>Perks</h6>
 
       <IconDisplay Icon={IconEssenceBonus} tooltip="Essence loot bonus">
-        +
-        {formatNumber({
-          format: "percentage",
-          value: getPerkEffect({ perk: "essenceBonus", stage: stageMaximumValue }),
-        })}
+        <span>
+          +
+          {formatNumber({
+            format: "percentage",
+            value: getPerkEffect({ perk: "essenceBonus", stage: stageMaximumValue }),
+          })}
+        </span>
       </IconDisplay>
 
       <IconDisplay

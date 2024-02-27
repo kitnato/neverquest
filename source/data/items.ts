@@ -373,7 +373,7 @@ export const RELICS: Record<
     },
   },
   memento: {
-    description: "Lost memories kept safe facilitate extraordinary discoveries.",
+    description: "Lost memories kept safe unlock pathways to remarkable discoveries.",
     Icon: IconMemento,
     item: {
       ID: "",
@@ -383,7 +383,7 @@ export const RELICS: Record<
     },
   },
   "thaumaturgic goggles": {
-    description: "Discerns # damage per second of oneself and all encounters.",
+    description: "Discerns # damage per second of all creatures.",
     descriptionIcons: [IconDamagePerSecond],
     Icon: IconThaumaturgicGoggles,
     item: {

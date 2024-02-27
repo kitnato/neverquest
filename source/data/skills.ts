@@ -5,6 +5,7 @@ import IconArmorHeavy from "@neverquest/icons/armor-heavy.svg?react";
 import IconArmorcraft from "@neverquest/icons/armorcraft.svg?react";
 import IconAssassination from "@neverquest/icons/assassination.svg?react";
 import IconBleeding from "@neverquest/icons/bleeding.svg?react";
+import IconBlighted from "@neverquest/icons/blighted.svg?react";
 import IconBlunt from "@neverquest/icons/blunt.svg?react";
 import IconCalisthenics from "@neverquest/icons/calisthenics.svg?react";
 import IconCriticalChance from "@neverquest/icons/critical-chance.svg?react";
@@ -22,6 +23,7 @@ import IconMeditation from "@neverquest/icons/meditation.svg?react";
 import IconMemetics from "@neverquest/icons/memetics.svg?react";
 import IconParryChance from "@neverquest/icons/parry-chance.svg?react";
 import IconPiercing from "@neverquest/icons/piercing.svg?react";
+import IconPoisoned from "@neverquest/icons/poisoned.svg?react";
 import IconRanged from "@neverquest/icons/ranged.svg?react";
 import IconRecovery from "@neverquest/icons/recovery.svg?react";
 import IconRegenerationAmount from "@neverquest/icons/regeneration-amount.svg?react";
@@ -113,8 +115,9 @@ export const SKILLS: Record<
     trainer: "mercenary",
   },
   impermeability: {
-    description: "Grants the ability to # deflect ailments, avoiding them entirely.",
-    descriptionIcons: [IconDeflectionChance],
+    description:
+      "Grants the ability to # deflect # poison and # blight ailments, avoiding them entirely.",
+    descriptionIcons: [IconDeflectionChance, IconPoisoned, IconBlighted],
     Icon: IconImpermeability,
     isInheritable: true,
     requiredCrewMember: "merchant",

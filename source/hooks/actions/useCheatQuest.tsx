@@ -30,8 +30,9 @@ export function useCheatQuest() {
       ({ cheat, value }: { cheat: string; value?: Skill | number }) => {
         const get = getSnapshotGetter(snapshot);
 
-        const stageValue = get(stage);
+        const isAttackingValue = get(isAttacking);
         const progressMaximumValue = get(progressMaximum);
+        const stageValue = get(stage);
 
         switch (cheat) {
           // Deus Ex
@@ -56,6 +57,10 @@ export function useCheatQuest() {
           }
           // Source engine
           case "noclip": {
+            if (isAttackingValue) {
+              toggleAttacking();
+            }
+
             set(progress, progressMaximumValue);
 
             break;
@@ -74,7 +79,7 @@ export function useCheatQuest() {
               const difference = value - stageValue;
 
               if (get(location) === "wilderness") {
-                if (get(isAttacking)) {
+                if (isAttackingValue) {
                   toggleAttacking();
                 }
 

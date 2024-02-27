@@ -62,7 +62,7 @@ export const QUESTS: Record<
     title: "Ranger",
   },
   acquiringDreamCatcher: {
-    description: `Acquire the ${LABEL_UNKNOWN}.`,
+    description: `Acquire the ${LABEL_UNKNOWN}`,
     hidden: "dream catcher.",
     progression: [1],
     requiresTracking: false,
@@ -82,14 +82,14 @@ export const QUESTS: Record<
     title: "Shiny",
   },
   acquiringLogEntry: {
-    description: `Acquire the ${LABEL_UNKNOWN}`,
+    description: `Find the ${LABEL_UNKNOWN}`,
     hidden: "log entry.",
     progression: [1],
     requiresTracking: false,
     title: "[ABNORMAL SEQUENCE TERMINATION]",
   },
   acquiringMemento: {
-    description: `Acquire the ${LABEL_UNKNOWN}.`,
+    description: `Acquire the ${LABEL_UNKNOWN}`,
     hidden: "memento.",
     progression: [1],
     requiresTracking: false,
@@ -102,7 +102,7 @@ export const QUESTS: Record<
     title: "Sniper",
   },
   acquiringTornManuscript: {
-    description: `Acquire the ${LABEL_UNKNOWN}.`,
+    description: `Acquire the ${LABEL_UNKNOWN}`,
     hidden: "torn manuscript.",
     progression: [1],
     requiresTracking: false,
@@ -313,13 +313,13 @@ export const QUESTS: Record<
   },
   hiring: {
     description: "Hire @ caravan crew members.",
-    progression: [3, 6],
+    progression: [3, 5],
     requiresTracking: true,
     title: "Don't forget the doctor",
   },
   hiringAll: {
     description: "Hire all caravan crew members.",
-    progression: [CREW_MEMBER_TYPES.length],
+    progression: [CREW_MEMBER_TYPES.length - 1],
     requiresTracking: true,
     title: "Haven't died of dysentery",
   },
@@ -421,8 +421,8 @@ export const QUESTS: Record<
     title: "Guru",
   },
   masteriesRank: {
-    description: "Rank up masteries.",
-    progression: [1, 3, 10, 25, 50],
+    description: "Rank up masteries @ times.",
+    progression: [3, 10, 25, 50],
     requiresTracking: true,
     title: "Practice makes perfect",
   },
@@ -553,13 +553,13 @@ export const QUESTS: Record<
   skills: {
     description: "Acquire skills.",
     progression: [1, 3, 7],
-    requiresTracking: false,
+    requiresTracking: true,
     title: "Prodigy",
   },
   skillsAll: {
     description: "Acquire all skills.",
     progression: [SKILL_TYPES.length],
-    requiresTracking: false,
+    requiresTracking: true,
     title: "The GOAT",
   },
   skillsCraft: {
@@ -648,7 +648,7 @@ export const QUESTS: Record<
     description: "Warp to the caravan @ times.",
     progression: [3, 10, 25],
     requiresTracking: true,
-    title: "... And Back Again",
+    title: "... And back again",
   },
   warpingWilderness: {
     description: "Navigate to a different wilderness @ times.",

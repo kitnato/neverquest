@@ -502,10 +502,10 @@ export const TRIUMPH_TYPES = [
   "visitingVoid",
   "powerLevelUltra",
   "stagesEnd",
-  "acquiringLogEntry",
   "acquiringFamiliar",
   "killingResCogitans",
   "deciding",
+  "acquiringLogEntry",
   "completing",
 ] as const;
 type Triumph = (typeof TRIUMPH_TYPES)[number];

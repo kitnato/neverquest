@@ -25,11 +25,11 @@ export function useToggleLocation() {
           set(location, "caravan");
         } else {
           if (get(isStageCompleted) && get(stage) === get(stageMaximum)) {
-            increaseStage();
             reset(blacksmithOptions);
             reset(fletcherOptions);
           }
 
+          increaseStage();
           resetWilderness();
 
           set(location, "wilderness");

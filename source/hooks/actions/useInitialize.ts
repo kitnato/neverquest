@@ -4,7 +4,6 @@ import { useRecoilCallback } from "recoil";
 
 import { CREW } from "@neverquest/data/caravan";
 import { KEY_SESSION } from "@neverquest/data/general";
-import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { isHired } from "@neverquest/state/caravan";
 import { wildernesses } from "@neverquest/state/encounter";
 import { monsterName } from "@neverquest/state/monster";
@@ -12,8 +11,6 @@ import { CREW_MEMBER_TYPES } from "@neverquest/types/unions";
 import { getAffixStructure } from "@neverquest/utilities/getters";
 
 export function useInitialize() {
-  const progressQuest = useProgressQuest();
-
   return useRecoilCallback(
     ({ set }) =>
       (isRetirement?: boolean) => {
@@ -27,9 +24,6 @@ export function useInitialize() {
 
             set(isHired(crewMember), isCrewMemberMemberHired);
             initialStore[`isHired-${crewMember}`] = isCrewMemberMemberHired;
-
-            progressQuest({ quest: "hiring" });
-            progressQuest({ quest: "hiringAll" });
           }
 
           const newWilderness = [generateLocation({ affixStructure: getAffixStructure() })];
@@ -47,6 +41,6 @@ export function useInitialize() {
           }
         }
       },
-    [progressQuest],
+    [],
   );
 }

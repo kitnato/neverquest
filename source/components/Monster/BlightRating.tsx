@@ -43,7 +43,7 @@ export function BlightRating() {
                     <td>
                       <span>
                         {formatNumber({ format: "percentage", value: blightChanceValue })}&nbsp;on
-                        hit (while poisoned)
+                        hit while poisoned
                       </span>
                     </td>
                   </tr>
@@ -72,12 +72,7 @@ export function BlightRating() {
           <span>
             {isPoisonedValue
               ? formatNumber({
-                  value:
-                    blightChanceValue *
-                    PERCENTAGE_POINTS *
-                    increment *
-                    PERCENTAGE_POINTS *
-                    PERCENTAGE_POINTS,
+                  value: blightChanceValue * PERCENTAGE_POINTS * increment * PERCENTAGE_POINTS,
                 })
               : LABEL_EMPTY}
           </span>

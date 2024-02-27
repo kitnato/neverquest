@@ -25,12 +25,23 @@ export function InfusionEffect({ infusable }: { infusable: Infusable }) {
   return (
     <Stack direction="horizontal" gap={1}>
       <IconDisplay Icon={EffectIcon} tooltip={tooltip}>
-        +
-        {formatNumber({
-          decimals: infusable === "mysterious egg" && infusionEffectValue >= 1 ? 0 : 2,
-          format: "percentage",
-          value: Math.abs(infusionEffectValue),
-        })}
+        {infusable === "mysterious egg" ? (
+          <span>
+            {formatNumber({
+              decimals: infusionEffectValue >= 1 ? 0 : 2,
+              format: "percentage",
+              value: Math.abs(infusionEffectValue),
+            })}
+          </span>
+        ) : (
+          <span>
+            +
+            {formatNumber({
+              format: "percentage",
+              value: Math.abs(infusionEffectValue),
+            })}
+          </span>
+        )}
       </IconDisplay>
 
       <DeltasDisplay delta={delta} />

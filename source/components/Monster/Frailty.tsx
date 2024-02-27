@@ -2,8 +2,8 @@ import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
+import { DescriptionDisplay } from "@neverquest/components/DescriptionDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { IconImage } from "@neverquest/components/IconImage";
 import { INFUSABLES, RELICS } from "@neverquest/data/items";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconFrailty from "@neverquest/icons/frailty.svg?react";
@@ -38,29 +38,10 @@ export function Frailty() {
             overlay={
               <Popover>
                 <PopoverBody>
-                  <Stack gap={1}>
-                    <div>
-                      <span>The&nbsp;</span>
-
-                      <IconImage className="small" Icon={Icon} />
-
-                      <span>
-                        &nbsp;{ownedItemFamiliar === undefined ? "Mysterious Egg" : "Familiar"}
-                      </span>
-
-                      <span>&nbsp;seems to be withering its resolve.</span>
-                    </div>
-
-                    <div>
-                      <IconImage className="small" Icon={IconMonsterHealth} />
-
-                      <span>&nbsp;and&nbsp;</span>
-
-                      <IconImage className="small" Icon={IconMonsterDamage} />
-
-                      <span>&nbsp;are reduced by&nbsp;{formattedValue}.</span>
-                    </div>
-                  </Stack>
+                  <DescriptionDisplay
+                    description={`# ${ownedItemFamiliar === undefined ? "Mysterious Egg" : "Familiar"} is weakening # and # by ${formattedValue}.`}
+                    descriptionIcons={[Icon, IconMonsterHealth, IconMonsterDamage]}
+                  />
                 </PopoverBody>
               </Popover>
             }

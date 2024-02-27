@@ -11,7 +11,7 @@ import { isRelicEquipped } from "@neverquest/state/items";
 import { isFinality } from "@neverquest/types/type-guards";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
-export function useProgressStage() {
+export function useAutoProgressStage() {
   const collectLoot = useCollectLoot();
   const completeStage = useCompleteStage();
   const increaseStage = useIncreaseStage();
@@ -23,20 +23,19 @@ export function useProgressStage() {
       () => {
         const get = getSnapshotGetter(snapshot);
 
-        if (get(isStageCompleted)) {
-          if (
-            get(isRelicEquipped("automincer")) &&
-            get(isAttacking) &&
-            !isFinality(get(encounter))
-          ) {
-            const lootCollection = collectLoot();
+        if (
+          get(isStageCompleted) &&
+          get(isRelicEquipped("automincer")) &&
+          get(isAttacking) &&
+          !isFinality(get(encounter))
+        ) {
+          const hasCollectedLoot = collectLoot() === "success";
 
-            if (lootCollection === "success") {
-              completeStage();
-              increaseStage();
-              resetWilderness();
-            }
-          } else if (get(isAttacking)) {
+          if (hasCollectedLoot) {
+            completeStage();
+            increaseStage();
+            resetWilderness();
+          } else {
             toggleAttacking();
           }
         }

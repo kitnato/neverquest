@@ -2,7 +2,7 @@ import type { Delta, Reserve } from "@neverquest/types/unions";
 
 export const AILING_RESERVE_MINIMUM = 1;
 
-export const HEALTH_LOW_THRESHOLD = 0.33;
+export const HEALTH_LOW_THRESHOLD = 0.25;
 
 export const RESERVES: Record<
   Reserve,

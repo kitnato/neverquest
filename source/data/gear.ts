@@ -116,8 +116,8 @@ export const SHIELD_SPECIFICATIONS: Record<
 > = {
   medium: {
     block: [
-      { maximum: 0.2, minimum: 0.19 },
-      { maximum: 0.35, minimum: 0.33 },
+      { maximum: 0.1, minimum: 0.09 },
+      { maximum: 0.3, minimum: 0.29 },
     ],
     burden: [
       { maximum: 4, minimum: 3 },
@@ -136,8 +136,8 @@ export const SHIELD_SPECIFICATIONS: Record<
   },
   small: {
     block: [
-      { maximum: 0.11, minimum: 0.1 },
-      { maximum: 0.25, minimum: 0.23 },
+      { maximum: 0.06, minimum: 0.05 },
+      { maximum: 0.2, minimum: 0.19 },
     ],
     burden: [
       { maximum: 2, minimum: 1 },
@@ -156,7 +156,7 @@ export const SHIELD_SPECIFICATIONS: Record<
   },
   tower: {
     block: [
-      { maximum: 0.33, minimum: 0.32 },
+      { maximum: 0.25, minimum: 0.24 },
       { maximum: 0.5, minimum: 0.48 },
     ],
     burden: [
@@ -211,12 +211,12 @@ export const WEAPON_BASE: GearRangeBase & {
 
 export const WEAPON_MODIFIER = {
   "one-handed": { ability: 1, burden: 1, damage: 1, price: 1, rate: 1, weight: 1 },
-  ranged: { ability: 1.1, burden: 0.85, damage: 1.1, price: 1.2, rate: 1.1, weight: 1.15 },
+  ranged: { ability: 1.1, burden: 0.85, damage: 1.1, price: 1.25, rate: 1.1, weight: 1.15 },
   "two-handed": {
     ability: 1.2,
     burden: 1.3,
     damage: 1.2,
-    price: 1.3,
+    price: 1.35,
     rate: 1.15,
     weight: 1.25,
   },

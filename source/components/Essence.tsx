@@ -51,11 +51,13 @@ export function Essence() {
                       iconProps={{ className: "small" }}
                       tooltip="Essence bonus"
                     >
-                      +
-                      {formatNumber({
-                        format: "percentage",
-                        value: essenceBonus,
-                      })}
+                      <span>
+                        +
+                        {formatNumber({
+                          format: "percentage",
+                          value: essenceBonus,
+                        })}
+                      </span>
                     </IconDisplay>
                   </Stack>
                 </PopoverBody>

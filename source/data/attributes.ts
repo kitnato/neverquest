@@ -38,7 +38,7 @@ export const ATTRIBUTES: Record<
     descriptionIcons: [IconDodgeChance],
     Icon: IconAgility,
     increment: 0.025,
-    maximum: 0.9,
+    maximum: 0.95,
     powerBonus: 0.005,
     requiredSkill: "evasion",
   },
@@ -58,8 +58,8 @@ export const ATTRIBUTES: Record<
     descriptionIcons: [IconStamina],
     Icon: IconEndurance,
     increment: 5,
-    powerBonus: 0.02,
-    rankBonus: { increment: 5, maximum: 100 },
+    powerBonus: 0.03,
+    rankBonus: { increment: 5, maximum: 150 },
     shows: "stamina",
   },
   fortitude: {
@@ -119,7 +119,7 @@ export const ATTRIBUTES: Record<
     Icon: IconVitality,
     increment: 15,
     powerBonus: 0.025,
-    rankBonus: { increment: 10, maximum: 200 },
+    rankBonus: { increment: 15, maximum: 300 },
     shows: "health",
   },
 };

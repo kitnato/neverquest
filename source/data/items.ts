@@ -257,7 +257,7 @@ export const RELICS: Record<
     item: {
       ID: "",
       name: "[P71NQ]",
-      price: 14_014,
+      price: 140_014,
       weight: 14,
     },
   },

@@ -35,7 +35,6 @@ export function useIncreaseStage() {
         set(stage, nextStage);
 
         if (Object.values(FINALITY_STAGE).includes(nextStage) && get(isAttacking)) {
-          console.log("useIncreaseStage");
           toggleAttacking();
         }
 

@@ -7,20 +7,30 @@ import { useToggleLocation } from "@neverquest/hooks/actions/useToggleLocation";
 import IconFinalTravel from "@neverquest/icons/final-travel.svg?react";
 import IconTravel from "@neverquest/icons/travel.svg?react";
 import { hasFlatlined, isAttacking } from "@neverquest/state/character";
-import { encounter, location } from "@neverquest/state/encounter";
+import {
+  encounter,
+  isStageCompleted,
+  location,
+  progress,
+  progressMaximum,
+} from "@neverquest/state/encounter";
 import { encumbranceExtent } from "@neverquest/state/inventory";
-import { hasLootedEssence } from "@neverquest/state/resources";
+import { essenceLoot, itemsLoot } from "@neverquest/state/resources";
 import { isShowing } from "@neverquest/state/ui";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Travel() {
   const encounterValue = useRecoilValue(encounter);
   const encumbranceExtentValue = useRecoilValue(encumbranceExtent);
-  const hasLootedEssenceValue = useRecoilValue(hasLootedEssence);
+  const essenceLootValue = useRecoilValue(essenceLoot);
   const isAttackingValue = useRecoilValue(isAttacking);
+  const isStageCompletedValue = useRecoilValue(isStageCompleted);
+  const itemsLootValue = useRecoilValue(itemsLoot);
   const hasFlatlinedValue = useRecoilValue(hasFlatlined);
   const isShowingLocation = useRecoilValue(isShowing("location"));
   const locationValue = useRecoilValue(location);
+  const progressValue = useRecoilValue(progress);
+  const progressMaximumValue = useRecoilValue(progressMaximum);
 
   const toggleLocation = useToggleLocation();
 
@@ -28,7 +38,14 @@ export function Travel() {
   const isOverEncumbered =
     locationValue === "caravan" && encumbranceExtentValue === "over-encumbered";
 
-  if (encounterValue === "void" || hasLootedEssenceValue || locationValue === "caravan") {
+  if (
+    ((progressMaximumValue === Number.POSITIVE_INFINITY
+      ? progressValue > 0
+      : isStageCompletedValue) &&
+      essenceLootValue === 0) ||
+    encounterValue === "void" ||
+    locationValue === "caravan"
+  ) {
     return (
       <OverlayTrigger
         overlay={
@@ -50,7 +67,7 @@ export function Travel() {
         <div className={getAnimationClass({ animation: "bounceIn" })}>
           <Button
             className={
-              !isAttackingValue && locationValue === "wilderness"
+              !isAttackingValue && locationValue === "wilderness" && itemsLootValue.length === 0
                 ? getAnimationClass({ animation: "pulse", isInfinite: true })
                 : undefined
             }

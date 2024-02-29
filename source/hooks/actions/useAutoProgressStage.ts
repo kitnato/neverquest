@@ -8,6 +8,7 @@ import { useToggleAttacking } from "@neverquest/hooks/actions/useToggleAttacking
 import { isAttacking } from "@neverquest/state/character";
 import { encounter, isStageCompleted } from "@neverquest/state/encounter";
 import { isRelicEquipped } from "@neverquest/state/items";
+import { itemsLoot } from "@neverquest/state/resources";
 import { isFinality } from "@neverquest/types/type-guards";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
@@ -29,9 +30,9 @@ export function useAutoProgressStage() {
           get(isAttacking) &&
           !isFinality(get(encounter))
         ) {
-          const hasCollectedLoot = collectLoot() === "success";
-
-          if (hasCollectedLoot) {
+          if (get(itemsLoot).length > 0) {
+            toggleAttacking();
+          } else if (collectLoot() === "success") {
             completeStage();
             increaseStage();
             resetWilderness();

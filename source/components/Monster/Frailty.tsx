@@ -4,9 +4,10 @@ import { useRecoilValue } from "recoil";
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DescriptionDisplay } from "@neverquest/components/DescriptionDisplay";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { INFUSABLES, RELICS } from "@neverquest/data/items";
+import { RELICS } from "@neverquest/data/items";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconFrailty from "@neverquest/icons/frailty.svg?react";
+import IconHatchingProgress from "@neverquest/icons/hatching-progress.svg?react";
 import IconMonsterDamage from "@neverquest/icons/monster-damage.svg?react";
 import IconMonsterHealth from "@neverquest/icons/monster-health.svg?react";
 import { ownedItem } from "@neverquest/state/inventory";
@@ -18,7 +19,7 @@ export function Frailty() {
   const frailtyValue = useRecoilValue(frailty);
   const ownedItemFamiliar = useRecoilValue(ownedItem("familiar"));
 
-  const { Icon } = ownedItemFamiliar === undefined ? INFUSABLES["mysterious egg"] : RELICS.familiar;
+  const Icon = ownedItemFamiliar === undefined ? IconHatchingProgress : RELICS.familiar.Icon;
   const formattedValue = formatNumber({ format: "percentage", value: frailtyValue });
 
   useDeltaText({
@@ -39,7 +40,7 @@ export function Frailty() {
               <Popover>
                 <PopoverBody>
                   <DescriptionDisplay
-                    description={`# ${ownedItemFamiliar === undefined ? "Mysterious Egg" : "Familiar"} is weakening # and # by ${formattedValue}.`}
+                    description={`A # presence is weakening # and # by ${formattedValue}.`}
                     descriptionIcons={[Icon, IconMonsterHealth, IconMonsterDamage]}
                   />
                 </PopoverBody>

@@ -95,8 +95,7 @@ export function useAttack() {
             (hasInflictedCritical && get(isTraitAcquired("executioner")))
           ) {
             changeMonsterHealth({
-              damageType: "execution",
-              delta: [
+              contents: [
                 {
                   color: "text-muted",
                   value: "EXECUTE",
@@ -106,6 +105,7 @@ export function useAttack() {
                   value: `-${monsterHealthValue}`,
                 },
               ],
+              damageType: "execution",
               value: -monsterHealthValue,
             });
           } else {
@@ -154,14 +154,14 @@ export function useAttack() {
             );
 
             changeMonsterHealth({
-              damageType: hasInflictedCritical ? "critical" : undefined,
-              delta: [
+              contents: [
                 ...monsterDeltas,
                 {
                   color: "text-danger",
                   value: totalDamage,
                 },
               ],
+              damageType: hasInflictedCritical ? "critical" : undefined,
               value: totalDamage,
             });
           }

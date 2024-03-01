@@ -1,5 +1,6 @@
 import { atom, selector } from "recoil";
 
+import { ownedItem } from "./inventory";
 import { LABEL_UNKNOWN } from "@neverquest/data/general";
 import { handleStorage } from "@neverquest/state/effects/handleStorage";
 import { armor, shield, weapon } from "@neverquest/state/gear";
@@ -32,6 +33,13 @@ export const canBlock = withStateKey("canBlock", (key) =>
 export const canDodge = withStateKey("canDodge", (key) =>
   selector({
     get: ({ get }) => get(isTraitAcquired("stalwart")) || get(stamina) >= get(armor).burden,
+    key,
+  }),
+);
+
+export const canResurrect = withStateKey("canResurrect", (key) =>
+  selector({
+    get: ({ get }) => get(hasFlatlined) && get(ownedItem("phylactery")) !== undefined,
     key,
   }),
 );

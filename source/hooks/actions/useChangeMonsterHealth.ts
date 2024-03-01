@@ -28,8 +28,8 @@ export function useChangeMonsterHealth() {
   return useRecoilCallback(
     ({ reset, set, snapshot }) =>
       ({
+        contents,
         damageType,
-        delta,
         value,
       }: DeltaReserveBase & {
         damageType?: "bleeding" | "critical" | "execution" | "parry" | "thorns";
@@ -49,12 +49,12 @@ export function useChangeMonsterHealth() {
 
         addDelta({
           contents:
-            delta === undefined || (Array.isArray(delta) && delta.length === 0)
+            contents === undefined || (Array.isArray(contents) && contents.length === 0)
               ? ({
                   color: isPositive ? "text-success" : "text-danger",
                   value: isPositive ? `+${formattedValue}` : formattedValue,
                 } as DeltaDisplay)
-              : delta,
+              : contents,
           delta: "monsterHealth",
         });
 

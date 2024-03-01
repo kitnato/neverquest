@@ -6,9 +6,9 @@ import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useToggleAttacking } from "@neverquest/hooks/actions/useToggleAttacking";
 import { absorbedEssence } from "@neverquest/state/attributes";
-import { isAttacking } from "@neverquest/state/character";
+import { isAttacking, recoveryDuration } from "@neverquest/state/character";
 import { corpse, stage } from "@neverquest/state/encounter";
-import { inventory, ownedItem } from "@neverquest/state/inventory";
+import { ownedItem } from "@neverquest/state/inventory";
 import { isRelicEquipped } from "@neverquest/state/items";
 import {
   health,
@@ -32,12 +32,9 @@ export function useChangeHealth() {
       (deltaReserve: DeltaReserve) => {
         const get = getSnapshotGetter(snapshot);
 
-        if (get(health) === 0) {
-          return;
-        }
-
         const healthMaximumPoisonedValue = get(healthMaximumPoisoned);
         const isAttackingValue = get(isAttacking);
+
         const value = deltaReserve.isRegeneration
           ? get(regenerationAmount("health"))
           : deltaReserve.value;
@@ -49,48 +46,35 @@ export function useChangeHealth() {
         addDelta({
           contents:
             deltaReserve.isRegeneration === true ||
-            deltaReserve.delta === undefined ||
-            (Array.isArray(deltaReserve.delta) && deltaReserve.delta.length === 0)
+            deltaReserve.contents === undefined ||
+            (Array.isArray(deltaReserve.contents) && deltaReserve.contents.length === 0)
               ? ({
                   color: isPositive ? "text-success" : value === 0 ? "text-muted" : "text-danger",
                   value: isPositive ? `+${formattedValue}` : formattedValue,
                 } as DeltaDisplay)
-              : deltaReserve.delta,
+              : deltaReserve.contents,
           delta: "health",
         });
 
         if (newHealth <= 0) {
-          const phylactery = get(ownedItem("phylactery"));
+          const ownedItemPhylactery = get(ownedItem("phylactery"));
+
+          newHealth = 0;
+
+          reset(recoveryDuration);
+          reset(regenerationDuration("health"));
+
+          progressQuest({ quest: "flatlining" });
 
           if (isAttackingValue) {
             toggleAttacking();
           }
 
-          if (phylactery === undefined) {
-            newHealth = 0;
-
-            progressQuest({ quest: "flatlining" });
-
+          if (ownedItemPhylactery === undefined) {
             set(corpse, {
               essence: Math.round(get(essence) + get(absorbedEssence) * CORPSE_VALUE),
               stage: get(stage),
             });
-          } else {
-            newHealth = healthMaximumPoisonedValue;
-
-            addDelta({
-              contents: {
-                color: "text-success",
-                value: "RESURRECTED",
-              },
-              delta: "health",
-            });
-
-            set(inventory, (currentInventory) =>
-              currentInventory.filter(({ ID: itemID }) => itemID !== phylactery.ID),
-            );
-
-            progressQuest({ quest: "resurrecting" });
           }
         }
 

@@ -303,6 +303,7 @@ export type StateKey =
   | "canDodge"
   | "canReceiveAilment"
   | "canReceiveAilments"
+  | "canResurrect"
   | "canTrackQuests"
   | "canTrainMastery"
   | "completedQuestsCount"

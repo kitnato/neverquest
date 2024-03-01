@@ -15,7 +15,7 @@ export function useHeal() {
         const healthDifference = get(healthMaximumPoisoned) - get(health);
 
         changeHealth({
-          delta: {
+          contents: {
             color: "text-success",
             value: `HEAL +${healthDifference}`,
           },

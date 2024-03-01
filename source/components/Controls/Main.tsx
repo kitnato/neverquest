@@ -10,14 +10,21 @@ import {
 import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
+import { useResurrection } from "@neverquest/hooks/actions/useResurrection";
 import { useToggleAttacking } from "@neverquest/hooks/actions/useToggleAttacking";
 import IconAttack from "@neverquest/icons/attack.svg?react";
 import IconGrinding from "@neverquest/icons/grinding.svg?react";
 import IconHealth from "@neverquest/icons/health.svg?react";
 import IconResting from "@neverquest/icons/resting.svg?react";
+import IconResurrection from "@neverquest/icons/resurrection.svg?react";
 import IconRetreat from "@neverquest/icons/retreat.svg?react";
 import { areAttributesAffordable } from "@neverquest/state/attributes";
-import { hasEnoughAmmunition, hasFlatlined, isAttacking } from "@neverquest/state/character";
+import {
+  canResurrect,
+  hasEnoughAmmunition,
+  hasFlatlined,
+  isAttacking,
+} from "@neverquest/state/character";
 import { encounter, isStageCompleted, location } from "@neverquest/state/encounter";
 import { isRelicEquipped } from "@neverquest/state/items";
 import { isMonsterDead } from "@neverquest/state/monster";
@@ -25,8 +32,9 @@ import { isHealthLow } from "@neverquest/state/reserves";
 import type { SVGIcon } from "@neverquest/types/components";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-export function Attack() {
+export function Main() {
   const areAttributesAffordableValue = useRecoilValue(areAttributesAffordable);
+  const canResurrectValue = useRecoilValue(canResurrect);
   const encounterValue = useRecoilValue(encounter);
   const hasEnoughAmmunitionValue = useRecoilValue(hasEnoughAmmunition);
   const hasFlatlinedValue = useRecoilValue(hasFlatlined);
@@ -38,20 +46,23 @@ export function Attack() {
   const locationValue = useRecoilValue(location);
 
   const toggleAttacking = useToggleAttacking();
+  const resurrection = useResurrection();
 
+  const isResting =
+    isStageCompletedValue || locationValue === "caravan" || encounterValue === "void";
   const pulseAnimation = getAnimationClass({
     animation: "pulse",
     isInfinite: true,
   });
-  const isResting =
-    hasFlatlinedValue ||
-    isStageCompletedValue ||
-    locationValue === "caravan" ||
-    encounterValue === "void";
-  const showWarning = isAttackingValue && isHealthLowValue && !isMonsterDeadValue && !isResting;
+  const showWarning =
+    !hasFlatlinedValue && isAttackingValue && isHealthLowValue && !isMonsterDeadValue && !isResting;
 
   const { animation, Icon, tooltip }: { animation?: string; Icon: SVGIcon; tooltip: string } =
     (() => {
+      if (canResurrectValue) {
+        return { animation: pulseAnimation, Icon: IconResurrection, tooltip: "Resurrection" };
+      }
+
       if (isResting) {
         return { Icon: IconResting, tooltip: "Resting" };
       }
@@ -106,12 +117,12 @@ export function Attack() {
         <Button
           className={animation}
           disabled={isResting}
-          onClick={toggleAttacking}
+          onClick={canResurrectValue ? resurrection : toggleAttacking}
           variant="outline-dark"
         >
           <IconImage Icon={Icon} />
 
-          {isAutomincerEquipped && !isResting && (
+          {!canResurrectValue && isAutomincerEquipped && !isResting && (
             <Badge bg="secondary" className="position-absolute top-50 start-100 translate-middle">
               <IconImage className="small" Icon={IconGrinding} />
             </Badge>

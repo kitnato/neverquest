@@ -32,13 +32,13 @@ export function useChangeStamina() {
         addDelta({
           contents:
             deltaReserve.isRegeneration === true ||
-            deltaReserve.delta === undefined ||
-            (Array.isArray(deltaReserve.delta) && deltaReserve.delta.length === 0)
+            deltaReserve.contents === undefined ||
+            (Array.isArray(deltaReserve.contents) && deltaReserve.contents.length === 0)
               ? ({
                   color: isPositive ? "text-success" : "text-danger",
                   value: isPositive ? `+${formattedValue}` : formattedValue,
                 } as DeltaDisplay)
-              : deltaReserve.delta,
+              : deltaReserve.contents,
           delta: "stamina",
         });
 

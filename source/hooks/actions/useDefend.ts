@@ -220,7 +220,7 @@ export function useDefend() {
                 progressQuest({ quest: "staggering" });
 
                 changeMonsterHealth({
-                  delta: {
+                  contents: {
                     color: "text-muted",
                     value: "STAGGER",
                   },
@@ -351,7 +351,7 @@ export function useDefend() {
           }
 
           // Take any damage and show any stamina costs.
-          changeHealth({ delta: deltaHealth, value: -healthDamage });
+          changeHealth({ contents: deltaHealth, value: -healthDamage });
 
           addDelta({
             contents: deltaStamina,
@@ -366,8 +366,8 @@ export function useDefend() {
           // Inflict any parry and/or thorns damage.
           if (monsterHealthDamage > 0) {
             changeMonsterHealth({
+              contents: deltaMonsterHealth,
               damageType: hasInflictedThorns ? "thorns" : hasParried ? "parry" : undefined,
-              delta: deltaMonsterHealth,
               value: -monsterHealthDamage,
             });
           }

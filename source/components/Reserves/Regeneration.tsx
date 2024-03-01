@@ -17,7 +17,7 @@ import IconRegenerationAmount from "@neverquest/icons/regeneration-amount.svg?re
 import IconRegenerationRate from "@neverquest/icons/regeneration-rate.svg?react";
 import IconVigor from "@neverquest/icons/vigor.svg?react";
 import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
-import { isRecovering } from "@neverquest/state/character";
+import { hasFlatlined, isRecovering } from "@neverquest/state/character";
 import {
   isHealthAtMaximum,
   isStaminaAtMaximum,
@@ -36,6 +36,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
   const attributePowerBonusVigor = useRecoilValue(attributePowerBonus("vigor"));
   const attributeStatisticFortitude = useRecoilValue(attributeStatisticFortitudeState);
   const attributeStatisticVigor = useRecoilValue(attributeStatistic("vigor"));
+  const hasFlatlinedValue = useRecoilValue(hasFlatlined);
   const isReserveAtMaximum = useRecoilValue(
     reserve === "health" ? isHealthAtMaximum : isStaminaAtMaximum,
   );
@@ -60,7 +61,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
       changeReserve({ isRegeneration: true });
     },
     setTick: setRegenerationDuration,
-    stop: isRecoveringValue || isReserveAtMaximum,
+    stop: hasFlatlinedValue || isRecoveringValue || isReserveAtMaximum,
   });
 
   useDeltaText({

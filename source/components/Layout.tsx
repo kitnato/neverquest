@@ -3,9 +3,9 @@ import { Col, Container, Row, Stack } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 
 import { Awakening } from "@neverquest/components/Awakening";
-import { Attack } from "@neverquest/components/Controls/Attack";
 import { Capabilities } from "@neverquest/components/Controls/Capabilities";
 import { CollectLoot } from "@neverquest/components/Controls/CollectLoot";
+import { Main } from "@neverquest/components/Controls/Main";
 import { Retire } from "@neverquest/components/Controls/Retire";
 import { ScavengeCorpse } from "@neverquest/components/Controls/ScavengeCorpse";
 import { ShowInventory } from "@neverquest/components/Controls/ShowInventory";
@@ -102,7 +102,7 @@ export function Layout() {
               <Stack gap={3}>
                 <Retire />
 
-                <Attack />
+                <Main />
 
                 <Capabilities />
 

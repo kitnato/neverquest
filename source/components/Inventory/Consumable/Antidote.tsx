@@ -31,7 +31,7 @@ export function Antidote({ ID }: { ID: string }) {
             resetPoison();
 
             changeHealth({
-              delta: {
+              contents: {
                 color: "text-muted",
                 value: "REMEDIED",
               },

@@ -11,6 +11,7 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { usePreviousValue } from "@neverquest/hooks/usePreviousValue";
 import IconBlighted from "@neverquest/icons/blighted.svg?react";
 import IconPoisoned from "@neverquest/icons/poisoned.svg?react";
+import { hasFlatlined } from "@neverquest/state/character";
 import {
   blightMagnitude,
   health,
@@ -39,6 +40,7 @@ export function ReserveMeter({ PrefixIcon, reserve }: { PrefixIcon?: SVGIcon; re
   const ailmentExtent = useRecoilValue(isHealth ? poisonDuration : blightMagnitude);
   const isAiling = useRecoilValue(isHealth ? isPoisoned : isBlighted);
   const isRegeneratingValue = useRecoilValue(isRegenerating(isHealth ? "health" : "stamina"));
+  const hasFlatlinedValue = useRecoilValue(hasFlatlined);
   const regenerationRateValue = useRecoilValue(regenerationRate(isHealth ? "health" : "stamina"));
   const reserveMaximumValue = useRecoilValue(reserveMaximum);
   const reserveMaximumAilingValue = useRecoilValue(
@@ -67,10 +69,22 @@ export function ReserveMeter({ PrefixIcon, reserve }: { PrefixIcon?: SVGIcon; re
       : reserveMaximumAilingValue - previousReserveMaximumAiling;
 
   useEffect(() => {
-    if (!isAiling && reserveMaximumDifference > 0 && reserveValue < reserveMaximumAilingValue) {
+    if (
+      !hasFlatlinedValue &&
+      !isAiling &&
+      reserveMaximumDifference > 0 &&
+      reserveValue < reserveMaximumAilingValue
+    ) {
       setReserve((currentReserve) => currentReserve + reserveMaximumDifference);
     }
-  }, [isAiling, reserveMaximumAilingValue, reserveMaximumDifference, reserveValue, setReserve]);
+  }, [
+    hasFlatlinedValue,
+    isAiling,
+    reserveMaximumAilingValue,
+    reserveMaximumDifference,
+    reserveValue,
+    setReserve,
+  ]);
 
   // Catches attribute resets and poison/blight penalties.
   useEffect(() => {

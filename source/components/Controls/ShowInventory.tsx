@@ -50,7 +50,7 @@ export function ShowInventory() {
         >
           <div className={getAnimationClass({ animation: "bounceIn" })}>
             <Button
-              disabled={isAttackingValue || hasFlatlinedValue}
+              disabled={hasFlatlinedValue || isAttackingValue}
               onClick={() => {
                 setActiveControl("inventory");
               }}

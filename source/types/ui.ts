@@ -25,7 +25,7 @@ export type DeltaReserve =
   | (DeltaReserveBase & { isRegeneration?: false });
 
 export type DeltaReserveBase = {
-  delta?: DeltaDisplay | DeltaDisplay[];
+  contents?: DeltaDisplay | DeltaDisplay[];
   value: number;
 };
 

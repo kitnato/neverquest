@@ -32,7 +32,7 @@ export function Elixir({ ID }: { ID: string }) {
             const staminaDifference = staminaMaximumBlightedValue - staminaValue;
 
             changeStamina({
-              delta: [
+              contents: [
                 {
                   color: "text-muted",
                   value: "RECOVER",

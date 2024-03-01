@@ -1,6 +1,6 @@
 import { useRecoilCallback } from "recoil";
 
-import { attackDuration, recoveryDuration } from "@neverquest/state/character";
+import { attackDuration } from "@neverquest/state/character";
 import { isStageStarted, location, progress, stage } from "@neverquest/state/encounter";
 import { isRelicEquipped } from "@neverquest/state/items";
 import {
@@ -25,7 +25,6 @@ export function useResetCharacter() {
         reset(poisonDuration);
         reset(progress);
         reset(location);
-        reset(recoveryDuration);
         reset(regenerationDuration("health"));
         reset(regenerationDuration("stamina"));
         reset(stage);

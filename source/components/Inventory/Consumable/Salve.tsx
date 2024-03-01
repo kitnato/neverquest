@@ -31,7 +31,7 @@ export function Salve({ ID }: { ID: string }) {
             resetBlight();
 
             changeStamina({
-              delta: {
+              contents: {
                 color: "text-muted",
                 value: "CURED",
               },

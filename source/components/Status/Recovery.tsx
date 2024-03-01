@@ -10,7 +10,7 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { useTimer } from "@neverquest/hooks/useTimer";
 import IconRecovery from "@neverquest/icons/recovery.svg?react";
 import IconResilience from "@neverquest/icons/resilience.svg?react";
-import { isRecovering, recoveryDuration } from "@neverquest/state/character";
+import { hasFlatlined, isRecovering, recoveryDuration } from "@neverquest/state/character";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import { recoveryRate } from "@neverquest/state/statistics";
 import { isShowing } from "@neverquest/state/ui";
@@ -18,6 +18,7 @@ import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Recovery() {
+  const hasFlatlinedValue = useRecoilValue(hasFlatlined);
   const isRecoveringValue = useRecoilValue(isRecovering);
   const isShowingRecovery = useRecoilValue(isShowing("recovery"));
   const resilienceValue = useRecoilValue(masteryStatistic("resilience"));
@@ -25,7 +26,7 @@ export function Recovery() {
 
   useTimer({
     setTick: setRecoveryDuration,
-    stop: !isRecoveringValue,
+    stop: hasFlatlinedValue || !isRecoveringValue,
   });
 
   useDeltaText({

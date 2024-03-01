@@ -6,7 +6,7 @@ import { IconImage } from "@neverquest/components/IconImage";
 import { Quests } from "@neverquest/components/Quests";
 import IconAttention from "@neverquest/icons/attention.svg?react";
 import IconQuests from "@neverquest/icons/quests.svg?react";
-import { isAttacking } from "@neverquest/state/character";
+import { hasFlatlined, isAttacking } from "@neverquest/state/character";
 import { location } from "@neverquest/state/encounter";
 import { ownedItem } from "@neverquest/state/inventory";
 import { canCompleteQuests } from "@neverquest/state/quests";
@@ -18,6 +18,7 @@ export function ShowQuests() {
   const canCompleteConquests = useRecoilValue(canCompleteQuests("conquest"));
   const canCompleteRoutines = useRecoilValue(canCompleteQuests("routine"));
   const canCompleteTriumphs = useRecoilValue(canCompleteQuests("triumph"));
+  const hasFlatlinedValue = useRecoilValue(hasFlatlined);
   const locationValue = useRecoilValue(location);
   const isAttackingValue = useRecoilValue(isAttacking);
   const ownedItemJournal = useRecoilValue(ownedItem("journal"));
@@ -38,14 +39,14 @@ export function ShowQuests() {
           <div className={getAnimationClass({ animation: "bounceIn" })}>
             <Button
               className={`position-relative${
-                canCompleteQuest && locationValue === "caravan"
+                canCompleteQuest && !hasFlatlinedValue && locationValue === "caravan"
                   ? ` ${getAnimationClass({
                       animation: "pulse",
                       isInfinite: true,
                     })}`
                   : ""
               }`}
-              disabled={isAttackingValue}
+              disabled={hasFlatlinedValue || isAttackingValue}
               onClick={() => {
                 setActiveControl("quests");
               }}

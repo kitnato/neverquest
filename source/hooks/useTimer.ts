@@ -1,9 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { type SetterOrUpdater, useRecoilValue } from "recoil";
+import type { SetterOrUpdater } from "recoil";
 import { clearInterval, setInterval } from "worker-timers";
 
 import { FRAMERATE } from "@neverquest/data/general";
-import { hasFlatlined } from "@neverquest/state/character";
 
 export function useTimer({
   factor = 1,
@@ -16,8 +15,6 @@ export function useTimer({
   setTick: SetterOrUpdater<number>;
   stop: boolean;
 }) {
-  const hasFlatlinedValue = useRecoilValue(hasFlatlined);
-
   const interval = useRef(-1);
   const previousTime = useRef(0);
 
@@ -43,7 +40,7 @@ export function useTimer({
   }, [hasTicked, onElapsed]);
 
   useEffect(() => {
-    if (hasFlatlinedValue || stop) {
+    if (stop) {
       terminate();
     } else if (interval.current === -1) {
       interval.current = setInterval(() => {
@@ -67,5 +64,5 @@ export function useTimer({
     }
 
     return terminate;
-  }, [factor, hasFlatlinedValue, setTick, stop]);
+  }, [factor, setTick, stop]);
 }

@@ -15,6 +15,7 @@ import { useToggleAttacking } from "@neverquest/hooks/actions/useToggleAttacking
 import IconAttack from "@neverquest/icons/attack.svg?react";
 import IconGrinding from "@neverquest/icons/grinding.svg?react";
 import IconHealth from "@neverquest/icons/health.svg?react";
+import IconPhylactery from "@neverquest/icons/phylactery.svg?react";
 import IconResting from "@neverquest/icons/resting.svg?react";
 import IconResurrection from "@neverquest/icons/resurrection.svg?react";
 import IconRetreat from "@neverquest/icons/retreat.svg?react";
@@ -49,13 +50,15 @@ export function Main() {
   const resurrection = useResurrection();
 
   const isResting =
-    isStageCompletedValue || locationValue === "caravan" || encounterValue === "void";
+    hasFlatlinedValue ||
+    isStageCompletedValue ||
+    locationValue === "caravan" ||
+    encounterValue === "void";
   const pulseAnimation = getAnimationClass({
     animation: "pulse",
     isInfinite: true,
   });
-  const showWarning =
-    !hasFlatlinedValue && isAttackingValue && isHealthLowValue && !isMonsterDeadValue && !isResting;
+  const showWarning = isAttackingValue && isHealthLowValue && !isMonsterDeadValue && !isResting;
 
   const { animation, Icon, tooltip }: { animation?: string; Icon: SVGIcon; tooltip: string } =
     (() => {
@@ -122,9 +125,12 @@ export function Main() {
         >
           <IconImage Icon={Icon} />
 
-          {!canResurrectValue && isAutomincerEquipped && !isResting && (
+          {(canResurrectValue || (isAutomincerEquipped && !isResting)) && (
             <Badge bg="secondary" className="position-absolute top-50 start-100 translate-middle">
-              <IconImage className="small" Icon={IconGrinding} />
+              <IconImage
+                className="small"
+                Icon={canResurrectValue ? IconPhylactery : IconGrinding}
+              />
             </Badge>
           )}
         </Button>

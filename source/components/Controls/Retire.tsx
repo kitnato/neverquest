@@ -4,18 +4,18 @@ import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
 import { Retirement } from "@neverquest/components/Retirement";
-import { RETIREMENT_STAGE } from "@neverquest/data/general";
 import IconRetire from "@neverquest/icons/retire.svg?react";
 import { hasFlatlined } from "@neverquest/state/character";
-import { location, stageMaximum } from "@neverquest/state/encounter";
+import { location } from "@neverquest/state/encounter";
+import { isShowing } from "@neverquest/state/ui";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Retire() {
   const hasFlatlinedValue = useRecoilValue(hasFlatlined);
+  const isShowingRetire = useRecoilValue(isShowing("retire"));
   const locationValue = useRecoilValue(location);
-  const stageMaximumValue = useRecoilValue(stageMaximum);
 
-  const [isShowingRetire, setIsShowingRetire] = useState(false);
+  const [isShowingRetirement, setIsShowingRetirement] = useState(false);
 
   return (
     <>
@@ -27,16 +27,12 @@ export function Retire() {
         }
       >
         <div
-          className={
-            stageMaximumValue >= RETIREMENT_STAGE
-              ? getAnimationClass({ animation: "bounceIn" })
-              : "invisible"
-          }
+          className={isShowingRetire ? getAnimationClass({ animation: "bounceIn" }) : "invisible"}
         >
           <Button
             disabled={hasFlatlinedValue || locationValue === "wilderness"}
             onClick={() => {
-              setIsShowingRetire(true);
+              setIsShowingRetirement(true);
             }}
             variant="outline-dark"
           >
@@ -45,7 +41,7 @@ export function Retire() {
         </div>
       </OverlayTrigger>
 
-      <Retirement state={[isShowingRetire, setIsShowingRetire]} />
+      <Retirement state={[isShowingRetirement, setIsShowingRetirement]} />
     </>
   );
 }

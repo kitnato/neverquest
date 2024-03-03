@@ -63,7 +63,7 @@ export const BLIGHT = {
 };
 
 export const ESSENCE = {
-  attenuation: 16,
+  attenuation: 17,
   base: 5,
   bonus: 0.03,
   boss: 1.5,

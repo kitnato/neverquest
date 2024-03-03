@@ -35,7 +35,7 @@ export function generateArmor({
 
   return {
     burden: Math.round(getFromRange(burden)),
-    deflection: deflection === undefined ? 0 : getFromRange(deflection),
+    deflection: getFromRange(deflection),
     gearClass,
     ID: nanoid(),
     level,

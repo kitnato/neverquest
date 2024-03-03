@@ -388,20 +388,21 @@ Each of the following armor classes increases the protection value for certain t
 ##### Light armor
 
 - Low protection
+- High [deflection](#deflection-chance) chance
 - Low burden
 - Low purchase and crafting cost
 
 ##### Reinforced armor
 
 - Medium protection
-- Low [deflection](#deflection-chance) chance
+- Medium deflection chance
 - Medium burden
 - Medium purchase and crafting cost
 
 ##### Heavy armor
 
 - High protection
-- High deflection chance
+- Low deflection chance
 - High burden
 - High purchase and crafting cost
 

@@ -110,39 +110,34 @@ export function ArmorName({
                 </tr>
               )}
 
-              {deflection > 0 && (
-                <tr>
-                  {isSkillAcquireImpermeability ? (
-                    <>
-                      <td>
-                        <span>Deflection chance:</span>
-                      </td>
-
-                      <td>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconDisplay
-                            Icon={IconDeflectionChance}
-                            iconProps={{ className: "small" }}
-                          >
-                            <span>{formatNumber({ format: "percentage", value: deflection })}</span>
-                          </IconDisplay>
-
-                          {showComparison && (
-                            <GearComparison
-                              difference={deflection - armorEquippedValue.deflection}
-                              showing="armor"
-                            />
-                          )}
-                        </Stack>
-                      </td>
-                    </>
-                  ) : (
-                    <td className="text-end">
-                      <span>{LABEL_UNKNOWN}</span>
+              <tr>
+                {isSkillAcquireImpermeability ? (
+                  <>
+                    <td>
+                      <span>Deflection chance:</span>
                     </td>
-                  )}
-                </tr>
-              )}
+
+                    <td>
+                      <Stack direction="horizontal" gap={1}>
+                        <IconDisplay Icon={IconDeflectionChance} iconProps={{ className: "small" }}>
+                          <span>{formatNumber({ format: "percentage", value: deflection })}</span>
+                        </IconDisplay>
+
+                        {showComparison && (
+                          <GearComparison
+                            difference={deflection - armorEquippedValue.deflection}
+                            showing="armor"
+                          />
+                        )}
+                      </Stack>
+                    </td>
+                  </>
+                ) : (
+                  <td className="text-end">
+                    <span>{LABEL_UNKNOWN}</span>
+                  </td>
+                )}
+              </tr>
 
               {!isArmorUnequipped && (
                 <WeightDetail

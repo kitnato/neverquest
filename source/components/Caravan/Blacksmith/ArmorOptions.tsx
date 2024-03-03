@@ -121,20 +121,18 @@ export function ArmorOptions() {
           })}
         </IconDisplay>
 
-        {deflection !== undefined && (
-          <IconDisplay
-            Icon={isSkillAcquiredImpermeability ? IconDeflectionChance : IconUnknown}
-            iconProps={{ overlayPlacement: "left" }}
-            tooltip={isSkillAcquiredImpermeability ? "Deflection chance" : LABEL_UNKNOWN}
-          >
-            {isSkillAcquiredImpermeability
-              ? `${formatNumber({
-                  format: "percentage",
-                  value: deflection.minimum,
-                })} - ${formatNumber({ format: "percentage", value: deflection.maximum })}`
-              : LABEL_UNKNOWN}
-          </IconDisplay>
-        )}
+        <IconDisplay
+          Icon={isSkillAcquiredImpermeability ? IconDeflectionChance : IconUnknown}
+          iconProps={{ overlayPlacement: "left" }}
+          tooltip={isSkillAcquiredImpermeability ? "Deflection chance" : LABEL_UNKNOWN}
+        >
+          {isSkillAcquiredImpermeability
+            ? `${formatNumber({
+                format: "percentage",
+                value: deflection.minimum,
+              })} - ${formatNumber({ format: "percentage", value: deflection.maximum })}`
+            : LABEL_UNKNOWN}
+        </IconDisplay>
 
         <IconDisplay Icon={IconBurden} iconProps={{ overlayPlacement: "left" }} tooltip="Burden">
           <span>

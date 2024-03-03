@@ -29,7 +29,7 @@ export const ARMOR_NONE: Omit<Armor, "gearClass" | "price"> = {
 export const ARMOR_SPECIFICATIONS: Record<
   ArmorClass,
   GearRangeBase & {
-    deflection?: [GeneratorRange, GeneratorRange];
+    deflection: [GeneratorRange, GeneratorRange];
     Icon: SVGIcon;
     protection: [GeneratorRange, GeneratorRange];
   }
@@ -40,11 +40,11 @@ export const ARMOR_SPECIFICATIONS: Record<
       { maximum: 80, minimum: 75 },
     ],
     deflection: [
+      { maximum: 0.12, minimum: 0.1 },
       { maximum: 0.3, minimum: 0.28 },
-      { maximum: 0.7, minimum: 0.66 },
     ],
     Icon: IconArmorHeavy,
-    price: { maximum: 13_000, minimum: 50 },
+    price: { maximum: 10_000, minimum: 50 },
     protection: [
       { maximum: 8, minimum: 6 },
       { maximum: 900, minimum: 850 },
@@ -58,6 +58,10 @@ export const ARMOR_SPECIFICATIONS: Record<
     burden: [
       { maximum: 2, minimum: 1 },
       { maximum: 25, minimum: 20 },
+    ],
+    deflection: [
+      { maximum: 0.3, minimum: 0.28 },
+      { maximum: 0.75, minimum: 0.73 },
     ],
     Icon: IconArmorLight,
     price: { maximum: 5000, minimum: 1 },
@@ -76,11 +80,11 @@ export const ARMOR_SPECIFICATIONS: Record<
       { maximum: 50, minimum: 45 },
     ],
     deflection: [
-      { maximum: 0.15, minimum: 0.1 },
-      { maximum: 0.35, minimum: 0.31 },
+      { maximum: 0.2, minimum: 0.18 },
+      { maximum: 0.45, minimum: 0.43 },
     ],
     Icon: IconReinforced,
-    price: { maximum: 8000, minimum: 25 },
+    price: { maximum: 7500, minimum: 25 },
     protection: [
       { maximum: 6, minimum: 3 },
       { maximum: 600, minimum: 550 },

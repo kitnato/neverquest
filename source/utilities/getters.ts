@@ -121,7 +121,7 @@ export function getArmorRanges({ factor, gearClass }: { factor: number; gearClas
 
   return {
     burden: getRange({ factor, isRounded: true, ranges: burden }),
-    deflection: deflection === undefined ? undefined : getRange({ factor, ranges: deflection }),
+    deflection: getRange({ factor, ranges: deflection }),
     protection: getRange({ factor, isRounded: true, ranges: protection }),
     weight: getRange({ factor, isRounded: true, ranges: weight }),
   };

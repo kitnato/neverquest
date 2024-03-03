@@ -40,7 +40,7 @@ export function CollectLoot() {
                 ? getAnimationClass({ animation: "pulse", isInfinite: true })
                 : undefined
             }
-            disabled={isAttackingValue || isLootingValue || hasFlatlinedValue}
+            disabled={hasFlatlinedValue || isAttackingValue || isLootingValue}
             onClick={collectLoot}
             variant="outline-dark"
           >

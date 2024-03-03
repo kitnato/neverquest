@@ -24,15 +24,13 @@ export function useAutoProgressStage() {
       () => {
         const get = getSnapshotGetter(snapshot);
 
-        if (
-          get(isStageCompleted) &&
-          get(isRelicEquipped("automincer")) &&
-          get(isAttacking) &&
-          !isFinality(get(encounter))
-        ) {
-          if (get(itemsLoot).length > 0) {
-            toggleAttacking();
-          } else if (collectLoot() === "success") {
+        if (get(isStageCompleted) && get(isAttacking)) {
+          if (
+            get(isRelicEquipped("automincer")) &&
+            !isFinality(get(encounter)) &&
+            get(itemsLoot).length === 0 &&
+            collectLoot() === "success"
+          ) {
             completeStage();
             increaseStage();
             resetWilderness();

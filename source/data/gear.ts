@@ -120,22 +120,22 @@ export const SHIELD_SPECIFICATIONS: Record<
 > = {
   medium: {
     block: [
-      { maximum: 0.1, minimum: 0.09 },
-      { maximum: 0.3, minimum: 0.29 },
+      { maximum: 0.12, minimum: 0.1 },
+      { maximum: 0.35, minimum: 0.33 },
     ],
     burden: [
       { maximum: 4, minimum: 3 },
       { maximum: 35, minimum: 30 },
     ],
     Icon: IconShieldMedium,
-    price: { maximum: 3500, minimum: 4 },
+    price: { maximum: 4500, minimum: 4 },
     stagger: [
-      { maximum: 0.4, minimum: 0.35 },
-      { maximum: 0.65, minimum: 0.6 },
+      { maximum: 0.3, minimum: 0.25 },
+      { maximum: 0.55, minimum: 0.53 },
     ],
     weight: [
       { maximum: 5, minimum: 3 },
-      { maximum: 50, minimum: 45 },
+      { maximum: 55, minimum: 50 },
     ],
   },
   small: {
@@ -148,30 +148,30 @@ export const SHIELD_SPECIFICATIONS: Record<
       { maximum: 20, minimum: 18 },
     ],
     Icon: IconShieldSmall,
-    price: { maximum: 1500, minimum: 2 },
+    price: { maximum: 3000, minimum: 2 },
     stagger: [
-      { maximum: 0.15, minimum: 0.1 },
-      { maximum: 0.3, minimum: 0.25 },
+      { maximum: 0.35, minimum: 0.3 },
+      { maximum: 0.75, minimum: 0.73 },
     ],
     weight: [
       { maximum: 2, minimum: 1 },
-      { maximum: 35, minimum: 30 },
+      { maximum: 40, minimum: 35 },
     ],
   },
   tower: {
     block: [
       { maximum: 0.25, minimum: 0.24 },
-      { maximum: 0.5, minimum: 0.48 },
+      { maximum: 0.55, minimum: 0.53 },
     ],
     burden: [
       { maximum: 7, minimum: 6 },
-      { maximum: 50, minimum: 45 },
+      { maximum: 45, minimum: 40 },
     ],
     Icon: IconShieldTower,
     price: { maximum: 7000, minimum: 7 },
     stagger: [
-      { maximum: 0.55, minimum: 0.5 },
-      { maximum: 0.95, minimum: 0.9 },
+      { maximum: 0.15, minimum: 0.1 },
+      { maximum: 0.3, minimum: 0.25 },
     ],
     weight: [
       { maximum: 9, minimum: 6 },

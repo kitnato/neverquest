@@ -44,7 +44,7 @@ export function PurgeMemories() {
         <IconDisplay
           description={
             <DescriptionDisplay
-              description="Resets the chosen rewards of all completed # quests, allowing for new choices."
+              description="Resets the rewards of all completed # quests, allowing for new choices."
               descriptionIcons={[IconQuests]}
             />
           }
@@ -77,7 +77,7 @@ export function PurgeMemories() {
                 onClick={() => {
                   transactEssence(-price);
                   resetCompletedQuests();
-                  progressQuest({ quest: "purgingEssence" });
+                  progressQuest({ quest: "purgingMemories" });
                 }}
                 variant="outline-dark"
               >

@@ -48,7 +48,7 @@ export function HiredCrewMember({ crewMember }: { crewMember: CrewMember }) {
           <IconDisplay
             description={<span>&quot;{monologueValue}&quot;</span>}
             Icon={Icon}
-            tooltip="Caravan crew member"
+            tooltip="Crew member"
           >
             <span>{capitalizeAll(crewMember)}</span>
           </IconDisplay>

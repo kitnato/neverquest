@@ -48,7 +48,7 @@ export const CREW: Record<
   }
 > = {
   alchemist: {
-    description: "Converts # gems between one another and may teach venerable # skills.",
+    description: "Converts # gems between one another. May impart a venerable # skill.",
     descriptionIcons: [IconGems, IconSkills],
     Icon: IconAlchemist,
     interaction: "Visit",
@@ -75,7 +75,7 @@ export const CREW: Record<
     shows: ["gearClass", "gearLevel"],
   },
   fletcher: {
-    description: "Crafts # ranged weapons and provides # ammunition.",
+    description: "Provides # ranged weapons and # ammunition.",
     descriptionIcons: [IconRanged, IconAmmunition],
     Icon: IconFletcher,
     interaction: "Craft",
@@ -88,7 +88,7 @@ export const CREW: Record<
     requiredStage: 18,
   },
   medic: {
-    description: "Offers immediate # healing and sells # bandages.",
+    description: "Offers # healing and sells # bandages.",
     descriptionIcons: [IconHealth, IconBandages],
     Icon: IconMedic,
     interaction: "Treat",
@@ -101,7 +101,7 @@ export const CREW: Record<
     requiredStage: 5,
   },
   mercenary: {
-    description: "Trains new # skills and # attributes.",
+    description: "Trains # skills and unlocks # attributes.",
     descriptionIcons: [IconSkills, IconAttributes],
     Icon: IconMercenary,
     interaction: "Train",
@@ -110,7 +110,7 @@ export const CREW: Record<
       [LEVELLING_CUTOFF]: MONOLOGUE_EMPTY,
       [LEVELLING_MAXIMUM]: "Why do they bleed? How?",
     },
-    price: 75,
+    price: 80,
     requiredStage: 15,
   },
   merchant: {
@@ -160,7 +160,8 @@ export const CREW: Record<
     requiredStage: 1,
   },
   occultist: {
-    description: "Sells # phylacteries and offers purging # rituals. May teach forbidden # skills.",
+    description:
+      "Sells # phylacteries and offers purging # rituals. May impart a forbidden # skill.",
     descriptionIcons: [IconPhylactery, IconRituals, IconSkills],
     Icon: IconOccultist,
     interaction: "Ritual",
@@ -188,7 +189,7 @@ export const CREW: Record<
   },
   witch: {
     description:
-      "Sells # potions that restore reserves and cure ailments. May teach mystical # skills.",
+      "Sells # potions that restore reserves and cure ailments. May impart a mystical # skill.",
     descriptionIcons: [IconPotions, IconSkills],
     Icon: IconWitch,
     interaction: "Brew",

@@ -23,7 +23,7 @@ export const canAttackOrParry = withStateKey("canAttackOrParry", (key) =>
   }),
 );
 
-export const canBlock = withStateKey("canBlock", (key) =>
+export const canBlockOrStagger = withStateKey("canBlockOrStagger", (key) =>
   selector({
     get: ({ get }) => get(stamina) >= get(shield).burden,
     key,

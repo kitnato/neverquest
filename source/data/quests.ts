@@ -170,6 +170,7 @@ export const QUESTS: Record<
   },
   completing: {
     description: "Complete all quests",
+    // See line 676.
     progression: [0],
     requiresTracking: true,
     title: "Completionist",
@@ -276,10 +277,10 @@ export const QUESTS: Record<
     title: "Capital punishment",
   },
   exhausting: {
-    description: "Be too exhausted to attack, dodge, parry or block @ times.",
+    description: "Be too exhausted to attack, dodge, parry, block or stagger @ times.",
     progression: [3, 10, 25, 50],
     requiresTracking: true,
-    title: "Out of breath",
+    title: "Wheeze",
   },
   flatlining: {
     description: "Die.",

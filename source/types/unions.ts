@@ -300,6 +300,7 @@ export type StateKey =
   | "canAttackOrParry"
   | "canAutoProgress"
   | "canBlock"
+  | "canBlockOrStagger"
   | "canCompleteQuests"
   | "canDodge"
   | "canReceiveAilment"

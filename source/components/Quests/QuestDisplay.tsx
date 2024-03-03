@@ -27,18 +27,18 @@ export function QuestDisplay({
   quest: Quest;
 }) {
   const questProgressValue = useRecoilValue(questProgress(quest));
-  const questStatusesValue = useRecoilValue(questStatuses(quest));
+  const questStatusValue = useRecoilValue(questStatuses(quest));
 
   const completeQuest = useCompleteQuest();
 
-  const questStatus = questStatusesValue[progressionIndex];
+  const status = questStatusValue[progressionIndex];
 
-  if (questStatus === undefined) {
+  if (status === undefined) {
     return;
   }
 
-  const hasCompletedQuest = isQuestBonus(questStatus);
-  const isQuestOver = hasCompletedQuest || questStatus === "achieved";
+  const hasCompletedQuest = isQuestBonus(status);
+  const isQuestOver = hasCompletedQuest || status === "achieved";
   const cappedProgress = isQuestOver ? progressionMaximum : questProgressValue;
   const choiceID = `quest-completion-${quest}-${progressionMaximum}`;
 
@@ -69,7 +69,7 @@ export function QuestDisplay({
         </Stack>
       </Stack>
 
-      {questStatus !== "incomplete" && (
+      {status !== "incomplete" && (
         <OverlayTrigger
           overlay={
             <Tooltip>
@@ -90,7 +90,7 @@ export function QuestDisplay({
               });
             }}
             type="radio"
-            value={hasCompletedQuest ? questStatus : undefined}
+            value={hasCompletedQuest ? status : undefined}
           >
             {[
               { bonus: "healthBonus", Icon: IconHealth },

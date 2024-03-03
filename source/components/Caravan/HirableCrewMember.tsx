@@ -40,7 +40,7 @@ export function HirableCrewMember({ crewMember }: { crewMember: CrewMember }) {
               <DescriptionDisplay description={description} descriptionIcons={descriptionIcons} />
             }
             Icon={Icon}
-            tooltip="Caravan crew member"
+            tooltip="Crew member"
           >
             <span>{name}</span>
           </IconDisplay>
@@ -84,7 +84,7 @@ export function HirableCrewMember({ crewMember }: { crewMember: CrewMember }) {
           />
         }
         Icon={IconUnknown}
-        tooltip="Caravan crew member"
+        tooltip="Crew member"
       >
         <span>{LABEL_UNKNOWN}</span>
       </IconDisplay>

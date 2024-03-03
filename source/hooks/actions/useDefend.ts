@@ -12,7 +12,7 @@ import { useTrainMastery } from "@neverquest/hooks/actions/useTrainMastery";
 import { staggerChance } from "@neverquest/state/ailments";
 import {
   canAttackOrParry,
-  canBlock,
+  canBlockOrStagger,
   canDodge,
   isAttacking,
   recoveryDuration,
@@ -70,15 +70,17 @@ export function useDefend() {
         set(isShowing("monsterOffense"), true);
 
         const { burden: armorBurden } = get(armor);
-        const deltaHealth: DeltaDisplay[] = [];
-        const deltaStamina: DeltaDisplay[] = [];
+        const shieldValue = get(shield);
+        const { burden: shieldBurden } = shieldValue;
+        const canBlockOrStaggerValue = get(canBlockOrStagger);
         const incursArmorBurden = !get(isTraitAcquired("stalwart")) && armorBurden > 0;
         const ownedItemLacrimatory = get(ownedItem("lacrimatory"));
         const canGatherTears = ownedItemLacrimatory !== undefined && get(tears) < TEARS_MAXIMUM;
-        const shieldValue = get(shield);
         const statusElementValue = get(statusElement);
 
-        let hasStaggered = false;
+        const deltaHealth: DeltaDisplay[] = [];
+        const deltaStamina: DeltaDisplay[] = [];
+
         let isAvoided = false;
 
         if (statusElementValue !== null) {
@@ -139,6 +141,7 @@ export function useDefend() {
         if (!isAvoided) {
           const hasParried = Math.random() <= get(parryChance);
           const hasBlocked = !hasParried && Math.random() <= get(blockChance);
+          const hasStaggered = !hasParried && Math.random() <= get(staggerChance);
           const thornsValue = get(thorns);
           const hasInflictedThorns = !hasBlocked && thornsValue > 0;
 
@@ -199,11 +202,8 @@ export function useDefend() {
             }
           }
 
-          // If not parried and blocking occurs, check & apply burden.
           if (hasBlocked) {
-            const { burden: shieldBurden } = shieldValue;
-
-            if (get(canBlock)) {
+            if (canBlockOrStaggerValue) {
               healthDamage = 0;
 
               deltaHealth.push({
@@ -213,27 +213,33 @@ export function useDefend() {
 
               changeStamina({ value: -shieldBurden });
               progressQuest({ quest: "blocking" });
-
-              if (Math.random() <= get(staggerChance)) {
-                set(monsterAilmentDuration("staggered"), get(masteryStatistic("stability")));
-
-                progressQuest({ quest: "staggering" });
-
-                changeMonsterHealth({
-                  contents: {
-                    color: "text-muted",
-                    value: "STAGGER",
-                  },
-                  value: 0,
-                });
-
-                hasStaggered = true;
-              }
             } else {
               deltaStamina.push(
                 {
                   color: "text-muted",
                   value: "CANNOT BLOCK",
+                },
+                {
+                  color: "text-danger",
+                  value: `(${shieldBurden})`,
+                },
+              );
+
+              progressQuest({ quest: "exhausting" });
+            }
+          }
+
+          if (hasStaggered) {
+            if (canBlockOrStaggerValue) {
+              set(monsterAilmentDuration("staggered"), get(masteryStatistic("stability")));
+
+              changeStamina({ value: -shieldBurden });
+              progressQuest({ quest: "staggering" });
+            } else {
+              deltaStamina.push(
+                {
+                  color: "text-muted",
+                  value: "CANNOT STAGGER",
                 },
                 {
                   color: "text-danger",
@@ -292,7 +298,7 @@ export function useDefend() {
             }
           }
 
-          // If poisoning occurs, check if has been deflected, otherwise apply poisonDuration.
+          // If poisoning occurs, check if has been deflected, otherwise apply poison duration.
           if (Math.random() <= get(poisonChance)) {
             if (Math.random() <= deflectionChanceValue) {
               progressQuest({ quest: "deflecting" });

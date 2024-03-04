@@ -38,8 +38,8 @@ export function useChangeMonsterHealth() {
 
         const isPositive = value > 0;
         const totalValue =
-          !isPositive && get(isMonsterAiling("staggered"))
-            ? Math.round(value * (1 + AILMENT_PENALTY.staggered))
+          !isPositive && get(isMonsterAiling("shocked"))
+            ? Math.round(value * (1 + AILMENT_PENALTY.shocked))
             : value;
         const formattedValue = formatNumber({ value: totalValue });
         const monsterHealthValue = get(monsterHealth);

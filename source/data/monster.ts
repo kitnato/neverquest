@@ -21,20 +21,20 @@ export const AILMENT_DESCRIPTION: Record<Ailment, Description> = {
     descriptionIcons: [IconMonsterAttackRate, IconDistance],
   },
   shocked: {
-    description: `Dealing ${formatNumber({
-      decimals: 0,
-      format: "percentage",
-      value: AILMENT_PENALTY.shocked,
-    })} decreased # damage.`,
-    descriptionIcons: [IconMonsterDamage],
-  },
-  staggered: {
     description: `Taking ${formatNumber({
       decimals: 0,
       format: "percentage",
-      value: AILMENT_PENALTY.staggered,
+      value: AILMENT_PENALTY.shocked,
     })} increased # damage.`,
     descriptionIcons: [IconDamage],
+  },
+  staggered: {
+    description: `Dealing ${formatNumber({
+      decimals: 0,
+      format: "percentage",
+      value: AILMENT_PENALTY.staggered,
+    })} decreased # damage.`,
+    descriptionIcons: [IconMonsterDamage],
   },
   stunned: {
     description: `Hit chance reduced to ${formatNumber({

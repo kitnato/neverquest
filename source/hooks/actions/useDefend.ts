@@ -346,7 +346,7 @@ export function useDefend() {
               trainMastery("resilience");
             }
 
-            if (!hasParried) {
+            if (!hasParried || !hasStaggered) {
               set(isShowing("recovery"), true);
               set(recoveryDuration, get(recoveryRate));
             }

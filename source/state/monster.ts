@@ -226,7 +226,8 @@ export const monsterDamageAiling = withStateKey("monsterDamageAiling", (key) =>
   selector({
     get: ({ get }) =>
       Math.round(
-        get(monsterDamage) * (get(isMonsterAiling("shocked")) ? 1 - AILMENT_PENALTY.shocked : 1),
+        get(monsterDamage) *
+          (get(isMonsterAiling("staggered")) ? 1 - AILMENT_PENALTY.staggered : 1),
       ),
     key,
   }),

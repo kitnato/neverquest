@@ -217,7 +217,7 @@ export const WEAPON_MODIFIER = {
   "one-handed": { ability: 1, burden: 1, damage: 1, price: 1, rate: 1, weight: 1 },
   ranged: { ability: 1.1, burden: 0.85, damage: 1.1, price: 1.25, rate: 1.1, weight: 1.15 },
   "two-handed": {
-    ability: 1.2,
+    ability: 1.15,
     burden: 1.3,
     damage: 1.2,
     price: 1.35,
@@ -252,7 +252,7 @@ export const WEAPON_SPECIFICATIONS: Record<
     ability: "stun",
     abilityChance: [
       { maximum: 0.2, minimum: 0.16 },
-      { maximum: 0.55, minimum: 0.53 },
+      { maximum: 0.5, minimum: 0.48 },
     ],
     IconAbility: IconStunChance,
     IconGearClass: IconBlunt,
@@ -261,7 +261,7 @@ export const WEAPON_SPECIFICATIONS: Record<
     ability: "bleed",
     abilityChance: [
       { maximum: 0.3, minimum: 0.26 },
-      { maximum: 0.65, minimum: 0.63 },
+      { maximum: 0.6, minimum: 0.58 },
     ],
     IconAbility: IconBleedChance,
     IconGearClass: IconPiercing,

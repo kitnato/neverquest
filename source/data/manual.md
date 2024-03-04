@@ -34,6 +34,8 @@ Total amount of damage you can take before game over at 0 health.
 
 Health is [regenerated](#health-regeneration) over time.
 
+Monsters also have an independent health meter.
+
 #### Stamina
 
 Several combat actions require stamina to execute them successfully. Most [gear](#gear) has a burden for an associated action which translate to a stamina cost that must be paid to be successful. For instance, when wielding a [weapon](#weapons) with burden 3, every attack will spend 3 stamina. Similarly, wearing [armor](#armor) incurs a burden that is paid when struck or [dodging](#dodge-chance) and [shields](#shields) incur this burden whenever an attack is [blocked](#block-chance).
@@ -104,7 +106,7 @@ The time duration between attacks. Does not take into account [recovery rate](#r
 
 #### Bleed rating
 
-A value determined by the chance of inflicting [bleed](#bleed) alongside total bleed damage, which is a percentage of weapon damage, and its duration. Only applies if a [piercing](#piercing-weapons) weapon is equipped.
+A value determined by the chance of inflicting [bleed](#bleeding) alongside total bleed damage, which is a percentage of weapon damage, and its duration. Only applies if a [piercing](#piercing-weapons) weapon is equipped.
 
 The bleed damage is increased by mastering [cruelty](#cruelty).
 
@@ -142,7 +144,7 @@ Requires the [evasion](#evasion) skill.
 
 A percentage determining the amount of monster health required before the next attack will kill it outright. Only applies if a [two-handed](#two-handed) weapon is equipped.
 
-The monster health threshold is increased by mastering [butchery](#butchery).
+This threshold is increased by mastering [butchery](#butchery).
 
 Requires the [siegecraft](#siegecraft) skill.
 
@@ -152,11 +154,13 @@ The amount of [health](#health) restored according to a certain rate.
 
 The restoration amount can be increased with the [vigor](#vigor) attribute and its rate with the [fortitude](#fortitude) attribute.
 
+Just like for health, monsters have an independent health regeneration meter.
+
 Requires the [calisthenics](#calisthenics) skill.
 
 #### Parry rating
 
-A value determined by the chance of successfully parrying when defending, along with the damage that is absorbed (after [protection](#protection)) and reflected back as a result. Only applies if a [slashing](#slashing-weapons) weapon is equipped.
+A value determined by the chance of successfully parrying when defending, along with the damage that is absorbed (after [protection](#protection)) and reflected back as a result. Only occurs if a [slashing](#slashing-weapons) weapon is equipped.
 
 The absorbed and reflected damage is increased by mastering [finesse](#finesse).
 
@@ -178,13 +182,13 @@ Requires the [archery](#archery) skill.
 
 #### Recovery rate
 
-The time duration until full [recovery](#recovery) from a monster's successful attack.
+The time duration until full [recovery](#recovery) from a monster's successful attack that is neither [blocked](#block-chance), [parried](#parry-rating) or [staggered](#stagger-rating).
 
 Can be decreased by mastering [resilience](#resilience).
 
 #### Stagger rating
 
-A value determined by the chance to [stagger](#stagger) and the stagger duration. Only applies if a [shield](#shields) is equipped.
+A value determined by the chance to [stagger](#staggered) and the stagger duration. Only applies if a [shield](#shields) is equipped.
 
 The stagger duration can be increased by mastering [stability](#stability).
 
@@ -192,7 +196,7 @@ Requires the [shieldcraft](#shieldcraft) skill.
 
 #### Stun rating
 
-A value determined by the chance to [stun](#stun) and the stun duration. Only applies if an appropriate [blunt](#blunt-weapons) weapon is equipped.
+A value determined by the chance to [stun](#stunned) and the stun duration. Only applies if an appropriate [blunt](#blunt-weapons) weapon is equipped.
 
 The stun duration can be increased by mastering [might](#might).
 
@@ -363,13 +367,13 @@ Whatever its melee or ranged, a weapon additionally falls into one of several cl
 
 ###### Blunt weapons
 
-Adds chance to [stun](#stun) for a certain duration. Being unarmed is considered as wielding a blunt weapon.
+Adds chance to [stun](#stunned) for a certain duration. Being unarmed is considered as wielding a blunt weapon.
 
 Stun requires the [traumatology](#traumatology) skill.
 
 ###### Piercing weapons
 
-Chance to inflict [bleed](#bleed).
+Chance to inflict [bleed](#bleeding).
 
 Bleed requires the [anatomy](#anatomy) skill.
 
@@ -410,7 +414,7 @@ Each of the following armor classes increases the protection value for certain t
 
 Grants a percentage chance to [block](#block-chance) all incoming damage. A shield's burden is paid in [stamina](#stamina) every time you successfully [block](#block-chance).
 
-Also grants [stagger chance](#stagger) with the acquisition of the [Traumatology](#traumatology) skill.
+Also grants [stagger chance](#staggered) with the acquisition of the [Traumatology](#traumatology) skill.
 
 ##### Small shields
 
@@ -537,7 +541,7 @@ Requires the [siegecraft](#siegecraft) skill.
 
 ### Cruelty
 
-Progress is gained by using [piercing](#piercing-weapons) weapons. Each rank increases [bleed](#bleed) damage.
+Progress is gained by using [piercing](#piercing-weapons) weapons. Each rank increases [bleed](#bleeding) damage.
 
 Requires the [anatomy](#anatomy) skill.
 
@@ -555,13 +559,13 @@ Requires the [archery](#archery) skill.
 
 ### Might
 
-Progress is gained by using [blunt](#blunt-weapons) weapons. Each rank increases how many of its attacks the monster is [stunned](#stun) for.
+Progress is gained by using [blunt](#blunt-weapons) weapons. Each rank increases how many of its attacks the monster is [stunned](#stunned) for.
 
 Requires the [traumatology](#traumatology) skill.
 
 ### Stability
 
-Progress is gained by successfully [blocking](#block-chance) with [shields](#shields). Each rank increases the [stagger](#stagger) duration.
+Progress is gained by successfully [blocking](#block-chance) with [shields](#shields). Each rank increases the [stagger](#staggered) duration.
 
 Requires the [shieldcraft](#shieldcraft) skill.
 
@@ -579,7 +583,7 @@ Some skills are also trained by other crew members, but require certain pre-cond
 
 ### Anatomy
 
-Unlocks [bleed](#bleed) when using [piercing](#piercing-weapons) weapons. Also unlocks the [Cruelty](#cruelty) mastery.
+Unlocks [bleed](#bleeding) when using [piercing](#piercing-weapons) weapons. Also unlocks the [Cruelty](#cruelty) mastery.
 
 ### Archery
 
@@ -613,13 +617,13 @@ Requires hiring the [blacksmith](#blacksmith).
 
 ### Shieldcraft
 
-Unlocks the use of [tower](#tower-shields) shields alongside the ability to [stagger](#stagger) monsters. Also unlocks the [stability](#stability) mastery.
+Unlocks the use of [tower](#tower-shields) shields alongside the ability to [stagger](#staggered) monsters. Also unlocks the [stability](#stability) mastery.
 
 Requires hiring the [blacksmith](#blacksmith).
 
 ### Traumatology
 
-Unlocks the ability to [stun](#stun) when attacking with [blunt](#blunt-weapons) weapons. Also unlocks the [might](#might) mastery.
+Unlocks the ability to [stun](#stunned) when attacking with [blunt](#blunt-weapons) weapons. Also unlocks the [might](#might) mastery.
 
 ## Ailments
 
@@ -655,15 +659,15 @@ Recovery occurs when damage is dealt, halting regeneration of [reserves](#reserv
 
 Ailments that are inflicted by you when attacking.
 
-#### Bleed
+#### Bleeding
 
-Certain successful attacks with a [piercing](#piercing-weapons) weapon can inflict bleeding on the monster, consisting of a proportional amount of damage inflicted regularly over a certain period of time. The extent of this is determined by the [bleed-rating](#bleed-rating).
+Certain attacks with a [piercing](#piercing-weapons) weapon can inflict bleeding on the monster, consisting of a proportional amount of damage inflicted regularly over a certain period of time. The extent of this is determined by the [bleed-rating](#bleed-rating).
 
 Requires the [anatomy](#anatomy) skill.
 
 #### Burning
 
-Inflicted by fire [elemental](#elemental-damage) damage. While burning, the monster cannot regenerate.
+Inflicted by fire [elemental](#elemental-damage) damage. While burning, the monster cannot [regenerate](#health-regeneration).
 
 #### Frozen
 
@@ -673,13 +677,13 @@ Inflicted by ice [elemental](#elemental-damage) damage. While frozen, attack rat
 
 Inflicted by lightning [elemental](#elemental-damage) damage. While shocked, the monster takes more damage from all sources.
 
-#### Stagger
+#### Staggered
 
 While staggered, the monster deals less damage. The extent of this is determined by the [stagger rating](#stagger-rating).
 
 Requires the [shieldcraft](#shieldcraft) skill.
 
-#### Stun
+#### Stunned
 
 While stunned, the monster's hit accuracy is reduced, which may make it miss an attack completely. The extent of this is determined by the [stun rating](#stun-rating).
 
@@ -699,7 +703,7 @@ Being unshielded increases one-handed melee damage.
 
 #### Bruiser
 
-Current stamina adds to unarmed damage and unarmed attacks have a chance to [stun](#stun) for each rank of the [strength](#strength) attribute. Stunning requires the [traumatology](#traumatology) skill.
+Current stamina adds to unarmed damage and unarmed attacks have a chance to [stun](#stunned) for each rank of the [strength](#strength) attribute. Stunning requires the [traumatology](#traumatology) skill.
 
 #### Colossus
 
@@ -723,7 +727,7 @@ While at [range](#range), all attacks with a [ranged](#ranged-weapons) weapon ar
 
 #### Shredder
 
-[Bleed](#bleed) damage is inflicted all at once, instead of being evenly spread over a certain duration.
+[Bleed](#bleeding) damage is inflicted all at once, instead of being evenly spread over a certain duration.
 
 #### Stalwart
 

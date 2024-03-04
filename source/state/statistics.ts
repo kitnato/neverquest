@@ -67,7 +67,10 @@ export const bleedDamage = withStateKey("bleedDamage", (key) =>
 
 export const bleedRating = withStateKey("bleedRating", (key) =>
   selector({
-    get: ({ get }) => Math.round(get(bleedDamage) * get(bleedChance) * PERCENTAGE_POINTS * 10),
+    get: ({ get }) =>
+      Math.round(
+        get(masteryStatistic("cruelty")) * PERCENTAGE_POINTS + get(bleedChance) * PERCENTAGE_POINTS,
+      ),
     key,
   }),
 );
@@ -238,11 +241,7 @@ export const parryRating = withStateKey("parryRating", (key) =>
   selector({
     get: ({ get }) =>
       Math.round(
-        get(parryChance) *
-          PERCENTAGE_POINTS *
-          get(parryAbsorption) *
-          PERCENTAGE_POINTS *
-          get(parryDamage),
+        get(parryChance) * PERCENTAGE_POINTS + get(masteryStatistic("finesse")) * PERCENTAGE_POINTS,
       ),
     key,
   }),

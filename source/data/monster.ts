@@ -151,8 +151,8 @@ export const POISON = {
     "res dominus": 0.4777,
   },
   magnitude: {
-    maximum: 0.2,
-    minimum: 0.05,
+    maximum: 0.25,
+    minimum: 0.075,
   },
   requiredStage: 45,
 };

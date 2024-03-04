@@ -2,6 +2,7 @@ import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { AilmentMeter } from "@neverquest/components/Monster/AilmentMeter";
+import { BLEED } from "@neverquest/data/statistics";
 import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth";
 import { useTimer } from "@neverquest/hooks/useTimer";
 import IconBleeding from "@neverquest/icons/bleeding.svg?react";
@@ -49,14 +50,19 @@ export function Bleeding() {
   });
 
   if (canReceiveAilmentBleeding) {
-    return (
-      <IconDisplay
-        className={getAnimationClass({ animation: "flipInX" })}
-        Icon={IconBleeding}
-        tooltip="Bleeding"
-      >
-        <AilmentMeter ailment="bleeding" totalDuration={duration} />
-      </IconDisplay>
-    );
+    if (duration === BLEED.base.duration) {
+      return (
+        <IconDisplay
+          className={getAnimationClass({ animation: "flipInX" })}
+          Icon={IconBleeding}
+          tooltip="Bleeding"
+        >
+          <AilmentMeter ailment="bleeding" totalDuration={duration} />
+        </IconDisplay>
+      );
+    }
+
+    // Render something so timers still work.
+    return <></>;
   }
 }

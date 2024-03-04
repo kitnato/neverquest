@@ -169,45 +169,6 @@ export function Inventory() {
             );
           })}
 
-        {storedItems
-          .filter(isRelicItem)
-          .toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2))
-          .map((relicItem) => {
-            const { ID, name } = relicItem;
-            const Action = RELIC_ACTIONS[name];
-
-            return (
-              <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
-                <ItemDisplay item={relicItem} />
-
-                <Stack className="ms-2" direction="horizontal" gap={3}>
-                  {Action !== undefined && <Action />}
-
-                  <DiscardItem item={relicItem} />
-                </Stack>
-              </div>
-            );
-          })}
-
-        {storedItems
-          .filter(isInfusableItem)
-          .toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2))
-          .map((infusableItem) => {
-            const { ID, name } = infusableItem;
-
-            return (
-              <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
-                <ItemDisplay item={infusableItem} />
-
-                <Stack className="ms-2" direction="horizontal" gap={3}>
-                  <InfusionInspect infusable={name} />
-
-                  <DiscardItem item={infusableItem} />
-                </Stack>
-              </div>
-            );
-          })}
-
         {[
           ...stackItems(
             storedItems
@@ -255,6 +216,45 @@ export function Inventory() {
             </div>
           );
         })}
+
+        {storedItems
+          .filter(isInfusableItem)
+          .toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2))
+          .map((infusableItem) => {
+            const { ID, name } = infusableItem;
+
+            return (
+              <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
+                <ItemDisplay item={infusableItem} />
+
+                <Stack className="ms-2" direction="horizontal" gap={3}>
+                  <InfusionInspect infusable={name} />
+
+                  <DiscardItem item={infusableItem} />
+                </Stack>
+              </div>
+            );
+          })}
+
+        {storedItems
+          .filter(isRelicItem)
+          .toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2))
+          .map((relicItem) => {
+            const { ID, name } = relicItem;
+            const Action = RELIC_ACTIONS[name];
+
+            return (
+              <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
+                <ItemDisplay item={relicItem} />
+
+                <Stack className="ms-2" direction="horizontal" gap={3}>
+                  {Action !== undefined && <Action />}
+
+                  <DiscardItem item={relicItem} />
+                </Stack>
+              </div>
+            );
+          })}
       </Stack>
     </Stack>
   );

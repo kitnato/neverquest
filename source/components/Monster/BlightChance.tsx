@@ -3,21 +3,18 @@ import { useRecoilValue } from "recoil";
 
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import {
-  LABEL_EMPTY,
-  LABEL_MAXIMUM,
-  PERCENTAGE_POINTS,
-  POPOVER_TRIGGER,
-} from "@neverquest/data/general";
+import { LABEL_EMPTY, LABEL_MAXIMUM, POPOVER_TRIGGER } from "@neverquest/data/general";
 import { BLIGHT } from "@neverquest/data/monster";
-import IconBlightRating from "@neverquest/icons/blight-rating.svg?react";
+import IconBlightChance from "@neverquest/icons/blight-chance.svg?react";
+import IconMonsterAttackRate from "@neverquest/icons/monster-attack-rate.svg?react";
+import IconPoisoned from "@neverquest/icons/poisoned.svg?react";
 import IconStamina from "@neverquest/icons/stamina.svg?react";
 import { blightChance } from "@neverquest/state/monster";
 import { isPoisoned } from "@neverquest/state/reserves";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-export function BlightRating() {
+export function BlightChance() {
   const blightChanceValue = useRecoilValue(blightChance);
   const isPoisonedValue = useRecoilValue(isPoisoned);
 
@@ -27,8 +24,8 @@ export function BlightRating() {
     return (
       <IconDisplay
         className={getAnimationClass({ animation: "flipInX" })}
-        Icon={IconBlightRating}
-        tooltip="Blight rating"
+        Icon={IconBlightChance}
+        tooltip="Blight chance"
       >
         <OverlayTrigger
           overlay={
@@ -41,10 +38,24 @@ export function BlightRating() {
                     </td>
 
                     <td>
-                      <span>
-                        {formatNumber({ format: "percentage", value: blightChanceValue })}&nbsp;on
-                        hit while poisoned
-                      </span>
+                      <Stack direction="horizontal" gap={1}>
+                        <span>
+                          {formatNumber({ format: "percentage", value: blightChanceValue })}&nbsp;on
+                        </span>
+
+                        <IconDisplay
+                          Icon={IconMonsterAttackRate}
+                          iconProps={{ className: "small" }}
+                        >
+                          <Stack direction="horizontal" gap={1}>
+                            <span>while</span>
+
+                            <IconDisplay Icon={IconPoisoned} iconProps={{ className: "small" }}>
+                              <span>poisoned</span>
+                            </IconDisplay>
+                          </Stack>
+                        </IconDisplay>
+                      </Stack>
                     </td>
                   </tr>
 
@@ -58,7 +69,7 @@ export function BlightRating() {
                         <span>-{formatNumber({ format: "percentage", value: increment })}</span>
 
                         <IconDisplay Icon={IconStamina} iconProps={{ className: "small" }}>
-                          <span>{LABEL_MAXIMUM}</span>
+                          <span>{LABEL_MAXIMUM} increments</span>
                         </IconDisplay>
                       </Stack>
                     </td>
@@ -72,7 +83,8 @@ export function BlightRating() {
           <span>
             {isPoisonedValue
               ? formatNumber({
-                  value: blightChanceValue * PERCENTAGE_POINTS * increment * PERCENTAGE_POINTS,
+                  format: "percentage",
+                  value: blightChanceValue,
                 })
               : LABEL_EMPTY}
           </span>

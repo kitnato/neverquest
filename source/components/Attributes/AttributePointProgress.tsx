@@ -32,8 +32,8 @@ export function AttributePointProgress({ isLoot }: { isLoot?: boolean }) {
         <Popover>
           <PopoverBody>
             <span>
-              {isLoot ? "Essence after collecting loot" : "Current essence"},&nbsp;and required
-              essence for next attribute point.
+              {isLoot ? "Essence after collecting loot" : "Current essence"}, and required essence
+              for next attribute point.
             </span>
           </PopoverBody>
         </Popover>

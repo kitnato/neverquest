@@ -13,7 +13,7 @@ import {
   BRAWLER_DAMAGE_BONUS,
   BRUISER,
   INOCULATED_DEFLECTION_BASE,
-  NUDIST_DODGE_BONUS,
+  NUDIST,
 } from "@neverquest/data/traits";
 import { bleed, bleedChance, staggerChance, stunChance } from "@neverquest/state/ailments";
 import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
@@ -189,7 +189,7 @@ export const dodgeChance = withStateKey("dodgeChance", (key) =>
         ? Math.min(
             get(attributeStatistic("agility")) *
               (1 + get(attributePowerBonus("agility"))) *
-              (get(isTraitAcquired("nudist")) && isUnarmored(get(armor)) ? NUDIST_DODGE_BONUS : 1),
+              (get(isTraitAcquired("nudist")) && isUnarmored(get(armor)) ? NUDIST.dodgeBonus : 1),
             ATTRIBUTES.agility.maximum ?? Number.POSITIVE_INFINITY,
           )
         : 0,

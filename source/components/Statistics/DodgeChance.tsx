@@ -5,7 +5,7 @@ import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LABEL_NO_PENALTY, LABEL_SEPARATOR } from "@neverquest/data/general";
-import { NUDIST_DODGE_BONUS } from "@neverquest/data/traits";
+import { NUDIST } from "@neverquest/data/traits";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconAgility from "@neverquest/icons/agility.svg?react";
 import IconBurden from "@neverquest/icons/burden.svg?react";
@@ -97,7 +97,7 @@ export function DodgeChance() {
                         </td>
 
                         <td>
-                          <span>×{NUDIST_DODGE_BONUS}</span>
+                          <span>×{NUDIST.dodgeBonus}</span>
                         </td>
                       </tr>
                     )}

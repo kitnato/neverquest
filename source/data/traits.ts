@@ -13,6 +13,7 @@ import IconDistance from "@neverquest/icons/distance.svg?react";
 import IconDodgeChance from "@neverquest/icons/dodge-chance.svg?react";
 import IconExecution from "@neverquest/icons/execution.svg?react";
 import IconExecutioner from "@neverquest/icons/executioner.svg?react";
+import IconHealth from "@neverquest/icons/health.svg?react";
 import IconInoculated from "@neverquest/icons/inoculated.svg?react";
 import IconNudist from "@neverquest/icons/nudist.svg?react";
 import IconProtection from "@neverquest/icons/protection.svg?react";
@@ -43,7 +44,10 @@ export const BRUISER = {
 
 export const INOCULATED_DEFLECTION_BASE = 0.33;
 
-export const NUDIST_DODGE_BONUS = 2;
+export const NUDIST = {
+  dodgeBonus: 2,
+  healAmount: 0.1,
+};
 
 export const TRAITS: Record<
   Trait,
@@ -95,8 +99,12 @@ export const TRAITS: Record<
     requiredSkill: "impermeability",
   },
   nudist: {
-    description: "While # unarmored, # dodge chance is doubled.",
-    descriptionIcons: [IconArmorNone, IconDodgeChance],
+    description: `While # unarmored, # dodge chance is doubled. ${formatNumber({
+      decimals: 0,
+      format: "percentage",
+      value: INOCULATED_DEFLECTION_BASE,
+    })} of maximum # health is healed when dodging.`,
+    descriptionIcons: [IconArmorNone, IconDodgeChance, IconHealth],
     Icon: IconNudist,
   },
   sharpshooter: {

@@ -95,12 +95,14 @@ export function BleedRating() {
                             {formatNumber({
                               value: bleedDamageValue * ticks,
                             })}
-                            &nbsp;over&nbsp;
-                            {formatNumber({
-                              decimals: 0,
-                              format: "time",
-                              value: duration,
-                            })}
+
+                            {ticks === 1
+                              ? "immediately"
+                              : `over ${formatNumber({
+                                  decimals: 0,
+                                  format: "time",
+                                  value: duration,
+                                })}`}
                           </span>
                         </IconDisplay>
                       </td>

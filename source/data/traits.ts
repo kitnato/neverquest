@@ -102,8 +102,8 @@ export const TRAITS: Record<
     description: `While # unarmored, # dodge chance is doubled. ${formatNumber({
       decimals: 0,
       format: "percentage",
-      value: INOCULATED_DEFLECTION_BASE,
-    })} of maximum # health is healed when dodging.`,
+      value: NUDIST.healAmount,
+    })} of maximum # health is restored when dodging.`,
     descriptionIcons: [IconArmorNone, IconDodgeChance, IconHealth],
     Icon: IconNudist,
   },

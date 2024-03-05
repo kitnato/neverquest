@@ -713,7 +713,7 @@ A [deflection](#deflection-chance) chance base value is added to the current def
 
 [Dodge](#dodge-chance) rate is doubled when not wearing any armor, effectively reducing the amount of attribute points required in [agility](#agility) to reach it.This is capped out at the maximum possible dodge rate (under 100%).
 
-Also heals for 10% of maximum [health](#health) on every dodge.
+Dodging also heals a certain amount of [health](#health) on every dodge.
 
 #### Sharpshooter
 

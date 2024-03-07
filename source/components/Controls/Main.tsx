@@ -94,46 +94,54 @@ export function Main() {
   return (
     <OverlayTrigger
       overlay={
-        showWarning ? (
-          <Popover>
-            <PopoverHeader className="text-center">
-              <span>Low&nbsp;</span>
+        <Popover>
+          <PopoverHeader className="text-center">
+            <span>Low&nbsp;</span>
 
-              <IconImage className="small" Icon={IconHealth} />
+            <IconImage className="small" Icon={IconHealth} />
 
-              <span>&nbsp;health</span>
-            </PopoverHeader>
+            <span>&nbsp;health</span>
+          </PopoverHeader>
 
-            <PopoverBody>
-              <span>&quot;The meaning of life is that it ends.&quot;</span>
-            </PopoverBody>
-          </Popover>
-        ) : (
-          <Tooltip>
-            <span>{tooltip}</span>
-          </Tooltip>
-        )
+          <PopoverBody>
+            <span>&quot;The meaning of life is that it ends.&quot;</span>
+          </PopoverBody>
+        </Popover>
       }
-      show={showWarning || undefined}
+      show={showWarning}
     >
       <div className={getAnimationClass({ animation: "bounceIn" })}>
-        <Button
-          className={animation}
-          disabled={isResting}
-          onClick={canResurrectValue ? resurrection : toggleAttacking}
-          variant="outline-dark"
+        <OverlayTrigger
+          overlay={
+            <Tooltip>
+              <span>{tooltip}</span>
+            </Tooltip>
+          }
+          placement={showWarning ? "bottom" : undefined}
         >
-          <IconImage Icon={Icon} />
+          <div>
+            <Button
+              className={animation}
+              disabled={isResting}
+              onClick={canResurrectValue ? resurrection : toggleAttacking}
+              variant="outline-dark"
+            >
+              <IconImage Icon={Icon} />
 
-          {(canResurrectValue || (isAutomincerEquipped && !isResting)) && (
-            <Badge bg="secondary" className="position-absolute top-50 start-100 translate-middle">
-              <IconImage
-                className="small"
-                Icon={canResurrectValue ? IconPhylactery : IconGrinding}
-              />
-            </Badge>
-          )}
-        </Button>
+              {(canResurrectValue || (isAutomincerEquipped && !isResting)) && (
+                <Badge
+                  bg="secondary"
+                  className="position-absolute top-50 start-100 translate-middle"
+                >
+                  <IconImage
+                    className="small"
+                    Icon={canResurrectValue ? IconPhylactery : IconGrinding}
+                  />
+                </Badge>
+              )}
+            </Button>
+          </div>
+        </OverlayTrigger>
       </div>
     </OverlayTrigger>
   );

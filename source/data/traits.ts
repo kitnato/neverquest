@@ -1,7 +1,6 @@
 import IconArmorNone from "@neverquest/icons/armor-none.svg?react";
 import IconArmor from "@neverquest/icons/armor.svg?react";
 import IconBleeding from "@neverquest/icons/bleeding.svg?react";
-import IconBlockChance from "@neverquest/icons/block-chance.svg?react";
 import IconBrawler from "@neverquest/icons/brawler.svg?react";
 import IconBruiser from "@neverquest/icons/bruiser.svg?react";
 import IconBurden from "@neverquest/icons/burden.svg?react";
@@ -46,8 +45,10 @@ export const INOCULATED_DEFLECTION_BASE = 0.33;
 
 export const NUDIST = {
   dodgeBonus: 2,
-  healAmount: 0.1,
+  healAmount: 0.07,
 };
+
+export const TANK_PROTECTION_BONUS = 0.3;
 
 export const TRAITS: Record<
   Trait,
@@ -124,8 +125,12 @@ export const TRAITS: Record<
     Icon: IconStalwart,
   },
   tank: {
-    description: "# Protection is increased by the current # block chance.",
-    descriptionIcons: [IconProtection, IconBlockChance],
+    description: `With a # shield equipped, # protection is increased by ${formatNumber({
+      decimals: 0,
+      format: "percentage",
+      value: TANK_PROTECTION_BONUS,
+    })}.`,
+    descriptionIcons: [IconShield, IconProtection],
     Icon: IconTank,
   },
 };

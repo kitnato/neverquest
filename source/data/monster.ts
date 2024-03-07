@@ -108,8 +108,8 @@ export const MONSTER_DAMAGE = {
     "res dominus": 1077,
   },
   menace: {
-    maximum: 2.5,
-    minimum: 0.5,
+    maximum: 2,
+    minimum: 0.3,
     requiredStage: RETIREMENT_STAGE + 1,
   },
 };
@@ -124,7 +124,7 @@ export const MONSTER_HEALTH = {
     "res dominus": 5777,
   },
   menace: {
-    maximum: 3.5,
+    maximum: 4,
     minimum: 0.35,
     requiredStage: RETIREMENT_STAGE + 1,
   },

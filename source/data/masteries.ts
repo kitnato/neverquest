@@ -10,6 +10,7 @@ import IconFinesse from "@neverquest/icons/finesse.svg?react";
 import IconHealth from "@neverquest/icons/health.svg?react";
 import IconMarksmanship from "@neverquest/icons/marksmanship.svg?react";
 import IconMight from "@neverquest/icons/might.svg?react";
+import IconMonsterDamage from "@neverquest/icons/monster-damage.svg?react";
 import IconParryChance from "@neverquest/icons/parry-chance.svg?react";
 import IconPiercing from "@neverquest/icons/piercing.svg?react";
 import IconRanged from "@neverquest/icons/ranged.svg?react";
@@ -89,8 +90,8 @@ export const MASTERIES: Record<
     descriptionIcons: [IconRecovery],
     Icon: IconResilience,
     increment: 1 / LEVELLING_MAXIMUM,
-    instructionIcons: [IconHealth],
-    instructions: "Trains when losing # health from attacks.",
+    instructionIcons: [IconHealth, IconMonsterDamage],
+    instructions: "Trains when losing # health when # struck.",
     requiredSkill: "armorcraft",
   },
   stability: {
@@ -99,9 +100,9 @@ export const MASTERIES: Record<
     descriptionIcons: [IconStaggered],
     Icon: IconStability,
     increment: Math.round(4000 / LEVELLING_MAXIMUM),
-    instructionIcons: [IconHealth, IconShield, IconBlockChance],
+    instructionIcons: [IconHealth, IconMonsterDamage, IconShield, IconBlockChance],
     instructions:
-      "Trains when losing # health from attacks while having a # shield equipped, as well as by # blocking.",
+      "Trains when losing # health when # struck while having a # shield equipped, as well as by # blocking.",
     requiredSkill: "shieldcraft",
   },
 };

@@ -6,6 +6,7 @@ import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LABEL_EMPTY, LABEL_NO_PENALTY, POPOVER_TRIGGER } from "@neverquest/data/general";
+import { TANK_PROTECTION_BONUS } from "@neverquest/data/traits";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconArmor from "@neverquest/icons/armor.svg?react";
@@ -19,7 +20,6 @@ import { questProgress } from "@neverquest/state/quests";
 import { protection } from "@neverquest/state/statistics";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import { isShowing } from "@neverquest/state/ui";
-import type { Shield } from "@neverquest/types";
 import { isUnshielded } from "@neverquest/types/type-guards";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
@@ -87,8 +87,9 @@ export function Protection() {
                             <span>
                               +
                               {formatNumber({
+                                decimals: 0,
                                 format: "percentage",
-                                value: (shieldValue as Shield).block,
+                                value: TANK_PROTECTION_BONUS,
                               })}
                             </span>
                           )}

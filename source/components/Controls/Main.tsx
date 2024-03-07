@@ -50,10 +50,7 @@ export function Main() {
   const resurrection = useResurrection();
 
   const isResting =
-    hasFlatlinedValue ||
-    isStageCompletedValue ||
-    locationValue === "caravan" ||
-    encounterValue === "void";
+    isStageCompletedValue || locationValue === "caravan" || encounterValue === "void";
   const pulseAnimation = getAnimationClass({
     animation: "pulse",
     isInfinite: true,
@@ -122,7 +119,7 @@ export function Main() {
           <div>
             <Button
               className={animation}
-              disabled={isResting}
+              disabled={isResting || (!canResurrectValue && hasFlatlinedValue)}
               onClick={canResurrectValue ? resurrection : toggleAttacking}
               variant="outline-dark"
             >

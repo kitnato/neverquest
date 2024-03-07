@@ -3,6 +3,7 @@ import IconAlchemist from "@neverquest/icons/alchemist.svg?react";
 import IconAmmunitionPouch from "@neverquest/icons/ammunition-pouch.svg?react";
 import IconAmmunition from "@neverquest/icons/ammunition.svg?react";
 import IconAntidote from "@neverquest/icons/antidote.svg?react";
+import IconAttack from "@neverquest/icons/attack.svg?react";
 import IconAutomincer from "@neverquest/icons/automincer.svg?react";
 import IconBandages from "@neverquest/icons/bandages.svg?react";
 import IconBlighted from "@neverquest/icons/blighted.svg?react";
@@ -46,6 +47,7 @@ import IconSalve from "@neverquest/icons/salve.svg?react";
 import IconSapphire from "@neverquest/icons/sapphire.svg?react";
 import IconStage from "@neverquest/icons/stage.svg?react";
 import IconStamina from "@neverquest/icons/stamina.svg?react";
+import IconTears from "@neverquest/icons/tears.svg?react";
 import IconThaumaturgicGoggles from "@neverquest/icons/thaumaturgic-goggles.svg?react";
 import IconTopaz from "@neverquest/icons/topaz.svg?react";
 import IconTornManuscript from "@neverquest/icons/torn-manuscript.svg?react";
@@ -292,8 +294,8 @@ export const RELICS: Record<
     },
   },
   "dream catcher": {
-    description: "While # equipped and attacking, disengages the bearer if at low # health.",
-    descriptionIcons: [IconProtected, IconHealth],
+    description: "While # equipped # and attacking, disengages the bearer if at low # health.",
+    descriptionIcons: [IconProtected, IconAttack, IconHealth],
     Icon: IconDreamCatcher,
     item: {
       ID: "",
@@ -324,8 +326,7 @@ export const RELICS: Record<
     },
   },
   hearthstone: {
-    description:
-      "Allows for instant travel back to the # caravan regardless of any # lurking monsters.",
+    description: "Instantly travel back to the # caravan regardless of any # lurking monsters.",
     descriptionIcons: [IconCaravan, IconMonsterLurking],
     Icon: IconStone,
     item: {
@@ -358,8 +359,8 @@ export const RELICS: Record<
     },
   },
   lacrimatory: {
-    description: "Enables the collection of samples from # noxious foes.",
-    descriptionIcons: [IconPoisonRating],
+    description: "Collects # tears from # noxious foes.",
+    descriptionIcons: [IconTears, IconPoisonRating],
     Icon: IconLacrimatory,
     item: {
       ID: "",
@@ -369,7 +370,7 @@ export const RELICS: Record<
     },
   },
   memento: {
-    description: "Lost memories kept safe unlock pathways to remarkable discoveries.",
+    description: "Lost memories kept safe unlock pathways to remarkable discoveries ...",
     Icon: IconMemento,
     item: {
       ID: "",

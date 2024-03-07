@@ -14,6 +14,7 @@ import {
   BRUISER,
   INOCULATED_DEFLECTION_BASE,
   NUDIST,
+  TANK_PROTECTION_BONUS,
 } from "@neverquest/data/traits";
 import { bleed, bleedChance, staggerChance, stunChance } from "@neverquest/state/ailments";
 import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
@@ -23,7 +24,6 @@ import { questsBonus } from "@neverquest/state/quests";
 import { stamina } from "@neverquest/state/reserves";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { isTraitAcquired } from "@neverquest/state/traits";
-import type { Shield } from "@neverquest/types";
 import {
   isMelee,
   isRanged,
@@ -254,7 +254,7 @@ export const protection = withStateKey("protection", (key) =>
       const shieldValue = get(shield);
 
       if (!isUnshielded(shieldValue) && get(isTraitAcquired("tank"))) {
-        return Math.ceil(protection * (1 + (shieldValue as Shield).block));
+        return Math.ceil(protection * (1 + TANK_PROTECTION_BONUS));
       }
 
       return protection;

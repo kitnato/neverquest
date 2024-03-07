@@ -110,8 +110,6 @@ export function Damage() {
                       </tr>
                     )}
 
-                    <ElementalDetails slot="weapon" />
-
                     {attributeStatisticStrength > 0 && (
                       <tr>
                         <td>
@@ -164,6 +162,8 @@ export function Damage() {
                         </td>
                       </tr>
                     )}
+
+                    <ElementalDetails slot="weapon" />
 
                     {questsBonusDamage > 0 && (
                       <tr>

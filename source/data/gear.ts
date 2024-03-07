@@ -61,7 +61,7 @@ export const ARMOR_SPECIFICATIONS: Record<
     ],
     deflection: [
       { maximum: 0.3, minimum: 0.28 },
-      { maximum: 0.75, minimum: 0.73 },
+      { maximum: 0.7, minimum: 0.68 },
     ],
     Icon: IconArmorLight,
     price: { maximum: 5000, minimum: 1 },

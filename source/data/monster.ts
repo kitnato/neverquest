@@ -124,7 +124,7 @@ export const MONSTER_HEALTH = {
     "res dominus": 5777,
   },
   menace: {
-    maximum: 3,
+    maximum: 3.5,
     minimum: 0.35,
     requiredStage: RETIREMENT_STAGE + 1,
   },

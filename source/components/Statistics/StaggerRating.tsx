@@ -47,10 +47,7 @@ export function StaggerRating() {
 
                       <td>
                         <IconDisplay Icon={IconStaggerChance} iconProps={{ className: "small" }}>
-                          <span>
-                            {formatNumber({ format: "percentage", value: stagger })}&nbsp;when
-                            blocking
-                          </span>
+                          <span>{formatNumber({ format: "percentage", value: stagger })}</span>
                         </IconDisplay>
                       </td>
                     </tr>

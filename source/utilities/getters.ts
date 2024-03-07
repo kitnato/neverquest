@@ -32,7 +32,6 @@ import {
 import {
   CONSUMABLES,
   ELEMENTALS,
-  ELEMENTAL_GEAR_EFFECT,
   GEMS,
   GEMS_MAXIMUM,
   GEM_BASE,
@@ -231,7 +230,6 @@ export function getGearElementalEffects({
   powerLevel: number;
 }) {
   if (isArmor(gear) || isUnarmed(gear) || isUnarmored(gear) || isWeapon(gear)) {
-    const { base, multiplier } = ELEMENTAL_GEAR_EFFECT;
     const effects = {
       fire: { damage: 0, duration: 0 },
       ice: { damage: 0, duration: 0 },
@@ -244,8 +242,7 @@ export function getGearElementalEffects({
 
       effects[elemental] = {
         damage: Math.ceil(
-          (powerLevel * multiplier + base) *
-            getFromRange({ factor: (amount - 1) / (GEMS_MAXIMUM - 1), ...damage }),
+          powerLevel * getFromRange({ factor: (amount - 1) / (GEMS_MAXIMUM - 1), ...damage }),
         ),
         duration: Math.round(
           getFromRange({

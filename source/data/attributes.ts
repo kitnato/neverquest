@@ -59,7 +59,7 @@ export const ATTRIBUTES: Record<
     Icon: IconEndurance,
     increment: 5,
     powerBonus: 0.03,
-    rankBonus: { increment: 5, maximum: 150 },
+    rankBonus: { increment: 7, maximum: 200 },
     shows: "stamina",
   },
   fortitude: {

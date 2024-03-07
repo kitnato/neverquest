@@ -74,6 +74,35 @@ export function ShieldName({
                 </td>
               </tr>
 
+              <tr>
+                {isSkillAcquiredShieldcraft ? (
+                  <>
+                    <td>
+                      <span>Stagger chance:</span>
+                    </td>
+
+                    <td>
+                      <Stack direction="horizontal" gap={1}>
+                        <IconDisplay Icon={IconStaggerChance} iconProps={{ className: "small" }}>
+                          <span>{formatNumber({ format: "percentage", value: stagger })}</span>
+                        </IconDisplay>
+
+                        {showComparison && (
+                          <GearComparison
+                            difference={stagger - shieldEquippedValue.stagger}
+                            showing="offhand"
+                          />
+                        )}
+                      </Stack>
+                    </td>
+                  </>
+                ) : (
+                  <td className="text-end">
+                    <span>{LABEL_UNKNOWN}</span>
+                  </td>
+                )}
+              </tr>
+
               <BurdenDetail
                 burden={burden}
                 comparison={
@@ -103,37 +132,6 @@ export function ShieldName({
                             </IconDisplay>
                           );
                         })()}
-                      </td>
-                    </>
-                  ) : (
-                    <td className="text-end">
-                      <span>{LABEL_UNKNOWN}</span>
-                    </td>
-                  )}
-                </tr>
-              )}
-
-              {stagger > 0 && (
-                <tr>
-                  {isSkillAcquiredShieldcraft ? (
-                    <>
-                      <td>
-                        <span>Stagger chance:</span>
-                      </td>
-
-                      <td>
-                        <Stack direction="horizontal" gap={1}>
-                          <IconDisplay Icon={IconStaggerChance} iconProps={{ className: "small" }}>
-                            <span>{formatNumber({ format: "percentage", value: stagger })}</span>
-                          </IconDisplay>
-
-                          {showComparison && (
-                            <GearComparison
-                              difference={stagger - shieldEquippedValue.stagger}
-                              showing="offhand"
-                            />
-                          )}
-                        </Stack>
                       </td>
                     </>
                   ) : (

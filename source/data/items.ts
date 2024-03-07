@@ -126,10 +126,6 @@ export const CONSUMABLES: Record<
   },
 };
 
-export const ELEMENTAL_GEAR_EFFECT = {
-  base: 5,
-  multiplier: 3,
-};
 export const ELEMENTALS: Record<
   Elemental,
   {
@@ -145,7 +141,7 @@ export const ELEMENTALS: Record<
   fire: {
     ailment: "burning",
     color: "text-orange",
-    damage: { maximum: 0.8, minimum: 0.1 },
+    damage: { maximum: 3, minimum: 1.75 },
     duration: { maximum: 2500, minimum: 1200 },
     durationCap: 7500,
     gem: "ruby",
@@ -154,7 +150,7 @@ export const ELEMENTALS: Record<
   ice: {
     ailment: "frozen",
     color: "text-blue",
-    damage: { maximum: 0.4, minimum: 0.05 },
+    damage: { maximum: 2, minimum: 1 },
     duration: { maximum: 2000, minimum: 900 },
     durationCap: 3000,
     gem: "sapphire",
@@ -162,8 +158,8 @@ export const ELEMENTALS: Record<
   },
   lightning: {
     ailment: "shocked",
-    color: "text-indigo",
-    damage: { maximum: 0.6, minimum: 0.075 },
+    color: "text-yellow",
+    damage: { maximum: 2.5, minimum: 1.25 },
     duration: { maximum: 2200, minimum: 1000 },
     durationCap: 5000,
     gem: "topaz",

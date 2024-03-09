@@ -53,7 +53,7 @@ import {
 } from "@neverquest/state/statistics";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import { isShowing } from "@neverquest/state/ui";
-import { isUnarmored, isUnshielded } from "@neverquest/types/type-guards";
+import { isUnarmored } from "@neverquest/types/type-guards";
 import type { DeltaDisplay } from "@neverquest/types/ui";
 import { ELEMENTAL_TYPES } from "@neverquest/types/unions";
 import { formatNumber } from "@neverquest/utilities/formatters";
@@ -180,7 +180,7 @@ export function useDefend() {
         let healthDamage = totalDamage > 0 ? totalDamage : 0;
         let monsterHealthDamage = 0;
 
-        // If parrying occurs, check if possible (burden is not applied).
+        // If parrying occurs, check if it's possible.
         if (hasParried) {
           if (get(canAttackOrParry)) {
             const reflectedDamage = Math.round(monsterDamageAilingValue * get(parryDamage));
@@ -236,7 +236,9 @@ export function useDefend() {
               value: "BLOCKED",
             });
 
+            trainMastery("stability");
             changeStamina({ value: -shieldBurden });
+
             progressQuest({ quest: "blocking" });
           } else {
             deltaStamina.push(
@@ -259,6 +261,8 @@ export function useDefend() {
             set(monsterAilmentDuration("staggered"), get(masteryStatistic("stability")));
 
             changeStamina({ value: -shieldBurden });
+            trainMastery("stability");
+
             progressQuest({ quest: "staggering" });
           } else {
             deltaStamina.push(
@@ -366,19 +370,13 @@ export function useDefend() {
           );
         }
 
-        if (!hasBlocked) {
-          if (healthDamage > 0) {
-            trainMastery("resilience");
-          }
-
-          if (!hasParried || !hasStaggered) {
-            set(isShowing("recovery"), true);
-            set(recoveryDuration, get(recoveryRate));
-          }
+        if (healthDamage > 0) {
+          trainMastery("resilience");
         }
 
-        if (!isUnshielded(shieldValue) && healthDamage > 0) {
-          trainMastery("stability");
+        if (!hasBlocked && !hasParried && !hasStaggered) {
+          set(isShowing("recovery"), true);
+          set(recoveryDuration, get(recoveryRate));
         }
 
         // Take any damage and show any stamina costs.
@@ -403,7 +401,7 @@ export function useDefend() {
           });
         }
 
-        if (hasStaggered || monsterHealthDamage > 0) {
+        if ((hasStaggered && canBlockOrStaggerValue) || monsterHealthDamage > 0) {
           const monsterElementValue = get(monsterElement);
 
           if (monsterElementValue !== null) {

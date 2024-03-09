@@ -23,7 +23,7 @@ export function Loot() {
       progression();
       autoProgressStage();
     },
-    setTick: setLootingDuration,
+    setDuration: setLootingDuration,
     stop: !isLootingValue,
   });
 

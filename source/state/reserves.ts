@@ -146,10 +146,7 @@ export const regenerationAmount = withStateKey("regenerationAmount", (key) =>
     get:
       (reserve: Reserve) =>
       ({ get }) =>
-        RESERVES[reserve].baseRegenerationAmount +
-        Math.round(
-          get(attributeStatistic("fortitude")) * (1 + get(attributePowerBonus("fortitude"))),
-        ),
+        Math.ceil(RESERVES[reserve].regeneration * get(reserve === "health" ? health : stamina)),
     key,
   }),
 );
@@ -162,7 +159,8 @@ export const regenerationRate = withStateKey("regenerationRate", (key) =>
         const { baseRegenerationRate } = RESERVES[reserve];
 
         return Math.round(
-          baseRegenerationRate - baseRegenerationRate * get(reserveRegenerationRateReduction),
+          baseRegenerationRate +
+            baseRegenerationRate * get(reserveRegenerationRateReduction(reserve)),
         );
       },
     key,
@@ -172,8 +170,17 @@ export const regenerationRate = withStateKey("regenerationRate", (key) =>
 export const reserveRegenerationRateReduction = withStateKey(
   "reserveRegenerationRateReduction",
   (key) =>
-    selector({
-      get: ({ get }) => get(attributeStatistic("vigor")) * (1 + get(attributePowerBonus("vigor"))),
+    selectorFamily({
+      get:
+        (reserve: Reserve) =>
+        ({ get }) => {
+          const { regenerationAttribute } = RESERVES[reserve];
+
+          return (
+            get(attributeStatistic(regenerationAttribute)) *
+            (1 + get(attributePowerBonus(regenerationAttribute)))
+          );
+        },
       key,
     }),
 );

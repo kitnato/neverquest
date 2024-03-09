@@ -4,8 +4,7 @@ import { useRecoilValue } from "recoil";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { PERCENTAGE_POINTS } from "@neverquest/data/general";
-import IconHealth from "@neverquest/icons/health.svg?react";
-import IconStamina from "@neverquest/icons/stamina.svg?react";
+import { REGENERATION_METER_ANIMATION_THRESHOLD, RESERVES } from "@neverquest/data/reserves";
 import { isRecovering } from "@neverquest/state/character";
 import {
   regenerationAmount,
@@ -16,14 +15,13 @@ import type { Reserve } from "@neverquest/types/unions";
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
 
 export function RegenerationMeter({ reserve }: { reserve: Reserve }) {
-  const isHealth = reserve === "health";
-
   const regenerationAmountValue = useRecoilValue(regenerationAmount(reserve));
   const regenerationDurationValue = useRecoilValue(regenerationDuration(reserve));
   const regenerationRateValue = useRecoilValue(regenerationRate(reserve));
   const isRecoveringValue = useRecoilValue(isRecovering);
 
-  const Icon = isHealth ? IconHealth : IconStamina;
+  const { Icon } = RESERVES[reserve];
+  const isContinuous = regenerationRateValue <= REGENERATION_METER_ANIMATION_THRESHOLD;
   const regenerationProgress =
     regenerationDurationValue === 0 ? 0 : regenerationRateValue - regenerationDurationValue;
 
@@ -32,7 +30,11 @@ export function RegenerationMeter({ reserve }: { reserve: Reserve }) {
       attachment="above"
       disableTransitions
       isSmall
-      value={(regenerationProgress / regenerationRateValue) * PERCENTAGE_POINTS}
+      value={
+        isContinuous
+          ? PERCENTAGE_POINTS
+          : (regenerationProgress / regenerationRateValue) * PERCENTAGE_POINTS
+      }
       variant="secondary"
     >
       {(() => {

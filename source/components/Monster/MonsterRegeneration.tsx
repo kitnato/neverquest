@@ -41,7 +41,7 @@ export function MonsterRegeneration() {
     onElapsed: () => {
       changeMonsterHealth({ value: regenerationAmount });
     },
-    setTick: setMonsterRegenerationDuration,
+    setDuration: setMonsterRegenerationDuration,
     stop: isMonsterAtFullHealthValue || isMonsterBurning || isMonsterDeadValue,
   });
 

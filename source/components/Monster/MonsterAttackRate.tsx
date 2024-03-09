@@ -34,7 +34,7 @@ export function MonsterAttackRate() {
   useTimer({
     factor: isMonsterFrozen ? 1 - AILMENT_PENALTY.frozen : 1,
     onElapsed: defend,
-    setTick: setMonsterAttackDuration,
+    setDuration: setMonsterAttackDuration,
     stop: !hasMonsterClosedValue || !isAttackingValue || isMonsterDeadValue,
   });
 

@@ -8,23 +8,24 @@ import IconDexterity from "@neverquest/icons/dexterity.svg?react";
 import IconDodgeChance from "@neverquest/icons/dodge-chance.svg?react";
 import IconEndurance from "@neverquest/icons/endurance.svg?react";
 import IconFortitude from "@neverquest/icons/fortitude.svg?react";
+import IconHealthRegeneration from "@neverquest/icons/health-regeneration.svg?react";
 import IconHealth from "@neverquest/icons/health.svg?react";
 import IconPerception from "@neverquest/icons/perception.svg?react";
-import IconRegenerationAmount from "@neverquest/icons/regeneration-amount.svg?react";
-import IconRegenerationRate from "@neverquest/icons/regeneration-rate.svg?react";
 import IconSpeed from "@neverquest/icons/speed.svg?react";
+import IconStaminaRegeneration from "@neverquest/icons/stamina-regeneration.svg?react";
 import IconStamina from "@neverquest/icons/stamina.svg?react";
 import IconStrength from "@neverquest/icons/strength.svg?react";
 import IconVigor from "@neverquest/icons/vigor.svg?react";
 import IconVitality from "@neverquest/icons/vitality.svg?react";
 import type { AttributeOrMasteryBaseData } from "@neverquest/types";
-import type { Attribute, Showing, Skill } from "@neverquest/types/unions";
+import type { Attribute, NumberFormat, Showing, Skill } from "@neverquest/types/unions";
 
 export const ATTRIBUTE_COST_BASE = 2;
 
 export const ATTRIBUTES: Record<
   Attribute,
   AttributeOrMasteryBaseData & {
+    format: NumberFormat;
     maximum?: number;
     powerBonus: number;
     rankBonus?: { increment: number; maximum: number };
@@ -36,6 +37,7 @@ export const ATTRIBUTES: Record<
     base: 0.03,
     description: "Increases chance to # dodge an attack.",
     descriptionIcons: [IconDodgeChance],
+    format: "percentage",
     Icon: IconAgility,
     increment: 0.025,
     maximum: 0.95,
@@ -46,6 +48,7 @@ export const ATTRIBUTES: Record<
     base: 0.03,
     description: "Increases # critical strike chance.",
     descriptionIcons: [IconCriticalChance],
+    format: "percentage",
     Icon: IconDexterity,
     increment: 0.0066,
     maximum: 0.5,
@@ -56,6 +59,7 @@ export const ATTRIBUTES: Record<
     base: RESERVES.stamina.baseAmount,
     description: "Increases maximum # stamina.",
     descriptionIcons: [IconStamina],
+    format: "integer",
     Icon: IconEndurance,
     increment: 5,
     powerBonus: 0.03,
@@ -64,18 +68,20 @@ export const ATTRIBUTES: Record<
   },
   fortitude: {
     base: 0,
-    description: "Increases health and stamina # regeneration amount.",
-    descriptionIcons: [IconRegenerationAmount],
+    description: "Increases health # regeneration rate.",
+    descriptionIcons: [IconHealthRegeneration],
+    format: "percentage",
     Icon: IconFortitude,
-    increment: 1,
-    maximum: 120,
-    powerBonus: 0.01,
+    increment: -0.025,
+    maximum: 0.9,
+    powerBonus: 0.002,
     requiredSkill: "calisthenics",
   },
   perception: {
     base: 1.2,
     description: "Increases # critical strike damage.",
     descriptionIcons: [IconCriticalDamage],
+    format: "percentage",
     Icon: IconPerception,
     increment: 0.03,
     maximum: 2.5,
@@ -86,8 +92,9 @@ export const ATTRIBUTES: Record<
     base: 0,
     description: "Reduces # attack rate.",
     descriptionIcons: [IconAttackRate],
+    format: "percentage",
     Icon: IconSpeed,
-    increment: 0.015,
+    increment: -0.015,
     maximum: 0.75,
     powerBonus: 0.001,
     shows: "attackRate",
@@ -96,6 +103,7 @@ export const ATTRIBUTES: Record<
     base: 0,
     description: "Increases # damage.",
     descriptionIcons: [IconDamage],
+    format: "integer",
     Icon: IconStrength,
     increment: 2,
     powerBonus: 0.01,
@@ -104,11 +112,12 @@ export const ATTRIBUTES: Record<
   },
   vigor: {
     base: 0,
-    description: "Reduces health and stamina # regeneration rate.",
-    descriptionIcons: [IconRegenerationRate],
+    description: "Reduces stamina # regeneration rate.",
+    descriptionIcons: [IconStaminaRegeneration],
+    format: "percentage",
     Icon: IconVigor,
-    increment: 0.015,
-    maximum: 0.85,
+    increment: -0.025,
+    maximum: 0.9,
     powerBonus: 0.002,
     requiredSkill: "calisthenics",
   },
@@ -116,6 +125,7 @@ export const ATTRIBUTES: Record<
     base: RESERVES.health.baseAmount,
     description: "Increases maximum # health.",
     descriptionIcons: [IconHealth],
+    format: "integer",
     Icon: IconVitality,
     increment: 15,
     powerBonus: 0.025,

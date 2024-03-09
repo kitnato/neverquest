@@ -17,7 +17,7 @@ export function Staggered() {
   const setMonsterStaggerDuration = useSetRecoilState(monsterAilmentDuration("staggered"));
 
   useTimer({
-    setTick: setMonsterStaggerDuration,
+    setDuration: setMonsterStaggerDuration,
     stop: !isMonsterStaggered || isMonsterDeadValue,
   });
 

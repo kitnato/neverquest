@@ -31,7 +31,7 @@ export type DeltaReserveBase = {
 
 export type Description = {
   description: string;
-  descriptionIcons?: SVGIcon[];
+  descriptionIcons?: [SVGIcon, ...SVGIcon[]];
 };
 
 export type UIAttachment = "above" | "below";

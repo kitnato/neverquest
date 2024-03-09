@@ -16,7 +16,7 @@ export function RageMeter() {
 
   return (
     <LabelledProgressBar
-      isStriped={isEnragedValue}
+      striping={{ animated: isEnragedValue, striped: isEnragedValue }}
       value={(rageValue / maximum) * PERCENTAGE_POINTS}
       variant="secondary"
     >

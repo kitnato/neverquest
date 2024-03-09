@@ -13,6 +13,7 @@ export type Armor = GearItemBase & {
 
 export type AttributeOrMasteryBaseData = Description & {
   base: number;
+  descriptionIcons: [SVGIcon, ...SVGIcon[]];
   Icon: SVGIcon;
   increment: number;
 };

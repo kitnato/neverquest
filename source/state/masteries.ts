@@ -80,10 +80,15 @@ export const masteryStatistic = withStateKey("masteryStatistic", (key) =>
     get:
       (mastery: Mastery) =>
       ({ get }) => {
-        const { base, increment } = MASTERIES[mastery];
-        const masteryRankValue = get(masteryRank(mastery));
+        const { base, increment, requiredSkill } = MASTERIES[mastery];
 
-        return getComputedStatistic({ base, increment, rank: masteryRankValue });
+        if (get(isSkillAcquired(requiredSkill))) {
+          const masteryRankValue = get(masteryRank(mastery));
+
+          return getComputedStatistic({ base, increment, rank: masteryRankValue });
+        }
+
+        return 0;
       },
     key,
   }),

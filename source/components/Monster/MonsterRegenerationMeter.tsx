@@ -14,18 +14,18 @@ export function MonsterRegenerationMeter({ amount }: { amount: number }) {
   const monsterRegenerationDurationValue = useRecoilValue(monsterRegenerationDuration);
 
   const { duration, ticks } = MONSTER_REGENERATION;
-  const regenerationRate = Math.round(duration / ticks);
+  const monsterRegenerationRate = Math.round(duration / ticks);
   const regenerationProgress =
     monsterRegenerationDurationValue === 0
       ? 0
-      : regenerationRate - monsterRegenerationDurationValue;
+      : monsterRegenerationRate - monsterRegenerationDurationValue;
 
   return (
     <LabelledProgressBar
       attachment="above"
       disableTransitions
       isSmall
-      value={(regenerationProgress / regenerationRate) * PERCENTAGE_POINTS}
+      value={(regenerationProgress / monsterRegenerationRate) * PERCENTAGE_POINTS}
       variant="secondary"
     >
       {(() => {
@@ -43,7 +43,7 @@ export function MonsterRegenerationMeter({ amount }: { amount: number }) {
                   {amount}&nbsp;per&nbsp;
                   {formatNumber({
                     format: "time",
-                    value: regenerationRate,
+                    value: monsterRegenerationRate,
                   })}
                 </span>
               </IconDisplay>
@@ -60,7 +60,7 @@ export function MonsterRegenerationMeter({ amount }: { amount: number }) {
                 {amount}&nbsp;in&nbsp;
                 {formatNumber({
                   format: "time",
-                  value: regenerationRate - regenerationProgress,
+                  value: monsterRegenerationRate - regenerationProgress,
                 })}
               </span>
             </IconDisplay>

@@ -31,7 +31,7 @@ export const LABEL_SEPARATOR = "·";
 export const LABEL_SKILL_REQUIRED = "Requires a skill.";
 export const LABEL_UNKNOWN = "???";
 
-export const LEVELLING_CUTOFF = 100;
+export const LEVELLING_THRESHOLD = 100;
 export const LEVELLING_MAXIMUM = 77;
 
 export const NAME_LENGTH_MAXIMUM = 50;

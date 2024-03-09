@@ -7,6 +7,7 @@ import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
 import { LABEL_MAXIMUM, PERCENTAGE_POINTS } from "@neverquest/data/general";
+import { RESERVES } from "@neverquest/data/reserves";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { usePreviousValue } from "@neverquest/hooks/usePreviousValue";
 import IconBlighted from "@neverquest/icons/blighted.svg?react";
@@ -39,9 +40,9 @@ export function ReserveMeter({ PrefixIcon, reserve }: { PrefixIcon?: SVGIcon; re
   const [reserveValue, setReserve] = useRecoilState(reserveState);
   const ailmentExtent = useRecoilValue(isHealth ? poisonDuration : blightMagnitude);
   const isAiling = useRecoilValue(isHealth ? isPoisoned : isBlighted);
-  const isRegeneratingValue = useRecoilValue(isRegenerating(isHealth ? "health" : "stamina"));
+  const isRegeneratingValue = useRecoilValue(isRegenerating(reserve));
   const hasFlatlinedValue = useRecoilValue(hasFlatlined);
-  const regenerationRateValue = useRecoilValue(regenerationRate(isHealth ? "health" : "stamina"));
+  const regenerationRateValue = useRecoilValue(regenerationRate(reserve));
   const reserveMaximumValue = useRecoilValue(reserveMaximum);
   const reserveMaximumAilingValue = useRecoilValue(
     isHealth ? healthMaximumPoisoned : staminaMaximumBlighted,
@@ -50,13 +51,13 @@ export function ReserveMeter({ PrefixIcon, reserve }: { PrefixIcon?: SVGIcon; re
   const resetRegenerationDuration = useResetRecoilState(regenerationDuration(reserve));
   const setRegenerationDuration = useSetRecoilState(regenerationDuration(reserve));
 
-  const deltaReserveMaximum = isHealth ? "healthMaximum" : "staminaMaximum";
+  const { maximumDelta } = RESERVES[reserve];
   const penalty = Math.round(
     ((reserveMaximumValue - reserveMaximumAilingValue) / reserveMaximumValue) * PERCENTAGE_POINTS,
   );
 
   useDeltaText({
-    delta: deltaReserveMaximum,
+    delta: maximumDelta,
     state: reserveMaximum,
     suffix: LABEL_MAXIMUM,
   });
@@ -111,9 +112,9 @@ export function ReserveMeter({ PrefixIcon, reserve }: { PrefixIcon?: SVGIcon; re
     <LabelledProgressBar
       attachment="below"
       sibling={
-        isAiling ? (
+        isAiling && (
           <ProgressBar animated={isHealth} key={2} now={penalty} striped variant="secondary" />
-        ) : undefined
+        )
       }
       value={(reserveValue / reserveMaximumAilingValue) * (PERCENTAGE_POINTS - penalty)}
     >
@@ -151,7 +152,7 @@ export function ReserveMeter({ PrefixIcon, reserve }: { PrefixIcon?: SVGIcon; re
         <Stack direction="horizontal">
           <DeltasDisplay delta={isHealth ? "health" : "stamina"} />
 
-          <DeltasDisplay delta={deltaReserveMaximum} />
+          <DeltasDisplay delta={maximumDelta} />
         </Stack>
       </Stack>
     </LabelledProgressBar>

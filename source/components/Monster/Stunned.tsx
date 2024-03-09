@@ -17,7 +17,7 @@ export function Stunned() {
   const setMonsterStunDuration = useSetRecoilState(monsterAilmentDuration("stunned"));
 
   useTimer({
-    setTick: setMonsterStunDuration,
+    setDuration: setMonsterStunDuration,
     stop: !isMonsterStunned || isMonsterDeadValue,
   });
 

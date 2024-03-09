@@ -23,7 +23,7 @@ import {
 import {
   CLASS_ANIMATED,
   CLASS_ANIMATE_PREFIX,
-  LEVELLING_CUTOFF,
+  LEVELLING_THRESHOLD,
   MILLISECONDS_IN_SECOND,
   RETIREMENT_STAGE,
   ROMAN_NUMERALS,
@@ -339,7 +339,7 @@ export function getItemIcon(item: InventoryItem) {
 export function getLinearMapping({ offset, stage }: { offset: number; stage: number }) {
   return stage < offset
     ? 0
-    : ((stage - offset) * (LEVELLING_CUTOFF - 1)) / (LEVELLING_CUTOFF - offset - 1) + 1;
+    : ((stage - offset) * (LEVELLING_THRESHOLD - 1)) / (LEVELLING_THRESHOLD - offset - 1) + 1;
 }
 
 export function getMeleeRanges({

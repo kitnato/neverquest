@@ -44,7 +44,7 @@ export function AttackRate() {
 
   useTimer({
     onElapsed: attack,
-    setTick: setAttackDuration,
+    setDuration: setAttackDuration,
     stop:
       !canAttackOrParryValue ||
       !isAttackingValue ||

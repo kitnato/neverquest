@@ -19,7 +19,7 @@ export function ElementalAilment({ elemental }: { elemental: Elemental }) {
   const setAilment = useSetRecoilState(monsterAilmentDuration(ailment));
 
   useTimer({
-    setTick: setAilment,
+    setDuration: setAilment,
     stop: !isMonsterAilingValue || isMonsterDeadValue,
   });
 

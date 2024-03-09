@@ -7,12 +7,12 @@ import { FRAMERATE } from "@neverquest/data/general";
 export function useTimer({
   factor = 1,
   onElapsed,
-  setTick,
+  setDuration,
   stop,
 }: {
   factor?: number;
   onElapsed?: () => void;
-  setTick: SetterOrUpdater<number>;
+  setDuration: SetterOrUpdater<number>;
   stop: boolean;
 }) {
   const interval = useRef(-1);
@@ -46,11 +46,11 @@ export function useTimer({
       interval.current = setInterval(() => {
         const now = Date.now();
 
-        setTick((elapsed) => {
+        setDuration((elapsed) => {
           const newDelta = elapsed - (now - (previousTime.current || now)) * factor;
 
           if (newDelta <= 0) {
-            // Cannot invoke setTick() here due to rules of hooks (state updates at top level only).
+            // Cannot invoke setDuration() here due to rules of hooks (state updates at top level only).
             setHasTicked(true);
 
             return 0;
@@ -64,5 +64,5 @@ export function useTimer({
     }
 
     return terminate;
-  }, [factor, setTick, stop]);
+  }, [factor, setDuration, stop]);
 }

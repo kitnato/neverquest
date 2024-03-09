@@ -8,8 +8,8 @@ export function LabelledProgressBar({
   children,
   disableTransitions = false,
   isSmall = false,
-  isStriped = false,
   sibling,
+  striping,
   value,
   variant = "dark",
 }: {
@@ -17,12 +17,15 @@ export function LabelledProgressBar({
   children: ReactNode;
   disableTransitions?: boolean;
   isSmall?: boolean;
-  isStriped?: boolean;
   sibling?: ReactNode;
+  striping?: Partial<{ animated: boolean; striped: boolean }>;
   value: number;
   variant?: BootstrapColorVariant;
 }) {
-  const progressAppearance = isStriped ? { animated: true, striped: true } : {};
+  const appearance = {
+    animated: striping?.animated ?? false,
+    striped: striping?.striped ?? false,
+  };
 
   return (
     <div
@@ -33,13 +36,13 @@ export function LabelledProgressBar({
       {isSmall ? (
         <OverlayTrigger overlay={<Tooltip>{children}</Tooltip>} placement="bottom">
           <ProgressBar className={`small${attachment ? ` attached-${attachment}` : ""}`}>
-            <ProgressBar {...progressAppearance} key={1} now={value} variant={variant} />
+            <ProgressBar {...appearance} now={value} variant={variant} />
           </ProgressBar>
         </OverlayTrigger>
       ) : (
         <>
           <ProgressBar className={attachment ? `attached-${attachment}` : undefined}>
-            <ProgressBar {...progressAppearance} key={1} now={value} variant={variant} />
+            <ProgressBar {...appearance} now={value} variant={variant} />
 
             {sibling}
           </ProgressBar>

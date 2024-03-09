@@ -3,16 +3,7 @@ import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
-import IconAttackRate from "@neverquest/icons/attack-rate.svg?react";
-import IconCriticalChance from "@neverquest/icons/critical-chance.svg?react";
-import IconCriticalDamage from "@neverquest/icons/critical-damage.svg?react";
-import IconDamage from "@neverquest/icons/damage.svg?react";
-import IconDodgeChance from "@neverquest/icons/dodge-chance.svg?react";
 import IconEldritchCodex from "@neverquest/icons/eldritch-codex.svg?react";
-import IconHealth from "@neverquest/icons/health.svg?react";
-import IconRegenerationAmount from "@neverquest/icons/regeneration-amount.svg?react";
-import IconRegenerationRate from "@neverquest/icons/regeneration-rate.svg?react";
-import IconStamina from "@neverquest/icons/stamina.svg?react";
 import { attributeRank } from "@neverquest/state/attributes";
 import { ownedItem } from "@neverquest/state/inventory";
 import { infusionEffect } from "@neverquest/state/items";
@@ -24,31 +15,21 @@ export function AttributeIncreaseDetails({ attribute }: { attribute: Attribute }
   const infusionEffectEldritchCodex = useRecoilValue(infusionEffect("eldritch codex"));
   const ownedItemEldritchCodex = useRecoilValue(ownedItem("eldritch codex"));
 
-  const { increment, powerBonus, rankBonus } = ATTRIBUTES[attribute];
-  const Icon = {
-    agility: IconDodgeChance,
-    dexterity: IconCriticalChance,
-    endurance: IconStamina,
-    fortitude: IconRegenerationAmount,
-    perception: IconCriticalDamage,
-    speed: IconAttackRate,
-    strength: IconDamage,
-    vigor: IconRegenerationRate,
-    vitality: IconHealth,
-  }[attribute];
-  const operand = ["speed", "vigor"].includes(attribute) ? "-" : "+";
+  const { descriptionIcons, format, increment, powerBonus, rankBonus } = ATTRIBUTES[attribute];
 
   return (
     <Stack gap={1}>
-      <IconDisplay Icon={Icon} iconProps={{ className: "small" }}>
+      <IconDisplay Icon={descriptionIcons[0]} iconProps={{ className: "small" }}>
         <span>
-          {operand}
+          {increment > 0 && "+"}
 
-          {increment < 1
-            ? formatNumber({ format: "percentage", value: increment })
-            : rankBonus === undefined
-              ? increment
-              : Math.min(increment + rankBonus.increment * attributeRankValue, rankBonus.maximum)}
+          {formatNumber({
+            format,
+            value:
+              rankBonus === undefined
+                ? increment
+                : Math.min(increment + rankBonus.increment * attributeRankValue, rankBonus.maximum),
+          })}
         </span>
       </IconDisplay>
 

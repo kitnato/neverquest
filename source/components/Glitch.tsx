@@ -2,7 +2,7 @@ import { nanoid } from "nanoid";
 import { useMemo, useState } from "react";
 import { useRecoilValue } from "recoil";
 
-import { GLITCH_NUMBER, GLITCH_STAGE_MINIMUM, LEVELLING_CUTOFF } from "@neverquest/data/general";
+import { GLITCH_NUMBER, GLITCH_STAGE_MINIMUM, LEVELLING_THRESHOLD } from "@neverquest/data/general";
 import { useAnimation } from "@neverquest/hooks/useAnimation";
 import { stage } from "@neverquest/state/encounter";
 import { getFromRange, getLinearMapping, getRange } from "@neverquest/utilities/getters";
@@ -66,7 +66,8 @@ export function Glitch() {
   const [intervalElapsed, setIntervalElapsed] = useState(0);
 
   const factor = useMemo(
-    () => getLinearMapping({ offset: GLITCH_STAGE_MINIMUM, stage: stageValue }) / LEVELLING_CUTOFF,
+    () =>
+      getLinearMapping({ offset: GLITCH_STAGE_MINIMUM, stage: stageValue }) / LEVELLING_THRESHOLD,
     [stageValue],
   );
   const interval = useMemo(

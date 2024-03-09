@@ -25,7 +25,7 @@ export function Recovery() {
   const setRecoveryDuration = useSetRecoilState(recoveryDuration);
 
   useTimer({
-    setTick: setRecoveryDuration,
+    setDuration: setRecoveryDuration,
     stop: hasFlatlinedValue || !isRecoveringValue,
   });
 

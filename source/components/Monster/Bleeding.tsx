@@ -39,13 +39,13 @@ export function Bleeding() {
 
       resetMonsterBleedingDelta();
     },
-    setTick: setMonsterBleedingDelta,
+    setDuration: setMonsterBleedingDelta,
     stop: hasStoppedBleeding,
   });
 
   useTimer({
     onElapsed: resetMonsterBleedingDelta,
-    setTick: setMonsterBleedingDuration,
+    setDuration: setMonsterBleedingDuration,
     stop: hasStoppedBleeding,
   });
 

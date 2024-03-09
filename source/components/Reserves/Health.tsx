@@ -34,7 +34,7 @@ export function Health() {
   const vitalityBonus = attributeStatisticVitality - baseAmount;
 
   useTimer({
-    setTick: setPoison,
+    setDuration: setPoison,
     stop: !isPoisonedValue,
   });
 

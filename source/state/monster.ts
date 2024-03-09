@@ -2,7 +2,7 @@ import { nanoid } from "nanoid";
 import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
 import { PROGRESS } from "@neverquest/data/encounter";
-import { LEVELLING_CUTOFF } from "@neverquest/data/general";
+import { LEVELLING_THRESHOLD } from "@neverquest/data/general";
 import { GEM_DROP_CHANCE, INFUSABLES, RELICS, RELIC_DROP_CHANCE } from "@neverquest/data/items";
 import {
   BLIGHT,
@@ -104,7 +104,7 @@ export const frailty = withStateKey("frailty", (key) =>
 
       if (get(ownedItem("mysterious egg")) !== undefined) {
         return getFromRange({
-          factor: getSigmoid(get(infusionEffect("mysterious egg")) * LEVELLING_CUTOFF),
+          factor: getSigmoid(get(infusionEffect("mysterious egg")) * LEVELLING_THRESHOLD),
           ...FRAILTY["mysterious egg"],
         });
       }

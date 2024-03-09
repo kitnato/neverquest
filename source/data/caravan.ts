@@ -5,7 +5,7 @@ import type {
   WeaponClass,
   WeaponModality,
 } from "@kitnato/locran/build/types";
-import { LEVELLING_CUTOFF, LEVELLING_MAXIMUM, RETIREMENT_STAGE } from "@neverquest/data/general";
+import { LEVELLING_MAXIMUM, LEVELLING_THRESHOLD, RETIREMENT_STAGE } from "@neverquest/data/general";
 import { INFUSABLES, RELICS } from "@neverquest/data/items";
 import { BLIGHT, FINALITY_STAGE, POISON, RAGE } from "@neverquest/data/monster";
 import IconAlchemist from "@neverquest/icons/alchemist.svg?react";
@@ -54,21 +54,21 @@ export const CREW: Record<
     interaction: "Visit",
     monologues: {
       1: "Things are not always what they seem.",
-      [LEVELLING_CUTOFF]: MONOLOGUE_EMPTY,
       [LEVELLING_MAXIMUM]: "Nothing makes any sense.",
+      [LEVELLING_THRESHOLD]: MONOLOGUE_EMPTY,
     },
     price: 400,
     requiredStage: 24,
   },
   blacksmith: {
-    description: "Crafts superior # gear.",
+    description: "Crafts superior # gear and identifies gear class.",
     descriptionIcons: [IconGear],
     Icon: IconBlacksmith,
     interaction: "Craft",
     monologues: {
       1: "In need of better gear?",
-      [LEVELLING_CUTOFF]: MONOLOGUE_EMPTY,
       [LEVELLING_MAXIMUM]: "Doesn't make a difference.",
+      [LEVELLING_THRESHOLD]: MONOLOGUE_EMPTY,
     },
     price: 50,
     requiredStage: 12,
@@ -81,8 +81,8 @@ export const CREW: Record<
     interaction: "Craft",
     monologues: {
       1: "Tired of monster breath? Don't forget to rearm.",
-      [LEVELLING_CUTOFF]: MONOLOGUE_EMPTY,
       [LEVELLING_MAXIMUM]: "There's too many of them.",
+      [LEVELLING_THRESHOLD]: MONOLOGUE_EMPTY,
     },
     price: 150,
     requiredStage: 18,
@@ -94,8 +94,8 @@ export const CREW: Record<
     interaction: "Treat",
     monologues: {
       1: "Allow me to patch you up.",
-      [LEVELLING_CUTOFF]: MONOLOGUE_EMPTY,
       [LEVELLING_MAXIMUM]: "Never-ending madness. Only agony.",
+      [LEVELLING_THRESHOLD]: MONOLOGUE_EMPTY,
     },
     price: 20,
     requiredStage: 5,
@@ -107,8 +107,8 @@ export const CREW: Record<
     interaction: "Train",
     monologues: {
       1: "I can teach, if you can learn.",
-      [LEVELLING_CUTOFF]: MONOLOGUE_EMPTY,
       [LEVELLING_MAXIMUM]: "Why do they bleed? How?",
+      [LEVELLING_THRESHOLD]: MONOLOGUE_EMPTY,
     },
     price: 80,
     requiredStage: 15,
@@ -146,13 +146,13 @@ export const CREW: Record<
       58: "Delving further must be our salvation.",
       76: "I fear the end is imminent.",
       [LEVELLING_MAXIMUM - 1]: "Something's wrong.",
-      [LEVELLING_CUTOFF]: "All is truly lost.",
+      [LEVELLING_MAXIMUM]: "How are you still here?",
       [LEVELLING_MAXIMUM + 4]: "Please go back to where you came from.",
       [LEVELLING_MAXIMUM + 8]: "This is all wrong. I don't understand.",
       [LEVELLING_MAXIMUM + 12]: "Why? Emptiness never-ending ...",
       [LEVELLING_MAXIMUM + 16]: "Inescapable. Unfathomable. Inside everything.",
       [LEVELLING_MAXIMUM + 20]: "Please ... the pain ...",
-      [LEVELLING_MAXIMUM]: "How are you still here?",
+      [LEVELLING_THRESHOLD]: "All is truly lost.",
       [RETIREMENT_STAGE + 1]: "A sea of monsters ... is it endless?",
       [RETIREMENT_STAGE]: "Retirement? Pretty sure you're trapped here with us.",
     },
@@ -168,8 +168,8 @@ export const CREW: Record<
     monologues: {
       1: "Prepared to transcend your limits?",
       [FINALITY_STAGE["res dominus"]]: "The world ends at 77.",
-      [LEVELLING_CUTOFF]: MONOLOGUE_EMPTY,
       [LEVELLING_MAXIMUM]: "I can't see any more.",
+      [LEVELLING_THRESHOLD]: MONOLOGUE_EMPTY,
     },
     price: 300,
     requiredStage: 21,
@@ -181,8 +181,8 @@ export const CREW: Record<
     interaction: "Stitch",
     monologues: {
       1: "Always leave some extra space for unexpected finds.",
-      [LEVELLING_CUTOFF]: MONOLOGUE_EMPTY,
       [LEVELLING_MAXIMUM]: "Fate has been mis-weaved.",
+      [LEVELLING_THRESHOLD]: MONOLOGUE_EMPTY,
     },
     price: 35,
     requiredStage: 8,
@@ -195,8 +195,8 @@ export const CREW: Record<
     interaction: "Brew",
     monologues: {
       1: "Gaze into my cauldron ...",
-      [LEVELLING_CUTOFF]: MONOLOGUE_EMPTY,
       [LEVELLING_MAXIMUM]: "The cipher has gone silent.",
+      [LEVELLING_THRESHOLD]: MONOLOGUE_EMPTY,
     },
     price: 650,
     requiredStage: 27,

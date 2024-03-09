@@ -28,7 +28,7 @@ import type { Mastery, Skill } from "@neverquest/types/unions";
 export const MASTERIES: Record<
   Mastery,
   AttributeOrMasteryBaseData & {
-    instructionIcons: SVGIcon[];
+    instructionIcons: [SVGIcon, ...SVGIcon[]];
     instructions: string;
     requiredSkill: Skill;
   }

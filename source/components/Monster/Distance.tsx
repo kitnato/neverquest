@@ -26,7 +26,7 @@ export function Distance() {
 
   useTimer({
     factor: isMonsterFrozen ? 1 - AILMENT_PENALTY.frozen : 1,
-    setTick: setMonsterDistance,
+    setDuration: setMonsterDistance,
     stop: !isAttackingValue || isMonsterDeadValue || hasMonsterClosedValue,
   });
 

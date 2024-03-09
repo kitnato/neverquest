@@ -14,8 +14,8 @@ export const ATTRIBUTE_TYPES = [
   "speed",
   "vitality",
   "endurance",
-  "vigor",
   "fortitude",
+  "vigor",
   "dexterity",
   "perception",
   "agility",
@@ -97,7 +97,6 @@ export type Delta =
   | "frailty"
   | "hatchingProgress"
   | "healthMaximum"
-  | "healthRegenerationAmount"
   | "healthRegenerationRate"
   | "infusionLevel"
   | "marksmanshipProgress"
@@ -119,7 +118,6 @@ export type Delta =
   | "stage"
   | "staggerRating"
   | "staminaMaximum"
-  | "staminaRegenerationAmount"
   | "staminaRegenerationRate"
   | "stunRating"
   | "thorns";

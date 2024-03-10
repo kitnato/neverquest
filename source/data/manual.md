@@ -437,9 +437,9 @@ Up to 5 gems can be applied to a piece of gear. Once applied, gems are consumed 
 
 The gem types are the following, associated with their corresponding [elemental damage](#elemental-damage) types:
 
+- Amethyst (lightning)
 - Ruby (fire)
 - Sapphire (ice)
-- Topaz (lightning)
 
 Gems add the following benefits to gear:
 

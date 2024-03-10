@@ -1,5 +1,6 @@
 import { FRAMERATE } from "@neverquest/data/general";
 import IconAlchemist from "@neverquest/icons/alchemist.svg?react";
+import IconAmethyst from "@neverquest/icons/amethyst.svg?react";
 import IconAmmunitionPouch from "@neverquest/icons/ammunition-pouch.svg?react";
 import IconAmmunition from "@neverquest/icons/ammunition.svg?react";
 import IconAntidote from "@neverquest/icons/antidote.svg?react";
@@ -49,7 +50,6 @@ import IconStage from "@neverquest/icons/stage.svg?react";
 import IconStamina from "@neverquest/icons/stamina.svg?react";
 import IconTears from "@neverquest/icons/tears.svg?react";
 import IconThaumaturgicGoggles from "@neverquest/icons/thaumaturgic-goggles.svg?react";
-import IconTopaz from "@neverquest/icons/topaz.svg?react";
 import IconTornManuscript from "@neverquest/icons/torn-manuscript.svg?react";
 import IconWilderness from "@neverquest/icons/wilderness.svg?react";
 import type { ConsumableItem, GeneratorRange, InfusableItem, RelicItem } from "@neverquest/types";
@@ -164,7 +164,7 @@ export const ELEMENTALS: Record<
     damage: { maximum: 2.5, minimum: 1.25 },
     duration: { maximum: 2200, minimum: 1000 },
     durationCap: 5000,
-    gem: "topaz",
+    gem: "amethyst",
     Icon: IconLightning,
   },
 };
@@ -179,9 +179,9 @@ export const GEM_DROP_CHANCE = { equalStage: 1, lowerStage: 0.33 };
 export const GEM_ENHANCEMENT_RANGE = { maximum: 1, minimum: 0.1 };
 export const GEM_FITTING_COST_RANGE = { maximum: 150, minimum: 10 };
 export const GEMS: Record<Gem, { elemental: Elemental; Icon: SVGIcon }> = {
+  amethyst: { elemental: "lightning", Icon: IconAmethyst },
   ruby: { elemental: "fire", Icon: IconRuby },
   sapphire: { elemental: "ice", Icon: IconSapphire },
-  topaz: { elemental: "lightning", Icon: IconTopaz },
 };
 export const GEMS_MAXIMUM = 5;
 

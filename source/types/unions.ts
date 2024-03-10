@@ -133,7 +133,7 @@ export type FletcherOption = "ammunition" | "ranged";
 export const GEAR_TYPES = ["weapon", "armor", "shield"] as const;
 export type Gear = (typeof GEAR_TYPES)[number];
 
-export const GEM_TYPES = ["ruby", "sapphire", "topaz"] as const;
+export const GEM_TYPES = ["amethyst", "ruby", "sapphire"] as const;
 export type Gem = (typeof GEM_TYPES)[number];
 
 export const GRIP_TYPES = ["one-handed", "two-handed"] as const;

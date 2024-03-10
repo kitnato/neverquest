@@ -42,7 +42,7 @@ export function TransmuteGems() {
       .filter(isGemItem)
       .toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2)),
   );
-  const transmutation = { ruby: 0, sapphire: 0, topaz: 0 };
+  const transmutation = { amethyst: 0, ruby: 0, sapphire: 0 };
 
   for (const gem of GEM_TYPES) {
     transmutation[gem] = gems.find(({ item: { name } }) => name === gem)?.amount ?? 0;

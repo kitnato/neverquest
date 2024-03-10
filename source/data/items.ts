@@ -142,7 +142,7 @@ export const ELEMENTALS: Record<
 > = {
   fire: {
     ailment: "burning",
-    color: "text-orange",
+    color: "orange",
     damage: { maximum: 3, minimum: 1.75 },
     duration: { maximum: 2500, minimum: 1200 },
     durationCap: 7500,
@@ -151,7 +151,7 @@ export const ELEMENTALS: Record<
   },
   ice: {
     ailment: "frozen",
-    color: "text-blue",
+    color: "cyan",
     damage: { maximum: 2, minimum: 1 },
     duration: { maximum: 2000, minimum: 900 },
     durationCap: 3000,
@@ -160,7 +160,7 @@ export const ELEMENTALS: Record<
   },
   lightning: {
     ailment: "shocked",
-    color: "text-yellow",
+    color: "purple",
     damage: { maximum: 2.5, minimum: 1.25 },
     duration: { maximum: 2200, minimum: 1000 },
     durationCap: 5000,

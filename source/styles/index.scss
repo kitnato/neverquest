@@ -171,14 +171,6 @@ svg {
   &.transitions-none .progress-bar {
     transition: none;
   }
-
-  > small {
-    text-shadow:
-      -1px 1px 1px var(--bs-gray-900),
-      1px 1px 1px var(--bs-gray-900),
-      1px -1px 1px var(--bs-gray-900),
-      -1px -1px 1px var(--bs-gray-900);
-  }
 }
 
 .table-details td {
@@ -196,8 +188,20 @@ svg {
   }
 }
 
-.text-blue {
-  color: $blue;
+.cyan {
+  color: $cyan-600;
+}
+
+.purple {
+  color: $purple-500;
+}
+
+.orange {
+  color: $orange-600;
+}
+
+.teal {
+  color: $teal-600;
 }
 
 .text-floating strong {
@@ -208,12 +212,12 @@ svg {
     -1px -1px 0 white;
 }
 
-.text-yellow {
-  color: $yellow;
-}
-
-.text-orange {
-  color: $orange;
+.text-shaded {
+  text-shadow:
+    -1px 1px 1px var(--bs-gray-900),
+    1px 1px 1px var(--bs-gray-900),
+    1px -1px 1px var(--bs-gray-900),
+    -1px -1px 1px var(--bs-gray-900);
 }
 
 .vstack {

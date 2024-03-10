@@ -40,7 +40,7 @@ export const attackRate = withStateKey("attackRate", (key) =>
   selector({
     get: ({ get }) =>
       get(weapon).rate *
-      (1 - get(attributeStatistic("speed")) * (1 + get(attributePowerBonus("speed")))),
+      (1 + get(attributeStatistic("speed")) * (1 + get(attributePowerBonus("speed")))),
     key,
   }),
 );

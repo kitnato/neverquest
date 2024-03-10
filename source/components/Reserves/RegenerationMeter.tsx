@@ -21,7 +21,9 @@ export function RegenerationMeter({ reserve }: { reserve: Reserve }) {
   const isRecoveringValue = useRecoilValue(isRecovering);
 
   const { Icon } = RESERVES[reserve];
-  const isContinuous = regenerationRateValue <= REGENERATION_METER_ANIMATION_THRESHOLD;
+  const isContinuous =
+    regenerationDurationValue > 0 &&
+    regenerationRateValue <= REGENERATION_METER_ANIMATION_THRESHOLD;
   const regenerationProgress =
     regenerationDurationValue === 0 ? 0 : regenerationRateValue - regenerationDurationValue;
 
@@ -30,6 +32,7 @@ export function RegenerationMeter({ reserve }: { reserve: Reserve }) {
       attachment="above"
       disableTransitions
       isSmall
+      striping={isContinuous ? { animated: true, striped: true } : undefined}
       value={
         isContinuous
           ? PERCENTAGE_POINTS

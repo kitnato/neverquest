@@ -242,7 +242,6 @@ export type Showing =
   | "offhand"
   | "protection"
   | "recovery"
-  | "retire"
   | "stamina"
   | "weapon"
   | "weight"

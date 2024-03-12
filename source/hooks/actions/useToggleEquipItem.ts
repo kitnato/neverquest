@@ -28,10 +28,17 @@ export function useToggleEquipItem() {
         const get = getSnapshotGetter(snapshot);
 
         if (isRelicItem(item)) {
-          set(isRelicEquipped(item.name), (isEquipped) => forceUnequip ?? !isEquipped);
+          const isRelicEquippedValue = isRelicEquipped(item.name);
+
+          if (forceUnequip) {
+            reset(isRelicEquippedValue);
+          } else {
+            set(isRelicEquippedValue, (isEquipped) => !isEquipped);
+          }
 
           return;
         }
+
         const armorValue = get(armor);
         const shieldValue = get(shield);
         const weaponValue = get(weapon);
@@ -45,9 +52,9 @@ export function useToggleEquipItem() {
             return;
           }
 
-          if (ID === armorValue.ID) {
+          if (ID === armorValue.ID || forceUnequip) {
             reset(armor);
-          } else if (forceUnequip !== true) {
+          } else {
             set(armor, item);
 
             set(isShowing("armor"), true);
@@ -62,9 +69,9 @@ export function useToggleEquipItem() {
             return;
           }
 
-          if (ID === shieldValue.ID) {
+          if (ID === shieldValue.ID || forceUnequip) {
             reset(shield);
-          } else if (forceUnequip !== true) {
+          } else {
             set(shield, item);
 
             // Equipping a shield while a ranged or two-handed weapon is equipped un-equips the weapon (unless it's two-handed and the colossus trait is acquired).
@@ -92,9 +99,9 @@ export function useToggleEquipItem() {
             return;
           }
 
-          if (ID === weaponValue.ID) {
+          if (ID === weaponValue.ID || forceUnequip) {
             reset(weapon);
-          } else if (forceUnequip !== true) {
+          } else {
             set(weapon, item);
 
             // Equipping a ranged or two-handed weapon while a shield is equipped un-equips the shield.

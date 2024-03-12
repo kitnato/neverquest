@@ -4,18 +4,22 @@ import { useRecoilValue } from "recoil";
 
 import { IconImage } from "@neverquest/components/IconImage";
 import { Retirement } from "@neverquest/components/Retirement";
+import { RETIREMENT_STAGE } from "@neverquest/data/general";
 import IconRetire from "@neverquest/icons/retire.svg?react";
 import { hasFlatlined } from "@neverquest/state/character";
-import { location } from "@neverquest/state/encounter";
-import { isShowing } from "@neverquest/state/ui";
+import { location, stageMaximum } from "@neverquest/state/encounter";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Retire() {
   const hasFlatlinedValue = useRecoilValue(hasFlatlined);
-  const isShowingRetire = useRecoilValue(isShowing("retire"));
   const locationValue = useRecoilValue(location);
+  const stageMaximumValue = useRecoilValue(stageMaximum);
 
   const [isShowingRetirement, setIsShowingRetirement] = useState(false);
+
+  const isShowingRetire =
+    (locationValue === "caravan" && stageMaximumValue === RETIREMENT_STAGE) ||
+    stageMaximumValue > RETIREMENT_STAGE;
 
   return (
     <>

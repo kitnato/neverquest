@@ -15,7 +15,6 @@ import { isShowing } from "@neverquest/state/ui";
 import type { GemItem } from "@neverquest/types";
 import { isGear, isMelee, isRanged, isUnarmed } from "@neverquest/types/type-guards";
 import { GEAR_TYPES } from "@neverquest/types/unions";
-import { capitalizeAll } from "@neverquest/utilities/formatters";
 import { getGearIcon, getGemFittingCost } from "@neverquest/utilities/getters";
 
 export function SocketGem({ gem }: { gem: GemItem }) {
@@ -106,7 +105,7 @@ export function SocketGem({ gem }: { gem: GemItem }) {
           <DropdownItem disabled={!canApply} eventKey={gearType} key={gearType}>
             <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
               <IconDisplay Icon={getGearIcon(gear)} iconProps={{ className: "small" }}>
-                <span>{capitalizeAll(gear.name)}</span>
+                <span>{gear.name}</span>
               </IconDisplay>
 
               <div className="ms-2">

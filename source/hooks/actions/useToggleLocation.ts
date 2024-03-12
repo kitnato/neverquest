@@ -1,6 +1,5 @@
 import { useRecoilCallback } from "recoil";
 
-import { RETIREMENT_STAGE } from "@neverquest/data/general";
 import { useCompleteStage } from "@neverquest/hooks/actions/useCompleteStage";
 import { useIncreaseStage } from "@neverquest/hooks/actions/useIncreaseStage";
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness";
@@ -19,19 +18,13 @@ export function useToggleLocation() {
       () => {
         const get = getSnapshotGetter(snapshot);
 
-        const stageMaximumValue = get(stageMaximum);
-
         if (get(location) === "wilderness") {
           completeStage();
 
           set(isShowing("location"), true);
           set(location, "caravan");
-
-          if (stageMaximumValue >= RETIREMENT_STAGE) {
-            set(isShowing("retire"), true);
-          }
         } else {
-          if (get(isStageCompleted) && get(stage) === stageMaximumValue) {
+          if (get(isStageCompleted) && get(stage) === get(stageMaximum)) {
             reset(blacksmithOptions);
             reset(fletcherOptions);
           }

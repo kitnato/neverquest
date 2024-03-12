@@ -11,7 +11,6 @@ import {
   stamina,
 } from "@neverquest/state/reserves";
 import { essence } from "@neverquest/state/resources";
-import { isShowing } from "@neverquest/state/ui";
 import { RELIC_TYPES } from "@neverquest/types/unions";
 
 export function useResetCharacter() {
@@ -22,7 +21,6 @@ export function useResetCharacter() {
         reset(blight);
         reset(essence);
         reset(health);
-        reset(isShowing("retire"));
         reset(isStageStarted);
         reset(poisonDuration);
         reset(progress);

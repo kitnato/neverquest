@@ -24,7 +24,6 @@ import {
   corpse,
   hasDefeatedFinality,
   retirementStage,
-  stage,
   stageMaximum,
 } from "@neverquest/state/encounter";
 import { armor, gems, shield, weapon } from "@neverquest/state/gear";
@@ -33,7 +32,6 @@ import { expandedMasteries, masteryProgress, masteryRank } from "@neverquest/sta
 import { questProgress } from "@neverquest/state/quests";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import { isTraitAcquired, selectedTrait } from "@neverquest/state/traits";
-import { isShowing } from "@neverquest/state/ui";
 import { isInheritableItem } from "@neverquest/types/type-guards";
 import {
   ATTRIBUTE_TYPES,
@@ -58,7 +56,6 @@ export function useRetire() {
         const get = getSnapshotGetter(snapshot);
 
         const selectedTraitValue = get(selectedTrait);
-        const stageValue = get(stage);
         const stageMaximumValue = get(stageMaximum);
 
         if (stageMaximumValue < RETIREMENT_STAGE) {
@@ -86,7 +83,6 @@ export function useRetire() {
         reset(gems(ARMOR_NONE.ID));
         reset(gems(SHIELD_NONE.ID));
         reset(gems(WEAPON_NONE.ID));
-        reset(isShowing("retire"));
         reset(name);
         reset(shield);
         reset(weapon);
@@ -145,7 +141,7 @@ export function useRetire() {
 
         reset(merchantInventory);
 
-        set(retirementStage, stageValue);
+        set(retirementStage, stageMaximumValue);
 
         if (get(isSkillAcquired("memetics"))) {
           progressQuest({ quest: "decipheringJournal" });

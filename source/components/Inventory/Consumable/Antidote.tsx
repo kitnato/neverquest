@@ -2,7 +2,7 @@ import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
 
 import { POPOVER_TRIGGER } from "@neverquest/data/general";
-import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth";
+import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta";
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
 import { inventory } from "@neverquest/state/inventory";
 import { isPoisoned, poisonDuration } from "@neverquest/state/reserves";
@@ -12,7 +12,7 @@ export function Antidote({ ID }: { ID: string }) {
   const resetPoison = useResetRecoilState(poisonDuration);
   const setInventory = useSetRecoilState(inventory);
 
-  const changeHealth = useChangeHealth();
+  const addDelta = useAddDelta();
   const progressQuest = useProgressQuest();
 
   return (
@@ -30,12 +30,12 @@ export function Antidote({ ID }: { ID: string }) {
           onClick={() => {
             resetPoison();
 
-            changeHealth({
+            addDelta({
               contents: {
                 color: "text-muted",
                 value: "REMEDIED",
               },
-              value: 0,
+              delta: "health",
             });
 
             setInventory((currentInventory) =>

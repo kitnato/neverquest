@@ -63,7 +63,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
 
   useTimer({
     onElapsed: () => {
-      changeReserve({ isRegeneration: true });
+      changeReserve({ value: regenerationAmountValue });
     },
     setDuration: setRegenerationDuration,
     stop: hasFlatlinedValue || isRecoveringValue || isReserveAtMaximum,

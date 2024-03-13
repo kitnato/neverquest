@@ -17,7 +17,7 @@ import {
   monsterRegenerationDuration,
 } from "@neverquest/state/monster";
 import { isHealthLow } from "@neverquest/state/reserves";
-import type { DeltaDisplay, DeltaReserveBase } from "@neverquest/types/ui";
+import type { DeltaReserve } from "@neverquest/types/ui";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
@@ -31,7 +31,7 @@ export function useChangeMonsterHealth() {
         contents,
         damageType,
         value,
-      }: DeltaReserveBase & {
+      }: DeltaReserve & {
         damageType?: "bleeding" | "critical" | "execution" | "parry" | "thorns";
       }) => {
         const get = getSnapshotGetter(snapshot);
@@ -46,17 +46,6 @@ export function useChangeMonsterHealth() {
         const monsterHealthMaximumValue = get(monsterHealthMaximum);
 
         let newHealth = Math.min(monsterHealthValue + totalValue, monsterHealthMaximumValue);
-
-        addDelta({
-          contents:
-            contents === undefined || (Array.isArray(contents) && contents.length === 0)
-              ? ({
-                  color: isPositive ? "text-success" : "text-danger",
-                  value: isPositive ? `+${formattedValue}` : formattedValue,
-                } as DeltaDisplay)
-              : contents,
-          delta: "monsterHealth",
-        });
 
         if (newHealth <= 0) {
           newHealth = 0;
@@ -153,6 +142,17 @@ export function useChangeMonsterHealth() {
         }
 
         set(monsterHealth, newHealth);
+
+        addDelta({
+          contents: [
+            ...(contents === undefined ? [] : Array.isArray(contents) ? contents : [contents]),
+            {
+              color: isPositive ? "text-success" : "text-danger",
+              value: isPositive ? `+${formattedValue}` : formattedValue,
+            },
+          ],
+          delta: "monsterHealth",
+        });
       },
     [addDelta, progressQuest],
   );

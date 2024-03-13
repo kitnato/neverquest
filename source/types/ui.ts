@@ -20,11 +20,7 @@ export type DeltaDisplay = {
   value: number | string;
 };
 
-export type DeltaReserve =
-  | { isRegeneration: true }
-  | (DeltaReserveBase & { isRegeneration?: false });
-
-export type DeltaReserveBase = {
+export type DeltaReserve = {
   contents?: DeltaDisplay | DeltaDisplay[];
   value: number;
 };

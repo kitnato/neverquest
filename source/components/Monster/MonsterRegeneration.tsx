@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { MonsterRegenerationMeter } from "@neverquest/components/Monster/MonsterRegenerationMeter";
@@ -26,15 +26,19 @@ export function MonsterRegeneration() {
   const changeMonsterHealth = useChangeMonsterHealth();
 
   const { duration, minimum, ticks } = MONSTER_REGENERATION;
-  const regenerationAmount = Math.max(
-    minimum,
-    Math.round(
-      getAmountPerTick({
-        amount: monsterHealthMaximumValue,
-        duration,
-        ticks,
-      }),
-    ),
+  const regenerationAmount = useMemo(
+    () =>
+      Math.max(
+        minimum,
+        Math.round(
+          getAmountPerTick({
+            amount: monsterHealthMaximumValue,
+            duration,
+            ticks,
+          }),
+        ),
+      ),
+    [duration, minimum, monsterHealthMaximumValue, ticks],
   );
 
   useTimer({

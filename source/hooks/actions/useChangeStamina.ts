@@ -3,12 +3,11 @@ import { useRecoilCallback } from "recoil";
 import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta";
 import {
   isInexhaustible,
-  regenerationAmount,
   regenerationDuration,
   stamina,
   staminaMaximumBlighted,
 } from "@neverquest/state/reserves";
-import type { DeltaDisplay, DeltaReserve } from "@neverquest/types/ui";
+import type { DeltaReserve } from "@neverquest/types/ui";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
@@ -17,30 +16,14 @@ export function useChangeStamina() {
 
   return useRecoilCallback(
     ({ reset, set, snapshot }) =>
-      (deltaReserve: DeltaReserve) => {
+      ({ contents, value }: DeltaReserve) => {
         const get = getSnapshotGetter(snapshot);
 
-        const value = deltaReserve.isRegeneration
-          ? get(regenerationAmount("stamina"))
-          : deltaReserve.value;
         const formattedValue = formatNumber({ value });
         const isPositive = value > 0;
         const staminaMaximumBlightedValue = get(staminaMaximumBlighted);
 
         let newStamina = get(stamina) + (get(isInexhaustible) ? (isPositive ? value : 0) : value);
-
-        addDelta({
-          contents:
-            deltaReserve.isRegeneration === true ||
-            deltaReserve.contents === undefined ||
-            (Array.isArray(deltaReserve.contents) && deltaReserve.contents.length === 0)
-              ? ({
-                  color: isPositive ? "text-success" : "text-danger",
-                  value: isPositive ? `+${formattedValue}` : formattedValue,
-                } as DeltaDisplay)
-              : deltaReserve.contents,
-          delta: "stamina",
-        });
 
         if (newStamina <= 0) {
           newStamina = 0;
@@ -53,6 +36,17 @@ export function useChangeStamina() {
         }
 
         set(stamina, newStamina);
+
+        addDelta({
+          contents: [
+            ...(contents === undefined ? [] : Array.isArray(contents) ? contents : [contents]),
+            {
+              color: isPositive ? "text-success" : "text-danger",
+              value: isPositive ? `+${formattedValue}` : formattedValue,
+            },
+          ],
+          delta: "stamina",
+        });
       },
     [addDelta],
   );

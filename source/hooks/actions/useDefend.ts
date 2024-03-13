@@ -134,16 +134,10 @@ export function useDefend() {
             const healthGain = Math.round(get(healthMaximum) * NUDIST.healAmount);
 
             changeHealth({
-              contents: [
-                {
-                  color: "text-muted",
-                  value: "HEAL",
-                },
-                {
-                  color: "text-success",
-                  value: `+${formatNumber({ value: healthGain })}`,
-                },
-              ],
+              contents: {
+                color: "text-muted",
+                value: "HEAL",
+              },
               value: healthGain,
             });
 
@@ -201,16 +195,10 @@ export function useDefend() {
               },
             );
 
-            deltaHealth.push(
-              {
-                color: "text-muted",
-                value: "PARRIED",
-              },
-              {
-                color: "text-danger",
-                value: `-${formatNumber({ value: healthDamage })}`,
-              },
-            );
+            deltaHealth.push({
+              color: "text-muted",
+              value: "PARRIED",
+            });
           } else {
             deltaStamina.push(
               {
@@ -282,11 +270,6 @@ export function useDefend() {
 
         // If neither dodged, parried nor blocked, show damage with protection and increase resilience.
         if (!hasBlocked && !hasParried) {
-          deltaHealth.push({
-            color: "text-danger",
-            value: `-${formatNumber({ value: healthDamage })}`,
-          });
-
           if (protectionValue > 0) {
             deltaHealth.push({
               color: "text-muted",

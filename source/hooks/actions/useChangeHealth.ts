@@ -14,11 +14,10 @@ import {
   health,
   healthMaximumPoisoned,
   isInvulnerable,
-  regenerationAmount,
   regenerationDuration,
 } from "@neverquest/state/reserves";
 import { essence } from "@neverquest/state/resources";
-import type { DeltaDisplay, DeltaReserve } from "@neverquest/types/ui";
+import type { DeltaReserve } from "@neverquest/types/ui";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getSnapshotGetter } from "@neverquest/utilities/getters";
 
@@ -29,32 +28,15 @@ export function useChangeHealth() {
 
   return useRecoilCallback(
     ({ reset, set, snapshot }) =>
-      (deltaReserve: DeltaReserve) => {
+      ({ contents, value }: DeltaReserve) => {
         const get = getSnapshotGetter(snapshot);
 
+        const formattedValue = formatNumber({ value });
         const healthMaximumPoisonedValue = get(healthMaximumPoisoned);
         const isAttackingValue = get(isAttacking);
-
-        const value = deltaReserve.isRegeneration
-          ? get(regenerationAmount("health"))
-          : deltaReserve.value;
-        const formattedValue = formatNumber({ value });
         const isPositive = value > 0;
 
         let newHealth = get(health) + (get(isInvulnerable) ? (isPositive ? value : 0) : value);
-
-        addDelta({
-          contents:
-            deltaReserve.isRegeneration === true ||
-            deltaReserve.contents === undefined ||
-            (Array.isArray(deltaReserve.contents) && deltaReserve.contents.length === 0)
-              ? ({
-                  color: isPositive ? "text-success" : value === 0 ? "text-muted" : "text-danger",
-                  value: isPositive ? `+${formattedValue}` : formattedValue,
-                } as DeltaDisplay)
-              : deltaReserve.contents,
-          delta: "health",
-        });
 
         if (newHealth <= 0) {
           const ownedItemPhylactery = get(ownedItem("phylactery"));
@@ -84,7 +66,7 @@ export function useChangeHealth() {
         }
 
         if (
-          !deltaReserve.isRegeneration &&
+          !isPositive &&
           newHealth > 0 &&
           newHealth <= healthMaximumPoisonedValue * HEALTH_LOW_THRESHOLD &&
           isAttackingValue &&
@@ -102,6 +84,17 @@ export function useChangeHealth() {
         }
 
         set(health, newHealth);
+
+        addDelta({
+          contents: [
+            ...(contents === undefined ? [] : Array.isArray(contents) ? contents : [contents]),
+            {
+              color: isPositive ? "text-success" : "text-danger",
+              value: isPositive ? `+${formattedValue}` : formattedValue,
+            },
+          ],
+          delta: "health",
+        });
       },
     [addDelta, progressQuest, toggleAttacking],
   );

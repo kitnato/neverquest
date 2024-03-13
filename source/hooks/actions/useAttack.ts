@@ -154,13 +154,7 @@ export function useAttack() {
             );
 
             changeMonsterHealth({
-              contents: [
-                ...monsterDeltas,
-                {
-                  color: "text-danger",
-                  value: totalDamage,
-                },
-              ],
+              contents: monsterDeltas,
               damageType: hasInflictedCritical ? "critical" : undefined,
               value: totalDamage,
             });

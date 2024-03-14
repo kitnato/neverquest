@@ -7,6 +7,7 @@ import { Encumbrance } from "@neverquest/components/Inventory/Encumbrance";
 import { TAILORING } from "@neverquest/data/caravan";
 import {
   CLASS_FULL_WIDTH_JUSTIFIED,
+  GENERIC_MINIMUM,
   LABEL_NO_ESSENCE,
   POPOVER_TRIGGER,
 } from "@neverquest/data/general";
@@ -30,11 +31,14 @@ export function ExpandKnapsack() {
 
   const { amount, priceRange } = TAILORING.knapsack;
 
-  const price = Math.ceil(
-    getFromRange({
-      factor: getSigmoid((knapsackCapacityValue - (KNAPSACK_CAPACITY - 1)) / amount),
-      ...priceRange,
-    }),
+  const price = Math.max(
+    Math.round(
+      getFromRange({
+        factor: getSigmoid((knapsackCapacityValue - (KNAPSACK_CAPACITY - 1)) / amount),
+        ...priceRange,
+      }),
+    ),
+    GENERIC_MINIMUM,
   );
   const isAffordable = price <= essenceValue;
 

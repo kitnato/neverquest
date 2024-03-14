@@ -4,17 +4,16 @@ import { useRecoilValue } from "recoil";
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { LABEL_NO_PENALTY, LABEL_SEPARATOR } from "@neverquest/data/general";
+import { LABEL_NO_PENALTY } from "@neverquest/data/general";
 import { NUDIST } from "@neverquest/data/traits";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import IconAgility from "@neverquest/icons/agility.svg?react";
 import IconBurden from "@neverquest/icons/burden.svg?react";
 import IconDodgeChance from "@neverquest/icons/dodge-chance.svg?react";
-import IconEldritchCodex from "@neverquest/icons/eldritch-codex.svg?react";
 import IconNudist from "@neverquest/icons/nudist.svg?react";
 import IconStalwart from "@neverquest/icons/stalwart.svg?react";
 import IconStamina from "@neverquest/icons/stamina.svg?react";
-import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
+import { attributeStatistic } from "@neverquest/state/attributes";
 import { armor } from "@neverquest/state/gear";
 import { dodgeChance } from "@neverquest/state/statistics";
 import { isTraitAcquired } from "@neverquest/state/traits";
@@ -24,7 +23,6 @@ import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function DodgeChance() {
   const armorValue = useRecoilValue(armor);
-  const attributePowerBonusAgility = useRecoilValue(attributePowerBonus("agility"));
   const agility = useRecoilValue(attributeStatistic("agility"));
   const dodgeChanceValue = useRecoilValue(dodgeChance);
   const isTraitAcquiredNudist = useRecoilValue(isTraitAcquired("nudist"));
@@ -66,24 +64,6 @@ export function DodgeChance() {
                               value: agility,
                             })}
                           </span>
-
-                          {attributePowerBonusAgility > 0 && (
-                            <>
-                              {LABEL_SEPARATOR}
-
-                              <IconDisplay
-                                Icon={IconEldritchCodex}
-                                iconProps={{ className: "small" }}
-                              >
-                                <span>
-                                  {formatNumber({
-                                    format: "multiplier",
-                                    value: attributePowerBonusAgility,
-                                  })}
-                                </span>
-                              </IconDisplay>
-                            </>
-                          )}
                         </Stack>
                       </td>
                     </tr>

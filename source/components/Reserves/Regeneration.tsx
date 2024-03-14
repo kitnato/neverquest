@@ -5,14 +5,13 @@ import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { RegenerationMeter } from "@neverquest/components/Reserves/RegenerationMeter";
-import { LABEL_SEPARATOR, POPOVER_TRIGGER } from "@neverquest/data/general";
+import { POPOVER_TRIGGER } from "@neverquest/data/general";
 import { RESERVES } from "@neverquest/data/reserves";
 import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth";
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { useTimer } from "@neverquest/hooks/useTimer";
-import IconEldritchCodex from "@neverquest/icons/eldritch-codex.svg?react";
-import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
+import { attributeStatistic } from "@neverquest/state/attributes";
 import { hasFlatlined, isRecovering } from "@neverquest/state/character";
 import {
   isHealthAtMaximum,
@@ -35,9 +34,6 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
     regenerationRateDelta,
   } = RESERVES[reserve];
 
-  const attributePowerBonusRegenerationRate = useRecoilValue(
-    attributePowerBonus(regenerationAttribute),
-  );
   const attributeStatisticRegenerationRate = useRecoilValue(
     attributeStatistic(regenerationAttribute),
   );
@@ -103,21 +99,6 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
                           value: attributeStatisticRegenerationRate,
                         })}
                       </span>
-
-                      {attributePowerBonusRegenerationRate > 0 && (
-                        <>
-                          {LABEL_SEPARATOR}
-
-                          <IconDisplay Icon={IconEldritchCodex} iconProps={{ className: "small" }}>
-                            <span>
-                              {formatNumber({
-                                format: "multiplier",
-                                value: attributePowerBonusRegenerationRate,
-                              })}
-                            </span>
-                          </IconDisplay>
-                        </>
-                      )}
                     </Stack>
                   </td>
                 </tr>

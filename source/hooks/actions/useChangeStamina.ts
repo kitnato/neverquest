@@ -39,11 +39,11 @@ export function useChangeStamina() {
 
         addDelta({
           contents: [
-            ...(contents === undefined ? [] : Array.isArray(contents) ? contents : [contents]),
             {
               color: isPositive ? "text-success" : "text-danger",
               value: isPositive ? `+${formattedValue}` : formattedValue,
             },
+            ...(contents === undefined ? [] : Array.isArray(contents) ? contents : [contents]),
           ],
           delta: "stamina",
         });

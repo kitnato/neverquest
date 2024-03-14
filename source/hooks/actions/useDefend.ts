@@ -35,7 +35,7 @@ import {
 } from "@neverquest/state/monster";
 import {
   blight,
-  healthMaximum,
+  healthMaximumPoisoned,
   isPoisoned,
   poisonDuration,
   poisonLength,
@@ -131,7 +131,7 @@ export function useDefend() {
           }
 
           if (get(isTraitAcquired("nudist")) && isUnarmored(armorValue)) {
-            const healthGain = Math.round(get(healthMaximum) * NUDIST.healAmount);
+            const healthGain = Math.round(get(healthMaximumPoisoned) * NUDIST.healAmount);
 
             changeHealth({
               contents: {

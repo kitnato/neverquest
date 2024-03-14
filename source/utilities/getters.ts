@@ -23,6 +23,7 @@ import {
 import {
   CLASS_ANIMATED,
   CLASS_ANIMATE_PREFIX,
+  GENERIC_MINIMUM,
   LEVELLING_THRESHOLD,
   MILLISECONDS_IN_SECOND,
   RETIREMENT_STAGE,
@@ -141,7 +142,7 @@ export function getAttributePoints({
   let requiredEssence = getAttributePointCost(powerLevel);
 
   while (requiredEssence <= essence) {
-    points += 1;
+    points += GENERIC_MINIMUM;
     requiredEssence += getAttributePointCost(powerLevel + points);
   }
 
@@ -150,27 +151,25 @@ export function getAttributePoints({
 
 export function getComputedStatistic({
   base,
-  bonus = { increment: 0, maximum: 0 },
+  bonus = 0,
   increment,
   rank,
 }: {
   base: number;
-  bonus?: { increment: number; maximum: number };
+  bonus?: number;
   increment: number;
   rank: number;
 }) {
-  if (bonus.increment === 0) {
-    return base + increment * rank;
+  const boost = increment * rank;
+
+  if (bonus === 0) {
+    return base + boost;
   }
 
   return (
-    Math.min(
-      Array.from({ length: rank })
-        .map((_, index) => index * bonus.increment)
-        .reduce((sum, bonus) => sum + bonus, base),
-      bonus.maximum,
-    ) +
-    increment * rank
+    Array.from({ length: rank })
+      .map((_, index) => index * bonus)
+      .reduce((sum, bonus) => sum + bonus, base) + boost
   );
 }
 
@@ -241,8 +240,11 @@ export function getGearElementalEffects({
       const { damage, duration } = ELEMENTALS[elemental];
 
       effects[elemental] = {
-        damage: Math.ceil(
-          powerLevel * getFromRange({ factor: (amount - 1) / (GEMS_MAXIMUM - 1), ...damage }),
+        damage: Math.max(
+          Math.round(
+            powerLevel * getFromRange({ factor: (amount - 1) / (GEMS_MAXIMUM - 1), ...damage }),
+          ),
+          GENERIC_MINIMUM,
         ),
         duration: Math.round(
           getFromRange({
@@ -483,7 +485,7 @@ export function getSellPrice({ gemsFitted, item }: { gemsFitted?: number; item: 
       }) * gemsFitted;
   }
 
-  return Math.ceil(price / 2) + supplement;
+  return Math.max(Math.round(price / 2), GENERIC_MINIMUM) + supplement;
 }
 
 export function getShieldRanges({ factor, gearClass }: { factor: number; gearClass: ShieldClass }) {

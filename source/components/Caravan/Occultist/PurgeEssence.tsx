@@ -28,7 +28,7 @@ export function PurgeEssence() {
   const transactEssence = useTransactEssence();
 
   const hasAbsorbedEssence = absorbedEssenceValue > 0;
-  const price = Math.ceil(absorbedEssenceValue * OCCULTIST_PURGE_PRICE_MULTIPLIER.essence);
+  const price = Math.round(absorbedEssenceValue * OCCULTIST_PURGE_PRICE_MULTIPLIER.essence);
   const isAffordable = price <= essenceValue;
   const isPurchasable = hasAbsorbedEssence && isAffordable;
 

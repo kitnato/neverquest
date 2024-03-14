@@ -5,15 +5,14 @@ import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { Regeneration } from "@neverquest/components/Reserves/Regeneration";
 import { ReserveMeter } from "@neverquest/components/Reserves/ReserveMeter";
-import { LABEL_SEPARATOR, POPOVER_TRIGGER } from "@neverquest/data/general";
+import { POPOVER_TRIGGER } from "@neverquest/data/general";
 import { RESERVES } from "@neverquest/data/reserves";
 import { useTimer } from "@neverquest/hooks/useTimer";
-import IconEldritchCodex from "@neverquest/icons/eldritch-codex.svg?react";
 import IconHealth from "@neverquest/icons/health.svg?react";
 import IconProtected from "@neverquest/icons/protected.svg?react";
 import IconQuests from "@neverquest/icons/quests.svg?react";
 import IconVitality from "@neverquest/icons/vitality.svg?react";
-import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
+import { attributeStatistic } from "@neverquest/state/attributes";
 import { isRelicEquipped } from "@neverquest/state/items";
 import { questsBonus } from "@neverquest/state/quests";
 import { isPoisoned, poisonDuration } from "@neverquest/state/reserves";
@@ -22,7 +21,6 @@ import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function Health() {
-  const attributePowerBonusVitality = useRecoilValue(attributePowerBonus("vitality"));
   const attributeStatisticVitality = useRecoilValue(attributeStatistic("vitality"));
   const isDreamCatcherEquipped = useRecoilValue(isRelicEquipped("dream catcher"));
   const isPoisonedValue = useRecoilValue(isPoisoned);
@@ -81,24 +79,6 @@ export function Health() {
                                 })}
                               </span>
                             </IconDisplay>
-
-                            {attributePowerBonusVitality > 0 && (
-                              <>
-                                {LABEL_SEPARATOR}
-
-                                <IconDisplay
-                                  Icon={IconEldritchCodex}
-                                  iconProps={{ className: "small" }}
-                                >
-                                  <span>
-                                    {formatNumber({
-                                      format: "multiplier",
-                                      value: attributePowerBonusVitality,
-                                    })}
-                                  </span>
-                                </IconDisplay>
-                              </>
-                            )}
                           </Stack>
                         </td>
                       </tr>
@@ -131,11 +111,7 @@ export function Health() {
               </Popover>
             }
             placement="right"
-            trigger={
-              attributePowerBonusVitality > 0 || questsBonusHealth > 0 || vitalityBonus > 0
-                ? POPOVER_TRIGGER
-                : []
-            }
+            trigger={questsBonusHealth > 0 || vitalityBonus > 0 ? POPOVER_TRIGGER : []}
           >
             <div className="w-100">
               <ReserveMeter

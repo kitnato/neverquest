@@ -14,7 +14,14 @@ export function InfusionEffect({ infusable }: { infusable: Infusable }) {
 
   const infusionEffectValue = useRecoilValue(infusionEffectState);
 
-  const { delta, EffectIcon, tooltip } = INFUSABLES[infusable];
+  const {
+    delta,
+    EffectIcon,
+    item: {
+      effect: { maximum },
+    },
+    tooltip,
+  } = INFUSABLES[infusable];
 
   useDeltaText({
     delta,
@@ -25,23 +32,13 @@ export function InfusionEffect({ infusable }: { infusable: Infusable }) {
   return (
     <Stack direction="horizontal" gap={1}>
       <IconDisplay Icon={EffectIcon} tooltip={tooltip}>
-        {infusable === "mysterious egg" ? (
-          <span>
-            {formatNumber({
-              decimals: infusionEffectValue >= 1 ? 0 : 2,
-              format: "percentage",
-              value: Math.abs(infusionEffectValue),
-            })}
-          </span>
-        ) : (
-          <span>
-            +
-            {formatNumber({
-              format: "percentage",
-              value: Math.abs(infusionEffectValue),
-            })}
-          </span>
-        )}
+        <span>
+          {formatNumber({
+            decimals: infusionEffectValue >= maximum ? 0 : 2,
+            format: "percentage",
+            value: Math.abs(infusionEffectValue),
+          })}
+        </span>
       </IconDisplay>
 
       <DeltasDisplay delta={delta} />

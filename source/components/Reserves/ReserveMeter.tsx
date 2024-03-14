@@ -16,7 +16,6 @@ import { hasFlatlined } from "@neverquest/state/character";
 import {
   blightMagnitude,
   health,
-  healthMaximum,
   healthMaximumPoisoned,
   isBlighted,
   isPoisoned,
@@ -24,8 +23,8 @@ import {
   poisonDuration,
   regenerationDuration,
   regenerationRate,
+  reserveMaximum,
   stamina,
-  staminaMaximum,
   staminaMaximumBlighted,
 } from "@neverquest/state/reserves";
 import type { SVGIcon } from "@neverquest/types/components";
@@ -35,7 +34,7 @@ import { formatNumber } from "@neverquest/utilities/formatters";
 export function ReserveMeter({ PrefixIcon, reserve }: { PrefixIcon?: SVGIcon; reserve: Reserve }) {
   const isHealth = reserve === "health";
   const reserveState = isHealth ? health : stamina;
-  const reserveMaximum = isHealth ? healthMaximum : staminaMaximum;
+  const reserveMaximumState = reserveMaximum(reserve);
 
   const [reserveValue, setReserve] = useRecoilState(reserveState);
   const ailmentExtent = useRecoilValue(isHealth ? poisonDuration : blightMagnitude);
@@ -43,7 +42,7 @@ export function ReserveMeter({ PrefixIcon, reserve }: { PrefixIcon?: SVGIcon; re
   const isRegeneratingValue = useRecoilValue(isRegenerating(reserve));
   const hasFlatlinedValue = useRecoilValue(hasFlatlined);
   const regenerationRateValue = useRecoilValue(regenerationRate(reserve));
-  const reserveMaximumValue = useRecoilValue(reserveMaximum);
+  const reserveMaximumValue = useRecoilValue(reserveMaximumState);
   const reserveMaximumAilingValue = useRecoilValue(
     isHealth ? healthMaximumPoisoned : staminaMaximumBlighted,
   );
@@ -58,7 +57,7 @@ export function ReserveMeter({ PrefixIcon, reserve }: { PrefixIcon?: SVGIcon; re
 
   useDeltaText({
     delta: maximumDelta,
-    state: reserveMaximum,
+    state: reserveMaximumState,
     suffix: LABEL_MAXIMUM,
   });
 

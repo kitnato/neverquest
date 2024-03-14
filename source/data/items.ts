@@ -11,6 +11,7 @@ import IconBlighted from "@neverquest/icons/blighted.svg?react";
 import IconCaravan from "@neverquest/icons/caravan.svg?react";
 import IconCompass from "@neverquest/icons/compass.svg?react";
 import IconDamagePerSecond from "@neverquest/icons/damage-per-second.svg?react";
+import IconDamage from "@neverquest/icons/damage.svg?react";
 import IconDreamCatcher from "@neverquest/icons/dream-catcher.svg?react";
 import IconEldritchCodex from "@neverquest/icons/eldritch-codex.svg?react";
 import IconElixir from "@neverquest/icons/elixir.svg?react";
@@ -27,6 +28,7 @@ import IconIce from "@neverquest/icons/ice.svg?react";
 import IconJournal from "@neverquest/icons/journal.svg?react";
 import IconKnapsack from "@neverquest/icons/knapsack.svg?react";
 import IconLacrimatory from "@neverquest/icons/lacrimatory.svg?react";
+import IconLifeLeech from "@neverquest/icons/life-leech.svg?react";
 import IconLightning from "@neverquest/icons/lightning.svg?react";
 import IconLogEntry from "@neverquest/icons/log-entry.svg?react";
 import IconLoot from "@neverquest/icons/loot.svg?react";
@@ -38,8 +40,6 @@ import IconNavigation from "@neverquest/icons/navigation.svg?react";
 import IconPhylactery from "@neverquest/icons/phylactery.svg?react";
 import IconPoisonRating from "@neverquest/icons/poison-rating.svg?react";
 import IconPoisoned from "@neverquest/icons/poisoned.svg?react";
-import IconPowerBonusBoost from "@neverquest/icons/power-bonus-boost.svg?react";
-import IconPowerLevel from "@neverquest/icons/power-level.svg?react";
 import IconProtected from "@neverquest/icons/protected.svg?react";
 import IconQuests from "@neverquest/icons/quests.svg?react";
 import IconRanged from "@neverquest/icons/ranged.svg?react";
@@ -201,22 +201,22 @@ export const INFUSABLES: Record<
   }
 > = {
   "eldritch codex": {
-    delta: "powerBonusBoost",
-    description: "Boosts all attribute effects based on # power level.",
-    descriptionIcons: [IconPowerLevel],
-    EffectIcon: IconPowerBonusBoost,
+    delta: "lifeLeech",
+    description: "Attacks return a fraction of # total damage as # health.",
+    descriptionIcons: [IconDamage, IconHealth],
+    EffectIcon: IconLifeLeech,
     Icon: IconEldritchCodex,
     item: {
       effect: {
-        maximum: 1.5,
-        minimum: 0,
+        maximum: 0.25,
+        minimum: 0.01,
       },
       ID: "",
       name: "eldritch codex",
-      price: 4000,
-      weight: 10,
+      price: 5000,
+      weight: 13,
     },
-    tooltip: "Power bonus boost",
+    tooltip: "Life leech",
   },
   "mysterious egg": {
     delta: "hatchingProgress",

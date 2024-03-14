@@ -1,6 +1,8 @@
 import { useRecoilCallback } from "recoil";
 
+import { GENERIC_MINIMUM } from "@neverquest/data/general";
 import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta";
+import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth";
 import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth";
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
 import { useInflictElementalAilment } from "@neverquest/hooks/actions/useInflictElementalAilment";
@@ -14,7 +16,7 @@ import {
   isAttacking,
 } from "@neverquest/state/character";
 import { weapon } from "@neverquest/state/gear";
-import { ammunition } from "@neverquest/state/items";
+import { ammunition, infusionEffect } from "@neverquest/state/items";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import {
   distance,
@@ -41,6 +43,7 @@ import { animateElement } from "@neverquest/utilities/helpers";
 
 export function useAttack() {
   const addDelta = useAddDelta();
+  const changeHealth = useChangeHealth();
   const changeMonsterHealth = useChangeMonsterHealth();
   const changeStamina = useChangeStamina();
   const trainMastery = useTrainMastery();
@@ -54,6 +57,7 @@ export function useAttack() {
 
         const canAttackOrParryValue = get(canAttackOrParry);
         const hasEnoughAmmunitionValue = get(hasEnoughAmmunition);
+        const infusionEffectEldritchCodex = get(infusionEffect("eldritch codex"));
         const monsterElementValue = get(monsterElement);
         const monsterHealthValue = get(monsterHealth);
         const weaponValue = get(weapon);
@@ -64,6 +68,8 @@ export function useAttack() {
             get(isTraitAcquired("sharpshooter")) &&
             get(distance) > 0) ||
           Math.random() <= get(criticalChance);
+
+        let totalDamage = Math.round(hasInflictedCritical ? get(criticalStrike) : get(damage));
 
         set(isShowing("damage"), true);
 
@@ -94,19 +100,17 @@ export function useAttack() {
               monsterHealthValue / get(monsterHealthMaximum) <= get(executionThreshold)) ||
             (hasInflictedCritical && get(isTraitAcquired("executioner")))
           ) {
+            totalDamage = monsterHealthValue;
+
             changeMonsterHealth({
               contents: [
                 {
                   color: "text-muted",
                   value: "EXECUTE",
                 },
-                {
-                  color: "text-danger",
-                  value: `-${monsterHealthValue}`,
-                },
               ],
               damageType: "execution",
-              value: -monsterHealthValue,
+              value: -totalDamage,
             });
           } else {
             const monsterDeltas: DeltaDisplay[] = [];
@@ -149,14 +153,23 @@ export function useAttack() {
               inflictElementalAilment({ elemental, slot: "weapon" });
             }
 
-            const totalDamage = -Math.round(
-              hasInflictedCritical ? get(criticalStrike) : get(damage),
-            );
-
             changeMonsterHealth({
               contents: monsterDeltas,
               damageType: hasInflictedCritical ? "critical" : undefined,
-              value: totalDamage,
+              value: -totalDamage,
+            });
+          }
+
+          if (infusionEffectEldritchCodex > 0) {
+            changeHealth({
+              contents: {
+                color: "text-muted",
+                value: "LEECH",
+              },
+              value: Math.max(
+                Math.round(totalDamage * infusionEffectEldritchCodex),
+                GENERIC_MINIMUM,
+              ),
             });
           }
 
@@ -203,6 +216,7 @@ export function useAttack() {
       },
     [
       addDelta,
+      changeHealth,
       changeMonsterHealth,
       changeStamina,
       trainMastery,

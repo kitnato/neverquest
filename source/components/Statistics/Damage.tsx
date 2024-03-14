@@ -16,12 +16,15 @@ import IconBruiser from "@neverquest/icons/bruiser.svg?react";
 import IconBurden from "@neverquest/icons/burden.svg?react";
 import IconDamage from "@neverquest/icons/damage.svg?react";
 import IconEldritchCodex from "@neverquest/icons/eldritch-codex.svg?react";
+import IconHealth from "@neverquest/icons/health.svg?react";
+import IconLifeLeech from "@neverquest/icons/life-leech.svg?react";
 import IconQuests from "@neverquest/icons/quests.svg?react";
 import IconStamina from "@neverquest/icons/stamina.svg?react";
 import IconStrength from "@neverquest/icons/strength.svg?react";
 import IconWeaponDamage from "@neverquest/icons/weapon-damage.svg?react";
-import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
+import { attributeStatistic } from "@neverquest/state/attributes";
 import { shield, weapon } from "@neverquest/state/gear";
+import { infusionEffect } from "@neverquest/state/items";
 import { questProgress, questsBonus } from "@neverquest/state/quests";
 import { stamina } from "@neverquest/state/reserves";
 import { damage } from "@neverquest/state/statistics";
@@ -32,9 +35,9 @@ import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAnimationClass, getGearIcon } from "@neverquest/utilities/getters";
 
 export function Damage() {
-  const attributePowerBonusStrength = useRecoilValue(attributePowerBonus("strength"));
   const attributeStatisticStrength = useRecoilValue(attributeStatistic("strength"));
   const damageValue = useRecoilValue(damage);
+  const infusionEffectEldritchCodex = useRecoilValue(infusionEffect("eldritch codex"));
   const isShowingDamage = useRecoilValue(isShowing("damage"));
   const isTraitAcquiredBrawler = useRecoilValue(isTraitAcquired("brawler"));
   const isTraitAcquiredBruiser = useRecoilValue(isTraitAcquired("bruiser"));
@@ -126,24 +129,6 @@ export function Damage() {
                                 value: attributeStatisticStrength,
                               })}
                             </span>
-
-                            {attributePowerBonusStrength > 0 && (
-                              <>
-                                {LABEL_SEPARATOR}
-
-                                <IconDisplay
-                                  Icon={IconEldritchCodex}
-                                  iconProps={{ className: "small" }}
-                                >
-                                  <span>
-                                    {formatNumber({
-                                      format: "multiplier",
-                                      value: attributePowerBonusStrength,
-                                    })}
-                                  </span>
-                                </IconDisplay>
-                              </>
-                            )}
                           </Stack>
                         </td>
                       </tr>
@@ -183,6 +168,42 @@ export function Damage() {
                                 value: questsBonusDamage,
                               })}
                             </span>
+                          </IconDisplay>
+                        </td>
+                      </tr>
+                    )}
+
+                    {infusionEffectEldritchCodex > 0 && (
+                      <tr>
+                        <td>
+                          <IconDisplay Icon={IconEldritchCodex} iconProps={{ className: "small" }}>
+                            <span>Life leech:</span>
+                          </IconDisplay>
+                        </td>
+
+                        <td>
+                          <IconDisplay Icon={IconLifeLeech} iconProps={{ className: "small" }}>
+                            <Stack direction="horizontal" gap={1}>
+                              <span>
+                                {formatNumber({
+                                  format: "percentage",
+                                  value: infusionEffectEldritchCodex,
+                                })}
+                              </span>
+
+                              {LABEL_SEPARATOR}
+
+                              <IconDisplay Icon={IconHealth} iconProps={{ className: "small" }}>
+                                <span>
+                                  {formatNumber({
+                                    value: Math.max(
+                                      Math.round(damageValue * infusionEffectEldritchCodex),
+                                      1,
+                                    ),
+                                  })}
+                                </span>
+                              </IconDisplay>
+                            </Stack>
                           </IconDisplay>
                         </td>
                       </tr>

@@ -14,6 +14,8 @@ export const FILE_EXTENSION = "nq";
 
 export const FRAMERATE = MILLISECONDS_IN_SECOND / 60;
 
+export const GENERIC_MINIMUM = 1;
+
 export const GLITCH_NUMBER = 7;
 export const GLITCH_STAGE_MINIMUM = 57;
 

@@ -12,16 +12,13 @@ import IconCriticalDamage from "@neverquest/icons/critical-damage.svg?react";
 import IconCriticalRating from "@neverquest/icons/critical-rating.svg?react";
 import IconDamage from "@neverquest/icons/damage.svg?react";
 import IconDexterity from "@neverquest/icons/dexterity.svg?react";
-import IconEldritchCodex from "@neverquest/icons/eldritch-codex.svg?react";
 import IconPerception from "@neverquest/icons/perception.svg?react";
-import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
+import { attributeStatistic } from "@neverquest/state/attributes";
 import { criticalChance, criticalRating, criticalStrike } from "@neverquest/state/statistics";
 import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function CriticalRating() {
-  const attributePowerBonusDexterity = useRecoilValue(attributePowerBonus("dexterity"));
-  const attributePowerBonusPerception = useRecoilValue(attributePowerBonus("perception"));
   const attributeStatisticDexterity = useRecoilValue(attributeStatistic("dexterity"));
   const attributeStatisticPerception = useRecoilValue(attributeStatistic("perception"));
   const criticalChanceValue = useRecoilValue(criticalChance);
@@ -67,20 +64,6 @@ export function CriticalRating() {
 
                             <IconImage className="small" Icon={IconAttackRate} />
                           </IconDisplay>
-
-                          {attributePowerBonusDexterity > 0 && (
-                            <IconDisplay
-                              Icon={IconEldritchCodex}
-                              iconProps={{ className: "small" }}
-                            >
-                              <span>
-                                {formatNumber({
-                                  format: "multiplier",
-                                  value: attributePowerBonusDexterity,
-                                })}
-                              </span>
-                            </IconDisplay>
-                          )}
                         </Stack>
                       </td>
                     </tr>
@@ -106,20 +89,6 @@ export function CriticalRating() {
 
                             <IconImage className="small" Icon={IconDamage} />
                           </IconDisplay>
-
-                          {attributePowerBonusPerception > 0 && (
-                            <IconDisplay
-                              Icon={IconEldritchCodex}
-                              iconProps={{ className: "small" }}
-                            >
-                              <span>
-                                {formatNumber({
-                                  format: "multiplier",
-                                  value: attributePowerBonusPerception,
-                                })}
-                              </span>
-                            </IconDisplay>
-                          )}
                         </Stack>
                       </td>
                     </tr>

@@ -4,15 +4,14 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { DetailsTable } from "@neverquest/components/DetailsTable";
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { AttackRateMeter } from "@neverquest/components/Status/AttackRateMeter";
-import { LABEL_SEPARATOR, POPOVER_TRIGGER } from "@neverquest/data/general";
+import { POPOVER_TRIGGER } from "@neverquest/data/general";
 import { useAttack } from "@neverquest/hooks/actions/useAttack";
 import { useDeltaText } from "@neverquest/hooks/useDeltaText";
 import { useTimer } from "@neverquest/hooks/useTimer";
 import IconAttackRate from "@neverquest/icons/attack-rate.svg?react";
-import IconEldritchCodex from "@neverquest/icons/eldritch-codex.svg?react";
 import IconWeaponSpeed from "@neverquest/icons/speed.svg?react";
 import IconWeaponAttackRate from "@neverquest/icons/weapon-attack-rate.svg?react";
-import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
+import { attributeStatistic } from "@neverquest/state/attributes";
 import {
   attackDuration,
   canAttackOrParry,
@@ -29,7 +28,6 @@ import { formatNumber } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
 export function AttackRate() {
-  const attributePowerBonusSpeed = useRecoilValue(attributePowerBonus("speed"));
   const attributeStatisticSpeed = useRecoilValue(attributeStatistic("speed"));
   const canAttackOrParryValue = useRecoilValue(canAttackOrParry);
   const isAttackingValue = useRecoilValue(isAttacking);
@@ -100,24 +98,6 @@ export function AttackRate() {
                               value: attributeStatisticSpeed,
                             })}
                           </span>
-
-                          {attributePowerBonusSpeed > 0 && (
-                            <>
-                              {LABEL_SEPARATOR}
-
-                              <IconDisplay
-                                Icon={IconEldritchCodex}
-                                iconProps={{ className: "small" }}
-                              >
-                                <span>
-                                  {formatNumber({
-                                    format: "multiplier",
-                                    value: attributePowerBonusSpeed,
-                                  })}
-                                </span>
-                              </IconDisplay>
-                            </>
-                          )}
                         </Stack>
                       </td>
                     </tr>
@@ -126,11 +106,7 @@ export function AttackRate() {
               </PopoverBody>
             </Popover>
           }
-          trigger={
-            attributeStatisticSpeed > 0 || attributePowerBonusSpeed > 0 || !canAttackOrParryValue
-              ? POPOVER_TRIGGER
-              : []
-          }
+          trigger={attributeStatisticSpeed > 0 || !canAttackOrParryValue ? POPOVER_TRIGGER : []}
         >
           <div className="w-100">
             <AttackRateMeter />

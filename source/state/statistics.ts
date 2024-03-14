@@ -1,7 +1,7 @@
 import { selector } from "recoil";
 
 import { ATTRIBUTES } from "@neverquest/data/attributes";
-import { PERCENTAGE_POINTS } from "@neverquest/data/general";
+import { GENERIC_MINIMUM, PERCENTAGE_POINTS } from "@neverquest/data/general";
 import {
   BLEED,
   DEFLECTION_MAXIMUM,
@@ -17,7 +17,7 @@ import {
   TANK_PROTECTION_BONUS,
 } from "@neverquest/data/traits";
 import { bleed, bleedChance, staggerChance, stunChance } from "@neverquest/state/ailments";
-import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
+import { attributeStatistic } from "@neverquest/state/attributes";
 import { armor, elementalEffects, shield, weapon } from "@neverquest/state/gear";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import { questsBonus } from "@neverquest/state/quests";
@@ -38,9 +38,7 @@ import { withStateKey } from "@neverquest/utilities/helpers";
 
 export const attackRate = withStateKey("attackRate", (key) =>
   selector({
-    get: ({ get }) =>
-      get(weapon).rate *
-      (1 + get(attributeStatistic("speed")) * (1 + get(attributePowerBonus("speed")))),
+    get: ({ get }) => get(weapon).rate * (1 + get(attributeStatistic("speed"))),
     key,
   }),
 );
@@ -92,9 +90,7 @@ export const blockChance = withStateKey("blockChance", (key) =>
 export const criticalChance = withStateKey("criticalChance", (key) =>
   selector({
     get: ({ get }) =>
-      get(isSkillAcquired("assassination"))
-        ? get(attributeStatistic("dexterity")) * (1 + get(attributePowerBonus("dexterity")))
-        : 0,
+      get(isSkillAcquired("assassination")) ? get(attributeStatistic("dexterity")) : 0,
     key,
   }),
 );
@@ -102,9 +98,7 @@ export const criticalChance = withStateKey("criticalChance", (key) =>
 export const criticalDamage = withStateKey("criticalDamage", (key) =>
   selector({
     get: ({ get }) =>
-      get(isSkillAcquired("assassination"))
-        ? get(attributeStatistic("perception")) * (1 + get(attributePowerBonus("perception")))
-        : 0,
+      get(isSkillAcquired("assassination")) ? get(attributeStatistic("perception")) : 0,
     key,
   }),
 );
@@ -130,7 +124,7 @@ export const damage = withStateKey("damage", (key) =>
       const weaponValue = get(weapon);
       const isWeaponUnarmed = isUnarmed(weaponValue);
 
-      return Math.ceil(
+      return Math.round(
         // Weapon damage multiplied by brawler trait bonus, if applicable.
         (weaponValue.damage *
           (get(isTraitAcquired("brawler")) &&
@@ -139,8 +133,8 @@ export const damage = withStateKey("damage", (key) =>
           (weaponValue.grip === "one-handed" || get(isTraitAcquired("colossus")))
             ? 1 + BRAWLER_DAMAGE_BONUS
             : 1) +
-          // Strength effect multiplied by its eldritch codex power, if applicable.
-          get(attributeStatistic("strength")) * (1 + get(attributePowerBonus("strength"))) +
+          // Strength attribute effect.
+          get(attributeStatistic("strength")) +
           // Elemental damage from any gems.
           Object.values(get(elementalEffects).weapon).reduce((sum, { damage }) => sum + damage, 0) +
           // Current stamina portion from bruiser trait, if applicable.
@@ -188,7 +182,6 @@ export const dodgeChance = withStateKey("dodgeChance", (key) =>
       get(isSkillAcquired("evasion"))
         ? Math.min(
             get(attributeStatistic("agility")) *
-              (1 + get(attributePowerBonus("agility"))) *
               (get(isTraitAcquired("nudist")) && isUnarmored(get(armor)) ? NUDIST.dodgeBonus : 1),
             ATTRIBUTES.agility.maximum ?? Number.POSITIVE_INFINITY,
           )
@@ -253,11 +246,12 @@ export const protection = withStateKey("protection", (key) =>
       const { protection } = get(armor);
       const shieldValue = get(shield);
 
-      if (!isUnshielded(shieldValue) && get(isTraitAcquired("tank"))) {
-        return Math.ceil(protection * (1 + TANK_PROTECTION_BONUS));
-      }
-
-      return protection;
+      return (
+        protection +
+        (!isUnshielded(shieldValue) && get(isTraitAcquired("tank"))
+          ? Math.max(Math.round(protection * TANK_PROTECTION_BONUS), GENERIC_MINIMUM)
+          : 0)
+      );
     },
     key,
   }),

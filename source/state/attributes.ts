@@ -2,7 +2,6 @@ import { atomFamily, selector, selectorFamily } from "recoil";
 
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { handleStorage } from "@neverquest/state/effects/handleStorage";
-import { infusionEffect } from "@neverquest/state/items";
 import { essence } from "@neverquest/state/resources";
 import { ATTRIBUTE_TYPES, type Attribute } from "@neverquest/types/unions";
 import {
@@ -39,21 +38,6 @@ export const areAttributesAffordable = withStateKey("areAttributesAffordable", (
 export const attributePoints = withStateKey("attributePoints", (key) =>
   selector({
     get: ({ get }) => getAttributePoints({ essence: get(essence), powerLevel: get(powerLevel) }),
-    key,
-  }),
-);
-
-export const attributePowerBonus = withStateKey("attributePowerBonus", (key) =>
-  selectorFamily({
-    get:
-      (attribute: Attribute) =>
-      ({ get }) => {
-        const infusionEffectValue = get(infusionEffect("eldritch codex"));
-
-        return get(attributeRank(attribute)) === 0 || infusionEffectValue === 0
-          ? 0
-          : get(powerLevel) * ATTRIBUTES[attribute].powerBonus * (1 + infusionEffectValue);
-      },
     key,
   }),
 );

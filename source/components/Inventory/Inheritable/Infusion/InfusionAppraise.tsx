@@ -21,7 +21,7 @@ import { INFUSABLES } from "@neverquest/data/items";
 import { isSkillAcquired } from "@neverquest/state/skills";
 import type { Infusable } from "@neverquest/types/unions";
 
-export function InfusionInspect({ infusable }: { infusable: Infusable }) {
+export function InfusionAppraise({ infusable }: { infusable: Infusable }) {
   const isSkillAcquiredMeditation = useRecoilValue(isSkillAcquired("meditation"));
 
   const [isShowingInfusion, setIsShowingInfusion] = useState(false);
@@ -46,7 +46,7 @@ export function InfusionInspect({ infusable }: { infusable: Infusable }) {
             }}
             variant="outline-dark"
           >
-            <span>Inspect</span>
+            <span>Appraise</span>
           </Button>
         </div>
       </OverlayTrigger>

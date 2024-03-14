@@ -5,8 +5,6 @@ import IconStamina from "@neverquest/icons/stamina.svg?react";
 import type { SVGIcon } from "@neverquest/types/components";
 import type { Attribute, Delta, Reserve } from "@neverquest/types/unions";
 
-export const AILING_RESERVE_MINIMUM = 1;
-
 export const HEALTH_LOW_THRESHOLD = 0.25;
 
 export const REGENERATION_METER_ANIMATION_THRESHOLD = 300;
@@ -14,6 +12,7 @@ export const REGENERATION_METER_ANIMATION_THRESHOLD = 300;
 export const RESERVES: Record<
   Reserve,
   {
+    attribute: Attribute;
     baseAmount: number;
     baseRegenerationRate: number;
     Icon: SVGIcon;
@@ -25,6 +24,7 @@ export const RESERVES: Record<
   }
 > = {
   health: {
+    attribute: "vitality",
     baseAmount: 80,
     baseRegenerationRate: 2700,
     Icon: IconHealth,
@@ -35,6 +35,7 @@ export const RESERVES: Record<
     regenerationRateDelta: "healthRegenerationRate",
   },
   stamina: {
+    attribute: "endurance",
     baseAmount: 25,
     baseRegenerationRate: 2000,
     Icon: IconStamina,

@@ -27,8 +27,7 @@ export const ATTRIBUTES: Record<
   AttributeOrMasteryBaseData & {
     format: NumberFormat;
     maximum?: number;
-    powerBonus: number;
-    rankBonus?: { increment: number; maximum: number };
+    rankBonus?: number;
     requiredSkill?: Skill;
     shows?: Showing;
   }
@@ -41,7 +40,6 @@ export const ATTRIBUTES: Record<
     Icon: IconAgility,
     increment: 0.025,
     maximum: 0.95,
-    powerBonus: 0.005,
     requiredSkill: "evasion",
   },
   dexterity: {
@@ -52,7 +50,6 @@ export const ATTRIBUTES: Record<
     Icon: IconDexterity,
     increment: 0.0066,
     maximum: 0.5,
-    powerBonus: 0.0025,
     requiredSkill: "assassination",
   },
   endurance: {
@@ -62,8 +59,7 @@ export const ATTRIBUTES: Record<
     format: "integer",
     Icon: IconEndurance,
     increment: 5,
-    powerBonus: 0.03,
-    rankBonus: { increment: 7, maximum: 200 },
+    rankBonus: 7,
     shows: "stamina",
   },
   fortitude: {
@@ -74,7 +70,6 @@ export const ATTRIBUTES: Record<
     Icon: IconFortitude,
     increment: -0.025,
     maximum: 0.9,
-    powerBonus: 0.002,
     requiredSkill: "calisthenics",
   },
   perception: {
@@ -85,7 +80,6 @@ export const ATTRIBUTES: Record<
     Icon: IconPerception,
     increment: 0.03,
     maximum: 2.5,
-    powerBonus: 0.0005,
     requiredSkill: "assassination",
   },
   speed: {
@@ -96,7 +90,6 @@ export const ATTRIBUTES: Record<
     Icon: IconSpeed,
     increment: -0.015,
     maximum: 0.75,
-    powerBonus: 0.001,
     shows: "attackRate",
   },
   strength: {
@@ -106,8 +99,7 @@ export const ATTRIBUTES: Record<
     format: "integer",
     Icon: IconStrength,
     increment: 2,
-    powerBonus: 0.01,
-    rankBonus: { increment: 1, maximum: 30 },
+    rankBonus: 1,
     shows: "damage",
   },
   vigor: {
@@ -118,7 +110,6 @@ export const ATTRIBUTES: Record<
     Icon: IconVigor,
     increment: -0.025,
     maximum: 0.9,
-    powerBonus: 0.002,
     requiredSkill: "calisthenics",
   },
   vitality: {
@@ -128,8 +119,7 @@ export const ATTRIBUTES: Record<
     format: "integer",
     Icon: IconVitality,
     increment: 15,
-    powerBonus: 0.025,
-    rankBonus: { increment: 15, maximum: 300 },
+    rankBonus: 15,
     shows: "health",
   },
 };

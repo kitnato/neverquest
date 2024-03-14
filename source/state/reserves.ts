@@ -1,8 +1,9 @@
 import { atom, atomFamily, selector, selectorFamily } from "recoil";
 
+import { GENERIC_MINIMUM } from "@neverquest/data/general";
 import { BLIGHT, POISON } from "@neverquest/data/monster";
-import { AILING_RESERVE_MINIMUM, HEALTH_LOW_THRESHOLD, RESERVES } from "@neverquest/data/reserves";
-import { attributePowerBonus, attributeStatistic } from "@neverquest/state/attributes";
+import { HEALTH_LOW_THRESHOLD, RESERVES } from "@neverquest/data/reserves";
+import { attributeStatistic } from "@neverquest/state/attributes";
 import { handleStorage } from "@neverquest/state/effects/handleStorage";
 import { stage } from "@neverquest/state/encounter";
 import { questsBonus } from "@neverquest/state/quests";
@@ -19,31 +20,19 @@ export const blightMagnitude = withStateKey("blightMagnitude", (key) =>
   }),
 );
 
-export const healthMaximum = withStateKey("healthMaximum", (key) =>
-  selector({
-    get: ({ get }) =>
-      Math.ceil(
-        get(attributeStatistic("vitality")) *
-          (1 + get(attributePowerBonus("vitality"))) *
-          (1 + get(questsBonus("healthBonus"))),
-      ),
-    key,
-  }),
-);
-
 export const healthMaximumPoisoned = withStateKey("healthMaximumPoisoned", (key) =>
   selector({
     get: ({ get }) => {
-      const healthMaximumValue = get(healthMaximum);
+      const healthMaximumValue = get(reserveMaximum("health"));
 
       return Math.max(
         Math.round(
           healthMaximumValue -
-            Math.ceil(
+            Math.round(
               healthMaximumValue * get(poisonMagnitude) * (get(poisonDuration) / get(poisonLength)),
             ),
         ),
-        AILING_RESERVE_MINIMUM,
+        GENERIC_MINIMUM,
       );
     },
     key,
@@ -146,7 +135,10 @@ export const regenerationAmount = withStateKey("regenerationAmount", (key) =>
     get:
       (reserve: Reserve) =>
       ({ get }) =>
-        Math.ceil(RESERVES[reserve].regeneration * get(reserve === "health" ? health : stamina)),
+        Math.max(
+          Math.round(RESERVES[reserve].regeneration * get(reserve === "health" ? health : stamina)),
+          GENERIC_MINIMUM,
+        ),
     key,
   }),
 );
@@ -167,44 +159,46 @@ export const regenerationRate = withStateKey("regenerationRate", (key) =>
   }),
 );
 
+export const reserveMaximum = withStateKey("reserveMaximum", (key) =>
+  selectorFamily({
+    get:
+      (reserve: Reserve) =>
+      ({ get }) => {
+        const { attribute } = RESERVES[reserve];
+        const attributeStatisticValue = get(attributeStatistic(attribute));
+        const questsBonusValue = get(questsBonus(`${reserve}Bonus`));
+
+        return (
+          attributeStatisticValue +
+          (questsBonusValue === 0
+            ? 0
+            : Math.max(Math.round(attributeStatisticValue * questsBonusValue), GENERIC_MINIMUM))
+        );
+      },
+    key,
+  }),
+);
+
 export const reserveRegenerationRateReduction = withStateKey(
   "reserveRegenerationRateReduction",
   (key) =>
     selectorFamily({
       get:
         (reserve: Reserve) =>
-        ({ get }) => {
-          const { regenerationAttribute } = RESERVES[reserve];
-
-          return (
-            get(attributeStatistic(regenerationAttribute)) *
-            (1 + get(attributePowerBonus(regenerationAttribute)))
-          );
-        },
+        ({ get }) =>
+          get(attributeStatistic(RESERVES[reserve].regenerationAttribute)),
       key,
     }),
-);
-
-export const staminaMaximum = withStateKey("staminaMaximum", (key) =>
-  selector({
-    get: ({ get }) =>
-      Math.ceil(
-        get(attributeStatistic("endurance")) *
-          (1 + get(attributePowerBonus("endurance"))) *
-          (1 + get(questsBonus("staminaBonus"))),
-      ),
-    key,
-  }),
 );
 
 export const staminaMaximumBlighted = withStateKey("staminaMaximumBlighted", (key) =>
   selector({
     get: ({ get }) => {
-      const staminaMaximumValue = get(staminaMaximum);
+      const staminaMaximumValue = get(reserveMaximum("stamina"));
 
       return Math.max(
         Math.round(staminaMaximumValue - staminaMaximumValue * get(blightMagnitude)),
-        AILING_RESERVE_MINIMUM,
+        GENERIC_MINIMUM,
       );
     },
     key,

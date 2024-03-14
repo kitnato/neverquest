@@ -11,7 +11,7 @@ import { Encumbrance } from "@neverquest/components/Inventory/Encumbrance";
 import { CompassNavigate } from "@neverquest/components/Inventory/Inheritable/CompassNavigate";
 import { EquipRelic } from "@neverquest/components/Inventory/Inheritable/EquipRelic";
 import { HearthstoneWarp } from "@neverquest/components/Inventory/Inheritable/HearthstoneWarp";
-import { InfusionInspect } from "@neverquest/components/Inventory/Inheritable/Infusion/InfusionInspect";
+import { InfusionAppraise } from "@neverquest/components/Inventory/Inheritable/Infusion/InfusionAppraise";
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
 import { SocketGem } from "@neverquest/components/Inventory/SocketGem";
 import {
@@ -228,7 +228,7 @@ export function Inventory() {
                 <ItemDisplay item={infusableItem} />
 
                 <Stack className="ms-2" direction="horizontal" gap={3}>
-                  <InfusionInspect infusable={name} />
+                  <InfusionAppraise infusable={name} />
 
                   <DiscardItem item={infusableItem} />
                 </Stack>

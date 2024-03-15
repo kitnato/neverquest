@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Stack } from "react-bootstrap";
 import { useRecoilState, useResetRecoilState } from "recoil";
 
+import { LABEL_SEPARATOR } from "@neverquest/data/general";
 import { deltas } from "@neverquest/state/deltas";
 import type { Delta } from "@neverquest/types/unions";
 import { getAnimationClass } from "@neverquest/utilities/getters";
@@ -23,16 +24,22 @@ export function DeltasDisplay({ delta }: { delta: Delta }) {
               animation: "fadeOutUp",
               speed: "slower",
             })}
+            direction="horizontal"
+            gap={1}
             onAnimationEnd={() => {
               setDeltas((currentDeltas) =>
                 currentDeltas.filter(({ ID: currentDeltaID }) => currentDeltaID !== ID),
               );
             }}
           >
-            {display.map(({ color, value }) => (
-              <strong className={`${color} small`} key={value}>
-                {value}
-              </strong>
+            {display.map(({ color, value }, index) => (
+              <>
+                <strong className={`${color} small`} key={value}>
+                  {value}
+                </strong>
+
+                {index < display.length - 1 && LABEL_SEPARATOR}
+              </>
             ))}
           </Stack>
         </div>

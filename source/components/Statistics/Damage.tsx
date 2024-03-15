@@ -27,7 +27,7 @@ import { shield, weapon } from "@neverquest/state/gear";
 import { infusionEffect } from "@neverquest/state/items";
 import { questProgress, questsBonus } from "@neverquest/state/quests";
 import { stamina } from "@neverquest/state/reserves";
-import { damage } from "@neverquest/state/statistics";
+import { damage, lifeLeech } from "@neverquest/state/statistics";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import { isShowing } from "@neverquest/state/ui";
 import { isUnarmed, isUnshielded } from "@neverquest/types/type-guards";
@@ -41,6 +41,7 @@ export function Damage() {
   const isShowingDamage = useRecoilValue(isShowing("damage"));
   const isTraitAcquiredBrawler = useRecoilValue(isTraitAcquired("brawler"));
   const isTraitAcquiredBruiser = useRecoilValue(isTraitAcquired("bruiser"));
+  const lifeLeechValue = useRecoilValue(lifeLeech);
   const questsBonusDamage = useRecoilValue(questsBonus("damageBonus"));
   const shieldValue = useRecoilValue(shield);
   const staminaValue = useRecoilValue(stamina);
@@ -196,10 +197,7 @@ export function Damage() {
                               <IconDisplay Icon={IconHealth} iconProps={{ className: "small" }}>
                                 <span>
                                   {formatNumber({
-                                    value: Math.max(
-                                      Math.round(damageValue * infusionEffectEldritchCodex),
-                                      1,
-                                    ),
+                                    value: lifeLeechValue,
                                   })}
                                 </span>
                               </IconDisplay>

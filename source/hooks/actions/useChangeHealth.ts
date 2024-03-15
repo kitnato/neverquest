@@ -35,6 +35,8 @@ export function useChangeHealth() {
         const healthMaximumPoisonedValue = get(healthMaximumPoisoned);
         const isAttackingValue = get(isAttacking);
         const isPositive = value > 0;
+        const deltaDisplay =
+          contents === undefined ? [] : Array.isArray(contents) ? contents : [contents];
 
         let newHealth = get(health) + (get(isInvulnerable) ? (isPositive ? value : 0) : value);
 
@@ -85,14 +87,15 @@ export function useChangeHealth() {
 
         set(health, newHealth);
 
+        if (value !== 0) {
+          deltaDisplay.push({
+            color: isPositive ? "text-success" : "text-danger",
+            value: isPositive ? `+${formattedValue}` : formattedValue,
+          });
+        }
+
         addDelta({
-          contents: [
-            {
-              color: isPositive ? "text-success" : "text-danger",
-              value: isPositive ? `+${formattedValue}` : formattedValue,
-            },
-            ...(contents === undefined ? [] : Array.isArray(contents) ? contents : [contents]),
-          ],
+          contents: deltaDisplay,
           delta: "health",
         });
       },

@@ -38,7 +38,7 @@ export const ATTRIBUTES: Record<
     descriptionIcons: [IconDodgeChance],
     format: "percentage",
     Icon: IconAgility,
-    increment: 0.025,
+    increment: 0.015,
     maximum: 0.95,
     requiredSkill: "evasion",
   },

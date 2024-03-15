@@ -1,5 +1,6 @@
 import { selector } from "recoil";
 
+import { infusionEffect } from "./items";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { GENERIC_MINIMUM, PERCENTAGE_POINTS } from "@neverquest/data/general";
 import {
@@ -182,7 +183,9 @@ export const dodgeChance = withStateKey("dodgeChance", (key) =>
       get(isSkillAcquired("evasion"))
         ? Math.min(
             get(attributeStatistic("agility")) *
-              (get(isTraitAcquired("nudist")) && isUnarmored(get(armor)) ? NUDIST.dodgeBonus : 1),
+              (get(isTraitAcquired("nudist")) && isUnarmored(get(armor))
+                ? 1 + NUDIST.dodgeBonus
+                : 1),
             ATTRIBUTES.agility.maximum ?? Number.POSITIVE_INFINITY,
           )
         : 0,
@@ -200,6 +203,21 @@ export const executionThreshold = withStateKey("executionThreshold", (key) =>
         weaponValue.grip === "two-handed"
         ? get(masteryStatistic("butchery"))
         : 0;
+    },
+    key,
+  }),
+);
+
+export const lifeLeech = withStateKey("lifeLeech", (key) =>
+  selector({
+    get: ({ get }) => {
+      const infusionEffectEldritchCodex = get(infusionEffect("eldritch codex"));
+
+      if (infusionEffectEldritchCodex === 0) {
+        return 0;
+      }
+
+      return Math.max(Math.round(get(damage) * infusionEffectEldritchCodex), GENERIC_MINIMUM);
     },
     key,
   }),

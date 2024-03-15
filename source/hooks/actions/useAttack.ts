@@ -1,6 +1,5 @@
 import { useRecoilCallback } from "recoil";
 
-import { GENERIC_MINIMUM } from "@neverquest/data/general";
 import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta";
 import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth";
 import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth";
@@ -16,7 +15,7 @@ import {
   isAttacking,
 } from "@neverquest/state/character";
 import { weapon } from "@neverquest/state/gear";
-import { ammunition, infusionEffect } from "@neverquest/state/items";
+import { ammunition } from "@neverquest/state/items";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import {
   distance,
@@ -32,6 +31,7 @@ import {
   criticalStrike,
   damage,
   executionThreshold,
+  lifeLeech,
 } from "@neverquest/state/statistics";
 import { isTraitAcquired } from "@neverquest/state/traits";
 import { isShowing } from "@neverquest/state/ui";
@@ -57,7 +57,7 @@ export function useAttack() {
 
         const canAttackOrParryValue = get(canAttackOrParry);
         const hasEnoughAmmunitionValue = get(hasEnoughAmmunition);
-        const infusionEffectEldritchCodex = get(infusionEffect("eldritch codex"));
+        const lifeLeechValue = get(lifeLeech);
         const monsterElementValue = get(monsterElement);
         const monsterHealthValue = get(monsterHealth);
         const weaponValue = get(weapon);
@@ -160,16 +160,13 @@ export function useAttack() {
             });
           }
 
-          if (infusionEffectEldritchCodex > 0) {
+          if (lifeLeechValue > 0) {
             changeHealth({
               contents: {
                 color: "text-muted",
                 value: "LEECH",
               },
-              value: Math.max(
-                Math.round(totalDamage * infusionEffectEldritchCodex),
-                GENERIC_MINIMUM,
-              ),
+              value: lifeLeechValue,
             });
           }
 

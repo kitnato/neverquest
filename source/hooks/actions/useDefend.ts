@@ -114,32 +114,36 @@ export function useDefend() {
           return;
         }
 
-        // If attack is dodged, all damage is avoided.
-        if (Math.random() <= get(dodgeChance) && get(canDodge)) {
-          progressQuest({ quest: "dodging" });
+        // If attack is dodged, all damage and ailments are avoided.
+        if (Math.random() <= get(dodgeChance)) {
+          if (get(canDodge)) {
+            progressQuest({ quest: "dodging" });
 
-          addDelta({
-            contents: {
+            deltaHealth.push({
               color: "text-muted",
               value: "DODGED",
-            },
-            delta: "health",
-          });
-
-          if (incursArmorBurden) {
-            changeStamina({ value: -armorBurden });
-          }
-
-          if (get(isTraitAcquired("nudist")) && isUnarmored(armorValue)) {
-            const healthGain = Math.round(get(healthMaximumPoisoned) * NUDIST.healAmount);
-
-            changeHealth({
-              contents: {
-                color: "text-muted",
-                value: "HEAL",
-              },
-              value: healthGain,
             });
+
+            if (incursArmorBurden) {
+              changeStamina({ value: -armorBurden });
+            }
+
+            if (get(isTraitAcquired("nudist")) && isUnarmored(armorValue)) {
+              const healthGain = Math.round(get(healthMaximumPoisoned) * NUDIST.healAmount);
+
+              changeHealth({
+                contents: [
+                  ...deltaHealth,
+                  {
+                    color: "text-muted",
+                    value: "HEAL",
+                  },
+                ],
+                value: healthGain,
+              });
+            } else {
+              addDelta({ contents: deltaHealth, delta: "health" });
+            }
 
             return;
           } else {
@@ -162,7 +166,7 @@ export function useDefend() {
         const hasBlocked = !hasParried && Math.random() <= get(blockChance);
         const hasStaggered = !hasParried && Math.random() <= get(staggerChance);
         const thornsValue = get(thorns);
-        const hasInflictedThorns = !hasBlocked && thornsValue > 0;
+        const hasInflictedThorns = thornsValue > 0;
 
         const deflectionChanceValue = get(deflectionChance);
         const monsterDamageAilingValue = get(monsterDamageAiling);
@@ -184,16 +188,10 @@ export function useDefend() {
 
             progressQuest({ quest: "parrying" });
 
-            deltaMonsterHealth.push(
-              {
-                color: "text-muted",
-                value: "PARRY",
-              },
-              {
-                color: "text-danger",
-                value: `-${formatNumber({ value: reflectedDamage })}`,
-              },
-            );
+            deltaMonsterHealth.push({
+              color: "text-muted",
+              value: "PARRY",
+            });
 
             deltaHealth.push({
               color: "text-muted",
@@ -341,16 +339,10 @@ export function useDefend() {
 
           monsterHealthDamage += thornsValue;
 
-          deltaMonsterHealth.push(
-            {
-              color: "text-muted",
-              value: "THORNS",
-            },
-            {
-              color: "text-danger",
-              value: `-${formatNumber({ value: thornsValue })}`,
-            },
-          );
+          deltaMonsterHealth.push({
+            color: "text-muted",
+            value: "THORNS",
+          });
         }
 
         if (healthDamage > 0) {
@@ -361,14 +353,6 @@ export function useDefend() {
           set(isShowing("recovery"), true);
           set(recoveryDuration, get(recoveryRate));
         }
-
-        // Take any damage and show any stamina costs.
-        changeHealth({ contents: deltaHealth, value: -healthDamage });
-
-        addDelta({
-          contents: deltaStamina,
-          delta: "stamina",
-        });
 
         // Inflict any armor elemental effects.
         for (const elemental of ELEMENTAL_TYPES) {
@@ -395,6 +379,14 @@ export function useDefend() {
             });
           }
         }
+
+        // Take any damage and show any stamina costs.
+        changeHealth({ contents: deltaHealth, value: -healthDamage });
+
+        addDelta({
+          contents: deltaStamina,
+          delta: "stamina",
+        });
       },
     [
       addDelta,

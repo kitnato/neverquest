@@ -44,8 +44,8 @@ export const BRUISER = {
 export const INOCULATED_DEFLECTION_BASE = 0.33;
 
 export const NUDIST = {
-  dodgeBonus: 2,
-  healAmount: 0.07,
+  dodgeBonus: 0.5,
+  healAmount: 0.1,
 };
 
 export const TANK_PROTECTION_BONUS = 0.3;
@@ -100,11 +100,15 @@ export const TRAITS: Record<
     requiredSkill: "impermeability",
   },
   nudist: {
-    description: `While # unarmored, # dodge chance is doubled. ${formatNumber({
+    description: `While # unarmored, # dodge chance is increased by ${formatNumber({
+      decimals: 0,
+      format: "percentage",
+      value: NUDIST.dodgeBonus,
+    })}. When dodging, ${formatNumber({
       decimals: 0,
       format: "percentage",
       value: NUDIST.healAmount,
-    })} of maximum # health is restored when dodging.`,
+    })} of maximum # health is restored.`,
     descriptionIcons: [IconArmorNone, IconDodgeChance, IconHealth],
     Icon: IconNudist,
   },

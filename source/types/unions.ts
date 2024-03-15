@@ -377,6 +377,7 @@ export type StateKey =
   | "isTraitAcquired"
   | "itemsLoot"
   | "knapsackCapacity"
+  | "lifeLeech"
   | "location"
   | "locationName"
   | "lootingDuration"

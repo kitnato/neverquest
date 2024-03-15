@@ -234,7 +234,7 @@ export const QUESTS: Record<
   },
   dodging: {
     description: "Dodge @ attacks.",
-    progression: [3, 10, 25, 50],
+    progression: [3, 10, 25, 50, 100],
     requiresTracking: true,
     title: "Grim fandango",
   },

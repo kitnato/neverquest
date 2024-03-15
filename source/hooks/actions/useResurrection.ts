@@ -30,7 +30,7 @@ export function useResurrection() {
 
           changeHealth({
             contents: {
-              color: "text-muted",
+              color: "text-secondary",
               value: "RESURRECTED",
             },
             value: healthMaximumPoisonedValue,

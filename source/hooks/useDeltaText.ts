@@ -66,7 +66,7 @@ export function useDeltaText({
 
     if (suffix !== undefined) {
       deltaContents.push({
-        color: "text-muted",
+        color: "text-secondary",
         value: suffix,
       });
     }

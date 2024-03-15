@@ -105,7 +105,7 @@ export function useAttack() {
             changeMonsterHealth({
               contents: [
                 {
-                  color: "text-muted",
+                  color: "text-secondary",
                   value: "EXECUTE",
                 },
               ],
@@ -124,7 +124,7 @@ export function useAttack() {
               progressQuest({ quest: "bleeding" });
 
               monsterDeltas.push({
-                color: "text-muted",
+                color: "text-secondary",
                 value: "BLEEDING",
               });
             }
@@ -133,7 +133,7 @@ export function useAttack() {
               progressQuest({ quest: "critical" });
 
               monsterDeltas.push({
-                color: "text-muted",
+                color: "text-secondary",
                 value: "CRITICAL",
               });
             }
@@ -144,7 +144,7 @@ export function useAttack() {
               progressQuest({ quest: "stunning" });
 
               monsterDeltas.push({
-                color: "text-muted",
+                color: "text-secondary",
                 value: "STUN",
               });
             }
@@ -163,7 +163,7 @@ export function useAttack() {
           if (lifeLeechValue > 0) {
             changeHealth({
               contents: {
-                color: "text-muted",
+                color: "text-secondary",
                 value: "LEECH",
               },
               value: lifeLeechValue,
@@ -180,7 +180,7 @@ export function useAttack() {
             addDelta({
               contents: [
                 {
-                  color: "text-muted",
+                  color: "text-secondary",
                   value: "CANNOT ATTACK",
                 },
                 {
@@ -198,7 +198,7 @@ export function useAttack() {
             addDelta({
               contents: [
                 {
-                  color: "text-muted",
+                  color: "text-secondary",
                   value: "INSUFFICIENT AMMUNITION",
                 },
                 {

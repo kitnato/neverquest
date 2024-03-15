@@ -61,7 +61,7 @@ export function QuestDisplay({
         <Stack gap={1}>
           <span>{title}</span>
 
-          <div className="small text-muted">
+          <div className="small text-secondary">
             {hidden !== undefined && isQuestOver
               ? description.replace(LABEL_UNKNOWN, hidden)
               : description}

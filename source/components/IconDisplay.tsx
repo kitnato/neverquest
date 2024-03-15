@@ -37,7 +37,7 @@ export function IconDisplay({
         <Stack gap={1}>
           {children}
 
-          <div className="small text-muted">{description}</div>
+          <div className="small text-secondary">{description}</div>
         </Stack>
       )}
     </Stack>

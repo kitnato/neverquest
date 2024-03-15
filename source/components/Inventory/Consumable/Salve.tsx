@@ -32,7 +32,7 @@ export function Salve({ ID }: { ID: string }) {
 
             addDelta({
               contents: {
-                color: "text-muted",
+                color: "text-secondary",
                 value: "CURED",
               },
               delta: "stamina",

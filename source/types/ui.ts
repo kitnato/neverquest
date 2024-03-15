@@ -16,7 +16,7 @@ export type AnimationSpeed = "fast" | "faster" | "slow" | "slower";
 export type BootstrapColorVariant = "dark" | "outline-dark" | "secondary";
 
 export type DeltaDisplay = {
-  color: "text-danger" | "text-muted" | "text-success";
+  color: "text-danger" | "text-secondary" | "text-success";
   value: number | string;
 };
 

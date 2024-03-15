@@ -204,12 +204,15 @@ svg {
   color: $teal-600;
 }
 
-.text-floating strong {
-  text-shadow:
-    -1px 1px 0 white,
-    1px 1px 0 white,
-    1px -1px 0 white,
-    -1px -1px 0 white;
+.text-floating {
+  span,
+  strong {
+    text-shadow:
+      -1px 1px 0 white,
+      1px 1px 0 white,
+      1px -1px 0 white,
+      -1px -1px 0 white;
+  }
 }
 
 .text-shaded {

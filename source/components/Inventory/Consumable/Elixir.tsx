@@ -33,7 +33,7 @@ export function Elixir({ ID }: { ID: string }) {
 
             changeStamina({
               contents: {
-                color: "text-muted",
+                color: "text-secondary",
                 value: "RECOVER",
               },
               value: staminaDifference,

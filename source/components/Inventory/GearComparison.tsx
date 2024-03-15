@@ -25,7 +25,7 @@ export function GearComparison({
     return (
       <IconImage
         className={`small ${
-          isDifferenceEqual ? "text-muted" : isPositive ? "text-success" : "text-danger"
+          isDifferenceEqual ? "text-secondary" : isPositive ? "text-success" : "text-danger"
         }`}
         Icon={isDifferenceEqual ? IconEquals : IconIncrease}
         isFlipped={difference < 0}

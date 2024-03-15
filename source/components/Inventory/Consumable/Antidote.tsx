@@ -32,7 +32,7 @@ export function Antidote({ ID }: { ID: string }) {
 
             addDelta({
               contents: {
-                color: "text-muted",
+                color: "text-secondary",
                 value: "REMEDIED",
               },
               delta: "health",

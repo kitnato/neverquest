@@ -105,7 +105,7 @@ export function useDefend() {
         if (get(isMonsterAiling("stunned")) && Math.random() <= AILMENT_PENALTY.stunned) {
           addDelta({
             contents: {
-              color: "text-muted",
+              color: "text-secondary",
               value: "MISS",
             },
             delta: "health",
@@ -120,7 +120,7 @@ export function useDefend() {
             progressQuest({ quest: "dodging" });
 
             deltaHealth.push({
-              color: "text-muted",
+              color: "text-secondary",
               value: "DODGED",
             });
 
@@ -135,7 +135,7 @@ export function useDefend() {
                 contents: [
                   ...deltaHealth,
                   {
-                    color: "text-muted",
+                    color: "text-secondary",
                     value: "HEAL",
                   },
                 ],
@@ -149,7 +149,7 @@ export function useDefend() {
           } else {
             deltaStamina.push(
               {
-                color: "text-muted",
+                color: "text-secondary",
                 value: "CANNOT DODGE",
               },
               {
@@ -189,18 +189,18 @@ export function useDefend() {
             progressQuest({ quest: "parrying" });
 
             deltaMonsterHealth.push({
-              color: "text-muted",
+              color: "text-secondary",
               value: "PARRY",
             });
 
             deltaHealth.push({
-              color: "text-muted",
+              color: "text-secondary",
               value: "PARRIED",
             });
           } else {
             deltaStamina.push(
               {
-                color: "text-muted",
+                color: "text-secondary",
                 value: "CANNOT PARRY",
               },
               {
@@ -218,7 +218,7 @@ export function useDefend() {
             healthDamage = 0;
 
             deltaHealth.push({
-              color: "text-muted",
+              color: "text-secondary",
               value: "BLOCKED",
             });
 
@@ -229,7 +229,7 @@ export function useDefend() {
           } else {
             deltaStamina.push(
               {
-                color: "text-muted",
+                color: "text-secondary",
                 value: "CANNOT BLOCK",
               },
               {
@@ -253,7 +253,7 @@ export function useDefend() {
           } else {
             deltaStamina.push(
               {
-                color: "text-muted",
+                color: "text-secondary",
                 value: "CANNOT STAGGER",
               },
               {
@@ -270,7 +270,7 @@ export function useDefend() {
         if (!hasBlocked && !hasParried) {
           if (protectionValue > 0) {
             deltaHealth.push({
-              color: "text-muted",
+              color: "text-secondary",
               // In the case of 0 health damage, show only inflicted damage.
               value: `(${formatNumber({
                 value: Math.min(protectionValue, monsterDamageAilingValue),
@@ -302,7 +302,7 @@ export function useDefend() {
             set(blight, (currentBlight) => currentBlight + 1);
 
             deltaStamina.push({
-              color: "text-muted",
+              color: "text-secondary",
               value: "BLIGHTED",
             });
           }
@@ -327,7 +327,7 @@ export function useDefend() {
             set(poisonDuration, get(poisonLength));
 
             deltaHealth.push({
-              color: "text-muted",
+              color: "text-secondary",
               value: "POISONED",
             });
           }
@@ -340,7 +340,7 @@ export function useDefend() {
           monsterHealthDamage += thornsValue;
 
           deltaMonsterHealth.push({
-            color: "text-muted",
+            color: "text-secondary",
             value: "THORNS",
           });
         }

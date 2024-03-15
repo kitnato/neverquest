@@ -78,7 +78,7 @@ export function useChangeHealth() {
 
           addDelta({
             contents: {
-              color: "text-muted",
+              color: "text-secondary",
               value: "CAUGHT",
             },
             delta: "health",

@@ -38,7 +38,7 @@ export function DeltasDisplay({ delta }: { delta: Delta }) {
                   {value}
                 </strong>
 
-                {index < display.length - 1 && LABEL_SEPARATOR}
+                {index < display.length - 1 && <span className="text-dark">{LABEL_SEPARATOR}</span>}
               </>
             ))}
           </Stack>

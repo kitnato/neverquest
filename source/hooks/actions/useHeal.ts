@@ -16,7 +16,7 @@ export function useHeal() {
 
         changeHealth({
           contents: {
-            color: "text-muted",
+            color: "text-secondary",
             value: "HEAL",
           },
           value: healthDifference,

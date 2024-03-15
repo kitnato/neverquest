@@ -36,6 +36,8 @@ export function useChangeMonsterHealth() {
       }) => {
         const get = getSnapshotGetter(snapshot);
 
+        const deltaDisplay =
+          contents === undefined ? [] : Array.isArray(contents) ? contents : [contents];
         const isPositive = value > 0;
         const totalValue =
           !isPositive && get(isMonsterAiling("shocked"))
@@ -143,14 +145,15 @@ export function useChangeMonsterHealth() {
 
         set(monsterHealth, newHealth);
 
+        if (value !== 0) {
+          deltaDisplay.push({
+            color: isPositive ? "text-success" : "text-danger",
+            value: isPositive ? `+${formattedValue}` : formattedValue,
+          });
+        }
+
         addDelta({
-          contents: [
-            {
-              color: isPositive ? "text-success" : "text-danger",
-              value: isPositive ? `+${formattedValue}` : formattedValue,
-            },
-            ...(contents === undefined ? [] : Array.isArray(contents) ? contents : [contents]),
-          ],
+          contents: deltaDisplay,
           delta: "monsterHealth",
         });
       },

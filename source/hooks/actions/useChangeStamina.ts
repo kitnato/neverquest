@@ -19,6 +19,8 @@ export function useChangeStamina() {
       ({ contents, value }: DeltaReserve) => {
         const get = getSnapshotGetter(snapshot);
 
+        const deltaDisplay =
+          contents === undefined ? [] : Array.isArray(contents) ? contents : [contents];
         const formattedValue = formatNumber({ value });
         const isPositive = value > 0;
         const staminaMaximumBlightedValue = get(staminaMaximumBlighted);
@@ -37,14 +39,15 @@ export function useChangeStamina() {
 
         set(stamina, newStamina);
 
+        if (value !== 0) {
+          deltaDisplay.push({
+            color: isPositive ? "text-success" : "text-danger",
+            value: isPositive ? `+${formattedValue}` : formattedValue,
+          });
+        }
+
         addDelta({
-          contents: [
-            {
-              color: isPositive ? "text-success" : "text-danger",
-              value: isPositive ? `+${formattedValue}` : formattedValue,
-            },
-            ...(contents === undefined ? [] : Array.isArray(contents) ? contents : [contents]),
-          ],
+          contents: deltaDisplay,
           delta: "stamina",
         });
       },

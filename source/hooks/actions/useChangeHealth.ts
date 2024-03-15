@@ -31,12 +31,12 @@ export function useChangeHealth() {
       ({ contents, value }: DeltaReserve) => {
         const get = getSnapshotGetter(snapshot);
 
+        const deltaDisplay =
+          contents === undefined ? [] : Array.isArray(contents) ? contents : [contents];
         const formattedValue = formatNumber({ value });
         const healthMaximumPoisonedValue = get(healthMaximumPoisoned);
         const isAttackingValue = get(isAttacking);
         const isPositive = value > 0;
-        const deltaDisplay =
-          contents === undefined ? [] : Array.isArray(contents) ? contents : [contents];
 
         let newHealth = get(health) + (get(isInvulnerable) ? (isPositive ? value : 0) : value);
 

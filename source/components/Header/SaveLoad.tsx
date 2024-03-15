@@ -14,6 +14,7 @@ import { useRecoilValue } from "recoil";
 
 import { IconDisplay } from "@neverquest/components/IconDisplay";
 import { IconImage } from "@neverquest/components/IconImage";
+import { version } from "@neverquest/configuration";
 import { FILE_EXTENSION, KEY_SESSION, LABEL_UNKNOWN } from "@neverquest/data/general";
 import IconLoad from "@neverquest/icons/load.svg?react";
 import IconSaveLoad from "@neverquest/icons/save-load.svg?react";
@@ -22,18 +23,24 @@ import { name } from "@neverquest/state/character";
 import { formatKebabCase } from "@neverquest/utilities/formatters";
 import { getAnimationClass } from "@neverquest/utilities/getters";
 
-const INVALID_FILE = "Invalid file.";
+const DEFAULT_RESULT = {
+  message: "",
+  status: false,
+};
+const VERSION_KEY = "version=";
 
 export function SaveLoad() {
   const nameValue = useRecoilValue(name);
 
   const [isLoading, setIsLoading] = useState(false);
   const [isShowingModal, setIsShowingModal] = useState(false);
+  const [{ message, status }, setResult] = useState(DEFAULT_RESULT);
 
   const fileInput = useRef<HTMLInputElement>(null);
 
   const onHide = () => {
     setIsShowingModal(false);
+    setResult(DEFAULT_RESULT);
   };
 
   return (
@@ -73,14 +80,17 @@ export function SaveLoad() {
                 const session = ls.get<string>(KEY_SESSION);
 
                 if (session === null) {
-                  throw new Error("Invalid session.");
+                  setResult({ message: "Invalid session data.", status: false });
+
+                  return;
                 }
 
                 const downloadAnchorNode = document.createElement("a");
 
                 downloadAnchorNode.setAttribute(
                   "href",
-                  "data:text/json;charset=utf-8," + encodeURIComponent(session),
+                  "data:text/json;charset=utf-8," +
+                    encodeURIComponent(`${session}${VERSION_KEY}${version}`),
                 );
                 downloadAnchorNode.setAttribute(
                   "download",
@@ -122,30 +132,46 @@ export function SaveLoad() {
                   const [file] = files;
 
                   if (file === undefined) {
-                    throw new Error(INVALID_FILE);
+                    setResult({ message: "Empty file.", status: false });
                   } else {
                     setIsLoading(true);
 
                     file
                       .text()
-                      .then((session) => {
-                        ls.set(KEY_SESSION, session);
+                      .then((contents) => {
+                        const [session, contentsVersion] = contents.split(VERSION_KEY);
 
-                        location.reload();
+                        if (contentsVersion === undefined || contentsVersion !== version) {
+                          setIsLoading(false);
+                          setResult({ message: "Incompatible version.", status: false });
+                        } else if (session === undefined) {
+                          setIsLoading(false);
+                          setResult({ message: "Invalid file.", status: false });
+                        } else {
+                          setResult({ message: "Reloading ...", status: true });
+
+                          ls.set(KEY_SESSION, session);
+                          location.reload();
+                        }
                       })
                       .catch(() => {
                         setIsLoading(false);
-
-                        throw new Error(INVALID_FILE);
+                        setResult({ message: "Invalid file contents.", status: false });
                       });
                   }
                 } else {
-                  throw new Error(INVALID_FILE);
+                  setResult({ message: "No file specified.", status: false });
                 }
               }}
               ref={fileInput}
               type="file"
             />
+
+            {message !== "" && (
+              <span
+                className={status ? "text-success" : "text-danger"}
+              >{`${status ? "Success!" : "Error:"} ${message}`}</span>
+            )}
           </Stack>
         </ModalBody>
       </Modal>

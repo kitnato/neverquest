@@ -5,7 +5,7 @@ import { Ouroboros } from "@neverquest/components/Header/Ouroboros";
 import { Repository } from "@neverquest/components/Header/Repository";
 import { Reset } from "@neverquest/components/Header/Reset";
 import { SaveLoad } from "@neverquest/components/Header/SaveLoad";
-import { version } from "@neverquest/config";
+import { version } from "@neverquest/configuration";
 
 export function Header() {
   return (

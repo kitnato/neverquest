@@ -1,9 +1,9 @@
-import { Stack } from "react-bootstrap";
+import { Stack } from "react-bootstrap"
 
-import { AcquireOccultistSkill } from "@neverquest/components/Caravan/Occultist/AcquireOccultistSkill";
-import { PurgeEssence } from "@neverquest/components/Caravan/Occultist/PurgeEssence";
-import { PurgeMemories } from "@neverquest/components/Caravan/Occultist/PurgeMemories";
-import { PurchaseConsumable } from "@neverquest/components/Caravan/PurchaseConsumable";
+import { AcquireOccultistSkill } from "@neverquest/components/Caravan/Occultist/AcquireOccultistSkill"
+import { PurgeEssence } from "@neverquest/components/Caravan/Occultist/PurgeEssence"
+import { PurgeMemories } from "@neverquest/components/Caravan/Occultist/PurgeMemories"
+import { PurchaseConsumable } from "@neverquest/components/Caravan/PurchaseConsumable"
 
 export function Occultist() {
   return (
@@ -24,5 +24,5 @@ export function Occultist() {
 
       <AcquireOccultistSkill />
     </Stack>
-  );
+  )
 }

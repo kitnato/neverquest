@@ -1,5 +1,5 @@
-import ls from "localstorage-slim";
-import { useContext, useState } from "react";
+import ls from "localstorage-slim"
+import { useContext, useState } from "react"
 import {
   Button,
   Modal,
@@ -9,21 +9,21 @@ import {
   ModalTitle,
   OverlayTrigger,
   Tooltip,
-} from "react-bootstrap";
+} from "react-bootstrap"
 
-import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { IconImage } from "@neverquest/components/IconImage";
-import IconReset from "@neverquest/icons/reset.svg?react";
-import IconWarning from "@neverquest/icons/warning.svg?react";
-import { SeedContext } from "@neverquest/state/seed";
+import { IconDisplay } from "@neverquest/components/IconDisplay"
+import { IconImage } from "@neverquest/components/IconImage"
+import IconReset from "@neverquest/icons/reset.svg?react"
+import IconWarning from "@neverquest/icons/warning.svg?react"
+import { SeedContext } from "@neverquest/state/seed"
 
 export function Reset() {
-  const context = useContext(SeedContext);
-  const [isShowingModal, setIsShowingModal] = useState(false);
+  const context = useContext(SeedContext)
+  const [isShowingModal, setIsShowingModal] = useState(false)
 
   const onHide = () => {
-    setIsShowingModal(false);
-  };
+    setIsShowingModal(false)
+  }
 
   return (
     <>
@@ -37,7 +37,7 @@ export function Reset() {
       >
         <Button
           onClick={() => {
-            setIsShowingModal(true);
+            setIsShowingModal(true)
           }}
           variant="outline-light"
         >
@@ -59,10 +59,10 @@ export function Reset() {
         <ModalFooter>
           <Button
             onClick={() => {
-              onHide();
+              onHide()
 
-              ls.clear();
-              context();
+              ls.clear()
+              context()
             }}
             variant="outline-dark"
           >
@@ -71,5 +71,5 @@ export function Reset() {
         </ModalFooter>
       </Modal>
     </>
-  );
+  )
 }

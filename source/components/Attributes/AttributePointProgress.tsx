@@ -1,23 +1,23 @@
-import { OverlayTrigger, Popover, PopoverBody } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { OverlayTrigger, Popover, PopoverBody } from "react-bootstrap"
+import { useRecoilValue } from "recoil"
 
-import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { IconImage } from "@neverquest/components/IconImage";
-import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
-import { PERCENTAGE_POINTS } from "@neverquest/data/general";
-import IconEssence from "@neverquest/icons/essence.svg?react";
-import IconLoot from "@neverquest/icons/loot.svg?react";
-import { powerLevel } from "@neverquest/state/attributes";
-import { essence, essenceLoot } from "@neverquest/state/resources";
-import { formatNumber } from "@neverquest/utilities/formatters";
-import { getAttributePointCost, getAttributePoints } from "@neverquest/utilities/getters";
+import { IconDisplay } from "@neverquest/components/IconDisplay"
+import { IconImage } from "@neverquest/components/IconImage"
+import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
+import { PERCENTAGE_POINTS } from "@neverquest/data/general"
+import IconEssence from "@neverquest/icons/essence.svg?react"
+import IconLoot from "@neverquest/icons/loot.svg?react"
+import { powerLevel } from "@neverquest/state/attributes"
+import { essence, essenceLoot } from "@neverquest/state/resources"
+import { formatNumber } from "@neverquest/utilities/formatters"
+import { getAttributePointCost, getAttributePoints } from "@neverquest/utilities/getters"
 
 export function AttributePointProgress({ isLoot }: { isLoot?: boolean }) {
-  const essenceValue = useRecoilValue(essence);
-  const essenceLootValue = useRecoilValue(essenceLoot);
-  const powerLevelValue = useRecoilValue(powerLevel);
+  const essenceValue = useRecoilValue(essence)
+  const essenceLootValue = useRecoilValue(essenceLoot)
+  const powerLevelValue = useRecoilValue(powerLevel)
 
-  const totalEssence = essenceValue + (isLoot ? essenceLootValue : 0);
+  const totalEssence = essenceValue + (isLoot ? essenceLootValue : 0)
   const nextTotalCost = Array.from<undefined>({
     length: getAttributePoints({
       essence: totalEssence,
@@ -26,7 +26,7 @@ export function AttributePointProgress({ isLoot }: { isLoot?: boolean }) {
   }).reduce(
     (sum, _, index) => sum + getAttributePointCost(powerLevelValue + index + 1),
     getAttributePointCost(powerLevelValue),
-  );
+  )
 
   return (
     <OverlayTrigger
@@ -61,7 +61,7 @@ export function AttributePointProgress({ isLoot }: { isLoot?: boolean }) {
           value={(totalEssence / nextTotalCost) * PERCENTAGE_POINTS}
           variant="secondary"
         >
-          <IconDisplay Icon={IconEssence} iconProps={{ className: "small stencilled" }}>
+          <IconDisplay Icon={IconEssence} iconProps={{ className: `small stencilled` }}>
             <span>
               {formatNumber({ value: totalEssence })}&nbsp;/&nbsp;
               {formatNumber({
@@ -72,5 +72,5 @@ export function AttributePointProgress({ isLoot }: { isLoot?: boolean }) {
         </LabelledProgressBar>
       </div>
     </OverlayTrigger>
-  );
+  )
 }

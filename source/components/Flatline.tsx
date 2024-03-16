@@ -1,4 +1,4 @@
-import { generateLocation } from "@kitnato/locran";
+import { generateLocation } from "@kitnato/locran"
 import {
   Button,
   Modal,
@@ -7,31 +7,31 @@ import {
   ModalHeader,
   ModalTitle,
   Stack,
-} from "react-bootstrap";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+} from "react-bootstrap"
+import { useRecoilValue, useSetRecoilState } from "recoil"
 
-import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { IconImage } from "@neverquest/components/IconImage";
-import { DEATH_STAGE_PENALTY } from "@neverquest/data/encounter";
-import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
-import { useResetCharacter } from "@neverquest/hooks/actions/useResetCharacter";
-import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness";
-import IconCorpse from "@neverquest/icons/corpse.svg?react";
-import IconEssence from "@neverquest/icons/essence.svg?react";
-import IconFlatlined from "@neverquest/icons/flatlined.svg?react";
-import { canResurrect, hasFlatlined } from "@neverquest/state/character";
-import { stage, wildernesses } from "@neverquest/state/encounter";
-import { getAffixStructure } from "@neverquest/utilities/getters";
+import { IconDisplay } from "@neverquest/components/IconDisplay"
+import { IconImage } from "@neverquest/components/IconImage"
+import { DEATH_STAGE_PENALTY } from "@neverquest/data/encounter"
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
+import { useResetCharacter } from "@neverquest/hooks/actions/useResetCharacter"
+import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness"
+import IconCorpse from "@neverquest/icons/corpse.svg?react"
+import IconEssence from "@neverquest/icons/essence.svg?react"
+import IconFlatlined from "@neverquest/icons/flatlined.svg?react"
+import { canResurrect, hasFlatlined } from "@neverquest/state/character"
+import { stage, wildernesses } from "@neverquest/state/encounter"
+import { getAffixStructure } from "@neverquest/utilities/getters"
 
 export function Flatline() {
-  const canResurrectValue = useRecoilValue(canResurrect);
-  const hasFlatlinedValue = useRecoilValue(hasFlatlined);
-  const stageValue = useRecoilValue(stage);
-  const setWildernesses = useSetRecoilState(wildernesses);
+  const canResurrectValue = useRecoilValue(canResurrect)
+  const hasFlatlinedValue = useRecoilValue(hasFlatlined)
+  const stageValue = useRecoilValue(stage)
+  const setWildernesses = useSetRecoilState(wildernesses)
 
-  const progressQuest = useProgressQuest();
-  const resetCharacter = useResetCharacter();
-  const resetWilderness = useResetWilderness();
+  const progressQuest = useProgressQuest()
+  const resetCharacter = useResetCharacter()
+  const resetWilderness = useResetWilderness()
 
   return (
     <Modal backdrop="static" show={!canResurrectValue && hasFlatlinedValue}>
@@ -71,16 +71,16 @@ export function Flatline() {
             if (stageValue > DEATH_STAGE_PENALTY) {
               setWildernesses((currentWildernesses) =>
                 currentWildernesses.slice(0, stageValue - DEATH_STAGE_PENALTY),
-              );
+              )
             } else {
-              setWildernesses([generateLocation({ affixStructure: getAffixStructure() })]);
+              setWildernesses([generateLocation({ affixStructure: getAffixStructure() })])
             }
 
-            progressQuest({ amount: -DEATH_STAGE_PENALTY, quest: "stages" });
-            progressQuest({ amount: -DEATH_STAGE_PENALTY, quest: "stagesEnd" });
+            progressQuest({ amount: -DEATH_STAGE_PENALTY, quest: `stages` })
+            progressQuest({ amount: -DEATH_STAGE_PENALTY, quest: `stagesEnd` })
 
-            resetCharacter();
-            resetWilderness();
+            resetCharacter()
+            resetWilderness()
           }}
           variant="outline-dark"
         >
@@ -88,5 +88,5 @@ export function Flatline() {
         </Button>
       </ModalFooter>
     </Modal>
-  );
+  )
 }

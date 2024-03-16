@@ -1,25 +1,25 @@
-import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
+import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap"
 
-import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
-import { LABEL_OVER_ENCUMBERED, POPOVER_TRIGGER } from "@neverquest/data/general";
-import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
-import { useCanFit } from "@neverquest/hooks/actions/useCanFit";
-import { useToggleEquipItem } from "@neverquest/hooks/actions/useToggleEquipItem";
-import type { GearItem } from "@neverquest/types";
-import { getAnimationClass } from "@neverquest/utilities/getters";
+import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay"
+import { LABEL_OVER_ENCUMBERED, POPOVER_TRIGGER } from "@neverquest/data/general"
+import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem"
+import { useCanFit } from "@neverquest/hooks/actions/useCanFit"
+import { useToggleEquipItem } from "@neverquest/hooks/actions/useToggleEquipItem"
+import type { GearItem } from "@neverquest/types"
+import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function CraftedGear({ item, onTransfer }: { item: GearItem; onTransfer: () => void }) {
-  const { weight } = item;
+  const { weight } = item
 
-  const acquireItem = useAcquireItem();
-  const canFit = useCanFit();
-  const toggleEquipItem = useToggleEquipItem();
+  const acquireItem = useAcquireItem()
+  const canFit = useCanFit()
+  const toggleEquipItem = useToggleEquipItem()
 
-  const canFitItem = canFit(weight);
+  const canFitItem = canFit(weight)
 
   return (
     <Stack gap={3}>
-      <div className={`mx-auto ${getAnimationClass({ animation: "pulse" })}`}>
+      <div className={`mx-auto ${getAnimationClass({ animation: `pulse` })}`}>
         <ItemDisplay item={item} />
       </div>
 
@@ -36,16 +36,16 @@ export function CraftedGear({ item, onTransfer }: { item: GearItem; onTransfer: 
             className="w-100"
             disabled={!canFitItem}
             onClick={() => {
-              const acquisitionStatus = acquireItem(item);
+              const acquisitionStatus = acquireItem(item)
 
-              if (acquisitionStatus === "failure") {
-                return;
+              if (acquisitionStatus === `failure`) {
+                return
               }
 
-              onTransfer();
+              onTransfer()
 
-              if (acquisitionStatus === "equip") {
-                toggleEquipItem({ item });
+              if (acquisitionStatus === `equip`) {
+                toggleEquipItem({ item })
               }
             }}
             variant="outline-dark"
@@ -55,5 +55,5 @@ export function CraftedGear({ item, onTransfer }: { item: GearItem; onTransfer: 
         </div>
       </OverlayTrigger>
     </Stack>
-  );
+  )
 }

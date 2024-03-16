@@ -1,10 +1,10 @@
-import type { ReactNode } from "react";
-import { Stack } from "react-bootstrap";
-import type { ResponsiveUtilityValue } from "react-bootstrap/esm/createUtilityClasses";
-import type { GapValue } from "react-bootstrap/esm/types";
+import type { ReactNode } from "react"
+import { Stack } from "react-bootstrap"
+import type { ResponsiveUtilityValue } from "react-bootstrap/esm/createUtilityClasses"
+import type { GapValue } from "react-bootstrap/esm/types"
 
-import { IconImage } from "@neverquest/components/IconImage";
-import type { IconImageDOMProperties, SVGIcon } from "@neverquest/types/components";
+import { IconImage } from "@neverquest/components/IconImage"
+import type { IconImageDOMProperties, SVGIcon } from "@neverquest/types/components"
 
 export function IconDisplay({
   children,
@@ -25,9 +25,9 @@ export function IconDisplay({
 }) {
   return (
     <Stack
-      className={`icon-display${className === undefined ? "" : ` ${className}`}`}
+      className={`icon-display${className === undefined ? `` : ` ${className}`}`}
       direction="horizontal"
-      gap={iconProps?.className?.includes("small") ? 1 : gap}
+      gap={iconProps?.className?.includes(`small`) ? 1 : gap}
     >
       <IconImage Icon={Icon} tooltip={tooltip} {...iconProps} />
 
@@ -41,5 +41,5 @@ export function IconDisplay({
         </Stack>
       )}
     </Stack>
-  );
+  )
 }

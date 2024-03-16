@@ -1,15 +1,15 @@
-import { Stack } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { Stack } from "react-bootstrap"
+import { useRecoilValue } from "recoil"
 
-import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { GearComparison } from "@neverquest/components/Inventory/GearComparison";
-import IconGearLevel from "@neverquest/icons/gear-level.svg?react";
-import { isShowing } from "@neverquest/state/ui";
-import type { Comparison } from "@neverquest/types/components";
-import { formatNumber } from "@neverquest/utilities/formatters";
+import { IconDisplay } from "@neverquest/components/IconDisplay"
+import { GearComparison } from "@neverquest/components/Inventory/GearComparison"
+import IconGearLevel from "@neverquest/icons/gear-level.svg?react"
+import { isShowing } from "@neverquest/state/ui"
+import type { Comparison } from "@neverquest/types/components"
+import { formatNumber } from "@neverquest/utilities/formatters"
 
 export function GearLevelDetail({ comparison, level }: { comparison: Comparison; level: number }) {
-  const isShowingGearLevel = useRecoilValue(isShowing("gearLevel"));
+  const isShowingGearLevel = useRecoilValue(isShowing(`gearLevel`))
 
   if (isShowingGearLevel && level > 0) {
     return (
@@ -20,7 +20,7 @@ export function GearLevelDetail({ comparison, level }: { comparison: Comparison;
 
         <td>
           <Stack direction="horizontal" gap={1}>
-            <IconDisplay Icon={IconGearLevel} iconProps={{ className: "small" }}>
+            <IconDisplay Icon={IconGearLevel} iconProps={{ className: `small` }}>
               <span>{formatNumber({ value: level })}</span>
             </IconDisplay>
 
@@ -33,6 +33,6 @@ export function GearLevelDetail({ comparison, level }: { comparison: Comparison;
           </Stack>
         </td>
       </tr>
-    );
+    )
   }
 }

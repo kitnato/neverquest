@@ -1,30 +1,30 @@
-import type { ArmorClass, ShieldClass, WeaponClass } from "@kitnato/locran/build/types";
+import type { ArmorClass, ShieldClass, WeaponClass } from "@kitnato/locran/build/types"
 
-import IconArmorHeavy from "@neverquest/icons/armor-heavy.svg?react";
-import IconArmorLight from "@neverquest/icons/armor-light.svg?react";
-import IconReinforced from "@neverquest/icons/armor-reinforced.svg?react";
-import IconBleedChance from "@neverquest/icons/bleed-chance.svg?react";
-import IconBlunt from "@neverquest/icons/blunt.svg?react";
-import IconParryChance from "@neverquest/icons/parry-chance.svg?react";
-import IconPiercing from "@neverquest/icons/piercing.svg?react";
-import IconShieldMedium from "@neverquest/icons/shield-medium.svg?react";
-import IconShieldSmall from "@neverquest/icons/shield-small.svg?react";
-import IconShieldTower from "@neverquest/icons/shield-tower.svg?react";
-import IconSlashing from "@neverquest/icons/slashing.svg?react";
-import IconStunChance from "@neverquest/icons/stun-chance.svg?react";
-import type { Armor, GearRangeBase, GeneratorRange, Melee, Shield } from "@neverquest/types";
-import type { SVGIcon } from "@neverquest/types/components";
-import type { WeaponAbility } from "@neverquest/types/unions";
+import IconArmorHeavy from "@neverquest/icons/armor-heavy.svg?react"
+import IconArmorLight from "@neverquest/icons/armor-light.svg?react"
+import IconReinforced from "@neverquest/icons/armor-reinforced.svg?react"
+import IconBleedChance from "@neverquest/icons/bleed-chance.svg?react"
+import IconBlunt from "@neverquest/icons/blunt.svg?react"
+import IconParryChance from "@neverquest/icons/parry-chance.svg?react"
+import IconPiercing from "@neverquest/icons/piercing.svg?react"
+import IconShieldMedium from "@neverquest/icons/shield-medium.svg?react"
+import IconShieldSmall from "@neverquest/icons/shield-small.svg?react"
+import IconShieldTower from "@neverquest/icons/shield-tower.svg?react"
+import IconSlashing from "@neverquest/icons/slashing.svg?react"
+import IconStunChance from "@neverquest/icons/stun-chance.svg?react"
+import type { Armor, GearRangeBase, GeneratorRange, Melee, Shield } from "@neverquest/types"
+import type { SVGIcon } from "@neverquest/types/components"
+import type { WeaponAbility } from "@neverquest/types/unions"
 
-export const ARMOR_NONE: Omit<Armor, "gearClass" | "price"> = {
+export const ARMOR_NONE: Omit<Armor, `gearClass` | `price`> = {
   burden: 0,
   deflection: 0,
-  ID: "ARMOR_NONE",
+  ID: `ARMOR_NONE`,
   level: 0,
-  name: "Unarmored",
+  name: `Unarmored`,
   protection: 0,
   weight: 0,
-};
+}
 
 export const ARMOR_SPECIFICATIONS: Record<
   ArmorClass,
@@ -94,21 +94,21 @@ export const ARMOR_SPECIFICATIONS: Record<
       { maximum: 80, minimum: 70 },
     ],
   },
-};
+}
 
-export const GEAR_LEVEL_RANGE_MAXIMUM = 3;
+export const GEAR_LEVEL_RANGE_MAXIMUM = 3
 
-export const SHIELD_ELEMENTAL_EFFECTS_BASE = { fire: 0, ice: 0, lightning: 0 };
+export const SHIELD_ELEMENTAL_EFFECTS_BASE = { fire: 0, ice: 0, lightning: 0 }
 
-export const SHIELD_NONE: Omit<Shield, "gearClass" | "price"> = {
+export const SHIELD_NONE: Omit<Shield, `gearClass` | `price`> = {
   block: 0,
   burden: 0,
-  ID: "SHIELD_NONE",
+  ID: `SHIELD_NONE`,
   level: 0,
-  name: "Unshielded",
+  name: `Unshielded`,
   stagger: 0,
   weight: 0,
-};
+}
 
 export const SHIELD_SPECIFICATIONS: Record<
   ShieldClass,
@@ -178,7 +178,7 @@ export const SHIELD_SPECIFICATIONS: Record<
       { maximum: 70, minimum: 65 },
     ],
   },
-};
+}
 
 export const WEAPON_BASE: GearRangeBase & {
   ammunitionCost: [GeneratorRange, GeneratorRange];
@@ -211,7 +211,7 @@ export const WEAPON_BASE: GearRangeBase & {
     { maximum: 2, minimum: 1 },
     { maximum: 75, minimum: 70 },
   ],
-};
+}
 
 export const WEAPON_MODIFIER = {
   "one-handed": { ability: 1, burden: 1, damage: 1, price: 1, rate: 1, weight: 1 },
@@ -224,20 +224,20 @@ export const WEAPON_MODIFIER = {
     rate: 1.15,
     weight: 1.25,
   },
-};
+}
 
-export const WEAPON_NONE: Omit<Melee, "price"> = {
+export const WEAPON_NONE: Omit<Melee, `price`> = {
   abilityChance: 0,
   burden: 0,
   damage: 7,
-  gearClass: "blunt",
-  grip: "one-handed",
-  ID: "WEAPON_NONE",
+  gearClass: `blunt`,
+  grip: `one-handed`,
+  ID: `WEAPON_NONE`,
   level: 0,
-  name: "Unarmed",
+  name: `Unarmed`,
   rate: 2200,
   weight: 0,
-};
+}
 
 export const WEAPON_SPECIFICATIONS: Record<
   WeaponClass,
@@ -249,7 +249,7 @@ export const WEAPON_SPECIFICATIONS: Record<
   }
 > = {
   blunt: {
-    ability: "stun",
+    ability: `stun`,
     abilityChance: [
       { maximum: 0.2, minimum: 0.16 },
       { maximum: 0.5, minimum: 0.48 },
@@ -258,7 +258,7 @@ export const WEAPON_SPECIFICATIONS: Record<
     IconGearClass: IconBlunt,
   },
   piercing: {
-    ability: "bleed",
+    ability: `bleed`,
     abilityChance: [
       { maximum: 0.3, minimum: 0.26 },
       { maximum: 0.6, minimum: 0.58 },
@@ -267,7 +267,7 @@ export const WEAPON_SPECIFICATIONS: Record<
     IconGearClass: IconPiercing,
   },
   slashing: {
-    ability: "parry",
+    ability: `parry`,
     abilityChance: [
       { maximum: 0.23, minimum: 0.2 },
       { maximum: 0.4, minimum: 0.38 },
@@ -275,4 +275,4 @@ export const WEAPON_SPECIFICATIONS: Record<
     IconAbility: IconParryChance,
     IconGearClass: IconSlashing,
   },
-};
+}

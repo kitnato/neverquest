@@ -1,19 +1,19 @@
-import { Badge, Nav, NavItem, NavLink, Stack } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { Badge, Nav, NavItem, NavLink, Stack } from "react-bootstrap"
+import { useRecoilValue } from "recoil"
 
-import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { IconImage } from "@neverquest/components/IconImage";
-import IconAttention from "@neverquest/icons/attention.svg?react";
-import { canCompleteQuests } from "@neverquest/state/quests";
-import type { TabsData } from "@neverquest/types/components";
-import type { QuestClass } from "@neverquest/types/unions";
-import { capitalizeAll } from "@neverquest/utilities/formatters";
-import { getAnimationClass } from "@neverquest/utilities/getters";
+import { IconDisplay } from "@neverquest/components/IconDisplay"
+import { IconImage } from "@neverquest/components/IconImage"
+import IconAttention from "@neverquest/icons/attention.svg?react"
+import { canCompleteQuests } from "@neverquest/state/quests"
+import type { TabsData } from "@neverquest/types/components"
+import type { QuestClass } from "@neverquest/types/unions"
+import { capitalizeAll } from "@neverquest/utilities/formatters"
+import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function QuestTabsNav({ tabs }: { tabs: TabsData<QuestClass> }) {
-  const canCompleteConquests = useRecoilValue(canCompleteQuests("conquest"));
-  const canCompleteRoutines = useRecoilValue(canCompleteQuests("routine"));
-  const canCompleteTriumphs = useRecoilValue(canCompleteQuests("triumph"));
+  const canCompleteConquests = useRecoilValue(canCompleteQuests(`conquest`))
+  const canCompleteRoutines = useRecoilValue(canCompleteQuests(`routine`))
+  const canCompleteTriumphs = useRecoilValue(canCompleteQuests(`triumph`))
 
   return (
     <Nav justify variant="pills">
@@ -24,12 +24,12 @@ export function QuestTabsNav({ tabs }: { tabs: TabsData<QuestClass> }) {
               <Stack direction="horizontal" gap={2}>
                 <span>{capitalizeAll(label)}</span>
 
-                {((label === "conquest" && canCompleteConquests) ||
-                  (label === "routine" && canCompleteRoutines) ||
-                  (label === "triumph" && canCompleteTriumphs)) && (
+                {((label === `conquest` && canCompleteConquests) ||
+                  (label === `routine` && canCompleteRoutines) ||
+                  (label === `triumph` && canCompleteTriumphs)) && (
                   <div
                     className={getAnimationClass({
-                      animation: "pulse",
+                      animation: `pulse`,
                       isInfinite: true,
                     })}
                   >
@@ -44,5 +44,5 @@ export function QuestTabsNav({ tabs }: { tabs: TabsData<QuestClass> }) {
         </NavItem>
       ))}
     </Nav>
-  );
+  )
 }

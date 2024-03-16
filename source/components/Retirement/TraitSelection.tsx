@@ -1,20 +1,20 @@
-import { FormCheck, Stack } from "react-bootstrap";
-import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
+import { FormCheck, Stack } from "react-bootstrap"
+import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil"
 
-import { TraitDisplay } from "@neverquest/components/Traits/TraitDisplay";
-import { LABEL_NONE } from "@neverquest/data/general";
-import { TRAITS } from "@neverquest/data/traits";
-import { acquiredSkills } from "@neverquest/state/skills";
-import { acquiredTraits, selectedTrait } from "@neverquest/state/traits";
-import { TRAIT_TYPES, type Trait } from "@neverquest/types/unions";
+import { TraitDisplay } from "@neverquest/components/Traits/TraitDisplay"
+import { LABEL_NONE } from "@neverquest/data/general"
+import { TRAITS } from "@neverquest/data/traits"
+import { acquiredSkills } from "@neverquest/state/skills"
+import { acquiredTraits, selectedTrait } from "@neverquest/state/traits"
+import { TRAIT_TYPES, type Trait } from "@neverquest/types/unions"
 
-const FORM_NAME = "trait-selection";
+const FORM_NAME = `trait-selection`
 
 export function TraitSelection() {
-  const acquiredSkillsValue = useRecoilValue(acquiredSkills);
-  const acquiredTraitsValue = useRecoilValue(acquiredTraits);
-  const [selectedTraitValue, setSelectedTrait] = useRecoilState(selectedTrait);
-  const resetSelectedTrait = useResetRecoilState(selectedTrait);
+  const acquiredSkillsValue = useRecoilValue(acquiredSkills)
+  const acquiredTraitsValue = useRecoilValue(acquiredTraits)
+  const [selectedTraitValue, setSelectedTrait] = useRecoilState(selectedTrait)
+  const resetSelectedTrait = useResetRecoilState(selectedTrait)
 
   return (
     <Stack gap={3}>
@@ -34,7 +34,7 @@ export function TraitSelection() {
           />
 
           {TRAIT_TYPES.map((trait) => {
-            const { requiredSkill } = TRAITS[trait];
+            const { requiredSkill } = TRAITS[trait]
 
             if (!acquiredTraitsValue[trait]) {
               return (
@@ -46,16 +46,16 @@ export function TraitSelection() {
                   label={<TraitDisplay key={trait} trait={trait} />}
                   name={FORM_NAME}
                   onChange={({ target: { value } }) => {
-                    setSelectedTrait(value as Trait);
+                    setSelectedTrait(value as Trait)
                   }}
                   type="radio"
                   value={trait}
                 />
-              );
+              )
             }
           })}
         </Stack>
       )}
     </Stack>
-  );
+  )
 }

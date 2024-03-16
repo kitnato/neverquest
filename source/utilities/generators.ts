@@ -1,15 +1,15 @@
-import { generateArtifact } from "@kitnato/locran";
+import { generateArtifact } from "@kitnato/locran"
 import type {
   ArmorClass,
   GeneratorParameters,
   ShieldClass,
   WeaponClass,
-} from "@kitnato/locran/build/types";
-import { nanoid } from "nanoid";
+} from "@kitnato/locran/build/types"
+import { nanoid } from "nanoid"
 
-import { ARMOR_SPECIFICATIONS, SHIELD_SPECIFICATIONS, WEAPON_BASE } from "@neverquest/data/gear";
-import type { Armor, Melee, Ranged, Shield } from "@neverquest/types";
-import type { Grip } from "@neverquest/types/unions";
+import { ARMOR_SPECIFICATIONS, SHIELD_SPECIFICATIONS, WEAPON_BASE } from "@neverquest/data/gear"
+import type { Armor, Melee, Ranged, Shield } from "@neverquest/types"
+import type { Grip } from "@neverquest/types/unions"
 import {
   getArmorRanges,
   getFromRange,
@@ -17,7 +17,7 @@ import {
   getRangedRanges,
   getShieldRanges,
   getSigmoid,
-} from "@neverquest/utilities/getters";
+} from "@neverquest/utilities/getters"
 
 export function generateArmor({
   gearClass,
@@ -27,11 +27,11 @@ export function generateArmor({
   gearClass: ArmorClass;
   level: number;
 }): Armor {
-  const factor = getSigmoid(level);
+  const factor = getSigmoid(level)
   const { burden, deflection, protection, weight } = getArmorRanges({
     factor,
     gearClass,
-  });
+  })
 
   return {
     burden: Math.round(getFromRange(burden)),
@@ -41,7 +41,7 @@ export function generateArmor({
     level,
     name: generateArtifact({
       query: {
-        type: "armor",
+        type: `armor`,
       },
       ...generatorParameters,
     }),
@@ -53,7 +53,7 @@ export function generateArmor({
     ),
     protection: Math.round(getFromRange(protection)),
     weight: Math.round(getFromRange(weight)),
-  };
+  }
 }
 
 export function generateMeleeWeapon({
@@ -66,12 +66,12 @@ export function generateMeleeWeapon({
   grip: Grip;
   level: number;
 }): Melee {
-  const factor = getSigmoid(level);
+  const factor = getSigmoid(level)
   const { abilityChance, burden, damage, rate, weight } = getMeleeRanges({
     factor,
     gearClass,
     grip,
-  });
+  })
 
   return {
     abilityChance: getFromRange(abilityChance),
@@ -84,15 +84,15 @@ export function generateMeleeWeapon({
     name: generateArtifact({
       query: {
         artifactClass: gearClass,
-        subtype: "melee",
-        type: "weapon",
+        subtype: `melee`,
+        type: `weapon`,
       },
       ...generatorParameters,
     }),
     price: Math.round(getFromRange({ factor, ...WEAPON_BASE.price })),
     rate: Math.round(getFromRange(rate)),
     weight: Math.round(getFromRange(weight)),
-  };
+  }
 }
 
 export function generateRangedWeapon({
@@ -103,11 +103,11 @@ export function generateRangedWeapon({
   gearClass: WeaponClass;
   level: number;
 }): Ranged {
-  const factor = getSigmoid(level);
+  const factor = getSigmoid(level)
   const { abilityChance, ammunitionCost, burden, damage, range, rate, weight } = getRangedRanges({
     factor,
     gearClass,
-  });
+  })
 
   return {
     abilityChance: getFromRange(abilityChance),
@@ -120,8 +120,8 @@ export function generateRangedWeapon({
     name: generateArtifact({
       query: {
         artifactClass: gearClass,
-        subtype: "ranged",
-        type: "weapon",
+        subtype: `ranged`,
+        type: `weapon`,
       },
       ...generatorParameters,
     }),
@@ -129,7 +129,7 @@ export function generateRangedWeapon({
     range: Math.round(getFromRange(range)),
     rate: Math.round(getFromRange(rate)),
     weight: Math.round(getFromRange(weight)),
-  };
+  }
 }
 
 export function generateShield({
@@ -140,11 +140,11 @@ export function generateShield({
   gearClass: ShieldClass;
   level: number;
 }): Shield {
-  const factor = getSigmoid(level);
+  const factor = getSigmoid(level)
   const { block, burden, stagger, weight } = getShieldRanges({
     factor,
     gearClass,
-  });
+  })
 
   return {
     block: getFromRange(block),
@@ -154,7 +154,7 @@ export function generateShield({
     level,
     name: generateArtifact({
       query: {
-        type: "shield",
+        type: `shield`,
       },
       ...generatorParameters,
     }),
@@ -166,5 +166,5 @@ export function generateShield({
     ),
     stagger: getFromRange(stagger),
     weight: Math.round(getFromRange(weight)),
-  };
+  }
 }

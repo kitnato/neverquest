@@ -1,21 +1,21 @@
-import { LEVELLING_MAXIMUM, RETIREMENT_STAGE } from "@neverquest/data/general";
-import { AILMENT_PENALTY } from "@neverquest/data/statistics";
-import IconDamage from "@neverquest/icons/damage.svg?react";
-import IconDistance from "@neverquest/icons/distance.svg?react";
-import IconMonsterAttackRate from "@neverquest/icons/monster-attack-rate.svg?react";
-import IconMonsterDamage from "@neverquest/icons/monster-damage.svg?react";
-import IconMonsterHealth from "@neverquest/icons/monster-health.svg?react";
-import type { Description } from "@neverquest/types/ui";
-import type { Ailment } from "@neverquest/types/unions";
-import { formatNumber } from "@neverquest/utilities/formatters";
+import { LEVELLING_MAXIMUM, RETIREMENT_STAGE } from "@neverquest/data/general"
+import { AILMENT_PENALTY } from "@neverquest/data/statistics"
+import IconDamage from "@neverquest/icons/damage.svg?react"
+import IconDistance from "@neverquest/icons/distance.svg?react"
+import IconMonsterAttackRate from "@neverquest/icons/monster-attack-rate.svg?react"
+import IconMonsterDamage from "@neverquest/icons/monster-damage.svg?react"
+import IconMonsterHealth from "@neverquest/icons/monster-health.svg?react"
+import type { Description } from "@neverquest/types/ui"
+import type { Ailment } from "@neverquest/types/unions"
+import { formatNumber } from "@neverquest/utilities/formatters"
 
 export const AILMENT_DESCRIPTION: Record<Ailment, Description> = {
-  bleeding: { description: "Suffering periodic damage." },
-  burning: { description: "Cannot regenerate # health.", descriptionIcons: [IconMonsterHealth] },
+  bleeding: { description: `Suffering periodic damage.` },
+  burning: { description: `Cannot regenerate # health.`, descriptionIcons: [IconMonsterHealth] },
   frozen: {
     description: `Attack # rate and # speed slowed by ${formatNumber({
       decimals: 0,
-      format: "percentage",
+      format: `percentage`,
       value: AILMENT_PENALTY.frozen,
     })}.`,
     descriptionIcons: [IconMonsterAttackRate, IconDistance],
@@ -23,7 +23,7 @@ export const AILMENT_DESCRIPTION: Record<Ailment, Description> = {
   shocked: {
     description: `Taking ${formatNumber({
       decimals: 0,
-      format: "percentage",
+      format: `percentage`,
       value: AILMENT_PENALTY.shocked,
     })} increased # damage.`,
     descriptionIcons: [IconDamage],
@@ -31,7 +31,7 @@ export const AILMENT_DESCRIPTION: Record<Ailment, Description> = {
   staggered: {
     description: `Dealing ${formatNumber({
       decimals: 0,
-      format: "percentage",
+      format: `percentage`,
       value: AILMENT_PENALTY.staggered,
     })} decreased # damage.`,
     descriptionIcons: [IconMonsterDamage],
@@ -39,14 +39,14 @@ export const AILMENT_DESCRIPTION: Record<Ailment, Description> = {
   stunned: {
     description: `Hit chance reduced to ${formatNumber({
       decimals: 0,
-      format: "percentage",
+      format: `percentage`,
       value: AILMENT_PENALTY.stunned,
     })}.`,
   },
-};
+}
 
-export const BOSS_STAGE_INTERVAL = 5;
-export const BOSS_STAGE_START = 10;
+export const BOSS_STAGE_INTERVAL = 5
+export const BOSS_STAGE_START = 10
 
 export const BLIGHT = {
   boss: 1.2,
@@ -60,7 +60,7 @@ export const BLIGHT = {
   },
   increment: 0.025,
   requiredStage: 50,
-};
+}
 
 export const ESSENCE = {
   attenuation: 17,
@@ -71,12 +71,12 @@ export const ESSENCE = {
     "res cogitans": 7777,
     "res dominus": 7777,
   },
-};
+}
 
 export const FINALITY_STAGE = {
   "res cogitans": LEVELLING_MAXIMUM,
   "res dominus": 57,
-};
+}
 
 export const FRAILTY = {
   familiar: 0.25,
@@ -84,7 +84,7 @@ export const FRAILTY = {
     maximum: 0.15,
     minimum: 0.01,
   },
-};
+}
 
 export const MONSTER_ATTACK_RATE = {
   attenuation: 4000,
@@ -96,7 +96,7 @@ export const MONSTER_ATTACK_RATE = {
     "res dominus": 2765,
   },
   minimum: 2000,
-};
+}
 
 export const MONSTER_DAMAGE = {
   attenuation: 27,
@@ -112,7 +112,7 @@ export const MONSTER_DAMAGE = {
     minimum: 0.3,
     requiredStage: RETIREMENT_STAGE + 1,
   },
-};
+}
 
 export const MONSTER_HEALTH = {
   attenuation: 24,
@@ -128,13 +128,13 @@ export const MONSTER_HEALTH = {
     minimum: 0.35,
     requiredStage: RETIREMENT_STAGE + 1,
   },
-};
+}
 
 export const MONSTER_REGENERATION = {
   duration: 40_000,
   minimum: 1,
   ticks: 20,
-};
+}
 
 export const POISON = {
   boss: 1.25,
@@ -155,11 +155,11 @@ export const POISON = {
     minimum: 0.075,
   },
   requiredStage: 45,
-};
+}
 
 export const RAGE = {
   effect: 0.5,
   increment: 1,
   maximum: 4,
   requiredStage: 21,
-};
+}

@@ -1,20 +1,20 @@
-import { Stack } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { Stack } from "react-bootstrap"
+import { useRecoilValue } from "recoil"
 
-import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
-import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
-import { PERCENTAGE_POINTS } from "@neverquest/data/general";
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
+import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
+import { PERCENTAGE_POINTS } from "@neverquest/data/general"
 import {
   isMonsterAiling,
   monsterAttackDuration,
   monsterAttackRate,
-} from "@neverquest/state/monster";
-import { formatNumber } from "@neverquest/utilities/formatters";
+} from "@neverquest/state/monster"
+import { formatNumber } from "@neverquest/utilities/formatters"
 
 export function MonsterAttackRateMeter() {
-  const isMonsterFrozen = useRecoilValue(isMonsterAiling("frozen"));
-  const monsterAttackDurationValue = useRecoilValue(monsterAttackDuration);
-  const monsterAttackRateValue = useRecoilValue(monsterAttackRate);
+  const isMonsterFrozen = useRecoilValue(isMonsterAiling(`frozen`))
+  const monsterAttackDurationValue = useRecoilValue(monsterAttackDuration)
+  const monsterAttackRateValue = useRecoilValue(monsterAttackRate)
 
   return (
     <LabelledProgressBar
@@ -32,7 +32,7 @@ export function MonsterAttackRateMeter() {
       <Stack direction="horizontal" gap={1}>
         <span>
           {formatNumber({
-            format: "time",
+            format: `time`,
             value: monsterAttackDurationValue || monsterAttackRateValue,
           })}
         </span>
@@ -40,5 +40,5 @@ export function MonsterAttackRateMeter() {
         <DeltasDisplay delta="monsterAttackRate" />
       </Stack>
     </LabelledProgressBar>
-  );
+  )
 }

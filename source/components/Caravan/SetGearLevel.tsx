@@ -1,8 +1,8 @@
-import { FormControl } from "react-bootstrap";
+import { FormControl } from "react-bootstrap"
 
-import { IconDisplay } from "@neverquest/components/IconDisplay";
-import IconGearLevel from "@neverquest/icons/gear-level.svg?react";
-import { formatNumber } from "@neverquest/utilities/formatters";
+import { IconDisplay } from "@neverquest/components/IconDisplay"
+import IconGearLevel from "@neverquest/icons/gear-level.svg?react"
+import { formatNumber } from "@neverquest/utilities/formatters"
 
 export function SetGearLevel({
   isDisabled,
@@ -16,27 +16,27 @@ export function SetGearLevel({
   setLevel: (level: number) => void;
 }) {
   return (
-    <IconDisplay Icon={IconGearLevel} iconProps={{ overlayPlacement: "left" }} tooltip="Gear level">
+    <IconDisplay Icon={IconGearLevel} iconProps={{ overlayPlacement: `left` }} tooltip="Gear level">
       <FormControl
         disabled={isDisabled}
         max={maximum}
         min={1}
         onChange={({ target: { value } }) => {
           if (!value) {
-            return;
+            return
           }
 
-          const parsedValue = Number.parseInt(value);
+          const parsedValue = Number.parseInt(value)
 
           if (Number.isNaN(parsedValue) || parsedValue < 1 || parsedValue > maximum) {
-            return;
+            return
           }
 
-          setLevel(parsedValue);
+          setLevel(parsedValue)
         }}
         type="number"
         value={formatNumber({ value: level })}
       />
     </IconDisplay>
-  );
+  )
 }

@@ -4,25 +4,25 @@ import {
   AccordionCollapse,
   AccordionItem,
   Stack,
-} from "react-bootstrap";
-import { useRecoilState, useRecoilValue } from "recoil";
+} from "react-bootstrap"
+import { useRecoilState, useRecoilValue } from "recoil"
 
-import { PurchasableItems } from "@neverquest/components/Caravan/Merchant/PurchasableItems";
-import { ACCORDION_EVENT_KEY } from "@neverquest/data/general";
-import { expandedBuyback, merchantInventory } from "@neverquest/state/caravan";
+import { PurchasableItems } from "@neverquest/components/Caravan/Merchant/PurchasableItems"
+import { ACCORDION_EVENT_KEY } from "@neverquest/data/general"
+import { expandedBuyback, merchantInventory } from "@neverquest/state/caravan"
 
 export function BuybackItems() {
-  const [expandedBuybackValue, setExpandBuyback] = useRecoilState(expandedBuyback);
-  const merchantInventoryValue = useRecoilValue(merchantInventory);
+  const [expandedBuybackValue, setExpandBuyback] = useRecoilState(expandedBuyback)
+  const merchantInventoryValue = useRecoilValue(merchantInventory)
 
-  const returnedItems = merchantInventoryValue.filter(({ isReturned }) => isReturned);
+  const returnedItems = merchantInventoryValue.filter(({ isReturned }) => isReturned)
 
   if (returnedItems.length > 0) {
     return (
       <Accordion
         activeKey={expandedBuybackValue ? ACCORDION_EVENT_KEY : undefined}
         onSelect={() => {
-          setExpandBuyback((isExpanded) => !isExpanded);
+          setExpandBuyback((isExpanded) => !isExpanded)
         }}
       >
         <AccordionItem className="border-0" eventKey={ACCORDION_EVENT_KEY}>
@@ -37,6 +37,6 @@ export function BuybackItems() {
           </AccordionCollapse>
         </AccordionItem>
       </Accordion>
-    );
+    )
   }
 }

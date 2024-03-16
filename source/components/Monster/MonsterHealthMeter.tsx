@@ -1,15 +1,15 @@
-import { Stack } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { Stack } from "react-bootstrap"
+import { useRecoilValue } from "recoil"
 
-import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
-import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
-import { PERCENTAGE_POINTS } from "@neverquest/data/general";
-import { monsterHealth, monsterHealthMaximum } from "@neverquest/state/monster";
-import { formatNumber } from "@neverquest/utilities/formatters";
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
+import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
+import { PERCENTAGE_POINTS } from "@neverquest/data/general"
+import { monsterHealth, monsterHealthMaximum } from "@neverquest/state/monster"
+import { formatNumber } from "@neverquest/utilities/formatters"
 
 export function MonsterHealthMeter() {
-  const monsterHealthValue = useRecoilValue(monsterHealth);
-  const monsterHealthMaximumValue = useRecoilValue(monsterHealthMaximum);
+  const monsterHealthValue = useRecoilValue(monsterHealth)
+  const monsterHealthMaximumValue = useRecoilValue(monsterHealthMaximum)
 
   return (
     <LabelledProgressBar
@@ -31,5 +31,5 @@ export function MonsterHealthMeter() {
         </Stack>
       </Stack>
     </LabelledProgressBar>
-  );
+  )
 }

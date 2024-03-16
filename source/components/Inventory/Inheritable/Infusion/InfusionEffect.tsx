@@ -1,18 +1,18 @@
-import { Stack } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { Stack } from "react-bootstrap"
+import { useRecoilValue } from "recoil"
 
-import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
-import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { INFUSABLES } from "@neverquest/data/items";
-import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { infusionEffect } from "@neverquest/state/items";
-import type { Infusable } from "@neverquest/types/unions";
-import { formatNumber } from "@neverquest/utilities/formatters";
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
+import { IconDisplay } from "@neverquest/components/IconDisplay"
+import { INFUSABLES } from "@neverquest/data/items"
+import { useDeltaText } from "@neverquest/hooks/useDeltaText"
+import { infusionEffect } from "@neverquest/state/items"
+import type { Infusable } from "@neverquest/types/unions"
+import { formatNumber } from "@neverquest/utilities/formatters"
 
 export function InfusionEffect({ infusable }: { infusable: Infusable }) {
-  const infusionEffectState = infusionEffect(infusable);
+  const infusionEffectState = infusionEffect(infusable)
 
-  const infusionEffectValue = useRecoilValue(infusionEffectState);
+  const infusionEffectValue = useRecoilValue(infusionEffectState)
 
   const {
     delta,
@@ -21,13 +21,13 @@ export function InfusionEffect({ infusable }: { infusable: Infusable }) {
       effect: { maximum },
     },
     tooltip,
-  } = INFUSABLES[infusable];
+  } = INFUSABLES[infusable]
 
   useDeltaText({
     delta,
-    format: "percentage",
+    format: `percentage`,
     state: infusionEffectState,
-  });
+  })
 
   return (
     <Stack direction="horizontal" gap={1}>
@@ -35,7 +35,7 @@ export function InfusionEffect({ infusable }: { infusable: Infusable }) {
         <span>
           {formatNumber({
             decimals: infusionEffectValue >= maximum ? 0 : 2,
-            format: "percentage",
+            format: `percentage`,
             value: Math.abs(infusionEffectValue),
           })}
         </span>
@@ -43,5 +43,5 @@ export function InfusionEffect({ infusable }: { infusable: Infusable }) {
 
       <DeltasDisplay delta={delta} />
     </Stack>
-  );
+  )
 }

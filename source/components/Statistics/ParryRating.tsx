@@ -1,36 +1,36 @@
-import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap"
+import { useRecoilValue } from "recoil"
 
-import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
-import { DetailsTable } from "@neverquest/components/DetailsTable";
-import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { LABEL_SEPARATOR } from "@neverquest/data/general";
-import { PARRY_ABSORPTION, PARRY_DAMAGE } from "@neverquest/data/statistics";
-import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import IconFinesse from "@neverquest/icons/finesse.svg?react";
-import IconParryChance from "@neverquest/icons/parry-chance.svg?react";
-import IconParryRating from "@neverquest/icons/parry-rating.svg?react";
-import { weapon } from "@neverquest/state/gear";
-import { masteryStatistic } from "@neverquest/state/masteries";
-import { parryChance, parryRating } from "@neverquest/state/statistics";
-import { formatNumber } from "@neverquest/utilities/formatters";
-import { getAnimationClass, getGearIcon } from "@neverquest/utilities/getters";
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
+import { DetailsTable } from "@neverquest/components/DetailsTable"
+import { IconDisplay } from "@neverquest/components/IconDisplay"
+import { LABEL_SEPARATOR } from "@neverquest/data/general"
+import { PARRY_ABSORPTION, PARRY_DAMAGE } from "@neverquest/data/statistics"
+import { useDeltaText } from "@neverquest/hooks/useDeltaText"
+import IconFinesse from "@neverquest/icons/finesse.svg?react"
+import IconParryChance from "@neverquest/icons/parry-chance.svg?react"
+import IconParryRating from "@neverquest/icons/parry-rating.svg?react"
+import { weapon } from "@neverquest/state/gear"
+import { masteryStatistic } from "@neverquest/state/masteries"
+import { parryChance, parryRating } from "@neverquest/state/statistics"
+import { formatNumber } from "@neverquest/utilities/formatters"
+import { getAnimationClass, getGearIcon } from "@neverquest/utilities/getters"
 
 export function ParryRating() {
-  const finesseValue = useRecoilValue(masteryStatistic("finesse"));
-  const parryChanceValue = useRecoilValue(parryChance);
-  const parryRatingValue = useRecoilValue(parryRating);
-  const weaponValue = useRecoilValue(weapon);
+  const finesseValue = useRecoilValue(masteryStatistic(`finesse`))
+  const parryChanceValue = useRecoilValue(parryChance)
+  const parryRatingValue = useRecoilValue(parryRating)
+  const weaponValue = useRecoilValue(weapon)
 
   useDeltaText({
-    delta: "parryRating",
+    delta: `parryRating`,
     state: parryRating,
-  });
+  })
 
   if (parryRatingValue > 0) {
     return (
       <IconDisplay
-        className={getAnimationClass({ animation: "flipInX" })}
+        className={getAnimationClass({ animation: `flipInX` })}
         Icon={IconParryRating}
         tooltip="Parry rating"
       >
@@ -44,16 +44,16 @@ export function ParryRating() {
                       <td>
                         <IconDisplay
                           Icon={getGearIcon(weaponValue)}
-                          iconProps={{ className: "small" }}
+                          iconProps={{ className: `small` }}
                         >
                           <span>Chance:</span>
                         </IconDisplay>
                       </td>
 
                       <td>
-                        <IconDisplay Icon={IconParryChance} iconProps={{ className: "small" }}>
+                        <IconDisplay Icon={IconParryChance} iconProps={{ className: `small` }}>
                           <span>
-                            {formatNumber({ format: "percentage", value: parryChanceValue })}
+                            {formatNumber({ format: `percentage`, value: parryChanceValue })}
                           </span>
                         </IconDisplay>
                       </td>
@@ -69,18 +69,18 @@ export function ParryRating() {
                           <span>
                             {formatNumber({
                               decimals: 0,
-                              format: "percentage",
+                              format: `percentage`,
                               value: PARRY_DAMAGE,
                             })}
                           </span>
 
                           {LABEL_SEPARATOR}
 
-                          <IconDisplay Icon={IconFinesse} iconProps={{ className: "small" }}>
+                          <IconDisplay Icon={IconFinesse} iconProps={{ className: `small` }}>
                             <span>
                               +
                               {formatNumber({
-                                format: "percentage",
+                                format: `percentage`,
                                 value: finesseValue,
                               })}
                             </span>
@@ -99,18 +99,18 @@ export function ParryRating() {
                           <span>
                             {formatNumber({
                               decimals: 0,
-                              format: "percentage",
+                              format: `percentage`,
                               value: PARRY_ABSORPTION,
                             })}
                           </span>
 
                           {LABEL_SEPARATOR}
 
-                          <IconDisplay Icon={IconFinesse} iconProps={{ className: "small" }}>
+                          <IconDisplay Icon={IconFinesse} iconProps={{ className: `small` }}>
                             <span>
                               +
                               {formatNumber({
-                                format: "percentage",
+                                format: `percentage`,
                                 value: finesseValue,
                               })}
                             </span>
@@ -129,6 +129,6 @@ export function ParryRating() {
           <DeltasDisplay delta="parryRating" />
         </Stack>
       </IconDisplay>
-    );
+    )
   }
 }

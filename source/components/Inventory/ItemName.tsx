@@ -1,18 +1,18 @@
-import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap";
+import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap"
 
-import { DescriptionDisplay } from "@neverquest/components/DescriptionDisplay";
-import { DetailsTable } from "@neverquest/components/DetailsTable";
-import { GemDescription } from "@neverquest/components/Inventory/GemDescription";
-import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
-import { CONSUMABLES, INFUSABLES, RELICS } from "@neverquest/data/items";
-import type { ConsumableItem, GemItem, InheritableItem } from "@neverquest/types";
+import { DescriptionDisplay } from "@neverquest/components/DescriptionDisplay"
+import { DetailsTable } from "@neverquest/components/DetailsTable"
+import { GemDescription } from "@neverquest/components/Inventory/GemDescription"
+import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail"
+import { CONSUMABLES, INFUSABLES, RELICS } from "@neverquest/data/items"
+import type { ConsumableItem, GemItem, InheritableItem } from "@neverquest/types"
 import {
   isConsumableItem,
   isGemItem,
   isInfusableItem,
   isRelicItem,
-} from "@neverquest/types/type-guards";
-import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
+} from "@neverquest/types/type-guards"
+import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters"
 
 export function ItemName({
   amount,
@@ -29,7 +29,7 @@ export function ItemName({
             <Stack gap={2}>
               {isGemItem(item) ? (
                 <GemDescription gem={item.name} />
-              ) : isRelicItem(item) && item.name === "[P71NQ]" ? (
+              ) : (isRelicItem(item) && item.name === `[P71NQ]` ? (
                 <Stack className="monospaced">
                   <span>Priority 0 - BREACH IN PROGRESS</span>
 
@@ -47,18 +47,18 @@ export function ItemName({
                 (() => {
                   const { description, descriptionIcons } = isConsumableItem(item)
                     ? CONSUMABLES[item.name]
-                    : isInfusableItem(item)
+                    : (isInfusableItem(item)
                       ? INFUSABLES[item.name]
-                      : RELICS[item.name];
+                      : RELICS[item.name])
 
                   return (
                     <DescriptionDisplay
                       description={description}
                       descriptionIcons={descriptionIcons}
                     />
-                  );
+                  )
                 })()
-              )}
+              ))}
 
               <DetailsTable>
                 <WeightDetail amount={amount} weight={item.weight} />
@@ -71,9 +71,9 @@ export function ItemName({
     >
       <span className="fitted">
         {capitalizeAll(item.name)}
-        {amount !== undefined && amount > 1 ? ` ×${formatNumber({ value: amount })}` : ""}
+        {amount !== undefined && amount > 1 ? ` ×${formatNumber({ value: amount })}` : ``}
         &nbsp;
       </span>
     </OverlayTrigger>
-  );
+  )
 }

@@ -1,15 +1,15 @@
-import { Stack } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { Stack } from "react-bootstrap"
+import { useRecoilValue } from "recoil"
 
-import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
-import { LABEL_NONE } from "@neverquest/data/general";
-import { inventory } from "@neverquest/state/inventory";
-import { isInheritableItem } from "@neverquest/types/type-guards";
+import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay"
+import { LABEL_NONE } from "@neverquest/data/general"
+import { inventory } from "@neverquest/state/inventory"
+import { isInheritableItem } from "@neverquest/types/type-guards"
 
 export function ItemsInherited() {
-  const inventoryValue = useRecoilValue(inventory);
+  const inventoryValue = useRecoilValue(inventory)
 
-  const ownedInheritableItems = inventoryValue.filter(isInheritableItem);
+  const ownedInheritableItems = inventoryValue.filter(isInheritableItem)
 
   return (
     <Stack gap={3}>
@@ -23,5 +23,5 @@ export function ItemsInherited() {
         ))
       )}
     </Stack>
-  );
+  )
 }

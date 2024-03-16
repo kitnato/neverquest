@@ -1,36 +1,36 @@
-import { Badge, Button, OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { Badge, Button, OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap"
+import { useRecoilValue } from "recoil"
 
-import { AttributeIncreaseDetails } from "@neverquest/components/Attributes/AttributeIncreaseDetails";
-import { AttributeRank } from "@neverquest/components/Attributes/AttributeRank";
-import { DescriptionDisplay } from "@neverquest/components/DescriptionDisplay";
-import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { IconImage } from "@neverquest/components/IconImage";
-import { ATTRIBUTES } from "@neverquest/data/attributes";
+import { AttributeIncreaseDetails } from "@neverquest/components/Attributes/AttributeIncreaseDetails"
+import { AttributeRank } from "@neverquest/components/Attributes/AttributeRank"
+import { DescriptionDisplay } from "@neverquest/components/DescriptionDisplay"
+import { IconDisplay } from "@neverquest/components/IconDisplay"
+import { IconImage } from "@neverquest/components/IconImage"
+import { ATTRIBUTES } from "@neverquest/data/attributes"
 import {
   CLASS_FULL_WIDTH_JUSTIFIED,
   LABEL_MAXIMUM,
   LABEL_SKILL_REQUIRED,
   LABEL_UNKNOWN,
-} from "@neverquest/data/general";
-import { useIncreaseAttribute } from "@neverquest/hooks/actions/useIncreaseAttribute";
-import IconWait from "@neverquest/icons/hourglass.svg?react";
-import IconIncrease from "@neverquest/icons/increase.svg?react";
-import IconUnknown from "@neverquest/icons/unknown.svg?react";
-import { areAttributesAffordable, isAttributeAtMaximum } from "@neverquest/state/attributes";
-import { acquiredSkills } from "@neverquest/state/skills";
-import type { Attribute } from "@neverquest/types/unions";
-import { capitalizeAll } from "@neverquest/utilities/formatters";
+} from "@neverquest/data/general"
+import { useIncreaseAttribute } from "@neverquest/hooks/actions/useIncreaseAttribute"
+import IconWait from "@neverquest/icons/hourglass.svg?react"
+import IconIncrease from "@neverquest/icons/increase.svg?react"
+import IconUnknown from "@neverquest/icons/unknown.svg?react"
+import { areAttributesAffordable, isAttributeAtMaximum } from "@neverquest/state/attributes"
+import { acquiredSkills } from "@neverquest/state/skills"
+import type { Attribute } from "@neverquest/types/unions"
+import { capitalizeAll } from "@neverquest/utilities/formatters"
 
 export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
-  const acquiredSkillsValue = useRecoilValue(acquiredSkills);
-  const areAttributesAffordableValue = useRecoilValue(areAttributesAffordable);
-  const isAttributeAtMaximumValue = useRecoilValue(isAttributeAtMaximum(attribute));
+  const acquiredSkillsValue = useRecoilValue(acquiredSkills)
+  const areAttributesAffordableValue = useRecoilValue(areAttributesAffordable)
+  const isAttributeAtMaximumValue = useRecoilValue(isAttributeAtMaximum(attribute))
 
-  const increaseAttribute = useIncreaseAttribute();
+  const increaseAttribute = useIncreaseAttribute()
 
-  const { description, descriptionIcons, Icon, requiredSkill } = ATTRIBUTES[attribute];
-  const name = capitalizeAll(attribute);
+  const { description, descriptionIcons, Icon, requiredSkill } = ATTRIBUTES[attribute]
+  const name = capitalizeAll(attribute)
 
   if (requiredSkill === undefined || acquiredSkillsValue[requiredSkill]) {
     return (
@@ -45,7 +45,7 @@ export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
           <span>{name}</span>
         </IconDisplay>
 
-        <Stack className="ms-2" direction="horizontal" style={{ gap: "7.5rem" }}>
+        <Stack className="ms-2" direction="horizontal" style={{ gap: `7.5rem` }}>
           <AttributeRank attribute={attribute} />
 
           {isAttributeAtMaximumValue ? (
@@ -69,7 +69,7 @@ export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
                 <Button
                   disabled={!areAttributesAffordableValue}
                   onClick={() => {
-                    increaseAttribute(attribute);
+                    increaseAttribute(attribute)
                   }}
                   variant="outline-dark"
                 >
@@ -80,7 +80,7 @@ export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
           )}
         </Stack>
       </div>
-    );
+    )
   }
 
   return (
@@ -91,5 +91,5 @@ export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
     >
       <span>{LABEL_UNKNOWN}</span>
     </IconDisplay>
-  );
+  )
 }

@@ -1,8 +1,8 @@
-import { Stack } from "react-bootstrap";
+import { Stack } from "react-bootstrap"
 
-import { BuybackItems } from "@neverquest/components/Caravan/Merchant/BuybackItems";
-import { PurchaseItems } from "@neverquest/components/Caravan/Merchant/PurchaseItems";
-import { SellItems } from "@neverquest/components/Caravan/Merchant/SellItems";
+import { BuybackItems } from "@neverquest/components/Caravan/Merchant/BuybackItems"
+import { PurchaseItems } from "@neverquest/components/Caravan/Merchant/PurchaseItems"
+import { SellItems } from "@neverquest/components/Caravan/Merchant/SellItems"
 
 export function Merchant() {
   return (
@@ -13,5 +13,5 @@ export function Merchant() {
 
       <SellItems />
     </Stack>
-  );
+  )
 }

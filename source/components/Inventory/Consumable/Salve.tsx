@@ -1,19 +1,19 @@
-import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
-import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
+import { Button, OverlayTrigger, Tooltip } from "react-bootstrap"
+import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil"
 
-import { POPOVER_TRIGGER } from "@neverquest/data/general";
-import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta";
-import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
-import { inventory } from "@neverquest/state/inventory";
-import { blight, isBlighted } from "@neverquest/state/reserves";
+import { POPOVER_TRIGGER } from "@neverquest/data/general"
+import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta"
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
+import { inventory } from "@neverquest/state/inventory"
+import { blight, isBlighted } from "@neverquest/state/reserves"
 
 export function Salve({ ID }: { ID: string }) {
-  const isBlightedValue = useRecoilValue(isBlighted);
-  const resetBlight = useResetRecoilState(blight);
-  const setInventory = useSetRecoilState(inventory);
+  const isBlightedValue = useRecoilValue(isBlighted)
+  const resetBlight = useResetRecoilState(blight)
+  const setInventory = useSetRecoilState(inventory)
 
-  const addDelta = useAddDelta();
-  const progressQuest = useProgressQuest();
+  const addDelta = useAddDelta()
+  const progressQuest = useProgressQuest()
 
   return (
     <OverlayTrigger
@@ -28,21 +28,21 @@ export function Salve({ ID }: { ID: string }) {
         <Button
           disabled={!isBlightedValue}
           onClick={() => {
-            resetBlight();
+            resetBlight()
 
             addDelta({
               contents: {
-                color: "text-secondary",
-                value: "CURED",
+                color: `text-secondary`,
+                value: `CURED`,
               },
-              delta: "stamina",
-            });
+              delta: `stamina`,
+            })
 
             setInventory((currentInventory) =>
               currentInventory.filter(({ ID: currentItemID }) => currentItemID !== ID),
-            );
+            )
 
-            progressQuest({ quest: "potions" });
+            progressQuest({ quest: `potions` })
           }}
           variant="outline-dark"
         >
@@ -50,5 +50,5 @@ export function Salve({ ID }: { ID: string }) {
         </Button>
       </div>
     </OverlayTrigger>
-  );
+  )
 }

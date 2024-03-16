@@ -1,27 +1,27 @@
-import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap"
+import { useRecoilValue } from "recoil"
 
-import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
-import { DetailsTable } from "@neverquest/components/DetailsTable";
-import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { ElementalDetails } from "@neverquest/components/Statistics/ElementalDetails";
-import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import IconThorns from "@neverquest/icons/thorns.svg?react";
-import { thorns } from "@neverquest/state/statistics";
-import { getAnimationClass } from "@neverquest/utilities/getters";
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
+import { DetailsTable } from "@neverquest/components/DetailsTable"
+import { IconDisplay } from "@neverquest/components/IconDisplay"
+import { ElementalDetails } from "@neverquest/components/Statistics/ElementalDetails"
+import { useDeltaText } from "@neverquest/hooks/useDeltaText"
+import IconThorns from "@neverquest/icons/thorns.svg?react"
+import { thorns } from "@neverquest/state/statistics"
+import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function Thorns() {
-  const thornsValue = useRecoilValue(thorns);
+  const thornsValue = useRecoilValue(thorns)
 
   useDeltaText({
-    delta: "thorns",
+    delta: `thorns`,
     state: thorns,
-  });
+  })
 
   if (thornsValue > 0) {
     return (
       <IconDisplay
-        className={getAnimationClass({ animation: "flipInX" })}
+        className={getAnimationClass({ animation: `flipInX` })}
         Icon={IconThorns}
         tooltip="Thorns"
       >
@@ -43,6 +43,6 @@ export function Thorns() {
           <DeltasDisplay delta="thorns" />
         </Stack>
       </IconDisplay>
-    );
+    )
   }
 }

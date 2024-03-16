@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from "react"
 import {
   Button,
   Modal,
@@ -8,25 +8,25 @@ import {
   OverlayTrigger,
   Stack,
   Tooltip,
-} from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+} from "react-bootstrap"
+import { useRecoilValue } from "recoil"
 
-import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { Infusion } from "@neverquest/components/Inventory/Inheritable/Infusion";
-import { InfusionEffect } from "@neverquest/components/Inventory/Inheritable/Infusion/InfusionEffect";
-import { InfusionLevel } from "@neverquest/components/Inventory/Inheritable/Infusion/InfusionLevel";
-import { InfusionProgress } from "@neverquest/components/Inventory/Inheritable/Infusion/InfusionProgress";
-import { LABEL_SKILL_REQUIRED, POPOVER_TRIGGER } from "@neverquest/data/general";
-import { INFUSABLES } from "@neverquest/data/items";
-import { isSkillAcquired } from "@neverquest/state/skills";
-import type { Infusable } from "@neverquest/types/unions";
+import { IconDisplay } from "@neverquest/components/IconDisplay"
+import { Infusion } from "@neverquest/components/Inventory/Inheritable/Infusion"
+import { InfusionEffect } from "@neverquest/components/Inventory/Inheritable/Infusion/InfusionEffect"
+import { InfusionLevel } from "@neverquest/components/Inventory/Inheritable/Infusion/InfusionLevel"
+import { InfusionProgress } from "@neverquest/components/Inventory/Inheritable/Infusion/InfusionProgress"
+import { LABEL_SKILL_REQUIRED, POPOVER_TRIGGER } from "@neverquest/data/general"
+import { INFUSABLES } from "@neverquest/data/items"
+import { isSkillAcquired } from "@neverquest/state/skills"
+import type { Infusable } from "@neverquest/types/unions"
 
 export function InfusionAppraise({ infusable }: { infusable: Infusable }) {
-  const isSkillAcquiredMeditation = useRecoilValue(isSkillAcquired("meditation"));
+  const isSkillAcquiredMeditation = useRecoilValue(isSkillAcquired(`meditation`))
 
-  const [isShowingInfusion, setIsShowingInfusion] = useState(false);
+  const [isShowingInfusion, setIsShowingInfusion] = useState(false)
 
-  const { Icon } = INFUSABLES[infusable];
+  const { Icon } = INFUSABLES[infusable]
 
   return (
     <>
@@ -42,7 +42,7 @@ export function InfusionAppraise({ infusable }: { infusable: Infusable }) {
           <Button
             disabled={!isSkillAcquiredMeditation}
             onClick={() => {
-              setIsShowingInfusion(true);
+              setIsShowingInfusion(true)
             }}
             variant="outline-dark"
           >
@@ -54,7 +54,7 @@ export function InfusionAppraise({ infusable }: { infusable: Infusable }) {
       <Modal
         centered
         onHide={() => {
-          setIsShowingInfusion(false);
+          setIsShowingInfusion(false)
         }}
         show={isShowingInfusion}
       >
@@ -81,5 +81,5 @@ export function InfusionAppraise({ infusable }: { infusable: Infusable }) {
         </ModalBody>
       </Modal>
     </>
-  );
+  )
 }

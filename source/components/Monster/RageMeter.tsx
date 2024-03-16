@@ -1,18 +1,18 @@
-import { Stack } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { Stack } from "react-bootstrap"
+import { useRecoilValue } from "recoil"
 
-import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
-import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
-import { PERCENTAGE_POINTS } from "@neverquest/data/general";
-import { RAGE } from "@neverquest/data/monster";
-import { isEnraged, rage } from "@neverquest/state/monster";
-import { formatNumber } from "@neverquest/utilities/formatters";
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
+import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
+import { PERCENTAGE_POINTS } from "@neverquest/data/general"
+import { RAGE } from "@neverquest/data/monster"
+import { isEnraged, rage } from "@neverquest/state/monster"
+import { formatNumber } from "@neverquest/utilities/formatters"
 
 export function RageMeter() {
-  const isEnragedValue = useRecoilValue(isEnraged);
-  const rageValue = useRecoilValue(rage);
+  const isEnragedValue = useRecoilValue(isEnraged)
+  const rageValue = useRecoilValue(rage)
 
-  const { maximum } = RAGE;
+  const { maximum } = RAGE
 
   return (
     <LabelledProgressBar
@@ -34,5 +34,5 @@ export function RageMeter() {
         <DeltasDisplay delta="rage" />
       </Stack>
     </LabelledProgressBar>
-  );
+  )
 }

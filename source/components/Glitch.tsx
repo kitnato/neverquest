@@ -1,55 +1,55 @@
-import { nanoid } from "nanoid";
-import { useMemo, useState } from "react";
-import { useRecoilValue } from "recoil";
+import { nanoid } from "nanoid"
+import { useMemo, useState } from "react"
+import { useRecoilValue } from "recoil"
 
-import { GLITCH_NUMBER, GLITCH_STAGE_MINIMUM, LEVELLING_THRESHOLD } from "@neverquest/data/general";
-import { useAnimation } from "@neverquest/hooks/useAnimation";
-import { stage } from "@neverquest/state/encounter";
-import { getFromRange, getLinearMapping, getRange } from "@neverquest/utilities/getters";
+import { GLITCH_NUMBER, GLITCH_STAGE_MINIMUM, LEVELLING_THRESHOLD } from "@neverquest/data/general"
+import { useAnimation } from "@neverquest/hooks/useAnimation"
+import { stage } from "@neverquest/state/encounter"
+import { getFromRange, getLinearMapping, getRange } from "@neverquest/utilities/getters"
 
-const CHARACTERS = "!·&=?¿|@#~¬+/\\^*[]{}-_<>";
+const CHARACTERS = `!·&=?¿|@#~¬+/\\^*[]{}-_<>`
 
-const LATENCY = 70;
+const LATENCY = 70
 
 function getGlitchingElement() {
   const textElements = document.body
-    .querySelector(".somnium")
-    ?.querySelectorAll("h6, span, strong");
+    .querySelector(`.somnium`)
+    ?.querySelectorAll(`h6, span, strong`)
 
   if (textElements === undefined) {
-    return;
+    return
   }
 
   return [...textElements]
     .map((element) => ({ element, nonce: Math.random() }))
     .toSorted(({ nonce: nonce1 }, { nonce: nonce2 }) => nonce1 - nonce2)
-    .find(({ element: { textContent } }) => textContent !== null && textContent.length > 0);
+    .find(({ element: { textContent } }) => textContent !== null && textContent.length > 0)
 }
 
 function glitchElementAt({ element, originalText }: { element: Element; originalText: string }) {
-  const { textContent } = element;
+  const { textContent } = element
 
   if (textContent !== null) {
     element.textContent = [...textContent]
       .map((_, index) => {
-        const glitchChance = Math.random();
+        const glitchChance = Math.random()
 
         if (glitchChance <= 0.2) {
-          return CHARACTERS[Math.floor(Math.random() * CHARACTERS.length)];
+          return CHARACTERS[Math.floor(Math.random() * CHARACTERS.length)]
         }
 
         if (glitchChance <= 0.6) {
-          return GLITCH_NUMBER;
+          return GLITCH_NUMBER
         }
 
-        return originalText[index];
+        return originalText[index]
       })
-      .join("");
+      .join(``)
   }
 }
 
 export function Glitch() {
-  const stageValue = useRecoilValue(stage);
+  const stageValue = useRecoilValue(stage)
 
   const [glitchingElements, setGlitchingElements] = useState<
     Record<
@@ -62,14 +62,14 @@ export function Glitch() {
         position: number;
       }
     >
-  >({});
-  const [intervalElapsed, setIntervalElapsed] = useState(0);
+  >({})
+  const [intervalElapsed, setIntervalElapsed] = useState(0)
 
   const factor = useMemo(
     () =>
       getLinearMapping({ offset: GLITCH_STAGE_MINIMUM, stage: stageValue }) / LEVELLING_THRESHOLD,
     [stageValue],
-  );
+  )
   const interval = useMemo(
     () =>
       Math.round(
@@ -84,19 +84,19 @@ export function Glitch() {
         ),
       ),
     [factor],
-  );
+  )
 
   useAnimation({
     onFrame: (elapsed) => {
       if (intervalElapsed >= interval) {
-        const glitchingElement = getGlitchingElement();
+        const glitchingElement = getGlitchingElement()
 
         if (glitchingElement !== undefined) {
-          const { element } = glitchingElement;
-          const { classList, textContent } = element;
+          const { element } = glitchingElement
+          const { classList, textContent } = element
 
           if (textContent !== null) {
-            classList.add("monospaced");
+            classList.add(`monospaced`)
 
             setGlitchingElements((elements) => ({
               ...elements,
@@ -117,26 +117,26 @@ export function Glitch() {
                 originalText: textContent,
                 position: Math.floor(Math.random() * textContent.length),
               },
-            }));
+            }))
           }
         }
 
-        setIntervalElapsed(0);
+        setIntervalElapsed(0)
       } else {
-        setIntervalElapsed(intervalElapsed + elapsed);
+        setIntervalElapsed(intervalElapsed + elapsed)
       }
 
       for (const [ID, { duration, element, latency, originalText, position }] of Object.entries(
         glitchingElements,
       )) {
         if (duration <= 0) {
-          element.classList.remove("monospaced");
-          element.textContent = originalText;
+          element.classList.remove(`monospaced`)
+          element.textContent = originalText
 
-          setGlitchingElements(({ [ID]: _, ...elements }) => ({ ...elements }));
+          setGlitchingElements(({ [ID]: _, ...elements }) => ({ ...elements }))
         } else {
           if (latency <= 0) {
-            glitchElementAt({ element, originalText });
+            glitchElementAt({ element, originalText })
           }
 
           setGlitchingElements((elements) => ({
@@ -148,12 +148,12 @@ export function Glitch() {
               originalText,
               position,
             },
-          }));
+          }))
         }
       }
     },
     stop: stageValue < GLITCH_STAGE_MINIMUM,
-  });
+  })
 
-  return <></>;
+  return <></>
 }

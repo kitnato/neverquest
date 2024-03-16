@@ -1,14 +1,14 @@
-import { Toast, ToastBody, ToastContainer, ToastHeader } from "react-bootstrap";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { Toast, ToastBody, ToastContainer, ToastHeader } from "react-bootstrap"
+import { useRecoilState, useRecoilValue } from "recoil"
 
-import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { LABEL_UNKNOWN } from "@neverquest/data/general";
-import { QUEST_CLASS_ICONS, QUEST_NOTIFICATION_DURATION } from "@neverquest/data/quests";
-import { canTrackQuests, questNotifications } from "@neverquest/state/quests";
+import { IconDisplay } from "@neverquest/components/IconDisplay"
+import { LABEL_UNKNOWN } from "@neverquest/data/general"
+import { QUEST_CLASS_ICONS, QUEST_NOTIFICATION_DURATION } from "@neverquest/data/quests"
+import { canTrackQuests, questNotifications } from "@neverquest/state/quests"
 
 export function QuestNotifications() {
-  const [questNotificationsValue, setQuestNotifications] = useRecoilState(questNotifications);
-  const canTrackQuestsValue = useRecoilValue(canTrackQuests);
+  const [questNotificationsValue, setQuestNotifications] = useRecoilState(questNotifications)
+  const canTrackQuestsValue = useRecoilValue(canTrackQuests)
 
   if (canTrackQuestsValue) {
     return (
@@ -25,7 +25,7 @@ export function QuestNotifications() {
                     ({ ID: questNotificationInnerID }) =>
                       questNotificationOuterID !== questNotificationInnerID,
                   ),
-                );
+                )
               }}
               show
             >
@@ -33,7 +33,7 @@ export function QuestNotifications() {
                 <IconDisplay
                   className="me-auto"
                   Icon={QUEST_CLASS_ICONS[questClass]}
-                  iconProps={{ className: "small" }}
+                  iconProps={{ className: `small` }}
                 >
                   <span>{title}</span>
                 </IconDisplay>
@@ -48,6 +48,6 @@ export function QuestNotifications() {
           ),
         )}
       </ToastContainer>
-    );
+    )
   }
 }

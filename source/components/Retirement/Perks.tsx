@@ -1,15 +1,15 @@
-import { Stack } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { Stack } from "react-bootstrap"
+import { useRecoilValue } from "recoil"
 
-import { IconDisplay } from "@neverquest/components/IconDisplay";
-import IconEssenceBonus from "@neverquest/icons/essence-bonus.svg?react";
-import IconMonsterReduction from "@neverquest/icons/monster-reduction.svg?react";
-import { stageMaximum } from "@neverquest/state/encounter";
-import { formatNumber } from "@neverquest/utilities/formatters";
-import { getPerkEffect } from "@neverquest/utilities/getters";
+import { IconDisplay } from "@neverquest/components/IconDisplay"
+import IconEssenceBonus from "@neverquest/icons/essence-bonus.svg?react"
+import IconMonsterReduction from "@neverquest/icons/monster-reduction.svg?react"
+import { stageMaximum } from "@neverquest/state/encounter"
+import { formatNumber } from "@neverquest/utilities/formatters"
+import { getPerkEffect } from "@neverquest/utilities/getters"
 
 export function Perks() {
-  const stageMaximumValue = useRecoilValue(stageMaximum);
+  const stageMaximumValue = useRecoilValue(stageMaximum)
 
   return (
     <Stack gap={3}>
@@ -19,8 +19,8 @@ export function Perks() {
         <span>
           +
           {formatNumber({
-            format: "percentage",
-            value: getPerkEffect({ perk: "essenceBonus", stage: stageMaximumValue }),
+            format: `percentage`,
+            value: getPerkEffect({ perk: `essenceBonus`, stage: stageMaximumValue }),
           })}
         </span>
       </IconDisplay>
@@ -33,11 +33,11 @@ export function Perks() {
         <span>
           -
           {formatNumber({
-            format: "percentage",
-            value: getPerkEffect({ perk: "monsterReduction", stage: stageMaximumValue }),
+            format: `percentage`,
+            value: getPerkEffect({ perk: `monsterReduction`, stage: stageMaximumValue }),
           })}
         </span>
       </IconDisplay>
     </Stack>
-  );
+  )
 }

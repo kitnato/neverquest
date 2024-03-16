@@ -1,19 +1,19 @@
-import { useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil"
 
-import { DescriptionDisplay } from "@neverquest/components/DescriptionDisplay";
-import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { LABEL_SKILL_REQUIRED, LABEL_UNKNOWN } from "@neverquest/data/general";
-import { TRAITS } from "@neverquest/data/traits";
-import IconUnknown from "@neverquest/icons/unknown.svg?react";
-import { acquiredSkills } from "@neverquest/state/skills";
-import type { Trait } from "@neverquest/types/unions";
-import { capitalizeAll } from "@neverquest/utilities/formatters";
+import { DescriptionDisplay } from "@neverquest/components/DescriptionDisplay"
+import { IconDisplay } from "@neverquest/components/IconDisplay"
+import { LABEL_SKILL_REQUIRED, LABEL_UNKNOWN } from "@neverquest/data/general"
+import { TRAITS } from "@neverquest/data/traits"
+import IconUnknown from "@neverquest/icons/unknown.svg?react"
+import { acquiredSkills } from "@neverquest/state/skills"
+import type { Trait } from "@neverquest/types/unions"
+import { capitalizeAll } from "@neverquest/utilities/formatters"
 
 export function TraitDisplay({ trait }: { trait: Trait }) {
-  const acquiredSkillsValue = useRecoilValue(acquiredSkills);
+  const acquiredSkillsValue = useRecoilValue(acquiredSkills)
 
-  const { description, descriptionIcons, Icon, requiredSkill } = TRAITS[trait];
-  const name = capitalizeAll(trait);
+  const { description, descriptionIcons, Icon, requiredSkill } = TRAITS[trait]
+  const name = capitalizeAll(trait)
 
   if (requiredSkill === undefined || acquiredSkillsValue[requiredSkill]) {
     return (
@@ -26,7 +26,7 @@ export function TraitDisplay({ trait }: { trait: Trait }) {
       >
         <span>{name}</span>
       </IconDisplay>
-    );
+    )
   }
 
   return (
@@ -37,5 +37,5 @@ export function TraitDisplay({ trait }: { trait: Trait }) {
     >
       <span>{LABEL_UNKNOWN}</span>
     </IconDisplay>
-  );
+  )
 }

@@ -1,19 +1,19 @@
-import { Stack } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { Stack } from "react-bootstrap"
+import { useRecoilValue } from "recoil"
 
-import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
-import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
-import { LABEL_UNKNOWN, PERCENTAGE_POINTS } from "@neverquest/data/general";
-import { encounter, progress, progressMaximum } from "@neverquest/state/encounter";
-import { formatNumber } from "@neverquest/utilities/formatters";
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
+import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
+import { LABEL_UNKNOWN, PERCENTAGE_POINTS } from "@neverquest/data/general"
+import { encounter, progress, progressMaximum } from "@neverquest/state/encounter"
+import { formatNumber } from "@neverquest/utilities/formatters"
 
 export function ProgressMeter() {
-  const encounterValue = useRecoilValue(encounter);
-  const progressValue = useRecoilValue(progress);
-  const progressMaximumValue = useRecoilValue(progressMaximum);
+  const encounterValue = useRecoilValue(encounter)
+  const progressValue = useRecoilValue(progress)
+  const progressMaximumValue = useRecoilValue(progressMaximum)
 
-  const isInfinite = progressMaximumValue === Number.POSITIVE_INFINITY;
-  const isVoid = encounterValue === "void";
+  const isInfinite = progressMaximumValue === Number.POSITIVE_INFINITY
+  const isVoid = encounterValue === `void`
 
   return (
     <LabelledProgressBar
@@ -36,5 +36,5 @@ export function ProgressMeter() {
         <DeltasDisplay delta="progress" />
       </Stack>
     </LabelledProgressBar>
-  );
+  )
 }

@@ -1,32 +1,32 @@
-import { Button, OverlayTrigger, Popover, PopoverBody, PopoverHeader } from "react-bootstrap";
-import { useRecoilValue, useResetRecoilState } from "recoil";
+import { Button, OverlayTrigger, Popover, PopoverBody, PopoverHeader } from "react-bootstrap"
+import { useRecoilValue, useResetRecoilState } from "recoil"
 
-import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { IconImage } from "@neverquest/components/IconImage";
-import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
-import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
-import IconCorpse from "@neverquest/icons/corpse.svg?react";
-import IconEssence from "@neverquest/icons/essence.svg?react";
-import { hasFlatlined, isAttacking } from "@neverquest/state/character";
-import { corpse, location, stage } from "@neverquest/state/encounter";
-import { formatNumber } from "@neverquest/utilities/formatters";
-import { getAnimationClass } from "@neverquest/utilities/getters";
+import { IconDisplay } from "@neverquest/components/IconDisplay"
+import { IconImage } from "@neverquest/components/IconImage"
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
+import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence"
+import IconCorpse from "@neverquest/icons/corpse.svg?react"
+import IconEssence from "@neverquest/icons/essence.svg?react"
+import { hasFlatlined, isAttacking } from "@neverquest/state/character"
+import { corpse, location, stage } from "@neverquest/state/encounter"
+import { formatNumber } from "@neverquest/utilities/formatters"
+import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function ScavengeCorpse() {
-  const corpseValue = useRecoilValue(corpse);
-  const hasFlatlinedValue = useRecoilValue(hasFlatlined);
-  const isAttackingValue = useRecoilValue(isAttacking);
-  const locationValue = useRecoilValue(location);
-  const stageValue = useRecoilValue(stage);
-  const resetCorpse = useResetRecoilState(corpse);
+  const corpseValue = useRecoilValue(corpse)
+  const hasFlatlinedValue = useRecoilValue(hasFlatlined)
+  const isAttackingValue = useRecoilValue(isAttacking)
+  const locationValue = useRecoilValue(location)
+  const stageValue = useRecoilValue(stage)
+  const resetCorpse = useResetRecoilState(corpse)
 
-  const progressQuest = useProgressQuest();
-  const transactEssence = useTransactEssence();
+  const progressQuest = useProgressQuest()
+  const transactEssence = useTransactEssence()
 
   if (corpseValue !== undefined && !hasFlatlinedValue) {
-    const { essence, stage } = corpseValue;
+    const { essence, stage } = corpseValue
 
-    if (locationValue === "wilderness" && stage === stageValue) {
+    if (locationValue === `wilderness` && stage === stageValue) {
       return (
         <OverlayTrigger
           overlay={
@@ -39,7 +39,7 @@ export function ScavengeCorpse() {
                 <IconDisplay
                   className="justify-content-center"
                   Icon={IconEssence}
-                  iconProps={{ className: "small" }}
+                  iconProps={{ className: `small` }}
                 >
                   <span>+{formatNumber({ value: essence })}</span>
                 </IconDisplay>
@@ -47,19 +47,19 @@ export function ScavengeCorpse() {
             </Popover>
           }
         >
-          <div className={getAnimationClass({ animation: "bounceIn" })}>
+          <div className={getAnimationClass({ animation: `bounceIn` })}>
             <Button
               className={
                 isAttackingValue
                   ? undefined
-                  : getAnimationClass({ animation: "pulse", isInfinite: true })
+                  : getAnimationClass({ animation: `pulse`, isInfinite: true })
               }
               disabled={isAttackingValue}
               onClick={() => {
-                transactEssence(essence);
-                progressQuest({ quest: "scavengingCorpse" });
+                transactEssence(essence)
+                progressQuest({ quest: `scavengingCorpse` })
 
-                resetCorpse();
+                resetCorpse()
               }}
               variant="outline-dark"
             >
@@ -67,7 +67,7 @@ export function ScavengeCorpse() {
             </Button>
           </div>
         </OverlayTrigger>
-      );
+      )
     }
   }
 }

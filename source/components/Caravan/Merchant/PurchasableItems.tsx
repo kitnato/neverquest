@@ -1,14 +1,14 @@
-import { Stack } from "react-bootstrap";
+import { Stack } from "react-bootstrap"
 
-import { PurchaseItem } from "@neverquest/components/Caravan/Merchant/PurchaseItem";
-import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { EradicateItem } from "@neverquest/components/Inventory/EradicateItem";
-import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
-import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general";
-import IconEssence from "@neverquest/icons/essence.svg?react";
-import type { MerchantInventoryItem } from "@neverquest/types";
-import { formatNumber } from "@neverquest/utilities/formatters";
-import { stackItems } from "@neverquest/utilities/helpers";
+import { PurchaseItem } from "@neverquest/components/Caravan/Merchant/PurchaseItem"
+import { IconDisplay } from "@neverquest/components/IconDisplay"
+import { EradicateItem } from "@neverquest/components/Inventory/EradicateItem"
+import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay"
+import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general"
+import IconEssence from "@neverquest/icons/essence.svg?react"
+import type { MerchantInventoryItem } from "@neverquest/types"
+import { formatNumber } from "@neverquest/utilities/formatters"
+import { stackItems } from "@neverquest/utilities/helpers"
 
 export function PurchasableItems({
   canEradicate = false,
@@ -20,7 +20,7 @@ export function PurchasableItems({
   return (
     <>
       {stackItems(merchantItems).map(({ amount, item }) => {
-        const { ID, price } = item;
+        const { ID, price } = item
 
         return (
           <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
@@ -36,8 +36,8 @@ export function PurchasableItems({
               {canEradicate && <EradicateItem item={item} />}
             </Stack>
           </div>
-        );
+        )
       })}
     </>
-  );
+  )
 }

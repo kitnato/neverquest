@@ -1,19 +1,19 @@
-import { useEffect } from "react";
-import { Stack } from "react-bootstrap";
-import { useRecoilState, useResetRecoilState } from "recoil";
+import { useEffect } from "react"
+import { Stack } from "react-bootstrap"
+import { useRecoilState, useResetRecoilState } from "recoil"
 
-import { LABEL_SEPARATOR } from "@neverquest/data/general";
-import { deltas } from "@neverquest/state/deltas";
-import type { Delta } from "@neverquest/types/unions";
-import { getAnimationClass } from "@neverquest/utilities/getters";
+import { LABEL_SEPARATOR } from "@neverquest/data/general"
+import { deltas } from "@neverquest/state/deltas"
+import type { Delta } from "@neverquest/types/unions"
+import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function DeltasDisplay({ delta }: { delta: Delta }) {
-  const deltasState = deltas(delta);
+  const deltasState = deltas(delta)
 
-  const [deltasValue, setDeltas] = useRecoilState(deltasState);
-  const resetDeltas = useResetRecoilState(deltasState);
+  const [deltasValue, setDeltas] = useRecoilState(deltasState)
+  const resetDeltas = useResetRecoilState(deltasState)
 
-  useEffect(() => resetDeltas, [resetDeltas]);
+  useEffect(() => resetDeltas, [resetDeltas])
 
   return (
     <div className="d-flex flex-nowrap text-floating position-relative">
@@ -21,15 +21,15 @@ export function DeltasDisplay({ delta }: { delta: Delta }) {
         <div className="position-absolute top-50 start-100 translate-middle-y" key={ID}>
           <Stack
             className={getAnimationClass({
-              animation: "fadeOutUp",
-              speed: "slower",
+              animation: `fadeOutUp`,
+              speed: `slower`,
             })}
             direction="horizontal"
             gap={1}
             onAnimationEnd={() => {
               setDeltas((currentDeltas) =>
                 currentDeltas.filter(({ ID: currentDeltaID }) => currentDeltaID !== ID),
-              );
+              )
             }}
           >
             {display.map(({ color, value }, index) => (
@@ -45,5 +45,5 @@ export function DeltasDisplay({ delta }: { delta: Delta }) {
         </div>
       ))}
     </div>
-  );
+  )
 }

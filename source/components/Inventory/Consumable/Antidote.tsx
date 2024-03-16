@@ -1,19 +1,19 @@
-import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
-import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
+import { Button, OverlayTrigger, Tooltip } from "react-bootstrap"
+import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil"
 
-import { POPOVER_TRIGGER } from "@neverquest/data/general";
-import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta";
-import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
-import { inventory } from "@neverquest/state/inventory";
-import { isPoisoned, poisonDuration } from "@neverquest/state/reserves";
+import { POPOVER_TRIGGER } from "@neverquest/data/general"
+import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta"
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
+import { inventory } from "@neverquest/state/inventory"
+import { isPoisoned, poisonDuration } from "@neverquest/state/reserves"
 
 export function Antidote({ ID }: { ID: string }) {
-  const isPoisonedValue = useRecoilValue(isPoisoned);
-  const resetPoison = useResetRecoilState(poisonDuration);
-  const setInventory = useSetRecoilState(inventory);
+  const isPoisonedValue = useRecoilValue(isPoisoned)
+  const resetPoison = useResetRecoilState(poisonDuration)
+  const setInventory = useSetRecoilState(inventory)
 
-  const addDelta = useAddDelta();
-  const progressQuest = useProgressQuest();
+  const addDelta = useAddDelta()
+  const progressQuest = useProgressQuest()
 
   return (
     <OverlayTrigger
@@ -28,21 +28,21 @@ export function Antidote({ ID }: { ID: string }) {
         <Button
           disabled={!isPoisonedValue}
           onClick={() => {
-            resetPoison();
+            resetPoison()
 
             addDelta({
               contents: {
-                color: "text-secondary",
-                value: "REMEDIED",
+                color: `text-secondary`,
+                value: `REMEDIED`,
               },
-              delta: "health",
-            });
+              delta: `health`,
+            })
 
             setInventory((currentInventory) =>
               currentInventory.filter(({ ID: currentItemID }) => currentItemID !== ID),
-            );
+            )
 
-            progressQuest({ quest: "potions" });
+            progressQuest({ quest: `potions` })
           }}
           variant="outline-dark"
         >
@@ -50,5 +50,5 @@ export function Antidote({ ID }: { ID: string }) {
         </Button>
       </div>
     </OverlayTrigger>
-  );
+  )
 }

@@ -1,13 +1,13 @@
-import { Stack } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { Stack } from "react-bootstrap"
+import { useRecoilValue } from "recoil"
 
-import { PurchasableItems } from "@neverquest/components/Caravan/Merchant/PurchasableItems";
-import { merchantInventory } from "@neverquest/state/caravan";
+import { PurchasableItems } from "@neverquest/components/Caravan/Merchant/PurchasableItems"
+import { merchantInventory } from "@neverquest/state/caravan"
 
 export function PurchaseItems() {
-  const merchantInventoryValue = useRecoilValue(merchantInventory);
+  const merchantInventoryValue = useRecoilValue(merchantInventory)
 
-  const newItems = merchantInventoryValue.filter(({ isReturned }) => !isReturned);
+  const newItems = merchantInventoryValue.filter(({ isReturned }) => !isReturned)
 
   return (
     <Stack gap={3}>
@@ -19,5 +19,5 @@ export function PurchaseItems() {
         <PurchasableItems merchantItems={newItems} />
       )}
     </Stack>
-  );
+  )
 }

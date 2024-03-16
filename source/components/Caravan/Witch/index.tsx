@@ -1,17 +1,17 @@
-import { Fragment } from "react";
-import { Stack } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { Fragment } from "react"
+import { Stack } from "react-bootstrap"
+import { useRecoilValue } from "recoil"
 
-import { PurchaseConsumable } from "@neverquest/components/Caravan/PurchaseConsumable";
-import { AcquireWitchSkill } from "@neverquest/components/Caravan/Witch/AcquireWitchSkill";
-import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { WITCH_POTIONS } from "@neverquest/data/caravan";
-import { LABEL_UNKNOWN } from "@neverquest/data/general";
-import IconUnknown from "@neverquest/icons/unknown.svg?react";
-import { stageMaximum } from "@neverquest/state/encounter";
+import { PurchaseConsumable } from "@neverquest/components/Caravan/PurchaseConsumable"
+import { AcquireWitchSkill } from "@neverquest/components/Caravan/Witch/AcquireWitchSkill"
+import { IconDisplay } from "@neverquest/components/IconDisplay"
+import { WITCH_POTIONS } from "@neverquest/data/caravan"
+import { LABEL_UNKNOWN } from "@neverquest/data/general"
+import IconUnknown from "@neverquest/icons/unknown.svg?react"
+import { stageMaximum } from "@neverquest/state/encounter"
 
 export function Witch() {
-  const stageMaximumValue = useRecoilValue(stageMaximum);
+  const stageMaximumValue = useRecoilValue(stageMaximum)
 
   return (
     <Stack gap={5}>
@@ -37,5 +37,5 @@ export function Witch() {
 
       <AcquireWitchSkill />
     </Stack>
-  );
+  )
 }

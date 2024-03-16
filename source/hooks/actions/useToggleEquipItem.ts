@@ -1,13 +1,13 @@
-import { useRecoilCallback } from "recoil";
+import { useRecoilCallback } from "recoil"
 
-import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
-import { armor, shield, weapon } from "@neverquest/state/gear";
-import { isRelicEquipped } from "@neverquest/state/items";
-import { questProgress } from "@neverquest/state/quests";
-import { isSkillAcquired } from "@neverquest/state/skills";
-import { isTraitAcquired } from "@neverquest/state/traits";
-import { isShowing } from "@neverquest/state/ui";
-import type { GearItem, RelicItem } from "@neverquest/types";
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
+import { armor, shield, weapon } from "@neverquest/state/gear"
+import { isRelicEquipped } from "@neverquest/state/items"
+import { questProgress } from "@neverquest/state/quests"
+import { isSkillAcquired } from "@neverquest/state/skills"
+import { isTraitAcquired } from "@neverquest/state/traits"
+import { isShowing } from "@neverquest/state/ui"
+import type { GearItem, RelicItem } from "@neverquest/types"
 import {
   isArmor,
   isMelee,
@@ -16,119 +16,119 @@ import {
   isShield,
   isUnshielded,
   isWeapon,
-} from "@neverquest/types/type-guards";
-import { getSnapshotGetter } from "@neverquest/utilities/getters";
+} from "@neverquest/types/type-guards"
+import { getSnapshotGetter } from "@neverquest/utilities/getters"
 
 export function useToggleEquipItem() {
-  const progressQuest = useProgressQuest();
+  const progressQuest = useProgressQuest()
 
   return useRecoilCallback(
     ({ reset, set, snapshot }) =>
       ({ forceUnequip, item }: { forceUnequip?: boolean; item: GearItem | RelicItem }) => {
-        const get = getSnapshotGetter(snapshot);
+        const get = getSnapshotGetter(snapshot)
 
         if (isRelicItem(item)) {
-          const isRelicEquippedValue = isRelicEquipped(item.name);
+          const isRelicEquippedValue = isRelicEquipped(item.name)
 
           if (forceUnequip) {
-            reset(isRelicEquippedValue);
+            reset(isRelicEquippedValue)
           } else {
-            set(isRelicEquippedValue, (isEquipped) => !isEquipped);
+            set(isRelicEquippedValue, (isEquipped) => !isEquipped)
           }
 
-          return;
+          return
         }
 
-        const armorValue = get(armor);
-        const shieldValue = get(shield);
-        const weaponValue = get(weapon);
+        const armorValue = get(armor)
+        const shieldValue = get(shield)
+        const weaponValue = get(weapon)
 
-        const { burden, gearClass, ID } = item;
-        const isWeaponRanged = isRanged(item);
-        const isWeaponTwoHanded = isMelee(item) && item.grip === "two-handed";
+        const { burden, gearClass, ID } = item
+        const isWeaponRanged = isRanged(item)
+        const isWeaponTwoHanded = isMelee(item) && item.grip === `two-handed`
 
         if (isArmor(item)) {
-          if (gearClass === "heavy" && !get(isSkillAcquired("armorcraft"))) {
-            return;
+          if (gearClass === `heavy` && !get(isSkillAcquired(`armorcraft`))) {
+            return
           }
 
           if (ID === armorValue.ID || forceUnequip) {
-            reset(armor);
+            reset(armor)
           } else {
-            set(armor, item);
+            set(armor, item)
 
-            set(isShowing("armor"), true);
-            set(isShowing("protection"), true);
+            set(isShowing(`armor`), true)
+            set(isShowing(`protection`), true)
 
-            progressQuest({ quest: "equippingArmor" });
+            progressQuest({ quest: `equippingArmor` })
           }
         }
 
         if (isShield(item)) {
-          if (gearClass === "tower" && !get(isSkillAcquired("shieldcraft"))) {
-            return;
+          if (gearClass === `tower` && !get(isSkillAcquired(`shieldcraft`))) {
+            return
           }
 
           if (ID === shieldValue.ID || forceUnequip) {
-            reset(shield);
+            reset(shield)
           } else {
-            set(shield, item);
+            set(shield, item)
 
             // Equipping a shield while a ranged or two-handed weapon is equipped un-equips the weapon (unless it's two-handed and the colossus trait is acquired).
             if (
               (isMelee(weaponValue) &&
-                weaponValue.grip === "two-handed" &&
-                !get(isTraitAcquired("colossus"))) ||
+                weaponValue.grip === `two-handed` &&
+                !get(isTraitAcquired(`colossus`))) ||
               isRanged(weaponValue)
             ) {
-              reset(weapon);
+              reset(weapon)
             }
 
-            set(isShowing("offhand"), true);
+            set(isShowing(`offhand`), true)
 
-            progressQuest({ quest: "equippingShield" });
+            progressQuest({ quest: `equippingShield` })
           }
         }
 
         if (isWeapon(item)) {
-          if (isWeaponTwoHanded && !get(isSkillAcquired("siegecraft"))) {
-            return;
+          if (isWeaponTwoHanded && !get(isSkillAcquired(`siegecraft`))) {
+            return
           }
 
-          if (isRanged(item) && !get(isSkillAcquired("archery"))) {
-            return;
+          if (isRanged(item) && !get(isSkillAcquired(`archery`))) {
+            return
           }
 
           if (ID === weaponValue.ID || forceUnequip) {
-            reset(weapon);
+            reset(weapon)
           } else {
-            set(weapon, item);
+            set(weapon, item)
 
             // Equipping a ranged or two-handed weapon while a shield is equipped un-equips the shield.
             if (
-              (isWeaponRanged || (isWeaponTwoHanded && !get(isTraitAcquired("colossus")))) &&
+              (isWeaponRanged || (isWeaponTwoHanded && !get(isTraitAcquired(`colossus`)))) &&
               !isUnshielded(shieldValue)
             ) {
-              reset(shield);
+              reset(shield)
             }
 
             if (isWeaponRanged || isWeaponTwoHanded) {
-              set(isShowing("offhand"), true);
+              set(isShowing(`offhand`), true)
             }
 
-            set(isShowing("damage"), true);
-            set(isShowing("weapon"), true);
+            set(isShowing(`damage`), true)
+            set(isShowing(`weapon`), true)
 
-            progressQuest({ quest: "equippingWeapon" });
+            progressQuest({ quest: `equippingWeapon` })
           }
         }
 
         if (burden > 0) {
-          set(isShowing("stamina"), true);
+          set(isShowing(`stamina`), true)
         }
 
-        reset(questProgress("survivingNoGear"));
+        reset(questProgress(`survivingNoGear`))
       },
     [progressQuest],
-  );
+  )
 }

@@ -1,21 +1,21 @@
-import { Card, CardBody, Stack } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { Card, CardBody, Stack } from "react-bootstrap"
+import { useRecoilValue } from "recoil"
 
-import { HirableCrewMember } from "@neverquest/components/Caravan/HirableCrewMember";
-import { HiredCrewMember } from "@neverquest/components/Caravan/HiredCrewMember";
-import { isCaravanHired } from "@neverquest/state/caravan";
-import { isShowing } from "@neverquest/state/ui";
-import { CREW_MEMBER_TYPES } from "@neverquest/types/unions";
-import { getAnimationClass } from "@neverquest/utilities/getters";
+import { HirableCrewMember } from "@neverquest/components/Caravan/HirableCrewMember"
+import { HiredCrewMember } from "@neverquest/components/Caravan/HiredCrewMember"
+import { isCaravanHired } from "@neverquest/state/caravan"
+import { isShowing } from "@neverquest/state/ui"
+import { CREW_MEMBER_TYPES } from "@neverquest/types/unions"
+import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function Caravan() {
-  const isCaravanHiredValue = useRecoilValue(isCaravanHired);
-  const isShowingCrewMemberHiring = useRecoilValue(isShowing("crewMemberHiring"));
+  const isCaravanHiredValue = useRecoilValue(isCaravanHired)
+  const isShowingCrewMemberHiring = useRecoilValue(isShowing(`crewMemberHiring`))
 
-  const showHiring = isShowingCrewMemberHiring && !isCaravanHiredValue;
+  const showHiring = isShowingCrewMemberHiring && !isCaravanHiredValue
 
   return (
-    <Card className={getAnimationClass({ animation: "zoomIn", speed: "fast" })}>
+    <Card className={getAnimationClass({ animation: `zoomIn`, speed: `fast` })}>
       <CardBody>
         <Stack gap={5}>
           <Stack gap={3}>
@@ -38,5 +38,5 @@ export function Caravan() {
         </Stack>
       </CardBody>
     </Card>
-  );
+  )
 }

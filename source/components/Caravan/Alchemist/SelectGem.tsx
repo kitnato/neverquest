@@ -1,10 +1,10 @@
-import { DropdownButton, DropdownItem, Stack } from "react-bootstrap";
+import { DropdownButton, DropdownItem, Stack } from "react-bootstrap"
 
-import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { TRANSMUTATION } from "@neverquest/data/caravan";
-import { GEMS } from "@neverquest/data/items";
-import { GEM_TYPES, type Gem } from "@neverquest/types/unions";
-import { capitalizeAll } from "@neverquest/utilities/formatters";
+import { IconDisplay } from "@neverquest/components/IconDisplay"
+import { TRANSMUTATION } from "@neverquest/data/caravan"
+import { GEMS } from "@neverquest/data/items"
+import { GEM_TYPES, type Gem } from "@neverquest/types/unions"
+import { capitalizeAll } from "@neverquest/utilities/formatters"
 
 export function SelectGem({
   gem,
@@ -15,7 +15,7 @@ export function SelectGem({
   omit?: Gem;
   onSelect: (gem: Gem) => void;
 }) {
-  const { gemCost, gemYield } = TRANSMUTATION;
+  const { gemCost, gemYield } = TRANSMUTATION
 
   return (
     <Stack direction="horizontal" gap={1}>
@@ -23,7 +23,7 @@ export function SelectGem({
         <DropdownButton
           onSelect={(key) => {
             if (key !== null) {
-              onSelect(key as Gem);
+              onSelect(key as Gem)
             }
           }}
           title={capitalizeAll(gem)}
@@ -42,5 +42,5 @@ export function SelectGem({
 
       <span>×{omit === undefined ? gemCost : gemYield}</span>
     </Stack>
-  );
+  )
 }

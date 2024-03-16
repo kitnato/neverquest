@@ -1,21 +1,21 @@
-import { Button, Card, CardBody, Stack } from "react-bootstrap";
-import { useSetRecoilState } from "recoil";
+import { Button, Card, CardBody, Stack } from "react-bootstrap"
+import { useSetRecoilState } from "recoil"
 
-import { IconImage } from "@neverquest/components/IconImage";
-import { Typewriter } from "@neverquest/components/Typewriter";
-import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
-import IconAwakening from "@neverquest/icons/awakening.svg?react";
-import { consciousness } from "@neverquest/state/encounter";
-import { getAnimationClass } from "@neverquest/utilities/getters";
+import { IconImage } from "@neverquest/components/IconImage"
+import { Typewriter } from "@neverquest/components/Typewriter"
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
+import IconAwakening from "@neverquest/icons/awakening.svg?react"
+import { consciousness } from "@neverquest/state/encounter"
+import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function Awakening() {
-  const setConsciousness = useSetRecoilState(consciousness);
+  const setConsciousness = useSetRecoilState(consciousness)
 
-  const progressQuest = useProgressQuest();
+  const progressQuest = useProgressQuest()
 
   return (
     <Card>
-      <CardBody className={getAnimationClass({ animation: "zoomIn" })}>
+      <CardBody className={getAnimationClass({ animation: `zoomIn` })}>
         <Stack className="align-items-center" gap={5}>
           <IconImage Icon={IconAwakening} />
 
@@ -25,8 +25,8 @@ export function Awakening() {
             <Button
               className="w-50"
               onClick={() => {
-                setConsciousness("somnium");
-                progressQuest({ quest: "deciding" });
+                setConsciousness(`somnium`)
+                progressQuest({ quest: `deciding` })
               }}
               variant="outline-dark"
             >
@@ -36,7 +36,7 @@ export function Awakening() {
             <Button
               className="w-50"
               onClick={() => {
-                setConsciousness("mors");
+                setConsciousness(`mors`)
               }}
               variant="outline-dark"
             >
@@ -46,5 +46,5 @@ export function Awakening() {
         </Stack>
       </CardBody>
     </Card>
-  );
+  )
 }

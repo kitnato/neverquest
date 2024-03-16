@@ -1,7 +1,7 @@
-import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import { OverlayTrigger, Tooltip } from "react-bootstrap"
 
-import { POPOVER_TRIGGER } from "@neverquest/data/general";
-import type { IconImageProperties } from "@neverquest/types/components";
+import { POPOVER_TRIGGER } from "@neverquest/data/general"
+import type { IconImageProperties } from "@neverquest/types/components"
 
 export function IconImage({
   className,
@@ -24,12 +24,12 @@ export function IconImage({
     >
       <div className="align-bottom d-inline-flex" onClick={onClick}>
         <Icon
-          className={`icon-image${className === undefined ? "" : ` ${className}`}`}
+          className={`icon-image${className === undefined ? `` : ` ${className}`}`}
           style={{
             transform: `scaleX(${isMirrored ? -1 : 1}) scaleY(${isFlipped ? -1 : 1})`,
           }}
         />
       </div>
     </OverlayTrigger>
-  );
+  )
 }

@@ -1,41 +1,41 @@
-import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap"
+import { useRecoilValue } from "recoil"
 
-import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
-import { DetailsTable } from "@neverquest/components/DetailsTable";
-import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { IconImage } from "@neverquest/components/IconImage";
-import { LABEL_EMPTY } from "@neverquest/data/general";
-import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import IconBleedChance from "@neverquest/icons/bleed-chance.svg?react";
-import IconBleedRating from "@neverquest/icons/bleed-rating.svg?react";
-import IconBleeding from "@neverquest/icons/bleeding.svg?react";
-import IconCruelty from "@neverquest/icons/cruelty.svg?react";
-import IconDamage from "@neverquest/icons/damage.svg?react";
-import { bleed, bleedChance } from "@neverquest/state/ailments";
-import { weapon } from "@neverquest/state/gear";
-import { masteryStatistic } from "@neverquest/state/masteries";
-import { bleedDamage, bleedRating } from "@neverquest/state/statistics";
-import { formatNumber } from "@neverquest/utilities/formatters";
-import { getAnimationClass, getGearIcon } from "@neverquest/utilities/getters";
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
+import { DetailsTable } from "@neverquest/components/DetailsTable"
+import { IconDisplay } from "@neverquest/components/IconDisplay"
+import { IconImage } from "@neverquest/components/IconImage"
+import { LABEL_EMPTY } from "@neverquest/data/general"
+import { useDeltaText } from "@neverquest/hooks/useDeltaText"
+import IconBleedChance from "@neverquest/icons/bleed-chance.svg?react"
+import IconBleedRating from "@neverquest/icons/bleed-rating.svg?react"
+import IconBleeding from "@neverquest/icons/bleeding.svg?react"
+import IconCruelty from "@neverquest/icons/cruelty.svg?react"
+import IconDamage from "@neverquest/icons/damage.svg?react"
+import { bleed, bleedChance } from "@neverquest/state/ailments"
+import { weapon } from "@neverquest/state/gear"
+import { masteryStatistic } from "@neverquest/state/masteries"
+import { bleedDamage, bleedRating } from "@neverquest/state/statistics"
+import { formatNumber } from "@neverquest/utilities/formatters"
+import { getAnimationClass, getGearIcon } from "@neverquest/utilities/getters"
 
 export function BleedRating() {
-  const { duration, ticks } = useRecoilValue(bleed);
-  const bleedChanceValue = useRecoilValue(bleedChance);
-  const bleedDamageValue = useRecoilValue(bleedDamage);
-  const bleedRatingValue = useRecoilValue(bleedRating);
-  const masteryStatisticCruelty = useRecoilValue(masteryStatistic("cruelty"));
-  const weaponValue = useRecoilValue(weapon);
+  const { duration, ticks } = useRecoilValue(bleed)
+  const bleedChanceValue = useRecoilValue(bleedChance)
+  const bleedDamageValue = useRecoilValue(bleedDamage)
+  const bleedRatingValue = useRecoilValue(bleedRating)
+  const masteryStatisticCruelty = useRecoilValue(masteryStatistic(`cruelty`))
+  const weaponValue = useRecoilValue(weapon)
 
   useDeltaText({
-    delta: "bleedRating",
+    delta: `bleedRating`,
     state: bleedRating,
-  });
+  })
 
   if (bleedRatingValue > 0) {
     return (
       <IconDisplay
-        className={getAnimationClass({ animation: "flipInX" })}
+        className={getAnimationClass({ animation: `flipInX` })}
         Icon={IconBleedRating}
         tooltip="Bleed rating"
       >
@@ -49,24 +49,24 @@ export function BleedRating() {
                       <td>
                         <IconDisplay
                           Icon={getGearIcon(weaponValue)}
-                          iconProps={{ className: "small" }}
+                          iconProps={{ className: `small` }}
                         >
                           <span>Chance:</span>
                         </IconDisplay>
                       </td>
 
                       <td>
-                        <IconDisplay Icon={IconBleedChance} iconProps={{ className: "small" }}>
+                        <IconDisplay Icon={IconBleedChance} iconProps={{ className: `small` }}>
                           {bleedChanceValue === 0
                             ? LABEL_EMPTY
-                            : formatNumber({ format: "percentage", value: bleedChanceValue })}
+                            : formatNumber({ format: `percentage`, value: bleedChanceValue })}
                         </IconDisplay>
                       </td>
                     </tr>
 
                     <tr>
                       <td>
-                        <IconDisplay Icon={IconCruelty} iconProps={{ className: "small" }}>
+                        <IconDisplay Icon={IconCruelty} iconProps={{ className: `small` }}>
                           <span>Cruelty:</span>
                         </IconDisplay>
                       </td>
@@ -74,7 +74,7 @@ export function BleedRating() {
                       <td>
                         <span>
                           {formatNumber({
-                            format: "percentage",
+                            format: `percentage`,
                             value: masteryStatisticCruelty,
                           })}
                           &nbsp;of&nbsp;
@@ -90,17 +90,17 @@ export function BleedRating() {
                       </td>
 
                       <td>
-                        <IconDisplay Icon={IconBleeding} iconProps={{ className: "small" }}>
+                        <IconDisplay Icon={IconBleeding} iconProps={{ className: `small` }}>
                           <span>
                             {formatNumber({
                               value: bleedDamageValue * ticks,
                             })}
 
                             {ticks === 1
-                              ? " immediately"
+                              ? ` immediately`
                               : ` over ${formatNumber({
                                   decimals: 0,
-                                  format: "time",
+                                  format: `time`,
                                   value: duration,
                                 })}`}
                           </span>
@@ -118,6 +118,6 @@ export function BleedRating() {
           <DeltasDisplay delta="bleedRating" />
         </Stack>
       </IconDisplay>
-    );
+    )
   }
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from "react"
 import {
   Button,
   DropdownButton,
@@ -9,37 +9,37 @@ import {
   ModalTitle,
   OverlayTrigger,
   Tooltip,
-} from "react-bootstrap";
-import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
+} from "react-bootstrap"
+import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil"
 
-import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { IconImage } from "@neverquest/components/IconImage";
-import { LABEL_SEPARATOR, POPOVER_TRIGGER } from "@neverquest/data/general";
-import { BOSS_STAGE_INTERVAL, BOSS_STAGE_START } from "@neverquest/data/monster";
-import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
-import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness";
-import IconBossHiding from "@neverquest/icons/boss-hiding.svg?react";
-import IconCompass from "@neverquest/icons/compass.svg?react";
-import IconNavigation from "@neverquest/icons/navigation.svg?react";
-import { location, stage, wildernesses } from "@neverquest/state/encounter";
-import { activeControl } from "@neverquest/state/ui";
-import { formatNumber } from "@neverquest/utilities/formatters";
+import { IconDisplay } from "@neverquest/components/IconDisplay"
+import { IconImage } from "@neverquest/components/IconImage"
+import { LABEL_SEPARATOR, POPOVER_TRIGGER } from "@neverquest/data/general"
+import { BOSS_STAGE_INTERVAL, BOSS_STAGE_START } from "@neverquest/data/monster"
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
+import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness"
+import IconBossHiding from "@neverquest/icons/boss-hiding.svg?react"
+import IconCompass from "@neverquest/icons/compass.svg?react"
+import IconNavigation from "@neverquest/icons/navigation.svg?react"
+import { location, stage, wildernesses } from "@neverquest/state/encounter"
+import { activeControl } from "@neverquest/state/ui"
+import { formatNumber } from "@neverquest/utilities/formatters"
 
 export function CompassNavigate() {
-  const locationValue = useRecoilValue(location);
-  const [stageValue, setStage] = useRecoilState(stage);
-  const wildernessesValue = useRecoilValue(wildernesses);
-  const resetActiveControl = useResetRecoilState(activeControl);
+  const locationValue = useRecoilValue(location)
+  const [stageValue, setStage] = useRecoilState(stage)
+  const wildernessesValue = useRecoilValue(wildernesses)
+  const resetActiveControl = useResetRecoilState(activeControl)
 
-  const [isShowingNavigation, setIsShowingNavigation] = useState(false);
+  const [isShowingNavigation, setIsShowingNavigation] = useState(false)
 
-  const progressQuest = useProgressQuest();
-  const resetWilderness = useResetWilderness();
+  const progressQuest = useProgressQuest()
+  const resetWilderness = useResetWilderness()
 
-  const canNavigate = locationValue === "wilderness";
+  const canNavigate = locationValue === `wilderness`
 
   const stageDisplay = (currentStage: number) => {
-    const stageName = wildernessesValue[currentStage - 1];
+    const stageName = wildernessesValue[currentStage - 1]
 
     if (stageName !== undefined) {
       return (
@@ -60,9 +60,9 @@ export function CompassNavigate() {
 
           <span>&nbsp;{stageName}</span>
         </>
-      );
+      )
     }
-  };
+  }
 
   return (
     <>
@@ -78,7 +78,7 @@ export function CompassNavigate() {
           <Button
             disabled={!canNavigate}
             onClick={() => {
-              setIsShowingNavigation(true);
+              setIsShowingNavigation(true)
             }}
             variant="outline-dark"
           >
@@ -89,7 +89,7 @@ export function CompassNavigate() {
 
       <Modal
         onHide={() => {
-          setIsShowingNavigation(false);
+          setIsShowingNavigation(false)
         }}
         show={isShowingNavigation}
       >
@@ -106,31 +106,31 @@ export function CompassNavigate() {
             <DropdownButton
               onSelect={(eventKey) => {
                 if (eventKey !== null) {
-                  progressQuest({ quest: "warpingWilderness" });
+                  progressQuest({ quest: `warpingWilderness` })
 
-                  setIsShowingNavigation(false);
-                  resetActiveControl();
+                  setIsShowingNavigation(false)
+                  resetActiveControl()
 
-                  setStage(Number(eventKey));
-                  resetWilderness();
+                  setStage(Number(eventKey))
+                  resetWilderness()
                 }
               }}
               title={stageDisplay(stageValue)}
               variant="outline-dark"
             >
               {wildernessesValue.map((name, index) => {
-                const stageIndex = index + 1;
+                const stageIndex = index + 1
 
                 return (
                   <DropdownItem as="button" eventKey={stageIndex} key={name}>
                     {stageDisplay(stageIndex)}
                   </DropdownItem>
-                );
+                )
               })}
             </DropdownButton>
           </IconDisplay>
         </ModalBody>
       </Modal>
     </>
-  );
+  )
 }

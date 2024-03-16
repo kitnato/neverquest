@@ -1,81 +1,81 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { FormControl } from "react-bootstrap";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useEffect, useLayoutEffect, useRef, useState } from "react"
+import { FormControl } from "react-bootstrap"
+import { useRecoilState, useRecoilValue } from "recoil"
 
-import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { LABEL_UNKNOWN, NAME_LENGTH_MAXIMUM } from "@neverquest/data/general";
-import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
-import IconFlatlined from "@neverquest/icons/flatlined.svg?react";
-import IconName from "@neverquest/icons/name.svg?react";
-import { hasFlatlined, name } from "@neverquest/state/character";
-import { getAnimationClass } from "@neverquest/utilities/getters";
+import { IconDisplay } from "@neverquest/components/IconDisplay"
+import { LABEL_UNKNOWN, NAME_LENGTH_MAXIMUM } from "@neverquest/data/general"
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
+import IconFlatlined from "@neverquest/icons/flatlined.svg?react"
+import IconName from "@neverquest/icons/name.svg?react"
+import { hasFlatlined, name } from "@neverquest/state/character"
+import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function Name() {
-  const hasFlatlinedValue = useRecoilValue(hasFlatlined);
-  const [nameValue, setName] = useRecoilState(name);
+  const hasFlatlinedValue = useRecoilValue(hasFlatlined)
+  const [nameValue, setName] = useRecoilState(name)
 
-  const [canEdit, setCanEdit] = useState(true);
-  const [isEditing, setIsEditing] = useState(false);
+  const [canEdit, setCanEdit] = useState(true)
+  const [isEditing, setIsEditing] = useState(false)
 
-  const element = useRef<HTMLInputElement | null>(null);
+  const element = useRef<HTMLInputElement | null>(null)
 
-  const progressQuest = useProgressQuest();
+  const progressQuest = useProgressQuest()
 
   useEffect(() => {
-    const { current } = element;
+    const { current } = element
 
     if (current !== null && isEditing) {
       if (nameValue === LABEL_UNKNOWN) {
-        current.select();
+        current.select()
       } else {
-        current.focus();
+        current.focus()
       }
     }
-  }, [isEditing, nameValue]);
+  }, [isEditing, nameValue])
 
   useLayoutEffect(() => {
     new MutationObserver(() => {
-      const isModalOpen = document.body.classList.contains("modal-open");
+      const isModalOpen = document.body.classList.contains(`modal-open`)
 
-      setCanEdit(!isModalOpen);
-      setIsEditing(false);
-    }).observe(document.body, { attributeFilter: ["class"] });
-  }, []);
+      setCanEdit(!isModalOpen)
+      setIsEditing(false)
+    }).observe(document.body, { attributeFilter: [`class`] })
+  }, [])
 
   return (
     <IconDisplay
-      className={getAnimationClass({ animation: "flipInX" })}
+      className={getAnimationClass({ animation: `flipInX` })}
       Icon={hasFlatlinedValue ? IconFlatlined : IconName}
       tooltip="Name"
     >
       {isEditing ? (
         <FormControl
           onBlur={({ currentTarget: { value } }) => {
-            const trimmedValue = value.trim().replaceAll(/\s+/g, " ");
+            const trimmedValue = value.trim().replaceAll(/\s+/g, ` `)
 
-            if (trimmedValue === "") {
-              setName(LABEL_UNKNOWN);
+            if (trimmedValue === ``) {
+              setName(LABEL_UNKNOWN)
             } else {
-              setName(trimmedValue);
-              progressQuest({ quest: "settingName" });
+              setName(trimmedValue)
+              progressQuest({ quest: `settingName` })
 
-              if (trimmedValue.toLowerCase().replaceAll(/[^\da-z]/g, "") === "patient7") {
-                progressQuest({ quest: "settingPatientName" });
+              if (trimmedValue.toLowerCase().replaceAll(/[^\da-z]/g, ``) === `patient7`) {
+                progressQuest({ quest: `settingPatientName` })
               }
             }
 
-            setIsEditing(false);
+            setIsEditing(false)
           }}
           onChange={({ target: { value } }) => {
             if (value.length >= NAME_LENGTH_MAXIMUM) {
-              return;
+              return
             }
 
-            setName(value);
+            setName(value)
           }}
           onKeyDown={({ key }) => {
-            if (key === "Enter") {
-              setIsEditing(false);
+            if (key === `Enter`) {
+              setIsEditing(false)
             }
           }}
           ref={element}
@@ -83,10 +83,10 @@ export function Name() {
         />
       ) : (
         <span
-          className={canEdit ? "hover-grow" : undefined}
+          className={canEdit ? `hover-grow` : undefined}
           onClick={() => {
             if (canEdit) {
-              setIsEditing(true);
+              setIsEditing(true)
             }
           }}
         >
@@ -94,5 +94,5 @@ export function Name() {
         </span>
       )}
     </IconDisplay>
-  );
+  )
 }

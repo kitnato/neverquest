@@ -1,4 +1,4 @@
-import type { Dispatch, SetStateAction } from "react";
+import type { Dispatch, SetStateAction } from "react"
 import {
   Button,
   Modal,
@@ -7,26 +7,26 @@ import {
   ModalHeader,
   ModalTitle,
   Stack,
-} from "react-bootstrap";
+} from "react-bootstrap"
 
-import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { ItemsInherited } from "@neverquest/components/Retirement/ItemsInherited";
-import { Perks } from "@neverquest/components/Retirement/Perks";
-import { ResetDetails } from "@neverquest/components/Retirement/ResetDetails";
-import { TraitSelection } from "@neverquest/components/Retirement/TraitSelection";
-import { useRetire } from "@neverquest/hooks/actions/useRetire";
-import IconRetire from "@neverquest/icons/retire.svg?react";
+import { IconDisplay } from "@neverquest/components/IconDisplay"
+import { ItemsInherited } from "@neverquest/components/Retirement/ItemsInherited"
+import { Perks } from "@neverquest/components/Retirement/Perks"
+import { ResetDetails } from "@neverquest/components/Retirement/ResetDetails"
+import { TraitSelection } from "@neverquest/components/Retirement/TraitSelection"
+import { useRetire } from "@neverquest/hooks/actions/useRetire"
+import IconRetire from "@neverquest/icons/retire.svg?react"
 
 export function Retirement({
   state: [isShowing, setIsShowing],
 }: {
   state: [boolean, Dispatch<SetStateAction<boolean>>];
 }) {
-  const retire = useRetire();
+  const retire = useRetire()
 
   const onHide = () => {
-    setIsShowing(false);
-  };
+    setIsShowing(false)
+  }
 
   return (
     <Modal onHide={onHide} show={isShowing} size="lg">
@@ -57,8 +57,8 @@ export function Retirement({
       <ModalFooter>
         <Button
           onClick={() => {
-            onHide();
-            retire();
+            onHide()
+            retire()
           }}
           variant="outline-dark"
         >
@@ -66,5 +66,5 @@ export function Retirement({
         </Button>
       </ModalFooter>
     </Modal>
-  );
+  )
 }

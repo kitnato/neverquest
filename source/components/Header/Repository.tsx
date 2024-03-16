@@ -1,8 +1,8 @@
-import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Button, OverlayTrigger, Tooltip } from "react-bootstrap"
 
-import { IconImage } from "@neverquest/components/IconImage";
-import { repository } from "@neverquest/configuration";
-import IconOctopus from "@neverquest/icons/octopus.svg?react";
+import { IconImage } from "@neverquest/components/IconImage"
+import { repository } from "@neverquest/configuration"
+import IconOctopus from "@neverquest/icons/octopus.svg?react"
 
 export function Repository() {
   return (
@@ -11,5 +11,5 @@ export function Repository() {
         <IconImage className="small" Icon={IconOctopus} />
       </Button>
     </OverlayTrigger>
-  );
+  )
 }

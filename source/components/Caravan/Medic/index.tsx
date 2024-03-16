@@ -1,7 +1,7 @@
-import { Stack } from "react-bootstrap";
+import { Stack } from "react-bootstrap"
 
-import { ReceiveHealing } from "@neverquest/components/Caravan/Medic/ReceiveHealing";
-import { PurchaseConsumable } from "@neverquest/components/Caravan/PurchaseConsumable";
+import { ReceiveHealing } from "@neverquest/components/Caravan/Medic/ReceiveHealing"
+import { PurchaseConsumable } from "@neverquest/components/Caravan/PurchaseConsumable"
 
 export function Medic() {
   return (
@@ -14,5 +14,5 @@ export function Medic() {
 
       <ReceiveHealing />
     </Stack>
-  );
+  )
 }

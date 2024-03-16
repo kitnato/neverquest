@@ -1,18 +1,18 @@
-import { useEffect } from "react";
-import { ProgressBar, Stack } from "react-bootstrap";
-import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
+import { useEffect } from "react"
+import { ProgressBar, Stack } from "react-bootstrap"
+import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil"
 
-import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
-import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { IconImage } from "@neverquest/components/IconImage";
-import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
-import { LABEL_MAXIMUM, PERCENTAGE_POINTS } from "@neverquest/data/general";
-import { RESERVES } from "@neverquest/data/reserves";
-import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { usePreviousValue } from "@neverquest/hooks/usePreviousValue";
-import IconBlighted from "@neverquest/icons/blighted.svg?react";
-import IconPoisoned from "@neverquest/icons/poisoned.svg?react";
-import { hasFlatlined } from "@neverquest/state/character";
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
+import { IconDisplay } from "@neverquest/components/IconDisplay"
+import { IconImage } from "@neverquest/components/IconImage"
+import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
+import { LABEL_MAXIMUM, PERCENTAGE_POINTS } from "@neverquest/data/general"
+import { RESERVES } from "@neverquest/data/reserves"
+import { useDeltaText } from "@neverquest/hooks/useDeltaText"
+import { usePreviousValue } from "@neverquest/hooks/usePreviousValue"
+import IconBlighted from "@neverquest/icons/blighted.svg?react"
+import IconPoisoned from "@neverquest/icons/poisoned.svg?react"
+import { hasFlatlined } from "@neverquest/state/character"
 import {
   blightMagnitude,
   health,
@@ -26,47 +26,47 @@ import {
   reserveMaximum,
   stamina,
   staminaMaximumBlighted,
-} from "@neverquest/state/reserves";
-import type { SVGIcon } from "@neverquest/types/components";
-import type { Reserve } from "@neverquest/types/unions";
-import { formatNumber } from "@neverquest/utilities/formatters";
+} from "@neverquest/state/reserves"
+import type { SVGIcon } from "@neverquest/types/components"
+import type { Reserve } from "@neverquest/types/unions"
+import { formatNumber } from "@neverquest/utilities/formatters"
 
 export function ReserveMeter({ PrefixIcon, reserve }: { PrefixIcon?: SVGIcon; reserve: Reserve }) {
-  const isHealth = reserve === "health";
-  const reserveState = isHealth ? health : stamina;
-  const reserveMaximumState = reserveMaximum(reserve);
+  const isHealth = reserve === `health`
+  const reserveState = isHealth ? health : stamina
+  const reserveMaximumState = reserveMaximum(reserve)
 
-  const [reserveValue, setReserve] = useRecoilState(reserveState);
-  const ailmentExtent = useRecoilValue(isHealth ? poisonDuration : blightMagnitude);
-  const isAiling = useRecoilValue(isHealth ? isPoisoned : isBlighted);
-  const isRegeneratingValue = useRecoilValue(isRegenerating(reserve));
-  const hasFlatlinedValue = useRecoilValue(hasFlatlined);
-  const regenerationRateValue = useRecoilValue(regenerationRate(reserve));
-  const reserveMaximumValue = useRecoilValue(reserveMaximumState);
+  const [reserveValue, setReserve] = useRecoilState(reserveState)
+  const ailmentExtent = useRecoilValue(isHealth ? poisonDuration : blightMagnitude)
+  const isAiling = useRecoilValue(isHealth ? isPoisoned : isBlighted)
+  const isRegeneratingValue = useRecoilValue(isRegenerating(reserve))
+  const hasFlatlinedValue = useRecoilValue(hasFlatlined)
+  const regenerationRateValue = useRecoilValue(regenerationRate(reserve))
+  const reserveMaximumValue = useRecoilValue(reserveMaximumState)
   const reserveMaximumAilingValue = useRecoilValue(
     isHealth ? healthMaximumPoisoned : staminaMaximumBlighted,
-  );
-  const resetReserve = useResetRecoilState(reserveState);
-  const resetRegenerationDuration = useResetRecoilState(regenerationDuration(reserve));
-  const setRegenerationDuration = useSetRecoilState(regenerationDuration(reserve));
+  )
+  const resetReserve = useResetRecoilState(reserveState)
+  const resetRegenerationDuration = useResetRecoilState(regenerationDuration(reserve))
+  const setRegenerationDuration = useSetRecoilState(regenerationDuration(reserve))
 
-  const { maximumDelta } = RESERVES[reserve];
+  const { maximumDelta } = RESERVES[reserve]
   const penalty = Math.round(
     ((reserveMaximumValue - reserveMaximumAilingValue) / reserveMaximumValue) * PERCENTAGE_POINTS,
-  );
+  )
 
   useDeltaText({
     delta: maximumDelta,
     state: reserveMaximumState,
     suffix: LABEL_MAXIMUM,
-  });
+  })
 
   // Have current health and stamina increase the same if the maximum is increased (e.g. via attribute).
-  const previousReserveMaximumAiling = usePreviousValue(reserveMaximumAilingValue);
+  const previousReserveMaximumAiling = usePreviousValue(reserveMaximumAilingValue)
   const reserveMaximumDifference =
     previousReserveMaximumAiling === undefined
       ? 0
-      : reserveMaximumAilingValue - previousReserveMaximumAiling;
+      : reserveMaximumAilingValue - previousReserveMaximumAiling
 
   useEffect(() => {
     if (
@@ -75,7 +75,7 @@ export function ReserveMeter({ PrefixIcon, reserve }: { PrefixIcon?: SVGIcon; re
       reserveMaximumDifference > 0 &&
       reserveValue < reserveMaximumAilingValue
     ) {
-      setReserve((currentReserve) => currentReserve + reserveMaximumDifference);
+      setReserve((currentReserve) => currentReserve + reserveMaximumDifference)
     }
   }, [
     hasFlatlinedValue,
@@ -84,20 +84,20 @@ export function ReserveMeter({ PrefixIcon, reserve }: { PrefixIcon?: SVGIcon; re
     reserveMaximumDifference,
     reserveValue,
     setReserve,
-  ]);
+  ])
 
   // Catches attribute resets and poison/blight penalties.
   useEffect(() => {
     if (reserveValue > reserveMaximumAilingValue) {
-      resetReserve();
-      resetRegenerationDuration();
+      resetReserve()
+      resetRegenerationDuration()
     }
-  }, [reserveMaximumAilingValue, reserveValue, resetRegenerationDuration, resetReserve]);
+  }, [reserveMaximumAilingValue, reserveValue, resetRegenerationDuration, resetReserve])
 
   // Always trigger regeneration if lower than ailing maximum.
   useEffect(() => {
     if (!isRegeneratingValue && reserveValue < reserveMaximumAilingValue) {
-      setRegenerationDuration(regenerationRateValue);
+      setRegenerationDuration(regenerationRateValue)
     }
   }, [
     isRegeneratingValue,
@@ -105,7 +105,7 @@ export function ReserveMeter({ PrefixIcon, reserve }: { PrefixIcon?: SVGIcon; re
     reserveMaximumAilingValue,
     reserveValue,
     setRegenerationDuration,
-  ]);
+  ])
 
   return (
     <LabelledProgressBar
@@ -133,14 +133,14 @@ export function ReserveMeter({ PrefixIcon, reserve }: { PrefixIcon?: SVGIcon; re
 
             <IconDisplay
               Icon={isHealth ? IconPoisoned : IconBlighted}
-              iconProps={{ className: "small stencilled" }}
+              iconProps={{ className: `small stencilled` }}
             >
               <span>
                 {isHealth
-                  ? formatNumber({ format: "time", value: ailmentExtent })
+                  ? formatNumber({ format: `time`, value: ailmentExtent })
                   : formatNumber({
                       decimals: 1,
-                      format: "percentage",
+                      format: `percentage`,
                       value: ailmentExtent,
                     })}
               </span>
@@ -149,11 +149,11 @@ export function ReserveMeter({ PrefixIcon, reserve }: { PrefixIcon?: SVGIcon; re
         )}
 
         <Stack direction="horizontal">
-          <DeltasDisplay delta={isHealth ? "health" : "stamina"} />
+          <DeltasDisplay delta={isHealth ? `health` : `stamina`} />
 
           <DeltasDisplay delta={maximumDelta} />
         </Stack>
       </Stack>
     </LabelledProgressBar>
-  );
+  )
 }

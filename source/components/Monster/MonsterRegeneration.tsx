@@ -1,10 +1,10 @@
-import { useEffect, useMemo } from "react";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useEffect, useMemo } from "react"
+import { useRecoilValue, useSetRecoilState } from "recoil"
 
-import { MonsterRegenerationMeter } from "@neverquest/components/Monster/MonsterRegenerationMeter";
-import { MONSTER_REGENERATION } from "@neverquest/data/monster";
-import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth";
-import { useTimer } from "@neverquest/hooks/useTimer";
+import { MonsterRegenerationMeter } from "@neverquest/components/Monster/MonsterRegenerationMeter"
+import { MONSTER_REGENERATION } from "@neverquest/data/monster"
+import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth"
+import { useTimer } from "@neverquest/hooks/useTimer"
 import {
   isMonsterAiling,
   isMonsterAtFullHealth,
@@ -12,20 +12,20 @@ import {
   isMonsterRegenerating,
   monsterHealthMaximum,
   monsterRegenerationDuration,
-} from "@neverquest/state/monster";
-import { getAmountPerTick } from "@neverquest/utilities/getters";
+} from "@neverquest/state/monster"
+import { getAmountPerTick } from "@neverquest/utilities/getters"
 
 export function MonsterRegeneration() {
-  const isMonsterBurning = useRecoilValue(isMonsterAiling("burning"));
-  const isMonsterDeadValue = useRecoilValue(isMonsterDead);
-  const isMonsterAtFullHealthValue = useRecoilValue(isMonsterAtFullHealth);
-  const isMonsterRegeneratingValue = useRecoilValue(isMonsterRegenerating);
-  const monsterHealthMaximumValue = useRecoilValue(monsterHealthMaximum);
-  const setMonsterRegenerationDuration = useSetRecoilState(monsterRegenerationDuration);
+  const isMonsterBurning = useRecoilValue(isMonsterAiling(`burning`))
+  const isMonsterDeadValue = useRecoilValue(isMonsterDead)
+  const isMonsterAtFullHealthValue = useRecoilValue(isMonsterAtFullHealth)
+  const isMonsterRegeneratingValue = useRecoilValue(isMonsterRegenerating)
+  const monsterHealthMaximumValue = useRecoilValue(monsterHealthMaximum)
+  const setMonsterRegenerationDuration = useSetRecoilState(monsterRegenerationDuration)
 
-  const changeMonsterHealth = useChangeMonsterHealth();
+  const changeMonsterHealth = useChangeMonsterHealth()
 
-  const { duration, minimum, ticks } = MONSTER_REGENERATION;
+  const { duration, minimum, ticks } = MONSTER_REGENERATION
   const regenerationAmount = useMemo(
     () =>
       Math.max(
@@ -39,19 +39,19 @@ export function MonsterRegeneration() {
         ),
       ),
     [duration, minimum, monsterHealthMaximumValue, ticks],
-  );
+  )
 
   useTimer({
     onElapsed: () => {
-      changeMonsterHealth({ value: regenerationAmount });
+      changeMonsterHealth({ value: regenerationAmount })
     },
     setDuration: setMonsterRegenerationDuration,
     stop: isMonsterAtFullHealthValue || isMonsterBurning || isMonsterDeadValue,
-  });
+  })
 
   useEffect(() => {
     if (!isMonsterAtFullHealthValue && !isMonsterRegeneratingValue) {
-      setMonsterRegenerationDuration(Math.round(duration / ticks));
+      setMonsterRegenerationDuration(Math.round(duration / ticks))
     }
   }, [
     duration,
@@ -59,7 +59,7 @@ export function MonsterRegeneration() {
     isMonsterRegeneratingValue,
     setMonsterRegenerationDuration,
     ticks,
-  ]);
+  ])
 
-  return <MonsterRegenerationMeter amount={regenerationAmount} />;
+  return <MonsterRegenerationMeter amount={regenerationAmount} />
 }

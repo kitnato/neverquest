@@ -1,13 +1,13 @@
-import { Stack } from "react-bootstrap";
-import { IconImage } from "@neverquest/components/IconImage";
-import { ELEMENTALS, GEMS } from "@neverquest/data/items";
-import IconGear from "@neverquest/icons/gear.svg?react";
-import IconPowerLevel from "@neverquest/icons/power-level.svg?react";
-import type { Gem } from "@neverquest/types/unions";
+import { Stack } from "react-bootstrap"
+import { IconImage } from "@neverquest/components/IconImage"
+import { ELEMENTALS, GEMS } from "@neverquest/data/items"
+import IconGear from "@neverquest/icons/gear.svg?react"
+import IconPowerLevel from "@neverquest/icons/power-level.svg?react"
+import type { Gem } from "@neverquest/types/unions"
 
 export function GemDescription({ gem }: { gem: Gem }) {
-  const { elemental } = GEMS[gem];
-  const { color, Icon } = ELEMENTALS[elemental];
+  const { elemental } = GEMS[gem]
+  const { color, Icon } = ELEMENTALS[elemental]
 
   return (
     <Stack gap={1}>
@@ -37,5 +37,5 @@ export function GemDescription({ gem }: { gem: Gem }) {
         <span>&nbsp;power level.</span>
       </div>
     </Stack>
-  );
+  )
 }

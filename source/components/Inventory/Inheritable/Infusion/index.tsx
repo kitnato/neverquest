@@ -1,52 +1,52 @@
-import { useEffect, useState } from "react";
-import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { useEffect, useState } from "react"
+import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap"
+import { useRecoilValue } from "recoil"
 
-import { Hatch } from "@neverquest/components/Inventory/Inheritable/Infusion/Hatch";
-import { LABEL_NO_ESSENCE, POPOVER_TRIGGER } from "@neverquest/data/general";
-import { INFUSION_DELTA } from "@neverquest/data/items";
-import { useInfuse } from "@neverquest/hooks/actions/useInfuse";
-import { useAnimation } from "@neverquest/hooks/useAnimation";
-import { infusionStep, isInfusionAtMaximum } from "@neverquest/state/items";
-import type { Infusable } from "@neverquest/types/unions";
+import { Hatch } from "@neverquest/components/Inventory/Inheritable/Infusion/Hatch"
+import { LABEL_NO_ESSENCE, POPOVER_TRIGGER } from "@neverquest/data/general"
+import { INFUSION_DELTA } from "@neverquest/data/items"
+import { useInfuse } from "@neverquest/hooks/actions/useInfuse"
+import { useAnimation } from "@neverquest/hooks/useAnimation"
+import { infusionStep, isInfusionAtMaximum } from "@neverquest/state/items"
+import type { Infusable } from "@neverquest/types/unions"
 
 export function Infusion({ infusable }: { infusable: Infusable }) {
-  const isInfusionAtMaximumValue = useRecoilValue(isInfusionAtMaximum(infusable));
-  const infusionStepValue = useRecoilValue(infusionStep(infusable));
+  const isInfusionAtMaximumValue = useRecoilValue(isInfusionAtMaximum(infusable))
+  const infusionStepValue = useRecoilValue(infusionStep(infusable))
 
-  const [isInfusing, setIsInfusing] = useState(false);
-  const [infusionDelta, setInfusionDelta] = useState(0);
+  const [isInfusing, setIsInfusing] = useState(false)
+  const [infusionDelta, setInfusionDelta] = useState(0)
 
-  const infuse = useInfuse();
+  const infuse = useInfuse()
 
-  const isInfusionPossible = infusionStepValue > 0;
-  const canInfuse = isInfusionPossible && !isInfusionAtMaximumValue;
+  const isInfusionPossible = infusionStepValue > 0
+  const canInfuse = isInfusionPossible && !isInfusionAtMaximumValue
 
   const onStop = () => {
-    setIsInfusing(false);
-    setInfusionDelta(0);
-  };
+    setIsInfusing(false)
+    setInfusionDelta(0)
+  }
 
   useAnimation({
     onFrame: (elapsed) => {
       if (infusionDelta >= INFUSION_DELTA) {
-        infuse(infusable);
+        infuse(infusable)
 
-        setInfusionDelta(0);
+        setInfusionDelta(0)
       } else {
-        setInfusionDelta(infusionDelta + elapsed);
+        setInfusionDelta(infusionDelta + elapsed)
       }
     },
     stop: !isInfusing,
-  });
+  })
 
   useEffect(() => {
     if (!isInfusing || isInfusionAtMaximumValue || !isInfusionPossible) {
-      onStop();
+      onStop()
     }
-  }, [isInfusing, isInfusionAtMaximumValue, isInfusionPossible]);
+  }, [isInfusing, isInfusionAtMaximumValue, isInfusionPossible])
 
-  return isInfusionAtMaximumValue && infusable === "mysterious egg" ? (
+  return isInfusionAtMaximumValue && infusable === `mysterious egg` ? (
     <Hatch />
   ) : (
     <OverlayTrigger
@@ -65,7 +65,7 @@ export function Infusion({ infusable }: { infusable: Infusable }) {
         <Button
           disabled={!canInfuse}
           onMouseDown={() => {
-            setIsInfusing(true);
+            setIsInfusing(true)
           }}
           onMouseOut={onStop}
           onMouseUp={onStop}
@@ -75,5 +75,5 @@ export function Infusion({ infusable }: { infusable: Infusable }) {
         </Button>
       </div>
     </OverlayTrigger>
-  );
+  )
 }

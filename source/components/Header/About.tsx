@@ -1,4 +1,4 @@
-import { type JSX, useState } from "react";
+import { type JSX, useState } from "react"
 import {
   Button,
   Modal,
@@ -7,26 +7,26 @@ import {
   ModalTitle,
   OverlayTrigger,
   Tooltip,
-} from "react-bootstrap";
-import ReactMarkdown, { type ExtraProps } from "react-markdown";
+} from "react-bootstrap"
+import ReactMarkdown, { type ExtraProps } from "react-markdown"
 
-import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { IconImage } from "@neverquest/components/IconImage";
-import manual from "@neverquest/data/manual.md?raw";
-import IconAbout from "@neverquest/icons/about.svg?react";
-import { formatKebabCase } from "@neverquest/utilities/formatters";
+import { IconDisplay } from "@neverquest/components/IconDisplay"
+import { IconImage } from "@neverquest/components/IconImage"
+import manual from "@neverquest/data/manual.md?raw"
+import IconAbout from "@neverquest/icons/about.svg?react"
+import { formatKebabCase } from "@neverquest/utilities/formatters"
 
-const HEADERS = ["h2", "h3", "h4", "h5", "h6"] as const;
+const HEADERS = [`h2`, `h3`, `h4`, `h5`, `h6`] as const
 
 export function About() {
-  const [isShowingModal, setIsShowingModal] = useState(false);
+  const [isShowingModal, setIsShowingModal] = useState(false)
 
   return (
     <>
       <OverlayTrigger overlay={<Tooltip>About</Tooltip>} placement="bottom">
         <Button
           onClick={() => {
-            setIsShowingModal(true);
+            setIsShowingModal(true)
           }}
           variant="outline-light"
         >
@@ -36,9 +36,9 @@ export function About() {
 
       <Modal
         onHide={() => {
-          setIsShowingModal(false);
+          setIsShowingModal(false)
 
-          window.history.replaceState(undefined, "", " ");
+          window.history.replaceState(undefined, ``, ` `)
         }}
         show={isShowingModal}
         size="lg"
@@ -61,7 +61,7 @@ export function About() {
                     ...properties
                   }: ExtraProps & JSX.IntrinsicElements[typeof Current]) => (
                     <Current
-                      id={typeof children === "string" ? formatKebabCase(children) : undefined}
+                      id={typeof children === `string` ? formatKebabCase(children) : undefined}
                       {...properties}
                     >
                       {children}
@@ -79,5 +79,5 @@ export function About() {
         </ModalBody>
       </Modal>
     </>
-  );
+  )
 }

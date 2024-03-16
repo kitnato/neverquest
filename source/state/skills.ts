@@ -1,28 +1,28 @@
-import { atomFamily, selector } from "recoil";
+import { atomFamily, selector } from "recoil"
 
-import { SKILL_PRICE_BASE, SKILL_PRICE_FACTOR } from "@neverquest/data/skills";
-import { handleStorage } from "@neverquest/state/effects/handleStorage";
-import { SKILL_TYPES, type Skill } from "@neverquest/types/unions";
-import { withStateKey } from "@neverquest/utilities/helpers";
+import { SKILL_PRICE_BASE, SKILL_PRICE_FACTOR } from "@neverquest/data/skills"
+import { handleStorage } from "@neverquest/state/effects/handleStorage"
+import { SKILL_TYPES, type Skill } from "@neverquest/types/unions"
+import { withStateKey } from "@neverquest/utilities/helpers"
 
 // SELECTORS
 
-export const acquiredSkills = withStateKey("acquiredSkills", (key) =>
+export const acquiredSkills = withStateKey(`acquiredSkills`, (key) =>
   selector({
     get: ({ get }) => {
-      const currentAcquiredSkills = {} as Record<Skill, boolean>;
+      const currentAcquiredSkills = {} as Record<Skill, boolean>
 
       for (const skill of SKILL_TYPES) {
-        currentAcquiredSkills[skill] = get(isSkillAcquired(skill));
+        currentAcquiredSkills[skill] = get(isSkillAcquired(skill))
       }
 
-      return currentAcquiredSkills;
+      return currentAcquiredSkills
     },
     key,
   }),
-);
+)
 
-export const skillPrice = withStateKey("skillPrice", (key) =>
+export const skillPrice = withStateKey(`skillPrice`, (key) =>
   selector({
     get: ({ get }) =>
       Math.round(
@@ -31,14 +31,14 @@ export const skillPrice = withStateKey("skillPrice", (key) =>
       ),
     key,
   }),
-);
+)
 
 // ATOMS
 
-export const isSkillAcquired = withStateKey("isSkillAcquired", (key) =>
+export const isSkillAcquired = withStateKey(`isSkillAcquired`, (key) =>
   atomFamily<boolean, Skill>({
     default: false,
     effects: (skill) => [handleStorage({ key, parameter: skill })],
     key,
   }),
-);
+)

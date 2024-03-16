@@ -1,19 +1,19 @@
-import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap"
+import { useRecoilValue } from "recoil"
 
-import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { LABEL_NO_ESSENCE, POPOVER_TRIGGER } from "@neverquest/data/general";
-import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
-import IconEssence from "@neverquest/icons/essence.svg?react";
-import { essence } from "@neverquest/state/resources";
-import { formatNumber } from "@neverquest/utilities/formatters";
+import { IconDisplay } from "@neverquest/components/IconDisplay"
+import { LABEL_NO_ESSENCE, POPOVER_TRIGGER } from "@neverquest/data/general"
+import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence"
+import IconEssence from "@neverquest/icons/essence.svg?react"
+import { essence } from "@neverquest/state/resources"
+import { formatNumber } from "@neverquest/utilities/formatters"
 
 export function CraftGear({ onCraft, price }: { onCraft: () => void; price: number }) {
-  const essenceValue = useRecoilValue(essence);
+  const essenceValue = useRecoilValue(essence)
 
-  const transactEssence = useTransactEssence();
+  const transactEssence = useTransactEssence()
 
-  const isAffordable = price <= essenceValue;
+  const isAffordable = price <= essenceValue
 
   return (
     <Stack className="mx-auto" direction="horizontal" gap={5}>
@@ -34,8 +34,8 @@ export function CraftGear({ onCraft, price }: { onCraft: () => void; price: numb
             className="w-100"
             disabled={!isAffordable}
             onClick={() => {
-              onCraft();
-              transactEssence(-price);
+              onCraft()
+              transactEssence(-price)
             }}
             variant="outline-dark"
           >
@@ -44,5 +44,5 @@ export function CraftGear({ onCraft, price }: { onCraft: () => void; price: numb
         </div>
       </OverlayTrigger>
     </Stack>
-  );
+  )
 }

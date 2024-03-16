@@ -1,50 +1,50 @@
-import { useEffect } from "react";
-import { Button, Form, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useEffect } from "react"
+import { Button, Form, OverlayTrigger, Stack, Tooltip } from "react-bootstrap"
+import { useRecoilState, useRecoilValue } from "recoil"
 
-import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { IconImage } from "@neverquest/components/IconImage";
-import { FLETCHING } from "@neverquest/data/caravan";
+import { IconDisplay } from "@neverquest/components/IconDisplay"
+import { IconImage } from "@neverquest/components/IconImage"
+import { FLETCHING } from "@neverquest/data/caravan"
 import {
   CLASS_FULL_WIDTH_JUSTIFIED,
   LABEL_MAXIMUM,
   LABEL_NO_ESSENCE,
   POPOVER_TRIGGER,
-} from "@neverquest/data/general";
-import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
-import IconAmmunition from "@neverquest/icons/ammunition.svg?react";
-import IconEssence from "@neverquest/icons/essence.svg?react";
-import { fletcherOptions } from "@neverquest/state/caravan";
-import { ammunition, ammunitionCapacity } from "@neverquest/state/items";
-import { essence } from "@neverquest/state/resources";
-import { formatNumber } from "@neverquest/utilities/formatters";
+} from "@neverquest/data/general"
+import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence"
+import IconAmmunition from "@neverquest/icons/ammunition.svg?react"
+import IconEssence from "@neverquest/icons/essence.svg?react"
+import { fletcherOptions } from "@neverquest/state/caravan"
+import { ammunition, ammunitionCapacity } from "@neverquest/state/items"
+import { essence } from "@neverquest/state/resources"
+import { formatNumber } from "@neverquest/utilities/formatters"
 
 export function PurchaseAmmunition() {
-  const [ammunitionValue, setAmmunition] = useRecoilState(ammunition);
-  const [{ ammunition: ammunitionAmount }, setFletcherOptions] = useRecoilState(fletcherOptions);
-  const ammunitionCapacityValue = useRecoilValue(ammunitionCapacity);
-  const essenceValue = useRecoilValue(essence);
+  const [ammunitionValue, setAmmunition] = useRecoilState(ammunition)
+  const [{ ammunition: ammunitionAmount }, setFletcherOptions] = useRecoilState(fletcherOptions)
+  const ammunitionCapacityValue = useRecoilValue(ammunitionCapacity)
+  const essenceValue = useRecoilValue(essence)
 
-  const transactEssence = useTransactEssence();
+  const transactEssence = useTransactEssence()
 
-  const { ammunitionPrice, minimumPurchase } = FLETCHING;
+  const { ammunitionPrice, minimumPurchase } = FLETCHING
   const maximumAffordable = Math.min(
     Math.floor(essenceValue / ammunitionPrice),
     ammunitionCapacityValue - ammunitionValue,
-  );
-  const totalPrice = ammunitionPrice * ammunitionAmount;
-  const isAffordable = totalPrice <= essenceValue;
-  const isFull = ammunitionValue >= ammunitionCapacityValue;
-  const canPurchase = isAffordable && !isFull;
+  )
+  const totalPrice = ammunitionPrice * ammunitionAmount
+  const isAffordable = totalPrice <= essenceValue
+  const isFull = ammunitionValue >= ammunitionCapacityValue
+  const canPurchase = isAffordable && !isFull
 
   useEffect(() => {
     if (ammunitionAmount === 0 || ammunitionAmount > maximumAffordable) {
       setFletcherOptions((options) => ({
         ...options,
         ammunition: maximumAffordable,
-      }));
+      }))
     }
-  }, [ammunitionAmount, maximumAffordable, setFletcherOptions]);
+  }, [ammunitionAmount, maximumAffordable, setFletcherOptions])
 
   return (
     <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
@@ -61,19 +61,19 @@ export function PurchaseAmmunition() {
           min={minimumPurchase}
           onChange={({ target: { value } }) => {
             if (!value) {
-              return;
+              return
             }
 
-            const parsedValue = Number.parseInt(value);
+            const parsedValue = Number.parseInt(value)
 
             if (Number.isNaN(parsedValue) || parsedValue < 1 || parsedValue > maximumAffordable) {
-              return;
+              return
             }
 
             setFletcherOptions((options) => ({
               ...options,
               ammunition: parsedValue,
-            }));
+            }))
           }}
           value={ammunitionAmount}
         />
@@ -104,9 +104,9 @@ export function PurchaseAmmunition() {
               disabled={!canPurchase}
               onClick={() => {
                 if (isAffordable && !isFull) {
-                  transactEssence(-totalPrice);
+                  transactEssence(-totalPrice)
 
-                  setAmmunition((currentAmmunition) => currentAmmunition + ammunitionAmount);
+                  setAmmunition((currentAmmunition) => currentAmmunition + ammunitionAmount)
                 }
               }}
               variant="outline-dark"
@@ -121,5 +121,5 @@ export function PurchaseAmmunition() {
         </OverlayTrigger>
       </Stack>
     </div>
-  );
+  )
 }

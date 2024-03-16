@@ -1,56 +1,56 @@
-import { useEffect } from "react";
-import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap";
-import { useRecoilValue, useResetRecoilState } from "recoil";
+import { useEffect } from "react"
+import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap"
+import { useRecoilValue, useResetRecoilState } from "recoil"
 
-import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
-import { DetailsTable } from "@neverquest/components/DetailsTable";
-import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { LABEL_EMPTY, LABEL_NO_PENALTY, POPOVER_TRIGGER } from "@neverquest/data/general";
-import { TANK_PROTECTION_BONUS } from "@neverquest/data/traits";
-import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
-import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import IconArmor from "@neverquest/icons/armor.svg?react";
-import IconBurden from "@neverquest/icons/burden.svg?react";
-import IconProtection from "@neverquest/icons/protection.svg?react";
-import IconStalwart from "@neverquest/icons/stalwart.svg?react";
-import IconStamina from "@neverquest/icons/stamina.svg?react";
-import IconTank from "@neverquest/icons/tank.svg?react";
-import { armor, shield } from "@neverquest/state/gear";
-import { questProgress } from "@neverquest/state/quests";
-import { protection } from "@neverquest/state/statistics";
-import { isTraitAcquired } from "@neverquest/state/traits";
-import { isShowing } from "@neverquest/state/ui";
-import { isUnshielded } from "@neverquest/types/type-guards";
-import { formatNumber } from "@neverquest/utilities/formatters";
-import { getAnimationClass } from "@neverquest/utilities/getters";
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
+import { DetailsTable } from "@neverquest/components/DetailsTable"
+import { IconDisplay } from "@neverquest/components/IconDisplay"
+import { LABEL_EMPTY, LABEL_NO_PENALTY, POPOVER_TRIGGER } from "@neverquest/data/general"
+import { TANK_PROTECTION_BONUS } from "@neverquest/data/traits"
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
+import { useDeltaText } from "@neverquest/hooks/useDeltaText"
+import IconArmor from "@neverquest/icons/armor.svg?react"
+import IconBurden from "@neverquest/icons/burden.svg?react"
+import IconProtection from "@neverquest/icons/protection.svg?react"
+import IconStalwart from "@neverquest/icons/stalwart.svg?react"
+import IconStamina from "@neverquest/icons/stamina.svg?react"
+import IconTank from "@neverquest/icons/tank.svg?react"
+import { armor, shield } from "@neverquest/state/gear"
+import { questProgress } from "@neverquest/state/quests"
+import { protection } from "@neverquest/state/statistics"
+import { isTraitAcquired } from "@neverquest/state/traits"
+import { isShowing } from "@neverquest/state/ui"
+import { isUnshielded } from "@neverquest/types/type-guards"
+import { formatNumber } from "@neverquest/utilities/formatters"
+import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function Protection() {
-  const armorValue = useRecoilValue(armor);
-  const isShowingProtection = useRecoilValue(isShowing("protection"));
-  const isTraitAcquiredStalwart = useRecoilValue(isTraitAcquired("stalwart"));
-  const isTraitAcquiredTank = useRecoilValue(isTraitAcquired("tank"));
-  const protectionValue = useRecoilValue(protection);
-  const shieldValue = useRecoilValue(shield);
-  const resetQuestProgressProtection = useResetRecoilState(questProgress("protection"));
+  const armorValue = useRecoilValue(armor)
+  const isShowingProtection = useRecoilValue(isShowing(`protection`))
+  const isTraitAcquiredStalwart = useRecoilValue(isTraitAcquired(`stalwart`))
+  const isTraitAcquiredTank = useRecoilValue(isTraitAcquired(`tank`))
+  const protectionValue = useRecoilValue(protection)
+  const shieldValue = useRecoilValue(shield)
+  const resetQuestProgressProtection = useResetRecoilState(questProgress(`protection`))
 
-  const progressQuest = useProgressQuest();
+  const progressQuest = useProgressQuest()
 
-  const { burden, protection: armorProtection } = armorValue;
+  const { burden, protection: armorProtection } = armorValue
 
   useDeltaText({
-    delta: "protection",
+    delta: `protection`,
     state: protection,
-  });
+  })
 
   useEffect(() => {
-    resetQuestProgressProtection();
-    progressQuest({ amount: protectionValue, quest: "protection" });
-  }, [progressQuest, protectionValue, resetQuestProgressProtection]);
+    resetQuestProgressProtection()
+    progressQuest({ amount: protectionValue, quest: `protection` })
+  }, [progressQuest, protectionValue, resetQuestProgressProtection])
 
   if (isShowingProtection) {
     return (
       <IconDisplay
-        className={getAnimationClass({ animation: "flipInX" })}
+        className={getAnimationClass({ animation: `flipInX` })}
         Icon={IconProtection}
         tooltip="Total protection"
       >
@@ -62,7 +62,7 @@ export function Protection() {
                   <DetailsTable>
                     <tr>
                       <td>
-                        <IconDisplay Icon={IconArmor} iconProps={{ className: "small" }}>
+                        <IconDisplay Icon={IconArmor} iconProps={{ className: `small` }}>
                           <span>Armor:</span>
                         </IconDisplay>
                       </td>
@@ -75,7 +75,7 @@ export function Protection() {
                     {isTraitAcquiredTank && (
                       <tr>
                         <td>
-                          <IconDisplay Icon={IconTank} iconProps={{ className: "small" }}>
+                          <IconDisplay Icon={IconTank} iconProps={{ className: `small` }}>
                             <span>Tank:</span>
                           </IconDisplay>
                         </td>
@@ -88,7 +88,7 @@ export function Protection() {
                               +
                               {formatNumber({
                                 decimals: 0,
-                                format: "percentage",
+                                format: `percentage`,
                                 value: TANK_PROTECTION_BONUS,
                               })}
                             </span>
@@ -100,18 +100,18 @@ export function Protection() {
                     {burden > 0 && (
                       <tr>
                         <td>
-                          <IconDisplay Icon={IconBurden} iconProps={{ className: "small" }}>
+                          <IconDisplay Icon={IconBurden} iconProps={{ className: `small` }}>
                             <span>When struck:</span>
                           </IconDisplay>
                         </td>
 
                         <td>
                           {isTraitAcquiredStalwart ? (
-                            <IconDisplay Icon={IconStalwart} iconProps={{ className: "small" }}>
+                            <IconDisplay Icon={IconStalwart} iconProps={{ className: `small` }}>
                               <span>{LABEL_NO_PENALTY}</span>
                             </IconDisplay>
                           ) : (
-                            <IconDisplay Icon={IconStamina} iconProps={{ className: "small" }}>
+                            <IconDisplay Icon={IconStamina} iconProps={{ className: `small` }}>
                               <span>-{formatNumber({ value: burden })}</span>
                             </IconDisplay>
                           )}
@@ -130,6 +130,6 @@ export function Protection() {
           <DeltasDisplay delta="protection" />
         </Stack>
       </IconDisplay>
-    );
+    )
   }
 }

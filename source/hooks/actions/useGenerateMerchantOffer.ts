@@ -1,30 +1,30 @@
-import type { GeneratorParameters } from "@kitnato/locran/build/types";
-import { nanoid } from "nanoid";
-import { useRecoilCallback } from "recoil";
+import type { GeneratorParameters } from "@kitnato/locran/build/types"
+import { nanoid } from "nanoid"
+import { useRecoilCallback } from "recoil"
 
-import { MERCHANT_OFFERS } from "@neverquest/data/caravan";
-import { hasGeneratedOffer, merchantInventory } from "@neverquest/state/caravan";
-import { stage, stageMaximum } from "@neverquest/state/encounter";
-import { ownedItem } from "@neverquest/state/inventory";
-import type { InheritableItem } from "@neverquest/types";
-import { isGearItem, isInheritableItem } from "@neverquest/types/type-guards";
+import { MERCHANT_OFFERS } from "@neverquest/data/caravan"
+import { hasGeneratedOffer, merchantInventory } from "@neverquest/state/caravan"
+import { stage, stageMaximum } from "@neverquest/state/encounter"
+import { ownedItem } from "@neverquest/state/inventory"
+import type { InheritableItem } from "@neverquest/types"
+import { isGearItem, isInheritableItem } from "@neverquest/types/type-guards"
 import {
   generateArmor,
   generateMeleeWeapon,
   generateShield,
-} from "@neverquest/utilities/generators";
-import { getSnapshotGetter } from "@neverquest/utilities/getters";
+} from "@neverquest/utilities/generators"
+import { getSnapshotGetter } from "@neverquest/utilities/getters"
 
 export function useGenerateMerchantOffer() {
   return useRecoilCallback(
     ({ set, snapshot }) =>
       () => {
-        const get = getSnapshotGetter(snapshot);
+        const get = getSnapshotGetter(snapshot)
 
-        const newMerchantInventory = [...get(merchantInventory)];
-        const stageValue = get(stage);
+        const newMerchantInventory = [...get(merchantInventory)]
+        const stageValue = get(stage)
 
-        const merchantOffer = MERCHANT_OFFERS[stageValue];
+        const merchantOffer = MERCHANT_OFFERS[stageValue]
 
         // Only add offer if it's the currently highest stage and it's not been generated before to avoid regenerating older gear offers.
         if (
@@ -32,7 +32,7 @@ export function useGenerateMerchantOffer() {
           stageValue === get(stageMaximum) &&
           !get(hasGeneratedOffer(stageValue))
         ) {
-          const { offer } = merchantOffer;
+          const { offer } = merchantOffer
 
           // In the case of being a relic or infusable, make sure it's not in any inventory.
           if (
@@ -40,57 +40,57 @@ export function useGenerateMerchantOffer() {
             (newMerchantInventory.some(({ name }) => name === offer.name) ||
               get(ownedItem(offer.name)) !== undefined)
           ) {
-            return;
+            return
           }
 
           const gearSettings: GeneratorParameters & { level: number } = {
-            affixStructure: "prefix",
+            affixStructure: `prefix`,
             level: stageValue,
-            prefixTags: ["lowQuality"],
-          };
+            prefixTags: [`lowQuality`],
+          }
 
           const item = (() => {
-            if ("type" in offer) {
+            if (`type` in offer) {
               switch (offer.type) {
-                case "armor": {
+                case `armor`: {
                   return generateArmor({
                     ...gearSettings,
                     ...offer,
-                  });
+                  })
                 }
 
-                case "shield": {
+                case `shield`: {
                   return generateShield({
                     ...gearSettings,
                     ...offer,
-                  });
+                  })
                 }
 
-                case "weapon": {
+                case `weapon`: {
                   return generateMeleeWeapon({
                     ...gearSettings,
                     ...offer,
-                  });
+                  })
                 }
               }
             }
 
-            return { ...offer, ID: nanoid() } as InheritableItem;
-          })();
+            return { ...offer, ID: nanoid() } as InheritableItem
+          })()
 
           if (isGearItem(item)) {
-            item.price = Math.round(item.price / 2);
+            item.price = Math.round(item.price / 2)
           }
 
           newMerchantInventory.push({
             ...item,
             isReturned: false,
-          });
+          })
 
-          set(merchantInventory, newMerchantInventory);
-          set(hasGeneratedOffer(stageValue), true);
+          set(merchantInventory, newMerchantInventory)
+          set(hasGeneratedOffer(stageValue), true)
         }
       },
     [],
-  );
+  )
 }

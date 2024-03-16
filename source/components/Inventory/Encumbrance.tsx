@@ -1,23 +1,23 @@
-import { Stack } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
-import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
+import { Stack } from "react-bootstrap"
+import { useRecoilValue } from "recoil"
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
 
-import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
-import { PERCENTAGE_POINTS } from "@neverquest/data/general";
-import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react";
-import { encumbrance, encumbranceMaximum } from "@neverquest/state/inventory";
-import { formatNumber } from "@neverquest/utilities/formatters";
+import { IconDisplay } from "@neverquest/components/IconDisplay"
+import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
+import { PERCENTAGE_POINTS } from "@neverquest/data/general"
+import { useDeltaText } from "@neverquest/hooks/useDeltaText"
+import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react"
+import { encumbrance, encumbranceMaximum } from "@neverquest/state/inventory"
+import { formatNumber } from "@neverquest/utilities/formatters"
 
 export function Encumbrance() {
-  const encumbranceValue = useRecoilValue(encumbrance);
-  const encumbranceMaximumValue = useRecoilValue(encumbranceMaximum);
+  const encumbranceValue = useRecoilValue(encumbrance)
+  const encumbranceMaximumValue = useRecoilValue(encumbranceMaximum)
 
   useDeltaText({
-    delta: "encumbranceMaximum",
+    delta: `encumbranceMaximum`,
     state: encumbranceMaximum,
-  });
+  })
 
   return (
     <IconDisplay className="w-100" Icon={IconEncumbrance} tooltip="Encumbrance">
@@ -34,5 +34,5 @@ export function Encumbrance() {
         </Stack>
       </LabelledProgressBar>
     </IconDisplay>
-  );
+  )
 }

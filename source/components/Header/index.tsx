@@ -1,11 +1,11 @@
-import { Badge, Container, Nav, Navbar, NavbarBrand, Stack } from "react-bootstrap";
+import { Badge, Container, Nav, Navbar, NavbarBrand, Stack } from "react-bootstrap"
 
-import { About } from "@neverquest/components/Header/About";
-import { Ouroboros } from "@neverquest/components/Header/Ouroboros";
-import { Repository } from "@neverquest/components/Header/Repository";
-import { Reset } from "@neverquest/components/Header/Reset";
-import { SaveLoad } from "@neverquest/components/Header/SaveLoad";
-import { version } from "@neverquest/configuration";
+import { About } from "@neverquest/components/Header/About"
+import { Ouroboros } from "@neverquest/components/Header/Ouroboros"
+import { Repository } from "@neverquest/components/Header/Repository"
+import { Reset } from "@neverquest/components/Header/Reset"
+import { SaveLoad } from "@neverquest/components/Header/SaveLoad"
+import { version } from "@neverquest/configuration"
 
 export function Header() {
   return (
@@ -38,5 +38,5 @@ export function Header() {
         </Nav>
       </Container>
     </Navbar>
-  );
+  )
 }

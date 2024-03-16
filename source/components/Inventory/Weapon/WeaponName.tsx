@@ -1,34 +1,34 @@
-import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap";
-import type { Placement } from "react-bootstrap/esm/types";
-import { useRecoilValue } from "recoil";
+import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap"
+import type { Placement } from "react-bootstrap/esm/types"
+import { useRecoilValue } from "recoil"
 
-import { DetailsTable } from "@neverquest/components/DetailsTable";
-import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { AppliedGems } from "@neverquest/components/Inventory/AppliedGems";
-import { BurdenDetail } from "@neverquest/components/Inventory/BurdenDetail";
-import { GearComparison } from "@neverquest/components/Inventory/GearComparison";
-import { GearLevelDetail } from "@neverquest/components/Inventory/GearLevelDetail";
-import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail";
-import { type WEAPON_NONE, WEAPON_SPECIFICATIONS } from "@neverquest/data/gear";
-import { LABEL_UNKNOWN } from "@neverquest/data/general";
-import { WEAPON_ABILITY_SKILLS } from "@neverquest/data/skills";
-import IconAmmunition from "@neverquest/icons/ammunition.svg?react";
-import IconGrip from "@neverquest/icons/grip.svg?react";
-import IconRange from "@neverquest/icons/range.svg?react";
-import IconWeaponAttackRate from "@neverquest/icons/weapon-attack-rate.svg?react";
-import IconWeaponDamagePerSecond from "@neverquest/icons/weapon-damage-per-second.svg?react";
-import IconWeaponDamage from "@neverquest/icons/weapon-damage.svg?react";
-import { bleedChance, stunChance } from "@neverquest/state/ailments";
-import { weapon as weaponEquipped } from "@neverquest/state/gear";
-import { ownedItem } from "@neverquest/state/inventory";
-import { isSkillAcquired } from "@neverquest/state/skills";
-import { parryChance } from "@neverquest/state/statistics";
-import { isShowing } from "@neverquest/state/ui";
-import type { Weapon } from "@neverquest/types";
-import { isMelee, isRanged, isUnarmed } from "@neverquest/types/type-guards";
-import type { WeaponAbility } from "@neverquest/types/unions";
-import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters";
-import { getDamagePerRate } from "@neverquest/utilities/getters";
+import { DetailsTable } from "@neverquest/components/DetailsTable"
+import { IconDisplay } from "@neverquest/components/IconDisplay"
+import { AppliedGems } from "@neverquest/components/Inventory/AppliedGems"
+import { BurdenDetail } from "@neverquest/components/Inventory/BurdenDetail"
+import { GearComparison } from "@neverquest/components/Inventory/GearComparison"
+import { GearLevelDetail } from "@neverquest/components/Inventory/GearLevelDetail"
+import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail"
+import { type WEAPON_NONE, WEAPON_SPECIFICATIONS } from "@neverquest/data/gear"
+import { LABEL_UNKNOWN } from "@neverquest/data/general"
+import { WEAPON_ABILITY_SKILLS } from "@neverquest/data/skills"
+import IconAmmunition from "@neverquest/icons/ammunition.svg?react"
+import IconGrip from "@neverquest/icons/grip.svg?react"
+import IconRange from "@neverquest/icons/range.svg?react"
+import IconWeaponAttackRate from "@neverquest/icons/weapon-attack-rate.svg?react"
+import IconWeaponDamagePerSecond from "@neverquest/icons/weapon-damage-per-second.svg?react"
+import IconWeaponDamage from "@neverquest/icons/weapon-damage.svg?react"
+import { bleedChance, stunChance } from "@neverquest/state/ailments"
+import { weapon as weaponEquipped } from "@neverquest/state/gear"
+import { ownedItem } from "@neverquest/state/inventory"
+import { isSkillAcquired } from "@neverquest/state/skills"
+import { parryChance } from "@neverquest/state/statistics"
+import { isShowing } from "@neverquest/state/ui"
+import type { Weapon } from "@neverquest/types"
+import { isMelee, isRanged, isUnarmed } from "@neverquest/types/type-guards"
+import type { WeaponAbility } from "@neverquest/types/unions"
+import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters"
+import { getDamagePerRate } from "@neverquest/utilities/getters"
 
 export function WeaponName({
   overlayPlacement,
@@ -41,21 +41,21 @@ export function WeaponName({
     bleed: useRecoilValue(bleedChance),
     parry: useRecoilValue(parryChance),
     stun: useRecoilValue(stunChance),
-  };
-  const isShowingGearClass = useRecoilValue(isShowing("gearClass"));
-  const isShowingGrip = useRecoilValue(isShowing("grip"));
-  const ownedItemThaumaturgicGoggles = useRecoilValue(ownedItem("thaumaturgic goggles"));
-  const weaponEquippedValue = useRecoilValue(weaponEquipped);
+  }
+  const isShowingGearClass = useRecoilValue(isShowing(`gearClass`))
+  const isShowingGrip = useRecoilValue(isShowing(`grip`))
+  const ownedItemThaumaturgicGoggles = useRecoilValue(ownedItem(`thaumaturgic goggles`))
+  const weaponEquippedValue = useRecoilValue(weaponEquipped)
 
-  const { abilityChance, burden, damage, gearClass, ID, level, name, rate, weight } = weapon;
-  const { ability, IconAbility, IconGearClass } = WEAPON_SPECIFICATIONS[gearClass];
+  const { abilityChance, burden, damage, gearClass, ID, level, name, rate, weight } = weapon
+  const { ability, IconAbility, IconGearClass } = WEAPON_SPECIFICATIONS[gearClass]
   const damagePerSecond = getDamagePerRate({
     damage,
     rate,
-  });
-  const isEquipped = ID === weaponEquippedValue.ID;
+  })
+  const isEquipped = ID === weaponEquippedValue.ID
 
-  const isSkillAcquiredAbility = useRecoilValue(isSkillAcquired(WEAPON_ABILITY_SKILLS[ability]));
+  const isSkillAcquiredAbility = useRecoilValue(isSkillAcquired(WEAPON_ABILITY_SKILLS[ability]))
 
   return (
     <OverlayTrigger
@@ -66,7 +66,7 @@ export function WeaponName({
               <GearLevelDetail
                 comparison={
                   !isEquipped && {
-                    showing: "weapon",
+                    showing: `weapon`,
                     subtrahend: weaponEquippedValue.level,
                   }
                 }
@@ -80,7 +80,7 @@ export function WeaponName({
 
                 <td>
                   <Stack direction="horizontal" gap={1}>
-                    <IconDisplay Icon={IconWeaponDamage} iconProps={{ className: "small" }}>
+                    <IconDisplay Icon={IconWeaponDamage} iconProps={{ className: `small` }}>
                       <span>{formatNumber({ value: damage })}</span>
                     </IconDisplay>
 
@@ -103,8 +103,8 @@ export function WeaponName({
 
                 <td>
                   <Stack direction="horizontal" gap={1}>
-                    <IconDisplay Icon={IconWeaponAttackRate} iconProps={{ className: "small" }}>
-                      <span>{formatNumber({ format: "time", value: rate })}</span>
+                    <IconDisplay Icon={IconWeaponAttackRate} iconProps={{ className: `small` }}>
+                      <span>{formatNumber({ format: `time`, value: rate })}</span>
                     </IconDisplay>
 
                     {!isEquipped && (
@@ -128,9 +128,9 @@ export function WeaponName({
                     <Stack direction="horizontal" gap={1}>
                       <IconDisplay
                         Icon={IconWeaponDamagePerSecond}
-                        iconProps={{ className: "small" }}
+                        iconProps={{ className: `small` }}
                       >
-                        <span>{formatNumber({ format: "float", value: damagePerSecond })}</span>
+                        <span>{formatNumber({ format: `float`, value: damagePerSecond })}</span>
                       </IconDisplay>
 
                       {!isEquipped && (
@@ -157,8 +157,7 @@ export function WeaponName({
                   </td>
 
                   <td>
-                    <IconDisplay Icon={IconGrip} iconProps={{ className: "small" }}>
-                      {/* eslint-disable-next-line unicorn/consistent-destructuring */}
+                    <IconDisplay Icon={IconGrip} iconProps={{ className: `small` }}>
                       <span>{capitalizeAll(weapon.grip)}</span>
                     </IconDisplay>
                   </td>
@@ -173,9 +172,8 @@ export function WeaponName({
                     </td>
 
                     <td>
-                      <IconDisplay Icon={IconRange} iconProps={{ className: "small" }}>
-                        {/* eslint-disable-next-line unicorn/consistent-destructuring */}
-                        <span>{formatNumber({ format: "time", value: weapon.range })}</span>
+                      <IconDisplay Icon={IconRange} iconProps={{ className: `small` }}>
+                        <span>{formatNumber({ format: `time`, value: weapon.range })}</span>
                       </IconDisplay>
                     </td>
                   </tr>
@@ -186,8 +184,7 @@ export function WeaponName({
                     </td>
 
                     <td>
-                      <IconDisplay Icon={IconAmmunition} iconProps={{ className: "small" }}>
-                        {/* eslint-disable-next-line unicorn/consistent-destructuring */}
+                      <IconDisplay Icon={IconAmmunition} iconProps={{ className: `small` }}>
                         <span>{formatNumber({ value: weapon.ammunitionCost })}</span>
                       </IconDisplay>
                     </td>
@@ -199,7 +196,7 @@ export function WeaponName({
                 burden={burden}
                 comparison={
                   !isEquipped && {
-                    showing: "weapon",
+                    showing: `weapon`,
                     subtrahend: weaponEquippedValue.burden,
                   }
                 }
@@ -213,7 +210,7 @@ export function WeaponName({
                     </td>
 
                     <td>
-                      <IconDisplay Icon={IconGearClass} iconProps={{ className: "small" }}>
+                      <IconDisplay Icon={IconGearClass} iconProps={{ className: `small` }}>
                         <span>{capitalizeAll(gearClass)}</span>
                       </IconDisplay>
                     </td>
@@ -234,10 +231,10 @@ export function WeaponName({
 
                     <td>
                       <Stack direction="horizontal" gap={1}>
-                        <IconDisplay Icon={IconAbility} iconProps={{ className: "small" }}>
+                        <IconDisplay Icon={IconAbility} iconProps={{ className: `small` }}>
                           <span>
                             {formatNumber({
-                              format: "percentage",
+                              format: `percentage`,
                               value: isEquipped ? abilityChances[ability] : abilityChance,
                             })}
                           </span>
@@ -262,7 +259,7 @@ export function WeaponName({
               {!isUnarmed(weapon) && (
                 <WeightDetail
                   comparison={
-                    !isEquipped && { showing: "weapon", subtrahend: weaponEquippedValue.weight }
+                    !isEquipped && { showing: `weapon`, subtrahend: weaponEquippedValue.weight }
                   }
                   weight={weight}
                 />
@@ -275,5 +272,5 @@ export function WeaponName({
     >
       <span>{name}&nbsp;</span>
     </OverlayTrigger>
-  );
+  )
 }

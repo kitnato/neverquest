@@ -1,25 +1,25 @@
-import { useState } from "react";
-import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { useState } from "react"
+import { Button, OverlayTrigger, Tooltip } from "react-bootstrap"
+import { useRecoilValue } from "recoil"
 
-import { IconImage } from "@neverquest/components/IconImage";
-import { Retirement } from "@neverquest/components/Retirement";
-import { RETIREMENT_STAGE } from "@neverquest/data/general";
-import IconRetire from "@neverquest/icons/retire.svg?react";
-import { hasFlatlined } from "@neverquest/state/character";
-import { location, stageMaximum } from "@neverquest/state/encounter";
-import { getAnimationClass } from "@neverquest/utilities/getters";
+import { IconImage } from "@neverquest/components/IconImage"
+import { Retirement } from "@neverquest/components/Retirement"
+import { RETIREMENT_STAGE } from "@neverquest/data/general"
+import IconRetire from "@neverquest/icons/retire.svg?react"
+import { hasFlatlined } from "@neverquest/state/character"
+import { location, stageMaximum } from "@neverquest/state/encounter"
+import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function Retire() {
-  const hasFlatlinedValue = useRecoilValue(hasFlatlined);
-  const locationValue = useRecoilValue(location);
-  const stageMaximumValue = useRecoilValue(stageMaximum);
+  const hasFlatlinedValue = useRecoilValue(hasFlatlined)
+  const locationValue = useRecoilValue(location)
+  const stageMaximumValue = useRecoilValue(stageMaximum)
 
-  const [isShowingRetirement, setIsShowingRetirement] = useState(false);
+  const [isShowingRetirement, setIsShowingRetirement] = useState(false)
 
   const isShowingRetire =
-    (locationValue === "caravan" && stageMaximumValue === RETIREMENT_STAGE) ||
-    stageMaximumValue > RETIREMENT_STAGE;
+    (locationValue === `caravan` && stageMaximumValue === RETIREMENT_STAGE) ||
+    stageMaximumValue > RETIREMENT_STAGE
 
   return (
     <>
@@ -31,12 +31,12 @@ export function Retire() {
         }
       >
         <div
-          className={isShowingRetire ? getAnimationClass({ animation: "bounceIn" }) : "invisible"}
+          className={isShowingRetire ? getAnimationClass({ animation: `bounceIn` }) : `invisible`}
         >
           <Button
-            disabled={hasFlatlinedValue || locationValue === "wilderness"}
+            disabled={hasFlatlinedValue || locationValue === `wilderness`}
             onClick={() => {
-              setIsShowingRetirement(true);
+              setIsShowingRetirement(true)
             }}
             variant="outline-dark"
           >
@@ -47,5 +47,5 @@ export function Retire() {
 
       <Retirement state={[isShowingRetirement, setIsShowingRetirement]} />
     </>
-  );
+  )
 }

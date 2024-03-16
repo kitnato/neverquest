@@ -1,35 +1,35 @@
-import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap"
+import { useRecoilState, useRecoilValue } from "recoil"
 
-import { DescriptionDisplay } from "@neverquest/components/DescriptionDisplay";
-import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { Encumbrance } from "@neverquest/components/Inventory/Encumbrance";
-import { TAILORING } from "@neverquest/data/caravan";
+import { DescriptionDisplay } from "@neverquest/components/DescriptionDisplay"
+import { IconDisplay } from "@neverquest/components/IconDisplay"
+import { Encumbrance } from "@neverquest/components/Inventory/Encumbrance"
+import { TAILORING } from "@neverquest/data/caravan"
 import {
   CLASS_FULL_WIDTH_JUSTIFIED,
   GENERIC_MINIMUM,
   LABEL_NO_ESSENCE,
   POPOVER_TRIGGER,
-} from "@neverquest/data/general";
-import { KNAPSACK_CAPACITY } from "@neverquest/data/items";
-import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
-import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence";
-import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react";
-import IconEssence from "@neverquest/icons/essence.svg?react";
-import IconTailoring from "@neverquest/icons/tailoring.svg?react";
-import { knapsackCapacity } from "@neverquest/state/inventory";
-import { essence } from "@neverquest/state/resources";
-import { formatNumber } from "@neverquest/utilities/formatters";
-import { getFromRange, getSigmoid } from "@neverquest/utilities/getters";
+} from "@neverquest/data/general"
+import { KNAPSACK_CAPACITY } from "@neverquest/data/items"
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
+import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence"
+import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react"
+import IconEssence from "@neverquest/icons/essence.svg?react"
+import IconTailoring from "@neverquest/icons/tailoring.svg?react"
+import { knapsackCapacity } from "@neverquest/state/inventory"
+import { essence } from "@neverquest/state/resources"
+import { formatNumber } from "@neverquest/utilities/formatters"
+import { getFromRange, getSigmoid } from "@neverquest/utilities/getters"
 
 export function ExpandKnapsack() {
-  const [knapsackCapacityValue, setKnapsackCapacity] = useRecoilState(knapsackCapacity);
-  const essenceValue = useRecoilValue(essence);
+  const [knapsackCapacityValue, setKnapsackCapacity] = useRecoilState(knapsackCapacity)
+  const essenceValue = useRecoilValue(essence)
 
-  const progressQuest = useProgressQuest();
-  const transactEssence = useTransactEssence();
+  const progressQuest = useProgressQuest()
+  const transactEssence = useTransactEssence()
 
-  const { amount, priceRange } = TAILORING.knapsack;
+  const { amount, priceRange } = TAILORING.knapsack
 
   const price = Math.max(
     Math.round(
@@ -39,8 +39,8 @@ export function ExpandKnapsack() {
       }),
     ),
     GENERIC_MINIMUM,
-  );
-  const isAffordable = price <= essenceValue;
+  )
+  const isAffordable = price <= essenceValue
 
   return (
     <Stack gap={3}>
@@ -79,16 +79,16 @@ export function ExpandKnapsack() {
               <Button
                 disabled={!isAffordable}
                 onClick={() => {
-                  transactEssence(-price);
+                  transactEssence(-price)
 
                   setKnapsackCapacity(
                     (currentKnapsackCapacity) => currentKnapsackCapacity + amount,
-                  );
+                  )
 
                   progressQuest({
                     amount,
-                    quest: "knapsackExpanding",
-                  });
+                    quest: `knapsackExpanding`,
+                  })
                 }}
                 variant="outline-dark"
               >
@@ -99,5 +99,5 @@ export function ExpandKnapsack() {
         </Stack>
       </div>
     </Stack>
-  );
+  )
 }

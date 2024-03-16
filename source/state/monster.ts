@@ -1,9 +1,9 @@
-import { nanoid } from "nanoid";
-import { atom, atomFamily, selector, selectorFamily } from "recoil";
+import { nanoid } from "nanoid"
+import { atom, atomFamily, selector, selectorFamily } from "recoil"
 
-import { PROGRESS } from "@neverquest/data/encounter";
-import { LEVELLING_THRESHOLD } from "@neverquest/data/general";
-import { GEM_DROP_CHANCE, INFUSABLES, RELICS, RELIC_DROP_CHANCE } from "@neverquest/data/items";
+import { PROGRESS } from "@neverquest/data/encounter"
+import { LEVELLING_THRESHOLD } from "@neverquest/data/general"
+import { GEM_DROP_CHANCE, INFUSABLES, RELICS, RELIC_DROP_CHANCE } from "@neverquest/data/items"
 import {
   BLIGHT,
   BOSS_STAGE_INTERVAL,
@@ -15,11 +15,11 @@ import {
   MONSTER_HEALTH,
   POISON,
   RAGE,
-} from "@neverquest/data/monster";
-import { AILMENT_PENALTY } from "@neverquest/data/statistics";
-import { bleed } from "@neverquest/state/ailments";
-import { isHired, merchantInventory } from "@neverquest/state/caravan";
-import { handleStorage } from "@neverquest/state/effects/handleStorage";
+} from "@neverquest/data/monster"
+import { AILMENT_PENALTY } from "@neverquest/data/statistics"
+import { bleed } from "@neverquest/state/ailments"
+import { isHired, merchantInventory } from "@neverquest/state/caravan"
+import { handleStorage } from "@neverquest/state/effects/handleStorage"
 import {
   encounter,
   isStageStarted,
@@ -27,14 +27,14 @@ import {
   retirementStage,
   stage,
   stageMaximum,
-} from "@neverquest/state/encounter";
-import { ownedItem } from "@neverquest/state/inventory";
-import { hasLootedLogEntry, infusionEffect } from "@neverquest/state/items";
-import { isSkillAcquired } from "@neverquest/state/skills";
-import { range } from "@neverquest/state/statistics";
-import { isFinality } from "@neverquest/types/type-guards";
-import type { Ailment } from "@neverquest/types/unions";
-import { formatNumber } from "@neverquest/utilities/formatters";
+} from "@neverquest/state/encounter"
+import { ownedItem } from "@neverquest/state/inventory"
+import { hasLootedLogEntry, infusionEffect } from "@neverquest/state/items"
+import { isSkillAcquired } from "@neverquest/state/skills"
+import { range } from "@neverquest/state/statistics"
+import { isFinality } from "@neverquest/types/type-guards"
+import type { Ailment } from "@neverquest/types/unions"
+import { formatNumber } from "@neverquest/utilities/formatters"
 import {
   getDamagePerRate,
   getFromRange,
@@ -42,41 +42,41 @@ import {
   getPerkEffect,
   getSigmoid,
   getTriangular,
-} from "@neverquest/utilities/getters";
-import { withStateKey } from "@neverquest/utilities/helpers";
+} from "@neverquest/utilities/getters"
+import { withStateKey } from "@neverquest/utilities/helpers"
 
 // SELECTORS
 
-const bleedingDeltaLength = withStateKey("bleedingDeltaLength", (key) =>
+const bleedingDeltaLength = withStateKey(`bleedingDeltaLength`, (key) =>
   selector({
     get: ({ get }) => {
-      const { duration, ticks } = get(bleed);
+      const { duration, ticks } = get(bleed)
 
-      return Math.round(duration / ticks);
+      return Math.round(duration / ticks)
     },
     key,
   }),
-);
+)
 
-export const blightChance = withStateKey("blightChance", (key) =>
+export const blightChance = withStateKey(`blightChance`, (key) =>
   selector({
     get: ({ get }) => {
-      const encounterValue = get(encounter);
-      const stageValue = get(stage);
+      const encounterValue = get(encounter)
+      const stageValue = get(stage)
 
       const {
         boss,
         chance: { maximum, minimum },
         finality,
         requiredStage,
-      } = BLIGHT;
+      } = BLIGHT
 
       if (stageValue < requiredStage) {
-        return 0;
+        return 0
       }
 
       if (isFinality(encounterValue)) {
-        return finality[encounterValue];
+        return finality[encounterValue]
       }
 
       return (
@@ -84,52 +84,52 @@ export const blightChance = withStateKey("blightChance", (key) =>
           factor: getSigmoid(getLinearMapping({ offset: requiredStage, stage: stageValue })),
           maximum,
           minimum,
-        }) * (encounterValue === "boss" ? boss : 1)
-      );
+        }) * (encounterValue === `boss` ? boss : 1)
+      )
     },
     key,
   }),
-);
+)
 
-export const frailty = withStateKey("frailty", (key) =>
+export const frailty = withStateKey(`frailty`, (key) =>
   selector({
     get: ({ get }) => {
       if (isFinality(get(encounter))) {
-        return 0;
+        return 0
       }
 
-      if (get(ownedItem("familiar")) !== undefined) {
-        return FRAILTY.familiar;
+      if (get(ownedItem(`familiar`)) !== undefined) {
+        return FRAILTY.familiar
       }
 
-      if (get(ownedItem("mysterious egg")) !== undefined) {
+      if (get(ownedItem(`mysterious egg`)) !== undefined) {
         return getFromRange({
-          factor: getSigmoid(get(infusionEffect("mysterious egg")) * LEVELLING_THRESHOLD),
-          ...FRAILTY["mysterious egg"],
-        });
+          factor: getSigmoid(get(infusionEffect(`mysterious egg`)) * LEVELLING_THRESHOLD),
+          ...FRAILTY[`mysterious egg`],
+        })
       }
 
-      return 0;
+      return 0
     },
     key,
   }),
-);
+)
 
-export const hasMonsterClosed = withStateKey("hasMonsterClosed", (key) =>
+export const hasMonsterClosed = withStateKey(`hasMonsterClosed`, (key) =>
   selector({
     get: ({ get }) => get(distance) === 0,
     key,
   }),
-);
+)
 
-export const isEnraged = withStateKey("isEnraged", (key) =>
+export const isEnraged = withStateKey(`isEnraged`, (key) =>
   selector({
     get: ({ get }) => get(rage) === RAGE.maximum,
     key,
   }),
-);
+)
 
-export const isMonsterAiling = withStateKey("isMonsterAiling", (key) =>
+export const isMonsterAiling = withStateKey(`isMonsterAiling`, (key) =>
   selectorFamily({
     get:
       (ailment: Ailment) =>
@@ -137,53 +137,53 @@ export const isMonsterAiling = withStateKey("isMonsterAiling", (key) =>
         get(monsterAilmentDuration(ailment)) > 0,
     key,
   }),
-);
+)
 
-export const isMonsterAtFullHealth = withStateKey("isMonsterAtFullHealth", (key) =>
+export const isMonsterAtFullHealth = withStateKey(`isMonsterAtFullHealth`, (key) =>
   selector({
     get: ({ get }) => get(monsterHealth) === get(monsterHealthMaximum),
     key,
   }),
-);
+)
 
-export const isMonsterDead = withStateKey("isMonsterDead", (key) =>
+export const isMonsterDead = withStateKey(`isMonsterDead`, (key) =>
   selector({
     get: ({ get }) => get(isStageStarted) && get(monsterHealth) === 0,
     key,
   }),
-);
+)
 
-export const isMonsterRegenerating = withStateKey("isMonsterRegenerating", (key) =>
+export const isMonsterRegenerating = withStateKey(`isMonsterRegenerating`, (key) =>
   selector({
     get: ({ get }) => get(monsterRegenerationDuration) > 0,
     key,
   }),
-);
+)
 
-export const monsterAttackRate = withStateKey("monsterAttackRate", (key) =>
+export const monsterAttackRate = withStateKey(`monsterAttackRate`, (key) =>
   selector({
     get: ({ get }) => {
-      const { attenuation, base, bonus, boss, finality, minimum } = MONSTER_ATTACK_RATE;
-      const encounterValue = get(encounter);
-      const factor = getTriangular(get(stage)) / attenuation;
+      const { attenuation, base, bonus, boss, finality, minimum } = MONSTER_ATTACK_RATE
+      const encounterValue = get(encounter)
+      const factor = getTriangular(get(stage)) / attenuation
 
       if (isFinality(encounterValue)) {
-        return finality[encounterValue];
+        return finality[encounterValue]
       }
 
       return Math.round(
         Math.max(
           (base - base * factor * (1 + Math.min(get(progress), PROGRESS.maximum) * bonus)) *
-            (encounterValue === "boss" ? boss : 1),
+            (encounterValue === `boss` ? boss : 1),
           minimum,
         ) * (get(isEnraged) ? RAGE.effect : 1),
-      );
+      )
     },
     key,
   }),
-);
+)
 
-export const monsterDamage = withStateKey("monsterDamage", (key) =>
+export const monsterDamage = withStateKey(`monsterDamage`, (key) =>
   selector({
     get: ({ get }) => {
       const {
@@ -193,18 +193,18 @@ export const monsterDamage = withStateKey("monsterDamage", (key) =>
         boss,
         finality,
         menace: { maximum, minimum, requiredStage },
-      } = MONSTER_DAMAGE;
-      const encounterValue = get(encounter);
-      const stageValue = get(stage);
-      const factor = getTriangular(stageValue) / attenuation;
+      } = MONSTER_DAMAGE
+      const encounterValue = get(encounter)
+      const stageValue = get(stage)
+      const factor = getTriangular(stageValue) / attenuation
 
       if (isFinality(encounterValue)) {
-        return finality[encounterValue];
+        return finality[encounterValue]
       }
 
       return Math.round(
         (base + base * factor * (1 + Math.min(get(progress), PROGRESS.maximum) * bonus)) *
-          (encounterValue === "boss" ? boss : 1) *
+          (encounterValue === `boss` ? boss : 1) *
           (1 +
             (stageValue >= requiredStage
               ? getFromRange({
@@ -216,44 +216,44 @@ export const monsterDamage = withStateKey("monsterDamage", (key) =>
                 })
               : 0)) *
           (1 - get(frailty)),
-      );
+      )
     },
     key,
   }),
-);
+)
 
-export const monsterDamageAiling = withStateKey("monsterDamageAiling", (key) =>
+export const monsterDamageAiling = withStateKey(`monsterDamageAiling`, (key) =>
   selector({
     get: ({ get }) =>
       Math.round(
         get(monsterDamage) *
-          (get(isMonsterAiling("staggered")) ? 1 - AILMENT_PENALTY.staggered : 1),
+          (get(isMonsterAiling(`staggered`)) ? 1 - AILMENT_PENALTY.staggered : 1),
       ),
     key,
   }),
-);
+)
 
-export const monsterDamageAilingPerSecond = withStateKey("monsterDamageAilingPerSecond", (key) =>
+export const monsterDamageAilingPerSecond = withStateKey(`monsterDamageAilingPerSecond`, (key) =>
   selector({
     get: ({ get }) => {
-      const { frozen, stunned } = AILMENT_PENALTY;
+      const { frozen, stunned } = AILMENT_PENALTY
 
       return formatNumber({
-        format: "float",
+        format: `float`,
         value: getDamagePerRate({
           damage: get(monsterDamageAiling),
           damageModifier: 0,
-          damageModifierChance: get(isMonsterAiling("stunned")) ? stunned : undefined,
+          damageModifierChance: get(isMonsterAiling(`stunned`)) ? stunned : undefined,
           rate: get(monsterAttackRate),
-          rateModifier: get(isMonsterAiling("frozen")) ? frozen : undefined,
+          rateModifier: get(isMonsterAiling(`frozen`)) ? frozen : undefined,
         }),
-      });
+      })
     },
     key,
   }),
-);
+)
 
-export const monsterHealthMaximum = withStateKey("monsterHealthMaximum", (key) =>
+export const monsterHealthMaximum = withStateKey(`monsterHealthMaximum`, (key) =>
   selector({
     get: ({ get }) => {
       const {
@@ -263,18 +263,18 @@ export const monsterHealthMaximum = withStateKey("monsterHealthMaximum", (key) =
         boss,
         finality,
         menace: { maximum, minimum, requiredStage },
-      } = MONSTER_HEALTH;
-      const encounterValue = get(encounter);
-      const stageValue = get(stage);
-      const factor = getTriangular(stageValue) / attenuation;
+      } = MONSTER_HEALTH
+      const encounterValue = get(encounter)
+      const stageValue = get(stage)
+      const factor = getTriangular(stageValue) / attenuation
 
       if (isFinality(encounterValue)) {
-        return finality[encounterValue];
+        return finality[encounterValue]
       }
 
       return Math.round(
         (base + base * factor * (1 + Math.min(get(progress), PROGRESS.maximum) * bonus)) *
-          (encounterValue === "boss" ? boss : 1) *
+          (encounterValue === `boss` ? boss : 1) *
           (1 +
             (stageValue >= requiredStage
               ? getFromRange({
@@ -286,37 +286,36 @@ export const monsterHealthMaximum = withStateKey("monsterHealthMaximum", (key) =
                 })
               : 0)) *
           (1 - get(frailty)),
-      );
+      )
     },
     key,
   }),
-);
+)
 
-export const monsterLoot = withStateKey("monsterLoot", (key) =>
+export const monsterLoot = withStateKey(`monsterLoot`, (key) =>
   selector({
     get: ({ get }) => {
-      const { attenuation, base: essenceBase, bonus, boss } = ESSENCE;
-      const { equalStage, lowerStage } = GEM_DROP_CHANCE;
+      const { attenuation, base: essenceBase, bonus, boss } = ESSENCE
+      const { equalStage, lowerStage } = GEM_DROP_CHANCE
 
-      const encounterValue = get(encounter);
-      const isMementoOwned = get(ownedItem("memento")) !== undefined;
-      const merchantInventoryValue = get(merchantInventory);
-      const stageValue = get(stage);
-      const stageMaximumValue = get(stageMaximum);
+      const encounterValue = get(encounter)
+      const isMementoOwned = get(ownedItem(`memento`)) !== undefined
+      const merchantInventoryValue = get(merchantInventory)
+      const stageValue = get(stage)
+      const stageMaximumValue = get(stageMaximum)
 
       return {
         essence: Math.round(
           ((essenceBase + (essenceBase * getTriangular(stageValue)) / attenuation) * 1 +
             (1 + Math.min(get(progress), PROGRESS.maximum)) *
               bonus *
-              (encounterValue === "boss" ? boss : 1)) *
-            (1 + getPerkEffect({ perk: "essenceBonus", stage: get(retirementStage) })),
+              (encounterValue === `boss` ? boss : 1)) *
+            (1 + getPerkEffect({ perk: `essenceBonus`, stage: get(retirementStage) })),
         ),
         gems:
-          encounterValue === "boss"
+          encounterValue === `boss`
             ? Array.from<undefined>({
                 length: 1 + Math.floor((stageValue - BOSS_STAGE_START) / BOSS_STAGE_INTERVAL),
-                // eslint-disable-next-line unicorn/no-array-reduce
               }).reduce<number>(
                 (sum, _) =>
                   Math.random() <= (stageValue < stageMaximumValue ? lowerStage : equalStage)
@@ -326,46 +325,46 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
               )
             : 0,
         relic:
-          encounterValue === "boss" || get(ownedItem("knapsack")) === undefined
+          encounterValue === `boss` || get(ownedItem(`knapsack`)) === undefined
             ? undefined
             : // Mysterious egg only drops after defeating Res Dominus while carrying the Memento and if the egg and the familiar are neither carried nor sold.
-              encounterValue === "res dominus" &&
+              encounterValue === `res dominus` &&
                 isMementoOwned &&
-                get(ownedItem("mysterious egg")) === undefined &&
-                get(ownedItem("familiar")) === undefined &&
+                get(ownedItem(`mysterious egg`)) === undefined &&
+                get(ownedItem(`familiar`)) === undefined &&
                 !merchantInventoryValue.some(({ name }) =>
-                  ["familiar", "mysterious egg"].includes(name),
+                  [`familiar`, `mysterious egg`].includes(name),
                 )
-              ? { ...INFUSABLES["mysterious egg"].item, ID: nanoid() }
+              ? { ...INFUSABLES[`mysterious egg`].item, ID: nanoid() }
               : // Log Entry only drops after defeating Res Dominus while carrying the Memento and if it's never been looted before.
-                encounterValue === "res dominus" && isMementoOwned && !get(hasLootedLogEntry)
-                ? { ...RELICS["[P71NQ]"].item, ID: nanoid() }
+                encounterValue === `res dominus` && isMementoOwned && !get(hasLootedLogEntry)
+                ? { ...RELICS[`[P71NQ]`].item, ID: nanoid() }
                 : // Torn manuscript drops if it's neither currently carried nor sold, if the memento is carried, if the correct crew member is hired, if the associated skill hasn't been trained and if the drop chance is reached.
                   isMementoOwned &&
-                    get(ownedItem("torn manuscript")) === undefined &&
-                    !merchantInventoryValue.some(({ name }) => name === "torn manuscript") &&
-                    get(isHired("alchemist")) &&
-                    !get(isSkillAcquired("memetics")) &&
+                    get(ownedItem(`torn manuscript`)) === undefined &&
+                    !merchantInventoryValue.some(({ name }) => name === `torn manuscript`) &&
+                    get(isHired(`alchemist`)) &&
+                    !get(isSkillAcquired(`memetics`)) &&
                     Math.random() <=
                       getFromRange({
                         factor: getSigmoid(stageValue),
-                        ...RELIC_DROP_CHANCE["torn manuscript"],
+                        ...RELIC_DROP_CHANCE[`torn manuscript`],
                       })
-                  ? { ...RELICS["torn manuscript"].item, ID: nanoid() }
+                  ? { ...RELICS[`torn manuscript`].item, ID: nanoid() }
                   : // Dream catcher drops if it's neither currently carried nor sold, if the memento is carried, if the correct crew member is hired and if the drop chance is reached.
                     isMementoOwned &&
-                      get(ownedItem("dream catcher")) === undefined &&
-                      !merchantInventoryValue.some(({ name }) => name === "dream catcher") &&
-                      get(isHired("occultist")) &&
+                      get(ownedItem(`dream catcher`)) === undefined &&
+                      !merchantInventoryValue.some(({ name }) => name === `dream catcher`) &&
+                      get(isHired(`occultist`)) &&
                       Math.random() <=
                         getFromRange({
                           factor: getSigmoid(stageValue),
-                          ...RELIC_DROP_CHANCE["dream catcher"],
+                          ...RELIC_DROP_CHANCE[`dream catcher`],
                         })
-                    ? { ...RELICS["dream catcher"].item, ID: nanoid() }
+                    ? { ...RELICS[`dream catcher`].item, ID: nanoid() }
                     : // Memento drops if it's neither currently carried nor sold and if the drop chance is reached.
                       !isMementoOwned &&
-                        !merchantInventoryValue.some(({ name }) => name === "memento") &&
+                        !merchantInventoryValue.some(({ name }) => name === `memento`) &&
                         Math.random() <=
                           getFromRange({
                             factor: getSigmoid(stageValue),
@@ -373,31 +372,31 @@ export const monsterLoot = withStateKey("monsterLoot", (key) =>
                           })
                       ? { ...RELICS.memento.item, ID: nanoid() }
                       : undefined,
-      };
+      }
     },
     key,
   }),
-);
+)
 
-export const poisonChance = withStateKey("poisonChance", (key) =>
+export const poisonChance = withStateKey(`poisonChance`, (key) =>
   selector({
     get: ({ get }) => {
-      const encounterValue = get(encounter);
-      const stageValue = get(stage);
+      const encounterValue = get(encounter)
+      const stageValue = get(stage)
 
       const {
         boss,
         chance: { maximum, minimum },
         finality,
         requiredStage,
-      } = POISON;
+      } = POISON
 
       if (stageValue < requiredStage) {
-        return 0;
+        return 0
       }
 
       if (isFinality(encounterValue)) {
-        return finality[encounterValue];
+        return finality[encounterValue]
       }
 
       return (
@@ -405,92 +404,91 @@ export const poisonChance = withStateKey("poisonChance", (key) =>
           factor: getSigmoid(getLinearMapping({ offset: requiredStage, stage: stageValue })),
           maximum,
           minimum,
-        }) * (encounterValue === "boss" ? boss : 1)
-      );
+        }) * (encounterValue === `boss` ? boss : 1)
+      )
     },
     key,
   }),
-);
+)
 
 // ATOMS
 
-export const bleedingDelta = withStateKey("bleedingDelta", (key) =>
+export const bleedingDelta = withStateKey(`bleedingDelta`, (key) =>
   atom({
     default: bleedingDeltaLength,
     effects: [handleStorage({ key })],
     key,
   }),
-);
+)
 
-export const distance = withStateKey("distance", (key) =>
+export const distance = withStateKey(`distance`, (key) =>
   atom({
     default: range,
     effects: [handleStorage({ key })],
     key,
   }),
-);
+)
 
-export const isMonsterNew = withStateKey("isMonsterNew", (key) =>
+export const isMonsterNew = withStateKey(`isMonsterNew`, (key) =>
   atom({
     default: true,
     effects: [handleStorage({ key })],
     key,
   }),
-);
+)
 
-export const monsterAilmentDuration = withStateKey("monsterAilmentDuration", (key) =>
+export const monsterAilmentDuration = withStateKey(`monsterAilmentDuration`, (key) =>
   atomFamily<number, Ailment>({
     default: 0,
     effects: (ailment) => [handleStorage({ key, parameter: ailment })],
     key,
   }),
-);
+)
 
-export const monsterAttackDuration = withStateKey("monsterAttackDuration", (key) =>
+export const monsterAttackDuration = withStateKey(`monsterAttackDuration`, (key) =>
   atom({
     default: 0,
     effects: [handleStorage({ key })],
     key,
   }),
-);
+)
 
-export const monsterElement = withStateKey("monsterElement", (key) =>
+export const monsterElement = withStateKey(`monsterElement`, (key) =>
   atom<HTMLDivElement | null>({
-    // eslint-disable-next-line unicorn/no-null
     default: null,
     effects: [handleStorage({ key })],
     key,
   }),
-);
+)
 
-export const monsterHealth = withStateKey("monsterHealth", (key) =>
+export const monsterHealth = withStateKey(`monsterHealth`, (key) =>
   atom({
     default: monsterHealthMaximum,
     effects: [handleStorage({ key })],
     key,
   }),
-);
+)
 
-export const monsterName = withStateKey("monsterName", (key) =>
+export const monsterName = withStateKey(`monsterName`, (key) =>
   atom<string | undefined>({
     default: undefined,
     effects: [handleStorage({ key })],
     key,
   }),
-);
+)
 
-export const monsterRegenerationDuration = withStateKey("monsterRegenerationDuration", (key) =>
+export const monsterRegenerationDuration = withStateKey(`monsterRegenerationDuration`, (key) =>
   atom({
     default: 0,
     effects: [handleStorage({ key })],
     key,
   }),
-);
+)
 
-export const rage = withStateKey("rage", (key) =>
+export const rage = withStateKey(`rage`, (key) =>
   atom({
     default: 0,
     effects: [handleStorage({ key })],
     key,
   }),
-);
+)

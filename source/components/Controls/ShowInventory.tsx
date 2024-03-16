@@ -1,42 +1,42 @@
-import { useEffect, useRef } from "react";
-import { Badge, Button, OverlayTrigger, Tooltip } from "react-bootstrap";
-import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
+import { useEffect, useRef } from "react"
+import { Badge, Button, OverlayTrigger, Tooltip } from "react-bootstrap"
+import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil"
 
-import { ItemAcquisition } from "@neverquest/components/Controls/ItemAcquisition";
-import { DismissableScreen } from "@neverquest/components/DismissableScreen";
-import { IconImage } from "@neverquest/components/IconImage";
-import { Inventory } from "@neverquest/components/Inventory";
-import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react";
-import IconInventory from "@neverquest/icons/knapsack.svg?react";
-import { hasFlatlined, isAttacking } from "@neverquest/state/character";
-import { encumbranceExtent, notifyOverEncumbrance, ownedItem } from "@neverquest/state/inventory";
-import { activeControl } from "@neverquest/state/ui";
-import { getAnimationClass } from "@neverquest/utilities/getters";
-import { animateElement } from "@neverquest/utilities/helpers";
+import { ItemAcquisition } from "@neverquest/components/Controls/ItemAcquisition"
+import { DismissableScreen } from "@neverquest/components/DismissableScreen"
+import { IconImage } from "@neverquest/components/IconImage"
+import { Inventory } from "@neverquest/components/Inventory"
+import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react"
+import IconInventory from "@neverquest/icons/knapsack.svg?react"
+import { hasFlatlined, isAttacking } from "@neverquest/state/character"
+import { encumbranceExtent, notifyOverEncumbrance, ownedItem } from "@neverquest/state/inventory"
+import { activeControl } from "@neverquest/state/ui"
+import { getAnimationClass } from "@neverquest/utilities/getters"
+import { animateElement } from "@neverquest/utilities/helpers"
 
 export function ShowInventory() {
-  const [activeControlValue, setActiveControl] = useRecoilState(activeControl);
-  const encumbranceExtentValue = useRecoilValue(encumbranceExtent);
-  const isAttackingValue = useRecoilValue(isAttacking);
-  const hasFlatlinedValue = useRecoilValue(hasFlatlined);
-  const notifyOverEncumbranceValue = useRecoilValue(notifyOverEncumbrance);
-  const ownedItemKnapsack = useRecoilValue(ownedItem("knapsack"));
-  const resetActiveControl = useResetRecoilState(activeControl);
-  const resetNotifyEncumbranceValue = useResetRecoilState(notifyOverEncumbrance);
+  const [activeControlValue, setActiveControl] = useRecoilState(activeControl)
+  const encumbranceExtentValue = useRecoilValue(encumbranceExtent)
+  const isAttackingValue = useRecoilValue(isAttacking)
+  const hasFlatlinedValue = useRecoilValue(hasFlatlined)
+  const notifyOverEncumbranceValue = useRecoilValue(notifyOverEncumbrance)
+  const ownedItemKnapsack = useRecoilValue(ownedItem(`knapsack`))
+  const resetActiveControl = useResetRecoilState(activeControl)
+  const resetNotifyEncumbranceValue = useResetRecoilState(notifyOverEncumbrance)
 
-  const badgeElement = useRef<HTMLDivElement | null>(null);
+  const badgeElement = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
-    const { current } = badgeElement;
+    const { current } = badgeElement
 
     if (current !== null && notifyOverEncumbranceValue) {
       animateElement({
-        animation: "heartBeat",
+        animation: `heartBeat`,
         element: current,
         onAnimationEnd: resetNotifyEncumbranceValue,
-      });
+      })
     }
-  }, [notifyOverEncumbranceValue, resetNotifyEncumbranceValue]);
+  }, [notifyOverEncumbranceValue, resetNotifyEncumbranceValue])
 
   if (ownedItemKnapsack !== undefined) {
     return (
@@ -48,11 +48,11 @@ export function ShowInventory() {
             </Tooltip>
           }
         >
-          <div className={getAnimationClass({ animation: "bounceIn" })}>
+          <div className={getAnimationClass({ animation: `bounceIn` })}>
             <Button
               disabled={hasFlatlinedValue || isAttackingValue}
               onClick={() => {
-                setActiveControl("inventory");
+                setActiveControl(`inventory`)
               }}
               variant="outline-dark"
             >
@@ -72,13 +72,13 @@ export function ShowInventory() {
         </OverlayTrigger>
 
         <DismissableScreen
-          isShowing={activeControlValue === "inventory"}
+          isShowing={activeControlValue === `inventory`}
           onClose={resetActiveControl}
           title="Inventory"
         >
           <Inventory />
         </DismissableScreen>
       </>
-    );
+    )
   }
 }

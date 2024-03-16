@@ -1,16 +1,16 @@
-import { Stack } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { Stack } from "react-bootstrap"
+import { useRecoilValue } from "recoil"
 
-import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { GearComparison } from "@neverquest/components/Inventory/GearComparison";
-import { LABEL_UNKNOWN } from "@neverquest/data/general";
-import IconBurden from "@neverquest/icons/burden.svg?react";
-import { isShowing } from "@neverquest/state/ui";
-import type { Comparison } from "@neverquest/types/components";
-import { formatNumber } from "@neverquest/utilities/formatters";
+import { IconDisplay } from "@neverquest/components/IconDisplay"
+import { GearComparison } from "@neverquest/components/Inventory/GearComparison"
+import { LABEL_UNKNOWN } from "@neverquest/data/general"
+import IconBurden from "@neverquest/icons/burden.svg?react"
+import { isShowing } from "@neverquest/state/ui"
+import type { Comparison } from "@neverquest/types/components"
+import { formatNumber } from "@neverquest/utilities/formatters"
 
 export function BurdenDetail({ burden, comparison }: { burden: number; comparison: Comparison }) {
-  const isShowingStamina = useRecoilValue(isShowing("stamina"));
+  const isShowingStamina = useRecoilValue(isShowing(`stamina`))
 
   if (burden > 0) {
     return (
@@ -23,7 +23,7 @@ export function BurdenDetail({ burden, comparison }: { burden: number; compariso
 
             <td>
               <Stack direction="horizontal" gap={1}>
-                <IconDisplay Icon={IconBurden} iconProps={{ className: "small" }}>
+                <IconDisplay Icon={IconBurden} iconProps={{ className: `small` }}>
                   <span>{formatNumber({ value: burden })}</span>
                 </IconDisplay>
 
@@ -43,6 +43,6 @@ export function BurdenDetail({ burden, comparison }: { burden: number; compariso
           </td>
         )}
       </tr>
-    );
+    )
   }
 }

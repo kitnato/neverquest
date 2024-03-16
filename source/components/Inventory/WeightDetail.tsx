@@ -1,13 +1,13 @@
-import { Stack } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { Stack } from "react-bootstrap"
+import { useRecoilValue } from "recoil"
 
-import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { GearComparison } from "@neverquest/components/Inventory/GearComparison";
-import { LABEL_UNKNOWN } from "@neverquest/data/general";
-import IconWeight from "@neverquest/icons/weight.svg?react";
-import { isShowing } from "@neverquest/state/ui";
-import type { Comparison } from "@neverquest/types/components";
-import { formatNumber } from "@neverquest/utilities/formatters";
+import { IconDisplay } from "@neverquest/components/IconDisplay"
+import { GearComparison } from "@neverquest/components/Inventory/GearComparison"
+import { LABEL_UNKNOWN } from "@neverquest/data/general"
+import IconWeight from "@neverquest/icons/weight.svg?react"
+import { isShowing } from "@neverquest/state/ui"
+import type { Comparison } from "@neverquest/types/components"
+import { formatNumber } from "@neverquest/utilities/formatters"
 
 export function WeightDetail({
   amount,
@@ -18,7 +18,7 @@ export function WeightDetail({
   comparison?: Comparison;
   weight: number;
 }) {
-  const isShowingWeight = useRecoilValue(isShowing("weight"));
+  const isShowingWeight = useRecoilValue(isShowing(`weight`))
 
   return (
     <tr>
@@ -30,7 +30,7 @@ export function WeightDetail({
 
           <td>
             <Stack direction="horizontal" gap={1}>
-              <IconDisplay Icon={IconWeight} iconProps={{ className: "small" }}>
+              <IconDisplay Icon={IconWeight} iconProps={{ className: `small` }}>
                 <span>{formatNumber({ value: weight })}</span>
               </IconDisplay>
 
@@ -54,5 +54,5 @@ export function WeightDetail({
         </td>
       )}
     </tr>
-  );
+  )
 }

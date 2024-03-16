@@ -1,22 +1,22 @@
-import { Stack } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { Stack } from "react-bootstrap"
+import { useRecoilValue } from "recoil"
 
-import { AcquireAlchemistSkill } from "@neverquest/components/Caravan/Alchemist/AcquireAlchemistSkill";
-import { TransmuteGems } from "@neverquest/components/Caravan/Alchemist/TransmuteGems";
-import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
-import { LABEL_NONE_AVAILABLE } from "@neverquest/data/general";
-import { inventory } from "@neverquest/state/inventory";
-import { isGemItem } from "@neverquest/types/type-guards";
-import { stackItems } from "@neverquest/utilities/helpers";
+import { AcquireAlchemistSkill } from "@neverquest/components/Caravan/Alchemist/AcquireAlchemistSkill"
+import { TransmuteGems } from "@neverquest/components/Caravan/Alchemist/TransmuteGems"
+import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay"
+import { LABEL_NONE_AVAILABLE } from "@neverquest/data/general"
+import { inventory } from "@neverquest/state/inventory"
+import { isGemItem } from "@neverquest/types/type-guards"
+import { stackItems } from "@neverquest/utilities/helpers"
 
 export function Alchemist() {
-  const inventoryValue = useRecoilValue(inventory);
+  const inventoryValue = useRecoilValue(inventory)
 
   const storedGemsStack = stackItems(
     inventoryValue
       .filter(isGemItem)
       .toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2)),
-  );
+  )
 
   return (
     <Stack gap={5}>
@@ -40,5 +40,5 @@ export function Alchemist() {
 
       <AcquireAlchemistSkill />
     </Stack>
-  );
+  )
 }

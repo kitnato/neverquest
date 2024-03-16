@@ -1,29 +1,29 @@
-import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap"
+import { useRecoilValue } from "recoil"
 
-import { DeltasDisplay } from "@neverquest/components/DeltasDisplay";
-import { DescriptionDisplay } from "@neverquest/components/DescriptionDisplay";
-import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar";
-import { LABEL_MAXIMUM, PERCENTAGE_POINTS } from "@neverquest/data/general";
-import { MASTERIES } from "@neverquest/data/masteries";
-import { useDeltaText } from "@neverquest/hooks/useDeltaText";
-import { isMasteryAtMaximum, masteryCost, masteryProgress } from "@neverquest/state/masteries";
-import type { Delta, Mastery } from "@neverquest/types/unions";
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
+import { DescriptionDisplay } from "@neverquest/components/DescriptionDisplay"
+import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
+import { LABEL_MAXIMUM, PERCENTAGE_POINTS } from "@neverquest/data/general"
+import { MASTERIES } from "@neverquest/data/masteries"
+import { useDeltaText } from "@neverquest/hooks/useDeltaText"
+import { isMasteryAtMaximum, masteryCost, masteryProgress } from "@neverquest/state/masteries"
+import type { Delta, Mastery } from "@neverquest/types/unions"
 
 export function MasteryProgress({ mastery }: { mastery: Mastery }) {
-  const masteryProgressState = masteryProgress(mastery);
-  const isMasteryAtMaximumValue = useRecoilValue(isMasteryAtMaximum(mastery));
-  const masteryCostValue = useRecoilValue(masteryCost(mastery));
-  const masteryProgressValue = useRecoilValue(masteryProgressState);
+  const masteryProgressState = masteryProgress(mastery)
+  const isMasteryAtMaximumValue = useRecoilValue(isMasteryAtMaximum(mastery))
+  const masteryCostValue = useRecoilValue(masteryCost(mastery))
+  const masteryProgressValue = useRecoilValue(masteryProgressState)
 
-  const { instructionIcons, instructions } = MASTERIES[mastery];
-  const delta: Delta = `${mastery}Progress`;
+  const { instructionIcons, instructions } = MASTERIES[mastery]
+  const delta: Delta = `${mastery}Progress`
 
   useDeltaText({
     delta,
     ignoreZero: true,
     state: masteryProgressState,
-  });
+  })
 
   return (
     <OverlayTrigger
@@ -56,5 +56,5 @@ export function MasteryProgress({ mastery }: { mastery: Mastery }) {
         </LabelledProgressBar>
       </div>
     </OverlayTrigger>
-  );
+  )
 }

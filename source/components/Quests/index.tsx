@@ -1,51 +1,51 @@
-import { Stack, TabContainer, TabContent, TabPane } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { Stack, TabContainer, TabContent, TabPane } from "react-bootstrap"
+import { useRecoilValue } from "recoil"
 
-import { QuestBonusDisplay } from "@neverquest/components/Quests/QuestBonusDisplay";
-import { QuestTab } from "@neverquest/components/Quests/QuestTab";
-import { QuestTabsNav } from "@neverquest/components/Quests/QuestTabsNav";
-import IconConquest from "@neverquest/icons/conquest.svg?react";
-import IconRoutine from "@neverquest/icons/routine.svg?react";
-import IconTriumph from "@neverquest/icons/triumph.svg?react";
-import { canTrackQuests } from "@neverquest/state/quests";
-import { isSkillAcquired } from "@neverquest/state/skills";
-import { isShowingQuestBonus } from "@neverquest/state/ui";
-import type { TabsData } from "@neverquest/types/components";
-import { QUEST_BONUS_TYPES, type QuestClass } from "@neverquest/types/unions";
+import { QuestBonusDisplay } from "@neverquest/components/Quests/QuestBonusDisplay"
+import { QuestTab } from "@neverquest/components/Quests/QuestTab"
+import { QuestTabsNav } from "@neverquest/components/Quests/QuestTabsNav"
+import IconConquest from "@neverquest/icons/conquest.svg?react"
+import IconRoutine from "@neverquest/icons/routine.svg?react"
+import IconTriumph from "@neverquest/icons/triumph.svg?react"
+import { canTrackQuests } from "@neverquest/state/quests"
+import { isSkillAcquired } from "@neverquest/state/skills"
+import { isShowingQuestBonus } from "@neverquest/state/ui"
+import type { TabsData } from "@neverquest/types/components"
+import { QUEST_BONUS_TYPES, type QuestClass } from "@neverquest/types/unions"
 
 const TABS: TabsData<QuestClass> = [
   {
     Component: () => <QuestTab questClass="routine" />,
     Icon: IconRoutine,
-    label: "routine",
+    label: `routine`,
   },
   {
     Component: () => <QuestTab questClass="conquest" />,
     Icon: IconConquest,
-    label: "conquest",
+    label: `conquest`,
   },
   {
     Component: () => <QuestTab questClass="triumph" />,
     Icon: IconTriumph,
-    label: "triumph",
+    label: `triumph`,
   },
-];
+]
 
 export function Quests() {
-  const canTrackQuestsValue = useRecoilValue(canTrackQuests);
-  const isSkillAcquiredMemetics = useRecoilValue(isSkillAcquired("memetics"));
-  const isShowingQuestBonusValue = useRecoilValue(isShowingQuestBonus);
+  const canTrackQuestsValue = useRecoilValue(canTrackQuests)
+  const isSkillAcquiredMemetics = useRecoilValue(isSkillAcquired(`memetics`))
+  const isShowingQuestBonusValue = useRecoilValue(isShowingQuestBonus)
 
   if (!isSkillAcquiredMemetics) {
     return (
       <span className="fst-italic">
         The journal is undecipherable. Perhaps someone versed in the alchemical arts can help ...
       </span>
-    );
+    )
   }
 
   if (!canTrackQuestsValue) {
-    return <span className="fst-italic">Time for contemplation must be made in retirement.</span>;
+    return <span className="fst-italic">Time for contemplation must be made in retirement.</span>
   }
 
   return (
@@ -78,5 +78,5 @@ export function Quests() {
         </Stack>
       </TabContainer>
     </Stack>
-  );
+  )
 }

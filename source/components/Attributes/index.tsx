@@ -1,10 +1,10 @@
-import { Stack } from "react-bootstrap";
+import { Stack } from "react-bootstrap"
 
-import { AttributeDisplay } from "@neverquest/components/Attributes/AttributeDisplay";
-import { AttributePointProgress } from "@neverquest/components/Attributes/AttributePointProgress";
-import { AttributePoints } from "@neverquest/components/Attributes/AttributePoints";
-import { PowerLevel } from "@neverquest/components/Status/PowerLevel";
-import { ATTRIBUTE_TYPES } from "@neverquest/types/unions";
+import { AttributeDisplay } from "@neverquest/components/Attributes/AttributeDisplay"
+import { AttributePointProgress } from "@neverquest/components/Attributes/AttributePointProgress"
+import { AttributePoints } from "@neverquest/components/Attributes/AttributePoints"
+import { PowerLevel } from "@neverquest/components/Status/PowerLevel"
+import { ATTRIBUTE_TYPES } from "@neverquest/types/unions"
 
 export function Attributes() {
   return (
@@ -23,5 +23,5 @@ export function Attributes() {
         ))}
       </Stack>
     </Stack>
-  );
+  )
 }

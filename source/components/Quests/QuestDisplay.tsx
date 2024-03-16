@@ -1,23 +1,23 @@
-import { OverlayTrigger, Stack, ToggleButton, ToggleButtonGroup, Tooltip } from "react-bootstrap";
-import { CircularProgressbar } from "react-circular-progressbar";
-import { useRecoilValue } from "recoil";
+import { OverlayTrigger, Stack, ToggleButton, ToggleButtonGroup, Tooltip } from "react-bootstrap"
+import { CircularProgressbar } from "react-circular-progressbar"
+import { useRecoilValue } from "recoil"
 
-import { IconDisplay } from "@neverquest/components/IconDisplay";
+import { IconDisplay } from "@neverquest/components/IconDisplay"
 import {
   CLASS_FULL_WIDTH_JUSTIFIED,
   LABEL_UNKNOWN,
   POPOVER_TRIGGER,
-} from "@neverquest/data/general";
-import { QUEST_COMPLETION_BONUS } from "@neverquest/data/quests";
-import { useCompleteQuest } from "@neverquest/hooks/actions/useCompleteQuest";
-import IconDamage from "@neverquest/icons/damage.svg?react";
-import IconHealth from "@neverquest/icons/health.svg?react";
-import IconStamina from "@neverquest/icons/stamina.svg?react";
-import { questProgress, questStatuses } from "@neverquest/state/quests";
-import type { QuestData } from "@neverquest/types";
-import { isQuestBonus } from "@neverquest/types/type-guards";
-import type { Quest, QuestBonus } from "@neverquest/types/unions";
-import { formatNumber } from "@neverquest/utilities/formatters";
+} from "@neverquest/data/general"
+import { QUEST_COMPLETION_BONUS } from "@neverquest/data/quests"
+import { useCompleteQuest } from "@neverquest/hooks/actions/useCompleteQuest"
+import IconDamage from "@neverquest/icons/damage.svg?react"
+import IconHealth from "@neverquest/icons/health.svg?react"
+import IconStamina from "@neverquest/icons/stamina.svg?react"
+import { questProgress, questStatuses } from "@neverquest/state/quests"
+import type { QuestData } from "@neverquest/types"
+import { isQuestBonus } from "@neverquest/types/type-guards"
+import type { Quest, QuestBonus } from "@neverquest/types/unions"
+import { formatNumber } from "@neverquest/utilities/formatters"
 
 export function QuestDisplay({
   activeQuest: { description, hidden, progressionIndex, progressionMaximum, title },
@@ -26,33 +26,33 @@ export function QuestDisplay({
   activeQuest: QuestData;
   quest: Quest;
 }) {
-  const questProgressValue = useRecoilValue(questProgress(quest));
-  const questStatusValue = useRecoilValue(questStatuses(quest));
+  const questProgressValue = useRecoilValue(questProgress(quest))
+  const questStatusValue = useRecoilValue(questStatuses(quest))
 
-  const completeQuest = useCompleteQuest();
+  const completeQuest = useCompleteQuest()
 
-  const status = questStatusValue[progressionIndex];
+  const status = questStatusValue[progressionIndex]
 
   if (status === undefined) {
-    return;
+    return
   }
 
-  const hasCompletedQuest = isQuestBonus(status);
-  const isQuestOver = hasCompletedQuest || status === "achieved";
-  const cappedProgress = isQuestOver ? progressionMaximum : questProgressValue;
-  const choiceID = `quest-completion-${quest}-${progressionMaximum}`;
+  const hasCompletedQuest = isQuestBonus(status)
+  const isQuestOver = hasCompletedQuest || status === `achieved`
+  const cappedProgress = isQuestOver ? progressionMaximum : questProgressValue
+  const choiceID = `quest-completion-${quest}-${progressionMaximum}`
 
   return (
     <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
       <Stack
-        className={`me-2${hasCompletedQuest ? " opacity-50" : ""}`}
+        className={`me-2${hasCompletedQuest ? ` opacity-50` : ``}`}
         direction="horizontal"
         gap={3}
       >
         <CircularProgressbar
           maxValue={progressionMaximum}
-          text={`${formatNumber({ format: "abbreviated", value: cappedProgress })}/${formatNumber({
-            format: "abbreviated",
+          text={`${formatNumber({ format: `abbreviated`, value: cappedProgress })}/${formatNumber({
+            format: `abbreviated`,
             value: progressionMaximum,
           })}`}
           value={cappedProgress}
@@ -69,7 +69,7 @@ export function QuestDisplay({
         </Stack>
       </Stack>
 
-      {status !== "incomplete" && (
+      {status !== `incomplete` && (
         <OverlayTrigger
           overlay={
             <Tooltip>
@@ -80,22 +80,22 @@ export function QuestDisplay({
           trigger={hasCompletedQuest ? [] : POPOVER_TRIGGER}
         >
           <ToggleButtonGroup
-            className={`me-1${hasCompletedQuest ? " opacity-50" : ""}`}
+            className={`me-1${hasCompletedQuest ? ` opacity-50` : ``}`}
             name={choiceID}
             onChange={(value) => {
               completeQuest({
                 bonus: value as QuestBonus,
                 progression: progressionMaximum,
                 quest,
-              });
+              })
             }}
             type="radio"
             value={hasCompletedQuest ? status : undefined}
           >
             {[
-              { bonus: "healthBonus", Icon: IconHealth },
-              { bonus: "staminaBonus", Icon: IconStamina },
-              { bonus: "damageBonus", Icon: IconDamage },
+              { bonus: `healthBonus`, Icon: IconHealth },
+              { bonus: `staminaBonus`, Icon: IconStamina },
+              { bonus: `damageBonus`, Icon: IconDamage },
             ].map(({ bonus, Icon }) => (
               <ToggleButton
                 disabled={hasCompletedQuest}
@@ -104,12 +104,12 @@ export function QuestDisplay({
                 value={bonus}
                 variant="outline-dark"
               >
-                <IconDisplay Icon={Icon} iconProps={{ className: "small" }}>
+                <IconDisplay Icon={Icon} iconProps={{ className: `small` }}>
                   <span>
                     +
                     {formatNumber({
                       decimals: 0,
-                      format: "percentage",
+                      format: `percentage`,
                       value: QUEST_COMPLETION_BONUS,
                     })}
                   </span>
@@ -120,5 +120,5 @@ export function QuestDisplay({
         </OverlayTrigger>
       )}
     </div>
-  );
+  )
 }

@@ -1,8 +1,8 @@
-import { Nav, NavItem, NavLink, Stack, TabContainer, TabContent, TabPane } from "react-bootstrap";
+import { Nav, NavItem, NavLink, Stack, TabContainer, TabContent, TabPane } from "react-bootstrap"
 
-import { IconDisplay } from "@neverquest/components/IconDisplay";
-import type { TabsData } from "@neverquest/types/components";
-import { capitalizeAll } from "@neverquest/utilities/formatters";
+import { IconDisplay } from "@neverquest/components/IconDisplay"
+import type { TabsData } from "@neverquest/types/components"
+import { capitalizeAll } from "@neverquest/utilities/formatters"
 
 export function IconTabs<TabLabel extends string>({
   activeKey,
@@ -19,7 +19,7 @@ export function IconTabs<TabLabel extends string>({
       defaultActiveKey={tabs[0].label}
       onSelect={(key) => {
         if (onSelect !== undefined && key !== null) {
-          onSelect(key as TabLabel);
+          onSelect(key as TabLabel)
         }
       }}
     >
@@ -47,5 +47,5 @@ export function IconTabs<TabLabel extends string>({
         </TabContent>
       </Stack>
     </TabContainer>
-  );
+  )
 }

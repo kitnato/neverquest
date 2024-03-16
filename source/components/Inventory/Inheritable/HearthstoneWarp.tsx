@@ -1,22 +1,22 @@
-import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
-import { useRecoilValue, useResetRecoilState } from "recoil";
+import { Button, OverlayTrigger, Tooltip } from "react-bootstrap"
+import { useRecoilValue, useResetRecoilState } from "recoil"
 
-import { POPOVER_TRIGGER } from "@neverquest/data/general";
-import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
-import { useToggleLocation } from "@neverquest/hooks/actions/useToggleLocation";
-import { isAttacking } from "@neverquest/state/character";
-import { location } from "@neverquest/state/encounter";
-import { activeControl } from "@neverquest/state/ui";
+import { POPOVER_TRIGGER } from "@neverquest/data/general"
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
+import { useToggleLocation } from "@neverquest/hooks/actions/useToggleLocation"
+import { isAttacking } from "@neverquest/state/character"
+import { location } from "@neverquest/state/encounter"
+import { activeControl } from "@neverquest/state/ui"
 
 export function HearthstoneWarp() {
-  const isAttackingValue = useRecoilValue(isAttacking);
-  const locationValue = useRecoilValue(location);
-  const resetActiveControl = useResetRecoilState(activeControl);
+  const isAttackingValue = useRecoilValue(isAttacking)
+  const locationValue = useRecoilValue(location)
+  const resetActiveControl = useResetRecoilState(activeControl)
 
-  const progressQuest = useProgressQuest();
-  const toggleLocation = useToggleLocation();
+  const progressQuest = useProgressQuest()
+  const toggleLocation = useToggleLocation()
 
-  const canWarp = !isAttackingValue && locationValue === "wilderness";
+  const canWarp = !isAttackingValue && locationValue === `wilderness`
 
   return (
     <OverlayTrigger
@@ -31,9 +31,9 @@ export function HearthstoneWarp() {
         <Button
           disabled={!canWarp}
           onClick={() => {
-            progressQuest({ quest: "warpingCaravan" });
-            resetActiveControl();
-            toggleLocation();
+            progressQuest({ quest: `warpingCaravan` })
+            resetActiveControl()
+            toggleLocation()
           }}
           variant="outline-dark"
         >
@@ -41,5 +41,5 @@ export function HearthstoneWarp() {
         </Button>
       </div>
     </OverlayTrigger>
-  );
+  )
 }

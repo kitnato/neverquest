@@ -1,9 +1,9 @@
 import { atom, selector } from "recoil";
 
-import { ownedItem } from "./inventory";
 import { LABEL_UNKNOWN } from "@neverquest/data/general";
 import { handleStorage } from "@neverquest/state/effects/handleStorage";
 import { armor, shield, weapon } from "@neverquest/state/gear";
+import { ownedItem } from "@neverquest/state/inventory";
 import { ammunition } from "@neverquest/state/items";
 import { health, stamina } from "@neverquest/state/reserves";
 import { isTraitAcquired } from "@neverquest/state/traits";

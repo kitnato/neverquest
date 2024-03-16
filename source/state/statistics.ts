@@ -1,6 +1,5 @@
 import { selector } from "recoil";
 
-import { infusionEffect } from "./items";
 import { ATTRIBUTES } from "@neverquest/data/attributes";
 import { GENERIC_MINIMUM, PERCENTAGE_POINTS } from "@neverquest/data/general";
 import {
@@ -20,6 +19,7 @@ import {
 import { bleed, bleedChance, staggerChance, stunChance } from "@neverquest/state/ailments";
 import { attributeStatistic } from "@neverquest/state/attributes";
 import { armor, elementalEffects, shield, weapon } from "@neverquest/state/gear";
+import { infusionEffect } from "@neverquest/state/items";
 import { masteryStatistic } from "@neverquest/state/masteries";
 import { questsBonus } from "@neverquest/state/quests";
 import { stamina } from "@neverquest/state/reserves";

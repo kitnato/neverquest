@@ -37,6 +37,8 @@ export function SaveLoad() {
   const [{ message, status }, setResult] = useState(DEFAULT_RESULT);
 
   const fileInput = useRef<HTMLInputElement>(null);
+  const [major, minor] = version.split(".") as [string, string, string];
+  const compatibleVersion = `${major}${minor}`;
 
   const onHide = () => {
     setIsShowingModal(false);
@@ -141,10 +143,23 @@ export function SaveLoad() {
                       .then((contents) => {
                         const [session, contentsVersion] = contents.split(VERSION_KEY);
 
-                        if (contentsVersion === undefined || contentsVersion !== version) {
+                        if (contentsVersion === undefined) {
+                          setIsLoading(false);
+                          setResult({ message: "Invalid version.", status: false });
+
+                          return;
+                        }
+
+                        const [fileMajor, fileMinor] = contentsVersion.split(".");
+
+                        if (`${fileMajor ?? ""}${fileMinor ?? ""}` !== compatibleVersion) {
                           setIsLoading(false);
                           setResult({ message: "Incompatible version.", status: false });
-                        } else if (session === undefined) {
+
+                          return;
+                        }
+
+                        if (session === undefined) {
                           setIsLoading(false);
                           setResult({ message: "Invalid file.", status: false });
                         } else {

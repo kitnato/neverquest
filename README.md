@@ -33,7 +33,7 @@ After [installation](#installation), but before committing any changes, do the f
 
 Now, every time changes are committed, all the relevant code, markup and style linters & formatters will apply any changes automatically.
 
-The linter config can be viewed in `.eslintrc.json`, `.stylelintrc.json` and `.prettierc.json`.
+The linter config can be viewed in `.eslintrc.json` and `.stylelintrc.json`.
 
 ## Attribution
 
@@ -45,8 +45,9 @@ The linter config can be viewed in `.eslintrc.json`, `.stylelintrc.json` and `.p
 - State management library is [Recoil](https://recoiljs.org).
 - Animation library is [Animate.css](https://animate.style).
 - Build system is [Vite](https://vitejs.dev).
-- Code style & linting is provided by [eslint](https://eslint.org), [stylelint](https://stylelint.io) and [prettier](https://prettier.io), using [@kitnato/eslint-config-succinct](https://github.com/kitnato/eslint-config-succinct).
-- Automation is provided by [husky](https://typicode.github.io/husky) and [lint-staged](https://www.npmjs.com/package/lint-staged).
+- Code style & linting is provided by [ESLint](https://eslint.org), and [ESLint Stylistic](https://eslint.style) using [@kitnato/eslint-config-succinct](https://github.com/kitnato/eslint-config-succinct).
+- SCSS linting is provided by [Stylelint](https://stylelint.io) and [Stylelint Stylistic](https://github.com/stylelint-stylistic/stylelint-stylistic).
+- Automation is provided by [Husky](https://typicode.github.io/husky) and [lint-staged](https://www.npmjs.com/package/lint-staged).
 
 ## License
 
@@ -59,11 +60,12 @@ This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareA
 ### 1. Gameplay objectives
 
 - Player always has something to do
-- No long waits, cliffs or walls
-- Can be played in the background
+- No arbitrary waiting time, cliffs or walls
+- Can play itself while not focused
+- Incremental progress can be made at all times
 - No excessive or repetitive clicking
 - Decisions are frequent and they have immediate gameplay impact
-- High character build variety
+- High character build variety with a long tail of min-maxing
 - Manage an economy of resources and character builds with trade-offs
 
 ### 2. Warren Spector's 6+2+1 [questions](https://www.gamedeveloper.com/design/warren-spector-traces-i-deus-ex-i-s-development-back-to-a-game-of-d-d)

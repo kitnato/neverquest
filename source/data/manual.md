@@ -134,7 +134,7 @@ Requires a certain [skill](#skills).
 
 #### Dodge chance
 
-A percentage determining the chance of when being struck, that all damage is avoided entirely. The equipped armor's [burden](#armor) incurs a stamina cost.
+A percentage determining the chance of when being struck, that all damage is avoided entirely. The equipped armor's [burden](#armor) incurs a stamina cost. Dodging is different from other damage-mitigating actions such as [blocking](#block-chance) and [parrying](#parry-rating) in that it avoids the infliction of any [ailments](#character-ailments) altogether.
 
 Dodge chance can be increased with the [agility](#agility) attribute.
 
@@ -306,7 +306,9 @@ Viewing encumbrance and managing it can only be accomplished once the [knapsack]
 
 ### Gear
 
-Items that can be equipped and unequipped from the inventory.
+Items that can be equipped and unequipped from the [inventory](#inventory).
+
+If gear has been equipped, all subsequent pieces of gear in the inventory will show indicators for their individual effects when compared to what is currently equipped. The indicators will either show that an effect is higher (up arrow), lower (down arrow) and simultaneously if that makes it worse (red) or better (green) than what is currently in the equipment slot. If it's the same effect, then the comparison is a grey diamond shape.
 
 The [merchant](#merchant) sells one of each gear type of various levels. To acquire improved gear, they need to be crafted by the [blacksmith](#blacksmith).
 
@@ -431,7 +433,7 @@ A shield's burden is paid in [stamina](#stamina) every time you successfully blo
 
 #### Gems
 
-Gems are items that can be applied to gear. They are dropped by [bosses](#bosses), one at stage 10 and one more for each boss encounter after that. For example, four gems are dropped by the boss on stage 25.
+Gems are items that can be applied to gear. They are dropped by [bosses](#bosses), one at stage 10 and one more for each boss encounter after that. For example, four gems are dropped by the boss on stage 25 if it's defeated for the first time. If a boss has already been defeated on a particular stage, visiting it again will drastically reduce the chance to drop each of its gems.
 
 Up to 5 gems can be applied to a piece of gear. Once applied, gems are consumed and cannot be removed or transferred to a different piece of gear.
 
@@ -474,6 +476,8 @@ These relics grant a new action. Some can be equipped for their effect to be gra
 ##### Infusable relics
 
 Some of usable relics are infusable, meaning they allow [essence](#essence) to be spent on them to upgrade their effect via infusion levels. This can only be done achieved once a certain [skill](#skills) has been acquired.
+
+To infuse continuously, the button can be held down so as to not require excessive clicking.
 
 ###### Eldritch Codex
 
@@ -623,7 +627,7 @@ Temporary, negative status effects that can afflict you or the monster.
 
 ### Character ailments
 
-Ailments that are inflicted by monsters when defending.
+Ailments that are inflicted by monsters when defending. Ailments can only be avoided entirely if they're [deflected](#deflection-chance) or the attack is [dodged](#dodge-chance).
 
 #### Blight
 
@@ -711,7 +715,7 @@ A [deflection](#deflection-chance) chance base value is added to the current def
 
 #### Nudist
 
-[Dodge](#dodge-chance) rate is doubled when not wearing any armor, effectively reducing the amount of attribute points required in [agility](#agility) to reach it.This is capped out at the maximum possible dodge rate (under 100%).
+[Dodge](#dodge-chance) rate is increased when not wearing any armor, effectively reducing the amount of attribute points required in [agility](#agility) to reach the maximum possible dodge rate.
 
 Dodging also heals a certain amount of [health](#health) on every dodge.
 

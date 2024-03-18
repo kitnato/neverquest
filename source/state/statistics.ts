@@ -129,9 +129,9 @@ export const damage = withStateKey(`damage`, (key) =>
         // Weapon damage multiplied by brawler trait bonus, if applicable.
         (weaponValue.damage *
           (get(isTraitAcquired(`brawler`)) &&
-          isUnshielded(get(shield)) &&
-          (isMelee(weaponValue) || isWeaponUnarmed) &&
-          (weaponValue.grip === `one-handed` || get(isTraitAcquired(`colossus`)))
+            isUnshielded(get(shield)) &&
+            (isMelee(weaponValue) || isWeaponUnarmed) &&
+            (weaponValue.grip === `one-handed` || get(isTraitAcquired(`colossus`)))
             ? 1 + BRAWLER_DAMAGE_BONUS
             : 1) +
           // Strength attribute effect.
@@ -142,8 +142,8 @@ export const damage = withStateKey(`damage`, (key) =>
           (get(isTraitAcquired(`bruiser`)) && isWeaponUnarmed
             ? get(stamina) * BRUISER.damage
             : 0)) *
-          // All multiplied by total damage bonus from quest rewards.
-          (1 + get(questsBonus(`damageBonus`))),
+        // All multiplied by total damage bonus from quest rewards.
+        (1 + get(questsBonus(`damageBonus`))),
       )
     },
     key,
@@ -168,10 +168,10 @@ export const deflectionChance = withStateKey(`deflectionChance`, (key) =>
     get: ({ get }) =>
       get(isSkillAcquired(`impermeability`))
         ? Math.min(
-            get(armor).deflection +
-              (get(isTraitAcquired(`inoculated`)) ? INOCULATED_DEFLECTION_BASE : 0),
-            DEFLECTION_MAXIMUM,
-          )
+          get(armor).deflection +
+          (get(isTraitAcquired(`inoculated`)) ? INOCULATED_DEFLECTION_BASE : 0),
+          DEFLECTION_MAXIMUM,
+        )
         : 0,
     key,
   }),
@@ -182,12 +182,12 @@ export const dodgeChance = withStateKey(`dodgeChance`, (key) =>
     get: ({ get }) =>
       get(isSkillAcquired(`evasion`))
         ? Math.min(
-            get(attributeStatistic(`agility`)) *
-              (get(isTraitAcquired(`nudist`)) && isUnarmored(get(armor))
-                ? 1 + NUDIST.dodgeBonus
-                : 1),
-            ATTRIBUTES.agility.maximum ?? Number.POSITIVE_INFINITY,
-          )
+          get(attributeStatistic(`agility`)) *
+          (get(isTraitAcquired(`nudist`)) && isUnarmored(get(armor))
+            ? 1 + NUDIST.dodgeBonus
+            : 1),
+          ATTRIBUTES.agility.maximum ?? Number.POSITIVE_INFINITY,
+        )
         : 0,
     key,
   }),

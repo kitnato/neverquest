@@ -12,7 +12,7 @@ import {
 import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { ItemsInherited } from "@neverquest/components/Retirement/ItemsInherited"
 import { Perks } from "@neverquest/components/Retirement/Perks"
-import { ResetDetails } from "@neverquest/components/Retirement/ResetDetails"
+import { RenewalDetails } from "@neverquest/components/Retirement/RenewalDetails"
 import { TraitSelection } from "@neverquest/components/Retirement/TraitSelection"
 import { useRetire } from "@neverquest/hooks/actions/useRetire"
 import IconRetire from "@neverquest/icons/retire.svg?react"
@@ -44,7 +44,7 @@ export function Retirement({
 						Weary bones yearn for quiescence to foster a new beginning.
 					</span>
 
-					<ResetDetails />
+					<RenewalDetails />
 
 					<Perks />
 

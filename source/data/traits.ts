@@ -129,7 +129,7 @@ export const TRAITS: Record<
 		Icon: IconStalwart,
 	},
 	tank: {
-		description: `With a # shield equipped, # protection is increased by ${formatNumber({
+		description: `While a # shield is equipped, # protection is increased by ${formatNumber({
 			decimals: 0,
 			format: "percentage",
 			value: TANK_PROTECTION_BONUS,

@@ -49,7 +49,7 @@ export function Reset() {
 				<ModalHeader closeButton>
 					<ModalTitle>
 						<IconDisplay Icon={IconWarning}>
-							<span>Reset game?</span>
+							<span>Reset quest?</span>
 						</IconDisplay>
 					</ModalTitle>
 				</ModalHeader>

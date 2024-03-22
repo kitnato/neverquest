@@ -300,9 +300,11 @@ export const monsterLoot = withStateKey("monsterLoot", key =>
 			const stageValue = get(stage)
 			const stageMaximumValue = get(stageMaximum)
 
+			const droppedEssence = essenceBase + ((essenceBase * getTriangular(stageValue)) / attenuation)
+
 			return {
 				essence: Math.round(
-					(essenceBase + (essenceBase * getTriangular(stageValue)) / attenuation) * Math.min(get(progress), PROGRESS.maximum) * bonus * (encounterValue === "boss" ? boss : 1)
+					(droppedEssence + droppedEssence * Math.min(get(progress), PROGRESS.maximum) * bonus) * (encounterValue === "boss" ? boss : 1)
 					* (1 + getPerkEffect({ perk: "essenceBonus", stage: get(retirementStage) })),
 				),
 				gems: encounterValue === "boss"

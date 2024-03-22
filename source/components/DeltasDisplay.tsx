@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { Fragment, useEffect } from "react"
 import { Stack } from "react-bootstrap"
 import { useRecoilState, useResetRecoilState } from "recoil"
 
@@ -33,13 +33,13 @@ export function DeltasDisplay({ delta }: { delta: Delta }) {
 						}}
 					>
 						{display.map(({ color, value }, index) => (
-							<>
-								<strong className={`${color} small`} key={value}>
+							<Fragment key={value}>
+								<strong className={`${color} small`}>
 									{value}
 								</strong>
 
 								{index < display.length - 1 && <span className="text-dark">{LABEL_SEPARATOR}</span>}
-							</>
+							</Fragment>
 						))}
 					</Stack>
 				</div>

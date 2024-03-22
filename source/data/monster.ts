@@ -65,7 +65,7 @@ export const BLIGHT = {
 export const ESSENCE = {
 	attenuation: 17,
 	base: 5,
-	bonus: 1.03,
+	bonus: 1.025,
 	boss: 1.5,
 	finality: {
 		"res cogitans": 7777,

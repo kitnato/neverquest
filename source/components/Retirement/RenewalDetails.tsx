@@ -11,10 +11,10 @@ import IconPowerLevel from "@neverquest/icons/power-level.svg?react"
 import IconSkills from "@neverquest/icons/skills.svg?react"
 import IconStage from "@neverquest/icons/stage.svg?react"
 
-export function ResetDetails() {
+export function RenewalDetails() {
 	return (
 		<Stack gap={3}>
-			<h6>Reset</h6>
+			<h6>Renewal</h6>
 
 			<ListGroup>
 				<ListGroupItem>
@@ -45,11 +45,16 @@ export function ResetDetails() {
 					<IconDisplay Icon={IconSkills} iconProps={{ className: "small" }}>
 						<span>
 							Skills&nbsp;
-							<span className="small text-secondary">
-								acquired from the&nbsp;
-								<IconImage className="small" Icon={IconMercenary} />
-                &nbsp;Mercenary
-							</span>
+						</span>
+
+						<span className="small text-secondary">
+							acquired from the&nbsp;
+						</span>
+
+						<IconImage className="small text-secondary" Icon={IconMercenary} />
+
+						<span className="small text-secondary">
+							&nbsp;Mercenary
 						</span>
 					</IconDisplay>
 				</ListGroupItem>

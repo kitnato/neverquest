@@ -29,7 +29,7 @@
 		"souls-like"
 	],
 	"dependencies": {
-		"@kitnato/locran": "0.12.1",
+		"@kitnato/locran": "1.0.0",
 		"animate.css": "4.1.1",
 		"bootstrap": "5.3.3",
 		"localstorage-slim": "2.7.0",
@@ -57,7 +57,7 @@
 		"stylelint": "16.2.1",
 		"stylelint-config-standard-scss": "13.0.0",
 		"typescript": "5.4.3",
-		"vite": "5.2.2",
+		"vite": "5.2.3",
 		"vite-plugin-checker": "0.6.4",
 		"vite-plugin-pwa": "0.19.6",
 		"vite-plugin-svgr": "4.2.0",

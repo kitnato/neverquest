@@ -19,12 +19,11 @@ import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness
 import IconCorpse from "@neverquest/icons/corpse.svg?react"
 import IconEssence from "@neverquest/icons/essence.svg?react"
 import IconFlatlined from "@neverquest/icons/flatlined.svg?react"
-import { canResurrect, hasFlatlined } from "@neverquest/state/character"
+import { hasFlatlined } from "@neverquest/state/character"
 import { stage, wildernesses } from "@neverquest/state/encounter"
 import { getAffixStructure } from "@neverquest/utilities/getters"
 
 export function Flatline() {
-	const canResurrectValue = useRecoilValue(canResurrect)
 	const hasFlatlinedValue = useRecoilValue(hasFlatlined)
 	const stageValue = useRecoilValue(stage)
 	const setWildernesses = useSetRecoilState(wildernesses)
@@ -34,7 +33,7 @@ export function Flatline() {
 	const resetWilderness = useResetWilderness()
 
 	return (
-		<Modal backdrop="static" show={!canResurrectValue && hasFlatlinedValue}>
+		<Modal backdrop="static" show={hasFlatlinedValue}>
 			<ModalHeader>
 				<ModalTitle>
 					<IconDisplay Icon={IconFlatlined}>

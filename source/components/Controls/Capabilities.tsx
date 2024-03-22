@@ -13,7 +13,7 @@ import IconSkills from "@neverquest/icons/skills.svg?react"
 import IconTraits from "@neverquest/icons/traits.svg?react"
 import IconUpgrade from "@neverquest/icons/upgrade.svg?react"
 import { areAttributesAffordable } from "@neverquest/state/attributes"
-import { hasFlatlined, isAttacking } from "@neverquest/state/character"
+import { isAttacking, isIncapacitated } from "@neverquest/state/character"
 import { location } from "@neverquest/state/encounter"
 import { acquiredSkills } from "@neverquest/state/skills"
 import { acquiredTraits } from "@neverquest/state/traits"
@@ -29,7 +29,7 @@ export function Capabilities() {
 	const acquiredTraitsValue = useRecoilValue(acquiredTraits)
 	const areAttributesAffordableValue = useRecoilValue(areAttributesAffordable)
 	const isAttackingValue = useRecoilValue(isAttacking)
-	const hasFlatlinedValue = useRecoilValue(hasFlatlined)
+	const isIncapacitatedValue = useRecoilValue(isIncapacitated)
 	const isShowingCapabilities = useRecoilValue(isShowing("capabilities"))
 	const locationValue = useRecoilValue(location)
 	const resetActiveControl = useResetRecoilState(activeControl)
@@ -83,15 +83,13 @@ export function Capabilities() {
 				>
 					<div className={getAnimationClass({ animation: "bounceIn" })}>
 						<Button
-							className={`position-relative${
-								areAttributesAffordableValue && locationValue === "caravan"
-									? ` ${getAnimationClass({
-										animation: "pulse",
-										isInfinite: true,
-									})}`
-									: ""
-							}`}
-							disabled={isAttackingValue || hasFlatlinedValue}
+							className={`position-relative${areAttributesAffordableValue && locationValue === "caravan"
+								? ` ${getAnimationClass({
+									animation: "pulse",
+									isInfinite: true,
+								})}`
+								: ""}`}
+							disabled={isIncapacitatedValue || isAttackingValue}
 							onClick={() => {
 								setActiveControl("capabilities")
 							}}

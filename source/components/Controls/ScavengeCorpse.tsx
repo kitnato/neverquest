@@ -7,15 +7,15 @@ import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence"
 import IconCorpse from "@neverquest/icons/corpse.svg?react"
 import IconEssence from "@neverquest/icons/essence.svg?react"
-import { hasFlatlined, isAttacking } from "@neverquest/state/character"
+import { isAttacking, isIncapacitated } from "@neverquest/state/character"
 import { corpse, location, stage } from "@neverquest/state/encounter"
 import { formatNumber } from "@neverquest/utilities/formatters"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function ScavengeCorpse() {
 	const corpseValue = useRecoilValue(corpse)
-	const hasFlatlinedValue = useRecoilValue(hasFlatlined)
 	const isAttackingValue = useRecoilValue(isAttacking)
+	const isIncapacitatedValue = useRecoilValue(isIncapacitated)
 	const locationValue = useRecoilValue(location)
 	const stageValue = useRecoilValue(stage)
 	const resetCorpse = useResetRecoilState(corpse)
@@ -23,7 +23,7 @@ export function ScavengeCorpse() {
 	const progressQuest = useProgressQuest()
 	const transactEssence = useTransactEssence()
 
-	if (corpseValue !== undefined && !hasFlatlinedValue) {
+	if (corpseValue !== undefined && !isIncapacitatedValue) {
 		const { essence, stage } = corpseValue
 
 		if (locationValue === "wilderness" && stage === stageValue) {

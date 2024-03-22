@@ -32,7 +32,7 @@ export function useChangeHealth() {
 				const get = getSnapshotGetter(snapshot)
 
 				const deltaDisplay
-          = contents === undefined ? [] : (Array.isArray(contents) ? contents : [contents])
+					= contents === undefined ? [] : (Array.isArray(contents) ? contents : [contents])
 				const formattedValue = formatNumber({ value })
 				const healthMaximumPoisonedValue = get(healthMaximumPoisoned)
 				const isAttackingValue = get(isAttacking)
@@ -41,8 +41,6 @@ export function useChangeHealth() {
 				let newHealth = get(health) + (get(isInvulnerable) ? (isPositive ? value : 0) : value)
 
 				if (newHealth <= 0) {
-					const ownedItemPhylactery = get(ownedItem("phylactery"))
-
 					newHealth = 0
 
 					reset(regenerationDuration("health"))
@@ -53,7 +51,7 @@ export function useChangeHealth() {
 						toggleAttacking()
 					}
 
-					if (ownedItemPhylactery === undefined) {
+					if (get(ownedItem("phylactery")) === undefined) {
 						set(corpse, {
 							essence: Math.round(get(essence) + get(absorbedEssence) * CORPSE_VALUE),
 							stage: get(stage),

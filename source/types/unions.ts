@@ -353,6 +353,7 @@ export type StateKey =
 	| "isHealthAtMaximum"
 	| "isHealthLow"
 	| "isHired"
+	| "isIncapacitated"
 	| "isInexhaustible"
 	| "isInfusionAtMaximum"
 	| "isInvulnerable"

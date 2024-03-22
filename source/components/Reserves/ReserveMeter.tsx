@@ -12,7 +12,7 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText"
 import { usePreviousValue } from "@neverquest/hooks/usePreviousValue"
 import IconBlighted from "@neverquest/icons/blighted.svg?react"
 import IconPoisoned from "@neverquest/icons/poisoned.svg?react"
-import { hasFlatlined } from "@neverquest/state/character"
+import { isIncapacitated } from "@neverquest/state/character"
 import {
 	blightMagnitude,
 	health,
@@ -38,9 +38,9 @@ export function ReserveMeter({ PrefixIcon, reserve }: { PrefixIcon?: SVGIcon, re
 
 	const [reserveValue, setReserve] = useRecoilState(reserveState)
 	const ailmentExtent = useRecoilValue(isHealth ? poisonDuration : blightMagnitude)
+	const isIncapacitatedValue = useRecoilValue(isIncapacitated)
 	const isAiling = useRecoilValue(isHealth ? isPoisoned : isBlighted)
 	const isRegeneratingValue = useRecoilValue(isRegenerating(reserve))
-	const hasFlatlinedValue = useRecoilValue(hasFlatlined)
 	const regenerationRateValue = useRecoilValue(regenerationRate(reserve))
 	const reserveMaximumValue = useRecoilValue(reserveMaximumState)
 	const reserveMaximumAilingValue = useRecoilValue(
@@ -67,7 +67,7 @@ export function ReserveMeter({ PrefixIcon, reserve }: { PrefixIcon?: SVGIcon, re
 
 	useEffect(() => {
 		if (
-			!hasFlatlinedValue
+			!isIncapacitatedValue
 			&& !isAiling
 			&& reserveMaximumDifference > 0
 			&& reserveValue < reserveMaximumAilingValue
@@ -75,7 +75,7 @@ export function ReserveMeter({ PrefixIcon, reserve }: { PrefixIcon?: SVGIcon, re
 			setReserve(currentReserve => currentReserve + reserveMaximumDifference)
 		}
 	}, [
-		hasFlatlinedValue,
+		isIncapacitatedValue,
 		isAiling,
 		reserveMaximumAilingValue,
 		reserveMaximumDifference,

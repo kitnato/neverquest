@@ -53,10 +53,10 @@ export function useToggleEquipItem() {
 						return
 					}
 
-					if (ID === armorValue.ID || forceUnequip) {
+					if (ID === armorValue.ID) {
 						reset(armor)
 					}
-					else {
+					else if (!forceUnequip) {
 						set(armor, item)
 
 						set(isShowing("armor"), true)
@@ -71,17 +71,15 @@ export function useToggleEquipItem() {
 						return
 					}
 
-					if (ID === shieldValue.ID || forceUnequip) {
+					if (ID === shieldValue.ID) {
 						reset(shield)
 					}
-					else {
+					else if (!forceUnequip) {
 						set(shield, item)
 
 						// Equipping a shield while a ranged or two-handed weapon is equipped un-equips the weapon (unless it's two-handed and the colossus trait is acquired).
 						if (
-							(isMelee(weaponValue)
-							&& weaponValue.grip === "two-handed"
-							&& !get(isTraitAcquired("colossus")))
+							(isMelee(weaponValue) && weaponValue.grip === "two-handed" && !get(isTraitAcquired("colossus")))
 							|| isRanged(weaponValue)
 						) {
 							reset(weapon)
@@ -102,10 +100,10 @@ export function useToggleEquipItem() {
 						return
 					}
 
-					if (ID === weaponValue.ID || forceUnequip) {
+					if (ID === weaponValue.ID) {
 						reset(weapon)
 					}
-					else {
+					else if (!forceUnequip) {
 						set(weapon, item)
 
 						// Equipping a ranged or two-handed weapon while a shield is equipped un-equips the shield.

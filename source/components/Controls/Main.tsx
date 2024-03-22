@@ -23,8 +23,8 @@ import { areAttributesAffordable } from "@neverquest/state/attributes"
 import {
 	canResurrect,
 	hasEnoughAmmunition,
-	hasFlatlined,
 	isAttacking,
+	isIncapacitated,
 } from "@neverquest/state/character"
 import { encounter, isStageCompleted, location } from "@neverquest/state/encounter"
 import { isRelicEquipped } from "@neverquest/state/items"
@@ -38,9 +38,9 @@ export function Main() {
 	const canResurrectValue = useRecoilValue(canResurrect)
 	const encounterValue = useRecoilValue(encounter)
 	const hasEnoughAmmunitionValue = useRecoilValue(hasEnoughAmmunition)
-	const hasFlatlinedValue = useRecoilValue(hasFlatlined)
 	const isAttackingValue = useRecoilValue(isAttacking)
 	const isHealthLowValue = useRecoilValue(isHealthLow)
+	const isIncapacitatedValue = useRecoilValue(isIncapacitated)
 	const isMonsterDeadValue = useRecoilValue(isMonsterDead)
 	const isAutomincerEquipped = useRecoilValue(isRelicEquipped("automincer"))
 	const isStageCompletedValue = useRecoilValue(isStageCompleted)
@@ -114,7 +114,7 @@ export function Main() {
 					<div>
 						<Button
 							className={animation}
-							disabled={isResting || (!canResurrectValue && hasFlatlinedValue)}
+							disabled={isIncapacitatedValue || isResting}
 							onClick={canResurrectValue ? resurrection : toggleAttacking}
 							variant="outline-dark"
 						>

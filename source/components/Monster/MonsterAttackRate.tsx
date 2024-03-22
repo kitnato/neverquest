@@ -7,7 +7,7 @@ import { useDefend } from "@neverquest/hooks/actions/useDefend"
 import { useDeltaText } from "@neverquest/hooks/useDeltaText"
 import { useTimer } from "@neverquest/hooks/useTimer"
 import IconMonsterAttackRate from "@neverquest/icons/monster-attack-rate.svg?react"
-import { isAttacking } from "@neverquest/state/character"
+import { isAttacking, isIncapacitated } from "@neverquest/state/character"
 import {
 	hasMonsterClosed,
 	isMonsterAiling,
@@ -19,6 +19,7 @@ import {
 export function MonsterAttackRate() {
 	const hasMonsterClosedValue = useRecoilValue(hasMonsterClosed)
 	const isAttackingValue = useRecoilValue(isAttacking)
+	const isIncapacitatedValue = useRecoilValue(isIncapacitated)
 	const isMonsterDeadValue = useRecoilValue(isMonsterDead)
 	const isMonsterFrozen = useRecoilValue(isMonsterAiling("frozen"))
 	const setMonsterAttackDuration = useSetRecoilState(monsterAttackDuration)
@@ -35,7 +36,7 @@ export function MonsterAttackRate() {
 		factor: isMonsterFrozen ? 1 - AILMENT_PENALTY.frozen : 1,
 		onElapsed: defend,
 		setDuration: setMonsterAttackDuration,
-		stop: !hasMonsterClosedValue || !isAttackingValue || isMonsterDeadValue,
+		stop: !hasMonsterClosedValue || !isAttackingValue || isIncapacitatedValue || isMonsterDeadValue,
 	})
 
 	return (

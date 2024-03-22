@@ -6,20 +6,20 @@ import { IconImage } from "@neverquest/components/IconImage"
 import { Retirement } from "@neverquest/components/Retirement"
 import { RETIREMENT_STAGE } from "@neverquest/data/general"
 import IconRetire from "@neverquest/icons/retire.svg?react"
-import { hasFlatlined } from "@neverquest/state/character"
+import { isIncapacitated } from "@neverquest/state/character"
 import { location, stageMaximum } from "@neverquest/state/encounter"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function Retire() {
-	const hasFlatlinedValue = useRecoilValue(hasFlatlined)
+	const isIncapacitatedValue = useRecoilValue(isIncapacitated)
 	const locationValue = useRecoilValue(location)
 	const stageMaximumValue = useRecoilValue(stageMaximum)
 
 	const [isShowingRetirement, setIsShowingRetirement] = useState(false)
 
 	const isShowingRetire
-    = (locationValue === "caravan" && stageMaximumValue === RETIREMENT_STAGE)
-    || stageMaximumValue > RETIREMENT_STAGE
+		= (locationValue === "caravan" && stageMaximumValue === RETIREMENT_STAGE)
+		|| stageMaximumValue > RETIREMENT_STAGE
 
 	return (
 		<>
@@ -34,7 +34,7 @@ export function Retire() {
 					className={isShowingRetire ? getAnimationClass({ animation: "bounceIn" }) : "invisible"}
 				>
 					<Button
-						disabled={hasFlatlinedValue || locationValue === "wilderness"}
+						disabled={isIncapacitatedValue || locationValue === "wilderness"}
 						onClick={() => {
 							setIsShowingRetirement(true)
 						}}

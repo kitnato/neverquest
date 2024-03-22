@@ -8,7 +8,7 @@ import { IconImage } from "@neverquest/components/IconImage"
 import { Inventory } from "@neverquest/components/Inventory"
 import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react"
 import IconInventory from "@neverquest/icons/knapsack.svg?react"
-import { hasFlatlined, isAttacking } from "@neverquest/state/character"
+import { isAttacking, isIncapacitated } from "@neverquest/state/character"
 import { encumbranceExtent, notifyOverEncumbrance, ownedItem } from "@neverquest/state/inventory"
 import { activeControl } from "@neverquest/state/ui"
 import { getAnimationClass } from "@neverquest/utilities/getters"
@@ -18,7 +18,7 @@ export function ShowInventory() {
 	const [activeControlValue, setActiveControl] = useRecoilState(activeControl)
 	const encumbranceExtentValue = useRecoilValue(encumbranceExtent)
 	const isAttackingValue = useRecoilValue(isAttacking)
-	const hasFlatlinedValue = useRecoilValue(hasFlatlined)
+	const isIncapacitatedValue = useRecoilValue(isIncapacitated)
 	const notifyOverEncumbranceValue = useRecoilValue(notifyOverEncumbrance)
 	const ownedItemKnapsack = useRecoilValue(ownedItem("knapsack"))
 	const resetActiveControl = useResetRecoilState(activeControl)
@@ -50,7 +50,7 @@ export function ShowInventory() {
 				>
 					<div className={getAnimationClass({ animation: "bounceIn" })}>
 						<Button
-							disabled={hasFlatlinedValue || isAttackingValue}
+							disabled={isAttackingValue || isIncapacitatedValue}
 							onClick={() => {
 								setActiveControl("inventory")
 							}}

@@ -12,7 +12,7 @@ import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina"
 import { useDeltaText } from "@neverquest/hooks/useDeltaText"
 import { useTimer } from "@neverquest/hooks/useTimer"
 import { attributeStatistic } from "@neverquest/state/attributes"
-import { hasFlatlined, isRecovering } from "@neverquest/state/character"
+import { isIncapacitated, isRecovering } from "@neverquest/state/character"
 import {
 	isHealthAtMaximum,
 	isStaminaAtMaximum,
@@ -37,7 +37,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
 	const attributeStatisticRegenerationRate = useRecoilValue(
 		attributeStatistic(regenerationAttribute),
 	)
-	const hasFlatlinedValue = useRecoilValue(hasFlatlined)
+	const isIncapacitatedValue = useRecoilValue(isIncapacitated)
 	const isReserveAtMaximum = useRecoilValue(
 		reserve === "health" ? isHealthAtMaximum : isStaminaAtMaximum,
 	)
@@ -62,7 +62,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
 			changeReserve({ value: regenerationAmountValue })
 		},
 		setDuration: setRegenerationDuration,
-		stop: hasFlatlinedValue || isRecoveringValue || isReserveAtMaximum,
+		stop: isIncapacitatedValue || isRecoveringValue || isReserveAtMaximum,
 	})
 
 	return (
@@ -116,7 +116,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
 											<span>
 												+
 												{formatNumber({ decimals: 0, format: "percentage", value: regeneration })}
-                        &nbsp;(
+												&nbsp;(
 												{formatNumber({ value: regenerationAmountValue })}
 												)
 											</span>

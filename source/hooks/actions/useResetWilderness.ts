@@ -9,24 +9,24 @@ import { essenceLoot, itemsLoot } from "@neverquest/state/resources"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
 
 export function useResetWilderness() {
-  const generateMonster = useGenerateMonster()
+	const generateMonster = useGenerateMonster()
 
-  return useRecoilCallback(
-    ({ reset, snapshot }) =>
-      () => {
-        const get = getSnapshotGetter(snapshot)
+	return useRecoilCallback(
+		({ reset, snapshot }) =>
+			() => {
+				const get = getSnapshotGetter(snapshot)
 
-        if (!(get(isRelicEquipped(`automincer`)) && get(isAttacking))) {
-          reset(isStageStarted)
-        }
+				if (!(get(isRelicEquipped("automincer")) && get(isAttacking))) {
+					reset(isStageStarted)
+				}
 
-        reset(essenceLoot)
-        reset(itemsLoot)
-        reset(progress)
-        reset(questProgress(`killingStage`))
+				reset(essenceLoot)
+				reset(itemsLoot)
+				reset(progress)
+				reset(questProgress("killingStage"))
 
-        generateMonster()
-      },
-    [generateMonster],
-  )
+				generateMonster()
+			},
+		[generateMonster],
+	)
 }

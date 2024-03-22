@@ -6,21 +6,22 @@ import { ammunition, ammunitionCapacity } from "@neverquest/state/items"
 import { formatNumber } from "@neverquest/utilities/formatters"
 
 export function AmmunitionPouchStatus() {
-  const ammunitionValue = useRecoilValue(ammunition)
-  const ammunitionCapacityValue = useRecoilValue(ammunitionCapacity)
+	const ammunitionValue = useRecoilValue(ammunition)
+	const ammunitionCapacityValue = useRecoilValue(ammunitionCapacity)
 
-  return (
-    <IconDisplay
-      Icon={IconAmmunition}
-      iconProps={{ className: `small`, overlayPlacement: `bottom` }}
-      tooltip="Ammunition"
-    >
-      <span>
-        {formatNumber({ value: ammunitionValue })}&nbsp;/&nbsp;
-        {formatNumber({
-          value: ammunitionCapacityValue,
-        })}
-      </span>
-    </IconDisplay>
-  )
+	return (
+		<IconDisplay
+			Icon={IconAmmunition}
+			iconProps={{ className: "small", overlayPlacement: "bottom" }}
+			tooltip="Ammunition"
+		>
+			<span>
+				{formatNumber({ value: ammunitionValue })}
+&nbsp;/&nbsp;
+				{formatNumber({
+					value: ammunitionCapacityValue,
+				})}
+			</span>
+		</IconDisplay>
+	)
 }

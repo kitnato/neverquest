@@ -11,41 +11,41 @@ import { location, stageMaximum } from "@neverquest/state/encounter"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function Retire() {
-  const hasFlatlinedValue = useRecoilValue(hasFlatlined)
-  const locationValue = useRecoilValue(location)
-  const stageMaximumValue = useRecoilValue(stageMaximum)
+	const hasFlatlinedValue = useRecoilValue(hasFlatlined)
+	const locationValue = useRecoilValue(location)
+	const stageMaximumValue = useRecoilValue(stageMaximum)
 
-  const [isShowingRetirement, setIsShowingRetirement] = useState(false)
+	const [isShowingRetirement, setIsShowingRetirement] = useState(false)
 
-  const isShowingRetire =
-    (locationValue === `caravan` && stageMaximumValue === RETIREMENT_STAGE) ||
-    stageMaximumValue > RETIREMENT_STAGE
+	const isShowingRetire
+    = (locationValue === "caravan" && stageMaximumValue === RETIREMENT_STAGE)
+    || stageMaximumValue > RETIREMENT_STAGE
 
-  return (
-    <>
-      <OverlayTrigger
-        overlay={
-          <Tooltip>
-            <span>Retire</span>
-          </Tooltip>
-        }
-      >
-        <div
-          className={isShowingRetire ? getAnimationClass({ animation: `bounceIn` }) : `invisible`}
-        >
-          <Button
-            disabled={hasFlatlinedValue || locationValue === `wilderness`}
-            onClick={() => {
-              setIsShowingRetirement(true)
-            }}
-            variant="outline-dark"
-          >
-            <IconImage Icon={IconRetire} />
-          </Button>
-        </div>
-      </OverlayTrigger>
+	return (
+		<>
+			<OverlayTrigger
+				overlay={(
+					<Tooltip>
+						<span>Retire</span>
+					</Tooltip>
+				)}
+			>
+				<div
+					className={isShowingRetire ? getAnimationClass({ animation: "bounceIn" }) : "invisible"}
+				>
+					<Button
+						disabled={hasFlatlinedValue || locationValue === "wilderness"}
+						onClick={() => {
+							setIsShowingRetirement(true)
+						}}
+						variant="outline-dark"
+					>
+						<IconImage Icon={IconRetire} />
+					</Button>
+				</div>
+			</OverlayTrigger>
 
-      <Retirement state={[isShowingRetirement, setIsShowingRetirement]} />
-    </>
-  )
+			<Retirement state={[isShowingRetirement, setIsShowingRetirement]} />
+		</>
+	)
 }

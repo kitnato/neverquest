@@ -9,42 +9,42 @@ import { consciousness } from "@neverquest/state/encounter"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function Awakening() {
-  const setConsciousness = useSetRecoilState(consciousness)
+	const setConsciousness = useSetRecoilState(consciousness)
 
-  const progressQuest = useProgressQuest()
+	const progressQuest = useProgressQuest()
 
-  return (
-    <Card>
-      <CardBody className={getAnimationClass({ animation: `zoomIn` })}>
-        <Stack className="align-items-center" gap={5}>
-          <IconImage Icon={IconAwakening} />
+	return (
+		<Card>
+			<CardBody className={getAnimationClass({ animation: "zoomIn" })}>
+				<Stack className="align-items-center" gap={5}>
+					<IconImage Icon={IconAwakening} />
 
-          <Typewriter>... System failure. Patient 7 has bypassed the cipher. Protocol?</Typewriter>
+					<Typewriter>... System failure. Patient 7 has bypassed the cipher. Protocol?</Typewriter>
 
-          <Stack className="mx-auto" direction="horizontal" gap={3} style={{ width: 400 }}>
-            <Button
-              className="w-50"
-              onClick={() => {
-                setConsciousness(`somnium`)
-                progressQuest({ quest: `deciding` })
-              }}
-              variant="outline-dark"
-            >
-              <span>Grind</span>
-            </Button>
+					<Stack className="mx-auto" direction="horizontal" gap={3} style={{ width: 400 }}>
+						<Button
+							className="w-50"
+							onClick={() => {
+								setConsciousness("somnium")
+								progressQuest({ quest: "deciding" })
+							}}
+							variant="outline-dark"
+						>
+							<span>Grind</span>
+						</Button>
 
-            <Button
-              className="w-50"
-              onClick={() => {
-                setConsciousness(`mors`)
-              }}
-              variant="outline-dark"
-            >
-              <span className="monospaced">Die</span>
-            </Button>
-          </Stack>
-        </Stack>
-      </CardBody>
-    </Card>
-  )
+						<Button
+							className="w-50"
+							onClick={() => {
+								setConsciousness("mors")
+							}}
+							variant="outline-dark"
+						>
+							<span className="monospaced">Die</span>
+						</Button>
+					</Stack>
+				</Stack>
+			</CardBody>
+		</Card>
+	)
 }

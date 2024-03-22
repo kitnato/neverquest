@@ -12,50 +12,50 @@ import { isShowing } from "@neverquest/state/ui"
 import { getAffixStructure, getSnapshotGetter } from "@neverquest/utilities/getters"
 
 const firstStageForCrewHiring = Object.values(CREW)
-  .map(({ requiredStage }) => requiredStage)
-  .toSorted((requiredStage1, requiredStage2) => requiredStage1 - requiredStage2)
-  .find((requiredStage) => requiredStage > 1)
+	.map(({ requiredStage }) => requiredStage)
+	.toSorted((requiredStage1, requiredStage2) => requiredStage1 - requiredStage2)
+	.find(requiredStage => requiredStage > 1)
 
 export function useIncreaseStage() {
-  const progressQuest = useProgressQuest()
-  const toggleAttacking = useToggleAttacking()
+	const progressQuest = useProgressQuest()
+	const toggleAttacking = useToggleAttacking()
 
-  return useRecoilCallback(
-    ({ set, snapshot }) =>
-      () => {
-        const get = getSnapshotGetter(snapshot)
+	return useRecoilCallback(
+		({ set, snapshot }) =>
+			() => {
+				const get = getSnapshotGetter(snapshot)
 
-        const stageValue = get(stage)
-        const nextStage = stageValue + 1
+				const stageValue = get(stage)
+				const nextStage = stageValue + 1
 
-        if (firstStageForCrewHiring !== undefined && nextStage >= firstStageForCrewHiring) {
-          set(isShowing(`crewMemberHiring`), true)
-        }
+				if (firstStageForCrewHiring !== undefined && nextStage >= firstStageForCrewHiring) {
+					set(isShowing("crewMemberHiring"), true)
+				}
 
-        set(stage, nextStage)
+				set(stage, nextStage)
 
-        if (Object.values(FINALITY_STAGE).includes(nextStage) && get(isAttacking)) {
-          toggleAttacking()
-        }
+				if (Object.values(FINALITY_STAGE).includes(nextStage) && get(isAttacking)) {
+					toggleAttacking()
+				}
 
-        if (stageValue === get(stageMaximum)) {
-          progressQuest({ amount: stageValue === 1 ? 2 : 1, quest: `stages` })
-          progressQuest({ amount: stageValue === 1 ? 2 : 1, quest: `stagesEnd` })
+				if (stageValue === get(stageMaximum)) {
+					progressQuest({ amount: stageValue === 1 ? 2 : 1, quest: "stages" })
+					progressQuest({ amount: stageValue === 1 ? 2 : 1, quest: "stagesEnd" })
 
-          if (stageValue === get(questProgress(`survivingNoAttributes`)) + 1) {
-            progressQuest({ quest: `survivingNoAttributes` })
-          }
+					if (stageValue === get(questProgress("survivingNoAttributes")) + 1) {
+						progressQuest({ quest: "survivingNoAttributes" })
+					}
 
-          if (stageValue === get(questProgress(`survivingNoGear`)) + 1) {
-            progressQuest({ quest: `survivingNoGear` })
-          }
+					if (stageValue === get(questProgress("survivingNoGear")) + 1) {
+						progressQuest({ quest: "survivingNoGear" })
+					}
 
-          set(wildernesses, (currentWildernesses) => [
-            ...currentWildernesses,
-            generateLocation({ affixStructure: getAffixStructure() }),
-          ])
-        }
-      },
-    [progressQuest, toggleAttacking],
-  )
+					set(wildernesses, currentWildernesses => [
+						...currentWildernesses,
+						generateLocation({ affixStructure: getAffixStructure() }),
+					])
+				}
+			},
+		[progressQuest, toggleAttacking],
+	)
 }

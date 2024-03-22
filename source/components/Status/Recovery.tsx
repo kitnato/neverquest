@@ -18,73 +18,73 @@ import { formatNumber } from "@neverquest/utilities/formatters"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function Recovery() {
-  const hasFlatlinedValue = useRecoilValue(hasFlatlined)
-  const isRecoveringValue = useRecoilValue(isRecovering)
-  const isShowingRecovery = useRecoilValue(isShowing(`recovery`))
-  const resilienceValue = useRecoilValue(masteryStatistic(`resilience`))
-  const setRecoveryDuration = useSetRecoilState(recoveryDuration)
+	const hasFlatlinedValue = useRecoilValue(hasFlatlined)
+	const isRecoveringValue = useRecoilValue(isRecovering)
+	const isShowingRecovery = useRecoilValue(isShowing("recovery"))
+	const resilienceValue = useRecoilValue(masteryStatistic("resilience"))
+	const setRecoveryDuration = useSetRecoilState(recoveryDuration)
 
-  useTimer({
-    setDuration: setRecoveryDuration,
-    stop: hasFlatlinedValue || !isRecoveringValue,
-  })
+	useTimer({
+		setDuration: setRecoveryDuration,
+		stop: hasFlatlinedValue || !isRecoveringValue,
+	})
 
-  useDeltaText({
-    delta: `recoveryRate`,
-    format: `time`,
-    state: recoveryRate,
-  })
+	useDeltaText({
+		delta: "recoveryRate",
+		format: "time",
+		state: recoveryRate,
+	})
 
-  if (isShowingRecovery) {
-    return (
-      <IconDisplay
-        className={getAnimationClass({ animation: `flipInX` })}
-        Icon={IconRecovery}
-        tooltip="Recovery rate"
-      >
-        <OverlayTrigger
-          overlay={
-            <Popover>
-              <PopoverBody>
-                <DetailsTable>
-                  <tr>
-                    <td>
-                      <span>Base:</span>
-                    </td>
+	if (isShowingRecovery) {
+		return (
+			<IconDisplay
+				className={getAnimationClass({ animation: "flipInX" })}
+				Icon={IconRecovery}
+				tooltip="Recovery rate"
+			>
+				<OverlayTrigger
+					overlay={(
+						<Popover>
+							<PopoverBody>
+								<DetailsTable>
+									<tr>
+										<td>
+											<span>Base:</span>
+										</td>
 
-                    <td>
-                      <span>{formatNumber({ format: `time`, value: RECOVERY_RATE })}</span>
-                    </td>
-                  </tr>
+										<td>
+											<span>{formatNumber({ format: "time", value: RECOVERY_RATE })}</span>
+										</td>
+									</tr>
 
-                  <tr>
-                    <td>
-                      <IconDisplay Icon={IconResilience} iconProps={{ className: `small` }}>
-                        <span>Resilience:</span>
-                      </IconDisplay>
-                    </td>
+									<tr>
+										<td>
+											<IconDisplay Icon={IconResilience} iconProps={{ className: "small" }}>
+												<span>Resilience:</span>
+											</IconDisplay>
+										</td>
 
-                    <td>
-                      <span>
-                        -
-                        {formatNumber({
-                          format: `percentage`,
-                          value: resilienceValue,
-                        })}
-                      </span>
-                    </td>
-                  </tr>
-                </DetailsTable>
-              </PopoverBody>
-            </Popover>
-          }
-          trigger={resilienceValue > 0 ? POPOVER_TRIGGER : []}
-        >
-          <div className="w-100">
-            <RecoveryMeter />
-          </div>
-        </OverlayTrigger>
-      </IconDisplay>
-    )
-  }
+										<td>
+											<span>
+												-
+												{formatNumber({
+													format: "percentage",
+													value: resilienceValue,
+												})}
+											</span>
+										</td>
+									</tr>
+								</DetailsTable>
+							</PopoverBody>
+						</Popover>
+					)}
+					trigger={resilienceValue > 0 ? POPOVER_TRIGGER : []}
+				>
+					<div className="w-100">
+						<RecoveryMeter />
+					</div>
+				</OverlayTrigger>
+			</IconDisplay>
+		)
+	}
 }

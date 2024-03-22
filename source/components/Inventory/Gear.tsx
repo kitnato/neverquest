@@ -7,29 +7,29 @@ import { WeaponEquipped } from "@neverquest/components/Inventory/Weapon/WeaponEq
 import { isShowing } from "@neverquest/state/ui"
 
 export function Gear() {
-  const isShowingArmor = useRecoilValue(isShowing(`armor`))
-  const isShowingOffhand = useRecoilValue(isShowing(`offhand`))
-  const isShowingWeapon = useRecoilValue(isShowing(`weapon`))
+	const isShowingArmor = useRecoilValue(isShowing("armor"))
+	const isShowingOffhand = useRecoilValue(isShowing("offhand"))
+	const isShowingWeapon = useRecoilValue(isShowing("weapon"))
 
-  if (isShowingArmor || isShowingOffhand || isShowingWeapon) {
-    return (
-      <Card>
-        <CardBody>
-          <Row className="align-items-center">
-            <Col>
-              <WeaponEquipped />
-            </Col>
+	if (isShowingArmor || isShowingOffhand || isShowingWeapon) {
+		return (
+			<Card>
+				<CardBody>
+					<Row className="align-items-center">
+						<Col>
+							<WeaponEquipped />
+						</Col>
 
-            <Col>
-              <ArmorEquipped />
-            </Col>
+						<Col>
+							<ArmorEquipped />
+						</Col>
 
-            <Col>
-              <OffhandEquipped />
-            </Col>
-          </Row>
-        </CardBody>
-      </Card>
-    )
-  }
+						<Col>
+							<OffhandEquipped />
+						</Col>
+					</Row>
+				</CardBody>
+			</Card>
+		)
+	}
 }

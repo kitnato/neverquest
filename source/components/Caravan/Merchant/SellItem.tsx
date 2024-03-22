@@ -14,43 +14,43 @@ import { formatNumber } from "@neverquest/utilities/formatters"
 import { getSellPrice } from "@neverquest/utilities/getters"
 
 export function SellItem({ item }: { item: InventoryItem }) {
-  const setInventory = useSetRecoilState(inventory)
-  const setMerchantInventory = useSetRecoilState(merchantInventory)
+	const setInventory = useSetRecoilState(inventory)
+	const setMerchantInventory = useSetRecoilState(merchantInventory)
 
-  const progressQuest = useProgressQuest()
-  const toggleEquipItem = useToggleEquipItem()
-  const transactEssence = useTransactEssence()
+	const progressQuest = useProgressQuest()
+	const toggleEquipItem = useToggleEquipItem()
+	const transactEssence = useTransactEssence()
 
-  return (
-    <Stack className="ms-2" direction="horizontal" gap={3}>
-      <IconDisplay Icon={IconEssence} tooltip="Value">
-        <span>{formatNumber({ value: getSellPrice({ item }) })}</span>
-      </IconDisplay>
+	return (
+		<Stack className="ms-2" direction="horizontal" gap={3}>
+			<IconDisplay Icon={IconEssence} tooltip="Value">
+				<span>{formatNumber({ value: getSellPrice({ item }) })}</span>
+			</IconDisplay>
 
-      <Button
-        onClick={() => {
-          const { ID } = item
+			<Button
+				onClick={() => {
+					const { ID } = item
 
-          transactEssence(getSellPrice({ item }))
+					transactEssence(getSellPrice({ item }))
 
-          if (isGearItem(item) || isRelicItem(item)) {
-            toggleEquipItem({ forceUnequip: true, item })
-          }
+					if (isGearItem(item) || isRelicItem(item)) {
+						toggleEquipItem({ forceUnequip: true, item })
+					}
 
-          setInventory((currentInventory) =>
-            currentInventory.filter((currentItem) => currentItem.ID !== ID),
-          )
-          setMerchantInventory((currentMerchantInventory) => [
-            ...currentMerchantInventory,
-            { ...item, isReturned: true },
-          ])
+					setInventory(currentInventory =>
+						currentInventory.filter(currentItem => currentItem.ID !== ID),
+					)
+					setMerchantInventory(currentMerchantInventory => [
+						...currentMerchantInventory,
+						{ ...item, isReturned: true },
+					])
 
-          progressQuest({ quest: `selling` })
-        }}
-        variant="outline-dark"
-      >
-        <span>Sell</span>
-      </Button>
-    </Stack>
-  )
+					progressQuest({ quest: "selling" })
+				}}
+				variant="outline-dark"
+			>
+				<span>Sell</span>
+			</Button>
+		</Stack>
+	)
 }

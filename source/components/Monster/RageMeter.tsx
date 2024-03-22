@@ -9,30 +9,30 @@ import { isEnraged, rage } from "@neverquest/state/monster"
 import { formatNumber } from "@neverquest/utilities/formatters"
 
 export function RageMeter() {
-  const isEnragedValue = useRecoilValue(isEnraged)
-  const rageValue = useRecoilValue(rage)
+	const isEnragedValue = useRecoilValue(isEnraged)
+	const rageValue = useRecoilValue(rage)
 
-  const { maximum } = RAGE
+	const { maximum } = RAGE
 
-  return (
-    <LabelledProgressBar
-      striping={{ animated: isEnragedValue, striped: isEnragedValue }}
-      value={(rageValue / maximum) * PERCENTAGE_POINTS}
-      variant="secondary"
-    >
-      <Stack direction="horizontal" gap={1}>
-        <span>
-          {formatNumber({
-            value: rageValue,
-          })}
+	return (
+		<LabelledProgressBar
+			striping={{ animated: isEnragedValue, striped: isEnragedValue }}
+			value={(rageValue / maximum) * PERCENTAGE_POINTS}
+			variant="secondary"
+		>
+			<Stack direction="horizontal" gap={1}>
+				<span>
+					{formatNumber({
+						value: rageValue,
+					})}
           &nbsp;/&nbsp;
-          {formatNumber({
-            value: maximum,
-          })}
-        </span>
+					{formatNumber({
+						value: maximum,
+					})}
+				</span>
 
-        <DeltasDisplay delta="rage" />
-      </Stack>
-    </LabelledProgressBar>
-  )
+				<DeltasDisplay delta="rage" />
+			</Stack>
+		</LabelledProgressBar>
+	)
 }

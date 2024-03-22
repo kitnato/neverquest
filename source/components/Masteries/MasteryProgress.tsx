@@ -11,50 +11,50 @@ import { isMasteryAtMaximum, masteryCost, masteryProgress } from "@neverquest/st
 import type { Delta, Mastery } from "@neverquest/types/unions"
 
 export function MasteryProgress({ mastery }: { mastery: Mastery }) {
-  const masteryProgressState = masteryProgress(mastery)
-  const isMasteryAtMaximumValue = useRecoilValue(isMasteryAtMaximum(mastery))
-  const masteryCostValue = useRecoilValue(masteryCost(mastery))
-  const masteryProgressValue = useRecoilValue(masteryProgressState)
+	const masteryProgressState = masteryProgress(mastery)
+	const isMasteryAtMaximumValue = useRecoilValue(isMasteryAtMaximum(mastery))
+	const masteryCostValue = useRecoilValue(masteryCost(mastery))
+	const masteryProgressValue = useRecoilValue(masteryProgressState)
 
-  const { instructionIcons, instructions } = MASTERIES[mastery]
-  const delta: Delta = `${mastery}Progress`
+	const { instructionIcons, instructions } = MASTERIES[mastery]
+	const delta: Delta = `${mastery}Progress`
 
-  useDeltaText({
-    delta,
-    ignoreZero: true,
-    state: masteryProgressState,
-  })
+	useDeltaText({
+		delta,
+		ignoreZero: true,
+		state: masteryProgressState,
+	})
 
-  return (
-    <OverlayTrigger
-      overlay={
-        <Popover>
-          <PopoverBody>
-            <DescriptionDisplay description={instructions} descriptionIcons={instructionIcons} />
-          </PopoverBody>
-        </Popover>
-      }
-    >
-      <div className="w-100">
-        <LabelledProgressBar
-          value={
-            isMasteryAtMaximumValue
-              ? PERCENTAGE_POINTS
-              : (masteryProgressValue / masteryCostValue) * PERCENTAGE_POINTS
-          }
-          variant="secondary"
-        >
-          <Stack direction="horizontal" gap={1}>
-            <span>
-              {isMasteryAtMaximumValue
-                ? LABEL_MAXIMUM
-                : `${masteryProgressValue} / ${masteryCostValue}`}
-            </span>
+	return (
+		<OverlayTrigger
+			overlay={(
+				<Popover>
+					<PopoverBody>
+						<DescriptionDisplay description={instructions} descriptionIcons={instructionIcons} />
+					</PopoverBody>
+				</Popover>
+			)}
+		>
+			<div className="w-100">
+				<LabelledProgressBar
+					value={
+						isMasteryAtMaximumValue
+							? PERCENTAGE_POINTS
+							: (masteryProgressValue / masteryCostValue) * PERCENTAGE_POINTS
+					}
+					variant="secondary"
+				>
+					<Stack direction="horizontal" gap={1}>
+						<span>
+							{isMasteryAtMaximumValue
+								? LABEL_MAXIMUM
+								: `${masteryProgressValue} / ${masteryCostValue}`}
+						</span>
 
-            <DeltasDisplay delta={delta} />
-          </Stack>
-        </LabelledProgressBar>
-      </div>
-    </OverlayTrigger>
-  )
+						<DeltasDisplay delta={delta} />
+					</Stack>
+				</LabelledProgressBar>
+			</div>
+		</OverlayTrigger>
+	)
 }

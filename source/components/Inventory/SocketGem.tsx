@@ -18,109 +18,111 @@ import { GEAR_TYPES } from "@neverquest/types/unions"
 import { getGearIcon, getGemFittingCost } from "@neverquest/utilities/getters"
 
 export function SocketGem({ gem }: { gem: GemItem }) {
-  const armorValue = useRecoilValue(armor)
-  const essenceValue = useRecoilValue(essence)
-  const isTraitAcquiredColossus = useRecoilValue(isTraitAcquired(`colossus`))
-  const shieldValue = useRecoilValue(shield)
-  const weaponValue = useRecoilValue(weapon)
-  const setInventory = useSetRecoilState(inventory)
-  const setIsShowing = {
-    armor: useSetRecoilState(isShowing(`armor`)),
-    shield: useSetRecoilState(isShowing(`offhand`)),
-    weapon: useSetRecoilState(isShowing(`weapon`)),
-  }
+	const armorValue = useRecoilValue(armor)
+	const essenceValue = useRecoilValue(essence)
+	const isTraitAcquiredColossus = useRecoilValue(isTraitAcquired("colossus"))
+	const shieldValue = useRecoilValue(shield)
+	const weaponValue = useRecoilValue(weapon)
+	const setInventory = useSetRecoilState(inventory)
+	const setIsShowing = {
+		armor: useSetRecoilState(isShowing("armor")),
+		shield: useSetRecoilState(isShowing("offhand")),
+		weapon: useSetRecoilState(isShowing("weapon")),
+	}
 
-  const [armorGemsValue, setArmorGems] = useRecoilState(gems(armorValue.ID))
-  const [shieldGemsValue, setShieldGems] = useRecoilState(gems(shieldValue.ID))
-  const [weaponGemsValue, setWeaponGems] = useRecoilState(gems(weaponValue.ID))
+	const [armorGemsValue, setArmorGems] = useRecoilState(gems(armorValue.ID))
+	const [shieldGemsValue, setShieldGems] = useRecoilState(gems(shieldValue.ID))
+	const [weaponGemsValue, setWeaponGems] = useRecoilState(gems(weaponValue.ID))
 
-  const gemFitting = {
-    armor: {
-      canFit: armorGemsValue.length < GEMS_MAXIMUM,
-      gear: armorValue,
-      gemsFitted: armorGemsValue.length,
-      isAffordable: getGemFittingCost(armorGemsValue.length) <= essenceValue,
-      setGems: setArmorGems,
-    },
-    shield: {
-      canFit: shieldGemsValue.length < GEMS_MAXIMUM,
-      gear: shieldValue,
-      gemsFitted: shieldGemsValue.length,
-      isAffordable: getGemFittingCost(shieldGemsValue.length) <= essenceValue,
-      setGems: setShieldGems,
-    },
-    weapon: {
-      canFit: weaponGemsValue.length < GEMS_MAXIMUM,
-      gear: weaponValue,
-      gemsFitted: weaponGemsValue.length,
-      isAffordable: getGemFittingCost(weaponGemsValue.length) <= essenceValue,
-      setGems: setWeaponGems,
-    },
-  }
+	const gemFitting = {
+		armor: {
+			canFit: armorGemsValue.length < GEMS_MAXIMUM,
+			gear: armorValue,
+			gemsFitted: armorGemsValue.length,
+			isAffordable: getGemFittingCost(armorGemsValue.length) <= essenceValue,
+			setGems: setArmorGems,
+		},
+		shield: {
+			canFit: shieldGemsValue.length < GEMS_MAXIMUM,
+			gear: shieldValue,
+			gemsFitted: shieldGemsValue.length,
+			isAffordable: getGemFittingCost(shieldGemsValue.length) <= essenceValue,
+			setGems: setShieldGems,
+		},
+		weapon: {
+			canFit: weaponGemsValue.length < GEMS_MAXIMUM,
+			gear: weaponValue,
+			gemsFitted: weaponGemsValue.length,
+			isAffordable: getGemFittingCost(weaponGemsValue.length) <= essenceValue,
+			setGems: setWeaponGems,
+		},
+	}
 
-  const progressQuest = useProgressQuest()
-  const transactEssence = useTransactEssence()
+	const progressQuest = useProgressQuest()
+	const transactEssence = useTransactEssence()
 
-  return (
-    <DropdownButton
-      onSelect={(slot) => {
-        if (isGear(slot)) {
-          const { gemsFitted, setGems } = gemFitting[slot]
+	return (
+		<DropdownButton
+			onSelect={(slot) => {
+				if (isGear(slot)) {
+					const { gemsFitted, setGems } = gemFitting[slot]
 
-          setGems((currentGems) => [...currentGems, gem])
-          setInventory((currentInventory) =>
-            currentInventory.filter(({ ID: itemID }) => itemID !== gem.ID),
-          )
+					setGems(currentGems => [...currentGems, gem])
+					setInventory(currentInventory =>
+						currentInventory.filter(({ ID: itemID }) => itemID !== gem.ID),
+					)
 
-          setIsShowing[slot](true)
+					setIsShowing[slot](true)
 
-          transactEssence(-getGemFittingCost(gemsFitted))
-          progressQuest({ quest: `gemsApplying` })
+					transactEssence(-getGemFittingCost(gemsFitted))
+					progressQuest({ quest: "gemsApplying" })
 
-          if (
-            GEAR_TYPES.filter((gear) => gear !== slot).every(
-              (gear) => gemFitting[gear].gemsFitted > 0,
-            )
-          ) {
-            progressQuest({ quest: `gemsApplyingAll` })
-          }
-        }
-      }}
-      title="Socket"
-      variant="outline-dark"
-    >
-      {GEAR_TYPES.filter((gearType) =>
-        gearType === `shield`
-          ? (((isMelee(weaponValue) || isUnarmed(weaponValue)) &&
-              weaponValue.grip === `one-handed`) ||
-              isTraitAcquiredColossus) &&
-            !isRanged(weaponValue)
-          : true,
-      ).map((gearType) => {
-        const { canFit, gear, gemsFitted, isAffordable } = gemFitting[gearType]
+					if (
+						GEAR_TYPES.filter(gear => gear !== slot).every(
+							gear => gemFitting[gear].gemsFitted > 0,
+						)
+					) {
+						progressQuest({ quest: "gemsApplyingAll" })
+					}
+				}
+			}}
+			title="Socket"
+			variant="outline-dark"
+		>
+			{GEAR_TYPES.filter(gearType =>
+				gearType === "shield"
+					? (((isMelee(weaponValue) || isUnarmed(weaponValue))
+					&& weaponValue.grip === "one-handed")
+					|| isTraitAcquiredColossus)
+					&& !isRanged(weaponValue)
+					: true,
+			).map((gearType) => {
+				const { canFit, gear, gemsFitted, isAffordable } = gemFitting[gearType]
 
-        const canApply = canFit && isAffordable
+				const canApply = canFit && isAffordable
 
-        return (
-          <DropdownItem disabled={!canApply} eventKey={gearType} key={gearType}>
-            <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-              <IconDisplay Icon={getGearIcon(gear)} iconProps={{ className: `small` }}>
-                <span>{gear.name}</span>
-              </IconDisplay>
+				return (
+					<DropdownItem disabled={!canApply} eventKey={gearType} key={gearType}>
+						<div className={CLASS_FULL_WIDTH_JUSTIFIED}>
+							<IconDisplay Icon={getGearIcon(gear)} iconProps={{ className: "small" }}>
+								<span>{gear.name}</span>
+							</IconDisplay>
 
-              <div className="ms-2">
-                {canFit ? (
-                  <IconDisplay Icon={IconEssence} iconProps={{ className: `small` }}>
-                    <span>{getGemFittingCost(gemsFitted)}</span>
-                  </IconDisplay>
-                ) : (
-                  <span>{LABEL_MAXIMUM}</span>
-                )}
-              </div>
-            </div>
-          </DropdownItem>
-        )
-      })}
-    </DropdownButton>
-  )
+							<div className="ms-2">
+								{canFit
+									? (
+										<IconDisplay Icon={IconEssence} iconProps={{ className: "small" }}>
+											<span>{getGemFittingCost(gemsFitted)}</span>
+										</IconDisplay>
+									)
+									: (
+										<span>{LABEL_MAXIMUM}</span>
+									)}
+							</div>
+						</div>
+					</DropdownItem>
+				)
+			})}
+		</DropdownButton>
+	)
 }

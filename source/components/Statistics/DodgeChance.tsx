@@ -24,108 +24,114 @@ import { formatNumber } from "@neverquest/utilities/formatters"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function DodgeChance() {
-  const armorValue = useRecoilValue(armor)
-  const agility = useRecoilValue(attributeStatistic(`agility`))
-  const dodgeChanceValue = useRecoilValue(dodgeChance)
-  const healthMaximumPoisonedValue = useRecoilValue(healthMaximumPoisoned)
-  const isTraitAcquiredNudist = useRecoilValue(isTraitAcquired(`nudist`))
-  const isTraitAcquiredStalwart = useRecoilValue(isTraitAcquired(`stalwart`))
+	const armorValue = useRecoilValue(armor)
+	const agility = useRecoilValue(attributeStatistic("agility"))
+	const dodgeChanceValue = useRecoilValue(dodgeChance)
+	const healthMaximumPoisonedValue = useRecoilValue(healthMaximumPoisoned)
+	const isTraitAcquiredNudist = useRecoilValue(isTraitAcquired("nudist"))
+	const isTraitAcquiredStalwart = useRecoilValue(isTraitAcquired("stalwart"))
 
-  const { burden } = armorValue
-  const { dodgeBonus, healAmount } = NUDIST
+	const { burden } = armorValue
+	const { dodgeBonus, healAmount } = NUDIST
 
-  useDeltaText({
-    delta: `dodgeChance`,
-    format: `percentage`,
-    state: dodgeChance,
-  })
+	useDeltaText({
+		delta: "dodgeChance",
+		format: "percentage",
+		state: dodgeChance,
+	})
 
-  if (dodgeChanceValue > 0) {
-    return (
-      <IconDisplay
-        className={getAnimationClass({ animation: `flipInX` })}
-        Icon={IconDodgeChance}
-        tooltip="Dodge chance"
-      >
-        <Stack direction="horizontal" gap={1}>
-          <OverlayTrigger
-            overlay={
-              <Popover>
-                <PopoverBody>
-                  <DetailsTable>
-                    <tr>
-                      <td>
-                        <IconDisplay Icon={IconAgility} iconProps={{ className: `small` }}>
-                          <span>Agility:</span>
-                        </IconDisplay>
-                      </td>
+	if (dodgeChanceValue > 0) {
+		return (
+			<IconDisplay
+				className={getAnimationClass({ animation: "flipInX" })}
+				Icon={IconDodgeChance}
+				tooltip="Dodge chance"
+			>
+				<Stack direction="horizontal" gap={1}>
+					<OverlayTrigger
+						overlay={(
+							<Popover>
+								<PopoverBody>
+									<DetailsTable>
+										<tr>
+											<td>
+												<IconDisplay Icon={IconAgility} iconProps={{ className: "small" }}>
+													<span>Agility:</span>
+												</IconDisplay>
+											</td>
 
-                      <td>
-                        <Stack direction="horizontal" gap={1}>
-                          <span>
-                            {formatNumber({
-                              format: `percentage`,
-                              value: agility,
-                            })}
-                          </span>
-                        </Stack>
-                      </td>
-                    </tr>
+											<td>
+												<Stack direction="horizontal" gap={1}>
+													<span>
+														{formatNumber({
+															format: "percentage",
+															value: agility,
+														})}
+													</span>
+												</Stack>
+											</td>
+										</tr>
 
-                    {isTraitAcquiredNudist && isUnarmored(armorValue) && (
-                      <tr>
-                        <td>
-                          <IconDisplay Icon={IconNudist} iconProps={{ className: `small` }}>
-                            <span>Nudist:</span>
-                          </IconDisplay>
-                        </td>
+										{isTraitAcquiredNudist && isUnarmored(armorValue) && (
+											<tr>
+												<td>
+													<IconDisplay Icon={IconNudist} iconProps={{ className: "small" }}>
+														<span>Nudist:</span>
+													</IconDisplay>
+												</td>
 
-                        <td>
-                          <Stack gap={1}>
-                            <span>{formatNumber({ format: `multiplier`, value: dodgeBonus })}</span>
+												<td>
+													<Stack gap={1}>
+														<span>{formatNumber({ format: "multiplier", value: dodgeBonus })}</span>
 
-                            <IconDisplay Icon={IconHealth} iconProps={{ className: `small` }}>
-                              <span>
-                                +{formatNumber({ value: healthMaximumPoisonedValue * healAmount })}
-                              </span>
-                            </IconDisplay>
-                          </Stack>
-                        </td>
-                      </tr>
-                    )}
+														<IconDisplay Icon={IconHealth} iconProps={{ className: "small" }}>
+															<span>
+																+
+																{formatNumber({ value: healthMaximumPoisonedValue * healAmount })}
+															</span>
+														</IconDisplay>
+													</Stack>
+												</td>
+											</tr>
+										)}
 
-                    {burden > 0 && (
-                      <tr>
-                        <td>
-                          <IconDisplay Icon={IconBurden} iconProps={{ className: `small` }}>
-                            <span>On dodge:</span>
-                          </IconDisplay>
-                        </td>
+										{burden > 0 && (
+											<tr>
+												<td>
+													<IconDisplay Icon={IconBurden} iconProps={{ className: "small" }}>
+														<span>On dodge:</span>
+													</IconDisplay>
+												</td>
 
-                        <td>
-                          {isTraitAcquiredStalwart ? (
-                            <IconDisplay Icon={IconStalwart} iconProps={{ className: `small` }}>
-                              <span>{LABEL_NO_PENALTY}</span>
-                            </IconDisplay>
-                          ) : (
-                            <IconDisplay Icon={IconStamina} iconProps={{ className: `small` }}>
-                              <span>-{formatNumber({ value: burden })}</span>
-                            </IconDisplay>
-                          )}
-                        </td>
-                      </tr>
-                    )}
-                  </DetailsTable>
-                </PopoverBody>
-              </Popover>
-            }
-          >
-            <span>{formatNumber({ format: `percentage`, value: dodgeChanceValue })}</span>
-          </OverlayTrigger>
+												<td>
+													{isTraitAcquiredStalwart
+														? (
+															<IconDisplay Icon={IconStalwart} iconProps={{ className: "small" }}>
+																<span>{LABEL_NO_PENALTY}</span>
+															</IconDisplay>
+														)
+														: (
+															<IconDisplay Icon={IconStamina} iconProps={{ className: "small" }}>
+																<span>
+																	-
+																	{formatNumber({ value: burden })}
+																</span>
+															</IconDisplay>
+														)}
+												</td>
+											</tr>
+										)}
+									</DetailsTable>
+								</PopoverBody>
+							</Popover>
+						)}
+					>
+						<span>{formatNumber({ format: "percentage", value: dodgeChanceValue })}</span>
+					</OverlayTrigger>
 
-          <DeltasDisplay delta="dodgeChance" />
-        </Stack>
-      </IconDisplay>
-    )
-  }
+					<DeltasDisplay delta="dodgeChance" />
+				</Stack>
+			</IconDisplay>
+		)
+	}
 }

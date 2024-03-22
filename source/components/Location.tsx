@@ -8,19 +8,19 @@ import { isShowing } from "@neverquest/state/ui"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function Location() {
-  const isShowingLocation = useRecoilValue(isShowing(`location`))
-  const locationValue = useRecoilValue(location)
-  const locationNameValue = useRecoilValue(locationName)
+	const isShowingLocation = useRecoilValue(isShowing("location"))
+	const locationValue = useRecoilValue(location)
+	const locationNameValue = useRecoilValue(locationName)
 
-  return (
-    <div className={isShowingLocation ? getAnimationClass({ animation: `flipInX` }) : `invisible`}>
-      <IconDisplay
-        Icon={locationValue === `caravan` ? IconCaravan : IconWilderness}
-        iconProps={{ overlayPlacement: `bottom` }}
-        tooltip="Location"
-      >
-        <span>{locationNameValue}</span>
-      </IconDisplay>
-    </div>
-  )
+	return (
+		<div className={isShowingLocation ? getAnimationClass({ animation: "flipInX" }) : "invisible"}>
+			<IconDisplay
+				Icon={locationValue === "caravan" ? IconCaravan : IconWilderness}
+				iconProps={{ overlayPlacement: "bottom" }}
+				tooltip="Location"
+			>
+				<span>{locationNameValue}</span>
+			</IconDisplay>
+		</div>
+	)
 }

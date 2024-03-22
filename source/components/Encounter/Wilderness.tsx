@@ -15,69 +15,69 @@ import { encounter, isStageCompleted, isStageStarted } from "@neverquest/state/e
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function Wilderness() {
-  const encounterValue = useRecoilValue(encounter)
-  const isStageStartedValue = useRecoilValue(isStageStarted)
-  const isStageCompletedValue = useRecoilValue(isStageCompleted)
+	const encounterValue = useRecoilValue(encounter)
+	const isStageStartedValue = useRecoilValue(isStageStarted)
+	const isStageCompletedValue = useRecoilValue(isStageCompleted)
 
-  const progressQuest = useProgressQuest()
+	const progressQuest = useProgressQuest()
 
-  useEffect(() => {
-    if (encounterValue === `void`) {
-      progressQuest({ quest: `visitingVoid` })
-    }
-  }, [encounterValue, progressQuest])
+	useEffect(() => {
+		if (encounterValue === "void") {
+			progressQuest({ quest: "visitingVoid" })
+		}
+	}, [encounterValue, progressQuest])
 
-  if (isStageCompletedValue) {
-    return (
-      <Card className={getAnimationClass({ animation: `flipInX` })}>
-        <CardBody>
-          <IconDisplay gap={5} Icon={IconRemains} tooltip="Remains">
-            <span className="fst-italic">Everything is dead.</span>
-          </IconDisplay>
-        </CardBody>
-      </Card>
-    )
-  }
+	if (isStageCompletedValue) {
+		return (
+			<Card className={getAnimationClass({ animation: "flipInX" })}>
+				<CardBody>
+					<IconDisplay gap={5} Icon={IconRemains} tooltip="Remains">
+						<span className="fst-italic">Everything is dead.</span>
+					</IconDisplay>
+				</CardBody>
+			</Card>
+		)
+	}
 
-  if (encounterValue === `void`) {
-    return (
-      <Card className={getAnimationClass({ animation: `flipInX` })}>
-        <CardBody>
-          <IconDisplay gap={5} Icon={IconVoid} tooltip="Void">
-            <span className="fst-italic">A shattering emptiness lingers ...</span>
-          </IconDisplay>
-        </CardBody>
-      </Card>
-    )
-  }
+	if (encounterValue === "void") {
+		return (
+			<Card className={getAnimationClass({ animation: "flipInX" })}>
+				<CardBody>
+					<IconDisplay gap={5} Icon={IconVoid} tooltip="Void">
+						<span className="fst-italic">A shattering emptiness lingers ...</span>
+					</IconDisplay>
+				</CardBody>
+			</Card>
+		)
+	}
 
-  if (isStageStartedValue) {
-    return <Monster />
-  }
+	if (isStageStartedValue) {
+		return <Monster />
+	}
 
-  return (
-    <Card className={getAnimationClass({ animation: `zoomIn`, speed: `fast` })}>
-      <CardBody>
-        <IconDisplay
-          gap={5}
-          Icon={
-            encounterValue === `boss`
-              ? IconBossHiding
-              : (encounterValue === `monster`
-                ? IconMonsterHiding
-                : IconFinality)
-          }
-          tooltip={LABEL_UNKNOWN}
-        >
-          <span className="fst-italic">
-            {encounterValue === `boss`
-              ? `A powerful presence looms.`
-              : (encounterValue === `monster`
-                ? `The darkness stirs.`
-                : `A grim entity is manifesting.`)}
-          </span>
-        </IconDisplay>
-      </CardBody>
-    </Card>
-  )
+	return (
+		<Card className={getAnimationClass({ animation: "zoomIn", speed: "fast" })}>
+			<CardBody>
+				<IconDisplay
+					gap={5}
+					Icon={
+						encounterValue === "boss"
+							? IconBossHiding
+							: (encounterValue === "monster"
+								? IconMonsterHiding
+								: IconFinality)
+					}
+					tooltip={LABEL_UNKNOWN}
+				>
+					<span className="fst-italic">
+						{encounterValue === "boss"
+							? "A powerful presence looms."
+							: (encounterValue === "monster"
+								? "The darkness stirs."
+								: "A grim entity is manifesting.")}
+					</span>
+				</IconDisplay>
+			</CardBody>
+		</Card>
+	)
 }

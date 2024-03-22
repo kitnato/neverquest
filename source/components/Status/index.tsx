@@ -10,36 +10,36 @@ import { Recovery } from "@neverquest/components/Status/Recovery"
 import { statusElement } from "@neverquest/state/character"
 
 export function Status() {
-  const setStatusElement = useSetRecoilState(statusElement)
-  const resetStatusElement = useResetRecoilState(statusElement)
+	const setStatusElement = useSetRecoilState(statusElement)
+	const resetStatusElement = useResetRecoilState(statusElement)
 
-  const element = useRef<HTMLDivElement | null>(null)
+	const element = useRef<HTMLDivElement | null>(null)
 
-  useEffect(() => {
-    const { current } = element
+	useEffect(() => {
+		const { current } = element
 
-    if (current !== null) {
-      setStatusElement(current)
-    }
+		if (current !== null) {
+			setStatusElement(current)
+		}
 
-    return resetStatusElement
-  }, [resetStatusElement, setStatusElement])
+		return resetStatusElement
+	}, [resetStatusElement, setStatusElement])
 
-  return (
-    <Card ref={element}>
-      <CardBody>
-        <Stack gap={3}>
-          <Name />
+	return (
+		<Card ref={element}>
+			<CardBody>
+				<Stack gap={3}>
+					<Name />
 
-          <Health />
+					<Health />
 
-          <Stamina />
+					<Stamina />
 
-          <AttackRate />
+					<AttackRate />
 
-          <Recovery />
-        </Stack>
-      </CardBody>
-    </Card>
-  )
+					<Recovery />
+				</Stack>
+			</CardBody>
+		</Card>
+	)
 }

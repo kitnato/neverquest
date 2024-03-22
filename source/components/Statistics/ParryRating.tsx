@@ -17,118 +17,118 @@ import { formatNumber } from "@neverquest/utilities/formatters"
 import { getAnimationClass, getGearIcon } from "@neverquest/utilities/getters"
 
 export function ParryRating() {
-  const finesseValue = useRecoilValue(masteryStatistic(`finesse`))
-  const parryChanceValue = useRecoilValue(parryChance)
-  const parryRatingValue = useRecoilValue(parryRating)
-  const weaponValue = useRecoilValue(weapon)
+	const finesseValue = useRecoilValue(masteryStatistic("finesse"))
+	const parryChanceValue = useRecoilValue(parryChance)
+	const parryRatingValue = useRecoilValue(parryRating)
+	const weaponValue = useRecoilValue(weapon)
 
-  useDeltaText({
-    delta: `parryRating`,
-    state: parryRating,
-  })
+	useDeltaText({
+		delta: "parryRating",
+		state: parryRating,
+	})
 
-  if (parryRatingValue > 0) {
-    return (
-      <IconDisplay
-        className={getAnimationClass({ animation: `flipInX` })}
-        Icon={IconParryRating}
-        tooltip="Parry rating"
-      >
-        <Stack direction="horizontal" gap={1}>
-          <OverlayTrigger
-            overlay={
-              <Popover>
-                <PopoverBody>
-                  <DetailsTable>
-                    <tr>
-                      <td>
-                        <IconDisplay
-                          Icon={getGearIcon(weaponValue)}
-                          iconProps={{ className: `small` }}
-                        >
-                          <span>Chance:</span>
-                        </IconDisplay>
-                      </td>
+	if (parryRatingValue > 0) {
+		return (
+			<IconDisplay
+				className={getAnimationClass({ animation: "flipInX" })}
+				Icon={IconParryRating}
+				tooltip="Parry rating"
+			>
+				<Stack direction="horizontal" gap={1}>
+					<OverlayTrigger
+						overlay={(
+							<Popover>
+								<PopoverBody>
+									<DetailsTable>
+										<tr>
+											<td>
+												<IconDisplay
+													Icon={getGearIcon(weaponValue)}
+													iconProps={{ className: "small" }}
+												>
+													<span>Chance:</span>
+												</IconDisplay>
+											</td>
 
-                      <td>
-                        <IconDisplay Icon={IconParryChance} iconProps={{ className: `small` }}>
-                          <span>
-                            {formatNumber({ format: `percentage`, value: parryChanceValue })}
-                          </span>
-                        </IconDisplay>
-                      </td>
-                    </tr>
+											<td>
+												<IconDisplay Icon={IconParryChance} iconProps={{ className: "small" }}>
+													<span>
+														{formatNumber({ format: "percentage", value: parryChanceValue })}
+													</span>
+												</IconDisplay>
+											</td>
+										</tr>
 
-                    <tr>
-                      <td>
-                        <span>Damage reflected:</span>
-                      </td>
+										<tr>
+											<td>
+												<span>Damage reflected:</span>
+											</td>
 
-                      <td>
-                        <Stack direction="horizontal" gap={1}>
-                          <span>
-                            {formatNumber({
-                              decimals: 0,
-                              format: `percentage`,
-                              value: PARRY_DAMAGE,
-                            })}
-                          </span>
+											<td>
+												<Stack direction="horizontal" gap={1}>
+													<span>
+														{formatNumber({
+															decimals: 0,
+															format: "percentage",
+															value: PARRY_DAMAGE,
+														})}
+													</span>
 
-                          {LABEL_SEPARATOR}
+													{LABEL_SEPARATOR}
 
-                          <IconDisplay Icon={IconFinesse} iconProps={{ className: `small` }}>
-                            <span>
-                              +
-                              {formatNumber({
-                                format: `percentage`,
-                                value: finesseValue,
-                              })}
-                            </span>
-                          </IconDisplay>
-                        </Stack>
-                      </td>
-                    </tr>
+													<IconDisplay Icon={IconFinesse} iconProps={{ className: "small" }}>
+														<span>
+															+
+															{formatNumber({
+																format: "percentage",
+																value: finesseValue,
+															})}
+														</span>
+													</IconDisplay>
+												</Stack>
+											</td>
+										</tr>
 
-                    <tr>
-                      <td>
-                        <span>Damage absorbed:</span>
-                      </td>
+										<tr>
+											<td>
+												<span>Damage absorbed:</span>
+											</td>
 
-                      <td>
-                        <Stack direction="horizontal" gap={1}>
-                          <span>
-                            {formatNumber({
-                              decimals: 0,
-                              format: `percentage`,
-                              value: PARRY_ABSORPTION,
-                            })}
-                          </span>
+											<td>
+												<Stack direction="horizontal" gap={1}>
+													<span>
+														{formatNumber({
+															decimals: 0,
+															format: "percentage",
+															value: PARRY_ABSORPTION,
+														})}
+													</span>
 
-                          {LABEL_SEPARATOR}
+													{LABEL_SEPARATOR}
 
-                          <IconDisplay Icon={IconFinesse} iconProps={{ className: `small` }}>
-                            <span>
-                              +
-                              {formatNumber({
-                                format: `percentage`,
-                                value: finesseValue,
-                              })}
-                            </span>
-                          </IconDisplay>
-                        </Stack>
-                      </td>
-                    </tr>
-                  </DetailsTable>
-                </PopoverBody>
-              </Popover>
-            }
-          >
-            <span>{formatNumber({ value: parryRatingValue })}</span>
-          </OverlayTrigger>
+													<IconDisplay Icon={IconFinesse} iconProps={{ className: "small" }}>
+														<span>
+															+
+															{formatNumber({
+																format: "percentage",
+																value: finesseValue,
+															})}
+														</span>
+													</IconDisplay>
+												</Stack>
+											</td>
+										</tr>
+									</DetailsTable>
+								</PopoverBody>
+							</Popover>
+						)}
+					>
+						<span>{formatNumber({ value: parryRatingValue })}</span>
+					</OverlayTrigger>
 
-          <DeltasDisplay delta="parryRating" />
-        </Stack>
-      </IconDisplay>
-    )
-  }
+					<DeltasDisplay delta="parryRating" />
+				</Stack>
+			</IconDisplay>
+		)
+	}
 }

@@ -15,37 +15,37 @@ import type { Consumable } from "@neverquest/types/unions"
 import { formatNumber } from "@neverquest/utilities/formatters"
 
 export function PurchaseConsumable({ consumable }: { consumable: Consumable }) {
-  const [ID, setID] = useState(nanoid())
+	const [ID, setID] = useState(nanoid())
 
-  const acquireItem = useAcquireItem()
-  const transactEssence = useTransactEssence()
+	const acquireItem = useAcquireItem()
+	const transactEssence = useTransactEssence()
 
-  const { item } = CONSUMABLES[consumable]
-  const itemWithID: ConsumableItem = {
-    ...item,
-    ID,
-  }
-  const { price } = itemWithID
+	const { item } = CONSUMABLES[consumable]
+	const itemWithID: ConsumableItem = {
+		...item,
+		ID,
+	}
+	const { price } = itemWithID
 
-  return (
-    <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-      <ItemDisplay item={itemWithID} />
+	return (
+		<div className={CLASS_FULL_WIDTH_JUSTIFIED}>
+			<ItemDisplay item={itemWithID} />
 
-      <Stack className="ms-2" direction="horizontal" gap={3}>
-        <IconDisplay Icon={IconEssence} tooltip="Price">
-          <span>{formatNumber({ value: price })}</span>
-        </IconDisplay>
+			<Stack className="ms-2" direction="horizontal" gap={3}>
+				<IconDisplay Icon={IconEssence} tooltip="Price">
+					<span>{formatNumber({ value: price })}</span>
+				</IconDisplay>
 
-        <PurchaseItemButton
-          item={itemWithID}
-          onPurchase={() => {
-            acquireItem(itemWithID)
-            transactEssence(-price)
+				<PurchaseItemButton
+					item={itemWithID}
+					onPurchase={() => {
+						acquireItem(itemWithID)
+						transactEssence(-price)
 
-            setID(nanoid())
-          }}
-        />
-      </Stack>
-    </div>
-  )
+						setID(nanoid())
+					}}
+				/>
+			</Stack>
+		</div>
+	)
 }

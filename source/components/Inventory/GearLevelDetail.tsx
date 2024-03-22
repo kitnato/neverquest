@@ -8,31 +8,31 @@ import { isShowing } from "@neverquest/state/ui"
 import type { Comparison } from "@neverquest/types/components"
 import { formatNumber } from "@neverquest/utilities/formatters"
 
-export function GearLevelDetail({ comparison, level }: { comparison: Comparison; level: number }) {
-  const isShowingGearLevel = useRecoilValue(isShowing(`gearLevel`))
+export function GearLevelDetail({ comparison, level }: { comparison: Comparison, level: number }) {
+	const isShowingGearLevel = useRecoilValue(isShowing("gearLevel"))
 
-  if (isShowingGearLevel && level > 0) {
-    return (
-      <tr>
-        <td>
-          <span>Gear level:</span>
-        </td>
+	if (isShowingGearLevel && level > 0) {
+		return (
+			<tr>
+				<td>
+					<span>Gear level:</span>
+				</td>
 
-        <td>
-          <Stack direction="horizontal" gap={1}>
-            <IconDisplay Icon={IconGearLevel} iconProps={{ className: `small` }}>
-              <span>{formatNumber({ value: level })}</span>
-            </IconDisplay>
+				<td>
+					<Stack direction="horizontal" gap={1}>
+						<IconDisplay Icon={IconGearLevel} iconProps={{ className: "small" }}>
+							<span>{formatNumber({ value: level })}</span>
+						</IconDisplay>
 
-            {comparison !== false && (
-              <GearComparison
-                difference={level - comparison.subtrahend}
-                showing={comparison.showing}
-              />
-            )}
-          </Stack>
-        </td>
-      </tr>
-    )
-  }
+						{comparison !== false && (
+							<GearComparison
+								difference={level - comparison.subtrahend}
+								showing={comparison.showing}
+							/>
+						)}
+					</Stack>
+				</td>
+			</tr>
+		)
+	}
 }

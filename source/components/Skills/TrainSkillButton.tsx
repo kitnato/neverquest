@@ -9,35 +9,35 @@ import { skillPrice } from "@neverquest/state/skills"
 import type { Skill } from "@neverquest/types/unions"
 
 export function TrainSkillButton({ skill }: { skill: Skill }) {
-  const essenceValue = useRecoilValue(essence)
-  const skillPriceValue = useRecoilValue(skillPrice)
+	const essenceValue = useRecoilValue(essence)
+	const skillPriceValue = useRecoilValue(skillPrice)
 
-  const acquireSkill = useAcquireSkill()
-  const transactEssence = useTransactEssence()
+	const acquireSkill = useAcquireSkill()
+	const transactEssence = useTransactEssence()
 
-  const isAffordable = skillPriceValue <= essenceValue
+	const isAffordable = skillPriceValue <= essenceValue
 
-  return (
-    <OverlayTrigger
-      overlay={
-        <Tooltip>
-          <span>{LABEL_NO_ESSENCE}</span>
-        </Tooltip>
-      }
-      trigger={isAffordable ? [] : POPOVER_TRIGGER}
-    >
-      <div>
-        <Button
-          disabled={!isAffordable}
-          onClick={() => {
-            acquireSkill(skill)
-            transactEssence(-skillPriceValue)
-          }}
-          variant="outline-dark"
-        >
-          <span>Train</span>
-        </Button>
-      </div>
-    </OverlayTrigger>
-  )
+	return (
+		<OverlayTrigger
+			overlay={(
+				<Tooltip>
+					<span>{LABEL_NO_ESSENCE}</span>
+				</Tooltip>
+			)}
+			trigger={isAffordable ? [] : POPOVER_TRIGGER}
+		>
+			<div>
+				<Button
+					disabled={!isAffordable}
+					onClick={() => {
+						acquireSkill(skill)
+						transactEssence(-skillPriceValue)
+					}}
+					variant="outline-dark"
+				>
+					<span>Train</span>
+				</Button>
+			</div>
+		</OverlayTrigger>
+	)
 }

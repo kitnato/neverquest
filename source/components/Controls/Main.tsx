@@ -1,11 +1,11 @@
 import {
-  Badge,
-  Button,
-  OverlayTrigger,
-  Popover,
-  PopoverBody,
-  PopoverHeader,
-  Tooltip,
+	Badge,
+	Button,
+	OverlayTrigger,
+	Popover,
+	PopoverBody,
+	PopoverHeader,
+	Tooltip,
 } from "react-bootstrap"
 import { useRecoilValue } from "recoil"
 
@@ -21,10 +21,10 @@ import IconResurrection from "@neverquest/icons/resurrection.svg?react"
 import IconRetreat from "@neverquest/icons/retreat.svg?react"
 import { areAttributesAffordable } from "@neverquest/state/attributes"
 import {
-  canResurrect,
-  hasEnoughAmmunition,
-  hasFlatlined,
-  isAttacking,
+	canResurrect,
+	hasEnoughAmmunition,
+	hasFlatlined,
+	isAttacking,
 } from "@neverquest/state/character"
 import { encounter, isStageCompleted, location } from "@neverquest/state/encounter"
 import { isRelicEquipped } from "@neverquest/state/items"
@@ -34,112 +34,107 @@ import type { SVGIcon } from "@neverquest/types/components"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function Main() {
-  const areAttributesAffordableValue = useRecoilValue(areAttributesAffordable)
-  const canResurrectValue = useRecoilValue(canResurrect)
-  const encounterValue = useRecoilValue(encounter)
-  const hasEnoughAmmunitionValue = useRecoilValue(hasEnoughAmmunition)
-  const hasFlatlinedValue = useRecoilValue(hasFlatlined)
-  const isAttackingValue = useRecoilValue(isAttacking)
-  const isHealthLowValue = useRecoilValue(isHealthLow)
-  const isMonsterDeadValue = useRecoilValue(isMonsterDead)
-  const isAutomincerEquipped = useRecoilValue(isRelicEquipped(`automincer`))
-  const isStageCompletedValue = useRecoilValue(isStageCompleted)
-  const locationValue = useRecoilValue(location)
+	const areAttributesAffordableValue = useRecoilValue(areAttributesAffordable)
+	const canResurrectValue = useRecoilValue(canResurrect)
+	const encounterValue = useRecoilValue(encounter)
+	const hasEnoughAmmunitionValue = useRecoilValue(hasEnoughAmmunition)
+	const hasFlatlinedValue = useRecoilValue(hasFlatlined)
+	const isAttackingValue = useRecoilValue(isAttacking)
+	const isHealthLowValue = useRecoilValue(isHealthLow)
+	const isMonsterDeadValue = useRecoilValue(isMonsterDead)
+	const isAutomincerEquipped = useRecoilValue(isRelicEquipped("automincer"))
+	const isStageCompletedValue = useRecoilValue(isStageCompleted)
+	const locationValue = useRecoilValue(location)
 
-  const toggleAttacking = useToggleAttacking()
-  const resurrection = useResurrection()
+	const toggleAttacking = useToggleAttacking()
+	const resurrection = useResurrection()
 
-  const isResting =
-    isStageCompletedValue || locationValue === `caravan` || encounterValue === `void`
-  const pulseAnimation = getAnimationClass({
-    animation: `pulse`,
-    isInfinite: true,
-  })
-  const showWarning = isAttackingValue && isHealthLowValue && !isMonsterDeadValue && !isResting
+	const isResting
+		= isStageCompletedValue || locationValue === "caravan" || encounterValue === "void"
+	const pulseAnimation = getAnimationClass({
+		animation: "pulse",
+		isInfinite: true,
+	})
+	const showWarning = isAttackingValue && isHealthLowValue && !isMonsterDeadValue && !isResting
 
-  const { animation, Icon, tooltip }: { animation?: string; Icon: SVGIcon; tooltip: string } =
-    (() => {
-      if (canResurrectValue) {
-        return { animation: pulseAnimation, Icon: IconResurrection, tooltip: `Resurrection` }
-      }
+	const { animation, Icon, tooltip }: { animation?: string, Icon: SVGIcon, tooltip: string } = (() => {
+		if (canResurrectValue) {
+			return { animation: pulseAnimation, Icon: IconResurrection, tooltip: "Resurrection" }
+		}
 
-      if (isResting) {
-        return { Icon: IconResting, tooltip: `Resting` }
-      }
+		if (isResting) {
+			return { Icon: IconResting, tooltip: "Resting" }
+		}
 
-      if (isAttackingValue) {
-        return {
-          animation: showWarning ? pulseAnimation : undefined,
-          Icon: IconRetreat,
-          tooltip: `Retreat`,
-        }
-      }
+		if (isAttackingValue) {
+			return {
+				animation: showWarning ? pulseAnimation : undefined,
+				Icon: IconRetreat,
+				tooltip: "Retreat",
+			}
+		}
 
-      return {
-        animation:
-          areAttributesAffordableValue ||
-          !hasEnoughAmmunitionValue ||
-          isHealthLowValue ||
-          isMonsterDeadValue
-            ? undefined
-            : pulseAnimation,
-        Icon: IconAttack,
-        tooltip: `Attack`,
-      }
-    })()
+		return {
+			animation: (areAttributesAffordableValue || !hasEnoughAmmunitionValue || isHealthLowValue || isMonsterDeadValue)
+				? undefined
+				: pulseAnimation,
+			Icon: IconAttack,
+			tooltip: "Attack",
+		}
+	})()
 
-  return (
-    <OverlayTrigger
-      overlay={
-        <Popover>
-          <PopoverHeader className="text-center">
-            <span>Low&nbsp;</span>
+	return (
+		<OverlayTrigger
+			overlay={(
+				<Popover>
+					<PopoverHeader className="text-center">
+						<span>Low&nbsp;</span>
 
-            <IconImage className="small" Icon={IconHealth} />
+						<IconImage className="small" Icon={IconHealth} />
 
-            <span>&nbsp;health</span>
-          </PopoverHeader>
+						<span>&nbsp;health</span>
+					</PopoverHeader>
 
-          <PopoverBody>
-            <span>&quot;The meaning of life is that it ends.&quot;</span>
-          </PopoverBody>
-        </Popover>
-      }
-      show={showWarning}
-    >
-      <div className={getAnimationClass({ animation: `bounceIn` })}>
-        <OverlayTrigger
-          overlay={
-            <Tooltip>
-              <span>{tooltip}</span>
-            </Tooltip>
-          }
-          placement={showWarning ? `bottom` : undefined}
-        >
-          <div>
-            <Button
-              className={animation}
-              disabled={isResting || (!canResurrectValue && hasFlatlinedValue)}
-              onClick={canResurrectValue ? resurrection : toggleAttacking}
-              variant="outline-dark"
-            >
-              <IconImage Icon={Icon} />
+					<PopoverBody>
+						<span>&quot;The meaning of life is that it ends.&quot;</span>
+					</PopoverBody>
+				</Popover>
+			)}
+			show={showWarning}
+		>
+			<div className={getAnimationClass({ animation: "bounceIn" })}>
+				<OverlayTrigger
+					overlay={(
+						<Tooltip>
+							<span>{tooltip}</span>
+						</Tooltip>
+					)}
+					placement={showWarning ? "bottom" : undefined}
+				>
+					<div>
+						<Button
+							className={animation}
+							disabled={isResting || (!canResurrectValue && hasFlatlinedValue)}
+							onClick={canResurrectValue ? resurrection : toggleAttacking}
+							variant="outline-dark"
+						>
+							<IconImage Icon={Icon} />
 
-              {(canResurrectValue || (isAutomincerEquipped && !isResting)) && (
-                <Badge
-                  bg="secondary"
-                  className="position-absolute top-50 start-100 translate-middle"
-                >
-                  <IconImage
-                    className="small"
-                    Icon={canResurrectValue ? IconPhylactery : IconGrinding}
-                  />
-                </Badge>
-              )}
-            </Button>
-          </div>
-        </OverlayTrigger>
-      </div>
-    </OverlayTrigger>
-  )
+							{(canResurrectValue || (isAutomincerEquipped && !isResting)) && (
+								<Badge
+									bg="secondary"
+									className="position-absolute top-50 start-100 translate-middle"
+								>
+									<IconImage
+										className="small"
+										Icon={canResurrectValue ? IconPhylactery : IconGrinding}
+									/>
+								</Badge>
+							)}
+						</Button>
+					</div>
+				</OverlayTrigger>
+			</div>
+		</OverlayTrigger>
+	)
 }

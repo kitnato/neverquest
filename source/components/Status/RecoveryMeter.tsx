@@ -9,26 +9,26 @@ import { recoveryRate } from "@neverquest/state/statistics"
 import { formatNumber } from "@neverquest/utilities/formatters"
 
 export function RecoveryMeter() {
-  const isRecoveringValue = useRecoilValue(isRecovering)
-  const recoveryDurationValue = useRecoilValue(recoveryDuration)
-  const recoveryRateValue = useRecoilValue(recoveryRate)
+	const isRecoveringValue = useRecoilValue(isRecovering)
+	const recoveryDurationValue = useRecoilValue(recoveryDuration)
+	const recoveryRateValue = useRecoilValue(recoveryRate)
 
-  return (
-    <LabelledProgressBar
-      disableTransitions
-      value={
-        ((isRecoveringValue ? recoveryRateValue - recoveryDurationValue : 0) / recoveryRateValue) *
-        PERCENTAGE_POINTS
-      }
-      variant="secondary"
-    >
-      <Stack direction="horizontal" gap={1}>
-        <span>
-          {formatNumber({ format: `time`, value: recoveryDurationValue || recoveryRateValue })}
-        </span>
+	return (
+		<LabelledProgressBar
+			disableTransitions
+			value={
+				((isRecoveringValue ? recoveryRateValue - recoveryDurationValue : 0) / recoveryRateValue)
+				* PERCENTAGE_POINTS
+			}
+			variant="secondary"
+		>
+			<Stack direction="horizontal" gap={1}>
+				<span>
+					{formatNumber({ format: "time", value: recoveryDurationValue || recoveryRateValue })}
+				</span>
 
-        <DeltasDisplay delta="recoveryRate" />
-      </Stack>
-    </LabelledProgressBar>
-  )
+				<DeltasDisplay delta="recoveryRate" />
+			</Stack>
+		</LabelledProgressBar>
+	)
 }

@@ -9,32 +9,33 @@ import { isShowing } from "@neverquest/state/ui"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
 
 export function useToggleLocation() {
-  const completeStage = useCompleteStage()
-  const increaseStage = useIncreaseStage()
-  const resetWilderness = useResetWilderness()
+	const completeStage = useCompleteStage()
+	const increaseStage = useIncreaseStage()
+	const resetWilderness = useResetWilderness()
 
-  return useRecoilCallback(
-    ({ reset, set, snapshot }) =>
-      () => {
-        const get = getSnapshotGetter(snapshot)
+	return useRecoilCallback(
+		({ reset, set, snapshot }) =>
+			() => {
+				const get = getSnapshotGetter(snapshot)
 
-        if (get(location) === `wilderness`) {
-          completeStage()
+				if (get(location) === "wilderness") {
+					completeStage()
 
-          set(isShowing(`location`), true)
-          set(location, `caravan`)
-        } else {
-          if (get(isStageCompleted) && get(stage) === get(stageMaximum)) {
-            reset(blacksmithOptions)
-            reset(fletcherOptions)
-          }
+					set(isShowing("location"), true)
+					set(location, "caravan")
+				}
+				else {
+					if (get(isStageCompleted) && get(stage) === get(stageMaximum)) {
+						reset(blacksmithOptions)
+						reset(fletcherOptions)
+					}
 
-          increaseStage()
-          resetWilderness()
+					increaseStage()
+					resetWilderness()
 
-          set(location, `wilderness`)
-        }
-      },
-    [completeStage, increaseStage, resetWilderness],
-  )
+					set(location, "wilderness")
+				}
+			},
+		[completeStage, increaseStage, resetWilderness],
+	)
 }

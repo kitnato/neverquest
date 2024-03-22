@@ -20,58 +20,64 @@ import { capitalizeAll } from "@neverquest/utilities/formatters"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function HiredCrewMember({ crewMember }: { crewMember: CrewMember }) {
-  const [activeCrewMemberValue, setActiveCrewMember] = useRecoilState(activeCrewMember)
-  const isHiredValue = useRecoilValue(isHired(crewMember))
-  const monologueValue = useRecoilValue(monologue(crewMember))
-  const resetCrewMember = useResetRecoilState(activeCrewMember)
+	const [activeCrewMemberValue, setActiveCrewMember] = useRecoilState(activeCrewMember)
+	const isHiredValue = useRecoilValue(isHired(crewMember))
+	const monologueValue = useRecoilValue(monologue(crewMember))
+	const resetCrewMember = useResetRecoilState(activeCrewMember)
 
-  const Component = {
-    alchemist: Alchemist,
-    blacksmith: Blacksmith,
-    fletcher: Fletcher,
-    medic: Medic,
-    mercenary: Mercenary,
-    merchant: Merchant,
-    occultist: Occultist,
-    tailor: Tailor,
-    witch: Witch,
-  }[crewMember]
+	const Component = {
+		alchemist: Alchemist,
+		blacksmith: Blacksmith,
+		fletcher: Fletcher,
+		medic: Medic,
+		mercenary: Mercenary,
+		merchant: Merchant,
+		occultist: Occultist,
+		tailor: Tailor,
+		witch: Witch,
+	}[crewMember]
 
-  if (isHiredValue) {
-    const { Icon, interaction } = CREW[crewMember]
+	if (isHiredValue) {
+		const { Icon, interaction } = CREW[crewMember]
 
-    return (
-      <>
-        <div
-          className={`${CLASS_FULL_WIDTH_JUSTIFIED} ${getAnimationClass({ animation: `flipInX` })}`}
-        >
-          <IconDisplay
-            description={<span>&quot;{monologueValue}&quot;</span>}
-            Icon={Icon}
-            tooltip="Crew member"
-          >
-            <span>{capitalizeAll(crewMember)}</span>
-          </IconDisplay>
+		return (
+			<>
+				<div
+					className={`${CLASS_FULL_WIDTH_JUSTIFIED} ${getAnimationClass({ animation: "flipInX" })}`}
+				>
+					<IconDisplay
+						description={(
+							<span>
+								&quot;
+								{monologueValue}
+								&quot;
+							</span>
+						)}
+						Icon={Icon}
+						tooltip="Crew member"
+					>
+						<span>{capitalizeAll(crewMember)}</span>
+					</IconDisplay>
 
-          <Button
-            className="ms-2"
-            onClick={() => {
-              setActiveCrewMember(crewMember)
-            }}
-            variant="outline-dark"
-          >
-            {interaction}
-          </Button>
-        </div>
+					<Button
+						className="ms-2"
+						onClick={() => {
+							setActiveCrewMember(crewMember)
+						}}
+						variant="outline-dark"
+					>
+						{interaction}
+					</Button>
+				</div>
 
-        <DismissableScreen
-          isShowing={activeCrewMemberValue === crewMember}
-          onClose={resetCrewMember}
-          title={capitalizeAll(crewMember)}
-        >
-          <Component />
-        </DismissableScreen>
-      </>
-    )
-  }
+				<DismissableScreen
+					isShowing={activeCrewMemberValue === crewMember}
+					onClose={resetCrewMember}
+					title={capitalizeAll(crewMember)}
+				>
+					<Component />
+				</DismissableScreen>
+			</>
+		)
+	}
 }

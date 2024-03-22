@@ -26,83 +26,83 @@ import type { SVGIcon } from "@neverquest/types/components"
 import type { Mastery, Skill } from "@neverquest/types/unions"
 
 export const MASTERIES: Record<
-  Mastery,
-  AttributeOrMasteryBaseData & {
-    instructionIcons: [SVGIcon, ...SVGIcon[]];
-    instructions: string;
-    requiredSkill: Skill;
-  }
+	Mastery,
+	AttributeOrMasteryBaseData & {
+		instructionIcons: [SVGIcon, ...SVGIcon[]]
+		instructions: string
+		requiredSkill: Skill
+	}
 > = {
-  butchery: {
-    base: 0.2,
-    description: `Affects # execution threshold.`,
-    descriptionIcons: [IconExecution],
-    Icon: IconButchery,
-    increment: 0.5 / LEVELLING_MAXIMUM,
-    instructionIcons: [IconTwoHanded],
-    instructions: `Trains when dealing damage with a # two-handed weapon.`,
-    requiredSkill: `siegecraft`,
-  },
-  cruelty: {
-    base: 0.3,
-    description: `Affects # bleed damage.`,
-    descriptionIcons: [IconBleeding],
-    Icon: IconCruelty,
-    increment: 1.5 / LEVELLING_MAXIMUM,
-    instructionIcons: [IconPiercing],
-    instructions: `Trains when dealing damage with a # piercing weapon.`,
-    requiredSkill: `anatomy`,
-  },
-  finesse: {
-    base: 0,
-    description: `Affects damage absorbed and reflected when # parrying.`,
-    descriptionIcons: [IconParryChance],
-    Icon: IconFinesse,
-    increment: 1 / LEVELLING_MAXIMUM,
-    instructionIcons: [IconSlashing],
-    instructions: `Trains when dealing damage with a # slashing weapon.`,
-    requiredSkill: `escrime`,
-  },
-  marksmanship: {
-    base: 0,
-    description: `Affects the # distance a monster must close before it can attack.`,
-    descriptionIcons: [IconDistance],
-    Icon: IconMarksmanship,
-    increment: 0.8 / LEVELLING_MAXIMUM,
-    instructionIcons: [IconRanged],
-    instructions: `Trains when dealing damage with a # ranged weapon.`,
-    requiredSkill: `archery`,
-  },
-  might: {
-    base: 1800,
-    description: `Affects # stun duration.`,
-    descriptionIcons: [IconStunned],
-    Icon: IconMight,
-    increment: Math.round(4000 / LEVELLING_MAXIMUM),
-    instructionIcons: [IconBlunt],
-    instructions: `Trains when dealing damage with a # blunt weapon.`,
-    requiredSkill: `traumatology`,
-  },
-  resilience: {
-    base: 0,
-    description: `Affects # recovery rate.`,
-    descriptionIcons: [IconRecovery],
-    Icon: IconResilience,
-    increment: 1 / LEVELLING_MAXIMUM,
-    instructionIcons: [IconHealth, IconMonsterDamage],
-    instructions: `Trains when losing # health on being # struck.`,
-    requiredSkill: `armorcraft`,
-  },
-  stability: {
-    base: 1800,
-    description: `Affects # stagger duration.`,
-    descriptionIcons: [IconStaggered],
-    Icon: IconStability,
-    increment: Math.round(4000 / LEVELLING_MAXIMUM),
-    instructionIcons: [IconBlockChance, IconStaggered],
-    instructions: `Trains when # blocking or # staggering a monster.`,
-    requiredSkill: `shieldcraft`,
-  },
+	butchery: {
+		base: 0.2,
+		description: "Affects # execution threshold.",
+		descriptionIcons: [IconExecution],
+		Icon: IconButchery,
+		increment: 0.5 / LEVELLING_MAXIMUM,
+		instructionIcons: [IconTwoHanded],
+		instructions: "Trains when dealing damage with a # two-handed weapon.",
+		requiredSkill: "siegecraft",
+	},
+	cruelty: {
+		base: 0.3,
+		description: "Affects # bleed damage.",
+		descriptionIcons: [IconBleeding],
+		Icon: IconCruelty,
+		increment: 1.5 / LEVELLING_MAXIMUM,
+		instructionIcons: [IconPiercing],
+		instructions: "Trains when dealing damage with a # piercing weapon.",
+		requiredSkill: "anatomy",
+	},
+	finesse: {
+		base: 0,
+		description: "Affects damage absorbed and reflected when # parrying.",
+		descriptionIcons: [IconParryChance],
+		Icon: IconFinesse,
+		increment: 1 / LEVELLING_MAXIMUM,
+		instructionIcons: [IconSlashing],
+		instructions: "Trains when dealing damage with a # slashing weapon.",
+		requiredSkill: "escrime",
+	},
+	marksmanship: {
+		base: 0,
+		description: "Affects the # distance a monster must close before it can attack.",
+		descriptionIcons: [IconDistance],
+		Icon: IconMarksmanship,
+		increment: 0.8 / LEVELLING_MAXIMUM,
+		instructionIcons: [IconRanged],
+		instructions: "Trains when dealing damage with a # ranged weapon.",
+		requiredSkill: "archery",
+	},
+	might: {
+		base: 1800,
+		description: "Affects # stun duration.",
+		descriptionIcons: [IconStunned],
+		Icon: IconMight,
+		increment: Math.round(4000 / LEVELLING_MAXIMUM),
+		instructionIcons: [IconBlunt],
+		instructions: "Trains when dealing damage with a # blunt weapon.",
+		requiredSkill: "traumatology",
+	},
+	resilience: {
+		base: 0,
+		description: "Affects # recovery rate.",
+		descriptionIcons: [IconRecovery],
+		Icon: IconResilience,
+		increment: 1 / LEVELLING_MAXIMUM,
+		instructionIcons: [IconHealth, IconMonsterDamage],
+		instructions: "Trains when losing # health on being # struck.",
+		requiredSkill: "armorcraft",
+	},
+	stability: {
+		base: 1800,
+		description: "Affects # stagger duration.",
+		descriptionIcons: [IconStaggered],
+		Icon: IconStability,
+		increment: Math.round(4000 / LEVELLING_MAXIMUM),
+		instructionIcons: [IconBlockChance, IconStaggered],
+		instructions: "Trains when # blocking or # staggering a monster.",
+		requiredSkill: "shieldcraft",
+	},
 }
 
 export const MASTERY_COST_BASE = 2

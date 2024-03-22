@@ -10,44 +10,44 @@ import { isLootAvailable } from "@neverquest/state/resources"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function CollectLoot() {
-  const isAttackingValue = useRecoilValue(isAttacking)
-  const hasFlatlinedValue = useRecoilValue(hasFlatlined)
-  const isLootAvailableValue = useRecoilValue(isLootAvailable)
-  const isLootingValue = useRecoilValue(isLooting)
-  const isStageCompletedValue = useRecoilValue(isStageCompleted)
-  const locationValue = useRecoilValue(location)
-  const progressMaximumValue = useRecoilValue(progressMaximum)
+	const isAttackingValue = useRecoilValue(isAttacking)
+	const hasFlatlinedValue = useRecoilValue(hasFlatlined)
+	const isLootAvailableValue = useRecoilValue(isLootAvailable)
+	const isLootingValue = useRecoilValue(isLooting)
+	const isStageCompletedValue = useRecoilValue(isStageCompleted)
+	const locationValue = useRecoilValue(location)
+	const progressMaximumValue = useRecoilValue(progressMaximum)
 
-  const collectLoot = useCollectLoot()
+	const collectLoot = useCollectLoot()
 
-  if (
-    isLootAvailableValue &&
-    (progressMaximumValue === Number.POSITIVE_INFINITY || isStageCompletedValue) &&
-    locationValue === `wilderness`
-  ) {
-    return (
-      <OverlayTrigger
-        overlay={
-          <Tooltip>
-            <span>Collect loot</span>
-          </Tooltip>
-        }
-      >
-        <div className={getAnimationClass({ animation: `bounceIn` })}>
-          <Button
-            className={
-              isStageCompletedValue
-                ? getAnimationClass({ animation: `pulse`, isInfinite: true })
-                : undefined
-            }
-            disabled={hasFlatlinedValue || isAttackingValue || isLootingValue}
-            onClick={collectLoot}
-            variant="outline-dark"
-          >
-            <IconImage Icon={IconLoot} />
-          </Button>
-        </div>
-      </OverlayTrigger>
-    )
-  }
+	if (
+		isLootAvailableValue
+		&& (progressMaximumValue === Number.POSITIVE_INFINITY || isStageCompletedValue)
+		&& locationValue === "wilderness"
+	) {
+		return (
+			<OverlayTrigger
+				overlay={(
+					<Tooltip>
+						<span>Collect loot</span>
+					</Tooltip>
+				)}
+			>
+				<div className={getAnimationClass({ animation: "bounceIn" })}>
+					<Button
+						className={
+							isStageCompletedValue
+								? getAnimationClass({ animation: "pulse", isInfinite: true })
+								: undefined
+						}
+						disabled={hasFlatlinedValue || isAttackingValue || isLootingValue}
+						onClick={collectLoot}
+						variant="outline-dark"
+					>
+						<IconImage Icon={IconLoot} />
+					</Button>
+				</div>
+			</OverlayTrigger>
+		)
+	}
 }

@@ -8,72 +8,72 @@ import type { Delta, NumberFormat } from "@neverquest/types/unions"
 import { formatNumber } from "@neverquest/utilities/formatters"
 
 export function useDeltaText({
-  delta,
-  format = `integer`,
-  ignoreZero = false,
-  state,
-  suffix,
+	delta,
+	format = "integer",
+	ignoreZero = false,
+	state,
+	suffix,
 }: {
-  delta: Delta;
-  format?: NumberFormat;
-  ignoreZero?: boolean;
-  state: RecoilValueReadOnly<number>;
-  suffix?: string;
+	delta: Delta
+	format?: NumberFormat
+	ignoreZero?: boolean
+	state: RecoilValueReadOnly<number>
+	suffix?: string
 }) {
-  const currentValue = useRecoilValue(state)
+	const currentValue = useRecoilValue(state)
 
-  const addDelta = useAddDelta()
-  const previousValue = usePreviousValue(currentValue)
+	const addDelta = useAddDelta()
+	const previousValue = usePreviousValue(currentValue)
 
-  const isTime = format === `time`
+	const isTime = format === "time"
 
-  useEffect(() => {
-    if (previousValue === undefined) {
-      return
-    }
+	useEffect(() => {
+		if (previousValue === undefined) {
+			return
+		}
 
-    if (ignoreZero && currentValue === 0) {
-      return
-    }
+		if (ignoreZero && currentValue === 0) {
+			return
+		}
 
-    const difference = currentValue - previousValue
+		const difference = currentValue - previousValue
 
-    if (
-      (format === `float` && Math.abs(difference) < 0.005) ||
-      (format === `integer` && difference === 0) ||
-      (format === `percentage` && Math.abs(difference) < 0.0005) ||
-      (isTime && Math.abs(difference) < 10)
-    ) {
-      return
-    }
+		if (
+			(format === "float" && Math.abs(difference) < 0.005)
+			|| (format === "integer" && difference === 0)
+			|| (format === "percentage" && Math.abs(difference) < 0.0005)
+			|| (isTime && Math.abs(difference) < 10)
+		) {
+			return
+		}
 
-    const isPositive = difference > 0
-    const deltaContents: DeltaDisplay[] = [
-      {
-        color: isPositive
-          ? (isTime
-            ? `text-danger`
-            : `text-success`)
-          : (isTime
-            ? `text-success`
-            : `text-danger`),
-        value: `${isPositive ? `+` : ``}${formatNumber({
-          format,
-          value: difference,
-        })}`,
-      },
-    ]
+		const isPositive = difference > 0
+		const deltaContents: DeltaDisplay[] = [
+			{
+				color: isPositive
+					? (isTime
+						? "text-danger"
+						: "text-success")
+					: (isTime
+						? "text-success"
+						: "text-danger"),
+				value: `${isPositive ? "+" : ""}${formatNumber({
+					format,
+					value: difference,
+				})}`,
+			},
+		]
 
-    if (suffix !== undefined) {
-      deltaContents.push({
-        color: `text-secondary`,
-        value: suffix,
-      })
-    }
+		if (suffix !== undefined) {
+			deltaContents.push({
+				color: "text-secondary",
+				value: suffix,
+			})
+		}
 
-    addDelta({
-      contents: deltaContents,
-      delta,
-    })
-  }, [addDelta, currentValue, delta, format, ignoreZero, isTime, previousValue, suffix])
+		addDelta({
+			contents: deltaContents,
+			delta,
+		})
+	}, [addDelta, currentValue, delta, format, ignoreZero, isTime, previousValue, suffix])
 }

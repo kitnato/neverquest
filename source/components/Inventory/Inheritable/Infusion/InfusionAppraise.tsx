@@ -1,13 +1,13 @@
 import { useState } from "react"
 import {
-  Button,
-  Modal,
-  ModalBody,
-  ModalHeader,
-  ModalTitle,
-  OverlayTrigger,
-  Stack,
-  Tooltip,
+	Button,
+	Modal,
+	ModalBody,
+	ModalHeader,
+	ModalTitle,
+	OverlayTrigger,
+	Stack,
+	Tooltip,
 } from "react-bootstrap"
 import { useRecoilValue } from "recoil"
 
@@ -22,64 +22,64 @@ import { isSkillAcquired } from "@neverquest/state/skills"
 import type { Infusable } from "@neverquest/types/unions"
 
 export function InfusionAppraise({ infusable }: { infusable: Infusable }) {
-  const isSkillAcquiredMeditation = useRecoilValue(isSkillAcquired(`meditation`))
+	const isSkillAcquiredMeditation = useRecoilValue(isSkillAcquired("meditation"))
 
-  const [isShowingInfusion, setIsShowingInfusion] = useState(false)
+	const [isShowingInfusion, setIsShowingInfusion] = useState(false)
 
-  const { Icon } = INFUSABLES[infusable]
+	const { Icon } = INFUSABLES[infusable]
 
-  return (
-    <>
-      <OverlayTrigger
-        overlay={
-          <Tooltip>
-            <span>{LABEL_SKILL_REQUIRED}</span>
-          </Tooltip>
-        }
-        trigger={isSkillAcquiredMeditation ? [] : POPOVER_TRIGGER}
-      >
-        <div>
-          <Button
-            disabled={!isSkillAcquiredMeditation}
-            onClick={() => {
-              setIsShowingInfusion(true)
-            }}
-            variant="outline-dark"
-          >
-            <span>Appraise</span>
-          </Button>
-        </div>
-      </OverlayTrigger>
+	return (
+		<>
+			<OverlayTrigger
+				overlay={(
+					<Tooltip>
+						<span>{LABEL_SKILL_REQUIRED}</span>
+					</Tooltip>
+				)}
+				trigger={isSkillAcquiredMeditation ? [] : POPOVER_TRIGGER}
+			>
+				<div>
+					<Button
+						disabled={!isSkillAcquiredMeditation}
+						onClick={() => {
+							setIsShowingInfusion(true)
+						}}
+						variant="outline-dark"
+					>
+						<span>Appraise</span>
+					</Button>
+				</div>
+			</OverlayTrigger>
 
-      <Modal
-        centered
-        onHide={() => {
-          setIsShowingInfusion(false)
-        }}
-        show={isShowingInfusion}
-      >
-        <ModalHeader closeButton>
-          <ModalTitle>
-            <IconDisplay Icon={Icon}>
-              <span>Infusion</span>
-            </IconDisplay>
-          </ModalTitle>
-        </ModalHeader>
+			<Modal
+				centered
+				onHide={() => {
+					setIsShowingInfusion(false)
+				}}
+				show={isShowingInfusion}
+			>
+				<ModalHeader closeButton>
+					<ModalTitle>
+						<IconDisplay Icon={Icon}>
+							<span>Infusion</span>
+						</IconDisplay>
+					</ModalTitle>
+				</ModalHeader>
 
-        <ModalBody>
-          <Stack gap={3}>
-            <InfusionEffect infusable={infusable} />
+				<ModalBody>
+					<Stack gap={3}>
+						<InfusionEffect infusable={infusable} />
 
-            <Stack direction="horizontal" gap={3}>
-              <InfusionLevel infusable={infusable} />
+						<Stack direction="horizontal" gap={3}>
+							<InfusionLevel infusable={infusable} />
 
-              <InfusionProgress infusable={infusable} />
+							<InfusionProgress infusable={infusable} />
 
-              <Infusion infusable={infusable} />
-            </Stack>
-          </Stack>
-        </ModalBody>
-      </Modal>
-    </>
-  )
+							<Infusion infusable={infusable} />
+						</Stack>
+					</Stack>
+				</ModalBody>
+			</Modal>
+		</>
+	)
 }

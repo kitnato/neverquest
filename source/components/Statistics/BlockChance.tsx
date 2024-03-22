@@ -14,52 +14,55 @@ import { formatNumber } from "@neverquest/utilities/formatters"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function BlockChance() {
-  const blockChanceValue = useRecoilValue(blockChance)
-  const shieldValue = useRecoilValue(shield)
+	const blockChanceValue = useRecoilValue(blockChance)
+	const shieldValue = useRecoilValue(shield)
 
-  useDeltaText({
-    delta: `blockChance`,
-    format: `percentage`,
-    state: blockChance,
-  })
+	useDeltaText({
+		delta: "blockChance",
+		format: "percentage",
+		state: blockChance,
+	})
 
-  if (blockChanceValue > 0) {
-    return (
-      <IconDisplay
-        className={getAnimationClass({ animation: `flipInX` })}
-        Icon={IconBlockChance}
-        tooltip="Total block chance"
-      >
-        <Stack direction="horizontal" gap={1}>
-          <OverlayTrigger
-            overlay={
-              <Popover>
-                <PopoverBody>
-                  <DetailsTable>
-                    <tr>
-                      <td>
-                        <IconDisplay Icon={IconBurden} iconProps={{ className: `small` }}>
-                          <span>On block:</span>
-                        </IconDisplay>
-                      </td>
+	if (blockChanceValue > 0) {
+		return (
+			<IconDisplay
+				className={getAnimationClass({ animation: "flipInX" })}
+				Icon={IconBlockChance}
+				tooltip="Total block chance"
+			>
+				<Stack direction="horizontal" gap={1}>
+					<OverlayTrigger
+						overlay={(
+							<Popover>
+								<PopoverBody>
+									<DetailsTable>
+										<tr>
+											<td>
+												<IconDisplay Icon={IconBurden} iconProps={{ className: "small" }}>
+													<span>On block:</span>
+												</IconDisplay>
+											</td>
 
-                      <td>
-                        <IconDisplay Icon={IconStamina} iconProps={{ className: `small` }}>
-                          <span>-{formatNumber({ value: shieldValue.burden })}</span>
-                        </IconDisplay>
-                      </td>
-                    </tr>
-                  </DetailsTable>
-                </PopoverBody>
-              </Popover>
-            }
-          >
-            <span>{formatNumber({ format: `percentage`, value: blockChanceValue })}</span>
-          </OverlayTrigger>
+											<td>
+												<IconDisplay Icon={IconStamina} iconProps={{ className: "small" }}>
+													<span>
+														-
+														{formatNumber({ value: shieldValue.burden })}
+													</span>
+												</IconDisplay>
+											</td>
+										</tr>
+									</DetailsTable>
+								</PopoverBody>
+							</Popover>
+						)}
+					>
+						<span>{formatNumber({ format: "percentage", value: blockChanceValue })}</span>
+					</OverlayTrigger>
 
-          <DeltasDisplay delta="blockChance" />
-        </Stack>
-      </IconDisplay>
-    )
-  }
+					<DeltasDisplay delta="blockChance" />
+				</Stack>
+			</IconDisplay>
+		)
+	}
 }

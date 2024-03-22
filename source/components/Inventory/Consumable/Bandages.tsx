@@ -8,36 +8,36 @@ import { inventory } from "@neverquest/state/inventory"
 import { isHealthAtMaximum } from "@neverquest/state/reserves"
 
 export function Bandages({ ID }: { ID: string }) {
-  const isHealthAtMaximumValue = useRecoilValue(isHealthAtMaximum)
-  const setInventory = useSetRecoilState(inventory)
+	const isHealthAtMaximumValue = useRecoilValue(isHealthAtMaximum)
+	const setInventory = useSetRecoilState(inventory)
 
-  const heal = useHeal()
-  const progressQuest = useProgressQuest()
+	const heal = useHeal()
+	const progressQuest = useProgressQuest()
 
-  return (
-    <OverlayTrigger
-      overlay={
-        <Tooltip>
-          <span>{LABEL_FULL_HEALTH}</span>
-        </Tooltip>
-      }
-      trigger={isHealthAtMaximumValue ? POPOVER_TRIGGER : []}
-    >
-      <div>
-        <Button
-          disabled={isHealthAtMaximumValue}
-          onClick={() => {
-            heal()
-            setInventory((currentInventory) =>
-              currentInventory.filter(({ ID: currentItemID }) => currentItemID !== ID),
-            )
-            progressQuest({ quest: `bandaging` })
-          }}
-          variant="outline-dark"
-        >
-          <span>Use</span>
-        </Button>
-      </div>
-    </OverlayTrigger>
-  )
+	return (
+		<OverlayTrigger
+			overlay={(
+				<Tooltip>
+					<span>{LABEL_FULL_HEALTH}</span>
+				</Tooltip>
+			)}
+			trigger={isHealthAtMaximumValue ? POPOVER_TRIGGER : []}
+		>
+			<div>
+				<Button
+					disabled={isHealthAtMaximumValue}
+					onClick={() => {
+						heal()
+						setInventory(currentInventory =>
+							currentInventory.filter(({ ID: currentItemID }) => currentItemID !== ID),
+						)
+						progressQuest({ quest: "bandaging" })
+					}}
+					variant="outline-dark"
+				>
+					<span>Use</span>
+				</Button>
+			</div>
+		</OverlayTrigger>
+	)
 }

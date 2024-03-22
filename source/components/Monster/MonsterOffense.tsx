@@ -7,23 +7,23 @@ import { PoisonRating } from "@neverquest/components/Monster/PoisonRating"
 import { isShowing } from "@neverquest/state/ui"
 
 export function MonsterOffense() {
-  const isShowingMonsterOffense = useRecoilValue(isShowing(`monsterOffense`))
+	const isShowingMonsterOffense = useRecoilValue(isShowing("monsterOffense"))
 
-  if (isShowingMonsterOffense) {
-    return (
-      <Row>
-        <Col>
-          <MonsterDamage />
-        </Col>
+	if (isShowingMonsterOffense) {
+		return (
+			<Row>
+				<Col>
+					<MonsterDamage />
+				</Col>
 
-        <Col>
-          <PoisonRating />
-        </Col>
+				<Col>
+					<PoisonRating />
+				</Col>
 
-        <Col>
-          <BlightChance />
-        </Col>
-      </Row>
-    )
-  }
+				<Col>
+					<BlightChance />
+				</Col>
+			</Row>
+		)
+	}
 }

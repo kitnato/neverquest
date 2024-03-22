@@ -12,59 +12,59 @@ import { formatNumber } from "@neverquest/utilities/formatters"
 import { getPerkEffect } from "@neverquest/utilities/getters"
 
 export function Progress() {
-  const locationValue = useRecoilValue(location)
-  const retirementStageValue = useRecoilValue(retirementStage)
+	const locationValue = useRecoilValue(location)
+	const retirementStageValue = useRecoilValue(retirementStage)
 
-  const monsterReduction = getPerkEffect({ perk: `monsterReduction`, stage: retirementStageValue })
+	const monsterReduction = getPerkEffect({ perk: "monsterReduction", stage: retirementStageValue })
 
-  useDeltaText({
-    delta: `progress`,
-    ignoreZero: true,
-    state: progress,
-  })
+	useDeltaText({
+		delta: "progress",
+		ignoreZero: true,
+		state: progress,
+	})
 
-  if (locationValue === `wilderness`) {
-    return (
-      <IconDisplay
-        className="w-100"
-        Icon={IconProgress}
-        iconProps={{ overlayPlacement: `bottom` }}
-        tooltip="Progress"
-      >
-        <OverlayTrigger
-          overlay={
-            <Popover>
-              <PopoverHeader className="text-center">
-                <span>Monster reduction</span>
-              </PopoverHeader>
+	if (locationValue === "wilderness") {
+		return (
+			<IconDisplay
+				className="w-100"
+				Icon={IconProgress}
+				iconProps={{ overlayPlacement: "bottom" }}
+				tooltip="Progress"
+			>
+				<OverlayTrigger
+					overlay={(
+						<Popover>
+							<PopoverHeader className="text-center">
+								<span>Monster reduction</span>
+							</PopoverHeader>
 
-              <PopoverBody>
-                <Stack className="justify-content-center" direction="horizontal" gap={1}>
-                  <IconDisplay
-                    Icon={IconMonsterReduction}
-                    iconProps={{ className: `small`, isFlipped: true }}
-                    tooltip="Monster reduction"
-                  >
-                    <span>
-                      -
-                      {formatNumber({
-                        format: `percentage`,
-                        value: monsterReduction,
-                      })}
-                    </span>
-                  </IconDisplay>
-                </Stack>
-              </PopoverBody>
-            </Popover>
-          }
-          placement="bottom"
-          trigger={monsterReduction > 0 ? POPOVER_TRIGGER : []}
-        >
-          <div className="w-100">
-            <ProgressMeter />
-          </div>
-        </OverlayTrigger>
-      </IconDisplay>
-    )
-  }
+							<PopoverBody>
+								<Stack className="justify-content-center" direction="horizontal" gap={1}>
+									<IconDisplay
+										Icon={IconMonsterReduction}
+										iconProps={{ className: "small", isFlipped: true }}
+										tooltip="Monster reduction"
+									>
+										<span>
+											-
+											{formatNumber({
+												format: "percentage",
+												value: monsterReduction,
+											})}
+										</span>
+									</IconDisplay>
+								</Stack>
+							</PopoverBody>
+						</Popover>
+					)}
+					placement="bottom"
+					trigger={monsterReduction > 0 ? POPOVER_TRIGGER : []}
+				>
+					<div className="w-100">
+						<ProgressMeter />
+					</div>
+				</OverlayTrigger>
+			</IconDisplay>
+		)
+	}
 }

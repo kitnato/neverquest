@@ -6,10 +6,10 @@ import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { Encumbrance } from "@neverquest/components/Inventory/Encumbrance"
 import { TAILORING } from "@neverquest/data/caravan"
 import {
-  CLASS_FULL_WIDTH_JUSTIFIED,
-  GENERIC_MINIMUM,
-  LABEL_NO_ESSENCE,
-  POPOVER_TRIGGER,
+	CLASS_FULL_WIDTH_JUSTIFIED,
+	GENERIC_MINIMUM,
+	LABEL_NO_ESSENCE,
+	POPOVER_TRIGGER,
 } from "@neverquest/data/general"
 import { KNAPSACK_CAPACITY } from "@neverquest/data/items"
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
@@ -23,81 +23,81 @@ import { formatNumber } from "@neverquest/utilities/formatters"
 import { getFromRange, getSigmoid } from "@neverquest/utilities/getters"
 
 export function ExpandKnapsack() {
-  const [knapsackCapacityValue, setKnapsackCapacity] = useRecoilState(knapsackCapacity)
-  const essenceValue = useRecoilValue(essence)
+	const [knapsackCapacityValue, setKnapsackCapacity] = useRecoilState(knapsackCapacity)
+	const essenceValue = useRecoilValue(essence)
 
-  const progressQuest = useProgressQuest()
-  const transactEssence = useTransactEssence()
+	const progressQuest = useProgressQuest()
+	const transactEssence = useTransactEssence()
 
-  const { amount, priceRange } = TAILORING.knapsack
+	const { amount, priceRange } = TAILORING.knapsack
 
-  const price = Math.max(
-    Math.round(
-      getFromRange({
-        factor: getSigmoid((knapsackCapacityValue - (KNAPSACK_CAPACITY - 1)) / amount),
-        ...priceRange,
-      }),
-    ),
-    GENERIC_MINIMUM,
-  )
-  const isAffordable = price <= essenceValue
+	const price = Math.max(
+		Math.round(
+			getFromRange({
+				factor: getSigmoid((knapsackCapacityValue - (KNAPSACK_CAPACITY - 1)) / amount),
+				...priceRange,
+			}),
+		),
+		GENERIC_MINIMUM,
+	)
+	const isAffordable = price <= essenceValue
 
-  return (
-    <Stack gap={3}>
-      <h6>Knapsack</h6>
+	return (
+		<Stack gap={3}>
+			<h6>Knapsack</h6>
 
-      <Encumbrance />
+			<Encumbrance />
 
-      <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-        <IconDisplay
-          description={
-            <DescriptionDisplay
-              description={`Increases maximum # encumbrance by ${amount}.`}
-              descriptionIcons={[IconEncumbrance]}
-            />
-          }
-          Icon={IconTailoring}
-          tooltip="Tailoring"
-        >
-          <span>Add pockets</span>
-        </IconDisplay>
+			<div className={CLASS_FULL_WIDTH_JUSTIFIED}>
+				<IconDisplay
+					description={(
+						<DescriptionDisplay
+							description={`Increases maximum # encumbrance by ${amount}.`}
+							descriptionIcons={[IconEncumbrance]}
+						/>
+					)}
+					Icon={IconTailoring}
+					tooltip="Tailoring"
+				>
+					<span>Add pockets</span>
+				</IconDisplay>
 
-        <Stack className="ms-2" direction="horizontal" gap={3}>
-          <IconDisplay Icon={IconEssence} tooltip="Price">
-            <span>{formatNumber({ value: price })}</span>
-          </IconDisplay>
+				<Stack className="ms-2" direction="horizontal" gap={3}>
+					<IconDisplay Icon={IconEssence} tooltip="Price">
+						<span>{formatNumber({ value: price })}</span>
+					</IconDisplay>
 
-          <OverlayTrigger
-            overlay={
-              <Tooltip>
-                <span>{LABEL_NO_ESSENCE}</span>
-              </Tooltip>
-            }
-            trigger={isAffordable ? [] : POPOVER_TRIGGER}
-          >
-            <div>
-              <Button
-                disabled={!isAffordable}
-                onClick={() => {
-                  transactEssence(-price)
+					<OverlayTrigger
+						overlay={(
+							<Tooltip>
+								<span>{LABEL_NO_ESSENCE}</span>
+							</Tooltip>
+						)}
+						trigger={isAffordable ? [] : POPOVER_TRIGGER}
+					>
+						<div>
+							<Button
+								disabled={!isAffordable}
+								onClick={() => {
+									transactEssence(-price)
 
-                  setKnapsackCapacity(
-                    (currentKnapsackCapacity) => currentKnapsackCapacity + amount,
-                  )
+									setKnapsackCapacity(
+										currentKnapsackCapacity => currentKnapsackCapacity + amount,
+									)
 
-                  progressQuest({
-                    amount,
-                    quest: `knapsackExpanding`,
-                  })
-                }}
-                variant="outline-dark"
-              >
-                <span>Expand</span>
-              </Button>
-            </div>
-          </OverlayTrigger>
-        </Stack>
-      </div>
-    </Stack>
-  )
+									progressQuest({
+										amount,
+										quest: "knapsackExpanding",
+									})
+								}}
+								variant="outline-dark"
+							>
+								<span>Expand</span>
+							</Button>
+						</div>
+					</OverlayTrigger>
+				</Stack>
+			</div>
+		</Stack>
+	)
 }

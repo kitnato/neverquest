@@ -11,28 +11,29 @@ import { ammunition, ammunitionCapacity } from "@neverquest/state/items"
 import { formatNumber } from "@neverquest/utilities/formatters"
 
 export function AmmunitionPouchCapacity() {
-  const ammunitionValue = useRecoilValue(ammunition)
-  const ammunitionCapacityValue = useRecoilValue(ammunitionCapacity)
+	const ammunitionValue = useRecoilValue(ammunition)
+	const ammunitionCapacityValue = useRecoilValue(ammunitionCapacity)
 
-  useDeltaText({
-    delta: `ammunitionCapacity`,
-    state: ammunitionCapacity,
-  })
+	useDeltaText({
+		delta: "ammunitionCapacity",
+		state: ammunitionCapacity,
+	})
 
-  return (
-    <IconDisplay Icon={IconAmmunitionPouch} tooltip="Ammunition capacity">
-      <LabelledProgressBar value={(ammunitionValue / ammunitionCapacityValue) * PERCENTAGE_POINTS}>
-        <Stack direction="horizontal" gap={1}>
-          <span>
-            {formatNumber({ value: ammunitionValue })}&nbsp;/&nbsp;
-            {formatNumber({
-              value: ammunitionCapacityValue,
-            })}
-          </span>
+	return (
+		<IconDisplay Icon={IconAmmunitionPouch} tooltip="Ammunition capacity">
+			<LabelledProgressBar value={(ammunitionValue / ammunitionCapacityValue) * PERCENTAGE_POINTS}>
+				<Stack direction="horizontal" gap={1}>
+					<span>
+						{formatNumber({ value: ammunitionValue })}
+&nbsp;/&nbsp;
+						{formatNumber({
+							value: ammunitionCapacityValue,
+						})}
+					</span>
 
-          <DeltasDisplay delta="ammunitionCapacity" />
-        </Stack>
-      </LabelledProgressBar>
-    </IconDisplay>
-  )
+					<DeltasDisplay delta="ammunitionCapacity" />
+				</Stack>
+			</LabelledProgressBar>
+		</IconDisplay>
+	)
 }

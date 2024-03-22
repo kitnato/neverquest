@@ -6,18 +6,18 @@ import { ExpandKnapsack } from "@neverquest/components/Caravan/Tailor/ExpandKnap
 import { ownedItem } from "@neverquest/state/inventory"
 
 export function Tailor() {
-  const ownedAmmunitionPouch = useRecoilValue(ownedItem(`ammunition pouch`))
-  const ownedItemKnapsack = useRecoilValue(ownedItem(`knapsack`))
+	const ownedAmmunitionPouch = useRecoilValue(ownedItem("ammunition pouch"))
+	const ownedItemKnapsack = useRecoilValue(ownedItem("knapsack"))
 
-  if (ownedAmmunitionPouch === undefined && ownedItemKnapsack === undefined) {
-    return <span>&quot;I&apos;m feeling a bit useless here ...&quot;</span>
-  }
+	if (ownedAmmunitionPouch === undefined && ownedItemKnapsack === undefined) {
+		return <span>&quot;I&apos;m feeling a bit useless here ...&quot;</span>
+	}
 
-  return (
-    <Stack gap={5}>
-      {ownedItemKnapsack !== undefined && <ExpandKnapsack />}
+	return (
+		<Stack gap={5}>
+			{ownedItemKnapsack !== undefined && <ExpandKnapsack />}
 
-      {ownedAmmunitionPouch !== undefined && <ExpandAmmunitionPouch />}
-    </Stack>
-  )
+			{ownedAmmunitionPouch !== undefined && <ExpandAmmunitionPouch />}
+		</Stack>
+	)
 }

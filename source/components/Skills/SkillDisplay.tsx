@@ -5,17 +5,17 @@ import type { Skill } from "@neverquest/types/unions"
 import { capitalizeAll } from "@neverquest/utilities/formatters"
 
 export function SkillDisplay({ skill }: { skill: Skill }) {
-  const { description, descriptionIcons, Icon } = SKILLS[skill]
+	const { description, descriptionIcons, Icon } = SKILLS[skill]
 
-  return (
-    <IconDisplay
-      description={
-        <DescriptionDisplay description={description} descriptionIcons={descriptionIcons} />
-      }
-      Icon={Icon}
-      tooltip="Skill"
-    >
-      <span>{capitalizeAll(skill)}</span>
-    </IconDisplay>
-  )
+	return (
+		<IconDisplay
+			description={
+				<DescriptionDisplay description={description} descriptionIcons={descriptionIcons} />
+			}
+			Icon={Icon}
+			tooltip="Skill"
+		>
+			<span>{capitalizeAll(skill)}</span>
+		</IconDisplay>
+	)
 }

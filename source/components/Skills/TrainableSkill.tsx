@@ -14,35 +14,37 @@ import type { Skill } from "@neverquest/types/unions"
 import { formatNumber } from "@neverquest/utilities/formatters"
 
 export function TrainableSkill({ skill }: { skill: Skill }) {
-  const isHiredValue = useRecoilValue(isHired(SKILLS[skill].requiredCrewMember))
-  const isSkillAcquiredValue = useRecoilValue(isSkillAcquired(skill))
-  const skillPriceValue = useRecoilValue(skillPrice)
+	const isHiredValue = useRecoilValue(isHired(SKILLS[skill].requiredCrewMember))
+	const isSkillAcquiredValue = useRecoilValue(isSkillAcquired(skill))
+	const skillPriceValue = useRecoilValue(skillPrice)
 
-  if (!isSkillAcquiredValue) {
-    return (
-      <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-        {isHiredValue ? (
-          <>
-            <SkillDisplay skill={skill} />
+	if (!isSkillAcquiredValue) {
+		return (
+			<div className={CLASS_FULL_WIDTH_JUSTIFIED}>
+				{isHiredValue
+					? (
+						<>
+							<SkillDisplay skill={skill} />
 
-            <Stack className="ms-2" direction="horizontal" gap={3}>
-              <IconDisplay Icon={IconEssence} tooltip="Price">
-                <span>{formatNumber({ value: skillPriceValue })}</span>
-              </IconDisplay>
+							<Stack className="ms-2" direction="horizontal" gap={3}>
+								<IconDisplay Icon={IconEssence} tooltip="Price">
+									<span>{formatNumber({ value: skillPriceValue })}</span>
+								</IconDisplay>
 
-              <TrainSkillButton skill={skill} />
-            </Stack>
-          </>
-        ) : (
-          <IconDisplay
-            description={<span>Requires a crew member.</span>}
-            Icon={IconUnknown}
-            tooltip="Skill"
-          >
-            <span>{LABEL_UNKNOWN}</span>
-          </IconDisplay>
-        )}
-      </div>
-    )
-  }
+								<TrainSkillButton skill={skill} />
+							</Stack>
+						</>
+					)
+					: (
+						<IconDisplay
+							description={<span>Requires a crew member.</span>}
+							Icon={IconUnknown}
+							tooltip="Skill"
+						>
+							<span>{LABEL_UNKNOWN}</span>
+						</IconDisplay>
+					)}
+			</div>
+		)
+	}
 }

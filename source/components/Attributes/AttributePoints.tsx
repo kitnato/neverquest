@@ -11,42 +11,42 @@ import { formatNumber } from "@neverquest/utilities/formatters"
 import { getAttributePointCost } from "@neverquest/utilities/getters"
 
 export function AttributePoints() {
-  const attributePointsValue = useRecoilValue(attributePoints)
-  const powerLevelValue = useRecoilValue(powerLevel)
+	const attributePointsValue = useRecoilValue(attributePoints)
+	const powerLevelValue = useRecoilValue(powerLevel)
 
-  useDeltaText({
-    delta: `attributePoints`,
-    state: attributePoints,
-  })
+	useDeltaText({
+		delta: "attributePoints",
+		state: attributePoints,
+	})
 
-  return (
-    <IconDisplay Icon={IconAttributePoints} tooltip="Available attribute points">
-      <Stack direction="horizontal">
-        <OverlayTrigger
-          overlay={
-            <Popover>
-              <PopoverHeader className="text-center">
-                <span>Attribute point cost</span>
-              </PopoverHeader>
+	return (
+		<IconDisplay Icon={IconAttributePoints} tooltip="Available attribute points">
+			<Stack direction="horizontal">
+				<OverlayTrigger
+					overlay={(
+						<Popover>
+							<PopoverHeader className="text-center">
+								<span>Attribute point cost</span>
+							</PopoverHeader>
 
-              <PopoverBody>
-                <IconDisplay
-                  className="justify-content-center"
-                  Icon={IconEssence}
-                  iconProps={{ className: `small` }}
-                >
-                  <span>{formatNumber({ value: getAttributePointCost(powerLevelValue) })}</span>
-                </IconDisplay>
-              </PopoverBody>
-            </Popover>
-          }
-          placement="left"
-        >
-          <span>{attributePointsValue}</span>
-        </OverlayTrigger>
+							<PopoverBody>
+								<IconDisplay
+									className="justify-content-center"
+									Icon={IconEssence}
+									iconProps={{ className: "small" }}
+								>
+									<span>{formatNumber({ value: getAttributePointCost(powerLevelValue) })}</span>
+								</IconDisplay>
+							</PopoverBody>
+						</Popover>
+					)}
+					placement="left"
+				>
+					<span>{attributePointsValue}</span>
+				</OverlayTrigger>
 
-        <DeltasDisplay delta="attributePoints" />
-      </Stack>
-    </IconDisplay>
-  )
+				<DeltasDisplay delta="attributePoints" />
+			</Stack>
+		</IconDisplay>
+	)
 }

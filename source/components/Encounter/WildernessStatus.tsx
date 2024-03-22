@@ -8,21 +8,21 @@ import { isShowing } from "@neverquest/state/ui"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function WildernessStatus() {
-  const isShowingWildernessStatus = useRecoilValue(isShowing(`wildernessStatus`))
+	const isShowingWildernessStatus = useRecoilValue(isShowing("wildernessStatus"))
 
-  return (
-    <Stack
-      className={`my-1 ${
-        isShowingWildernessStatus
-          ? `visible ${getAnimationClass({ animation: `flipInX` })}`
-          : `invisible`
-      }`}
-      direction="horizontal"
-      gap={5}
-    >
-      <Stage />
+	return (
+		<Stack
+			className={`my-1 ${
+				isShowingWildernessStatus
+					? `visible ${getAnimationClass({ animation: "flipInX" })}`
+					: "invisible"
+			}`}
+			direction="horizontal"
+			gap={5}
+		>
+			<Stage />
 
-      <Progress />
-    </Stack>
-  )
+			<Progress />
+		</Stack>
+	)
 }

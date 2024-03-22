@@ -11,33 +11,33 @@ import { formatNumber } from "@neverquest/utilities/formatters"
 import { stackItems } from "@neverquest/utilities/helpers"
 
 export function PurchasableItems({
-  canEradicate = false,
-  merchantItems,
+	canEradicate = false,
+	merchantItems,
 }: {
-  canEradicate?: boolean;
-  merchantItems: MerchantInventoryItem[];
+	canEradicate?: boolean
+	merchantItems: MerchantInventoryItem[]
 }) {
-  return (
-    <>
-      {stackItems(merchantItems).map(({ amount, item }) => {
-        const { ID, price } = item
+	return (
+		<>
+			{stackItems(merchantItems).map(({ amount, item }) => {
+				const { ID, price } = item
 
-        return (
-          <div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
-            <ItemDisplay amount={amount} item={item} />
+				return (
+					<div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
+						<ItemDisplay amount={amount} item={item} />
 
-            <Stack className="ms-2" direction="horizontal" gap={3}>
-              <IconDisplay Icon={IconEssence} tooltip="Price">
-                <span>{formatNumber({ value: price })}</span>
-              </IconDisplay>
+						<Stack className="ms-2" direction="horizontal" gap={3}>
+							<IconDisplay Icon={IconEssence} tooltip="Price">
+								<span>{formatNumber({ value: price })}</span>
+							</IconDisplay>
 
-              <PurchaseItem merchantItem={item} />
+							<PurchaseItem merchantItem={item} />
 
-              {canEradicate && <EradicateItem item={item} />}
-            </Stack>
-          </div>
-        )
-      })}
-    </>
-  )
+							{canEradicate && <EradicateItem item={item} />}
+						</Stack>
+					</div>
+				)
+			})}
+		</>
+	)
 }

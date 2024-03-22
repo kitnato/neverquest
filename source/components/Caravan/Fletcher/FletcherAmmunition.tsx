@@ -6,25 +6,25 @@ import { PurchaseAmmunition } from "@neverquest/components/Caravan/Fletcher/Purc
 import { ownedItem } from "@neverquest/state/inventory"
 
 export function FletcherAmmunition() {
-  const ownedAmmunitionPouch = useRecoilValue(ownedItem(`ammunition pouch`))
+	const ownedAmmunitionPouch = useRecoilValue(ownedItem("ammunition pouch"))
 
-  if (ownedAmmunitionPouch === undefined) {
-    return <span className="fst-italic">Nowhere to store ammunition.</span>
-  }
+	if (ownedAmmunitionPouch === undefined) {
+		return <span className="fst-italic">Nowhere to store ammunition.</span>
+	}
 
-  return (
-    <Stack gap={5}>
-      <Stack gap={3}>
-        <h6>Current ammunition</h6>
+	return (
+		<Stack gap={5}>
+			<Stack gap={3}>
+				<h6>Current ammunition</h6>
 
-        <AmmunitionPouch />
-      </Stack>
+				<AmmunitionPouch />
+			</Stack>
 
-      <Stack gap={3}>
-        <h6>Purchase ammunition</h6>
+			<Stack gap={3}>
+				<h6>Purchase ammunition</h6>
 
-        <PurchaseAmmunition />
-      </Stack>
-    </Stack>
-  )
+				<PurchaseAmmunition />
+			</Stack>
+		</Stack>
+	)
 }

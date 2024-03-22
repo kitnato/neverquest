@@ -8,10 +8,10 @@ import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { IconImage } from "@neverquest/components/IconImage"
 import { ATTRIBUTES } from "@neverquest/data/attributes"
 import {
-  CLASS_FULL_WIDTH_JUSTIFIED,
-  LABEL_MAXIMUM,
-  LABEL_SKILL_REQUIRED,
-  LABEL_UNKNOWN,
+	CLASS_FULL_WIDTH_JUSTIFIED,
+	LABEL_MAXIMUM,
+	LABEL_SKILL_REQUIRED,
+	LABEL_UNKNOWN,
 } from "@neverquest/data/general"
 import { useIncreaseAttribute } from "@neverquest/hooks/actions/useIncreaseAttribute"
 import IconWait from "@neverquest/icons/hourglass.svg?react"
@@ -23,73 +23,75 @@ import type { Attribute } from "@neverquest/types/unions"
 import { capitalizeAll } from "@neverquest/utilities/formatters"
 
 export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
-  const acquiredSkillsValue = useRecoilValue(acquiredSkills)
-  const areAttributesAffordableValue = useRecoilValue(areAttributesAffordable)
-  const isAttributeAtMaximumValue = useRecoilValue(isAttributeAtMaximum(attribute))
+	const acquiredSkillsValue = useRecoilValue(acquiredSkills)
+	const areAttributesAffordableValue = useRecoilValue(areAttributesAffordable)
+	const isAttributeAtMaximumValue = useRecoilValue(isAttributeAtMaximum(attribute))
 
-  const increaseAttribute = useIncreaseAttribute()
+	const increaseAttribute = useIncreaseAttribute()
 
-  const { description, descriptionIcons, Icon, requiredSkill } = ATTRIBUTES[attribute]
-  const name = capitalizeAll(attribute)
+	const { description, descriptionIcons, Icon, requiredSkill } = ATTRIBUTES[attribute]
+	const name = capitalizeAll(attribute)
 
-  if (requiredSkill === undefined || acquiredSkillsValue[requiredSkill]) {
-    return (
-      <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-        <IconDisplay
-          description={
-            <DescriptionDisplay description={description} descriptionIcons={descriptionIcons} />
-          }
-          Icon={Icon}
-          tooltip="Attribute"
-        >
-          <span>{name}</span>
-        </IconDisplay>
+	if (requiredSkill === undefined || acquiredSkillsValue[requiredSkill]) {
+		return (
+			<div className={CLASS_FULL_WIDTH_JUSTIFIED}>
+				<IconDisplay
+					description={
+						<DescriptionDisplay description={description} descriptionIcons={descriptionIcons} />
+					}
+					Icon={Icon}
+					tooltip="Attribute"
+				>
+					<span>{name}</span>
+				</IconDisplay>
 
-        <Stack className="ms-2" direction="horizontal" style={{ gap: `7.5rem` }}>
-          <AttributeRank attribute={attribute} />
+				<Stack className="ms-2" direction="horizontal" style={{ gap: "7.5rem" }}>
+					<AttributeRank attribute={attribute} />
 
-          {isAttributeAtMaximumValue ? (
-            <Button className="border-0" disabled variant="outline-dark">
-              <Badge bg="dark">{LABEL_MAXIMUM}</Badge>
-            </Button>
-          ) : (
-            <OverlayTrigger
-              overlay={
-                <Popover>
-                  <PopoverBody>
-                    <Stack gap={1}>
-                      <AttributeIncreaseDetails attribute={attribute} />
-                    </Stack>
-                  </PopoverBody>
-                </Popover>
-              }
-              placement="left"
-            >
-              <div>
-                <Button
-                  disabled={!areAttributesAffordableValue}
-                  onClick={() => {
-                    increaseAttribute(attribute)
-                  }}
-                  variant="outline-dark"
-                >
-                  <IconImage Icon={areAttributesAffordableValue ? IconIncrease : IconWait} />
-                </Button>
-              </div>
-            </OverlayTrigger>
-          )}
-        </Stack>
-      </div>
-    )
-  }
+					{isAttributeAtMaximumValue
+						? (
+							<Button className="border-0" disabled variant="outline-dark">
+								<Badge bg="dark">{LABEL_MAXIMUM}</Badge>
+							</Button>
+						)
+						: (
+							<OverlayTrigger
+								overlay={(
+									<Popover>
+										<PopoverBody>
+											<Stack gap={1}>
+												<AttributeIncreaseDetails attribute={attribute} />
+											</Stack>
+										</PopoverBody>
+									</Popover>
+								)}
+								placement="left"
+							>
+								<div>
+									<Button
+										disabled={!areAttributesAffordableValue}
+										onClick={() => {
+											increaseAttribute(attribute)
+										}}
+										variant="outline-dark"
+									>
+										<IconImage Icon={areAttributesAffordableValue ? IconIncrease : IconWait} />
+									</Button>
+								</div>
+							</OverlayTrigger>
+						)}
+				</Stack>
+			</div>
+		)
+	}
 
-  return (
-    <IconDisplay
-      description={<span>{LABEL_SKILL_REQUIRED}</span>}
-      Icon={IconUnknown}
-      tooltip="Attribute"
-    >
-      <span>{LABEL_UNKNOWN}</span>
-    </IconDisplay>
-  )
+	return (
+		<IconDisplay
+			description={<span>{LABEL_SKILL_REQUIRED}</span>}
+			Icon={IconUnknown}
+			tooltip="Attribute"
+		>
+			<span>{LABEL_UNKNOWN}</span>
+		</IconDisplay>
+	)
 }

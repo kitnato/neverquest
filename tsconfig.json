@@ -1,36 +1,53 @@
 {
-  "compilerOptions": {
-    "allowJs": false,
-    "alwaysStrict": true,
-    "allowUnreachableCode": false,
-    "allowUnusedLabels": false,
-    "baseUrl": ".",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "isolatedModules": true,
-    "jsx": "react-jsx",
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "noEmit": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitAny": true,
-    "noImplicitThis": true,
-    "noUncheckedIndexedAccess": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "paths": {
-      "@neverquest/*": ["./source/*"],
-      "@neverquest/configuration": ["./package.json"]
-    },
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "strictNullChecks": true,
-    "target": "esnext",
-    "types": ["vite/client", "vite-plugin-svgr/client"],
-    "verbatimModuleSyntax": true
-  },
-  "exclude": ["build", "node_modules"],
-  "include": ["./source", "./*.ts"]
+	"compilerOptions": {
+		"allowJs": false,
+		"alwaysStrict": true,
+		"allowUnreachableCode": false,
+		"allowUnusedLabels": false,
+		"baseUrl": ".",
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"isolatedModules": true,
+		"jsx": "react-jsx",
+		"lib": [
+			"DOM",
+			"DOM.Iterable",
+			"ESNext"
+		],
+		"module": "esnext",
+		"moduleResolution": "bundler",
+		"noEmit": true,
+		"noFallthroughCasesInSwitch": true,
+		"noImplicitAny": true,
+		"noImplicitThis": true,
+		"noUncheckedIndexedAccess": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"paths": {
+			"@neverquest/*": [
+				"./source/*"
+			],
+			"@neverquest/configuration": [
+				"./package.json"
+			]
+		},
+		"resolveJsonModule": true,
+		"skipLibCheck": true,
+		"strict": true,
+		"strictNullChecks": true,
+		"target": "esnext",
+		"types": [
+			"vite/client",
+			"vite-plugin-svgr/client"
+		],
+		"verbatimModuleSyntax": true
+	},
+	"exclude": [
+		"build",
+		"node_modules"
+	],
+	"include": [
+		"./source",
+		"./*.ts"
+	]
 }

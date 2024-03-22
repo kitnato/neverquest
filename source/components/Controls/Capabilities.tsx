@@ -24,101 +24,101 @@ import { formatEnumeration } from "@neverquest/utilities/formatters"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function Capabilities() {
-  const [activeControlValue, setActiveControl] = useRecoilState(activeControl)
-  const acquiredSkillsValue = useRecoilValue(acquiredSkills)
-  const acquiredTraitsValue = useRecoilValue(acquiredTraits)
-  const areAttributesAffordableValue = useRecoilValue(areAttributesAffordable)
-  const isAttackingValue = useRecoilValue(isAttacking)
-  const hasFlatlinedValue = useRecoilValue(hasFlatlined)
-  const isShowingCapabilities = useRecoilValue(isShowing(`capabilities`))
-  const locationValue = useRecoilValue(location)
-  const resetActiveControl = useResetRecoilState(activeControl)
+	const [activeControlValue, setActiveControl] = useRecoilState(activeControl)
+	const acquiredSkillsValue = useRecoilValue(acquiredSkills)
+	const acquiredTraitsValue = useRecoilValue(acquiredTraits)
+	const areAttributesAffordableValue = useRecoilValue(areAttributesAffordable)
+	const isAttackingValue = useRecoilValue(isAttacking)
+	const hasFlatlinedValue = useRecoilValue(hasFlatlined)
+	const isShowingCapabilities = useRecoilValue(isShowing("capabilities"))
+	const locationValue = useRecoilValue(location)
+	const resetActiveControl = useResetRecoilState(activeControl)
 
-  let tabs: TabsData<Capability> = [
-    {
-      Component: Attributes,
-      Icon: IconAttributes,
-      label: `attributes`,
-    },
-  ]
-  let tooltip = [`Attributes`]
+	let tabs: TabsData<Capability> = [
+		{
+			Component: Attributes,
+			Icon: IconAttributes,
+			label: "attributes",
+		},
+	]
+	let tooltip = ["Attributes"]
 
-  const isShowingSkills = Object.values(acquiredSkillsValue).some(Boolean)
-  const isShowingTraits = Object.values(acquiredTraitsValue).some(Boolean)
-  const isShowingSkillsOrTraits = isShowingSkills || isShowingTraits
+	const isShowingSkills = Object.values(acquiredSkillsValue).some(Boolean)
+	const isShowingTraits = Object.values(acquiredTraitsValue).some(Boolean)
+	const isShowingSkillsOrTraits = isShowingSkills || isShowingTraits
 
-  if (isShowingSkills) {
-    tabs = [
-      ...tabs,
-      {
-        Component: Skills,
-        Icon: IconSkills,
-        label: `skills`,
-      },
-    ]
-    tooltip = [...tooltip, `skills`]
-  }
+	if (isShowingSkills) {
+		tabs = [
+			...tabs,
+			{
+				Component: Skills,
+				Icon: IconSkills,
+				label: "skills",
+			},
+		]
+		tooltip = [...tooltip, "skills"]
+	}
 
-  if (isShowingTraits) {
-    tabs = [
-      ...tabs,
-      {
-        Component: Traits,
-        Icon: IconTraits,
-        label: `traits`,
-      },
-    ]
-    tooltip = [...tooltip, `traits`]
-  }
+	if (isShowingTraits) {
+		tabs = [
+			...tabs,
+			{
+				Component: Traits,
+				Icon: IconTraits,
+				label: "traits",
+			},
+		]
+		tooltip = [...tooltip, "traits"]
+	}
 
-  if (isShowingCapabilities) {
-    return (
-      <>
-        <OverlayTrigger
-          overlay={
-            <Tooltip>
-              <span>{formatEnumeration(tooltip)}</span>
-            </Tooltip>
-          }
-        >
-          <div className={getAnimationClass({ animation: `bounceIn` })}>
-            <Button
-              className={`position-relative${
-                areAttributesAffordableValue && locationValue === `caravan`
-                  ? ` ${getAnimationClass({
-                      animation: `pulse`,
-                      isInfinite: true,
-                    })}`
-                  : ``
-              }`}
-              disabled={isAttackingValue || hasFlatlinedValue}
-              onClick={() => {
-                setActiveControl(`capabilities`)
-              }}
-              variant="outline-dark"
-            >
-              <IconImage Icon={IconCapabilities} />
+	if (isShowingCapabilities) {
+		return (
+			<>
+				<OverlayTrigger
+					overlay={(
+						<Tooltip>
+							<span>{formatEnumeration(tooltip)}</span>
+						</Tooltip>
+					)}
+				>
+					<div className={getAnimationClass({ animation: "bounceIn" })}>
+						<Button
+							className={`position-relative${
+								areAttributesAffordableValue && locationValue === "caravan"
+									? ` ${getAnimationClass({
+										animation: "pulse",
+										isInfinite: true,
+									})}`
+									: ""
+							}`}
+							disabled={isAttackingValue || hasFlatlinedValue}
+							onClick={() => {
+								setActiveControl("capabilities")
+							}}
+							variant="outline-dark"
+						>
+							<IconImage Icon={IconCapabilities} />
 
-              {areAttributesAffordableValue && (
-                <Badge
-                  bg="secondary"
-                  className="position-absolute top-50 start-100 translate-middle"
-                >
-                  <IconImage className="small" Icon={IconUpgrade} />
-                </Badge>
-              )}
-            </Button>
-          </div>
-        </OverlayTrigger>
+							{areAttributesAffordableValue && (
+								<Badge
+									bg="secondary"
+									className="position-absolute top-50 start-100 translate-middle"
+								>
+									<IconImage className="small" Icon={IconUpgrade} />
+								</Badge>
+							)}
+						</Button>
+					</div>
+				</OverlayTrigger>
 
-        <DismissableScreen
-          isShowing={activeControlValue === `capabilities`}
-          onClose={resetActiveControl}
-          title={isShowingSkillsOrTraits ? `Capabilities` : `Attributes`}
-        >
-          {isShowingSkillsOrTraits ? <IconTabs tabs={tabs} /> : <Attributes />}
-        </DismissableScreen>
-      </>
-    )
-  }
+				<DismissableScreen
+					isShowing={activeControlValue === "capabilities"}
+					onClose={resetActiveControl}
+					title={isShowingSkillsOrTraits ? "Capabilities" : "Attributes"}
+				>
+					{isShowingSkillsOrTraits ? <IconTabs tabs={tabs} /> : <Attributes />}
+				</DismissableScreen>
+			</>
+		)
+	}
 }

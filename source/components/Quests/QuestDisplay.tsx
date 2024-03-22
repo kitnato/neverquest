@@ -4,9 +4,9 @@ import { useRecoilValue } from "recoil"
 
 import { IconDisplay } from "@neverquest/components/IconDisplay"
 import {
-  CLASS_FULL_WIDTH_JUSTIFIED,
-  LABEL_UNKNOWN,
-  POPOVER_TRIGGER,
+	CLASS_FULL_WIDTH_JUSTIFIED,
+	LABEL_UNKNOWN,
+	POPOVER_TRIGGER,
 } from "@neverquest/data/general"
 import { QUEST_COMPLETION_BONUS } from "@neverquest/data/quests"
 import { useCompleteQuest } from "@neverquest/hooks/actions/useCompleteQuest"
@@ -20,105 +20,105 @@ import type { Quest, QuestBonus } from "@neverquest/types/unions"
 import { formatNumber } from "@neverquest/utilities/formatters"
 
 export function QuestDisplay({
-  activeQuest: { description, hidden, progressionIndex, progressionMaximum, title },
-  quest,
+	activeQuest: { description, hidden, progressionIndex, progressionMaximum, title },
+	quest,
 }: {
-  activeQuest: QuestData;
-  quest: Quest;
+	activeQuest: QuestData
+	quest: Quest
 }) {
-  const questProgressValue = useRecoilValue(questProgress(quest))
-  const questStatusValue = useRecoilValue(questStatuses(quest))
+	const questProgressValue = useRecoilValue(questProgress(quest))
+	const questStatusValue = useRecoilValue(questStatuses(quest))
 
-  const completeQuest = useCompleteQuest()
+	const completeQuest = useCompleteQuest()
 
-  const status = questStatusValue[progressionIndex]
+	const status = questStatusValue[progressionIndex]
 
-  if (status === undefined) {
-    return
-  }
+	if (status === undefined) {
+		return
+	}
 
-  const hasCompletedQuest = isQuestBonus(status)
-  const isQuestOver = hasCompletedQuest || status === `achieved`
-  const cappedProgress = isQuestOver ? progressionMaximum : questProgressValue
-  const choiceID = `quest-completion-${quest}-${progressionMaximum}`
+	const hasCompletedQuest = isQuestBonus(status)
+	const isQuestOver = hasCompletedQuest || status === "achieved"
+	const cappedProgress = isQuestOver ? progressionMaximum : questProgressValue
+	const choiceID = `quest-completion-${quest}-${progressionMaximum}`
 
-  return (
-    <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-      <Stack
-        className={`me-2${hasCompletedQuest ? ` opacity-50` : ``}`}
-        direction="horizontal"
-        gap={3}
-      >
-        <CircularProgressbar
-          maxValue={progressionMaximum}
-          text={`${formatNumber({ format: `abbreviated`, value: cappedProgress })}/${formatNumber({
-            format: `abbreviated`,
-            value: progressionMaximum,
-          })}`}
-          value={cappedProgress}
-        />
+	return (
+		<div className={CLASS_FULL_WIDTH_JUSTIFIED}>
+			<Stack
+				className={`me-2${hasCompletedQuest ? " opacity-50" : ""}`}
+				direction="horizontal"
+				gap={3}
+			>
+				<CircularProgressbar
+					maxValue={progressionMaximum}
+					text={`${formatNumber({ format: "abbreviated", value: cappedProgress })}/${formatNumber({
+						format: "abbreviated",
+						value: progressionMaximum,
+					})}`}
+					value={cappedProgress}
+				/>
 
-        <Stack gap={1}>
-          <span>{title}</span>
+				<Stack gap={1}>
+					<span>{title}</span>
 
-          <div className="small text-secondary">
-            {hidden !== undefined && isQuestOver
-              ? description.replace(LABEL_UNKNOWN, hidden)
-              : description}
-          </div>
-        </Stack>
-      </Stack>
+					<div className="small text-secondary">
+						{hidden !== undefined && isQuestOver
+							? description.replace(LABEL_UNKNOWN, hidden)
+							: description}
+					</div>
+				</Stack>
+			</Stack>
 
-      {status !== `incomplete` && (
-        <OverlayTrigger
-          overlay={
-            <Tooltip>
-              <span>Choose a quest reward.</span>
-            </Tooltip>
-          }
-          show={hasCompletedQuest ? false : undefined}
-          trigger={hasCompletedQuest ? [] : POPOVER_TRIGGER}
-        >
-          <ToggleButtonGroup
-            className={`me-1${hasCompletedQuest ? ` opacity-50` : ``}`}
-            name={choiceID}
-            onChange={(value) => {
-              completeQuest({
-                bonus: value as QuestBonus,
-                progression: progressionMaximum,
-                quest,
-              })
-            }}
-            type="radio"
-            value={hasCompletedQuest ? status : undefined}
-          >
-            {[
-              { bonus: `healthBonus`, Icon: IconHealth },
-              { bonus: `staminaBonus`, Icon: IconStamina },
-              { bonus: `damageBonus`, Icon: IconDamage },
-            ].map(({ bonus, Icon }) => (
-              <ToggleButton
-                disabled={hasCompletedQuest}
-                id={`${choiceID}-${bonus}`}
-                key={bonus}
-                value={bonus}
-                variant="outline-dark"
-              >
-                <IconDisplay Icon={Icon} iconProps={{ className: `small` }}>
-                  <span>
-                    +
-                    {formatNumber({
-                      decimals: 0,
-                      format: `percentage`,
-                      value: QUEST_COMPLETION_BONUS,
-                    })}
-                  </span>
-                </IconDisplay>
-              </ToggleButton>
-            ))}
-          </ToggleButtonGroup>
-        </OverlayTrigger>
-      )}
-    </div>
-  )
+			{status !== "incomplete" && (
+				<OverlayTrigger
+					overlay={(
+						<Tooltip>
+							<span>Choose a quest reward.</span>
+						</Tooltip>
+					)}
+					show={hasCompletedQuest ? false : undefined}
+					trigger={hasCompletedQuest ? [] : POPOVER_TRIGGER}
+				>
+					<ToggleButtonGroup
+						className={`me-1${hasCompletedQuest ? " opacity-50" : ""}`}
+						name={choiceID}
+						onChange={(value) => {
+							completeQuest({
+								bonus: value as QuestBonus,
+								progression: progressionMaximum,
+								quest,
+							})
+						}}
+						type="radio"
+						value={hasCompletedQuest ? status : undefined}
+					>
+						{[
+							{ bonus: "healthBonus", Icon: IconHealth },
+							{ bonus: "staminaBonus", Icon: IconStamina },
+							{ bonus: "damageBonus", Icon: IconDamage },
+						].map(({ bonus, Icon }) => (
+							<ToggleButton
+								disabled={hasCompletedQuest}
+								id={`${choiceID}-${bonus}`}
+								key={bonus}
+								value={bonus}
+								variant="outline-dark"
+							>
+								<IconDisplay Icon={Icon} iconProps={{ className: "small" }}>
+									<span>
+										+
+										{formatNumber({
+											decimals: 0,
+											format: "percentage",
+											value: QUEST_COMPLETION_BONUS,
+										})}
+									</span>
+								</IconDisplay>
+							</ToggleButton>
+						))}
+					</ToggleButtonGroup>
+				</OverlayTrigger>
+			)}
+		</div>
+	)
 }

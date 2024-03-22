@@ -13,32 +13,33 @@ import { isFinality } from "@neverquest/types/type-guards"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
 
 export function useAutoProgressStage() {
-  const collectLoot = useCollectLoot()
-  const completeStage = useCompleteStage()
-  const increaseStage = useIncreaseStage()
-  const resetWilderness = useResetWilderness()
-  const toggleAttacking = useToggleAttacking()
+	const collectLoot = useCollectLoot()
+	const completeStage = useCompleteStage()
+	const increaseStage = useIncreaseStage()
+	const resetWilderness = useResetWilderness()
+	const toggleAttacking = useToggleAttacking()
 
-  return useRecoilCallback(
-    ({ snapshot }) =>
-      () => {
-        const get = getSnapshotGetter(snapshot)
+	return useRecoilCallback(
+		({ snapshot }) =>
+			() => {
+				const get = getSnapshotGetter(snapshot)
 
-        if (get(isStageCompleted) && get(isAttacking)) {
-          if (
-            get(isRelicEquipped(`automincer`)) &&
-            !isFinality(get(encounter)) &&
-            get(itemsLoot).length === 0 &&
-            collectLoot() === `success`
-          ) {
-            completeStage()
-            increaseStage()
-            resetWilderness()
-          } else {
-            toggleAttacking()
-          }
-        }
-      },
-    [collectLoot, completeStage, increaseStage, resetWilderness, toggleAttacking],
-  )
+				if (get(isStageCompleted) && get(isAttacking)) {
+					if (
+						get(isRelicEquipped("automincer"))
+						&& !isFinality(get(encounter))
+						&& get(itemsLoot).length === 0
+						&& collectLoot() === "success"
+					) {
+						completeStage()
+						increaseStage()
+						resetWilderness()
+					}
+					else {
+						toggleAttacking()
+					}
+				}
+			},
+		[collectLoot, completeStage, increaseStage, resetWilderness, toggleAttacking],
+	)
 }

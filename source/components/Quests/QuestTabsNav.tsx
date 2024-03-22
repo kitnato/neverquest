@@ -11,38 +11,38 @@ import { capitalizeAll } from "@neverquest/utilities/formatters"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function QuestTabsNav({ tabs }: { tabs: TabsData<QuestClass> }) {
-  const canCompleteConquests = useRecoilValue(canCompleteQuests(`conquest`))
-  const canCompleteRoutines = useRecoilValue(canCompleteQuests(`routine`))
-  const canCompleteTriumphs = useRecoilValue(canCompleteQuests(`triumph`))
+	const canCompleteConquests = useRecoilValue(canCompleteQuests("conquest"))
+	const canCompleteRoutines = useRecoilValue(canCompleteQuests("routine"))
+	const canCompleteTriumphs = useRecoilValue(canCompleteQuests("triumph"))
 
-  return (
-    <Nav justify variant="pills">
-      {tabs.map(({ Icon, label }) => (
-        <NavItem key={label}>
-          <NavLink className="d-flex justify-content-center" eventKey={label}>
-            <IconDisplay Icon={Icon}>
-              <Stack direction="horizontal" gap={2}>
-                <span>{capitalizeAll(label)}</span>
+	return (
+		<Nav justify variant="pills">
+			{tabs.map(({ Icon, label }) => (
+				<NavItem key={label}>
+					<NavLink className="d-flex justify-content-center" eventKey={label}>
+						<IconDisplay Icon={Icon}>
+							<Stack direction="horizontal" gap={2}>
+								<span>{capitalizeAll(label)}</span>
 
-                {((label === `conquest` && canCompleteConquests) ||
-                  (label === `routine` && canCompleteRoutines) ||
-                  (label === `triumph` && canCompleteTriumphs)) && (
-                  <div
-                    className={getAnimationClass({
-                      animation: `pulse`,
-                      isInfinite: true,
-                    })}
-                  >
-                    <Badge bg="secondary" className="align-middle">
-                      <IconImage className="small" Icon={IconAttention} />
-                    </Badge>
-                  </div>
-                )}
-              </Stack>
-            </IconDisplay>
-          </NavLink>
-        </NavItem>
-      ))}
-    </Nav>
-  )
+								{((label === "conquest" && canCompleteConquests)
+								|| (label === "routine" && canCompleteRoutines)
+								|| (label === "triumph" && canCompleteTriumphs)) && (
+									<div
+										className={getAnimationClass({
+											animation: "pulse",
+											isInfinite: true,
+										})}
+									>
+										<Badge bg="secondary" className="align-middle">
+											<IconImage className="small" Icon={IconAttention} />
+										</Badge>
+									</div>
+								)}
+							</Stack>
+						</IconDisplay>
+					</NavLink>
+				</NavItem>
+			))}
+		</Nav>
+	)
 }

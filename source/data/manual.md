@@ -479,18 +479,6 @@ Some of usable relics are infusable, meaning they allow [essence](#essence) to b
 
 To infuse continuously, the button can be held down so as to not require excessive clicking.
 
-###### Eldritch Codex
-
-This infusable relic, while carried in the [knapsack](#knapsack), provides a bonus to all attributes by their respective percentage amount (the extent of each is shown when increasing [attributes](#attributes)) multiplied by your current [power level](#attributes).
-
-For example, if you are carrying a level 0 Eldritch Codex, your power level is 25, the attribute in question is at rank 5, a given attribute rank would increase a given statistic by 10, and the boosted percentage is 1%, the statistic value is calculated as follows:
-
-`5 attribute ranks × 10 + 25 power levels × 1% bonus per rank = 62.5 (50 if the Codex wasn't owned)`
-
-Additionally, each infusion level boosts this bonus percentage. In case the Codex is infused to grant a bonus boost of +5%, the calculation would be as follows:
-
-`5 × 10 + 25 × 1.05% = 63.125`
-
 ### Consumables
 
 A single-use item. [Gems](#gems) are also consumable items.
@@ -627,7 +615,7 @@ Temporary, negative status effects that can afflict you or the monster.
 
 ### Character ailments
 
-Ailments that are inflicted by monsters when defending. Ailments can only be avoided entirely if they're [deflected](#deflection-chance) or the attack is [dodged](#dodge-chance).
+Ailments that are inflicted by monsters when defending. Ailments can only be avoided if they're [deflected](#deflection-chance) or the attack is [dodged](#dodge-chance).
 
 #### Blight
 

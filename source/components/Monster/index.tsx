@@ -14,54 +14,54 @@ import { isMonsterNew, monsterElement } from "@neverquest/state/monster"
 import { animateElement } from "@neverquest/utilities/helpers"
 
 export function Monster() {
-  const [isMonsterNewValue, setMonsterNew] = useRecoilState(isMonsterNew)
-  const [monsterElementValue, setMonsterElement] = useRecoilState(monsterElement)
-  const resetMonsterElement = useResetRecoilState(monsterElement)
+	const [isMonsterNewValue, setMonsterNew] = useRecoilState(isMonsterNew)
+	const [monsterElementValue, setMonsterElement] = useRecoilState(monsterElement)
+	const resetMonsterElement = useResetRecoilState(monsterElement)
 
-  const element = useRef(null)
+	const element = useRef(null)
 
-  useLayoutEffect(() => {
-    setMonsterElement(element.current)
+	useLayoutEffect(() => {
+		setMonsterElement(element.current)
 
-    return resetMonsterElement
-  }, [resetMonsterElement, setMonsterElement])
+		return resetMonsterElement
+	}, [resetMonsterElement, setMonsterElement])
 
-  useEffect(() => {
-    if (isMonsterNewValue && monsterElementValue !== null) {
-      animateElement({
-        animation: `zoomInRight`,
-        element: monsterElementValue,
-        onAnimationEnd: () => {
-          setMonsterNew(false)
-        },
-        speed: `faster`,
-      })
-    }
-  }, [isMonsterNewValue, monsterElementValue, setMonsterNew])
+	useEffect(() => {
+		if (isMonsterNewValue && monsterElementValue !== null) {
+			animateElement({
+				animation: "zoomInRight",
+				element: monsterElementValue,
+				onAnimationEnd: () => {
+					setMonsterNew(false)
+				},
+				speed: "faster",
+			})
+		}
+	}, [isMonsterNewValue, monsterElementValue, setMonsterNew])
 
-  return (
-    <Stack gap={3}>
-      <Card ref={element}>
-        <CardBody>
-          <Stack gap={3}>
-            <MonsterName />
+	return (
+		<Stack gap={3}>
+			<Card ref={element}>
+				<CardBody>
+					<Stack gap={3}>
+						<MonsterName />
 
-            <MonsterHealth />
+						<MonsterHealth />
 
-            <MonsterAttackRate />
+						<MonsterAttackRate />
 
-            <Rage />
+						<Rage />
 
-            <MonsterOffense />
+						<MonsterOffense />
 
-            <Frailty />
-          </Stack>
-        </CardBody>
-      </Card>
+						<Frailty />
+					</Stack>
+				</CardBody>
+			</Card>
 
-      <Distance />
+			<Distance />
 
-      <Ailments />
-    </Stack>
-  )
+			<Ailments />
+		</Stack>
+	)
 }

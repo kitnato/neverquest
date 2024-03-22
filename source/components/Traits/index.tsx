@@ -7,17 +7,19 @@ import { acquiredTraits } from "@neverquest/state/traits"
 import { TRAIT_TYPES } from "@neverquest/types/unions"
 
 export function Traits() {
-  const acquiredTraitsValue = useRecoilValue(acquiredTraits)
+	const acquiredTraitsValue = useRecoilValue(acquiredTraits)
 
-  return (
-    <Stack gap={3}>
-      {Object.values(acquiredTraitsValue).every((hasAcquiredTrait) => !hasAcquiredTrait) ? (
-        <span className="fst-italic">{LABEL_NONE}</span>
-      ) : (
-        TRAIT_TYPES.map((trait) =>
-          acquiredTraitsValue[trait] ? <TraitDisplay key={trait} trait={trait} /> : undefined,
-        )
-      )}
-    </Stack>
-  )
+	return (
+		<Stack gap={3}>
+			{Object.values(acquiredTraitsValue).every(hasAcquiredTrait => !hasAcquiredTrait)
+				? (
+					<span className="fst-italic">{LABEL_NONE}</span>
+				)
+				: (
+					TRAIT_TYPES.map(trait =>
+						acquiredTraitsValue[trait] ? <TraitDisplay key={trait} trait={trait} /> : undefined,
+					)
+				)}
+		</Stack>
+	)
 }

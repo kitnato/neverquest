@@ -6,23 +6,23 @@ import { PurgeMemories } from "@neverquest/components/Caravan/Occultist/PurgeMem
 import { PurchaseConsumable } from "@neverquest/components/Caravan/PurchaseConsumable"
 
 export function Occultist() {
-  return (
-    <Stack gap={5}>
-      <Stack gap={3}>
-        <h6>Purchase phylacteries</h6>
+	return (
+		<Stack gap={5}>
+			<Stack gap={3}>
+				<h6>Purchase phylacteries</h6>
 
-        <PurchaseConsumable consumable="phylactery" />
-      </Stack>
+				<PurchaseConsumable consumable="phylactery" />
+			</Stack>
 
-      <Stack gap={3}>
-        <h6>Rituals</h6>
+			<Stack gap={3}>
+				<h6>Rituals</h6>
 
-        <PurgeEssence />
+				<PurgeEssence />
 
-        <PurgeMemories />
-      </Stack>
+				<PurgeMemories />
+			</Stack>
 
-      <AcquireOccultistSkill />
-    </Stack>
-  )
+			<AcquireOccultistSkill />
+		</Stack>
+	)
 }

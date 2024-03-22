@@ -11,40 +11,44 @@ import { acquiredSkills } from "@neverquest/state/skills"
 import { SKILL_TYPES } from "@neverquest/types/unions"
 
 export function AcquireAlchemistSkill() {
-  const acquiredSkillsValue = useRecoilValue(acquiredSkills)
-  const ownedItemTornManuscript = useRecoilValue(ownedItem(`torn manuscript`))
+	const acquiredSkillsValue = useRecoilValue(acquiredSkills)
+	const ownedItemTornManuscript = useRecoilValue(ownedItem("torn manuscript"))
 
-  const availableSkills = SKILL_TYPES.filter(
-    (skill) => SKILLS[skill].trainer === `alchemist` && !acquiredSkillsValue[skill],
-  )
+	const availableSkills = SKILL_TYPES.filter(
+		skill => SKILLS[skill].trainer === "alchemist" && !acquiredSkillsValue[skill],
+	)
 
-  return (
-    <Stack gap={3}>
-      <h6>Acquire skill</h6>
+	return (
+		<Stack gap={3}>
+			<h6>Acquire skill</h6>
 
-      {availableSkills.length === 0 ? (
-        <span className="fst-italic">{LABEL_NONE_AVAILABLE}</span>
-      ) : (ownedItemTornManuscript === undefined ? (
-        <span>
-          &quot;Alas, the sage teachings are lost to time. Have you come across any arcane writs
-          lately?&quot;
-        </span>
-      ) : (
-        <>
-          <IconDisplay Icon={IconTornManuscript} iconProps={{ className: `small` }}>
-            <span>
-              &quot;Pages from the hermetic almanac! Let&apos;s see if I can still weave miracles
-              ...&quot;
-            </span>
-          </IconDisplay>
+			{availableSkills.length === 0
+				? (
+					<span className="fst-italic">{LABEL_NONE_AVAILABLE}</span>
+				)
+				: (ownedItemTornManuscript === undefined
+					? (
+						<span>
+							&quot;Alas, the sage teachings are lost to time. Have you come across any arcane writs
+							lately?&quot;
+						</span>
+					)
+					: (
+						<>
+							<IconDisplay Icon={IconTornManuscript} iconProps={{ className: "small" }}>
+								<span>
+									&quot;Pages from the hermetic almanac! Let&apos;s see if I can still weave miracles
+									...&quot;
+								</span>
+							</IconDisplay>
 
-          <>
-            {availableSkills.map((skill) => (
-              <TrainableSkill key={skill} skill={skill} />
-            ))}
-          </>
-        </>
-      ))}
-    </Stack>
-  )
+							<>
+								{availableSkills.map(skill => (
+									<TrainableSkill key={skill} skill={skill} />
+								))}
+							</>
+						</>
+					))}
+		</Stack>
+	)
 }

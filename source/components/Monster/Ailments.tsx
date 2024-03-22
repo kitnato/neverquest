@@ -9,25 +9,25 @@ import { canReceiveAilments } from "@neverquest/state/ailments"
 import { ELEMENTAL_TYPES } from "@neverquest/types/unions"
 
 export function Ailments() {
-  const canReceiveAilmentsValue = useRecoilValue(canReceiveAilments)
+	const canReceiveAilmentsValue = useRecoilValue(canReceiveAilments)
 
-  if (canReceiveAilmentsValue) {
-    return (
-      <Card>
-        <CardBody>
-          <Stack gap={3}>
-            {ELEMENTAL_TYPES.map((elemental) => (
-              <ElementalAilment elemental={elemental} key={elemental} />
-            ))}
+	if (canReceiveAilmentsValue) {
+		return (
+			<Card>
+				<CardBody>
+					<Stack gap={3}>
+						{ELEMENTAL_TYPES.map(elemental => (
+							<ElementalAilment elemental={elemental} key={elemental} />
+						))}
 
-            <Stunned />
+						<Stunned />
 
-            <Staggered />
+						<Staggered />
 
-            <Bleeding />
-          </Stack>
-        </CardBody>
-      </Card>
-    )
-  }
+						<Bleeding />
+					</Stack>
+				</CardBody>
+			</Card>
+		)
+	}
 }

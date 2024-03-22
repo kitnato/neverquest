@@ -10,35 +10,37 @@ import { isGemItem } from "@neverquest/types/type-guards"
 import { stackItems } from "@neverquest/utilities/helpers"
 
 export function Alchemist() {
-  const inventoryValue = useRecoilValue(inventory)
+	const inventoryValue = useRecoilValue(inventory)
 
-  const storedGemsStack = stackItems(
-    inventoryValue
-      .filter(isGemItem)
-      .toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2)),
-  )
+	const storedGemsStack = stackItems(
+		inventoryValue
+			.filter(isGemItem)
+			.toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2)),
+	)
 
-  return (
-    <Stack gap={5}>
-      <Stack gap={3}>
-        <h6>Stored gems</h6>
+	return (
+		<Stack gap={5}>
+			<Stack gap={3}>
+				<h6>Stored gems</h6>
 
-        {storedGemsStack.length === 0 ? (
-          <span className="fst-italic">{LABEL_NONE_AVAILABLE}</span>
-        ) : (
-          storedGemsStack.map(({ amount, item }) => (
-            <ItemDisplay amount={amount} item={item} key={item.ID} />
-          ))
-        )}
-      </Stack>
+				{storedGemsStack.length === 0
+					? (
+						<span className="fst-italic">{LABEL_NONE_AVAILABLE}</span>
+					)
+					: (
+						storedGemsStack.map(({ amount, item }) => (
+							<ItemDisplay amount={amount} item={item} key={item.ID} />
+						))
+					)}
+			</Stack>
 
-      <Stack gap={3}>
-        <h6>Transmute gems</h6>
+			<Stack gap={3}>
+				<h6>Transmute gems</h6>
 
-        <TransmuteGems />
-      </Stack>
+				<TransmuteGems />
+			</Stack>
 
-      <AcquireAlchemistSkill />
-    </Stack>
-  )
+			<AcquireAlchemistSkill />
+		</Stack>
+	)
 }

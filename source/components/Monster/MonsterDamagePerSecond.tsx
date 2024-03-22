@@ -6,19 +6,19 @@ import { ownedItem } from "@neverquest/state/inventory"
 import { monsterDamageAilingPerSecond } from "@neverquest/state/monster"
 
 export function MonsterDamagePerSecond() {
-  const ownedItemThaumaturgicGoggles = useRecoilValue(ownedItem(`thaumaturgic goggles`))
-  const monsterDamageAilingPerSecondValue = useRecoilValue(monsterDamageAilingPerSecond)
+	const ownedItemThaumaturgicGoggles = useRecoilValue(ownedItem("thaumaturgic goggles"))
+	const monsterDamageAilingPerSecondValue = useRecoilValue(monsterDamageAilingPerSecond)
 
-  if (ownedItemThaumaturgicGoggles !== undefined) {
-    return (
-      <IconDisplay
-        className="text-nowrap"
-        Icon={IconDamagePerSecond}
-        iconProps={{ className: `small`, overlayPlacement: `bottom` }}
-        tooltip="Monster damage per second"
-      >
-        <span>{monsterDamageAilingPerSecondValue}</span>
-      </IconDisplay>
-    )
-  }
+	if (ownedItemThaumaturgicGoggles !== undefined) {
+		return (
+			<IconDisplay
+				className="text-nowrap"
+				Icon={IconDamagePerSecond}
+				iconProps={{ className: "small", overlayPlacement: "bottom" }}
+				tooltip="Monster damage per second"
+			>
+				<span>{monsterDamageAilingPerSecondValue}</span>
+			</IconDisplay>
+		)
+	}
 }

@@ -16,47 +16,47 @@ import { isMonsterDead, monsterName } from "@neverquest/state/monster"
 import { capitalizeAll } from "@neverquest/utilities/formatters"
 
 export function MonsterName() {
-  const encounterValue = useRecoilValue(encounter)
-  const isAttackingValue = useRecoilValue(isAttacking)
-  const isMonsterDeadValue = useRecoilValue(isMonsterDead)
-  const monsterNameValue = useRecoilValue(monsterName)
+	const encounterValue = useRecoilValue(encounter)
+	const isAttackingValue = useRecoilValue(isAttacking)
+	const isMonsterDeadValue = useRecoilValue(isMonsterDead)
+	const monsterNameValue = useRecoilValue(monsterName)
 
-  const { Icon, tooltip } = (() => {
-    switch (encounterValue) {
-      case `boss`:
-      case `monster`: {
-        if (isMonsterDeadValue) {
-          return {
-            Icon: encounterValue === `boss` ? IconBossCorpse : IconMonsterCorpse,
-            tooltip: `Dead ${encounterValue}`,
-          }
-        }
+	const { Icon, tooltip } = (() => {
+		switch (encounterValue) {
+			case "boss":
+			case "monster": {
+				if (isMonsterDeadValue) {
+					return {
+						Icon: encounterValue === "boss" ? IconBossCorpse : IconMonsterCorpse,
+						tooltip: `Dead ${encounterValue}`,
+					}
+				}
 
-        if (isAttackingValue) {
-          return {
-            Icon: encounterValue === `boss` ? IconBossAttacking : IconAttacking,
-            tooltip: capitalizeAll(encounterValue),
-          }
-        }
+				if (isAttackingValue) {
+					return {
+						Icon: encounterValue === "boss" ? IconBossAttacking : IconAttacking,
+						tooltip: capitalizeAll(encounterValue),
+					}
+				}
 
-        return {
-          Icon: encounterValue === `boss` ? IconBossLurking : IconLurking,
-          tooltip: `Lurking ${encounterValue}`,
-        }
-      }
+				return {
+					Icon: encounterValue === "boss" ? IconBossLurking : IconLurking,
+					tooltip: `Lurking ${encounterValue}`,
+				}
+			}
 
-      default: {
-        return {
-          Icon: encounterValue === `res cogitans` ? IconResCogitans : IconResDominus,
-          tooltip: LABEL_UNKNOWN,
-        }
-      }
-    }
-  })()
+			default: {
+				return {
+					Icon: encounterValue === "res cogitans" ? IconResCogitans : IconResDominus,
+					tooltip: LABEL_UNKNOWN,
+				}
+			}
+		}
+	})()
 
-  return (
-    <IconDisplay Icon={Icon} tooltip={tooltip}>
-      <span>{monsterNameValue}</span>
-    </IconDisplay>
-  )
+	return (
+		<IconDisplay Icon={Icon} tooltip={tooltip}>
+			<span>{monsterNameValue}</span>
+		</IconDisplay>
+	)
 }

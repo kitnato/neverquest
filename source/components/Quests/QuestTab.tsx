@@ -11,36 +11,38 @@ import { completedQuestsCount } from "@neverquest/state/quests"
 import type { QuestClass } from "@neverquest/types/unions"
 
 export function QuestTab({ questClass }: { questClass: QuestClass }) {
-  const completedQuestsCountState = completedQuestsCount(questClass)
+	const completedQuestsCountState = completedQuestsCount(questClass)
 
-  const completedQuestsValue = useRecoilValue(completedQuestsCountState)
+	const completedQuestsValue = useRecoilValue(completedQuestsCountState)
 
-  const questCount = QUESTS_COUNT[questClass]
+	const questCount = QUESTS_COUNT[questClass]
 
-  useDeltaText({
-    delta: questClass,
-    state: completedQuestsCountState,
-  })
+	useDeltaText({
+		delta: questClass,
+		state: completedQuestsCountState,
+	})
 
-  return (
-    <Stack className="overflow-y-hidden" gap={3}>
-      <hr />
+	return (
+		<Stack className="overflow-y-hidden" gap={3}>
+			<hr />
 
-      <LabelledProgressBar value={(completedQuestsValue / questCount) * PERCENTAGE_POINTS}>
-        <Stack direction="horizontal" gap={1}>
-          <span>
-            {completedQuestsValue}&nbsp;/&nbsp;{questCount}
-          </span>
+			<LabelledProgressBar value={(completedQuestsValue / questCount) * PERCENTAGE_POINTS}>
+				<Stack direction="horizontal" gap={1}>
+					<span>
+						{completedQuestsValue}
+&nbsp;/&nbsp;
+						{questCount}
+					</span>
 
-          <DeltasDisplay delta={questClass} />
-        </Stack>
-      </LabelledProgressBar>
+					<DeltasDisplay delta={questClass} />
+				</Stack>
+			</LabelledProgressBar>
 
-      <Stack className="overflow-y-auto" gap={3}>
-        {QUEST_TYPES_BY_CLASS[questClass].map((quest) => (
-          <QuestListing key={quest} quest={quest} />
-        ))}
-      </Stack>
-    </Stack>
-  )
+			<Stack className="overflow-y-auto" gap={3}>
+				{QUEST_TYPES_BY_CLASS[questClass].map(quest => (
+					<QuestListing key={quest} quest={quest} />
+				))}
+			</Stack>
+		</Stack>
+	)
 }

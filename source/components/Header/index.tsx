@@ -8,35 +8,36 @@ import { SaveLoad } from "@neverquest/components/Header/SaveLoad"
 import { version } from "@neverquest/configuration"
 
 export function Header() {
-  return (
-    <Navbar bg="dark" className="mb-4" collapseOnSelect expand="lg" variant="dark">
-      <Container>
-        <Stack direction="horizontal" gap={3}>
-          <Ouroboros />
+	return (
+		<Navbar bg="dark" className="mb-4" collapseOnSelect expand="lg" variant="dark">
+			<Container>
+				<Stack direction="horizontal" gap={3}>
+					<Ouroboros />
 
-          <div>
-            <NavbarBrand>neverquest</NavbarBrand>
+					<div>
+						<NavbarBrand>neverquest</NavbarBrand>
 
-            <Badge bg="light" text="dark">
-              v{version}
-            </Badge>
-          </div>
-        </Stack>
+						<Badge bg="light" text="dark">
+							v
+							{version}
+						</Badge>
+					</div>
+				</Stack>
 
-        <Nav>
-          <Stack direction="horizontal" gap={3}>
-            <About />
+				<Nav>
+					<Stack direction="horizontal" gap={3}>
+						<About />
 
-            <Repository />
+						<Repository />
 
-            <div className="text-white vr" />
+						<div className="text-white vr" />
 
-            <SaveLoad />
+						<SaveLoad />
 
-            <Reset />
-          </Stack>
-        </Nav>
-      </Container>
-    </Navbar>
-  )
+						<Reset />
+					</Stack>
+				</Nav>
+			</Container>
+		</Navbar>
+	)
 }

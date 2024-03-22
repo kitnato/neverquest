@@ -21,109 +21,109 @@ import { formatNumber } from "@neverquest/utilities/formatters"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function Health() {
-  const attributeStatisticVitality = useRecoilValue(attributeStatistic(`vitality`))
-  const isDreamCatcherEquipped = useRecoilValue(isRelicEquipped(`dream catcher`))
-  const isPoisonedValue = useRecoilValue(isPoisoned)
-  const isShowingHealth = useRecoilValue(isShowing(`health`))
-  const questsBonusHealth = useRecoilValue(questsBonus(`healthBonus`))
-  const setPoison = useSetRecoilState(poisonDuration)
+	const attributeStatisticVitality = useRecoilValue(attributeStatistic("vitality"))
+	const isDreamCatcherEquipped = useRecoilValue(isRelicEquipped("dream catcher"))
+	const isPoisonedValue = useRecoilValue(isPoisoned)
+	const isShowingHealth = useRecoilValue(isShowing("health"))
+	const questsBonusHealth = useRecoilValue(questsBonus("healthBonus"))
+	const setPoison = useSetRecoilState(poisonDuration)
 
-  const { baseAmount } = RESERVES.health
-  const vitalityBonus = attributeStatisticVitality - baseAmount
+	const { baseAmount } = RESERVES.health
+	const vitalityBonus = attributeStatisticVitality - baseAmount
 
-  useTimer({
-    setDuration: setPoison,
-    stop: !isPoisonedValue,
-  })
+	useTimer({
+		setDuration: setPoison,
+		stop: !isPoisonedValue,
+	})
 
-  if (isShowingHealth) {
-    return (
-      <IconDisplay
-        className={getAnimationClass({ animation: `flipInX` })}
-        Icon={IconHealth}
-        tooltip="Health"
-      >
-        <Stack>
-          <OverlayTrigger
-            overlay={
-              <Popover>
-                <PopoverBody>
-                  <DetailsTable>
-                    <tr>
-                      <td>
-                        <span>Base:</span>
-                      </td>
+	if (isShowingHealth) {
+		return (
+			<IconDisplay
+				className={getAnimationClass({ animation: "flipInX" })}
+				Icon={IconHealth}
+				tooltip="Health"
+			>
+				<Stack>
+					<OverlayTrigger
+						overlay={(
+							<Popover>
+								<PopoverBody>
+									<DetailsTable>
+										<tr>
+											<td>
+												<span>Base:</span>
+											</td>
 
-                      <td>
-                        <IconDisplay Icon={IconHealth} iconProps={{ className: `small` }}>
-                          <span>{baseAmount}</span>
-                        </IconDisplay>
-                      </td>
-                    </tr>
+											<td>
+												<IconDisplay Icon={IconHealth} iconProps={{ className: "small" }}>
+													<span>{baseAmount}</span>
+												</IconDisplay>
+											</td>
+										</tr>
 
-                    {vitalityBonus > 0 && (
-                      <tr>
-                        <td>
-                          <IconDisplay Icon={IconVitality} iconProps={{ className: `small` }}>
-                            <span>Vitality:</span>
-                          </IconDisplay>
-                        </td>
+										{vitalityBonus > 0 && (
+											<tr>
+												<td>
+													<IconDisplay Icon={IconVitality} iconProps={{ className: "small" }}>
+														<span>Vitality:</span>
+													</IconDisplay>
+												</td>
 
-                        <td>
-                          <Stack direction="horizontal" gap={1}>
-                            <IconDisplay Icon={IconHealth} iconProps={{ className: `small` }}>
-                              <span>
-                                +
-                                {formatNumber({
-                                  value: vitalityBonus,
-                                })}
-                              </span>
-                            </IconDisplay>
-                          </Stack>
-                        </td>
-                      </tr>
-                    )}
+												<td>
+													<Stack direction="horizontal" gap={1}>
+														<IconDisplay Icon={IconHealth} iconProps={{ className: "small" }}>
+															<span>
+																+
+																{formatNumber({
+																	value: vitalityBonus,
+																})}
+															</span>
+														</IconDisplay>
+													</Stack>
+												</td>
+											</tr>
+										)}
 
-                    {questsBonusHealth > 0 && (
-                      <tr>
-                        <td>
-                          <IconDisplay Icon={IconQuests} iconProps={{ className: `small` }}>
-                            <span>Quest bonus:</span>
-                          </IconDisplay>
-                        </td>
+										{questsBonusHealth > 0 && (
+											<tr>
+												<td>
+													<IconDisplay Icon={IconQuests} iconProps={{ className: "small" }}>
+														<span>Quest bonus:</span>
+													</IconDisplay>
+												</td>
 
-                        <td>
-                          <IconDisplay Icon={IconHealth} iconProps={{ className: `small` }}>
-                            <span>
-                              +
-                              {formatNumber({
-                                decimals: 0,
-                                format: `percentage`,
-                                value: questsBonusHealth,
-                              })}
-                            </span>
-                          </IconDisplay>
-                        </td>
-                      </tr>
-                    )}
-                  </DetailsTable>
-                </PopoverBody>
-              </Popover>
-            }
-            placement="right"
-            trigger={questsBonusHealth > 0 || vitalityBonus > 0 ? POPOVER_TRIGGER : []}
-          >
-            <div className="w-100">
-              <ReserveMeter
-                PrefixIcon={isDreamCatcherEquipped ? IconProtected : undefined}
-                reserve="health"
-              />
-            </div>
-          </OverlayTrigger>
+												<td>
+													<IconDisplay Icon={IconHealth} iconProps={{ className: "small" }}>
+														<span>
+															+
+															{formatNumber({
+																decimals: 0,
+																format: "percentage",
+																value: questsBonusHealth,
+															})}
+														</span>
+													</IconDisplay>
+												</td>
+											</tr>
+										)}
+									</DetailsTable>
+								</PopoverBody>
+							</Popover>
+						)}
+						placement="right"
+						trigger={questsBonusHealth > 0 || vitalityBonus > 0 ? POPOVER_TRIGGER : []}
+					>
+						<div className="w-100">
+							<ReserveMeter
+								PrefixIcon={isDreamCatcherEquipped ? IconProtected : undefined}
+								reserve="health"
+							/>
+						</div>
+					</OverlayTrigger>
 
-          <Regeneration reserve="health" />
-        </Stack>
-      </IconDisplay>
-    )
-  }
+					<Regeneration reserve="health" />
+				</Stack>
+			</IconDisplay>
+		)
+	}
 }

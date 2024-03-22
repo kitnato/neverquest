@@ -21,142 +21,145 @@ import { isUnshielded } from "@neverquest/types/type-guards"
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters"
 
 export function ShieldName({
-  overlayPlacement,
-  shield,
+	overlayPlacement,
+	shield,
 }: {
-  overlayPlacement: Placement;
-  shield: Shield | typeof SHIELD_NONE;
+	overlayPlacement: Placement
+	shield: Shield | typeof SHIELD_NONE
 }) {
-  const isShowingGearClass = useRecoilValue(isShowing(`gearClass`))
-  const shieldEquippedValue = useRecoilValue(shieldEquipped)
-  const isSkillAcquiredShieldcraft = useRecoilValue(isSkillAcquired(`shieldcraft`))
+	const isShowingGearClass = useRecoilValue(isShowing("gearClass"))
+	const shieldEquippedValue = useRecoilValue(shieldEquipped)
+	const isSkillAcquiredShieldcraft = useRecoilValue(isSkillAcquired("shieldcraft"))
 
-  const { block, burden, ID, level, name, stagger, weight } = shield
-  const isShieldUnequipped = isUnshielded(shield)
-  const showComparison = ID !== shieldEquippedValue.ID
+	const { block, burden, ID, level, name, stagger, weight } = shield
+	const isShieldUnequipped = isUnshielded(shield)
+	const showComparison = ID !== shieldEquippedValue.ID
 
-  return (
-    <OverlayTrigger
-      overlay={
-        <Popover>
-          <PopoverBody>
-            <DetailsTable>
-              <GearLevelDetail
-                comparison={
-                  showComparison && {
-                    showing: `offhand`,
-                    subtrahend: shieldEquippedValue.level,
-                  }
-                }
-                level={level}
-              />
+	return (
+		<OverlayTrigger
+			overlay={(
+				<Popover>
+					<PopoverBody>
+						<DetailsTable>
+							<GearLevelDetail
+								comparison={showComparison && {
+									showing: "offhand",
+									subtrahend: shieldEquippedValue.level,
+								}}
+								level={level}
+							/>
 
-              <AppliedGems gearItem={shield} />
+							<AppliedGems gearItem={shield} />
 
-              <tr>
-                <td>
-                  <span>Block chance:</span>
-                </td>
+							<tr>
+								<td>
+									<span>Block chance:</span>
+								</td>
 
-                <td>
-                  <Stack direction="horizontal" gap={1}>
-                    <IconDisplay Icon={IconBlockChance} iconProps={{ className: `small` }}>
-                      <span>{formatNumber({ format: `percentage`, value: block })}</span>
-                    </IconDisplay>
+								<td>
+									<Stack direction="horizontal" gap={1}>
+										<IconDisplay Icon={IconBlockChance} iconProps={{ className: "small" }}>
+											<span>{formatNumber({ format: "percentage", value: block })}</span>
+										</IconDisplay>
 
-                    {showComparison && (
-                      <GearComparison
-                        difference={block - shieldEquippedValue.block}
-                        showing="offhand"
-                      />
-                    )}
-                  </Stack>
-                </td>
-              </tr>
+										{showComparison && (
+											<GearComparison
+												difference={block - shieldEquippedValue.block}
+												showing="offhand"
+											/>
+										)}
+									</Stack>
+								</td>
+							</tr>
 
-              <tr>
-                {isSkillAcquiredShieldcraft ? (
-                  <>
-                    <td>
-                      <span>Stagger chance:</span>
-                    </td>
+							<tr>
+								{isSkillAcquiredShieldcraft
+									? (
+										<>
+											<td>
+												<span>Stagger chance:</span>
+											</td>
 
-                    <td>
-                      <Stack direction="horizontal" gap={1}>
-                        <IconDisplay Icon={IconStaggerChance} iconProps={{ className: `small` }}>
-                          <span>{formatNumber({ format: `percentage`, value: stagger })}</span>
-                        </IconDisplay>
+											<td>
+												<Stack direction="horizontal" gap={1}>
+													<IconDisplay Icon={IconStaggerChance} iconProps={{ className: "small" }}>
+														<span>{formatNumber({ format: "percentage", value: stagger })}</span>
+													</IconDisplay>
 
-                        {showComparison && (
-                          <GearComparison
-                            difference={stagger - shieldEquippedValue.stagger}
-                            showing="offhand"
-                          />
-                        )}
-                      </Stack>
-                    </td>
-                  </>
-                ) : (
-                  <td className="text-end">
-                    <span>{LABEL_UNKNOWN}</span>
-                  </td>
-                )}
-              </tr>
+													{showComparison && (
+														<GearComparison
+															difference={stagger - shieldEquippedValue.stagger}
+															showing="offhand"
+														/>
+													)}
+												</Stack>
+											</td>
+										</>
+									)
+									: (
+										<td className="text-end">
+											<span>{LABEL_UNKNOWN}</span>
+										</td>
+									)}
+							</tr>
 
-              <BurdenDetail
-                burden={burden}
-                comparison={
-                  showComparison && {
-                    showing: `offhand`,
-                    subtrahend: shieldEquippedValue.burden,
-                  }
-                }
-              />
+							<BurdenDetail
+								burden={burden}
+								comparison={showComparison && {
+									showing: "offhand",
+									subtrahend: shieldEquippedValue.burden,
+								}}
+							/>
 
-              {!isShieldUnequipped && (
-                <tr>
-                  {isShowingGearClass ? (
-                    <>
-                      <td>
-                        <span>Class:</span>
-                      </td>
+							{!isShieldUnequipped && (
+								<tr>
+									{isShowingGearClass
+										? (
+											<>
+												<td>
+													<span>Class:</span>
+												</td>
 
-                      <td>
-                        {(() => {
-                          const { gearClass } = shield
-                          const { Icon } = SHIELD_SPECIFICATIONS[gearClass]
+												<td>
+													{(() => {
+														const { gearClass } = shield
+														const { Icon } = SHIELD_SPECIFICATIONS[gearClass]
 
-                          return (
-                            <IconDisplay Icon={Icon} iconProps={{ className: `small` }}>
-                              <span>{capitalizeAll(gearClass)}</span>
-                            </IconDisplay>
-                          )
-                        })()}
-                      </td>
-                    </>
-                  ) : (
-                    <td className="text-end">
-                      <span>{LABEL_UNKNOWN}</span>
-                    </td>
-                  )}
-                </tr>
-              )}
+														return (
+															<IconDisplay Icon={Icon} iconProps={{ className: "small" }}>
+																<span>{capitalizeAll(gearClass)}</span>
+															</IconDisplay>
+														)
+													})()}
+												</td>
+											</>
+										)
+										: (
+											<td className="text-end">
+												<span>{LABEL_UNKNOWN}</span>
+											</td>
+										)}
+								</tr>
+							)}
 
-              {!isShieldUnequipped && (
-                <WeightDetail
-                  comparison={
-                    showComparison && { showing: `offhand`, subtrahend: shieldEquippedValue.weight }
-                  }
-                  weight={weight}
-                />
-              )}
-            </DetailsTable>
-          </PopoverBody>
-        </Popover>
-      }
-      placement={overlayPlacement}
-    >
-      <span>{name}&nbsp;</span>
-    </OverlayTrigger>
-  )
+							{!isShieldUnequipped && (
+								<WeightDetail
+									comparison={
+										showComparison && { showing: "offhand", subtrahend: shieldEquippedValue.weight }
+									}
+									weight={weight}
+								/>
+							)}
+						</DetailsTable>
+					</PopoverBody>
+				</Popover>
+			)}
+			placement={overlayPlacement}
+		>
+			<span>
+				{name}
+				&nbsp;
+			</span>
+		</OverlayTrigger>
+	)
 }

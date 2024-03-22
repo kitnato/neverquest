@@ -8,33 +8,33 @@ import { encounter, progress, progressMaximum } from "@neverquest/state/encounte
 import { formatNumber } from "@neverquest/utilities/formatters"
 
 export function ProgressMeter() {
-  const encounterValue = useRecoilValue(encounter)
-  const progressValue = useRecoilValue(progress)
-  const progressMaximumValue = useRecoilValue(progressMaximum)
+	const encounterValue = useRecoilValue(encounter)
+	const progressValue = useRecoilValue(progress)
+	const progressMaximumValue = useRecoilValue(progressMaximum)
 
-  const isInfinite = progressMaximumValue === Number.POSITIVE_INFINITY
-  const isVoid = encounterValue === `void`
+	const isInfinite = progressMaximumValue === Number.POSITIVE_INFINITY
+	const isVoid = encounterValue === "void"
 
-  return (
-    <LabelledProgressBar
-      value={
-        isInfinite || isVoid
-          ? PERCENTAGE_POINTS
-          : (progressValue / progressMaximumValue) * PERCENTAGE_POINTS
-      }
-      variant="secondary"
-    >
-      <Stack direction="horizontal" gap={1}>
-        <span>
-          {isVoid
-            ? LABEL_UNKNOWN
-            : `${formatNumber({ value: progressValue })} / ${
-                isInfinite ? LABEL_UNKNOWN : formatNumber({ value: progressMaximumValue })
-              }`}
-        </span>
+	return (
+		<LabelledProgressBar
+			value={
+				isInfinite || isVoid
+					? PERCENTAGE_POINTS
+					: (progressValue / progressMaximumValue) * PERCENTAGE_POINTS
+			}
+			variant="secondary"
+		>
+			<Stack direction="horizontal" gap={1}>
+				<span>
+					{isVoid
+						? LABEL_UNKNOWN
+						: `${formatNumber({ value: progressValue })} / ${
+							isInfinite ? LABEL_UNKNOWN : formatNumber({ value: progressMaximumValue })
+						}`}
+				</span>
 
-        <DeltasDisplay delta="progress" />
-      </Stack>
-    </LabelledProgressBar>
-  )
+				<DeltasDisplay delta="progress" />
+			</Stack>
+		</LabelledProgressBar>
+	)
 }

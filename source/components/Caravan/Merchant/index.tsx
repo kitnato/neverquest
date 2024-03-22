@@ -5,13 +5,13 @@ import { PurchaseItems } from "@neverquest/components/Caravan/Merchant/PurchaseI
 import { SellItems } from "@neverquest/components/Caravan/Merchant/SellItems"
 
 export function Merchant() {
-  return (
-    <Stack gap={5}>
-      <PurchaseItems />
+	return (
+		<Stack gap={5}>
+			<PurchaseItems />
 
-      <BuybackItems />
+			<BuybackItems />
 
-      <SellItems />
-    </Stack>
-  )
+			<SellItems />
+		</Stack>
+	)
 }

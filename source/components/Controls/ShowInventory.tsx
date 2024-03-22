@@ -15,70 +15,70 @@ import { getAnimationClass } from "@neverquest/utilities/getters"
 import { animateElement } from "@neverquest/utilities/helpers"
 
 export function ShowInventory() {
-  const [activeControlValue, setActiveControl] = useRecoilState(activeControl)
-  const encumbranceExtentValue = useRecoilValue(encumbranceExtent)
-  const isAttackingValue = useRecoilValue(isAttacking)
-  const hasFlatlinedValue = useRecoilValue(hasFlatlined)
-  const notifyOverEncumbranceValue = useRecoilValue(notifyOverEncumbrance)
-  const ownedItemKnapsack = useRecoilValue(ownedItem(`knapsack`))
-  const resetActiveControl = useResetRecoilState(activeControl)
-  const resetNotifyEncumbranceValue = useResetRecoilState(notifyOverEncumbrance)
+	const [activeControlValue, setActiveControl] = useRecoilState(activeControl)
+	const encumbranceExtentValue = useRecoilValue(encumbranceExtent)
+	const isAttackingValue = useRecoilValue(isAttacking)
+	const hasFlatlinedValue = useRecoilValue(hasFlatlined)
+	const notifyOverEncumbranceValue = useRecoilValue(notifyOverEncumbrance)
+	const ownedItemKnapsack = useRecoilValue(ownedItem("knapsack"))
+	const resetActiveControl = useResetRecoilState(activeControl)
+	const resetNotifyEncumbranceValue = useResetRecoilState(notifyOverEncumbrance)
 
-  const badgeElement = useRef<HTMLDivElement | null>(null)
+	const badgeElement = useRef<HTMLDivElement | null>(null)
 
-  useEffect(() => {
-    const { current } = badgeElement
+	useEffect(() => {
+		const { current } = badgeElement
 
-    if (current !== null && notifyOverEncumbranceValue) {
-      animateElement({
-        animation: `heartBeat`,
-        element: current,
-        onAnimationEnd: resetNotifyEncumbranceValue,
-      })
-    }
-  }, [notifyOverEncumbranceValue, resetNotifyEncumbranceValue])
+		if (current !== null && notifyOverEncumbranceValue) {
+			animateElement({
+				animation: "heartBeat",
+				element: current,
+				onAnimationEnd: resetNotifyEncumbranceValue,
+			})
+		}
+	}, [notifyOverEncumbranceValue, resetNotifyEncumbranceValue])
 
-  if (ownedItemKnapsack !== undefined) {
-    return (
-      <>
-        <OverlayTrigger
-          overlay={
-            <Tooltip>
-              <span>Inventory</span>
-            </Tooltip>
-          }
-        >
-          <div className={getAnimationClass({ animation: `bounceIn` })}>
-            <Button
-              disabled={hasFlatlinedValue || isAttackingValue}
-              onClick={() => {
-                setActiveControl(`inventory`)
-              }}
-              variant="outline-dark"
-            >
-              <IconImage Icon={IconInventory} />
+	if (ownedItemKnapsack !== undefined) {
+		return (
+			<>
+				<OverlayTrigger
+					overlay={(
+						<Tooltip>
+							<span>Inventory</span>
+						</Tooltip>
+					)}
+				>
+					<div className={getAnimationClass({ animation: "bounceIn" })}>
+						<Button
+							disabled={hasFlatlinedValue || isAttackingValue}
+							onClick={() => {
+								setActiveControl("inventory")
+							}}
+							variant="outline-dark"
+						>
+							<IconImage Icon={IconInventory} />
 
-              {(encumbranceExtentValue !== undefined || notifyOverEncumbranceValue) && (
-                <div className="position-absolute top-50 start-100 translate-middle">
-                  <Badge bg="secondary" ref={badgeElement}>
-                    <IconImage className="small" Icon={IconEncumbrance} />
-                  </Badge>
-                </div>
-              )}
+							{(encumbranceExtentValue !== undefined || notifyOverEncumbranceValue) && (
+								<div className="position-absolute top-50 start-100 translate-middle">
+									<Badge bg="secondary" ref={badgeElement}>
+										<IconImage className="small" Icon={IconEncumbrance} />
+									</Badge>
+								</div>
+							)}
 
-              <ItemAcquisition />
-            </Button>
-          </div>
-        </OverlayTrigger>
+							<ItemAcquisition />
+						</Button>
+					</div>
+				</OverlayTrigger>
 
-        <DismissableScreen
-          isShowing={activeControlValue === `inventory`}
-          onClose={resetActiveControl}
-          title="Inventory"
-        >
-          <Inventory />
-        </DismissableScreen>
-      </>
-    )
-  }
+				<DismissableScreen
+					isShowing={activeControlValue === "inventory"}
+					onClose={resetActiveControl}
+					title="Inventory"
+				>
+					<Inventory />
+				</DismissableScreen>
+			</>
+		)
+	}
 }

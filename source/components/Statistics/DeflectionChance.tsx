@@ -18,77 +18,77 @@ import { formatNumber } from "@neverquest/utilities/formatters"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function DeflectionChance() {
-  const { deflection } = useRecoilValue(armor)
-  const deflectionChanceValue = useRecoilValue(deflectionChance)
-  const isTraitAcquiredInoculated = useRecoilValue(isTraitAcquired(`inoculated`))
+	const { deflection } = useRecoilValue(armor)
+	const deflectionChanceValue = useRecoilValue(deflectionChance)
+	const isTraitAcquiredInoculated = useRecoilValue(isTraitAcquired("inoculated"))
 
-  useDeltaText({
-    delta: `deflectionChance`,
-    format: `percentage`,
-    state: deflectionChance,
-  })
+	useDeltaText({
+		delta: "deflectionChance",
+		format: "percentage",
+		state: deflectionChance,
+	})
 
-  if (deflectionChanceValue > 0) {
-    return (
-      <IconDisplay
-        className={getAnimationClass({ animation: `flipInX` })}
-        Icon={IconDeflectionChance}
-        tooltip="Total deflection chance"
-      >
-        <Stack direction="horizontal" gap={1}>
-          <OverlayTrigger
-            overlay={
-              <Popover>
-                <PopoverBody>
-                  <DetailsTable>
-                    <tr>
-                      <td>
-                        <IconDisplay Icon={IconArmor} iconProps={{ className: `small` }}>
-                          <span>Armor:</span>
-                        </IconDisplay>
-                      </td>
+	if (deflectionChanceValue > 0) {
+		return (
+			<IconDisplay
+				className={getAnimationClass({ animation: "flipInX" })}
+				Icon={IconDeflectionChance}
+				tooltip="Total deflection chance"
+			>
+				<Stack direction="horizontal" gap={1}>
+					<OverlayTrigger
+						overlay={(
+							<Popover>
+								<PopoverBody>
+									<DetailsTable>
+										<tr>
+											<td>
+												<IconDisplay Icon={IconArmor} iconProps={{ className: "small" }}>
+													<span>Armor:</span>
+												</IconDisplay>
+											</td>
 
-                      <td>
-                        <IconDisplay Icon={IconDeflectionChance} iconProps={{ className: `small` }}>
-                          <span>{formatNumber({ format: `percentage`, value: deflection })}</span>
-                        </IconDisplay>
-                      </td>
-                    </tr>
+											<td>
+												<IconDisplay Icon={IconDeflectionChance} iconProps={{ className: "small" }}>
+													<span>{formatNumber({ format: "percentage", value: deflection })}</span>
+												</IconDisplay>
+											</td>
+										</tr>
 
-                    <tr>
-                      <td>
-                        <IconDisplay Icon={IconInoculated} iconProps={{ className: `small` }}>
-                          <span>Inoculated:</span>
-                        </IconDisplay>
-                      </td>
+										<tr>
+											<td>
+												<IconDisplay Icon={IconInoculated} iconProps={{ className: "small" }}>
+													<span>Inoculated:</span>
+												</IconDisplay>
+											</td>
 
-                      <td>
-                        <span>
-                          +
-                          {formatNumber({
-                            decimals: 0,
-                            format: `percentage`,
-                            value: INOCULATED_DEFLECTION_BASE,
-                          })}
-                        </span>
-                      </td>
-                    </tr>
-                  </DetailsTable>
-                </PopoverBody>
-              </Popover>
-            }
-            trigger={isTraitAcquiredInoculated ? POPOVER_TRIGGER : []}
-          >
-            <span>
-              {`${formatNumber({ format: `percentage`, value: deflectionChanceValue })}${
-                deflectionChanceValue === DEFLECTION_MAXIMUM ? ` ${LABEL_MAXIMUM}` : ``
-              }`}
-            </span>
-          </OverlayTrigger>
+											<td>
+												<span>
+													+
+													{formatNumber({
+														decimals: 0,
+														format: "percentage",
+														value: INOCULATED_DEFLECTION_BASE,
+													})}
+												</span>
+											</td>
+										</tr>
+									</DetailsTable>
+								</PopoverBody>
+							</Popover>
+						)}
+						trigger={isTraitAcquiredInoculated ? POPOVER_TRIGGER : []}
+					>
+						<span>
+							{`${formatNumber({ format: "percentage", value: deflectionChanceValue })}${
+								deflectionChanceValue === DEFLECTION_MAXIMUM ? ` ${LABEL_MAXIMUM}` : ""
+							}`}
+						</span>
+					</OverlayTrigger>
 
-          <DeltasDisplay delta="deflectionChance" />
-        </Stack>
-      </IconDisplay>
-    )
-  }
+					<DeltasDisplay delta="deflectionChance" />
+				</Stack>
+			</IconDisplay>
+		)
+	}
 }

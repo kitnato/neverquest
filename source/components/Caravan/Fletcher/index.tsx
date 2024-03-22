@@ -9,18 +9,18 @@ import { fletcherOptions } from "@neverquest/state/caravan"
 import type { FletcherOption } from "@neverquest/types/unions"
 
 export function Fletcher() {
-  const [{ activeTab }, setFletcherOptions] = useRecoilState(fletcherOptions)
+	const [{ activeTab }, setFletcherOptions] = useRecoilState(fletcherOptions)
 
-  return (
-    <IconTabs<FletcherOption>
-      activeKey={activeTab}
-      onSelect={(key) => {
-        setFletcherOptions((options) => ({ ...options, activeTab: key }))
-      }}
-      tabs={[
-        { Component: RangedOptions, Icon: IconRanged, label: `ranged` },
-        { Component: FletcherAmmunition, Icon: IconAmmunition, label: `ammunition` },
-      ]}
-    />
-  )
+	return (
+		<IconTabs<FletcherOption>
+			activeKey={activeTab}
+			onSelect={(key) => {
+				setFletcherOptions(options => ({ ...options, activeTab: key }))
+			}}
+			tabs={[
+				{ Component: RangedOptions, Icon: IconRanged, label: "ranged" },
+				{ Component: FletcherAmmunition, Icon: IconAmmunition, label: "ammunition" },
+			]}
+		/>
+	)
 }

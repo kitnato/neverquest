@@ -8,21 +8,21 @@ import type { Infusable } from "@neverquest/types/unions"
 import { formatNumber } from "@neverquest/utilities/formatters"
 
 export function InfusionLevelDisplay({
-  infusable,
-  overlayPlacement,
+	infusable,
+	overlayPlacement,
 }: {
-  infusable: Infusable;
-  overlayPlacement?: Placement;
+	infusable: Infusable
+	overlayPlacement?: Placement
 }) {
-  const infusionLevelValue = useRecoilValue(infusionLevel(infusable))
+	const infusionLevelValue = useRecoilValue(infusionLevel(infusable))
 
-  return (
-    <IconDisplay
-      Icon={IconInfusionLevel}
-      iconProps={{ className: `small`, overlayPlacement }}
-      tooltip="Infusion level"
-    >
-      <span>{formatNumber({ value: infusionLevelValue })}</span>
-    </IconDisplay>
-  )
+	return (
+		<IconDisplay
+			Icon={IconInfusionLevel}
+			iconProps={{ className: "small", overlayPlacement }}
+			tooltip="Infusion level"
+		>
+			<span>{formatNumber({ value: infusionLevelValue })}</span>
+		</IconDisplay>
+	)
 }

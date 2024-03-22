@@ -15,81 +15,89 @@ import { formatNumber } from "@neverquest/utilities/formatters"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function BlightChance() {
-  const blightChanceValue = useRecoilValue(blightChance)
-  const isPoisonedValue = useRecoilValue(isPoisoned)
+	const blightChanceValue = useRecoilValue(blightChance)
+	const isPoisonedValue = useRecoilValue(isPoisoned)
 
-  const { increment } = BLIGHT
+	const { increment } = BLIGHT
 
-  if (blightChanceValue > 0) {
-    return (
-      <IconDisplay
-        className={getAnimationClass({ animation: `flipInX` })}
-        Icon={IconBlightChance}
-        tooltip="Blight chance"
-      >
-        <OverlayTrigger
-          overlay={
-            <Popover>
-              <PopoverBody>
-                <DetailsTable>
-                  <tr>
-                    <td>
-                      <span>Chance:</span>
-                    </td>
+	if (blightChanceValue > 0) {
+		return (
+			<IconDisplay
+				className={getAnimationClass({ animation: "flipInX" })}
+				Icon={IconBlightChance}
+				tooltip="Blight chance"
+			>
+				<OverlayTrigger
+					overlay={(
+						<Popover>
+							<PopoverBody>
+								<DetailsTable>
+									<tr>
+										<td>
+											<span>Chance:</span>
+										</td>
 
-                    <td>
-                      <Stack direction="horizontal" gap={1}>
-                        <span>
-                          {formatNumber({ format: `percentage`, value: blightChanceValue })}&nbsp;on
-                        </span>
+										<td>
+											<Stack direction="horizontal" gap={1}>
+												<span>
+													{formatNumber({ format: "percentage", value: blightChanceValue })}
+&nbsp;on
+												</span>
 
-                        <IconDisplay
-                          Icon={IconMonsterAttackRate}
-                          iconProps={{ className: `small` }}
-                        >
-                          <Stack direction="horizontal" gap={1}>
-                            <span>while</span>
+												<IconDisplay
+													Icon={IconMonsterAttackRate}
+													iconProps={{ className: "small" }}
+												>
+													<Stack direction="horizontal" gap={1}>
+														<span>while</span>
 
-                            <IconDisplay Icon={IconPoisoned} iconProps={{ className: `small` }}>
-                              <span>poisoned</span>
-                            </IconDisplay>
-                          </Stack>
-                        </IconDisplay>
-                      </Stack>
-                    </td>
-                  </tr>
+														<IconDisplay Icon={IconPoisoned} iconProps={{ className: "small" }}>
+															<span>poisoned</span>
+														</IconDisplay>
+													</Stack>
+												</IconDisplay>
+											</Stack>
+										</td>
+									</tr>
 
-                  <tr>
-                    <td>
-                      <span>Effect:</span>
-                    </td>
+									<tr>
+										<td>
+											<span>Effect:</span>
+										</td>
 
-                    <td>
-                      <Stack direction="horizontal" gap={1}>
-                        <span>-{formatNumber({ format: `percentage`, value: increment })}</span>
+										<td>
+											<Stack direction="horizontal" gap={1}>
+												<span>
+													-
+													{formatNumber({ format: "percentage", value: increment })}
+												</span>
 
-                        <IconDisplay Icon={IconStamina} iconProps={{ className: `small` }}>
-                          <span>{LABEL_MAXIMUM} increments</span>
-                        </IconDisplay>
-                      </Stack>
-                    </td>
-                  </tr>
-                </DetailsTable>
-              </PopoverBody>
-            </Popover>
-          }
-          trigger={isPoisonedValue ? POPOVER_TRIGGER : []}
-        >
-          <span>
-            {isPoisonedValue
-              ? formatNumber({
-                  format: `percentage`,
-                  value: blightChanceValue,
-                })
-              : LABEL_EMPTY}
-          </span>
-        </OverlayTrigger>
-      </IconDisplay>
-    )
-  }
+												<IconDisplay Icon={IconStamina} iconProps={{ className: "small" }}>
+													<span>
+														{LABEL_MAXIMUM}
+														{" "}
+														increments
+													</span>
+												</IconDisplay>
+											</Stack>
+										</td>
+									</tr>
+								</DetailsTable>
+							</PopoverBody>
+						</Popover>
+					)}
+					trigger={isPoisonedValue ? POPOVER_TRIGGER : []}
+				>
+					<span>
+						{isPoisonedValue
+							? formatNumber({
+								format: "percentage",
+								value: blightChanceValue,
+							})
+							: LABEL_EMPTY}
+					</span>
+				</OverlayTrigger>
+			</IconDisplay>
+		)
+	}
 }

@@ -8,61 +8,61 @@ import { useTimer } from "@neverquest/hooks/useTimer"
 import IconBleeding from "@neverquest/icons/bleeding.svg?react"
 import { bleed, canReceiveAilment } from "@neverquest/state/ailments"
 import {
-  bleedingDelta,
-  isMonsterAiling,
-  isMonsterDead,
-  monsterAilmentDuration,
+	bleedingDelta,
+	isMonsterAiling,
+	isMonsterDead,
+	monsterAilmentDuration,
 } from "@neverquest/state/monster"
 import { bleedDamage } from "@neverquest/state/statistics"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function Bleeding() {
-  const { duration } = useRecoilValue(bleed)
-  const bleedDamageValue = useRecoilValue(bleedDamage)
-  const canReceiveAilmentBleeding = useRecoilValue(canReceiveAilment(`bleeding`))
-  const isMonsterBleedingValue = useRecoilValue(isMonsterAiling(`bleeding`))
-  const isMonsterDeadValue = useRecoilValue(isMonsterDead)
-  const resetMonsterBleedingDelta = useResetRecoilState(bleedingDelta)
-  const setMonsterBleedingDelta = useSetRecoilState(bleedingDelta)
-  const setMonsterBleedingDuration = useSetRecoilState(monsterAilmentDuration(`bleeding`))
+	const { duration } = useRecoilValue(bleed)
+	const bleedDamageValue = useRecoilValue(bleedDamage)
+	const canReceiveAilmentBleeding = useRecoilValue(canReceiveAilment("bleeding"))
+	const isMonsterBleedingValue = useRecoilValue(isMonsterAiling("bleeding"))
+	const isMonsterDeadValue = useRecoilValue(isMonsterDead)
+	const resetMonsterBleedingDelta = useResetRecoilState(bleedingDelta)
+	const setMonsterBleedingDelta = useSetRecoilState(bleedingDelta)
+	const setMonsterBleedingDuration = useSetRecoilState(monsterAilmentDuration("bleeding"))
 
-  const changeMonsterHealth = useChangeMonsterHealth()
+	const changeMonsterHealth = useChangeMonsterHealth()
 
-  const hasStoppedBleeding = !isMonsterBleedingValue || isMonsterDeadValue
+	const hasStoppedBleeding = !isMonsterBleedingValue || isMonsterDeadValue
 
-  useTimer({
-    onElapsed: () => {
-      changeMonsterHealth({
-        damageType: `bleeding`,
-        value: -bleedDamageValue,
-      })
+	useTimer({
+		onElapsed: () => {
+			changeMonsterHealth({
+				damageType: "bleeding",
+				value: -bleedDamageValue,
+			})
 
-      resetMonsterBleedingDelta()
-    },
-    setDuration: setMonsterBleedingDelta,
-    stop: hasStoppedBleeding,
-  })
+			resetMonsterBleedingDelta()
+		},
+		setDuration: setMonsterBleedingDelta,
+		stop: hasStoppedBleeding,
+	})
 
-  useTimer({
-    onElapsed: resetMonsterBleedingDelta,
-    setDuration: setMonsterBleedingDuration,
-    stop: hasStoppedBleeding,
-  })
+	useTimer({
+		onElapsed: resetMonsterBleedingDelta,
+		setDuration: setMonsterBleedingDuration,
+		stop: hasStoppedBleeding,
+	})
 
-  if (canReceiveAilmentBleeding) {
-    if (duration === BLEED.base.duration) {
-      return (
-        <IconDisplay
-          className={getAnimationClass({ animation: `flipInX` })}
-          Icon={IconBleeding}
-          tooltip="Bleeding"
-        >
-          <AilmentMeter ailment="bleeding" totalDuration={duration} />
-        </IconDisplay>
-      )
-    }
+	if (canReceiveAilmentBleeding) {
+		if (duration === BLEED.base.duration) {
+			return (
+				<IconDisplay
+					className={getAnimationClass({ animation: "flipInX" })}
+					Icon={IconBleeding}
+					tooltip="Bleeding"
+				>
+					<AilmentMeter ailment="bleeding" totalDuration={duration} />
+				</IconDisplay>
+			)
+		}
 
-    // Render something so timers still work.
-    return <></>
-  }
+		// Render something so timers still work.
+		return <></>
+	}
 }

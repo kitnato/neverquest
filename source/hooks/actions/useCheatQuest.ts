@@ -16,104 +16,104 @@ import { SKILL_TYPES, type Skill } from "@neverquest/types/unions"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
 
 export function useCheatQuest() {
-  const acquireSkill = useAcquireSkill()
-  const generateMerchantOffer = useGenerateMerchantOffer()
-  const increaseStage = useIncreaseStage()
-  const resetWilderness = useResetWilderness()
-  const setMonologues = useSetMonologues()
-  const toggleAttacking = useToggleAttacking()
-  const toggleLocation = useToggleLocation()
-  const transactEssence = useTransactEssence()
+	const acquireSkill = useAcquireSkill()
+	const generateMerchantOffer = useGenerateMerchantOffer()
+	const increaseStage = useIncreaseStage()
+	const resetWilderness = useResetWilderness()
+	const setMonologues = useSetMonologues()
+	const toggleAttacking = useToggleAttacking()
+	const toggleLocation = useToggleLocation()
+	const transactEssence = useTransactEssence()
 
-  return useRecoilCallback(
-    ({ reset, set, snapshot }) =>
-      ({ cheat, value }: { cheat: string; value?: Skill | number }) => {
-        const get = getSnapshotGetter(snapshot)
+	return useRecoilCallback(
+		({ reset, set, snapshot }) =>
+			({ cheat, value }: { cheat: string, value?: Skill | number }) => {
+				const get = getSnapshotGetter(snapshot)
 
-        const isAttackingValue = get(isAttacking)
-        const progressMaximumValue = get(progressMaximum)
-        const stageValue = get(stage)
+				const isAttackingValue = get(isAttacking)
+				const progressMaximumValue = get(progressMaximum)
+				const stageValue = get(stage)
 
-        switch (cheat) {
-          // Deus Ex
-          case `allenergy`: {
-            set(isInexhaustible, (isCurrentlyInexhaustible) => !isCurrentlyInexhaustible)
+				switch (cheat) {
+					// Deus Ex
+					case "allenergy": {
+						set(isInexhaustible, isCurrentlyInexhaustible => !isCurrentlyInexhaustible)
 
-            break
-          }
-          // Doom
-          case `IDBEHOLDV`: {
-            set(isInvulnerable, (isCurrentlyInvulnerable) => !isCurrentlyInvulnerable)
+						break
+					}
+					// Doom
+					case "IDBEHOLDV": {
+						set(isInvulnerable, isCurrentlyInvulnerable => !isCurrentlyInvulnerable)
 
-            break
-          }
-          // Heretic
-          case `gimmee`: {
-            if (typeof value === `string` && SKILL_TYPES.includes(value)) {
-              acquireSkill(value)
-            }
+						break
+					}
+					// Heretic
+					case "gimmee": {
+						if (typeof value === "string" && SKILL_TYPES.includes(value)) {
+							acquireSkill(value)
+						}
 
-            break
-          }
-          // Source engine
-          case `noclip`: {
-            if (isAttackingValue) {
-              toggleAttacking()
-            }
+						break
+					}
+					// Source engine
+					case "noclip": {
+						if (isAttackingValue) {
+							toggleAttacking()
+						}
 
-            set(progress, progressMaximumValue)
+						set(progress, progressMaximumValue)
 
-            break
-          }
-          // Starcraft
-          case `something for nothing`: {
-            if (typeof value === `number` && Number.isInteger(value)) {
-              transactEssence(value)
-            }
+						break
+					}
+					// Starcraft
+					case "something for nothing": {
+						if (typeof value === "number" && Number.isInteger(value)) {
+							transactEssence(value)
+						}
 
-            break
-          }
-          // Thief
-          case `starting_mission`: {
-            if (typeof value === `number` && Number.isInteger(value) && value > stageValue) {
-              const difference = value - stageValue
+						break
+					}
+					// Thief
+					case "starting_mission": {
+						if (typeof value === "number" && Number.isInteger(value) && value > stageValue) {
+							const difference = value - stageValue
 
-              if (get(location) === `wilderness`) {
-                if (isAttackingValue) {
-                  toggleAttacking()
-                }
+							if (get(location) === "wilderness") {
+								if (isAttackingValue) {
+									toggleAttacking()
+								}
 
-                reset(essenceLoot)
-                toggleLocation()
-              }
+								reset(essenceLoot)
+								toggleLocation()
+							}
 
-              for (let step = 0; step < difference; step++) {
-                generateMerchantOffer()
-                setMonologues()
-                increaseStage()
-              }
+							for (let step = 0; step < difference; step++) {
+								generateMerchantOffer()
+								setMonologues()
+								increaseStage()
+							}
 
-              resetWilderness()
-            }
+							resetWilderness()
+						}
 
-            break
-          }
-          default: {
-            console.warn(`Some doors are better left unopened ...`)
+						break
+					}
+					default: {
+						console.warn("Some doors are better left unopened ...")
 
-            return
-          }
-        }
-      },
-    [
-      acquireSkill,
-      generateMerchantOffer,
-      increaseStage,
-      resetWilderness,
-      setMonologues,
-      toggleAttacking,
-      toggleLocation,
-      transactEssence,
-    ],
-  )
+						return
+					}
+				}
+			},
+		[
+			acquireSkill,
+			generateMerchantOffer,
+			increaseStage,
+			resetWilderness,
+			setMonologues,
+			toggleAttacking,
+			toggleLocation,
+			transactEssence,
+		],
+	)
 }

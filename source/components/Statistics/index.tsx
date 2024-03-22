@@ -16,73 +16,73 @@ import { StunRating } from "@neverquest/components/Statistics/StunRating"
 import { Thorns } from "@neverquest/components/Statistics/Thorns"
 
 export function Statistics() {
-  const element = useRef<HTMLDivElement | null>(null)
-  const [isVisible, setIsVisible] = useState(false)
+	const element = useRef<HTMLDivElement | null>(null)
+	const [isVisible, setIsVisible] = useState(false)
 
-  const setVisibleOnTextChange = () => {
-    const { current } = element
+	const setVisibleOnTextChange = () => {
+		const { current } = element
 
-    if (current?.textContent?.trim() !== ``) {
-      setIsVisible(true)
-    }
-  }
+		if (current?.textContent?.trim() !== "") {
+			setIsVisible(true)
+		}
+	}
 
-  useLayoutEffect(() => {
-    const { current } = element
+	useLayoutEffect(() => {
+		const { current } = element
 
-    if (current !== null) {
-      new MutationObserver(setVisibleOnTextChange).observe(current, {
-        childList: true,
-        subtree: true,
-      })
+		if (current !== null) {
+			new MutationObserver(setVisibleOnTextChange).observe(current, {
+				childList: true,
+				subtree: true,
+			})
 
-      setVisibleOnTextChange()
-    }
-  }, [])
+			setVisibleOnTextChange()
+		}
+	}, [])
 
-  return (
-    <Card className={isVisible ? `` : `d-none `} ref={element}>
-      <CardBody>
-        <Row>
-          <Col>
-            <Stack gap={3}>
-              <Damage />
+	return (
+		<Card className={isVisible ? "" : "d-none "} ref={element}>
+			<CardBody>
+				<Row>
+					<Col>
+						<Stack gap={3}>
+							<Damage />
 
-              <CriticalRating />
+							<CriticalRating />
 
-              <StunRating />
+							<StunRating />
 
-              <BleedRating />
+							<BleedRating />
 
-              <ParryRating />
+							<ParryRating />
 
-              <ExecutionThreshold />
+							<ExecutionThreshold />
 
-              <Range />
-            </Stack>
-          </Col>
+							<Range />
+						</Stack>
+					</Col>
 
-          <Col>
-            <Stack gap={3}>
-              <Protection />
+					<Col>
+						<Stack gap={3}>
+							<Protection />
 
-              <Thorns />
+							<Thorns />
 
-              <DeflectionChance />
+							<DeflectionChance />
 
-              <DodgeChance />
-            </Stack>
-          </Col>
+							<DodgeChance />
+						</Stack>
+					</Col>
 
-          <Col>
-            <Stack gap={3}>
-              <BlockChance />
+					<Col>
+						<Stack gap={3}>
+							<BlockChance />
 
-              <StaggerRating />
-            </Stack>
-          </Col>
-        </Row>
-      </CardBody>
-    </Card>
-  )
+							<StaggerRating />
+						</Stack>
+					</Col>
+				</Row>
+			</CardBody>
+		</Card>
+	)
 }

@@ -11,27 +11,27 @@ import { capitalizeAll } from "@neverquest/utilities/formatters"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function ElementalAilment({ elemental }: { elemental: Elemental }) {
-  const { ailment, durationCap, Icon } = ELEMENTALS[elemental]
+	const { ailment, durationCap, Icon } = ELEMENTALS[elemental]
 
-  const isMonsterAilingValue = useRecoilValue(isMonsterAiling(ailment))
-  const isMonsterDeadValue = useRecoilValue(isMonsterDead)
-  const { armor, weapon } = useRecoilValue(elementalEffects)
-  const setAilment = useSetRecoilState(monsterAilmentDuration(ailment))
+	const isMonsterAilingValue = useRecoilValue(isMonsterAiling(ailment))
+	const isMonsterDeadValue = useRecoilValue(isMonsterDead)
+	const { armor, weapon } = useRecoilValue(elementalEffects)
+	const setAilment = useSetRecoilState(monsterAilmentDuration(ailment))
 
-  useTimer({
-    setDuration: setAilment,
-    stop: !isMonsterAilingValue || isMonsterDeadValue,
-  })
+	useTimer({
+		setDuration: setAilment,
+		stop: !isMonsterAilingValue || isMonsterDeadValue,
+	})
 
-  if (armor[elemental].duration > 0 || weapon[elemental].duration > 0) {
-    return (
-      <IconDisplay
-        className={getAnimationClass({ animation: `flipInX` })}
-        Icon={Icon}
-        tooltip={capitalizeAll(ailment)}
-      >
-        <AilmentMeter ailment={ailment} totalDuration={durationCap} />
-      </IconDisplay>
-    )
-  }
+	if (armor[elemental].duration > 0 || weapon[elemental].duration > 0) {
+		return (
+			<IconDisplay
+				className={getAnimationClass({ animation: "flipInX" })}
+				Icon={Icon}
+				tooltip={capitalizeAll(ailment)}
+			>
+				<AilmentMeter ailment={ailment} totalDuration={durationCap} />
+			</IconDisplay>
+		)
+	}
 }

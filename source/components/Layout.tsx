@@ -28,120 +28,121 @@ import { formatNumber } from "@neverquest/utilities/formatters"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function Layout() {
-  const consciousnessValue = useRecoilValue(consciousness)
+	const consciousnessValue = useRecoilValue(consciousness)
 
-  const [screenSizeWarning, setScreenSizeWarning] = useState(``)
+	const [screenSizeWarning, setScreenSizeWarning] = useState("")
 
-  useLayoutEffect(() => {
-    const checkWidth = () => {
-      if (window.innerWidth <= SCREEN_WIDTH_MINIMUM) {
-        setScreenSizeWarning(
-          `Requires a screen width of minimum ${formatNumber({
-            value: SCREEN_WIDTH_MINIMUM,
-          })} pixels.`,
-        )
-      } else {
-        setScreenSizeWarning(``)
-      }
-    }
+	useLayoutEffect(() => {
+		const checkWidth = () => {
+			if (window.innerWidth <= SCREEN_WIDTH_MINIMUM) {
+				setScreenSizeWarning(
+					`Requires a screen width of minimum ${formatNumber({
+						value: SCREEN_WIDTH_MINIMUM,
+					})} pixels.`,
+				)
+			}
+			else {
+				setScreenSizeWarning("")
+			}
+		}
 
-    window.addEventListener(`resize`, checkWidth)
+		window.addEventListener("resize", checkWidth)
 
-    checkWidth()
+		checkWidth()
 
-    return () => {
-      window.removeEventListener(`resize`, checkWidth)
-    }
-  }, [])
+		return () => {
+			window.removeEventListener("resize", checkWidth)
+		}
+	}, [])
 
-  if (screenSizeWarning !== ``) {
-    return <ScreenMessage>{screenSizeWarning}</ScreenMessage>
-  }
+	if (screenSizeWarning !== "") {
+		return <ScreenMessage>{screenSizeWarning}</ScreenMessage>
+	}
 
-  switch (consciousnessValue) {
-    case `mors`: {
-      return (
-        <ScreenMessage>
-          <h5
-            className={getAnimationClass({
-              animation: `zoomIn`,
-              speed: `slower`,
-            })}
-          >
-            Fin.
-          </h5>
-        </ScreenMessage>
-      )
-    }
+	switch (consciousnessValue) {
+		case "mors": {
+			return (
+				<ScreenMessage>
+					<h5
+						className={getAnimationClass({
+							animation: "zoomIn",
+							speed: "slower",
+						})}
+					>
+						Fin.
+					</h5>
+				</ScreenMessage>
+			)
+		}
 
-    case `somnium`: {
-      return (
-        <Container className="somnium mb-4">
-          <Row>
-            <Col>
-              <Stack gap={3}>
-                <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-                  <Location />
+		case "somnium": {
+			return (
+				<Container className="somnium mb-4">
+					<Row>
+						<Col>
+							<Stack gap={3}>
+								<div className={CLASS_FULL_WIDTH_JUSTIFIED}>
+									<Location />
 
-                  <Essence />
-                </div>
+									<Essence />
+								</div>
 
-                <Stack className="overlay-offcanvas" gap={3}>
-                  <Status />
+								<Stack className="overlay-offcanvas" gap={3}>
+									<Status />
 
-                  <Statistics />
+									<Statistics />
 
-                  <Gear />
+									<Gear />
 
-                  <Masteries />
-                </Stack>
-              </Stack>
-            </Col>
+									<Masteries />
+								</Stack>
+							</Stack>
+						</Col>
 
-            <Col xs="auto">
-              <Stack gap={3}>
-                <Retire />
+						<Col xs="auto">
+							<Stack gap={3}>
+								<Retire />
 
-                <Main />
+								<Main />
 
-                <Capabilities />
+								<Capabilities />
 
-                <ShowInventory />
+								<ShowInventory />
 
-                <ShowQuests />
+								<ShowQuests />
 
-                <ScavengeCorpse />
+								<ScavengeCorpse />
 
-                <CollectLoot />
+								<CollectLoot />
 
-                <Travel />
-              </Stack>
-            </Col>
+								<Travel />
+							</Stack>
+						</Col>
 
-            <Col>
-              <Stack gap={3}>
-                <WildernessStatus />
+						<Col>
+							<Stack gap={3}>
+								<WildernessStatus />
 
-                <Encounter />
-              </Stack>
-            </Col>
-          </Row>
+								<Encounter />
+							</Stack>
+						</Col>
+					</Row>
 
-          <QuestNotifications />
+					<QuestNotifications />
 
-          <Flatline />
-        </Container>
-      )
-    }
+					<Flatline />
+				</Container>
+			)
+		}
 
-    case `vigilans`: {
-      return (
-        <Container className="mb-4">
-          <Awakening />
+		case "vigilans": {
+			return (
+				<Container className="mb-4">
+					<Awakening />
 
-          <QuestNotifications />
-        </Container>
-      )
-    }
-  }
+					<QuestNotifications />
+				</Container>
+			)
+		}
+	}
 }

@@ -10,45 +10,45 @@ import type { MerchantInventoryItem } from "@neverquest/types"
 import { isConsumableItem, isGearItem } from "@neverquest/types/type-guards"
 
 export function PurchaseItem({ merchantItem }: { merchantItem: MerchantInventoryItem }) {
-  const setMerchantInventory = useSetRecoilState(merchantInventory)
+	const setMerchantInventory = useSetRecoilState(merchantInventory)
 
-  const acquireItem = useAcquireItem()
-  const progressQuest = useProgressQuest()
-  const toggleEquipItem = useToggleEquipItem()
-  const transactEssence = useTransactEssence()
+	const acquireItem = useAcquireItem()
+	const progressQuest = useProgressQuest()
+	const toggleEquipItem = useToggleEquipItem()
+	const transactEssence = useTransactEssence()
 
-  return (
-    <PurchaseItemButton
-      item={merchantItem}
-      onPurchase={() => {
-        const { isReturned, ...item } = merchantItem
+	return (
+		<PurchaseItemButton
+			item={merchantItem}
+			onPurchase={() => {
+				const { isReturned, ...item } = merchantItem
 
-        const acquisitionStatus = acquireItem(item)
+				const acquisitionStatus = acquireItem(item)
 
-        if (acquisitionStatus === `failure`) {
-          return
-        }
+				if (acquisitionStatus === "failure") {
+					return
+				}
 
-        const { ID, price } = item
+				const { ID, price } = item
 
-        transactEssence(-price)
+				transactEssence(-price)
 
-        if (isGearItem(item) && acquisitionStatus === `equip`) {
-          toggleEquipItem({ item })
-        }
+				if (isGearItem(item) && acquisitionStatus === "equip") {
+					toggleEquipItem({ item })
+				}
 
-        setMerchantInventory((currentMerchantInventory) =>
-          currentMerchantInventory.filter(({ ID: currentItemID }) => currentItemID !== ID),
-        )
+				setMerchantInventory(currentMerchantInventory =>
+					currentMerchantInventory.filter(({ ID: currentItemID }) => currentItemID !== ID),
+				)
 
-        if (isReturned) {
-          progressQuest({ quest: `buyingBack` })
-        }
+				if (isReturned) {
+					progressQuest({ quest: "buyingBack" })
+				}
 
-        progressQuest({
-          quest: isConsumableItem(item) ? `purchasingConsumable` : `purchasingItem`,
-        })
-      }}
-    />
-  )
+				progressQuest({
+					quest: isConsumableItem(item) ? "purchasingConsumable" : "purchasingItem",
+				})
+			}}
+		/>
+	)
 }

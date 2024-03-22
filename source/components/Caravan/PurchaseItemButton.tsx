@@ -7,40 +7,40 @@ import { essence } from "@neverquest/state/resources"
 import type { InventoryItem } from "@neverquest/types"
 
 export function PurchaseItemButton({
-  item,
-  onPurchase,
+	item,
+	onPurchase,
 }: {
-  item: InventoryItem;
-  onPurchase: () => void;
+	item: InventoryItem
+	onPurchase: () => void
 }) {
-  const essenceValue = useRecoilValue(essence)
+	const essenceValue = useRecoilValue(essence)
 
-  const { price, weight } = item
+	const { price, weight } = item
 
-  const canFit = useCanFit()
+	const canFit = useCanFit()
 
-  const canFitItem = canFit(weight)
-  const isAffordable = price <= essenceValue
-  const isPurchasable = isAffordable && canFitItem
+	const canFitItem = canFit(weight)
+	const isAffordable = price <= essenceValue
+	const isPurchasable = isAffordable && canFitItem
 
-  return (
-    <OverlayTrigger
-      overlay={
-        <Tooltip>
-          <Stack>
-            {!isAffordable && <span>{LABEL_NO_ESSENCE}</span>}
+	return (
+		<OverlayTrigger
+			overlay={(
+				<Tooltip>
+					<Stack>
+						{!isAffordable && <span>{LABEL_NO_ESSENCE}</span>}
 
-            {!canFitItem && <span>{LABEL_OVER_ENCUMBERED}</span>}
-          </Stack>
-        </Tooltip>
-      }
-      trigger={isPurchasable ? [] : POPOVER_TRIGGER}
-    >
-      <div>
-        <Button disabled={!isPurchasable} onClick={onPurchase} variant="outline-dark">
-          <span>Buy</span>
-        </Button>
-      </div>
-    </OverlayTrigger>
-  )
+						{!canFitItem && <span>{LABEL_OVER_ENCUMBERED}</span>}
+					</Stack>
+				</Tooltip>
+			)}
+			trigger={isPurchasable ? [] : POPOVER_TRIGGER}
+		>
+			<div>
+				<Button disabled={!isPurchasable} onClick={onPurchase} variant="outline-dark">
+					<span>Buy</span>
+				</Button>
+			</div>
+		</OverlayTrigger>
+	)
 }

@@ -7,17 +7,17 @@ import { Loot } from "@neverquest/components/Loot"
 import { location } from "@neverquest/state/encounter"
 
 export function Encounter() {
-  const locationValue = useRecoilValue(location)
+	const locationValue = useRecoilValue(location)
 
-  if (locationValue === `wilderness`) {
-    return (
-      <Stack gap={3}>
-        <Wilderness />
+	if (locationValue === "wilderness") {
+		return (
+			<Stack gap={3}>
+				<Wilderness />
 
-        <Loot />
-      </Stack>
-    )
-  }
+				<Loot />
+			</Stack>
+		)
+	}
 
-  return <Caravan />
+	return <Caravan />
 }

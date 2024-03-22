@@ -9,19 +9,19 @@ import IconMonsterHealth from "@neverquest/icons/monster-health.svg?react"
 import { monsterHealthMaximum } from "@neverquest/state/monster"
 
 export function MonsterHealth() {
-  useDeltaText({
-    delta: `monsterHealthMaximum`,
-    state: monsterHealthMaximum,
-    suffix: LABEL_MAXIMUM,
-  })
+	useDeltaText({
+		delta: "monsterHealthMaximum",
+		state: monsterHealthMaximum,
+		suffix: LABEL_MAXIMUM,
+	})
 
-  return (
-    <IconDisplay Icon={IconMonsterHealth} tooltip="Monster health">
-      <Stack>
-        <MonsterHealthMeter />
+	return (
+		<IconDisplay Icon={IconMonsterHealth} tooltip="Monster health">
+			<Stack>
+				<MonsterHealthMeter />
 
-        <MonsterRegeneration />
-      </Stack>
-    </IconDisplay>
-  )
+				<MonsterRegeneration />
+			</Stack>
+		</IconDisplay>
+	)
 }

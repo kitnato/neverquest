@@ -9,53 +9,54 @@ import type { Infusable } from "@neverquest/types/unions"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
 
 export function useInfuse() {
-  const progressQuest = useProgressQuest()
-  const transactEssence = useTransactEssence()
+	const progressQuest = useProgressQuest()
+	const transactEssence = useTransactEssence()
 
-  return useRecoilCallback(
-    ({ reset, set, snapshot }) =>
-      (infusable: Infusable) => {
-        const get = getSnapshotGetter(snapshot)
+	return useRecoilCallback(
+		({ reset, set, snapshot }) =>
+			(infusable: Infusable) => {
+				const get = getSnapshotGetter(snapshot)
 
-        const ownedInfusable = get(ownedItem(infusable))
+				const ownedInfusable = get(ownedItem(infusable))
 
-        if (ownedInfusable === undefined) {
-          return
-        }
+				if (ownedInfusable === undefined) {
+					return
+				}
 
-        if (get(infusionLevel(infusable)) >= LEVELLING_MAXIMUM) {
-          return
-        }
+				if (get(infusionLevel(infusable)) >= LEVELLING_MAXIMUM) {
+					return
+				}
 
-        const infusionStepValue = get(infusionStep(infusable))
+				const infusionStepValue = get(infusionStep(infusable))
 
-        if (infusionStepValue === 0) {
-          return
-        }
+				if (infusionStepValue === 0) {
+					return
+				}
 
-        const infusionState = infusion(infusable)
-        const infusionLevelState = infusionLevel(infusable)
-        const infusionValue = get(infusionState)
-        const newInfusion = infusionValue + infusionStepValue
+				const infusionState = infusion(infusable)
+				const infusionLevelState = infusionLevel(infusable)
+				const infusionValue = get(infusionState)
+				const newInfusion = infusionValue + infusionStepValue
 
-        if (newInfusion >= get(infusionMaximum(infusable))) {
-          const newLevel = get(infusionLevelState) + 1
+				if (newInfusion >= get(infusionMaximum(infusable))) {
+					const newLevel = get(infusionLevelState) + 1
 
-          set(infusionLevelState, newLevel)
+					set(infusionLevelState, newLevel)
 
-          progressQuest({ quest: `infusing` })
+					progressQuest({ quest: "infusing" })
 
-          if (newLevel >= LEVELLING_MAXIMUM) {
-            progressQuest({ quest: `infusingMaximum` })
-          }
+					if (newLevel >= LEVELLING_MAXIMUM) {
+						progressQuest({ quest: "infusingMaximum" })
+					}
 
-          reset(infusionState)
-        } else {
-          set(infusionState, newInfusion)
-        }
+					reset(infusionState)
+				}
+				else {
+					set(infusionState, newInfusion)
+				}
 
-        transactEssence(-(Math.round(newInfusion) - Math.round(infusionValue)))
-      },
-    [progressQuest, transactEssence],
-  )
+				transactEssence(-(Math.round(newInfusion) - Math.round(infusionValue)))
+			},
+		[progressQuest, transactEssence],
+	)
 }

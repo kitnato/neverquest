@@ -3,9 +3,9 @@ import { Button, OverlayTrigger, Tooltip } from "react-bootstrap"
 import { useRecoilValue, useSetRecoilState } from "recoil"
 
 import {
-  LABEL_OVER_ENCUMBERED,
-  LEVELLING_MAXIMUM,
-  POPOVER_TRIGGER,
+	LABEL_OVER_ENCUMBERED,
+	LEVELLING_MAXIMUM,
+	POPOVER_TRIGGER,
 } from "@neverquest/data/general"
 import { RELICS } from "@neverquest/data/items"
 import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem"
@@ -14,45 +14,45 @@ import { inventory, ownedItem } from "@neverquest/state/inventory"
 import { infusionLevel } from "@neverquest/state/items"
 
 export function Hatch() {
-  const infusionLevelValue = useRecoilValue(infusionLevel(`mysterious egg`))
-  const ownedItemMysteriousEgg = useRecoilValue(ownedItem(`mysterious egg`))
-  const setInventory = useSetRecoilState(inventory)
+	const infusionLevelValue = useRecoilValue(infusionLevel("mysterious egg"))
+	const ownedItemMysteriousEgg = useRecoilValue(ownedItem("mysterious egg"))
+	const setInventory = useSetRecoilState(inventory)
 
-  const acquireItem = useAcquireItem()
-  const canFit = useCanFit()
+	const acquireItem = useAcquireItem()
+	const canFit = useCanFit()
 
-  const { item: familiarItem } = RELICS.familiar
-  const canFitFamiliar = canFit(familiarItem.weight)
+	const { item: familiarItem } = RELICS.familiar
+	const canFitFamiliar = canFit(familiarItem.weight)
 
-  return (
-    infusionLevelValue >= LEVELLING_MAXIMUM &&
-    ownedItemMysteriousEgg !== undefined && (
-      <OverlayTrigger
-        overlay={
-          <Tooltip>
-            <span>{LABEL_OVER_ENCUMBERED}</span>
-          </Tooltip>
-        }
-        trigger={canFitFamiliar ? [] : POPOVER_TRIGGER}
-      >
-        <div>
-          <Button
-            disabled={!canFitFamiliar}
-            onClick={() => {
-              const acquiredStatus = acquireItem({ ...familiarItem, ID: nanoid() })
+	return (
+		infusionLevelValue >= LEVELLING_MAXIMUM
+		&& ownedItemMysteriousEgg !== undefined && (
+			<OverlayTrigger
+				overlay={(
+					<Tooltip>
+						<span>{LABEL_OVER_ENCUMBERED}</span>
+					</Tooltip>
+				)}
+				trigger={canFitFamiliar ? [] : POPOVER_TRIGGER}
+			>
+				<div>
+					<Button
+						disabled={!canFitFamiliar}
+						onClick={() => {
+							const acquiredStatus = acquireItem({ ...familiarItem, ID: nanoid() })
 
-              if (acquiredStatus === `success`) {
-                setInventory((currentInventory) =>
-                  currentInventory.filter(({ ID }) => ID !== ownedItemMysteriousEgg.ID),
-                )
-              }
-            }}
-            variant="outline-dark"
-          >
-            <span>Hatch</span>
-          </Button>
-        </div>
-      </OverlayTrigger>
-    )
-  )
+							if (acquiredStatus === "success") {
+								setInventory(currentInventory =>
+									currentInventory.filter(({ ID }) => ID !== ownedItemMysteriousEgg.ID),
+								)
+							}
+						}}
+						variant="outline-dark"
+					>
+						<span>Hatch</span>
+					</Button>
+				</div>
+			</OverlayTrigger>
+		)
+	)
 }

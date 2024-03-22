@@ -13,64 +13,67 @@ import { formatNumber } from "@neverquest/utilities/formatters"
 import { getAttributePointCost, getAttributePoints } from "@neverquest/utilities/getters"
 
 export function AttributePointProgress({ isLoot }: { isLoot?: boolean }) {
-  const essenceValue = useRecoilValue(essence)
-  const essenceLootValue = useRecoilValue(essenceLoot)
-  const powerLevelValue = useRecoilValue(powerLevel)
+	const essenceValue = useRecoilValue(essence)
+	const essenceLootValue = useRecoilValue(essenceLoot)
+	const powerLevelValue = useRecoilValue(powerLevel)
 
-  const totalEssence = essenceValue + (isLoot ? essenceLootValue : 0)
-  const nextTotalCost = Array.from<undefined>({
-    length: getAttributePoints({
-      essence: totalEssence,
-      powerLevel: powerLevelValue,
-    }),
-  }).reduce(
-    (sum, _, index) => sum + getAttributePointCost(powerLevelValue + index + 1),
-    getAttributePointCost(powerLevelValue),
-  )
+	const totalEssence = essenceValue + (isLoot ? essenceLootValue : 0)
+	const nextTotalCost = Array.from<undefined>({
+		length: getAttributePoints({
+			essence: totalEssence,
+			powerLevel: powerLevelValue,
+		}),
+	}).reduce(
+		(sum, _, index) => sum + getAttributePointCost(powerLevelValue + index + 1),
+		getAttributePointCost(powerLevelValue),
+	)
 
-  return (
-    <OverlayTrigger
-      overlay={
-        <Popover>
-          <PopoverBody>
-            {isLoot ? (
-              <>
-                <span>Essence after&nbsp;</span>
+	return (
+		<OverlayTrigger
+			overlay={(
+				<Popover>
+					<PopoverBody>
+						{isLoot
+							? (
+								<>
+									<span>Essence after&nbsp;</span>
 
-                <IconImage className="small" Icon={IconLoot} />
+									<IconImage className="small" Icon={IconLoot} />
 
-                <span>&nbsp;loot collection</span>
-              </>
-            ) : (
-              <>
-                <span>Current&nbsp;</span>
+									<span>&nbsp;loot collection</span>
+								</>
+							)
+							: (
+								<>
+									<span>Current&nbsp;</span>
 
-                <IconImage className="small" Icon={IconEssence} />
+									<IconImage className="small" Icon={IconEssence} />
 
-                <span>&nbsp;essence</span>
-              </>
-            )}
+									<span>&nbsp;essence</span>
+								</>
+							)}
 
-            <span>&nbsp;and required essence for next attribute point.</span>
-          </PopoverBody>
-        </Popover>
-      }
-    >
-      <div className="w-100">
-        <LabelledProgressBar
-          value={(totalEssence / nextTotalCost) * PERCENTAGE_POINTS}
-          variant="secondary"
-        >
-          <IconDisplay Icon={IconEssence} iconProps={{ className: `small stencilled` }}>
-            <span>
-              {formatNumber({ value: totalEssence })}&nbsp;/&nbsp;
-              {formatNumber({
-                value: nextTotalCost,
-              })}
-            </span>
-          </IconDisplay>
-        </LabelledProgressBar>
-      </div>
-    </OverlayTrigger>
-  )
+						<span>&nbsp;and required essence for next attribute point.</span>
+					</PopoverBody>
+				</Popover>
+			)}
+		>
+			<div className="w-100">
+				<LabelledProgressBar
+					value={(totalEssence / nextTotalCost) * PERCENTAGE_POINTS}
+					variant="secondary"
+				>
+					<IconDisplay Icon={IconEssence} iconProps={{ className: "small stencilled" }}>
+						<span>
+							{formatNumber({ value: totalEssence })}
+&nbsp;/&nbsp;
+							{formatNumber({
+								value: nextTotalCost,
+							})}
+						</span>
+					</IconDisplay>
+				</LabelledProgressBar>
+			</div>
+		</OverlayTrigger>
+	)
 }

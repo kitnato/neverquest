@@ -35,205 +35,214 @@ import { formatNumber } from "@neverquest/utilities/formatters"
 import { getAnimationClass, getGearIcon } from "@neverquest/utilities/getters"
 
 export function Damage() {
-  const attributeStatisticStrength = useRecoilValue(attributeStatistic(`strength`))
-  const damageValue = useRecoilValue(damage)
-  const infusionEffectEldritchCodex = useRecoilValue(infusionEffect(`eldritch codex`))
-  const isShowingDamage = useRecoilValue(isShowing(`damage`))
-  const isTraitAcquiredBrawler = useRecoilValue(isTraitAcquired(`brawler`))
-  const isTraitAcquiredBruiser = useRecoilValue(isTraitAcquired(`bruiser`))
-  const lifeLeechValue = useRecoilValue(lifeLeech)
-  const questsBonusDamage = useRecoilValue(questsBonus(`damageBonus`))
-  const shieldValue = useRecoilValue(shield)
-  const staminaValue = useRecoilValue(stamina)
-  const weaponValue = useRecoilValue(weapon)
-  const resetQuestProgressDamage = useResetRecoilState(questProgress(`damage`))
+	const attributeStatisticStrength = useRecoilValue(attributeStatistic("strength"))
+	const damageValue = useRecoilValue(damage)
+	const infusionEffectEldritchCodex = useRecoilValue(infusionEffect("eldritch codex"))
+	const isShowingDamage = useRecoilValue(isShowing("damage"))
+	const isTraitAcquiredBrawler = useRecoilValue(isTraitAcquired("brawler"))
+	const isTraitAcquiredBruiser = useRecoilValue(isTraitAcquired("bruiser"))
+	const lifeLeechValue = useRecoilValue(lifeLeech)
+	const questsBonusDamage = useRecoilValue(questsBonus("damageBonus"))
+	const shieldValue = useRecoilValue(shield)
+	const staminaValue = useRecoilValue(stamina)
+	const weaponValue = useRecoilValue(weapon)
+	const resetQuestProgressDamage = useResetRecoilState(questProgress("damage"))
 
-  const progressQuest = useProgressQuest()
+	const progressQuest = useProgressQuest()
 
-  const { burden, damage: weaponDamage } = weaponValue
+	const { burden, damage: weaponDamage } = weaponValue
 
-  useDeltaText({
-    delta: `damage`,
-    state: damage,
-  })
+	useDeltaText({
+		delta: "damage",
+		state: damage,
+	})
 
-  useEffect(() => {
-    resetQuestProgressDamage()
-    progressQuest({ amount: damageValue, quest: `damage` })
-  }, [damageValue, progressQuest, resetQuestProgressDamage])
+	useEffect(() => {
+		resetQuestProgressDamage()
+		progressQuest({ amount: damageValue, quest: "damage" })
+	}, [damageValue, progressQuest, resetQuestProgressDamage])
 
-  if (isShowingDamage) {
-    return (
-      <IconDisplay
-        className={getAnimationClass({ animation: `flipInX` })}
-        description={<DamagePerSecond />}
-        Icon={IconDamage}
-        tooltip="Total damage"
-      >
-        <Stack direction="horizontal" gap={1}>
-          <OverlayTrigger
-            overlay={
-              <Popover>
-                <PopoverBody>
-                  <DetailsTable>
-                    <tr>
-                      <td>
-                        <IconDisplay
-                          Icon={getGearIcon(weaponValue)}
-                          iconProps={{ className: `small` }}
-                        >
-                          <span>{isUnarmed(weaponValue) ? `Base` : `Weapon`}:</span>
-                        </IconDisplay>
-                      </td>
+	if (isShowingDamage) {
+		return (
+			<IconDisplay
+				className={getAnimationClass({ animation: "flipInX" })}
+				description={<DamagePerSecond />}
+				Icon={IconDamage}
+				tooltip="Total damage"
+			>
+				<Stack direction="horizontal" gap={1}>
+					<OverlayTrigger
+						overlay={(
+							<Popover>
+								<PopoverBody>
+									<DetailsTable>
+										<tr>
+											<td>
+												<IconDisplay
+													Icon={getGearIcon(weaponValue)}
+													iconProps={{ className: "small" }}
+												>
+													<span>
+														{isUnarmed(weaponValue) ? "Base" : "Weapon"}
+														:
+													</span>
+												</IconDisplay>
+											</td>
 
-                      <td>
-                        <IconDisplay Icon={IconWeaponDamage} iconProps={{ className: `small` }}>
-                          <span>{formatNumber({ value: weaponDamage })}</span>
-                        </IconDisplay>
-                      </td>
-                    </tr>
+											<td>
+												<IconDisplay Icon={IconWeaponDamage} iconProps={{ className: "small" }}>
+													<span>{formatNumber({ value: weaponDamage })}</span>
+												</IconDisplay>
+											</td>
+										</tr>
 
-                    {isTraitAcquiredBrawler && isUnshielded(shieldValue) && (
-                      <tr>
-                        <td>
-                          <IconDisplay Icon={IconBrawler} iconProps={{ className: `small` }}>
-                            <span>Brawler:</span>
-                          </IconDisplay>
-                        </td>
+										{isTraitAcquiredBrawler && isUnshielded(shieldValue) && (
+											<tr>
+												<td>
+													<IconDisplay Icon={IconBrawler} iconProps={{ className: "small" }}>
+														<span>Brawler:</span>
+													</IconDisplay>
+												</td>
 
-                        <td>
-                          <span>
-                            +
-                            {formatNumber({
-                              decimals: 0,
-                              format: `percentage`,
-                              value: BRAWLER_DAMAGE_BONUS,
-                            })}
-                          </span>
-                        </td>
-                      </tr>
-                    )}
+												<td>
+													<span>
+														+
+														{formatNumber({
+															decimals: 0,
+															format: "percentage",
+															value: BRAWLER_DAMAGE_BONUS,
+														})}
+													</span>
+												</td>
+											</tr>
+										)}
 
-                    {attributeStatisticStrength > 0 && (
-                      <tr>
-                        <td>
-                          <IconDisplay Icon={IconStrength} iconProps={{ className: `small` }}>
-                            <span>Strength:</span>
-                          </IconDisplay>
-                        </td>
+										{attributeStatisticStrength > 0 && (
+											<tr>
+												<td>
+													<IconDisplay Icon={IconStrength} iconProps={{ className: "small" }}>
+														<span>Strength:</span>
+													</IconDisplay>
+												</td>
 
-                        <td>
-                          <Stack direction="horizontal" gap={1}>
-                            <span>
-                              +
-                              {formatNumber({
-                                value: attributeStatisticStrength,
-                              })}
-                            </span>
-                          </Stack>
-                        </td>
-                      </tr>
-                    )}
+												<td>
+													<Stack direction="horizontal" gap={1}>
+														<span>
+															+
+															{formatNumber({
+																value: attributeStatisticStrength,
+															})}
+														</span>
+													</Stack>
+												</td>
+											</tr>
+										)}
 
-                    {isTraitAcquiredBruiser && isUnarmed(weaponValue) && (
-                      <tr>
-                        <td>
-                          <IconDisplay Icon={IconBruiser} iconProps={{ className: `small` }}>
-                            <span>Bruiser:</span>
-                          </IconDisplay>
-                        </td>
+										{isTraitAcquiredBruiser && isUnarmed(weaponValue) && (
+											<tr>
+												<td>
+													<IconDisplay Icon={IconBruiser} iconProps={{ className: "small" }}>
+														<span>Bruiser:</span>
+													</IconDisplay>
+												</td>
 
-                        <td>
-                          <span>+{formatNumber({ value: staminaValue * BRUISER.damage })}</span>
-                        </td>
-                      </tr>
-                    )}
+												<td>
+													<span>
+														+
+														{formatNumber({ value: staminaValue * BRUISER.damage })}
+													</span>
+												</td>
+											</tr>
+										)}
 
-                    <ElementalDetails slot="weapon" />
+										<ElementalDetails slot="weapon" />
 
-                    {questsBonusDamage > 0 && (
-                      <tr>
-                        <td>
-                          <IconDisplay Icon={IconQuests} iconProps={{ className: `small` }}>
-                            <span>Quest bonus:</span>
-                          </IconDisplay>
-                        </td>
+										{questsBonusDamage > 0 && (
+											<tr>
+												<td>
+													<IconDisplay Icon={IconQuests} iconProps={{ className: "small" }}>
+														<span>Quest bonus:</span>
+													</IconDisplay>
+												</td>
 
-                        <td>
-                          <IconDisplay Icon={IconDamage} iconProps={{ className: `small` }}>
-                            <span>
-                              +
-                              {formatNumber({
-                                decimals: 0,
-                                format: `percentage`,
-                                value: questsBonusDamage,
-                              })}
-                            </span>
-                          </IconDisplay>
-                        </td>
-                      </tr>
-                    )}
+												<td>
+													<IconDisplay Icon={IconDamage} iconProps={{ className: "small" }}>
+														<span>
+															+
+															{formatNumber({
+																decimals: 0,
+																format: "percentage",
+																value: questsBonusDamage,
+															})}
+														</span>
+													</IconDisplay>
+												</td>
+											</tr>
+										)}
 
-                    {infusionEffectEldritchCodex > 0 && (
-                      <tr>
-                        <td>
-                          <IconDisplay Icon={IconEldritchCodex} iconProps={{ className: `small` }}>
-                            <span>Life leech:</span>
-                          </IconDisplay>
-                        </td>
+										{infusionEffectEldritchCodex > 0 && (
+											<tr>
+												<td>
+													<IconDisplay Icon={IconEldritchCodex} iconProps={{ className: "small" }}>
+														<span>Life leech:</span>
+													</IconDisplay>
+												</td>
 
-                        <td>
-                          <IconDisplay Icon={IconLifeLeech} iconProps={{ className: `small` }}>
-                            <Stack direction="horizontal" gap={1}>
-                              <span>
-                                {formatNumber({
-                                  format: `percentage`,
-                                  value: infusionEffectEldritchCodex,
-                                })}
-                              </span>
+												<td>
+													<IconDisplay Icon={IconLifeLeech} iconProps={{ className: "small" }}>
+														<Stack direction="horizontal" gap={1}>
+															<span>
+																{formatNumber({
+																	format: "percentage",
+																	value: infusionEffectEldritchCodex,
+																})}
+															</span>
 
-                              {LABEL_SEPARATOR}
+															{LABEL_SEPARATOR}
 
-                              <IconDisplay Icon={IconHealth} iconProps={{ className: `small` }}>
-                                <span>
-                                  {formatNumber({
-                                    value: lifeLeechValue,
-                                  })}
-                                </span>
-                              </IconDisplay>
-                            </Stack>
-                          </IconDisplay>
-                        </td>
-                      </tr>
-                    )}
+															<IconDisplay Icon={IconHealth} iconProps={{ className: "small" }}>
+																<span>
+																	{formatNumber({
+																		value: lifeLeechValue,
+																	})}
+																</span>
+															</IconDisplay>
+														</Stack>
+													</IconDisplay>
+												</td>
+											</tr>
+										)}
 
-                    {burden > 0 && (
-                      <tr>
-                        <td>
-                          <IconDisplay Icon={IconBurden} iconProps={{ className: `small` }}>
-                            <span>On attack:</span>
-                          </IconDisplay>
-                        </td>
+										{burden > 0 && (
+											<tr>
+												<td>
+													<IconDisplay Icon={IconBurden} iconProps={{ className: "small" }}>
+														<span>On attack:</span>
+													</IconDisplay>
+												</td>
 
-                        <td>
-                          <IconDisplay Icon={IconStamina} iconProps={{ className: `small` }}>
-                            <span>-{formatNumber({ value: burden })}</span>
-                          </IconDisplay>
-                        </td>
-                      </tr>
-                    )}
-                  </DetailsTable>
-                </PopoverBody>
-              </Popover>
-            }
-            trigger={burden > 0 || damageValue !== weaponDamage ? POPOVER_TRIGGER : []}
-          >
-            <span>{formatNumber({ value: damageValue })}</span>
-          </OverlayTrigger>
+												<td>
+													<IconDisplay Icon={IconStamina} iconProps={{ className: "small" }}>
+														<span>
+															-
+															{formatNumber({ value: burden })}
+														</span>
+													</IconDisplay>
+												</td>
+											</tr>
+										)}
+									</DetailsTable>
+								</PopoverBody>
+							</Popover>
+						)}
+						trigger={burden > 0 || damageValue !== weaponDamage ? POPOVER_TRIGGER : []}
+					>
+						<span>{formatNumber({ value: damageValue })}</span>
+					</OverlayTrigger>
 
-          <DeltasDisplay delta="damage" />
-        </Stack>
-      </IconDisplay>
-    )
-  }
+					<DeltasDisplay delta="damage" />
+				</Stack>
+			</IconDisplay>
+		)
+	}
 }

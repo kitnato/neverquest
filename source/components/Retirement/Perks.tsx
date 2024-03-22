@@ -9,35 +9,35 @@ import { formatNumber } from "@neverquest/utilities/formatters"
 import { getPerkEffect } from "@neverquest/utilities/getters"
 
 export function Perks() {
-  const stageMaximumValue = useRecoilValue(stageMaximum)
+	const stageMaximumValue = useRecoilValue(stageMaximum)
 
-  return (
-    <Stack gap={3}>
-      <h6>Perks</h6>
+	return (
+		<Stack gap={3}>
+			<h6>Perks</h6>
 
-      <IconDisplay Icon={IconEssenceBonus} tooltip="Essence loot bonus">
-        <span>
-          +
-          {formatNumber({
-            format: `percentage`,
-            value: getPerkEffect({ perk: `essenceBonus`, stage: stageMaximumValue }),
-          })}
-        </span>
-      </IconDisplay>
+			<IconDisplay Icon={IconEssenceBonus} tooltip="Essence loot bonus">
+				<span>
+					+
+					{formatNumber({
+						format: "percentage",
+						value: getPerkEffect({ perk: "essenceBonus", stage: stageMaximumValue }),
+					})}
+				</span>
+			</IconDisplay>
 
-      <IconDisplay
-        Icon={IconMonsterReduction}
-        iconProps={{ isFlipped: true }}
-        tooltip="Monster reduction"
-      >
-        <span>
-          -
-          {formatNumber({
-            format: `percentage`,
-            value: getPerkEffect({ perk: `monsterReduction`, stage: stageMaximumValue }),
-          })}
-        </span>
-      </IconDisplay>
-    </Stack>
-  )
+			<IconDisplay
+				Icon={IconMonsterReduction}
+				iconProps={{ isFlipped: true }}
+				tooltip="Monster reduction"
+			>
+				<span>
+					-
+					{formatNumber({
+						format: "percentage",
+						value: getPerkEffect({ perk: "monsterReduction", stage: stageMaximumValue }),
+					})}
+				</span>
+			</IconDisplay>
+		</Stack>
+	)
 }

@@ -10,26 +10,26 @@ import { isMonsterAiling, isMonsterDead, monsterAilmentDuration } from "@neverqu
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function Stunned() {
-  const canReceiveAilmentStunned = useRecoilValue(canReceiveAilment(`stunned`))
-  const isMonsterDeadValue = useRecoilValue(isMonsterDead)
-  const isMonsterStunned = useRecoilValue(isMonsterAiling(`stunned`))
-  const mightValue = useRecoilValue(masteryStatistic(`might`))
-  const setMonsterStunDuration = useSetRecoilState(monsterAilmentDuration(`stunned`))
+	const canReceiveAilmentStunned = useRecoilValue(canReceiveAilment("stunned"))
+	const isMonsterDeadValue = useRecoilValue(isMonsterDead)
+	const isMonsterStunned = useRecoilValue(isMonsterAiling("stunned"))
+	const mightValue = useRecoilValue(masteryStatistic("might"))
+	const setMonsterStunDuration = useSetRecoilState(monsterAilmentDuration("stunned"))
 
-  useTimer({
-    setDuration: setMonsterStunDuration,
-    stop: !isMonsterStunned || isMonsterDeadValue,
-  })
+	useTimer({
+		setDuration: setMonsterStunDuration,
+		stop: !isMonsterStunned || isMonsterDeadValue,
+	})
 
-  if (canReceiveAilmentStunned) {
-    return (
-      <IconDisplay
-        className={getAnimationClass({ animation: `flipInX` })}
-        Icon={IconStunned}
-        tooltip="Stunned"
-      >
-        <AilmentMeter ailment="stunned" totalDuration={mightValue} />
-      </IconDisplay>
-    )
-  }
+	if (canReceiveAilmentStunned) {
+		return (
+			<IconDisplay
+				className={getAnimationClass({ animation: "flipInX" })}
+				Icon={IconStunned}
+				tooltip="Stunned"
+			>
+				<AilmentMeter ailment="stunned" totalDuration={mightValue} />
+			</IconDisplay>
+		)
+	}
 }

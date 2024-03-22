@@ -16,73 +16,77 @@ import { formatNumber } from "@neverquest/utilities/formatters"
 import { getAnimationClass, getGearIcon } from "@neverquest/utilities/getters"
 
 export function StunRating() {
-  const mightValue = useRecoilValue(masteryStatistic(`might`))
-  const stunChanceValue = useRecoilValue(stunChance)
-  const stunRatingValue = useRecoilValue(stunRating)
-  const weaponValue = useRecoilValue(weapon)
+	const mightValue = useRecoilValue(masteryStatistic("might"))
+	const stunChanceValue = useRecoilValue(stunChance)
+	const stunRatingValue = useRecoilValue(stunRating)
+	const weaponValue = useRecoilValue(weapon)
 
-  useDeltaText({
-    delta: `stunRating`,
-    state: stunRating,
-  })
+	useDeltaText({
+		delta: "stunRating",
+		state: stunRating,
+	})
 
-  if (stunRatingValue > 0) {
-    return (
-      <IconDisplay
-        className={getAnimationClass({ animation: `flipInX` })}
-        Icon={IconStunRating}
-        tooltip="Stun rating"
-      >
-        <Stack direction="horizontal" gap={1}>
-          <OverlayTrigger
-            overlay={
-              <Popover>
-                <PopoverBody>
-                  <DetailsTable>
-                    <tr>
-                      <td>
-                        <IconDisplay
-                          Icon={getGearIcon(weaponValue)}
-                          iconProps={{ className: `small` }}
-                        >
-                          <span>Chance:</span>
-                        </IconDisplay>
-                      </td>
+	if (stunRatingValue > 0) {
+		return (
+			<IconDisplay
+				className={getAnimationClass({ animation: "flipInX" })}
+				Icon={IconStunRating}
+				tooltip="Stun rating"
+			>
+				<Stack direction="horizontal" gap={1}>
+					<OverlayTrigger
+						overlay={(
+							<Popover>
+								<PopoverBody>
+									<DetailsTable>
+										<tr>
+											<td>
+												<IconDisplay
+													Icon={getGearIcon(weaponValue)}
+													iconProps={{ className: "small" }}
+												>
+													<span>Chance:</span>
+												</IconDisplay>
+											</td>
 
-                      <td>
-                        <IconDisplay Icon={IconStunChance} iconProps={{ className: `small` }}>
-                          <span>
-                            {formatNumber({
-                              format: `percentage`,
-                              value: stunChanceValue,
-                            })}
-                          </span>
-                        </IconDisplay>
-                      </td>
-                    </tr>
+											<td>
+												<IconDisplay Icon={IconStunChance} iconProps={{ className: "small" }}>
+													<span>
+														{formatNumber({
+															format: "percentage",
+															value: stunChanceValue,
+														})}
+													</span>
+												</IconDisplay>
+											</td>
+										</tr>
 
-                    <tr>
-                      <td>
-                        <IconDisplay Icon={IconMight} iconProps={{ className: `small` }}>
-                          <span>Might:</span>
-                        </IconDisplay>
-                      </td>
+										<tr>
+											<td>
+												<IconDisplay Icon={IconMight} iconProps={{ className: "small" }}>
+													<span>Might:</span>
+												</IconDisplay>
+											</td>
 
-                      <td>
-                        <span>{formatNumber({ format: `time`, value: mightValue })} duration</span>
-                      </td>
-                    </tr>
-                  </DetailsTable>
-                </PopoverBody>
-              </Popover>
-            }
-          >
-            <span>{formatNumber({ value: stunRatingValue })}</span>
-          </OverlayTrigger>
+											<td>
+												<span>
+													{formatNumber({ format: "time", value: mightValue })}
+													{" "}
+													duration
+												</span>
+											</td>
+										</tr>
+									</DetailsTable>
+								</PopoverBody>
+							</Popover>
+						)}
+					>
+						<span>{formatNumber({ value: stunRatingValue })}</span>
+					</OverlayTrigger>
 
-          <DeltasDisplay delta="stunRating" />
-        </Stack>
-      </IconDisplay>
-    )
-  }
+					<DeltasDisplay delta="stunRating" />
+				</Stack>
+			</IconDisplay>
+		)
+	}
 }

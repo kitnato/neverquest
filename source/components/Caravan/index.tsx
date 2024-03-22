@@ -9,34 +9,34 @@ import { CREW_MEMBER_TYPES } from "@neverquest/types/unions"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function Caravan() {
-  const isCaravanHiredValue = useRecoilValue(isCaravanHired)
-  const isShowingCrewMemberHiring = useRecoilValue(isShowing(`crewMemberHiring`))
+	const isCaravanHiredValue = useRecoilValue(isCaravanHired)
+	const isShowingCrewMemberHiring = useRecoilValue(isShowing("crewMemberHiring"))
 
-  const showHiring = isShowingCrewMemberHiring && !isCaravanHiredValue
+	const showHiring = isShowingCrewMemberHiring && !isCaravanHiredValue
 
-  return (
-    <Card className={getAnimationClass({ animation: `zoomIn`, speed: `fast` })}>
-      <CardBody>
-        <Stack gap={5}>
-          <Stack gap={3}>
-            {showHiring && <h6>Hired crew</h6>}
+	return (
+		<Card className={getAnimationClass({ animation: "zoomIn", speed: "fast" })}>
+			<CardBody>
+				<Stack gap={5}>
+					<Stack gap={3}>
+						{showHiring && <h6>Hired crew</h6>}
 
-            {CREW_MEMBER_TYPES.map((crewMember, index) => (
-              <HiredCrewMember crewMember={crewMember} key={index} />
-            ))}
-          </Stack>
+						{CREW_MEMBER_TYPES.map((crewMember, index) => (
+							<HiredCrewMember crewMember={crewMember} key={index} />
+						))}
+					</Stack>
 
-          {showHiring && (
-            <Stack gap={3}>
-              <h6>Crew for hire</h6>
+					{showHiring && (
+						<Stack gap={3}>
+							<h6>Crew for hire</h6>
 
-              {CREW_MEMBER_TYPES.map((crewMember, index) => (
-                <HirableCrewMember crewMember={crewMember} key={index} />
-              ))}
-            </Stack>
-          )}
-        </Stack>
-      </CardBody>
-    </Card>
-  )
+							{CREW_MEMBER_TYPES.map((crewMember, index) => (
+								<HirableCrewMember crewMember={crewMember} key={index} />
+							))}
+						</Stack>
+					)}
+				</Stack>
+			</CardBody>
+		</Card>
+	)
 }

@@ -11,31 +11,33 @@ import IconUnknown from "@neverquest/icons/unknown.svg?react"
 import { stageMaximum } from "@neverquest/state/encounter"
 
 export function Witch() {
-  const stageMaximumValue = useRecoilValue(stageMaximum)
+	const stageMaximumValue = useRecoilValue(stageMaximum)
 
-  return (
-    <Stack gap={5}>
-      <Stack gap={3}>
-        <h6>Purchase potions</h6>
+	return (
+		<Stack gap={5}>
+			<Stack gap={3}>
+				<h6>Purchase potions</h6>
 
-        {WITCH_POTIONS.map(({ consumable, requiredStage }) => (
-          <Fragment key={consumable}>
-            {stageMaximumValue >= requiredStage ? (
-              <PurchaseConsumable consumable={consumable} />
-            ) : (
-              <IconDisplay
-                description={<span>Missing samples.</span>}
-                Icon={IconUnknown}
-                tooltip="Consumable"
-              >
-                <span>{LABEL_UNKNOWN}</span>
-              </IconDisplay>
-            )}
-          </Fragment>
-        ))}
-      </Stack>
+				{WITCH_POTIONS.map(({ consumable, requiredStage }) => (
+					<Fragment key={consumable}>
+						{stageMaximumValue >= requiredStage
+							? (
+								<PurchaseConsumable consumable={consumable} />
+							)
+							: (
+								<IconDisplay
+									description={<span>Missing samples.</span>}
+									Icon={IconUnknown}
+									tooltip="Consumable"
+								>
+									<span>{LABEL_UNKNOWN}</span>
+								</IconDisplay>
+							)}
+					</Fragment>
+				))}
+			</Stack>
 
-      <AcquireWitchSkill />
-    </Stack>
-  )
+			<AcquireWitchSkill />
+		</Stack>
+	)
 }

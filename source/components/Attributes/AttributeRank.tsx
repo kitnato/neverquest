@@ -10,21 +10,21 @@ import type { Attribute } from "@neverquest/types/unions"
 import { formatNumber } from "@neverquest/utilities/formatters"
 
 export function AttributeRank({ attribute }: { attribute: Attribute }) {
-  const attributeRankState = attributeRank(attribute)
-  const attributeRankValue = useRecoilValue(attributeRankState)
+	const attributeRankState = attributeRank(attribute)
+	const attributeRankValue = useRecoilValue(attributeRankState)
 
-  useDeltaText({
-    delta: attribute,
-    state: attributeRankState,
-  })
+	useDeltaText({
+		delta: attribute,
+		state: attributeRankState,
+	})
 
-  return (
-    <Stack direction="horizontal" gap={1}>
-      <IconDisplay Icon={IconRank} tooltip="Rank">
-        <span>{formatNumber({ value: attributeRankValue })}</span>
-      </IconDisplay>
+	return (
+		<Stack direction="horizontal" gap={1}>
+			<IconDisplay Icon={IconRank} tooltip="Rank">
+				<span>{formatNumber({ value: attributeRankValue })}</span>
+			</IconDisplay>
 
-      <DeltasDisplay delta={attribute} />
-    </Stack>
-  )
+			<DeltasDisplay delta={attribute} />
+		</Stack>
+	)
 }

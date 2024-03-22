@@ -17,98 +17,98 @@ import { formatNumber } from "@neverquest/utilities/formatters"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function Stamina() {
-  const attributeStatisticEndurance = useRecoilValue(attributeStatistic(`endurance`))
-  const isShowingStamina = useRecoilValue(isShowing(`stamina`))
-  const questsBonusStamina = useRecoilValue(questsBonus(`staminaBonus`))
+	const attributeStatisticEndurance = useRecoilValue(attributeStatistic("endurance"))
+	const isShowingStamina = useRecoilValue(isShowing("stamina"))
+	const questsBonusStamina = useRecoilValue(questsBonus("staminaBonus"))
 
-  const { baseAmount } = RESERVES.stamina
-  const enduranceBonus = attributeStatisticEndurance - baseAmount
+	const { baseAmount } = RESERVES.stamina
+	const enduranceBonus = attributeStatisticEndurance - baseAmount
 
-  if (isShowingStamina) {
-    return (
-      <IconDisplay
-        className={getAnimationClass({ animation: `flipInX` })}
-        Icon={IconStamina}
-        tooltip="Stamina"
-      >
-        <Stack>
-          <OverlayTrigger
-            overlay={
-              <Popover>
-                <PopoverBody>
-                  <DetailsTable>
-                    <tr>
-                      <td>
-                        <span>Base:</span>
-                      </td>
+	if (isShowingStamina) {
+		return (
+			<IconDisplay
+				className={getAnimationClass({ animation: "flipInX" })}
+				Icon={IconStamina}
+				tooltip="Stamina"
+			>
+				<Stack>
+					<OverlayTrigger
+						overlay={(
+							<Popover>
+								<PopoverBody>
+									<DetailsTable>
+										<tr>
+											<td>
+												<span>Base:</span>
+											</td>
 
-                      <td>
-                        <IconDisplay Icon={IconStamina} iconProps={{ className: `small` }}>
-                          <span>{baseAmount}</span>
-                        </IconDisplay>
-                      </td>
-                    </tr>
+											<td>
+												<IconDisplay Icon={IconStamina} iconProps={{ className: "small" }}>
+													<span>{baseAmount}</span>
+												</IconDisplay>
+											</td>
+										</tr>
 
-                    {enduranceBonus > 0 && (
-                      <tr>
-                        <td>
-                          <IconDisplay Icon={IconEndurance} iconProps={{ className: `small` }}>
-                            <span>Endurance:</span>
-                          </IconDisplay>
-                        </td>
+										{enduranceBonus > 0 && (
+											<tr>
+												<td>
+													<IconDisplay Icon={IconEndurance} iconProps={{ className: "small" }}>
+														<span>Endurance:</span>
+													</IconDisplay>
+												</td>
 
-                        <td>
-                          <Stack direction="horizontal" gap={1}>
-                            <IconDisplay Icon={IconStamina} iconProps={{ className: `small` }}>
-                              <span>
-                                +
-                                {formatNumber({
-                                  value: enduranceBonus,
-                                })}
-                              </span>
-                            </IconDisplay>
-                          </Stack>
-                        </td>
-                      </tr>
-                    )}
+												<td>
+													<Stack direction="horizontal" gap={1}>
+														<IconDisplay Icon={IconStamina} iconProps={{ className: "small" }}>
+															<span>
+																+
+																{formatNumber({
+																	value: enduranceBonus,
+																})}
+															</span>
+														</IconDisplay>
+													</Stack>
+												</td>
+											</tr>
+										)}
 
-                    {questsBonusStamina > 0 && (
-                      <tr>
-                        <td>
-                          <IconDisplay Icon={IconQuests} iconProps={{ className: `small` }}>
-                            <span>Quest bonus:</span>
-                          </IconDisplay>
-                        </td>
+										{questsBonusStamina > 0 && (
+											<tr>
+												<td>
+													<IconDisplay Icon={IconQuests} iconProps={{ className: "small" }}>
+														<span>Quest bonus:</span>
+													</IconDisplay>
+												</td>
 
-                        <td>
-                          <IconDisplay Icon={IconStamina} iconProps={{ className: `small` }}>
-                            <span>
-                              +
-                              {formatNumber({
-                                decimals: 0,
-                                format: `percentage`,
-                                value: questsBonusStamina,
-                              })}
-                            </span>
-                          </IconDisplay>
-                        </td>
-                      </tr>
-                    )}
-                  </DetailsTable>
-                </PopoverBody>
-              </Popover>
-            }
-            placement="right"
-            trigger={enduranceBonus > 0 || questsBonusStamina > 0 ? POPOVER_TRIGGER : []}
-          >
-            <div className="w-100">
-              <ReserveMeter reserve="stamina" />
-            </div>
-          </OverlayTrigger>
+												<td>
+													<IconDisplay Icon={IconStamina} iconProps={{ className: "small" }}>
+														<span>
+															+
+															{formatNumber({
+																decimals: 0,
+																format: "percentage",
+																value: questsBonusStamina,
+															})}
+														</span>
+													</IconDisplay>
+												</td>
+											</tr>
+										)}
+									</DetailsTable>
+								</PopoverBody>
+							</Popover>
+						)}
+						placement="right"
+						trigger={enduranceBonus > 0 || questsBonusStamina > 0 ? POPOVER_TRIGGER : []}
+					>
+						<div className="w-100">
+							<ReserveMeter reserve="stamina" />
+						</div>
+					</OverlayTrigger>
 
-          <Regeneration reserve="stamina" />
-        </Stack>
-      </IconDisplay>
-    )
-  }
+					<Regeneration reserve="stamina" />
+				</Stack>
+			</IconDisplay>
+		)
+	}
 }

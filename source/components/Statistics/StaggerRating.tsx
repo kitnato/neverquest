@@ -16,70 +16,70 @@ import { formatNumber } from "@neverquest/utilities/formatters"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function StaggerRating() {
-  const stabilityValue = useRecoilValue(masteryStatistic(`stability`))
-  const { stagger } = useRecoilValue(shield)
-  const staggerRatingValue = useRecoilValue(staggerRating)
+	const stabilityValue = useRecoilValue(masteryStatistic("stability"))
+	const { stagger } = useRecoilValue(shield)
+	const staggerRatingValue = useRecoilValue(staggerRating)
 
-  useDeltaText({
-    delta: `staggerRating`,
-    state: staggerRating,
-  })
+	useDeltaText({
+		delta: "staggerRating",
+		state: staggerRating,
+	})
 
-  if (staggerRatingValue > 0) {
-    return (
-      <IconDisplay
-        className={getAnimationClass({ animation: `flipInX` })}
-        Icon={IconStaggerRating}
-        tooltip="Stagger rating"
-      >
-        <Stack direction="horizontal" gap={1}>
-          <OverlayTrigger
-            overlay={
-              <Popover>
-                <PopoverBody>
-                  <DetailsTable>
-                    <tr>
-                      <td>
-                        <IconDisplay Icon={IconShield} iconProps={{ className: `small` }}>
-                          <span>Chance:</span>
-                        </IconDisplay>
-                      </td>
+	if (staggerRatingValue > 0) {
+		return (
+			<IconDisplay
+				className={getAnimationClass({ animation: "flipInX" })}
+				Icon={IconStaggerRating}
+				tooltip="Stagger rating"
+			>
+				<Stack direction="horizontal" gap={1}>
+					<OverlayTrigger
+						overlay={(
+							<Popover>
+								<PopoverBody>
+									<DetailsTable>
+										<tr>
+											<td>
+												<IconDisplay Icon={IconShield} iconProps={{ className: "small" }}>
+													<span>Chance:</span>
+												</IconDisplay>
+											</td>
 
-                      <td>
-                        <IconDisplay Icon={IconStaggerChance} iconProps={{ className: `small` }}>
-                          <span>{formatNumber({ format: `percentage`, value: stagger })}</span>
-                        </IconDisplay>
-                      </td>
-                    </tr>
+											<td>
+												<IconDisplay Icon={IconStaggerChance} iconProps={{ className: "small" }}>
+													<span>{formatNumber({ format: "percentage", value: stagger })}</span>
+												</IconDisplay>
+											</td>
+										</tr>
 
-                    <tr>
-                      <td>
-                        <IconDisplay Icon={IconStability} iconProps={{ className: `small` }}>
-                          <span>Stability:</span>
-                        </IconDisplay>
-                      </td>
+										<tr>
+											<td>
+												<IconDisplay Icon={IconStability} iconProps={{ className: "small" }}>
+													<span>Stability:</span>
+												</IconDisplay>
+											</td>
 
-                      <td>
-                        <span>
-                          {formatNumber({
-                            format: `time`,
-                            value: stabilityValue,
-                          })}
+											<td>
+												<span>
+													{formatNumber({
+														format: "time",
+														value: stabilityValue,
+													})}
                           &nbsp;duration
-                        </span>
-                      </td>
-                    </tr>
-                  </DetailsTable>
-                </PopoverBody>
-              </Popover>
-            }
-          >
-            <span>{formatNumber({ value: staggerRatingValue })}</span>
-          </OverlayTrigger>
+												</span>
+											</td>
+										</tr>
+									</DetailsTable>
+								</PopoverBody>
+							</Popover>
+						)}
+					>
+						<span>{formatNumber({ value: staggerRatingValue })}</span>
+					</OverlayTrigger>
 
-          <DeltasDisplay delta="staggerRating" />
-        </Stack>
-      </IconDisplay>
-    )
-  }
+					<DeltasDisplay delta="staggerRating" />
+				</Stack>
+			</IconDisplay>
+		)
+	}
 }

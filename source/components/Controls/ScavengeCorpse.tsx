@@ -13,61 +13,64 @@ import { formatNumber } from "@neverquest/utilities/formatters"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function ScavengeCorpse() {
-  const corpseValue = useRecoilValue(corpse)
-  const hasFlatlinedValue = useRecoilValue(hasFlatlined)
-  const isAttackingValue = useRecoilValue(isAttacking)
-  const locationValue = useRecoilValue(location)
-  const stageValue = useRecoilValue(stage)
-  const resetCorpse = useResetRecoilState(corpse)
+	const corpseValue = useRecoilValue(corpse)
+	const hasFlatlinedValue = useRecoilValue(hasFlatlined)
+	const isAttackingValue = useRecoilValue(isAttacking)
+	const locationValue = useRecoilValue(location)
+	const stageValue = useRecoilValue(stage)
+	const resetCorpse = useResetRecoilState(corpse)
 
-  const progressQuest = useProgressQuest()
-  const transactEssence = useTransactEssence()
+	const progressQuest = useProgressQuest()
+	const transactEssence = useTransactEssence()
 
-  if (corpseValue !== undefined && !hasFlatlinedValue) {
-    const { essence, stage } = corpseValue
+	if (corpseValue !== undefined && !hasFlatlinedValue) {
+		const { essence, stage } = corpseValue
 
-    if (locationValue === `wilderness` && stage === stageValue) {
-      return (
-        <OverlayTrigger
-          overlay={
-            <Popover>
-              <PopoverHeader className="text-center">
-                <span>Scavenge corpse</span>
-              </PopoverHeader>
+		if (locationValue === "wilderness" && stage === stageValue) {
+			return (
+				<OverlayTrigger
+					overlay={(
+						<Popover>
+							<PopoverHeader className="text-center">
+								<span>Scavenge corpse</span>
+							</PopoverHeader>
 
-              <PopoverBody>
-                <IconDisplay
-                  className="justify-content-center"
-                  Icon={IconEssence}
-                  iconProps={{ className: `small` }}
-                >
-                  <span>+{formatNumber({ value: essence })}</span>
-                </IconDisplay>
-              </PopoverBody>
-            </Popover>
-          }
-        >
-          <div className={getAnimationClass({ animation: `bounceIn` })}>
-            <Button
-              className={
-                isAttackingValue
-                  ? undefined
-                  : getAnimationClass({ animation: `pulse`, isInfinite: true })
-              }
-              disabled={isAttackingValue}
-              onClick={() => {
-                transactEssence(essence)
-                progressQuest({ quest: `scavengingCorpse` })
+							<PopoverBody>
+								<IconDisplay
+									className="justify-content-center"
+									Icon={IconEssence}
+									iconProps={{ className: "small" }}
+								>
+									<span>
+										+
+										{formatNumber({ value: essence })}
+									</span>
+								</IconDisplay>
+							</PopoverBody>
+						</Popover>
+					)}
+				>
+					<div className={getAnimationClass({ animation: "bounceIn" })}>
+						<Button
+							className={
+								isAttackingValue
+									? undefined
+									: getAnimationClass({ animation: "pulse", isInfinite: true })
+							}
+							disabled={isAttackingValue}
+							onClick={() => {
+								transactEssence(essence)
+								progressQuest({ quest: "scavengingCorpse" })
 
-                resetCorpse()
-              }}
-              variant="outline-dark"
-            >
-              <IconImage Icon={IconCorpse} />
-            </Button>
-          </div>
-        </OverlayTrigger>
-      )
-    }
-  }
+								resetCorpse()
+							}}
+							variant="outline-dark"
+						>
+							<IconImage Icon={IconCorpse} />
+						</Button>
+					</div>
+				</OverlayTrigger>
+			)
+		}
+	}
 }

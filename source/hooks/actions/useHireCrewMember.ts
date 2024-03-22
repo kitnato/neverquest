@@ -9,37 +9,36 @@ import { CREW_MEMBER_TYPES, type CrewMember } from "@neverquest/types/unions"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
 
 export function useHireCrewMember() {
-  const progressQuest = useProgressQuest()
-  const transactEssence = useTransactEssence()
+	const progressQuest = useProgressQuest()
+	const transactEssence = useTransactEssence()
 
-  return useRecoilCallback(
-    ({ set, snapshot }) =>
-      ({ crewMember, price }: { crewMember: CrewMember; price: number }) => {
-        const get = getSnapshotGetter(snapshot)
+	return useRecoilCallback(
+		({ set, snapshot }) =>
+			({ crewMember, price }: { crewMember: CrewMember, price: number }) => {
+				const get = getSnapshotGetter(snapshot)
 
-        const { shows } = CREW[crewMember]
+				const { shows } = CREW[crewMember]
 
-        set(isHired(crewMember), true)
-        transactEssence(-price)
+				set(isHired(crewMember), true)
+				transactEssence(-price)
 
-        if (shows !== undefined) {
-          for (const show of shows) {
-            set(isShowing(show), true)
-          }
-        }
+				if (shows !== undefined) {
+					for (const show of shows) {
+						set(isShowing(show), true)
+					}
+				}
 
-        progressQuest({ quest: `hiring` })
-        progressQuest({ quest: `hiringAll` })
+				progressQuest({ quest: "hiring" })
+				progressQuest({ quest: "hiringAll" })
 
-        if (
-          crewMember === `blacksmith` &&
-          CREW_MEMBER_TYPES.filter(
-            (crewMemberType) => crewMemberType !== crewMember && crewMemberType !== `merchant`,
-          ).every((hirableCrewMember) => !get(isHired(hirableCrewMember)))
-        ) {
-          progressQuest({ quest: `hiringBlacksmithFirst` })
-        }
-      },
-    [progressQuest],
-  )
+				if (
+					crewMember === "blacksmith" && CREW_MEMBER_TYPES
+						.filter(crewMemberType => crewMemberType !== crewMember && crewMemberType !== "merchant")
+						.every(hirableCrewMember => !get(isHired(hirableCrewMember)))
+				) {
+					progressQuest({ quest: "hiringBlacksmithFirst" })
+				}
+			},
+		[progressQuest],
+	)
 }

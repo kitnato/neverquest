@@ -10,24 +10,24 @@ import { formatNumber } from "@neverquest/utilities/formatters"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function Ammunition() {
-  const ammunitionValue = useRecoilValue(ammunition)
+	const ammunitionValue = useRecoilValue(ammunition)
 
-  useDeltaText({
-    delta: `ammunition`,
-    state: ammunition,
-  })
+	useDeltaText({
+		delta: "ammunition",
+		state: ammunition,
+	})
 
-  return (
-    <IconDisplay
-      className={getAnimationClass({ animation: `flipInX` })}
-      Icon={IconAmmunition}
-      tooltip="Ammunition"
-    >
-      <Stack direction="horizontal" gap={1}>
-        <span>{formatNumber({ value: ammunitionValue })}</span>
+	return (
+		<IconDisplay
+			className={getAnimationClass({ animation: "flipInX" })}
+			Icon={IconAmmunition}
+			tooltip="Ammunition"
+		>
+			<Stack direction="horizontal" gap={1}>
+				<span>{formatNumber({ value: ammunitionValue })}</span>
 
-        <DeltasDisplay delta="ammunition" />
-      </Stack>
-    </IconDisplay>
-  )
+				<DeltasDisplay delta="ammunition" />
+			</Stack>
+		</IconDisplay>
+	)
 }

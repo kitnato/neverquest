@@ -11,38 +11,38 @@ import { thorns } from "@neverquest/state/statistics"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function Thorns() {
-  const thornsValue = useRecoilValue(thorns)
+	const thornsValue = useRecoilValue(thorns)
 
-  useDeltaText({
-    delta: `thorns`,
-    state: thorns,
-  })
+	useDeltaText({
+		delta: "thorns",
+		state: thorns,
+	})
 
-  if (thornsValue > 0) {
-    return (
-      <IconDisplay
-        className={getAnimationClass({ animation: `flipInX` })}
-        Icon={IconThorns}
-        tooltip="Thorns"
-      >
-        <Stack direction="horizontal" gap={1}>
-          <OverlayTrigger
-            overlay={
-              <Popover>
-                <PopoverBody>
-                  <DetailsTable>
-                    <ElementalDetails slot="armor" />
-                  </DetailsTable>
-                </PopoverBody>
-              </Popover>
-            }
-          >
-            <span>{thornsValue}</span>
-          </OverlayTrigger>
+	if (thornsValue > 0) {
+		return (
+			<IconDisplay
+				className={getAnimationClass({ animation: "flipInX" })}
+				Icon={IconThorns}
+				tooltip="Thorns"
+			>
+				<Stack direction="horizontal" gap={1}>
+					<OverlayTrigger
+						overlay={(
+							<Popover>
+								<PopoverBody>
+									<DetailsTable>
+										<ElementalDetails slot="armor" />
+									</DetailsTable>
+								</PopoverBody>
+							</Popover>
+						)}
+					>
+						<span>{thornsValue}</span>
+					</OverlayTrigger>
 
-          <DeltasDisplay delta="thorns" />
-        </Stack>
-      </IconDisplay>
-    )
-  }
+					<DeltasDisplay delta="thorns" />
+				</Stack>
+			</IconDisplay>
+		)
+	}
 }

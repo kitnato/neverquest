@@ -37,104 +37,104 @@ import { formatNumber } from "@neverquest/utilities/formatters"
 export const BRAWLER_DAMAGE_BONUS = 0.25
 
 export const BRUISER = {
-  damage: 0.35,
-  stun: { increment: 0.03, maximum: 0.9 },
+	damage: 0.35,
+	stun: { increment: 0.03, maximum: 0.9 },
 }
 
 export const INOCULATED_DEFLECTION_BASE = 0.33
 
 export const NUDIST = {
-  dodgeBonus: 0.5,
-  healAmount: 0.1,
+	dodgeBonus: 0.5,
+	healAmount: 0.1,
 }
 
 export const TANK_PROTECTION_BONUS = 0.3
 
 export const TRAITS: Record<
-  Trait,
-  Description & {
-    Icon: SVGIcon;
-    requiredSkill?: Skill;
-  }
+	Trait,
+	Description & {
+		Icon: SVGIcon
+		requiredSkill?: Skill
+	}
 > = {
-  brawler: {
-    description: `Being # unshielded increases # weapon damage by ${formatNumber({
-      decimals: 0,
-      format: `percentage`,
-      value: BRAWLER_DAMAGE_BONUS,
-    })}.`,
-    descriptionIcons: [IconShieldNone, IconWeaponDamage],
-    Icon: IconBrawler,
-  },
-  bruiser: {
-    description: `While # unarmed, # total damage is increased by ${formatNumber({
-      decimals: 0,
-      format: `percentage`,
-      value: BRUISER.damage,
-    })} of current # stamina and # stun chance is ${formatNumber({
-      decimals: 0,
-      format: `percentage`,
-      value: BRUISER.stun.increment,
-    })} per # strength attribute rank.`,
-    descriptionIcons: [IconWeaponNone, IconDamage, IconStamina, IconStunChance, IconStrength],
-    Icon: IconBruiser,
-  },
-  colossus: {
-    description: `# Two-handed melee weapons can be wielded alongside a # shield.`,
-    descriptionIcons: [IconTwoHanded, IconShield],
-    Icon: IconColossus,
-  },
-  executioner: {
-    description: `# Critical strikes with a # two-handed weapon always perform an # execution.`,
-    descriptionIcons: [IconCriticalRating, IconTwoHanded, IconExecution],
-    Icon: IconExecutioner,
-  },
-  inoculated: {
-    description: `Base # deflection chance is ${formatNumber({
-      decimals: 0,
-      format: `percentage`,
-      value: INOCULATED_DEFLECTION_BASE,
-    })}.`,
-    descriptionIcons: [IconDeflectionChance],
-    Icon: IconInoculated,
-    requiredSkill: `impermeability`,
-  },
-  nudist: {
-    description: `While # unarmored, # dodge chance is increased by ${formatNumber({
-      decimals: 0,
-      format: `percentage`,
-      value: NUDIST.dodgeBonus,
-    })}. When dodging, ${formatNumber({
-      decimals: 0,
-      format: `percentage`,
-      value: NUDIST.healAmount,
-    })} of maximum # health is restored.`,
-    descriptionIcons: [IconArmorNone, IconDodgeChance, IconHealth],
-    Icon: IconNudist,
-  },
-  sharpshooter: {
-    description:
-      `While at a # distance, all attacks with a # ranged weapon are # critical strikes.`,
-    descriptionIcons: [IconDistance, IconRanged, IconCriticalRating],
-    Icon: IconSharpshooter,
-  },
-  shredder: {
-    description: `# Bleed damage is inflicted all at once.`,
-    descriptionIcons: [IconBleeding],
-    Icon: IconShredder,
-  },
-  stalwart: {
-    description: `Wearing # armor no longer incurs its # burden.`,
-    descriptionIcons: [IconArmor, IconBurden],
-    Icon: IconStalwart,
-  },
-  tank: {
-    description: `With a # shield equipped, # protection is increased by ${formatNumber({
-      decimals: 0,
-      format: `percentage`,
-      value: TANK_PROTECTION_BONUS,
-    })}.`,
-    descriptionIcons: [IconShield, IconProtection],
-    Icon: IconTank,
-  },
+	brawler: {
+		description: `Being # unshielded increases # weapon damage by ${formatNumber({
+			decimals: 0,
+			format: "percentage",
+			value: BRAWLER_DAMAGE_BONUS,
+		})}.`,
+		descriptionIcons: [IconShieldNone, IconWeaponDamage],
+		Icon: IconBrawler,
+	},
+	bruiser: {
+		description: `While # unarmed, # total damage is increased by ${formatNumber({
+			decimals: 0,
+			format: "percentage",
+			value: BRUISER.damage,
+		})} of current # stamina and # stun chance is ${formatNumber({
+			decimals: 0,
+			format: "percentage",
+			value: BRUISER.stun.increment,
+		})} per # strength attribute rank.`,
+		descriptionIcons: [IconWeaponNone, IconDamage, IconStamina, IconStunChance, IconStrength],
+		Icon: IconBruiser,
+	},
+	colossus: {
+		description: "# Two-handed melee weapons can be wielded alongside a # shield.",
+		descriptionIcons: [IconTwoHanded, IconShield],
+		Icon: IconColossus,
+	},
+	executioner: {
+		description: "# Critical strikes with a # two-handed weapon always perform an # execution.",
+		descriptionIcons: [IconCriticalRating, IconTwoHanded, IconExecution],
+		Icon: IconExecutioner,
+	},
+	inoculated: {
+		description: `Base # deflection chance is ${formatNumber({
+			decimals: 0,
+			format: "percentage",
+			value: INOCULATED_DEFLECTION_BASE,
+		})}.`,
+		descriptionIcons: [IconDeflectionChance],
+		Icon: IconInoculated,
+		requiredSkill: "impermeability",
+	},
+	nudist: {
+		description: `While # unarmored, # dodge chance is increased by ${formatNumber({
+			decimals: 0,
+			format: "percentage",
+			value: NUDIST.dodgeBonus,
+		})}. When dodging, ${formatNumber({
+			decimals: 0,
+			format: "percentage",
+			value: NUDIST.healAmount,
+		})} of maximum # health is restored.`,
+		descriptionIcons: [IconArmorNone, IconDodgeChance, IconHealth],
+		Icon: IconNudist,
+	},
+	sharpshooter: {
+		description:
+			"While at a # distance, all attacks with a # ranged weapon are # critical strikes.",
+		descriptionIcons: [IconDistance, IconRanged, IconCriticalRating],
+		Icon: IconSharpshooter,
+	},
+	shredder: {
+		description: "# Bleed damage is inflicted all at once.",
+		descriptionIcons: [IconBleeding],
+		Icon: IconShredder,
+	},
+	stalwart: {
+		description: "Wearing # armor no longer incurs its # burden.",
+		descriptionIcons: [IconArmor, IconBurden],
+		Icon: IconStalwart,
+	},
+	tank: {
+		description: `With a # shield equipped, # protection is increased by ${formatNumber({
+			decimals: 0,
+			format: "percentage",
+			value: TANK_PROTECTION_BONUS,
+		})}.`,
+		descriptionIcons: [IconShield, IconProtection],
+		Icon: IconTank,
+	},
 }

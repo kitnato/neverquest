@@ -13,40 +13,41 @@ import { rage } from "@neverquest/state/monster"
 import { formatNumber } from "@neverquest/utilities/formatters"
 
 export function Rage() {
-  const stageValue = useRecoilValue(stage)
+	const stageValue = useRecoilValue(stage)
 
-  const { effect, requiredStage } = RAGE
+	const { effect, requiredStage } = RAGE
 
-  useDeltaText({
-    delta: `rage`,
-    ignoreZero: true,
-    state: rage,
-  })
+	useDeltaText({
+		delta: "rage",
+		ignoreZero: true,
+		state: rage,
+	})
 
-  if (stageValue >= requiredStage) {
-    return (
-      <IconDisplay Icon={IconRage} tooltip="Rage">
-        <OverlayTrigger
-          overlay={
-            <Popover>
-              <PopoverBody>
-                <span>Once enraged,&nbsp;</span>
+	if (stageValue >= requiredStage) {
+		return (
+			<IconDisplay Icon={IconRage} tooltip="Rage">
+				<OverlayTrigger
+					overlay={(
+						<Popover>
+							<PopoverBody>
+								<span>Once enraged,&nbsp;</span>
 
-                <IconImage className="small" Icon={IconMonsterAttackRate} />
+								<IconImage className="small" Icon={IconMonsterAttackRate} />
 
-                <span>
+								<span>
                   &nbsp;attack rate is hastened by&nbsp;
-                  {formatNumber({ decimals: 0, format: `percentage`, value: effect })}.
-                </span>
-              </PopoverBody>
-            </Popover>
-          }
-        >
-          <div className="w-100">
-            <RageMeter />
-          </div>
-        </OverlayTrigger>
-      </IconDisplay>
-    )
-  }
+									{formatNumber({ decimals: 0, format: "percentage", value: effect })}
+									.
+								</span>
+							</PopoverBody>
+						</Popover>
+					)}
+				>
+					<div className="w-100">
+						<RageMeter />
+					</div>
+				</OverlayTrigger>
+			</IconDisplay>
+		)
+	}
 }

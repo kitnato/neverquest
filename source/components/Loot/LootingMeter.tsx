@@ -7,17 +7,17 @@ import { lootingDuration } from "@neverquest/state/character"
 import { formatNumber } from "@neverquest/utilities/formatters"
 
 export function LootingMeter() {
-  const lootingDurationValue = useRecoilValue(lootingDuration)
+	const lootingDurationValue = useRecoilValue(lootingDuration)
 
-  const { base } = LOOTING_RATE
+	const { base } = LOOTING_RATE
 
-  return (
-    <LabelledProgressBar
-      disableTransitions
-      value={((base - lootingDurationValue) / base) * PERCENTAGE_POINTS}
-      variant="secondary"
-    >
-      <span>{formatNumber({ format: `time`, value: lootingDurationValue })}</span>
-    </LabelledProgressBar>
-  )
+	return (
+		<LabelledProgressBar
+			disableTransitions
+			value={((base - lootingDurationValue) / base) * PERCENTAGE_POINTS}
+			variant="secondary"
+		>
+			<span>{formatNumber({ format: "time", value: lootingDurationValue })}</span>
+		</LabelledProgressBar>
+	)
 }

@@ -14,64 +14,64 @@ import { formatNumber } from "@neverquest/utilities/formatters"
 import { getAnimationClass, getPerkEffect } from "@neverquest/utilities/getters"
 
 export function Essence() {
-  const essenceValue = useRecoilValue(essence)
-  const isShowingEssence = useRecoilValue(isShowing(`essence`))
-  const retirementStageValue = useRecoilValue(retirementStage)
+	const essenceValue = useRecoilValue(essence)
+	const isShowingEssence = useRecoilValue(isShowing("essence"))
+	const retirementStageValue = useRecoilValue(retirementStage)
 
-  const essenceBonus = getPerkEffect({ perk: `essenceBonus`, stage: retirementStageValue })
+	const essenceBonus = getPerkEffect({ perk: "essenceBonus", stage: retirementStageValue })
 
-  useDeltaText({
-    delta: `essence`,
-    state: essence,
-  })
+	useDeltaText({
+		delta: "essence",
+		state: essence,
+	})
 
-  return (
-    <Card className="border-0 px-2 py-1 overlay-modal-backdrop">
-      <Stack
-        className={
-          isShowingEssence ? `visible ${getAnimationClass({ animation: `flipInX` })}` : `invisible`
-        }
-        direction="horizontal"
-        gap={1}
-      >
-        <IconDisplay
-          Icon={IconEssence}
-          iconProps={{ overlayPlacement: `bottom` }}
-          tooltip="Essence"
-        >
-          <OverlayTrigger
-            overlay={
-              <Popover>
-                <PopoverHeader className="text-center">Essence loot bonus</PopoverHeader>
+	return (
+		<Card className="border-0 px-2 py-1 overlay-modal-backdrop">
+			<Stack
+				className={
+					isShowingEssence ? `visible ${getAnimationClass({ animation: "flipInX" })}` : "invisible"
+				}
+				direction="horizontal"
+				gap={1}
+			>
+				<IconDisplay
+					Icon={IconEssence}
+					iconProps={{ overlayPlacement: "bottom" }}
+					tooltip="Essence"
+				>
+					<OverlayTrigger
+						overlay={(
+							<Popover>
+								<PopoverHeader className="text-center">Essence loot bonus</PopoverHeader>
 
-                <PopoverBody>
-                  <Stack className="justify-content-center" direction="horizontal" gap={1}>
-                    <IconDisplay
-                      Icon={IconEssenceBonus}
-                      iconProps={{ className: `small` }}
-                      tooltip="Essence bonus"
-                    >
-                      <span>
-                        +
-                        {formatNumber({
-                          format: `percentage`,
-                          value: essenceBonus,
-                        })}
-                      </span>
-                    </IconDisplay>
-                  </Stack>
-                </PopoverBody>
-              </Popover>
-            }
-            placement="bottom"
-            trigger={essenceBonus > 0 ? POPOVER_TRIGGER : []}
-          >
-            <span>{formatNumber({ value: essenceValue })}</span>
-          </OverlayTrigger>
-        </IconDisplay>
+								<PopoverBody>
+									<Stack className="justify-content-center" direction="horizontal" gap={1}>
+										<IconDisplay
+											Icon={IconEssenceBonus}
+											iconProps={{ className: "small" }}
+											tooltip="Essence bonus"
+										>
+											<span>
+												+
+												{formatNumber({
+													format: "percentage",
+													value: essenceBonus,
+												})}
+											</span>
+										</IconDisplay>
+									</Stack>
+								</PopoverBody>
+							</Popover>
+						)}
+						placement="bottom"
+						trigger={essenceBonus > 0 ? POPOVER_TRIGGER : []}
+					>
+						<span>{formatNumber({ value: essenceValue })}</span>
+					</OverlayTrigger>
+				</IconDisplay>
 
-        <DeltasDisplay delta="essence" />
-      </Stack>
-    </Card>
-  )
+				<DeltasDisplay delta="essence" />
+			</Stack>
+		</Card>
+	)
 }

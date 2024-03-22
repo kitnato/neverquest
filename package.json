@@ -1,97 +1,97 @@
 {
-  "name": "neverquest",
-  "version": "1.0.0",
-  "description": "An irreverent UI-based incremental Souls-like.",
-  "author": "kitnato",
-  "license": "cc-by-sa-4.0",
-  "homepage": "https://kitnato.github.io/neverquest",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/kitnato/neverquest.git"
-  },
-  "private": true,
-  "type": "module",
-  "bugs": {
-    "url": "https://github.com/kitnato/neverquest/issues"
-  },
-  "keywords": [
-    "absurd",
-    "action",
-    "arpg",
-    "browser",
-    "clicker",
-    "game",
-    "incremental",
-    "rogue-like",
-    "rogue-lite",
-    "role-playing",
-    "rpg",
-    "souls-like"
-  ],
-  "dependencies": {
-    "@kitnato/locran": "0.12.1",
-    "animate.css": "4.1.1",
-    "bootstrap": "5.3.3",
-    "localstorage-slim": "2.7.0",
-    "nanoid": "5.0.6",
-    "react": "18.2.0",
-    "react-bootstrap": "2.10.1",
-    "react-circular-progressbar": "2.1.0",
-    "react-dom": "18.2.0",
-    "react-markdown": "9.0.1",
-    "recoil": "0.7.7",
-    "sass": "1.72.0",
-    "worker-timers": "7.1.4"
-  },
-  "devDependencies": {
-    "@kitnato/eslint-config-succinct": "3.0.0",
-    "@stylistic/stylelint-config": "1.0.1",
-    "@stylistic/stylelint-plugin": "2.1.0",
-    "@types/node": "20.11.28",
-    "@types/react": "18.2.66",
-    "@types/react-dom": "18.2.22",
-    "@vitejs/plugin-react": "4.2.1",
-    "eslint": "8.57.0",
-    "husky": "9.0.11",
-    "lint-staged": "15.2.2",
-    "stylelint": "16.2.1",
-    "stylelint-config-standard-scss": "13.0.0",
-    "typescript": "5.4.2",
-    "vite": "5.1.6",
-    "vite-plugin-checker": "0.6.4",
-    "vite-plugin-pwa": "0.19.4",
-    "vite-plugin-svgr": "4.2.0",
-    "vite-tsconfig-paths": "4.3.2"
-  },
-  "lint-staged": {
-    "*.{json,ts,tsx}": [
-      "npm run lint-code"
-    ],
-    "*.scss": [
-      "npm run lint-styles"
-    ]
-  },
-  "scripts": {
-    "build": "vite build",
-    "lint-code": "eslint --fix --ext .ts,.tsx .",
-    "lint-styles": "stylelint \"**/*.scss\"",
-    "prepare": "husky",
-    "start": "vite"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "engines": {
-    "node": ">=18",
-    "npm": ">=8"
-  }
+	"name": "neverquest",
+	"version": "1.0.0",
+	"description": "An irreverent UI-based incremental Souls-like.",
+	"author": "kitnato",
+	"license": "cc-by-sa-4.0",
+	"homepage": "https://kitnato.github.io/neverquest",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/kitnato/neverquest.git"
+	},
+	"private": true,
+	"type": "module",
+	"bugs": {
+		"url": "https://github.com/kitnato/neverquest/issues"
+	},
+	"keywords": [
+		"absurd",
+		"action",
+		"arpg",
+		"browser",
+		"clicker",
+		"game",
+		"incremental",
+		"rogue-like",
+		"rogue-lite",
+		"role-playing",
+		"rpg",
+		"souls-like"
+	],
+	"dependencies": {
+		"@kitnato/locran": "0.12.1",
+		"animate.css": "4.1.1",
+		"bootstrap": "5.3.3",
+		"localstorage-slim": "2.7.0",
+		"nanoid": "5.0.6",
+		"react": "18.2.0",
+		"react-bootstrap": "2.10.2",
+		"react-circular-progressbar": "2.1.0",
+		"react-dom": "18.2.0",
+		"react-markdown": "9.0.1",
+		"recoil": "0.7.7",
+		"sass": "1.72.0",
+		"worker-timers": "7.1.4"
+	},
+	"devDependencies": {
+		"@kitnato/eslint-config-succinct": "3.2.0",
+		"@stylistic/stylelint-config": "1.0.1",
+		"@stylistic/stylelint-plugin": "2.1.0",
+		"@types/node": "20.11.30",
+		"@types/react": "18.2.67",
+		"@types/react-dom": "18.2.22",
+		"@vitejs/plugin-react": "4.2.1",
+		"eslint": "8.57.0",
+		"husky": "9.0.11",
+		"lint-staged": "15.2.2",
+		"stylelint": "16.2.1",
+		"stylelint-config-standard-scss": "13.0.0",
+		"typescript": "5.4.3",
+		"vite": "5.2.2",
+		"vite-plugin-checker": "0.6.4",
+		"vite-plugin-pwa": "0.19.6",
+		"vite-plugin-svgr": "4.2.0",
+		"vite-tsconfig-paths": "4.3.2"
+	},
+	"lint-staged": {
+		"*.{ts,tsx}": [
+			"npm run lint-code"
+		],
+		"*.scss": [
+			"npm run lint-styles"
+		]
+	},
+	"scripts": {
+		"build": "vite build",
+		"lint-code": "eslint --fix --ext .ts,.tsx .",
+		"lint-styles": "stylelint \"**/*.scss\"",
+		"prepare": "husky",
+		"start": "vite"
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	},
+	"engines": {
+		"node": ">=18",
+		"npm": ">=8"
+	}
 }

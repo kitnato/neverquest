@@ -10,44 +10,44 @@ import type { Ailment } from "@neverquest/types/unions"
 import { formatNumber } from "@neverquest/utilities/formatters"
 
 export function AilmentMeter({
-  ailment,
-  totalDuration,
+	ailment,
+	totalDuration,
 }: {
-  ailment: Ailment;
-  totalDuration: number;
+	ailment: Ailment
+	totalDuration: number
 }) {
-  const isMonsterAilingValue = useRecoilValue(isMonsterAiling(ailment))
-  const monsterAilmentDurationValue = useRecoilValue(monsterAilmentDuration(ailment))
+	const isMonsterAilingValue = useRecoilValue(isMonsterAiling(ailment))
+	const monsterAilmentDurationValue = useRecoilValue(monsterAilmentDuration(ailment))
 
-  const { description, descriptionIcons } = AILMENT_DESCRIPTION[ailment]
+	const { description, descriptionIcons } = AILMENT_DESCRIPTION[ailment]
 
-  return (
-    <OverlayTrigger
-      overlay={
-        <Popover>
-          <PopoverBody className="text-center">
-            <DescriptionDisplay description={description} descriptionIcons={descriptionIcons} />
-          </PopoverBody>
-        </Popover>
-      }
-    >
-      <div className="w-100">
-        <LabelledProgressBar
-          disableTransitions
-          value={
-            isMonsterAilingValue
-              ? (monsterAilmentDurationValue / totalDuration) * PERCENTAGE_POINTS
-              : 0
-          }
-          variant="secondary"
-        >
-          <span>
-            {isMonsterAilingValue
-              ? formatNumber({ format: `time`, value: monsterAilmentDurationValue })
-              : LABEL_EMPTY}
-          </span>
-        </LabelledProgressBar>
-      </div>
-    </OverlayTrigger>
-  )
+	return (
+		<OverlayTrigger
+			overlay={(
+				<Popover>
+					<PopoverBody className="text-center">
+						<DescriptionDisplay description={description} descriptionIcons={descriptionIcons} />
+					</PopoverBody>
+				</Popover>
+			)}
+		>
+			<div className="w-100">
+				<LabelledProgressBar
+					disableTransitions
+					value={
+						isMonsterAilingValue
+							? (monsterAilmentDurationValue / totalDuration) * PERCENTAGE_POINTS
+							: 0
+					}
+					variant="secondary"
+				>
+					<span>
+						{isMonsterAilingValue
+							? formatNumber({ format: "time", value: monsterAilmentDurationValue })
+							: LABEL_EMPTY}
+					</span>
+				</LabelledProgressBar>
+			</div>
+		</OverlayTrigger>
+	)
 }

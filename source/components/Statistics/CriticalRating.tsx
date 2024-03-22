@@ -19,107 +19,110 @@ import { formatNumber } from "@neverquest/utilities/formatters"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function CriticalRating() {
-  const attributeStatisticDexterity = useRecoilValue(attributeStatistic(`dexterity`))
-  const attributeStatisticPerception = useRecoilValue(attributeStatistic(`perception`))
-  const criticalChanceValue = useRecoilValue(criticalChance)
-  const criticalRatingValue = useRecoilValue(criticalRating)
-  const criticalStrikeValue = useRecoilValue(criticalStrike)
+	const attributeStatisticDexterity = useRecoilValue(attributeStatistic("dexterity"))
+	const attributeStatisticPerception = useRecoilValue(attributeStatistic("perception"))
+	const criticalChanceValue = useRecoilValue(criticalChance)
+	const criticalRatingValue = useRecoilValue(criticalRating)
+	const criticalStrikeValue = useRecoilValue(criticalStrike)
 
-  useDeltaText({
-    delta: `criticalRating`,
-    state: criticalRating,
-  })
+	useDeltaText({
+		delta: "criticalRating",
+		state: criticalRating,
+	})
 
-  if (criticalRatingValue > 0) {
-    return (
-      <IconDisplay
-        className={getAnimationClass({ animation: `flipInX` })}
-        Icon={IconCriticalRating}
-        tooltip="Critical rating"
-      >
-        <Stack direction="horizontal" gap={1}>
-          <OverlayTrigger
-            overlay={
-              <Popover>
-                <PopoverBody>
-                  <DetailsTable>
-                    <tr>
-                      <td>
-                        <IconDisplay Icon={IconDexterity} iconProps={{ className: `small` }}>
-                          <span>Dexterity:</span>
-                        </IconDisplay>
-                      </td>
+	if (criticalRatingValue > 0) {
+		return (
+			<IconDisplay
+				className={getAnimationClass({ animation: "flipInX" })}
+				Icon={IconCriticalRating}
+				tooltip="Critical rating"
+			>
+				<Stack direction="horizontal" gap={1}>
+					<OverlayTrigger
+						overlay={(
+							<Popover>
+								<PopoverBody>
+									<DetailsTable>
+										<tr>
+											<td>
+												<IconDisplay Icon={IconDexterity} iconProps={{ className: "small" }}>
+													<span>Dexterity:</span>
+												</IconDisplay>
+											</td>
 
-                      <td>
-                        <Stack gap={1}>
-                          <IconDisplay Icon={IconCriticalChance} iconProps={{ className: `small` }}>
-                            <span>
-                              {formatNumber({
-                                decimals: 0,
-                                format: `percentage`,
-                                value: attributeStatisticDexterity,
-                              })}
+											<td>
+												<Stack gap={1}>
+													<IconDisplay Icon={IconCriticalChance} iconProps={{ className: "small" }}>
+														<span>
+															{formatNumber({
+																decimals: 0,
+																format: "percentage",
+																value: attributeStatisticDexterity,
+															})}
                               &nbsp;chance on&nbsp;
-                            </span>
+														</span>
 
-                            <IconImage className="small" Icon={IconAttackRate} />
-                          </IconDisplay>
-                        </Stack>
-                      </td>
-                    </tr>
+														<IconImage className="small" Icon={IconAttackRate} />
+													</IconDisplay>
+												</Stack>
+											</td>
+										</tr>
 
-                    <tr>
-                      <td>
-                        <IconDisplay Icon={IconPerception} iconProps={{ className: `small` }}>
-                          <span>Perception:</span>
-                        </IconDisplay>
-                      </td>
+										<tr>
+											<td>
+												<IconDisplay Icon={IconPerception} iconProps={{ className: "small" }}>
+													<span>Perception:</span>
+												</IconDisplay>
+											</td>
 
-                      <td>
-                        <Stack gap={1}>
-                          <IconDisplay Icon={IconCriticalDamage} iconProps={{ className: `small` }}>
-                            <span>
-                              {formatNumber({
-                                decimals: 0,
-                                format: `percentage`,
-                                value: attributeStatisticPerception,
-                              })}
+											<td>
+												<Stack gap={1}>
+													<IconDisplay Icon={IconCriticalDamage} iconProps={{ className: "small" }}>
+														<span>
+															{formatNumber({
+																decimals: 0,
+																format: "percentage",
+																value: attributeStatisticPerception,
+															})}
                               &nbsp;of&nbsp;
-                            </span>
+														</span>
 
-                            <IconImage className="small" Icon={IconDamage} />
-                          </IconDisplay>
-                        </Stack>
-                      </td>
-                    </tr>
+														<IconImage className="small" Icon={IconDamage} />
+													</IconDisplay>
+												</Stack>
+											</td>
+										</tr>
 
-                    <tr>
-                      <td>
-                        <span>Critical strike:</span>
-                      </td>
+										<tr>
+											<td>
+												<span>Critical strike:</span>
+											</td>
 
-                      <td>
-                        {criticalChanceValue !== attributeStatisticDexterity && (
-                          <span>
-                            {formatNumber({ format: `percentage`, value: criticalChanceValue })}
+											<td>
+												{criticalChanceValue !== attributeStatisticDexterity && (
+													<span>
+														{formatNumber({ format: "percentage", value: criticalChanceValue })}
                             &nbsp;chance for&nbsp;
-                          </span>
-                        )}
+													</span>
+												)}
 
-                        <span>{formatNumber({ value: criticalStrikeValue })}&nbsp;damage</span>
-                      </td>
-                    </tr>
-                  </DetailsTable>
-                </PopoverBody>
-              </Popover>
-            }
-          >
-            <span>{formatNumber({ value: criticalRatingValue })}</span>
-          </OverlayTrigger>
+												<span>
+													{formatNumber({ value: criticalStrikeValue })}
+&nbsp;damage
+												</span>
+											</td>
+										</tr>
+									</DetailsTable>
+								</PopoverBody>
+							</Popover>
+						)}
+					>
+						<span>{formatNumber({ value: criticalRatingValue })}</span>
+					</OverlayTrigger>
 
-          <DeltasDisplay delta="criticalRating" />
-        </Stack>
-      </IconDisplay>
-    )
-  }
+					<DeltasDisplay delta="criticalRating" />
+				</Stack>
+			</IconDisplay>
+		)
+	}
 }

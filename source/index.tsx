@@ -8,14 +8,15 @@ import "@neverquest/styles/index.scss"
 
 ls.config.secret = 77
 
-const root = document.querySelector(`#root`)
+const root = document.querySelector("#root")
 
 if (root === null) {
-  throw new Error(`Cannot select document root.`)
-} else {
-  createRoot(root).render(
-    <StrictMode>
-      <Core />
-    </StrictMode>,
-  )
+	throw new Error("Cannot select document root.")
+}
+else {
+	createRoot(root).render(
+		<StrictMode>
+			<Core />
+		</StrictMode>,
+	)
 }

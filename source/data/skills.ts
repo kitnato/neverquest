@@ -43,130 +43,130 @@ export const SKILL_PRICE_BASE = 60
 export const SKILL_PRICE_FACTOR = 2.05
 
 export const SKILLS: Record<
-  Skill,
-  Description & {
-    Icon: SVGIcon;
-    isInheritable: boolean;
-    requiredCrewMember: CrewMember;
-    shows?: Showing[];
-    trainer: CrewMember;
-  }
+	Skill,
+	Description & {
+		Icon: SVGIcon
+		isInheritable: boolean
+		requiredCrewMember: CrewMember
+		shows?: Showing[]
+		trainer: CrewMember
+	}
 > = {
-  anatomy: {
-    description: `Grants the ability to inflict # bleeding with # piercing weapons.`,
-    descriptionIcons: [IconBleeding, IconPiercing],
-    Icon: IconAnatomy,
-    isInheritable: false,
-    requiredCrewMember: `merchant`,
-    trainer: `mercenary`,
-  },
-  archery: {
-    description: `Grants the use of # ranged weapons.`,
-    descriptionIcons: [IconRanged],
-    Icon: IconArchery,
-    isInheritable: false,
-    requiredCrewMember: `fletcher`,
-    trainer: `mercenary`,
-  },
-  armorcraft: {
-    description: `Grants the use of # heavy armor alongside the ability to improve # recovery.`,
-    descriptionIcons: [IconArmorHeavy, IconRecovery],
-    Icon: IconArmorcraft,
-    isInheritable: false,
-    requiredCrewMember: `blacksmith`,
-    trainer: `mercenary`,
-  },
-  assassination: {
-    description:
-      `Grants the ability to deal # critical strikes alongside attributes that determine their # chance and # damage.`,
-    descriptionIcons: [IconCriticalRating, IconCriticalChance, IconCriticalDamage],
-    Icon: IconAssassination,
-    isInheritable: false,
-    requiredCrewMember: `merchant`,
-    trainer: `mercenary`,
-  },
-  calisthenics: {
-    description:
-      `Grants attributes that increase rates for # health regeneration and # stamina regeneration.`,
-    descriptionIcons: [IconHealthRegeneration, IconStaminaRegeneration],
-    Icon: IconCalisthenics,
-    isInheritable: false,
-    requiredCrewMember: `merchant`,
-    shows: [`health`, `stamina`],
-    trainer: `mercenary`,
-  },
-  escrime: {
-    description:
-      `Grants the ability to # parry attacks with # slashing weapons, partially reflecting damage.`,
-    descriptionIcons: [IconParryChance, IconSlashing],
-    Icon: IconEscrime,
-    isInheritable: false,
-    requiredCrewMember: `merchant`,
-    trainer: `mercenary`,
-  },
-  evasion: {
-    description: `Grants the ability to # dodge attacks, avoiding all damage.`,
-    descriptionIcons: [IconDodgeChance],
-    Icon: IconEvasion,
-    isInheritable: false,
-    requiredCrewMember: `merchant`,
-    trainer: `mercenary`,
-  },
-  impermeability: {
-    description:
-      `Grants the ability to # deflect # poison and # blight ailments, avoiding them entirely.`,
-    descriptionIcons: [IconDeflectionChance, IconPoisoned, IconBlighted],
-    Icon: IconImpermeability,
-    isInheritable: true,
-    requiredCrewMember: `merchant`,
-    trainer: `witch`,
-  },
-  meditation: {
-    description: `Grants the ability to perform relic # infusion.`,
-    descriptionIcons: [IconInfusionLevel],
-    Icon: IconMeditation,
-    isInheritable: true,
-    requiredCrewMember: `merchant`,
-    trainer: `occultist`,
-  },
-  memetics: {
-    description: `Grants the ability to decipher and inscribe the # journal.`,
-    descriptionIcons: [RELICS.journal.Icon],
-    Icon: IconMemetics,
-    isInheritable: true,
-    requiredCrewMember: `merchant`,
-    trainer: `alchemist`,
-  },
-  shieldcraft: {
-    description: `Grants the use of # tower shields and the ability to # stagger monsters.`,
-    descriptionIcons: [IconShieldTower, IconStaggered],
-    Icon: IconShieldcraft,
-    isInheritable: false,
-    requiredCrewMember: `blacksmith`,
-    trainer: `mercenary`,
-  },
-  siegecraft: {
-    description:
-      `Grants the use of # two-handed melee weapons that have a chance to # execute monsters.`,
-    descriptionIcons: [IconTwoHanded, IconExecution],
-    Icon: IconSiegecraft,
-    isInheritable: false,
-    requiredCrewMember: `blacksmith`,
-    shows: [`grip`],
-    trainer: `mercenary`,
-  },
-  traumatology: {
-    description: `Grants the ability to # stun monsters with # blunt weapons.`,
-    descriptionIcons: [IconStunned, IconBlunt],
-    Icon: IconTraumatology,
-    isInheritable: false,
-    requiredCrewMember: `merchant`,
-    trainer: `mercenary`,
-  },
+	anatomy: {
+		description: "Grants the ability to inflict # bleeding with # piercing weapons.",
+		descriptionIcons: [IconBleeding, IconPiercing],
+		Icon: IconAnatomy,
+		isInheritable: false,
+		requiredCrewMember: "merchant",
+		trainer: "mercenary",
+	},
+	archery: {
+		description: "Grants the use of # ranged weapons.",
+		descriptionIcons: [IconRanged],
+		Icon: IconArchery,
+		isInheritable: false,
+		requiredCrewMember: "fletcher",
+		trainer: "mercenary",
+	},
+	armorcraft: {
+		description: "Grants the use of # heavy armor alongside the ability to improve # recovery.",
+		descriptionIcons: [IconArmorHeavy, IconRecovery],
+		Icon: IconArmorcraft,
+		isInheritable: false,
+		requiredCrewMember: "blacksmith",
+		trainer: "mercenary",
+	},
+	assassination: {
+		description:
+			"Grants the ability to deal # critical strikes alongside attributes that determine their # chance and # damage.",
+		descriptionIcons: [IconCriticalRating, IconCriticalChance, IconCriticalDamage],
+		Icon: IconAssassination,
+		isInheritable: false,
+		requiredCrewMember: "merchant",
+		trainer: "mercenary",
+	},
+	calisthenics: {
+		description:
+			"Grants attributes that increase rates for # health regeneration and # stamina regeneration.",
+		descriptionIcons: [IconHealthRegeneration, IconStaminaRegeneration],
+		Icon: IconCalisthenics,
+		isInheritable: false,
+		requiredCrewMember: "merchant",
+		shows: ["health", "stamina"],
+		trainer: "mercenary",
+	},
+	escrime: {
+		description:
+			"Grants the ability to # parry attacks with # slashing weapons, partially reflecting damage.",
+		descriptionIcons: [IconParryChance, IconSlashing],
+		Icon: IconEscrime,
+		isInheritable: false,
+		requiredCrewMember: "merchant",
+		trainer: "mercenary",
+	},
+	evasion: {
+		description: "Grants the ability to # dodge attacks, avoiding all damage.",
+		descriptionIcons: [IconDodgeChance],
+		Icon: IconEvasion,
+		isInheritable: false,
+		requiredCrewMember: "merchant",
+		trainer: "mercenary",
+	},
+	impermeability: {
+		description:
+			"Grants the ability to # deflect # poison and # blight ailments, avoiding them entirely.",
+		descriptionIcons: [IconDeflectionChance, IconPoisoned, IconBlighted],
+		Icon: IconImpermeability,
+		isInheritable: true,
+		requiredCrewMember: "merchant",
+		trainer: "witch",
+	},
+	meditation: {
+		description: "Grants the ability to perform relic # infusion.",
+		descriptionIcons: [IconInfusionLevel],
+		Icon: IconMeditation,
+		isInheritable: true,
+		requiredCrewMember: "merchant",
+		trainer: "occultist",
+	},
+	memetics: {
+		description: "Grants the ability to decipher and inscribe the # journal.",
+		descriptionIcons: [RELICS.journal.Icon],
+		Icon: IconMemetics,
+		isInheritable: true,
+		requiredCrewMember: "merchant",
+		trainer: "alchemist",
+	},
+	shieldcraft: {
+		description: "Grants the use of # tower shields and the ability to # stagger monsters.",
+		descriptionIcons: [IconShieldTower, IconStaggered],
+		Icon: IconShieldcraft,
+		isInheritable: false,
+		requiredCrewMember: "blacksmith",
+		trainer: "mercenary",
+	},
+	siegecraft: {
+		description:
+			"Grants the use of # two-handed melee weapons that have a chance to # execute monsters.",
+		descriptionIcons: [IconTwoHanded, IconExecution],
+		Icon: IconSiegecraft,
+		isInheritable: false,
+		requiredCrewMember: "blacksmith",
+		shows: ["grip"],
+		trainer: "mercenary",
+	},
+	traumatology: {
+		description: "Grants the ability to # stun monsters with # blunt weapons.",
+		descriptionIcons: [IconStunned, IconBlunt],
+		Icon: IconTraumatology,
+		isInheritable: false,
+		requiredCrewMember: "merchant",
+		trainer: "mercenary",
+	},
 }
 
 export const WEAPON_ABILITY_SKILLS: Record<WeaponAbility, Skill> = {
-  bleed: `anatomy`,
-  parry: `escrime`,
-  stun: `traumatology`,
+	bleed: "anatomy",
+	parry: "escrime",
+	stun: "traumatology",
 }

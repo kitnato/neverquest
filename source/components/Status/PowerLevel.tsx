@@ -10,42 +10,42 @@ import { absorbedEssence, powerLevel } from "@neverquest/state/attributes"
 import { formatNumber } from "@neverquest/utilities/formatters"
 
 export function PowerLevel() {
-  const absorbedEssenceValue = useRecoilValue(absorbedEssence)
-  const powerLevelValue = useRecoilValue(powerLevel)
+	const absorbedEssenceValue = useRecoilValue(absorbedEssence)
+	const powerLevelValue = useRecoilValue(powerLevel)
 
-  useDeltaText({
-    delta: `powerLevel`,
-    state: powerLevel,
-  })
+	useDeltaText({
+		delta: "powerLevel",
+		state: powerLevel,
+	})
 
-  return (
-    <IconDisplay Icon={IconPowerLevel} tooltip="Power level">
-      <Stack direction="horizontal" gap={1}>
-        <OverlayTrigger
-          overlay={
-            <Popover>
-              <PopoverHeader className="text-center">
-                <span>Absorbed essence</span>
-              </PopoverHeader>
+	return (
+		<IconDisplay Icon={IconPowerLevel} tooltip="Power level">
+			<Stack direction="horizontal" gap={1}>
+				<OverlayTrigger
+					overlay={(
+						<Popover>
+							<PopoverHeader className="text-center">
+								<span>Absorbed essence</span>
+							</PopoverHeader>
 
-              <PopoverBody>
-                <IconDisplay
-                  className="justify-content-center"
-                  Icon={IconEssence}
-                  iconProps={{ className: `small` }}
-                >
-                  <span>{formatNumber({ value: absorbedEssenceValue })}</span>
-                </IconDisplay>
-              </PopoverBody>
-            </Popover>
-          }
-          placement="right"
-        >
-          <span>{formatNumber({ value: powerLevelValue })}</span>
-        </OverlayTrigger>
+							<PopoverBody>
+								<IconDisplay
+									className="justify-content-center"
+									Icon={IconEssence}
+									iconProps={{ className: "small" }}
+								>
+									<span>{formatNumber({ value: absorbedEssenceValue })}</span>
+								</IconDisplay>
+							</PopoverBody>
+						</Popover>
+					)}
+					placement="right"
+				>
+					<span>{formatNumber({ value: powerLevelValue })}</span>
+				</OverlayTrigger>
 
-        <DeltasDisplay delta="powerLevel" />
-      </Stack>
-    </IconDisplay>
-  )
+				<DeltasDisplay delta="powerLevel" />
+			</Stack>
+		</IconDisplay>
+	)
 }

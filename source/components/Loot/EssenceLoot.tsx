@@ -13,29 +13,29 @@ import { formatNumber } from "@neverquest/utilities/formatters"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function EssenceLoot() {
-  const essenceLootValue = useRecoilValue(essenceLoot)
-  const isShowingLootedEssenceProgress = useRecoilValue(isShowing(`lootedEssenceProgress`))
+	const essenceLootValue = useRecoilValue(essenceLoot)
+	const isShowingLootedEssenceProgress = useRecoilValue(isShowing("lootedEssenceProgress"))
 
-  useDeltaText({
-    delta: `essenceLoot`,
-    state: essenceLoot,
-  })
+	useDeltaText({
+		delta: "essenceLoot",
+		state: essenceLoot,
+	})
 
-  if (essenceLootValue > 0) {
-    return (
-      <Stack className={getAnimationClass({ animation: `flipInX` })} direction="horizontal" gap={5}>
-        <Stack direction="horizontal" gap={1}>
-          <IconDisplay Icon={IconEssence} tooltip="Looted essence">
-            <span>{formatNumber({ value: essenceLootValue })}</span>
-          </IconDisplay>
+	if (essenceLootValue > 0) {
+		return (
+			<Stack className={getAnimationClass({ animation: "flipInX" })} direction="horizontal" gap={5}>
+				<Stack direction="horizontal" gap={1}>
+					<IconDisplay Icon={IconEssence} tooltip="Looted essence">
+						<span>{formatNumber({ value: essenceLootValue })}</span>
+					</IconDisplay>
 
-          <DeltasDisplay delta="essenceLoot" />
-        </Stack>
+					<DeltasDisplay delta="essenceLoot" />
+				</Stack>
 
-        {isShowingLootedEssenceProgress && <AttributePointProgress isLoot />}
+				{isShowingLootedEssenceProgress && <AttributePointProgress isLoot />}
 
-        {isShowingLootedEssenceProgress && <NewAttributePoints />}
-      </Stack>
-    )
-  }
+				{isShowingLootedEssenceProgress && <NewAttributePoints />}
+			</Stack>
+		)
+	}
 }

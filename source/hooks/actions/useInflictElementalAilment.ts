@@ -9,45 +9,45 @@ import type { Elemental } from "@neverquest/types/unions"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
 
 export function useInflictElementalAilment() {
-  const progressQuest = useProgressQuest()
+	const progressQuest = useProgressQuest()
 
-  return useRecoilCallback(
-    ({ set, snapshot }) =>
-      ({ elemental, slot }: { elemental: Elemental; slot: `armor` | `weapon` }) => {
-        const get = getSnapshotGetter(snapshot)
+	return useRecoilCallback(
+		({ set, snapshot }) =>
+			({ elemental, slot }: { elemental: Elemental, slot: "armor" | "weapon" }) => {
+				const get = getSnapshotGetter(snapshot)
 
-        const { ailment, durationCap } = ELEMENTALS[elemental]
-        const { duration } = get(elementalEffects)[slot][elemental]
+				const { ailment, durationCap } = ELEMENTALS[elemental]
+				const { duration } = get(elementalEffects)[slot][elemental]
 
-        if (get(canReceiveAilment(ailment)) && duration > 0) {
-          set(monsterAilmentDuration(ailment), (ailmentDuration) => {
-            const newDuration = ailmentDuration + duration
+				if (get(canReceiveAilment(ailment)) && duration > 0) {
+					set(monsterAilmentDuration(ailment), (ailmentDuration) => {
+						const newDuration = ailmentDuration + duration
 
-            if (newDuration > durationCap) {
-              return durationCap
-            }
+						if (newDuration > durationCap) {
+							return durationCap
+						}
 
-            return newDuration
-          })
+						return newDuration
+					})
 
-          switch (ailment) {
-            case `burning`: {
-              progressQuest({ quest: `burning` })
-              break
-            }
+					switch (ailment) {
+						case "burning": {
+							progressQuest({ quest: "burning" })
+							break
+						}
 
-            case `frozen`: {
-              progressQuest({ quest: `freezing` })
-              break
-            }
+						case "frozen": {
+							progressQuest({ quest: "freezing" })
+							break
+						}
 
-            case `shocked`: {
-              progressQuest({ quest: `shocking` })
-              break
-            }
-          }
-        }
-      },
-    [progressQuest],
-  )
+						case "shocked": {
+							progressQuest({ quest: "shocking" })
+							break
+						}
+					}
+				}
+			},
+		[progressQuest],
+	)
 }

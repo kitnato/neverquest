@@ -1,13 +1,13 @@
 import { useState } from "react"
 import {
-  Button,
-  Modal,
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-  ModalTitle,
-  OverlayTrigger,
-  Tooltip,
+	Button,
+	Modal,
+	ModalBody,
+	ModalFooter,
+	ModalHeader,
+	ModalTitle,
+	OverlayTrigger,
+	Tooltip,
 } from "react-bootstrap"
 import { useSetRecoilState } from "recoil"
 
@@ -22,71 +22,71 @@ import { capitalizeAll } from "@neverquest/utilities/formatters"
 import { getItemIcon } from "@neverquest/utilities/getters"
 
 export function DiscardItem({ item }: { item: InventoryItem }) {
-  const setInventory = useSetRecoilState(inventory)
+	const setInventory = useSetRecoilState(inventory)
 
-  const [isShowingModal, setIsShowingModal] = useState(false)
+	const [isShowingModal, setIsShowingModal] = useState(false)
 
-  const { ID, name } = item
+	const { ID, name } = item
 
-  const neutralize = useNeutralize()
-  const progressQuest = useProgressQuest()
+	const neutralize = useNeutralize()
+	const progressQuest = useProgressQuest()
 
-  const onHide = () => {
-    setIsShowingModal(false)
-  }
+	const onHide = () => {
+		setIsShowingModal(false)
+	}
 
-  return (
-    <>
-      <OverlayTrigger
-        overlay={
-          <Tooltip>
-            <span>Discard</span>
-          </Tooltip>
-        }
-      >
-        <Button
-          onClick={() => {
-            setIsShowingModal(true)
-          }}
-          variant="outline-dark"
-        >
-          <IconImage className="small" Icon={IconDiscard} />
-        </Button>
-      </OverlayTrigger>
+	return (
+		<>
+			<OverlayTrigger
+				overlay={(
+					<Tooltip>
+						<span>Discard</span>
+					</Tooltip>
+				)}
+			>
+				<Button
+					onClick={() => {
+						setIsShowingModal(true)
+					}}
+					variant="outline-dark"
+				>
+					<IconImage className="small" Icon={IconDiscard} />
+				</Button>
+			</OverlayTrigger>
 
-      <Modal onHide={onHide} show={isShowingModal}>
-        <ModalHeader closeButton>
-          <ModalTitle>
-            <IconDisplay Icon={IconDiscard}>
-              <span>Discard item?</span>
-            </IconDisplay>
-          </ModalTitle>
-        </ModalHeader>
+			<Modal onHide={onHide} show={isShowingModal}>
+				<ModalHeader closeButton>
+					<ModalTitle>
+						<IconDisplay Icon={IconDiscard}>
+							<span>Discard item?</span>
+						</IconDisplay>
+					</ModalTitle>
+				</ModalHeader>
 
-        <ModalBody>
-          <IconDisplay Icon={getItemIcon(item)} iconProps={{ className: `small` }}>
-            <span>{`${capitalizeAll(name)} will be lost forever.`}</span>
-          </IconDisplay>
-        </ModalBody>
+				<ModalBody>
+					<IconDisplay Icon={getItemIcon(item)} iconProps={{ className: "small" }}>
+						<span>{`${capitalizeAll(name)} will be lost forever.`}</span>
+					</IconDisplay>
+				</ModalBody>
 
-        <ModalFooter>
-          <Button
-            onClick={() => {
-              setInventory((currentInventory) =>
-                currentInventory.filter(({ ID: currentItemID }) => currentItemID !== ID),
-              )
+				<ModalFooter>
+					<Button
+						onClick={() => {
+							setInventory(currentInventory =>
+								currentInventory.filter(({ ID: currentItemID }) => currentItemID !== ID),
+							)
 
-              neutralize({ item })
-              progressQuest({ quest: `discarding` })
+							neutralize({ item })
+							progressQuest({ quest: "discarding" })
 
-              onHide()
-            }}
-            variant="outline-dark"
-          >
-            <span>Discard</span>
-          </Button>
-        </ModalFooter>
-      </Modal>
-    </>
-  )
+							onHide()
+						}}
+						variant="outline-dark"
+					>
+						<span>Discard</span>
+					</Button>
+				</ModalFooter>
+			</Modal>
+		</>
+	)
 }

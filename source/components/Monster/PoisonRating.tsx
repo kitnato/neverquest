@@ -14,83 +14,84 @@ import { formatNumber } from "@neverquest/utilities/formatters"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function PoisonRating() {
-  const poisonChanceValue = useRecoilValue(poisonChance)
-  const poisonLengthValue = useRecoilValue(poisonLength)
-  const poisonMagnitudeValue = useRecoilValue(poisonMagnitude)
+	const poisonChanceValue = useRecoilValue(poisonChance)
+	const poisonLengthValue = useRecoilValue(poisonLength)
+	const poisonMagnitudeValue = useRecoilValue(poisonMagnitude)
 
-  if (poisonChanceValue > 0) {
-    return (
-      <IconDisplay
-        className={getAnimationClass({ animation: `flipInX` })}
-        Icon={IconPoisonRating}
-        tooltip="Poison rating"
-      >
-        <OverlayTrigger
-          overlay={
-            <Popover>
-              <PopoverBody>
-                <DetailsTable>
-                  <tr>
-                    <td>
-                      <span>Chance:</span>
-                    </td>
+	if (poisonChanceValue > 0) {
+		return (
+			<IconDisplay
+				className={getAnimationClass({ animation: "flipInX" })}
+				Icon={IconPoisonRating}
+				tooltip="Poison rating"
+			>
+				<OverlayTrigger
+					overlay={(
+						<Popover>
+							<PopoverBody>
+								<DetailsTable>
+									<tr>
+										<td>
+											<span>Chance:</span>
+										</td>
 
-                    <td>
-                      <Stack direction="horizontal" gap={1}>
-                        <span>
-                          {formatNumber({ format: `percentage`, value: poisonChanceValue })}&nbsp;on
-                        </span>
+										<td>
+											<Stack direction="horizontal" gap={1}>
+												<span>
+													{formatNumber({ format: "percentage", value: poisonChanceValue })}
+&nbsp;on
+												</span>
 
-                        <IconImage className="small" Icon={IconMonsterAttackRate} />
-                      </Stack>
-                    </td>
-                  </tr>
+												<IconImage className="small" Icon={IconMonsterAttackRate} />
+											</Stack>
+										</td>
+									</tr>
 
-                  <tr>
-                    <td>
-                      <span>Effect:</span>
-                    </td>
+									<tr>
+										<td>
+											<span>Effect:</span>
+										</td>
 
-                    <td>
-                      <Stack direction="horizontal" gap={1}>
-                        <span>
-                          -
-                          {formatNumber({
-                            format: `percentage`,
-                            value: poisonMagnitudeValue,
-                          })}
-                        </span>
+										<td>
+											<Stack direction="horizontal" gap={1}>
+												<span>
+													-
+													{formatNumber({
+														format: "percentage",
+														value: poisonMagnitudeValue,
+													})}
+												</span>
 
-                        <IconDisplay Icon={IconHealth} iconProps={{ className: `small` }}>
-                          <span>{LABEL_MAXIMUM}</span>
-                        </IconDisplay>
-                      </Stack>
-                    </td>
-                  </tr>
+												<IconDisplay Icon={IconHealth} iconProps={{ className: "small" }}>
+													<span>{LABEL_MAXIMUM}</span>
+												</IconDisplay>
+											</Stack>
+										</td>
+									</tr>
 
-                  <tr>
-                    <td>
-                      <span>Duration:</span>
-                    </td>
+									<tr>
+										<td>
+											<span>Duration:</span>
+										</td>
 
-                    <td>
-                      <span>{formatNumber({ format: `time`, value: poisonLengthValue })}</span>
-                    </td>
-                  </tr>
-                </DetailsTable>
-              </PopoverBody>
-            </Popover>
-          }
-        >
-          <span>
-            {formatNumber({
-              value:
-                ((poisonChanceValue + poisonMagnitudeValue) * poisonLengthValue) /
-                PERCENTAGE_POINTS,
-            })}
-          </span>
-        </OverlayTrigger>
-      </IconDisplay>
-    )
-  }
+										<td>
+											<span>{formatNumber({ format: "time", value: poisonLengthValue })}</span>
+										</td>
+									</tr>
+								</DetailsTable>
+							</PopoverBody>
+						</Popover>
+					)}
+				>
+					<span>
+						{formatNumber({
+							value:
+                ((poisonChanceValue + poisonMagnitudeValue) * poisonLengthValue)
+                / PERCENTAGE_POINTS,
+						})}
+					</span>
+				</OverlayTrigger>
+			</IconDisplay>
+		)
+	}
 }

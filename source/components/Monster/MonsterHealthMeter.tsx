@@ -8,28 +8,29 @@ import { monsterHealth, monsterHealthMaximum } from "@neverquest/state/monster"
 import { formatNumber } from "@neverquest/utilities/formatters"
 
 export function MonsterHealthMeter() {
-  const monsterHealthValue = useRecoilValue(monsterHealth)
-  const monsterHealthMaximumValue = useRecoilValue(monsterHealthMaximum)
+	const monsterHealthValue = useRecoilValue(monsterHealth)
+	const monsterHealthMaximumValue = useRecoilValue(monsterHealthMaximum)
 
-  return (
-    <LabelledProgressBar
-      attachment="below"
-      value={(monsterHealthValue / monsterHealthMaximumValue) * PERCENTAGE_POINTS}
-    >
-      <Stack direction="horizontal" gap={1}>
-        <span>
-          {formatNumber({ value: monsterHealthValue })}&nbsp;/&nbsp;
-          {formatNumber({
-            value: monsterHealthMaximumValue,
-          })}
-        </span>
+	return (
+		<LabelledProgressBar
+			attachment="below"
+			value={(monsterHealthValue / monsterHealthMaximumValue) * PERCENTAGE_POINTS}
+		>
+			<Stack direction="horizontal" gap={1}>
+				<span>
+					{formatNumber({ value: monsterHealthValue })}
+&nbsp;/&nbsp;
+					{formatNumber({
+						value: monsterHealthMaximumValue,
+					})}
+				</span>
 
-        <Stack>
-          <DeltasDisplay delta="monsterHealth" />
+				<Stack>
+					<DeltasDisplay delta="monsterHealth" />
 
-          <DeltasDisplay delta="monsterHealthMaximum" />
-        </Stack>
-      </Stack>
-    </LabelledProgressBar>
-  )
+					<DeltasDisplay delta="monsterHealthMaximum" />
+				</Stack>
+			</Stack>
+		</LabelledProgressBar>
+	)
 }

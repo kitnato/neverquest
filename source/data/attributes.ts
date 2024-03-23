@@ -119,7 +119,7 @@ export const ATTRIBUTES: Record<
 		format: "integer",
 		Icon: IconVitality,
 		increment: 15,
-		rankBonus: 15,
+		rankBonus: 10,
 		shows: "health",
 	},
 }

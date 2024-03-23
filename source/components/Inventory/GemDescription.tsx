@@ -1,8 +1,8 @@
 import { Stack } from "react-bootstrap"
 import { IconImage } from "@neverquest/components/IconImage"
 import { ELEMENTALS, GEMS } from "@neverquest/data/items"
+import IconGearLevel from "@neverquest/icons/gear-level.svg?react"
 import IconGear from "@neverquest/icons/gear.svg?react"
-import IconPowerLevel from "@neverquest/icons/power-level.svg?react"
 import type { Gem } from "@neverquest/types/unions"
 
 export function GemDescription({ gem }: { gem: Gem }) {
@@ -25,20 +25,20 @@ export function GemDescription({ gem }: { gem: Gem }) {
 				<IconImage className="small" Icon={Icon} />
 
 				<span className={color}>
-&nbsp;
+					&nbsp;
 					{elemental}
-&nbsp;
+					&nbsp;
 				</span>
 
 				<span>effect</span>
 			</div>
 
 			<div>
-				<span>based on&nbsp;</span>
+				<span>based on its&nbsp;</span>
 
-				<IconImage className="small" Icon={IconPowerLevel} />
+				<IconImage className="small" Icon={IconGearLevel} />
 
-				<span>&nbsp;power level.</span>
+				<span>&nbsp;level.</span>
 			</div>
 		</Stack>
 	)

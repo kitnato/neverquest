@@ -47,7 +47,7 @@ export const ARMOR_SPECIFICATIONS: Record<
 		price: { maximum: 10_000, minimum: 50 },
 		protection: [
 			{ maximum: 8, minimum: 6 },
-			{ maximum: 900, minimum: 850 },
+			{ maximum: 800, minimum: 750 },
 		],
 		weight: [
 			{ maximum: 7, minimum: 5 },
@@ -124,8 +124,8 @@ export const SHIELD_SPECIFICATIONS: Record<
 			{ maximum: 0.35, minimum: 0.33 },
 		],
 		burden: [
-			{ maximum: 4, minimum: 3 },
-			{ maximum: 35, minimum: 30 },
+			{ maximum: 7, minimum: 5 },
+			{ maximum: 40, minimum: 35 },
 		],
 		Icon: IconShieldMedium,
 		price: { maximum: 4500, minimum: 4 },
@@ -144,8 +144,8 @@ export const SHIELD_SPECIFICATIONS: Record<
 			{ maximum: 0.2, minimum: 0.19 },
 		],
 		burden: [
-			{ maximum: 2, minimum: 1 },
-			{ maximum: 20, minimum: 18 },
+			{ maximum: 4, minimum: 3 },
+			{ maximum: 25, minimum: 23 },
 		],
 		Icon: IconShieldSmall,
 		price: { maximum: 3000, minimum: 2 },
@@ -164,8 +164,8 @@ export const SHIELD_SPECIFICATIONS: Record<
 			{ maximum: 0.55, minimum: 0.53 },
 		],
 		burden: [
-			{ maximum: 7, minimum: 6 },
-			{ maximum: 45, minimum: 40 },
+			{ maximum: 10, minimum: 8 },
+			{ maximum: 55, minimum: 50 },
 		],
 		Icon: IconShieldTower,
 		price: { maximum: 7000, minimum: 7 },

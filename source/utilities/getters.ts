@@ -191,43 +191,37 @@ export function getDamagePerRate({
 	)
 }
 
-export function getGearElementalEffects({
+export function getElementalEffects({
 	gear,
 	gems,
-	powerLevel,
 }: {
 	gear: Armor | Weapon | typeof ARMOR_NONE | typeof WEAPON_NONE
 	gems: GemItem[]
-	powerLevel: number
 }): Record<Elemental, { damage: number, duration: number }>
-export function getGearElementalEffects({
+export function getElementalEffects({
 	gear,
 	gems,
-	powerLevel,
 }: {
 	gear: Shield | typeof SHIELD_NONE
 	gems: GemItem[]
-	powerLevel: number
 }): Record<Elemental, number>
-export function getGearElementalEffects({
+export function getElementalEffects({
 	gear,
 	gems,
-	powerLevel,
 }: {
 	gear: GearItem | GearItemUnequipped
 	gems: GemItem[]
-	powerLevel: number
 }): Record<Elemental, { damage: number, duration: number }> | Record<Elemental, number>
-export function getGearElementalEffects({
+export function getElementalEffects({
 	gear,
 	gems,
-	powerLevel,
 }: {
 	gear: GearItem | GearItemUnequipped
 	gems: GemItem[]
-	powerLevel: number
 }) {
-	if (isArmor(gear) || isUnarmed(gear) || isUnarmored(gear) || isWeapon(gear)) {
+	const armorEffect = isArmor(gear) || isUnarmored(gear)
+
+	if (armorEffect || isUnarmed(gear) || isWeapon(gear)) {
 		const effects = {
 			fire: { damage: 0, duration: 0 },
 			ice: { damage: 0, duration: 0 },
@@ -236,12 +230,12 @@ export function getGearElementalEffects({
 
 		for (const { amount, item } of stackItems(gems)) {
 			const { elemental } = GEMS[item.name]
-			const { damage, duration } = ELEMENTALS[elemental]
+			const { damageArmor, damageWeapon, duration } = ELEMENTALS[elemental]
 
 			effects[elemental] = {
 				damage: Math.max(
 					Math.round(
-						powerLevel * getFromRange({ factor: (amount - 1) / (GEMS_MAXIMUM - 1), ...damage }),
+						gear.level * getFromRange({ factor: (amount - 1) / (GEMS_MAXIMUM - 1), ...(armorEffect ? damageArmor : damageWeapon) }),
 					),
 					GENERIC_MINIMUM,
 				),

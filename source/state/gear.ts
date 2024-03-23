@@ -6,12 +6,11 @@ import {
 	SHIELD_NONE,
 	WEAPON_NONE,
 } from "@neverquest/data/gear"
-import { powerLevel } from "@neverquest/state/attributes"
 import { handleStorage } from "@neverquest/state/effects/handleStorage"
 import { isTraitAcquired } from "@neverquest/state/traits"
 import type { Armor, GemItem, Shield, Weapon } from "@neverquest/types"
 import { isMelee, isUnarmed } from "@neverquest/types/type-guards"
-import { getGearElementalEffects, getTotalElementalEffects } from "@neverquest/utilities/getters"
+import { getElementalEffects, getTotalElementalEffects } from "@neverquest/utilities/getters"
 import { withStateKey } from "@neverquest/utilities/helpers"
 
 // SELECTORS
@@ -20,28 +19,24 @@ export const elementalEffects = withStateKey("elementalEffects", key =>
 	selector({
 		get: ({ get }) => {
 			const armorValue = get(armor)
-			const powerLevelValue = get(powerLevel)
 			const shieldValue = get(shield)
 			const weaponValue = get(weapon)
 
-			const armorEffects = getGearElementalEffects({
+			const armorEffects = getElementalEffects({
 				gear: armorValue,
 				gems: get(gems(armorValue.ID)),
-				powerLevel: powerLevelValue,
 			})
 			// Only apply shield effects if they're actively used.
 			const shieldEffects
 				= (isMelee(weaponValue) || isUnarmed(weaponValue)) && (weaponValue.grip === "one-handed" || get(isTraitAcquired("colossus")))
-					? getGearElementalEffects({
+					? getElementalEffects({
 						gear: shieldValue,
 						gems: get(gems(shieldValue.ID)),
-						powerLevel: powerLevelValue,
 					})
 					: SHIELD_ELEMENTAL_EFFECTS_BASE
-			const weaponEffects = getGearElementalEffects({
+			const weaponEffects = getElementalEffects({
 				gear: weaponValue,
 				gems: get(gems(weaponValue.ID)),
-				powerLevel: powerLevelValue,
 			})
 
 			return {

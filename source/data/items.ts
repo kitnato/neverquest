@@ -133,7 +133,8 @@ export const ELEMENTALS: Record<
 	{
 		ailment: ElementalAilment
 		color: string
-		damage: GeneratorRange
+		damageArmor: GeneratorRange
+		damageWeapon: GeneratorRange
 		duration: GeneratorRange
 		durationCap: number
 		gem: Gem
@@ -143,7 +144,8 @@ export const ELEMENTALS: Record<
 	fire: {
 		ailment: "burning",
 		color: "orange",
-		damage: { maximum: 3, minimum: 1 },
+		damageArmor: { maximum: 3, minimum: 1.5 },
+		damageWeapon: { maximum: 2.5, minimum: 1 },
 		duration: { maximum: 2500, minimum: 1200 },
 		durationCap: 7500,
 		gem: "ruby",
@@ -152,7 +154,8 @@ export const ELEMENTALS: Record<
 	ice: {
 		ailment: "frozen",
 		color: "cyan",
-		damage: { maximum: 2, minimum: 0.5 },
+		damageArmor: { maximum: 2.5, minimum: 1 },
+		damageWeapon: { maximum: 2, minimum: 0.75 },
 		duration: { maximum: 2000, minimum: 900 },
 		durationCap: 3000,
 		gem: "sapphire",
@@ -161,7 +164,8 @@ export const ELEMENTALS: Record<
 	lightning: {
 		ailment: "shocked",
 		color: "purple",
-		damage: { maximum: 2.5, minimum: 0.75 },
+		damageArmor: { maximum: 2, minimum: 0.75 },
+		damageWeapon: { maximum: 1.5, minimum: 0.5 },
 		duration: { maximum: 2200, minimum: 1000 },
 		durationCap: 5000,
 		gem: "amethyst",

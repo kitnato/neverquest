@@ -57,8 +57,8 @@ export const CREW: Record<
 			[LEVELLING_MAXIMUM]: "Nothing makes any sense.",
 			[LEVELLING_THRESHOLD]: MONOLOGUE_EMPTY,
 		},
-		price: 400,
-		requiredStage: 24,
+		price: 650,
+		requiredStage: 27,
 	},
 	blacksmith: {
 		description: "Crafts superior # gear and identifies gear class.",
@@ -197,8 +197,8 @@ export const CREW: Record<
 			[LEVELLING_MAXIMUM]: "The cipher has gone silent.",
 			[LEVELLING_THRESHOLD]: MONOLOGUE_EMPTY,
 		},
-		price: 650,
-		requiredStage: 27,
+		price: 400,
+		requiredStage: 24,
 	},
 }
 
@@ -208,7 +208,7 @@ export const FLETCHING = {
 }
 
 export const OCCULTIST_PURGE_PRICE_MULTIPLIER = {
-	essence: 0.3,
+	essence: 0.25,
 	quests: 250,
 }
 

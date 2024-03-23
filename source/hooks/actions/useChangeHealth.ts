@@ -6,7 +6,7 @@ import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta"
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import { useToggleAttacking } from "@neverquest/hooks/actions/useToggleAttacking"
 import { absorbedEssence } from "@neverquest/state/attributes"
-import { isAttacking } from "@neverquest/state/character"
+import { isAttacking, recoveryDuration } from "@neverquest/state/character"
 import { corpse, stage } from "@neverquest/state/encounter"
 import { ownedItem } from "@neverquest/state/inventory"
 import { isRelicEquipped } from "@neverquest/state/items"
@@ -44,6 +44,8 @@ export function useChangeHealth() {
 					newHealth = 0
 
 					reset(regenerationDuration("health"))
+					reset(regenerationDuration("stamina"))
+					reset(recoveryDuration)
 
 					progressQuest({ quest: "flatlining" })
 

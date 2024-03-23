@@ -48,7 +48,7 @@ export const NUDIST = {
 	healAmount: 0.1,
 }
 
-export const TANK_PROTECTION_BONUS = 0.3
+export const TANK_PROTECTION_BONUS = 0.25
 
 export const TRAITS: Record<
 	Trait,

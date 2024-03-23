@@ -4,22 +4,19 @@ import { useRecoilValue } from "recoil"
 import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { LABEL_SEPARATOR } from "@neverquest/data/general"
 import { ELEMENTALS, GEMS, GEMS_MAXIMUM } from "@neverquest/data/items"
-import { powerLevel } from "@neverquest/state/attributes"
 import { gems } from "@neverquest/state/gear"
 import type { GearItem, GearItemUnequipped } from "@neverquest/types"
 import { formatNumber } from "@neverquest/utilities/formatters"
-import { getGearElementalEffects } from "@neverquest/utilities/getters"
+import { getElementalEffects } from "@neverquest/utilities/getters"
 import { stackItems } from "@neverquest/utilities/helpers"
 
 export function AppliedGems({ gearItem }: { gearItem: GearItem | GearItemUnequipped }) {
 	const gemsValue = useRecoilValue(gems(gearItem.ID))
-	const powerLevelValue = useRecoilValue(powerLevel)
 
 	const { length } = gemsValue
-	const elementalEffects = getGearElementalEffects({
+	const elementalEffects = getElementalEffects({
 		gear: gearItem,
 		gems: gemsValue,
-		powerLevel: powerLevelValue,
 	})
 
 	if (length > 0) {

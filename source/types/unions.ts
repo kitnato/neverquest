@@ -65,8 +65,8 @@ export const CREW_MEMBER_TYPES = [
 	"mercenary",
 	"fletcher",
 	"occultist",
-	"alchemist",
 	"witch",
+	"alchemist",
 ] as const
 export type CrewMember = (typeof CREW_MEMBER_TYPES)[number]
 

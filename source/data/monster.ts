@@ -37,11 +37,12 @@ export const AILMENT_DESCRIPTION: Record<Ailment, Description> = {
 		descriptionIcons: [IconMonsterDamage],
 	},
 	stunned: {
-		description: `Hit chance reduced to ${formatNumber({
+		description: `Chance to hit on # attack reduced to ${formatNumber({
 			decimals: 0,
 			format: "percentage",
 			value: AILMENT_PENALTY.stunned,
 		})}.`,
+		descriptionIcons: [IconMonsterAttackRate],
 	},
 }
 
@@ -63,7 +64,7 @@ export const BLIGHT = {
 }
 
 export const ESSENCE = {
-	attenuation: 17,
+	attenuation: 18,
 	base: 5,
 	bonus: 0.025,
 	boss: 1.5,
@@ -115,7 +116,7 @@ export const MONSTER_DAMAGE = {
 }
 
 export const MONSTER_HEALTH = {
-	attenuation: 24,
+	attenuation: 20,
 	base: 18,
 	bonus: 0.02,
 	boss: 1.7,

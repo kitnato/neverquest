@@ -59,14 +59,18 @@ This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareA
 
 ### 1. Gameplay objectives
 
-- Player always has something to do
+- There is always has something to do
 - No arbitrary waiting time, cliffs or walls
-- Can play itself while not focused
-- Incremental progress can be made at all times
+- Engaging active gameplay by default
+- No need for "skip the grind" mechanics
+- Idle gameplay can be unlocked with in-game mechanics
+- Incremental progress can always be made
+- Little RNG, clear and accumulable paths to upgrades
 - No excessive or repetitive clicking
 - Decisions are frequent and they have immediate gameplay impact
 - High character build variety with a long tail of min-maxing
-- Manage an economy of resources and character builds with trade-offs
+- Always options to change strategy and try new approaches
+- Difficult, but always fair
 
 ### 2. Warren Spector's 6+2+1 [questions](https://www.gamedeveloper.com/design/warren-spector-traces-i-deus-ex-i-s-development-back-to-a-game-of-d-d)
 

@@ -66,7 +66,7 @@ export const isAttributeAtMaximum = withStateKey("isAttributeAtMaximum", key =>
 		get:
 			(attribute: Attribute) =>
 				({ get }) =>
-					get(attributeStatistic(attribute))
+					Math.abs(get(attributeStatistic(attribute)))
 					>= (ATTRIBUTES[attribute].maximum ?? Number.POSITIVE_INFINITY),
 		key,
 	}),

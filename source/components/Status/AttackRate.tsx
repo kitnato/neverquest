@@ -40,15 +40,17 @@ export function AttackRate() {
 
 	const attack = useAttack()
 
+	const showDetails = attributeStatisticSpeed !== 0
+
 	useTimer({
 		onElapsed: attack,
 		setDuration: setAttackDuration,
 		stop:
-      !canAttackOrParryValue
-      || !isAttackingValue
-      || isLootingValue
-      || isMonsterDeadValue
-      || isRecoveringValue,
+			!canAttackOrParryValue
+			|| !isAttackingValue
+			|| isLootingValue
+			|| isMonsterDeadValue
+			|| isRecoveringValue,
 	})
 
 	useDeltaText({
@@ -81,7 +83,7 @@ export function AttackRate() {
 										</td>
 									</tr>
 
-									{attributeStatisticSpeed > 0 && (
+									{showDetails && (
 										<tr>
 											<td>
 												<IconDisplay Icon={IconWeaponSpeed} iconProps={{ className: "small" }}>
@@ -92,7 +94,6 @@ export function AttackRate() {
 											<td>
 												<Stack direction="horizontal" gap={1}>
 													<span>
-														-
 														{formatNumber({
 															format: "percentage",
 															value: attributeStatisticSpeed,
@@ -106,7 +107,7 @@ export function AttackRate() {
 							</PopoverBody>
 						</Popover>
 					)}
-					trigger={attributeStatisticSpeed > 0 || !canAttackOrParryValue ? POPOVER_TRIGGER : []}
+					trigger={showDetails ? POPOVER_TRIGGER : []}
 				>
 					<div className="w-100">
 						<AttackRateMeter />

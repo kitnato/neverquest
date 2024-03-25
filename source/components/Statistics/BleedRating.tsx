@@ -77,7 +77,7 @@ export function BleedRating() {
 														format: "percentage",
 														value: masteryStatisticCruelty,
 													})}
-                          &nbsp;of&nbsp;
+													{" of "}
 												</span>
 
 												<IconImage className="small" Icon={IconDamage} />

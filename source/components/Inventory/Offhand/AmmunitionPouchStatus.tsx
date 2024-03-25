@@ -17,7 +17,7 @@ export function AmmunitionPouchStatus() {
 		>
 			<span>
 				{formatNumber({ value: ammunitionValue })}
-&nbsp;/&nbsp;
+				{" / "}
 				{formatNumber({
 					value: ammunitionCapacityValue,
 				})}

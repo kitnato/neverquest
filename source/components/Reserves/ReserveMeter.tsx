@@ -115,7 +115,7 @@ export function ReserveMeter({ PrefixIcon, reserve }: { PrefixIcon?: SVGIcon, re
 
 				<span>
 					{formatNumber({ value: reserveValue })}
-					&nbsp;/&nbsp;
+					{" / "}
 					{formatNumber({
 						value: reserveMaximumAilingValue,
 					})}

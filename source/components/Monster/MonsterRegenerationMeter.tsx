@@ -38,7 +38,7 @@ export function MonsterRegenerationMeter({ amount }: { amount: number }) {
 							<IconDisplay Icon={IconMonsterHealth} iconProps={{ className: "small" }}>
 								<span>
 									{amount}
-									&nbsp;per&nbsp;
+									{" per "}
 									{formatNumber({
 										format: "time",
 										value: monsterRegenerationRate,
@@ -56,7 +56,7 @@ export function MonsterRegenerationMeter({ amount }: { amount: number }) {
 						<IconDisplay Icon={IconMonsterHealth} iconProps={{ className: "small" }}>
 							<span>
 								{amount}
-								&nbsp;in&nbsp;
+								{" in "}
 								{formatNumber({
 									format: "time",
 									value: monsterRegenerationRate - regenerationProgress,

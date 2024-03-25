@@ -68,7 +68,7 @@ export function AttributePointProgress({ isLoot }: { isLoot?: boolean }) {
 					<IconDisplay Icon={IconEssence} iconProps={{ className: "small stencilled" }}>
 						<span>
 							{formatNumber({ value: totalEssence })}
-							&nbsp;/&nbsp;
+							{" / "}
 							{formatNumber({
 								value: nextTotalCost,
 							})}

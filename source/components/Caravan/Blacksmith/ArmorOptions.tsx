@@ -116,7 +116,7 @@ export function ArmorOptions() {
 					tooltip="Protection"
 				>
 					{formatNumber({ value: protection.minimum })}
-					&nbsp;-&nbsp;
+					{" - "}
 					{formatNumber({
 						value: protection.maximum,
 					})}
@@ -138,7 +138,7 @@ export function ArmorOptions() {
 				<IconDisplay Icon={IconBurden} iconProps={{ overlayPlacement: "left" }} tooltip="Burden">
 					<span>
 						{formatNumber({ value: burden.minimum })}
-						&nbsp;-&nbsp;
+						{" - "}
 						{formatNumber({
 							value: burden.maximum,
 						})}
@@ -148,7 +148,7 @@ export function ArmorOptions() {
 				<IconDisplay Icon={IconWeight} iconProps={{ overlayPlacement: "left" }} tooltip="Weight">
 					<span>
 						{formatNumber({ value: weight.minimum })}
-						&nbsp;-&nbsp;
+						{" - "}
 						{formatNumber({
 							value: weight.maximum,
 						})}

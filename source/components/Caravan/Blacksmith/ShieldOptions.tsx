@@ -112,7 +112,7 @@ export function ShieldOptions() {
 					tooltip="Block chance"
 				>
 					{formatNumber({ format: "percentage", value: block.minimum })}
-					&nbsp;-&nbsp;
+					{" - "}
 					{formatNumber({
 						format: "percentage",
 						value: block.maximum,
@@ -135,7 +135,7 @@ export function ShieldOptions() {
 				<IconDisplay Icon={IconBurden} iconProps={{ overlayPlacement: "left" }} tooltip="Burden">
 					<span>
 						{formatNumber({ value: burden.minimum })}
-						&nbsp;-&nbsp;
+						{" - "}
 						{formatNumber({
 							value: burden.maximum,
 						})}
@@ -145,7 +145,7 @@ export function ShieldOptions() {
 				<IconDisplay Icon={IconWeight} iconProps={{ overlayPlacement: "left" }} tooltip="Weight">
 					<span>
 						{formatNumber({ value: weight.minimum })}
-						&nbsp;-&nbsp;
+						{" - "}
 						{formatNumber({
 							value: weight.maximum,
 						})}

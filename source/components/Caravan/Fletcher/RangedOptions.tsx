@@ -124,7 +124,7 @@ export function RangedOptions() {
 				>
 					<span>
 						{formatNumber({ value: damage.minimum })}
-						&nbsp;-&nbsp;
+						{" - "}
 						{formatNumber({
 							value: damage.maximum,
 						})}
@@ -138,7 +138,7 @@ export function RangedOptions() {
 				>
 					<span>
 						{formatNumber({ format: "time", value: rate.minimum })}
-						&nbsp;-&nbsp;
+						{" - "}
 						{formatNumber({
 							format: "time",
 							value: rate.maximum,
@@ -153,7 +153,7 @@ export function RangedOptions() {
 				>
 					<span>
 						{formatNumber({ value: ammunitionCost.minimum })}
-						&nbsp;-&nbsp;
+						{" - "}
 						{formatNumber({
 							value: ammunitionCost.maximum,
 						})}
@@ -163,7 +163,7 @@ export function RangedOptions() {
 				<IconDisplay Icon={IconRange} iconProps={{ overlayPlacement: "left" }} tooltip="Range">
 					<span>
 						{formatNumber({ format: "time", value: range.minimum })}
-						&nbsp;-&nbsp;
+						{" - "}
 						{formatNumber({
 							format: "time",
 							value: range.maximum,
@@ -189,7 +189,7 @@ export function RangedOptions() {
 				<IconDisplay Icon={IconBurden} iconProps={{ overlayPlacement: "left" }} tooltip="Burden">
 					<span>
 						{formatNumber({ value: burden.minimum })}
-						&nbsp;-&nbsp;
+						{" - "}
 						{formatNumber({
 							value: burden.maximum,
 						})}
@@ -199,7 +199,7 @@ export function RangedOptions() {
 				<IconDisplay Icon={IconWeight} iconProps={{ overlayPlacement: "left" }} tooltip="Weight">
 					<span>
 						{formatNumber({ value: weight.minimum })}
-						&nbsp;-&nbsp;
+						{" - "}
 						{formatNumber({
 							value: weight.maximum,
 						})}

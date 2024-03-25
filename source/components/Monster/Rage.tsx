@@ -30,7 +30,7 @@ export function Rage() {
 					overlay={(
 						<Popover>
 							<PopoverBody>
-								<Stack direction="horizontal">
+								<Stack direction="horizontal" gap={1}>
 									<span>Once enraged,</span>
 
 									<IconImage className="small" Icon={IconMonsterAttackRate} />

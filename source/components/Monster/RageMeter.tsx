@@ -25,7 +25,7 @@ export function RageMeter() {
 					{formatNumber({
 						value: rageValue,
 					})}
-          &nbsp;/&nbsp;
+					{" / "}
 					{formatNumber({
 						value: maximum,
 					})}

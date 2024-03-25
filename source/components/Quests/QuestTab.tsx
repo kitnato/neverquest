@@ -30,7 +30,7 @@ export function QuestTab({ questClass }: { questClass: QuestClass }) {
 				<Stack direction="horizontal" gap={1}>
 					<span>
 						{completedQuestsValue}
-&nbsp;/&nbsp;
+						{" / "}
 						{questCount}
 					</span>
 

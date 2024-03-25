@@ -56,7 +56,7 @@ export function RegenerationMeter({ reserve }: { reserve: Reserve }) {
 							<IconDisplay Icon={Icon} iconProps={{ className: "small" }}>
 								<span>
 									{regenerationAmountValue}
-									&nbsp;per&nbsp;
+									{" per "}
 									{formatNumber({
 										format: "time",
 										value: regenerationRateValue,
@@ -77,7 +77,7 @@ export function RegenerationMeter({ reserve }: { reserve: Reserve }) {
 						<IconDisplay Icon={Icon} iconProps={{ className: "small" }}>
 							<span>
 								{regenerationAmountValue}
-								&nbsp;in&nbsp;
+								{" in "}
 								{formatNumber({
 									format: "time",
 									value: regenerationRateValue - regenerationProgress,

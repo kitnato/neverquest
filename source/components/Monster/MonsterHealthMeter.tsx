@@ -19,7 +19,7 @@ export function MonsterHealthMeter() {
 			<Stack direction="horizontal" gap={1}>
 				<span>
 					{formatNumber({ value: monsterHealthValue })}
-&nbsp;/&nbsp;
+					{" / "}
 					{formatNumber({
 						value: monsterHealthMaximumValue,
 					})}

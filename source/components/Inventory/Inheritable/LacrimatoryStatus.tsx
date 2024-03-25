@@ -17,7 +17,7 @@ export function LacrimatoryStatus() {
 		>
 			<span>
 				{formatNumber({ value: tearsValue })}
-&nbsp;/&nbsp;
+				{" / "}
 				{formatNumber({
 					value: TEARS_MAXIMUM,
 				})}

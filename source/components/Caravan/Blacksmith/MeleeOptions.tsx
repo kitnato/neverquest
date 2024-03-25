@@ -149,7 +149,7 @@ export function MeleeOptions() {
 				>
 					<span>
 						{formatNumber({ value: damage.minimum })}
-						&nbsp;-&nbsp;
+						{" - "}
 						{formatNumber({
 							value: damage.maximum,
 						})}
@@ -163,7 +163,7 @@ export function MeleeOptions() {
 				>
 					<span>
 						{formatNumber({ format: "time", value: rate.minimum })}
-						&nbsp;-&nbsp;
+						{" - "}
 						{formatNumber({
 							format: "time",
 							value: rate.maximum,
@@ -189,7 +189,7 @@ export function MeleeOptions() {
 				<IconDisplay Icon={IconBurden} iconProps={{ overlayPlacement: "left" }} tooltip="Burden">
 					<span>
 						{formatNumber({ value: burden.minimum })}
-						&nbsp;-&nbsp;
+						{" - "}
 						{formatNumber({
 							value: burden.maximum,
 						})}
@@ -199,7 +199,7 @@ export function MeleeOptions() {
 				<IconDisplay Icon={IconWeight} iconProps={{ overlayPlacement: "left" }} tooltip="Weight">
 					<span>
 						{formatNumber({ value: weight.minimum })}
-						&nbsp;-&nbsp;
+						{" - "}
 						{formatNumber({
 							value: weight.maximum,
 						})}

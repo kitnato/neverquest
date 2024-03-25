@@ -30,7 +30,7 @@ export function CraftMunitions() {
 	const transactEssence = useTransactEssence()
 
 	const { amount, maximum, price } = MUNITIONS
-	const totalPrice = price + getTriangular(munitionsValue - amount)
+	const totalPrice = price + getTriangular(munitionsValue)
 	const isAffordable = totalPrice <= essenceValue
 
 	useDeltaText({

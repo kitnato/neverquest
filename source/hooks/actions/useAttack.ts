@@ -24,6 +24,7 @@ import {
 	monsterHealth,
 	monsterHealthMaximum,
 } from "@neverquest/state/monster"
+import { isHealthAtMaximum } from "@neverquest/state/reserves"
 import { isSkillAcquired } from "@neverquest/state/skills"
 import {
 	attackRate,
@@ -57,6 +58,7 @@ export function useAttack() {
 
 				const canAttackOrParryValue = get(canAttackOrParry)
 				const hasEnoughMunitionsValue = get(hasEnoughMunitions)
+				const executionThresholdValue = get(executionThreshold)
 				const lifeLeechValue = get(lifeLeech)
 				const monsterElementValue = get(monsterElement)
 				const monsterHealthValue = get(monsterHealth)
@@ -98,9 +100,11 @@ export function useAttack() {
 						(
 							isMelee(weaponValue)
 							&& weaponValue.grip === "two-handed"
-							&& monsterHealthValue / get(monsterHealthMaximum) <= get(executionThreshold)
+							&& monsterHealthValue / get(monsterHealthMaximum) <= executionThresholdValue
 						)
-						|| (hasInflictedCritical && get(isTraitAcquired("executioner")))
+						|| (
+							hasInflictedCritical && get(isTraitAcquired("executioner")) && Math.random() <= executionThresholdValue
+						)
 					) {
 						totalDamage = monsterHealthValue
 
@@ -163,7 +167,7 @@ export function useAttack() {
 						})
 					}
 
-					if (lifeLeechValue > 0) {
+					if (!get(isHealthAtMaximum) && lifeLeechValue > 0) {
 						changeHealth({
 							contents: {
 								color: "text-secondary",

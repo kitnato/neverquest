@@ -14,9 +14,10 @@ export function NewAttributePoints() {
 	const essenceLootValue = useRecoilValue(essenceLoot)
 	const powerLevelValue = useRecoilValue(powerLevel)
 
-	const difference
-    = getAttributePoints({ essence: essenceValue + essenceLootValue, powerLevel: powerLevelValue })
-    - attributePointsValue
+	const difference = getAttributePoints({
+		essence: essenceValue + essenceLootValue,
+		powerLevel: powerLevelValue,
+	}) - attributePointsValue
 
 	return (
 		<IconDisplay Icon={IconAttributePoints} tooltip="New attribute points">

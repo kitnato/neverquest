@@ -57,7 +57,7 @@ export const BLIGHT = {
 	},
 	finality: {
 		"res cogitans": 0.7777,
-		"res dominus": 0.5777,
+		"res dominus": 0.4777,
 	},
 	increment: 0.025,
 	requiredStage: 50,
@@ -76,7 +76,7 @@ export const ESSENCE = {
 
 export const FINALITY_STAGE = {
 	"res cogitans": LEVELLING_MAXIMUM,
-	"res dominus": 57,
+	"res dominus": 60,
 }
 
 export const FRAILTY = {
@@ -86,6 +86,8 @@ export const FRAILTY = {
 		minimum: 0.01,
 	},
 }
+
+export const MAXIMUM_GEM_DROP = 7
 
 export const MONSTER_ATTACK_RATE = {
 	attenuation: 4000,
@@ -103,10 +105,10 @@ export const MONSTER_DAMAGE = {
 	attenuation: 26,
 	base: 7,
 	bonus: 0.01,
-	boss: 1.05,
+	boss: 1.075,
 	finality: {
-		"res cogitans": 2077,
-		"res dominus": 1077,
+		"res cogitans": 1777,
+		"res dominus": 777,
 	},
 	menace: {
 		maximum: 2,
@@ -119,7 +121,7 @@ export const MONSTER_HEALTH = {
 	attenuation: 19,
 	base: 18,
 	bonus: 0.02,
-	boss: 1.7,
+	boss: 1.8,
 	finality: {
 		"res cogitans": 17777,
 		"res dominus": 7777,

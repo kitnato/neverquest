@@ -122,7 +122,7 @@ export const SHIELD_SPECIFICATIONS: Record<
 	medium: {
 		block: [
 			{ maximum: 0.12, minimum: 0.1 },
-			{ maximum: 0.35, minimum: 0.33 },
+			{ maximum: 0.3, minimum: 0.28 },
 		],
 		burden: [
 			{ maximum: 7, minimum: 5 },
@@ -132,7 +132,7 @@ export const SHIELD_SPECIFICATIONS: Record<
 		price: { maximum: 4500, minimum: 4 },
 		stagger: [
 			{ maximum: 0.3, minimum: 0.25 },
-			{ maximum: 0.55, minimum: 0.53 },
+			{ maximum: 0.5, minimum: 0.45 },
 		],
 		weight: [
 			{ maximum: 5, minimum: 3 },
@@ -142,7 +142,7 @@ export const SHIELD_SPECIFICATIONS: Record<
 	small: {
 		block: [
 			{ maximum: 0.06, minimum: 0.05 },
-			{ maximum: 0.2, minimum: 0.19 },
+			{ maximum: 0.15, minimum: 0.14 },
 		],
 		burden: [
 			{ maximum: 4, minimum: 3 },
@@ -162,7 +162,7 @@ export const SHIELD_SPECIFICATIONS: Record<
 	tower: {
 		block: [
 			{ maximum: 0.25, minimum: 0.24 },
-			{ maximum: 0.55, minimum: 0.53 },
+			{ maximum: 0.40, minimum: 0.38 },
 		],
 		burden: [
 			{ maximum: 10, minimum: 8 },
@@ -172,7 +172,7 @@ export const SHIELD_SPECIFICATIONS: Record<
 		price: { maximum: 7000, minimum: 7 },
 		stagger: [
 			{ maximum: 0.15, minimum: 0.1 },
-			{ maximum: 0.3, minimum: 0.25 },
+			{ maximum: 0.25, minimum: 0.2 },
 		],
 		weight: [
 			{ maximum: 9, minimum: 6 },

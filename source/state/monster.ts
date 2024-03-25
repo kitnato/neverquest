@@ -10,6 +10,7 @@ import {
 	BOSS_STAGE_START,
 	ESSENCE,
 	FRAILTY,
+	MAXIMUM_GEM_DROP,
 	MONSTER_ATTACK_RATE,
 	MONSTER_DAMAGE,
 	MONSTER_HEALTH,
@@ -308,42 +309,52 @@ export const monsterLoot = withStateKey("monsterLoot", key =>
 					* (1 + getPerkEffect({ perk: "essenceBonus", stage: get(retirementStage) })),
 				),
 				gems: encounterValue === "boss"
-					? Array.from<undefined>({
-						length: 1 + Math.floor((stageValue - BOSS_STAGE_START) / BOSS_STAGE_INTERVAL),
-					}).reduce<number>(
-						(sum, _) =>
-							Math.random() <= (stageValue < stageMaximumValue ? lowerStage : equalStage)
-								? sum + 1
-								: sum,
-						0,
-					)
+					? Math.min(
+						Array.from<undefined>({
+							length: 1 + Math.floor((stageValue - BOSS_STAGE_START) / BOSS_STAGE_INTERVAL),
+						}).reduce<number>(
+							(sum, _) =>
+								Math.random() <= (stageValue < stageMaximumValue ? lowerStage : equalStage)
+									? sum + 1
+									: sum,
+							0,
+						),
+						MAXIMUM_GEM_DROP)
 					: 0,
 				relic: encounterValue === "boss" || get(ownedItem("knapsack")) === undefined
 					? undefined
-					: encounterValue === "res dominus" && isMementoOwned && get(ownedItem("mysterious egg")) === undefined && get(ownedItem("familiar")) === undefined && !merchantInventoryValue.some(({ name }) =>
-						["familiar", "mysterious egg"].includes(name),
+					: (
+						encounterValue === "res dominus"
+						&& isMementoOwned
+						&& get(ownedItem("mysterious egg")) === undefined
+						&& get(ownedItem("familiar")) === undefined
+						&& !merchantInventoryValue.some(({ name }) => ["familiar", "mysterious egg"].includes(name))
 					) // Mysterious egg only drops after defeating Res Dominus while carrying the Memento and if the egg and the familiar are neither carried nor sold.
 						? { ...INFUSABLES["mysterious egg"].item, ID: nanoid() }
 						// Log Entry only drops after defeating Res Dominus while carrying the Memento and if it's never been looted before.
 						: encounterValue === "res dominus" && isMementoOwned && !get(hasLootedLogEntry)
 							? { ...RELICS["[P71NQ]"].item, ID: nanoid() }
-							// Torn manuscript drops if it's neither currently carried nor sold, if the memento is carried, if the correct crew member is hired, if the associated skill hasn't been trained and if the drop chance is reached.
-							: isMementoOwned && get(ownedItem("torn manuscript")) === undefined && !merchantInventoryValue.some(({ name }) => name === "torn manuscript") && get(isHired("alchemist")) && !get(isSkillAcquired("memetics")) && Math.random() <= getFromRange({
-								factor: getSigmoid(stageValue),
-								...RELIC_DROP_CHANCE["torn manuscript"],
-							})
+							: (
+								isMementoOwned
+								&& get(ownedItem("torn manuscript")) === undefined
+								&& !merchantInventoryValue.some(({ name }) => name === "torn manuscript")
+								&& get(isHired("alchemist")) && !get(isSkillAcquired("memetics"))
+								&& Math.random() <= getFromRange({ factor: getSigmoid(stageValue), ...RELIC_DROP_CHANCE["torn manuscript"] })
+							) // Torn manuscript drops if it's neither carried nor sold, if the memento is carried, if the correct crew member is hired, if the associated skill hasn't been trained and if the drop chance is reached.
 								? { ...RELICS["torn manuscript"].item, ID: nanoid() }
-								// Dream catcher drops if it's neither currently carried nor sold, if the memento is carried, if the correct crew member is hired and if the drop chance is reached.
-								: isMementoOwned && get(ownedItem("dream catcher")) === undefined && !merchantInventoryValue.some(({ name }) => name === "dream catcher") && get(isHired("occultist")) && Math.random() <= getFromRange({
-									factor: getSigmoid(stageValue),
-									...RELIC_DROP_CHANCE["dream catcher"],
-								})
+								: (
+									isMementoOwned
+									&& get(ownedItem("dream catcher")) === undefined
+									&& !merchantInventoryValue.some(({ name }) => name === "dream catcher")
+									&& get(isHired("occultist"))
+									&& Math.random() <= getFromRange({ factor: getSigmoid(stageValue), ...RELIC_DROP_CHANCE["dream catcher"] })
+								) // Dream catcher drops if it's neither carried nor sold, if the memento is carried, if the correct crew member is hired and if the drop chance is reached.
 									? { ...RELICS["dream catcher"].item, ID: nanoid() }
-									// Memento drops if it's neither currently carried nor sold and if the drop chance is reached.
-									: !isMementoOwned && !merchantInventoryValue.some(({ name }) => name === "memento") && Math.random() <= getFromRange({
-										factor: getSigmoid(stageValue),
-										...RELIC_DROP_CHANCE.memento,
-									})
+									: (
+										!isMementoOwned
+										&& !merchantInventoryValue.some(({ name }) => name === "memento")
+										&& Math.random() <= getFromRange({ factor: getSigmoid(stageValue), ...RELIC_DROP_CHANCE.memento })
+									) // Memento drops if it's neither carried nor sold and if the drop chance is reached.
 										? { ...RELICS.memento.item, ID: nanoid() }
 										: undefined,
 			}

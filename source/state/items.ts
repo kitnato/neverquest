@@ -66,14 +66,6 @@ export const isInfusionAtMaximum = withStateKey("isInfusionAtMaximum", key =>
 
 // ATOMS
 
-export const munitions = withStateKey("munitions", key =>
-	atom({
-		default: 1,
-		effects: [handleStorage({ key })],
-		key,
-	}),
-)
-
 export const hasLootedLogEntry = withStateKey("hasLootedLogEntry", key =>
 	atom({
 		default: false,
@@ -102,6 +94,14 @@ export const isRelicEquipped = withStateKey("isRelicEquipped", key =>
 	atomFamily<boolean, Relic>({
 		default: false,
 		effects: relic => [handleStorage({ key, parameter: relic })],
+		key,
+	}),
+)
+
+export const munitions = withStateKey("munitions", key =>
+	atom({
+		default: 0,
+		effects: [handleStorage({ key })],
 		key,
 	}),
 )

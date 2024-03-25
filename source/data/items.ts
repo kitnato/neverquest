@@ -121,7 +121,7 @@ export const CONSUMABLES: Record<
 		item: {
 			ID: "",
 			name: "salve",
-			price: 80,
+			price: 200,
 			weight: 3,
 		},
 	},
@@ -143,8 +143,8 @@ export const ELEMENTALS: Record<
 	fire: {
 		ailment: "burning",
 		color: "orange",
-		damageArmor: { maximum: 2.5, minimum: 1 },
-		damageWeapon: { maximum: 1, minimum: 0.33 },
+		damageArmor: { maximum: 3, minimum: 1 },
+		damageWeapon: { maximum: 0.6, minimum: 0.15 },
 		duration: { maximum: 2500, minimum: 1200 },
 		durationCap: 7500,
 		gem: "ruby",
@@ -153,8 +153,8 @@ export const ELEMENTALS: Record<
 	ice: {
 		ailment: "frozen",
 		color: "cyan",
-		damageArmor: { maximum: 2, minimum: 0.75 },
-		damageWeapon: { maximum: 0.75, minimum: 0.2 },
+		damageArmor: { maximum: 2.5, minimum: 0.75 },
+		damageWeapon: { maximum: 0.4, minimum: 0.1 },
 		duration: { maximum: 2000, minimum: 900 },
 		durationCap: 3000,
 		gem: "sapphire",
@@ -163,8 +163,8 @@ export const ELEMENTALS: Record<
 	lightning: {
 		ailment: "shocked",
 		color: "purple",
-		damageArmor: { maximum: 1.5, minimum: 0.5 },
-		damageWeapon: { maximum: 0.5, minimum: 0.1 },
+		damageArmor: { maximum: 2, minimum: 0.5 },
+		damageWeapon: { maximum: 0.25, minimum: 0.05 },
 		duration: { maximum: 2200, minimum: 1000 },
 		durationCap: 5000,
 		gem: "amethyst",
@@ -181,12 +181,12 @@ export const GEM_BASE = {
 export const GEM_DROP_CHANCE = { equalStage: 1, lowerStage: 0.33 }
 export const GEM_ENHANCEMENT_RANGE = { maximum: 1, minimum: 0.1 }
 export const GEM_FITTING_COST_RANGE = { maximum: 150, minimum: 10 }
+export const GEMS_MAXIMUM = 3
 export const GEMS: Record<Gem, { elemental: Elemental, Icon: SVGIcon }> = {
 	amethyst: { elemental: "lightning", Icon: IconAmethyst },
 	ruby: { elemental: "fire", Icon: IconRuby },
 	sapphire: { elemental: "ice", Icon: IconSapphire },
 }
-export const GEMS_MAXIMUM = 5
 
 export const INFUSION_BASE = 2
 
@@ -368,7 +368,7 @@ export const RELICS: Record<
 		},
 	},
 	"memento": {
-		description: "Lost memories kept safe unlock pathways to remarkable discoveries ...",
+		description: "Lost memories held close unlock pathways to remarkable discoveries ...",
 		Icon: IconMemento,
 		item: {
 			ID: "",

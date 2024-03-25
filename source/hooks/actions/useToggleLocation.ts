@@ -28,9 +28,10 @@ export function useToggleLocation() {
 					if (get(isStageCompleted) && get(stage) === get(stageMaximum)) {
 						reset(blacksmithOptions)
 						reset(fletcherOptions)
+
+						increaseStage()
 					}
 
-					increaseStage()
 					resetWilderness()
 
 					set(location, "wilderness")

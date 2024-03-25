@@ -52,7 +52,7 @@ export function ReserveMeter({ PrefixIcon, reserve }: { PrefixIcon?: SVGIcon, re
 
 	const { maximumDelta } = RESERVES[reserve]
 	const penalty = Math.round(
-		((reserveMaximumValue - reserveMaximumAilingValue) / reserveMaximumValue) * PERCENTAGE_POINTS,
+		(reserveMaximumValue - reserveMaximumAilingValue) / reserveMaximumValue * PERCENTAGE_POINTS,
 	)
 
 	useDeltaText({
@@ -113,7 +113,7 @@ export function ReserveMeter({ PrefixIcon, reserve }: { PrefixIcon?: SVGIcon, re
 		<LabelledProgressBar
 			attachment="below"
 			sibling={isAiling && <ProgressBar animated={isHealth} key={2} now={penalty} striped variant="secondary" />}
-			value={(reserveValue / reserveMaximumAilingValue) * (PERCENTAGE_POINTS - penalty)}
+			value={reserveValue / reserveMaximumAilingValue * (PERCENTAGE_POINTS - penalty)}
 		>
 			<Stack direction="horizontal" gap={1}>
 				{PrefixIcon !== undefined && <IconImage className="small stencilled" Icon={PrefixIcon} />}

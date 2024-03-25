@@ -165,7 +165,7 @@ export function SaveLoad() {
 													setResult({ message: "Invalid file.", status: false })
 												}
 												else {
-													setResult({ message: "Reloading ...", status: true })
+													setResult({ message: "Refreshing ...", status: true })
 
 													ls.set(KEY_SESSION, session)
 													location.reload()

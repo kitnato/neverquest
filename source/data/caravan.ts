@@ -141,10 +141,9 @@ export const CREW: Record<
 			[BLIGHT.requiredStage - 1]:
 				"These abominations are becoming ever more pestilent. Be prepared.",
 			[BLIGHT.requiredStage]: "Your bravery is unmatched. Will it be enough?",
-			56: "Dark tides are impending.",
-			57: "The portents are truly dire ...",
-			58: "Delving further must be our salvation.",
-			76: "I fear the end is imminent.",
+			[FINALITY_STAGE["res dominus"] - 1]: "Dark tides are impending.",
+			[FINALITY_STAGE["res dominus"]]: "The portents are truly dire ...",
+			[FINALITY_STAGE["res dominus"] + 1]: "Delving further must be our salvation.",
 			[LEVELLING_MAXIMUM - 1]: "Something's wrong.",
 			[LEVELLING_MAXIMUM]: "How are you still here?",
 			[LEVELLING_MAXIMUM + 4]: "Please go back to where you came from.",

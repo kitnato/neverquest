@@ -85,8 +85,8 @@ export const TRAITS: Record<
 		Icon: IconColossus,
 	},
 	executioner: {
-		description: "# Critical strikes with a # two-handed weapon always perform an # execution.",
-		descriptionIcons: [IconCriticalRating, IconTwoHanded, IconExecution],
+		description: "Chance to execute equivalent to the # threshold occurs on # critical strikes with a # two-handed melee weapon.",
+		descriptionIcons: [IconExecution, IconCriticalRating, IconTwoHanded],
 		Icon: IconExecutioner,
 	},
 	inoculated: {

@@ -493,12 +493,14 @@ export function getShieldRanges({ factor, gearClass }: { factor: number, gearCla
 }
 
 // https://en.wikipedia.org/wiki/Sigmoid_function
-// f(0-1) = ~0, f(38) = ~0.5, f(50) = ~0.75, f(77) = ~1
+// f(0|1) = 0, f(38) = ~0.5, f(50) = ~0.75, f(77) = ~1
 export function getSigmoid(x: number) {
-	return (
-		(1 / (1 + Math.pow(Math.E, -0.15 * (x - 45)) - 0.011) - 0.0012)
-		* (9 * Math.pow(Math.E, -(Math.LN2 / 5) * x) + 1)
-	)
+	return [0, 1].includes(x)
+		? 0
+		: (
+			(1 / (1 + Math.pow(Math.E, -0.15 * (x - 45)) - 0.011) - 0.0012)
+			* (9 * Math.pow(Math.E, -(Math.LN2 / 5) * x) + 1)
+		)
 }
 
 export function getSnapshotGetter({ getLoadable }: Snapshot) {

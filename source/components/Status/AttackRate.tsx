@@ -1,5 +1,6 @@
+import { useEffect } from "react"
 import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap"
-import { useRecoilValue, useSetRecoilState } from "recoil"
+import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil"
 
 import { DetailsTable } from "@neverquest/components/DetailsTable"
 import { IconDisplay } from "@neverquest/components/IconDisplay"
@@ -36,6 +37,7 @@ export function AttackRate() {
 	const isRecoveringValue = useRecoilValue(isRecovering)
 	const isShowingAttackRate = useRecoilValue(isShowing("attackRate"))
 	const weaponValue = useRecoilValue(weapon)
+	const resetAttackDuration = useResetRecoilState(attackDuration)
 	const setAttackDuration = useSetRecoilState(attackDuration)
 
 	const attack = useAttack()
@@ -58,6 +60,12 @@ export function AttackRate() {
 		format: "time",
 		state: attackRate,
 	})
+
+	useEffect(() => {
+		if (!canAttackOrParryValue) {
+			resetAttackDuration()
+		}
+	}, [canAttackOrParryValue, resetAttackDuration])
 
 	if (isShowingAttackRate) {
 		return (

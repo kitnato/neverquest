@@ -2,7 +2,6 @@ import { atom, atomFamily, selectorFamily } from "recoil"
 
 import { LEVELLING_MAXIMUM } from "@neverquest/data/general"
 import {
-	AMMUNITION_CAPACITY,
 	INFUSABLES,
 	INFUSION_BASE,
 	INFUSION_DELTA,
@@ -67,17 +66,9 @@ export const isInfusionAtMaximum = withStateKey("isInfusionAtMaximum", key =>
 
 // ATOMS
 
-export const ammunition = withStateKey("ammunition", key =>
+export const munitions = withStateKey("munitions", key =>
 	atom({
-		default: 0,
-		effects: [handleStorage({ key })],
-		key,
-	}),
-)
-
-export const ammunitionCapacity = withStateKey("ammunitionCapacity", key =>
-	atom({
-		default: AMMUNITION_CAPACITY,
+		default: 1,
 		effects: [handleStorage({ key })],
 		key,
 	}),

@@ -5,8 +5,8 @@ import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { ArmorName } from "@neverquest/components/Inventory/Armor/ArmorName"
 import { InfusionLevelDisplay } from "@neverquest/components/Inventory/Inheritable/Infusion/InfusionLevelDisplay"
 import { LacrimatoryStatus } from "@neverquest/components/Inventory/Inheritable/LacrimatoryStatus"
+import { MunitionsStatus } from "@neverquest/components/Inventory/Inheritable/MunitionsStatus"
 import { ItemName } from "@neverquest/components/Inventory/ItemName"
-import { AmmunitionPouchStatus } from "@neverquest/components/Inventory/Offhand/AmmunitionPouchStatus"
 import { ShieldName } from "@neverquest/components/Inventory/Offhand/ShieldName"
 import { WeaponName } from "@neverquest/components/Inventory/Weapon/WeaponName"
 import { CONSUMABLES, GEMS, INFUSABLES, RELICS } from "@neverquest/data/items"
@@ -93,9 +93,9 @@ export function ItemDisplay({
 		return (
 			<IconDisplay
 				description={
-					name === "ammunition pouch"
+					name === "munitions satchel"
 						? (
-							<AmmunitionPouchStatus />
+							<MunitionsStatus />
 						)
 						: name === "lacrimatory"
 							? (

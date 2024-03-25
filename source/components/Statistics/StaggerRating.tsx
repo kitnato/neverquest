@@ -65,7 +65,8 @@ export function StaggerRating() {
 														format: "time",
 														value: stabilityValue,
 													})}
-                          &nbsp;duration
+													{" "}
+													duration
 												</span>
 											</td>
 										</tr>

@@ -71,56 +71,7 @@ export const CREW_MEMBER_TYPES = [
 export type CrewMember = (typeof CREW_MEMBER_TYPES)[number]
 
 export type Delta =
-	| Attribute
-	| Mastery
-	| QuestBonus
-	| QuestClass
-	| Reserve
-	| "ammunition"
-	| "ammunitionCapacity"
-	| "attackRate"
-	| "attributePoints"
-	| "bleedRating"
-	| "blockChance"
-	| "butcheryProgress"
-	| "criticalRating"
-	| "crueltyProgress"
-	| "damage"
-	| "damagePerSecond"
-	| "deflectionChance"
-	| "dodgeChance"
-	| "encumbranceMaximum"
-	| "essence"
-	| "essenceLoot"
-	| "executionThreshold"
-	| "finesseProgress"
-	| "frailty"
-	| "hatchingProgress"
-	| "healthMaximum"
-	| "healthRegenerationRate"
-	| "infusionLevel"
-	| "lifeLeech"
-	| "marksmanshipProgress"
-	| "mightProgress"
-	| "monsterAttackRate"
-	| "monsterDamage"
-	| "monsterHealth"
-	| "monsterHealthMaximum"
-	| "parryRating"
-	| "powerLevel"
-	| "progress"
-	| "protection"
-	| "rage"
-	| "range"
-	| "recoveryRate"
-	| "resilienceProgress"
-	| "stabilityProgress"
-	| "stage"
-	| "staggerRating"
-	| "staminaMaximum"
-	| "staminaRegenerationRate"
-	| "stunRating"
-	| "thorns"
+	Attribute | Mastery | QuestBonus | QuestClass | Reserve | "attackRate" | "attributePoints" | "bleedRating" | "blockChance" | "butcheryProgress" | "criticalRating" | "crueltyProgress" | "damage" | "damagePerSecond" | "deflectionChance" | "dodgeChance" | "encumbranceMaximum" | "essence" | "essenceLoot" | "executionThreshold" | "finesseProgress" | "frailty" | "hatchingProgress" | "healthMaximum" | "healthRegenerationRate" | "infusionLevel" | "lifeLeech" | "marksmanshipProgress" | "mightProgress" | "monsterAttackRate" | "monsterDamage" | "monsterHealth" | "monsterHealthMaximum" | "munitions" | "parryRating" | "powerLevel" | "progress" | "protection" | "rage" | "range" | "recoveryRate" | "resilienceProgress" | "stabilityProgress" | "stage" | "staggerRating" | "staminaMaximum" | "staminaRegenerationRate" | "stunRating" | "thorns"
 
 export const ELEMENTAL_TYPES = ["lightning", "fire", "ice"] as const
 export type Elemental = (typeof ELEMENTAL_TYPES)[number]
@@ -128,7 +79,7 @@ export type Elemental = (typeof ELEMENTAL_TYPES)[number]
 export const FINALITY_TYPES = ["res cogitans", "res dominus"] as const
 export type Finality = (typeof FINALITY_TYPES)[number]
 
-export type FletcherOption = "ammunition" | "ranged"
+export type FletcherOption = "munitions" | "ranged"
 
 export const GEAR_TYPES = ["weapon", "armor", "shield"] as const
 export type Gear = (typeof GEAR_TYPES)[number]
@@ -273,8 +224,6 @@ export type StateKey =
 	| "activeControl"
 	| "activeCrewMember"
 	| "activeQuests"
-	| "ammunition"
-	| "ammunitionCapacity"
 	| "areAttributesAffordable"
 	| "attackDuration"
 	| "attackRate"
@@ -332,7 +281,7 @@ export type StateKey =
 	| "frailty"
 	| "gems"
 	| "hasDefeatedFinality"
-	| "hasEnoughAmmunition"
+	| "hasEnoughMunitions"
 	| "hasFlatlined"
 	| "hasGeneratedOffer"
 	| "hasLootedLogEntry"
@@ -400,6 +349,7 @@ export type StateKey =
 	| "monsterLoot"
 	| "monsterName"
 	| "monsterRegenerationDuration"
+	| "munitions"
 	| "name"
 	| "notifyOverEncumbrance"
 	| "ownedItem"
@@ -462,7 +412,7 @@ export type Trait = (typeof TRAIT_TYPES)[number]
 
 export const RELIC_TYPES = [
 	"[P71NQ]",
-	"ammunition pouch",
+	"munitions satchel",
 	"automincer",
 	"compass",
 	"ender hook",

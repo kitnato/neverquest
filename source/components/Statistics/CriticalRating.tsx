@@ -108,7 +108,8 @@ export function CriticalRating() {
 
 												<span>
 													{formatNumber({ value: criticalStrikeValue })}
-													&nbsp;damage
+													{" "}
+													damage
 												</span>
 											</td>
 										</tr>

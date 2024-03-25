@@ -1,5 +1,6 @@
 import type { ArmorClass, ShieldClass, WeaponClass } from "@kitnato/locran/build/types"
 
+import { LEVELLING_MAXIMUM } from "@neverquest/data/general"
 import IconArmorHeavy from "@neverquest/icons/armor-heavy.svg?react"
 import IconArmorLight from "@neverquest/icons/armor-light.svg?react"
 import IconReinforced from "@neverquest/icons/armor-reinforced.svg?react"
@@ -181,15 +182,11 @@ export const SHIELD_SPECIFICATIONS: Record<
 }
 
 export const WEAPON_BASE: GearRangeBase & {
-	ammunitionCost: [GeneratorRange, GeneratorRange]
 	damage: [GeneratorRange, GeneratorRange]
+	munitionsCost: [GeneratorRange, GeneratorRange]
 	range: [GeneratorRange, GeneratorRange]
 	rate: [GeneratorRange, GeneratorRange]
 } = {
-	ammunitionCost: [
-		{ maximum: 1, minimum: 1 },
-		{ maximum: 20, minimum: 18 },
-	],
 	burden: [
 		{ maximum: 2, minimum: 1 },
 		{ maximum: 50, minimum: 45 },
@@ -197,6 +194,10 @@ export const WEAPON_BASE: GearRangeBase & {
 	damage: [
 		{ maximum: 15, minimum: 13 },
 		{ maximum: 900, minimum: 800 },
+	],
+	munitionsCost: [
+		{ maximum: 2, minimum: 1 },
+		{ maximum: LEVELLING_MAXIMUM, minimum: 75 },
 	],
 	price: { maximum: 8000, minimum: 1 },
 	range: [

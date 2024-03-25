@@ -104,19 +104,19 @@ export function generateRangedWeapon({
 	level: number
 }): Ranged {
 	const factor = getSigmoid(level)
-	const { abilityChance, ammunitionCost, burden, damage, range, rate, weight } = getRangedRanges({
+	const { abilityChance, burden, damage, munitionsCost, range, rate, weight } = getRangedRanges({
 		factor,
 		gearClass,
 	})
 
 	return {
 		abilityChance: getFromRange(abilityChance),
-		ammunitionCost: Math.round(getFromRange(ammunitionCost)),
 		burden: Math.round(getFromRange(burden)),
 		damage: Math.round(getFromRange(damage)),
 		gearClass,
 		ID: nanoid(),
 		level,
+		munitionsCost: Math.round(getFromRange(munitionsCost)),
 		name: generateArtifact({
 			query: {
 				artifactClass: gearClass,

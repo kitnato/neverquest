@@ -4,7 +4,7 @@ import { LABEL_UNKNOWN } from "@neverquest/data/general"
 import { handleStorage } from "@neverquest/state/effects/handleStorage"
 import { armor, shield, weapon } from "@neverquest/state/gear"
 import { ownedItem } from "@neverquest/state/inventory"
-import { ammunition } from "@neverquest/state/items"
+import { munitions } from "@neverquest/state/items"
 import { health, stamina } from "@neverquest/state/reserves"
 import { isTraitAcquired } from "@neverquest/state/traits"
 import { isRanged } from "@neverquest/types/type-guards"
@@ -44,12 +44,12 @@ export const canResurrect = withStateKey("canResurrect", key =>
 	}),
 )
 
-export const hasEnoughAmmunition = withStateKey("hasEnoughAmmunition", key =>
+export const hasEnoughMunitions = withStateKey("hasEnoughMunitions", key =>
 	selector({
 		get: ({ get }) => {
 			const weaponValue = get(weapon)
 
-			return isRanged(weaponValue) ? get(ammunition) >= weaponValue.ammunitionCost : true
+			return isRanged(weaponValue) ? get(munitions) >= weaponValue.munitionsCost : true
 		},
 		key,
 	}),

@@ -3,10 +3,9 @@ import { useRecoilCallback } from "recoil"
 import { useToggleEquipItem } from "@neverquest/hooks/actions/useToggleEquipItem"
 import { knapsackCapacity } from "@neverquest/state/inventory"
 import {
-	ammunition,
-	ammunitionCapacity,
 	infusion,
 	infusionLevel,
+	munitions,
 	tears,
 } from "@neverquest/state/items"
 import type { InventoryItem } from "@neverquest/types"
@@ -30,9 +29,8 @@ export function useNeutralize() {
 
 					toggleEquipItem({ forceUnequip: true, item })
 
-					if (name === "ammunition pouch") {
-						reset(ammunition)
-						reset(ammunitionCapacity)
+					if (name === "munitions satchel") {
+						reset(munitions)
 					}
 
 					if (name === "knapsack") {

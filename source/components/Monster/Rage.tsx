@@ -30,13 +30,14 @@ export function Rage() {
 					overlay={(
 						<Popover>
 							<PopoverBody>
-								<span>Once enraged,</span>
-								&nbsp;
+								<span>Once enraged, </span>
+
 								<IconImage className="small" Icon={IconMonsterAttackRate} />
-								&nbsp;
+
 								<span>
+									{" "}
 									attack rate is hastened by
-									&nbsp;
+									{" "}
 									{formatNumber({ decimals: 0, format: "percentage", value: effect })}
 									.
 								</span>

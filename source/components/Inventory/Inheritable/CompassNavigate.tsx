@@ -44,7 +44,7 @@ export function CompassNavigate() {
 
 		if (stageName !== undefined) {
 			return (
-				<Stack direction="horizontal" gap={1}>
+				<Stack className="d-inline-flex" direction="horizontal" gap={1}>
 					<span>
 						Stage
 						{" "}

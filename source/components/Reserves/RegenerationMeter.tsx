@@ -50,7 +50,8 @@ export function RegenerationMeter({ reserve }: { reserve: Reserve }) {
 						<Stack>
 							<span>
 								{capitalizeAll(reserve)}
-								&nbsp;regeneration
+								{" "}
+								regeneration
 							</span>
 
 							<IconDisplay Icon={Icon} iconProps={{ className: "small" }}>
@@ -70,7 +71,8 @@ export function RegenerationMeter({ reserve }: { reserve: Reserve }) {
 				return (
 					<Stack>
 						<span>
-							Regenerating&nbsp;
+							Regenerating
+							{" "}
 							{reserve}
 						</span>
 

@@ -81,7 +81,7 @@ export type QuestData = {
 export type QuestNotification = QuestData & { ID: string }
 
 export type Ranged = WeaponBase & {
-	ammunitionCost: number
+	munitionsCost: number
 	range: number
 }
 

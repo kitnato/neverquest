@@ -116,7 +116,8 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
 											<span>
 												+
 												{formatNumber({ decimals: 0, format: "percentage", value: regeneration })}
-												&nbsp;(
+												{" "}
+												(
 												{formatNumber({ value: regenerationAmountValue })}
 												)
 											</span>

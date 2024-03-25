@@ -15,7 +15,6 @@ export type IconImageProperties = {
 	Icon: SVGIcon
 	isFlipped?: boolean
 	isMirrored?: boolean
-	onClick?: () => void
 	overlayPlacement?: Placement
 	tooltip?: string
 }

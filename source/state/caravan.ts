@@ -105,7 +105,6 @@ export const fletcherInventory = withStateKey("fletcherInventory", key =>
 export const fletcherOptions = withStateKey("fletcherOptions", key =>
 	atom<{
 		activeTab: FletcherOption
-		ammunition: number
 		ranged: {
 			gearClass: WeaponClass
 			level: number
@@ -113,7 +112,6 @@ export const fletcherOptions = withStateKey("fletcherOptions", key =>
 	}>({
 		default: {
 			activeTab: "ranged",
-			ammunition: 0,
 			ranged: {
 				gearClass: "blunt",
 				level: 0,

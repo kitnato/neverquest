@@ -11,11 +11,11 @@ import { bleed, bleedChance, stunChance } from "@neverquest/state/ailments"
 import {
 	attackDuration,
 	canAttackOrParry,
-	hasEnoughAmmunition,
+	hasEnoughMunitions,
 	isAttacking,
 } from "@neverquest/state/character"
 import { weapon } from "@neverquest/state/gear"
-import { ammunition } from "@neverquest/state/items"
+import { munitions } from "@neverquest/state/items"
 import { masteryStatistic } from "@neverquest/state/masteries"
 import {
 	distance,
@@ -56,18 +56,18 @@ export function useAttack() {
 				const get = getSnapshotGetter(snapshot)
 
 				const canAttackOrParryValue = get(canAttackOrParry)
-				const hasEnoughAmmunitionValue = get(hasEnoughAmmunition)
+				const hasEnoughMunitionsValue = get(hasEnoughMunitions)
 				const lifeLeechValue = get(lifeLeech)
 				const monsterElementValue = get(monsterElement)
 				const monsterHealthValue = get(monsterHealth)
 				const weaponValue = get(weapon)
 				const isWeaponRanged = isRanged(weaponValue)
-				const hasInflictedCritical
-          = (get(isSkillAcquired("assassination"))
-          && isWeaponRanged
-          && get(isTraitAcquired("sharpshooter"))
-          && get(distance) > 0)
-          || Math.random() <= get(criticalChance)
+				const hasInflictedCritical = (
+					get(isSkillAcquired("assassination"))
+					&& isWeaponRanged
+					&& get(isTraitAcquired("sharpshooter"))
+					&& get(distance) > 0
+				) || Math.random() <= get(criticalChance)
 
 				let totalDamage = Math.round(hasInflictedCritical ? get(criticalStrike) : get(damage))
 
@@ -77,7 +77,7 @@ export function useAttack() {
 					set(attackDuration, get(attackRate))
 				}
 
-				if (canAttackOrParryValue && hasEnoughAmmunitionValue) {
+				if (canAttackOrParryValue && hasEnoughMunitionsValue) {
 					if (weaponValue.burden > 0) {
 						changeStamina({ value: -weaponValue.burden })
 					}
@@ -91,13 +91,15 @@ export function useAttack() {
 					}
 
 					if (isWeaponRanged) {
-						set(ammunition, currentAmmunition => currentAmmunition - weaponValue.ammunitionCost)
+						set(munitions, currentMunitions => currentMunitions - weaponValue.munitionsCost)
 					}
 
 					if (
-						(isMelee(weaponValue)
-						&& weaponValue.grip === "two-handed"
-						&& monsterHealthValue / get(monsterHealthMaximum) <= get(executionThreshold))
+						(
+							isMelee(weaponValue)
+							&& weaponValue.grip === "two-handed"
+							&& monsterHealthValue / get(monsterHealthMaximum) <= get(executionThreshold)
+						)
 						|| (hasInflictedCritical && get(isTraitAcquired("executioner")))
 					) {
 						totalDamage = monsterHealthValue
@@ -196,19 +198,13 @@ export function useAttack() {
 						progressQuest({ quest: "exhausting" })
 					}
 
-					if (isWeaponRanged && !hasEnoughAmmunitionValue) {
+					if (!hasEnoughMunitionsValue) {
 						addDelta({
-							contents: [
-								{
-									color: "text-secondary",
-									value: "INSUFFICIENT AMMUNITION",
-								},
-								{
-									color: "text-danger",
-									value: `(${weaponValue.ammunitionCost})`,
-								},
-							],
-							delta: "ammunition",
+							contents: {
+								color: "text-secondary",
+								value: "INSUFFICIENT MUNITIONS",
+							},
+							delta: "munitions",
 						})
 					}
 				}

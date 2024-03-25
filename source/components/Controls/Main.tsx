@@ -23,7 +23,7 @@ import IconRetreat from "@neverquest/icons/retreat.svg?react"
 import { areAttributesAffordable } from "@neverquest/state/attributes"
 import {
 	canResurrect,
-	hasEnoughAmmunition,
+	hasEnoughMunitions,
 	isAttacking,
 	isIncapacitated,
 } from "@neverquest/state/character"
@@ -38,7 +38,7 @@ export function Main() {
 	const areAttributesAffordableValue = useRecoilValue(areAttributesAffordable)
 	const canResurrectValue = useRecoilValue(canResurrect)
 	const encounterValue = useRecoilValue(encounter)
-	const hasEnoughAmmunitionValue = useRecoilValue(hasEnoughAmmunition)
+	const hasEnoughMunitionsValue = useRecoilValue(hasEnoughMunitions)
 	const isAttackingValue = useRecoilValue(isAttacking)
 	const isHealthLowValue = useRecoilValue(isHealthLow)
 	const isIncapacitatedValue = useRecoilValue(isIncapacitated)
@@ -76,7 +76,7 @@ export function Main() {
 		}
 
 		return {
-			animation: (areAttributesAffordableValue || !hasEnoughAmmunitionValue || isHealthLowValue || isMonsterDeadValue)
+			animation: (areAttributesAffordableValue || !hasEnoughMunitionsValue || isHealthLowValue || isMonsterDeadValue)
 				? undefined
 				: pulseAnimation,
 			Icon: IconAttack,

@@ -39,7 +39,8 @@ export function PoisonRating() {
 											<Stack direction="horizontal" gap={1}>
 												<span>
 													{formatNumber({ format: "percentage", value: poisonChanceValue })}
-&nbsp;on
+													{" "}
+													on
 												</span>
 
 												<IconImage className="small" Icon={IconMonsterAttackRate} />
@@ -86,8 +87,8 @@ export function PoisonRating() {
 					<span>
 						{formatNumber({
 							value:
-                ((poisonChanceValue + poisonMagnitudeValue) * poisonLengthValue)
-                / PERCENTAGE_POINTS,
+								((poisonChanceValue + poisonMagnitudeValue) * poisonLengthValue)
+								/ PERCENTAGE_POINTS,
 						})}
 					</span>
 				</OverlayTrigger>

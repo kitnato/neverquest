@@ -41,7 +41,8 @@ export function BlightChance() {
 											<Stack direction="horizontal" gap={1}>
 												<span>
 													{formatNumber({ format: "percentage", value: blightChanceValue })}
-													&nbsp;on
+													{" "}
+													on
 												</span>
 
 												<IconDisplay

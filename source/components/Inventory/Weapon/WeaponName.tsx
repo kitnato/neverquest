@@ -12,8 +12,8 @@ import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail"
 import { type WEAPON_NONE, WEAPON_SPECIFICATIONS } from "@neverquest/data/gear"
 import { LABEL_UNKNOWN } from "@neverquest/data/general"
 import { WEAPON_ABILITY_SKILLS } from "@neverquest/data/skills"
-import IconAmmunition from "@neverquest/icons/ammunition.svg?react"
 import IconGrip from "@neverquest/icons/grip.svg?react"
+import IconMunitions from "@neverquest/icons/munitions.svg?react"
 import IconRange from "@neverquest/icons/range.svg?react"
 import IconWeaponAttackRate from "@neverquest/icons/weapon-attack-rate.svg?react"
 import IconWeaponDamagePerSecond from "@neverquest/icons/weapon-damage-per-second.svg?react"
@@ -175,12 +175,12 @@ export function WeaponName({
 
 									<tr>
 										<td>
-											<span>Ammunition cost:</span>
+											<span>Munitions cost:</span>
 										</td>
 
 										<td>
-											<IconDisplay Icon={IconAmmunition} iconProps={{ className: "small" }}>
-												<span>{formatNumber({ value: weapon.ammunitionCost })}</span>
+											<IconDisplay Icon={IconMunitions} iconProps={{ className: "small" }}>
+												<span>{formatNumber({ value: weapon.munitionsCost })}</span>
 											</IconDisplay>
 										</td>
 									</tr>

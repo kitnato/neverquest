@@ -1,9 +1,8 @@
-import { FRAMERATE } from "@neverquest/data/general"
+import { FRAMERATE, LEVELLING_MAXIMUM } from "@neverquest/data/general"
 import IconAlchemist from "@neverquest/icons/alchemist.svg?react"
 import IconAmethyst from "@neverquest/icons/amethyst.svg?react"
-import IconAmmunitionPouch from "@neverquest/icons/ammunition-pouch.svg?react"
-import IconAmmunition from "@neverquest/icons/ammunition.svg?react"
 import IconAntidote from "@neverquest/icons/antidote.svg?react"
+import IconAttackRate from "@neverquest/icons/attack-rate.svg?react"
 import IconAttack from "@neverquest/icons/attack.svg?react"
 import IconAutomincer from "@neverquest/icons/automincer.svg?react"
 import IconBandages from "@neverquest/icons/bandages.svg?react"
@@ -35,6 +34,8 @@ import IconLoot from "@neverquest/icons/loot.svg?react"
 import IconLooting from "@neverquest/icons/looting.svg?react"
 import IconMemento from "@neverquest/icons/memento.svg?react"
 import IconMonsterLurking from "@neverquest/icons/monster-lurking.svg?react"
+import IconMunitionsSatchel from "@neverquest/icons/munitions-satchel.svg?react"
+import IconMunitions from "@neverquest/icons/munitions.svg?react"
 import IconMysteriousEgg from "@neverquest/icons/mysterious-egg.svg?react"
 import IconNavigation from "@neverquest/icons/navigation.svg?react"
 import IconPhylactery from "@neverquest/icons/phylactery.svg?react"
@@ -64,8 +65,6 @@ import type {
 	Infusable,
 	Relic,
 } from "@neverquest/types/unions"
-
-export const AMMUNITION_CAPACITY = 100
 
 export const CONSUMABLES: Record<
 	Consumable,
@@ -206,8 +205,8 @@ export const INFUSABLES: Record<
 > = {
 	"eldritch codex": {
 		delta: "lifeLeech",
-		description: "Attacks return a fraction of # total damage as # health.",
-		descriptionIcons: [IconDamage, IconHealth],
+		description: "# Attacks return a fraction of # total damage as # health.",
+		descriptionIcons: [IconAttackRate, IconDamage, IconHealth],
 		EffectIcon: IconLifeLeech,
 		Icon: IconEldritchCodex,
 		item: {
@@ -240,6 +239,12 @@ export const INFUSABLES: Record<
 
 export const KNAPSACK_CAPACITY = 20
 
+export const MUNITIONS = {
+	amount: 1,
+	maximum: LEVELLING_MAXIMUM,
+	price: 3,
+}
+
 export const RELIC_DROP_CHANCE = {
 	"dream catcher": { maximum: 0.1, minimum: 0.03 },
 	"memento": { maximum: 0.1, minimum: 0.01 },
@@ -261,17 +266,6 @@ export const RELICS: Record<
 			name: "[P71NQ]",
 			price: 140_014,
 			weight: 14,
-		},
-	},
-	"ammunition pouch": {
-		description: "Stores # ammunition for # ranged weapons.",
-		descriptionIcons: [IconAmmunition, IconRanged],
-		Icon: IconAmmunitionPouch,
-		item: {
-			ID: "",
-			name: "ammunition pouch",
-			price: 300,
-			weight: 6,
 		},
 	},
 	"automincer": {
@@ -381,6 +375,17 @@ export const RELICS: Record<
 			name: "memento",
 			price: 154,
 			weight: 2,
+		},
+	},
+	"munitions satchel": {
+		description: "Stores # munitions for # ranged weapons.",
+		descriptionIcons: [IconMunitions, IconRanged],
+		Icon: IconMunitionsSatchel,
+		item: {
+			ID: "",
+			name: "munitions satchel",
+			price: 300,
+			weight: 6,
 		},
 	},
 	"thaumaturgic goggles": {

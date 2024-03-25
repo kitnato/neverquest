@@ -1,5 +1,6 @@
 import { Stack } from "react-bootstrap"
 import { IconImage } from "@neverquest/components/IconImage"
+import { LABEL_SEPARATOR } from "@neverquest/data/general"
 import { ELEMENTALS, GEMS } from "@neverquest/data/items"
 import IconArmor from "@neverquest/icons/armor.svg?react"
 import IconGearLevel from "@neverquest/icons/gear-level.svg?react"
@@ -42,7 +43,9 @@ export function GemDescription({ gem }: { gem: Gem }) {
 				<Stack className="justify-content-center" direction="horizontal" gap={1}>
 					<IconImage className="small" Icon={IconOneHanded} />
 
-					<span>: bonus to</span>
+					{LABEL_SEPARATOR}
+
+					<span>bonus to</span>
 
 					<IconImage className="small" Icon={IconWeaponDamage} />
 
@@ -52,7 +55,9 @@ export function GemDescription({ gem }: { gem: Gem }) {
 				<Stack className="justify-content-center" direction="horizontal" gap={1}>
 					<IconImage className="small" Icon={IconArmor} />
 
-					<span>: grants</span>
+					{LABEL_SEPARATOR}
+
+					<span>grants</span>
 
 					<IconImage className="small" Icon={IconThorns} />
 
@@ -66,7 +71,9 @@ export function GemDescription({ gem }: { gem: Gem }) {
 				<Stack className="justify-content-center" direction="horizontal" gap={1}>
 					<IconImage className="small" Icon={IconShield} />
 
-					<span>: bonus to all</span>
+					{LABEL_SEPARATOR}
+
+					<span>bonus to all</span>
 
 					<IconImage className="small" Icon={Icon} />
 

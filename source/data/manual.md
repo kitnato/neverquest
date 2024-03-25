@@ -250,7 +250,7 @@ Crafts [armor](#armor), [melee weapons](#melee-weapons) and [shields](#shields).
 
 #### Fletcher
 
-Crafts [ranged weapons](#ranged-weapons) and sells ammunition.
+Crafts [ranged weapons](#ranged-weapons) and sells munitions.
 
 Requires the [archery](#archery) skill.
 
@@ -272,7 +272,7 @@ Offers purging rituals, such as resetting your [power level](#attributes) that r
 
 #### Tailor
 
-Sells upgrades for increasing maximum [encumbrance](#encumbrance). Also offers expansion of the [ammunition pouch](#ranged-weapons).
+Sells upgrades for increasing maximum [encumbrance](#encumbrance). Also offers expansion of the [munitions satchel](#ranged-weapons).
 
 #### Witch
 
@@ -353,7 +353,7 @@ Also provides a chance to [execute](#execution-threshold) monsters when at or un
 
 Also provides a certain [range](#range) that delays contact with the monster.
 
-Requires finite ammunition as part of the second slot, which can be purchased from the [fletcher](#fletcher). Also requires the [archery](#archery) skill.
+Requires finite munitions as part of the second slot, which can be purchased from the [fletcher](#fletcher). Also requires the [archery](#archery) skill.
 
 ##### Weapon class
 

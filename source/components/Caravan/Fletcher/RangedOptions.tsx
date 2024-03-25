@@ -15,8 +15,8 @@ import {
 } from "@neverquest/data/gear"
 import { LABEL_SKILL_REQUIRED, LABEL_UNKNOWN, LEVELLING_MAXIMUM } from "@neverquest/data/general"
 import { WEAPON_ABILITY_SKILLS } from "@neverquest/data/skills"
-import IconAmmunition from "@neverquest/icons/ammunition.svg?react"
 import IconBurden from "@neverquest/icons/burden.svg?react"
+import IconMunitions from "@neverquest/icons/munitions.svg?react"
 import IconRange from "@neverquest/icons/range.svg?react"
 import IconUnknown from "@neverquest/icons/unknown.svg?react"
 import IconWeaponAttackRate from "@neverquest/icons/weapon-attack-rate.svg?react"
@@ -51,7 +51,7 @@ export function RangedOptions() {
 	const isSkillAcquiredAbility = useRecoilValue(isSkillAcquired(WEAPON_ABILITY_SKILLS[ability]))
 
 	const factor = getSigmoid(level)
-	const { abilityChance, ammunitionCost, burden, damage, range, rate, weight } = getRangedRanges({
+	const { abilityChance, burden, damage, munitionsCost, range, rate, weight } = getRangedRanges({
 		factor,
 		gearClass,
 	})
@@ -147,15 +147,15 @@ export function RangedOptions() {
 				</IconDisplay>
 
 				<IconDisplay
-					Icon={IconAmmunition}
+					Icon={IconMunitions}
 					iconProps={{ overlayPlacement: "left" }}
-					tooltip="Ammunition cost"
+					tooltip="Munitions cost"
 				>
 					<span>
-						{formatNumber({ value: ammunitionCost.minimum })}
+						{formatNumber({ value: munitionsCost.minimum })}
 						{" - "}
 						{formatNumber({
-							value: ammunitionCost.maximum,
+							value: munitionsCost.maximum,
 						})}
 					</span>
 				</IconDisplay>

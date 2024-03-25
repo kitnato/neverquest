@@ -1,9 +1,9 @@
 import { useRecoilState } from "recoil"
 
-import { FletcherAmmunition } from "@neverquest/components/Caravan/Fletcher/FletcherAmmunition"
+import { CraftMunitions } from "@neverquest/components/Caravan/Fletcher/CraftMunitions"
 import { RangedOptions } from "@neverquest/components/Caravan/Fletcher/RangedOptions"
 import { IconTabs } from "@neverquest/components/IconTabs"
-import IconAmmunition from "@neverquest/icons/ammunition.svg?react"
+import IconMunitions from "@neverquest/icons/munitions.svg?react"
 import IconRanged from "@neverquest/icons/ranged.svg?react"
 import { fletcherOptions } from "@neverquest/state/caravan"
 import type { FletcherOption } from "@neverquest/types/unions"
@@ -19,7 +19,7 @@ export function Fletcher() {
 			}}
 			tabs={[
 				{ Component: RangedOptions, Icon: IconRanged, label: "ranged" },
-				{ Component: FletcherAmmunition, Icon: IconAmmunition, label: "ammunition" },
+				{ Component: CraftMunitions, Icon: IconMunitions, label: "munitions" },
 			]}
 		/>
 	)

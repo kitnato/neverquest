@@ -140,8 +140,8 @@ export function isQuestBonus(thing: unknown): thing is QuestBonus {
 export function isRanged(thing: unknown): thing is Ranged {
 	return (
 		isWeaponBase(thing)
-		&& "ammunitionCost" in thing
-		&& typeof thing.ammunitionCost === "number"
+		&& "munitionsCost" in thing
+		&& typeof thing.munitionsCost === "number"
 		&& "range" in thing
 		&& typeof thing.range === "number"
 	)

@@ -9,7 +9,6 @@ import { LEVELLING_MAXIMUM, LEVELLING_THRESHOLD, RETIREMENT_STAGE } from "@never
 import { INFUSABLES, RELICS } from "@neverquest/data/items"
 import { BLIGHT, FINALITY_STAGE, POISON, RAGE } from "@neverquest/data/monster"
 import IconAlchemist from "@neverquest/icons/alchemist.svg?react"
-import IconAmmunition from "@neverquest/icons/ammunition.svg?react"
 import IconAttributes from "@neverquest/icons/attributes.svg?react"
 import IconBandages from "@neverquest/icons/bandages.svg?react"
 import IconBlacksmith from "@neverquest/icons/blacksmith.svg?react"
@@ -21,6 +20,7 @@ import IconHealth from "@neverquest/icons/health.svg?react"
 import IconMedic from "@neverquest/icons/medic.svg?react"
 import IconMercenary from "@neverquest/icons/mercenary.svg?react"
 import IconMerchant from "@neverquest/icons/merchant.svg?react"
+import IconMunitions from "@neverquest/icons/munitions.svg?react"
 import IconOccultist from "@neverquest/icons/occultist.svg?react"
 import IconPhylactery from "@neverquest/icons/phylactery.svg?react"
 import IconPotions from "@neverquest/icons/potions.svg?react"
@@ -75,8 +75,8 @@ export const CREW: Record<
 		shows: ["gearClass", "gearLevel"],
 	},
 	fletcher: {
-		description: "Provides # ranged weapons and # ammunition.",
-		descriptionIcons: [IconRanged, IconAmmunition],
+		description: "Provides # ranged weapons and # munitions.",
+		descriptionIcons: [IconRanged, IconMunitions],
 		Icon: IconFletcher,
 		interaction: "Craft",
 		monologues: {
@@ -202,11 +202,6 @@ export const CREW: Record<
 	},
 }
 
-export const FLETCHING = {
-	ammunitionPrice: 3,
-	minimumPurchase: 1,
-}
-
 export const OCCULTIST_PURGE_PRICE_MULTIPLIER = {
 	essence: 0.25,
 	quests: 250,
@@ -271,7 +266,7 @@ export const MERCHANT_OFFERS: Record<
 	},
 	[CREW.fletcher.requiredStage]: {
 		monologue: "Here is something suitable for marksmen.",
-		offer: RELICS["ammunition pouch"].item,
+		offer: RELICS["munitions satchel"].item,
 	},
 	25: {
 		monologue: "I recently came into possession of a fine curiosity.",
@@ -293,8 +288,8 @@ export const MERCHANT_OFFERS: Record<
 }
 
 export const TAILORING = {
-	"ammunition pouch": { amount: 20, priceRange: { maximum: 300, minimum: 10 } },
 	"knapsack": { amount: 3, priceRange: { maximum: 250, minimum: 3 } },
+	"munitions satchel": { amount: 20, priceRange: { maximum: 300, minimum: 10 } },
 }
 
 export const TRANSMUTATION = {

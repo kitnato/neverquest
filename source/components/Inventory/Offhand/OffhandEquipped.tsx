@@ -1,7 +1,7 @@
 import { useRecoilValue } from "recoil"
 
 import { IconDisplay } from "@neverquest/components/IconDisplay"
-import { Ammunition } from "@neverquest/components/Inventory/Offhand/Ammunition"
+import { Munitions } from "@neverquest/components/Inventory/Offhand/Munitions"
 import { ShieldName } from "@neverquest/components/Inventory/Offhand/ShieldName"
 import IconTwoHanded from "@neverquest/icons/two-handed.svg?react"
 import { shield, weapon } from "@neverquest/state/gear"
@@ -18,7 +18,7 @@ export function OffhandEquipped() {
 
 	if (isShowingOffhand) {
 		if (isRanged(weaponValue)) {
-			return <Ammunition />
+			return <Munitions />
 		}
 
 		if (!isTraitAcquiredColossus && weaponValue.grip === "two-handed") {

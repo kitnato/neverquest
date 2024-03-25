@@ -408,14 +408,14 @@ export function getRangedRanges({ factor, gearClass }: { factor: number, gearCla
 		rate: rateModifier,
 		weight: weightModifier,
 	} = WEAPON_MODIFIER.ranged
-	const { ammunitionCost, burden, damage, range, rate, weight } = WEAPON_BASE
+	const { burden, damage, munitionsCost, range, rate, weight } = WEAPON_BASE
 	const { abilityChance } = WEAPON_SPECIFICATIONS[gearClass]
 
 	return {
 		abilityChance: getRange({ factor, modifier: abilityModifier, ranges: abilityChance }),
-		ammunitionCost: getRange({ factor, isRounded: true, ranges: ammunitionCost }),
 		burden: getRange({ factor, isRounded: true, modifier: burdenModifier, ranges: burden }),
 		damage: getRange({ factor, isRounded: true, modifier: damageModifier, ranges: damage }),
+		munitionsCost: getRange({ factor, isRounded: true, ranges: munitionsCost }),
 		range: getRange({ factor, isRounded: true, ranges: range }),
 		rate: getRange({ factor, isRounded: true, modifier: rateModifier, ranges: rate }),
 		weight: getRange({ factor, isRounded: true, modifier: weightModifier, ranges: weight }),

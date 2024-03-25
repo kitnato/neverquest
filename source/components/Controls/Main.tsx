@@ -5,6 +5,7 @@ import {
 	Popover,
 	PopoverBody,
 	PopoverHeader,
+	Stack,
 	Tooltip,
 } from "react-bootstrap"
 import { useRecoilValue } from "recoil"
@@ -88,11 +89,13 @@ export function Main() {
 			overlay={(
 				<Popover>
 					<PopoverHeader className="text-center">
-						<span>Low&nbsp;</span>
+						<Stack direction="horizontal" gap={1}>
+							<span>Low</span>
 
-						<IconImage className="small" Icon={IconHealth} />
+							<IconImage className="small" Icon={IconHealth} />
 
-						<span>&nbsp;health</span>
+							<span>health</span>
+						</Stack>
 					</PopoverHeader>
 
 					<PopoverBody>

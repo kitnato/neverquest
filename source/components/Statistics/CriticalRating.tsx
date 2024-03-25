@@ -59,7 +59,7 @@ export function CriticalRating() {
 																format: "percentage",
 																value: attributeStatisticDexterity,
 															})}
-                              &nbsp;chance on&nbsp;
+															&nbsp;chance on&nbsp;
 														</span>
 
 														<IconImage className="small" Icon={IconAttackRate} />
@@ -84,7 +84,7 @@ export function CriticalRating() {
 																format: "percentage",
 																value: attributeStatisticPerception,
 															})}
-                              &nbsp;of&nbsp;
+															&nbsp;of&nbsp;
 														</span>
 
 														<IconImage className="small" Icon={IconDamage} />
@@ -102,13 +102,13 @@ export function CriticalRating() {
 												{criticalChanceValue !== attributeStatisticDexterity && (
 													<span>
 														{formatNumber({ format: "percentage", value: criticalChanceValue })}
-                            &nbsp;chance for&nbsp;
+														&nbsp;chance for&nbsp;
 													</span>
 												)}
 
 												<span>
 													{formatNumber({ value: criticalStrikeValue })}
-&nbsp;damage
+													&nbsp;damage
 												</span>
 											</td>
 										</tr>

@@ -43,19 +43,21 @@ export function RenewalDetails() {
 
 				<ListGroupItem>
 					<IconDisplay Icon={IconSkills} iconProps={{ className: "small" }}>
-						<span>
-							Skills&nbsp;
-						</span>
+						<Stack direction="horizontal" gap={1}>
+							<span>
+								Skills
+							</span>
 
-						<span className="small text-secondary">
-							acquired from the&nbsp;
-						</span>
+							<span className="small text-secondary">
+								acquired from the
+							</span>
 
-						<IconImage className="small text-secondary" Icon={IconMercenary} />
+							<IconImage className="small text-secondary" Icon={IconMercenary} />
 
-						<span className="small text-secondary">
-							&nbsp;Mercenary
-						</span>
+							<span className="small text-secondary">
+								Mercenary
+							</span>
+						</Stack>
 					</IconDisplay>
 				</ListGroupItem>
 

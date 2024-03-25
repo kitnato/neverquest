@@ -22,10 +22,10 @@ export function RegenerationMeter({ reserve }: { reserve: Reserve }) {
 
 	const { Icon } = RESERVES[reserve]
 	const isContinuous
-    = regenerationDurationValue > 0
-    && regenerationRateValue <= REGENERATION_METER_ANIMATION_THRESHOLD
+		= regenerationDurationValue > 0
+		&& regenerationRateValue <= REGENERATION_METER_ANIMATION_THRESHOLD
 	const regenerationProgress
-    = regenerationDurationValue === 0 ? 0 : regenerationRateValue - regenerationDurationValue
+		= regenerationDurationValue === 0 ? 0 : regenerationRateValue - regenerationDurationValue
 
 	return (
 		<LabelledProgressBar
@@ -50,13 +50,13 @@ export function RegenerationMeter({ reserve }: { reserve: Reserve }) {
 						<Stack>
 							<span>
 								{capitalizeAll(reserve)}
-&nbsp;regeneration
+								&nbsp;regeneration
 							</span>
 
 							<IconDisplay Icon={Icon} iconProps={{ className: "small" }}>
 								<span>
 									{regenerationAmountValue}
-&nbsp;per&nbsp;
+									&nbsp;per&nbsp;
 									{formatNumber({
 										format: "time",
 										value: regenerationRateValue,
@@ -77,7 +77,7 @@ export function RegenerationMeter({ reserve }: { reserve: Reserve }) {
 						<IconDisplay Icon={Icon} iconProps={{ className: "small" }}>
 							<span>
 								{regenerationAmountValue}
-&nbsp;in&nbsp;
+								&nbsp;in&nbsp;
 								{formatNumber({
 									format: "time",
 									value: regenerationRateValue - regenerationProgress,

@@ -8,6 +8,7 @@ import {
 	ModalHeader,
 	ModalTitle,
 	OverlayTrigger,
+	Stack,
 	Tooltip,
 } from "react-bootstrap"
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil"
@@ -43,13 +44,11 @@ export function CompassNavigate() {
 
 		if (stageName !== undefined) {
 			return (
-				<>
+				<Stack direction="horizontal" gap={1}>
 					<span>
-						Stage&nbsp;
-						{formatNumber({
-							value: currentStage,
-						})}
-            &nbsp;
+						Stage
+						{" "}
+						{formatNumber({ value: currentStage })}
 					</span>
 
 					{currentStage >= BOSS_STAGE_START && currentStage % BOSS_STAGE_INTERVAL === 0
@@ -61,10 +60,9 @@ export function CompassNavigate() {
 						)}
 
 					<span>
-&nbsp;
 						{stageName}
 					</span>
-				</>
+				</Stack>
 			)
 		}
 	}

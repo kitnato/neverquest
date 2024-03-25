@@ -26,43 +26,46 @@ export function ItemName({
 			overlay={(
 				<Popover>
 					<PopoverBody className="text-center">
-						<Stack gap={2}>
-							{isGemItem(item)
-								? (
-									<GemDescription gem={item.name} />
-								)
-								: (isRelicItem(item) && item.name === "[P71NQ]"
+						<Stack gap={3}>
+							{
+								isGemItem(item)
 									? (
-										<Stack className="monospaced">
-											<span>Priority 0 - BREACH IN PROGRESS</span>
-
-											<span>Location: Outfloor ██-██#7</span>
-
-											<span>Initializing: CipherBrk-██-███</span>
-
-											<span>Processing: 7.7% ...</span>
-
-											<span>Error: Q██nt█m ██████ destabilization</span>
-
-											<span>LEAKAGE IMMINENT</span>
-										</Stack>
+										<GemDescription gem={item.name} />
 									)
-									: (
-										(() => {
-											const { description, descriptionIcons } = isConsumableItem(item)
-												? CONSUMABLES[item.name]
-												: (isInfusableItem(item)
-													? INFUSABLES[item.name]
-													: RELICS[item.name])
+									: (isRelicItem(item) && item.name === "[P71NQ]"
+										? (
+											<Stack className="monospaced">
+												<span>Priority 0 - BREACH IN PROGRESS</span>
 
-											return (
-												<DescriptionDisplay
-													description={description}
-													descriptionIcons={descriptionIcons}
-												/>
-											)
-										})()
-									))}
+												<span>Location: Outfloor ██-██#7</span>
+
+												<span>Initializing: CipherBrk-██-███</span>
+
+												<span>Processing: 7.7% ...</span>
+
+												<span>Error: Q██nt█m ██████ destabilization</span>
+
+												<span>LEAKAGE IMMINENT</span>
+											</Stack>
+										)
+										: (
+											(() => {
+												const { description, descriptionIcons } = isConsumableItem(item)
+													? CONSUMABLES[item.name]
+													: (isInfusableItem(item)
+														? INFUSABLES[item.name]
+														: RELICS[item.name])
+
+												return (
+													<DescriptionDisplay
+														description={description}
+														descriptionIcons={descriptionIcons}
+													/>
+												)
+											})()
+										)
+									)
+							}
 
 							<DetailsTable>
 								<WeightDetail amount={amount} weight={item.weight} />
@@ -76,7 +79,7 @@ export function ItemName({
 			<span className="fitted">
 				{capitalizeAll(item.name)}
 				{amount !== undefined && amount > 1 ? ` ×${formatNumber({ value: amount })}` : ""}
-        &nbsp;
+				&nbsp;
 			</span>
 		</OverlayTrigger>
 	)

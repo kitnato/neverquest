@@ -1,4 +1,4 @@
-import { OverlayTrigger, Popover, PopoverBody } from "react-bootstrap"
+import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap"
 import { useRecoilValue } from "recoil"
 
 import { IconDisplay } from "@neverquest/components/IconDisplay"
@@ -33,27 +33,29 @@ export function AttributePointProgress({ isLoot }: { isLoot?: boolean }) {
 			overlay={(
 				<Popover>
 					<PopoverBody>
-						{isLoot
-							? (
-								<>
-									<span>Essence after&nbsp;</span>
+						<Stack direction="horizontal">
+							{isLoot
+								? (
+									<>
+										<span>Essence after</span>
 
-									<IconImage className="small" Icon={IconLoot} />
+										<IconImage className="small" Icon={IconLoot} />
 
-									<span>&nbsp;loot collection</span>
-								</>
-							)
-							: (
-								<>
-									<span>Current&nbsp;</span>
+										<span>loot collection</span>
+									</>
+								)
+								: (
+									<>
+										<span>Current</span>
 
-									<IconImage className="small" Icon={IconEssence} />
+										<IconImage className="small" Icon={IconEssence} />
 
-									<span>&nbsp;essence</span>
-								</>
-							)}
+										<span>essence</span>
+									</>
+								)}
 
-						<span>&nbsp;and required essence for next attribute point.</span>
+							<span>and required essence for next attribute point.</span>
+						</Stack>
 					</PopoverBody>
 				</Popover>
 			)}
@@ -66,7 +68,7 @@ export function AttributePointProgress({ isLoot }: { isLoot?: boolean }) {
 					<IconDisplay Icon={IconEssence} iconProps={{ className: "small stencilled" }}>
 						<span>
 							{formatNumber({ value: totalEssence })}
-&nbsp;/&nbsp;
+							&nbsp;/&nbsp;
 							{formatNumber({
 								value: nextTotalCost,
 							})}

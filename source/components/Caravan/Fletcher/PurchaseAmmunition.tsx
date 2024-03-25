@@ -111,14 +111,15 @@ export function PurchaseAmmunition() {
 							}}
 							variant="outline-dark"
 						>
-							<span>Purchase&nbsp;</span>
+							<Stack direction="horizontal" gap={1}>
+								<span>Purchase</span>
 
-							<IconImage className="small" Icon={IconAmmunition} />
+								<IconImage className="small" Icon={IconAmmunition} />
 
-							<span>
-&nbsp;
-								{formatNumber({ value: ammunitionAmount })}
-							</span>
+								<span>
+									{formatNumber({ value: ammunitionAmount })}
+								</span>
+							</Stack>
 						</Button>
 					</div>
 				</OverlayTrigger>

@@ -1,8 +1,13 @@
 import { Stack } from "react-bootstrap"
 import { IconImage } from "@neverquest/components/IconImage"
 import { ELEMENTALS, GEMS } from "@neverquest/data/items"
+import IconArmor from "@neverquest/icons/armor.svg?react"
 import IconGearLevel from "@neverquest/icons/gear-level.svg?react"
 import IconGear from "@neverquest/icons/gear.svg?react"
+import IconOneHanded from "@neverquest/icons/one-handed.svg?react"
+import IconShield from "@neverquest/icons/shield.svg?react"
+import IconThorns from "@neverquest/icons/thorns.svg?react"
+import IconWeaponDamage from "@neverquest/icons/weapon-damage.svg?react"
 import type { Gem } from "@neverquest/types/unions"
 
 export function GemDescription({ gem }: { gem: Gem }) {
@@ -10,36 +15,68 @@ export function GemDescription({ gem }: { gem: Gem }) {
 	const { color, Icon } = ELEMENTALS[elemental]
 
 	return (
-		<Stack gap={1}>
-			<div>
-				<span>Socketed into&nbsp;</span>
+		<Stack gap={3}>
+			<Stack>
+				<Stack className="justify-content-center" direction="horizontal" gap={1}>
+					<span>Socketed into</span>
 
-				<IconImage className="small" Icon={IconGear} />
+					<IconImage className="small" Icon={IconGear} />
 
-				<span>&nbsp;gear,</span>
-			</div>
+					<span>gear,</span>
+				</Stack>
 
-			<div>
-				<span>adds an elemental&nbsp;</span>
+				<Stack className="justify-content-center" direction="horizontal" gap={1}>
+					<span>adds an elemental</span>
 
-				<IconImage className="small" Icon={Icon} />
+					<IconImage className="small" Icon={Icon} />
 
-				<span className={color}>
-					&nbsp;
-					{elemental}
-					&nbsp;
-				</span>
+					<span className={color}>
+						{elemental}
+					</span>
 
-				<span>effect</span>
-			</div>
+					<span>effect.</span>
+				</Stack>
+			</Stack>
 
-			<div>
-				<span>based on its&nbsp;</span>
+			<Stack gap={1}>
+				<Stack className="justify-content-center" direction="horizontal" gap={1}>
+					<IconImage className="small" Icon={IconOneHanded} />
 
-				<IconImage className="small" Icon={IconGearLevel} />
+					<span>: bonus to</span>
 
-				<span>&nbsp;level.</span>
-			</div>
+					<IconImage className="small" Icon={IconWeaponDamage} />
+
+					<span>weapon damage</span>
+				</Stack>
+
+				<Stack className="justify-content-center" direction="horizontal" gap={1}>
+					<IconImage className="small" Icon={IconArmor} />
+
+					<span>: grants</span>
+
+					<IconImage className="small" Icon={IconThorns} />
+
+					<span>thorns based on</span>
+
+					<IconImage className="small" Icon={IconGearLevel} />
+
+					<span>gear level</span>
+				</Stack>
+
+				<Stack className="justify-content-center" direction="horizontal" gap={1}>
+					<IconImage className="small" Icon={IconShield} />
+
+					<span>: bonus to all</span>
+
+					<IconImage className="small" Icon={Icon} />
+
+					<span className={color}>
+						{elemental}
+					</span>
+
+					<span>effects</span>
+				</Stack>
+			</Stack>
 		</Stack>
 	)
 }

@@ -44,21 +44,21 @@ export function Flatline() {
 
 			<ModalBody>
 				<Stack gap={1}>
-					<div>
-						<span>Unspent&nbsp;</span>
+					<Stack direction="horizontal" gap={1}>
+						<span>Unspent</span>
 
 						<IconImage className="small" Icon={IconEssence} />
 
-						<span>&nbsp;essence is lost, but memories and possessions are retained.</span>
-					</div>
+						<span>essence is lost, but memories and possessions are retained.</span>
+					</Stack>
 
-					<div>
-						<span>A&nbsp;</span>
+					<Stack direction="horizontal" gap={1}>
+						<span>A</span>
 
 						<IconImage className="small" Icon={IconCorpse} />
 
-						<span>&nbsp;corpse decorates the battlefield, ripe for scavenging.</span>
-					</div>
+						<span>corpse decorates the battlefield, ripe for scavenging.</span>
+					</Stack>
 
 					<span>The wilderness is shifting ...</span>
 				</Stack>

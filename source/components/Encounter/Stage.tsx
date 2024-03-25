@@ -27,10 +27,11 @@ export function Stage() {
 					overlay={(
 						<Popover>
 							<PopoverHeader className="text-center">
-								<span>
+								<Stack direction="horizontal" gap={1}>
 									<IconImage className="small" Icon={IconCorpse} />
-                  &nbsp;Corpse location
-								</span>
+
+									<span>Corpse location</span>
+								</Stack>
 							</PopoverHeader>
 
 							<PopoverBody>

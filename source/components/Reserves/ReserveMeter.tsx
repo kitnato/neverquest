@@ -89,7 +89,12 @@ export function ReserveMeter({ PrefixIcon, reserve }: { PrefixIcon?: SVGIcon, re
 			resetReserve()
 			resetRegenerationDuration()
 		}
-	}, [reserveMaximumAilingValue, reserveValue, resetRegenerationDuration, resetReserve])
+	}, [
+		reserveMaximumAilingValue,
+		reserveValue,
+		resetRegenerationDuration,
+		resetReserve,
+	])
 
 	// Always trigger regeneration if lower than ailing maximum.
 	useEffect(() => {

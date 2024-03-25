@@ -187,8 +187,8 @@ export const WEAPON_BASE: GearRangeBase & {
 	rate: [GeneratorRange, GeneratorRange]
 } = {
 	ammunitionCost: [
-		{ maximum: 2, minimum: 1 },
-		{ maximum: 25, minimum: 23 },
+		{ maximum: 1, minimum: 1 },
+		{ maximum: 20, minimum: 18 },
 	],
 	burden: [
 		{ maximum: 2, minimum: 1 },

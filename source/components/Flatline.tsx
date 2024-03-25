@@ -16,9 +16,11 @@ import { DEATH_STAGE_PENALTY } from "@neverquest/data/encounter"
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import { useResetCharacter } from "@neverquest/hooks/actions/useResetCharacter"
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness"
+import IconCapabilities from "@neverquest/icons/capabilities.svg?react"
 import IconCorpse from "@neverquest/icons/corpse.svg?react"
 import IconEssence from "@neverquest/icons/essence.svg?react"
 import IconFlatlined from "@neverquest/icons/flatlined.svg?react"
+import IconKnapsack from "@neverquest/icons/knapsack.svg?react"
 import { hasFlatlined } from "@neverquest/state/character"
 import { stage, wildernesses } from "@neverquest/state/encounter"
 import { getAffixStructure } from "@neverquest/utilities/getters"
@@ -49,7 +51,17 @@ export function Flatline() {
 
 						<IconImage className="small" Icon={IconEssence} />
 
-						<span>essence is lost, but memories and possessions are retained.</span>
+						<span>essence is lost.</span>
+					</Stack>
+
+					<Stack direction="horizontal" gap={1}>
+						<IconImage className="small" Icon={IconCapabilities} />
+
+						<span>Memories and</span>
+
+						<IconImage className="small" Icon={IconKnapsack} />
+
+						<span>possessions are retained.</span>
 					</Stack>
 
 					<Stack direction="horizontal" gap={1}>

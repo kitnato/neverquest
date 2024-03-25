@@ -50,19 +50,14 @@ export function Bleeding() {
 	})
 
 	if (canReceiveAilmentBleeding) {
-		if (duration === BLEED.base.duration) {
-			return (
-				<IconDisplay
-					className={getAnimationClass({ animation: "flipInX" })}
-					Icon={IconBleeding}
-					tooltip="Bleeding"
-				>
-					<AilmentMeter ailment="bleeding" totalDuration={duration} />
-				</IconDisplay>
-			)
-		}
-
-		// Render something so timers still work.
-		return <></>
+		return (
+			<IconDisplay
+				className={getAnimationClass({ animation: "flipInX" })}
+				Icon={IconBleeding}
+				tooltip="Bleeding"
+			>
+				{duration === BLEED.base.duration ? <AilmentMeter ailment="bleeding" totalDuration={duration} /> : <span>Susceptible to shredding.</span>}
+			</IconDisplay>
+		)
 	}
 }

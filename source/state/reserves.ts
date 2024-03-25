@@ -136,7 +136,7 @@ export const regenerationAmount = withStateKey("regenerationAmount", key =>
 			(reserve: Reserve) =>
 				({ get }) =>
 					Math.max(
-						Math.round(RESERVES[reserve].regeneration * get(reserve === "health" ? health : stamina)),
+						Math.round(RESERVES[reserve].regeneration * get(reserve === "health" ? healthMaximumPoisoned : staminaMaximumBlighted)),
 						GENERIC_MINIMUM,
 					),
 		key,

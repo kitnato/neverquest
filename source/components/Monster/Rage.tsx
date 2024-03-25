@@ -1,4 +1,4 @@
-import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap"
+import { OverlayTrigger, Popover, PopoverBody } from "react-bootstrap"
 import { useRecoilValue } from "recoil"
 
 import { IconDisplay } from "@neverquest/components/IconDisplay"
@@ -30,18 +30,16 @@ export function Rage() {
 					overlay={(
 						<Popover>
 							<PopoverBody>
-								<Stack direction="horizontal" gap={1}>
-									<span>Once enraged,</span>
-
-									<IconImage className="small" Icon={IconMonsterAttackRate} />
-
-									<span>
-										attack rate is hastened by
-										&nbsp;
-										{formatNumber({ decimals: 0, format: "percentage", value: effect })}
-										.
-									</span>
-								</Stack>
+								<span>Once enraged,</span>
+								&nbsp;
+								<IconImage className="small" Icon={IconMonsterAttackRate} />
+								&nbsp;
+								<span>
+									attack rate is hastened by
+									&nbsp;
+									{formatNumber({ decimals: 0, format: "percentage", value: effect })}
+									.
+								</span>
 							</PopoverBody>
 						</Popover>
 					)}

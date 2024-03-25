@@ -38,9 +38,9 @@ Monsters also have health that functions in the same way.
 
 #### Stamina
 
-Several combat actions require stamina to be able to execute them. Most [gear](#gear) has a burden for an associated action which translates to a stamina cost that must be paid to be successful. For instance, when wielding a [weapon](#weapons) with burden 3, every attack will spend 3 stamina. Similarly, wearing [armor](#armor) incurs a burden that is paid when struck or [dodging](#dodge-chance) and [shields](#shields) incur this burden whenever an attack is [blocked](#block-chance).
+Several combat actions require stamina to be able to execute them. Most [gear](#gear) has a burden for an associated action which translates to a stamina cost that must be paid to be successful. Similarly, wearing [armor](#armor) incurs a burden that is paid when struck or [dodging](#dodge-chance) and [shields](#shields) incur their own burden whenever an attack is [blocked](#block-chance).
 
-When there is not enough stamina available for a particular action, exhaustion occurs in which none of these actions are possible until sufficient stamina is [regenerated](#stamina-regeneration).
+When there is not enough stamina available for a particular action, you become exhausted during which none of these actions are possible until sufficient stamina is [regenerated](#stamina-regeneration).
 
 ### Essence
 
@@ -108,7 +108,7 @@ The time duration between attacks. Does not take into account [recovery rate](#r
 
 A value determined by the chance of inflicting [bleeding](#bleeding) alongside total bleed damage, which is a percentage of weapon damage, and its duration. Only applies if a [piercing](#piercing-weapons) weapon is equipped.
 
-The bleed damage is increased by mastering [cruelty](#cruelty).
+Bleed damage is increased by mastering [cruelty](#cruelty).
 
 Requires the [anatomy](#anatomy) skill.
 
@@ -206,7 +206,7 @@ The restoration amount can be increased with the [vigor](#vigor) attribute and i
 
 #### Total damage
 
-Damage from the equipped [weapon](#weapons) in addition to [strength](#strength),and socketed [gems](#gems), along with any other bonuses that together are inflicted with every attack.
+Damage from the equipped [weapon](#weapons) in addition to [strength](#strength) and socketed [gems](#gems), along with any other bonuses that together are inflicted with every attack.
 
 ### Death
 
@@ -230,7 +230,7 @@ In later stages, rage can build up when retreating, which eventually frenzies th
 
 #### Bosses
 
-A monster that is more powerful than a standard monster would otherwise be on that stage. They appear every 5 stages, starting at stage 10. It's the only monster on that stage, and once defeated, it drops [gems](#gems) and under special circumstances it may also drop a [relic](#relics).
+A monster that is more powerful than a standard monster would otherwise be on that stage. They appear every few stages. It's the only monster on that stage, and once defeated, it drops [gems](#gems) and under special circumstances it may also drop a [relic](#relics).
 
 ### Caravan
 
@@ -250,7 +250,7 @@ Crafts [armor](#armor), [melee weapons](#melee-weapons) and [shields](#shields).
 
 #### Fletcher
 
-Crafts [ranged weapons](#ranged-weapons) and sells munitions.
+Crafts [ranged weapons](#ranged-weapons) as well as their munitions.
 
 Requires the [archery](#archery) skill.
 
@@ -272,7 +272,7 @@ Offers purging rituals, such as resetting your [power level](#attributes) that r
 
 #### Tailor
 
-Sells upgrades for increasing maximum [encumbrance](#encumbrance). Also offers expansion of the [munitions satchel](#ranged-weapons).
+Sells upgrades for increasing maximum [encumbrance](#encumbrance).
 
 #### Witch
 
@@ -353,11 +353,11 @@ Also provides a chance to [execute](#execution-threshold) monsters when at or un
 
 Also provides a certain [range](#range) that delays contact with the monster.
 
-Requires finite munitions as part of the second slot, which can be purchased from the [fletcher](#fletcher). Also requires the [archery](#archery) skill.
+Requires the [archery](#archery) skill. Also requires munitions, which can be crafted by the [fletcher](#fletcher). Munition storage must first be procured from the [merchant](#merchant).
 
 ##### Weapon class
 
-Whatever its melee or ranged, a weapon additionally falls into one of several classes that grants certain modifiers. These modifiers are only applied if the associated [skill](#skills) is acquired.
+Whatever melee or ranged, a weapon additionally falls into one of several classes that grants certain modifiers. These modifiers are only applied if the associated [skill](#skills) is acquired.
 
 ###### Blunt weapons
 
@@ -379,7 +379,7 @@ Parry requires the [escrime](#escrime) skill.
 
 #### Armor
 
-Armor provides [protection](#protection), but is burdensome. This burden is paid in stamina whenever you are struck or when [dodging](#dodge-chance). When receiving damage, if the armor has [thorns](#gems), then that damage is simultaneously inflicted upon the attacker.
+Armor provides [protection](#protection), but is burdensome. This burden is paid in stamina whenever you are struck or when [dodging](#dodge-chance). When receiving damage, if the armor has [thorns](#gems), then that damage is simultaneously inflicted upon the monster.
 
 Each of the following armor classes increases the protection value for certain tradeoffs.
 
@@ -433,9 +433,9 @@ A shield's burden is paid in [stamina](#stamina) every time you successfully blo
 
 #### Gems
 
-Gems are items that can be socketed into gear. They are dropped by [bosses](#bosses), one at stage 10 and one more for each boss encounter after that. For example, four gems are dropped by the boss on stage 25 if it's defeated for the first time. If a boss has already been defeated on a particular stage, visiting it again will drastically reduce the chance to drop each of its gems.
+Gems are items that can be socketed into gear. They are dropped by [bosses](#bosses), and more are dropped per boss additional the higher the wilderness [stage](#wilderness) is. If a boss has already been defeated on a particular stage, visiting it again will drastically reduce the chance to drop any gems.
 
-Up to 5 gems can be applied to a piece of gear. Once applied, gems cannot be removed or transferred to a different piece of gear.
+Only a certain amount of gems can be applied to a piece of gear. Once applied, gems cannot be removed or transferred to a different piece of gear.
 
 The gem types are the following, associated with their corresponding [elemental damage](#elemental-damage) types:
 
@@ -695,7 +695,7 @@ Current stamina adds to unarmed damage and unarmed attacks have a chance to [stu
 
 #### Executioner
 
-[Critical](#critical-rating) strikes with a two-handed weapon always [execute](#execution-threshold) the monster. Critical strikes require the [assassination](#assassination) skill.
+[Critical](#critical-rating) strikes with a two-handed melee weapon may also [execute](#execution-threshold) the monster. Critical strikes require the [assassination](#assassination) skill.
 
 #### Inoculated
 

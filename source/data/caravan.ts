@@ -174,7 +174,7 @@ export const CREW: Record<
 		requiredStage: 21,
 	},
 	tailor: {
-		description: "Expands # encumbrance and the capacity of certain items.",
+		description: "Offers the expansion of # encumbrance.",
 		descriptionIcons: [IconEncumbrance],
 		Icon: IconTailor,
 		interaction: "Stitch",

@@ -433,9 +433,9 @@ A shield's burden is paid in [stamina](#stamina) every time you successfully blo
 
 #### Gems
 
-Gems are items that can be applied to gear. They are dropped by [bosses](#bosses), one at stage 10 and one more for each boss encounter after that. For example, four gems are dropped by the boss on stage 25 if it's defeated for the first time. If a boss has already been defeated on a particular stage, visiting it again will drastically reduce the chance to drop each of its gems.
+Gems are items that can be socketed into gear. They are dropped by [bosses](#bosses), one at stage 10 and one more for each boss encounter after that. For example, four gems are dropped by the boss on stage 25 if it's defeated for the first time. If a boss has already been defeated on a particular stage, visiting it again will drastically reduce the chance to drop each of its gems.
 
-Up to 5 gems can be applied to a piece of gear. Once applied, gems are consumed and cannot be removed or transferred to a different piece of gear.
+Up to 5 gems can be applied to a piece of gear. Once applied, gems cannot be removed or transferred to a different piece of gear.
 
 The gem types are the following, associated with their corresponding [elemental damage](#elemental-damage) types:
 
@@ -443,13 +443,13 @@ The gem types are the following, associated with their corresponding [elemental 
 - Ruby (fire)
 - Sapphire (ice)
 
-Gems add the following benefits to gear:
+Gems add the following effects to gear:
 
-- Weapon: adds damage based on base damage. Once an attack hits the monster, the corresponding elemental effect is also applied.
-- Armor: adds [thorns](#armor) damage based on protection. If thorns are inflicted, the corresponding elemental effect is applied as well.
+- Weapon: adds damage bonus based on weapon damage. Once an attack hits the monster, the corresponding elemental effect is also applied.
+- Armor: adds [thorns](#armor) damage based on armor gear level. Once thorns are inflicted, the corresponding elemental effect is applied as well.
 - Shield: increases the potency of the elemental damage and duration of the elemental effect of both armor and weapon gems of the same type.
 
-Every applied gem of the same type to the same piece of gear increases its corresponding potency.
+Every applied gem of the same type to the same piece of gear increases its corresponding effect.
 
 ##### Elemental damage
 
@@ -459,7 +459,7 @@ The elemental damage types are the following, associated with their correspondin
 - Ice inflicts [frozen](#frozen).
 - Lightning inflicts [shocked](#shocked).
 
-A monster can be afflicted by any combination of elemental ailment, the severity of which is determined by the number of gems applied to gear.
+A monster can be afflicted by any combination of elemental ailment.
 
 #### Relics
 

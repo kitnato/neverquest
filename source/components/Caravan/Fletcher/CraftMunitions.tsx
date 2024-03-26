@@ -20,7 +20,7 @@ import { ownedItem } from "@neverquest/state/inventory"
 import { munitions } from "@neverquest/state/items"
 import { essence } from "@neverquest/state/resources"
 import { formatNumber } from "@neverquest/utilities/formatters"
-import { getTriangular } from "@neverquest/utilities/getters"
+import { getFromRange, getSigmoid } from "@neverquest/utilities/getters"
 
 export function CraftMunitions() {
 	const [munitionsValue, setMunitions] = useRecoilState(munitions)
@@ -29,9 +29,16 @@ export function CraftMunitions() {
 
 	const transactEssence = useTransactEssence()
 
-	const { amount, maximum, price } = MUNITIONS
-	const totalPrice = price + getTriangular(munitionsValue)
-	const isAffordable = totalPrice <= essenceValue
+	const { amount, maximum, priceRange } = MUNITIONS
+	const price = Math.round(
+		getFromRange({
+			factor: getSigmoid(munitionsValue),
+			...priceRange,
+		}),
+	)
+	const isAffordable = price <= essenceValue
+	const isAtMaximum = munitionsValue >= maximum
+	const canCraft = isAffordable && !isAtMaximum
 
 	useDeltaText({
 		delta: "munitions",
@@ -39,7 +46,7 @@ export function CraftMunitions() {
 	})
 
 	if (ownedItemMunitionsSatchel === undefined) {
-		return <span>&quot;How will you store any armaments?&quot;</span>
+		return <span>&quot;How will you store munitions?&quot;</span>
 	}
 
 	return (
@@ -67,23 +74,27 @@ export function CraftMunitions() {
 
 				<Stack className="ms-2" direction="horizontal" gap={3}>
 					<IconDisplay Icon={IconEssence} tooltip="Price">
-						<span>{formatNumber({ value: totalPrice })}</span>
+						<span>{formatNumber({ value: price })}</span>
 					</IconDisplay>
 
 					<OverlayTrigger
 						overlay={(
 							<Tooltip>
-								<span>{LABEL_NO_ESSENCE}</span>
+								<Stack>
+									{!isAffordable && <span>{LABEL_NO_ESSENCE}</span>}
+
+									{isAtMaximum && <span>At full capacity.</span>}
+								</Stack>
 							</Tooltip>
 						)}
-						trigger={isAffordable ? [] : POPOVER_TRIGGER}
+						trigger={canCraft ? [] : POPOVER_TRIGGER}
 					>
 						<div>
 							<Button
-								disabled={!isAffordable}
+								disabled={!canCraft}
 								onClick={() => {
-									if (isAffordable) {
-										transactEssence(-totalPrice)
+									if (canCraft) {
+										transactEssence(-price)
 
 										setMunitions(currentMunitions => currentMunitions + amount)
 									}

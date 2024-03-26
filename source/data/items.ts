@@ -242,7 +242,7 @@ export const KNAPSACK_CAPACITY = 20
 export const MUNITIONS = {
 	amount: 1,
 	maximum: LEVELLING_MAXIMUM,
-	price: 3,
+	priceRange: { maximum: 750, minimum: 3 },
 }
 
 export const RELIC_DROP_CHANCE = {

@@ -1,6 +1,6 @@
 # neverquest
 
-_An irreverent UI-based incremental Souls-like._
+_An irreverent incremental action RPG._
 
 > - View [gameplay manual](./source/data/manual.md).
 > - View [screenshots](#3-screenshots).
@@ -101,7 +101,7 @@ This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareA
    - Crank - user-interaction-driven adventure/mystery game with gradually expanding storyline and gameplay.
    - NGU Idle - irreverent UI-based fantasy incremental idle game.
 1. What's the one new thing?
-   - Feels like text-based Diablo/Dark Souls hybrid, but it's a web app.
+   - Feels like text-based Diablo/Dark Souls hybrid, but it's funny and a web app.
 1. Do you have something to say?
    - Browser games with only text and a GUI can be just as engaging and can have similar gameplay depth to traditional video games without relying solely on simple deterministic incremental progress.
 

@@ -1,6 +1,6 @@
 # neverquest
 
-_An irreverent UI-based incremental Souls-like._
+_An irreverent incremental action RPG._
 
 > This manual has content spoilers.
 

@@ -57,6 +57,7 @@ import type {
 	GearItemUnequipped,
 	GemItem,
 	GeneratorRange,
+	IncrementBonus,
 	InventoryItem,
 	QuestData,
 	Shield,
@@ -151,24 +152,24 @@ export function getAttributePoints({
 
 export function getComputedStatistic({
 	base,
-	bonus = 0,
+	bonus: { maximum, perRank } = { maximum: Number.POSITIVE_INFINITY, perRank: 0 },
 	increment,
 	rank,
 }: {
 	base: number
-	bonus?: number
+	bonus?: IncrementBonus
 	increment: number
 	rank: number
 }) {
 	const boost = increment * rank
 
-	if (bonus === 0) {
+	if (perRank === 0) {
 		return base + boost
 	}
 
 	return (
 		Array.from({ length: rank })
-			.map((_, index) => index * bonus)
+			.map((_, index) => Math.min(index * perRank, maximum))
 			.reduce((sum, bonus) => sum + bonus, base) + boost
 	)
 }
@@ -482,12 +483,12 @@ export function getSellPrice({ gemsFitted, item }: { gemsFitted?: number, item: 
 }
 
 export function getShieldRanges({ factor, gearClass }: { factor: number, gearClass: ShieldClass }) {
-	const { block, burden, stagger, weight } = SHIELD_SPECIFICATIONS[gearClass]
+	const { blockChance, burden, staggerChance, weight } = SHIELD_SPECIFICATIONS[gearClass]
 
 	return {
-		block: getRange({ factor, ranges: block }),
+		blockChance: getRange({ factor, ranges: blockChance }),
 		burden: getRange({ factor, isRounded: true, ranges: burden }),
-		stagger: getRange({ factor, ranges: stagger }),
+		staggerChance: getRange({ factor, ranges: staggerChance }),
 		weight: getRange({ factor, isRounded: true, ranges: weight }),
 	}
 }

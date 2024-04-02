@@ -69,7 +69,7 @@ export const ESSENCE = {
 	bonus: 0.025,
 	boss: 1.5,
 	finality: {
-		"res cogitans": 7777,
+		"res cogitans": 17777,
 		"res dominus": 7777,
 	},
 }
@@ -108,11 +108,11 @@ export const MONSTER_DAMAGE = {
 	boss: 1.075,
 	finality: {
 		"res cogitans": 1777,
-		"res dominus": 777,
+		"res dominus": 1007,
 	},
 	menace: {
-		maximum: 2,
-		minimum: 0.3,
+		maximum: 0.5,
+		minimum: 0.25,
 		requiredStage: RETIREMENT_STAGE + 1,
 	},
 }
@@ -124,11 +124,11 @@ export const MONSTER_HEALTH = {
 	boss: 1.8,
 	finality: {
 		"res cogitans": 17777,
-		"res dominus": 7777,
+		"res dominus": 10777,
 	},
 	menace: {
-		maximum: 4.5,
-		minimum: 0.35,
+		maximum: 1.2,
+		minimum: 0.3,
 		requiredStage: RETIREMENT_STAGE + 1,
 	},
 }

@@ -38,7 +38,7 @@ export function ShieldOptions() {
 	const stageMaximumValue = useRecoilValue(stageMaximum)
 
 	const factor = getSigmoid(level)
-	const { block, burden, stagger, weight } = getShieldRanges({
+	const { blockChance, burden, staggerChance, weight } = getShieldRanges({
 		factor,
 		gearClass,
 	})
@@ -111,11 +111,11 @@ export function ShieldOptions() {
 					iconProps={{ overlayPlacement: "left" }}
 					tooltip="Block chance"
 				>
-					{formatNumber({ format: "percentage", value: block.minimum })}
+					{formatNumber({ format: "percentage", value: blockChance.minimum })}
 					{" - "}
 					{formatNumber({
 						format: "percentage",
-						value: block.maximum,
+						value: blockChance.maximum,
 					})}
 				</IconDisplay>
 
@@ -125,9 +125,9 @@ export function ShieldOptions() {
 					tooltip={isSkillAcquiredShieldcraft ? "Stagger chance" : LABEL_UNKNOWN}
 				>
 					{isSkillAcquiredShieldcraft
-						? `${formatNumber({ format: "percentage", value: stagger.minimum })} - ${formatNumber({
+						? `${formatNumber({ format: "percentage", value: staggerChance.minimum })} - ${formatNumber({
 							format: "percentage",
-							value: stagger.maximum,
+							value: staggerChance.maximum,
 						})}`
 						: LABEL_UNKNOWN}
 				</IconDisplay>

@@ -17,7 +17,7 @@ import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function StaggerRating() {
 	const stabilityValue = useRecoilValue(masteryStatistic("stability"))
-	const { stagger } = useRecoilValue(shield)
+	const { staggerChance } = useRecoilValue(shield)
 	const staggerRatingValue = useRecoilValue(staggerRating)
 
 	useDeltaText({
@@ -47,7 +47,7 @@ export function StaggerRating() {
 
 											<td>
 												<IconDisplay Icon={IconStaggerChance} iconProps={{ className: "small" }}>
-													<span>{formatNumber({ format: "percentage", value: stagger })}</span>
+													<span>{formatNumber({ format: "percentage", value: staggerChance })}</span>
 												</IconDisplay>
 											</td>
 										</tr>

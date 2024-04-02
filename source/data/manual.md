@@ -108,7 +108,7 @@ The time duration between attacks. Does not take into account [recovery rate](#r
 
 A value determined by the chance of inflicting [bleeding](#bleeding) alongside total bleed damage, which is a percentage of weapon damage, and its duration. Only applies if a [piercing](#piercing-weapons) weapon is equipped.
 
-Bleed damage is increased by mastering [cruelty](#cruelty).
+Bleeding damage is increased by mastering [cruelty](#cruelty).
 
 Requires the [anatomy](#anatomy) skill.
 
@@ -713,7 +713,7 @@ While at a [distance](#range), all attacks with a [ranged](#ranged-weapons) weap
 
 #### Shredder
 
-[Bleed](#bleeding) damage is inflicted all at once, instead of being evenly spread over a certain duration.
+[Bleeding](#bleeding) damage is inflicted all at once, instead of being evenly spread over a certain duration.
 
 #### Stalwart
 

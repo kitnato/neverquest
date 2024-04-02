@@ -86,7 +86,7 @@ export function BleedRating() {
 
 										<tr>
 											<td>
-												<span>Bleed damage:</span>
+												<span>Bleeding damage:</span>
 											</td>
 
 											<td>

@@ -15,7 +15,6 @@ import {
 	isAttacking,
 } from "@neverquest/state/character"
 import { weapon } from "@neverquest/state/gear"
-import { munitions } from "@neverquest/state/items"
 import { masteryStatistic } from "@neverquest/state/masteries"
 import {
 	distance,
@@ -90,10 +89,6 @@ export function useAttack() {
 							element: monsterElementValue,
 							speed: "fast",
 						})
-					}
-
-					if (isWeaponRanged) {
-						set(munitions, currentMunitions => currentMunitions - weaponValue.munitionsCost)
 					}
 
 					if (

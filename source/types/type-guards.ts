@@ -163,15 +163,15 @@ export function isRoutine(thing: unknown): thing is Routine {
 export function isShield(thing: unknown): thing is Shield {
 	return (
 		isGearItemBase(thing)
-		&& "block" in thing
-		&& typeof thing.block === "number"
+		&& "blockChance" in thing
+		&& typeof thing.blockChance === "number"
 		&& "burden" in thing
 		&& typeof thing.burden === "number"
 		&& "gearClass" in thing
 		&& typeof thing.gearClass === "string"
 		&& new Set<string>(SHIELD_CLASS_TYPES).has(thing.gearClass)
-		&& "stagger" in thing
-		&& typeof thing.stagger === "number"
+		&& "staggerChance" in thing
+		&& typeof thing.staggerChance === "number"
 	)
 }
 

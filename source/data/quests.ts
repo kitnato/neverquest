@@ -393,7 +393,7 @@ export const QUESTS: Record<
 		title: "Killing spree",
 	},
 	knapsackExpanding: {
-		description: "Expand knapsack capacity.",
+		description: "Expand knapsack capacity to @.",
 		progression: [
 			TAILORING.knapsack.amount * 3,
 			TAILORING.knapsack.amount * 10,

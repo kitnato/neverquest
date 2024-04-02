@@ -31,7 +31,7 @@ export function ShieldName({
 	const shieldEquippedValue = useRecoilValue(shieldEquipped)
 	const isSkillAcquiredShieldcraft = useRecoilValue(isSkillAcquired("shieldcraft"))
 
-	const { block, burden, ID, level, name, stagger, weight } = shield
+	const { blockChance, burden, ID, level, name, staggerChance, weight } = shield
 	const isShieldUnequipped = isUnshielded(shield)
 	const showComparison = ID !== shieldEquippedValue.ID
 
@@ -59,12 +59,12 @@ export function ShieldName({
 								<td>
 									<Stack direction="horizontal" gap={1}>
 										<IconDisplay Icon={IconBlockChance} iconProps={{ className: "small" }}>
-											<span>{formatNumber({ format: "percentage", value: block })}</span>
+											<span>{formatNumber({ format: "percentage", value: blockChance })}</span>
 										</IconDisplay>
 
 										{showComparison && (
 											<GearComparison
-												difference={block - shieldEquippedValue.block}
+												difference={blockChance - shieldEquippedValue.blockChance}
 												showing="offhand"
 											/>
 										)}
@@ -83,12 +83,12 @@ export function ShieldName({
 											<td>
 												<Stack direction="horizontal" gap={1}>
 													<IconDisplay Icon={IconStaggerChance} iconProps={{ className: "small" }}>
-														<span>{formatNumber({ format: "percentage", value: stagger })}</span>
+														<span>{formatNumber({ format: "percentage", value: staggerChance })}</span>
 													</IconDisplay>
 
 													{showComparison && (
 														<GearComparison
-															difference={stagger - shieldEquippedValue.stagger}
+															difference={staggerChance - shieldEquippedValue.staggerChance}
 															showing="offhand"
 														/>
 													)}

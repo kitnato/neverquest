@@ -102,27 +102,27 @@ export const GEAR_LEVEL_RANGE_MAXIMUM = 3
 export const SHIELD_ELEMENTAL_EFFECTS_BASE = { fire: 0, ice: 0, lightning: 0 }
 
 export const SHIELD_NONE: Omit<Shield, "gearClass" | "price"> = {
-	block: 0,
+	blockChance: 0,
 	burden: 0,
 	ID: "SHIELD_NONE",
 	level: 0,
 	name: "Unshielded",
-	stagger: 0,
+	staggerChance: 0,
 	weight: 0,
 }
 
 export const SHIELD_SPECIFICATIONS: Record<
 	ShieldClass,
 	GearRangeBase & {
-		block: [GeneratorRange, GeneratorRange]
+		blockChance: [GeneratorRange, GeneratorRange]
 		Icon: SVGIcon
-		stagger: [GeneratorRange, GeneratorRange]
+		staggerChance: [GeneratorRange, GeneratorRange]
 	}
 > = {
 	medium: {
-		block: [
-			{ maximum: 0.12, minimum: 0.1 },
-			{ maximum: 0.3, minimum: 0.28 },
+		blockChance: [
+			{ maximum: 0.13, minimum: 0.1 },
+			{ maximum: 0.25, minimum: 0.22 },
 		],
 		burden: [
 			{ maximum: 7, minimum: 5 },
@@ -130,9 +130,9 @@ export const SHIELD_SPECIFICATIONS: Record<
 		],
 		Icon: IconShieldMedium,
 		price: { maximum: 4500, minimum: 4 },
-		stagger: [
-			{ maximum: 0.3, minimum: 0.25 },
-			{ maximum: 0.5, minimum: 0.45 },
+		staggerChance: [
+			{ maximum: 0.2, minimum: 0.18 },
+			{ maximum: 0.4, minimum: 0.35 },
 		],
 		weight: [
 			{ maximum: 5, minimum: 3 },
@@ -140,9 +140,9 @@ export const SHIELD_SPECIFICATIONS: Record<
 		],
 	},
 	small: {
-		block: [
+		blockChance: [
 			{ maximum: 0.06, minimum: 0.05 },
-			{ maximum: 0.15, minimum: 0.14 },
+			{ maximum: 0.15, minimum: 0.12 },
 		],
 		burden: [
 			{ maximum: 4, minimum: 3 },
@@ -150,9 +150,9 @@ export const SHIELD_SPECIFICATIONS: Record<
 		],
 		Icon: IconShieldSmall,
 		price: { maximum: 3000, minimum: 2 },
-		stagger: [
-			{ maximum: 0.35, minimum: 0.3 },
-			{ maximum: 0.75, minimum: 0.73 },
+		staggerChance: [
+			{ maximum: 0.25, minimum: 0.23 },
+			{ maximum: 0.6, minimum: 0.55 },
 		],
 		weight: [
 			{ maximum: 2, minimum: 1 },
@@ -160,9 +160,9 @@ export const SHIELD_SPECIFICATIONS: Record<
 		],
 	},
 	tower: {
-		block: [
-			{ maximum: 0.25, minimum: 0.24 },
-			{ maximum: 0.40, minimum: 0.38 },
+		blockChance: [
+			{ maximum: 0.2, minimum: 0.18 },
+			{ maximum: 0.35, minimum: 0.32 },
 		],
 		burden: [
 			{ maximum: 10, minimum: 8 },
@@ -170,9 +170,9 @@ export const SHIELD_SPECIFICATIONS: Record<
 		],
 		Icon: IconShieldTower,
 		price: { maximum: 7000, minimum: 7 },
-		stagger: [
-			{ maximum: 0.15, minimum: 0.1 },
-			{ maximum: 0.25, minimum: 0.2 },
+		staggerChance: [
+			{ maximum: 0.1, minimum: 0.05 },
+			{ maximum: 0.2, minimum: 0.15 },
 		],
 		weight: [
 			{ maximum: 9, minimum: 6 },
@@ -202,7 +202,7 @@ export const WEAPON_BASE: GearRangeBase & {
 	price: { maximum: 8000, minimum: 1 },
 	range: [
 		{ maximum: 2200, minimum: 2000 },
-		{ maximum: 3500, minimum: 3400 },
+		{ maximum: 5500, minimum: 5400 },
 	],
 	rate: [
 		{ maximum: 3000, minimum: 2900 },
@@ -252,8 +252,8 @@ export const WEAPON_SPECIFICATIONS: Record<
 	blunt: {
 		ability: "stun",
 		abilityChance: [
-			{ maximum: 0.2, minimum: 0.16 },
-			{ maximum: 0.5, minimum: 0.48 },
+			{ maximum: 0.15, minimum: 0.12 },
+			{ maximum: 0.35, minimum: 0.33 },
 		],
 		IconAbility: IconStunChance,
 		IconGearClass: IconBlunt,
@@ -261,8 +261,8 @@ export const WEAPON_SPECIFICATIONS: Record<
 	piercing: {
 		ability: "bleed",
 		abilityChance: [
-			{ maximum: 0.3, minimum: 0.26 },
-			{ maximum: 0.6, minimum: 0.58 },
+			{ maximum: 0.2, minimum: 0.17 },
+			{ maximum: 0.35, minimum: 0.33 },
 		],
 		IconAbility: IconBleedChance,
 		IconGearClass: IconPiercing,
@@ -270,8 +270,8 @@ export const WEAPON_SPECIFICATIONS: Record<
 	slashing: {
 		ability: "parry",
 		abilityChance: [
-			{ maximum: 0.23, minimum: 0.2 },
-			{ maximum: 0.4, minimum: 0.38 },
+			{ maximum: 0.15, minimum: 0.12 },
+			{ maximum: 0.3, minimum: 0.28 },
 		],
 		IconAbility: IconParryChance,
 		IconGearClass: IconSlashing,

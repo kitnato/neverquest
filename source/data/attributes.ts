@@ -17,7 +17,7 @@ import IconStamina from "@neverquest/icons/stamina.svg?react"
 import IconStrength from "@neverquest/icons/strength.svg?react"
 import IconVigor from "@neverquest/icons/vigor.svg?react"
 import IconVitality from "@neverquest/icons/vitality.svg?react"
-import type { AttributeOrMasteryBaseData } from "@neverquest/types"
+import type { AttributeOrMasteryBaseData, IncrementBonus } from "@neverquest/types"
 import type { Attribute, NumberFormat, Showing, Skill } from "@neverquest/types/unions"
 
 export const ATTRIBUTE_COST_BASE = 2
@@ -26,8 +26,8 @@ export const ATTRIBUTES: Record<
 	Attribute,
 	AttributeOrMasteryBaseData & {
 		format: NumberFormat
+		incrementBonus?: IncrementBonus
 		maximum?: number
-		rankBonus?: number
 		requiredSkill?: Skill
 		shows?: Showing
 	}
@@ -59,7 +59,7 @@ export const ATTRIBUTES: Record<
 		format: "integer",
 		Icon: IconEndurance,
 		increment: 5,
-		rankBonus: 7,
+		incrementBonus: { maximum: 150, perRank: 5 },
 		shows: "stamina",
 	},
 	fortitude: {
@@ -99,7 +99,7 @@ export const ATTRIBUTES: Record<
 		format: "integer",
 		Icon: IconStrength,
 		increment: 2,
-		rankBonus: 1,
+		incrementBonus: { maximum: 50, perRank: 1 },
 		shows: "damage",
 	},
 	vigor: {
@@ -119,7 +119,7 @@ export const ATTRIBUTES: Record<
 		format: "integer",
 		Icon: IconVitality,
 		increment: 15,
-		rankBonus: 10,
+		incrementBonus: { maximum: 200, perRank: 10 },
 		shows: "health",
 	},
 }

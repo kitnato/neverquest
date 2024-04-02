@@ -46,6 +46,11 @@ export type GeneratorRange = {
 	minimum: number
 }
 
+export type IncrementBonus = {
+	maximum: number
+	perRank: number
+}
+
 export type InfusableItem = ItemBase & {
 	effect: GeneratorRange
 	name: Infusable
@@ -86,10 +91,10 @@ export type Ranged = WeaponBase & {
 }
 
 export type Shield = GearItemBase & {
-	block: number
+	blockChance: number
 	burden: number
 	gearClass: ShieldClass
-	stagger: number
+	staggerChance: number
 }
 
 export type StackableItem = ConsumableItem | GemItem

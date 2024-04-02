@@ -141,13 +141,13 @@ export function generateShield({
 	level: number
 }): Shield {
 	const factor = getSigmoid(level)
-	const { block, burden, stagger, weight } = getShieldRanges({
+	const { blockChance, burden, staggerChance, weight } = getShieldRanges({
 		factor,
 		gearClass,
 	})
 
 	return {
-		block: getFromRange(block),
+		blockChance: getFromRange(blockChance),
 		burden: Math.round(getFromRange(burden)),
 		gearClass,
 		ID: nanoid(),
@@ -164,7 +164,7 @@ export function generateShield({
 				...SHIELD_SPECIFICATIONS[gearClass].price,
 			}),
 		),
-		stagger: getFromRange(stagger),
+		staggerChance: getFromRange(staggerChance),
 		weight: Math.round(getFromRange(weight)),
 	}
 }

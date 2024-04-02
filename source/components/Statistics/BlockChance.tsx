@@ -39,7 +39,7 @@ export function BlockChance() {
 										<tr>
 											<td>
 												<IconDisplay Icon={IconBurden} iconProps={{ className: "small" }}>
-													<span>On block:</span>
+													<span>When blocking:</span>
 												</IconDisplay>
 											</td>
 

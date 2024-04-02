@@ -15,6 +15,7 @@ import IconExecutioner from "@neverquest/icons/executioner.svg?react"
 import IconHealth from "@neverquest/icons/health.svg?react"
 import IconInoculated from "@neverquest/icons/inoculated.svg?react"
 import IconNudist from "@neverquest/icons/nudist.svg?react"
+import IconOneHanded from "@neverquest/icons/one-handed.svg?react"
 import IconProtection from "@neverquest/icons/protection.svg?react"
 import IconRanged from "@neverquest/icons/ranged.svg?react"
 import IconSharpshooter from "@neverquest/icons/sharpshooter.svg?react"
@@ -48,7 +49,7 @@ export const NUDIST = {
 	healAmount: 0.1,
 }
 
-export const TANK_PROTECTION_BONUS = 0.25
+export const TANK_PROTECTION_BONUS = 0.2
 
 export const TRAITS: Record<
 	Trait,
@@ -58,12 +59,12 @@ export const TRAITS: Record<
 	}
 > = {
 	brawler: {
-		description: `Being # unshielded increases # weapon damage by ${formatNumber({
+		description: `Being # unshielded increases # one-handed melee # weapon damage by ${formatNumber({
 			decimals: 0,
 			format: "percentage",
 			value: BRAWLER_DAMAGE_BONUS,
 		})}.`,
-		descriptionIcons: [IconShieldNone, IconWeaponDamage],
+		descriptionIcons: [IconShieldNone, IconOneHanded, IconWeaponDamage],
 		Icon: IconBrawler,
 	},
 	bruiser: {
@@ -80,8 +81,8 @@ export const TRAITS: Record<
 		Icon: IconBruiser,
 	},
 	colossus: {
-		description: "# Two-handed melee weapons can be wielded alongside a # shield.",
-		descriptionIcons: [IconTwoHanded, IconShield],
+		description: "# Two-handed melee weapons can be wielded as if they were # one-handed.",
+		descriptionIcons: [IconTwoHanded, IconOneHanded],
 		Icon: IconColossus,
 	},
 	executioner: {
@@ -119,7 +120,7 @@ export const TRAITS: Record<
 		Icon: IconSharpshooter,
 	},
 	shredder: {
-		description: "# Bleed damage is inflicted all at once.",
+		description: "# Bleeding damage is inflicted all at once.",
 		descriptionIcons: [IconBleeding],
 		Icon: IconShredder,
 	},

@@ -9,7 +9,7 @@ import { formatNumber } from "@neverquest/utilities/formatters"
 export function AttributeIncreaseDetails({ attribute }: { attribute: Attribute }) {
 	const attributeRankValue = useRecoilValue(attributeRank(attribute))
 
-	const { descriptionIcons, format, increment, rankBonus } = ATTRIBUTES[attribute]
+	const { descriptionIcons, format, increment, incrementBonus } = ATTRIBUTES[attribute]
 
 	return (
 		<IconDisplay Icon={descriptionIcons[0]} iconProps={{ className: "small" }}>
@@ -18,7 +18,9 @@ export function AttributeIncreaseDetails({ attribute }: { attribute: Attribute }
 
 				{formatNumber({
 					format,
-					value: rankBonus === undefined ? increment : increment + rankBonus * attributeRankValue,
+					value: incrementBonus === undefined
+						? increment
+						: Math.min(increment + incrementBonus.perRank * attributeRankValue, incrementBonus.maximum),
 				})}
 			</span>
 		</IconDisplay>

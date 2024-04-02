@@ -6,6 +6,7 @@ import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
 import {
 	CLASS_FULL_WIDTH_JUSTIFIED,
+	LABEL_MAXIMUM,
 	LABEL_NO_ESSENCE,
 	PERCENTAGE_POINTS,
 	POPOVER_TRIGGER,
@@ -74,7 +75,7 @@ export function CraftMunitions() {
 
 				<Stack className="ms-2" direction="horizontal" gap={3}>
 					<IconDisplay Icon={IconEssence} tooltip="Price">
-						<span>{formatNumber({ value: price })}</span>
+						<span>{isAtMaximum ? LABEL_MAXIMUM : formatNumber({ value: price })}</span>
 					</IconDisplay>
 
 					<OverlayTrigger

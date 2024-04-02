@@ -80,7 +80,7 @@ export const staggerChance = withStateKey("staggerChance", key =>
 			const shieldValue = get(shield)
 
 			return get(isSkillAcquired("shieldcraft")) && !isUnshielded(shieldValue)
-				? get(shield).stagger
+				? get(shield).staggerChance
 				: 0
 		},
 		key,

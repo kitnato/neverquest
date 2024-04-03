@@ -14,7 +14,7 @@ export function DistanceMeter() {
 	return (
 		<LabelledProgressBar
 			disableTransitions
-			striping={{ animated: isMonsterFrozen, striped: isMonsterFrozen }}
+			isAnimated={isMonsterFrozen}
 			value={(distanceValue / rangeValue) * PERCENTAGE_POINTS}
 			variant="secondary"
 		>

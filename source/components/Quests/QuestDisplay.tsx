@@ -45,7 +45,7 @@ export function QuestDisplay({
 	return (
 		<div className={CLASS_FULL_WIDTH_JUSTIFIED}>
 			<Stack
-				className={`me-2${hasCompletedQuest ? " opacity-50" : ""}`}
+				className={`me-2${hasCompletedQuest ? " opacity-25" : ""}`}
 				direction="horizontal"
 				gap={3}
 			>

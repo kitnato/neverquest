@@ -170,7 +170,7 @@ export const QUESTS: Record<
 	},
 	completing: {
 		description: "Complete all quests",
-		// See line 676.
+		// See line 677.
 		progression: [0],
 		requiresTracking: true,
 		title: "Completionist",
@@ -227,7 +227,7 @@ export const QUESTS: Record<
 		title: "Litterbug",
 	},
 	distantKilling: {
-		description: "Kill @ distant monsters.",
+		description: "Kill @ monsters at range.",
 		progression: [3, 10, 25],
 		requiresTracking: true,
 		title: "Headshot",
@@ -588,13 +588,13 @@ export const QUESTS: Record<
 		title: "Does it end?",
 	},
 	staggering: {
-		description: "Stagger @ monsters.",
+		description: "Stagger monsters @ times.",
 		progression: [3, 10, 25, 50, 100],
 		requiresTracking: true,
 		title: "Stop wiggling",
 	},
 	stunning: {
-		description: "Stun @ monsters.",
+		description: "Stun monsters @ times.",
 		progression: [3, 10, 25, 50, 100],
 		requiresTracking: true,
 		title: "Brain damage",

@@ -5,6 +5,7 @@ import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
 import { DetailsTable } from "@neverquest/components/DetailsTable"
 import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { RegenerationMeter } from "@neverquest/components/Reserves/RegenerationMeter"
+import { ATTRIBUTES } from "@neverquest/data/attributes"
 import { POPOVER_TRIGGER } from "@neverquest/data/general"
 import { RESERVES } from "@neverquest/data/reserves"
 import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth"
@@ -84,27 +85,29 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
 									</td>
 								</tr>
 
-								<tr>
-									<td>
-										<IconDisplay Icon={IconRegeneration} iconProps={{ className: "small" }}>
-											<span>
-												{capitalizeAll(regenerationAttribute)}
-												:
-											</span>
-										</IconDisplay>
-									</td>
+								{attributeStatisticRegenerationRate < 0 && (
+									<tr>
+										<td>
+											<IconDisplay Icon={ATTRIBUTES[regenerationAttribute].Icon} iconProps={{ className: "small" }}>
+												<span>
+													{capitalizeAll(regenerationAttribute)}
+													:
+												</span>
+											</IconDisplay>
+										</td>
 
-									<td>
-										<Stack direction="horizontal" gap={1}>
-											<span>
-												{formatNumber({
-													format: "percentage",
-													value: attributeStatisticRegenerationRate,
-												})}
-											</span>
-										</Stack>
-									</td>
-								</tr>
+										<td>
+											<Stack direction="horizontal" gap={1}>
+												<span>
+													{formatNumber({
+														format: "percentage",
+														value: attributeStatisticRegenerationRate,
+													})}
+												</span>
+											</Stack>
+										</td>
+									</tr>
+								)}
 
 								<tr>
 									<td>

@@ -18,7 +18,7 @@ import { formatNumber } from "@neverquest/utilities/formatters"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function DeflectionChance() {
-	const { deflection } = useRecoilValue(armor)
+	const { deflectionChance: armorDeflectionChance } = useRecoilValue(armor)
 	const deflectionChanceValue = useRecoilValue(deflectionChance)
 	const isTraitAcquiredInoculated = useRecoilValue(isTraitAcquired("inoculated"))
 
@@ -50,7 +50,7 @@ export function DeflectionChance() {
 
 											<td>
 												<IconDisplay Icon={IconDeflectionChance} iconProps={{ className: "small" }}>
-													<span>{formatNumber({ format: "percentage", value: deflection })}</span>
+													<span>{formatNumber({ format: "percentage", value: armorDeflectionChance })}</span>
 												</IconDisplay>
 											</td>
 										</tr>
@@ -80,9 +80,9 @@ export function DeflectionChance() {
 						trigger={isTraitAcquiredInoculated ? POPOVER_TRIGGER : []}
 					>
 						<span>
-							{`${formatNumber({ format: "percentage", value: deflectionChanceValue })}${
-								deflectionChanceValue === DEFLECTION_MAXIMUM ? ` ${LABEL_MAXIMUM}` : ""
-							}`}
+							{`${formatNumber({ format: "percentage", value: deflectionChanceValue })}${deflectionChanceValue === DEFLECTION_MAXIMUM
+								? ` ${LABEL_MAXIMUM}`
+								: ""}`}
 						</span>
 					</OverlayTrigger>
 

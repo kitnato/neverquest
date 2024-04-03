@@ -19,14 +19,14 @@ export function MonsterAttackRateMeter() {
 	return (
 		<LabelledProgressBar
 			disableTransitions
-			striping={{ animated: isMonsterFrozen, striped: isMonsterFrozen }}
-			value={
-				((monsterAttackDurationValue === 0
+			isAnimated={isMonsterFrozen}
+			value={(
+				(monsterAttackDurationValue === 0
 					? 0
-					: monsterAttackRateValue - monsterAttackDurationValue)
-					/ monsterAttackRateValue)
-					* PERCENTAGE_POINTS
-			}
+					: monsterAttackRateValue - monsterAttackDurationValue
+				)
+				/ monsterAttackRateValue
+			) * PERCENTAGE_POINTS}
 			variant="secondary"
 		>
 			<Stack direction="horizontal" gap={1}>

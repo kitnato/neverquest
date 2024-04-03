@@ -165,7 +165,7 @@ export const deflectionChance = withStateKey("deflectionChance", key =>
 		get: ({ get }) =>
 			get(isSkillAcquired("impermeability"))
 				? Math.min(
-					get(armor).deflection
+					get(armor).deflectionChance
 					+ (get(isTraitAcquired("inoculated")) ? INOCULATED_DEFLECTION_BASE : 0),
 					DEFLECTION_MAXIMUM,
 				)

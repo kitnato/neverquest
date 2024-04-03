@@ -31,7 +31,7 @@ export function ArmorName({
 	const isShowingGearClass = useRecoilValue(isShowing("gearClass"))
 	const isSkillAcquireImpermeability = useRecoilValue(isSkillAcquired("impermeability"))
 
-	const { burden, deflection, ID, level, name, protection, weight } = armor
+	const { burden, deflectionChance, ID, level, name, protection, weight } = armor
 	const isArmorUnequipped = isUnarmored(armor)
 	const showComparison = ID !== armorEquippedValue.ID
 
@@ -121,12 +121,12 @@ export function ArmorName({
 											<td>
 												<Stack direction="horizontal" gap={1}>
 													<IconDisplay Icon={IconDeflectionChance} iconProps={{ className: "small" }}>
-														<span>{formatNumber({ format: "percentage", value: deflection })}</span>
+														<span>{formatNumber({ format: "percentage", value: deflectionChance })}</span>
 													</IconDisplay>
 
 													{showComparison && (
 														<GearComparison
-															difference={deflection - armorEquippedValue.deflection}
+															difference={deflectionChance - armorEquippedValue.deflectionChance}
 															showing="armor"
 														/>
 													)}

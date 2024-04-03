@@ -42,7 +42,7 @@ export function ArmorOptions() {
 	const progressQuest = useProgressQuest()
 
 	const factor = getSigmoid(level)
-	const { burden, deflection, protection, weight } = getArmorRanges({
+	const { burden, deflectionChance, protection, weight } = getArmorRanges({
 		factor,
 		gearClass,
 	})
@@ -130,8 +130,8 @@ export function ArmorOptions() {
 					{isSkillAcquiredImpermeability
 						? `${formatNumber({
 							format: "percentage",
-							value: deflection.minimum,
-						})} - ${formatNumber({ format: "percentage", value: deflection.maximum })}`
+							value: deflectionChance.minimum,
+						})} - ${formatNumber({ format: "percentage", value: deflectionChance.maximum })}`
 						: LABEL_UNKNOWN}
 				</IconDisplay>
 

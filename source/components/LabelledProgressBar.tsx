@@ -7,25 +7,27 @@ export function LabelledProgressBar({
 	attachment,
 	children,
 	disableTransitions = false,
+	isAnimated,
 	isSmall = false,
 	sibling,
-	striping,
 	value,
 	variant = "dark",
 }: {
 	attachment?: UIAttachment
 	children: ReactNode
 	disableTransitions?: boolean
+	isAnimated?: boolean
 	isSmall?: boolean
 	sibling?: ReactNode
-	striping?: Partial<{ animated: boolean, striped: boolean }>
 	value: number
 	variant?: BootstrapColorVariant
 }) {
-	const appearance = {
-		animated: striping?.animated ?? false,
-		striped: striping?.striped ?? false,
-	}
+	const appearance = isAnimated
+		? {
+			animated: true,
+			striped: true,
+		}
+		: {}
 
 	return (
 		<div

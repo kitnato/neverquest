@@ -118,11 +118,11 @@ export function getAnimationClass({
 }
 
 export function getArmorRanges({ factor, gearClass }: { factor: number, gearClass: ArmorClass }) {
-	const { burden, deflection, protection, weight } = ARMOR_SPECIFICATIONS[gearClass]
+	const { burden, deflectionChance, protection, weight } = ARMOR_SPECIFICATIONS[gearClass]
 
 	return {
 		burden: getRange({ factor, isRounded: true, ranges: burden }),
-		deflection: getRange({ factor, ranges: deflection }),
+		deflectionChance: getRange({ factor, ranges: deflectionChance }),
 		protection: getRange({ factor, isRounded: true, ranges: protection }),
 		weight: getRange({ factor, isRounded: true, ranges: weight }),
 	}
@@ -494,9 +494,9 @@ export function getShieldRanges({ factor, gearClass }: { factor: number, gearCla
 }
 
 // https://en.wikipedia.org/wiki/Sigmoid_function
-// f(0|1) = 0, f(38) = ~0.5, f(50) = ~0.75, f(77) = ~1
+// f(0) = 0, f(38) = ~0.5, f(50) = ~0.75, f(77) = ~1
 export function getSigmoid(x: number) {
-	return [0, 1].includes(x)
+	return x === 0
 		? 0
 		: (
 			(1 / (1 + Math.pow(Math.E, -0.15 * (x - 45)) - 0.011) - 0.0012)

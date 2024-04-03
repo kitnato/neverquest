@@ -45,7 +45,7 @@ export function isArmor(thing: unknown): thing is Armor {
 		isGearItemBase(thing)
 		&& "burden" in thing
 		&& typeof thing.burden === "number"
-		&& "deflection" in thing
+		&& "deflectionChance" in thing
 		&& typeof thing.burden === "number"
 		&& "gearClass" in thing
 		&& typeof thing.gearClass === "string"

@@ -31,8 +31,8 @@ export function RegenerationMeter({ reserve }: { reserve: Reserve }) {
 		<LabelledProgressBar
 			attachment="above"
 			disableTransitions
+			isAnimated={isContinuous}
 			isSmall
-			striping={isContinuous ? { animated: true, striped: true } : undefined}
 			value={
 				isContinuous
 					? PERCENTAGE_POINTS

@@ -6,7 +6,7 @@ import type { Consumable, Gem, Grip, Infusable, QuestClass, Relic } from "@never
 
 export type Armor = GearItemBase & {
 	burden: number
-	deflection: number
+	deflectionChance: number
 	gearClass: ArmorClass
 	protection: number
 }

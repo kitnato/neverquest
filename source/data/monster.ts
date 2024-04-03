@@ -76,7 +76,7 @@ export const ESSENCE = {
 
 export const FINALITY_STAGE = {
 	"res cogitans": LEVELLING_MAXIMUM,
-	"res dominus": 60,
+	"res dominus": 57,
 }
 
 export const FRAILTY = {
@@ -111,7 +111,7 @@ export const MONSTER_DAMAGE = {
 		"res dominus": 1007,
 	},
 	menace: {
-		maximum: 0.5,
+		maximum: 1,
 		minimum: 0.25,
 		requiredStage: RETIREMENT_STAGE + 1,
 	},
@@ -127,7 +127,7 @@ export const MONSTER_HEALTH = {
 		"res dominus": 10777,
 	},
 	menace: {
-		maximum: 1.2,
+		maximum: 2.5,
 		minimum: 0.3,
 		requiredStage: RETIREMENT_STAGE + 1,
 	},

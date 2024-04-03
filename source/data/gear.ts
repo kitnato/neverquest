@@ -19,7 +19,7 @@ import type { WeaponAbility } from "@neverquest/types/unions"
 
 export const ARMOR_NONE: Omit<Armor, "gearClass" | "price"> = {
 	burden: 0,
-	deflection: 0,
+	deflectionChance: 0,
 	ID: "ARMOR_NONE",
 	level: 0,
 	name: "Unarmored",
@@ -30,7 +30,7 @@ export const ARMOR_NONE: Omit<Armor, "gearClass" | "price"> = {
 export const ARMOR_SPECIFICATIONS: Record<
 	ArmorClass,
 	GearRangeBase & {
-		deflection: [GeneratorRange, GeneratorRange]
+		deflectionChance: [GeneratorRange, GeneratorRange]
 		Icon: SVGIcon
 		protection: [GeneratorRange, GeneratorRange]
 	}
@@ -40,9 +40,9 @@ export const ARMOR_SPECIFICATIONS: Record<
 			{ maximum: 9, minimum: 4 },
 			{ maximum: 80, minimum: 75 },
 		],
-		deflection: [
+		deflectionChance: [
 			{ maximum: 0.12, minimum: 0.1 },
-			{ maximum: 0.3, minimum: 0.28 },
+			{ maximum: 0.25, minimum: 0.23 },
 		],
 		Icon: IconArmorHeavy,
 		price: { maximum: 10_000, minimum: 50 },
@@ -60,7 +60,7 @@ export const ARMOR_SPECIFICATIONS: Record<
 			{ maximum: 2, minimum: 1 },
 			{ maximum: 25, minimum: 20 },
 		],
-		deflection: [
+		deflectionChance: [
 			{ maximum: 0.3, minimum: 0.28 },
 			{ maximum: 0.7, minimum: 0.68 },
 		],
@@ -80,7 +80,7 @@ export const ARMOR_SPECIFICATIONS: Record<
 			{ maximum: 5, minimum: 3 },
 			{ maximum: 50, minimum: 45 },
 		],
-		deflection: [
+		deflectionChance: [
 			{ maximum: 0.2, minimum: 0.18 },
 			{ maximum: 0.45, minimum: 0.43 },
 		],
@@ -202,10 +202,10 @@ export const WEAPON_BASE: GearRangeBase & {
 	price: { maximum: 8000, minimum: 1 },
 	range: [
 		{ maximum: 2200, minimum: 2000 },
-		{ maximum: 5500, minimum: 5400 },
+		{ maximum: 4500, minimum: 4300 },
 	],
 	rate: [
-		{ maximum: 3000, minimum: 2900 },
+		{ maximum: 3100, minimum: 3000 },
 		{ maximum: 2200, minimum: 2100 },
 	],
 	weight: [
@@ -218,11 +218,11 @@ export const WEAPON_MODIFIER = {
 	"one-handed": { ability: 1, burden: 1, damage: 1, price: 1, rate: 1, weight: 1 },
 	"ranged": { ability: 1.1, burden: 0.85, damage: 1.1, price: 1.25, rate: 1.1, weight: 1.15 },
 	"two-handed": {
-		ability: 1.15,
+		ability: 1.2,
 		burden: 1.3,
-		damage: 1.2,
+		damage: 1.25,
 		price: 1.35,
-		rate: 1.15,
+		rate: 1.2,
 		weight: 1.25,
 	},
 }

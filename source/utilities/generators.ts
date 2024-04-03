@@ -28,14 +28,14 @@ export function generateArmor({
 	level: number
 }): Armor {
 	const factor = getSigmoid(level)
-	const { burden, deflection, protection, weight } = getArmorRanges({
+	const { burden, deflectionChance, protection, weight } = getArmorRanges({
 		factor,
 		gearClass,
 	})
 
 	return {
 		burden: Math.round(getFromRange(burden)),
-		deflection: getFromRange(deflection),
+		deflectionChance: getFromRange(deflectionChance),
 		gearClass,
 		ID: nanoid(),
 		level,

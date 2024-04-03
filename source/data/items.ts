@@ -77,7 +77,7 @@ export const CONSUMABLES: Record<
 		item: {
 			ID: "",
 			name: "antidote",
-			price: 120,
+			price: 150,
 			weight: 5,
 		},
 	},
@@ -88,7 +88,7 @@ export const CONSUMABLES: Record<
 		item: {
 			ID: "",
 			name: "bandages",
-			price: 30,
+			price: 40,
 			weight: 1,
 		},
 	},
@@ -99,7 +99,7 @@ export const CONSUMABLES: Record<
 		item: {
 			ID: "",
 			name: "elixir",
-			price: 40,
+			price: 60,
 			weight: 2,
 		},
 	},
@@ -121,7 +121,7 @@ export const CONSUMABLES: Record<
 		item: {
 			ID: "",
 			name: "salve",
-			price: 200,
+			price: 250,
 			weight: 3,
 		},
 	},
@@ -144,7 +144,7 @@ export const ELEMENTALS: Record<
 		ailment: "burning",
 		color: "orange",
 		damageArmor: { maximum: 3, minimum: 1 },
-		damageWeapon: { maximum: 0.5, minimum: 0.15 },
+		damageWeapon: { maximum: 0.4, minimum: 0.15 },
 		duration: { maximum: 2500, minimum: 1200 },
 		durationCap: 7500,
 		gem: "ruby",
@@ -154,7 +154,7 @@ export const ELEMENTALS: Record<
 		ailment: "frozen",
 		color: "cyan",
 		damageArmor: { maximum: 2.5, minimum: 0.75 },
-		damageWeapon: { maximum: 0.35, minimum: 0.1 },
+		damageWeapon: { maximum: 0.3, minimum: 0.1 },
 		duration: { maximum: 2000, minimum: 900 },
 		durationCap: 3000,
 		gem: "sapphire",
@@ -292,7 +292,7 @@ export const RELICS: Record<
 		},
 	},
 	"dream catcher": {
-		description: "While # equipped # and attacking, disengages the bearer if at low # health.",
+		description: "While # equipped and # attacking, disengages the bearer if at low # health.",
 		descriptionIcons: [IconProtected, IconAttack, IconHealth],
 		Icon: IconDreamCatcher,
 		item: {
@@ -320,7 +320,7 @@ export const RELICS: Record<
 			ID: "",
 			name: "familiar",
 			price: 1,
-			weight: 17,
+			weight: 77,
 		},
 	},
 	"hearthstone": {

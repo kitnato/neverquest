@@ -11,7 +11,7 @@ import { Encumbrance } from "@neverquest/components/Inventory/Encumbrance"
 import { CompassNavigate } from "@neverquest/components/Inventory/Inheritable/CompassNavigate"
 import { EquipRelic } from "@neverquest/components/Inventory/Inheritable/EquipRelic"
 import { HearthstoneWarp } from "@neverquest/components/Inventory/Inheritable/HearthstoneWarp"
-import { InfusionAppraise } from "@neverquest/components/Inventory/Inheritable/Infusion/InfusionAppraise"
+import { Infusion } from "@neverquest/components/Inventory/Inheritable/Infusion"
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay"
 import { SocketGem } from "@neverquest/components/Inventory/SocketGem"
 import {
@@ -60,9 +60,9 @@ export function Inventory() {
 
 	for (const item of inventoryValue) {
 		let canEquip
-      = (isArmor(item) && armorValue.ID !== item.ID)
-      || (isWeapon(item) && weaponValue.ID !== item.ID)
-      || (isShield(item) && shieldValue.ID !== item.ID)
+			= (isArmor(item) && armorValue.ID !== item.ID)
+			|| (isWeapon(item) && weaponValue.ID !== item.ID)
+			|| (isShield(item) && shieldValue.ID !== item.ID)
 
 		if (isArmor(item) && item.gearClass === "heavy") {
 			canEquip = isSkillAcquiredArmorcraft
@@ -104,17 +104,17 @@ export function Inventory() {
 
 				{equippedGear.length === 0 && <span className="fst-italic">Nothing equipped.</span>}
 
-				{equippedGear.map((item) => {
-					const { ID } = item
+				{equippedGear.map((gearItem) => {
+					const { ID } = gearItem
 
 					return (
 						<div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
-							<ItemDisplay item={item} />
+							<ItemDisplay item={gearItem} />
 
 							<Button
 								className="ms-2"
 								onClick={() => {
-									toggleEquipItem({ item })
+									toggleEquipItem({ item: gearItem })
 								}}
 								variant="outline-dark"
 							>
@@ -133,13 +133,13 @@ export function Inventory() {
 				{storedItems
 					.filter(isGearItem)
 					.toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2))
-					.map((item) => {
-						const { ID } = item
+					.map((gearItem) => {
+						const { ID } = gearItem
 						const canEquipGear = equippableItems[ID]
 
 						return (
 							<div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
-								<ItemDisplay item={item} />
+								<ItemDisplay item={gearItem} />
 
 								<Stack className="ms-2" direction="horizontal" gap={3}>
 									<OverlayTrigger
@@ -154,7 +154,7 @@ export function Inventory() {
 											<Button
 												disabled={!canEquipGear}
 												onClick={() => {
-													toggleEquipItem({ item })
+													toggleEquipItem({ item: gearItem })
 												}}
 												variant="outline-dark"
 											>
@@ -163,7 +163,7 @@ export function Inventory() {
 										</div>
 									</OverlayTrigger>
 
-									<DiscardItem item={item} />
+									<DiscardItem item={gearItem} />
 								</Stack>
 							</div>
 						)
@@ -228,7 +228,7 @@ export function Inventory() {
 								<ItemDisplay item={infusableItem} />
 
 								<Stack className="ms-2" direction="horizontal" gap={3}>
-									<InfusionAppraise infusable={name} />
+									<Infusion infusable={name} />
 
 									<DiscardItem item={infusableItem} />
 								</Stack>

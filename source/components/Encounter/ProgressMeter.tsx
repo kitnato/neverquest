@@ -24,16 +24,18 @@ export function ProgressMeter() {
 			}
 			variant="secondary"
 		>
-			<Stack direction="horizontal" gap={1}>
+			<Stack className="text-nowrap" direction="horizontal" gap={1}>
 				<span>
 					{isVoid
 						? LABEL_UNKNOWN
-						: `${formatNumber({ value: progressValue })} / ${
-							isInfinite ? LABEL_UNKNOWN : formatNumber({ value: progressMaximumValue })
-						}`}
+						: formatNumber({ value: progressValue })}
 				</span>
 
 				<DeltasDisplay delta="progress" />
+
+				<span>
+					{` / ${isInfinite ? LABEL_UNKNOWN : formatNumber({ value: progressMaximumValue })}`}
+				</span>
 			</Stack>
 		</LabelledProgressBar>
 	)

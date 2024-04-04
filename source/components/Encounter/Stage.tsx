@@ -8,12 +8,13 @@ import { POPOVER_TRIGGER } from "@neverquest/data/general"
 import { useDeltaText } from "@neverquest/hooks/useDeltaText"
 import IconCorpse from "@neverquest/icons/corpse.svg?react"
 import IconStage from "@neverquest/icons/stage.svg?react"
-import { corpse, stage } from "@neverquest/state/encounter"
+import { corpse, stage, stageMaximum } from "@neverquest/state/encounter"
 import { formatNumber } from "@neverquest/utilities/formatters"
 
 export function Stage() {
 	const corpseValue = useRecoilValue(corpse)
 	const stageValue = useRecoilValue(stage)
+	const stageMaximumValue = useRecoilValue(stageMaximum)
 
 	useDeltaText({
 		delta: "stage",
@@ -22,7 +23,7 @@ export function Stage() {
 
 	return (
 		<IconDisplay Icon={IconStage} iconProps={{ overlayPlacement: "bottom" }} tooltip="Stage">
-			<Stack direction="horizontal" gap={1}>
+			<Stack className="text-nowrap" direction="horizontal" gap={1}>
 				<OverlayTrigger
 					overlay={(
 						<Popover>
@@ -50,10 +51,14 @@ export function Stage() {
 					placement="right"
 					trigger={corpseValue === undefined ? [] : POPOVER_TRIGGER}
 				>
-					<span>{formatNumber({ value: stageValue })}</span>
+					<span>
+						{formatNumber({ value: stageValue })}
+					</span>
 				</OverlayTrigger>
 
 				<DeltasDisplay delta="stage" />
+
+				<span>{stageValue < stageMaximumValue ? ` / ${stageMaximumValue}` : ""}</span>
 			</Stack>
 		</IconDisplay>
 	)

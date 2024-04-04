@@ -39,11 +39,11 @@ export function ItemName({
 
 												<span>Location: Outfloor ██-██#7</span>
 
-												<span>Initializing: CipherBrk-██-███</span>
+												<span>Initializing: RbtNvrqst-██-███</span>
 
 												<span>Processing: 7.7% ...</span>
 
-												<span>Error: Q██nt█m ██████ destabilization</span>
+												<span>Error: Δ-Θ destabilization</span>
 
 												<span>LEAKAGE IMMINENT</span>
 											</Stack>

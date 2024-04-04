@@ -471,7 +471,7 @@ These provide a permanent effect of some sort while they are carried in the inve
 
 ##### Usable relics
 
-These relics grant a new action. Some can be equipped for their effect to be granted.
+These relics can be interacted with. Some can be equipped so that their effect is granted.
 
 ##### Infusable relics
 

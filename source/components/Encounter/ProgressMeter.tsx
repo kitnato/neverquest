@@ -24,19 +24,19 @@ export function ProgressMeter() {
 			}
 			variant="secondary"
 		>
-			<Stack className="text-nowrap" direction="horizontal" gap={1}>
-				<span>
-					{isVoid
-						? LABEL_UNKNOWN
-						: formatNumber({ value: progressValue })}
-				</span>
+			{isVoid
+				? LABEL_UNKNOWN
+				: (
+					<Stack className="text-nowrap" direction="horizontal" gap={1}>
+						<span>{formatNumber({ value: progressValue })}</span>
 
-				<DeltasDisplay delta="progress" />
+						<DeltasDisplay delta="progress" />
 
-				<span>
-					{` / ${isInfinite ? LABEL_UNKNOWN : formatNumber({ value: progressMaximumValue })}`}
-				</span>
-			</Stack>
+						<span>
+							{` / ${isInfinite ? LABEL_UNKNOWN : formatNumber({ value: progressMaximumValue })}`}
+						</span>
+					</Stack>
+				)}
 		</LabelledProgressBar>
 	)
 }

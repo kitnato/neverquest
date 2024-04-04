@@ -292,7 +292,7 @@ export const monsterHealthMaximum = withStateKey("monsterHealthMaximum", key =>
 export const monsterLoot = withStateKey("monsterLoot", key =>
 	selector({
 		get: ({ get }) => {
-			const { attenuation, base: essenceBase, bonus, boss } = ESSENCE
+			const { attenuation, base: essenceBase, bonus, boss, finality } = ESSENCE
 			const { equalStage, lowerStage } = GEM_DROP_CHANCE
 
 			const encounterValue = get(encounter)
@@ -304,10 +304,12 @@ export const monsterLoot = withStateKey("monsterLoot", key =>
 			const droppedEssence = essenceBase + ((essenceBase * getTriangular(stageValue)) / attenuation)
 
 			return {
-				essence: Math.round(
-					(droppedEssence + droppedEssence * Math.min(get(progress), PROGRESS.maximum) * bonus) * (encounterValue === "boss" ? boss : 1)
-					* (1 + getPerkEffect({ perk: "essenceBonus", stage: get(retirementStage) })),
-				),
+				essence: isFinality(encounterValue)
+					? finality[encounterValue]
+					: Math.round(
+						(droppedEssence + droppedEssence * Math.min(get(progress), PROGRESS.maximum) * bonus) * (encounterValue === "boss" ? boss : 1)
+						* (1 + getPerkEffect({ perk: "essenceBonus", stage: get(retirementStage) })),
+					),
 				gems: encounterValue === "boss"
 					? Math.min(
 						Array.from<undefined>({

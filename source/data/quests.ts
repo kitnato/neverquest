@@ -205,7 +205,7 @@ export const QUESTS: Record<
 		description: `Decide to ${LABEL_UNKNOWN}`,
 		hidden: "keep grinding.",
 		progression: [1],
-		requiresTracking: true,
+		requiresTracking: false,
 		title: "Parable of Stanislav",
 	},
 	decipheringJournal: {
@@ -383,7 +383,7 @@ export const QUESTS: Record<
 	killingResDominus: {
 		description: "Defeat the dominant being.",
 		progression: [1],
-		requiresTracking: false,
+		requiresTracking: true,
 		title: "Back to reality",
 	},
 	killingStage: {
@@ -400,7 +400,7 @@ export const QUESTS: Record<
 			TAILORING.knapsack.amount * 25,
 			TAILORING.knapsack.amount * 50,
 		],
-		requiresTracking: true,
+		requiresTracking: false,
 		title: "Deep pockets",
 	},
 	looting: {

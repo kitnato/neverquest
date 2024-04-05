@@ -3,24 +3,23 @@ import { useRecoilValue } from "recoil"
 
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
-import { LABEL_UNKNOWN, PERCENTAGE_POINTS } from "@neverquest/data/general"
-import { encounter, progress, progressMaximum } from "@neverquest/state/encounter"
+import { LABEL_UNKNOWN, PERCENTAGE } from "@neverquest/data/general"
+import { progress, progressMaximum } from "@neverquest/state/encounter"
 import { formatNumber } from "@neverquest/utilities/formatters"
 
 export function ProgressMeter() {
-	const encounterValue = useRecoilValue(encounter)
 	const progressValue = useRecoilValue(progress)
 	const progressMaximumValue = useRecoilValue(progressMaximum)
 
 	const isInfinite = progressMaximumValue === Number.POSITIVE_INFINITY
-	const isVoid = encounterValue === "void"
+	const isVoid = progressMaximumValue === 0
 
 	return (
 		<LabelledProgressBar
 			value={
 				isInfinite || isVoid
-					? PERCENTAGE_POINTS
-					: (progressValue / progressMaximumValue) * PERCENTAGE_POINTS
+					? PERCENTAGE
+					: (progressValue / progressMaximumValue) * PERCENTAGE
 			}
 			variant="secondary"
 		>

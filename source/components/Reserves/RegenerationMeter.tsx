@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil"
 
 import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
-import { PERCENTAGE_POINTS } from "@neverquest/data/general"
+import { PERCENTAGE } from "@neverquest/data/general"
 import { REGENERATION_METER_ANIMATION_THRESHOLD, RESERVES } from "@neverquest/data/reserves"
 import { isRecovering } from "@neverquest/state/character"
 import {
@@ -35,8 +35,8 @@ export function RegenerationMeter({ reserve }: { reserve: Reserve }) {
 			isSmall
 			value={
 				isContinuous
-					? PERCENTAGE_POINTS
-					: (regenerationProgress / regenerationRateValue) * PERCENTAGE_POINTS
+					? PERCENTAGE
+					: (regenerationProgress / regenerationRateValue) * PERCENTAGE
 			}
 			variant="secondary"
 		>

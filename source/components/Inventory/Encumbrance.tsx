@@ -4,7 +4,7 @@ import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
 
 import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
-import { PERCENTAGE_POINTS } from "@neverquest/data/general"
+import { PERCENTAGE } from "@neverquest/data/general"
 import { useDeltaText } from "@neverquest/hooks/useDeltaText"
 import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react"
 import { encumbrance, encumbranceMaximum } from "@neverquest/state/inventory"
@@ -21,7 +21,7 @@ export function Encumbrance() {
 
 	return (
 		<IconDisplay className="w-100" Icon={IconEncumbrance} tooltip="Encumbrance">
-			<LabelledProgressBar value={(encumbranceValue / encumbranceMaximumValue) * PERCENTAGE_POINTS}>
+			<LabelledProgressBar value={(encumbranceValue / encumbranceMaximumValue) * PERCENTAGE}>
 				<Stack direction="horizontal" gap={1}>
 					<span>
 						{formatNumber({ value: encumbranceValue })}

@@ -38,7 +38,7 @@ export const LEVELLING_MAXIMUM = 77
 
 export const NAME_LENGTH_MAXIMUM = 50
 
-export const PERCENTAGE_POINTS = 100
+export const PERCENTAGE = 100
 
 export const POPOVER_TRIGGER: OverlayTriggerType[] = ["focus", "hover"]
 

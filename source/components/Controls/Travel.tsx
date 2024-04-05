@@ -34,13 +34,15 @@ export function Travel() {
 
 	const toggleLocation = useToggleLocation()
 
+	const isCaravan = locationValue === "caravan"
 	// Occurs if the knapsack is sold and carrying more than the weight difference of its absence.
-	const isOverEncumbered = locationValue === "caravan" && encumbranceExtentValue === "over-encumbered"
+	const isOverEncumbered = isCaravan && encumbranceExtentValue === "over-encumbered"
+	const isResCogitans = encounterValue === "res cogitans"
 
-	if (
-		((progressMaximumValue === Number.POSITIVE_INFINITY ? progressValue > 0 : isStageCompletedValue) && essenceLootValue === 0)
-		|| encounterValue === "void"
-		|| locationValue === "caravan"
+	if ((
+		(progressMaximumValue === Number.POSITIVE_INFINITY ? progressValue > 0 : isStageCompletedValue)
+		&& essenceLootValue === 0
+	) || isCaravan
 	) {
 		return (
 			<OverlayTrigger
@@ -49,8 +51,8 @@ export function Travel() {
 						<span>
 							{isOverEncumbered
 								? "Over-encumbered."
-								: (locationValue === "wilderness"
-									? `Go to ${!isShowingLocation || encounterValue === "res cogitans"
+								: (!isCaravan
+									? `Go to ${!isShowingLocation || isResCogitans
 										? LABEL_UNKNOWN
 										: "caravan"
 									}`
@@ -62,7 +64,7 @@ export function Travel() {
 				<div className={getAnimationClass({ animation: "bounceIn" })}>
 					<Button
 						className={
-							!isAttackingValue && locationValue === "wilderness" && itemsLootValue.length === 0
+							!isAttackingValue && !isCaravan && itemsLootValue.length === 0
 								? getAnimationClass({ animation: "pulse", isInfinite: true })
 								: undefined
 						}
@@ -71,8 +73,8 @@ export function Travel() {
 						variant="outline-dark"
 					>
 						<IconImage
-							Icon={encounterValue === "res cogitans" ? IconFinalTravel : IconTravel}
-							isMirrored={locationValue === "caravan"}
+							Icon={isResCogitans ? IconFinalTravel : IconTravel}
+							isMirrored={isCaravan}
 						/>
 					</Button>
 				</div>

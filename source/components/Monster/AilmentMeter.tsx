@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil"
 
 import { DescriptionDisplay } from "@neverquest/components/DescriptionDisplay"
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
-import { LABEL_EMPTY, PERCENTAGE_POINTS } from "@neverquest/data/general"
+import { LABEL_EMPTY, PERCENTAGE } from "@neverquest/data/general"
 import { AILMENT_DESCRIPTION } from "@neverquest/data/monster"
 import { isMonsterAiling, monsterAilmentDuration } from "@neverquest/state/monster"
 import type { Ailment } from "@neverquest/types/unions"
@@ -36,7 +36,7 @@ export function AilmentMeter({
 					disableTransitions
 					value={
 						isMonsterAilingValue
-							? (monsterAilmentDurationValue / totalDuration) * PERCENTAGE_POINTS
+							? (monsterAilmentDurationValue / totalDuration) * PERCENTAGE
 							: 0
 					}
 					variant="secondary"

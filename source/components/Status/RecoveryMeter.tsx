@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil"
 
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
-import { PERCENTAGE_POINTS } from "@neverquest/data/general"
+import { PERCENTAGE } from "@neverquest/data/general"
 import { isRecovering, recoveryDuration } from "@neverquest/state/character"
 import { recoveryRate } from "@neverquest/state/statistics"
 import { formatNumber } from "@neverquest/utilities/formatters"
@@ -18,7 +18,7 @@ export function RecoveryMeter() {
 			disableTransitions
 			value={
 				((isRecoveringValue ? recoveryRateValue - recoveryDurationValue : 0) / recoveryRateValue)
-				* PERCENTAGE_POINTS
+				* PERCENTAGE
 			}
 			variant="secondary"
 		>

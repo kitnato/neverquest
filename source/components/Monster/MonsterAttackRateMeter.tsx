@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil"
 
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
-import { PERCENTAGE_POINTS } from "@neverquest/data/general"
+import { PERCENTAGE } from "@neverquest/data/general"
 import {
 	isMonsterAiling,
 	monsterAttackDuration,
@@ -26,7 +26,7 @@ export function MonsterAttackRateMeter() {
 					: monsterAttackRateValue - monsterAttackDurationValue
 				)
 				/ monsterAttackRateValue
-			) * PERCENTAGE_POINTS}
+			) * PERCENTAGE}
 			variant="secondary"
 		>
 			<Stack direction="horizontal" gap={1}>

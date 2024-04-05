@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil"
 
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
-import { PERCENTAGE_POINTS } from "@neverquest/data/general"
+import { PERCENTAGE } from "@neverquest/data/general"
 import { RAGE } from "@neverquest/data/monster"
 import { isEnraged, rage } from "@neverquest/state/monster"
 import { formatNumber } from "@neverquest/utilities/formatters"
@@ -17,7 +17,7 @@ export function RageMeter() {
 	return (
 		<LabelledProgressBar
 			isAnimated={isEnragedValue}
-			value={(rageValue / maximum) * PERCENTAGE_POINTS}
+			value={(rageValue / maximum) * PERCENTAGE}
 			variant="secondary"
 		>
 			<Stack direction="horizontal" gap={1}>

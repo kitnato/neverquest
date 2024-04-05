@@ -23,6 +23,9 @@ export function useCompleteStage() {
 				if (get(isStageCompleted)) {
 					const encounterValue = get(encounter)
 
+					generateMerchantOffer()
+					setMonologues()
+
 					if (isFinality(encounterValue)) {
 						set(hasDefeatedFinality(encounterValue), true)
 
@@ -30,9 +33,6 @@ export function useCompleteStage() {
 							set(consciousness, "vigilans")
 						}
 					}
-
-					generateMerchantOffer()
-					setMonologues()
 				}
 			},
 		[generateMerchantOffer, setMonologues],

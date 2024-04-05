@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid"
-import { useMemo, useState } from "react"
+import { type ReactNode, useCallback, useLayoutEffect, useMemo, useRef, useState } from "react"
 import { useRecoilValue } from "recoil"
 
 import { GLITCH_NUMBER, GLITCH_STAGE_MINIMUM, LEVELLING_THRESHOLD } from "@neverquest/data/general"
@@ -11,9 +11,9 @@ const CHARACTERS = "!·&=?¿|@#~¬+/\\^*[]{}-_<>"
 
 const LATENCY = 70
 
-function getGlitchingElement() {
+function getGlitchingElement(glitchClassName: string) {
 	const textElements = document.body
-		.querySelector(".somnium")
+		.querySelector(`.${glitchClassName}`)
 		?.querySelectorAll("h6, span, strong")
 
 	if (textElements === undefined) {
@@ -48,7 +48,7 @@ function glitchElementAt({ element, originalText }: { element: Element, original
 	}
 }
 
-export function Glitch() {
+export function Glitch({ children, isContinuous = false }: { children: ReactNode, isContinuous?: boolean }) {
 	const stageValue = useRecoilValue(stage)
 
 	const [glitchingElements, setGlitchingElements] = useState<
@@ -72,54 +72,64 @@ export function Glitch() {
 	)
 	const interval = useMemo(
 		() =>
-			Math.round(
-				getFromRange(
-					getRange({
-						factor,
-						ranges: [
-							{ maximum: 60_000, minimum: 55_000 },
-							{ maximum: 12_000, minimum: 10_000 },
-						],
-					}),
+			isContinuous
+				? 1000
+				: Math.round(
+					getFromRange(
+						getRange({
+							factor,
+							ranges: [
+								{ maximum: 60_000, minimum: 55_000 },
+								{ maximum: 12_000, minimum: 10_000 },
+							],
+						}),
+					),
 				),
-			),
-		[factor],
+		[factor, isContinuous],
 	)
+
+	const { current: glitchClassName } = useRef(`glitched-${nanoid()}`)
+
+	const startGlitching = useCallback(() => {
+		const glitchingElement = getGlitchingElement(glitchClassName)
+
+		if (glitchingElement !== undefined) {
+			const { element } = glitchingElement
+			const { classList, textContent } = element
+
+			if (textContent !== null) {
+				classList.add("monospaced")
+
+				setGlitchingElements(elements => ({
+					...elements,
+					[nanoid()]: {
+						duration: isContinuous
+							? 990
+							: Math.round(
+								getFromRange(
+									getRange({
+										factor,
+										ranges: [
+											{ maximum: 600, minimum: 400 },
+											{ maximum: 3200, minimum: 2800 },
+										],
+									}),
+								),
+							),
+						element,
+						latency: LATENCY,
+						originalText: textContent,
+						position: Math.floor(Math.random() * textContent.length),
+					},
+				}))
+			}
+		}
+	}, [factor, glitchClassName, isContinuous])
 
 	useAnimation({
 		onFrame: (elapsed) => {
 			if (intervalElapsed >= interval) {
-				const glitchingElement = getGlitchingElement()
-
-				if (glitchingElement !== undefined) {
-					const { element } = glitchingElement
-					const { classList, textContent } = element
-
-					if (textContent !== null) {
-						classList.add("monospaced")
-
-						setGlitchingElements(elements => ({
-							...elements,
-							[nanoid()]: {
-								duration: Math.round(
-									getFromRange(
-										getRange({
-											factor,
-											ranges: [
-												{ maximum: 600, minimum: 400 },
-												{ maximum: 3200, minimum: 2800 },
-											],
-										}),
-									),
-								),
-								element,
-								latency: LATENCY,
-								originalText: textContent,
-								position: Math.floor(Math.random() * textContent.length),
-							},
-						}))
-					}
-				}
+				startGlitching()
 
 				setIntervalElapsed(0)
 			}
@@ -154,8 +164,18 @@ export function Glitch() {
 				}
 			}
 		},
-		stop: stageValue < GLITCH_STAGE_MINIMUM,
+		stop: !isContinuous && stageValue < GLITCH_STAGE_MINIMUM,
 	})
 
-	return <></>
+	useLayoutEffect(() => {
+		if (isContinuous) {
+			startGlitching()
+		}
+	}, [isContinuous, startGlitching])
+
+	return (
+		<div className={glitchClassName}>
+			{children}
+		</div>
+	)
 }

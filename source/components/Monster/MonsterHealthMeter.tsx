@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil"
 
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
-import { PERCENTAGE_POINTS } from "@neverquest/data/general"
+import { PERCENTAGE } from "@neverquest/data/general"
 import { monsterHealth, monsterHealthMaximum } from "@neverquest/state/monster"
 import { formatNumber } from "@neverquest/utilities/formatters"
 
@@ -14,7 +14,7 @@ export function MonsterHealthMeter() {
 	return (
 		<LabelledProgressBar
 			attachment="below"
-			value={(monsterHealthValue / monsterHealthMaximumValue) * PERCENTAGE_POINTS}
+			value={(monsterHealthValue / monsterHealthMaximumValue) * PERCENTAGE}
 		>
 			<Stack direction="horizontal" gap={1}>
 				<span>

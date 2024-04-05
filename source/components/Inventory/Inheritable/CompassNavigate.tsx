@@ -13,10 +13,11 @@ import {
 } from "react-bootstrap"
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil"
 
+import { Glitch } from "@neverquest/components/Glitch"
 import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { IconImage } from "@neverquest/components/IconImage"
 import { LABEL_SEPARATOR, POPOVER_TRIGGER } from "@neverquest/data/general"
-import { BOSS_STAGE_INTERVAL, BOSS_STAGE_START } from "@neverquest/data/monster"
+import { BOSS_STAGE_INTERVAL, BOSS_STAGE_START, FINALITY_STAGE } from "@neverquest/data/monster"
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness"
 import IconBossHiding from "@neverquest/icons/boss-hiding.svg?react"
@@ -25,6 +26,48 @@ import IconNavigation from "@neverquest/icons/navigation.svg?react"
 import { location, stage, wildernesses } from "@neverquest/state/encounter"
 import { activeControl } from "@neverquest/state/ui"
 import { formatNumber } from "@neverquest/utilities/formatters"
+
+const StageDisplay = ({ currentStage, wildernesses }: { currentStage: number, wildernesses: string[] }) => {
+	const stageName = wildernesses[currentStage - 1]
+
+	if (stageName !== undefined) {
+		return (
+			<Stack className="d-inline-flex" direction="horizontal" gap={1}>
+				<span>
+					Stage
+				</span>
+
+				<span>
+					{formatNumber({ value: currentStage })}
+				</span>
+
+				{LABEL_SEPARATOR}
+
+				{
+					currentStage >= BOSS_STAGE_START
+					&& currentStage % BOSS_STAGE_INTERVAL === 0
+					&& (
+						<IconImage className="small" Icon={IconBossHiding} />
+					)
+				}
+
+				{Object.values(FINALITY_STAGE).includes(currentStage)
+					? (
+						<Glitch isContinuous>
+							<span>
+								{stageName}
+							</span>
+						</Glitch>
+					)
+					: (
+						<span>
+							{stageName}
+						</span>
+					)}
+			</Stack>
+		)
+	}
+}
 
 export function CompassNavigate() {
 	const locationValue = useRecoilValue(location)
@@ -38,34 +81,6 @@ export function CompassNavigate() {
 	const resetWilderness = useResetWilderness()
 
 	const canNavigate = locationValue === "wilderness"
-
-	const stageDisplay = (currentStage: number) => {
-		const stageName = wildernessesValue[currentStage - 1]
-
-		if (stageName !== undefined) {
-			return (
-				<Stack className="d-inline-flex" direction="horizontal" gap={1}>
-					<span>
-						Stage
-						{" "}
-						{formatNumber({ value: currentStage })}
-					</span>
-
-					{currentStage >= BOSS_STAGE_START && currentStage % BOSS_STAGE_INTERVAL === 0
-						? (
-							<IconImage className="small" Icon={IconBossHiding} />
-						)
-						: (
-							LABEL_SEPARATOR
-						)}
-
-					<span>
-						{stageName}
-					</span>
-				</Stack>
-			)
-		}
-	}
 
 	return (
 		<>
@@ -118,7 +133,7 @@ export function CompassNavigate() {
 									resetWilderness()
 								}
 							}}
-							title={stageDisplay(stageValue)}
+							title={<StageDisplay currentStage={stageValue} wildernesses={wildernessesValue} />}
 							variant="outline-dark"
 						>
 							{wildernessesValue.map((name, index) => {
@@ -126,7 +141,7 @@ export function CompassNavigate() {
 
 								return (
 									<DropdownItem as="button" eventKey={stageIndex} key={name}>
-										{stageDisplay(stageIndex)}
+										<StageDisplay currentStage={stageIndex} wildernesses={wildernessesValue} />
 									</DropdownItem>
 								)
 							})}

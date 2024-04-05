@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil"
 import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { IconImage } from "@neverquest/components/IconImage"
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
-import { PERCENTAGE_POINTS } from "@neverquest/data/general"
+import { PERCENTAGE } from "@neverquest/data/general"
 import IconEssence from "@neverquest/icons/essence.svg?react"
 import IconLoot from "@neverquest/icons/loot.svg?react"
 import { powerLevel } from "@neverquest/state/attributes"
@@ -60,7 +60,7 @@ export function AttributePointProgress({ isLoot }: { isLoot?: boolean }) {
 		>
 			<div className="w-100">
 				<LabelledProgressBar
-					value={(totalEssence / nextTotalCost) * PERCENTAGE_POINTS}
+					value={(totalEssence / nextTotalCost) * PERCENTAGE}
 					variant="secondary"
 				>
 					<IconDisplay Icon={IconEssence} iconProps={{ className: "small stencilled" }}>

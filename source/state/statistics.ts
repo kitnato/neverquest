@@ -1,7 +1,7 @@
 import { selector } from "recoil"
 
 import { ATTRIBUTES } from "@neverquest/data/attributes"
-import { GENERIC_MINIMUM, PERCENTAGE_POINTS } from "@neverquest/data/general"
+import { GENERIC_MINIMUM, PERCENTAGE } from "@neverquest/data/general"
 import {
 	BLEED,
 	DEFLECTION_MAXIMUM,
@@ -68,7 +68,7 @@ export const bleedRating = withStateKey("bleedRating", key =>
 	selector({
 		get: ({ get }) =>
 			Math.round(
-				get(masteryStatistic("cruelty")) * PERCENTAGE_POINTS + get(bleedChance) * PERCENTAGE_POINTS,
+				get(masteryStatistic("cruelty")) * PERCENTAGE + get(bleedChance) * PERCENTAGE,
 			),
 		key,
 	}),
@@ -107,7 +107,7 @@ export const criticalDamage = withStateKey("criticalDamage", key =>
 export const criticalRating = withStateKey("criticalRating", key =>
 	selector({
 		get: ({ get }) =>
-			Math.round(get(criticalChance) * PERCENTAGE_POINTS + get(criticalDamage) * PERCENTAGE_POINTS),
+			Math.round(get(criticalChance) * PERCENTAGE + get(criticalDamage) * PERCENTAGE),
 		key,
 	}),
 )
@@ -249,7 +249,7 @@ export const parryRating = withStateKey("parryRating", key =>
 	selector({
 		get: ({ get }) =>
 			Math.round(
-				get(parryChance) * PERCENTAGE_POINTS + get(masteryStatistic("finesse")) * PERCENTAGE_POINTS,
+				get(parryChance) * PERCENTAGE + get(masteryStatistic("finesse")) * PERCENTAGE,
 			),
 		key,
 	}),

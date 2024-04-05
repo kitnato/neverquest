@@ -63,10 +63,10 @@ export const progressMaximum = withStateKey("progressMaximum", key =>
 	selector({
 		get: ({ get }) => {
 			const { maximum, minimum } = PROGRESS
+			const encounterValue = get(encounter)
+			const stageValue = get(stage)
 
-			if (get(encounter) === "monster") {
-				const stageValue = get(stage)
-
+			if (encounterValue === "monster") {
 				if (stageValue < get(stageMaximum)) {
 					return Number.POSITIVE_INFINITY
 				}
@@ -78,6 +78,14 @@ export const progressMaximum = withStateKey("progressMaximum", key =>
 						* (1 - getPerkEffect({ perk: "monsterReduction", stage: get(retirementStage) })),
 					),
 				)
+			}
+
+			if (encounterValue === "void") {
+				if (stageValue === FINALITY_STAGE["res cogitans"] && !get(hasDefeatedFinality("res cogitans"))) {
+					return Number.POSITIVE_INFINITY
+				}
+
+				return 0
 			}
 
 			return 1

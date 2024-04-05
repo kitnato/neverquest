@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil"
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
 import { DescriptionDisplay } from "@neverquest/components/DescriptionDisplay"
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
-import { LABEL_MAXIMUM, PERCENTAGE_POINTS } from "@neverquest/data/general"
+import { LABEL_MAXIMUM, PERCENTAGE } from "@neverquest/data/general"
 import { MASTERIES } from "@neverquest/data/masteries"
 import { useDeltaText } from "@neverquest/hooks/useDeltaText"
 import { isMasteryAtMaximum, masteryCost, masteryProgress } from "@neverquest/state/masteries"
@@ -39,8 +39,8 @@ export function MasteryProgress({ mastery }: { mastery: Mastery }) {
 				<LabelledProgressBar
 					value={
 						isMasteryAtMaximumValue
-							? PERCENTAGE_POINTS
-							: (masteryProgressValue / masteryCostValue) * PERCENTAGE_POINTS
+							? PERCENTAGE
+							: (masteryProgressValue / masteryCostValue) * PERCENTAGE
 					}
 					variant="secondary"
 				>

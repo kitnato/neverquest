@@ -2,7 +2,7 @@ import { useRecoilValue } from "recoil"
 
 import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
-import { LABEL_MAXIMUM, PERCENTAGE_POINTS } from "@neverquest/data/general"
+import { LABEL_MAXIMUM, PERCENTAGE } from "@neverquest/data/general"
 import IconEssence from "@neverquest/icons/essence.svg?react"
 import { infusion, infusionMaximum, isInfusionAtMaximum } from "@neverquest/state/items"
 import type { Infusable } from "@neverquest/types/unions"
@@ -18,8 +18,8 @@ export function InfusionProgress({ infusable }: { infusable: Infusable }) {
 			disableTransitions
 			value={
 				isInfusionAtMaximumValue
-					? PERCENTAGE_POINTS
-					: (infusionValue / infusionMaximumValue) * PERCENTAGE_POINTS
+					? PERCENTAGE
+					: (infusionValue / infusionMaximumValue) * PERCENTAGE
 			}
 			variant="secondary"
 		>

@@ -27,7 +27,7 @@ import {
 	isAttacking,
 	isIncapacitated,
 } from "@neverquest/state/character"
-import { encounter, isStageCompleted, location } from "@neverquest/state/encounter"
+import { isStageCompleted, location } from "@neverquest/state/encounter"
 import { isRelicEquipped } from "@neverquest/state/items"
 import { isMonsterDead } from "@neverquest/state/monster"
 import { isHealthLow } from "@neverquest/state/reserves"
@@ -37,7 +37,6 @@ import { getAnimationClass } from "@neverquest/utilities/getters"
 export function Main() {
 	const areAttributesAffordableValue = useRecoilValue(areAttributesAffordable)
 	const canResurrectValue = useRecoilValue(canResurrect)
-	const encounterValue = useRecoilValue(encounter)
 	const hasEnoughMunitionsValue = useRecoilValue(hasEnoughMunitions)
 	const isAttackingValue = useRecoilValue(isAttacking)
 	const isHealthLowValue = useRecoilValue(isHealthLow)
@@ -50,8 +49,7 @@ export function Main() {
 	const toggleAttacking = useToggleAttacking()
 	const resurrection = useResurrection()
 
-	const isResting
-		= isStageCompletedValue || locationValue === "caravan" || encounterValue === "void"
+	const isResting = isStageCompletedValue || locationValue === "caravan"
 	const pulseAnimation = getAnimationClass({
 		animation: "pulse",
 		isInfinite: true,
@@ -126,7 +124,7 @@ export function Main() {
 							{(canResurrectValue || (isAutomincerEquipped && !isResting)) && (
 								<Badge
 									bg="secondary"
-									className="position-absolute top-50 start-100 translate-middle"
+									className="position-absolute start-100 top-50 translate-middle"
 								>
 									<IconImage
 										className="small"

@@ -6,7 +6,7 @@ import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
 import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { IconImage } from "@neverquest/components/IconImage"
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
-import { LABEL_MAXIMUM, LABEL_SEPARATOR, PERCENTAGE_POINTS } from "@neverquest/data/general"
+import { LABEL_MAXIMUM, LABEL_SEPARATOR, PERCENTAGE } from "@neverquest/data/general"
 import { RESERVES } from "@neverquest/data/reserves"
 import { useDeltaText } from "@neverquest/hooks/useDeltaText"
 import { usePreviousValue } from "@neverquest/hooks/usePreviousValue"
@@ -52,7 +52,7 @@ export function ReserveMeter({ PrefixIcon, reserve }: { PrefixIcon?: SVGIcon, re
 
 	const { maximumDelta } = RESERVES[reserve]
 	const penalty = Math.round(
-		(reserveMaximumValue - reserveMaximumAilingValue) / reserveMaximumValue * PERCENTAGE_POINTS,
+		(reserveMaximumValue - reserveMaximumAilingValue) / reserveMaximumValue * PERCENTAGE,
 	)
 
 	useDeltaText({
@@ -113,7 +113,7 @@ export function ReserveMeter({ PrefixIcon, reserve }: { PrefixIcon?: SVGIcon, re
 		<LabelledProgressBar
 			attachment="below"
 			sibling={isAiling && <ProgressBar animated={isHealth} key={2} now={penalty} striped variant="secondary" />}
-			value={reserveValue / reserveMaximumAilingValue * (PERCENTAGE_POINTS - penalty)}
+			value={reserveValue / reserveMaximumAilingValue * (PERCENTAGE - penalty)}
 		>
 			<Stack direction="horizontal" gap={1}>
 				{PrefixIcon !== undefined && <IconImage className="small stencilled" Icon={PrefixIcon} />}

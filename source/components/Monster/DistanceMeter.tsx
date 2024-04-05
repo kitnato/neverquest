@@ -1,7 +1,7 @@
 import { useRecoilValue } from "recoil"
 
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
-import { LABEL_EMPTY, PERCENTAGE_POINTS } from "@neverquest/data/general"
+import { LABEL_EMPTY, PERCENTAGE } from "@neverquest/data/general"
 import { distance, isMonsterAiling } from "@neverquest/state/monster"
 import { range } from "@neverquest/state/statistics"
 import { formatNumber } from "@neverquest/utilities/formatters"
@@ -15,7 +15,7 @@ export function DistanceMeter() {
 		<LabelledProgressBar
 			disableTransitions
 			isAnimated={isMonsterFrozen}
-			value={(distanceValue / rangeValue) * PERCENTAGE_POINTS}
+			value={(distanceValue / rangeValue) * PERCENTAGE}
 			variant="secondary"
 		>
 			<span>

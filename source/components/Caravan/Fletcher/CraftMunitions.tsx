@@ -8,7 +8,7 @@ import {
 	CLASS_FULL_WIDTH_JUSTIFIED,
 	LABEL_MAXIMUM,
 	LABEL_NO_ESSENCE,
-	PERCENTAGE_POINTS,
+	PERCENTAGE,
 	POPOVER_TRIGGER,
 } from "@neverquest/data/general"
 import { MUNITIONS } from "@neverquest/data/items"
@@ -53,7 +53,7 @@ export function CraftMunitions() {
 	return (
 		<Stack gap={3}>
 			<IconDisplay Icon={IconMunitionsSatchel} tooltip="Munitions satchel">
-				<LabelledProgressBar value={(munitionsValue / maximum) * PERCENTAGE_POINTS}>
+				<LabelledProgressBar value={(munitionsValue / maximum) * PERCENTAGE}>
 					<Stack direction="horizontal" gap={1}>
 						<span>
 							{formatNumber({ value: munitionsValue })}

@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil"
 
 import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
-import { PERCENTAGE_POINTS } from "@neverquest/data/general"
+import { PERCENTAGE } from "@neverquest/data/general"
 import { MONSTER_REGENERATION } from "@neverquest/data/monster"
 import IconMonsterHealth from "@neverquest/icons/monster-health.svg?react"
 import { isMonsterAiling, monsterRegenerationDuration } from "@neverquest/state/monster"
@@ -22,7 +22,7 @@ export function MonsterRegenerationMeter({ amount }: { amount: number }) {
 			attachment="above"
 			disableTransitions
 			isSmall
-			value={(regenerationProgress / monsterRegenerationRate) * PERCENTAGE_POINTS}
+			value={(regenerationProgress / monsterRegenerationRate) * PERCENTAGE}
 			variant="secondary"
 		>
 			{(() => {

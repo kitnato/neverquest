@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil"
 
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
-import { PERCENTAGE_POINTS } from "@neverquest/data/general"
+import { PERCENTAGE } from "@neverquest/data/general"
 import { attackDuration, canAttackOrParry } from "@neverquest/state/character"
 import { attackRate } from "@neverquest/state/statistics"
 import { formatNumber } from "@neverquest/utilities/formatters"
@@ -16,11 +16,9 @@ export function AttackRateMeter() {
 	return (
 		<LabelledProgressBar
 			disableTransitions
-			value={
-				((attackDurationValue === 0 ? 0 : attackRateValue - attackDurationValue)
-				/ attackRateValue)
-				* PERCENTAGE_POINTS
-			}
+			value={(
+				(attackDurationValue === 0 ? 0 : attackRateValue - attackDurationValue) / attackRateValue
+			) * PERCENTAGE}
 			variant="secondary"
 		>
 			<Stack direction="horizontal" gap={1}>

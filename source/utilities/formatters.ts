@@ -2,7 +2,7 @@ import {
 	MILLISECONDS_IN_HOUR,
 	MILLISECONDS_IN_MINUTE,
 	MILLISECONDS_IN_SECOND,
-	PERCENTAGE_POINTS,
+	PERCENTAGE,
 } from "@neverquest/data/general"
 import type { NumberFormat } from "@neverquest/types/unions"
 
@@ -60,7 +60,7 @@ export function formatNumber({
 		}
 
 		case "percentage": {
-			return `${formatFloat({ decimals, value: value * PERCENTAGE_POINTS })}%`
+			return `${formatFloat({ decimals, value: value * PERCENTAGE })}%`
 		}
 
 		case "integer": {

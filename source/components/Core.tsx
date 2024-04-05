@@ -28,11 +28,11 @@ export function Core() {
 				<Initializer>
 					<CheatQuest />
 
-					<Glitch />
-
 					<Header />
 
-					<Layout />
+					<Glitch>
+						<Layout />
+					</Glitch>
 				</Initializer>
 			</RecoilRoot>
 		</SeedContext.Provider>

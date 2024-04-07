@@ -66,7 +66,7 @@ export function HiredCrewMember({ crewMember }: { crewMember: CrewMember }) {
 						}}
 						variant="outline-dark"
 					>
-						{interaction}
+						<span>{interaction}</span>
 					</Button>
 				</div>
 

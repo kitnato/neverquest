@@ -1,6 +1,6 @@
 import type { ReactNode } from "react"
 
-export function ScreenMessage({
+export function CenterScreen({
 	children,
 	className,
 }: {

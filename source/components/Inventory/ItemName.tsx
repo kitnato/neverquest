@@ -39,9 +39,9 @@ export function ItemName({
 
 												<span>Location: Outfloor ██-██#7</span>
 
-												<span>Initializing: RbtNvrqst-██-███</span>
+												<span>Initializing: NqstCipher-██-███</span>
 
-												<span>Processing: 7.7% ...</span>
+												<span>Processing: 7.8% ...</span>
 
 												<span>Error: Δ-Θ destabilization</span>
 

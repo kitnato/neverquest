@@ -2,12 +2,11 @@ import { nanoid } from "nanoid"
 import { useState } from "react"
 import { RecoilRoot } from "recoil"
 
+import { CenterScreen } from "@neverquest/components/CenterScreen"
 import { CheatQuest } from "@neverquest/components/CheatQuest"
-import { Glitch } from "@neverquest/components/Glitch"
 import { Header } from "@neverquest/components/Header"
 import { Initializer } from "@neverquest/components/Initializer"
 import { Layout } from "@neverquest/components/Layout"
-import { ScreenMessage } from "@neverquest/components/ScreenMessage"
 import { SeedContext } from "@neverquest/state/seed"
 
 export function Core() {
@@ -15,7 +14,7 @@ export function Core() {
 
 	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 	if (window.Worker === undefined) {
-		return <ScreenMessage>Requires enabled Web Workers.</ScreenMessage>
+		return <CenterScreen>Requires enabled Web Workers.</CenterScreen>
 	}
 
 	return (
@@ -30,9 +29,7 @@ export function Core() {
 
 					<Header />
 
-					<Glitch>
-						<Layout />
-					</Glitch>
+					<Layout />
 				</Initializer>
 			</RecoilRoot>
 		</SeedContext.Provider>

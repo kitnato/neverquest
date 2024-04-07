@@ -119,7 +119,7 @@ export const MONSTER_DAMAGE = {
 
 export const MONSTER_HEALTH = {
 	attenuation: 19,
-	base: 18,
+	base: 20,
 	bonus: 0.02,
 	boss: 1.8,
 	finality: {

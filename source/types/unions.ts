@@ -430,7 +430,7 @@ export type Relic = (typeof RELIC_TYPES)[number]
 
 export const TRIUMPH_TYPES = [
 	"decipheringJournal",
-	"settingPatientName",
+	"settingSubjectName",
 	"survivingNoGear",
 	"survivingNoAttributes",
 	"killingOneStrike",

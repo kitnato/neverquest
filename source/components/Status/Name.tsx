@@ -61,8 +61,8 @@ export function Name() {
 						setName(trimmedValue)
 						progressQuest({ quest: "settingName" })
 
-						if (trimmedValue.toLowerCase().replaceAll(/[^\da-z]/g, "") === "patient7") {
-							progressQuest({ quest: "settingPatientName" })
+						if (trimmedValue.toLowerCase().replaceAll(/[^\da-z]/g, "") === "subject77") {
+							progressQuest({ quest: "settingSubjectName" })
 						}
 					}
 

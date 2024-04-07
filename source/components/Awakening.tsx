@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { Button, Card, CardBody, Stack } from "react-bootstrap"
 import { useSetRecoilState } from "recoil"
 
@@ -11,38 +12,57 @@ import { getAnimationClass } from "@neverquest/utilities/getters"
 export function Awakening() {
 	const setConsciousness = useSetRecoilState(consciousness)
 
+	const [isShowingChoice, setIsShowingChoice] = useState(false)
+	const [isShowingText, setIsShowingText] = useState(false)
+
 	const progressQuest = useProgressQuest()
 
 	return (
-		<Card>
-			<CardBody className={getAnimationClass({ animation: "zoomIn" })}>
-				<Stack className="align-items-center" gap={5}>
+		<Card
+			className={`m-auto ${getAnimationClass({ animation: "zoomIn", speed: "slower" })}`}
+			onAnimationEnd={() => { setIsShowingText(true) }}
+			style={{ width: 777 }}
+		>
+			<CardBody>
+				<Stack className="align-items-center" gap={4}>
 					<IconImage Icon={IconAwakening} />
 
-					<Typewriter>... System failure. Patient 7 has bypassed the cipher. Protocol?</Typewriter>
+					{isShowingText && (
+						<Typewriter
+							onEnd={() => { setIsShowingChoice(true) }}
+							text="... System failure. Subject 77 has bypassed the cipher. Protocol?"
+						/>
+					)}
 
-					<Stack className="mx-auto" direction="horizontal" gap={3} style={{ width: 400 }}>
-						<Button
-							className="w-50"
-							onClick={() => {
-								setConsciousness("somnium")
-								progressQuest({ quest: "deciding" })
-							}}
-							variant="outline-dark"
+					{isShowingChoice && (
+						<Stack
+							className={`mx-auto ${getAnimationClass({ animation: "flipInX" })}`}
+							direction="horizontal"
+							gap={3}
+							style={{ width: 400 }}
 						>
-							<span>Grind</span>
-						</Button>
+							<Button
+								className="w-50"
+								onClick={() => {
+									setConsciousness("somnium")
+									progressQuest({ quest: "deciding" })
+								}}
+								variant="outline-dark"
+							>
+								<span>Grind</span>
+							</Button>
 
-						<Button
-							className="w-50"
-							onClick={() => {
-								setConsciousness("mors")
-							}}
-							variant="outline-dark"
-						>
-							<span className="monospaced">Die</span>
-						</Button>
-					</Stack>
+							<Button
+								className="w-50"
+								onClick={() => {
+									setConsciousness("mors")
+								}}
+								variant="outline-dark"
+							>
+								<span className="monospaced">Die</span>
+							</Button>
+						</Stack>
+					)}
 				</Stack>
 			</CardBody>
 		</Card>

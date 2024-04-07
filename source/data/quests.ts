@@ -536,10 +536,10 @@ export const QUESTS: Record<
 	settingName: {
 		description: "Set a name.",
 		progression: [1],
-		requiresTracking: true,
+		requiresTracking: false,
 		title: "Humble beginnings",
 	},
-	settingPatientName: {
+	settingSubjectName: {
 		description: "Set the true name.",
 		progression: [1],
 		requiresTracking: true,

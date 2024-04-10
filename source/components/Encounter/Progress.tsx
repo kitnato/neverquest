@@ -7,7 +7,7 @@ import { POPOVER_TRIGGER } from "@neverquest/data/general"
 import { useDeltaText } from "@neverquest/hooks/useDeltaText"
 import IconMonsterReduction from "@neverquest/icons/monster-reduction.svg?react"
 import IconProgress from "@neverquest/icons/progress.svg?react"
-import { location, progress, retirementStage } from "@neverquest/state/encounter"
+import { location, progress, progressMaximum, retirementStage } from "@neverquest/state/encounter"
 import { formatNumber } from "@neverquest/utilities/formatters"
 import { getPerkEffect } from "@neverquest/utilities/getters"
 
@@ -21,6 +21,11 @@ export function Progress() {
 		delta: "progress",
 		ignoreZero: true,
 		state: progress,
+	})
+
+	useDeltaText({
+		delta: "progressMaximum",
+		state: progressMaximum,
 	})
 
 	if (locationValue === "wilderness") {

@@ -37,13 +37,13 @@ export function ItemName({
 											<Stack className="monospaced">
 												<span>Priority 0 - BREACH IN PROGRESS</span>
 
-												<span>Location: Outfloor ██-██#7</span>
+												<span>Location: Outfloor ██-██#77</span>
 
 												<span>Initializing: NqstCipher-██-███</span>
 
 												<span>Processing: 7.8% ...</span>
 
-												<span>Error: Δ-Θ destabilization</span>
+												<span>Error: δ destabilization</span>
 
 												<span>LEAKAGE IMMINENT</span>
 											</Stack>

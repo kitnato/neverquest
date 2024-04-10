@@ -73,15 +73,7 @@ export function GemDescription({ gem }: { gem: Gem }) {
 
 					{LABEL_SEPARATOR}
 
-					<span>bonus to all</span>
-
-					<IconImage className="small" Icon={Icon} />
-
-					<span className={color}>
-						{elemental}
-					</span>
-
-					<span>effects</span>
+					<span>bonus to damage, thorns and duration</span>
 				</Stack>
 			</Stack>
 		</Stack>

@@ -1,6 +1,6 @@
 export const AILMENT_PENALTY = {
 	frozen: 0.4,
-	shocked: 0.15,
+	shocked: 0.1,
 	staggered: 0.25,
 	stunned: 0.5,
 }

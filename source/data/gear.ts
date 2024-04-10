@@ -78,7 +78,7 @@ export const ARMOR_SPECIFICATIONS: Record<
 	reinforced: {
 		burden: [
 			{ maximum: 5, minimum: 3 },
-			{ maximum: 50, minimum: 45 },
+			{ maximum: 45, minimum: 40 },
 		],
 		deflectionChance: [
 			{ maximum: 0.2, minimum: 0.18 },

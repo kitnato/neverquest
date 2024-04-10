@@ -8,7 +8,7 @@ import { nanoid } from "nanoid"
 import type { RecoilValue, Snapshot } from "recoil"
 
 import { ATTRIBUTE_COST_BASE } from "@neverquest/data/attributes"
-import { AFFIX_STRUCTURE_WEIGHTS, PERKS } from "@neverquest/data/encounter"
+import { AFFIX_STRUCTURE_WEIGHTS, GENERATIONS_MAXIMUM, PERKS } from "@neverquest/data/encounter"
 import {
 	type ARMOR_NONE,
 	ARMOR_SPECIFICATIONS,
@@ -26,7 +26,6 @@ import {
 	GENERIC_MINIMUM,
 	LEVELLING_THRESHOLD,
 	MILLISECONDS_IN_SECOND,
-	RETIREMENT_STAGE,
 	ROMAN_NUMERALS,
 	ROMAN_NUMERAL_MAXIMUM,
 } from "@neverquest/data/general"
@@ -423,20 +422,21 @@ export function getRangedRanges({ factor, gearClass }: { factor: number, gearCla
 	}
 }
 
-export function getPerkEffect({ perk, stage }: { perk: Perk, stage: number }) {
+export function getPerkEffect({
+	generations,
+	perk,
+}: {
+	generations: number
+	perk: Perk
+}) {
 	const { maximum, minimum } = PERKS[perk]
 
-	if (stage < RETIREMENT_STAGE) {
+	if (generations === 0) {
 		return 0
 	}
 
 	return getFromRange({
-		factor: getSigmoid(
-			getLinearMapping({
-				offset: RETIREMENT_STAGE,
-				stage,
-			}),
-		),
+		factor: (Math.min(generations, GENERATIONS_MAXIMUM) - 1) / (GENERATIONS_MAXIMUM - 1),
 		maximum,
 		minimum,
 	})

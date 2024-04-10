@@ -22,8 +22,8 @@ import {
 import { name } from "@neverquest/state/character"
 import {
 	corpse,
+	generations,
 	hasDefeatedFinality,
-	retirementStage,
 	stageMaximum,
 } from "@neverquest/state/encounter"
 import { armor, gems, shield, weapon } from "@neverquest/state/gear"
@@ -141,7 +141,7 @@ export function useRetire() {
 
 				reset(merchantInventory)
 
-				set(retirementStage, stageMaximumValue)
+				set(generations, current => current + 1)
 
 				if (get(isSkillAcquired("memetics"))) {
 					progressQuest({ quest: "decipheringJournal" })

@@ -11,7 +11,7 @@ import IconPowerLevel from "@neverquest/icons/power-level.svg?react"
 import IconSkills from "@neverquest/icons/skills.svg?react"
 import IconStage from "@neverquest/icons/stage.svg?react"
 
-export function RenewalDetails() {
+export function Renewal() {
 	return (
 		<Stack gap={3}>
 			<h6>Renewal</h6>

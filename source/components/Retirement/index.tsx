@@ -10,9 +10,10 @@ import {
 } from "react-bootstrap"
 
 import { IconDisplay } from "@neverquest/components/IconDisplay"
+import { Generations } from "@neverquest/components/Retirement/Generations"
 import { ItemsInherited } from "@neverquest/components/Retirement/ItemsInherited"
 import { Perks } from "@neverquest/components/Retirement/Perks"
-import { RenewalDetails } from "@neverquest/components/Retirement/RenewalDetails"
+import { Renewal } from "@neverquest/components/Retirement/Renewal"
 import { TraitSelection } from "@neverquest/components/Retirement/TraitSelection"
 import { useRetire } from "@neverquest/hooks/actions/useRetire"
 import IconRetire from "@neverquest/icons/retire.svg?react"
@@ -41,12 +42,14 @@ export function Retirement({
 			<ModalBody>
 				<Stack gap={5}>
 					<span className="fst-italic">
-						Weary bones yearn for quiescence to foster a new beginning.
+						Weary bones yearn for quiescence to foster a new beginning. Each generation strengthens resolve and wisdom.
 					</span>
 
-					<RenewalDetails />
+					<Generations />
 
 					<Perks />
+
+					<Renewal />
 
 					<ItemsInherited />
 

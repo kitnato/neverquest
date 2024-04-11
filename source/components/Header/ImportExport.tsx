@@ -16,9 +16,9 @@ import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { IconImage } from "@neverquest/components/IconImage"
 import { version } from "@neverquest/configuration"
 import { FILE_EXTENSION, KEY_SESSION, LABEL_UNKNOWN } from "@neverquest/data/general"
-import IconLoad from "@neverquest/icons/load.svg?react"
-import IconSaveLoad from "@neverquest/icons/save-load.svg?react"
-import IconSave from "@neverquest/icons/save.svg?react"
+import IconExport from "@neverquest/icons/export.svg?react"
+import IconImportExport from "@neverquest/icons/import-export.svg?react"
+import IconImport from "@neverquest/icons/import.svg?react"
 import { name } from "@neverquest/state/character"
 import { formatKebabCase } from "@neverquest/utilities/formatters"
 import { getAnimationClass } from "@neverquest/utilities/getters"
@@ -29,7 +29,7 @@ const DEFAULT_RESULT = {
 }
 const VERSION_KEY = "version="
 
-export function SaveLoad() {
+export function ImportExport() {
 	const nameValue = useRecoilValue(name)
 
 	const [isLoading, setIsLoading] = useState(false)
@@ -47,14 +47,14 @@ export function SaveLoad() {
 
 	return (
 		<>
-			<OverlayTrigger overlay={<Tooltip>Save & load</Tooltip>} placement="bottom">
+			<OverlayTrigger overlay={<Tooltip>Save file</Tooltip>} placement="bottom">
 				<Button
 					onClick={() => {
 						setIsShowingModal(true)
 					}}
 					variant="outline-light"
 				>
-					<IconImage className="small" Icon={IconSaveLoad} />
+					<IconImage className="small" Icon={IconImportExport} />
 				</Button>
 			</OverlayTrigger>
 
@@ -62,20 +62,22 @@ export function SaveLoad() {
 				<ModalHeader closeButton={!isLoading}>
 					<ModalTitle>
 						<IconDisplay
-							Icon={IconSaveLoad}
+							Icon={IconImportExport}
 							iconProps={{
 								className: isLoading
 									? getAnimationClass({ animation: "pulse", isInfinite: true, speed: "fast" })
 									: undefined,
 							}}
 						>
-							<span>Save & load game</span>
+							<span>Import & export save file</span>
 						</IconDisplay>
 					</ModalTitle>
 				</ModalHeader>
 
 				<ModalBody>
 					<Stack gap={3}>
+						<small>The game is saved in browser memory at all times, persisting through window closure and page reloads.</small>
+
 						<Button
 							disabled={isLoading}
 							onClick={() => {
@@ -108,9 +110,9 @@ export function SaveLoad() {
 							}}
 							variant="outline-dark"
 						>
-							<IconImage className="small" Icon={IconSave} />
+							<IconImage className="small" Icon={IconExport} />
 
-							<span>&nbsp;Save</span>
+							<span>&nbsp;Export file</span>
 						</Button>
 
 						<Button
@@ -120,9 +122,9 @@ export function SaveLoad() {
 							}}
 							variant="outline-dark"
 						>
-							<IconImage className="small" Icon={IconLoad} />
+							<IconImage className="small" Icon={IconImport} />
 
-							<span>&nbsp;Load</span>
+							<span>&nbsp;Import file</span>
 						</Button>
 
 						<input

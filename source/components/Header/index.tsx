@@ -1,10 +1,10 @@
 import { Badge, Container, Nav, Navbar, NavbarBrand, Stack } from "react-bootstrap"
 
 import { About } from "@neverquest/components/Header/About"
+import { ImportExport } from "@neverquest/components/Header/ImportExport"
 import { Ouroboros } from "@neverquest/components/Header/Ouroboros"
 import { Repository } from "@neverquest/components/Header/Repository"
 import { Reset } from "@neverquest/components/Header/Reset"
-import { SaveLoad } from "@neverquest/components/Header/SaveLoad"
 import { version } from "@neverquest/configuration"
 
 export function Header() {
@@ -32,7 +32,7 @@ export function Header() {
 
 						<div className="text-white vr" />
 
-						<SaveLoad />
+						<ImportExport />
 
 						<Reset />
 					</Stack>

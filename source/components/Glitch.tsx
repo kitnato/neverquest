@@ -9,21 +9,20 @@ import { getFromRange, getLinearMapping, getRange } from "@neverquest/utilities/
 
 const CHARACTERS = "!·&=?¿|@#~¬+/\\^*[]{}-_<>"
 
+const GLITCHING_CLASS = "glitching"
+
 const LATENCY = 70
 
 function getGlitchingElement(glitchClassName: string) {
 	const textElements = document.body
 		.querySelector(`.${glitchClassName}`)
-		?.querySelectorAll("h6, span, strong")
+		?.querySelectorAll(`h6:not(.${GLITCHING_CLASS}), span:not(.${GLITCHING_CLASS}), strong:not(.${GLITCHING_CLASS})`)
 
 	if (textElements === undefined) {
 		return
 	}
 
-	return [...textElements]
-		.map(element => ({ element, nonce: Math.random() }))
-		.toSorted(({ nonce: nonce1 }, { nonce: nonce2 }) => nonce1 - nonce2)
-		.find(({ element: { textContent } }) => textContent !== null && textContent.length > 0)
+	return [...textElements][Math.floor(Math.random() * textElements.length)]
 }
 
 function glitchElementAt({ element, originalText }: { element: Element, originalText: string }) {
@@ -79,8 +78,8 @@ export function Glitch({ children, isContinuous = false }: { children: ReactNode
 						getRange({
 							factor,
 							ranges: [
-								{ maximum: 60_000, minimum: 55_000 },
-								{ maximum: 12_000, minimum: 10_000 },
+								{ maximum: 55_000, minimum: 50_000 },
+								{ maximum: 15_000, minimum: 12_000 },
 							],
 						}),
 					),
@@ -94,11 +93,10 @@ export function Glitch({ children, isContinuous = false }: { children: ReactNode
 		const glitchingElement = getGlitchingElement(glitchClassName)
 
 		if (glitchingElement !== undefined) {
-			const { element } = glitchingElement
-			const { classList, textContent } = element
+			const { classList, textContent } = glitchingElement
 
 			if (textContent !== null) {
-				classList.add("monospaced")
+				classList.add(GLITCHING_CLASS, "monospaced")
 
 				setGlitchingElements(elements => ({
 					...elements,
@@ -116,7 +114,7 @@ export function Glitch({ children, isContinuous = false }: { children: ReactNode
 									}),
 								),
 							),
-						element,
+						element: glitchingElement,
 						latency: LATENCY,
 						originalText: textContent,
 						position: Math.floor(Math.random() * textContent.length),
@@ -141,7 +139,7 @@ export function Glitch({ children, isContinuous = false }: { children: ReactNode
 				glitchingElements,
 			)) {
 				if (duration <= 0) {
-					element.classList.remove("monospaced")
+					element.classList.remove(GLITCHING_CLASS, "monospaced")
 					element.textContent = originalText
 
 					setGlitchingElements(({ [ID]: _, ...elements }) => ({ ...elements }))

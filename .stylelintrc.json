@@ -1,9 +1,12 @@
 {
-  "extends": [
-    "stylelint-config-standard-scss",
-    "@stylistic/stylelint-config"
-  ],
-  "plugins": [
-    "@stylistic/stylelint-plugin"
-  ]
+	"extends": [
+		"stylelint-config-standard-scss",
+		"@stylistic/stylelint-config"
+	],
+	"plugins": [
+		"@stylistic/stylelint-plugin"
+	],
+	"rules": {
+		"@stylistic/indentation": "tab"
+	}
 }

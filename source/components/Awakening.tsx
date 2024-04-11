@@ -30,7 +30,7 @@ export function Awakening() {
 					{isShowingText && (
 						<Typewriter
 							onEnd={() => { setIsShowingChoice(true) }}
-							text="... System failure. Subject 77 has bypassed the cipher. Protocol?"
+							text="... System failure. Subject 77 has bypassed containment cipher. Protocol?"
 						/>
 					)}
 

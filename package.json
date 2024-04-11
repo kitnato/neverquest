@@ -74,7 +74,7 @@
 	"scripts": {
 		"build": "vite build",
 		"lint-code": "eslint --fix --ext .ts,.tsx .",
-		"lint-styles": "stylelint \"**/*.scss\"",
+		"lint-styles": "stylelint \"**/*.scss\" --fix",
 		"prepare": "husky",
 		"start": "vite"
 	},

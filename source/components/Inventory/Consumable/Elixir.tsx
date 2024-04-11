@@ -2,18 +2,16 @@ import { Button, OverlayTrigger, Tooltip } from "react-bootstrap"
 import { useRecoilValue, useSetRecoilState } from "recoil"
 
 import { POPOVER_TRIGGER } from "@neverquest/data/general"
-import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina"
+import { useHealing } from "@neverquest/hooks/actions/useHealing"
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import { inventory } from "@neverquest/state/inventory"
-import { isStaminaAtMaximum, stamina, staminaMaximumBlighted } from "@neverquest/state/reserves"
+import { isStaminaAtMaximum } from "@neverquest/state/reserves"
 
 export function Elixir({ ID }: { ID: string }) {
 	const isStaminaAtMaximumValue = useRecoilValue(isStaminaAtMaximum)
-	const staminaValue = useRecoilValue(stamina)
-	const staminaMaximumBlightedValue = useRecoilValue(staminaMaximumBlighted)
 	const setInventory = useSetRecoilState(inventory)
 
-	const changeStamina = useChangeStamina()
+	const healing = useHealing()
 	const progressQuest = useProgressQuest()
 
 	return (
@@ -29,15 +27,7 @@ export function Elixir({ ID }: { ID: string }) {
 				<Button
 					disabled={isStaminaAtMaximumValue}
 					onClick={() => {
-						const staminaDifference = staminaMaximumBlightedValue - staminaValue
-
-						changeStamina({
-							contents: {
-								color: "text-secondary",
-								value: "RECOVER",
-							},
-							value: staminaDifference,
-						})
+						healing("stamina")
 
 						setInventory(currentInventory =>
 							currentInventory.filter(({ ID: currentItemID }) => currentItemID !== ID),

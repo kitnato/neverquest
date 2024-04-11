@@ -6,7 +6,7 @@ import type {
 	WeaponModality,
 } from "@kitnato/locran/build/types"
 import { LEVELLING_MAXIMUM, LEVELLING_THRESHOLD, RETIREMENT_STAGE } from "@neverquest/data/general"
-import { INFUSABLES, RELICS } from "@neverquest/data/items"
+import { CONSUMABLES, INFUSABLES, RELICS } from "@neverquest/data/items"
 import { BLIGHT, FINALITY_STAGE, POISON, RAGE } from "@neverquest/data/monster"
 import IconAlchemist from "@neverquest/icons/alchemist.svg?react"
 import IconAttributes from "@neverquest/icons/attributes.svg?react"
@@ -201,13 +201,6 @@ export const CREW: Record<
 	},
 }
 
-export const OCCULTIST_PURGE_PRICE_MULTIPLIER = {
-	essence: 0.25,
-	quests: 250,
-}
-
-export const MEDIC_PRICE_SURGERY = 15
-
 export const MERCHANT_OFFERS: Record<
 	number,
 	{
@@ -284,6 +277,17 @@ export const MERCHANT_OFFERS: Record<
 		monologue: "Allow me to offer a phial to collect your sorrows.",
 		offer: RELICS.lacrimatory.item,
 	},
+}
+
+export const PURGE_PRICE_MULTIPLIER = {
+	essence: 0.25,
+	quests: 250,
+}
+
+export const SURGERY_PRICE = {
+	maximum: Math.round((CONSUMABLES.bandages.item.price + CONSUMABLES.elixir.item.price) * 1.05),
+	minimum: 3,
+	surcharge: 0.1,
 }
 
 export const TAILORING = {

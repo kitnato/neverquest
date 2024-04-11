@@ -88,7 +88,7 @@ export const CONSUMABLES: Record<
 		item: {
 			ID: "",
 			name: "bandages",
-			price: 40,
+			price: 50,
 			weight: 1,
 		},
 	},

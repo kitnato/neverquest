@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil"
 
 import { DescriptionDisplay } from "@neverquest/components/DescriptionDisplay"
 import { IconDisplay } from "@neverquest/components/IconDisplay"
-import { OCCULTIST_PURGE_PRICE_MULTIPLIER } from "@neverquest/data/caravan"
+import { PURGE_PRICE_MULTIPLIER } from "@neverquest/data/caravan"
 import {
 	CLASS_FULL_WIDTH_JUSTIFIED,
 	LABEL_NO_ESSENCE,
@@ -23,9 +23,9 @@ import { formatNumber } from "@neverquest/utilities/formatters"
 
 export function PurgeMemories() {
 	const allCompletedQuestsCount
-    = useRecoilValue(completedQuestsCount("conquest"))
-    + useRecoilValue(completedQuestsCount("routine"))
-    + useRecoilValue(completedQuestsCount("triumph"))
+		= useRecoilValue(completedQuestsCount("conquest"))
+		+ useRecoilValue(completedQuestsCount("routine"))
+		+ useRecoilValue(completedQuestsCount("triumph"))
 	const canTrackQuestsValue = useRecoilValue(canTrackQuests)
 	const essenceValue = useRecoilValue(essence)
 
@@ -34,7 +34,7 @@ export function PurgeMemories() {
 	const transactEssence = useTransactEssence()
 
 	const hasCompletedQuests = allCompletedQuestsCount > 0
-	const price = Math.round(allCompletedQuestsCount * OCCULTIST_PURGE_PRICE_MULTIPLIER.quests)
+	const price = Math.round(allCompletedQuestsCount * PURGE_PRICE_MULTIPLIER.quests)
 	const isAffordable = price <= essenceValue
 	const isPurchasable = hasCompletedQuests && isAffordable
 

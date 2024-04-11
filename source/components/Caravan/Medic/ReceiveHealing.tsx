@@ -3,32 +3,42 @@ import { useRecoilValue } from "recoil"
 
 import { DescriptionDisplay } from "@neverquest/components/DescriptionDisplay"
 import { IconDisplay } from "@neverquest/components/IconDisplay"
-import { MEDIC_PRICE_SURGERY } from "@neverquest/data/caravan"
+import { SURGERY_PRICE } from "@neverquest/data/caravan"
 import {
 	CLASS_FULL_WIDTH_JUSTIFIED,
 	LABEL_FULL_HEALTH,
 	LABEL_NO_ESSENCE,
 	POPOVER_TRIGGER,
 } from "@neverquest/data/general"
-import { useHeal } from "@neverquest/hooks/actions/useHeal"
+import { useHealing } from "@neverquest/hooks/actions/useHealing"
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence"
 import IconEssence from "@neverquest/icons/essence.svg?react"
 import IconHealing from "@neverquest/icons/healing.svg?react"
 import IconHealth from "@neverquest/icons/health.svg?react"
+import IconStamina from "@neverquest/icons/stamina.svg?react"
+import { powerLevel } from "@neverquest/state/attributes"
 import { isHealthAtMaximum } from "@neverquest/state/reserves"
 import { essence } from "@neverquest/state/resources"
 import { formatNumber } from "@neverquest/utilities/formatters"
+import { getFromRange, getSigmoid } from "@neverquest/utilities/getters"
 
 export function ReceiveHealing() {
 	const essenceValue = useRecoilValue(essence)
 	const isHealthAtMaximumValue = useRecoilValue(isHealthAtMaximum)
+	const powerLevelValue = useRecoilValue(powerLevel)
 
 	const transactEssence = useTransactEssence()
 
-	const isAffordable = MEDIC_PRICE_SURGERY <= essenceValue
+	const price = Math.round(
+		getFromRange({
+			factor: getSigmoid(powerLevelValue),
+			...SURGERY_PRICE,
+		}),
+	)
+	const isAffordable = price <= essenceValue
 	const isPurchasable = isAffordable && !isHealthAtMaximumValue
 
-	const heal = useHeal()
+	const healing = useHealing()
 
 	return (
 		<Stack gap={3}>
@@ -38,8 +48,8 @@ export function ReceiveHealing() {
 				<IconDisplay
 					description={(
 						<DescriptionDisplay
-							description="Fully restores # health."
-							descriptionIcons={[IconHealth]}
+							description="If injured, fully restores # health and # stamina."
+							descriptionIcons={[IconHealth, IconStamina]}
 						/>
 					)}
 					Icon={IconHealing}
@@ -50,7 +60,7 @@ export function ReceiveHealing() {
 
 				<Stack className="ms-2" direction="horizontal" gap={3}>
 					<IconDisplay Icon={IconEssence} tooltip="Price">
-						<span>{formatNumber({ value: MEDIC_PRICE_SURGERY })}</span>
+						<span>{formatNumber({ value: price })}</span>
 					</IconDisplay>
 
 					<OverlayTrigger
@@ -69,9 +79,10 @@ export function ReceiveHealing() {
 							<Button
 								disabled={!isPurchasable}
 								onClick={() => {
-									heal()
+									healing("health")
+									healing("stamina")
 
-									transactEssence(-MEDIC_PRICE_SURGERY)
+									transactEssence(-price)
 								}}
 								variant="outline-dark"
 							>

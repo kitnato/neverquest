@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil"
 
 import { DescriptionDisplay } from "@neverquest/components/DescriptionDisplay"
 import { IconDisplay } from "@neverquest/components/IconDisplay"
-import { OCCULTIST_PURGE_PRICE_MULTIPLIER } from "@neverquest/data/caravan"
+import { PURGE_PRICE_MULTIPLIER } from "@neverquest/data/caravan"
 import {
 	CLASS_FULL_WIDTH_JUSTIFIED,
 	LABEL_NO_ESSENCE,
@@ -28,7 +28,7 @@ export function PurgeEssence() {
 	const transactEssence = useTransactEssence()
 
 	const hasAbsorbedEssence = absorbedEssenceValue > 0
-	const price = Math.round(absorbedEssenceValue * OCCULTIST_PURGE_PRICE_MULTIPLIER.essence)
+	const price = Math.round(absorbedEssenceValue * PURGE_PRICE_MULTIPLIER.essence)
 	const isAffordable = price <= essenceValue
 	const isPurchasable = hasAbsorbedEssence && isAffordable
 

@@ -65,7 +65,7 @@ export function LootDisplay() {
 								Icon={IconLooted}
 								tooltip="Loot"
 							>
-								<span className="fst-italic">Nothing remains.</span>
+								<span className="fst-italic">Nothing is left.</span>
 							</IconDisplay>
 						)}
 				</CardBody>

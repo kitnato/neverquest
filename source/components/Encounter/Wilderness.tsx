@@ -12,6 +12,7 @@ import IconMonsterHiding from "@neverquest/icons/monster-hiding.svg?react"
 import IconRemains from "@neverquest/icons/remains.svg?react"
 import IconVoid from "@neverquest/icons/void.svg?react"
 import { encounter, isStageCompleted, isStageStarted } from "@neverquest/state/encounter"
+import { isFinality } from "@neverquest/types/type-guards"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function Wilderness() {
@@ -46,7 +47,7 @@ export function Wilderness() {
 			<Card className={getAnimationClass({ animation: "flipInX" })}>
 				<CardBody>
 					<IconDisplay gap={5} Icon={IconRemains} tooltip="Remains">
-						<span className="fst-italic">Everything is dead.</span>
+						<span className="fst-italic">{isFinality(encounterValue) ? "A great finality has fallen." : "Everything is dead."}</span>
 					</IconDisplay>
 				</CardBody>
 			</Card>

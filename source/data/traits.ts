@@ -42,7 +42,7 @@ export const BRUISER = {
 	stun: { increment: 0.03, maximum: 0.9 },
 }
 
-export const INOCULATED_DEFLECTION_BASE = 0.33
+export const INOCULATED_DEFLECTION_BASE = 0.3
 
 export const NUDIST = {
 	dodgeBonus: 0.5,

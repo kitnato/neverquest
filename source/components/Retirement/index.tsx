@@ -42,7 +42,7 @@ export function Retirement({
 			<ModalBody>
 				<Stack gap={5}>
 					<span className="fst-italic">
-						Weary bones yearn for quiescence to foster a new beginning. Each generation strengthens resolve and wisdom.
+						Weary bones yearn for quiescence to foster a new beginning.
 					</span>
 
 					<Generations />

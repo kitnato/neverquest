@@ -12,18 +12,20 @@ export function Generations() {
 	const generationsValue = useRecoilValue(generations)
 
 	return (
-		<IconDisplay Icon={IconGenerations} tooltip="Generation">
-			<Stack direction="horizontal" gap={3}>
-				<span>
-					{formatNumber({ value: generationsValue })}
-				</span>
+		<Stack gap={3}>
+			<IconDisplay Icon={IconGenerations} tooltip="Generation">
+				<Stack direction="horizontal" gap={3}>
+					<span>
+						{formatNumber({ value: generationsValue })}
+					</span>
 
-				<IconImage className="small text-secondary" Icon={IconTransmute} />
+					<IconImage className="small text-secondary" Icon={IconTransmute} />
 
-				<span>
-					{formatNumber({ value: generationsValue + 1 })}
-				</span>
-			</Stack>
-		</IconDisplay>
+					<span>
+						{formatNumber({ value: generationsValue + 1 })}
+					</span>
+				</Stack>
+			</IconDisplay>
+		</Stack>
 	)
 }

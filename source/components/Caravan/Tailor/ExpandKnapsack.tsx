@@ -32,7 +32,7 @@ export function ExpandKnapsack() {
 
 	const price = Math.round(
 		getFromRange({
-			factor: getSigmoid(knapsackCapacityValue - KNAPSACK_CAPACITY),
+			factor: getSigmoid((knapsackCapacityValue - KNAPSACK_CAPACITY) / 2.5),
 			...priceRange,
 		}),
 	)

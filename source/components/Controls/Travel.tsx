@@ -8,7 +8,7 @@ import IconFinalTravel from "@neverquest/icons/final-travel.svg?react"
 import IconTravel from "@neverquest/icons/travel.svg?react"
 import { isAttacking, isIncapacitated } from "@neverquest/state/character"
 import {
-	encounter,
+	canAwaken,
 	isStageCompleted,
 	location,
 	progress,
@@ -20,7 +20,7 @@ import { isShowing } from "@neverquest/state/ui"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function Travel() {
-	const encounterValue = useRecoilValue(encounter)
+	const canAwakenValue = useRecoilValue(canAwaken)
 	const encumbranceExtentValue = useRecoilValue(encumbranceExtent)
 	const essenceLootValue = useRecoilValue(essenceLoot)
 	const isAttackingValue = useRecoilValue(isAttacking)
@@ -37,12 +37,14 @@ export function Travel() {
 	const isCaravan = locationValue === "caravan"
 	// Occurs if the knapsack is sold and carrying more than the weight difference of its absence.
 	const isOverEncumbered = isCaravan && encumbranceExtentValue === "over-encumbered"
-	const isResCogitans = encounterValue === "res cogitans"
 
-	if ((
-		(progressMaximumValue === Number.POSITIVE_INFINITY ? progressValue > 0 : isStageCompletedValue)
-		&& essenceLootValue === 0
-	) || isCaravan
+	if (
+		(
+			(progressMaximumValue === Number.POSITIVE_INFINITY ? progressValue > 0 : isStageCompletedValue)
+			&& essenceLootValue === 0
+		)
+		|| isCaravan
+		|| canAwakenValue
 	) {
 		return (
 			<OverlayTrigger
@@ -52,7 +54,7 @@ export function Travel() {
 							{isOverEncumbered
 								? "Over-encumbered."
 								: (!isCaravan
-									? `Go to ${!isShowingLocation || isResCogitans
+									? `Go to ${canAwakenValue || !isShowingLocation
 										? LABEL_UNKNOWN
 										: "caravan"
 									}`
@@ -69,11 +71,11 @@ export function Travel() {
 								: undefined
 						}
 						disabled={isAttackingValue || isIncapacitatedValue || isOverEncumbered}
-						onClick={toggleLocation}
+						onClick={() => { toggleLocation() }}
 						variant="outline-dark"
 					>
 						<IconImage
-							Icon={isResCogitans ? IconFinalTravel : IconTravel}
+							Icon={canAwakenValue ? IconFinalTravel : IconTravel}
 							isMirrored={isCaravan}
 						/>
 					</Button>

@@ -10,6 +10,19 @@ import { withStateKey } from "@neverquest/utilities/helpers"
 
 // SELECTORS
 
+export const canAwaken = withStateKey("canAwaken", key =>
+	selector({
+		get: ({ get }) => (
+			!get(hasAwoken)
+			&& get(isStageCompleted)
+			&& get(location) === "wilderness"
+			&& ["res cogitans", "void"].includes(get(encounter))
+			&& get(stage) === FINALITY_STAGE["res cogitans"]
+		),
+		key,
+	}),
+)
+
 export const encounter = withStateKey("encounter", key =>
 	selector({
 		get: ({ get }) => {
@@ -81,10 +94,6 @@ export const progressMaximum = withStateKey("progressMaximum", key =>
 			}
 
 			if (encounterValue === "void") {
-				if (stageValue === FINALITY_STAGE["res cogitans"] && !get(hasDefeatedFinality("res cogitans"))) {
-					return Number.POSITIVE_INFINITY
-				}
-
 				return 0
 			}
 
@@ -120,8 +129,16 @@ export const corpse = withStateKey("corpse", key =>
 )
 
 export const generations = withStateKey("generations", key =>
-	atom<number>({
+	atom({
 		default: 0,
+		effects: [handleStorage({ key })],
+		key,
+	}),
+)
+
+export const hasAwoken = withStateKey("hasAwoken", key =>
+	atom({
+		default: false,
 		effects: [handleStorage({ key })],
 		key,
 	}),

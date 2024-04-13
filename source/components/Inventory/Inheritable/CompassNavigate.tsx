@@ -18,6 +18,7 @@ import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { IconImage } from "@neverquest/components/IconImage"
 import { LABEL_SEPARATOR, POPOVER_TRIGGER } from "@neverquest/data/general"
 import { BOSS_STAGE_INTERVAL, BOSS_STAGE_START, FINALITY_STAGE } from "@neverquest/data/monster"
+import { useDefeatFinality } from "@neverquest/hooks/actions/useDefeatFinality"
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness"
 import IconBossHiding from "@neverquest/icons/boss-hiding.svg?react"
@@ -77,6 +78,7 @@ export function CompassNavigate() {
 
 	const [isShowingNavigation, setIsShowingNavigation] = useState(false)
 
+	const defeatFinality = useDefeatFinality()
 	const progressQuest = useProgressQuest()
 	const resetWilderness = useResetWilderness()
 
@@ -124,6 +126,7 @@ export function CompassNavigate() {
 						<DropdownButton
 							onSelect={(eventKey) => {
 								if (eventKey !== null) {
+									defeatFinality()
 									progressQuest({ quest: "warpingWilderness" })
 
 									setIsShowingNavigation(false)

@@ -33,7 +33,7 @@ export function HearthstoneWarp() {
 					onClick={() => {
 						progressQuest({ quest: "warpingCaravan" })
 						resetActiveControl()
-						toggleLocation()
+						toggleLocation(true)
 					}}
 					variant="outline-dark"
 				>

@@ -1,7 +1,7 @@
 import { useRecoilCallback } from "recoil"
+import { useAdvanceCaravan } from "@neverquest/hooks/actions/useAdvanceCaravan"
 
 import { useCollectLoot } from "@neverquest/hooks/actions/useCollectLoot"
-import { useCompleteStage } from "@neverquest/hooks/actions/useCompleteStage"
 import { useIncreaseStage } from "@neverquest/hooks/actions/useIncreaseStage"
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness"
 import { useToggleAttacking } from "@neverquest/hooks/actions/useToggleAttacking"
@@ -13,8 +13,8 @@ import { isFinality } from "@neverquest/types/type-guards"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
 
 export function useAutoProgressStage() {
+	const advanceCaravan = useAdvanceCaravan()
 	const collectLoot = useCollectLoot()
-	const completeStage = useCompleteStage()
 	const increaseStage = useIncreaseStage()
 	const resetWilderness = useResetWilderness()
 	const toggleAttacking = useToggleAttacking()
@@ -31,7 +31,7 @@ export function useAutoProgressStage() {
 						&& get(itemsLoot).length === 0
 						&& collectLoot() === "success"
 					) {
-						completeStage()
+						advanceCaravan()
 						increaseStage()
 						resetWilderness()
 					}
@@ -40,6 +40,6 @@ export function useAutoProgressStage() {
 					}
 				}
 			},
-		[collectLoot, completeStage, increaseStage, resetWilderness, toggleAttacking],
+		[collectLoot, advanceCaravan, increaseStage, resetWilderness, toggleAttacking],
 	)
 }

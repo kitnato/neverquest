@@ -285,9 +285,8 @@ export const PURGE_PRICE_MULTIPLIER = {
 }
 
 export const SURGERY_PRICE = {
-	maximum: Math.round((CONSUMABLES.bandages.item.price + CONSUMABLES.elixir.item.price) * 1.05),
+	maximum: Math.round((CONSUMABLES.bandages.item.price + CONSUMABLES.elixir.item.price) * 1.1),
 	minimum: 3,
-	surcharge: 0.1,
 }
 
 export const TAILORING = {

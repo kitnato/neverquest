@@ -1,25 +1,33 @@
 import { useRecoilCallback } from "recoil"
+import { useAdvanceCaravan } from "@neverquest/hooks/actions/useAdvanceCaravan"
 
-import { useCompleteStage } from "@neverquest/hooks/actions/useCompleteStage"
+import { useDefeatFinality } from "@neverquest/hooks/actions/useDefeatFinality"
 import { useIncreaseStage } from "@neverquest/hooks/actions/useIncreaseStage"
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness"
 import { blacksmithOptions, fletcherOptions } from "@neverquest/state/caravan"
-import { isStageCompleted, location, stage, stageMaximum } from "@neverquest/state/encounter"
+import { canAwaken, consciousness, hasAwoken, isStageCompleted, location, stage, stageMaximum } from "@neverquest/state/encounter"
 import { isShowing } from "@neverquest/state/ui"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
 
 export function useToggleLocation() {
-	const completeStage = useCompleteStage()
+	const advanceCaravan = useAdvanceCaravan()
+	const defeatFinality = useDefeatFinality()
 	const increaseStage = useIncreaseStage()
 	const resetWilderness = useResetWilderness()
 
 	return useRecoilCallback(
 		({ reset, set, snapshot }) =>
-			() => {
+			(isWarp?: boolean) => {
 				const get = getSnapshotGetter(snapshot)
 
 				if (get(location) === "wilderness") {
-					completeStage()
+					advanceCaravan()
+					defeatFinality()
+
+					if (get(canAwaken) && !isWarp) {
+						set(consciousness, "vigilans")
+						set(hasAwoken, true)
+					}
 
 					set(isShowing("location"), true)
 					set(location, "caravan")
@@ -37,6 +45,6 @@ export function useToggleLocation() {
 					set(location, "wilderness")
 				}
 			},
-		[completeStage, increaseStage, resetWilderness],
+		[advanceCaravan, increaseStage, resetWilderness],
 	)
 }

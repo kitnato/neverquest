@@ -1,4 +1,5 @@
-import { LEVELLING_MAXIMUM, RETIREMENT_STAGE } from "@neverquest/data/general"
+import { LEVELLING_MAXIMUM } from "@neverquest/data/general"
+import { RETIREMENT_STAGE } from "@neverquest/data/retirement"
 import { AILMENT_PENALTY } from "@neverquest/data/statistics"
 import IconDamage from "@neverquest/icons/damage.svg?react"
 import IconDistance from "@neverquest/icons/distance.svg?react"

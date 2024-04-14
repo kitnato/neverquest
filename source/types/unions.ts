@@ -163,7 +163,7 @@ export type NumberFormat =
 	| "percentage"
 	| "time"
 
-export const PERK_TYPES = ["essenceBonus", "monsterReduction"] as const
+export const PERK_TYPES = ["essenceBonus", "monsterReduction", "startingEssence"] as const
 export type Perk = (typeof PERK_TYPES)[number]
 
 export type Quest = Conquest | Routine | Triumph

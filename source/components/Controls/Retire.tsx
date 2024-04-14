@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil"
 
 import { IconImage } from "@neverquest/components/IconImage"
 import { Retirement } from "@neverquest/components/Retirement"
-import { RETIREMENT_STAGE } from "@neverquest/data/general"
+import { RETIREMENT_STAGE } from "@neverquest/data/retirement"
 import IconRetire from "@neverquest/icons/retire.svg?react"
 import { isIncapacitated } from "@neverquest/state/character"
 import { location, stageMaximum } from "@neverquest/state/encounter"

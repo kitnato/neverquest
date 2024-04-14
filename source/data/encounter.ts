@@ -11,20 +11,7 @@ export const CORPSE_VALUE = 0.3
 
 export const DEATH_STAGE_PENALTY = 2
 
-export const GENERATIONS_MAXIMUM = 4
-
 export const PROGRESS = {
 	maximum: 20,
 	minimum: 3,
-}
-
-export const PERKS = {
-	essenceBonus: {
-		maximum: 1,
-		minimum: 0.4,
-	},
-	monsterReduction: {
-		maximum: 0.9,
-		minimum: 0.35,
-	},
 }

@@ -8,7 +8,7 @@ import { nanoid } from "nanoid"
 import type { RecoilValue, Snapshot } from "recoil"
 
 import { ATTRIBUTE_COST_BASE } from "@neverquest/data/attributes"
-import { AFFIX_STRUCTURE_WEIGHTS, GENERATIONS_MAXIMUM, PERKS } from "@neverquest/data/encounter"
+import { AFFIX_STRUCTURE_WEIGHTS } from "@neverquest/data/encounter"
 import {
 	type ARMOR_NONE,
 	ARMOR_SPECIFICATIONS,
@@ -41,6 +41,7 @@ import {
 	RELICS,
 } from "@neverquest/data/items"
 import { QUESTS } from "@neverquest/data/quests"
+import { GENERATIONS_MAXIMUM, PERKS } from "@neverquest/data/retirement"
 import IconArmorNone from "@neverquest/icons/armor-none.svg?react"
 import IconArmor from "@neverquest/icons/armor.svg?react"
 import IconOneHanded from "@neverquest/icons/one-handed.svg?react"
@@ -431,7 +432,7 @@ export function getPerkEffect({
 }) {
 	const { maximum, minimum } = PERKS[perk]
 
-	if (generations === 0) {
+	if (generations === 0 && perk !== "startingEssence") {
 		return 0
 	}
 

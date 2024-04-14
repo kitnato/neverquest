@@ -10,7 +10,6 @@ import {
 } from "react-bootstrap"
 
 import { IconDisplay } from "@neverquest/components/IconDisplay"
-import { Generations } from "@neverquest/components/Retirement/Generations"
 import { ItemsInherited } from "@neverquest/components/Retirement/ItemsInherited"
 import { Perks } from "@neverquest/components/Retirement/Perks"
 import { Renewal } from "@neverquest/components/Retirement/Renewal"
@@ -45,11 +44,9 @@ export function Retirement({
 						Weary bones yearn for quiescence to foster a new beginning.
 					</span>
 
-					<Generations />
+					<Renewal />
 
 					<Perks />
-
-					<Renewal />
 
 					<ItemsInherited />
 

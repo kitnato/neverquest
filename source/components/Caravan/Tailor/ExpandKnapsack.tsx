@@ -28,7 +28,7 @@ export function ExpandKnapsack() {
 	const progressQuest = useProgressQuest()
 	const transactEssence = useTransactEssence()
 
-	const { amount, priceRange } = TAILORING.knapsack
+	const { amount, priceRange } = TAILORING
 
 	const price = Math.round(
 		getFromRange({

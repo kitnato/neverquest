@@ -4,18 +4,27 @@ import { useRecoilValue } from "recoil"
 import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { IconImage } from "@neverquest/components/IconImage"
 import IconEssenceBonus from "@neverquest/icons/essence-bonus.svg?react"
+import IconEssence from "@neverquest/icons/essence.svg?react"
 import IconMonsterReduction from "@neverquest/icons/monster-reduction.svg?react"
 import IconTransmute from "@neverquest/icons/transmute.svg?react"
+import { absorbedEssence } from "@neverquest/state/attributes"
 import { generations } from "@neverquest/state/encounter"
 import { formatNumber } from "@neverquest/utilities/formatters"
 import { getPerkEffect } from "@neverquest/utilities/getters"
 
 export function Perks() {
+	const absorbedEssenceValue = useRecoilValue(absorbedEssence)
 	const generationsValue = useRecoilValue(generations)
 
 	return (
 		<Stack gap={3}>
 			<h6>Perks</h6>
+
+			<IconDisplay Icon={IconEssence} tooltip="Starting essence">
+				{formatNumber({
+					value: getPerkEffect({ generations: generationsValue, perk: "startingEssence" }) * absorbedEssenceValue,
+				})}
+			</IconDisplay>
 
 			<IconDisplay Icon={IconEssenceBonus} tooltip="Essence loot bonus">
 				<Stack direction="horizontal" gap={3}>

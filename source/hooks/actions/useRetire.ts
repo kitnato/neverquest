@@ -2,7 +2,7 @@ import { useRecoilCallback } from "recoil"
 
 import { ATTRIBUTES } from "@neverquest/data/attributes"
 import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear"
-import { RETIREMENT_STAGE } from "@neverquest/data/general"
+import { RETIREMENT_STAGE } from "@neverquest/data/retirement"
 import { SKILLS } from "@neverquest/data/skills"
 import { useAcquireSkill } from "@neverquest/hooks/actions/useAcquireSkill"
 import { useInitialize } from "@neverquest/hooks/actions/useInitialize"
@@ -11,6 +11,7 @@ import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import { useResetAttributes } from "@neverquest/hooks/actions/useResetAttributes"
 import { useResetCharacter } from "@neverquest/hooks/actions/useResetCharacter"
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness"
+import { absorbedEssence } from "@neverquest/state/attributes"
 import {
 	blacksmithInventory,
 	expandedBuyback,
@@ -30,6 +31,7 @@ import { armor, gems, shield, weapon } from "@neverquest/state/gear"
 import { inventory } from "@neverquest/state/inventory"
 import { expandedMasteries, masteryProgress, masteryRank } from "@neverquest/state/masteries"
 import { questProgress } from "@neverquest/state/quests"
+import { essence } from "@neverquest/state/resources"
 import { isSkillAcquired } from "@neverquest/state/skills"
 import { isTraitAcquired, selectedTrait } from "@neverquest/state/traits"
 import { isInheritableItem } from "@neverquest/types/type-guards"
@@ -39,7 +41,7 @@ import {
 	MASTERY_TYPES,
 	SKILL_TYPES,
 } from "@neverquest/types/unions"
-import { getSnapshotGetter } from "@neverquest/utilities/getters"
+import { getPerkEffect, getSnapshotGetter } from "@neverquest/utilities/getters"
 
 export function useRetire() {
 	const acquireSkill = useAcquireSkill()
@@ -72,6 +74,8 @@ export function useRetire() {
 
 				resetAttributes()
 				resetCharacter()
+
+				set(essence, Math.round(getPerkEffect({ generations: get(generations), perk: "startingEssence" }) * get(absorbedEssence)))
 
 				reset(armor)
 				reset(blacksmithInventory)

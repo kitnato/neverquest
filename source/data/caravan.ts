@@ -5,9 +5,10 @@ import type {
 	WeaponClass,
 	WeaponModality,
 } from "@kitnato/locran/build/types"
-import { LEVELLING_MAXIMUM, LEVELLING_THRESHOLD, RETIREMENT_STAGE } from "@neverquest/data/general"
+import { LEVELLING_MAXIMUM, LEVELLING_THRESHOLD } from "@neverquest/data/general"
 import { CONSUMABLES, INFUSABLES, RELICS } from "@neverquest/data/items"
 import { BLIGHT, FINALITY_STAGE, POISON, RAGE } from "@neverquest/data/monster"
+import { RETIREMENT_STAGE } from "@neverquest/data/retirement"
 import IconAlchemist from "@neverquest/icons/alchemist.svg?react"
 import IconAttributes from "@neverquest/icons/attributes.svg?react"
 import IconBandages from "@neverquest/icons/bandages.svg?react"
@@ -280,8 +281,8 @@ export const MERCHANT_OFFERS: Record<
 }
 
 export const PURGE_PRICE_MULTIPLIER = {
-	essence: 0.25,
-	quests: 250,
+	essence: 0.2,
+	quests: 150,
 }
 
 export const SURGERY_PRICE = {
@@ -289,10 +290,7 @@ export const SURGERY_PRICE = {
 	minimum: 3,
 }
 
-export const TAILORING = {
-	"knapsack": { amount: 3, priceRange: { maximum: 250, minimum: 3 } },
-	"munitions satchel": { amount: 20, priceRange: { maximum: 300, minimum: 10 } },
-}
+export const TAILORING = { amount: 3, priceRange: { maximum: 250, minimum: 3 } }
 
 export const TRANSMUTATION = {
 	gemCost: 3,

@@ -42,8 +42,6 @@ export const PERCENTAGE = 100
 
 export const POPOVER_TRIGGER: OverlayTriggerType[] = ["focus", "hover"]
 
-export const RETIREMENT_STAGE = 35
-
 export const ROMAN_NUMERAL_MAXIMUM = 3999
 export const ROMAN_NUMERALS = [
 	["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"], // 1-9

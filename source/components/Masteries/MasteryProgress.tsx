@@ -1,10 +1,11 @@
 import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap"
 import { useRecoilValue } from "recoil"
 
+import { BadgeMaximum } from "@neverquest/components/BadgeMaximum"
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
 import { DescriptionDisplay } from "@neverquest/components/DescriptionDisplay"
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
-import { LABEL_MAXIMUM, PERCENTAGE } from "@neverquest/data/general"
+import { PERCENTAGE } from "@neverquest/data/general"
 import { MASTERIES } from "@neverquest/data/masteries"
 import { useDeltaText } from "@neverquest/hooks/useDeltaText"
 import { isMasteryAtMaximum, masteryCost, masteryProgress } from "@neverquest/state/masteries"
@@ -45,11 +46,13 @@ export function MasteryProgress({ mastery }: { mastery: Mastery }) {
 					variant="secondary"
 				>
 					<Stack direction="horizontal" gap={1}>
-						<span>
-							{isMasteryAtMaximumValue
-								? LABEL_MAXIMUM
-								: `${masteryProgressValue} / ${masteryCostValue}`}
-						</span>
+						{isMasteryAtMaximumValue
+							? <BadgeMaximum />
+							: (
+								<span>
+									{`${masteryProgressValue} / ${masteryCostValue}`}
+								</span>
+							)}
 
 						<DeltasDisplay delta={delta} />
 					</Stack>

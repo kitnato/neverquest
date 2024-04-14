@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil"
 
 import { DetailsTable } from "@neverquest/components/DetailsTable"
 import { IconDisplay } from "@neverquest/components/IconDisplay"
-import { LABEL_EMPTY, LABEL_MAXIMUM, POPOVER_TRIGGER } from "@neverquest/data/general"
+import { LABEL_EMPTY, LABEL_TOTAL, POPOVER_TRIGGER } from "@neverquest/data/general"
 import { BLIGHT } from "@neverquest/data/monster"
 import IconBlightChance from "@neverquest/icons/blight-chance.svg?react"
 import IconMonsterAttackRate from "@neverquest/icons/monster-attack-rate.svg?react"
@@ -75,9 +75,7 @@ export function BlightChance() {
 
 												<IconDisplay Icon={IconStamina} iconProps={{ className: "small" }}>
 													<span>
-														{LABEL_MAXIMUM}
-														{" "}
-														increments
+														{LABEL_TOTAL}
 													</span>
 												</IconDisplay>
 											</Stack>

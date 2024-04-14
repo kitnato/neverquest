@@ -1,10 +1,11 @@
 import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap"
 import { useRecoilValue } from "recoil"
 
+import { BadgeMaximum } from "@neverquest/components/BadgeMaximum"
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
 import { DetailsTable } from "@neverquest/components/DetailsTable"
 import { IconDisplay } from "@neverquest/components/IconDisplay"
-import { LABEL_MAXIMUM, POPOVER_TRIGGER } from "@neverquest/data/general"
+import { POPOVER_TRIGGER } from "@neverquest/data/general"
 import { DEFLECTION_MAXIMUM } from "@neverquest/data/statistics"
 import { INOCULATED_DEFLECTION_BASE } from "@neverquest/data/traits"
 import { useDeltaText } from "@neverquest/hooks/useDeltaText"
@@ -80,13 +81,13 @@ export function DeflectionChance() {
 						trigger={isTraitAcquiredInoculated ? POPOVER_TRIGGER : []}
 					>
 						<span>
-							{`${formatNumber({ format: "percentage", value: deflectionChanceValue })}${deflectionChanceValue === DEFLECTION_MAXIMUM
-								? ` ${LABEL_MAXIMUM}`
-								: ""}`}
+							{formatNumber({ format: "percentage", value: deflectionChanceValue })}
 						</span>
 					</OverlayTrigger>
 
 					<DeltasDisplay delta="deflectionChance" />
+
+					{deflectionChanceValue === DEFLECTION_MAXIMUM && <BadgeMaximum />}
 				</Stack>
 			</IconDisplay>
 		)

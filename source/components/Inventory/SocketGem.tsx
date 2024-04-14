@@ -1,8 +1,9 @@
 import { DropdownButton, DropdownItem } from "react-bootstrap"
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
 
+import { BadgeMaximum } from "@neverquest/components/BadgeMaximum"
 import { IconDisplay } from "@neverquest/components/IconDisplay"
-import { CLASS_FULL_WIDTH_JUSTIFIED, LABEL_MAXIMUM } from "@neverquest/data/general"
+import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general"
 import { GEMS_MAXIMUM } from "@neverquest/data/items"
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence"
@@ -91,9 +92,12 @@ export function SocketGem({ gem }: { gem: GemItem }) {
 		>
 			{GEAR_TYPES.filter(gearType =>
 				gearType === "shield"
-					? (((isMelee(weaponValue) || isUnarmed(weaponValue))
-					&& weaponValue.grip === "one-handed")
-					|| isTraitAcquiredColossus)
+					? (
+						(
+							(isMelee(weaponValue) || isUnarmed(weaponValue))
+							&& weaponValue.grip === "one-handed"
+						) || isTraitAcquiredColossus
+					)
 					&& !isRanged(weaponValue)
 					: true,
 			).map((gearType) => {
@@ -116,7 +120,7 @@ export function SocketGem({ gem }: { gem: GemItem }) {
 										</IconDisplay>
 									)
 									: (
-										<span>{LABEL_MAXIMUM}</span>
+										<BadgeMaximum />
 									)}
 							</div>
 						</div>

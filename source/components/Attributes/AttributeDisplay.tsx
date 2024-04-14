@@ -1,15 +1,15 @@
-import { Badge, Button, OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap"
+import { Button, OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap"
 import { useRecoilValue } from "recoil"
 
 import { AttributeIncreaseDetails } from "@neverquest/components/Attributes/AttributeIncreaseDetails"
 import { AttributeRank } from "@neverquest/components/Attributes/AttributeRank"
+import { BadgeMaximum } from "@neverquest/components/BadgeMaximum"
 import { DescriptionDisplay } from "@neverquest/components/DescriptionDisplay"
 import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { IconImage } from "@neverquest/components/IconImage"
 import { ATTRIBUTES } from "@neverquest/data/attributes"
 import {
 	CLASS_FULL_WIDTH_JUSTIFIED,
-	LABEL_MAXIMUM,
 	LABEL_SKILL_REQUIRED,
 	LABEL_UNKNOWN,
 } from "@neverquest/data/general"
@@ -51,7 +51,7 @@ export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
 					{isAttributeAtMaximumValue
 						? (
 							<Button className="border-0" disabled variant="outline-dark">
-								<Badge bg="dark">{LABEL_MAXIMUM}</Badge>
+								<BadgeMaximum />
 							</Button>
 						)
 						: (

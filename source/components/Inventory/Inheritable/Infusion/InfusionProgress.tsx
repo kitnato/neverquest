@@ -1,8 +1,9 @@
 import { useRecoilValue } from "recoil"
 
+import { BadgeMaximum } from "@neverquest/components/BadgeMaximum"
 import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
-import { LABEL_MAXIMUM, PERCENTAGE } from "@neverquest/data/general"
+import { PERCENTAGE } from "@neverquest/data/general"
 import IconEssence from "@neverquest/icons/essence.svg?react"
 import { infusion, infusionMaximum, isInfusionAtMaximum } from "@neverquest/state/items"
 import type { Infusable } from "@neverquest/types/unions"
@@ -24,13 +25,13 @@ export function InfusionProgress({ infusable }: { infusable: Infusable }) {
 			variant="secondary"
 		>
 			<IconDisplay Icon={IconEssence} iconProps={{ className: "small stencilled" }}>
-				<span>
-					{isInfusionAtMaximumValue
-						? LABEL_MAXIMUM
-						: `${formatNumber({ value: infusionValue })} / ${formatNumber({
-							value: infusionMaximumValue,
-						})}`}
-				</span>
+				{isInfusionAtMaximumValue
+					? <BadgeMaximum />
+					: (
+						<span>
+							{`${formatNumber({ value: infusionValue })} / ${formatNumber({ value: infusionMaximumValue })}`}
+						</span>
+					)}
 			</IconDisplay>
 		</LabelledProgressBar>
 	)

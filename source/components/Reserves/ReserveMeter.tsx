@@ -6,7 +6,7 @@ import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
 import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { IconImage } from "@neverquest/components/IconImage"
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
-import { LABEL_MAXIMUM, LABEL_SEPARATOR, PERCENTAGE } from "@neverquest/data/general"
+import { LABEL_SEPARATOR, LABEL_TOTAL, PERCENTAGE } from "@neverquest/data/general"
 import { RESERVES } from "@neverquest/data/reserves"
 import { useDeltaText } from "@neverquest/hooks/useDeltaText"
 import { usePreviousValue } from "@neverquest/hooks/usePreviousValue"
@@ -58,7 +58,7 @@ export function ReserveMeter({ PrefixIcon, reserve }: { PrefixIcon?: SVGIcon, re
 	useDeltaText({
 		delta: maximumDelta,
 		state: reserveMaximumState,
-		suffix: LABEL_MAXIMUM,
+		suffix: LABEL_TOTAL.toUpperCase(),
 	})
 
 	// Have current health and stamina increase the same if the maximum is increased (e.g. via attribute).

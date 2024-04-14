@@ -23,7 +23,6 @@ export const KEY_SESSION = "neverquest-session"
 
 export const LABEL_EMPTY = "--"
 export const LABEL_FULL_HEALTH = "Already at full health."
-export const LABEL_MAXIMUM = "MAX"
 export const LABEL_NO_ESSENCE = "Insufficient essence."
 export const LABEL_NONE = "None."
 export const LABEL_NONE_AVAILABLE = "None available."
@@ -31,6 +30,7 @@ export const LABEL_NO_PENALTY = "No penalty."
 export const LABEL_OVER_ENCUMBERED = "Too heavy."
 export const LABEL_SEPARATOR = "·"
 export const LABEL_SKILL_REQUIRED = "Requires a skill."
+export const LABEL_TOTAL = "total"
 export const LABEL_UNKNOWN = "???"
 
 export const LEVELLING_THRESHOLD = 100

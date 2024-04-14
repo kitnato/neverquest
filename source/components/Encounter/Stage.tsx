@@ -52,13 +52,11 @@ export function Stage() {
 					trigger={corpseValue === undefined ? [] : POPOVER_TRIGGER}
 				>
 					<span>
-						{formatNumber({ value: stageValue })}
+						{`${formatNumber({ value: stageValue })}${stageValue < stageMaximumValue ? ` / ${stageMaximumValue}` : ""}`}
 					</span>
 				</OverlayTrigger>
 
 				<DeltasDisplay delta="stage" />
-
-				<span>{stageValue < stageMaximumValue ? ` / ${stageMaximumValue}` : ""}</span>
 			</Stack>
 		</IconDisplay>
 	)

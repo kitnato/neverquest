@@ -149,7 +149,7 @@ export function ReserveMeter({ PrefixIcon, reserve }: { PrefixIcon?: SVGIcon, re
 					</>
 				)}
 
-				<Stack direction="horizontal">
+				<Stack>
 					<DeltasDisplay delta={isHealth ? "health" : "stamina"} />
 
 					<DeltasDisplay delta={maximumDelta} />

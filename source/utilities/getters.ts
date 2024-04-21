@@ -424,20 +424,20 @@ export function getRangedRanges({ factor, gearClass }: { factor: number, gearCla
 }
 
 export function getPerkEffect({
-	generations,
+	generation,
 	perk,
 }: {
-	generations: number
+	generation: number
 	perk: Perk
 }) {
 	const { maximum, minimum } = PERKS[perk]
 
-	if (generations === 0 && perk !== "startingEssence") {
+	if (generation === 0 && perk !== "startingEssence") {
 		return 0
 	}
 
 	return getFromRange({
-		factor: (Math.min(generations, GENERATIONS_MAXIMUM) - 1) / (GENERATIONS_MAXIMUM - 1),
+		factor: (Math.min(generation, GENERATIONS_MAXIMUM) - 1) / (GENERATIONS_MAXIMUM - 1),
 		maximum,
 		minimum,
 	})

@@ -330,7 +330,7 @@ export type StateKey =
 	| "fletcherOptions"
 	| "frailty"
 	| "gems"
-	| "generations"
+	| "generation"
 	| "hasAwoken"
 	| "hasDefeatedFinality"
 	| "hasEnoughMunitions"

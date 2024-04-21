@@ -23,7 +23,7 @@ import {
 import { name } from "@neverquest/state/character"
 import {
 	corpse,
-	generations,
+	generation,
 	hasDefeatedFinality,
 	stageMaximum,
 } from "@neverquest/state/encounter"
@@ -75,7 +75,7 @@ export function useRetire() {
 				resetAttributes()
 				resetCharacter()
 
-				set(essence, Math.round(getPerkEffect({ generations: get(generations), perk: "startingEssence" }) * get(absorbedEssence)))
+				set(essence, Math.round(getPerkEffect({ generation: get(generation), perk: "startingEssence" }) * get(absorbedEssence)))
 
 				reset(armor)
 				reset(blacksmithInventory)
@@ -145,7 +145,7 @@ export function useRetire() {
 
 				reset(merchantInventory)
 
-				set(generations, current => current + 1)
+				set(generation, current => current + 1)
 
 				if (get(isSkillAcquired("memetics"))) {
 					progressQuest({ quest: "decipheringJournal" })

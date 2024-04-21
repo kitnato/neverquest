@@ -7,15 +7,15 @@ import { LABEL_TOTAL, POPOVER_TRIGGER } from "@neverquest/data/general"
 import { useDeltaText } from "@neverquest/hooks/useDeltaText"
 import IconMonsterReduction from "@neverquest/icons/monster-reduction.svg?react"
 import IconProgress from "@neverquest/icons/progress.svg?react"
-import { generations, location, progress, progressMaximum } from "@neverquest/state/encounter"
+import { generation, location, progress, progressMaximum } from "@neverquest/state/encounter"
 import { formatNumber } from "@neverquest/utilities/formatters"
 import { getPerkEffect } from "@neverquest/utilities/getters"
 
 export function Progress() {
 	const locationValue = useRecoilValue(location)
-	const generationsValue = useRecoilValue(generations)
+	const generationValue = useRecoilValue(generation)
 
-	const monsterReduction = getPerkEffect({ generations: generationsValue, perk: "monsterReduction" })
+	const monsterReduction = getPerkEffect({ generation: generationValue, perk: "monsterReduction" })
 
 	useDeltaText({
 		delta: "progress",

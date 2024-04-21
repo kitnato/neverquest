@@ -4,24 +4,24 @@ import { useRecoilValue } from "recoil"
 import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { TraitDisplay } from "@neverquest/components/Traits/TraitDisplay"
 import { LABEL_NONE } from "@neverquest/data/general"
-import IconGenerations from "@neverquest/icons/generations.svg?react"
-import { generations } from "@neverquest/state/encounter"
+import IconGeneration from "@neverquest/icons/generation.svg?react"
+import { generation } from "@neverquest/state/encounter"
 import { acquiredTraits } from "@neverquest/state/traits"
 import { TRAIT_TYPES } from "@neverquest/types/unions"
 import { formatNumber } from "@neverquest/utilities/formatters"
 
 export function Traits() {
 	const acquiredTraitsValue = useRecoilValue(acquiredTraits)
-	const generationsValue = useRecoilValue(generations)
+	const generationValue = useRecoilValue(generation)
 
 	return (
 		<Stack gap={5}>
 			<Stack gap={3}>
 				<h6>Generation</h6>
 
-				<IconDisplay Icon={IconGenerations} tooltip="Current generation">
+				<IconDisplay Icon={IconGeneration} tooltip="Current generation">
 					<span>
-						{formatNumber({ value: generationsValue })}
+						{formatNumber({ value: generationValue })}
 					</span>
 				</IconDisplay>
 			</Stack>

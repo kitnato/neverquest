@@ -23,7 +23,7 @@ import { isHired, merchantInventory } from "@neverquest/state/caravan"
 import { handleStorage } from "@neverquest/state/effects/handleStorage"
 import {
 	encounter,
-	generations,
+	generation,
 	isStageStarted,
 	progress,
 	stage,
@@ -308,7 +308,7 @@ export const monsterLoot = withStateKey("monsterLoot", key =>
 					? finality[encounterValue]
 					: Math.round(
 						(droppedEssence + droppedEssence * Math.min(get(progress), PROGRESS.maximum) * bonus) * (encounterValue === "boss" ? boss : 1)
-						* (1 + getPerkEffect({ generations: get(generations), perk: "essenceBonus" })),
+						* (1 + getPerkEffect({ generation: get(generation), perk: "essenceBonus" })),
 					),
 				gems: encounterValue === "boss"
 					? Math.min(

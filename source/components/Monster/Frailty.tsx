@@ -40,7 +40,7 @@ export function Frailty() {
 							<Popover>
 								<PopoverBody>
 									<DescriptionDisplay
-										description={`A # presence is weakening # and # by ${formattedValue}.`}
+										description={`A # presence is weakening monster # health and # damage by ${formattedValue}.`}
 										descriptionIcons={[Icon, IconMonsterHealth, IconMonsterDamage]}
 									/>
 								</PopoverBody>

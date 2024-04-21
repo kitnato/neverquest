@@ -7,7 +7,7 @@ import { POPOVER_TRIGGER } from "@neverquest/data/general"
 import { useDeltaText } from "@neverquest/hooks/useDeltaText"
 import IconEssenceBonus from "@neverquest/icons/essence-bonus.svg?react"
 import IconEssence from "@neverquest/icons/essence.svg?react"
-import { generations } from "@neverquest/state/encounter"
+import { generation } from "@neverquest/state/encounter"
 import { essence } from "@neverquest/state/resources"
 import { isShowing } from "@neverquest/state/ui"
 import { formatNumber } from "@neverquest/utilities/formatters"
@@ -16,9 +16,9 @@ import { getAnimationClass, getPerkEffect } from "@neverquest/utilities/getters"
 export function Essence() {
 	const essenceValue = useRecoilValue(essence)
 	const isShowingEssence = useRecoilValue(isShowing("essence"))
-	const generationsValue = useRecoilValue(generations)
+	const generationValue = useRecoilValue(generation)
 
-	const essenceBonus = getPerkEffect({ generations: generationsValue, perk: "essenceBonus" })
+	const essenceBonus = getPerkEffect({ generation: generationValue, perk: "essenceBonus" })
 
 	useDeltaText({
 		delta: "essence",

@@ -5,25 +5,44 @@ import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { IconImage } from "@neverquest/components/IconImage"
 import IconEssenceBonus from "@neverquest/icons/essence-bonus.svg?react"
 import IconEssence from "@neverquest/icons/essence.svg?react"
+import IconGeneration from "@neverquest/icons/generation.svg?react"
 import IconMonsterReduction from "@neverquest/icons/monster-reduction.svg?react"
 import IconTransmute from "@neverquest/icons/transmute.svg?react"
 import { absorbedEssence } from "@neverquest/state/attributes"
-import { generations } from "@neverquest/state/encounter"
+import { generation } from "@neverquest/state/encounter"
 import { formatNumber } from "@neverquest/utilities/formatters"
 import { getPerkEffect } from "@neverquest/utilities/getters"
 
 export function Perks() {
 	const absorbedEssenceValue = useRecoilValue(absorbedEssence)
-	const generationsValue = useRecoilValue(generations)
+	const generationValue = useRecoilValue(generation)
 
 	return (
 		<Stack gap={3}>
 			<h6>Perks</h6>
 
-			<IconDisplay Icon={IconEssence} tooltip="Starting essence">
-				{formatNumber({
-					value: getPerkEffect({ generations: generationsValue, perk: "startingEssence" }) * absorbedEssenceValue,
-				})}
+			<IconDisplay
+				description={(
+					<Stack direction="horizontal" gap={1}>
+						<span className="text-secondary">Based on current</span>
+
+						<IconDisplay
+							className="text-secondary"
+							Icon={IconGeneration}
+							iconProps={{ className: "small" }}
+						>
+							<span>generation.</span>
+						</IconDisplay>
+					</Stack>
+				)}
+				Icon={IconEssence}
+				tooltip="Starting essence"
+			>
+				<span>
+					{formatNumber({
+						value: getPerkEffect({ generation: generationValue, perk: "startingEssence" }) * absorbedEssenceValue,
+					})}
+				</span>
 			</IconDisplay>
 
 			<IconDisplay Icon={IconEssenceBonus} tooltip="Essence loot bonus">
@@ -32,7 +51,7 @@ export function Perks() {
 						+
 						{formatNumber({
 							format: "percentage",
-							value: getPerkEffect({ generations: generationsValue, perk: "essenceBonus" }),
+							value: getPerkEffect({ generation: generationValue, perk: "essenceBonus" }),
 						})}
 					</span>
 
@@ -42,7 +61,7 @@ export function Perks() {
 						+
 						{formatNumber({
 							format: "percentage",
-							value: getPerkEffect({ generations: generationsValue + 1, perk: "essenceBonus" }),
+							value: getPerkEffect({ generation: generationValue + 1, perk: "essenceBonus" }),
 						})}
 					</span>
 				</Stack>
@@ -58,7 +77,7 @@ export function Perks() {
 						-
 						{formatNumber({
 							format: "percentage",
-							value: getPerkEffect({ generations: generationsValue, perk: "monsterReduction" }),
+							value: getPerkEffect({ generation: generationValue, perk: "monsterReduction" }),
 						})}
 					</span>
 
@@ -68,7 +87,7 @@ export function Perks() {
 						-
 						{formatNumber({
 							format: "percentage",
-							value: getPerkEffect({ generations: generationsValue + 1, perk: "monsterReduction" }),
+							value: getPerkEffect({ generation: generationValue + 1, perk: "monsterReduction" }),
 						})}
 					</span>
 				</Stack>

@@ -5,7 +5,7 @@ import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { IconImage } from "@neverquest/components/IconImage"
 import IconAttributes from "@neverquest/icons/attributes.svg?react"
 import IconGear from "@neverquest/icons/gear.svg?react"
-import IconGenerations from "@neverquest/icons/generations.svg?react"
+import IconGeneration from "@neverquest/icons/generation.svg?react"
 import IconMasteries from "@neverquest/icons/masteries.svg?react"
 import IconMercenary from "@neverquest/icons/mercenary.svg?react"
 import IconPowerLevel from "@neverquest/icons/power-level.svg?react"
@@ -13,11 +13,11 @@ import IconSkills from "@neverquest/icons/skills.svg?react"
 import IconStage from "@neverquest/icons/stage.svg?react"
 import IconTransmute from "@neverquest/icons/transmute.svg?react"
 import { powerLevel } from "@neverquest/state/attributes"
-import { generations, stage } from "@neverquest/state/encounter"
+import { generation, stage } from "@neverquest/state/encounter"
 import { formatNumber } from "@neverquest/utilities/formatters"
 
 export function Renewal() {
-	const generationsValue = useRecoilValue(generations)
+	const generationValue = useRecoilValue(generation)
 	const powerLevelValue = useRecoilValue(powerLevel)
 	const stageValue = useRecoilValue(stage)
 
@@ -28,19 +28,19 @@ export function Renewal() {
 			<ListGroup>
 				<ListGroupItem>
 					<IconDisplay
-						Icon={IconGenerations}
+						Icon={IconGeneration}
 						iconProps={{ className: "small" }}
 						tooltip="Generation"
 					>
 						<Stack direction="horizontal" gap={1}>
 							<span>
-								{formatNumber({ value: generationsValue })}
+								{formatNumber({ value: generationValue })}
 							</span>
 
 							<IconImage className="small text-secondary" Icon={IconTransmute} />
 
 							<span>
-								{formatNumber({ value: generationsValue + 1 })}
+								{formatNumber({ value: generationValue + 1 })}
 							</span>
 						</Stack>
 					</IconDisplay>

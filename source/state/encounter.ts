@@ -88,7 +88,7 @@ export const progressMaximum = withStateKey("progressMaximum", key =>
 					1,
 					Math.round(
 						getFromRange({ factor: getSigmoid(stageValue), maximum, minimum })
-						* (1 - getPerkEffect({ generations: get(generations), perk: "monsterReduction" })),
+						* (1 - getPerkEffect({ generation: get(generation), perk: "monsterReduction" })),
 					),
 				)
 			}
@@ -128,7 +128,7 @@ export const corpse = withStateKey("corpse", key =>
 	}),
 )
 
-export const generations = withStateKey("generations", key =>
+export const generation = withStateKey("generation", key =>
 	atom({
 		default: 0,
 		effects: [handleStorage({ key })],

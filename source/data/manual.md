@@ -12,11 +12,11 @@ While engaged, the monster attacks continuously, triggering your **defense**. Wh
 
 Both you and monster keep attacking one another until either you **retreat**, or either one of you dies (health reaches zero). Retreating disengages all combat until you choose to attack again.
 
-Upon a monster's death, the stage's **progress** is incremented, its remains are **looted** for [essence](#essence) and any [items](#items) and the next monster is engaged immediately, unless you retreat. Beware of the powerful [boss monsters](#bosses) that lurk at regular stage intervals.
+Upon a monster's death, the stage's **progress** is incremented, its remains are **looted** for [essence](#essence) and any [items](#items) and the next monster is engaged immediately, unless you retreat. Beware of the powerful [boss monsters](#boss) that lurk at regular stage intervals.
 
 Once the wilderness is cleared of monsters, all looted resources can be **collected** and you enter a **resting** state. At this point, **traveling** to the [caravan](#caravan) becomes possible.
 
-The caravan allows interacting with crew members that each provide essential goods & services that help you progress through the stages and unlock new capabilities. [Death](#death) is but a temporary setback and **retiring** allows for a [fresh start](#retirement) with mighty bonuses.
+The caravan allows interacting with crew members that each provide essential goods & services that help you progress through the stages and unlock new capabilities. [Death](#death) is but a temporary setback and, eventually, **retiring** allows for a [fresh start](#retirement) with mighty bonuses.
 
 Stages can increase indefinitely and there are many secrets to uncover and foes to conquer. Will you be able to piece together the true ending?
 
@@ -228,7 +228,7 @@ A creature with a unique, randomly generated name that continuously attacks you 
 
 In later stages, rage can build up when retreating, which eventually frenzies the monster permanently into attacking a lot faster.
 
-#### Bosses
+#### Boss
 
 A monster that is more powerful than a standard monster would otherwise be on that stage. They appear every few stages. It's the only monster on that stage, and once defeated, it drops [gems](#gems) and under special circumstances it may also drop a [relic](#relics).
 
@@ -433,7 +433,7 @@ A shield's burden is paid in [stamina](#stamina) every time you successfully blo
 
 #### Gems
 
-Gems are items that can be socketed into gear. They are dropped by [bosses](#bosses), and more are dropped per boss additional the higher the wilderness [stage](#wilderness) is. If a boss has already been defeated on a particular stage, visiting it again will drastically reduce the chance to drop any gems.
+Gems are items that can be socketed into gear. They are dropped by [bosses](#boss), and more are dropped per boss additional the higher the wilderness [stage](#wilderness) is. If a boss has already been defeated on a particular stage, visiting it again will drastically reduce the chance to drop any gems.
 
 Only a certain amount of gems can be applied to a piece of gear. Once applied, gems cannot be removed or transferred to a different piece of gear.
 
@@ -675,11 +675,29 @@ Requires the [traumatology](#traumatology) skill.
 
 ## Retirement
 
-When reaching a certain stage, retirement is unlocked. This restarts the game from stage 1 with [power level](#attributes) at 0, no essence, no skills and no gear. However, all carried [relics](#relics) are retained. A [trait](#traits) can be also chosen that confers a permanent bonus that persists through future retirements.
+When reaching a certain stage, retirement is unlocked. Doing so restarts the game from [wilderness](#wilderness) stage 1 with [power level](#attributes) at 0 (hence no attributes), no [skills](#skills) (hence no [masteries](#masteries)) and no [gear](#gear). However, all carried [relics](#relics) are retained.
+
+A [trait](#traits) can be also chosen that confers a permanent bonus that persists through future retirements. Retiring increases the current generation by 1.
+
+### Perks
+
+Certain starting bonuses are bestowed that grow more potent with each passing generation, i.e. how many times you have retired.
+
+#### Starting essence
+
+An amount of [essence](#essence) gifted at the start, allowing immediate spending on attributes and the [caravan](#caravan).
+
+#### Essence loot bonus
+
+A percentage indicating the amount of extra essence that is looted from defeated [monsters](#monster) and [bosses](#boss).
+
+#### Monster reduction
+
+A percentage determining the reduction of the amount of monsters there are to defeat per stage before being able to progress to the next one.
 
 ### Traits
 
-Traits are permanent passive abilities acquired upon [retiring](#retirement) for all subsequent new starts. One may be chosen at a time for every retirement.
+Permanent passive abilities acquired upon [retiring](#retirement) for all subsequent new starts. One may be chosen at a time for every retirement.
 
 #### Brawler
 

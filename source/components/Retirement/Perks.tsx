@@ -7,6 +7,7 @@ import IconEssenceBonus from "@neverquest/icons/essence-bonus.svg?react"
 import IconEssence from "@neverquest/icons/essence.svg?react"
 import IconGeneration from "@neverquest/icons/generation.svg?react"
 import IconMonsterReduction from "@neverquest/icons/monster-reduction.svg?react"
+import IconPowerLevel from "@neverquest/icons/power-level.svg?react"
 import IconTransmute from "@neverquest/icons/transmute.svg?react"
 import { absorbedEssence } from "@neverquest/state/attributes"
 import { generation } from "@neverquest/state/encounter"
@@ -31,7 +32,17 @@ export function Perks() {
 							Icon={IconGeneration}
 							iconProps={{ className: "small" }}
 						>
-							<span>generation.</span>
+							<span>generation</span>
+						</IconDisplay>
+
+						<span>and</span>
+
+						<IconDisplay
+							className="text-secondary"
+							Icon={IconPowerLevel}
+							iconProps={{ className: "small" }}
+						>
+							<span>power level.</span>
 						</IconDisplay>
 					</Stack>
 				)}

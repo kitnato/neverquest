@@ -2,7 +2,8 @@ import { nanoid } from "nanoid"
 import { type ReactNode, useCallback, useLayoutEffect, useMemo, useRef, useState } from "react"
 import { useRecoilValue } from "recoil"
 
-import { GLITCH_NUMBER, GLITCH_STAGE_MINIMUM, LEVELLING_THRESHOLD } from "@neverquest/data/general"
+import { LEVELLING_THRESHOLD } from "@neverquest/data/general"
+import { FINALITY_STAGE } from "@neverquest/data/monster"
 import { useAnimation } from "@neverquest/hooks/useAnimation"
 import { stage } from "@neverquest/state/encounter"
 import { getFromRange, getLinearMapping, getRange } from "@neverquest/utilities/getters"
@@ -10,6 +11,8 @@ import { getFromRange, getLinearMapping, getRange } from "@neverquest/utilities/
 const CHARACTERS = "!·&=?¿|@#~¬+/\\^*[]{}-_<>"
 
 const GLITCHING_CLASS = "glitching"
+const GLITCH_NUMBERS = [5, 7]
+const GLITCH_STAGE_MINIMUM = FINALITY_STAGE["res dominus"] - 5
 
 const LATENCY = 70
 
@@ -38,7 +41,7 @@ function glitchElementAt({ element, originalText }: { element: Element, original
 				}
 
 				if (glitchChance <= 0.6) {
-					return GLITCH_NUMBER
+					return GLITCH_NUMBERS[Math.floor(Math.random() * GLITCH_NUMBERS.length)]
 				}
 
 				return originalText[index]

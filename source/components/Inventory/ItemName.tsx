@@ -4,6 +4,7 @@ import { DescriptionDisplay } from "@neverquest/components/DescriptionDisplay"
 import { DetailsTable } from "@neverquest/components/DetailsTable"
 import { GemDescription } from "@neverquest/components/Inventory/GemDescription"
 import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail"
+import { LEVELLING_MAXIMUM } from "@neverquest/data/general"
 import { CONSUMABLES, INFUSABLES, RELICS } from "@neverquest/data/items"
 import type { ConsumableItem, GemItem, InheritableItem } from "@neverquest/types"
 import {
@@ -37,11 +38,11 @@ export function ItemName({
 											<Stack className="monospaced">
 												<span>Priority 0 - BREACH IN PROGRESS</span>
 
-												<span>Location: Outfloor ██-██#77</span>
+												<span>{`Location: Outfloor ██-██#${LEVELLING_MAXIMUM}`}</span>
 
 												<span>Initializing: NqstCipher-██-███</span>
 
-												<span>Processing: 7.8% ...</span>
+												<span>Processing: 7.5% ...</span>
 
 												<span>Error: δ destabilization</span>
 

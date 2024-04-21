@@ -320,7 +320,7 @@ export const RELICS: Record<
 			ID: "",
 			name: "familiar",
 			price: 1,
-			weight: 77,
+			weight: 75,
 		},
 	},
 	"hearthstone": {

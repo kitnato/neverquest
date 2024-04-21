@@ -167,7 +167,7 @@ export const CREW: Record<
 		interaction: "Ritual",
 		monologues: {
 			1: "Prepared to transcend your limits?",
-			[FINALITY_STAGE["res dominus"]]: "The world ends at 77.",
+			[FINALITY_STAGE["res dominus"]]: `The world ends at ${LEVELLING_MAXIMUM}.`,
 			[LEVELLING_MAXIMUM]: "I can't see any more.",
 			[LEVELLING_THRESHOLD]: MONOLOGUE_EMPTY,
 		},

@@ -31,8 +31,8 @@ export const QUEST_NOTIFICATION_DURATION = 5000
 
 export const QUEST_REQUIREMENTS = {
 	damage: 2000,
-	essenceCount: 777,
-	monstersKilled: 77,
+	essenceCount: 7575,
+	monstersKilled: 75,
 	protection: 1500,
 	skillsCraft: ["armorcraft", "shieldcraft", "siegecraft"] as Skill[],
 	survivingNoAttributes: 7,

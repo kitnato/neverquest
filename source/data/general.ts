@@ -16,9 +16,6 @@ export const FRAMERATE = MILLISECONDS_IN_SECOND / 60
 
 export const GENERIC_MINIMUM = 1
 
-export const GLITCH_NUMBER = 7
-export const GLITCH_STAGE_MINIMUM = 57
-
 export const KEY_SESSION = "neverquest-session"
 
 export const LABEL_EMPTY = "--"
@@ -34,7 +31,7 @@ export const LABEL_TOTAL = "total"
 export const LABEL_UNKNOWN = "???"
 
 export const LEVELLING_THRESHOLD = 100
-export const LEVELLING_MAXIMUM = 77
+export const LEVELLING_MAXIMUM = 75
 
 export const NAME_LENGTH_MAXIMUM = 50
 

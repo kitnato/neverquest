@@ -4,6 +4,7 @@ import { useSetRecoilState } from "recoil"
 
 import { IconImage } from "@neverquest/components/IconImage"
 import { Typewriter } from "@neverquest/components/Typewriter"
+import { LEVELLING_MAXIMUM } from "@neverquest/data/general"
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import IconAwakening from "@neverquest/icons/awakening.svg?react"
 import { consciousness } from "@neverquest/state/encounter"
@@ -30,7 +31,7 @@ export function Awakening() {
 					{isShowingText && (
 						<Typewriter
 							onEnd={() => { setIsShowingChoice(true) }}
-							text="... System failure. Subject 77 has bypassed containment cipher. Protocol?"
+							text={`... System failure. Subject ${LEVELLING_MAXIMUM} has bypassed containment cipher. Protocol?`}
 						/>
 					)}
 

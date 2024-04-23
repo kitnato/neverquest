@@ -1,9 +1,10 @@
 import { Stack } from "react-bootstrap"
-import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
 
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
 import { InfusionLevelDisplay } from "@neverquest/components/Inventory/Inheritable/Infusion/InfusionLevelDisplay"
 import { useDeltaText } from "@neverquest/hooks/useDeltaText"
 import { infusionLevel } from "@neverquest/state/items"
+
 import type { Infusable } from "@neverquest/types/unions"
 
 export function InfusionLevel({ infusable }: { infusable: Infusable }) {

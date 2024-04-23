@@ -1,7 +1,7 @@
 import { Stack } from "react-bootstrap"
 import { useRecoilValue } from "recoil"
-import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
 
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
 import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
 import { PERCENTAGE } from "@neverquest/data/general"

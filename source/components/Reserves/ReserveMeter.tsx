@@ -27,9 +27,10 @@ import {
 	stamina,
 	staminaMaximumBlighted,
 } from "@neverquest/state/reserves"
+import { formatNumber } from "@neverquest/utilities/formatters"
+
 import type { SVGIcon } from "@neverquest/types/components"
 import type { Reserve } from "@neverquest/types/unions"
-import { formatNumber } from "@neverquest/utilities/formatters"
 
 export function ReserveMeter({ PrefixIcon, reserve }: { PrefixIcon?: SVGIcon, reserve: Reserve }) {
 	const isHealth = reserve === "health"

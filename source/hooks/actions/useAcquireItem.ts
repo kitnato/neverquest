@@ -8,7 +8,6 @@ import { hasLootedLogEntry } from "@neverquest/state/items"
 import { isSkillAcquired } from "@neverquest/state/skills"
 import { isTraitAcquired } from "@neverquest/state/traits"
 import { isShowing } from "@neverquest/state/ui"
-import type { InventoryItem } from "@neverquest/types"
 import {
 	isArmor,
 	isGearItem,
@@ -22,6 +21,8 @@ import {
 	isUnshielded,
 } from "@neverquest/types/type-guards"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
+
+import type { InventoryItem } from "@neverquest/types"
 
 export function useAcquireItem() {
 	const canFit = useCanFit()

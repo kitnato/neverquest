@@ -53,12 +53,12 @@ export function Travel() {
 						<span>
 							{isOverEncumbered
 								? "Over-encumbered."
-								: (!isCaravan
+								: !isCaravan
 									? `Go to ${canAwakenValue || !isShowingLocation
 										? LABEL_UNKNOWN
 										: "caravan"
 									}`
-									: "Return to wilderness")}
+									: "Return to wilderness"}
 						</span>
 					</Tooltip>
 				)}

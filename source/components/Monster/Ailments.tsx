@@ -16,9 +16,9 @@ export function Ailments() {
 			<Card>
 				<CardBody>
 					<Stack gap={3}>
-						{ELEMENTAL_TYPES.map(elemental => (
-							<ElementalAilment elemental={elemental} key={elemental} />
-						))}
+						{ELEMENTAL_TYPES.map(elemental =>
+							<ElementalAilment elemental={elemental} key={elemental} />,
+						)}
 
 						<Stunned />
 

@@ -3,8 +3,9 @@ import { useRecoilValue } from "recoil"
 import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { ATTRIBUTES } from "@neverquest/data/attributes"
 import { attributeRank } from "@neverquest/state/attributes"
-import type { Attribute } from "@neverquest/types/unions"
 import { formatNumber } from "@neverquest/utilities/formatters"
+
+import type { Attribute } from "@neverquest/types/unions"
 
 export function AttributeIncreaseDetails({ attribute }: { attribute: Attribute }) {
 	const attributeRankValue = useRecoilValue(attributeRank(attribute))

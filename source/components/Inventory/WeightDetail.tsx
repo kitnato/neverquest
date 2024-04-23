@@ -6,8 +6,9 @@ import { GearComparison } from "@neverquest/components/Inventory/GearComparison"
 import { LABEL_UNKNOWN } from "@neverquest/data/general"
 import IconWeight from "@neverquest/icons/weight.svg?react"
 import { isShowing } from "@neverquest/state/ui"
-import type { Comparison } from "@neverquest/types/components"
 import { formatNumber } from "@neverquest/utilities/formatters"
+
+import type { Comparison } from "@neverquest/types/components"
 
 export function WeightDetail({
 	amount,
@@ -43,9 +44,8 @@ export function WeightDetail({
 									/>
 								)}
 
-								{amount !== undefined && amount > 1 && (
-									<span>{` (${formatNumber({ value: weight * amount })})`}</span>
-								)}
+								{amount !== undefined && amount > 1
+								&& <span>{` (${formatNumber({ value: weight * amount })})`}</span>}
 							</Stack>
 						</td>
 					</>

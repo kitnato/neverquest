@@ -5,10 +5,11 @@ import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { LABEL_SEPARATOR } from "@neverquest/data/general"
 import { ELEMENTALS, GEMS, GEMS_MAXIMUM } from "@neverquest/data/items"
 import { gems } from "@neverquest/state/gear"
-import type { GearItem, GearItemUnequipped } from "@neverquest/types"
 import { formatNumber } from "@neverquest/utilities/formatters"
 import { getElementalEffects } from "@neverquest/utilities/getters"
 import { stackItems } from "@neverquest/utilities/helpers"
+
+import type { GearItem, GearItemUnequipped } from "@neverquest/types"
 
 export function AppliedGems({ gearItem }: { gearItem: GearItem | GearItemUnequipped }) {
 	const gemsValue = useRecoilValue(gems(gearItem.ID))

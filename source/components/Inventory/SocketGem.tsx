@@ -13,10 +13,11 @@ import { inventory } from "@neverquest/state/inventory"
 import { essence } from "@neverquest/state/resources"
 import { isTraitAcquired } from "@neverquest/state/traits"
 import { isShowing } from "@neverquest/state/ui"
-import type { GemItem } from "@neverquest/types"
 import { isGear, isMelee, isRanged, isUnarmed } from "@neverquest/types/type-guards"
 import { GEAR_TYPES } from "@neverquest/types/unions"
 import { getGearIcon, getGemFittingCost } from "@neverquest/utilities/getters"
+
+import type { GemItem } from "@neverquest/types"
 
 export function SocketGem({ gem }: { gem: GemItem }) {
 	const armorValue = useRecoilValue(armor)
@@ -119,9 +120,7 @@ export function SocketGem({ gem }: { gem: GemItem }) {
 											<span>{getGemFittingCost(gemsFitted)}</span>
 										</IconDisplay>
 									)
-									: (
-										<BadgeMaximum />
-									)}
+									: <BadgeMaximum />}
 							</div>
 						</div>
 					</DropdownItem>

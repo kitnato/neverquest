@@ -16,13 +16,10 @@ export function ItemsInherited() {
 			<h6>Inherited relics</h6>
 
 			{ownedInheritableItems.length === 0
-				? (
-					<span className="fst-italic">{LABEL_NONE}</span>
-				)
-				: (
-					ownedInheritableItems.map(inheritableItem => (
-						<ItemDisplay item={inheritableItem} key={inheritableItem.ID} />
-					))
+				? <span className="fst-italic">{LABEL_NONE}</span>
+
+				: ownedInheritableItems.map(inheritableItem =>
+					<ItemDisplay item={inheritableItem} key={inheritableItem.ID} />,
 				)}
 		</Stack>
 	)

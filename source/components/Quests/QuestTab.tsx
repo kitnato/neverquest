@@ -1,13 +1,14 @@
 import { Stack } from "react-bootstrap"
 import { useRecoilValue } from "recoil"
-import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
 
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
 import { QuestListing } from "@neverquest/components/Quests/QuestListing"
 import { PERCENTAGE } from "@neverquest/data/general"
 import { QUESTS_COUNT, QUEST_TYPES_BY_CLASS } from "@neverquest/data/quests"
 import { useDeltaText } from "@neverquest/hooks/useDeltaText"
 import { completedQuestsCount } from "@neverquest/state/quests"
+
 import type { QuestClass } from "@neverquest/types/unions"
 
 export function QuestTab({ questClass }: { questClass: QuestClass }) {
@@ -39,9 +40,9 @@ export function QuestTab({ questClass }: { questClass: QuestClass }) {
 			</LabelledProgressBar>
 
 			<Stack className="overflow-y-auto" gap={3}>
-				{QUEST_TYPES_BY_CLASS[questClass].map(quest => (
-					<QuestListing key={quest} quest={quest} />
-				))}
+				{QUEST_TYPES_BY_CLASS[questClass].map(quest =>
+					<QuestListing key={quest} quest={quest} />,
+				)}
 			</Stack>
 		</Stack>
 	)

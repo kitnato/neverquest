@@ -18,10 +18,11 @@ import { location } from "@neverquest/state/encounter"
 import { acquiredSkills } from "@neverquest/state/skills"
 import { acquiredTraits } from "@neverquest/state/traits"
 import { activeControl, isShowing } from "@neverquest/state/ui"
-import type { TabsData } from "@neverquest/types/components"
-import type { Capability } from "@neverquest/types/unions"
 import { formatEnumeration } from "@neverquest/utilities/formatters"
 import { getAnimationClass } from "@neverquest/utilities/getters"
+
+import type { TabsData } from "@neverquest/types/components"
+import type { Capability } from "@neverquest/types/unions"
 
 export function Capabilities() {
 	const [activeControlValue, setActiveControl] = useRecoilState(activeControl)

@@ -1,5 +1,6 @@
-import type { ReactNode } from "react"
 import { Offcanvas, OffcanvasBody, OffcanvasHeader, OffcanvasTitle } from "react-bootstrap"
+
+import type { ReactNode } from "react"
 import type { OffcanvasPlacement } from "react-bootstrap/Offcanvas"
 
 export function DismissableScreen({

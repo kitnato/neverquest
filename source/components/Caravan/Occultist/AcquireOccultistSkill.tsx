@@ -23,10 +23,9 @@ export function AcquireOccultistSkill() {
 			<h6>Acquire skill</h6>
 
 			{availableSkills.length === 0
-				? (
-					<span className="fst-italic">{LABEL_NONE_AVAILABLE}</span>
-				)
-				: (ownedItemDreamCatcher === undefined
+				? <span className="fst-italic">{LABEL_NONE_AVAILABLE}</span>
+
+				: ownedItemDreamCatcher === undefined
 					? (
 						<span>
 							&quot;There exists tremendous power in dreams, one must but find a medium to harness
@@ -39,11 +38,11 @@ export function AcquireOccultistSkill() {
 								<span>&quot;The cipher sings.&quot;</span>
 							</IconDisplay>
 
-							{availableSkills.map(skill => (
-								<TrainableSkill key={skill} skill={skill} />
-							))}
+							{availableSkills.map(skill =>
+								<TrainableSkill key={skill} skill={skill} />,
+							)}
 						</>
-					))}
+					)}
 		</Stack>
 	)
 }

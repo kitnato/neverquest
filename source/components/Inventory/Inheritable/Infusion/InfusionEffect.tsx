@@ -6,8 +6,9 @@ import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { INFUSABLES } from "@neverquest/data/items"
 import { useDeltaText } from "@neverquest/hooks/useDeltaText"
 import { infusionEffect } from "@neverquest/state/items"
-import type { Infusable } from "@neverquest/types/unions"
 import { formatNumber } from "@neverquest/utilities/formatters"
+
+import type { Infusable } from "@neverquest/types/unions"
 
 export function InfusionEffect({ infusable }: { infusable: Infusable }) {
 	const infusionEffectState = infusionEffect(infusable)

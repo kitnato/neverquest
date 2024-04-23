@@ -2,6 +2,7 @@ import IconHealthRegeneration from "@neverquest/icons/health-regeneration.svg?re
 import IconHealth from "@neverquest/icons/health.svg?react"
 import IconStaminaRegeneration from "@neverquest/icons/stamina-regeneration.svg?react"
 import IconStamina from "@neverquest/icons/stamina.svg?react"
+
 import type { SVGIcon } from "@neverquest/types/components"
 import type { Attribute, Delta, Reserve } from "@neverquest/types/unions"
 

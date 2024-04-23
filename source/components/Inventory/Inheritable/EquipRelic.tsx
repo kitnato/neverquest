@@ -4,6 +4,7 @@ import { useRecoilValue } from "recoil"
 import { useToggleEquipItem } from "@neverquest/hooks/actions/useToggleEquipItem"
 import { ownedItem } from "@neverquest/state/inventory"
 import { isRelicEquipped } from "@neverquest/state/items"
+
 import type { RelicItem } from "@neverquest/types"
 import type { Relic } from "@neverquest/types/unions"
 

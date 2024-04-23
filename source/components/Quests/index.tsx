@@ -10,8 +10,9 @@ import IconTriumph from "@neverquest/icons/triumph.svg?react"
 import { canTrackQuests } from "@neverquest/state/quests"
 import { isSkillAcquired } from "@neverquest/state/skills"
 import { isShowingQuestBonus } from "@neverquest/state/ui"
-import type { TabsData } from "@neverquest/types/components"
 import { QUEST_BONUS_TYPES, type QuestClass } from "@neverquest/types/unions"
+
+import type { TabsData } from "@neverquest/types/components"
 
 const TABS: TabsData<QuestClass> = [
 	{
@@ -55,9 +56,9 @@ export function Quests() {
 					<h6>Rewards</h6>
 
 					<Stack className="mx-auto" direction="horizontal" gap={5}>
-						{QUEST_BONUS_TYPES.map(questBonus => (
-							<QuestBonusDisplay bonus={questBonus} key={questBonus} />
-						))}
+						{QUEST_BONUS_TYPES.map(questBonus =>
+							<QuestBonusDisplay bonus={questBonus} key={questBonus} />,
+						)}
 					</Stack>
 				</>
 			)}

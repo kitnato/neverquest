@@ -1,13 +1,14 @@
 import { Stack } from "react-bootstrap"
 import { useRecoilValue } from "recoil"
-import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
 
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
 import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { useDeltaText } from "@neverquest/hooks/useDeltaText"
 import IconRank from "@neverquest/icons/rank.svg?react"
 import { attributeRank } from "@neverquest/state/attributes"
-import type { Attribute } from "@neverquest/types/unions"
 import { formatNumber } from "@neverquest/utilities/formatters"
+
+import type { Attribute } from "@neverquest/types/unions"
 
 export function AttributeRank({ attribute }: { attribute: Attribute }) {
 	const attributeRankState = attributeRank(attribute)

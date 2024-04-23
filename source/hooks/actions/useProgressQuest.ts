@@ -8,9 +8,10 @@ import {
 	questProgress,
 	questStatuses,
 } from "@neverquest/state/quests"
+import { getQuestsData, getSnapshotGetter } from "@neverquest/utilities/getters"
+
 import type { QuestNotification } from "@neverquest/types"
 import type { Quest } from "@neverquest/types/unions"
-import { getQuestsData, getSnapshotGetter } from "@neverquest/utilities/getters"
 
 export function useProgressQuest() {
 	return useRecoilCallback(

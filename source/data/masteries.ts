@@ -21,6 +21,7 @@ import IconStability from "@neverquest/icons/stability.svg?react"
 import IconStaggered from "@neverquest/icons/staggered.svg?react"
 import IconStunned from "@neverquest/icons/stunned.svg?react"
 import IconTwoHanded from "@neverquest/icons/two-handed.svg?react"
+
 import type { AttributeOrMasteryBaseData } from "@neverquest/types"
 import type { SVGIcon } from "@neverquest/types/components"
 import type { Mastery, Skill } from "@neverquest/types/unions"

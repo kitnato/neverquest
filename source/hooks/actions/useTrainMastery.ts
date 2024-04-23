@@ -9,8 +9,9 @@ import {
 	masteryProgress,
 	masteryRank,
 } from "@neverquest/state/masteries"
-import type { Mastery } from "@neverquest/types/unions"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
+
+import type { Mastery } from "@neverquest/types/unions"
 
 export function useTrainMastery() {
 	const progressQuest = useProgressQuest()

@@ -4,7 +4,6 @@ import { QUESTS, QUEST_COMPLETION_BONUS, QUEST_TYPES_BY_CLASS } from "@neverques
 import { handleStorage } from "@neverquest/state/effects/handleStorage"
 import { ownedItem } from "@neverquest/state/inventory"
 import { isSkillAcquired } from "@neverquest/state/skills"
-import type { QuestNotification } from "@neverquest/types"
 import { isQuestBonus } from "@neverquest/types/type-guards"
 import {
 	QUEST_CLASS_TYPES,
@@ -15,6 +14,8 @@ import {
 } from "@neverquest/types/unions"
 import { getQuestsData } from "@neverquest/utilities/getters"
 import { withStateKey } from "@neverquest/utilities/helpers"
+
+import type { QuestNotification } from "@neverquest/types"
 
 // SELECTORS
 

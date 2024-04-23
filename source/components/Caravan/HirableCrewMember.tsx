@@ -17,8 +17,9 @@ import IconUnknown from "@neverquest/icons/unknown.svg?react"
 import { isHired } from "@neverquest/state/caravan"
 import { stageMaximum } from "@neverquest/state/encounter"
 import { essence } from "@neverquest/state/resources"
-import type { CrewMember } from "@neverquest/types/unions"
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters"
+
+import type { CrewMember } from "@neverquest/types/unions"
 
 export function HirableCrewMember({ crewMember }: { crewMember: CrewMember }) {
 	const isHiredValue = useRecoilValue(isHired(crewMember))

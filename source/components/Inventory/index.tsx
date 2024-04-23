@@ -1,4 +1,3 @@
-import type { FunctionComponent } from "react"
 import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap"
 import { useRecoilValue } from "recoil"
 
@@ -23,7 +22,6 @@ import { useToggleEquipItem } from "@neverquest/hooks/actions/useToggleEquipItem
 import { armor, shield, weapon } from "@neverquest/state/gear"
 import { inventory } from "@neverquest/state/inventory"
 import { isSkillAcquired } from "@neverquest/state/skills"
-import type { Armor, Shield, Weapon } from "@neverquest/types"
 import {
 	isArmor,
 	isConsumableItem,
@@ -36,8 +34,11 @@ import {
 	isShield,
 	isWeapon,
 } from "@neverquest/types/type-guards"
-import type { Relic } from "@neverquest/types/unions"
 import { stackItems } from "@neverquest/utilities/helpers"
+
+import type { Armor, Shield, Weapon } from "@neverquest/types"
+import type { Relic } from "@neverquest/types/unions"
+import type { FunctionComponent } from "react"
 
 const RELIC_ACTIONS: Partial<Record<Relic, FunctionComponent>> = {
 	"automincer": () => <EquipRelic relic="automincer" />,

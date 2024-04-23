@@ -1,8 +1,8 @@
 import { useEffect, useLayoutEffect, useRef } from "react"
 import { Card, CardBody, Stack } from "react-bootstrap"
 import { useRecoilState, useResetRecoilState } from "recoil"
-import { Ailments } from "@neverquest/components/Monster/Ailments"
 
+import { Ailments } from "@neverquest/components/Monster/Ailments"
 import { Distance } from "@neverquest/components/Monster/Distance"
 import { Frailty } from "@neverquest/components/Monster/Frailty"
 import { MonsterAttackRate } from "@neverquest/components/Monster/MonsterAttackRate"

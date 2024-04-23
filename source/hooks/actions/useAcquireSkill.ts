@@ -7,8 +7,9 @@ import { SKILLS } from "@neverquest/data/skills"
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import { acquiredSkills, isSkillAcquired } from "@neverquest/state/skills"
 import { isShowing } from "@neverquest/state/ui"
-import type { Skill } from "@neverquest/types/unions"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
+
+import type { Skill } from "@neverquest/types/unions"
 
 export function useAcquireSkill() {
 	const progressQuest = useProgressQuest()

@@ -1,8 +1,9 @@
 import { atom, selector } from "recoil"
 
 import { handleStorage } from "@neverquest/state/effects/handleStorage"
-import type { InventoryItem } from "@neverquest/types"
 import { withStateKey } from "@neverquest/utilities/helpers"
+
+import type { InventoryItem } from "@neverquest/types"
 
 // SELECTORS
 

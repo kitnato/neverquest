@@ -4,21 +4,21 @@ import { PROGRESS } from "@neverquest/data/encounter"
 import { BOSS_STAGE_INTERVAL, BOSS_STAGE_START, FINALITY_STAGE } from "@neverquest/data/monster"
 import { handleStorage } from "@neverquest/state/effects/handleStorage"
 import { ownedItem } from "@neverquest/state/inventory"
-import type { Finality } from "@neverquest/types/unions"
 import { getFromRange, getPerkEffect, getSigmoid } from "@neverquest/utilities/getters"
 import { withStateKey } from "@neverquest/utilities/helpers"
+
+import type { Finality } from "@neverquest/types/unions"
 
 // SELECTORS
 
 export const canAwaken = withStateKey("canAwaken", key =>
 	selector({
-		get: ({ get }) => (
+		get: ({ get }) =>
 			!get(hasAwoken)
 			&& get(isStageCompleted)
 			&& get(location) === "wilderness"
 			&& ["res cogitans", "void"].includes(get(encounter))
-			&& get(stage) === FINALITY_STAGE["res cogitans"]
-		),
+			&& get(stage) === FINALITY_STAGE["res cogitans"],
 		key,
 	}),
 )

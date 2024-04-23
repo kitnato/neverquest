@@ -1,6 +1,6 @@
 import { useRecoilCallback } from "recoil"
-import { useAdvanceCaravan } from "@neverquest/hooks/actions/useAdvanceCaravan"
 
+import { useAdvanceCaravan } from "@neverquest/hooks/actions/useAdvanceCaravan"
 import { useDefeatFinality } from "@neverquest/hooks/actions/useDefeatFinality"
 import { useIncreaseStage } from "@neverquest/hooks/actions/useIncreaseStage"
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness"

@@ -7,9 +7,10 @@ import {
 	stamina,
 	staminaMaximumBlighted,
 } from "@neverquest/state/reserves"
-import type { DeltaReserve } from "@neverquest/types/ui"
 import { formatNumber } from "@neverquest/utilities/formatters"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
+
+import type { DeltaReserve } from "@neverquest/types/ui"
 
 export function useChangeStamina() {
 	const addDelta = useAddDelta()
@@ -20,12 +21,12 @@ export function useChangeStamina() {
 				const get = getSnapshotGetter(snapshot)
 
 				const deltaDisplay
-          = contents === undefined ? [] : (Array.isArray(contents) ? contents : [contents])
+          = contents === undefined ? [] : Array.isArray(contents) ? contents : [contents]
 				const formattedValue = formatNumber({ value })
 				const isPositive = value > 0
 				const staminaMaximumBlightedValue = get(staminaMaximumBlighted)
 
-				let newStamina = get(stamina) + (get(isInexhaustible) ? (isPositive ? value : 0) : value)
+				let newStamina = get(stamina) + (get(isInexhaustible) ? isPositive ? value : 0 : value)
 
 				if (newStamina <= 0) {
 					newStamina = 0

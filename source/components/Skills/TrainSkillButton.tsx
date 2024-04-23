@@ -6,6 +6,7 @@ import { useAcquireSkill } from "@neverquest/hooks/actions/useAcquireSkill"
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence"
 import { essence } from "@neverquest/state/resources"
 import { skillPrice } from "@neverquest/state/skills"
+
 import type { Skill } from "@neverquest/types/unions"
 
 export function TrainSkillButton({ skill }: { skill: Skill }) {

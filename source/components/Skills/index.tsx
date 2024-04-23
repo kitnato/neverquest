@@ -10,9 +10,8 @@ export function Skills() {
 	const acquiredSkillsValue = useRecoilValue(acquiredSkills)
 
 	return Object.values(acquiredSkillsValue).every(hasAcquiredSkill => !hasAcquiredSkill)
-		? (
-			<span className="fst-italic">{LABEL_NONE}</span>
-		)
+		? <span className="fst-italic">{LABEL_NONE}</span>
+
 		: (
 			<Stack gap={3}>
 				{SKILL_TYPES.map(

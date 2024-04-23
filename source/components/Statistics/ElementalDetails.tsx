@@ -6,9 +6,10 @@ import { LABEL_SEPARATOR } from "@neverquest/data/general"
 import { ELEMENTALS, GEMS } from "@neverquest/data/items"
 import IconElemental from "@neverquest/icons/elemental.svg?react"
 import { armor, elementalEffects, gems, weapon } from "@neverquest/state/gear"
-import type { GearItem, GearItemUnequipped } from "@neverquest/types"
 import { formatNumber } from "@neverquest/utilities/formatters"
 import { stackItems } from "@neverquest/utilities/helpers"
+
+import type { GearItem, GearItemUnequipped } from "@neverquest/types"
 
 export function ElementalDetails({ slot }: { slot: "armor" | "weapon" }) {
 	const gemsValue = useRecoilValue(

@@ -82,9 +82,8 @@ export function Protection() {
 
 												<td>
 													{isUnshielded(shieldValue)
-														? (
-															<span>{LABEL_EMPTY}</span>
-														)
+														? <span>{LABEL_EMPTY}</span>
+
 														: (
 															<span>
 																+

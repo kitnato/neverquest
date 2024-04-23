@@ -30,13 +30,10 @@ export function Traits() {
 				<h6>Acquired traits</h6>
 
 				{Object.values(acquiredTraitsValue).every(hasAcquiredTrait => !hasAcquiredTrait)
-					? (
-						<span className="fst-italic">{LABEL_NONE}</span>
-					)
-					: (
-						TRAIT_TYPES.map(trait =>
-							acquiredTraitsValue[trait] ? <TraitDisplay key={trait} trait={trait} /> : undefined,
-						)
+					? <span className="fst-italic">{LABEL_NONE}</span>
+
+					: TRAIT_TYPES.map(trait =>
+						acquiredTraitsValue[trait] ? <TraitDisplay key={trait} trait={trait} /> : undefined,
 					)}
 			</Stack>
 		</Stack>

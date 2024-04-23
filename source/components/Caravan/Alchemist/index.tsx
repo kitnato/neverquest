@@ -24,13 +24,10 @@ export function Alchemist() {
 				<h6>Stored gems</h6>
 
 				{storedGemsStack.length === 0
-					? (
-						<span className="fst-italic">{LABEL_NONE_AVAILABLE}</span>
-					)
-					: (
-						storedGemsStack.map(({ amount, item }) => (
-							<ItemDisplay amount={amount} item={item} key={item.ID} />
-						))
+					? <span className="fst-italic">{LABEL_NONE_AVAILABLE}</span>
+
+					: storedGemsStack.map(({ amount, item }) =>
+						<ItemDisplay amount={amount} item={item} key={item.ID} />,
 					)}
 			</Stack>
 

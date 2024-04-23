@@ -1,5 +1,6 @@
-import type { ReactNode } from "react"
 import { Table } from "react-bootstrap"
+
+import type { ReactNode } from "react"
 
 export function DetailsTable({ children }: { children: ReactNode }) {
 	return (

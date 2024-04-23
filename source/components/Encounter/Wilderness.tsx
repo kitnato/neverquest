@@ -66,18 +66,18 @@ export function Wilderness() {
 					Icon={
 						encounterValue === "boss"
 							? IconBossHiding
-							: (encounterValue === "monster"
+							: encounterValue === "monster"
 								? IconMonsterHiding
-								: IconFinality)
+								: IconFinality
 					}
 					tooltip={LABEL_UNKNOWN}
 				>
 					<span className="fst-italic">
 						{encounterValue === "boss"
 							? "A powerful presence looms."
-							: (encounterValue === "monster"
+							: encounterValue === "monster"
 								? "The darkness stirs."
-								: "A grim entity is manifesting.")}
+								: "A grim entity is manifesting."}
 					</span>
 				</IconDisplay>
 			</CardBody>

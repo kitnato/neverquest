@@ -6,8 +6,9 @@ import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
 import { LABEL_EMPTY, PERCENTAGE } from "@neverquest/data/general"
 import { AILMENT_DESCRIPTION } from "@neverquest/data/monster"
 import { isMonsterAiling, monsterAilmentDuration } from "@neverquest/state/monster"
-import type { Ailment } from "@neverquest/types/unions"
 import { formatNumber } from "@neverquest/utilities/formatters"
+
+import type { Ailment } from "@neverquest/types/unions"
 
 export function AilmentMeter({
 	ailment,

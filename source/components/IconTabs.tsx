@@ -1,8 +1,9 @@
 import { Nav, NavItem, NavLink, Stack, TabContainer, TabContent, TabPane } from "react-bootstrap"
 
 import { IconDisplay } from "@neverquest/components/IconDisplay"
-import type { TabsData } from "@neverquest/types/components"
 import { capitalizeAll } from "@neverquest/utilities/formatters"
+
+import type { TabsData } from "@neverquest/types/components"
 
 export function IconTabs<TabLabel extends string>({
 	activeKey,

@@ -1,7 +1,7 @@
-import type { ReactNode } from "react"
 import { OverlayTrigger, ProgressBar, Tooltip } from "react-bootstrap"
 
 import type { BootstrapColorVariant, UIAttachment } from "@neverquest/types/ui"
+import type { ReactNode } from "react"
 
 export function LabelledProgressBar({
 	attachment,

@@ -6,9 +6,10 @@ import { ELEMENTALS } from "@neverquest/data/items"
 import { useTimer } from "@neverquest/hooks/useTimer"
 import { elementalEffects } from "@neverquest/state/gear"
 import { isMonsterAiling, isMonsterDead, monsterAilmentDuration } from "@neverquest/state/monster"
-import type { Elemental } from "@neverquest/types/unions"
 import { capitalizeAll } from "@neverquest/utilities/formatters"
 import { getAnimationClass } from "@neverquest/utilities/getters"
+
+import type { Elemental } from "@neverquest/types/unions"
 
 export function ElementalAilment({ elemental }: { elemental: Elemental }) {
 	const { ailment, durationCap, Icon } = ELEMENTALS[elemental]

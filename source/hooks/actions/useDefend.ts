@@ -54,11 +54,12 @@ import {
 import { isTraitAcquired } from "@neverquest/state/traits"
 import { isShowing } from "@neverquest/state/ui"
 import { isUnarmored } from "@neverquest/types/type-guards"
-import type { DeltaDisplay } from "@neverquest/types/ui"
 import { ELEMENTAL_TYPES } from "@neverquest/types/unions"
 import { formatNumber } from "@neverquest/utilities/formatters"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
 import { animateElement } from "@neverquest/utilities/helpers"
+
+import type { DeltaDisplay } from "@neverquest/types/ui"
 
 export function useDefend() {
 	const addDelta = useAddDelta()
@@ -370,7 +371,7 @@ export function useDefend() {
 				if (monsterHealthDamage > 0) {
 					changeMonsterHealth({
 						contents: deltaMonsterHealth,
-						damageType: hasInflictedThorns ? "thorns" : (hasParried ? "parry" : undefined),
+						damageType: hasInflictedThorns ? "thorns" : hasParried ? "parry" : undefined,
 						value: -monsterHealthDamage,
 					})
 				}

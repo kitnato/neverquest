@@ -1,4 +1,5 @@
 import { Stack } from "react-bootstrap"
+
 import { IconImage } from "@neverquest/components/IconImage"
 import { LABEL_SEPARATOR } from "@neverquest/data/general"
 import { ELEMENTALS, GEMS } from "@neverquest/data/items"
@@ -9,6 +10,7 @@ import IconOneHanded from "@neverquest/icons/one-handed.svg?react"
 import IconShield from "@neverquest/icons/shield.svg?react"
 import IconThorns from "@neverquest/icons/thorns.svg?react"
 import IconWeaponDamage from "@neverquest/icons/weapon-damage.svg?react"
+
 import type { Gem } from "@neverquest/types/unions"
 
 export function GemDescription({ gem }: { gem: Gem }) {

@@ -35,6 +35,7 @@ import IconStaminaRegeneration from "@neverquest/icons/stamina-regeneration.svg?
 import IconStunned from "@neverquest/icons/stunned.svg?react"
 import IconTraumatology from "@neverquest/icons/traumatology.svg?react"
 import IconTwoHanded from "@neverquest/icons/two-handed.svg?react"
+
 import type { SVGIcon } from "@neverquest/types/components"
 import type { Description } from "@neverquest/types/ui"
 import type { CrewMember, Showing, Skill, WeaponAbility } from "@neverquest/types/unions"

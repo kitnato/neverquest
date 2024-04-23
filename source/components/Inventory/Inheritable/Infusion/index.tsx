@@ -19,6 +19,7 @@ import { InfusionProgress } from "@neverquest/components/Inventory/Inheritable/I
 import { LABEL_SKILL_REQUIRED, POPOVER_TRIGGER } from "@neverquest/data/general"
 import { INFUSABLES } from "@neverquest/data/items"
 import { isSkillAcquired } from "@neverquest/state/skills"
+
 import type { Infusable } from "@neverquest/types/unions"
 
 export function Infusion({ infusable }: { infusable: Infusable }) {

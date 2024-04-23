@@ -1,11 +1,4 @@
-import type {
-	AffixStructure,
-	ArmorClass,
-	ShieldClass,
-	WeaponClass,
-} from "@kitnato/locran/build/types"
 import { nanoid } from "nanoid"
-import type { RecoilValue, Snapshot } from "recoil"
 
 import { ATTRIBUTE_COST_BASE } from "@neverquest/data/attributes"
 import { AFFIX_STRUCTURE_WEIGHTS } from "@neverquest/data/encounter"
@@ -51,18 +44,6 @@ import IconShield from "@neverquest/icons/shield.svg?react"
 import IconTwoHanded from "@neverquest/icons/two-handed.svg?react"
 import IconUnknown from "@neverquest/icons/unknown.svg?react"
 import IconWeaponNone from "@neverquest/icons/weapon-none.svg?react"
-import type {
-	Armor,
-	GearItem,
-	GearItemUnequipped,
-	GemItem,
-	GeneratorRange,
-	IncrementBonus,
-	InventoryItem,
-	QuestData,
-	Shield,
-	Weapon,
-} from "@neverquest/types"
 import {
 	isArmor,
 	isConquest,
@@ -79,10 +60,30 @@ import {
 	isUnshielded,
 	isWeapon,
 } from "@neverquest/types/type-guards"
-import type { Animation, AnimationSpeed } from "@neverquest/types/ui"
-import type { Elemental, Grip, Perk, Quest } from "@neverquest/types/unions"
 import { formatNumber } from "@neverquest/utilities/formatters"
 import { stackItems } from "@neverquest/utilities/helpers"
+
+import type {
+	AffixStructure,
+	ArmorClass,
+	ShieldClass,
+	WeaponClass,
+} from "@kitnato/locran/build/types"
+import type {
+	Armor,
+	GearItem,
+	GearItemUnequipped,
+	GemItem,
+	GeneratorRange,
+	IncrementBonus,
+	InventoryItem,
+	QuestData,
+	Shield,
+	Weapon,
+} from "@neverquest/types"
+import type { Animation, AnimationSpeed } from "@neverquest/types/ui"
+import type { Elemental, Grip, Perk, Quest } from "@neverquest/types/unions"
+import type { RecoilValue, Snapshot } from "recoil"
 
 export function getAffixStructure(): AffixStructure {
 	let chance = Math.random()
@@ -236,7 +237,7 @@ export function getElementalEffects({
 			effects[elemental] = {
 				damage: Math.max(
 					Math.round(
-						(armorEffect ? gear.level : gear.damage) * getFromRange({ factor: (amount - 1) / (GEMS_MAXIMUM - 1), ...(armorEffect ? damageArmor : damageWeapon) }),
+						(armorEffect ? gear.level : gear.damage) * getFromRange({ factor: (amount - 1) / (GEMS_MAXIMUM - 1), ...armorEffect ? damageArmor : damageWeapon }),
 					),
 					GENERIC_MINIMUM,
 				),
@@ -289,9 +290,9 @@ export function getGearIcon(gearItem: GearItem | GearItemUnequipped) {
 
 	if (isWeapon(gearItem)) {
 		return isMelee(gearItem)
-			? (gearItem.grip === "one-handed"
+			? gearItem.grip === "one-handed"
 				? IconOneHanded
-				: IconTwoHanded)
+				: IconTwoHanded
 			: IconRanged
 	}
 
@@ -374,7 +375,7 @@ export function getQuestsData(quest: Quest): QuestData[] {
 		hidden,
 		progressionIndex: index,
 		progressionMaximum: progress,
-		questClass: isConquest(quest) ? "conquest" : (isRoutine(quest) ? "routine" : "triumph"),
+		questClass: isConquest(quest) ? "conquest" : isRoutine(quest) ? "routine" : "triumph",
 		title: `${title}${progression.length > 1 ? ` ${getRomanNumeral(index + 1)}` : ""}`,
 	}))
 }
@@ -499,10 +500,8 @@ export function getShieldRanges({ factor, gearClass }: { factor: number, gearCla
 export function getSigmoid(x: number) {
 	return x === 0
 		? 0
-		: (
-			(1 / (1 + Math.pow(Math.E, -0.15 * (x - 44))) + 0.01)
-			* (9 * Math.pow(Math.E, -(Math.LN2 / 5) * x) + 1)
-		)
+		: (1 / (1 + Math.pow(Math.E, -0.15 * (x - 44))) + 0.01)
+		* (9 * Math.pow(Math.E, -(Math.LN2 / 5) * x) + 1)
 }
 
 export function getSnapshotGetter({ getLoadable }: Snapshot) {

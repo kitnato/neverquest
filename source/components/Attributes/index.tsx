@@ -18,9 +18,9 @@ export function Attributes() {
 			</Stack>
 
 			<Stack gap={3}>
-				{ATTRIBUTE_TYPES.map((attribute, index) => (
-					<AttributeDisplay attribute={attribute} key={index} />
-				))}
+				{ATTRIBUTE_TYPES.map((attribute, index) =>
+					<AttributeDisplay attribute={attribute} key={index} />,
+				)}
 			</Stack>
 		</Stack>
 	)

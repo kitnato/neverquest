@@ -2,10 +2,11 @@ import { atom, selector, selectorFamily } from "recoil"
 
 import { ENCUMBRANCE_CAPACITY, KNAPSACK_CAPACITY } from "@neverquest/data/items"
 import { handleStorage } from "@neverquest/state/effects/handleStorage"
-import type { ConsumableItem, InheritableItem, InventoryItem } from "@neverquest/types"
 import { isConsumableItem, isInheritableItem } from "@neverquest/types/type-guards"
-import type { Consumable, Inheritable } from "@neverquest/types/unions"
 import { withStateKey } from "@neverquest/utilities/helpers"
+
+import type { ConsumableItem, InheritableItem, InventoryItem } from "@neverquest/types"
+import type { Consumable, Inheritable } from "@neverquest/types/unions"
 
 // SELECTORS
 
@@ -21,9 +22,9 @@ export const encumbranceExtent = withStateKey("encumbranceExtent", key =>
 		get: ({ get }) =>
 			get(encumbrance) === get(encumbranceMaximum)
 				? "encumbered"
-				: (get(encumbrance) > get(encumbranceMaximum)
+				: get(encumbrance) > get(encumbranceMaximum)
 					? "over-encumbered"
-					: undefined),
+					: undefined,
 		key,
 	}),
 )

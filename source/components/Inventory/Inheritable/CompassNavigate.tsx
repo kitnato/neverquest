@@ -47,9 +47,8 @@ const StageDisplay = ({ currentStage, wildernesses }: { currentStage: number, wi
 				{
 					currentStage >= BOSS_STAGE_START
 					&& currentStage % BOSS_STAGE_INTERVAL === 0
-					&& (
-						<IconImage className="small" Icon={IconBossHiding} />
-					)
+					&& <IconImage className="small" Icon={IconBossHiding} />
+
 				}
 
 				{Object.values(FINALITY_STAGE).includes(currentStage)

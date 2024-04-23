@@ -1,5 +1,4 @@
 import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap"
-import type { Placement } from "react-bootstrap/esm/types"
 import { useRecoilValue } from "recoil"
 
 import { DetailsTable } from "@neverquest/components/DetailsTable"
@@ -24,11 +23,13 @@ import { ownedItem } from "@neverquest/state/inventory"
 import { isSkillAcquired } from "@neverquest/state/skills"
 import { parryChance } from "@neverquest/state/statistics"
 import { isShowing } from "@neverquest/state/ui"
-import type { Weapon } from "@neverquest/types"
 import { isMelee, isRanged, isUnarmed } from "@neverquest/types/type-guards"
-import type { WeaponAbility } from "@neverquest/types/unions"
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters"
 import { getDamagePerRate } from "@neverquest/utilities/getters"
+
+import type { Weapon } from "@neverquest/types"
+import type { WeaponAbility } from "@neverquest/types/unions"
+import type { Placement } from "react-bootstrap/esm/types"
 
 export function WeaponName({
 	overlayPlacement,

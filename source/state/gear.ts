@@ -8,10 +8,11 @@ import {
 } from "@neverquest/data/gear"
 import { handleStorage } from "@neverquest/state/effects/handleStorage"
 import { isTraitAcquired } from "@neverquest/state/traits"
-import type { Armor, GemItem, Shield, Weapon } from "@neverquest/types"
 import { isMelee, isUnarmed } from "@neverquest/types/type-guards"
 import { getElementalEffects, getTotalElementalEffects } from "@neverquest/utilities/getters"
 import { withStateKey } from "@neverquest/utilities/helpers"
+
+import type { Armor, GemItem, Shield, Weapon } from "@neverquest/types"
 
 // SELECTORS
 

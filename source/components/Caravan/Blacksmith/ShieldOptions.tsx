@@ -156,10 +156,9 @@ export function ShieldOptions() {
 			<hr />
 
 			{!isSkillAcquiredShieldcraft && gearClass === "tower"
-				? (
-					<span className="fst-italic text-center">{LABEL_SKILL_REQUIRED}</span>
-				)
-				: (hasCrafted
+				? <span className="fst-italic text-center">{LABEL_SKILL_REQUIRED}</span>
+
+				: hasCrafted
 					? (
 						<CraftedGear
 							item={craftedShield}
@@ -182,9 +181,9 @@ export function ShieldOptions() {
 										level,
 										prefixTags: level < maximumShieldLevel - GEAR_LEVEL_RANGE_MAXIMUM * 2
 											? ["lowQuality"]
-											: (level === maximumShieldLevel
+											: level === maximumShieldLevel
 												? ["highQuality"]
-												: undefined),
+												: undefined,
 									}),
 								}))
 							}}
@@ -195,7 +194,7 @@ export function ShieldOptions() {
 								}),
 							)}
 						/>
-					))}
+					)}
 		</Stack>
 	)
 }

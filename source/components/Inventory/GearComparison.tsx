@@ -4,6 +4,7 @@ import { IconImage } from "@neverquest/components/IconImage"
 import IconEquals from "@neverquest/icons/equals.svg?react"
 import IconIncrease from "@neverquest/icons/increase.svg?react"
 import { isShowing } from "@neverquest/state/ui"
+
 import type { Showing } from "@neverquest/types/unions"
 
 export function GearComparison({
@@ -25,7 +26,7 @@ export function GearComparison({
 		return (
 			<IconImage
 				className={`small ${
-					isDifferenceEqual ? "text-secondary" : (isPositive ? "text-success" : "text-danger")
+					isDifferenceEqual ? "text-secondary" : isPositive ? "text-success" : "text-danger"
 				}`}
 				Icon={isDifferenceEqual ? IconEquals : IconIncrease}
 				isFlipped={difference < 0}

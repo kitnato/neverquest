@@ -24,21 +24,18 @@ export function Mercenary() {
 				<h6>Train skills</h6>
 
 				{trainableSkills.length === 0
-					? (
-						<span className="fst-italic">{LABEL_NONE_AVAILABLE}</span>
-					)
-					: (
-						trainableSkills.map(skill => <TrainableSkill key={skill} skill={skill} />)
-					)}
+					? <span className="fst-italic">{LABEL_NONE_AVAILABLE}</span>
+
+					: trainableSkills.map(skill => <TrainableSkill key={skill} skill={skill} />)}
 			</Stack>
 
 			{trainedSkills.length > 0 && (
 				<Stack gap={3}>
 					<h6>Trained skills</h6>
 
-					{trainedSkills.map(skill => (
-						<SkillDisplay key={skill} skill={skill} />
-					))}
+					{trainedSkills.map(skill =>
+						<SkillDisplay key={skill} skill={skill} />,
+					)}
 				</Stack>
 			)}
 		</Stack>

@@ -233,9 +233,9 @@ export function MeleeOptions() {
 									level,
 									prefixTags: level < maximumWeaponLevel - GEAR_LEVEL_RANGE_MAXIMUM * 2
 										? ["lowQuality"]
-										: (level === maximumWeaponLevel
+										: level === maximumWeaponLevel
 											? ["highQuality"]
-											: undefined),
+											: undefined,
 								}),
 							}))
 						}}

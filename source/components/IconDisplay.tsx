@@ -1,10 +1,11 @@
-import type { ReactNode } from "react"
 import { Stack } from "react-bootstrap"
-import type { ResponsiveUtilityValue } from "react-bootstrap/esm/createUtilityClasses"
-import type { GapValue } from "react-bootstrap/esm/types"
 
 import { IconImage } from "@neverquest/components/IconImage"
+
 import type { IconImageDOMProperties, SVGIcon } from "@neverquest/types/components"
+import type { ReactNode } from "react"
+import type { ResponsiveUtilityValue } from "react-bootstrap/esm/createUtilityClasses"
+import type { GapValue } from "react-bootstrap/esm/types"
 
 export function IconDisplay({
 	children,
@@ -32,9 +33,8 @@ export function IconDisplay({
 			<IconImage Icon={Icon} tooltip={tooltip} {...iconProps} />
 
 			{description === undefined
-				? (
-					children
-				)
+				? children
+
 				: (
 					<Stack gap={1}>
 						{children}

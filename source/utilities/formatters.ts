@@ -4,6 +4,7 @@ import {
 	MILLISECONDS_IN_SECOND,
 	PERCENTAGE,
 } from "@neverquest/data/general"
+
 import type { NumberFormat } from "@neverquest/types/unions"
 
 export function capitalizeAll(string: string) {

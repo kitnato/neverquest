@@ -9,6 +9,7 @@ import { PERCENTAGE } from "@neverquest/data/general"
 import { MASTERIES } from "@neverquest/data/masteries"
 import { useDeltaText } from "@neverquest/hooks/useDeltaText"
 import { isMasteryAtMaximum, masteryCost, masteryProgress } from "@neverquest/state/masteries"
+
 import type { Delta, Mastery } from "@neverquest/types/unions"
 
 export function MasteryProgress({ mastery }: { mastery: Mastery }) {

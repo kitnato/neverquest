@@ -1,7 +1,7 @@
 import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap"
 import { useRecoilValue } from "recoil"
-import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
 
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
 import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { useDeltaText } from "@neverquest/hooks/useDeltaText"
 import IconEssence from "@neverquest/icons/essence.svg?react"

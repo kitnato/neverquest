@@ -1,7 +1,7 @@
 import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap"
 import { useRecoilValue } from "recoil"
-import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
 
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
 import { DetailsTable } from "@neverquest/components/DetailsTable"
 import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { LABEL_EMPTY } from "@neverquest/data/general"
@@ -12,9 +12,10 @@ import IconRanged from "@neverquest/icons/ranged.svg?react"
 import { weapon } from "@neverquest/state/gear"
 import { masteryStatistic } from "@neverquest/state/masteries"
 import { range } from "@neverquest/state/statistics"
-import type { Ranged } from "@neverquest/types"
 import { formatNumber } from "@neverquest/utilities/formatters"
 import { getAnimationClass } from "@neverquest/utilities/getters"
+
+import type { Ranged } from "@neverquest/types"
 
 export function Range() {
 	const marksmanshipValue = useRecoilValue(masteryStatistic("marksmanship"))

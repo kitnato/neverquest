@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react"
-import type { SetterOrUpdater } from "recoil"
 import { clearInterval, setInterval } from "worker-timers"
 
 import { FRAMERATE } from "@neverquest/data/general"
+
+import type { SetterOrUpdater } from "recoil"
 
 export function useTimer({
 	factor = 1,

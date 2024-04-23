@@ -24,10 +24,9 @@ export function AcquireWitchSkill() {
 			<h6>Acquire skill</h6>
 
 			{availableSkills.length === 0
-				? (
-					<span className="fst-italic">{LABEL_NONE_AVAILABLE}</span>
-				)
-				: (tearsValue < TEARS_MAXIMUM
+				? <span className="fst-italic">{LABEL_NONE_AVAILABLE}</span>
+
+				: tearsValue < TEARS_MAXIMUM
 					? (
 						<span>
 							&quot;Before I can impart protective hexes, you must first taste the bitter tears of
@@ -42,11 +41,11 @@ export function AcquireWitchSkill() {
 								</span>
 							</IconDisplay>
 
-							{availableSkills.map(skill => (
-								<TrainableSkill key={skill} skill={skill} />
-							))}
+							{availableSkills.map(skill =>
+								<TrainableSkill key={skill} skill={skill} />,
+							)}
 						</>
-					))}
+					)}
 		</Stack>
 	)
 }

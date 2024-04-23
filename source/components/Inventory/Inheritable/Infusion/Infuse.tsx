@@ -8,6 +8,7 @@ import { INFUSION_DELTA } from "@neverquest/data/items"
 import { useInfuse } from "@neverquest/hooks/actions/useInfuse"
 import { useAnimation } from "@neverquest/hooks/useAnimation"
 import { infusionStep, isInfusionAtMaximum } from "@neverquest/state/items"
+
 import type { Infusable } from "@neverquest/types/unions"
 
 export function Infuse({ infusable }: { infusable: Infusable }) {
@@ -48,9 +49,8 @@ export function Infuse({ infusable }: { infusable: Infusable }) {
 	}, [isInfusing, isInfusionAtMaximumValue, isInfusionPossible])
 
 	return isInfusionAtMaximumValue && infusable === "mysterious egg"
-		? (
-			<Hatch />
-		)
+		? <Hatch />
+
 		: (
 			<OverlayTrigger
 				overlay={(

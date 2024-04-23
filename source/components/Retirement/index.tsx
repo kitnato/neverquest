@@ -1,4 +1,3 @@
-import type { Dispatch, SetStateAction } from "react"
 import {
 	Button,
 	Modal,
@@ -16,6 +15,8 @@ import { Renewal } from "@neverquest/components/Retirement/Renewal"
 import { TraitSelection } from "@neverquest/components/Retirement/TraitSelection"
 import { useRetire } from "@neverquest/hooks/actions/useRetire"
 import IconRetire from "@neverquest/icons/retire.svg?react"
+
+import type { Dispatch, SetStateAction } from "react"
 
 export function Retirement({
 	state: [isShowing, setIsShowing],

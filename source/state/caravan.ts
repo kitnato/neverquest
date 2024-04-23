@@ -1,9 +1,7 @@
-import type { ArmorClass, ShieldClass, WeaponClass } from "@kitnato/locran/build/types"
 import { atom, atomFamily, selector } from "recoil"
 
 import { CREW, MONOLOGUE_EMPTY } from "@neverquest/data/caravan"
 import { handleStorage } from "@neverquest/state/effects/handleStorage"
-import type { Armor, Melee, MerchantInventoryItem, Ranged, Shield } from "@neverquest/types"
 import {
 	CREW_MEMBER_TYPES,
 	type CrewMember,
@@ -12,6 +10,9 @@ import {
 	type Grip,
 } from "@neverquest/types/unions"
 import { withStateKey } from "@neverquest/utilities/helpers"
+
+import type { ArmorClass, ShieldClass, WeaponClass } from "@kitnato/locran/build/types"
+import type { Armor, Melee, MerchantInventoryItem, Ranged, Shield } from "@neverquest/types"
 
 // SELECTORS
 

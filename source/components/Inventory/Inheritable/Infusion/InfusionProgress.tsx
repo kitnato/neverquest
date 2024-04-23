@@ -6,8 +6,9 @@ import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
 import { PERCENTAGE } from "@neverquest/data/general"
 import IconEssence from "@neverquest/icons/essence.svg?react"
 import { infusion, infusionMaximum, isInfusionAtMaximum } from "@neverquest/state/items"
-import type { Infusable } from "@neverquest/types/unions"
 import { formatNumber } from "@neverquest/utilities/formatters"
+
+import type { Infusable } from "@neverquest/types/unions"
 
 export function InfusionProgress({ infusable }: { infusable: Infusable }) {
 	const infusionValue = Math.round(useRecoilValue(infusion(infusable)))

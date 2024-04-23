@@ -97,9 +97,9 @@ export const stunChance = withStateKey("stunChance", key =>
 			} = BRUISER
 
 			return get(isSkillAcquired("traumatology")) && gearClass === "blunt"
-				? (get(isTraitAcquired("bruiser")) && isUnarmed(weaponValue)
+				? get(isTraitAcquired("bruiser")) && isUnarmed(weaponValue)
 					? Math.min(increment * get(attributeRank("strength")), maximum)
-					: abilityChance)
+					: abilityChance
 				: 0
 		},
 		key,

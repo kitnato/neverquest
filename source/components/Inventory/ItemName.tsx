@@ -6,7 +6,6 @@ import { GemDescription } from "@neverquest/components/Inventory/GemDescription"
 import { WeightDetail } from "@neverquest/components/Inventory/WeightDetail"
 import { LEVELLING_MAXIMUM } from "@neverquest/data/general"
 import { CONSUMABLES, INFUSABLES, RELICS } from "@neverquest/data/items"
-import type { ConsumableItem, GemItem, InheritableItem } from "@neverquest/types"
 import {
 	isConsumableItem,
 	isGemItem,
@@ -14,6 +13,8 @@ import {
 	isRelicItem,
 } from "@neverquest/types/type-guards"
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters"
+
+import type { ConsumableItem, GemItem, InheritableItem } from "@neverquest/types"
 
 export function ItemName({
 	amount,
@@ -30,10 +31,9 @@ export function ItemName({
 						<Stack gap={3}>
 							{
 								isGemItem(item)
-									? (
-										<GemDescription gem={item.name} />
-									)
-									: (isRelicItem(item) && item.name === "[P71NQ]"
+									? <GemDescription gem={item.name} />
+
+									: isRelicItem(item) && item.name === "[P71NQ]"
 										? (
 											<Stack className="monospaced">
 												<span>Priority 0 - BREACH IN PROGRESS</span>
@@ -49,23 +49,21 @@ export function ItemName({
 												<span>LEAKAGE IMMINENT</span>
 											</Stack>
 										)
-										: (
-											(() => {
-												const { description, descriptionIcons } = isConsumableItem(item)
-													? CONSUMABLES[item.name]
-													: (isInfusableItem(item)
-														? INFUSABLES[item.name]
-														: RELICS[item.name])
+										: (() => {
+											const { description, descriptionIcons } = isConsumableItem(item)
+												? CONSUMABLES[item.name]
+												: isInfusableItem(item)
+													? INFUSABLES[item.name]
+													: RELICS[item.name]
 
-												return (
-													<DescriptionDisplay
-														description={description}
-														descriptionIcons={descriptionIcons}
-													/>
-												)
-											})()
-										)
-									)
+											return (
+												<DescriptionDisplay
+													description={description}
+													descriptionIcons={descriptionIcons}
+												/>
+											)
+										})()
+
 							}
 
 							<DetailsTable>

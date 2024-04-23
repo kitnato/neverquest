@@ -6,9 +6,10 @@ import IconDistance from "@neverquest/icons/distance.svg?react"
 import IconMonsterAttackRate from "@neverquest/icons/monster-attack-rate.svg?react"
 import IconMonsterDamage from "@neverquest/icons/monster-damage.svg?react"
 import IconMonsterHealth from "@neverquest/icons/monster-health.svg?react"
+import { formatNumber } from "@neverquest/utilities/formatters"
+
 import type { Description } from "@neverquest/types/ui"
 import type { Ailment } from "@neverquest/types/unions"
-import { formatNumber } from "@neverquest/utilities/formatters"
 
 export const AILMENT_DESCRIPTION: Record<Ailment, Description> = {
 	bleeding: { description: "Suffering periodic damage." },

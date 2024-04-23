@@ -3,9 +3,10 @@ import { type RecoilValueReadOnly, useRecoilValue } from "recoil"
 
 import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta"
 import { usePreviousValue } from "@neverquest/hooks/usePreviousValue"
+import { formatNumber } from "@neverquest/utilities/formatters"
+
 import type { DeltaDisplay } from "@neverquest/types/ui"
 import type { Delta, NumberFormat } from "@neverquest/types/unions"
-import { formatNumber } from "@neverquest/utilities/formatters"
 
 export function useDeltaText({
 	delta,
@@ -51,12 +52,12 @@ export function useDeltaText({
 		const deltaContents: DeltaDisplay[] = [
 			{
 				color: isPositive
-					? (isTime
+					? isTime
 						? "text-danger"
-						: "text-success")
-					: (isTime
+						: "text-success"
+					: isTime
 						? "text-success"
-						: "text-danger"),
+						: "text-danger",
 				value: `${isPositive ? "+" : ""}${formatNumber({
 					format,
 					value: difference,

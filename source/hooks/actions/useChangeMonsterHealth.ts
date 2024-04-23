@@ -17,9 +17,10 @@ import {
 	monsterRegenerationDuration,
 } from "@neverquest/state/monster"
 import { isHealthLow } from "@neverquest/state/reserves"
-import type { DeltaReserve } from "@neverquest/types/ui"
 import { formatNumber } from "@neverquest/utilities/formatters"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
+
+import type { DeltaReserve } from "@neverquest/types/ui"
 
 export function useChangeMonsterHealth() {
 	const addDelta = useAddDelta()
@@ -37,9 +38,9 @@ export function useChangeMonsterHealth() {
 				const get = getSnapshotGetter(snapshot)
 
 				const deltaDisplay
-					= contents === undefined ? [] : (Array.isArray(contents) ? contents : [contents])
+					= contents === undefined ? [] : Array.isArray(contents) ? contents : [contents]
 				const isPositive = value > 0
-				const totalValue = (!isPositive && get(isMonsterAiling("shocked"))) ? Math.round(value * (1 + AILMENT_PENALTY.shocked)) : value
+				const totalValue = !isPositive && get(isMonsterAiling("shocked")) ? Math.round(value * (1 + AILMENT_PENALTY.shocked)) : value
 				const formattedValue = formatNumber({ value: totalValue })
 				const monsterHealthValue = get(monsterHealth)
 				const monsterHealthMaximumValue = get(monsterHealthMaximum)

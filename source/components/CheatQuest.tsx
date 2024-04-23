@@ -1,6 +1,7 @@
 import { useLayoutEffect } from "react"
 
 import { useCheatQuest } from "@neverquest/hooks/actions/useCheatQuest"
+
 import type { Skill } from "@neverquest/types/unions"
 
 declare const window: Window & {

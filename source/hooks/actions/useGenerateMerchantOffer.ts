@@ -1,4 +1,3 @@
-import type { GeneratorParameters } from "@kitnato/locran/build/types"
 import { nanoid } from "nanoid"
 import { useRecoilCallback } from "recoil"
 
@@ -6,7 +5,6 @@ import { MERCHANT_OFFERS } from "@neverquest/data/caravan"
 import { hasGeneratedOffer, merchantInventory } from "@neverquest/state/caravan"
 import { stage, stageMaximum } from "@neverquest/state/encounter"
 import { ownedItem } from "@neverquest/state/inventory"
-import type { InheritableItem } from "@neverquest/types"
 import { isGearItem, isInheritableItem } from "@neverquest/types/type-guards"
 import {
 	generateArmor,
@@ -14,6 +12,9 @@ import {
 	generateShield,
 } from "@neverquest/utilities/generators"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
+
+import type { GeneratorParameters } from "@kitnato/locran/build/types"
+import type { InheritableItem } from "@neverquest/types"
 
 export function useGenerateMerchantOffer() {
 	return useRecoilCallback(

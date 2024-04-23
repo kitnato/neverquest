@@ -17,9 +17,10 @@ import { useNeutralize } from "@neverquest/hooks/actions/useNeutralize"
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import IconDiscard from "@neverquest/icons/discard.svg?react"
 import { inventory } from "@neverquest/state/inventory"
-import type { InventoryItem } from "@neverquest/types"
 import { capitalizeAll } from "@neverquest/utilities/formatters"
 import { getItemIcon } from "@neverquest/utilities/getters"
+
+import type { InventoryItem } from "@neverquest/types"
 
 export function DiscardItem({ item }: { item: InventoryItem }) {
 	const setInventory = useSetRecoilState(inventory)

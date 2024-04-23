@@ -36,10 +36,11 @@ import {
 import { isTraitAcquired } from "@neverquest/state/traits"
 import { isShowing } from "@neverquest/state/ui"
 import { isMelee, isRanged } from "@neverquest/types/type-guards"
-import type { DeltaDisplay } from "@neverquest/types/ui"
 import { ELEMENTAL_TYPES } from "@neverquest/types/unions"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
 import { animateElement } from "@neverquest/utilities/helpers"
+
+import type { DeltaDisplay } from "@neverquest/types/ui"
 
 export function useAttack() {
 	const addDelta = useAddDelta()

@@ -3,7 +3,6 @@ import { LABEL_UNKNOWN, LEVELLING_MAXIMUM, LEVELLING_THRESHOLD } from "@neverque
 import IconConquest from "@neverquest/icons/conquest.svg?react"
 import IconRoutine from "@neverquest/icons/routine.svg?react"
 import IconTriumph from "@neverquest/icons/triumph.svg?react"
-import type { SVGIcon } from "@neverquest/types/components"
 import {
 	ATTRIBUTE_TYPES,
 	CONQUEST_TYPES,
@@ -18,6 +17,8 @@ import {
 	TRIUMPH_TYPES,
 } from "@neverquest/types/unions"
 import { formatEnumeration, formatNumber } from "@neverquest/utilities/formatters"
+
+import type { SVGIcon } from "@neverquest/types/components"
 
 export const QUEST_CLASS_ICONS: Record<QuestClass, SVGIcon> = {
 	conquest: IconConquest,

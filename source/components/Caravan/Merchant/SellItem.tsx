@@ -8,10 +8,11 @@ import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence
 import IconEssence from "@neverquest/icons/essence.svg?react"
 import { merchantInventory } from "@neverquest/state/caravan"
 import { inventory } from "@neverquest/state/inventory"
-import type { InventoryItem } from "@neverquest/types"
 import { isGearItem, isRelicItem } from "@neverquest/types/type-guards"
 import { formatNumber } from "@neverquest/utilities/formatters"
 import { getSellPrice } from "@neverquest/utilities/getters"
+
+import type { InventoryItem } from "@neverquest/types"
 
 export function SellItem({ item }: { item: InventoryItem }) {
 	const setInventory = useSetRecoilState(inventory)

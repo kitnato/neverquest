@@ -1,6 +1,6 @@
 import { atom, atomFamily, selector } from "recoil"
-import { handleStorage } from "@neverquest/state/effects/handleStorage"
 
+import { handleStorage } from "@neverquest/state/effects/handleStorage"
 import { TRAIT_TYPES, type Trait } from "@neverquest/types/unions"
 import { withStateKey } from "@neverquest/utilities/helpers"
 

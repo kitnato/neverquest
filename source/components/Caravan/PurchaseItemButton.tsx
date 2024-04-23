@@ -4,6 +4,7 @@ import { useRecoilValue } from "recoil"
 import { LABEL_NO_ESSENCE, LABEL_OVER_ENCUMBERED, POPOVER_TRIGGER } from "@neverquest/data/general"
 import { useCanFit } from "@neverquest/hooks/actions/useCanFit"
 import { essence } from "@neverquest/state/resources"
+
 import type { InventoryItem } from "@neverquest/types"
 
 export function PurchaseItemButton({

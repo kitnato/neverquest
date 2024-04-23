@@ -1,15 +1,7 @@
 import { generateArtifact } from "@kitnato/locran"
-import type {
-	ArmorClass,
-	GeneratorParameters,
-	ShieldClass,
-	WeaponClass,
-} from "@kitnato/locran/build/types"
 import { nanoid } from "nanoid"
 
 import { ARMOR_SPECIFICATIONS, SHIELD_SPECIFICATIONS, WEAPON_BASE } from "@neverquest/data/gear"
-import type { Armor, Melee, Ranged, Shield } from "@neverquest/types"
-import type { Grip } from "@neverquest/types/unions"
 import {
 	getArmorRanges,
 	getFromRange,
@@ -18,6 +10,15 @@ import {
 	getShieldRanges,
 	getSigmoid,
 } from "@neverquest/utilities/getters"
+
+import type {
+	ArmorClass,
+	GeneratorParameters,
+	ShieldClass,
+	WeaponClass,
+} from "@kitnato/locran/build/types"
+import type { Armor, Melee, Ranged, Shield } from "@neverquest/types"
+import type { Grip } from "@neverquest/types/unions"
 
 export function generateArmor({
 	gearClass,

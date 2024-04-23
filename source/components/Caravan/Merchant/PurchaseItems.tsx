@@ -14,12 +14,9 @@ export function PurchaseItems() {
 			<h6>Purchase items</h6>
 
 			{newItems.length === 0
-				? (
-					<span className="fst-italic">Nothing available.</span>
-				)
-				: (
-					<PurchasableItems merchantItems={newItems} />
-				)}
+				? <span className="fst-italic">Nothing available.</span>
+
+				: <PurchasableItems merchantItems={newItems} />}
 		</Stack>
 	)
 }

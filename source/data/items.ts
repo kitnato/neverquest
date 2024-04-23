@@ -53,6 +53,7 @@ import IconTears from "@neverquest/icons/tears.svg?react"
 import IconThaumaturgicGoggles from "@neverquest/icons/thaumaturgic-goggles.svg?react"
 import IconTornManuscript from "@neverquest/icons/torn-manuscript.svg?react"
 import IconWilderness from "@neverquest/icons/wilderness.svg?react"
+
 import type { ConsumableItem, GeneratorRange, InfusableItem, RelicItem } from "@neverquest/types"
 import type { SVGIcon } from "@neverquest/types/components"
 import type { Description } from "@neverquest/types/ui"

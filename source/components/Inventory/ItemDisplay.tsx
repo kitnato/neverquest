@@ -1,4 +1,3 @@
-import type { Placement } from "react-bootstrap/esm/types"
 import { useRecoilValue } from "recoil"
 
 import { IconDisplay } from "@neverquest/components/IconDisplay"
@@ -13,7 +12,6 @@ import { CONSUMABLES, GEMS, INFUSABLES, RELICS } from "@neverquest/data/items"
 import IconArmor from "@neverquest/icons/armor.svg?react"
 import IconShield from "@neverquest/icons/shield.svg?react"
 import { isRelicEquipped } from "@neverquest/state/items"
-import type { InventoryItem } from "@neverquest/types"
 import {
 	isArmor,
 	isConsumableItem,
@@ -22,8 +20,11 @@ import {
 	isShield,
 	isWeapon,
 } from "@neverquest/types/type-guards"
-import type { Relic } from "@neverquest/types/unions"
 import { getGearIcon } from "@neverquest/utilities/getters"
+
+import type { InventoryItem } from "@neverquest/types"
+import type { Relic } from "@neverquest/types/unions"
+import type { Placement } from "react-bootstrap/esm/types"
 
 export function ItemDisplay({
 	amount,
@@ -94,17 +95,14 @@ export function ItemDisplay({
 			<IconDisplay
 				description={
 					name === "munitions satchel"
-						? (
-							<MunitionsStatus />
-						)
+						? <MunitionsStatus />
+
 						: name === "lacrimatory"
-							? (
-								<LacrimatoryStatus />
-							)
+							? <LacrimatoryStatus />
+
 							: equippedRelics[name]
-								? (
-									<span>Equipped</span>
-								)
+								? <span>Equipped</span>
+
 								: undefined
 				}
 				Icon={RELICS[name].Icon}

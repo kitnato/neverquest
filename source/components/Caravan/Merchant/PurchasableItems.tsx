@@ -6,9 +6,10 @@ import { EradicateItem } from "@neverquest/components/Inventory/EradicateItem"
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay"
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general"
 import IconEssence from "@neverquest/icons/essence.svg?react"
-import type { MerchantInventoryItem } from "@neverquest/types"
 import { formatNumber } from "@neverquest/utilities/formatters"
 import { stackItems } from "@neverquest/utilities/helpers"
+
+import type { MerchantInventoryItem } from "@neverquest/types"
 
 export function PurchasableItems({
 	canEradicate = false,

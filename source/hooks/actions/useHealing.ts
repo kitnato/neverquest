@@ -3,9 +3,10 @@ import { useRecoilCallback } from "recoil"
 import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth"
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina"
 import { health, healthMaximumPoisoned, stamina, staminaMaximumBlighted } from "@neverquest/state/reserves"
+import { getSnapshotGetter } from "@neverquest/utilities/getters"
+
 import type { DeltaReserve } from "@neverquest/types/ui"
 import type { Reserve } from "@neverquest/types/unions"
-import { getSnapshotGetter } from "@neverquest/utilities/getters"
 
 export function useHealing() {
 	const changeHealth = useChangeHealth()

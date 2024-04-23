@@ -23,10 +23,9 @@ export function AcquireAlchemistSkill() {
 			<h6>Acquire skill</h6>
 
 			{availableSkills.length === 0
-				? (
-					<span className="fst-italic">{LABEL_NONE_AVAILABLE}</span>
-				)
-				: (ownedItemTornManuscript === undefined
+				? <span className="fst-italic">{LABEL_NONE_AVAILABLE}</span>
+
+				: ownedItemTornManuscript === undefined
 					? (
 						<span>
 							&quot;Alas, the sage teachings are lost to time. Have you come across any arcane writs
@@ -43,12 +42,12 @@ export function AcquireAlchemistSkill() {
 							</IconDisplay>
 
 							<>
-								{availableSkills.map(skill => (
-									<TrainableSkill key={skill} skill={skill} />
-								))}
+								{availableSkills.map(skill =>
+									<TrainableSkill key={skill} skill={skill} />,
+								)}
 							</>
 						</>
-					))}
+					)}
 		</Stack>
 	)
 }

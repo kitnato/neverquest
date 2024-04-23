@@ -1,5 +1,6 @@
 import { CLASS_ANIMATED, CLASS_ANIMATE_PREFIX } from "@neverquest/data/general"
 import { isStackableItem } from "@neverquest/types/type-guards"
+
 import type { Animation, AnimationSpeed } from "@neverquest/types/ui"
 import type { StateKey } from "@neverquest/types/unions"
 

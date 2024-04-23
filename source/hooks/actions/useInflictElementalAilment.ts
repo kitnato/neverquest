@@ -5,8 +5,9 @@ import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import { canReceiveAilment } from "@neverquest/state/ailments"
 import { elementalEffects } from "@neverquest/state/gear"
 import { monsterAilmentDuration } from "@neverquest/state/monster"
-import type { Elemental } from "@neverquest/types/unions"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
+
+import type { Elemental } from "@neverquest/types/unions"
 
 export function useInflictElementalAilment() {
 	const progressQuest = useProgressQuest()

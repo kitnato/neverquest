@@ -1,5 +1,3 @@
-import type { ArmorClass, ShieldClass, WeaponClass } from "@kitnato/locran/build/types"
-
 import { LEVELLING_MAXIMUM } from "@neverquest/data/general"
 import IconArmorHeavy from "@neverquest/icons/armor-heavy.svg?react"
 import IconArmorLight from "@neverquest/icons/armor-light.svg?react"
@@ -13,6 +11,8 @@ import IconShieldSmall from "@neverquest/icons/shield-small.svg?react"
 import IconShieldTower from "@neverquest/icons/shield-tower.svg?react"
 import IconSlashing from "@neverquest/icons/slashing.svg?react"
 import IconStunChance from "@neverquest/icons/stun-chance.svg?react"
+
+import type { ArmorClass, ShieldClass, WeaponClass } from "@kitnato/locran/build/types"
 import type { Armor, GearRangeBase, GeneratorRange, Melee, Shield } from "@neverquest/types"
 import type { SVGIcon } from "@neverquest/types/components"
 import type { WeaponAbility } from "@neverquest/types/unions"

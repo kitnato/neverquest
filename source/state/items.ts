@@ -10,9 +10,10 @@ import {
 import { handleStorage } from "@neverquest/state/effects/handleStorage"
 import { ownedItem } from "@neverquest/state/inventory"
 import { essence } from "@neverquest/state/resources"
-import type { Infusable, Relic } from "@neverquest/types/unions"
 import { getFromRange, getSigmoid, getTriangular } from "@neverquest/utilities/getters"
 import { withStateKey } from "@neverquest/utilities/helpers"
+
+import type { Infusable, Relic } from "@neverquest/types/unions"
 
 // SELECTORS
 

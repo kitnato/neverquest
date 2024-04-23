@@ -7,7 +7,6 @@ import { questProgress } from "@neverquest/state/quests"
 import { isSkillAcquired } from "@neverquest/state/skills"
 import { isTraitAcquired } from "@neverquest/state/traits"
 import { isShowing } from "@neverquest/state/ui"
-import type { GearItem, RelicItem } from "@neverquest/types"
 import {
 	isArmor,
 	isMelee,
@@ -18,6 +17,8 @@ import {
 	isWeapon,
 } from "@neverquest/types/type-guards"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
+
+import type { GearItem, RelicItem } from "@neverquest/types"
 
 export function useToggleEquipItem() {
 	const progressQuest = useProgressQuest()

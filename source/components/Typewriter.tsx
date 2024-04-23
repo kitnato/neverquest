@@ -29,7 +29,7 @@ export function Typewriter({
 			deltaDelayReference.current += elapsed
 
 			if (index === text.length && deltaCursorReference.current >= CURSOR_DELAY) {
-				setCursor(currentCursor => (currentCursor === CURSOR ? "" : CURSOR))
+				setCursor(currentCursor => currentCursor === CURSOR ? "" : CURSOR)
 				deltaCursorReference.current = 0
 
 				if (onEnd !== undefined) {

@@ -69,9 +69,9 @@ export function About() {
 									),
 								]),
 							),
-							blockquote: ({ children }) => (
+							blockquote: ({ children }) =>
 								<blockquote className="blockquote text-center">{children}</blockquote>
-							),
+							,
 						}}
 					>
 						{manual}

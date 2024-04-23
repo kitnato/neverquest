@@ -9,6 +9,7 @@ import IconArmor from "@neverquest/icons/armor.svg?react"
 import IconCraftWeapon from "@neverquest/icons/craft-weapon.svg?react"
 import IconShield from "@neverquest/icons/shield.svg?react"
 import { blacksmithOptions } from "@neverquest/state/caravan"
+
 import type { Gear } from "@neverquest/types/unions"
 
 export function Blacksmith() {

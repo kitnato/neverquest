@@ -17,6 +17,7 @@ import IconStamina from "@neverquest/icons/stamina.svg?react"
 import IconStrength from "@neverquest/icons/strength.svg?react"
 import IconVigor from "@neverquest/icons/vigor.svg?react"
 import IconVitality from "@neverquest/icons/vitality.svg?react"
+
 import type { AttributeOrMasteryBaseData, IncrementBonus } from "@neverquest/types"
 import type { Attribute, NumberFormat, Showing, Skill } from "@neverquest/types/unions"
 

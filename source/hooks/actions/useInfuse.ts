@@ -5,8 +5,9 @@ import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence"
 import { ownedItem } from "@neverquest/state/inventory"
 import { infusion, infusionLevel, infusionMaximum, infusionStep } from "@neverquest/state/items"
-import type { Infusable } from "@neverquest/types/unions"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
+
+import type { Infusable } from "@neverquest/types/unions"
 
 export function useInfuse() {
 	const progressQuest = useProgressQuest()

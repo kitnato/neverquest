@@ -30,10 +30,11 @@ import IconTank from "@neverquest/icons/tank.svg?react"
 import IconTwoHanded from "@neverquest/icons/two-handed.svg?react"
 import IconWeaponDamage from "@neverquest/icons/weapon-damage.svg?react"
 import IconWeaponNone from "@neverquest/icons/weapon-none.svg?react"
+import { formatNumber } from "@neverquest/utilities/formatters"
+
 import type { SVGIcon } from "@neverquest/types/components"
 import type { Description } from "@neverquest/types/ui"
 import type { Skill, Trait } from "@neverquest/types/unions"
-import { formatNumber } from "@neverquest/utilities/formatters"
 
 export const BRAWLER_DAMAGE_BONUS = 0.25
 

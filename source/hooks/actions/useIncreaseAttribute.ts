@@ -11,8 +11,9 @@ import {
 } from "@neverquest/state/attributes"
 import { questProgress } from "@neverquest/state/quests"
 import { isShowing } from "@neverquest/state/ui"
-import type { Attribute } from "@neverquest/types/unions"
 import { getAttributePointCost, getSnapshotGetter } from "@neverquest/utilities/getters"
+
+import type { Attribute } from "@neverquest/types/unions"
 
 export function useIncreaseAttribute() {
 	const progressQuest = useProgressQuest()

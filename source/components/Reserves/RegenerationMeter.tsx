@@ -11,8 +11,9 @@ import {
 	regenerationDuration,
 	regenerationRate,
 } from "@neverquest/state/reserves"
-import type { Reserve } from "@neverquest/types/unions"
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters"
+
+import type { Reserve } from "@neverquest/types/unions"
 
 export function RegenerationMeter({ reserve }: { reserve: Reserve }) {
 	const regenerationAmountValue = useRecoilValue(regenerationAmount(reserve))

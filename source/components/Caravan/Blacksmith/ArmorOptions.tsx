@@ -159,10 +159,9 @@ export function ArmorOptions() {
 			<hr />
 
 			{!isSkillAcquiredArmorcraft && gearClass === "heavy"
-				? (
-					<span className="fst-italic text-center">{LABEL_SKILL_REQUIRED}</span>
-				)
-				: (hasCrafted
+				? <span className="fst-italic text-center">{LABEL_SKILL_REQUIRED}</span>
+
+				: hasCrafted
 					? (
 						<CraftedGear
 							item={craftedArmor}
@@ -185,9 +184,9 @@ export function ArmorOptions() {
 										level,
 										prefixTags: level < maximumArmorLevel - GEAR_LEVEL_RANGE_MAXIMUM * 2
 											? ["lowQuality"]
-											: (level === maximumArmorLevel
+											: level === maximumArmorLevel
 												? ["highQuality"]
-												: undefined),
+												: undefined,
 									}),
 								}))
 
@@ -200,7 +199,7 @@ export function ArmorOptions() {
 								}),
 							)}
 						/>
-					))}
+					)}
 		</Stack>
 	)
 }

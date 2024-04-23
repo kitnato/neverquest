@@ -1,5 +1,4 @@
 import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap"
-import type { Placement } from "react-bootstrap/esm/types"
 import { useRecoilValue } from "recoil"
 
 import { DetailsTable } from "@neverquest/components/DetailsTable"
@@ -16,9 +15,11 @@ import IconStaggerChance from "@neverquest/icons/stagger-chance.svg?react"
 import { shield as shieldEquipped } from "@neverquest/state/gear"
 import { isSkillAcquired } from "@neverquest/state/skills"
 import { isShowing } from "@neverquest/state/ui"
-import type { Shield } from "@neverquest/types"
 import { isUnshielded } from "@neverquest/types/type-guards"
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters"
+
+import type { Shield } from "@neverquest/types"
+import type { Placement } from "react-bootstrap/esm/types"
 
 export function ShieldName({
 	overlayPlacement,

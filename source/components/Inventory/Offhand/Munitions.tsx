@@ -1,7 +1,7 @@
 import { Stack } from "react-bootstrap"
 import { useRecoilValue } from "recoil"
-import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
 
+import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
 import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { LABEL_SEPARATOR } from "@neverquest/data/general"
 import { useDeltaText } from "@neverquest/hooks/useDeltaText"
@@ -33,9 +33,9 @@ export function Munitions() {
 				<DeltasDisplay delta="munitions" />
 
 				{
-					isRanged(weaponValue) && (weaponValue.munitionsCost > munitionsValue) && (
-						<span className="text-danger">{`${LABEL_SEPARATOR} (${weaponValue.munitionsCost})`}</span>
-					)
+					isRanged(weaponValue) && (weaponValue.munitionsCost > munitionsValue)
+					&& <span className="text-danger">{`${LABEL_SEPARATOR} (${weaponValue.munitionsCost})`}</span>
+
 				}
 			</Stack>
 		</IconDisplay>

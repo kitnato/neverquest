@@ -210,39 +210,35 @@ export function RangedOptions() {
 			<hr />
 
 			{isSkillAcquiredArchery
-				? (
-					hasCrafted
-						? (
-							<CraftedGear item={fletcherInventoryValue} onTransfer={resetFletcherInventory} />
-						)
-						: (
-							<CraftGear
-								onCraft={() => {
-									setFletcherInventory(
-										generateRangedWeapon({
-											affixStructure: getAffixStructure(),
-											gearClass,
-											level,
-											prefixTags: level < maximumWeaponLevel - GEAR_LEVEL_RANGE_MAXIMUM * 2
-												? ["lowQuality"]
-												: (level === maximumWeaponLevel
-													? ["highQuality"]
-													: undefined),
-										}),
-									)
-								}}
-								price={Math.round(
-									getFromRange({
-										factor,
-										...WEAPON_BASE.price,
-									}) * WEAPON_MODIFIER.ranged.price,
-								)}
-							/>
-						)
-				)
-				: (
-					<span className="fst-italic text-center">{LABEL_SKILL_REQUIRED}</span>
-				)}
+				? hasCrafted
+					? <CraftedGear item={fletcherInventoryValue} onTransfer={resetFletcherInventory} />
+
+					: (
+						<CraftGear
+							onCraft={() => {
+								setFletcherInventory(
+									generateRangedWeapon({
+										affixStructure: getAffixStructure(),
+										gearClass,
+										level,
+										prefixTags: level < maximumWeaponLevel - GEAR_LEVEL_RANGE_MAXIMUM * 2
+											? ["lowQuality"]
+											: level === maximumWeaponLevel
+												? ["highQuality"]
+												: undefined,
+									}),
+								)
+							}}
+							price={Math.round(
+								getFromRange({
+									factor,
+									...WEAPON_BASE.price,
+								}) * WEAPON_MODIFIER.ranged.price,
+							)}
+						/>
+					)
+
+				: <span className="fst-italic text-center">{LABEL_SKILL_REQUIRED}</span>}
 		</Stack>
 	)
 }

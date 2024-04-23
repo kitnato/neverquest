@@ -6,7 +6,6 @@ import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay"
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general"
 import { armor, shield, weapon } from "@neverquest/state/gear"
 import { inventory } from "@neverquest/state/inventory"
-import type { Armor, Shield, Weapon } from "@neverquest/types"
 import {
 	isArmor,
 	isConsumableItem,
@@ -17,6 +16,8 @@ import {
 	isWeapon,
 } from "@neverquest/types/type-guards"
 import { stackItems } from "@neverquest/utilities/helpers"
+
+import type { Armor, Shield, Weapon } from "@neverquest/types"
 
 export function SellItems() {
 	const armorValue = useRecoilValue(armor)
@@ -35,9 +36,8 @@ export function SellItems() {
 			<h6>Sell items</h6>
 
 			{inventoryValue.length === 0
-				? (
-					<span className="fst-italic">Nothing to sell.</span>
-				)
+				? <span className="fst-italic">Nothing to sell.</span>
+
 				: (
 					<Stack gap={3}>
 						{storedItems

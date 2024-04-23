@@ -4,8 +4,9 @@ import { useRecoilState, useResetRecoilState } from "recoil"
 
 import { LABEL_SEPARATOR } from "@neverquest/data/general"
 import { deltas } from "@neverquest/state/deltas"
-import type { Delta } from "@neverquest/types/unions"
 import { getAnimationClass } from "@neverquest/utilities/getters"
+
+import type { Delta } from "@neverquest/types/unions"
 
 export function DeltasDisplay({ delta }: { delta: Delta }) {
 	const deltasState = deltas(delta)

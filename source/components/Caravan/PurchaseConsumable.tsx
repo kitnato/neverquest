@@ -10,9 +10,10 @@ import { CONSUMABLES } from "@neverquest/data/items"
 import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem"
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence"
 import IconEssence from "@neverquest/icons/essence.svg?react"
+import { formatNumber } from "@neverquest/utilities/formatters"
+
 import type { ConsumableItem } from "@neverquest/types"
 import type { Consumable } from "@neverquest/types/unions"
-import { formatNumber } from "@neverquest/utilities/formatters"
 
 export function PurchaseConsumable({ consumable }: { consumable: Consumable }) {
 	const [ID, setID] = useState(nanoid())

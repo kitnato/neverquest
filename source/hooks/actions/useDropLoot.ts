@@ -4,9 +4,10 @@ import { useRecoilCallback } from "recoil"
 import { GEM_BASE } from "@neverquest/data/items"
 import { monsterLoot } from "@neverquest/state/monster"
 import { essenceLoot, itemsLoot } from "@neverquest/state/resources"
-import type { InventoryItem } from "@neverquest/types"
 import { GEM_TYPES } from "@neverquest/types/unions"
 import { getFromRange, getSnapshotGetter } from "@neverquest/utilities/getters"
+
+import type { InventoryItem } from "@neverquest/types"
 
 export function useDropLoot() {
 	return useRecoilCallback(

@@ -31,8 +31,9 @@ import { isStageCompleted, location } from "@neverquest/state/encounter"
 import { isRelicEquipped } from "@neverquest/state/items"
 import { isMonsterDead } from "@neverquest/state/monster"
 import { isHealthLow } from "@neverquest/state/reserves"
-import type { SVGIcon } from "@neverquest/types/components"
 import { getAnimationClass } from "@neverquest/utilities/getters"
+
+import type { SVGIcon } from "@neverquest/types/components"
 
 export function Main() {
 	const areAttributesAffordableValue = useRecoilValue(areAttributesAffordable)
@@ -74,7 +75,7 @@ export function Main() {
 		}
 
 		return {
-			animation: (areAttributesAffordableValue || !hasEnoughMunitionsValue || isHealthLowValue || isMonsterDeadValue)
+			animation: areAttributesAffordableValue || !hasEnoughMunitionsValue || isHealthLowValue || isMonsterDeadValue
 				? undefined
 				: pulseAnimation,
 			Icon: IconAttack,

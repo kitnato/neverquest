@@ -21,9 +21,8 @@ export function Witch() {
 				{WITCH_POTIONS.map(({ consumable, requiredStage }) => (
 					<Fragment key={consumable}>
 						{stageMaximumValue >= requiredStage
-							? (
-								<PurchaseConsumable consumable={consumable} />
-							)
+							? <PurchaseConsumable consumable={consumable} />
+
 							: (
 								<IconDisplay
 									description={<span>Missing samples.</span>}

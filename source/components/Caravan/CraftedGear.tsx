@@ -5,8 +5,9 @@ import { LABEL_OVER_ENCUMBERED, POPOVER_TRIGGER } from "@neverquest/data/general
 import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem"
 import { useCanFit } from "@neverquest/hooks/actions/useCanFit"
 import { useToggleEquipItem } from "@neverquest/hooks/actions/useToggleEquipItem"
-import type { GearItem } from "@neverquest/types"
 import { getAnimationClass } from "@neverquest/utilities/getters"
+
+import type { GearItem } from "@neverquest/types"
 
 export function CraftedGear({ item, onTransfer }: { item: GearItem, onTransfer: () => void }) {
 	const { weight } = item

@@ -7,9 +7,10 @@ import { attributeStatistic } from "@neverquest/state/attributes"
 import { handleStorage } from "@neverquest/state/effects/handleStorage"
 import { stage } from "@neverquest/state/encounter"
 import { questsBonus } from "@neverquest/state/quests"
-import type { Reserve } from "@neverquest/types/unions"
 import { getFromRange, getLinearMapping, getSigmoid } from "@neverquest/utilities/getters"
 import { withStateKey } from "@neverquest/utilities/helpers"
+
+import type { Reserve } from "@neverquest/types/unions"
 
 // SELECTORS
 

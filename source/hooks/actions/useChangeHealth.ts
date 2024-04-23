@@ -17,9 +17,10 @@ import {
 	regenerationDuration,
 } from "@neverquest/state/reserves"
 import { essence } from "@neverquest/state/resources"
-import type { DeltaReserve } from "@neverquest/types/ui"
 import { formatNumber } from "@neverquest/utilities/formatters"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
+
+import type { DeltaReserve } from "@neverquest/types/ui"
 
 export function useChangeHealth() {
 	const addDelta = useAddDelta()
@@ -32,13 +33,13 @@ export function useChangeHealth() {
 				const get = getSnapshotGetter(snapshot)
 
 				const deltaDisplay
-					= contents === undefined ? [] : (Array.isArray(contents) ? contents : [contents])
+					= contents === undefined ? [] : Array.isArray(contents) ? contents : [contents]
 				const formattedValue = formatNumber({ value })
 				const healthMaximumPoisonedValue = get(healthMaximumPoisoned)
 				const isAttackingValue = get(isAttacking)
 				const isPositive = value > 0
 
-				let newHealth = get(health) + (get(isInvulnerable) ? (isPositive ? value : 0) : value)
+				let newHealth = get(health) + (get(isInvulnerable) ? isPositive ? value : 0 : value)
 
 				if (newHealth <= 0) {
 					newHealth = 0

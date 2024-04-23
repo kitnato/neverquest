@@ -22,8 +22,9 @@ import {
 	regenerationRate,
 } from "@neverquest/state/reserves"
 import { isSkillAcquired } from "@neverquest/state/skills"
-import type { Reserve } from "@neverquest/types/unions"
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters"
+
+import type { Reserve } from "@neverquest/types/unions"
 
 export function Regeneration({ reserve }: { reserve: Reserve }) {
 	const {

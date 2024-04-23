@@ -21,18 +21,18 @@ export function Caravan() {
 					<Stack gap={3}>
 						{showHiring && <h6>Hired crew</h6>}
 
-						{CREW_MEMBER_TYPES.map((crewMember, index) => (
-							<HiredCrewMember crewMember={crewMember} key={index} />
-						))}
+						{CREW_MEMBER_TYPES.map((crewMember, index) =>
+							<HiredCrewMember crewMember={crewMember} key={index} />,
+						)}
 					</Stack>
 
 					{showHiring && (
 						<Stack gap={3}>
 							<h6>Crew for hire</h6>
 
-							{CREW_MEMBER_TYPES.map((crewMember, index) => (
-								<HirableCrewMember crewMember={crewMember} key={index} />
-							))}
+							{CREW_MEMBER_TYPES.map((crewMember, index) =>
+								<HirableCrewMember crewMember={crewMember} key={index} />,
+							)}
 						</Stack>
 					)}
 				</Stack>

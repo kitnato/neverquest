@@ -3,7 +3,26 @@ import {
 	SHIELD_CLASS_TYPES,
 	WEAPON_CLASS_TYPES,
 } from "@kitnato/locran/build/types"
+
 import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear"
+import {
+	CONQUEST_TYPES,
+	CONSUMABLE_TYPES,
+	type Conquest,
+	FINALITY_TYPES,
+	type Finality,
+	GEAR_TYPES,
+	GEM_TYPES,
+	GRIP_TYPES,
+	type Gear,
+	INFUSABLE_TYPES,
+	QUEST_BONUS_TYPES,
+	type QuestBonus,
+	RELIC_TYPES,
+	ROUTINE_TYPES,
+	type Routine,
+} from "@neverquest/types/unions"
+
 import type {
 	Armor,
 	ConsumableItem,
@@ -22,23 +41,6 @@ import type {
 	Weapon,
 	WeaponBase,
 } from "@neverquest/types"
-import {
-	CONQUEST_TYPES,
-	CONSUMABLE_TYPES,
-	type Conquest,
-	FINALITY_TYPES,
-	type Finality,
-	GEAR_TYPES,
-	GEM_TYPES,
-	GRIP_TYPES,
-	type Gear,
-	INFUSABLE_TYPES,
-	QUEST_BONUS_TYPES,
-	type QuestBonus,
-	RELIC_TYPES,
-	ROUTINE_TYPES,
-	type Routine,
-} from "@neverquest/types/unions"
 
 export function isArmor(thing: unknown): thing is Armor {
 	return (

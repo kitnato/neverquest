@@ -10,7 +10,7 @@ export function useResetCompletedQuests() {
 			() => {
 				for (const quest of Object.values(QUEST_TYPES_BY_CLASS).flat()) {
 					set(questStatuses(quest), statuses =>
-						statuses.map(status => (isQuestBonus(status) ? "achieved" : status)),
+						statuses.map(status => isQuestBonus(status) ? "achieved" : status),
 					)
 				}
 

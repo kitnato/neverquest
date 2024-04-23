@@ -19,8 +19,9 @@ import IconIncrease from "@neverquest/icons/increase.svg?react"
 import IconUnknown from "@neverquest/icons/unknown.svg?react"
 import { areAttributesAffordable, isAttributeAtMaximum } from "@neverquest/state/attributes"
 import { acquiredSkills } from "@neverquest/state/skills"
-import type { Attribute } from "@neverquest/types/unions"
 import { capitalizeAll } from "@neverquest/utilities/formatters"
+
+import type { Attribute } from "@neverquest/types/unions"
 
 export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
 	const acquiredSkillsValue = useRecoilValue(acquiredSkills)

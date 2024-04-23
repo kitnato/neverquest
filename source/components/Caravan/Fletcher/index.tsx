@@ -6,6 +6,7 @@ import { IconTabs } from "@neverquest/components/IconTabs"
 import IconMunitions from "@neverquest/icons/munitions.svg?react"
 import IconRanged from "@neverquest/icons/ranged.svg?react"
 import { fletcherOptions } from "@neverquest/state/caravan"
+
 import type { FletcherOption } from "@neverquest/types/unions"
 
 export function Fletcher() {

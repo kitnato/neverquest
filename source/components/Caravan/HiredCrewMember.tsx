@@ -15,9 +15,10 @@ import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { CREW } from "@neverquest/data/caravan"
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general"
 import { activeCrewMember, isHired, monologue } from "@neverquest/state/caravan"
-import type { CrewMember } from "@neverquest/types/unions"
 import { capitalizeAll } from "@neverquest/utilities/formatters"
 import { getAnimationClass } from "@neverquest/utilities/getters"
+
+import type { CrewMember } from "@neverquest/types/unions"
 
 export function HiredCrewMember({ crewMember }: { crewMember: CrewMember }) {
 	const [activeCrewMemberValue, setActiveCrewMember] = useRecoilState(activeCrewMember)

@@ -1,10 +1,3 @@
-import type {
-	ArmorClass,
-	ArtifactType,
-	ShieldClass,
-	WeaponClass,
-	WeaponModality,
-} from "@kitnato/locran/build/types"
 import { LEVELLING_MAXIMUM, LEVELLING_THRESHOLD } from "@neverquest/data/general"
 import { CONSUMABLES, INFUSABLES, RELICS } from "@neverquest/data/items"
 import { BLIGHT, FINALITY_STAGE, POISON, RAGE } from "@neverquest/data/monster"
@@ -30,6 +23,14 @@ import IconRituals from "@neverquest/icons/rituals.svg?react"
 import IconSkills from "@neverquest/icons/skills.svg?react"
 import IconTailor from "@neverquest/icons/tailor.svg?react"
 import IconWitch from "@neverquest/icons/witch.svg?react"
+
+import type {
+	ArmorClass,
+	ArtifactType,
+	ShieldClass,
+	WeaponClass,
+	WeaponModality,
+} from "@kitnato/locran/build/types"
 import type { InheritableItem } from "@neverquest/types"
 import type { SVGIcon } from "@neverquest/types/components"
 import type { Description } from "@neverquest/types/ui"

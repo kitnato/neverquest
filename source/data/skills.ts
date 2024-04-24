@@ -54,7 +54,7 @@ export const SKILLS: Record<
 	}
 > = {
 	anatomy: {
-		description: "Grants the ability to inflict # bleeding with # piercing weapons.",
+		description: "Grants the ability to inflict # bleeding with # piercing weapons, dealing periodic damage.",
 		descriptionIcons: [IconBleeding, IconPiercing],
 		Icon: IconAnatomy,
 		isInheritable: false,
@@ -70,7 +70,7 @@ export const SKILLS: Record<
 		trainer: "mercenary",
 	},
 	armorcraft: {
-		description: "Grants the use of # heavy armor alongside the ability to improve # recovery.",
+		description: "Grants the use of # heavy armor and the ability to improve # recovery.",
 		descriptionIcons: [IconArmorHeavy, IconRecovery],
 		Icon: IconArmorcraft,
 		isInheritable: false,
@@ -139,7 +139,7 @@ export const SKILLS: Record<
 		trainer: "alchemist",
 	},
 	shieldcraft: {
-		description: "Grants the use of # tower shields and the ability to # stagger monsters.",
+		description: "Grants the use of # tower shields and the ability to # stagger monsters, reducing their damage dealt.",
 		descriptionIcons: [IconShieldTower, IconStaggered],
 		Icon: IconShieldcraft,
 		isInheritable: false,
@@ -157,7 +157,7 @@ export const SKILLS: Record<
 		trainer: "mercenary",
 	},
 	traumatology: {
-		description: "Grants the ability to # stun monsters with # blunt weapons.",
+		description: "Grants the ability to # stun monsters with # blunt weapons, reducing their chance to hit.",
 		descriptionIcons: [IconStunned, IconBlunt],
 		Icon: IconTraumatology,
 		isInheritable: false,

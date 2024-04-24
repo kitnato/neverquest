@@ -165,9 +165,6 @@ export function useDefend() {
 					}
 				}
 
-				const hasParried = Math.random() <= get(parryChance)
-				const hasBlocked = !hasParried && Math.random() <= get(blockChance)
-				const hasStaggered = !hasParried && Math.random() <= get(staggerChance)
 				const thornsValue = get(thorns)
 				const hasInflictedThorns = thornsValue > 0
 
@@ -178,8 +175,12 @@ export function useDefend() {
 				const deltaMonsterHealth: DeltaDisplay[] = []
 				const totalDamage = monsterDamageAilingValue - protectionValue
 
+				let hasParried = Math.random() <= get(parryChance)
+				let hasBlocked = !hasParried && Math.random() <= get(blockChance)
+				let hasStaggered = !hasParried && Math.random() <= get(staggerChance)
 				let healthDamage = totalDamage > 0 ? totalDamage : 0
 				let monsterHealthDamage = 0
+				let staminaDamage = 0
 
 				// If parrying occurs, check if it's possible.
 				if (hasParried) {
@@ -202,6 +203,8 @@ export function useDefend() {
 						})
 					}
 					else {
+						hasParried = false
+
 						deltaStamina.push(
 							{
 								color: "text-secondary",
@@ -220,6 +223,7 @@ export function useDefend() {
 				if (hasBlocked) {
 					if (canBlockOrStaggerValue) {
 						healthDamage = 0
+						staminaDamage += shieldBurden
 
 						deltaHealth.push({
 							color: "text-secondary",
@@ -227,11 +231,11 @@ export function useDefend() {
 						})
 
 						trainMastery("stability")
-						changeStamina({ value: -shieldBurden })
-
 						progressQuest({ quest: "blocking" })
 					}
 					else {
+						hasBlocked = false
+
 						deltaStamina.push(
 							{
 								color: "text-secondary",
@@ -249,14 +253,16 @@ export function useDefend() {
 
 				if (hasStaggered) {
 					if (canBlockOrStaggerValue) {
+						staminaDamage += shieldBurden
+
 						set(monsterAilmentDuration("staggered"), get(masteryStatistic("stability")))
 
-						changeStamina({ value: -shieldBurden })
 						trainMastery("stability")
-
 						progressQuest({ quest: "staggering" })
 					}
 					else {
+						hasStaggered = false
+
 						deltaStamina.push(
 							{
 								color: "text-secondary",
@@ -285,7 +291,7 @@ export function useDefend() {
 					}
 
 					if (incursArmorBurden) {
-						changeStamina({ value: -armorBurden })
+						staminaDamage += armorBurden
 					}
 				}
 
@@ -388,13 +394,9 @@ export function useDefend() {
 					}
 				}
 
-				// Take any damage and show any stamina costs.
+				// Take any damage and any stamina costs.
 				changeHealth({ contents: deltaHealth, value: -healthDamage })
-
-				addDelta({
-					contents: deltaStamina,
-					delta: "stamina",
-				})
+				changeStamina({ contents: deltaStamina, value: -staminaDamage })
 			},
 		[
 			addDelta,

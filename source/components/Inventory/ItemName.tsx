@@ -32,17 +32,16 @@ export function ItemName({
 							{
 								isGemItem(item)
 									? <GemDescription gem={item.name} />
-
-									: isRelicItem(item) && item.name === "[P71NQ]"
+									: isRelicItem(item) && item.name === "[S751NQ]"
 										? (
 											<Stack className="monospaced">
 												<span>Priority 0 - BREACH IN PROGRESS</span>
 
 												<span>{`Location: Outfloor ██-██#${LEVELLING_MAXIMUM}`}</span>
 
-												<span>Initializing: NqstCipher-██-███</span>
+												<span>Initializing: NqstCphr-██-███</span>
 
-												<span>Processing: 7.5% ...</span>
+												<span>Processing: 5.7% ...</span>
 
 												<span>Error: δ destabilization</span>
 
@@ -60,10 +59,10 @@ export function ItemName({
 												<DescriptionDisplay
 													description={description}
 													descriptionIcons={descriptionIcons}
+													isItalic={item.name === "memento"}
 												/>
 											)
 										})()
-
 							}
 
 							<DetailsTable>

@@ -462,7 +462,7 @@ export const TRAIT_TYPES = [
 export type Trait = (typeof TRAIT_TYPES)[number]
 
 export const RELIC_TYPES = [
-	"[P71NQ]",
+	"[S751NQ]",
 	"munitions satchel",
 	"automincer",
 	"compass",

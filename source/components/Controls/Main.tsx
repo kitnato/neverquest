@@ -87,8 +87,8 @@ export function Main() {
 		<OverlayTrigger
 			overlay={(
 				<Popover>
-					<PopoverHeader className="text-center">
-						<Stack direction="horizontal" gap={1}>
+					<PopoverHeader>
+						<Stack className="justify-content-center" direction="horizontal" gap={1}>
 							<span>Low</span>
 
 							<IconImage className="small" Icon={IconHealth} />

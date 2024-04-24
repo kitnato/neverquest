@@ -89,7 +89,7 @@ export const CONSUMABLES: Record<
 		item: {
 			ID: "",
 			name: "bandages",
-			price: 50,
+			price: 35,
 			weight: 1,
 		},
 	},
@@ -100,7 +100,7 @@ export const CONSUMABLES: Record<
 		item: {
 			ID: "",
 			name: "elixir",
-			price: 60,
+			price: 50,
 			weight: 2,
 		},
 	},
@@ -144,7 +144,7 @@ export const ELEMENTALS: Record<
 	fire: {
 		ailment: "burning",
 		color: "orange",
-		damageArmor: { maximum: 2, minimum: 1 },
+		damageArmor: { maximum: 1.75, minimum: 0.75 },
 		damageWeapon: { maximum: 0.45, minimum: 0.15 },
 		duration: { maximum: 2500, minimum: 1200 },
 		durationCap: 7500,
@@ -154,7 +154,7 @@ export const ELEMENTALS: Record<
 	ice: {
 		ailment: "frozen",
 		color: "cyan",
-		damageArmor: { maximum: 1.5, minimum: 0.75 },
+		damageArmor: { maximum: 1.25, minimum: 0.5 },
 		damageWeapon: { maximum: 0.35, minimum: 0.1 },
 		duration: { maximum: 2200, minimum: 1000 },
 		durationCap: 3500,
@@ -164,7 +164,7 @@ export const ELEMENTALS: Record<
 	lightning: {
 		ailment: "shocked",
 		color: "purple",
-		damageArmor: { maximum: 1, minimum: 0.5 },
+		damageArmor: { maximum: 0.75, minimum: 0.25 },
 		damageWeapon: { maximum: 0.2, minimum: 0.05 },
 		duration: { maximum: 2000, minimum: 900 },
 		durationCap: 5000,
@@ -259,12 +259,12 @@ export const RELICS: Record<
 		item: RelicItem
 	}
 > = {
-	"[P71NQ]": {
+	"[S751NQ]": {
 		description: "",
 		Icon: IconLogEntry,
 		item: {
 			ID: "",
-			name: "[P71NQ]",
+			name: "[S751NQ]",
 			price: 140_014,
 			weight: 14,
 		},

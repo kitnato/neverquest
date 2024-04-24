@@ -4,26 +4,21 @@ import { IconImage } from "@neverquest/components/IconImage"
 
 import type { Description } from "@neverquest/types/ui"
 
-export function DescriptionDisplay({ description, descriptionIcons }: Description) {
+export function DescriptionDisplay({ description, descriptionIcons, isItalic }: Description) {
 	return (
 		<div>
 			{description.split("#").map((part, index) => {
-				if (descriptionIcons?.[index] === undefined) {
-					return <span key={index}>{part}</span>
-				}
+				const descriptionIcon = descriptionIcons?.[index]
 
-				const descriptionIcon = descriptionIcons[index]
+				return (
+					<Fragment key={index}>
+						<span className={isItalic ? "fst-italic" : undefined}>
+							{part}
+						</span>
 
-				if (descriptionIcon !== undefined) {
-					return (
-						<Fragment key={index}>
-							<span>{part}</span>
-
-							{descriptionIcons[index] !== undefined
-							&& <IconImage className="small" Icon={descriptionIcon} />}
-						</Fragment>
-					)
-				}
+						{descriptionIcon !== undefined && <IconImage className="small" Icon={descriptionIcon} />}
+					</Fragment>
+				)
 			})}
 		</div>
 	)

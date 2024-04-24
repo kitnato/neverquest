@@ -331,7 +331,7 @@ export const monsterLoot = withStateKey("monsterLoot", key =>
 						? { ...INFUSABLES["mysterious egg"].item, ID: nanoid() }
 						// Log Entry only drops after defeating Res Dominus while carrying the Memento and if it's never been looted before.
 						: encounterValue === "res dominus" && isMementoOwned && !get(hasLootedLogEntry)
-							? { ...RELICS["[P71NQ]"].item, ID: nanoid() }
+							? { ...RELICS["[S751NQ]"].item, ID: nanoid() }
 							: isMementoOwned && get(ownedItem("torn manuscript")) === undefined && !merchantInventoryValue.some(({ name }) => name === "torn manuscript") && get(isHired("alchemist")) && !get(isSkillAcquired("memetics")) && Math.random() <= getFromRange({ factor: getSigmoid(stageValue), ...RELIC_DROP_CHANCE["torn manuscript"] })
 								// Torn manuscript drops if it's neither carried nor sold, if the memento is carried, if the correct crew member is hired, if the associated skill hasn't been trained and if the drop chance is reached.
 								? { ...RELICS["torn manuscript"].item, ID: nanoid() }

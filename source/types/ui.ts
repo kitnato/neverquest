@@ -28,6 +28,7 @@ export type DeltaReserve = {
 export type Description = {
 	description: string
 	descriptionIcons?: [SVGIcon, ...SVGIcon[]]
+	isItalic?: boolean
 }
 
 export type UIAttachment = "above" | "below"

@@ -38,7 +38,9 @@ Monsters also have health that functions in the same way.
 
 #### Stamina
 
-Several combat actions require stamina to be able to execute them. Most [gear](#gear) has a burden for an associated action which translates to a stamina cost that must be paid to be successful. Similarly, wearing [armor](#armor) incurs a burden that is paid when struck or [dodging](#dodge-chance) and [shields](#shields) incur their own burden whenever an attack is [blocked](#block-chance).
+Several combat actions require stamina to be able to accomplish them. Most [gear](#gear) has a burden for an associated action which translates to a stamina cost that must be paid.
+
+Every attack with a [weapon](#weapons) costs stamina, determined by its burden. Similarly, wearing [armor](#armor) incurs a burden that is paid when being struck or [dodging](#dodge-chance) and [shields](#shields) incur their own burden whenever an attack is [blocked](#block-chance) or the monster is [staggered](#staggered).
 
 When there is not enough stamina available for a particular action, you become exhausted during which none of these actions are possible until sufficient stamina is [regenerated](#stamina-regeneration).
 
@@ -106,7 +108,13 @@ The time duration between attacks. Does not take into account [recovery rate](#r
 
 #### Bleed rating
 
-A value determined by the chance of inflicting [bleeding](#bleeding) alongside total bleed damage, which is a percentage of weapon damage, and its duration. Only applies if a [piercing](#piercing-weapons) weapon is equipped.
+A value determined by:
+
+- the chance of inflicting [bleeding](#bleeding),
+- its associated total bleeding damage, which is a percentage of weapon damage,
+- and the bleeding duration.
+
+Only applies if a [piercing](#piercing-weapons) weapon is equipped.
 
 Bleeding damage is increased by mastering [cruelty](#cruelty).
 
@@ -134,7 +142,7 @@ Requires a certain [skill](#skills).
 
 #### Dodge chance
 
-A percentage determining the chance of when being struck, that all damage is avoided entirely. The equipped armor's [burden](#armor) incurs a stamina cost. Dodging is different from other damage-mitigating actions such as [blocking](#block-chance) and [parrying](#parry-rating) in that it avoids the infliction of any [ailments](#character-ailments) altogether.
+A percentage determining the chance of when being struck, that all damage is avoided entirely. The equipped armor's [burden](#armor) incurs a stamina cost if an attack is dodged successfully. Dodging is different from other damage-mitigating actions such as [blocking](#block-chance) and [parrying](#parry-rating) in that it avoids the infliction of any [ailments](#character-ailments) altogether.
 
 Dodge chance can be increased with the [agility](#agility) attribute.
 
@@ -292,7 +300,7 @@ An item can either be;
 - b) a consumable like a [potion](#potions), or
 - c) a [relic](#relics) that grants a special effect and/or a manual action while carried.
 
-Every item, apart from the [knapsack](#knapsack), has an associated weight that affects [encumbrance](#encumbrance).
+Every item, apart from the [knapsack](#knapsack), has an associated weight that affects [encumbrance](#encumbrance). Any item can also be discarded, thereby irretrievably removing it from the inventory.
 
 ### Knapsack
 
@@ -467,15 +475,15 @@ Relics enable various actions or grant certain effects if they are carried in th
 
 ##### Static relics
 
-These provide a permanent effect of some sort while they are carried in the inventory. If one is sold or discarded, the effect disappears alongside it.
+Provide a permanent effect of some sort while they are carried in the inventory. If such a relic is sold or discarded, the effect disappears with it.
 
 ##### Usable relics
 
-These relics can be interacted with. Some can be equipped so that their effect is granted.
+Relics that can be interacted with. Some can be equipped for their effect to be granted.
 
 ##### Infusable relics
 
-Some of usable relics are infusable, meaning they allow [essence](#essence) to be spent on them to upgrade their effect via infusion levels. This can only be done achieved once a certain [skill](#skills) has been acquired.
+Some usable relics are infusable, meaning they allow [essence](#essence) to be spent on them to upgrade their effect via infusion levels. This can only be done once a certain [skill](#skills) has been acquired.
 
 To infuse continuously, the button can be held down so as to not require excessive clicking.
 
@@ -735,7 +743,7 @@ While at a [distance](#range), all attacks with a [ranged](#ranged-weapons) weap
 
 #### Stalwart
 
-There are no stamina penalties when wearing armor.
+There are no stamina costs associated with wearing armor.
 
 #### Tank
 

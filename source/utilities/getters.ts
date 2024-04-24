@@ -471,14 +471,13 @@ export function getSellPrice({ gemsFitted, item }: { gemsFitted?: number, item: 
 	let supplement = 0
 
 	if (isGearItem(item) && gemsFitted !== undefined && gemsFitted > 0) {
-		supplement
-			+= getSellPrice({
-				item: {
-					...GEM_BASE,
-					ID: nanoid(),
-					name: "ruby",
-				},
-			}) * gemsFitted
+		supplement += getSellPrice({
+			item: {
+				...GEM_BASE,
+				ID: nanoid(),
+				name: "ruby",
+			},
+		}) * gemsFitted
 	}
 
 	return Math.max(Math.round(price / 2), GENERIC_MINIMUM) + supplement
@@ -496,12 +495,11 @@ export function getShieldRanges({ factor, gearClass }: { factor: number, gearCla
 }
 
 // https://en.wikipedia.org/wiki/Sigmoid_function
-// f(0) = 0, f(37) = ~0.28, f(50) = ~0.73, f(75) = ~1, f(75) = ~1
+// f(0) = 0, f(37) = ~0.28, f(50) = ~0.73, f(75) = ~1, f(100) = ~1
 export function getSigmoid(x: number) {
 	return x === 0
 		? 0
-		: (1 / (1 + Math.pow(Math.E, -0.15 * (x - 44))) + 0.01)
-		* (9 * Math.pow(Math.E, -(Math.LN2 / 5) * x) + 1)
+		: (Math.tanh(x / 13 - 3) + 1) / 2
 }
 
 export function getSnapshotGetter({ getLoadable }: Snapshot) {

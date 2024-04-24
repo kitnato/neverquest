@@ -21,7 +21,7 @@ export function Mercenary() {
 	return (
 		<Stack gap={5}>
 			<Stack gap={3}>
-				<h6>Train skills</h6>
+				<h6>Acquire skills</h6>
 
 				{trainableSkills.length === 0
 					? <span className="fst-italic">{LABEL_NONE_AVAILABLE}</span>

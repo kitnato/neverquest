@@ -42,7 +42,9 @@ export function Essence() {
 					<OverlayTrigger
 						overlay={(
 							<Popover>
-								<PopoverHeader className="text-center">Essence loot bonus</PopoverHeader>
+								<PopoverHeader className="text-center">
+									<span>Essence loot bonus</span>
+								</PopoverHeader>
 
 								<PopoverBody>
 									<Stack className="justify-content-center" direction="horizontal" gap={1}>

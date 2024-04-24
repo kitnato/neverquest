@@ -96,13 +96,10 @@ export function ItemDisplay({
 				description={
 					name === "munitions satchel"
 						? <MunitionsStatus />
-
 						: name === "lacrimatory"
 							? <LacrimatoryStatus />
-
 							: equippedRelics[name]
 								? <span>Equipped</span>
-
 								: undefined
 				}
 				Icon={RELICS[name].Icon}

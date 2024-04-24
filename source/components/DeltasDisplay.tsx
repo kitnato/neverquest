@@ -35,7 +35,7 @@ export function DeltasDisplay({ delta }: { delta: Delta }) {
 					>
 						{display.map(({ color, value }, index) => (
 							<Fragment key={value}>
-								<strong className={`${color} small`}>
+								<strong className={`${color} small text-nowrap`}>
 									{value}
 								</strong>
 

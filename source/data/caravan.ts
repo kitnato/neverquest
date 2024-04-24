@@ -10,7 +10,7 @@ import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react"
 import IconFletcher from "@neverquest/icons/fletcher.svg?react"
 import IconGear from "@neverquest/icons/gear.svg?react"
 import IconGems from "@neverquest/icons/gems.svg?react"
-import IconHealth from "@neverquest/icons/health.svg?react"
+import IconHealing from "@neverquest/icons/healing.svg?react"
 import IconMedic from "@neverquest/icons/medic.svg?react"
 import IconMercenary from "@neverquest/icons/mercenary.svg?react"
 import IconMerchant from "@neverquest/icons/merchant.svg?react"
@@ -63,7 +63,7 @@ export const CREW: Record<
 		requiredStage: 25,
 	},
 	blacksmith: {
-		description: "Crafts superior # gear and identifies gear class.",
+		description: "Crafts and identifies # gear.",
 		descriptionIcons: [IconGear],
 		Icon: IconBlacksmith,
 		interaction: "Craft",
@@ -91,7 +91,7 @@ export const CREW: Record<
 	},
 	medic: {
 		description: "Offers # healing and sells # bandages.",
-		descriptionIcons: [IconHealth, IconBandages],
+		descriptionIcons: [IconHealing, IconBandages],
 		Icon: IconMedic,
 		interaction: "Treat",
 		monologues: {
@@ -176,7 +176,7 @@ export const CREW: Record<
 		requiredStage: 30,
 	},
 	tailor: {
-		description: "Offers the expansion of # encumbrance.",
+		description: "Expands # encumbrance.",
 		descriptionIcons: [IconEncumbrance],
 		Icon: IconTailor,
 		interaction: "Stitch",
@@ -287,8 +287,9 @@ export const PURGE_PRICE_MULTIPLIER = {
 }
 
 export const SURGERY_PRICE = {
+	// Price of individually purchasing bandages and elixir with a 10% surcharge.
 	maximum: Math.round((CONSUMABLES.bandages.item.price + CONSUMABLES.elixir.item.price) * 1.1),
-	minimum: 3,
+	minimum: 5,
 }
 
 export const TAILORING = { amount: 3, priceRange: { maximum: 250, minimum: 3 } }

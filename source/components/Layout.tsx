@@ -79,7 +79,7 @@ export function Layout() {
 		case "somnium": {
 			return (
 				<Glitch>
-					<Container className="mb-4">
+					<Container className="pb-4">
 						<Row>
 							<Col>
 								<Stack gap={3}>

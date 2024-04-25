@@ -3,11 +3,11 @@ import { useRecoilValue } from "recoil"
 
 import { ProgressMeter } from "@neverquest/components/Encounter/ProgressMeter"
 import { IconDisplay } from "@neverquest/components/IconDisplay"
-import { LABEL_TOTAL, POPOVER_TRIGGER } from "@neverquest/data/general"
+import { POPOVER_TRIGGER } from "@neverquest/data/general"
 import { useDeltaText } from "@neverquest/hooks/useDeltaText"
 import IconMonsterReduction from "@neverquest/icons/monster-reduction.svg?react"
 import IconProgress from "@neverquest/icons/progress.svg?react"
-import { generation, location, progress, progressMaximum } from "@neverquest/state/encounter"
+import { generation, location, progress } from "@neverquest/state/encounter"
 import { formatNumber } from "@neverquest/utilities/formatters"
 import { getPerkEffect } from "@neverquest/utilities/getters"
 
@@ -21,12 +21,6 @@ export function Progress() {
 		delta: "progress",
 		ignoreZero: true,
 		state: progress,
-	})
-
-	useDeltaText({
-		delta: "progressMaximum",
-		state: progressMaximum,
-		suffix: LABEL_TOTAL.toUpperCase(),
 	})
 
 	if (locationValue === "wilderness") {

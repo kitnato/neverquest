@@ -108,7 +108,6 @@ export type Delta =
 	| "parryRating"
 	| "powerLevel"
 	| "progress"
-	| "progressMaximum"
 	| "protection"
 	| "rage"
 	| "range"

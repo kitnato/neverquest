@@ -33,11 +33,7 @@ export function ProgressMeter() {
 							{isInfinite ? LABEL_UNKNOWN : formatNumber({ value: progressMaximumValue })}
 						</span>
 
-						<Stack>
-							<DeltasDisplay delta="progress" />
-
-							{!isInfinite && <DeltasDisplay delta="progressMaximum" />}
-						</Stack>
+						<DeltasDisplay delta="progress" />
 					</Stack>
 				)}
 		</LabelledProgressBar>

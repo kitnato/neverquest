@@ -8,7 +8,7 @@ import IconGeneration from "@neverquest/icons/generation.svg?react"
 import { generation } from "@neverquest/state/encounter"
 import { acquiredTraits } from "@neverquest/state/traits"
 import { TRAIT_TYPES } from "@neverquest/types/unions"
-import { formatNumber } from "@neverquest/utilities/formatters"
+import { formatCardinal } from "@neverquest/utilities/formatters"
 
 export function Traits() {
 	const acquiredTraitsValue = useRecoilValue(acquiredTraits)
@@ -21,7 +21,7 @@ export function Traits() {
 
 				<IconDisplay Icon={IconGeneration} tooltip="Current generation">
 					<span>
-						{formatNumber({ value: generationValue })}
+						{formatCardinal(generationValue)}
 					</span>
 				</IconDisplay>
 			</Stack>

@@ -57,6 +57,7 @@ export function useRetire() {
 			() => {
 				const get = getSnapshotGetter(snapshot)
 
+				const nextGeneration = get(generation) + 1
 				const selectedTraitValue = get(selectedTrait)
 				const stageMaximumValue = get(stageMaximum)
 
@@ -75,7 +76,7 @@ export function useRetire() {
 				resetAttributes()
 				resetCharacter()
 
-				set(essence, Math.round(getPerkEffect({ generation: get(generation), perk: "startingEssence" }) * get(absorbedEssence)))
+				set(essence, Math.round(getPerkEffect({ generation: nextGeneration, perk: "startingEssence" }) * get(absorbedEssence)))
 
 				reset(armor)
 				reset(blacksmithInventory)
@@ -145,7 +146,7 @@ export function useRetire() {
 
 				reset(merchantInventory)
 
-				set(generation, current => current + 1)
+				set(generation, nextGeneration)
 
 				if (get(isSkillAcquired("memetics"))) {
 					progressQuest({ quest: "decipheringJournal" })

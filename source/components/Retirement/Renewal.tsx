@@ -14,7 +14,7 @@ import IconStage from "@neverquest/icons/stage.svg?react"
 import IconTransmute from "@neverquest/icons/transmute.svg?react"
 import { powerLevel } from "@neverquest/state/attributes"
 import { generation, stage } from "@neverquest/state/encounter"
-import { formatNumber } from "@neverquest/utilities/formatters"
+import { formatCardinal, formatNumber } from "@neverquest/utilities/formatters"
 
 export function Renewal() {
 	const generationValue = useRecoilValue(generation)
@@ -34,13 +34,13 @@ export function Renewal() {
 					>
 						<Stack direction="horizontal" gap={1}>
 							<span>
-								{formatNumber({ value: generationValue })}
+								{formatCardinal(generationValue)}
 							</span>
 
 							<IconImage className="small text-secondary" Icon={IconTransmute} />
 
 							<span>
-								{formatNumber({ value: generationValue + 1 })}
+								{formatCardinal(generationValue + 1)}
 							</span>
 						</Stack>
 					</IconDisplay>

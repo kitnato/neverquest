@@ -51,7 +51,7 @@ export function Perks() {
 			>
 				<span>
 					{formatNumber({
-						value: getPerkEffect({ generation: generationValue, perk: "startingEssence" }) * absorbedEssenceValue,
+						value: getPerkEffect({ generation: generationValue + 1, perk: "startingEssence" }) * absorbedEssenceValue,
 					})}
 				</span>
 			</IconDisplay>

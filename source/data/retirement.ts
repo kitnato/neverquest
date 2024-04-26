@@ -1,16 +1,21 @@
-export const GENERATIONS_MAXIMUM = 4
+import { type Perk, TRAIT_TYPES } from "@neverquest/types/unions"
 
-export const PERKS = {
+import type { GeneratorRange } from "@neverquest/types"
+
+export const PERKS: Record<Perk, GeneratorRange & { generationMaximum: number }> = {
 	essenceBonus: {
+		generationMaximum: 5,
 		maximum: 1,
 		minimum: 0.4,
 	},
 	monsterReduction: {
+		generationMaximum: 5,
 		maximum: 0.9,
 		minimum: 0.35,
 	},
 	startingEssence: {
-		maximum: 0.125,
+		generationMaximum: TRAIT_TYPES.length,
+		maximum: 0.35,
 		minimum: 0.05,
 	},
 }

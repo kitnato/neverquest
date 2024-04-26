@@ -130,7 +130,7 @@ export const corpse = withStateKey("corpse", key =>
 
 export const generation = withStateKey("generation", key =>
 	atom({
-		default: 0,
+		default: 1,
 		effects: [handleStorage({ key })],
 		key,
 	}),

@@ -35,6 +35,8 @@ export const LEVELLING_MAXIMUM = 75
 
 export const NAME_LENGTH_MAXIMUM = 50
 
+export const ORDINALS = new Intl.PluralRules("en", { type: "ordinal" })
+
 export const PERCENTAGE = 100
 
 export const POPOVER_TRIGGER: OverlayTriggerType[] = ["focus", "hover"]

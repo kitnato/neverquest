@@ -2,6 +2,7 @@ import {
 	MILLISECONDS_IN_HOUR,
 	MILLISECONDS_IN_MINUTE,
 	MILLISECONDS_IN_SECOND,
+	ORDINALS,
 	PERCENTAGE,
 } from "@neverquest/data/general"
 
@@ -10,6 +11,28 @@ import type { NumberFormat } from "@neverquest/types/unions"
 export function capitalizeAll(string: string) {
 	// ^\w{1} matches the first letter of the word, or (|) \s+ matches any amount of whitespace between the words.
 	return string.replaceAll(/(^\w)|(\s+\w)/g, letter => letter.toUpperCase())
+}
+
+export function formatCardinal(ordinal: number) {
+	const formattedOrdinal = formatNumber({ value: ordinal })
+
+	switch (ORDINALS.select(ordinal)) {
+		case "one": {
+			return `${formattedOrdinal}st`
+		}
+
+		case "two": {
+			return `${formattedOrdinal}nd`
+		}
+
+		case "few": {
+			return `${formattedOrdinal}rd`
+		}
+
+		default: {
+			return `${formattedOrdinal}th`
+		}
+	}
 }
 
 export function formatEnumeration(list: string[]) {

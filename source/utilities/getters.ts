@@ -34,7 +34,7 @@ import {
 	RELICS,
 } from "@neverquest/data/items"
 import { QUESTS } from "@neverquest/data/quests"
-import { GENERATIONS_MAXIMUM, PERKS } from "@neverquest/data/retirement"
+import { PERKS } from "@neverquest/data/retirement"
 import IconArmorNone from "@neverquest/icons/armor-none.svg?react"
 import IconArmor from "@neverquest/icons/armor.svg?react"
 import IconOneHanded from "@neverquest/icons/one-handed.svg?react"
@@ -431,14 +431,15 @@ export function getPerkEffect({
 	generation: number
 	perk: Perk
 }) {
-	const { maximum, minimum } = PERKS[perk]
+	const { generationMaximum, maximum, minimum } = PERKS[perk]
+	const increasableGenerations = generationMaximum - 2
 
-	if (generation === 0 && perk !== "startingEssence") {
+	if (generation === 1) {
 		return 0
 	}
 
 	return getFromRange({
-		factor: (Math.min(generation, GENERATIONS_MAXIMUM) - 1) / (GENERATIONS_MAXIMUM - 1),
+		factor: Math.min(generation - 2, increasableGenerations) / increasableGenerations,
 		maximum,
 		minimum,
 	})

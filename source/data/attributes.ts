@@ -59,7 +59,7 @@ export const ATTRIBUTES: Record<
 		descriptionIcons: [IconStamina],
 		format: "integer",
 		Icon: IconEndurance,
-		increment: 8,
+		increment: 10,
 		incrementBonus: { maximum: 150, perRank: 5 },
 		shows: "stamina",
 	},

@@ -1,8 +1,8 @@
 import { Badge } from "react-bootstrap"
 
-export function BadgeMaximum() {
+export function BadgeMaximum({ className }: { className?: string }) {
 	return (
-		<Badge bg="secondary">
+		<Badge bg="secondary" className={className}>
 			<span>MAX</span>
 		</Badge>
 	)

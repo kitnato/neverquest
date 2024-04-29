@@ -258,12 +258,14 @@ export const parryRating = withStateKey("parryRating", key =>
 export const protection = withStateKey("protection", key =>
 	selector({
 		get: ({ get }) => {
-			const { protection } = get(armor)
+			const armorValue = get(armor)
 			const shieldValue = get(shield)
+
+			const { protection } = armorValue
 
 			return (
 				protection
-				+ (!isUnshielded(shieldValue) && get(isTraitAcquired("tank"))
+				+ (!isUnarmored(armorValue) && !isUnshielded(shieldValue) && get(isTraitAcquired("tank"))
 					? Math.max(Math.round(protection * TANK_PROTECTION_BONUS), GENERIC_MINIMUM)
 					: 0)
 			)

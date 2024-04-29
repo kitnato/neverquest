@@ -144,8 +144,8 @@ export const ELEMENTALS: Record<
 	fire: {
 		ailment: "burning",
 		color: "orange",
-		damageArmor: { maximum: 1.75, minimum: 0.75 },
-		damageWeapon: { maximum: 0.45, minimum: 0.15 },
+		damageArmor: { maximum: 1.8, minimum: 0.8 },
+		damageWeapon: { maximum: 0.4, minimum: 0.15 },
 		duration: { maximum: 2500, minimum: 1200 },
 		durationCap: 7500,
 		gem: "ruby",
@@ -154,8 +154,8 @@ export const ELEMENTALS: Record<
 	ice: {
 		ailment: "frozen",
 		color: "cyan",
-		damageArmor: { maximum: 1.25, minimum: 0.5 },
-		damageWeapon: { maximum: 0.35, minimum: 0.1 },
+		damageArmor: { maximum: 1.3, minimum: 0.6 },
+		damageWeapon: { maximum: 0.3, minimum: 0.1 },
 		duration: { maximum: 2200, minimum: 1000 },
 		durationCap: 3500,
 		gem: "sapphire",
@@ -164,7 +164,7 @@ export const ELEMENTALS: Record<
 	lightning: {
 		ailment: "shocked",
 		color: "purple",
-		damageArmor: { maximum: 0.75, minimum: 0.25 },
+		damageArmor: { maximum: 0.8, minimum: 0.3 },
 		damageWeapon: { maximum: 0.2, minimum: 0.05 },
 		duration: { maximum: 2000, minimum: 900 },
 		durationCap: 5000,

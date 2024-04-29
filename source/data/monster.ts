@@ -97,8 +97,8 @@ export const MONSTER_ATTACK_RATE = {
 	bonus: 0.005,
 	boss: 1.05,
 	finality: {
-		"res cogitans": 1765,
-		"res dominus": 2765,
+		"res cogitans": 1750,
+		"res dominus": 2750,
 	},
 	minimum: 2000,
 }
@@ -109,12 +109,12 @@ export const MONSTER_DAMAGE = {
 	bonus: 0.01,
 	boss: 1.075,
 	finality: {
-		"res cogitans": 1777,
-		"res dominus": 1077,
+		"res cogitans": 1757,
+		"res dominus": 1075,
 	},
 	menace: {
-		maximum: 1.3,
-		minimum: 0.35,
+		maximum: 2,
+		minimum: 0.4,
 		requiredStage: RETIREMENT_STAGE + 1,
 	},
 }
@@ -125,11 +125,11 @@ export const MONSTER_HEALTH = {
 	bonus: 0.02,
 	boss: 1.8,
 	finality: {
-		"res cogitans": 21777,
-		"res dominus": 11777,
+		"res cogitans": 21757,
+		"res dominus": 11757,
 	},
 	menace: {
-		maximum: 2.6,
+		maximum: 2.8,
 		minimum: 0.4,
 		requiredStage: RETIREMENT_STAGE + 1,
 	},
@@ -148,8 +148,8 @@ export const POISON = {
 		minimum: 0.15,
 	},
 	duration: {
-		maximum: 300_000,
-		minimum: 30_000,
+		maximum: 500_000,
+		minimum: 45_000,
 	},
 	finality: {
 		"res cogitans": 0.7777,

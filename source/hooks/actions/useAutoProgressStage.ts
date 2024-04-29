@@ -9,7 +9,7 @@ import { isAttacking } from "@neverquest/state/character"
 import { encounter, isStageCompleted } from "@neverquest/state/encounter"
 import { isRelicEquipped } from "@neverquest/state/items"
 import { itemsLoot } from "@neverquest/state/resources"
-import { isFinality } from "@neverquest/types/type-guards"
+import { isFinality, isGemItem } from "@neverquest/types/type-guards"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
 
 export function useAutoProgressStage() {
@@ -24,11 +24,13 @@ export function useAutoProgressStage() {
 			() => {
 				const get = getSnapshotGetter(snapshot)
 
+				const itemsLootValue = get(itemsLoot)
+
 				if (get(isStageCompleted) && get(isAttacking)) {
 					if (
 						get(isRelicEquipped("automincer"))
 						&& !isFinality(get(encounter))
-						&& get(itemsLoot).length === 0
+						&& (itemsLootValue.length === 0 || itemsLootValue.every(item => isGemItem(item)))
 						&& collectLoot() === "success"
 					) {
 						advanceCaravan()

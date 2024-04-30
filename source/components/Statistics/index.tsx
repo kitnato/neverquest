@@ -16,11 +16,11 @@ import { StunRating } from "@neverquest/components/Statistics/StunRating"
 import { Thorns } from "@neverquest/components/Statistics/Thorns"
 
 export function Statistics() {
-	const element = useRef<HTMLDivElement | null>(null)
+	const elementReference = useRef<HTMLDivElement | null>(null)
 	const [isVisible, setIsVisible] = useState(false)
 
 	const setVisibleOnTextChange = () => {
-		const { current } = element
+		const { current } = elementReference
 
 		if (current?.textContent?.trim() !== "") {
 			setIsVisible(true)
@@ -28,7 +28,7 @@ export function Statistics() {
 	}
 
 	useLayoutEffect(() => {
-		const { current } = element
+		const { current } = elementReference
 
 		if (current !== null) {
 			new MutationObserver(setVisibleOnTextChange).observe(current, {
@@ -41,7 +41,7 @@ export function Statistics() {
 	}, [])
 
 	return (
-		<Card className={isVisible ? "" : "d-none "} ref={element}>
+		<Card className={isVisible ? "" : "d-none "} ref={elementReference}>
 			<CardBody>
 				<Row>
 					<Col>

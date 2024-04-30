@@ -3,6 +3,7 @@ import { useRecoilCallback } from "recoil"
 import { CORPSE_VALUE } from "@neverquest/data/encounter"
 import { HEALTH_LOW_THRESHOLD } from "@neverquest/data/reserves"
 import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta"
+import { useMending } from "@neverquest/hooks/actions/useMending"
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import { useToggleAttacking } from "@neverquest/hooks/actions/useToggleAttacking"
 import { absorbedEssence } from "@neverquest/state/attributes"
@@ -14,16 +15,19 @@ import {
 	health,
 	healthMaximumPoisoned,
 	isInvulnerable,
+	protectedElement,
 	regenerationDuration,
 } from "@neverquest/state/reserves"
 import { essence } from "@neverquest/state/resources"
 import { formatNumber } from "@neverquest/utilities/formatters"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
+import { animateElement } from "@neverquest/utilities/helpers"
 
 import type { DeltaReserve } from "@neverquest/types/ui"
 
 export function useChangeHealth() {
 	const addDelta = useAddDelta()
+	const mending = useMending()
 	const progressQuest = useProgressQuest()
 	const toggleAttacking = useToggleAttacking()
 
@@ -32,8 +36,11 @@ export function useChangeHealth() {
 			({ contents, value }: DeltaReserve) => {
 				const get = getSnapshotGetter(snapshot)
 
-				const deltaDisplay
-					= contents === undefined ? [] : Array.isArray(contents) ? contents : [contents]
+				const deltaDisplay = contents === undefined
+					? []
+					: Array.isArray(contents)
+						? contents
+						: [contents]
 				const formattedValue = formatNumber({ value })
 				const healthMaximumPoisonedValue = get(healthMaximumPoisoned)
 				const isAttackingValue = get(isAttacking)
@@ -75,15 +82,20 @@ export function useChangeHealth() {
 					&& isAttackingValue
 					&& get(isRelicEquipped("dream catcher"))
 				) {
-					toggleAttacking()
-
-					addDelta({
-						contents: {
-							color: "text-secondary",
-							value: "CAUGHT",
-						},
-						delta: "health",
+					animateElement({
+						animation: "heartBeat",
+						element: get(protectedElement),
 					})
+
+					const ownedBandages = get(ownedItem("bandages"))
+
+					if (ownedBandages === undefined) {
+						toggleAttacking()
+					}
+					else {
+						mending("health", ownedBandages.ID)
+						return
+					}
 				}
 
 				set(health, newHealth)
@@ -100,6 +112,6 @@ export function useChangeHealth() {
 					delta: "health",
 				})
 			},
-		[addDelta, progressQuest, toggleAttacking],
+		[addDelta, mending, progressQuest, toggleAttacking],
 	)
 }

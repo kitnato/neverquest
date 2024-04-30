@@ -1,18 +1,14 @@
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap"
-import { useRecoilValue, useSetRecoilState } from "recoil"
+import { useRecoilValue } from "recoil"
 
 import { LABEL_FULL_HEALTH, POPOVER_TRIGGER } from "@neverquest/data/general"
-import { useHealing } from "@neverquest/hooks/actions/useHealing"
-import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
-import { inventory } from "@neverquest/state/inventory"
+import { useMending } from "@neverquest/hooks/actions/useMending"
 import { isHealthAtMaximum } from "@neverquest/state/reserves"
 
 export function Bandages({ ID }: { ID: string }) {
 	const isHealthAtMaximumValue = useRecoilValue(isHealthAtMaximum)
-	const setInventory = useSetRecoilState(inventory)
 
-	const healing = useHealing()
-	const progressQuest = useProgressQuest()
+	const mending = useMending()
 
 	return (
 		<OverlayTrigger
@@ -27,13 +23,7 @@ export function Bandages({ ID }: { ID: string }) {
 				<Button
 					disabled={isHealthAtMaximumValue}
 					onClick={() => {
-						healing("health")
-
-						setInventory(currentInventory =>
-							currentInventory.filter(({ ID: currentItemID }) => currentItemID !== ID),
-						)
-
-						progressQuest({ quest: "bandaging" })
+						mending("health", ID)
 					}}
 					variant="outline-dark"
 				>

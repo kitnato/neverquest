@@ -220,6 +220,8 @@ Damage from the equipped [weapon](#weapons) in addition to [strength](#strength)
 
 When your [health](#health) reaches 0, you flatline and are reborn several stages lower with your [items](#items) and [power level](#attributes) intact, but having lost all unspent [essence](#essence). Upon reaching the stage again in which you previously died, you may scavenge your corpse to recover the lost unspent essence and an additional fraction of your total absorbed essence at the time of death.
 
+All [equipped relics](#usable-relics) will need to be re-equipped.
+
 ## Encounter
 
 The panel to the right of the screen. It changes based on one of the two possible locations, [wilderness](#wilderness) or [caravan](#caravan).
@@ -264,7 +266,7 @@ Requires the [archery](#archery) skill.
 
 #### Medic
 
-Offers full healing in exchange for essence. Also sells [bandages](#bandages) that fully restore health.
+Offers full healing & stamina recovery in exchange for essence. Also sells [bandages](#bandages) that fully restore health.
 
 #### Mercenary
 

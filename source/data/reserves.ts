@@ -42,7 +42,7 @@ export const RESERVES: Record<
 		Icon: IconStamina,
 		IconRegeneration: IconStaminaRegeneration,
 		maximumDelta: "staminaMaximum",
-		regeneration: 0.03,
+		regeneration: 0.02,
 		regenerationAttribute: "vigor",
 		regenerationRateDelta: "staminaRegenerationRate",
 	},

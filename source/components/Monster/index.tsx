@@ -27,7 +27,7 @@ export function Monster() {
 	}, [resetMonsterElement, setMonsterElement])
 
 	useEffect(() => {
-		if (isMonsterNewValue && monsterElementValue !== null) {
+		if (isMonsterNewValue) {
 			animateElement({
 				animation: "zoomInRight",
 				element: monsterElementValue,

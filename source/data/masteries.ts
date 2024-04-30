@@ -49,7 +49,7 @@ export const MASTERIES: Record<
 		description: "Affects # bleed damage.",
 		descriptionIcons: [IconBleeding],
 		Icon: IconCruelty,
-		increment: 1.5 / LEVELLING_MAXIMUM,
+		increment: 1.25 / LEVELLING_MAXIMUM,
 		instructionIcons: [IconPiercing],
 		instructions: "Trains when dealing damage with a # piercing weapon.",
 		requiredSkill: "anatomy",

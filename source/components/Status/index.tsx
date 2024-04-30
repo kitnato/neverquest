@@ -13,10 +13,10 @@ export function Status() {
 	const setStatusElement = useSetRecoilState(statusElement)
 	const resetStatusElement = useResetRecoilState(statusElement)
 
-	const element = useRef<HTMLDivElement | null>(null)
+	const elementReference = useRef<HTMLDivElement | null>(null)
 
 	useEffect(() => {
-		const { current } = element
+		const { current } = elementReference
 
 		if (current !== null) {
 			setStatusElement(current)
@@ -26,7 +26,7 @@ export function Status() {
 	}, [resetStatusElement, setStatusElement])
 
 	return (
-		<Card ref={element}>
+		<Card ref={elementReference}>
 			<CardBody>
 				<Stack gap={3}>
 					<Name />

@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react"
 import {
 	Badge,
 	Button,
@@ -8,7 +9,7 @@ import {
 	Stack,
 	Tooltip,
 } from "react-bootstrap"
-import { useRecoilValue } from "recoil"
+import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil"
 
 import { IconImage } from "@neverquest/components/IconImage"
 import { useResurrection } from "@neverquest/hooks/actions/useResurrection"
@@ -17,6 +18,7 @@ import IconAttack from "@neverquest/icons/attack.svg?react"
 import IconGrinding from "@neverquest/icons/grinding.svg?react"
 import IconHealth from "@neverquest/icons/health.svg?react"
 import IconPhylactery from "@neverquest/icons/phylactery.svg?react"
+import IconProtected from "@neverquest/icons/protected.svg?react"
 import IconResting from "@neverquest/icons/resting.svg?react"
 import IconResurrection from "@neverquest/icons/resurrection.svg?react"
 import IconRetreat from "@neverquest/icons/retreat.svg?react"
@@ -30,7 +32,7 @@ import {
 import { isStageCompleted, location } from "@neverquest/state/encounter"
 import { isRelicEquipped } from "@neverquest/state/items"
 import { isMonsterDead } from "@neverquest/state/monster"
-import { isHealthLow } from "@neverquest/state/reserves"
+import { isHealthLow, protectedElement } from "@neverquest/state/reserves"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
 import type { SVGIcon } from "@neverquest/types/components"
@@ -44,11 +46,26 @@ export function Main() {
 	const isIncapacitatedValue = useRecoilValue(isIncapacitated)
 	const isMonsterDeadValue = useRecoilValue(isMonsterDead)
 	const isAutomincerEquipped = useRecoilValue(isRelicEquipped("automincer"))
+	const isDreamCatcherEquipped = useRecoilValue(isRelicEquipped("dream catcher"))
 	const isStageCompletedValue = useRecoilValue(isStageCompleted)
 	const locationValue = useRecoilValue(location)
+	const setProtectedElement = useSetRecoilState(protectedElement)
+	const resetProtectedElement = useResetRecoilState(protectedElement)
 
-	const toggleAttacking = useToggleAttacking()
+	const protectedElementReference = useRef<HTMLDivElement | null>(null)
+
 	const resurrection = useResurrection()
+	const toggleAttacking = useToggleAttacking()
+
+	useEffect(() => {
+		const { current } = protectedElementReference
+
+		if (current !== null) {
+			setProtectedElement(current)
+		}
+
+		return resetProtectedElement
+	}, [resetProtectedElement, setProtectedElement])
 
 	const isResting = isStageCompletedValue || locationValue === "caravan"
 	const pulseAnimation = getAnimationClass({
@@ -132,6 +149,20 @@ export function Main() {
 										Icon={canResurrectValue ? IconPhylactery : IconGrinding}
 									/>
 								</Badge>
+							)}
+
+							{isDreamCatcherEquipped && !isIncapacitatedValue && !isResting && (
+								<div className="position-absolute start-0 top-50 translate-middle">
+									<Badge
+										bg="secondary"
+										ref={protectedElementReference}
+									>
+										<IconImage
+											className="small"
+											Icon={IconProtected}
+										/>
+									</Badge>
+								</div>
 							)}
 						</Button>
 					</div>

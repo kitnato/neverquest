@@ -4,7 +4,6 @@ import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState 
 
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
 import { IconDisplay } from "@neverquest/components/IconDisplay"
-import { IconImage } from "@neverquest/components/IconImage"
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
 import { LABEL_SEPARATOR, LABEL_TOTAL, PERCENTAGE } from "@neverquest/data/general"
 import { RESERVES } from "@neverquest/data/reserves"
@@ -29,10 +28,9 @@ import {
 } from "@neverquest/state/reserves"
 import { formatNumber } from "@neverquest/utilities/formatters"
 
-import type { SVGIcon } from "@neverquest/types/components"
 import type { Reserve } from "@neverquest/types/unions"
 
-export function ReserveMeter({ PrefixIcon, reserve }: { PrefixIcon?: SVGIcon, reserve: Reserve }) {
+export function ReserveMeter({ reserve }: { reserve: Reserve }) {
 	const isHealth = reserve === "health"
 	const reserveState = isHealth ? health : stamina
 	const reserveMaximumState = reserveMaximum(reserve)
@@ -117,8 +115,6 @@ export function ReserveMeter({ PrefixIcon, reserve }: { PrefixIcon?: SVGIcon, re
 			value={reserveValue / reserveMaximumAilingValue * (PERCENTAGE - penalty)}
 		>
 			<Stack direction="horizontal" gap={1}>
-				{PrefixIcon !== undefined && <IconImage className="small stencilled" Icon={PrefixIcon} />}
-
 				<span className="text-nowrap">
 					{formatNumber({ value: reserveValue })}
 					{" / "}

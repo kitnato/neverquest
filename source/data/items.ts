@@ -44,6 +44,7 @@ import IconPoisoned from "@neverquest/icons/poisoned.svg?react"
 import IconProtected from "@neverquest/icons/protected.svg?react"
 import IconQuests from "@neverquest/icons/quests.svg?react"
 import IconRanged from "@neverquest/icons/ranged.svg?react"
+import IconRetreat from "@neverquest/icons/retreat.svg?react"
 import IconRuby from "@neverquest/icons/ruby.svg?react"
 import IconSalve from "@neverquest/icons/salve.svg?react"
 import IconSapphire from "@neverquest/icons/sapphire.svg?react"
@@ -144,8 +145,8 @@ export const ELEMENTALS: Record<
 	fire: {
 		ailment: "burning",
 		color: "orange",
-		damageArmor: { maximum: 1.8, minimum: 0.8 },
-		damageWeapon: { maximum: 0.4, minimum: 0.15 },
+		damageArmor: { maximum: 2, minimum: 1 },
+		damageWeapon: { maximum: 0.5, minimum: 0.1 },
 		duration: { maximum: 2500, minimum: 1200 },
 		durationCap: 7500,
 		gem: "ruby",
@@ -154,8 +155,8 @@ export const ELEMENTALS: Record<
 	ice: {
 		ailment: "frozen",
 		color: "cyan",
-		damageArmor: { maximum: 1.3, minimum: 0.6 },
-		damageWeapon: { maximum: 0.3, minimum: 0.1 },
+		damageArmor: { maximum: 1.75, minimum: 0.75 },
+		damageWeapon: { maximum: 0.4, minimum: 0.075 },
 		duration: { maximum: 2200, minimum: 1000 },
 		durationCap: 3500,
 		gem: "sapphire",
@@ -164,8 +165,8 @@ export const ELEMENTALS: Record<
 	lightning: {
 		ailment: "shocked",
 		color: "purple",
-		damageArmor: { maximum: 0.8, minimum: 0.3 },
-		damageWeapon: { maximum: 0.2, minimum: 0.05 },
+		damageArmor: { maximum: 1.5, minimum: 0.5 },
+		damageWeapon: { maximum: 0.25, minimum: 0.05 },
 		duration: { maximum: 2000, minimum: 900 },
 		durationCap: 5000,
 		gem: "amethyst",
@@ -181,8 +182,8 @@ export const GEM_BASE = {
 }
 export const GEM_DROP_CHANCE = { equalStage: 1, lowerStage: 0.33 }
 export const GEM_ENHANCEMENT_RANGE = { maximum: 1, minimum: 0.1 }
-export const GEM_FITTING_COST_RANGE = { maximum: 150, minimum: 10 }
-export const GEMS_MAXIMUM = 3
+export const GEM_FITTING_COST_RANGE = { maximum: 300, minimum: 10 }
+export const GEMS_MAXIMUM = 5
 export const GEMS: Record<Gem, { elemental: Elemental, Icon: SVGIcon }> = {
 	amethyst: { elemental: "lightning", Icon: IconAmethyst },
 	ruby: { elemental: "fire", Icon: IconRuby },
@@ -293,8 +294,8 @@ export const RELICS: Record<
 		},
 	},
 	"dream catcher": {
-		description: "While # equipped and # attacking, disengages the bearer if at low # health.",
-		descriptionIcons: [IconProtected, IconAttack, IconHealth],
+		description: "While # equipped and # attacking, consumes # bandages if at low # health or an # elixir if # exhausted, otherwise # retreats.",
+		descriptionIcons: [IconProtected, IconAttack, IconBandages, IconHealth, IconElixir, IconStamina, IconRetreat],
 		Icon: IconDreamCatcher,
 		item: {
 			ID: "",

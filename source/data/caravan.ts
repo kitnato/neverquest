@@ -10,8 +10,8 @@ import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react"
 import IconFletcher from "@neverquest/icons/fletcher.svg?react"
 import IconGear from "@neverquest/icons/gear.svg?react"
 import IconGems from "@neverquest/icons/gems.svg?react"
-import IconHealing from "@neverquest/icons/healing.svg?react"
 import IconMedic from "@neverquest/icons/medic.svg?react"
+import IconMending from "@neverquest/icons/mending.svg?react"
 import IconMercenary from "@neverquest/icons/mercenary.svg?react"
 import IconMerchant from "@neverquest/icons/merchant.svg?react"
 import IconMunitions from "@neverquest/icons/munitions.svg?react"
@@ -90,8 +90,8 @@ export const CREW: Record<
 		requiredStage: 18,
 	},
 	medic: {
-		description: "Offers # healing and sells # bandages.",
-		descriptionIcons: [IconHealing, IconBandages],
+		description: "Offers # mending and sells # bandages.",
+		descriptionIcons: [IconMending, IconBandages],
 		Icon: IconMedic,
 		interaction: "Treat",
 		monologues: {
@@ -165,7 +165,7 @@ export const CREW: Record<
 			"Sells # phylacteries and offers purging # rituals. May impart a forbidden # skill.",
 		descriptionIcons: [IconPhylactery, IconRituals, IconSkills],
 		Icon: IconOccultist,
-		interaction: "Ritual",
+		interaction: "See",
 		monologues: {
 			1: "Prepared to transcend your limits?",
 			[FINALITY_STAGE["res dominus"]]: `The world ends at ${LEVELLING_MAXIMUM}.`,

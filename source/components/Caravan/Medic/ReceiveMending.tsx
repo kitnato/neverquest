@@ -10,11 +10,11 @@ import {
 	LABEL_NO_ESSENCE,
 	POPOVER_TRIGGER,
 } from "@neverquest/data/general"
-import { useHealing } from "@neverquest/hooks/actions/useHealing"
+import { useMending } from "@neverquest/hooks/actions/useMending"
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence"
 import IconEssence from "@neverquest/icons/essence.svg?react"
-import IconHealing from "@neverquest/icons/healing.svg?react"
 import IconHealth from "@neverquest/icons/health.svg?react"
+import IconMending from "@neverquest/icons/mending.svg?react"
 import IconStamina from "@neverquest/icons/stamina.svg?react"
 import { powerLevel } from "@neverquest/state/attributes"
 import { isHealthAtMaximum } from "@neverquest/state/reserves"
@@ -22,7 +22,7 @@ import { essence } from "@neverquest/state/resources"
 import { formatNumber } from "@neverquest/utilities/formatters"
 import { getFromRange, getSigmoid } from "@neverquest/utilities/getters"
 
-export function ReceiveHealing() {
+export function ReceiveMending() {
 	const essenceValue = useRecoilValue(essence)
 	const isHealthAtMaximumValue = useRecoilValue(isHealthAtMaximum)
 	const powerLevelValue = useRecoilValue(powerLevel)
@@ -38,11 +38,11 @@ export function ReceiveHealing() {
 	const isAffordable = price <= essenceValue
 	const isPurchasable = isAffordable && !isHealthAtMaximumValue
 
-	const healing = useHealing()
+	const mending = useMending()
 
 	return (
 		<Stack gap={3}>
-			<h6>Receive healing</h6>
+			<h6>Receive mending</h6>
 
 			<div className={CLASS_FULL_WIDTH_JUSTIFIED}>
 				<IconDisplay
@@ -52,8 +52,8 @@ export function ReceiveHealing() {
 							descriptionIcons={[IconHealth, IconStamina]}
 						/>
 					)}
-					Icon={IconHealing}
-					tooltip="Healing"
+					Icon={IconMending}
+					tooltip="Mending"
 				>
 					<span>Surgery</span>
 				</IconDisplay>
@@ -79,8 +79,8 @@ export function ReceiveHealing() {
 							<Button
 								disabled={!isPurchasable}
 								onClick={() => {
-									healing("health")
-									healing("stamina")
+									mending("health")
+									mending("stamina")
 
 									transactEssence(-price)
 								}}

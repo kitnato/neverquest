@@ -415,6 +415,7 @@ export type StateKey =
 	| "powerLevel"
 	| "progress"
 	| "progressMaximum"
+	| "protectedElement"
 	| "protection"
 	| "questNotifications"
 	| "questProgress"

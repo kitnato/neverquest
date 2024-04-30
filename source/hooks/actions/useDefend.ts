@@ -83,20 +83,17 @@ export function useDefend() {
 				const incursArmorBurden = !get(isTraitAcquired("stalwart")) && armorBurden > 0
 				const ownedItemLacrimatory = get(ownedItem("lacrimatory"))
 				const canGatherTears = ownedItemLacrimatory !== undefined && get(tears) < TEARS_MAXIMUM
-				const statusElementValue = get(statusElement)
 
 				const deltaHealth: DeltaDisplay[] = []
 				const deltaStamina: DeltaDisplay[] = []
 
 				set(isShowing("monsterOffense"), true)
 
-				if (statusElementValue !== null) {
-					animateElement({
-						animation: "headShake",
-						element: statusElementValue,
-						speed: "fast",
-					})
-				}
+				animateElement({
+					animation: "headShake",
+					element: get(statusElement),
+					speed: "fast",
+				})
 
 				if (get(isAttacking) && get(monsterAttackDuration) === 0) {
 					set(monsterAttackDuration, get(monsterAttackRate))
@@ -383,15 +380,11 @@ export function useDefend() {
 				}
 
 				if ((hasStaggered && canBlockOrStaggerValue) || monsterHealthDamage > 0) {
-					const monsterElementValue = get(monsterElement)
-
-					if (monsterElementValue !== null) {
-						animateElement({
-							animation: "headShake",
-							element: monsterElementValue,
-							speed: "fast",
-						})
-					}
+					animateElement({
+						animation: "headShake",
+						element: get(monsterElement),
+						speed: "fast",
+					})
 				}
 
 				// Take any damage and any stamina costs.

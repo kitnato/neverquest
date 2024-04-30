@@ -248,6 +248,14 @@ export const poisonDuration = withStateKey("poisonDuration", key =>
 	}),
 )
 
+export const protectedElement = withStateKey("protectedElement", key =>
+	atom<HTMLDivElement | null>({
+		default: null,
+		effects: [handleStorage({ key })],
+		key,
+	}),
+)
+
 export const regenerationDuration = withStateKey("regenerationDuration", key =>
 	atomFamily<number, Reserve>({
 		default: 0,

@@ -60,7 +60,6 @@ export function useAttack() {
 				const hasEnoughMunitionsValue = get(hasEnoughMunitions)
 				const executionThresholdValue = get(executionThreshold)
 				const lifeLeechValue = get(lifeLeech)
-				const monsterElementValue = get(monsterElement)
 				const monsterHealthValue = get(monsterHealth)
 				const weaponValue = get(weapon)
 				const isWeaponRanged = isRanged(weaponValue)
@@ -84,13 +83,11 @@ export function useAttack() {
 						changeStamina({ value: -weaponValue.burden })
 					}
 
-					if (monsterElementValue !== null) {
-						animateElement({
-							animation: "headShake",
-							element: monsterElementValue,
-							speed: "fast",
-						})
-					}
+					animateElement({
+						animation: "headShake",
+						element: get(monsterElement),
+						speed: "fast",
+					})
 
 					if (
 						(

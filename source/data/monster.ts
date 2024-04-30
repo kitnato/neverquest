@@ -89,10 +89,10 @@ export const FRAILTY = {
 	},
 }
 
-export const MAXIMUM_GEM_DROP = 7
+export const MAXIMUM_GEM_DROP = 5
 
 export const MONSTER_ATTACK_RATE = {
-	attenuation: 4000,
+	attenuation: 4500,
 	base: 4100,
 	bonus: 0.005,
 	boss: 1.05,
@@ -104,7 +104,7 @@ export const MONSTER_ATTACK_RATE = {
 }
 
 export const MONSTER_DAMAGE = {
-	attenuation: 30,
+	attenuation: 31,
 	base: 7,
 	bonus: 0.01,
 	boss: 1.075,
@@ -113,7 +113,7 @@ export const MONSTER_DAMAGE = {
 		"res dominus": 1075,
 	},
 	menace: {
-		maximum: 2,
+		maximum: 1.5,
 		minimum: 0.4,
 		requiredStage: RETIREMENT_STAGE + 1,
 	},
@@ -129,7 +129,7 @@ export const MONSTER_HEALTH = {
 		"res dominus": 11757,
 	},
 	menace: {
-		maximum: 2.8,
+		maximum: 2,
 		minimum: 0.4,
 		requiredStage: RETIREMENT_STAGE + 1,
 	},
@@ -144,11 +144,11 @@ export const MONSTER_REGENERATION = {
 export const POISON = {
 	boss: 1.25,
 	chance: {
-		maximum: 0.5,
+		maximum: 0.4,
 		minimum: 0.15,
 	},
 	duration: {
-		maximum: 500_000,
+		maximum: 450_000,
 		minimum: 45_000,
 	},
 	finality: {
@@ -156,7 +156,7 @@ export const POISON = {
 		"res dominus": 0.4777,
 	},
 	magnitude: {
-		maximum: 0.25,
+		maximum: 0.2,
 		minimum: 0.075,
 	},
 	requiredStage: 45,

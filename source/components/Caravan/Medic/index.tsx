@@ -1,6 +1,6 @@
 import { Stack } from "react-bootstrap"
 
-import { ReceiveHealing } from "@neverquest/components/Caravan/Medic/ReceiveHealing"
+import { ReceiveMending } from "@neverquest/components/Caravan/Medic/ReceiveMending"
 import { PurchaseConsumable } from "@neverquest/components/Caravan/PurchaseConsumable"
 
 export function Medic() {
@@ -12,7 +12,7 @@ export function Medic() {
 				<PurchaseConsumable consumable="bandages" />
 			</Stack>
 
-			<ReceiveHealing />
+			<ReceiveMending />
 		</Stack>
 	)
 }

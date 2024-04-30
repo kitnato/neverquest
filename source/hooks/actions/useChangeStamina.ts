@@ -1,22 +1,27 @@
 import { useRecoilCallback } from "recoil"
 
 import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta"
+import { useMending } from "@neverquest/hooks/actions/useMending"
 import { useToggleAttacking } from "@neverquest/hooks/actions/useToggleAttacking"
 import { isAttacking } from "@neverquest/state/character"
+import { ownedItem } from "@neverquest/state/inventory"
 import { isRelicEquipped } from "@neverquest/state/items"
 import {
 	isInexhaustible,
+	protectedElement,
 	regenerationDuration,
 	stamina,
 	staminaMaximumBlighted,
 } from "@neverquest/state/reserves"
 import { formatNumber } from "@neverquest/utilities/formatters"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
+import { animateElement } from "@neverquest/utilities/helpers"
 
 import type { DeltaReserve } from "@neverquest/types/ui"
 
 export function useChangeStamina() {
 	const addDelta = useAddDelta()
+	const mending = useMending()
 	const toggleAttacking = useToggleAttacking()
 
 	return useRecoilCallback(
@@ -24,8 +29,11 @@ export function useChangeStamina() {
 			({ contents, value }: DeltaReserve) => {
 				const get = getSnapshotGetter(snapshot)
 
-				const deltaDisplay
-					= contents === undefined ? [] : Array.isArray(contents) ? contents : [contents]
+				const deltaDisplay = contents === undefined
+					? []
+					: Array.isArray(contents)
+						? contents
+						: [contents]
 				const formattedValue = formatNumber({ value })
 				const isPositive = value > 0
 				const staminaMaximumBlightedValue = get(staminaMaximumBlighted)
@@ -48,15 +56,20 @@ export function useChangeStamina() {
 					&& get(isAttacking)
 					&& get(isRelicEquipped("dream catcher"))
 				) {
-					toggleAttacking()
-
-					addDelta({
-						contents: {
-							color: "text-secondary",
-							value: "CAUGHT",
-						},
-						delta: "stamina",
+					animateElement({
+						animation: "heartBeat",
+						element: get(protectedElement),
 					})
+
+					const ownedElixir = get(ownedItem("elixir"))
+
+					if (ownedElixir === undefined) {
+						toggleAttacking()
+					}
+					else {
+						mending("stamina", ownedElixir.ID)
+						return
+					}
 				}
 
 				set(stamina, newStamina)

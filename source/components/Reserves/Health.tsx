@@ -9,11 +9,9 @@ import { POPOVER_TRIGGER } from "@neverquest/data/general"
 import { RESERVES } from "@neverquest/data/reserves"
 import { useTimer } from "@neverquest/hooks/useTimer"
 import IconHealth from "@neverquest/icons/health.svg?react"
-import IconProtected from "@neverquest/icons/protected.svg?react"
 import IconQuests from "@neverquest/icons/quests.svg?react"
 import IconVitality from "@neverquest/icons/vitality.svg?react"
 import { attributeStatistic } from "@neverquest/state/attributes"
-import { isRelicEquipped } from "@neverquest/state/items"
 import { questsBonus } from "@neverquest/state/quests"
 import { isPoisoned, poisonDuration } from "@neverquest/state/reserves"
 import { isShowing } from "@neverquest/state/ui"
@@ -22,7 +20,6 @@ import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function Health() {
 	const attributeStatisticVitality = useRecoilValue(attributeStatistic("vitality"))
-	const isDreamCatcherEquipped = useRecoilValue(isRelicEquipped("dream catcher"))
 	const isPoisonedValue = useRecoilValue(isPoisoned)
 	const isShowingHealth = useRecoilValue(isShowing("health"))
 	const questsBonusHealth = useRecoilValue(questsBonus("healthBonus"))
@@ -114,10 +111,7 @@ export function Health() {
 						trigger={questsBonusHealth > 0 || vitalityBonus > 0 ? POPOVER_TRIGGER : []}
 					>
 						<div className="w-100">
-							<ReserveMeter
-								PrefixIcon={isDreamCatcherEquipped ? IconProtected : undefined}
-								reserve="health"
-							/>
+							<ReserveMeter reserve="health" />
 						</div>
 					</OverlayTrigger>
 

@@ -8,6 +8,7 @@ import { INFUSION_DELTA } from "@neverquest/data/items"
 import { useInfuse } from "@neverquest/hooks/actions/useInfuse"
 import { useAnimation } from "@neverquest/hooks/useAnimation"
 import { infusionStep, isInfusionAtMaximum } from "@neverquest/state/items"
+import { getAnimationClass } from "@neverquest/utilities/getters"
 
 import type { Infusable } from "@neverquest/types/unions"
 
@@ -74,7 +75,13 @@ export function Infuse({ infusable }: { infusable: Infusable }) {
 						onMouseUp={onStop}
 						variant="outline-dark"
 					>
-						<span>Infuse</span>
+						<span
+							className={`d-block ${isInfusing
+								? getAnimationClass({ animation: "pulse", isInfinite: true, speed: "faster" })
+								: ""}`}
+						>
+							Infuse
+						</span>
 					</Button>
 				</div>
 			</OverlayTrigger>

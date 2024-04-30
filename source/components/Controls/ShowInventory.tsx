@@ -24,12 +24,12 @@ export function ShowInventory() {
 	const resetActiveControl = useResetRecoilState(activeControl)
 	const resetNotifyEncumbranceValue = useResetRecoilState(notifyOverEncumbrance)
 
-	const badgeElement = useRef<HTMLDivElement | null>(null)
+	const badgeElementReference = useRef<HTMLDivElement | null>(null)
 
 	useEffect(() => {
-		const { current } = badgeElement
+		const { current } = badgeElementReference
 
-		if (current !== null && notifyOverEncumbranceValue) {
+		if (notifyOverEncumbranceValue) {
 			animateElement({
 				animation: "heartBeat",
 				element: current,
@@ -60,7 +60,7 @@ export function ShowInventory() {
 
 							{(encumbranceExtentValue !== undefined || notifyOverEncumbranceValue) && (
 								<div className="position-absolute top-50 start-100 translate-middle">
-									<Badge bg="secondary" ref={badgeElement}>
+									<Badge bg="secondary" ref={badgeElementReference}>
 										<IconImage className="small" Icon={IconEncumbrance} />
 									</Badge>
 								</div>

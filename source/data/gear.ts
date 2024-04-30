@@ -149,7 +149,7 @@ export const SHIELD_SPECIFICATIONS: Record<
 			{ maximum: 25, minimum: 23 },
 		],
 		Icon: IconShieldSmall,
-		price: { maximum: 3000, minimum: 2 },
+		price: { maximum: 3500, minimum: 2 },
 		staggerChance: [
 			{ maximum: 0.25, minimum: 0.23 },
 			{ maximum: 0.6, minimum: 0.55 },
@@ -169,7 +169,7 @@ export const SHIELD_SPECIFICATIONS: Record<
 			{ maximum: 55, minimum: 50 },
 		],
 		Icon: IconShieldTower,
-		price: { maximum: 7000, minimum: 7 },
+		price: { maximum: 6500, minimum: 7 },
 		staggerChance: [
 			{ maximum: 0.1, minimum: 0.05 },
 			{ maximum: 0.2, minimum: 0.15 },

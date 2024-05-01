@@ -12,6 +12,7 @@ export function useResetAttributes() {
 					reset(attributeRank(attribute))
 				}
 
+				reset(questProgress("attributesIncreasing"))
 				reset(questProgress("powerLevel"))
 				reset(questProgress("powerLevelUltra"))
 			},

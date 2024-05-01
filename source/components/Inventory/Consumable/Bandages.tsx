@@ -3,10 +3,10 @@ import { useRecoilValue } from "recoil"
 
 import { LABEL_FULL_HEALTH, POPOVER_TRIGGER } from "@neverquest/data/general"
 import { useMending } from "@neverquest/hooks/actions/useMending"
-import { isHealthAtMaximum } from "@neverquest/state/reserves"
+import { isReserveAtMaximum } from "@neverquest/state/reserves"
 
 export function Bandages({ ID }: { ID: string }) {
-	const isHealthAtMaximumValue = useRecoilValue(isHealthAtMaximum)
+	const isReserveAtMaximumHealth = useRecoilValue(isReserveAtMaximum("health"))
 
 	const mending = useMending()
 
@@ -17,11 +17,11 @@ export function Bandages({ ID }: { ID: string }) {
 					<span>{LABEL_FULL_HEALTH}</span>
 				</Tooltip>
 			)}
-			trigger={isHealthAtMaximumValue ? POPOVER_TRIGGER : []}
+			trigger={isReserveAtMaximumHealth ? POPOVER_TRIGGER : []}
 		>
 			<div>
 				<Button
-					disabled={isHealthAtMaximumValue}
+					disabled={isReserveAtMaximumHealth}
 					onClick={() => {
 						mending("health", ID)
 					}}

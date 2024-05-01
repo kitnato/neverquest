@@ -12,7 +12,7 @@ import {
 	type QuestClass,
 	type QuestStatus,
 } from "@neverquest/types/unions"
-import { getQuestsData } from "@neverquest/utilities/getters"
+import { getQuestClass, getQuestsData } from "@neverquest/utilities/getters"
 import { withStateKey } from "@neverquest/utilities/helpers"
 
 import type { QuestNotification } from "@neverquest/types"
@@ -104,7 +104,7 @@ export const questsBonus = withStateKey("questsBonus", key =>
 						for (const quest of QUEST_TYPES_BY_CLASS[questClass]) {
 							bonus
 								+= Object.values(get(questStatuses(quest))).filter(status => questBonus === status)
-									.length * QUEST_COMPLETION_BONUS
+									.length * QUEST_COMPLETION_BONUS[getQuestClass(quest)]
 						}
 					}
 

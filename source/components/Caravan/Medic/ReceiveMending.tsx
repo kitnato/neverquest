@@ -17,16 +17,17 @@ import IconHealth from "@neverquest/icons/health.svg?react"
 import IconMending from "@neverquest/icons/mending.svg?react"
 import IconStamina from "@neverquest/icons/stamina.svg?react"
 import { powerLevel } from "@neverquest/state/attributes"
-import { isHealthAtMaximum } from "@neverquest/state/reserves"
+import { isReserveAtMaximum } from "@neverquest/state/reserves"
 import { essence } from "@neverquest/state/resources"
 import { formatNumber } from "@neverquest/utilities/formatters"
 import { getFromRange, getSigmoid } from "@neverquest/utilities/getters"
 
 export function ReceiveMending() {
 	const essenceValue = useRecoilValue(essence)
-	const isHealthAtMaximumValue = useRecoilValue(isHealthAtMaximum)
+	const isReserveAtMaximumHealth = useRecoilValue(isReserveAtMaximum("health"))
 	const powerLevelValue = useRecoilValue(powerLevel)
 
+	const mending = useMending()
 	const transactEssence = useTransactEssence()
 
 	const price = Math.round(
@@ -36,9 +37,7 @@ export function ReceiveMending() {
 		}),
 	)
 	const isAffordable = price <= essenceValue
-	const isPurchasable = isAffordable && !isHealthAtMaximumValue
-
-	const mending = useMending()
+	const isPurchasable = isAffordable && !isReserveAtMaximumHealth
 
 	return (
 		<Stack gap={3}>
@@ -69,7 +68,7 @@ export function ReceiveMending() {
 								<Stack>
 									{!isAffordable && <span>{LABEL_NO_ESSENCE}</span>}
 
-									{isHealthAtMaximumValue && <span>{LABEL_FULL_HEALTH}</span>}
+									{isReserveAtMaximumHealth && <span>{LABEL_FULL_HEALTH}</span>}
 								</Stack>
 							</Tooltip>
 						)}

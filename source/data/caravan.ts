@@ -282,8 +282,8 @@ export const MERCHANT_OFFERS: Record<
 }
 
 export const PURGE_PRICE_MULTIPLIER = {
-	essence: 0.2,
-	quests: 150,
+	essence: 0.1,
+	quests: 100,
 }
 
 export const SURGERY_PRICE = {

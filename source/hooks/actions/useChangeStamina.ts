@@ -10,7 +10,7 @@ import {
 	isInexhaustible,
 	protectedElement,
 	regenerationDuration,
-	stamina,
+	reserveCurrent,
 	staminaMaximumBlighted,
 } from "@neverquest/state/reserves"
 import { formatNumber } from "@neverquest/utilities/formatters"
@@ -38,7 +38,7 @@ export function useChangeStamina() {
 				const isPositive = value > 0
 				const staminaMaximumBlightedValue = get(staminaMaximumBlighted)
 
-				let newStamina = get(stamina) + (get(isInexhaustible) ? isPositive ? value : 0 : value)
+				let newStamina = get(reserveCurrent("stamina")) + (get(isInexhaustible) ? isPositive ? value : 0 : value)
 
 				if (newStamina <= 0) {
 					newStamina = 0
@@ -72,7 +72,7 @@ export function useChangeStamina() {
 					}
 				}
 
-				set(stamina, newStamina)
+				set(reserveCurrent("stamina"), newStamina)
 
 				if (value !== 0) {
 					deltaDisplay.push({

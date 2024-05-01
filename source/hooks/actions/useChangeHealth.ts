@@ -12,11 +12,11 @@ import { corpse, stage } from "@neverquest/state/encounter"
 import { ownedItem } from "@neverquest/state/inventory"
 import { isRelicEquipped } from "@neverquest/state/items"
 import {
-	health,
 	healthMaximumPoisoned,
 	isInvulnerable,
 	protectedElement,
 	regenerationDuration,
+	reserveCurrent,
 } from "@neverquest/state/reserves"
 import { essence } from "@neverquest/state/resources"
 import { formatNumber } from "@neverquest/utilities/formatters"
@@ -46,7 +46,7 @@ export function useChangeHealth() {
 				const isAttackingValue = get(isAttacking)
 				const isPositive = value > 0
 
-				let newHealth = get(health) + (get(isInvulnerable) ? isPositive ? value : 0 : value)
+				let newHealth = get(reserveCurrent("health")) + (get(isInvulnerable) ? isPositive ? value : 0 : value)
 
 				if (newHealth <= 0) {
 					newHealth = 0
@@ -98,7 +98,7 @@ export function useChangeHealth() {
 					}
 				}
 
-				set(health, newHealth)
+				set(reserveCurrent("health"), newHealth)
 
 				if (value !== 0) {
 					deltaDisplay.push({

@@ -3,10 +3,10 @@ import { useRecoilValue } from "recoil"
 
 import { POPOVER_TRIGGER } from "@neverquest/data/general"
 import { useMending } from "@neverquest/hooks/actions/useMending"
-import { isStaminaAtMaximum } from "@neverquest/state/reserves"
+import { isReserveAtMaximum } from "@neverquest/state/reserves"
 
 export function Elixir({ ID }: { ID: string }) {
-	const isStaminaAtMaximumValue = useRecoilValue(isStaminaAtMaximum)
+	const isReserveAtMaximumStamina = useRecoilValue(isReserveAtMaximum("stamina"))
 
 	const mending = useMending()
 
@@ -17,11 +17,11 @@ export function Elixir({ ID }: { ID: string }) {
 					<span>Already at full stamina.</span>
 				</Tooltip>
 			)}
-			trigger={isStaminaAtMaximumValue ? POPOVER_TRIGGER : []}
+			trigger={isReserveAtMaximumStamina ? POPOVER_TRIGGER : []}
 		>
 			<div>
 				<Button
-					disabled={isStaminaAtMaximumValue}
+					disabled={isReserveAtMaximumStamina}
 					onClick={() => {
 						mending("stamina", ID)
 					}}

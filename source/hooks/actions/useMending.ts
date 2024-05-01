@@ -3,7 +3,7 @@ import { useRecoilCallback } from "recoil"
 import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta"
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import { inventory } from "@neverquest/state/inventory"
-import { health, healthMaximumPoisoned, stamina, staminaMaximumBlighted } from "@neverquest/state/reserves"
+import { healthMaximumPoisoned, regenerationDuration, reserveCurrent, staminaMaximumBlighted } from "@neverquest/state/reserves"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
 
 import type { Reserve } from "@neverquest/types/unions"
@@ -13,7 +13,7 @@ export function useMending() {
 	const progressQuest = useProgressQuest()
 
 	return useRecoilCallback(
-		({ set, snapshot }) =>
+		({ reset, set, snapshot }) =>
 			(reserve: Reserve, consumableID?: string) => {
 				const get = getSnapshotGetter(snapshot)
 
@@ -28,7 +28,8 @@ export function useMending() {
 					progressQuest({ quest: isHealth ? "bandaging" : "potions" })
 				}
 
-				set(isHealth ? health : stamina, reserveMaximumValue)
+				set(reserveCurrent(reserve), reserveMaximumValue)
+				reset(regenerationDuration(reserve))
 
 				addDelta({
 					contents: [{
@@ -37,7 +38,7 @@ export function useMending() {
 					},
 					{
 						color: "text-success",
-						value: `+${reserveMaximumValue - get(isHealth ? health : stamina)}`,
+						value: `+${reserveMaximumValue - get(reserveCurrent(reserve))}`,
 					}],
 					delta: reserve,
 				})

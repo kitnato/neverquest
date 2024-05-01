@@ -17,7 +17,7 @@ export const canAwaken = withStateKey("canAwaken", key =>
 			!get(hasAwoken)
 			&& get(isStageCompleted)
 			&& get(location) === "wilderness"
-			&& ["res cogitans", "void"].includes(get(encounter))
+			&& get(hasDefeatedFinality("res cogitans"))
 			&& get(stage) === FINALITY_STAGE["res cogitans"],
 		key,
 	}),

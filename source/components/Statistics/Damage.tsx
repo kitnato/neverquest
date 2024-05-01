@@ -26,7 +26,7 @@ import { attributeStatistic } from "@neverquest/state/attributes"
 import { shield, weapon } from "@neverquest/state/gear"
 import { infusionEffect } from "@neverquest/state/items"
 import { questProgress, questsBonus } from "@neverquest/state/quests"
-import { stamina } from "@neverquest/state/reserves"
+import { reserveCurrent } from "@neverquest/state/reserves"
 import { damage, lifeLeech } from "@neverquest/state/statistics"
 import { isTraitAcquired } from "@neverquest/state/traits"
 import { isShowing } from "@neverquest/state/ui"
@@ -43,8 +43,8 @@ export function Damage() {
 	const isTraitAcquiredBruiser = useRecoilValue(isTraitAcquired("bruiser"))
 	const lifeLeechValue = useRecoilValue(lifeLeech)
 	const questsBonusDamage = useRecoilValue(questsBonus("damageBonus"))
+	const reserveStamina = useRecoilValue(reserveCurrent("stamina"))
 	const shieldValue = useRecoilValue(shield)
-	const staminaValue = useRecoilValue(stamina)
 	const weaponValue = useRecoilValue(weapon)
 	const resetQuestProgressDamage = useResetRecoilState(questProgress("damage"))
 
@@ -149,7 +149,7 @@ export function Damage() {
 												<td>
 													<span>
 														+
-														{formatNumber({ value: staminaValue * BRUISER.damage })}
+														{formatNumber({ value: reserveStamina * BRUISER.damage })}
 													</span>
 												</td>
 											</tr>

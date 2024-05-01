@@ -33,7 +33,7 @@ import {
 	INFUSABLES,
 	RELICS,
 } from "@neverquest/data/items"
-import { QUESTS } from "@neverquest/data/quests"
+import { QUESTS, QUEST_TYPES_BY_CLASS } from "@neverquest/data/quests"
 import { PERKS } from "@neverquest/data/retirement"
 import IconArmorNone from "@neverquest/icons/armor-none.svg?react"
 import IconArmor from "@neverquest/icons/armor.svg?react"
@@ -82,7 +82,7 @@ import type {
 	Weapon,
 } from "@neverquest/types"
 import type { Animation, AnimationSpeed } from "@neverquest/types/ui"
-import type { Elemental, Grip, Perk, Quest } from "@neverquest/types/unions"
+import type { Elemental, Grip, Perk, Quest, QuestClass } from "@neverquest/types/unions"
 import type { RecoilValue, Snapshot } from "recoil"
 
 export function getAffixStructure(): AffixStructure {
@@ -443,6 +443,20 @@ export function getPerkEffect({
 		maximum,
 		minimum,
 	})
+}
+
+export function getQuestClass(quest: Quest): QuestClass {
+	const { conquest, routine } = QUEST_TYPES_BY_CLASS
+
+	if (conquest.some(currentQuest => currentQuest === quest)) {
+		return "conquest"
+	}
+
+	if (routine.some(currentQuest => currentQuest === quest)) {
+		return "routine"
+	}
+
+	return "triumph"
 }
 
 function getRomanNumeral(value: number) {

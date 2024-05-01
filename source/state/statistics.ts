@@ -22,7 +22,7 @@ import { armor, elementalEffects, shield, weapon } from "@neverquest/state/gear"
 import { infusionEffect } from "@neverquest/state/items"
 import { masteryStatistic } from "@neverquest/state/masteries"
 import { questsBonus } from "@neverquest/state/quests"
-import { stamina } from "@neverquest/state/reserves"
+import { reserveCurrent } from "@neverquest/state/reserves"
 import { isSkillAcquired } from "@neverquest/state/skills"
 import { isTraitAcquired } from "@neverquest/state/traits"
 import {
@@ -138,7 +138,7 @@ export const damage = withStateKey("damage", key =>
 				+ Object.values(get(elementalEffects).weapon).reduce((sum, { damage }) => sum + damage, 0)
 				// Current stamina portion from bruiser trait, if applicable.
 				+ (get(isTraitAcquired("bruiser")) && isWeaponUnarmed
-					? get(stamina) * BRUISER.damage
+					? get(reserveCurrent("stamina")) * BRUISER.damage
 					: 0)
 				// All multiplied by total damage bonus from quest rewards.
 			) * (1 + get(questsBonus("damageBonus"))))

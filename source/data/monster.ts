@@ -54,8 +54,8 @@ export const BOSS_STAGE_START = 10
 export const BLIGHT = {
 	boss: 1.2,
 	chance: {
-		maximum: 0.3,
-		minimum: 0.075,
+		maximum: 0.25,
+		minimum: 0.05,
 	},
 	finality: {
 		"res cogitans": 0.7777,
@@ -113,7 +113,7 @@ export const MONSTER_DAMAGE = {
 		"res dominus": 1075,
 	},
 	menace: {
-		maximum: 2,
+		maximum: 1.6,
 		minimum: 0.4,
 		requiredStage: RETIREMENT_STAGE + 1,
 	},
@@ -129,7 +129,7 @@ export const MONSTER_HEALTH = {
 		"res dominus": 11757,
 	},
 	menace: {
-		maximum: 2.5,
+		maximum: 1.9,
 		minimum: 0.4,
 		requiredStage: RETIREMENT_STAGE + 1,
 	},
@@ -144,11 +144,11 @@ export const MONSTER_REGENERATION = {
 export const POISON = {
 	boss: 1.25,
 	chance: {
-		maximum: 0.4,
-		minimum: 0.15,
+		maximum: 0.35,
+		minimum: 0.1,
 	},
 	duration: {
-		maximum: 450_000,
+		maximum: 400_000,
 		minimum: 45_000,
 	},
 	finality: {

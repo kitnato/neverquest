@@ -16,6 +16,7 @@ import IconStamina from "@neverquest/icons/stamina.svg?react"
 import { questProgress, questStatuses } from "@neverquest/state/quests"
 import { isQuestBonus } from "@neverquest/types/type-guards"
 import { formatNumber } from "@neverquest/utilities/formatters"
+import { getQuestClass } from "@neverquest/utilities/getters"
 
 import type { QuestData } from "@neverquest/types"
 import type { Quest, QuestBonus } from "@neverquest/types/unions"
@@ -115,7 +116,7 @@ export function QuestDisplay({
 										{formatNumber({
 											decimals: 0,
 											format: "percentage",
-											value: QUEST_COMPLETION_BONUS,
+											value: QUEST_COMPLETION_BONUS[getQuestClass(quest)],
 										})}
 									</span>
 								</IconDisplay>

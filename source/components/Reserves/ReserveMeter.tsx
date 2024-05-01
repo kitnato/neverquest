@@ -14,7 +14,6 @@ import IconPoisoned from "@neverquest/icons/poisoned.svg?react"
 import { isIncapacitated } from "@neverquest/state/character"
 import {
 	blightMagnitude,
-	health,
 	healthMaximumPoisoned,
 	isBlighted,
 	isPoisoned,
@@ -22,8 +21,8 @@ import {
 	poisonDuration,
 	regenerationDuration,
 	regenerationRate,
+	reserveCurrent,
 	reserveMaximum,
-	stamina,
 	staminaMaximumBlighted,
 } from "@neverquest/state/reserves"
 import { formatNumber } from "@neverquest/utilities/formatters"
@@ -32,8 +31,8 @@ import type { Reserve } from "@neverquest/types/unions"
 
 export function ReserveMeter({ reserve }: { reserve: Reserve }) {
 	const isHealth = reserve === "health"
-	const reserveState = isHealth ? health : stamina
 	const reserveMaximumState = reserveMaximum(reserve)
+	const reserveState = reserveCurrent(reserve)
 
 	const [reserveValue, setReserve] = useRecoilState(reserveState)
 	const ailmentExtent = useRecoilValue(isHealth ? poisonDuration : blightMagnitude)

@@ -92,7 +92,6 @@ export function useRetire() {
 				reset(shield)
 				reset(weapon)
 
-				reset(questProgress("attributesIncreasing"))
 				reset(questProgress("attributesUnlocking"))
 				reset(questProgress("hiring"))
 				reset(questProgress("hiringAll"))

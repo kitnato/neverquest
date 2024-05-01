@@ -15,8 +15,7 @@ import { useTimer } from "@neverquest/hooks/useTimer"
 import { attributeStatistic } from "@neverquest/state/attributes"
 import { isIncapacitated, isRecovering } from "@neverquest/state/character"
 import {
-	isHealthAtMaximum,
-	isStaminaAtMaximum,
+	isReserveAtMaximum,
 	regenerationAmount,
 	regenerationDuration,
 	regenerationRate,
@@ -40,10 +39,8 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
 		attributeStatistic(regenerationAttribute),
 	)
 	const isIncapacitatedValue = useRecoilValue(isIncapacitated)
-	const isReserveAtMaximum = useRecoilValue(
-		reserve === "health" ? isHealthAtMaximum : isStaminaAtMaximum,
-	)
 	const isRecoveringValue = useRecoilValue(isRecovering)
+	const isReserveAtMaximumValue = useRecoilValue(isReserveAtMaximum(reserve))
 	const isSkillAcquiredCalisthenics = useRecoilValue(isSkillAcquired("calisthenics"))
 	const regenerationAmountValue = useRecoilValue(regenerationAmount(reserve))
 	const setRegenerationDuration = useSetRecoilState(regenerationDuration(reserve))
@@ -64,7 +61,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
 			changeReserve({ value: regenerationAmountValue })
 		},
 		setDuration: setRegenerationDuration,
-		stop: isIncapacitatedValue || isRecoveringValue || isReserveAtMaximum,
+		stop: isIncapacitatedValue || isRecoveringValue || isReserveAtMaximumValue,
 	})
 
 	return (

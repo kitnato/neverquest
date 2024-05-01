@@ -23,7 +23,7 @@ import {
 	monsterHealth,
 	monsterHealthMaximum,
 } from "@neverquest/state/monster"
-import { isHealthAtMaximum } from "@neverquest/state/reserves"
+import { isReserveAtMaximum } from "@neverquest/state/reserves"
 import { isSkillAcquired } from "@neverquest/state/skills"
 import {
 	attackRate,
@@ -160,7 +160,7 @@ export function useAttack() {
 						})
 					}
 
-					if (!get(isHealthAtMaximum) && lifeLeechValue > 0) {
+					if (!get(isReserveAtMaximum("health")) && lifeLeechValue > 0) {
 						changeHealth({
 							contents: {
 								color: "text-secondary",

@@ -5,7 +5,7 @@ import { handleStorage } from "@neverquest/state/effects/handleStorage"
 import { armor, shield, weapon } from "@neverquest/state/gear"
 import { ownedItem } from "@neverquest/state/inventory"
 import { munitions } from "@neverquest/state/items"
-import { health, stamina } from "@neverquest/state/reserves"
+import { reserveCurrent } from "@neverquest/state/reserves"
 import { isTraitAcquired } from "@neverquest/state/traits"
 import { isRanged } from "@neverquest/types/type-guards"
 import { withStateKey } from "@neverquest/utilities/helpers"
@@ -15,7 +15,7 @@ import { withStateKey } from "@neverquest/utilities/helpers"
 export const canAttackOrParry = withStateKey("canAttackOrParry", key =>
 	selector({
 		get: ({ get }) => {
-			const staminaValue = get(stamina)
+			const staminaValue = get(reserveCurrent("stamina"))
 
 			return staminaValue > 0 && staminaValue >= get(weapon).burden
 		},
@@ -25,21 +25,21 @@ export const canAttackOrParry = withStateKey("canAttackOrParry", key =>
 
 export const canBlockOrStagger = withStateKey("canBlockOrStagger", key =>
 	selector({
-		get: ({ get }) => get(stamina) >= get(shield).burden,
+		get: ({ get }) => get(reserveCurrent("stamina")) >= get(shield).burden,
 		key,
 	}),
 )
 
 export const canDodge = withStateKey("canDodge", key =>
 	selector({
-		get: ({ get }) => get(isTraitAcquired("stalwart")) || get(stamina) >= get(armor).burden,
+		get: ({ get }) => get(isTraitAcquired("stalwart")) || get(reserveCurrent("stamina")) >= get(armor).burden,
 		key,
 	}),
 )
 
 export const canResurrect = withStateKey("canResurrect", key =>
 	selector({
-		get: ({ get }) => get(health) === 0 && get(ownedItem("phylactery")) !== undefined,
+		get: ({ get }) => get(reserveCurrent("health")) === 0 && get(ownedItem("phylactery")) !== undefined,
 		key,
 	}),
 )
@@ -57,7 +57,7 @@ export const hasEnoughMunitions = withStateKey("hasEnoughMunitions", key =>
 
 export const hasFlatlined = withStateKey("hasFlatlined", key =>
 	selector({
-		get: ({ get }) => get(health) === 0 && get(ownedItem("phylactery")) === undefined,
+		get: ({ get }) => get(reserveCurrent("health")) === 0 && get(ownedItem("phylactery")) === undefined,
 		key,
 	}),
 )

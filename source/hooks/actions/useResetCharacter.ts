@@ -6,10 +6,9 @@ import { isStageStarted, location, progress, stage } from "@neverquest/state/enc
 import { isRelicEquipped } from "@neverquest/state/items"
 import {
 	blight,
-	health,
 	poisonDuration,
 	regenerationDuration,
-	stamina,
+	reserveCurrent,
 } from "@neverquest/state/reserves"
 import { essence } from "@neverquest/state/resources"
 import { RELIC_TYPES } from "@neverquest/types/unions"
@@ -23,7 +22,6 @@ export function useResetCharacter() {
 				reset(blight)
 				reset(essence)
 				reset(fletcherOptions)
-				reset(health)
 				reset(isStageStarted)
 				reset(poisonDuration)
 				reset(progress)
@@ -31,8 +29,9 @@ export function useResetCharacter() {
 				reset(recoveryDuration)
 				reset(regenerationDuration("health"))
 				reset(regenerationDuration("stamina"))
+				reset(reserveCurrent("health"))
+				reset(reserveCurrent("stamina"))
 				reset(stage)
-				reset(stamina)
 
 				for (const relic of RELIC_TYPES) {
 					reset(isRelicEquipped(relic))

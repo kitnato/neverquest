@@ -26,7 +26,11 @@ export const QUEST_CLASS_ICONS: Record<QuestClass, SVGIcon> = {
 	triumph: IconTriumph,
 }
 
-export const QUEST_COMPLETION_BONUS = 0.01
+export const QUEST_COMPLETION_BONUS: Record<QuestClass, number> = {
+	conquest: 0.02,
+	routine: 0.01,
+	triumph: 0.03,
+}
 
 export const QUEST_NOTIFICATION_DURATION = 5000
 

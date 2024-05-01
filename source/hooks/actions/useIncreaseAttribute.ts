@@ -20,7 +20,7 @@ export function useIncreaseAttribute() {
 	const transactEssence = useTransactEssence()
 
 	return useRecoilCallback(
-		({ reset, set, snapshot }) =>
+		({ set, snapshot }) =>
 			(attribute: Attribute) => {
 				const get = getSnapshotGetter(snapshot)
 
@@ -48,7 +48,7 @@ export function useIncreaseAttribute() {
 					progressQuest({ quest: "attributesIncreasing" })
 				}
 
-				reset(questProgress("survivingNoAttributes"))
+				set(questProgress("survivingNoAttributes"), Number.NEGATIVE_INFINITY)
 			},
 		[progressQuest, transactEssence],
 	)

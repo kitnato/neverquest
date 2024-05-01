@@ -1,7 +1,7 @@
 {
 	"name": "neverquest",
 	"version": "1.0.0",
-	"description": "An irreverent incremental action RPG.",
+	"description": "An irreverent text-based incremental action role-playing game.",
 	"author": "kitnato",
 	"license": "cc-by-sa-4.0",
 	"homepage": "https://kitnato.github.io/neverquest",

@@ -30,7 +30,7 @@ export const LABEL_SKILL_REQUIRED = "Requires a skill."
 export const LABEL_TOTAL = "total"
 export const LABEL_UNKNOWN = "???"
 
-export const LEVELLING_THRESHOLD = 100
+export const LEVELLING_END = 100
 export const LEVELLING_MAXIMUM = 75
 
 export const NAME_LENGTH_MAXIMUM = 50

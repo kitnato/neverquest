@@ -2,7 +2,7 @@ import { nanoid } from "nanoid"
 import { type ReactNode, useCallback, useLayoutEffect, useMemo, useRef, useState } from "react"
 import { useRecoilValue } from "recoil"
 
-import { LEVELLING_THRESHOLD } from "@neverquest/data/general"
+import { LEVELLING_END } from "@neverquest/data/general"
 import { FINALITY_STAGE } from "@neverquest/data/monster"
 import { useAnimation } from "@neverquest/hooks/useAnimation"
 import { stage } from "@neverquest/state/encounter"
@@ -69,7 +69,7 @@ export function Glitch({ children, isContinuous = false }: { children: ReactNode
 
 	const factor = useMemo(
 		() =>
-			getLinearMapping({ offset: GLITCH_STAGE_MINIMUM, stage: stageValue }) / LEVELLING_THRESHOLD,
+			getLinearMapping({ offset: GLITCH_STAGE_MINIMUM, stage: stageValue }) / LEVELLING_END,
 		[stageValue],
 	)
 	const interval = useMemo(

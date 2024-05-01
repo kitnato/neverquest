@@ -130,7 +130,7 @@ export function useToggleEquipItem() {
 					set(isShowing("stamina"), true)
 				}
 
-				reset(questProgress("survivingNoGear"))
+				set(questProgress("survivingNoGear"), Number.NEGATIVE_INFINITY)
 			},
 		[progressQuest],
 	)

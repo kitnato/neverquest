@@ -3,7 +3,7 @@ import { FormControl } from "react-bootstrap"
 import { useRecoilState, useRecoilValue } from "recoil"
 
 import { IconDisplay } from "@neverquest/components/IconDisplay"
-import { LABEL_UNKNOWN, NAME_LENGTH_MAXIMUM } from "@neverquest/data/general"
+import { LABEL_UNKNOWN, LEVELLING_MAXIMUM, NAME_LENGTH_MAXIMUM } from "@neverquest/data/general"
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import IconFlatlined from "@neverquest/icons/flatlined.svg?react"
 import IconName from "@neverquest/icons/name.svg?react"
@@ -52,7 +52,18 @@ export function Name() {
 			<FormControl
 				className={canEdit && !isEditing ? "hover-grow" : undefined}
 				onBlur={({ currentTarget: { value } }) => {
+					const selected = window.getSelection()
 					const trimmedValue = value.trim().replaceAll(/\s+/g, " ")
+
+					setIsEditing(false)
+
+					if (selected !== null) {
+						selected.removeAllRanges()
+					}
+
+					if (trimmedValue === LABEL_UNKNOWN) {
+						return
+					}
 
 					if (trimmedValue === "") {
 						setName(LABEL_UNKNOWN)
@@ -61,12 +72,10 @@ export function Name() {
 						setName(trimmedValue)
 						progressQuest({ quest: "settingName" })
 
-						if (trimmedValue.toLowerCase().replaceAll(/[^\da-z]/g, "") === "subject77") {
+						if (trimmedValue.toLowerCase().replaceAll(/[^\da-z]/g, "") === `subject${LEVELLING_MAXIMUM}`) {
 							progressQuest({ quest: "settingSubjectName" })
 						}
 					}
-
-					setIsEditing(false)
 				}}
 				onChange={({ target: { value } }) => {
 					if (value.length >= NAME_LENGTH_MAXIMUM) {

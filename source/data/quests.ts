@@ -1,5 +1,5 @@
 import { TAILORING } from "@neverquest/data/caravan"
-import { LABEL_UNKNOWN, LEVELLING_MAXIMUM, LEVELLING_THRESHOLD } from "@neverquest/data/general"
+import { LABEL_UNKNOWN, LEVELLING_END, LEVELLING_MAXIMUM } from "@neverquest/data/general"
 import IconConquest from "@neverquest/icons/conquest.svg?react"
 import IconRoutine from "@neverquest/icons/routine.svg?react"
 import IconTriumph from "@neverquest/icons/triumph.svg?react"
@@ -143,7 +143,7 @@ export const QUESTS: Record<
 		description: "Kill @ monsters with bleed damage.",
 		progression: [3, 10, 25, 50],
 		requiresTracking: true,
-		title: "Phlebotomizing",
+		title: "Phlebotomized",
 	},
 	blighting: {
 		description: "Become blighted @ times.",
@@ -200,7 +200,7 @@ export const QUESTS: Record<
 		})} total damage.`,
 		progression: [QUEST_REQUIREMENTS.damage],
 		requiresTracking: true,
-		title: "Destroyer",
+		title: "Annihilator",
 	},
 	deciding: {
 		description: `Decide to ${LABEL_UNKNOWN}`,
@@ -223,7 +223,7 @@ export const QUESTS: Record<
 	},
 	discarding: {
 		description: "Discard @ items.",
-		progression: [3, 7],
+		progression: [3],
 		requiresTracking: true,
 		title: "Litterbug",
 	},
@@ -259,7 +259,7 @@ export const QUESTS: Record<
 	},
 	eradicating: {
 		description: "Eradicate @ items.",
-		progression: [3, 7],
+		progression: [3],
 		requiresTracking: true,
 		title: "Vanishing act",
 	},
@@ -269,7 +269,7 @@ export const QUESTS: Record<
 		})} essence.`,
 		progression: [1],
 		requiresTracking: true,
-		title: "Foggy memory",
+		title: "Hangover",
 	},
 	executing: {
 		description: "Execute @ monsters.",
@@ -333,7 +333,7 @@ export const QUESTS: Record<
 	},
 	infusing: {
 		description: "Gain @ infusion levels.",
-		progression: [3, 10, 25, 50],
+		progression: [3, 10, 25, 50, 100],
 		requiresTracking: false,
 		title: "Voodoo",
 	},
@@ -372,7 +372,7 @@ export const QUESTS: Record<
 			"Kill a monster in one strike while at equal or lower power level than the current stage.",
 		progression: [1],
 		requiresTracking: true,
-		title: "One Punch",
+		title: "One Punch Person",
 	},
 	killingResCogitans: {
 		description: `Defeat ${LABEL_UNKNOWN}`,
@@ -400,6 +400,7 @@ export const QUESTS: Record<
 			TAILORING.amount * 10,
 			TAILORING.amount * 25,
 			TAILORING.amount * 50,
+			TAILORING.amount * 100,
 		],
 		requiresTracking: false,
 		title: "Deep pockets",
@@ -466,9 +467,9 @@ export const QUESTS: Record<
 	},
 	powerLevelUltra: {
 		description: `Reach power level ${formatNumber({
-			value: LEVELLING_THRESHOLD,
+			value: LEVELLING_END,
 		})}.`,
-		progression: [LEVELLING_THRESHOLD],
+		progression: [LEVELLING_END],
 		requiresTracking: true,
 		title: `It's over ${formatNumber({ value: 9000 })}!`,
 	},
@@ -487,7 +488,7 @@ export const QUESTS: Record<
 		title: "Target customer",
 	},
 	purchasingItem: {
-		description: "Purchase @ gear items and relics.",
+		description: "Purchase @ gear items or relics.",
 		progression: [3, 10, 25],
 		requiresTracking: true,
 		title: "Reliquary",
@@ -502,7 +503,7 @@ export const QUESTS: Record<
 		description: "Undergo the memory purge ritual.",
 		progression: [1, 3],
 		requiresTracking: true,
-		title: "What? Who? Where?",
+		title: "Who? What? Where?",
 	},
 	resurrecting: {
 		description: "Resurrect with a phylactery.",
@@ -583,8 +584,8 @@ export const QUESTS: Record<
 		title: "Sisyphean expedition",
 	},
 	stagesEnd: {
-		description: `Reach stage ${formatNumber({ value: LEVELLING_THRESHOLD })}.`,
-		progression: [LEVELLING_THRESHOLD],
+		description: `Reach stage ${formatNumber({ value: LEVELLING_END })}.`,
+		progression: [LEVELLING_END],
 		requiresTracking: true,
 		title: "Does it end?",
 	},

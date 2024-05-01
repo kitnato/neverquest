@@ -40,7 +40,11 @@ export function QuestDisplay({
 
 	const hasCompletedQuest = isQuestBonus(status)
 	const isQuestOver = hasCompletedQuest || status === "achieved"
-	const cappedProgress = isQuestOver ? progressionMaximum : questProgressValue
+	const cappedProgress = isQuestOver
+		? progressionMaximum
+		: questProgressValue < 0
+			? 0
+			: questProgressValue
 	const choiceID = `quest-completion-${quest}-${progressionMaximum}`
 
 	return (

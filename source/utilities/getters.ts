@@ -17,7 +17,7 @@ import {
 	CLASS_ANIMATED,
 	CLASS_ANIMATE_PREFIX,
 	GENERIC_MINIMUM,
-	LEVELLING_THRESHOLD,
+	LEVELLING_END,
 	MILLISECONDS_IN_SECOND,
 	ROMAN_NUMERALS,
 	ROMAN_NUMERAL_MAXIMUM,
@@ -336,7 +336,7 @@ export function getItemIcon(item: InventoryItem) {
 export function getLinearMapping({ offset, stage }: { offset: number, stage: number }) {
 	return stage < offset
 		? 0
-		: ((stage - offset) * (LEVELLING_THRESHOLD - 1)) / (LEVELLING_THRESHOLD - offset - 1) + 1
+		: ((stage - offset) * (LEVELLING_END - 1)) / (LEVELLING_END - offset - 1) + 1
 }
 
 export function getMeleeRanges({

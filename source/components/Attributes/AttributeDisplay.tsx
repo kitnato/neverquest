@@ -50,7 +50,7 @@ export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
 					<AttributeRank attribute={attribute} />
 
 					{isAttributeAtMaximumValue
-						? <BadgeMaximum className="me-3" />
+						? <BadgeMaximum />
 						: (
 							<OverlayTrigger
 								overlay={(
@@ -72,7 +72,10 @@ export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
 										}}
 										variant="outline-dark"
 									>
-										<IconImage Icon={areAttributesAffordableValue ? IconIncrease : IconWait} />
+										<IconImage
+											className="small"
+											Icon={areAttributesAffordableValue ? IconIncrease : IconWait}
+										/>
 									</Button>
 								</div>
 							</OverlayTrigger>

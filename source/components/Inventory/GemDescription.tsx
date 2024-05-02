@@ -1,9 +1,14 @@
 import { Stack } from "react-bootstrap"
 
+import { DescriptionDisplay } from "@neverquest/components/DescriptionDisplay"
 import { IconImage } from "@neverquest/components/IconImage"
 import { LABEL_SEPARATOR } from "@neverquest/data/general"
 import { ELEMENTALS, GEMS } from "@neverquest/data/items"
+import { AILMENT_DESCRIPTION } from "@neverquest/data/monster"
 import IconArmor from "@neverquest/icons/armor.svg?react"
+import IconExtentHigh from "@neverquest/icons/extent-high.svg?react"
+import IconExtentLow from "@neverquest/icons/extent-low.svg?react"
+import IconExtentMedium from "@neverquest/icons/extent-medium.svg?react"
 import IconGearLevel from "@neverquest/icons/gear-level.svg?react"
 import IconGear from "@neverquest/icons/gear.svg?react"
 import IconOneHanded from "@neverquest/icons/one-handed.svg?react"
@@ -11,25 +16,33 @@ import IconShield from "@neverquest/icons/shield.svg?react"
 import IconThorns from "@neverquest/icons/thorns.svg?react"
 import IconWeaponDamage from "@neverquest/icons/weapon-damage.svg?react"
 
-import type { Gem } from "@neverquest/types/unions"
+import type { SVGIcon } from "@neverquest/types/components"
+import type { Extent, Gem } from "@neverquest/types/unions"
+
+const IconExtent: Record<Extent, SVGIcon> = {
+	high: IconExtentHigh,
+	low: IconExtentLow,
+	medium: IconExtentMedium,
+}
 
 export function GemDescription({ gem }: { gem: Gem }) {
 	const { elemental } = GEMS[gem]
-	const { color, Icon } = ELEMENTALS[elemental]
+	const { ailment, color, extent, Icon } = ELEMENTALS[elemental]
+	const { description, descriptionIcons } = AILMENT_DESCRIPTION[ailment]
 
 	return (
 		<Stack gap={3}>
 			<Stack>
 				<Stack className="justify-content-center" direction="horizontal" gap={1}>
-					<span>Socketed into</span>
+					<span>Sockets into</span>
 
 					<IconImage className="small" Icon={IconGear} />
 
-					<span>gear,</span>
+					<span>gear.</span>
 				</Stack>
 
 				<Stack className="justify-content-center" direction="horizontal" gap={1}>
-					<span>adds an elemental</span>
+					<span>Adds an elemental</span>
 
 					<IconImage className="small" Icon={Icon} />
 
@@ -37,8 +50,12 @@ export function GemDescription({ gem }: { gem: Gem }) {
 						{elemental}
 					</span>
 
-					<span>effect.</span>
+					<span>
+						effect:
+					</span>
 				</Stack>
+
+				<DescriptionDisplay description={`Monster ${description.toLowerCase()}`} descriptionIcons={descriptionIcons} />
 			</Stack>
 
 			<Stack gap={1}>
@@ -47,7 +64,7 @@ export function GemDescription({ gem }: { gem: Gem }) {
 
 					{LABEL_SEPARATOR}
 
-					<span>bonus to</span>
+					<IconImage className="small" Icon={IconExtent[extent]} />
 
 					<IconImage className="small" Icon={IconWeaponDamage} />
 
@@ -59,7 +76,7 @@ export function GemDescription({ gem }: { gem: Gem }) {
 
 					{LABEL_SEPARATOR}
 
-					<span>grants</span>
+					<IconImage className="small" Icon={IconExtent[extent]} />
 
 					<IconImage className="small" Icon={IconThorns} />
 

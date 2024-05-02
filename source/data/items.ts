@@ -63,6 +63,7 @@ import type {
 	Delta,
 	Elemental,
 	ElementalAilment,
+	Extent,
 	Gem,
 	Infusable,
 	Relic,
@@ -138,6 +139,7 @@ export const ELEMENTALS: Record<
 		damageWeapon: GeneratorRange
 		duration: GeneratorRange
 		durationCap: number
+		extent: Extent
 		gem: Gem
 		Icon: SVGIcon
 	}
@@ -149,6 +151,7 @@ export const ELEMENTALS: Record<
 		damageWeapon: { maximum: 0.5, minimum: 0.1 },
 		duration: { maximum: 2500, minimum: 1200 },
 		durationCap: 7500,
+		extent: "high",
 		gem: "ruby",
 		Icon: IconFire,
 	},
@@ -159,6 +162,7 @@ export const ELEMENTALS: Record<
 		damageWeapon: { maximum: 0.4, minimum: 0.075 },
 		duration: { maximum: 2200, minimum: 1000 },
 		durationCap: 3500,
+		extent: "medium",
 		gem: "sapphire",
 		Icon: IconIce,
 	},
@@ -169,6 +173,7 @@ export const ELEMENTALS: Record<
 		damageWeapon: { maximum: 0.25, minimum: 0.05 },
 		duration: { maximum: 2000, minimum: 900 },
 		durationCap: 5000,
+		extent: "low",
 		gem: "amethyst",
 		Icon: IconLightning,
 	},

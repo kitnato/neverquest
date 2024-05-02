@@ -124,6 +124,8 @@ export type Delta =
 export const ELEMENTAL_TYPES = ["lightning", "fire", "ice"] as const
 export type Elemental = (typeof ELEMENTAL_TYPES)[number]
 
+export type Extent = "high" | "low" | "medium"
+
 export const FINALITY_TYPES = ["res cogitans", "res dominus"] as const
 export type Finality = (typeof FINALITY_TYPES)[number]
 

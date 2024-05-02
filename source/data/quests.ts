@@ -35,10 +35,10 @@ export const QUEST_COMPLETION_BONUS: Record<QuestClass, number> = {
 export const QUEST_NOTIFICATION_DURATION = 5000
 
 export const QUEST_REQUIREMENTS = {
-	damage: 2000,
+	damage: 2500,
 	essenceCount: 7575,
 	monstersKilled: 75,
-	protection: 1500,
+	protection: 1000,
 	skillsCraft: ["armorcraft", "shieldcraft", "siegecraft"] as Skill[],
 	survivingNoAttributes: 7,
 	survivingNoGear: 7,

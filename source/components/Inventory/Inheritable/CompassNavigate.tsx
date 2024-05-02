@@ -28,7 +28,13 @@ import { location, stage, wildernesses } from "@neverquest/state/encounter"
 import { activeControl } from "@neverquest/state/ui"
 import { formatNumber } from "@neverquest/utilities/formatters"
 
-const StageDisplay = ({ currentStage, wildernesses }: { currentStage: number, wildernesses: string[] }) => {
+const StageDisplay = ({
+	currentStage,
+	wildernesses,
+}: {
+	currentStage: number
+	wildernesses: string[]
+}) => {
 	const stageName = wildernesses[currentStage - 1]
 
 	if (stageName !== undefined) {
@@ -47,8 +53,8 @@ const StageDisplay = ({ currentStage, wildernesses }: { currentStage: number, wi
 				{
 					currentStage >= BOSS_STAGE_START
 					&& currentStage % BOSS_STAGE_INTERVAL === 0
+					&& !Object.values(FINALITY_STAGE).includes(currentStage)
 					&& <IconImage className="small" Icon={IconBossHiding} />
-
 				}
 
 				{Object.values(FINALITY_STAGE).includes(currentStage)

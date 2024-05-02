@@ -47,7 +47,7 @@ export function ImportExport() {
 
 	return (
 		<>
-			<OverlayTrigger overlay={<Tooltip>Save file</Tooltip>} placement="bottom">
+			<OverlayTrigger overlay={<Tooltip>Save & load game</Tooltip>} placement="bottom">
 				<Button
 					onClick={() => {
 						setIsShowingModal(true)
@@ -69,7 +69,7 @@ export function ImportExport() {
 									: undefined,
 							}}
 						>
-							<span>Import & export save file</span>
+							<span>Import & export savegame file</span>
 						</IconDisplay>
 					</ModalTitle>
 				</ModalHeader>
@@ -112,7 +112,7 @@ export function ImportExport() {
 						>
 							<IconImage className="small" Icon={IconExport} />
 
-							<span>&nbsp;Export file</span>
+							<span>&nbsp;Export savegame</span>
 						</Button>
 
 						<Button
@@ -124,7 +124,7 @@ export function ImportExport() {
 						>
 							<IconImage className="small" Icon={IconImport} />
 
-							<span>&nbsp;Import file</span>
+							<span>&nbsp;Import savegame</span>
 						</Button>
 
 						<input

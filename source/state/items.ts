@@ -21,13 +21,19 @@ export const infusionEffect = withStateKey("infusionEffect", key =>
 	selectorFamily({
 		get:
 			(infusable: Infusable) =>
-				({ get }) =>
-					get(ownedItem(infusable)) === undefined
+				({ get }) => {
+					const infusionLevelValue = get(infusionLevel(infusable))
+					const { effect } = INFUSABLES[infusable].item
+
+					return get(ownedItem(infusable)) === undefined
 						? 0
-						: getFromRange({
-							factor: getSigmoid(get(infusionLevel(infusable))),
-							...INFUSABLES[infusable].item.effect,
-						}),
+						: infusionLevelValue === LEVELLING_MAXIMUM
+							? effect.maximum
+							: getFromRange({
+								factor: getSigmoid(infusionLevelValue),
+								...effect,
+							})
+				},
 		key,
 	}),
 )

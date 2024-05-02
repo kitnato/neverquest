@@ -125,8 +125,8 @@ export const MONSTER_HEALTH = {
 	bonus: 0.02,
 	boss: 1.8,
 	finality: {
-		"res cogitans": 21757,
-		"res dominus": 11757,
+		"res cogitans": 25757,
+		"res dominus": 12757,
 	},
 	menace: {
 		maximum: 1.9,

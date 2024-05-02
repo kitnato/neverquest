@@ -51,7 +51,6 @@ export function Infuse({ infusable }: { infusable: Infusable }) {
 
 	return isInfusionAtMaximumValue && infusable === "mysterious egg"
 		? <Hatch />
-
 		: (
 			<OverlayTrigger
 				overlay={(

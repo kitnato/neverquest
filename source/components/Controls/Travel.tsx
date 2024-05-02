@@ -43,8 +43,8 @@ export function Travel() {
 			(progressMaximumValue === Number.POSITIVE_INFINITY ? progressValue > 0 : isStageCompletedValue)
 			&& essenceLootValue === 0
 		)
-		|| isCaravan
 		|| canAwakenValue
+		|| isCaravan
 	) {
 		return (
 			<OverlayTrigger

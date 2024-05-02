@@ -1,6 +1,4 @@
-import IconHealthRegeneration from "@neverquest/icons/health-regeneration.svg?react"
 import IconHealth from "@neverquest/icons/health.svg?react"
-import IconStaminaRegeneration from "@neverquest/icons/stamina-regeneration.svg?react"
 import IconStamina from "@neverquest/icons/stamina.svg?react"
 
 import type { SVGIcon } from "@neverquest/types/components"
@@ -17,10 +15,8 @@ export const RESERVES: Record<
 		baseAmount: number
 		baseRegenerationRate: number
 		Icon: SVGIcon
-		IconRegeneration: SVGIcon
 		maximumDelta: Delta
 		regeneration: number
-		regenerationAttribute: Attribute
 		regenerationRateDelta: Delta
 	}
 > = {
@@ -29,10 +25,8 @@ export const RESERVES: Record<
 		baseAmount: 80,
 		baseRegenerationRate: 3100,
 		Icon: IconHealth,
-		IconRegeneration: IconHealthRegeneration,
 		maximumDelta: "healthMaximum",
 		regeneration: 0.03,
-		regenerationAttribute: "fortitude",
 		regenerationRateDelta: "healthRegenerationRate",
 	},
 	stamina: {
@@ -40,10 +34,8 @@ export const RESERVES: Record<
 		baseAmount: 20,
 		baseRegenerationRate: 2300,
 		Icon: IconStamina,
-		IconRegeneration: IconStaminaRegeneration,
 		maximumDelta: "staminaMaximum",
 		regeneration: 0.02,
-		regenerationAttribute: "vigor",
 		regenerationRateDelta: "staminaRegenerationRate",
 	},
 }

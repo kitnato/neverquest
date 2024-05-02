@@ -5,13 +5,14 @@ import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
 import { DetailsTable } from "@neverquest/components/DetailsTable"
 import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { RegenerationMeter } from "@neverquest/components/Reserves/RegenerationMeter"
-import { ATTRIBUTES } from "@neverquest/data/attributes"
 import { POPOVER_TRIGGER } from "@neverquest/data/general"
 import { RESERVES } from "@neverquest/data/reserves"
 import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth"
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina"
 import { useDeltaText } from "@neverquest/hooks/useDeltaText"
 import { useTimer } from "@neverquest/hooks/useTimer"
+import IconRegenerationRate from "@neverquest/icons/regeneration-rate.svg?react"
+import IconVigor from "@neverquest/icons/vigor.svg?react"
 import { attributeStatistic } from "@neverquest/state/attributes"
 import { isIncapacitated, isRecovering } from "@neverquest/state/character"
 import {
@@ -21,7 +22,7 @@ import {
 	regenerationRate,
 } from "@neverquest/state/reserves"
 import { isSkillAcquired } from "@neverquest/state/skills"
-import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters"
+import { formatNumber } from "@neverquest/utilities/formatters"
 
 import type { Reserve } from "@neverquest/types/unions"
 
@@ -29,14 +30,12 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
 	const {
 		baseRegenerationRate,
 		Icon,
-		IconRegeneration,
 		regeneration,
-		regenerationAttribute,
 		regenerationRateDelta,
 	} = RESERVES[reserve]
 
-	const attributeStatisticRegenerationRate = useRecoilValue(
-		attributeStatistic(regenerationAttribute),
+	const attributeStatisticVigor = useRecoilValue(
+		attributeStatistic("vigor"),
 	)
 	const isIncapacitatedValue = useRecoilValue(isIncapacitated)
 	const isRecoveringValue = useRecoilValue(isRecovering)
@@ -77,19 +76,18 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
 									</td>
 
 									<td>
-										<IconDisplay Icon={IconRegeneration} iconProps={{ className: "small" }}>
+										<IconDisplay Icon={IconRegenerationRate} iconProps={{ className: "small" }}>
 											<span>{formatNumber({ format: "time", value: baseRegenerationRate })}</span>
 										</IconDisplay>
 									</td>
 								</tr>
 
-								{attributeStatisticRegenerationRate < 0 && (
+								{attributeStatisticVigor < 0 && (
 									<tr>
 										<td>
-											<IconDisplay Icon={ATTRIBUTES[regenerationAttribute].Icon} iconProps={{ className: "small" }}>
+											<IconDisplay Icon={IconVigor} iconProps={{ className: "small" }}>
 												<span>
-													{capitalizeAll(regenerationAttribute)}
-													:
+													Vigor:
 												</span>
 											</IconDisplay>
 										</td>
@@ -99,7 +97,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
 												<span>
 													{formatNumber({
 														format: "percentage",
-														value: attributeStatisticRegenerationRate,
+														value: attributeStatisticVigor,
 													})}
 												</span>
 											</Stack>

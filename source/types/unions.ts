@@ -13,7 +13,6 @@ export const ATTRIBUTE_TYPES = [
 	"strength",
 	"speed",
 	"vitality",
-	"fortitude",
 	"endurance",
 	"vigor",
 	"dexterity",

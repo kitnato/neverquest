@@ -145,7 +145,7 @@ export const regenerationRate = withStateKey("regenerationRate", key =>
 
 				return Math.round(
 					baseRegenerationRate
-					+ baseRegenerationRate * get(reserveRegenerationRateReduction(reserve)),
+					+ baseRegenerationRate * get(attributeStatistic("vigor")),
 				)
 			},
 		key,
@@ -167,13 +167,6 @@ export const reserveMaximum = withStateKey("reserveMaximum", key =>
 						: Math.max(Math.round(attributeStatisticValue * questsBonusValue), GENERIC_MINIMUM))
 				)
 			},
-		key,
-	}),
-)
-
-export const reserveRegenerationRateReduction = withStateKey("reserveRegenerationRateReduction", key =>
-	selectorFamily({
-		get: (reserve: Reserve) => ({ get }) => get(attributeStatistic(RESERVES[reserve].regenerationAttribute)),
 		key,
 	}),
 )

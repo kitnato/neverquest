@@ -16,7 +16,7 @@ import IconDodgeChance from "@neverquest/icons/dodge-chance.svg?react"
 import IconEscrime from "@neverquest/icons/escrime.svg?react"
 import IconEvasion from "@neverquest/icons/evasion.svg?react"
 import IconExecution from "@neverquest/icons/execution.svg?react"
-import IconHealthRegeneration from "@neverquest/icons/health-regeneration.svg?react"
+import IconHealth from "@neverquest/icons/health.svg?react"
 import IconImpermeability from "@neverquest/icons/impermeability.svg?react"
 import IconInfusionLevel from "@neverquest/icons/infusion-level.svg?react"
 import IconMeditation from "@neverquest/icons/meditation.svg?react"
@@ -26,12 +26,13 @@ import IconPiercing from "@neverquest/icons/piercing.svg?react"
 import IconPoisoned from "@neverquest/icons/poisoned.svg?react"
 import IconRanged from "@neverquest/icons/ranged.svg?react"
 import IconRecovery from "@neverquest/icons/recovery.svg?react"
+import IconRegenerationRate from "@neverquest/icons/regeneration-rate.svg?react"
 import IconShieldTower from "@neverquest/icons/shield-tower.svg?react"
 import IconShieldcraft from "@neverquest/icons/shieldcraft.svg?react"
 import IconSiegecraft from "@neverquest/icons/siegecraft.svg?react"
 import IconSlashing from "@neverquest/icons/slashing.svg?react"
 import IconStaggered from "@neverquest/icons/staggered.svg?react"
-import IconStaminaRegeneration from "@neverquest/icons/stamina-regeneration.svg?react"
+import IconStamina from "@neverquest/icons/stamina.svg?react"
 import IconStunned from "@neverquest/icons/stunned.svg?react"
 import IconTraumatology from "@neverquest/icons/traumatology.svg?react"
 import IconTwoHanded from "@neverquest/icons/two-handed.svg?react"
@@ -88,8 +89,8 @@ export const SKILLS: Record<
 	},
 	calisthenics: {
 		description:
-			"Grants attributes that increase rates for # health regeneration and # stamina regeneration.",
-		descriptionIcons: [IconHealthRegeneration, IconStaminaRegeneration],
+			"Grants an # attribute that increases rates for # health regeneration and # stamina regeneration.",
+		descriptionIcons: [IconRegenerationRate, IconHealth, IconStamina],
 		Icon: IconCalisthenics,
 		isInheritable: false,
 		requiredCrewMember: "merchant",

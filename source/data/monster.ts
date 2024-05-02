@@ -58,8 +58,8 @@ export const BLIGHT = {
 		minimum: 0.05,
 	},
 	finality: {
-		"res cogitans": 0.7777,
-		"res dominus": 0.4777,
+		"res cogitans": 0.5757,
+		"res dominus": 0.1717,
 	},
 	increment: 0.025,
 	requiredStage: 50,
@@ -149,11 +149,11 @@ export const POISON = {
 	},
 	duration: {
 		maximum: 400_000,
-		minimum: 45_000,
+		minimum: 30_000,
 	},
 	finality: {
-		"res cogitans": 0.7777,
-		"res dominus": 0.4777,
+		"res cogitans": 0.7575,
+		"res dominus": 0.5757,
 	},
 	magnitude: {
 		maximum: 0.2,

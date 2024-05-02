@@ -11,6 +11,7 @@ import { CompassNavigate } from "@neverquest/components/Inventory/Inheritable/Co
 import { EquipRelic } from "@neverquest/components/Inventory/Inheritable/EquipRelic"
 import { HearthstoneWarp } from "@neverquest/components/Inventory/Inheritable/HearthstoneWarp"
 import { Infusion } from "@neverquest/components/Inventory/Inheritable/Infusion"
+import { SemperServatis } from "@neverquest/components/Inventory/Inheritable/SemperServatis"
 import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay"
 import { SocketGem } from "@neverquest/components/Inventory/SocketGem"
 import {
@@ -41,6 +42,7 @@ import type { Relic } from "@neverquest/types/unions"
 import type { FunctionComponent } from "react"
 
 const RELIC_ACTIONS: Partial<Record<Relic, FunctionComponent>> = {
+	"[S751NQ]": SemperServatis,
 	"automincer": () => <EquipRelic relic="automincer" />,
 	"compass": CompassNavigate,
 	"dream catcher": () => <EquipRelic relic="dream catcher" />,

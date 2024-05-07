@@ -133,7 +133,7 @@ export function Main() {
 					<div>
 						<Button
 							className={animation}
-							disabled={isIncapacitatedValue || isResting}
+							disabled={!canResurrectValue && (isIncapacitatedValue || isResting)}
 							onClick={canResurrectValue ? resurrection : toggleAttacking}
 							variant="outline-dark"
 						>

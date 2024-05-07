@@ -45,7 +45,7 @@ export const ARMOR_SPECIFICATIONS: Record<
 			{ maximum: 0.2, minimum: 0.18 },
 		],
 		Icon: IconArmorHeavy,
-		price: { maximum: 10_000, minimum: 50 },
+		price: { maximum: 8000, minimum: 25 },
 		protection: [
 			{ maximum: 8, minimum: 6 },
 			{ maximum: 800, minimum: 750 },
@@ -85,7 +85,7 @@ export const ARMOR_SPECIFICATIONS: Record<
 			{ maximum: 0.42, minimum: 0.4 },
 		],
 		Icon: IconReinforced,
-		price: { maximum: 7500, minimum: 25 },
+		price: { maximum: 6500, minimum: 10 },
 		protection: [
 			{ maximum: 6, minimum: 3 },
 			{ maximum: 650, minimum: 600 },

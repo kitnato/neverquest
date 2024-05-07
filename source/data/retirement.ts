@@ -15,8 +15,8 @@ export const PERKS: Record<Perk, GeneratorRange & { generationMaximum: number }>
 	},
 	startingEssence: {
 		generationMaximum: TRAIT_TYPES.length,
-		maximum: 0.35,
-		minimum: 0.05,
+		maximum: 0.25,
+		minimum: 0.03,
 	},
 }
 

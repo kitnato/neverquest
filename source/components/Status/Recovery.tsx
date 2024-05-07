@@ -53,7 +53,9 @@ export function Recovery() {
 										</td>
 
 										<td>
-											<span>{formatNumber({ format: "time", value: RECOVERY_RATE })}</span>
+											<IconDisplay Icon={IconRecovery} iconProps={{ className: "small" }}>
+												<span>{formatNumber({ format: "time", value: RECOVERY_RATE })}</span>
+											</IconDisplay>
 										</td>
 									</tr>
 

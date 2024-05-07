@@ -64,7 +64,6 @@ export function DodgeChance() {
 												<Stack direction="horizontal" gap={1}>
 													<span>
 														{formatNumber({
-															decimals: 1,
 															format: "percentage",
 															value: agility,
 														})}

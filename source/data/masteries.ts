@@ -45,11 +45,11 @@ export const MASTERIES: Record<
 		requiredSkill: "siegecraft",
 	},
 	cruelty: {
-		base: 0.3,
+		base: 0.25,
 		description: "Affects # bleed damage.",
 		descriptionIcons: [IconBleeding],
 		Icon: IconCruelty,
-		increment: 1.25 / LEVELLING_MAXIMUM,
+		increment: 1 / LEVELLING_MAXIMUM,
 		instructionIcons: [IconPiercing],
 		instructions: "Trains when dealing damage with a # piercing weapon.",
 		requiredSkill: "anatomy",

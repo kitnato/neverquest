@@ -67,9 +67,11 @@ export const bleedDamage = withStateKey("bleedDamage", key =>
 export const bleedRating = withStateKey("bleedRating", key =>
 	selector({
 		get: ({ get }) =>
-			Math.round(
-				get(masteryStatistic("cruelty")) * PERCENTAGE + get(bleedChance) * PERCENTAGE + get(bleedDamage),
-			),
+			get(bleedChance) === 0
+				? 0
+				: Math.round(
+					get(masteryStatistic("cruelty")) * PERCENTAGE + get(bleedChance) * PERCENTAGE + get(bleedDamage) * get(bleed).ticks,
+				),
 		key,
 	}),
 )

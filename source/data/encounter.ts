@@ -7,9 +7,9 @@ export const AFFIX_STRUCTURE_WEIGHTS: [AffixStructure, number][] = [
 	["prefix", 0.65],
 ]
 
-export const CORPSE_VALUE = 0.3
+export const CORPSE_VALUE = 0.1
 
-export const DEATH_STAGE_PENALTY = 3
+export const DEATH_STAGE_PENALTY = 1
 
 export const PROGRESS = {
 	maximum: 20,

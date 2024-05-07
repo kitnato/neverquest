@@ -58,16 +58,12 @@ export function Stamina() {
 												</td>
 
 												<td>
-													<Stack direction="horizontal" gap={1}>
-														<IconDisplay Icon={IconStamina} iconProps={{ className: "small" }}>
-															<span>
-																+
-																{formatNumber({
-																	value: enduranceBonus,
-																})}
-															</span>
-														</IconDisplay>
-													</Stack>
+													<span>
+														+
+														{formatNumber({
+															value: enduranceBonus,
+														})}
+													</span>
 												</td>
 											</tr>
 										)}
@@ -81,16 +77,14 @@ export function Stamina() {
 												</td>
 
 												<td>
-													<IconDisplay Icon={IconStamina} iconProps={{ className: "small" }}>
-														<span>
-															+
-															{formatNumber({
-																decimals: 0,
-																format: "percentage",
-																value: questsBonusStamina,
-															})}
-														</span>
-													</IconDisplay>
+													<span>
+														+
+														{formatNumber({
+															decimals: 0,
+															format: "percentage",
+															value: questsBonusStamina,
+														})}
+													</span>
 												</td>
 											</tr>
 										)}

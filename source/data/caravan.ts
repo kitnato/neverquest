@@ -134,6 +134,7 @@ export const CREW: Record<
 			20: "May our hearth be a beacon for your replenishment.",
 			[RAGE.requiredStage - 1]: "The foul creatures seem even more irate than usual.",
 			23: "Always a sight for sore eyes.",
+			26: "Dreariness lifts with your arrival.",
 			30: "Yet you return for more punishment?",
 			31: "Your headway in the wilderness is helping business.",
 			41: "Still you press on. There must be an answer.",

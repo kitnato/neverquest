@@ -2,7 +2,7 @@ import { useRecoilValue } from "recoil"
 
 import { IconImage } from "@neverquest/components/IconImage"
 import IconEquals from "@neverquest/icons/equals.svg?react"
-import IconIncrease from "@neverquest/icons/increase.svg?react"
+import IconExtentLow from "@neverquest/icons/extent-low.svg?react"
 import { isShowing } from "@neverquest/state/ui"
 
 import type { Showing } from "@neverquest/types/unions"
@@ -25,10 +25,14 @@ export function GearComparison({
 	if (isShowingGearComparison) {
 		return (
 			<IconImage
-				className={`small ${
-					isDifferenceEqual ? "text-secondary" : isPositive ? "text-success" : "text-danger"
-				}`}
-				Icon={isDifferenceEqual ? IconEquals : IconIncrease}
+				className={
+					`small ${isDifferenceEqual
+						? "text-secondary"
+						: isPositive
+							? "text-success"
+							: "text-danger"}`
+				}
+				Icon={isDifferenceEqual ? IconEquals : IconExtentLow}
 				isFlipped={difference < 0}
 			/>
 		)

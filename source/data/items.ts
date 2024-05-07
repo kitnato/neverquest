@@ -113,7 +113,7 @@ export const CONSUMABLES: Record<
 		item: {
 			ID: "",
 			name: "phylactery",
-			price: 500,
+			price: 375,
 			weight: 10,
 		},
 	},
@@ -244,7 +244,7 @@ export const INFUSABLES: Record<
 	},
 }
 
-export const KNAPSACK_CAPACITY = 20
+export const KNAPSACK_CAPACITY = 16
 
 export const MUNITIONS = {
 	amount: 1,
@@ -253,9 +253,9 @@ export const MUNITIONS = {
 }
 
 export const RELIC_DROP_CHANCE = {
-	"dream catcher": { maximum: 0.1, minimum: 0.03 },
+	"dream catcher": { maximum: 0.1, minimum: 0.02 },
 	"memento": { maximum: 0.1, minimum: 0.01 },
-	"torn manuscript": { maximum: 0.1, minimum: 0.03 },
+	"torn manuscript": { maximum: 0.1, minimum: 0.02 },
 }
 
 export const RELICS: Record<

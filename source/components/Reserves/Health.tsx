@@ -67,16 +67,12 @@ export function Health() {
 												</td>
 
 												<td>
-													<Stack direction="horizontal" gap={1}>
-														<IconDisplay Icon={IconHealth} iconProps={{ className: "small" }}>
-															<span>
-																+
-																{formatNumber({
-																	value: vitalityBonus,
-																})}
-															</span>
-														</IconDisplay>
-													</Stack>
+													<span>
+														+
+														{formatNumber({
+															value: vitalityBonus,
+														})}
+													</span>
 												</td>
 											</tr>
 										)}
@@ -90,16 +86,14 @@ export function Health() {
 												</td>
 
 												<td>
-													<IconDisplay Icon={IconHealth} iconProps={{ className: "small" }}>
-														<span>
-															+
-															{formatNumber({
-																decimals: 0,
-																format: "percentage",
-																value: questsBonusHealth,
-															})}
-														</span>
-													</IconDisplay>
+													<span>
+														+
+														{formatNumber({
+															decimals: 0,
+															format: "percentage",
+															value: questsBonusHealth,
+														})}
+													</span>
 												</td>
 											</tr>
 										)}

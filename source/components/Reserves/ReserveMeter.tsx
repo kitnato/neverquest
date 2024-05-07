@@ -136,7 +136,6 @@ export function ReserveMeter({ reserve }: { reserve: Reserve }) {
 								{isHealth
 									? formatNumber({ format: "time", value: ailmentExtent })
 									: formatNumber({
-										decimals: 1,
 										format: "percentage",
 										value: -ailmentExtent,
 									})}

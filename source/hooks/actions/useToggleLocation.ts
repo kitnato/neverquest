@@ -1,11 +1,12 @@
 import { useRecoilCallback } from "recoil"
 
+import { FINALITY_STAGE } from "@neverquest/data/monster"
 import { useAdvanceCaravan } from "@neverquest/hooks/actions/useAdvanceCaravan"
 import { useDefeatFinality } from "@neverquest/hooks/actions/useDefeatFinality"
 import { useIncreaseStage } from "@neverquest/hooks/actions/useIncreaseStage"
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness"
 import { blacksmithOptions, fletcherOptions } from "@neverquest/state/caravan"
-import { canAwaken, consciousness, hasAwoken, isStageCompleted, location, stage, stageMaximum } from "@neverquest/state/encounter"
+import { canAwaken, consciousness, hasAwoken, hasDefeatedFinality, isStageCompleted, location, stage, stageMaximum } from "@neverquest/state/encounter"
 import { isShowing } from "@neverquest/state/ui"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
 
@@ -19,6 +20,8 @@ export function useToggleLocation() {
 		({ reset, set, snapshot }) =>
 			(isWarp?: boolean) => {
 				const get = getSnapshotGetter(snapshot)
+
+				const stageValue = get(stage)
 
 				if (get(location) === "wilderness") {
 					advanceCaravan()
@@ -37,7 +40,9 @@ export function useToggleLocation() {
 						reset(blacksmithOptions)
 						reset(fletcherOptions)
 
-						increaseStage()
+						if (!(stageValue === FINALITY_STAGE["res cogitans"] && !get(hasDefeatedFinality("res cogitans")))) {
+							increaseStage()
+						}
 					}
 
 					resetWilderness()

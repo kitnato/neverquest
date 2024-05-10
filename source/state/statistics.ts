@@ -66,12 +66,11 @@ export const bleedDamage = withStateKey("bleedDamage", key =>
 
 export const bleedRating = withStateKey("bleedRating", key =>
 	selector({
-		get: ({ get }) =>
-			get(bleedChance) === 0
-				? 0
-				: Math.round(
-					get(masteryStatistic("cruelty")) * PERCENTAGE + get(bleedChance) * PERCENTAGE + get(bleedDamage) * get(bleed).ticks,
-				),
+		get: ({ get }) => get(bleedChance) === 0
+			? 0
+			: Math.round(
+				get(masteryStatistic("cruelty")) * PERCENTAGE + get(bleedChance) * PERCENTAGE + get(bleedDamage) * get(bleed).ticks,
+			),
 		key,
 	}),
 )
@@ -92,24 +91,21 @@ export const blockChance = withStateKey("blockChance", key =>
 
 export const criticalChance = withStateKey("criticalChance", key =>
 	selector({
-		get: ({ get }) =>
-			get(isSkillAcquired("assassination")) ? get(attributeStatistic("dexterity")) : 0,
+		get: ({ get }) => get(isSkillAcquired("assassination")) ? get(attributeStatistic("dexterity")) : 0,
 		key,
 	}),
 )
 
 export const criticalDamage = withStateKey("criticalDamage", key =>
 	selector({
-		get: ({ get }) =>
-			get(isSkillAcquired("assassination")) ? get(attributeStatistic("perception")) : 0,
+		get: ({ get }) => get(isSkillAcquired("assassination")) ? get(attributeStatistic("perception")) : 0,
 		key,
 	}),
 )
 
 export const criticalRating = withStateKey("criticalRating", key =>
 	selector({
-		get: ({ get }) =>
-			Math.round((get(criticalChance) * PERCENTAGE * 2) + (get(criticalDamage) * PERCENTAGE)),
+		get: ({ get }) => Math.round((get(criticalChance) * PERCENTAGE * 2) + (get(criticalDamage) * PERCENTAGE)),
 		key,
 	}),
 )
@@ -151,43 +147,40 @@ export const damage = withStateKey("damage", key =>
 
 export const damagePerSecond = withStateKey("damagePerSecond", key =>
 	selector({
-		get: ({ get }) =>
-			getDamagePerRate({
-				damage: get(damage),
-				damageModifier: get(criticalDamage),
-				damageModifierChance: get(criticalChance),
-				rate: get(attackRate),
-			}),
+		get: ({ get }) => getDamagePerRate({
+			damage: get(damage),
+			damageModifier: get(criticalDamage),
+			damageModifierChance: get(criticalChance),
+			rate: get(attackRate),
+		}),
 		key,
 	}),
 )
 
 export const deflectionChance = withStateKey("deflectionChance", key =>
 	selector({
-		get: ({ get }) =>
-			get(isSkillAcquired("impermeability"))
-				? Math.min(
-					get(armor).deflectionChance
-					+ (get(isTraitAcquired("inoculated")) ? INOCULATED_DEFLECTION_BASE : 0),
-					DEFLECTION_MAXIMUM,
-				)
-				: 0,
+		get: ({ get }) => get(isSkillAcquired("impermeability"))
+			? Math.min(
+				get(armor).deflectionChance
+				+ (get(isTraitAcquired("inoculated")) ? INOCULATED_DEFLECTION_BASE : 0),
+				DEFLECTION_MAXIMUM,
+			)
+			: 0,
 		key,
 	}),
 )
 
 export const dodgeChance = withStateKey("dodgeChance", key =>
 	selector({
-		get: ({ get }) =>
-			get(isSkillAcquired("evasion"))
-				? Math.min(
-					get(attributeStatistic("agility"))
-					* (get(isTraitAcquired("nudist")) && isUnarmored(get(armor))
-						? 1 + NUDIST.dodgeBonus
-						: 1),
-					ATTRIBUTES.agility.maximum ?? Number.POSITIVE_INFINITY,
-				)
-				: 0,
+		get: ({ get }) => get(isSkillAcquired("evasion"))
+			? Math.min(
+				get(attributeStatistic("agility"))
+				* (get(isTraitAcquired("nudist")) && isUnarmored(get(armor))
+					? 1 + NUDIST.dodgeBonus
+					: 1),
+				ATTRIBUTES.agility.maximum ?? Number.POSITIVE_INFINITY,
+			)
+			: 0,
 		key,
 	}),
 )
@@ -278,8 +271,7 @@ export const protection = withStateKey("protection", key =>
 
 export const recoveryRate = withStateKey("recoveryRate", key =>
 	selector({
-		get: ({ get }) =>
-			Math.max(RECOVERY_RATE - RECOVERY_RATE * get(masteryStatistic("resilience")), 0),
+		get: ({ get }) => Math.max(RECOVERY_RATE - RECOVERY_RATE * get(masteryStatistic("resilience")), 0),
 		key,
 	}),
 )
@@ -313,8 +305,7 @@ export const stunRating = withStateKey("stunRating", key =>
 
 export const thorns = withStateKey("thorns", key =>
 	selector({
-		get: ({ get }) =>
-			Object.values(get(elementalEffects).armor).reduce((sum, { damage }) => sum + damage, 0),
+		get: ({ get }) => Object.values(get(elementalEffects).armor).reduce((sum, { damage }) => sum + damage, 0),
 		key,
 	}),
 )

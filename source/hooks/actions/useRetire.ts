@@ -25,6 +25,7 @@ import {
 	corpse,
 	generation,
 	hasDefeatedFinality,
+	stageHighest,
 	stageMaximum,
 } from "@neverquest/state/encounter"
 import { armor, gems, shield, weapon } from "@neverquest/state/gear"
@@ -74,7 +75,7 @@ export function useRetire() {
 				}
 
 				resetAttributes()
-				resetCharacter()
+				resetCharacter(true)
 
 				set(essence, Math.round(getPerkEffect({ generation: nextGeneration, perk: "startingEssence" }) * get(absorbedEssence)))
 
@@ -90,6 +91,7 @@ export function useRetire() {
 				reset(gems(WEAPON_NONE.ID))
 				reset(name)
 				reset(shield)
+				reset(stageHighest)
 				reset(weapon)
 
 				reset(questProgress("attributesUnlocking"))

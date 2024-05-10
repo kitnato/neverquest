@@ -22,12 +22,13 @@ import IconEssence from "@neverquest/icons/essence.svg?react"
 import IconFlatlined from "@neverquest/icons/flatlined.svg?react"
 import IconKnapsack from "@neverquest/icons/knapsack.svg?react"
 import { hasFlatlined } from "@neverquest/state/character"
-import { stage, wildernesses } from "@neverquest/state/encounter"
+import { stage, stageMaximum, wildernesses } from "@neverquest/state/encounter"
 import { getAffixStructure } from "@neverquest/utilities/getters"
 
 export function Flatline() {
 	const hasFlatlinedValue = useRecoilValue(hasFlatlined)
 	const stageValue = useRecoilValue(stage)
+	const stageMaximumValue = useRecoilValue(stageMaximum)
 	const setWildernesses = useSetRecoilState(wildernesses)
 
 	const progressQuest = useProgressQuest()
@@ -79,19 +80,22 @@ export function Flatline() {
 			<ModalFooter>
 				<Button
 					onClick={() => {
+						const relativeStagePenalty = stageValue - DEATH_STAGE_PENALTY
+						const absoluteStagePenalty = stageMaximumValue - relativeStagePenalty
+
 						if (stageValue > DEATH_STAGE_PENALTY) {
 							setWildernesses(currentWildernesses =>
-								currentWildernesses.slice(0, stageValue - DEATH_STAGE_PENALTY),
+								currentWildernesses.slice(0, relativeStagePenalty),
 							)
 						}
 						else {
 							setWildernesses([generateLocation({ affixStructure: getAffixStructure() })])
 						}
 
-						progressQuest({ amount: -DEATH_STAGE_PENALTY, quest: "stages" })
-						progressQuest({ amount: -DEATH_STAGE_PENALTY, quest: "stagesEnd" })
+						progressQuest({ amount: absoluteStagePenalty, quest: "stages" })
+						progressQuest({ amount: absoluteStagePenalty, quest: "stagesEnd" })
 
-						resetCharacter()
+						resetCharacter(true)
 						resetWilderness()
 					}}
 					variant="outline-dark"

@@ -434,6 +434,7 @@ export type StateKey =
 	| "skillPrice"
 	| "stability"
 	| "stage"
+	| "stageHighest"
 	| "stageMaximum"
 	| "staggerChance"
 	| "staggerRating"

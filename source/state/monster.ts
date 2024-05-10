@@ -1,9 +1,9 @@
 import { nanoid } from "nanoid"
 import { atom, atomFamily, selector, selectorFamily } from "recoil"
 
-import { PROGRESS } from "@neverquest/data/encounter"
+import { LOOT_MODIFIER, PROGRESS } from "@neverquest/data/encounter"
 import { LEVELLING_MAXIMUM } from "@neverquest/data/general"
-import { GEM_DROP_CHANCE, INFUSABLES, RELICS, RELIC_DROP_CHANCE } from "@neverquest/data/items"
+import { INFUSABLES, RELICS, RELIC_DROP_CHANCE } from "@neverquest/data/items"
 import {
 	BLIGHT,
 	BOSS_STAGE_INTERVAL,
@@ -27,7 +27,7 @@ import {
 	isStageStarted,
 	progress,
 	stage,
-	stageMaximum,
+	stageHighest,
 } from "@neverquest/state/encounter"
 import { ownedItem } from "@neverquest/state/inventory"
 import { hasLootedLogEntry, infusionEffect } from "@neverquest/state/items"
@@ -294,13 +294,13 @@ export const monsterLoot = withStateKey("monsterLoot", key =>
 	selector({
 		get: ({ get }) => {
 			const { attenuation, base: essenceBase, bonus, boss, finality } = ESSENCE
-			const { equalStage, lowerStage } = GEM_DROP_CHANCE
+			const { equalStage, lowerStage } = LOOT_MODIFIER
 
 			const encounterValue = get(encounter)
 			const isMementoOwned = get(ownedItem("memento")) !== undefined
 			const merchantInventoryValue = get(merchantInventory)
 			const stageValue = get(stage)
-			const stageMaximumValue = get(stageMaximum)
+			const stageHighestValue = get(stageHighest)
 
 			const droppedEssence = essenceBase + ((essenceBase * getTriangular(stageValue)) / attenuation)
 
@@ -308,8 +308,10 @@ export const monsterLoot = withStateKey("monsterLoot", key =>
 				essence: isFinality(encounterValue)
 					? finality[encounterValue]
 					: Math.round(
-						(droppedEssence + droppedEssence * Math.min(get(progress), PROGRESS.maximum) * bonus) * (encounterValue === "boss" ? boss : 1)
-						* (1 + getPerkEffect({ generation: get(generation), perk: "essenceBonus" })),
+						(droppedEssence + droppedEssence * Math.min(get(progress), PROGRESS.maximum) * bonus)
+						* (encounterValue === "boss" ? boss : 1)
+						* (1 + getPerkEffect({ generation: get(generation), perk: "essenceBonus" }))
+						* (stageValue < stageHighestValue ? lowerStage : equalStage),
 					),
 				gems: encounterValue === "boss"
 					? Math.min(
@@ -317,7 +319,7 @@ export const monsterLoot = withStateKey("monsterLoot", key =>
 							length: 1 + Math.floor((stageValue - BOSS_STAGE_START) / BOSS_STAGE_INTERVAL),
 						}).reduce<number>(
 							(sum, _) =>
-								Math.random() <= (stageValue < stageMaximumValue ? lowerStage : equalStage)
+								Math.random() <= (stageValue < stageHighestValue ? lowerStage : equalStage)
 									? sum + 1
 									: sum,
 							0,

@@ -186,6 +186,14 @@ export const stage = withStateKey("stage", key =>
 	}),
 )
 
+export const stageHighest = withStateKey("stageHighest", key =>
+	atom({
+		default: stageMaximum,
+		effects: [handleStorage({ key })],
+		key,
+	}),
+)
+
 export const wildernesses = withStateKey("wildernesses", key =>
 	atom<string[]>({
 		default: [],

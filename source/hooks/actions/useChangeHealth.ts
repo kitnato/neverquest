@@ -6,7 +6,6 @@ import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta"
 import { useMending } from "@neverquest/hooks/actions/useMending"
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import { useToggleAttacking } from "@neverquest/hooks/actions/useToggleAttacking"
-import { absorbedEssence } from "@neverquest/state/attributes"
 import { isAttacking, recoveryDuration } from "@neverquest/state/character"
 import { corpse, stage } from "@neverquest/state/encounter"
 import { ownedItem } from "@neverquest/state/inventory"
@@ -63,7 +62,7 @@ export function useChangeHealth() {
 
 					if (get(ownedItem("phylactery")) === undefined) {
 						set(corpse, {
-							essence: Math.round(get(essence) + get(absorbedEssence) * CORPSE_VALUE),
+							essence: Math.round(get(essence) * CORPSE_VALUE),
 							stage: get(stage),
 						})
 					}

@@ -16,25 +16,28 @@ import { RELIC_TYPES } from "@neverquest/types/unions"
 export function useResetCharacter() {
 	return useRecoilCallback(
 		({ reset }) =>
-			() => {
+			(resetStanding?: boolean) => {
 				reset(attackDuration)
 				reset(blacksmithOptions)
 				reset(blight)
-				reset(essence)
 				reset(fletcherOptions)
-				reset(isStageStarted)
 				reset(poisonDuration)
-				reset(progress)
-				reset(location)
 				reset(recoveryDuration)
 				reset(regenerationDuration("health"))
 				reset(regenerationDuration("stamina"))
 				reset(reserveCurrent("health"))
 				reset(reserveCurrent("stamina"))
-				reset(stage)
 
 				for (const relic of RELIC_TYPES) {
 					reset(isRelicEquipped(relic))
+				}
+
+				if (resetStanding) {
+					reset(essence)
+					reset(isStageStarted)
+					reset(progress)
+					reset(location)
+					reset(stage)
 				}
 			},
 		[],

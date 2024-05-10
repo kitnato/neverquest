@@ -38,7 +38,7 @@ export const ATTRIBUTES: Record<
 		format: "percentage",
 		Icon: IconAgility,
 		increment: 0.015,
-		maximum: 0.95,
+		maximum: 0.9,
 		requiredSkill: "evasion",
 	},
 	dexterity: {
@@ -78,7 +78,7 @@ export const ATTRIBUTES: Record<
 		format: "percentage",
 		Icon: IconSpeed,
 		increment: -0.02,
-		maximum: 0.8,
+		maximum: -0.8,
 		shows: "attackRate",
 	},
 	strength: {
@@ -98,7 +98,7 @@ export const ATTRIBUTES: Record<
 		format: "percentage",
 		Icon: IconVigor,
 		increment: -0.025,
-		maximum: 0.9,
+		maximum: -0.85,
 		requiredSkill: "calisthenics",
 	},
 	vitality: {

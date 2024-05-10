@@ -37,26 +37,28 @@ export const areAttributesAffordable = withStateKey("areAttributesAffordable", k
 
 export const attributePoints = withStateKey("attributePoints", key =>
 	selector({
-		get: ({ get }) => getAttributePoints({ essence: get(essence), powerLevel: get(powerLevel) }),
+		get: ({ get }) => getAttributePoints({
+			essence: get(essence),
+			powerLevel: get(powerLevel),
+		}),
 		key,
 	}),
 )
 
 export const attributeStatistic = withStateKey("attributeStatistic", key =>
 	selectorFamily({
-		get:
-			(attribute: Attribute) =>
-				({ get }) => {
-					const { base, increment, incrementBonus } = ATTRIBUTES[attribute]
-					const attributeRankValue = get(attributeRank(attribute))
+		get: (attribute: Attribute) =>
+			({ get }) => {
+				const { base, increment, incrementBonus } = ATTRIBUTES[attribute]
+				const attributeRankValue = get(attributeRank(attribute))
 
-					return getComputedStatistic({
-						base,
-						bonus: incrementBonus,
-						increment,
-						rank: attributeRankValue,
-					})
-				},
+				return getComputedStatistic({
+					base,
+					bonus: incrementBonus,
+					increment,
+					rank: attributeRankValue,
+				})
+			},
 		key,
 	}),
 )
@@ -65,17 +67,14 @@ export const isAttributeAtMaximum = withStateKey("isAttributeAtMaximum", key =>
 	selectorFamily({
 		get:
 			(attribute: Attribute) =>
-				({ get }) =>
-					Math.abs(get(attributeStatistic(attribute)))
-					>= (ATTRIBUTES[attribute].maximum ?? Number.POSITIVE_INFINITY),
+				({ get }) => Math.abs(get(attributeStatistic(attribute))) >= Math.abs(ATTRIBUTES[attribute].maximum ?? Number.POSITIVE_INFINITY),
 		key,
 	}),
 )
 
 export const powerLevel = withStateKey("powerLevel", key =>
 	selector({
-		get: ({ get }) =>
-			ATTRIBUTE_TYPES.reduce((sum, attribute) => sum + get(attributeRank(attribute)), 0),
+		get: ({ get }) => ATTRIBUTE_TYPES.reduce((sum, attribute) => sum + get(attributeRank(attribute)), 0),
 		key,
 	}),
 )

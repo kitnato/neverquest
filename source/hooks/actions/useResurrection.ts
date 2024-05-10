@@ -2,6 +2,7 @@ import { useRecoilCallback } from "recoil"
 
 import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth"
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
+import { useResetCharacter } from "@neverquest/hooks/actions/useResetCharacter"
 import { recoveryDuration } from "@neverquest/state/character"
 import { inventory, ownedItem } from "@neverquest/state/inventory"
 import { healthMaximumPoisoned } from "@neverquest/state/reserves"
@@ -10,6 +11,7 @@ import { getSnapshotGetter } from "@neverquest/utilities/getters"
 export function useResurrection() {
 	const changeHealth = useChangeHealth()
 	const progressQuest = useProgressQuest()
+	const resetCharacter = useResetCharacter()
 
 	return useRecoilCallback(
 		({ reset, set, snapshot }) =>
@@ -35,8 +37,10 @@ export function useResurrection() {
 						},
 						value: healthMaximumPoisonedValue,
 					})
+
+					resetCharacter()
 				}
 			},
-		[changeHealth, progressQuest],
+		[changeHealth, progressQuest, resetCharacter],
 	)
 }

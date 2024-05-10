@@ -1,9 +1,11 @@
 import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap"
 import { useRecoilValue } from "recoil"
 
+import { BadgeMaximum } from "@neverquest/components/BadgeMaximum"
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
 import { DetailsTable } from "@neverquest/components/DetailsTable"
 import { IconDisplay } from "@neverquest/components/IconDisplay"
+import { ATTRIBUTES } from "@neverquest/data/attributes"
 import { LABEL_NO_PENALTY } from "@neverquest/data/general"
 import { NUDIST } from "@neverquest/data/traits"
 import { useDeltaText } from "@neverquest/hooks/useDeltaText"
@@ -33,6 +35,7 @@ export function DodgeChance() {
 
 	const { burden } = armorValue
 	const { dodgeBonus, healAmount } = NUDIST
+	const formattedDodgeChance = formatNumber({ format: "percentage", value: dodgeChanceValue })
 
 	useDeltaText({
 		delta: "dodgeChance",
@@ -126,7 +129,11 @@ export function DodgeChance() {
 							</Popover>
 						)}
 					>
-						<span>{formatNumber({ format: "percentage", value: dodgeChanceValue })}</span>
+						<Stack direction="horizontal" gap={1}>
+							<span>{formattedDodgeChance}</span>
+
+							{dodgeChanceValue >= (ATTRIBUTES.agility.maximum ?? Number.POSITIVE_INFINITY) && <BadgeMaximum />}
+						</Stack>
 					</OverlayTrigger>
 
 					<DeltasDisplay delta="dodgeChance" />

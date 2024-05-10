@@ -6,7 +6,7 @@ import { FINALITY_STAGE } from "@neverquest/data/monster"
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import { useToggleAttacking } from "@neverquest/hooks/actions/useToggleAttacking"
 import { isAttacking } from "@neverquest/state/character"
-import { stage, stageMaximum, wildernesses } from "@neverquest/state/encounter"
+import { stage, stageHighest, stageMaximum, wildernesses } from "@neverquest/state/encounter"
 import { questProgress } from "@neverquest/state/quests"
 import { isShowing } from "@neverquest/state/ui"
 import { getAffixStructure, getSnapshotGetter } from "@neverquest/utilities/getters"
@@ -39,6 +39,15 @@ export function useIncreaseStage() {
 				}
 
 				if (stageValue === get(stageMaximum)) {
+					if (get(stageHighest) < nextStage) {
+						set(stageHighest, nextStage)
+					}
+
+					set(wildernesses, currentWildernesses => [
+						...currentWildernesses,
+						generateLocation({ affixStructure: getAffixStructure() }),
+					])
+
 					progressQuest({ amount: stageValue === 1 ? 2 : 1, quest: "stages" })
 					progressQuest({ amount: stageValue === 1 ? 2 : 1, quest: "stagesEnd" })
 
@@ -49,11 +58,6 @@ export function useIncreaseStage() {
 					if (stageValue === get(questProgress("survivingNoGear")) + 1) {
 						progressQuest({ quest: "survivingNoGear" })
 					}
-
-					set(wildernesses, currentWildernesses => [
-						...currentWildernesses,
-						generateLocation({ affixStructure: getAffixStructure() }),
-					])
 				}
 			},
 		[progressQuest, toggleAttacking],

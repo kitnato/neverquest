@@ -46,11 +46,11 @@ export const BRUISER = {
 export const INOCULATED_DEFLECTION_BASE = 0.3
 
 export const NUDIST = {
-	dodgeBonus: 0.6,
+	dodgeBonus: 0.5,
 	healAmount: 0.1,
 }
 
-export const TANK_PROTECTION_BONUS = 0.2
+export const TANK_PROTECTION_BONUS = 0.15
 
 export const TRAITS: Record<
 	Trait,

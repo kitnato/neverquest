@@ -218,9 +218,11 @@ Damage from the equipped [weapon](#weapons) in addition to [strength](#strength)
 
 ### Death
 
-When your [health](#health) reaches 0, you flatline and are reborn several stages lower with your [items](#items) and [power level](#attributes) intact, but having lost all unspent [essence](#essence). Upon reaching the stage again in which you previously died, you may scavenge your corpse to recover the lost unspent essence and an additional fraction of your total absorbed essence at the time of death.
+When your [health](#health) reaches 0, you flatline and are reborn a stage lower with your [items](#items) and [power level](#attributes) intact, but having lost all unspent [essence](#essence). Upon reaching the stage again in which you died, you may scavenge your corpse to recover some of the lost essence.
 
 All [equipped relics](#usable-relics) will need to be re-equipped.
+
+If carrying a [phylactery](#phylactery), you may instantly resurrect where you died without any penalties.
 
 ## Encounter
 
@@ -519,7 +521,7 @@ Cures and removes [blight](#blight).
 
 Sold by the [occultist](#occultist).
 
-While present in the [inventory](#inventory), automatically revives you upon [death](#death). The item is consumed in the process.
+While present in the [inventory](#inventory), gives you the option of resurrecting upon [death](#death) without losing essence or progress. The item is consumed in the process.
 
 ## Masteries
 

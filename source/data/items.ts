@@ -185,9 +185,14 @@ export const GEM_BASE = {
 	price: 250,
 	weight: 1,
 }
-export const GEM_DROP_CHANCE = { equalStage: 1, lowerStage: 0.33 }
-export const GEM_ENHANCEMENT_RANGE = { maximum: 1, minimum: 0.1 }
-export const GEM_FITTING_COST_RANGE = { maximum: 300, minimum: 10 }
+export const GEM_ENHANCEMENT_RANGE = {
+	maximum: 1,
+	minimum: 0.1,
+}
+export const GEM_FITTING_COST_RANGE = {
+	maximum: 300,
+	minimum: 10,
+}
 export const GEMS_MAXIMUM = 5
 export const GEMS: Record<Gem, { elemental: Elemental, Icon: SVGIcon }> = {
 	amethyst: { elemental: "lightning", Icon: IconAmethyst },

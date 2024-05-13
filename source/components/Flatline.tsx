@@ -27,8 +27,8 @@ import { getAffixStructure } from "@neverquest/utilities/getters"
 
 export function Flatline() {
 	const hasFlatlinedValue = useRecoilValue(hasFlatlined)
-	const stageValue = useRecoilValue(stage)
 	const stageMaximumValue = useRecoilValue(stageMaximum)
+	const setStage = useSetRecoilState(stage)
 	const setWildernesses = useSetRecoilState(wildernesses)
 
 	const progressQuest = useProgressQuest()
@@ -80,20 +80,16 @@ export function Flatline() {
 			<ModalFooter>
 				<Button
 					onClick={() => {
-						const relativeStagePenalty = stageValue - DEATH_STAGE_PENALTY
-						const absoluteStagePenalty = stageMaximumValue - relativeStagePenalty
-
-						if (stageValue > DEATH_STAGE_PENALTY) {
-							setWildernesses(currentWildernesses =>
-								currentWildernesses.slice(0, relativeStagePenalty),
-							)
+						if (stageMaximumValue > DEATH_STAGE_PENALTY) {
+							setWildernesses(currentWildernesses => currentWildernesses.slice(0, -1))
+							setStage(currentStage => currentStage - 1)
 						}
 						else {
 							setWildernesses([generateLocation({ affixStructure: getAffixStructure() })])
 						}
 
-						progressQuest({ amount: absoluteStagePenalty, quest: "stages" })
-						progressQuest({ amount: absoluteStagePenalty, quest: "stagesEnd" })
+						progressQuest({ amount: -1, quest: "stages" })
+						progressQuest({ amount: -1, quest: "stagesEnd" })
 
 						resetCharacter(true)
 						resetWilderness()

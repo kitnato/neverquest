@@ -2,7 +2,7 @@ import { useRecoilCallback } from "recoil"
 
 import { blacksmithOptions, fletcherOptions } from "@neverquest/state/caravan"
 import { attackDuration, recoveryDuration } from "@neverquest/state/character"
-import { isStageStarted, location, progress, stage } from "@neverquest/state/encounter"
+import { isStageStarted, location, progress } from "@neverquest/state/encounter"
 import { isRelicEquipped } from "@neverquest/state/items"
 import {
 	blight,
@@ -37,7 +37,6 @@ export function useResetCharacter() {
 					reset(isStageStarted)
 					reset(progress)
 					reset(location)
-					reset(stage)
 				}
 			},
 		[],

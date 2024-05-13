@@ -25,6 +25,7 @@ import {
 	corpse,
 	generation,
 	hasDefeatedFinality,
+	stage,
 	stageHighest,
 	stageMaximum,
 } from "@neverquest/state/encounter"
@@ -91,6 +92,7 @@ export function useRetire() {
 				reset(gems(WEAPON_NONE.ID))
 				reset(name)
 				reset(shield)
+				reset(stage)
 				reset(stageHighest)
 				reset(weapon)
 

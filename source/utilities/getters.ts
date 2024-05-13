@@ -485,14 +485,16 @@ export function getSellPrice({ gemsFitted, item }: { gemsFitted?: number, item: 
 	const { price } = item
 	let supplement = 0
 
-	if (isGearItem(item) && gemsFitted !== undefined && gemsFitted > 0) {
-		supplement += getSellPrice({
-			item: {
-				...GEM_BASE,
-				ID: nanoid(),
-				name: "ruby",
-			},
-		}) * gemsFitted
+	if (isGearItem(item) && gemsFitted !== undefined) {
+		supplement += (
+			getSellPrice({
+				item: {
+					...GEM_BASE,
+					ID: nanoid(),
+					name: "ruby",
+				},
+			}) * gemsFitted
+		) / 2
 	}
 
 	return Math.max(Math.round(price / 2), GENERIC_MINIMUM) + supplement

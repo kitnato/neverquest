@@ -242,10 +242,9 @@ export const parryDamage = withStateKey("parryDamage", key =>
 
 export const parryRating = withStateKey("parryRating", key =>
 	selector({
-		get: ({ get }) =>
-			Math.round(
-				get(parryChance) * PERCENTAGE + get(masteryStatistic("finesse")) * PERCENTAGE,
-			),
+		get: ({ get }) => Math.round(
+			get(parryAbsorption) * PERCENTAGE + get(parryChance) * PERCENTAGE + get(parryDamage) * PERCENTAGE,
+		),
 		key,
 	}),
 )

@@ -68,10 +68,6 @@ Affects [critical](#critical-rating) chance. Requires the [assassination](#assas
 
 Affects maximum [total stamina](#stamina).
 
-#### Fortitude
-
-Affects [health](#health-regeneration) and [stamina](#stamina-regeneration) regeneration amounts in equal measure. Requires the [calisthenics](#calisthenics) skill.
-
 #### Perception
 
 Affects [critical](#critical-rating) damage. Requires the [assassination](#assassination) skill.
@@ -158,9 +154,9 @@ Requires the [siegecraft](#siegecraft) skill.
 
 #### Health regeneration
 
-The amount of [health](#health) restored according to a certain rate.
+The amount of [health](#health) restored according to a cyclical rate.
 
-The restoration amount can be increased with the [vigor](#vigor) attribute and its rate with the [fortitude](#fortitude) attribute.
+The restoration amount per cycle is 3%of total current health. The rate can be increased with the [vigor](#vigor) attribute.
 
 #### Parry rating
 
@@ -210,7 +206,7 @@ Requires the [traumatology](#traumatology) skill.
 
 The amount of [stamina](#stamina) restored according to a certain rate.
 
-The restoration amount can be increased with the [vigor](#vigor) attribute and its rate with the [fortitude](#fortitude) attribute.
+The restoration amount per cycle is 2% of total current stamina. The rate can be increased with the [vigor](#vigor) attribute.
 
 #### Total damage
 
@@ -595,7 +591,7 @@ Unlocks the [dexterity](#dexterity) and [perception](#perception) attributes.
 
 ### Calisthenics
 
-Unlocks the [fortitude](#fortitude) and [vigor](#vigor) attributes.
+Unlocks the [vigor](#vigor) attribute.
 
 ### Escrime
 

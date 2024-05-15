@@ -8,6 +8,7 @@ import {
 	munitionsCapacity,
 	tears,
 } from "@neverquest/state/items"
+import { questProgress } from "@neverquest/state/quests"
 import { isInfusableItem, isRelicItem } from "@neverquest/types/type-guards"
 
 import type { InventoryItem } from "@neverquest/types"
@@ -32,10 +33,12 @@ export function useNeutralize() {
 
 					if (name === "munitions satchel") {
 						reset(munitionsCapacity)
+						reset(questProgress("munitionsCrafting"))
 					}
 
 					if (name === "knapsack") {
 						reset(knapsackCapacity)
+						reset(questProgress("knapsackExpanding"))
 					}
 
 					if (name === "lacrimatory") {

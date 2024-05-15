@@ -1,4 +1,3 @@
-import { TAILORING } from "@neverquest/data/caravan"
 import { LABEL_UNKNOWN, LEVELLING_END, LEVELLING_MAXIMUM } from "@neverquest/data/general"
 import { MUNITIONS } from "@neverquest/data/items"
 import IconConquest from "@neverquest/icons/conquest.svg?react"
@@ -405,13 +404,8 @@ export const QUESTS: Record<
 		title: "Killing spree",
 	},
 	knapsackExpanding: {
-		description: "Expand knapsack capacity to @.",
-		progression: [
-			TAILORING.amount * 5,
-			TAILORING.amount * 15,
-			TAILORING.amount * 30,
-			TAILORING.amount * 60,
-		],
+		description: "Expand knapsack capacity @ times.",
+		progression: [5, 15, 30, 60],
 		requiresTracking: false,
 		title: "Deep pockets",
 	},
@@ -446,13 +440,8 @@ export const QUESTS: Record<
 		title: "Virtuoso",
 	},
 	munitionsCrafting: {
-		description: "Expand munitions satchel capacity to @.",
-		progression: [
-			MUNITIONS.amount * 5,
-			MUNITIONS.amount * 15,
-			MUNITIONS.amount * 30,
-			MUNITIONS.amount * 60,
-		],
+		description: "Expand munitions satchel capacity @ times.",
+		progression: [5, 15, 30, MUNITIONS.maximum - MUNITIONS.satchelCapacity],
 		requiresTracking: false,
 		title: "Quivering",
 	},

@@ -79,10 +79,7 @@ export function ExpandKnapsack() {
 
 									setKnapsackCapacity(currentKnapsackCapacity => currentKnapsackCapacity + amount)
 
-									progressQuest({
-										amount,
-										quest: "knapsackExpanding",
-									})
+									progressQuest({ quest: "knapsackExpanding" })
 								}}
 								variant="outline-dark"
 							>

@@ -17,6 +17,7 @@ import {
 	monsterRegenerationDuration,
 } from "@neverquest/state/monster"
 import { isHealthLow } from "@neverquest/state/reserves"
+import { acquiredTraits } from "@neverquest/state/traits"
 import { formatNumber } from "@neverquest/utilities/formatters"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
 
@@ -90,6 +91,10 @@ export function useChangeMonsterHealth() {
 
 						case "res dominus": {
 							progressQuest({ quest: "killingResDominus" })
+
+							if (Object.values(get(acquiredTraits)).every(isAcquired => !isAcquired)) {
+								progressQuest({ quest: "killingResDominusNoTraits" })
+							}
 							break
 						}
 

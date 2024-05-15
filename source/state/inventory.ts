@@ -31,8 +31,9 @@ export const encumbranceExtent = withStateKey("encumbranceExtent", key =>
 
 export const encumbranceMaximum = withStateKey("encumbranceMaximum", key =>
 	selector({
-		get: ({ get }) =>
-			get(ownedItem("knapsack")) === undefined ? ENCUMBRANCE_CAPACITY : get(knapsackCapacity),
+		get: ({ get }) => get(ownedItem("knapsack")) === undefined
+			? ENCUMBRANCE_CAPACITY
+			: get(knapsackCapacity),
 		key,
 	}),
 )

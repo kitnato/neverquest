@@ -4,15 +4,15 @@ import { useRecoilValue } from "recoil"
 import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { useDeltaText } from "@neverquest/hooks/useDeltaText"
 import IconMunitions from "@neverquest/icons/munitions.svg?react"
-import { munitions } from "@neverquest/state/items"
+import { munitionsCapacity } from "@neverquest/state/items"
 import { formatNumber } from "@neverquest/utilities/formatters"
 
 export function MunitionsStatus() {
-	const munitionsValue = useRecoilValue(munitions)
+	const munitionsCapacityValue = useRecoilValue(munitionsCapacity)
 
 	useDeltaText({
-		delta: "munitions",
-		state: munitions,
+		delta: "munitionsCapacity",
+		state: munitionsCapacity,
 	})
 
 	return (
@@ -22,7 +22,7 @@ export function MunitionsStatus() {
 			tooltip="Munitions"
 		>
 			<Stack direction="horizontal" gap={1}>
-				<span>{formatNumber({ value: munitionsValue })}</span>
+				<span>{formatNumber({ value: munitionsCapacityValue })}</span>
 			</Stack>
 		</IconDisplay>
 	)

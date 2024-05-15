@@ -1,5 +1,6 @@
 import { TAILORING } from "@neverquest/data/caravan"
 import { LABEL_UNKNOWN, LEVELLING_END, LEVELLING_MAXIMUM } from "@neverquest/data/general"
+import { MUNITIONS } from "@neverquest/data/items"
 import IconConquest from "@neverquest/icons/conquest.svg?react"
 import IconRoutine from "@neverquest/icons/routine.svg?react"
 import IconTriumph from "@neverquest/icons/triumph.svg?react"
@@ -391,6 +392,12 @@ export const QUESTS: Record<
 		requiresTracking: true,
 		title: "Back to reality",
 	},
+	killingResDominusNoTraits: {
+		description: "Defeat the dominant being without having any traits.",
+		progression: [1],
+		requiresTracking: true,
+		title: "No rest for the wicked",
+	},
 	killingStage: {
 		description: "Kill @ monsters in one stage.",
 		progression: [QUEST_REQUIREMENTS.monstersKilled],
@@ -437,6 +444,17 @@ export const QUESTS: Record<
 		progression: [1],
 		requiresTracking: true,
 		title: "Virtuoso",
+	},
+	munitionsCrafting: {
+		description: "Expand munitions satchel capacity to @.",
+		progression: [
+			MUNITIONS.amount * 5,
+			MUNITIONS.amount * 15,
+			MUNITIONS.amount * 30,
+			MUNITIONS.amount * 60,
+		],
+		requiresTracking: false,
+		title: "Quivering",
 	},
 	parrying: {
 		description: "Parry @ attacks.",

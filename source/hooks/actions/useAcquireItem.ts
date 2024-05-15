@@ -39,18 +39,15 @@ export function useAcquireItem() {
 					return "failure"
 				}
 
-				if (isRelicItem(item) && item.name === "knapsack") {
-					set(isShowing("weight"), true)
-				}
-				else {
-					set(acquiredItems, currentAcquiredItems => [...currentAcquiredItems, item])
-				}
-
 				if (isGemItem(item)) {
 					progressQuest({ quest: "acquiringGems" })
 				}
 
 				if (isRelicItem(item)) {
+					if (item.name !== "knapsack") {
+						set(acquiredItems, currentAcquiredItems => [...currentAcquiredItems, item])
+					}
+
 					switch (item.name) {
 						case "[S751NQ]": {
 							set(hasLootedLogEntry, true)
@@ -66,6 +63,11 @@ export function useAcquireItem() {
 
 						case "familiar": {
 							progressQuest({ quest: "acquiringFamiliar" })
+							break
+						}
+
+						case "knapsack": {
+							set(isShowing("weight"), true)
 							break
 						}
 

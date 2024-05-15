@@ -32,11 +32,11 @@ export function Munitions() {
 
 				<DeltasDisplay delta="munitions" />
 
-				{
-					isRanged(weaponValue) && (weaponValue.munitionsCost > munitionsValue)
-					&& <span className="text-danger">{`${LABEL_SEPARATOR} (${weaponValue.munitionsCost})`}</span>
-
-				}
+				{isRanged(weaponValue) && (weaponValue.munitionsCost > munitionsValue) && (
+					<span className="text-danger">
+						{`${LABEL_SEPARATOR} (${weaponValue.munitionsCost})`}
+					</span>
+				)}
 			</Stack>
 		</IconDisplay>
 	)

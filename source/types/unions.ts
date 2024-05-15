@@ -104,6 +104,7 @@ export type Delta =
 	| "monsterHealth"
 	| "monsterHealthMaximum"
 	| "munitions"
+	| "munitionsCapacity"
 	| "parryRating"
 	| "powerLevel"
 	| "progress"
@@ -208,6 +209,7 @@ export const ROUTINE_TYPES = [
 	"gemsTransmuting",
 	"potions",
 	"acquiringRanged",
+	"munitionsCrafting",
 	"acquiringTwoHanded",
 	"infusing",
 	"infusingMaximum",
@@ -400,6 +402,7 @@ export type StateKey =
 	| "monsterName"
 	| "monsterRegenerationDuration"
 	| "munitions"
+	| "munitionsCapacity"
 	| "name"
 	| "notifyOverEncumbrance"
 	| "ownedItem"
@@ -499,6 +502,7 @@ export const TRIUMPH_TYPES = [
 	"acquiringTornManuscript",
 	"acquiringDreamCatcher",
 	"killingResDominus",
+	"killingResDominusNoTraits",
 	"visitingVoid",
 	"powerLevelUltra",
 	"stagesEnd",

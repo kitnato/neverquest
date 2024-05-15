@@ -255,12 +255,13 @@ export const MUNITIONS = {
 	amount: 1,
 	maximum: LEVELLING_MAXIMUM,
 	priceRange: { maximum: 750, minimum: 3 },
+	satchelCapacity: 5,
 }
 
 export const RELIC_DROP_CHANCE = {
-	"dream catcher": { maximum: 0.1, minimum: 0.02 },
+	"dream catcher": { maximum: 0.05, minimum: 0.01 },
 	"memento": { maximum: 0.1, minimum: 0.01 },
-	"torn manuscript": { maximum: 0.1, minimum: 0.02 },
+	"torn manuscript": { maximum: 0.05, minimum: 0.01 },
 }
 
 export const RELICS: Record<

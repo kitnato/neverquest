@@ -1,4 +1,4 @@
-import { atom, atomFamily, selectorFamily } from "recoil"
+import { atom, atomFamily, selector, selectorFamily } from "recoil"
 
 import { LEVELLING_MAXIMUM } from "@neverquest/data/general"
 import {
@@ -6,6 +6,7 @@ import {
 	INFUSION_BASE,
 	INFUSION_DELTA,
 	INFUSION_DURATION,
+	MUNITIONS,
 } from "@neverquest/data/items"
 import { handleStorage } from "@neverquest/state/effects/handleStorage"
 import { ownedItem } from "@neverquest/state/inventory"
@@ -41,9 +42,7 @@ export const infusionEffect = withStateKey("infusionEffect", key =>
 export const infusionMaximum = withStateKey("infusionMaximum", key =>
 	selectorFamily({
 		get:
-			(infusable: Infusable) =>
-				({ get }) =>
-					getTriangular(get(infusionLevel(infusable)) + INFUSION_BASE),
+			(infusable: Infusable) => ({ get }) => getTriangular(get(infusionLevel(infusable)) + INFUSION_BASE),
 		key,
 	}),
 )
@@ -52,11 +51,10 @@ export const infusionStep = withStateKey("infusionStep", key =>
 	selectorFamily({
 		get:
 			(infusable: Infusable) =>
-				({ get }) =>
-					Math.min(
-						get(essence),
-						(get(infusionMaximum(infusable)) / INFUSION_DURATION) * INFUSION_DELTA,
-					),
+				({ get }) => Math.min(
+					get(essence),
+					(get(infusionMaximum(infusable)) / INFUSION_DURATION) * INFUSION_DELTA,
+				),
 		key,
 	}),
 )
@@ -65,8 +63,16 @@ export const isInfusionAtMaximum = withStateKey("isInfusionAtMaximum", key =>
 	selectorFamily({
 		get:
 			(infusable: Infusable) =>
-				({ get }) =>
-					get(infusionLevel(infusable)) >= LEVELLING_MAXIMUM,
+				({ get }) => get(infusionLevel(infusable)) >= LEVELLING_MAXIMUM,
+		key,
+	}),
+)
+
+export const munitions = withStateKey("munitions", key =>
+	selector({
+		get: ({ get }) => get(ownedItem("munitions satchel")) === undefined
+			? 0
+			: get(munitionsCapacity),
 		key,
 	}),
 )
@@ -105,9 +111,9 @@ export const isRelicEquipped = withStateKey("isRelicEquipped", key =>
 	}),
 )
 
-export const munitions = withStateKey("munitions", key =>
+export const munitionsCapacity = withStateKey("munitionsCapacity", key =>
 	atom({
-		default: 0,
+		default: MUNITIONS.satchelCapacity,
 		effects: [handleStorage({ key })],
 		key,
 	}),

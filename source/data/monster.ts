@@ -1,5 +1,4 @@
 import { LEVELLING_MAXIMUM } from "@neverquest/data/general"
-import { RETIREMENT_STAGE } from "@neverquest/data/retirement"
 import { AILMENT_PENALTY } from "@neverquest/data/statistics"
 import IconDamage from "@neverquest/icons/damage.svg?react"
 import IconDistance from "@neverquest/icons/distance.svg?react"
@@ -66,7 +65,7 @@ export const BLIGHT = {
 }
 
 export const ESSENCE = {
-	attenuation: 19,
+	attenuation: 15,
 	base: 5,
 	bonus: 0.03,
 	boss: 2,
@@ -104,7 +103,7 @@ export const MONSTER_ATTACK_RATE = {
 }
 
 export const MONSTER_DAMAGE = {
-	attenuation: 22,
+	attenuation: 25,
 	base: 5,
 	bonus: 0.01,
 	boss: 1.075,
@@ -113,14 +112,14 @@ export const MONSTER_DAMAGE = {
 		"res dominus": 1075,
 	},
 	menace: {
-		maximum: 0.7,
-		minimum: 0.45,
-		requiredStage: RETIREMENT_STAGE + 1,
+		maximum: 0.5,
+		minimum: 0.2,
+		requiredStage: 26,
 	},
 }
 
 export const MONSTER_HEALTH = {
-	attenuation: 17,
+	attenuation: 25,
 	base: 18,
 	bonus: 0.02,
 	boss: 1.8,
@@ -130,8 +129,8 @@ export const MONSTER_HEALTH = {
 	},
 	menace: {
 		maximum: 1.5,
-		minimum: 0.4,
-		requiredStage: RETIREMENT_STAGE + 1,
+		minimum: 0.25,
+		requiredStage: 31,
 	},
 }
 

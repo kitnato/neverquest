@@ -5,7 +5,7 @@ import { knapsackCapacity } from "@neverquest/state/inventory"
 import {
 	infusion,
 	infusionLevel,
-	munitions,
+	munitionsCapacity,
 	tears,
 } from "@neverquest/state/items"
 import { isInfusableItem, isRelicItem } from "@neverquest/types/type-guards"
@@ -31,7 +31,7 @@ export function useNeutralize() {
 					toggleEquipItem({ forceUnequip: true, item })
 
 					if (name === "munitions satchel") {
-						reset(munitions)
+						reset(munitionsCapacity)
 					}
 
 					if (name === "knapsack") {

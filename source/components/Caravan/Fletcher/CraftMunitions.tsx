@@ -12,58 +12,60 @@ import {
 	POPOVER_TRIGGER,
 } from "@neverquest/data/general"
 import { MUNITIONS } from "@neverquest/data/items"
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence"
 import { useDeltaText } from "@neverquest/hooks/useDeltaText"
 import IconEssence from "@neverquest/icons/essence.svg?react"
 import IconMunitionsSatchel from "@neverquest/icons/munitions-satchel.svg?react"
 import IconMunitions from "@neverquest/icons/munitions.svg?react"
 import { ownedItem } from "@neverquest/state/inventory"
-import { munitions } from "@neverquest/state/items"
+import { munitionsCapacity } from "@neverquest/state/items"
 import { essence } from "@neverquest/state/resources"
 import { formatNumber } from "@neverquest/utilities/formatters"
 import { getFromRange, getSigmoid } from "@neverquest/utilities/getters"
 
 export function CraftMunitions() {
-	const [munitionsValue, setMunitions] = useRecoilState(munitions)
+	const [munitionsCapacityValue, setMunitionsCapacity] = useRecoilState(munitionsCapacity)
 	const essenceValue = useRecoilValue(essence)
 	const ownedItemMunitionsSatchel = useRecoilValue(ownedItem("munitions satchel"))
 
+	const progressQuest = useProgressQuest()
 	const transactEssence = useTransactEssence()
 
 	const { amount, maximum, priceRange } = MUNITIONS
 	const price = Math.round(
 		getFromRange({
-			factor: getSigmoid(munitionsValue),
+			factor: getSigmoid(munitionsCapacityValue - MUNITIONS.satchelCapacity),
 			...priceRange,
 		}),
 	)
 	const isAffordable = price <= essenceValue
-	const isAtMaximum = munitionsValue >= maximum
+	const isAtMaximum = munitionsCapacityValue >= maximum
 	const canCraft = isAffordable && !isAtMaximum
 
 	useDeltaText({
-		delta: "munitions",
-		state: munitions,
+		delta: "munitionsCapacity",
+		state: munitionsCapacity,
 	})
 
 	if (ownedItemMunitionsSatchel === undefined) {
-		return <span>&quot;How will you store munitions?&quot;</span>
+		return <span>&quot;How will you carry around ammo?&quot;</span>
 	}
 
 	return (
 		<Stack gap={3}>
 			<IconDisplay Icon={IconMunitionsSatchel} tooltip="Munitions satchel">
-				<LabelledProgressBar value={(munitionsValue / maximum) * PERCENTAGE}>
+				<LabelledProgressBar value={(munitionsCapacityValue / maximum) * PERCENTAGE}>
 					<Stack direction="horizontal" gap={1}>
 						<span>
-							{formatNumber({ value: munitionsValue })}
+							{formatNumber({ value: munitionsCapacityValue })}
 							{" / "}
 							{formatNumber({
 								value: maximum,
 							})}
 						</span>
 
-						<DeltasDisplay delta="munitions" />
+						<DeltasDisplay delta="munitionsCapacity" />
 					</Stack>
 				</LabelledProgressBar>
 			</IconDisplay>
@@ -97,7 +99,12 @@ export function CraftMunitions() {
 									if (canCraft) {
 										transactEssence(-price)
 
-										setMunitions(currentMunitions => currentMunitions + amount)
+										setMunitionsCapacity(currentMunitionsCapacity => currentMunitionsCapacity + amount)
+
+										progressQuest({
+											amount,
+											quest: "munitionsCrafting",
+										})
 									}
 								}}
 								variant="outline-dark"

@@ -58,7 +58,7 @@ export const ARMOR_SPECIFICATIONS: Record<
 	light: {
 		burden: [
 			{ maximum: 2, minimum: 1 },
-			{ maximum: 25, minimum: 20 },
+			{ maximum: 30, minimum: 25 },
 		],
 		deflectionChance: [
 			{ maximum: 0.3, minimum: 0.28 },
@@ -78,7 +78,7 @@ export const ARMOR_SPECIFICATIONS: Record<
 	reinforced: {
 		burden: [
 			{ maximum: 5, minimum: 3 },
-			{ maximum: 45, minimum: 40 },
+			{ maximum: 50, minimum: 45 },
 		],
 		deflectionChance: [
 			{ maximum: 0.2, minimum: 0.18 },
@@ -125,8 +125,8 @@ export const SHIELD_SPECIFICATIONS: Record<
 			{ maximum: 0.25, minimum: 0.22 },
 		],
 		burden: [
-			{ maximum: 7, minimum: 5 },
-			{ maximum: 40, minimum: 35 },
+			{ maximum: 6, minimum: 4 },
+			{ maximum: 35, minimum: 32 },
 		],
 		Icon: IconShieldMedium,
 		price: { maximum: 4500, minimum: 4 },
@@ -145,7 +145,7 @@ export const SHIELD_SPECIFICATIONS: Record<
 			{ maximum: 0.15, minimum: 0.12 },
 		],
 		burden: [
-			{ maximum: 4, minimum: 3 },
+			{ maximum: 3, minimum: 2 },
 			{ maximum: 25, minimum: 23 },
 		],
 		Icon: IconShieldSmall,
@@ -166,7 +166,7 @@ export const SHIELD_SPECIFICATIONS: Record<
 		],
 		burden: [
 			{ maximum: 10, minimum: 8 },
-			{ maximum: 55, minimum: 50 },
+			{ maximum: 50, minimum: 45 },
 		],
 		Icon: IconShieldTower,
 		price: { maximum: 6500, minimum: 7 },

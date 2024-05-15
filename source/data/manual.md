@@ -156,7 +156,7 @@ Requires the [siegecraft](#siegecraft) skill.
 
 The amount of [health](#health) restored according to a cyclical rate.
 
-The restoration amount per cycle is 3%of total current health. The rate can be increased with the [vigor](#vigor) attribute.
+The restoration amount per cycle is a small percentage of maximum health. The rate can be increased with the [vigor](#vigor) attribute.
 
 #### Parry rating
 
@@ -206,7 +206,7 @@ Requires the [traumatology](#traumatology) skill.
 
 The amount of [stamina](#stamina) restored according to a certain rate.
 
-The restoration amount per cycle is 2% of total current stamina. The rate can be increased with the [vigor](#vigor) attribute.
+The restoration amount per cycle is a small percentage of maximum stamina. The rate can be increased with the [vigor](#vigor) attribute.
 
 #### Total damage
 

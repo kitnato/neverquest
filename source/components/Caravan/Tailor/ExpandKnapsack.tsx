@@ -77,9 +77,7 @@ export function ExpandKnapsack() {
 								onClick={() => {
 									transactEssence(-price)
 
-									setKnapsackCapacity(
-										currentKnapsackCapacity => currentKnapsackCapacity + amount,
-									)
+									setKnapsackCapacity(currentKnapsackCapacity => currentKnapsackCapacity + amount)
 
 									progressQuest({
 										amount,

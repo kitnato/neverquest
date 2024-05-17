@@ -13,6 +13,7 @@ const currentPath = path.dirname(fileURLToPath(import.meta.url))
 // eslint-disable-next-line import/no-default-export
 export default defineConfig({
 	assetsInclude: ["**/*.md"],
+	base: "/neverquest",
 	plugins: [
 		checker({
 			eslint: { lintCommand: "eslint --ext .ts,.tsx ." },

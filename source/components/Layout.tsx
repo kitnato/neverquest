@@ -1,147 +1,151 @@
-import { useLayoutEffect, useState } from "react";
-import { Col, Container, Row, Stack } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { useLayoutEffect, useState } from "react"
+import { Col, Container, Row, Stack } from "react-bootstrap"
+import { useRecoilValue } from "recoil"
 
-import { Awakening } from "@neverquest/components/Awakening";
-import { Attack } from "@neverquest/components/Controls/Attack";
-import { Capabilities } from "@neverquest/components/Controls/Capabilities";
-import { CollectLoot } from "@neverquest/components/Controls/CollectLoot";
-import { Retire } from "@neverquest/components/Controls/Retire";
-import { ScavengeCorpse } from "@neverquest/components/Controls/ScavengeCorpse";
-import { ShowInventory } from "@neverquest/components/Controls/ShowInventory";
-import { ShowQuests } from "@neverquest/components/Controls/ShowQuests";
-import { Travel } from "@neverquest/components/Controls/Travel";
-import { Encounter } from "@neverquest/components/Encounter";
-import { WildernessStatus } from "@neverquest/components/Encounter/WildernessStatus";
-import { Essence } from "@neverquest/components/Essence";
-import { Flatline } from "@neverquest/components/Flatline";
-import { Gear } from "@neverquest/components/Inventory/Gear";
-import { Location } from "@neverquest/components/Location";
-import { Masteries } from "@neverquest/components/Masteries";
-import { QuestNotifications } from "@neverquest/components/Quests/QuestNotifications";
-import { ScreenMessage } from "@neverquest/components/ScreenMessage";
-import { Statistics } from "@neverquest/components/Statistics";
-import { Status } from "@neverquest/components/Status";
-import { CLASS_FULL_WIDTH_JUSTIFIED, SCREEN_WIDTH_MINIMUM } from "@neverquest/data/general";
-import { consciousness } from "@neverquest/state/encounter";
-import { formatNumber } from "@neverquest/utilities/formatters";
-import { getAnimationClass } from "@neverquest/utilities/getters";
+import { Awakening } from "@neverquest/components/Awakening"
+import { CenterScreen } from "@neverquest/components/CenterScreen"
+import { Capabilities } from "@neverquest/components/Controls/Capabilities"
+import { CollectLoot } from "@neverquest/components/Controls/CollectLoot"
+import { Main } from "@neverquest/components/Controls/Main"
+import { Retire } from "@neverquest/components/Controls/Retire"
+import { ScavengeCorpse } from "@neverquest/components/Controls/ScavengeCorpse"
+import { ShowInventory } from "@neverquest/components/Controls/ShowInventory"
+import { ShowQuests } from "@neverquest/components/Controls/ShowQuests"
+import { Travel } from "@neverquest/components/Controls/Travel"
+import { Encounter } from "@neverquest/components/Encounter"
+import { WildernessStatus } from "@neverquest/components/Encounter/WildernessStatus"
+import { Essence } from "@neverquest/components/Essence"
+import { Flatline } from "@neverquest/components/Flatline"
+import { Glitch } from "@neverquest/components/Glitch"
+import { Gear } from "@neverquest/components/Inventory/Gear"
+import { Location } from "@neverquest/components/Location"
+import { Masteries } from "@neverquest/components/Masteries"
+import { QuestNotifications } from "@neverquest/components/Quests/QuestNotifications"
+import { Statistics } from "@neverquest/components/Statistics"
+import { Status } from "@neverquest/components/Status"
+import { CLASS_FULL_WIDTH_JUSTIFIED, SCREEN_WIDTH_MINIMUM } from "@neverquest/data/general"
+import { consciousness } from "@neverquest/state/encounter"
+import { formatNumber } from "@neverquest/utilities/formatters"
+import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function Layout() {
-  const consciousnessValue = useRecoilValue(consciousness);
+	const consciousnessValue = useRecoilValue(consciousness)
 
-  const [screenSizeWarning, setScreenSizeWarning] = useState("");
+	const [screenSizeWarning, setScreenSizeWarning] = useState("")
 
-  useLayoutEffect(() => {
-    const checkWidth = () => {
-      if (window.innerWidth <= SCREEN_WIDTH_MINIMUM) {
-        setScreenSizeWarning(
-          `Requires a screen width of minimum ${formatNumber({
-            value: SCREEN_WIDTH_MINIMUM,
-          })} pixels.`,
-        );
-      } else {
-        setScreenSizeWarning("");
-      }
-    };
+	useLayoutEffect(() => {
+		const checkWidth = () => {
+			if (window.innerWidth <= SCREEN_WIDTH_MINIMUM) {
+				setScreenSizeWarning(
+					`Requires a screen width of minimum ${formatNumber({
+						value: SCREEN_WIDTH_MINIMUM,
+					})} pixels.`,
+				)
+			}
+			else {
+				setScreenSizeWarning("")
+			}
+		}
 
-    window.addEventListener("resize", checkWidth);
+		window.addEventListener("resize", checkWidth)
 
-    checkWidth();
+		checkWidth()
 
-    return () => {
-      window.removeEventListener("resize", checkWidth);
-    };
-  }, []);
+		return () => {
+			window.removeEventListener("resize", checkWidth)
+		}
+	}, [])
 
-  if (screenSizeWarning !== "") {
-    return <ScreenMessage>{screenSizeWarning}</ScreenMessage>;
-  }
+	if (screenSizeWarning !== "") {
+		return <CenterScreen>{screenSizeWarning}</CenterScreen>
+	}
 
-  switch (consciousnessValue) {
-    case "mors": {
-      return (
-        <ScreenMessage>
-          <h5
-            className={getAnimationClass({
-              animation: "zoomIn",
-              speed: "slower",
-            })}
-          >
-            Fin.
-          </h5>
-        </ScreenMessage>
-      );
-    }
+	switch (consciousnessValue) {
+		case "mors": {
+			return (
+				<CenterScreen>
+					<h4
+						className={getAnimationClass({
+							animation: "zoomIn",
+							speed: "slower",
+						})}
+					>
+						Fin.
+					</h4>
+				</CenterScreen>
+			)
+		}
 
-    case "somnium": {
-      return (
-        <Container className="somnium mb-4">
-          <Row>
-            <Col>
-              <Stack gap={3}>
-                <div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-                  <Location />
+		case "somnium": {
+			return (
+				<Glitch>
+					<Container className="pb-4">
+						<Row>
+							<Col>
+								<Stack gap={3}>
+									<div className={CLASS_FULL_WIDTH_JUSTIFIED}>
+										<Location />
 
-                  <Essence />
-                </div>
+										<Essence />
+									</div>
 
-                <Stack className="overlay-offcanvas" gap={3}>
-                  <Status />
+									<Stack className="overlay-offcanvas" gap={3}>
+										<Status />
 
-                  <Statistics />
+										<Statistics />
 
-                  <Gear />
+										<Gear />
 
-                  <Masteries />
-                </Stack>
-              </Stack>
-            </Col>
+										<Masteries />
+									</Stack>
+								</Stack>
+							</Col>
 
-            <Col xs="auto">
-              <Stack gap={3}>
-                <Retire />
+							<Col xs="auto">
+								<Stack gap={3}>
+									<Retire />
 
-                <Attack />
+									<Main />
 
-                <Capabilities />
+									<Capabilities />
 
-                <ShowInventory />
+									<ShowInventory />
 
-                <ShowQuests />
+									<ShowQuests />
 
-                <ScavengeCorpse />
+									<ScavengeCorpse />
 
-                <CollectLoot />
+									<CollectLoot />
 
-                <Travel />
-              </Stack>
-            </Col>
+									<Travel />
+								</Stack>
+							</Col>
 
-            <Col>
-              <Stack gap={3}>
-                <WildernessStatus />
+							<Col>
+								<Stack gap={3}>
+									<WildernessStatus />
 
-                <Encounter />
-              </Stack>
-            </Col>
-          </Row>
+									<Encounter />
+								</Stack>
+							</Col>
+						</Row>
 
-          <QuestNotifications />
+						<QuestNotifications />
 
-          <Flatline />
-        </Container>
-      );
-    }
+						<Flatline />
+					</Container>
+				</Glitch>
+			)
+		}
 
-    case "vigilans": {
-      return (
-        <Container className="mb-4">
-          <Awakening />
+		case "vigilans": {
+			return (
+				<Container className="my-5">
+					<Awakening />
 
-          <QuestNotifications />
-        </Container>
-      );
-    }
-  }
+					<QuestNotifications />
+				</Container>
+			)
+		}
+	}
 }

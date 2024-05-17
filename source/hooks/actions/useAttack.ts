@@ -1,219 +1,219 @@
-import { useRecoilCallback } from "recoil";
+import { useRecoilCallback } from "recoil"
 
-import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta";
-import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth";
-import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
-import { useInflictElementalAilment } from "@neverquest/hooks/actions/useInflictElementalAilment";
-import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
-import { useTrainMastery } from "@neverquest/hooks/actions/useTrainMastery";
-import { bleed, bleedChance, stunChance } from "@neverquest/state/ailments";
+import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta"
+import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth"
+import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth"
+import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina"
+import { useInflictElementalAilment } from "@neverquest/hooks/actions/useInflictElementalAilment"
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
+import { useTrainMastery } from "@neverquest/hooks/actions/useTrainMastery"
+import { bleed, bleedChance, stunChance } from "@neverquest/state/ailments"
 import {
-  attackDuration,
-  canAttackOrParry,
-  hasEnoughAmmunition,
-  isAttacking,
-} from "@neverquest/state/character";
-import { weapon } from "@neverquest/state/gear";
-import { ammunition } from "@neverquest/state/items";
-import { masteryStatistic } from "@neverquest/state/masteries";
+	attackDuration,
+	canAttackOrParry,
+	hasEnoughMunitions,
+	isAttacking,
+} from "@neverquest/state/character"
+import { weapon } from "@neverquest/state/gear"
+import { masteryStatistic } from "@neverquest/state/masteries"
 import {
-  distance,
-  monsterAilmentDuration,
-  monsterElement,
-  monsterHealth,
-  monsterHealthMaximum,
-} from "@neverquest/state/monster";
-import { isSkillAcquired } from "@neverquest/state/skills";
+	distance,
+	monsterAilmentDuration,
+	monsterElement,
+	monsterHealth,
+	monsterHealthMaximum,
+} from "@neverquest/state/monster"
+import { isReserveAtMaximum } from "@neverquest/state/reserves"
+import { isSkillAcquired } from "@neverquest/state/skills"
 import {
-  attackRate,
-  criticalChance,
-  criticalStrike,
-  damage,
-  executionThreshold,
-} from "@neverquest/state/statistics";
-import { isTraitAcquired } from "@neverquest/state/traits";
-import { isShowing } from "@neverquest/state/ui";
-import { isMelee, isRanged } from "@neverquest/types/type-guards";
-import type { DeltaDisplay } from "@neverquest/types/ui";
-import { ELEMENTAL_TYPES } from "@neverquest/types/unions";
-import { getSnapshotGetter } from "@neverquest/utilities/getters";
-import { animateElement } from "@neverquest/utilities/helpers";
+	attackRate,
+	criticalChance,
+	criticalStrike,
+	damage,
+	executionThreshold,
+	lifeLeech,
+} from "@neverquest/state/statistics"
+import { isTraitAcquired } from "@neverquest/state/traits"
+import { isShowing } from "@neverquest/state/ui"
+import { isMelee, isRanged } from "@neverquest/types/type-guards"
+import { ELEMENTAL_TYPES } from "@neverquest/types/unions"
+import { getSnapshotGetter } from "@neverquest/utilities/getters"
+import { animateElement } from "@neverquest/utilities/helpers"
+
+import type { DeltaDisplay } from "@neverquest/types/ui"
 
 export function useAttack() {
-  const addDelta = useAddDelta();
-  const changeMonsterHealth = useChangeMonsterHealth();
-  const changeStamina = useChangeStamina();
-  const trainMastery = useTrainMastery();
-  const inflictElementalAilment = useInflictElementalAilment();
-  const progressQuest = useProgressQuest();
+	const addDelta = useAddDelta()
+	const changeHealth = useChangeHealth()
+	const changeMonsterHealth = useChangeMonsterHealth()
+	const changeStamina = useChangeStamina()
+	const trainMastery = useTrainMastery()
+	const inflictElementalAilment = useInflictElementalAilment()
+	const progressQuest = useProgressQuest()
 
-  return useRecoilCallback(
-    ({ set, snapshot }) =>
-      () => {
-        const get = getSnapshotGetter(snapshot);
+	return useRecoilCallback(
+		({ set, snapshot }) =>
+			() => {
+				const get = getSnapshotGetter(snapshot)
 
-        const canAttackOrParryValue = get(canAttackOrParry);
-        const hasEnoughAmmunitionValue = get(hasEnoughAmmunition);
-        const monsterElementValue = get(monsterElement);
-        const monsterHealthValue = get(monsterHealth);
-        const weaponValue = get(weapon);
-        const isWeaponRanged = isRanged(weaponValue);
-        const hasInflictedCritical =
-          (get(isSkillAcquired("assassination")) &&
-            isWeaponRanged &&
-            get(isTraitAcquired("sharpshooter")) &&
-            get(distance) > 0) ||
-          Math.random() <= get(criticalChance);
+				const canAttackOrParryValue = get(canAttackOrParry)
+				const hasEnoughMunitionsValue = get(hasEnoughMunitions)
+				const executionThresholdValue = get(executionThreshold)
+				const lifeLeechValue = get(lifeLeech)
+				const monsterHealthValue = get(monsterHealth)
+				const weaponValue = get(weapon)
+				const isWeaponRanged = isRanged(weaponValue)
+				const hasInflictedCritical = (
+					get(isSkillAcquired("assassination"))
+					&& isWeaponRanged
+					&& get(isTraitAcquired("sharpshooter"))
+					&& get(distance) > 0
+				) || Math.random() <= get(criticalChance)
 
-        set(isShowing("damage"), true);
+				let totalDamage = Math.round(hasInflictedCritical ? get(criticalStrike) : get(damage))
 
-        if (get(isAttacking) && get(attackDuration) === 0) {
-          set(attackDuration, get(attackRate));
-        }
+				set(isShowing("damage"), true)
 
-        if (canAttackOrParryValue && hasEnoughAmmunitionValue) {
-          if (weaponValue.burden > 0) {
-            changeStamina({ value: -weaponValue.burden });
-          }
+				if (get(isAttacking) && get(attackDuration) === 0) {
+					set(attackDuration, get(attackRate))
+				}
 
-          if (monsterElementValue !== null) {
-            animateElement({
-              animation: "headShake",
-              element: monsterElementValue,
-              speed: "fast",
-            });
-          }
+				if (canAttackOrParryValue && hasEnoughMunitionsValue) {
+					if (weaponValue.burden > 0) {
+						changeStamina({ value: -weaponValue.burden })
+					}
 
-          if (isWeaponRanged) {
-            set(ammunition, (currentAmmunition) => currentAmmunition - weaponValue.ammunitionCost);
-          }
+					animateElement({
+						animation: "headShake",
+						element: get(monsterElement),
+						speed: "fast",
+					})
 
-          if (
-            (isMelee(weaponValue) &&
-              weaponValue.grip === "two-handed" &&
-              monsterHealthValue / get(monsterHealthMaximum) <= get(executionThreshold)) ||
-            (hasInflictedCritical && get(isTraitAcquired("executioner")))
-          ) {
-            changeMonsterHealth({
-              damageType: "execution",
-              delta: [
-                {
-                  color: "text-muted",
-                  value: "EXECUTE",
-                },
-                {
-                  color: "text-danger",
-                  value: `-${monsterHealthValue}`,
-                },
-              ],
-              value: -monsterHealthValue,
-            });
-          } else {
-            const monsterDeltas: DeltaDisplay[] = [];
+					if (
+						(
+							isMelee(weaponValue)
+							&& weaponValue.grip === "two-handed"
+							&& monsterHealthValue / get(monsterHealthMaximum) <= executionThresholdValue
+						)
+						|| (
+							hasInflictedCritical && get(isTraitAcquired("executioner")) && Math.random() <= executionThresholdValue
+						)
+					) {
+						totalDamage = monsterHealthValue
 
-            if (
-              get(monsterAilmentDuration("bleeding")) === 0 &&
-              Math.random() <= get(bleedChance)
-            ) {
-              set(monsterAilmentDuration("bleeding"), get(bleed).duration);
+						changeMonsterHealth({
+							contents: [
+								{
+									color: "text-secondary",
+									value: "EXECUTE",
+								},
+							],
+							damageType: "execution",
+							value: -totalDamage,
+						})
+					}
+					else {
+						const monsterDeltas: DeltaDisplay[] = []
 
-              progressQuest({ quest: "bleeding" });
+						if (
+							get(monsterAilmentDuration("bleeding")) === 0
+							&& Math.random() <= get(bleedChance)
+						) {
+							set(monsterAilmentDuration("bleeding"), get(bleed).duration)
 
-              monsterDeltas.push({
-                color: "text-muted",
-                value: "BLEEDING",
-              });
-            }
+							progressQuest({ quest: "bleeding" })
 
-            if (hasInflictedCritical) {
-              progressQuest({ quest: "critical" });
+							monsterDeltas.push({
+								color: "text-secondary",
+								value: "BLEEDING",
+							})
+						}
 
-              monsterDeltas.push({
-                color: "text-muted",
-                value: "CRITICAL",
-              });
-            }
+						if (hasInflictedCritical) {
+							progressQuest({ quest: "critical" })
 
-            if (Math.random() <= get(stunChance)) {
-              set(monsterAilmentDuration("stunned"), get(masteryStatistic("might")));
+							monsterDeltas.push({
+								color: "text-secondary",
+								value: "CRITICAL",
+							})
+						}
 
-              progressQuest({ quest: "stunning" });
+						if (Math.random() <= get(stunChance)) {
+							set(monsterAilmentDuration("stunned"), get(masteryStatistic("might")))
 
-              monsterDeltas.push({
-                color: "text-muted",
-                value: "STUN",
-              });
-            }
+							progressQuest({ quest: "stunning" })
 
-            for (const elemental of ELEMENTAL_TYPES) {
-              inflictElementalAilment({ elemental, slot: "weapon" });
-            }
+							monsterDeltas.push({
+								color: "text-secondary",
+								value: "STUN",
+							})
+						}
 
-            const totalDamage = -Math.round(
-              hasInflictedCritical ? get(criticalStrike) : get(damage),
-            );
+						for (const elemental of ELEMENTAL_TYPES) {
+							inflictElementalAilment({ elemental, slot: "weapon" })
+						}
 
-            changeMonsterHealth({
-              damageType: hasInflictedCritical ? "critical" : undefined,
-              delta: [
-                ...monsterDeltas,
-                {
-                  color: "text-danger",
-                  value: totalDamage,
-                },
-              ],
-              value: totalDamage,
-            });
-          }
+						changeMonsterHealth({
+							contents: monsterDeltas,
+							damageType: hasInflictedCritical ? "critical" : undefined,
+							value: -totalDamage,
+						})
+					}
 
-          trainMastery("butchery");
-          trainMastery("cruelty");
-          trainMastery("finesse");
-          trainMastery("marksmanship");
-          trainMastery("might");
-        } else {
-          if (!canAttackOrParryValue) {
-            addDelta({
-              contents: [
-                {
-                  color: "text-muted",
-                  value: "CANNOT ATTACK",
-                },
-                {
-                  color: "text-danger",
-                  value: `(${weaponValue.burden})`,
-                },
-              ],
-              delta: "stamina",
-            });
+					if (!get(isReserveAtMaximum("health")) && lifeLeechValue > 0) {
+						changeHealth({
+							contents: {
+								color: "text-secondary",
+								value: "LEECH",
+							},
+							value: lifeLeechValue,
+						})
+					}
 
-            progressQuest({ quest: "exhausting" });
-          }
+					trainMastery("butchery")
+					trainMastery("cruelty")
+					trainMastery("finesse")
+					trainMastery("marksmanship")
+					trainMastery("might")
+				}
+				else {
+					if (!canAttackOrParryValue) {
+						addDelta({
+							contents: [
+								{
+									color: "text-secondary",
+									value: "CANNOT ATTACK",
+								},
+								{
+									color: "text-danger",
+									value: `(${weaponValue.burden})`,
+								},
+							],
+							delta: "stamina",
+						})
 
-          if (isWeaponRanged && !hasEnoughAmmunitionValue) {
-            addDelta({
-              contents: [
-                {
-                  color: "text-muted",
-                  value: "INSUFFICIENT AMMUNITION",
-                },
-                {
-                  color: "text-danger",
-                  value: `(${weaponValue.ammunitionCost})`,
-                },
-              ],
-              delta: "ammunition",
-            });
-          }
-        }
-      },
-    [
-      addDelta,
-      changeMonsterHealth,
-      changeStamina,
-      trainMastery,
-      inflictElementalAilment,
-      progressQuest,
-    ],
-  );
+						progressQuest({ quest: "exhausting" })
+					}
+
+					if (!hasEnoughMunitionsValue) {
+						addDelta({
+							contents: {
+								color: "text-secondary",
+								value: "INSUFFICIENT MUNITIONS",
+							},
+							delta: "munitions",
+						})
+					}
+				}
+			},
+		[
+			addDelta,
+			changeHealth,
+			changeMonsterHealth,
+			changeStamina,
+			trainMastery,
+			inflictElementalAilment,
+			progressQuest,
+		],
+	)
 }

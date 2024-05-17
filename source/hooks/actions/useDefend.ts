@@ -1,395 +1,404 @@
-import { useRecoilCallback } from "recoil";
+import { useRecoilCallback } from "recoil"
 
-import { TEARS_MAXIMUM } from "@neverquest/data/items";
-import { AILMENT_PENALTY } from "@neverquest/data/statistics";
-import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta";
-import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth";
-import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth";
-import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina";
-import { useInflictElementalAilment } from "@neverquest/hooks/actions/useInflictElementalAilment";
-import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
-import { useTrainMastery } from "@neverquest/hooks/actions/useTrainMastery";
-import { staggerChance } from "@neverquest/state/ailments";
+import { TEARS_MAXIMUM } from "@neverquest/data/items"
+import { AILMENT_PENALTY } from "@neverquest/data/statistics"
+import { NUDIST } from "@neverquest/data/traits"
+import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta"
+import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth"
+import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth"
+import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina"
+import { useInflictElementalAilment } from "@neverquest/hooks/actions/useInflictElementalAilment"
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
+import { useTrainMastery } from "@neverquest/hooks/actions/useTrainMastery"
+import { staggerChance } from "@neverquest/state/ailments"
 import {
-  canAttackOrParry,
-  canBlock,
-  canDodge,
-  isAttacking,
-  recoveryDuration,
-  statusElement,
-} from "@neverquest/state/character";
-import { armor, shield, weapon } from "@neverquest/state/gear";
-import { ownedItem } from "@neverquest/state/inventory";
-import { tears } from "@neverquest/state/items";
-import { masteryStatistic } from "@neverquest/state/masteries";
+	canAttackOrParry,
+	canBlockOrStagger,
+	canDodge,
+	isAttacking,
+	recoveryDuration,
+	statusElement,
+} from "@neverquest/state/character"
+import { armor, shield, weapon } from "@neverquest/state/gear"
+import { ownedItem } from "@neverquest/state/inventory"
+import { tears } from "@neverquest/state/items"
+import { masteryStatistic } from "@neverquest/state/masteries"
 import {
-  blightChance,
-  isMonsterAiling,
-  monsterAilmentDuration,
-  monsterAttackDuration,
-  monsterAttackRate,
-  monsterDamageAiling,
-  monsterElement,
-  poisonChance,
-} from "@neverquest/state/monster";
-import { blight, isPoisoned, poisonDuration, poisonLength } from "@neverquest/state/reserves";
+	blightChance,
+	isMonsterAiling,
+	monsterAilmentDuration,
+	monsterAttackDuration,
+	monsterAttackRate,
+	monsterDamageAiling,
+	monsterElement,
+	poisonChance,
+} from "@neverquest/state/monster"
 import {
-  blockChance,
-  deflectionChance,
-  dodgeChance,
-  parryAbsorption,
-  parryChance,
-  parryDamage,
-  protection,
-  recoveryRate,
-  thorns,
-} from "@neverquest/state/statistics";
-import { isTraitAcquired } from "@neverquest/state/traits";
-import { isShowing } from "@neverquest/state/ui";
-import type { DeltaDisplay } from "@neverquest/types/ui";
-import { ELEMENTAL_TYPES } from "@neverquest/types/unions";
-import { formatNumber } from "@neverquest/utilities/formatters";
-import { getSnapshotGetter } from "@neverquest/utilities/getters";
-import { animateElement } from "@neverquest/utilities/helpers";
+	blight,
+	healthMaximumPoisoned,
+	isPoisoned,
+	poisonDuration,
+	poisonLength,
+} from "@neverquest/state/reserves"
+import {
+	blockChance,
+	deflectionChance,
+	dodgeChance,
+	parryAbsorption,
+	parryChance,
+	parryDamage,
+	protection,
+	recoveryRate,
+	thorns,
+} from "@neverquest/state/statistics"
+import { isTraitAcquired } from "@neverquest/state/traits"
+import { isShowing } from "@neverquest/state/ui"
+import { isUnarmored } from "@neverquest/types/type-guards"
+import { ELEMENTAL_TYPES } from "@neverquest/types/unions"
+import { formatNumber } from "@neverquest/utilities/formatters"
+import { getSnapshotGetter } from "@neverquest/utilities/getters"
+import { animateElement } from "@neverquest/utilities/helpers"
+
+import type { DeltaDisplay } from "@neverquest/types/ui"
 
 export function useDefend() {
-  const addDelta = useAddDelta();
-  const changeHealth = useChangeHealth();
-  const changeMonsterHealth = useChangeMonsterHealth();
-  const changeStamina = useChangeStamina();
-  const trainMastery = useTrainMastery();
-  const inflictElementalAilment = useInflictElementalAilment();
-  const progressQuest = useProgressQuest();
+	const addDelta = useAddDelta()
+	const changeHealth = useChangeHealth()
+	const changeMonsterHealth = useChangeMonsterHealth()
+	const changeStamina = useChangeStamina()
+	const trainMastery = useTrainMastery()
+	const inflictElementalAilment = useInflictElementalAilment()
+	const progressQuest = useProgressQuest()
 
-  return useRecoilCallback(
-    ({ set, snapshot }) =>
-      () => {
-        const get = getSnapshotGetter(snapshot);
+	return useRecoilCallback(
+		({ set, snapshot }) =>
+			() => {
+				const get = getSnapshotGetter(snapshot)
 
-        set(isShowing("monsterOffense"), true);
+				const armorValue = get(armor)
+				const { burden: armorBurden } = armorValue
+				const shieldValue = get(shield)
+				const { burden: shieldBurden } = shieldValue
+				const canBlockOrStaggerValue = get(canBlockOrStagger)
+				const incursArmorBurden = !get(isTraitAcquired("stalwart")) && armorBurden > 0
+				const ownedItemLacrimatory = get(ownedItem("lacrimatory"))
+				const canGatherTears = ownedItemLacrimatory !== undefined && get(tears) < TEARS_MAXIMUM
 
-        const { burden } = get(armor);
-        const deltaHealth: DeltaDisplay[] = [];
-        const deltaStamina: DeltaDisplay[] = [];
-        const incursArmorBurden = !get(isTraitAcquired("stalwart")) && burden > 0;
-        const ownedItemLacrimatory = get(ownedItem("lacrimatory"));
-        const statusElementValue = get(statusElement);
-        const tearsValue = get(tears);
+				const deltaHealth: DeltaDisplay[] = []
+				const deltaStamina: DeltaDisplay[] = []
 
-        let hasStaggered = false;
-        let isAvoided = false;
+				set(isShowing("monsterOffense"), true)
 
-        if (statusElementValue !== null) {
-          animateElement({
-            animation: "headShake",
-            element: statusElementValue,
-            speed: "fast",
-          });
-        }
+				animateElement({
+					animation: "headShake",
+					element: get(statusElement),
+					speed: "fast",
+				})
 
-        // If stunned, check if hit connects at all.
-        if (get(isMonsterAiling("stunned")) && Math.random() <= AILMENT_PENALTY.stunned) {
-          addDelta({
-            contents: {
-              color: "text-muted",
-              value: "MISS",
-            },
-            delta: "health",
-          });
+				if (get(isAttacking) && get(monsterAttackDuration) === 0) {
+					set(monsterAttackDuration, get(monsterAttackRate))
+				}
 
-          isAvoided = true;
-        }
+				// If stunned, check if hit connects at all.
+				if (get(isMonsterAiling("stunned")) && Math.random() <= AILMENT_PENALTY.stunned) {
+					addDelta({
+						contents: {
+							color: "text-secondary",
+							value: "MISS",
+						},
+						delta: "health",
+					})
 
-        // If attack is dodged, all damage is avoided.
-        if (Math.random() <= get(dodgeChance)) {
-          if (get(canDodge)) {
-            progressQuest({ quest: "dodging" });
+					return
+				}
 
-            addDelta({
-              contents: {
-                color: "text-muted",
-                value: "DODGED",
-              },
-              delta: "health",
-            });
+				// If attack is dodged, all damage and ailments are avoided.
+				if (Math.random() <= get(dodgeChance)) {
+					if (get(canDodge)) {
+						progressQuest({ quest: "dodging" })
 
-            if (incursArmorBurden) {
-              changeStamina({ value: -burden });
-            }
+						deltaHealth.push({
+							color: "text-secondary",
+							value: "DODGED",
+						})
 
-            isAvoided = true;
-          } else {
-            deltaStamina.push(
-              {
-                color: "text-muted",
-                value: "CANNOT DODGE",
-              },
-              {
-                color: "text-danger",
-                value: `(${burden})`,
-              },
-            );
+						if (incursArmorBurden) {
+							changeStamina({ value: -armorBurden })
+						}
 
-            progressQuest({ quest: "exhausting" });
-          }
-        }
+						if (get(isTraitAcquired("nudist")) && isUnarmored(armorValue)) {
+							const healthGain = Math.round(get(healthMaximumPoisoned) * NUDIST.healAmount)
 
-        if (!isAvoided) {
-          const hasParried = Math.random() <= get(parryChance);
-          const hasBlocked = !hasParried && Math.random() <= get(blockChance);
-          const thornsValue = get(thorns);
-          const hasInflictedThorns = !hasBlocked && thornsValue > 0;
+							changeHealth({
+								contents: [
+									...deltaHealth,
+									{
+										color: "text-secondary",
+										value: "HEAL",
+									},
+								],
+								value: healthGain,
+							})
+						}
+						else {
+							addDelta({ contents: deltaHealth, delta: "health" })
+						}
 
-          const deflectionChanceValue = get(deflectionChance);
-          const monsterDamageAilingValue = get(monsterDamageAiling);
-          const protectionValue = get(protection);
+						return
+					}
+					else {
+						deltaStamina.push(
+							{
+								color: "text-secondary",
+								value: "CANNOT DODGE",
+							},
+							{
+								color: "text-danger",
+								value: `(${armorBurden})`,
+							},
+						)
 
-          const deltaMonsterHealth: DeltaDisplay[] = [];
-          const totalDamage = monsterDamageAilingValue - protectionValue;
+						progressQuest({ quest: "exhausting" })
+					}
+				}
 
-          let healthDamage = totalDamage > 0 ? totalDamage : 0;
-          let monsterHealthDamage = 0;
+				const thornsValue = get(thorns)
+				const hasInflictedThorns = thornsValue > 0
 
-          // If parrying occurs, check if possible (burden is not applied).
-          if (hasParried) {
-            if (get(canAttackOrParry)) {
-              const parryReflected = Math.round(monsterDamageAilingValue * get(parryDamage));
+				const deflectionChanceValue = get(deflectionChance)
+				const monsterDamageAilingValue = get(monsterDamageAiling)
+				const protectionValue = get(protection)
 
-              healthDamage -= Math.round(healthDamage * get(parryAbsorption));
-              monsterHealthDamage += parryReflected;
+				const deltaMonsterHealth: DeltaDisplay[] = []
+				const totalDamage = monsterDamageAilingValue - protectionValue
 
-              progressQuest({ quest: "parrying" });
+				let hasParried = Math.random() <= get(parryChance)
+				let hasBlocked = !hasParried && Math.random() <= get(blockChance)
+				let hasStaggered = !hasParried && Math.random() <= get(staggerChance)
+				let healthDamage = totalDamage > 0 ? totalDamage : 0
+				let monsterHealthDamage = 0
+				let staminaDamage = 0
 
-              deltaMonsterHealth.push(
-                {
-                  color: "text-muted",
-                  value: "PARRY",
-                },
-                {
-                  color: "text-danger",
-                  value: `-${formatNumber({ value: parryReflected })}`,
-                },
-              );
+				// If parrying occurs, check if it's possible.
+				if (hasParried) {
+					if (get(canAttackOrParry)) {
+						const reflectedDamage = Math.round(monsterDamageAilingValue * get(parryDamage))
 
-              deltaHealth.push(
-                {
-                  color: "text-muted",
-                  value: "PARRIED",
-                },
-                {
-                  color: "text-danger",
-                  value: `-${formatNumber({ value: healthDamage })}`,
-                },
-              );
-            } else {
-              deltaStamina.push(
-                {
-                  color: "text-muted",
-                  value: "CANNOT PARRY",
-                },
-                {
-                  color: "text-danger",
-                  value: `(${get(weapon).burden})`,
-                },
-              );
+						healthDamage -= Math.round(healthDamage * get(parryAbsorption))
+						monsterHealthDamage += reflectedDamage
 
-              progressQuest({ quest: "exhausting" });
-            }
-          }
+						progressQuest({ quest: "parrying" })
 
-          // If not parried and blocking occurs, check & apply burden.
-          if (hasBlocked) {
-            const { burden } = get(shield);
+						deltaMonsterHealth.push({
+							color: "text-secondary",
+							value: "PARRY",
+						})
 
-            if (get(canBlock)) {
-              healthDamage = 0;
+						deltaHealth.push({
+							color: "text-secondary",
+							value: "PARRIED",
+						})
+					}
+					else {
+						hasParried = false
 
-              progressQuest({ quest: "blocking" });
+						deltaStamina.push(
+							{
+								color: "text-secondary",
+								value: "CANNOT PARRY",
+							},
+							{
+								color: "text-danger",
+								value: `(${get(weapon).burden})`,
+							},
+						)
 
-              deltaHealth.push({
-                color: "text-muted",
-                value: "BLOCKED",
-              });
+						progressQuest({ quest: "exhausting" })
+					}
+				}
 
-              changeStamina({ value: -burden });
+				if (hasBlocked) {
+					if (canBlockOrStaggerValue) {
+						healthDamage = 0
+						staminaDamage += shieldBurden
 
-              if (Math.random() <= get(staggerChance)) {
-                set(monsterAilmentDuration("staggered"), get(masteryStatistic("stability")));
+						deltaHealth.push({
+							color: "text-secondary",
+							value: "BLOCKED",
+						})
 
-                progressQuest({ quest: "staggering" });
+						trainMastery("stability")
+						progressQuest({ quest: "blocking" })
+					}
+					else {
+						hasBlocked = false
 
-                changeMonsterHealth({
-                  delta: {
-                    color: "text-muted",
-                    value: "STAGGER",
-                  },
-                  value: 0,
-                });
+						deltaStamina.push(
+							{
+								color: "text-secondary",
+								value: "CANNOT BLOCK",
+							},
+							{
+								color: "text-danger",
+								value: `(${shieldBurden})`,
+							},
+						)
 
-                hasStaggered = true;
-              }
-            } else {
-              deltaStamina.push(
-                {
-                  color: "text-muted",
-                  value: "CANNOT BLOCK",
-                },
-                {
-                  color: "text-danger",
-                  value: `(${burden})`,
-                },
-              );
+						progressQuest({ quest: "exhausting" })
+					}
+				}
 
-              progressQuest({ quest: "exhausting" });
-            }
-          }
+				if (hasStaggered) {
+					if (canBlockOrStaggerValue) {
+						staminaDamage += shieldBurden
 
-          // If neither dodged, parried nor blocked, show damage with protection and increase resilience.
-          if (!hasBlocked && !hasParried) {
-            deltaHealth.push({
-              color: "text-danger",
-              value: `-${formatNumber({ value: healthDamage })}`,
-            });
+						set(monsterAilmentDuration("staggered"), get(masteryStatistic("stability")))
 
-            if (protectionValue > 0) {
-              deltaHealth.push({
-                color: "text-muted",
-                // In the case of 0 health damage, show only inflicted damage.
-                value: `(${formatNumber({
-                  value: Math.min(protectionValue, monsterDamageAilingValue),
-                })})`,
-              });
-            }
+						trainMastery("stability")
+						progressQuest({ quest: "staggering" })
+					}
+					else {
+						hasStaggered = false
 
-            if (incursArmorBurden) {
-              changeStamina({ value: -burden });
-            }
-          }
+						deltaStamina.push(
+							{
+								color: "text-secondary",
+								value: "CANNOT STAGGER",
+							},
+							{
+								color: "text-danger",
+								value: `(${shieldBurden})`,
+							},
+						)
 
-          set(isShowing("recovery"), true);
-          set(recoveryDuration, get(recoveryRate));
+						progressQuest({ quest: "exhausting" })
+					}
+				}
 
-          // If already poisoned, check if blighting has occurred and if it's been deflected.
-          if (get(isPoisoned) && Math.random() <= get(blightChance)) {
-            if (Math.random() <= deflectionChanceValue) {
-              progressQuest({ quest: "deflecting" });
+				// If neither dodged, parried nor blocked, show damage with protection and increase resilience.
+				if (!hasBlocked && !hasParried) {
+					if (protectionValue > 0) {
+						deltaHealth.push({
+							color: "text-secondary",
+							// In the case of 0 health damage, show only inflicted damage.
+							value: `(${formatNumber({
+								value: Math.min(protectionValue, monsterDamageAilingValue),
+							})})`,
+						})
+					}
 
-              deltaStamina.push({
-                color: "text-success",
-                value: "DEFLECTED BLIGHT",
-              });
-            } else {
-              if (ownedItemLacrimatory !== undefined && tearsValue < TEARS_MAXIMUM) {
-                set(tears, (currentTears) => currentTears + 1);
-              }
+					if (incursArmorBurden) {
+						staminaDamage += armorBurden
+					}
+				}
 
-              progressQuest({ quest: "blighting" });
+				// If already poisoned, check if blighting has occurred and if it's been deflected.
+				if (get(isPoisoned) && Math.random() <= get(blightChance)) {
+					if (Math.random() <= deflectionChanceValue) {
+						progressQuest({ quest: "deflecting" })
 
-              set(blight, (currentBlight) => currentBlight + 1);
+						deltaStamina.push({
+							color: "text-success",
+							value: "DEFLECTED BLIGHT",
+						})
+					}
+					else {
+						if (canGatherTears) {
+							set(tears, currentTears => currentTears + 1)
+						}
 
-              deltaStamina.push({
-                color: "text-muted",
-                value: "BLIGHTED",
-              });
-            }
-          }
+						progressQuest({ quest: "blighting" })
 
-          // If poisoning occurs, check if has been deflected, otherwise apply poisonDuration.
-          if (Math.random() <= get(poisonChance)) {
-            if (Math.random() <= deflectionChanceValue) {
-              progressQuest({ quest: "deflecting" });
+						set(blight, currentBlight => currentBlight + 1)
 
-              deltaHealth.push({
-                color: "text-success",
-                value: "DEFLECTED POISON",
-              });
-            } else {
-              if (ownedItemLacrimatory !== undefined && tearsValue < TEARS_MAXIMUM) {
-                set(tears, (currentTears) => currentTears + 1);
-              }
+						deltaStamina.push({
+							color: "text-secondary",
+							value: "BLIGHTED",
+						})
+					}
+				}
 
-              progressQuest({ quest: "poisoning" });
+				// If poisoning occurs, check if has been deflected, otherwise apply poison duration.
+				if (Math.random() <= get(poisonChance)) {
+					if (Math.random() <= deflectionChanceValue) {
+						progressQuest({ quest: "deflecting" })
 
-              set(poisonDuration, get(poisonLength));
+						deltaHealth.push({
+							color: "text-success",
+							value: "DEFLECTED POISON",
+						})
+					}
+					else {
+						if (canGatherTears) {
+							set(tears, currentTears => currentTears + 1)
+						}
 
-              deltaHealth.push({
-                color: "text-muted",
-                value: "POISONED",
-              });
-            }
-          }
+						progressQuest({ quest: "poisoning" })
 
-          // Calculate & apply thorns damage.
-          if (hasInflictedThorns) {
-            progressQuest({ quest: "thorns" });
+						set(poisonDuration, get(poisonLength))
 
-            monsterHealthDamage += thornsValue;
+						deltaHealth.push({
+							color: "text-secondary",
+							value: "POISONED",
+						})
+					}
+				}
 
-            deltaMonsterHealth.push(
-              {
-                color: "text-muted",
-                value: "THORNS",
-              },
-              {
-                color: "text-danger",
-                value: `-${formatNumber({ value: thornsValue })}`,
-              },
-            );
-          }
+				// Calculate & apply thorns damage.
+				if (hasInflictedThorns) {
+					progressQuest({ quest: "thorns" })
 
-          // Take any damage and show any stamina costs.
-          changeHealth({ delta: deltaHealth, value: -healthDamage });
+					monsterHealthDamage += thornsValue
 
-          addDelta({
-            contents: deltaStamina,
-            delta: "stamina",
-          });
+					deltaMonsterHealth.push({
+						color: "text-secondary",
+						value: "THORNS",
+					})
+				}
 
-          if (healthDamage > 0) {
-            trainMastery("resilience");
-          }
+				if (healthDamage > 0) {
+					trainMastery("resilience")
+				}
 
-          trainMastery("stability");
+				if (!hasBlocked && !hasParried && !hasStaggered) {
+					set(isShowing("recovery"), true)
+					set(recoveryDuration, get(recoveryRate))
+				}
 
-          // Inflict any armor elemental effects.
-          for (const elemental of ELEMENTAL_TYPES) {
-            inflictElementalAilment({ elemental, slot: "armor" });
-          }
+				// Inflict any armor elemental effects.
+				for (const elemental of ELEMENTAL_TYPES) {
+					inflictElementalAilment({ elemental, slot: "armor" })
+				}
 
-          // Inflict any parry and/or thorns damage.
-          if (monsterHealthDamage > 0) {
-            changeMonsterHealth({
-              damageType: hasInflictedThorns ? "thorns" : hasParried ? "parry" : undefined,
-              delta: deltaMonsterHealth,
-              value: -monsterHealthDamage,
-            });
-          }
+				// Inflict any parry and/or thorns damage.
+				if (monsterHealthDamage > 0) {
+					changeMonsterHealth({
+						contents: deltaMonsterHealth,
+						damageType: hasInflictedThorns ? "thorns" : hasParried ? "parry" : undefined,
+						value: -monsterHealthDamage,
+					})
+				}
 
-          if (hasStaggered || monsterHealthDamage > 0) {
-            const monsterElementValue = get(monsterElement);
+				if ((hasStaggered && canBlockOrStaggerValue) || monsterHealthDamage > 0) {
+					animateElement({
+						animation: "headShake",
+						element: get(monsterElement),
+						speed: "fast",
+					})
+				}
 
-            if (monsterElementValue !== null) {
-              animateElement({
-                animation: "headShake",
-                element: monsterElementValue,
-                speed: "fast",
-              });
-            }
-          }
-        }
-
-        if (get(isAttacking) && get(monsterAttackDuration) === 0) {
-          set(monsterAttackDuration, get(monsterAttackRate));
-        }
-      },
-    [
-      addDelta,
-      changeHealth,
-      changeMonsterHealth,
-      changeStamina,
-      trainMastery,
-      inflictElementalAilment,
-      progressQuest,
-    ],
-  );
+				// Take any damage and any stamina costs.
+				changeHealth({ contents: deltaHealth, value: -healthDamage })
+				changeStamina({ contents: deltaStamina, value: -staminaDamage })
+			},
+		[
+			addDelta,
+			changeHealth,
+			changeMonsterHealth,
+			changeStamina,
+			trainMastery,
+			inflictElementalAilment,
+			progressQuest,
+		],
+	)
 }

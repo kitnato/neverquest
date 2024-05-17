@@ -1,38 +1,39 @@
-import { Stack } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { Stack } from "react-bootstrap"
+import { useRecoilValue } from "recoil"
 
-import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { GearComparison } from "@neverquest/components/Inventory/GearComparison";
-import IconGearLevel from "@neverquest/icons/gear-level.svg?react";
-import { isShowing } from "@neverquest/state/ui";
-import type { Comparison } from "@neverquest/types/components";
-import { formatNumber } from "@neverquest/utilities/formatters";
+import { IconDisplay } from "@neverquest/components/IconDisplay"
+import { GearComparison } from "@neverquest/components/Inventory/GearComparison"
+import IconGearLevel from "@neverquest/icons/gear-level.svg?react"
+import { isShowing } from "@neverquest/state/ui"
+import { formatNumber } from "@neverquest/utilities/formatters"
 
-export function GearLevelDetail({ comparison, level }: { comparison: Comparison; level: number }) {
-  const isShowingGearLevel = useRecoilValue(isShowing("gearLevel"));
+import type { Comparison } from "@neverquest/types/components"
 
-  if (isShowingGearLevel && level > 0) {
-    return (
-      <tr>
-        <td>
-          <span>Gear level:</span>
-        </td>
+export function GearLevelDetail({ comparison, level }: { comparison: Comparison, level: number }) {
+	const isShowingGearLevel = useRecoilValue(isShowing("gearLevel"))
 
-        <td>
-          <Stack direction="horizontal" gap={1}>
-            <IconDisplay Icon={IconGearLevel} iconProps={{ className: "small" }}>
-              <span>{formatNumber({ value: level })}</span>
-            </IconDisplay>
+	if (isShowingGearLevel && level > 0) {
+		return (
+			<tr>
+				<td>
+					<span>Gear level:</span>
+				</td>
 
-            {comparison !== false && (
-              <GearComparison
-                difference={level - comparison.subtrahend}
-                showing={comparison.showing}
-              />
-            )}
-          </Stack>
-        </td>
-      </tr>
-    );
-  }
+				<td>
+					<Stack direction="horizontal" gap={1}>
+						<IconDisplay Icon={IconGearLevel} iconProps={{ className: "small" }}>
+							<span>{formatNumber({ value: level })}</span>
+						</IconDisplay>
+
+						{comparison !== false && (
+							<GearComparison
+								difference={level - comparison.subtrahend}
+								showing={comparison.showing}
+							/>
+						)}
+					</Stack>
+				</td>
+			</tr>
+		)
+	}
 }

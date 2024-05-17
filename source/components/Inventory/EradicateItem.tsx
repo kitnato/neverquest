@@ -1,76 +1,93 @@
-import { useState } from "react";
+import { useState } from "react"
 import {
-  Button,
-  Modal,
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-  ModalTitle,
-  OverlayTrigger,
-  Tooltip,
-} from "react-bootstrap";
+	Button,
+	Modal,
+	ModalBody,
+	ModalFooter,
+	ModalHeader,
+	ModalTitle,
+	OverlayTrigger,
+	Tooltip,
+} from "react-bootstrap"
+import { useSetRecoilState } from "recoil"
 
-import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { IconImage } from "@neverquest/components/IconImage";
-import { useEradicate } from "@neverquest/hooks/actions/useEradicate";
-import IconEradicate from "@neverquest/icons/eradicate.svg?react";
-import type { MerchantInventoryItem } from "@neverquest/types";
-import { capitalizeAll } from "@neverquest/utilities/formatters";
+import { IconDisplay } from "@neverquest/components/IconDisplay"
+import { IconImage } from "@neverquest/components/IconImage"
+import { useNeutralize } from "@neverquest/hooks/actions/useNeutralize"
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
+import IconEradicate from "@neverquest/icons/eradicate.svg?react"
+import { merchantInventory } from "@neverquest/state/caravan"
+import { capitalizeAll } from "@neverquest/utilities/formatters"
+import { getItemIcon } from "@neverquest/utilities/getters"
+
+import type { MerchantInventoryItem } from "@neverquest/types"
 
 export function EradicateItem({ item }: { item: MerchantInventoryItem }) {
-  const [isShowingModal, setIsShowingModal] = useState(false);
+	const setMerchantInventory = useSetRecoilState(merchantInventory)
 
-  const eradicate = useEradicate();
+	const [isShowingModal, setIsShowingModal] = useState(false)
 
-  const onHide = () => {
-    setIsShowingModal(false);
-  };
+	const { ID, name } = item
 
-  return (
-    <>
-      <OverlayTrigger
-        overlay={
-          <Tooltip>
-            <span>Eradicate</span>
-          </Tooltip>
-        }
-      >
-        <Button
-          onClick={() => {
-            setIsShowingModal(true);
-          }}
-          variant="outline-dark"
-        >
-          <IconImage className="small" Icon={IconEradicate} />
-        </Button>
-      </OverlayTrigger>
+	const neutralize = useNeutralize()
+	const progressQuest = useProgressQuest()
 
-      <Modal onHide={onHide} show={isShowingModal}>
-        <ModalHeader closeButton>
-          <ModalTitle>
-            <IconDisplay Icon={IconEradicate}>
-              <span>Eradicate item?</span>
-            </IconDisplay>
-          </ModalTitle>
-        </ModalHeader>
+	const onHide = () => {
+		setIsShowingModal(false)
+	}
 
-        <ModalBody>{`"${capitalizeAll(
-          item.name,
-        )}" will no longer be available for purchase.`}</ModalBody>
+	return (
+		<>
+			<OverlayTrigger
+				overlay={(
+					<Tooltip>
+						<span>Eradicate</span>
+					</Tooltip>
+				)}
+			>
+				<Button
+					onClick={() => {
+						setIsShowingModal(true)
+					}}
+					variant="outline-dark"
+				>
+					<IconImage className="small" Icon={IconEradicate} />
+				</Button>
+			</OverlayTrigger>
 
-        <ModalFooter>
-          <Button
-            onClick={() => {
-              eradicate(item);
+			<Modal onHide={onHide} show={isShowingModal}>
+				<ModalHeader closeButton>
+					<ModalTitle>
+						<IconDisplay Icon={IconEradicate}>
+							<span>Eradicate item?</span>
+						</IconDisplay>
+					</ModalTitle>
+				</ModalHeader>
 
-              onHide();
-            }}
-            variant="outline-dark"
-          >
-            Eradicate
-          </Button>
-        </ModalFooter>
-      </Modal>
-    </>
-  );
+				<ModalBody>
+					<IconImage className="small" Icon={getItemIcon(item)} />
+
+					<span>{` ${capitalizeAll(name)} will be irretrievably destroyed.`}</span>
+				</ModalBody>
+
+				<ModalFooter>
+					<Button
+						onClick={() => {
+							setMerchantInventory(currentInventory =>
+								currentInventory.filter(({ ID: currentItemID }) => currentItemID !== ID),
+							)
+
+							neutralize({ item })
+							progressQuest({ quest: "eradicating" })
+
+							onHide()
+						}}
+						variant="outline-dark"
+					>
+						<span>Eradicate</span>
+					</Button>
+				</ModalFooter>
+			</Modal>
+		</>
+	)
 }

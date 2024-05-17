@@ -4,218 +4,216 @@
 @import "~react-circular-progressbar/dist/styles";
 
 ::selection {
-  background: $gray-600;
-  color: white;
+	background: $gray-600;
+	color: white;
 }
 
 body {
-  user-select: none;
+	height: 100vh;
+	user-select: none;
 }
 
 h6 {
-  font-variant: all-petite-caps;
-}
-
-select {
-  cursor: pointer;
+	font-variant: all-petite-caps;
 }
 
 small {
-  small {
-    font-size: inherit;
-  }
+	small {
+		font-size: inherit;
+	}
 
-  &:empty {
-    display: none;
-  }
+	&:empty {
+		display: none;
+	}
 }
 
 svg {
-  /* stylelint-disable-next-line selector-class-pattern */
-  &.CircularProgressbar {
-    max-width: 60px;
+	/* stylelint-disable-next-line selector-class-pattern */
+	&.CircularProgressbar {
+		max-width: 60px;
 
-    /* stylelint-disable-next-line selector-class-pattern */
-    .CircularProgressbar-path {
-      stroke: $dark;
-    }
+		/* stylelint-disable-next-line selector-class-pattern */
+		.CircularProgressbar-path {
+			stroke: $dark;
+		}
 
-    /* stylelint-disable-next-line selector-class-pattern */
-    .CircularProgressbar-text {
-      fill: $dark;
-      font-size: 18px;
-    }
+		/* stylelint-disable-next-line selector-class-pattern */
+		.CircularProgressbar-text {
+			fill: $dark;
+			font-size: 18px;
+		}
 
-    /* stylelint-disable-next-line selector-class-pattern */
-    .CircularProgressbar-trail {
-      stroke: $body-secondary-bg;
-    }
-  }
+		/* stylelint-disable-next-line selector-class-pattern */
+		.CircularProgressbar-trail {
+			stroke: $body-secondary-bg;
+		}
+	}
 
-  &.icon-image {
-    display: block;
-    fill: currentcolor;
-    width: 3rem;
+	&.icon-image {
+		display: block;
+		fill: currentcolor;
+		width: 3rem;
 
-    &.glowing {
-      filter: drop-shadow(0 0 3px currentcolor);
-    }
+		&.glowing {
+			filter: drop-shadow(0 0 3px currentcolor);
+		}
 
-    &.small {
-      width: 1.5rem;
-    }
+		&.small {
+			width: 1.5rem;
+		}
 
-    &.stencilled {
-      filter: drop-shadow(0 0 2px $dark);
-    }
-  }
+		&.stencilled {
+			filter: drop-shadow(0 0 2px $dark);
+		}
+	}
 }
 
 .accordion-button {
-  box-shadow: none !important;
+	box-shadow: none !important;
 }
 
 // Reset button hover styles for toggle button groups to behave like they should.
 .btn-check + .btn:hover {
-  background-color: var(--bs-btn-hover-bg);
-  border-color: var(--bs-btn-hover-border-color);
-  color: var(--bs-btn-hover-color);
+	background-color: var(--bs-btn-hover-bg);
+	border-color: var(--bs-btn-hover-border-color);
+	color: var(--bs-btn-hover-color);
 }
 
 .fitted {
-  width: max-content;
+	width: max-content;
 }
 
 .form-check {
-  align-items: center;
-  display: flex;
-  gap: 0.8rem;
+	align-items: center;
+	display: flex;
+	gap: 0.8rem;
 
-  .form-check-input,
-  .form-check-label {
-    cursor: pointer;
-  }
-
-  .form-check-input {
-    margin-top: initial;
-  }
+	.form-check-input {
+		margin-top: initial;
+	}
 }
 
 .hover-grow:hover {
-  cursor: pointer;
-  transform: scale(1.1);
-  transform-origin: center left;
-  transition: transform 0.5s;
+	transform: scale(1.1);
+	transform-origin: center left;
+	transition: transform 0.5s;
 }
 
 .journal .tab-pane.active {
-  display: flex;
-  flex-direction: column;
-  overflow-y: hidden;
+	display: flex;
+	flex-direction: column;
+	overflow-y: hidden;
 }
 
 .monospaced {
-  font-family: monospace;
+	font-family: monospace;
 }
 
 .offcanvas {
-  max-width: 780px;
+	max-width: 780px;
 }
 
 .overlay-offcanvas {
-  z-index: calc($zindex-offcanvas + 1);
+	z-index: calc($zindex-offcanvas + 1);
 }
 
 .overlay-modal-backdrop {
-  z-index: calc($zindex-modal-backdrop + 1);
+	z-index: calc($zindex-modal-backdrop + 1);
 }
 
 // Workaround for https://github.com/react-bootstrap/react-bootstrap/issues/6563.
 .popover,
 .tooltip {
-  position: fixed;
+	position: fixed;
 }
 
 // Tooltip doesn't have a box-shadow variable, and $popover-box-shadow doesn't control this way.
 .popover.show {
-  box-shadow: 0 0 4px 1px rgb(0 0 0 / 20%);
+	box-shadow: 0 0 4px 1px rgb(0 0 0 / 20%);
 }
 
 .tooltip-inner {
-  box-shadow: 0 0 4px 1px rgb(0 0 0 / 30%);
+	box-shadow: 0 0 4px 1px rgb(0 0 0 / 30%);
 
-  .icon-display {
-    justify-content: center;
-  }
+	.icon-display {
+		justify-content: center;
+	}
 }
 
 .progress-labelled {
-  .progress {
-    height: 1.6rem;
+	.progress {
+		height: 1.6rem;
 
-    &.attached-above {
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
-    }
+		&.attached-above {
+			border-top-left-radius: 0;
+			border-top-right-radius: 0;
+		}
 
-    &.attached-below {
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-    }
+		&.attached-below {
+			border-bottom-left-radius: 0;
+			border-bottom-right-radius: 0;
+		}
 
-    &.small {
-      height: 0.75rem;
-    }
-  }
+		&.small {
+			height: 0.75rem;
+		}
+	}
 
-  &.transitions-none .progress-bar {
-    transition: none;
-  }
-
-  > small {
-    text-shadow:
-      -1px 1px 1px var(--bs-gray-900),
-      1px 1px 1px var(--bs-gray-900),
-      1px -1px 1px var(--bs-gray-900),
-      -1px -1px 1px var(--bs-gray-900);
-  }
+	&.transitions-none .progress-bar {
+		transition: none;
+	}
 }
 
 .table-details td {
-  &:first-child {
-    font-style: italic;
-    text-align: end;
+	&:first-child {
+		font-style: italic;
+		text-align: end;
 
-    .icon-display {
-      justify-content: end;
-    }
-  }
+		.icon-display {
+			justify-content: end;
+		}
+	}
 
-  &:nth-child(2) {
-    vertical-align: middle;
-  }
+	&:nth-child(2) {
+		vertical-align: middle;
+	}
 }
 
-.text-blue {
-  color: $blue;
+.cyan {
+	color: $cyan-600;
 }
 
-.text-floating strong {
-  text-shadow:
-    -1px 1px 0 white,
-    1px 1px 0 white,
-    1px -1px 0 white,
-    -1px -1px 0 white;
+.purple {
+	color: $purple-500;
 }
 
-.text-indigo {
-  color: $indigo;
+.orange {
+	color: $orange-600;
 }
 
-.text-orange {
-  color: $orange;
+.teal {
+	color: $teal-600;
+}
+
+.text-floating {
+	span,
+	strong {
+		text-shadow:
+			-1px 1px 0 white,
+			1px 1px 0 white,
+			1px -1px 0 white,
+			-1px -1px 0 white;
+	}
+}
+
+.text-shaded {
+	text-shadow:
+		-1px 1px 1px var(--bs-gray-900),
+		1px 1px 1px var(--bs-gray-900),
+		1px -1px 1px var(--bs-gray-900),
+		-1px -1px 1px var(--bs-gray-900);
 }
 
 .vstack {
-  align-self: initial;
+	align-self: initial;
 }

@@ -1,100 +1,116 @@
-import { useRecoilCallback } from "recoil";
+import { useRecoilCallback } from "recoil"
 
-import { CORPSE_VALUE } from "@neverquest/data/encounter";
-import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta";
-import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest";
-import { useToggleAttacking } from "@neverquest/hooks/actions/useToggleAttacking";
-import { absorbedEssence } from "@neverquest/state/attributes";
-import { isAttacking } from "@neverquest/state/character";
-import { corpse, stage } from "@neverquest/state/encounter";
-import { inventory, ownedItem } from "@neverquest/state/inventory";
+import { CORPSE_VALUE } from "@neverquest/data/encounter"
+import { HEALTH_LOW_THRESHOLD } from "@neverquest/data/reserves"
+import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta"
+import { useMending } from "@neverquest/hooks/actions/useMending"
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
+import { useToggleAttacking } from "@neverquest/hooks/actions/useToggleAttacking"
+import { isAttacking, recoveryDuration } from "@neverquest/state/character"
+import { corpse, stage } from "@neverquest/state/encounter"
+import { ownedItem } from "@neverquest/state/inventory"
+import { isRelicEquipped } from "@neverquest/state/items"
 import {
-  health,
-  healthMaximumPoisoned,
-  isInvulnerable,
-  regenerationAmount,
-  regenerationDuration,
-} from "@neverquest/state/reserves";
-import { essence } from "@neverquest/state/resources";
-import type { DeltaDisplay, DeltaReserve } from "@neverquest/types/ui";
-import { formatNumber } from "@neverquest/utilities/formatters";
-import { getSnapshotGetter } from "@neverquest/utilities/getters";
+	healthMaximumPoisoned,
+	isInvulnerable,
+	protectedElement,
+	regenerationDuration,
+	reserveCurrent,
+} from "@neverquest/state/reserves"
+import { essence } from "@neverquest/state/resources"
+import { formatNumber } from "@neverquest/utilities/formatters"
+import { getSnapshotGetter } from "@neverquest/utilities/getters"
+import { animateElement } from "@neverquest/utilities/helpers"
+
+import type { DeltaReserve } from "@neverquest/types/ui"
 
 export function useChangeHealth() {
-  const addDelta = useAddDelta();
-  const progressQuest = useProgressQuest();
-  const toggleAttacking = useToggleAttacking();
+	const addDelta = useAddDelta()
+	const mending = useMending()
+	const progressQuest = useProgressQuest()
+	const toggleAttacking = useToggleAttacking()
 
-  return useRecoilCallback(
-    ({ reset, set, snapshot }) =>
-      (deltaReserve: DeltaReserve) => {
-        const get = getSnapshotGetter(snapshot);
+	return useRecoilCallback(
+		({ reset, set, snapshot }) =>
+			({ contents, value }: DeltaReserve) => {
+				const get = getSnapshotGetter(snapshot)
 
-        const healthMaximumPoisonedValue = get(healthMaximumPoisoned);
-        const value = deltaReserve.isRegeneration
-          ? get(regenerationAmount("health"))
-          : deltaReserve.value;
-        const formattedValue = formatNumber({ value });
-        const isPositive = value > 0;
+				const deltaDisplay = contents === undefined
+					? []
+					: Array.isArray(contents)
+						? contents
+						: [contents]
+				const formattedValue = formatNumber({ value })
+				const healthMaximumPoisonedValue = get(healthMaximumPoisoned)
+				const isAttackingValue = get(isAttacking)
+				const isPositive = value > 0
 
-        let newHealth = get(health) + (get(isInvulnerable) ? (isPositive ? value : 0) : value);
+				let newHealth = get(reserveCurrent("health")) + (get(isInvulnerable) ? isPositive ? value : 0 : value)
 
-        addDelta({
-          contents:
-            deltaReserve.isRegeneration === true ||
-            deltaReserve.delta === undefined ||
-            (Array.isArray(deltaReserve.delta) && deltaReserve.delta.length === 0)
-              ? ({
-                  color: isPositive ? "text-success" : value === 0 ? "text-muted" : "text-danger",
-                  value: isPositive ? `+${formattedValue}` : formattedValue,
-                } as DeltaDisplay)
-              : deltaReserve.delta,
-          delta: "health",
-        });
+				if (newHealth <= 0) {
+					newHealth = 0
 
-        if (newHealth <= 0) {
-          const phylactery = get(ownedItem("phylactery"));
+					reset(regenerationDuration("health"))
+					reset(regenerationDuration("stamina"))
+					reset(recoveryDuration)
 
-          if (get(isAttacking)) {
-            toggleAttacking();
-          }
+					progressQuest({ quest: "flatlining" })
 
-          if (phylactery === undefined) {
-            newHealth = 0;
+					if (isAttackingValue) {
+						toggleAttacking()
+					}
 
-            progressQuest({ quest: "flatlining" });
+					if (get(ownedItem("phylactery")) === undefined) {
+						set(corpse, {
+							essence: Math.round(get(essence) * CORPSE_VALUE),
+							stage: get(stage),
+						})
+					}
+				}
 
-            set(corpse, {
-              essence: Math.round(get(essence) + get(absorbedEssence) * CORPSE_VALUE),
-              stage: get(stage),
-            });
-          } else {
-            newHealth = healthMaximumPoisonedValue;
+				if (newHealth >= healthMaximumPoisonedValue) {
+					newHealth = healthMaximumPoisonedValue
 
-            addDelta({
-              contents: {
-                color: "text-success",
-                value: "RESURRECTED",
-              },
-              delta: "health",
-            });
+					reset(regenerationDuration("health"))
+				}
 
-            set(inventory, (currentInventory) =>
-              currentInventory.filter(({ ID: itemID }) => itemID !== phylactery.ID),
-            );
+				if (
+					!isPositive
+					&& newHealth > 0
+					&& newHealth <= healthMaximumPoisonedValue * HEALTH_LOW_THRESHOLD
+					&& isAttackingValue
+					&& get(isRelicEquipped("dream catcher"))
+				) {
+					animateElement({
+						animation: "heartBeat",
+						element: get(protectedElement),
+					})
 
-            progressQuest({ quest: "resurrecting" });
-          }
-        }
+					const ownedBandages = get(ownedItem("bandages"))
 
-        if (newHealth >= healthMaximumPoisonedValue) {
-          newHealth = healthMaximumPoisonedValue;
+					if (ownedBandages === undefined) {
+						toggleAttacking()
+					}
+					else {
+						mending("health", ownedBandages.ID)
+						return
+					}
+				}
 
-          reset(regenerationDuration("health"));
-        }
+				set(reserveCurrent("health"), newHealth)
 
-        set(health, newHealth);
-      },
-    [addDelta, progressQuest, toggleAttacking],
-  );
+				if (value !== 0) {
+					deltaDisplay.push({
+						color: isPositive ? "text-success" : "text-danger",
+						value: isPositive ? `+${formattedValue}` : formattedValue,
+					})
+				}
+
+				addDelta({
+					contents: deltaDisplay,
+					delta: "health",
+				})
+			},
+		[addDelta, mending, progressQuest, toggleAttacking],
+	)
 }

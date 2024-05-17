@@ -1,37 +1,44 @@
-import { useRecoilCallback } from "recoil";
+import { useRecoilCallback } from "recoil"
 
-import { attackDuration, name, recoveryDuration } from "@neverquest/state/character";
-import { isStageStarted, location, progress, stage } from "@neverquest/state/encounter";
-import { isWeaving } from "@neverquest/state/items";
+import { blacksmithOptions, fletcherOptions } from "@neverquest/state/caravan"
+import { attackDuration, recoveryDuration } from "@neverquest/state/character"
+import { isStageStarted, location, progress } from "@neverquest/state/encounter"
+import { isRelicEquipped } from "@neverquest/state/items"
 import {
-  blight,
-  health,
-  poisonDuration,
-  regenerationDuration,
-  stamina,
-} from "@neverquest/state/reserves";
-import { essence } from "@neverquest/state/resources";
+	blight,
+	poisonDuration,
+	regenerationDuration,
+	reserveCurrent,
+} from "@neverquest/state/reserves"
+import { essence } from "@neverquest/state/resources"
+import { RELIC_TYPES } from "@neverquest/types/unions"
 
 export function useResetCharacter() {
-  return useRecoilCallback(
-    ({ reset }) =>
-      () => {
-        reset(attackDuration);
-        reset(blight);
-        reset(essence);
-        reset(health);
-        reset(isWeaving);
-        reset(isStageStarted);
-        reset(poisonDuration);
-        reset(progress);
-        reset(location);
-        reset(name);
-        reset(recoveryDuration);
-        reset(regenerationDuration("health"));
-        reset(regenerationDuration("stamina"));
-        reset(stage);
-        reset(stamina);
-      },
-    [],
-  );
+	return useRecoilCallback(
+		({ reset }) =>
+			(resetStanding?: boolean) => {
+				reset(attackDuration)
+				reset(blacksmithOptions)
+				reset(blight)
+				reset(fletcherOptions)
+				reset(poisonDuration)
+				reset(recoveryDuration)
+				reset(regenerationDuration("health"))
+				reset(regenerationDuration("stamina"))
+				reset(reserveCurrent("health"))
+				reset(reserveCurrent("stamina"))
+
+				for (const relic of RELIC_TYPES) {
+					reset(isRelicEquipped(relic))
+				}
+
+				if (resetStanding) {
+					reset(essence)
+					reset(isStageStarted)
+					reset(progress)
+					reset(location)
+				}
+			},
+		[],
+	)
 }

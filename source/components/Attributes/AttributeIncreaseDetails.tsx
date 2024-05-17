@@ -1,66 +1,29 @@
-import { Stack } from "react-bootstrap";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil"
 
-import { IconDisplay } from "@neverquest/components/IconDisplay";
-import { ATTRIBUTES } from "@neverquest/data/attributes";
-import IconAttackRate from "@neverquest/icons/attack-rate.svg?react";
-import IconCriticalChance from "@neverquest/icons/critical-chance.svg?react";
-import IconCriticalDamage from "@neverquest/icons/critical-damage.svg?react";
-import IconDamage from "@neverquest/icons/damage.svg?react";
-import IconDodge from "@neverquest/icons/dodge.svg?react";
-import IconEldritchCodex from "@neverquest/icons/eldritch-codex.svg?react";
-import IconHealth from "@neverquest/icons/health.svg?react";
-import IconRegenerationAmount from "@neverquest/icons/regeneration-amount.svg?react";
-import IconRegenerationRate from "@neverquest/icons/regeneration-rate.svg?react";
-import IconStamina from "@neverquest/icons/stamina.svg?react";
-import { attributeRank } from "@neverquest/state/attributes";
-import { ownedItem } from "@neverquest/state/inventory";
-import { infusionEffect } from "@neverquest/state/items";
-import type { Attribute } from "@neverquest/types/unions";
-import { formatNumber } from "@neverquest/utilities/formatters";
+import { IconDisplay } from "@neverquest/components/IconDisplay"
+import { ATTRIBUTES } from "@neverquest/data/attributes"
+import { attributeRank } from "@neverquest/state/attributes"
+import { formatNumber } from "@neverquest/utilities/formatters"
+
+import type { Attribute } from "@neverquest/types/unions"
 
 export function AttributeIncreaseDetails({ attribute }: { attribute: Attribute }) {
-  const attributeRankValue = useRecoilValue(attributeRank(attribute));
-  const infusionEffectEldritchCodex = useRecoilValue(infusionEffect("eldritch codex"));
-  const ownedItemEldritchCodex = useRecoilValue(ownedItem("eldritch codex"));
+	const attributeRankValue = useRecoilValue(attributeRank(attribute))
 
-  const { increment, powerBonus, rankBonus } = ATTRIBUTES[attribute];
-  const Icon = {
-    agility: IconDodge,
-    dexterity: IconCriticalChance,
-    endurance: IconStamina,
-    fortitude: IconRegenerationAmount,
-    perception: IconCriticalDamage,
-    speed: IconAttackRate,
-    strength: IconDamage,
-    vigor: IconRegenerationRate,
-    vitality: IconHealth,
-  }[attribute];
-  const operand = ["speed", "vigor"].includes(attribute) ? "-" : "+";
+	const { descriptionIcons, format, increment, incrementBonus } = ATTRIBUTES[attribute]
 
-  return (
-    <Stack gap={1}>
-      <IconDisplay Icon={Icon} iconProps={{ className: "small" }}>
-        <span>
-          {operand}
+	return (
+		<IconDisplay Icon={descriptionIcons[0]} iconProps={{ className: "small" }}>
+			<span>
+				{increment > 0 && "+"}
 
-          {increment < 1
-            ? formatNumber({ format: "percentage", value: increment })
-            : increment + (rankBonus ?? 0) * attributeRankValue}
-        </span>
-      </IconDisplay>
-
-      {ownedItemEldritchCodex !== undefined && (
-        <IconDisplay Icon={IconEldritchCodex} iconProps={{ className: "small" }}>
-          <span>
-            +
-            {formatNumber({
-              format: "percentage",
-              value: powerBonus * (1 + infusionEffectEldritchCodex),
-            })}
-          </span>
-        </IconDisplay>
-      )}
-    </Stack>
-  );
+				{formatNumber({
+					format,
+					value: incrementBonus === undefined
+						? increment
+						: Math.min(increment + incrementBonus.perRank * attributeRankValue, incrementBonus.maximum),
+				})}
+			</span>
+		</IconDisplay>
+	)
 }

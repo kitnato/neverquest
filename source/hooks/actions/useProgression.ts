@@ -1,25 +1,25 @@
-import { useRecoilCallback } from "recoil";
+import { useRecoilCallback } from "recoil"
 
-import { useGenerateMonster } from "@neverquest/hooks/actions/useGenerateMonster";
-import { progress, progressMaximum } from "@neverquest/state/encounter";
-import { getSnapshotGetter } from "@neverquest/utilities/getters";
+import { useGenerateMonster } from "@neverquest/hooks/actions/useGenerateMonster"
+import { progress, progressMaximum } from "@neverquest/state/encounter"
+import { getSnapshotGetter } from "@neverquest/utilities/getters"
 
 export function useProgression() {
-  const generateMonster = useGenerateMonster();
+	const generateMonster = useGenerateMonster()
 
-  return useRecoilCallback(
-    ({ set, snapshot }) =>
-      () => {
-        const get = getSnapshotGetter(snapshot);
+	return useRecoilCallback(
+		({ set, snapshot }) =>
+			() => {
+				const get = getSnapshotGetter(snapshot)
 
-        const nextProgress = get(progress) + 1;
+				const nextProgress = get(progress) + 1
 
-        set(progress, nextProgress);
+				set(progress, nextProgress)
 
-        if (nextProgress < get(progressMaximum)) {
-          generateMonster();
-        }
-      },
-    [generateMonster],
-  );
+				if (nextProgress < get(progressMaximum)) {
+					generateMonster()
+				}
+			},
+		[generateMonster],
+	)
 }

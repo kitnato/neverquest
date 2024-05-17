@@ -1,10 +1,10 @@
 @font-face {
-  font-family: AoboshiOne-Regular;
-  font-style: normal;
-  font-weight: normal;
-  src:
-    local("AoboshiOne-Regular"),
-    url("AoboshiOne-Regular.woff") format("woff");
+	font-family: AoboshiOne-Regular;
+	font-style: normal;
+	font-weight: normal;
+	src:
+		local("AoboshiOne-Regular"),
+		url("AoboshiOne-Regular.woff") format("woff");
 }
 
 $accordion-border-color: var(--bs-border-color-translucent);
@@ -13,21 +13,22 @@ $accordion-button-active-color: var(--bs-body-color);
 $code-color: #6c757d; // var(--bs-secondary);
 $component-active-bg: #212529; // var(--bs-gray-900);
 $container-max-widths: (
-  xl: 1184px,
-  xxl: 1344px,
-  xxxl: 1680px,
+	xl: 1184px,
+	xxl: 1344px,
+	xxxl: 1680px,
 );
 $focus-ring-color: none;
 $font-family-base: "AoboshiOne-Regular", serif;
 $grid-breakpoints: (
-  lg: 0,
-  xl: 1284px,
-  xxl: 1424px,
-  xxxl: 1776px,
+	lg: 0,
+	xl: 1284px,
+	xxl: 1424px,
+	xxxl: 1776px,
 );
 $nav-link-hover-color: var(--bs-gray-600);
 $nav-link-color: var(--bs-gray-900);
 $offcanvas-horizontal-width: 50%;
 $popover-max-width: 350px;
 $progress-height: 1.3rem;
+$toast-max-width: 400px;
 $tooltip-opacity: 1;

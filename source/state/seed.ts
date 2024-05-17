@@ -1,5 +1,5 @@
-import { createContext } from "react";
+import { createContext } from "react"
 
 export const SeedContext = createContext(() => {
-  console.error("SeedContext.Provider not found");
-});
+	console.error("SeedContext.Provider not found")
+})

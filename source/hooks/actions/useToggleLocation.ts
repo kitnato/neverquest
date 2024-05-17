@@ -1,41 +1,55 @@
-import { useRecoilCallback } from "recoil";
+import { useRecoilCallback } from "recoil"
 
-import { useCompleteStage } from "@neverquest/hooks/actions/useCompleteStage";
-import { useIncreaseStage } from "@neverquest/hooks/actions/useIncreaseStage";
-import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness";
-import { blacksmithOptions, fletcherOptions } from "@neverquest/state/caravan";
-import { isStageCompleted, location, stage, stageMaximum } from "@neverquest/state/encounter";
-import { isShowing } from "@neverquest/state/ui";
-import { getSnapshotGetter } from "@neverquest/utilities/getters";
+import { FINALITY_STAGE } from "@neverquest/data/monster"
+import { useAdvanceCaravan } from "@neverquest/hooks/actions/useAdvanceCaravan"
+import { useDefeatFinality } from "@neverquest/hooks/actions/useDefeatFinality"
+import { useIncreaseStage } from "@neverquest/hooks/actions/useIncreaseStage"
+import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness"
+import { blacksmithOptions, fletcherOptions } from "@neverquest/state/caravan"
+import { canAwaken, consciousness, hasAwoken, hasDefeatedFinality, isStageCompleted, location, stage, stageMaximum } from "@neverquest/state/encounter"
+import { isShowing } from "@neverquest/state/ui"
+import { getSnapshotGetter } from "@neverquest/utilities/getters"
 
 export function useToggleLocation() {
-  const completeStage = useCompleteStage();
-  const increaseStage = useIncreaseStage();
-  const resetWilderness = useResetWilderness();
+	const advanceCaravan = useAdvanceCaravan()
+	const defeatFinality = useDefeatFinality()
+	const increaseStage = useIncreaseStage()
+	const resetWilderness = useResetWilderness()
 
-  return useRecoilCallback(
-    ({ reset, set, snapshot }) =>
-      () => {
-        const get = getSnapshotGetter(snapshot);
+	return useRecoilCallback(
+		({ reset, set, snapshot }) =>
+			(isWarp?: boolean) => {
+				const get = getSnapshotGetter(snapshot)
 
-        if (get(location) === "wilderness") {
-          completeStage();
+				const stageValue = get(stage)
 
-          set(isShowing("location"), true);
-          set(location, "caravan");
+				if (get(location) === "wilderness") {
+					advanceCaravan()
+					defeatFinality()
 
-          reset(blacksmithOptions);
-          reset(fletcherOptions);
-        } else {
-          if (get(isStageCompleted) && get(stage) === get(stageMaximum)) {
-            increaseStage();
-          }
+					if (get(canAwaken) && !isWarp) {
+						set(consciousness, "vigilans")
+						set(hasAwoken, true)
+					}
 
-          resetWilderness();
+					set(isShowing("location"), true)
+					set(location, "caravan")
+				}
+				else {
+					if (get(isStageCompleted) && get(stage) === get(stageMaximum)) {
+						reset(blacksmithOptions)
+						reset(fletcherOptions)
 
-          set(location, "wilderness");
-        }
-      },
-    [completeStage, increaseStage, resetWilderness],
-  );
+						if (!(stageValue === FINALITY_STAGE["res cogitans"] && !get(hasDefeatedFinality("res cogitans")))) {
+							increaseStage()
+						}
+					}
+
+					resetWilderness()
+
+					set(location, "wilderness")
+				}
+			},
+		[advanceCaravan, increaseStage, resetWilderness],
+	)
 }

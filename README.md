@@ -1,14 +1,9 @@
 # neverquest
 
-_An irreverent UI-based incremental Souls-like._
+_An irreverent incremental action RPG._
 
-<p style="display: flex; gap: 16px;">
-  <img alt="neverquest screenshot 1" src="/public/screenshot-1.png" />
-  <img alt="neverquest screenshot 2" src="/public/screenshot-2.png" />
-  <img alt="neverquest screenshot 3" src="/public/screenshot-3.png" />
-</p>
-
-**For a full breakdown of gameplay, please consult the [manual](./source/data/manual.md).**
+> - View [gameplay manual](./source/data/manual.md).
+> - View [screenshots](#3-screenshots).
 
 ## Local set up
 
@@ -38,19 +33,21 @@ After [installation](#installation), but before committing any changes, do the f
 
 Now, every time changes are committed, all the relevant code, markup and style linters & formatters will apply any changes automatically.
 
-The linter config can be viewed in `.eslintrc.json`, `.stylelintrc.json` and `.prettierc.json`.
+The linter config can be viewed in `.eslintrc.json` and `.stylelintrc.json`.
 
-## Implementation
+## Attribution
 
-- All art assets (SVG icons & images) are sourced from the talented [authors](https://game-icons.net/about.html#authors) of [game-icons.net](https://game-icons.net) under the [CC BY 3.0](https://creativecommons.org/licenses/by/3.0) license.
-- Monster, item & location names provided by the [LOCRAN](https://github.com/kitnato/locran) system.
+- All art assets (SVG icons & images) are sourced from the talented [authors](https://game-icons.net/about.html#authors) of [game-icons.net](https://game-icons.net) under [CC BY 3.0](https://creativecommons.org/licenses/by/3.0).
+- Font is [Aoboshi-Regular](https://github.com/matsuba723/Aoboshi), licensed under [OFL-1.1](https://openfontlicense.org/open-font-license-official-text/).
+- Monster, item & location names provided by the [LOCRAN](https://github.com/kitnato/locran) system under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0).
 - Written in [TypeScript](https://www.typescriptlang.org) using [React](https://react.dev/).
 - UI framework is [Bootstrap](https://react-bootstrap.github.io).
 - State management library is [Recoil](https://recoiljs.org).
 - Animation library is [Animate.css](https://animate.style).
-- Runs on [Vite](https://vitejs.dev).
-- Code style & linting is provided by [eslint](https://eslint.org), [stylelint](https://stylelint.io) and [prettier](https://prettier.io), using [@kitnato/eslint-config-succinct](https://github.com/kitnato/eslint-config-succinct).
-- Automation is provided by [husky](https://typicode.github.io/husky) and [lint-staged](https://www.npmjs.com/package/lint-staged).
+- Build system is [Vite](https://vitejs.dev).
+- Code style & linting is provided by [ESLint](https://eslint.org), and [ESLint Stylistic](https://eslint.style) using [@kitnato/eslint-config-succinct](https://github.com/kitnato/eslint-config-succinct).
+- SCSS linting is provided by [Stylelint](https://stylelint.io) and [Stylelint Stylistic](https://github.com/stylelint-stylistic/stylelint-stylistic).
+- Automation is provided by [Husky](https://typicode.github.io/husky) and [lint-staged](https://www.npmjs.com/package/lint-staged).
 
 ## License
 
@@ -62,13 +59,18 @@ This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareA
 
 ### 1. Gameplay objectives
 
-- Player always has something to do
-- No long waits, cliffs or walls
-- Can be played in the background
+- There is always has something to do
+- No arbitrary waiting time, cliffs or walls
+- Engaging active gameplay by default
+- No need for "skip the grind" mechanics
+- Idle gameplay can be unlocked with in-game mechanics
+- Incremental progress can always be made
+- Little RNG, clear and accumulable paths to upgrades
 - No excessive or repetitive clicking
 - Decisions are frequent and they have immediate gameplay impact
-- High character build variety
-- Manage an economy of resources and character builds with trade-offs
+- High character build variety with a long tail of min-maxing
+- Always options to change strategy and try new approaches
+- Difficult, but always fair
 
 ### 2. Warren Spector's 6+2+1 [questions](https://www.gamedeveloper.com/design/warren-spector-traces-i-deus-ex-i-s-development-back-to-a-game-of-d-d)
 
@@ -99,6 +101,18 @@ This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareA
    - Crank - user-interaction-driven adventure/mystery game with gradually expanding storyline and gameplay.
    - NGU Idle - irreverent UI-based fantasy incremental idle game.
 1. What's the one new thing?
-   - Feels like text-based Diablo/Dark Souls hybrid, but it's a web app.
+   - Feels like text-based Diablo/Dark Souls hybrid, but it's funny and a web app.
 1. Do you have something to say?
    - Browser games with only text and a GUI can be just as engaging and can have similar gameplay depth to traditional video games without relying solely on simple deterministic incremental progress.
+
+### 3. Screenshots
+
+![Screenshot 1](./public/nq-screenshot-1.png "neverquest screenshot start")
+
+![Screenshot 2](./public/nq-screenshot-2.png "neverquest screenshot caravan")
+
+![Screenshot 3](./public/nq-screenshot-3.png "neverquest screenshot ranged")
+
+![Screenshot 4](./public/nq-screenshot-4.png "neverquest screenshot melee")
+
+![Screenshot 5](./public/nq-screenshot-5.png "neverquest screenshot quests")

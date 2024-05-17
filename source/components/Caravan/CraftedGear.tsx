@@ -1,64 +1,60 @@
-import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
+import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap"
 
-import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay";
-import { LABEL_OVER_ENCUMBERED, POPOVER_TRIGGER } from "@neverquest/data/general";
-import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem";
-import { useCanFit } from "@neverquest/hooks/actions/useCanFit";
-import { useToggleEquipGear } from "@neverquest/hooks/actions/useToggleEquipGear";
-import type { GearItem } from "@neverquest/types";
+import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay"
+import { LABEL_OVER_ENCUMBERED, POPOVER_TRIGGER } from "@neverquest/data/general"
+import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem"
+import { useCanFit } from "@neverquest/hooks/actions/useCanFit"
+import { useToggleEquipItem } from "@neverquest/hooks/actions/useToggleEquipItem"
+import { getAnimationClass } from "@neverquest/utilities/getters"
 
-export function CraftedGear({
-  gearItem,
-  onTransfer,
-}: {
-  gearItem: GearItem;
-  onTransfer: () => void;
-}) {
-  const { weight } = gearItem;
+import type { GearItem } from "@neverquest/types"
 
-  const acquireItem = useAcquireItem();
-  const canFit = useCanFit();
-  const toggleEquipGear = useToggleEquipGear();
+export function CraftedGear({ item, onTransfer }: { item: GearItem, onTransfer: () => void }) {
+	const { weight } = item
 
-  const canFitItem = canFit(weight);
+	const acquireItem = useAcquireItem()
+	const canFit = useCanFit()
+	const toggleEquipItem = useToggleEquipItem()
 
-  return (
-    <Stack gap={3}>
-      <div className="mx-auto">
-        <ItemDisplay item={gearItem} />
-      </div>
+	const canFitItem = canFit(weight)
 
-      <OverlayTrigger
-        overlay={
-          <Tooltip>
-            <span>{LABEL_OVER_ENCUMBERED}</span>
-          </Tooltip>
-        }
-        trigger={canFitItem ? [] : POPOVER_TRIGGER}
-      >
-        <div>
-          <Button
-            className="w-100"
-            disabled={!canFitItem}
-            onClick={() => {
-              const acquisitionStatus = acquireItem(gearItem);
+	return (
+		<Stack gap={3}>
+			<div className={`mx-auto ${getAnimationClass({ animation: "pulse" })}`}>
+				<ItemDisplay item={item} />
+			</div>
 
-              if (acquisitionStatus === "failure") {
-                return;
-              }
+			<OverlayTrigger
+				overlay={(
+					<Tooltip>
+						<span>{LABEL_OVER_ENCUMBERED}</span>
+					</Tooltip>
+				)}
+				trigger={canFitItem ? [] : POPOVER_TRIGGER}
+			>
+				<div>
+					<Button
+						className="w-100"
+						disabled={!canFitItem}
+						onClick={() => {
+							const acquisitionStatus = acquireItem(item)
 
-              onTransfer();
+							if (acquisitionStatus === "failure") {
+								return
+							}
 
-              if (acquisitionStatus === "equip") {
-                toggleEquipGear(gearItem);
-              }
-            }}
-            variant="outline-dark"
-          >
-            Acquire
-          </Button>
-        </div>
-      </OverlayTrigger>
-    </Stack>
-  );
+							onTransfer()
+
+							if (acquisitionStatus === "equip") {
+								toggleEquipItem({ item })
+							}
+						}}
+						variant="outline-dark"
+					>
+						<span>Acquire</span>
+					</Button>
+				</div>
+			</OverlayTrigger>
+		</Stack>
+	)
 }

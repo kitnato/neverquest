@@ -1,88 +1,80 @@
-import { CLASS_ANIMATED, CLASS_ANIMATE_PREFIX } from "@neverquest/data/general";
-import { isStackableItem } from "@neverquest/types/type-guards";
-import type { Animation, AnimationSpeed } from "@neverquest/types/ui";
-import type { StateKey } from "@neverquest/types/unions";
+import { CLASS_ANIMATED, CLASS_ANIMATE_PREFIX } from "@neverquest/data/general"
+import { isStackableItem } from "@neverquest/types/type-guards"
+
+import type { Animation, AnimationSpeed } from "@neverquest/types/ui"
+import type { StateKey } from "@neverquest/types/unions"
 
 export function animateElement({
-  animation,
-  element,
-  onAnimationEnd,
-  speed,
+	animation,
+	element,
+	onAnimationEnd,
+	speed,
 }: {
-  animation: Animation;
-  element: HTMLElement;
-  onAnimationEnd?: () => void;
-  speed?: AnimationSpeed;
+	animation: Animation
+	element: HTMLElement | null
+	onAnimationEnd?: () => void
+	speed?: AnimationSpeed
 }) {
-  const { classList } = element;
-  const animationName = `${CLASS_ANIMATE_PREFIX}${animation}`;
-  const animationSpeedClass = speed ? `${CLASS_ANIMATE_PREFIX}${speed}` : undefined;
+	if (element === null) {
+		return
+	}
 
-  classList.add(CLASS_ANIMATED, animationName);
+	const { classList } = element
+	const animationName = `${CLASS_ANIMATE_PREFIX}${animation}`
+	const animationSpeedClass = speed ? `${CLASS_ANIMATE_PREFIX}${speed}` : undefined
 
-  if (animationSpeedClass !== undefined) {
-    classList.add(animationSpeedClass);
-  }
+	classList.add(CLASS_ANIMATED, animationName)
 
-  element.addEventListener(
-    "animationend",
-    (event: AnimationEvent) => {
-      event.stopPropagation();
+	if (animationSpeedClass !== undefined) {
+		classList.add(animationSpeedClass)
+	}
 
-      classList.remove(CLASS_ANIMATED, animationName);
+	element.addEventListener(
+		"animationend",
+		(event: AnimationEvent) => {
+			event.stopPropagation()
 
-      if (animationSpeedClass !== undefined) {
-        classList.remove(animationSpeedClass);
-      }
+			classList.remove(CLASS_ANIMATED, animationName)
 
-      if (onAnimationEnd !== undefined) {
-        onAnimationEnd();
-      }
-    },
-    { once: true },
-  );
-}
+			if (animationSpeedClass !== undefined) {
+				classList.remove(animationSpeedClass)
+			}
 
-export function isLocalStorageAvailable() {
-  const storage = window.localStorage;
-
-  try {
-    const test = "NEVERQUEST_LOCAL_STORAGE_TEST";
-
-    storage.setItem(test, test);
-    storage.removeItem(test);
-
-    return true;
-  } catch {
-    return false;
-  }
+			if (onAnimationEnd !== undefined) {
+				onAnimationEnd()
+			}
+		},
+		{ once: true },
+	)
 }
 
 export function stackItems<ItemType>(items: ItemType[]) {
-  const stackedItems: { amount: number; item: ItemType }[] = [];
+	const stackedItems: { amount: number, item: ItemType }[] = []
 
-  for (const item of items) {
-    if (isStackableItem(item)) {
-      const existingStackIndex = stackedItems.findIndex(
-        ({ item: stackedItem }) => isStackableItem(stackedItem) && stackedItem.name === item.name,
-      );
+	for (const item of items) {
+		if (isStackableItem(item)) {
+			const existingStackIndex = stackedItems.findIndex(
+				({ item: stackedItem }) => isStackableItem(stackedItem) && stackedItem.name === item.name,
+			)
 
-      if (existingStackIndex === -1) {
-        stackedItems.push({ amount: 1, item });
-      } else {
-        stackedItems.splice(existingStackIndex, 1, {
-          amount: (stackedItems[existingStackIndex] ?? { amount: 1 }).amount + 1,
-          item,
-        });
-      }
-    } else {
-      stackedItems.push({ amount: 1, item });
-    }
-  }
+			if (existingStackIndex === -1) {
+				stackedItems.push({ amount: 1, item })
+			}
+			else {
+				stackedItems.splice(existingStackIndex, 1, {
+					amount: (stackedItems[existingStackIndex] ?? { amount: 1 }).amount + 1,
+					item,
+				})
+			}
+		}
+		else {
+			stackedItems.push({ amount: 1, item })
+		}
+	}
 
-  return stackedItems;
+	return stackedItems
 }
 
 export function withStateKey<State>(key: StateKey, assign: (key: StateKey) => State) {
-  return assign(key);
+	return assign(key)
 }

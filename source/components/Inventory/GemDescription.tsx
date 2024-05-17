@@ -1,35 +1,100 @@
-import { Stack } from "react-bootstrap";
-import { IconImage } from "@neverquest/components/IconImage";
-import { ELEMENTALS, GEMS } from "@neverquest/data/items";
-import type { Gem } from "@neverquest/types/unions";
+import { Stack } from "react-bootstrap"
+
+import { DescriptionDisplay } from "@neverquest/components/DescriptionDisplay"
+import { IconImage } from "@neverquest/components/IconImage"
+import { LABEL_SEPARATOR } from "@neverquest/data/general"
+import { ELEMENTALS, GEMS } from "@neverquest/data/items"
+import { AILMENT_DESCRIPTION } from "@neverquest/data/monster"
+import IconArmor from "@neverquest/icons/armor.svg?react"
+import IconExtentHigh from "@neverquest/icons/extent-high.svg?react"
+import IconExtentLow from "@neverquest/icons/extent-low.svg?react"
+import IconExtentMedium from "@neverquest/icons/extent-medium.svg?react"
+import IconGearLevel from "@neverquest/icons/gear-level.svg?react"
+import IconGear from "@neverquest/icons/gear.svg?react"
+import IconOneHanded from "@neverquest/icons/one-handed.svg?react"
+import IconShield from "@neverquest/icons/shield.svg?react"
+import IconThorns from "@neverquest/icons/thorns.svg?react"
+import IconWeaponDamage from "@neverquest/icons/weapon-damage.svg?react"
+
+import type { SVGIcon } from "@neverquest/types/components"
+import type { Extent, Gem } from "@neverquest/types/unions"
+
+const IconExtent: Record<Extent, SVGIcon> = {
+	high: IconExtentHigh,
+	low: IconExtentLow,
+	medium: IconExtentMedium,
+}
 
 export function GemDescription({ gem }: { gem: Gem }) {
-  const { elemental } = GEMS[gem];
-  const { color, damageModification, Icon } = ELEMENTALS[elemental];
+	const { elemental } = GEMS[gem]
+	const { ailment, color, extent, Icon } = ELEMENTALS[elemental]
+	const { description, descriptionIcons } = AILMENT_DESCRIPTION[ailment]
 
-  return (
-    <Stack gap={1}>
-      <div>
-        <span>Adds elemental&nbsp;</span>
+	return (
+		<Stack gap={3}>
+			<Stack>
+				<Stack className="justify-content-center" direction="horizontal" gap={1}>
+					<span>Sockets into</span>
 
-        <IconImage className="small" Icon={Icon} />
+					<IconImage className="small" Icon={IconGear} />
 
-        <span className={color}>&nbsp;{elemental}</span>
+					<span>gear.</span>
+				</Stack>
 
-        <span>&nbsp;effect to gear.</span>
-      </div>
+				<Stack className="justify-content-center" direction="horizontal" gap={1}>
+					<span>Adds an elemental</span>
 
-      <div>
-        <span>In weapons/armor, provides a</span>
+					<IconImage className="small" Icon={Icon} />
 
-        <span className="fst-italic">&nbsp;{damageModification}&nbsp;</span>
+					<span className={color}>
+						{elemental}
+					</span>
 
-        <span>damage/thorns bonus.</span>
-      </div>
+					<span>
+						effect:
+					</span>
+				</Stack>
 
-      <div>
-        <span>{`In shields, enhances the elemental effect for all socketed ${gem} gems.`}</span>
-      </div>
-    </Stack>
-  );
+				<DescriptionDisplay description={`Monster ${description.toLowerCase()}`} descriptionIcons={descriptionIcons} />
+			</Stack>
+
+			<Stack gap={1}>
+				<Stack className="justify-content-center" direction="horizontal" gap={1}>
+					<IconImage className="small" Icon={IconOneHanded} />
+
+					{LABEL_SEPARATOR}
+
+					<IconImage className="small" Icon={IconExtent[extent]} />
+
+					<IconImage className="small" Icon={IconWeaponDamage} />
+
+					<span>weapon damage</span>
+				</Stack>
+
+				<Stack className="justify-content-center" direction="horizontal" gap={1}>
+					<IconImage className="small" Icon={IconArmor} />
+
+					{LABEL_SEPARATOR}
+
+					<IconImage className="small" Icon={IconExtent[extent]} />
+
+					<IconImage className="small" Icon={IconThorns} />
+
+					<span>thorns based on</span>
+
+					<IconImage className="small" Icon={IconGearLevel} />
+
+					<span>gear level</span>
+				</Stack>
+
+				<Stack className="justify-content-center" direction="horizontal" gap={1}>
+					<IconImage className="small" Icon={IconShield} />
+
+					{LABEL_SEPARATOR}
+
+					<span>bonus to damage, thorns and duration</span>
+				</Stack>
+			</Stack>
+		</Stack>
+	)
 }

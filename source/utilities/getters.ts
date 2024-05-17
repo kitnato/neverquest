@@ -1,454 +1,544 @@
-import type {
-  AffixStructure,
-  ArmorClass,
-  ShieldClass,
-  WeaponClass,
-} from "@kitnato/locran/build/types";
-import { nanoid } from "nanoid";
-import type { RecoilValue, Snapshot } from "recoil";
+import { nanoid } from "nanoid"
 
-import { ATTRIBUTE_COST_BASE } from "@neverquest/data/attributes";
-import { AFFIX_STRUCTURE_WEIGHTS, PERKS } from "@neverquest/data/encounter";
+import { ATTRIBUTE_COST_BASE } from "@neverquest/data/attributes"
+import { AFFIX_STRUCTURE_WEIGHTS } from "@neverquest/data/encounter"
 import {
-  type ARMOR_NONE,
-  ARMOR_SPECIFICATIONS,
-  SHIELD_ELEMENTAL_EFFECTS_BASE,
-  type SHIELD_NONE,
-  SHIELD_SPECIFICATIONS,
-  WEAPON_BASE,
-  WEAPON_MODIFIER,
-  type WEAPON_NONE,
-  WEAPON_SPECIFICATIONS,
-} from "@neverquest/data/gear";
+	type ARMOR_NONE,
+	ARMOR_SPECIFICATIONS,
+	SHIELD_ELEMENTAL_EFFECTS_BASE,
+	type SHIELD_NONE,
+	SHIELD_SPECIFICATIONS,
+	WEAPON_BASE,
+	WEAPON_MODIFIER,
+	type WEAPON_NONE,
+	WEAPON_SPECIFICATIONS,
+} from "@neverquest/data/gear"
 import {
-  CLASS_ANIMATED,
-  CLASS_ANIMATE_PREFIX,
-  LEVELLING_CUTOFF,
-  MILLISECONDS_IN_SECOND,
-  RETIREMENT_STAGE,
-  ROMAN_NUMERALS,
-  ROMAN_NUMERAL_MAXIMUM,
-} from "@neverquest/data/general";
+	CLASS_ANIMATED,
+	CLASS_ANIMATE_PREFIX,
+	GENERIC_MINIMUM,
+	LEVELLING_END,
+	MILLISECONDS_IN_SECOND,
+	ROMAN_NUMERALS,
+	ROMAN_NUMERAL_MAXIMUM,
+} from "@neverquest/data/general"
 import {
-  ELEMENTALS,
-  GEMS,
-  GEMS_MAXIMUM,
-  GEM_BASE,
-  GEM_ENHANCEMENT_RANGE,
-  GEM_FITTING_COST_RANGE,
-} from "@neverquest/data/items";
-import { QUESTS } from "@neverquest/data/quests";
-import IconHand from "@neverquest/icons/hand.svg?react";
-import IconOneHanded from "@neverquest/icons/one-handed.svg?react";
-import IconRanged from "@neverquest/icons/ranged.svg?react";
-import IconTwoHanded from "@neverquest/icons/two-handed.svg?react";
+	CONSUMABLES,
+	ELEMENTALS,
+	GEMS,
+	GEMS_MAXIMUM,
+	GEM_BASE,
+	GEM_ENHANCEMENT_RANGE,
+	GEM_FITTING_COST_RANGE,
+	INFUSABLES,
+	RELICS,
+} from "@neverquest/data/items"
+import { QUESTS, QUEST_TYPES_BY_CLASS } from "@neverquest/data/quests"
+import { PERKS } from "@neverquest/data/retirement"
+import IconArmorNone from "@neverquest/icons/armor-none.svg?react"
+import IconArmor from "@neverquest/icons/armor.svg?react"
+import IconOneHanded from "@neverquest/icons/one-handed.svg?react"
+import IconRanged from "@neverquest/icons/ranged.svg?react"
+import IconShieldNone from "@neverquest/icons/shield-none.svg?react"
+import IconShield from "@neverquest/icons/shield.svg?react"
+import IconTwoHanded from "@neverquest/icons/two-handed.svg?react"
+import IconUnknown from "@neverquest/icons/unknown.svg?react"
+import IconWeaponNone from "@neverquest/icons/weapon-none.svg?react"
+import {
+	isArmor,
+	isConquest,
+	isConsumableItem,
+	isGearItem,
+	isGemItem,
+	isInfusableItem,
+	isMelee,
+	isRelicItem,
+	isRoutine,
+	isShield,
+	isUnarmed,
+	isUnarmored,
+	isUnshielded,
+	isWeapon,
+} from "@neverquest/types/type-guards"
+import { formatNumber } from "@neverquest/utilities/formatters"
+import { stackItems } from "@neverquest/utilities/helpers"
+
 import type {
-  Armor,
-  GearItem,
-  GearItemUnequipped,
-  GemItem,
-  GeneratorRange,
-  InventoryItem,
-  QuestData,
-  Shield,
-  Weapon,
-} from "@neverquest/types";
-import {
-  isArmor,
-  isConquest,
-  isGearItem,
-  isMelee,
-  isRoutine,
-  isUnarmed,
-  isWeapon,
-} from "@neverquest/types/type-guards";
-import type { Animation, AnimationSpeed } from "@neverquest/types/ui";
-import type { Elemental, Grip, Perk, Quest } from "@neverquest/types/unions";
-import { formatNumber } from "@neverquest/utilities/formatters";
-import { stackItems } from "@neverquest/utilities/helpers";
+	AffixStructure,
+	ArmorClass,
+	ShieldClass,
+	WeaponClass,
+} from "@kitnato/locran/build/types"
+import type {
+	Armor,
+	GearItem,
+	GearItemUnequipped,
+	GemItem,
+	GeneratorRange,
+	IncrementBonus,
+	InventoryItem,
+	QuestData,
+	Shield,
+	Weapon,
+} from "@neverquest/types"
+import type { Animation, AnimationSpeed } from "@neverquest/types/ui"
+import type { Elemental, Grip, Perk, Quest, QuestClass } from "@neverquest/types/unions"
+import type { RecoilValue, Snapshot } from "recoil"
 
 export function getAffixStructure(): AffixStructure {
-  let chance = Math.random();
-  const result = AFFIX_STRUCTURE_WEIGHTS.find(([_, probability]) => (chance -= probability) <= 0);
+	let chance = Math.random()
+	const result = AFFIX_STRUCTURE_WEIGHTS.find(([_, probability]) => (chance -= probability) <= 0)
 
-  return result === undefined ? "noAffix" : result[0];
+	return result === undefined ? "noAffix" : result[0]
 }
 
 export function getAmountPerTick({
-  amount,
-  duration,
-  ticks,
+	amount,
+	duration,
+	ticks,
 }: {
-  amount: number;
-  duration: number;
-  ticks: number;
+	amount: number
+	duration: number
+	ticks: number
 }) {
-  return Math.ceil((amount / duration) * (duration / ticks));
+	return (amount / duration) * (duration / ticks)
 }
 
 export function getAnimationClass({
-  animation,
-  isInfinite,
-  speed,
+	animation,
+	isInfinite,
+	speed,
 }: {
-  animation: Animation;
-  isInfinite?: boolean;
-  speed?: AnimationSpeed;
+	animation: Animation
+	isInfinite?: boolean
+	speed?: AnimationSpeed
 }) {
-  return `${CLASS_ANIMATED} ${CLASS_ANIMATE_PREFIX}${animation}${
-    isInfinite ? ` ${CLASS_ANIMATE_PREFIX}infinite` : ""
-  }${speed ? ` ${CLASS_ANIMATE_PREFIX}${speed}` : ""}`;
+	return `${CLASS_ANIMATED} ${CLASS_ANIMATE_PREFIX}${animation}${isInfinite
+		? ` ${CLASS_ANIMATE_PREFIX}infinite`
+		: ""}${speed ? ` ${CLASS_ANIMATE_PREFIX}${speed}` : ""}`
 }
 
-export function getArmorRanges({ factor, gearClass }: { factor: number; gearClass: ArmorClass }) {
-  const { burden, deflection, protection, weight } = ARMOR_SPECIFICATIONS[gearClass];
+export function getArmorRanges({ factor, gearClass }: { factor: number, gearClass: ArmorClass }) {
+	const { burden, deflectionChance, protection, weight } = ARMOR_SPECIFICATIONS[gearClass]
 
-  return {
-    burden: getRange({ factor, isRounded: true, ranges: burden }),
-    deflection: deflection === undefined ? undefined : getRange({ factor, ranges: deflection }),
-    protection: getRange({ factor, isRounded: true, ranges: protection }),
-    weight: getRange({ factor, isRounded: true, ranges: weight }),
-  };
+	return {
+		burden: getRange({ factor, isRounded: true, ranges: burden }),
+		deflectionChance: getRange({ factor, ranges: deflectionChance }),
+		protection: getRange({ factor, isRounded: true, ranges: protection }),
+		weight: getRange({ factor, isRounded: true, ranges: weight }),
+	}
 }
 
 export function getAttributePointCost(powerLevel: number) {
-  return getTriangular(ATTRIBUTE_COST_BASE + powerLevel);
+	return getTriangular(ATTRIBUTE_COST_BASE + powerLevel)
 }
 
 export function getAttributePoints({
-  essence,
-  powerLevel,
+	essence,
+	powerLevel,
 }: {
-  essence: number;
-  powerLevel: number;
+	essence: number
+	powerLevel: number
 }) {
-  let points = 0;
-  let requiredEssence = getAttributePointCost(powerLevel);
+	let points = 0
+	let requiredEssence = getAttributePointCost(powerLevel)
 
-  while (requiredEssence <= essence) {
-    points += 1;
-    requiredEssence += getAttributePointCost(powerLevel + points);
-  }
+	while (requiredEssence <= essence) {
+		points += GENERIC_MINIMUM
+		requiredEssence += getAttributePointCost(powerLevel + points)
+	}
 
-  return points;
+	return points
 }
 
 export function getComputedStatistic({
-  base,
-  bonus = 0,
-  increment,
-  rank,
+	base,
+	bonus: { maximum, perRank } = { maximum: Number.POSITIVE_INFINITY, perRank: 0 },
+	increment,
+	rank,
 }: {
-  base: number;
-  bonus?: number;
-  increment: number;
-  rank: number;
+	base: number
+	bonus?: IncrementBonus
+	increment: number
+	rank: number
 }) {
-  if (bonus === 0) {
-    return base + increment * rank;
-  }
+	const boost = increment * rank
 
-  return (
-    Array.from({ length: rank })
-      .map((_, index) => index * bonus)
-      .reduce((sum, bonus) => sum + bonus, base) +
-    increment * rank
-  );
+	if (perRank === 0) {
+		return base + boost
+	}
+
+	return (
+		Array.from({ length: rank })
+			.map((_, index) => Math.min(index * perRank, maximum))
+			.reduce((sum, bonus) => sum + bonus, base) + boost
+	)
 }
 
 export function getDamagePerRate({
-  damage,
-  damageModifier = 0,
-  damageModifierChance = 0,
-  rate,
-  rateModifier = 0,
+	damage,
+	damageModifier = 0,
+	damageModifierChance = 0,
+	rate,
+	rateModifier = 0,
 }: {
-  damage: number;
-  damageModifier?: number;
-  damageModifierChance?: number;
-  rate: number;
-  rateModifier?: number;
+	damage: number
+	damageModifier?: number
+	damageModifierChance?: number
+	rate: number
+	rateModifier?: number
 }) {
-  return (
-    (damage * (1 - damageModifierChance) + damage * damageModifierChance * damageModifier) /
-    (rate / (MILLISECONDS_IN_SECOND * (1 - rateModifier)))
-  );
+	return (
+		(damage * (1 - damageModifierChance) + damage * damageModifierChance * damageModifier) / (rate / (MILLISECONDS_IN_SECOND * (1 - rateModifier)))
+	)
 }
 
-export function getGearElementalEffects({
-  gear,
-  gems,
+export function getElementalEffects({
+	gear,
+	gems,
 }: {
-  gear: Armor | Weapon | typeof ARMOR_NONE | typeof WEAPON_NONE;
-  gems: GemItem[];
-}): Record<Elemental, { damage: number; duration: number }>;
-export function getGearElementalEffects({
-  gear,
-  gems,
+	gear: Armor | Weapon | typeof ARMOR_NONE | typeof WEAPON_NONE
+	gems: GemItem[]
+}): Record<Elemental, { damage: number, duration: number }>
+export function getElementalEffects({
+	gear,
+	gems,
 }: {
-  gear: Shield | typeof SHIELD_NONE;
-  gems: GemItem[];
-}): Record<Elemental, number>;
-export function getGearElementalEffects({
-  gear,
-  gems,
+	gear: Shield | typeof SHIELD_NONE
+	gems: GemItem[]
+}): Record<Elemental, number>
+export function getElementalEffects({
+	gear,
+	gems,
 }: {
-  gear: GearItem | GearItemUnequipped;
-  gems: GemItem[];
-}): Record<Elemental, { damage: number; duration: number }> | Record<Elemental, number>;
-export function getGearElementalEffects({
-  gear,
-  gems,
+	gear: GearItem | GearItemUnequipped
+	gems: GemItem[]
+}): Record<Elemental, { damage: number, duration: number }> | Record<Elemental, number>
+export function getElementalEffects({
+	gear,
+	gems,
 }: {
-  gear: GearItem | GearItemUnequipped;
-  gems: GemItem[];
+	gear: GearItem | GearItemUnequipped
+	gems: GemItem[]
 }) {
-  if (isArmor(gear) || isWeapon(gear)) {
-    const effects = {
-      fire: { damage: 0, duration: 0 },
-      ice: { damage: 0, duration: 0 },
-      lightning: { damage: 0, duration: 0 },
-    };
-    const effector = isArmor(gear) ? gear.protection : gear.damage;
+	const armorEffect = isArmor(gear) || isUnarmored(gear)
 
-    for (const { amount, item } of stackItems(gems)) {
-      const { elemental } = GEMS[item.name];
-      const { damage, duration } = ELEMENTALS[elemental];
+	if (armorEffect || isUnarmed(gear) || isWeapon(gear)) {
+		const effects = {
+			fire: { damage: 0, duration: 0 },
+			ice: { damage: 0, duration: 0 },
+			lightning: { damage: 0, duration: 0 },
+		}
 
-      effects[elemental] = {
-        damage: Math.ceil(
-          effector * getFromRange({ factor: (amount - 1) / (GEMS_MAXIMUM - 1), ...damage }),
-        ),
-        duration: Math.round(
-          getFromRange({
-            factor: (amount - 1) / (GEMS_MAXIMUM - 1),
-            ...duration,
-          }),
-        ),
-      };
-    }
+		for (const { amount, item } of stackItems(gems)) {
+			const { elemental } = GEMS[item.name]
+			const { damageArmor, damageWeapon, duration } = ELEMENTALS[elemental]
 
-    return effects;
-  }
+			effects[elemental] = {
+				damage: Math.max(
+					Math.round(
+						(armorEffect ? gear.level : gear.damage) * getFromRange({ factor: (amount - 1) / (GEMS_MAXIMUM - 1), ...armorEffect ? damageArmor : damageWeapon }),
+					),
+					GENERIC_MINIMUM,
+				),
+				duration: Math.round(
+					getFromRange({
+						factor: (amount - 1) / (GEMS_MAXIMUM - 1),
+						...duration,
+					}),
+				),
+			}
+		}
 
-  const effects = { ...SHIELD_ELEMENTAL_EFFECTS_BASE };
+		return effects
+	}
 
-  for (const { amount, item } of stackItems(gems)) {
-    const { elemental } = GEMS[item.name];
+	const effects = { ...SHIELD_ELEMENTAL_EFFECTS_BASE }
 
-    effects[elemental] = getFromRange({
-      factor: (amount - 1) / (GEMS_MAXIMUM - 1),
-      ...GEM_ENHANCEMENT_RANGE,
-    });
-  }
+	for (const { amount, item } of stackItems(gems)) {
+		const { elemental } = GEMS[item.name]
 
-  return effects;
+		effects[elemental] = getFromRange({
+			factor: (amount - 1) / (GEMS_MAXIMUM - 1),
+			...GEM_ENHANCEMENT_RANGE,
+		})
+	}
+
+	return effects
+}
+
+export function getGearIcon(gearItem: GearItem | GearItemUnequipped) {
+	if (isArmor(gearItem)) {
+		return IconArmor
+	}
+
+	if (isShield(gearItem)) {
+		return IconShield
+	}
+
+	if (isUnarmed(gearItem)) {
+		return IconWeaponNone
+	}
+
+	if (isUnarmored(gearItem)) {
+		return IconArmorNone
+	}
+
+	if (isUnshielded(gearItem)) {
+		return IconShieldNone
+	}
+
+	if (isWeapon(gearItem)) {
+		return isMelee(gearItem)
+			? gearItem.grip === "one-handed"
+				? IconOneHanded
+				: IconTwoHanded
+			: IconRanged
+	}
+
+	return IconUnknown
 }
 
 export function getFromRange({ factor, maximum, minimum }: GeneratorRange & { factor?: number }) {
-  return (factor ?? Math.random()) * (maximum - minimum) + minimum;
+	return (factor ?? Math.random()) * (maximum - minimum) + minimum
 }
 
 export function getGemFittingCost(fitted: number) {
-  return Math.round(
-    getFromRange({ factor: fitted / (GEMS_MAXIMUM - 1), ...GEM_FITTING_COST_RANGE }),
-  );
+	return Math.round(
+		getFromRange({ factor: fitted / (GEMS_MAXIMUM - 1), ...GEM_FITTING_COST_RANGE }),
+	)
 }
 
-export function getLinearMapping({ offset, stage }: { offset: number; stage: number }) {
-  return ((stage - offset) * (LEVELLING_CUTOFF - 1)) / (LEVELLING_CUTOFF - offset - 1) + 1;
+export function getItemIcon(item: InventoryItem) {
+	if (isConsumableItem(item)) {
+		return CONSUMABLES[item.name].Icon
+	}
+
+	if (isGearItem(item)) {
+		return getGearIcon(item)
+	}
+
+	if (isGemItem(item)) {
+		return GEMS[item.name].Icon
+	}
+
+	if (isInfusableItem(item)) {
+		return INFUSABLES[item.name].Icon
+	}
+
+	if (isRelicItem(item)) {
+		return RELICS[item.name].Icon
+	}
+
+	return IconUnknown
+}
+
+export function getLinearMapping({ offset, stage }: { offset: number, stage: number }) {
+	return stage < offset
+		? 0
+		: ((stage - offset) * (LEVELLING_END - 1)) / (LEVELLING_END - offset - 1) + 1
 }
 
 export function getMeleeRanges({
-  factor,
-  gearClass,
-  grip,
+	factor,
+	gearClass,
+	grip,
 }: {
-  factor: number;
-  gearClass: WeaponClass;
-  grip: Grip;
+	factor: number
+	gearClass: WeaponClass
+	grip: Grip
 }) {
-  const {
-    ability: abilityModifier,
-    burden: burdenModifier,
-    damage: damageModifier,
-    rate: rateModifier,
-    weight: weightModifier,
-  } = WEAPON_MODIFIER[grip];
-  const { burden, damage, rate, weight } = WEAPON_BASE;
-  const { abilityChance } = WEAPON_SPECIFICATIONS[gearClass];
+	const {
+		ability: abilityModifier,
+		burden: burdenModifier,
+		damage: damageModifier,
+		rate: rateModifier,
+		weight: weightModifier,
+	} = WEAPON_MODIFIER[grip]
+	const { burden, damage, rate, weight } = WEAPON_BASE
+	const { abilityChance } = WEAPON_SPECIFICATIONS[gearClass]
 
-  return {
-    abilityChance: getRange({ factor, modifier: abilityModifier, ranges: abilityChance }),
-    burden: getRange({ factor, isRounded: true, modifier: burdenModifier, ranges: burden }),
-    damage: getRange({ factor, isRounded: true, modifier: damageModifier, ranges: damage }),
-    rate: getRange({ factor, isRounded: true, modifier: rateModifier, ranges: rate }),
-    weight: getRange({ factor, isRounded: true, modifier: weightModifier, ranges: weight }),
-  };
+	return {
+		abilityChance: getRange({ factor, modifier: abilityModifier, ranges: abilityChance }),
+		burden: getRange({ factor, isRounded: true, modifier: burdenModifier, ranges: burden }),
+		damage: getRange({ factor, isRounded: true, modifier: damageModifier, ranges: damage }),
+		rate: getRange({ factor, isRounded: true, modifier: rateModifier, ranges: rate }),
+		weight: getRange({ factor, isRounded: true, modifier: weightModifier, ranges: weight }),
+	}
 }
 
 export function getQuestsData(quest: Quest): QuestData[] {
-  const { description, hidden, progression, title } = QUESTS[quest];
+	const { description, hidden, progression, title } = QUESTS[quest]
 
-  return progression.map((progress, index) => ({
-    description: description.replace("@", formatNumber({ value: progress })),
-    hidden,
-    progressionIndex: index,
-    progressionMaximum: progress,
-    questClass: isConquest(quest) ? "conquest" : isRoutine(quest) ? "routine" : "triumph",
-    title: `${title}${progression.length > 1 ? ` ${getRomanNumeral(index + 1)}` : ""}`,
-  }));
+	return progression.map((progress, index) => ({
+		description: description.replace("@", formatNumber({ value: progress })),
+		hidden,
+		progressionIndex: index,
+		progressionMaximum: progress,
+		questClass: isConquest(quest) ? "conquest" : isRoutine(quest) ? "routine" : "triumph",
+		title: `${title}${progression.length > 1 ? ` ${getRomanNumeral(index + 1)}` : ""}`,
+	}))
 }
 
 export function getRange({
-  factor,
-  isRounded = false,
-  modifier = 1,
-  ranges,
+	factor,
+	isRounded = false,
+	modifier = 1,
+	ranges,
 }: {
-  factor: number;
-  isRounded?: boolean;
-  modifier?: number;
-  ranges: [GeneratorRange, GeneratorRange];
+	factor: number
+	isRounded?: boolean
+	modifier?: number
+	ranges: [GeneratorRange, GeneratorRange]
 }): GeneratorRange {
-  const maximum =
-    getFromRange({ factor, maximum: ranges[1].maximum, minimum: ranges[0].maximum }) * modifier;
-  const minimum =
-    getFromRange({ factor, maximum: ranges[1].minimum, minimum: ranges[0].minimum }) * modifier;
+	const maximum
+		= getFromRange({ factor, maximum: ranges[1].maximum, minimum: ranges[0].maximum }) * modifier
+	const minimum
+		= getFromRange({ factor, maximum: ranges[1].minimum, minimum: ranges[0].minimum }) * modifier
 
-  return {
-    maximum: isRounded ? Math.round(maximum) : maximum,
-    minimum: isRounded ? Math.round(minimum) : minimum,
-  };
+	return {
+		maximum: isRounded ? Math.round(maximum) : maximum,
+		minimum: isRounded ? Math.round(minimum) : minimum,
+	}
 }
 
-export function getRangedRanges({ factor, gearClass }: { factor: number; gearClass: WeaponClass }) {
-  const {
-    ability: abilityModifier,
-    burden: burdenModifier,
-    damage: damageModifier,
-    rate: rateModifier,
-    weight: weightModifier,
-  } = WEAPON_MODIFIER.ranged;
-  const { ammunitionCost, burden, damage, range, rate, weight } = WEAPON_BASE;
-  const { abilityChance } = WEAPON_SPECIFICATIONS[gearClass];
+export function getRangedRanges({ factor, gearClass }: { factor: number, gearClass: WeaponClass }) {
+	const {
+		ability: abilityModifier,
+		burden: burdenModifier,
+		damage: damageModifier,
+		rate: rateModifier,
+		weight: weightModifier,
+	} = WEAPON_MODIFIER.ranged
+	const { burden, damage, munitionsCost, range, rate, weight } = WEAPON_BASE
+	const { abilityChance } = WEAPON_SPECIFICATIONS[gearClass]
 
-  return {
-    abilityChance: getRange({ factor, modifier: abilityModifier, ranges: abilityChance }),
-    ammunitionCost: getRange({ factor, isRounded: true, ranges: ammunitionCost }),
-    burden: getRange({ factor, isRounded: true, modifier: burdenModifier, ranges: burden }),
-    damage: getRange({ factor, isRounded: true, modifier: damageModifier, ranges: damage }),
-    range: getRange({ factor, isRounded: true, ranges: range }),
-    rate: getRange({ factor, isRounded: true, modifier: rateModifier, ranges: rate }),
-    weight: getRange({ factor, isRounded: true, modifier: weightModifier, ranges: weight }),
-  };
+	return {
+		abilityChance: getRange({ factor, modifier: abilityModifier, ranges: abilityChance }),
+		burden: getRange({ factor, isRounded: true, modifier: burdenModifier, ranges: burden }),
+		damage: getRange({ factor, isRounded: true, modifier: damageModifier, ranges: damage }),
+		munitionsCost: getRange({ factor, isRounded: true, ranges: munitionsCost }),
+		range: getRange({ factor, isRounded: true, ranges: range }),
+		rate: getRange({ factor, isRounded: true, modifier: rateModifier, ranges: rate }),
+		weight: getRange({ factor, isRounded: true, modifier: weightModifier, ranges: weight }),
+	}
 }
 
-export function getPerkEffect({ perk, stage }: { perk: Perk; stage: number }) {
-  const { maximum, minimum } = PERKS[perk];
+export function getPerkEffect({
+	generation,
+	perk,
+}: {
+	generation: number
+	perk: Perk
+}) {
+	const { generationMaximum, maximum, minimum } = PERKS[perk]
+	const increasableGenerations = generationMaximum - 2
 
-  return getFromRange({
-    factor: getSigmoid(
-      getLinearMapping({
-        offset: RETIREMENT_STAGE,
-        stage,
-      }),
-    ),
-    maximum,
-    minimum,
-  });
+	if (generation === 1) {
+		return 0
+	}
+
+	return getFromRange({
+		factor: Math.min(generation - 2, increasableGenerations) / increasableGenerations,
+		maximum,
+		minimum,
+	})
+}
+
+export function getQuestClass(quest: Quest): QuestClass {
+	const { conquest, routine } = QUEST_TYPES_BY_CLASS
+
+	if (conquest.some(currentQuest => currentQuest === quest)) {
+		return "conquest"
+	}
+
+	if (routine.some(currentQuest => currentQuest === quest)) {
+		return "routine"
+	}
+
+	return "triumph"
 }
 
 function getRomanNumeral(value: number) {
-  if (!Number.isInteger(value) || value < 1 || value > ROMAN_NUMERAL_MAXIMUM) {
-    return value;
-  }
+	if (!Number.isInteger(value) || value < 1 || value > ROMAN_NUMERAL_MAXIMUM) {
+		return value
+	}
 
-  const digits = [...Math.round(value).toString()];
-  let position = digits.length - 1;
-  let currentNumeral = "";
+	const digits = [...Math.round(value).toString()]
+	let position = digits.length - 1
+	let currentNumeral = ""
 
-  for (const digit of digits) {
-    const numeral = ROMAN_NUMERALS[position];
+	for (const digit of digits) {
+		const numeral = ROMAN_NUMERALS[position]
 
-    if (numeral !== undefined && digit !== "0") {
-      currentNumeral += numeral[Number.parseInt(digit) - 1];
-    }
+		if (numeral !== undefined && digit !== "0") {
+			currentNumeral += numeral[Number.parseInt(digit) - 1]
+		}
 
-    position -= 1;
-  }
+		position -= 1
+	}
 
-  return currentNumeral;
+	return currentNumeral
 }
 
-export function getSellPrice({ gemsFitted, item }: { gemsFitted?: number; item: InventoryItem }) {
-  const { price } = item;
-  let supplement = 0;
+export function getSellPrice({ gemsFitted, item }: { gemsFitted?: number, item: InventoryItem }) {
+	const { price } = item
+	let supplement = 0
 
-  if (isGearItem(item) && gemsFitted !== undefined && gemsFitted > 0) {
-    supplement +=
-      getSellPrice({
-        item: {
-          ...GEM_BASE,
-          ID: nanoid(),
-          name: "ruby",
-        },
-      }) * gemsFitted;
-  }
+	if (isGearItem(item) && gemsFitted !== undefined) {
+		supplement += (
+			getSellPrice({
+				item: {
+					...GEM_BASE,
+					ID: nanoid(),
+					name: "ruby",
+				},
+			}) * gemsFitted
+		) / 2
+	}
 
-  return Math.ceil(price / 2) + supplement;
+	return Math.max(Math.round(price / 2), GENERIC_MINIMUM) + supplement
 }
 
-export function getShieldRanges({ factor, gearClass }: { factor: number; gearClass: ShieldClass }) {
-  const { block, burden, stagger, weight } = SHIELD_SPECIFICATIONS[gearClass];
+export function getShieldRanges({ factor, gearClass }: { factor: number, gearClass: ShieldClass }) {
+	const { blockChance, burden, staggerChance, weight } = SHIELD_SPECIFICATIONS[gearClass]
 
-  return {
-    block: getRange({ factor, ranges: block }),
-    burden: getRange({ factor, isRounded: true, ranges: burden }),
-    stagger: getRange({ factor, ranges: stagger }),
-    weight: getRange({ factor, isRounded: true, ranges: weight }),
-  };
+	return {
+		blockChance: getRange({ factor, ranges: blockChance }),
+		burden: getRange({ factor, isRounded: true, ranges: burden }),
+		staggerChance: getRange({ factor, ranges: staggerChance }),
+		weight: getRange({ factor, isRounded: true, ranges: weight }),
+	}
 }
 
 // https://en.wikipedia.org/wiki/Sigmoid_function
-// f(0-1) = ~0, f(38) = ~0.5, f(50) = ~0.75, f(77) = ~1
+// f(0) = 0, f(37) = ~0.28, f(50) = ~0.73, f(75) = ~1, f(100) = ~1
 export function getSigmoid(x: number) {
-  return (
-    (1 / (1 + Math.pow(Math.E, -0.15 * (x - 45)) - 0.011) - 0.0012) *
-    (9 * Math.pow(Math.E, -(Math.LN2 / 5) * x) + 1)
-  );
+	return x === 0
+		? 0
+		: (Math.tanh(x / 13 - 3) + 1) / 2
 }
 
 export function getSnapshotGetter({ getLoadable }: Snapshot) {
-  return <T>(state: RecoilValue<T>) => getLoadable(state).getValue();
+	return <T>(state: RecoilValue<T>) => getLoadable(state).getValue()
 }
 
 export function getTotalElementalEffects({
-  damage,
-  duration,
-  modifier,
+	damage,
+	duration,
+	modifier,
 }: {
-  damage: number;
-  duration: number;
-  modifier: number;
+	damage: number
+	duration: number
+	modifier: number
 }) {
-  return {
-    damage: Math.round(damage + damage * modifier),
-    duration: Math.round(duration + duration * modifier),
-  };
+	return {
+		damage: Math.round(damage + damage * modifier),
+		duration: Math.round(duration + duration * modifier),
+	}
 }
 
 // https://en.wikipedia.org/wiki/Triangular_number
 export function getTriangular(x: number) {
-  return (x * (x + 1)) / 2;
-}
-
-export function getWeaponIcon(weapon: Weapon | typeof WEAPON_NONE) {
-  return isUnarmed(weapon)
-    ? IconHand
-    : isMelee(weapon)
-      ? weapon.grip === "one-handed"
-        ? IconOneHanded
-        : IconTwoHanded
-      : IconRanged;
+	return (x * (x + 1)) / 2
 }

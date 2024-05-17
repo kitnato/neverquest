@@ -1,336 +1,428 @@
-import { FRAMERATE } from "@neverquest/data/general";
-import IconAmmunitionPouch from "@neverquest/icons/ammunition-pouch.svg?react";
-import IconAntidote from "@neverquest/icons/antidote.svg?react";
-import IconBandages from "@neverquest/icons/bandages.svg?react";
-import IconCompass from "@neverquest/icons/compass.svg?react";
-import IconDreamCatcher from "@neverquest/icons/dream-catcher.svg?react";
-import IconEldritchCodex from "@neverquest/icons/eldritch-codex.svg?react";
-import IconElixir from "@neverquest/icons/elixir.svg?react";
-import IconEnderHook from "@neverquest/icons/ender-hook.svg?react";
-import IconFamiliar from "@neverquest/icons/familiar.svg?react";
-import IconFire from "@neverquest/icons/fire.svg?react";
-import IconHatchingProgress from "@neverquest/icons/hatching-progress.svg?react";
-import IconStone from "@neverquest/icons/hearthstone.svg?react";
-import IconIce from "@neverquest/icons/ice.svg?react";
-import IconJournal from "@neverquest/icons/journal.svg?react";
-import IconKnapsack from "@neverquest/icons/knapsack.svg?react";
-import IconLacrimatory from "@neverquest/icons/lacrimatory.svg?react";
-import IconLightning from "@neverquest/icons/lightning.svg?react";
-import IconMemento from "@neverquest/icons/memento.svg?react";
-import IconMysteriousEgg from "@neverquest/icons/mysterious-egg.svg?react";
-import IconPerpetualLoom from "@neverquest/icons/perpetual-loom.svg?react";
-import IconPhylactery from "@neverquest/icons/phylactery.svg?react";
-import IconPowerBonusBoost from "@neverquest/icons/power-bonus-boost.svg?react";
-import IconRuby from "@neverquest/icons/ruby.svg?react";
-import IconSalve from "@neverquest/icons/salve.svg?react";
-import IconSapphire from "@neverquest/icons/sapphire.svg?react";
-import IconThaumaturgicGoggles from "@neverquest/icons/thaumaturgic-goggles.svg?react";
-import IconTopaz from "@neverquest/icons/topaz.svg?react";
-import IconTornManuscript from "@neverquest/icons/torn-manuscript.svg?react";
-import type { ConsumableItem, GeneratorRange, InfusableItem, RelicItem } from "@neverquest/types";
-import type { SVGIcon } from "@neverquest/types/components";
+import { FRAMERATE, LEVELLING_MAXIMUM } from "@neverquest/data/general"
+import IconAlchemist from "@neverquest/icons/alchemist.svg?react"
+import IconAmethyst from "@neverquest/icons/amethyst.svg?react"
+import IconAntidote from "@neverquest/icons/antidote.svg?react"
+import IconAttackRate from "@neverquest/icons/attack-rate.svg?react"
+import IconAttack from "@neverquest/icons/attack.svg?react"
+import IconAutomincer from "@neverquest/icons/automincer.svg?react"
+import IconBandages from "@neverquest/icons/bandages.svg?react"
+import IconBlighted from "@neverquest/icons/blighted.svg?react"
+import IconCaravan from "@neverquest/icons/caravan.svg?react"
+import IconCompass from "@neverquest/icons/compass.svg?react"
+import IconDamagePerSecond from "@neverquest/icons/damage-per-second.svg?react"
+import IconDamage from "@neverquest/icons/damage.svg?react"
+import IconDreamCatcher from "@neverquest/icons/dream-catcher.svg?react"
+import IconEldritchCodex from "@neverquest/icons/eldritch-codex.svg?react"
+import IconElixir from "@neverquest/icons/elixir.svg?react"
+import IconEnderHook from "@neverquest/icons/ender-hook.svg?react"
+import IconFamiliar from "@neverquest/icons/familiar.svg?react"
+import IconFire from "@neverquest/icons/fire.svg?react"
+import IconFlatlined from "@neverquest/icons/flatlined.svg?react"
+import IconGear from "@neverquest/icons/gear.svg?react"
+import IconGrinding from "@neverquest/icons/grinding.svg?react"
+import IconHatchingProgress from "@neverquest/icons/hatching-progress.svg?react"
+import IconHealth from "@neverquest/icons/health.svg?react"
+import IconStone from "@neverquest/icons/hearthstone.svg?react"
+import IconIce from "@neverquest/icons/ice.svg?react"
+import IconJournal from "@neverquest/icons/journal.svg?react"
+import IconKnapsack from "@neverquest/icons/knapsack.svg?react"
+import IconLacrimatory from "@neverquest/icons/lacrimatory.svg?react"
+import IconLifeLeech from "@neverquest/icons/life-leech.svg?react"
+import IconLightning from "@neverquest/icons/lightning.svg?react"
+import IconLogEntry from "@neverquest/icons/log-entry.svg?react"
+import IconLoot from "@neverquest/icons/loot.svg?react"
+import IconLooting from "@neverquest/icons/looting.svg?react"
+import IconMemento from "@neverquest/icons/memento.svg?react"
+import IconMonsterLurking from "@neverquest/icons/monster-lurking.svg?react"
+import IconMunitionsSatchel from "@neverquest/icons/munitions-satchel.svg?react"
+import IconMunitions from "@neverquest/icons/munitions.svg?react"
+import IconMysteriousEgg from "@neverquest/icons/mysterious-egg.svg?react"
+import IconNavigation from "@neverquest/icons/navigation.svg?react"
+import IconPhylactery from "@neverquest/icons/phylactery.svg?react"
+import IconPoisonRating from "@neverquest/icons/poison-rating.svg?react"
+import IconPoisoned from "@neverquest/icons/poisoned.svg?react"
+import IconProtected from "@neverquest/icons/protected.svg?react"
+import IconQuests from "@neverquest/icons/quests.svg?react"
+import IconRanged from "@neverquest/icons/ranged.svg?react"
+import IconRetreat from "@neverquest/icons/retreat.svg?react"
+import IconRuby from "@neverquest/icons/ruby.svg?react"
+import IconSalve from "@neverquest/icons/salve.svg?react"
+import IconSapphire from "@neverquest/icons/sapphire.svg?react"
+import IconStage from "@neverquest/icons/stage.svg?react"
+import IconStamina from "@neverquest/icons/stamina.svg?react"
+import IconTears from "@neverquest/icons/tears.svg?react"
+import IconThaumaturgicGoggles from "@neverquest/icons/thaumaturgic-goggles.svg?react"
+import IconTornManuscript from "@neverquest/icons/torn-manuscript.svg?react"
+import IconWilderness from "@neverquest/icons/wilderness.svg?react"
+
+import type { ConsumableItem, GeneratorRange, InfusableItem, RelicItem } from "@neverquest/types"
+import type { SVGIcon } from "@neverquest/types/components"
+import type { Description } from "@neverquest/types/ui"
 import type {
-  Consumable,
-  Delta,
-  Elemental,
-  ElementalAilment,
-  Gem,
-  Infusable,
-  Relic,
-} from "@neverquest/types/unions";
+	Consumable,
+	Delta,
+	Elemental,
+	ElementalAilment,
+	Extent,
+	Gem,
+	Infusable,
+	Relic,
+} from "@neverquest/types/unions"
 
-export const AMMUNITION_CAPACITY = 100;
-
-export const CONSUMABLES: Record<Consumable, { Icon: SVGIcon; item: Omit<ConsumableItem, "ID"> }> =
-  {
-    antidote: {
-      Icon: IconAntidote,
-      item: {
-        description: "Cures poison.",
-        name: "antidote",
-        price: 120,
-        weight: 5,
-      },
-    },
-    bandages: {
-      Icon: IconBandages,
-      item: {
-        description: "Fully restores health.",
-        name: "bandages",
-        price: 30,
-        weight: 1,
-      },
-    },
-    elixir: {
-      Icon: IconElixir,
-      item: {
-        description: "Restores all stamina.",
-        name: "elixir",
-        price: 25,
-        weight: 2,
-      },
-    },
-    phylactery: {
-      Icon: IconPhylactery,
-      item: {
-        description: "Resurrects the carrier upon death.",
-        name: "phylactery",
-        price: 500,
-        weight: 10,
-      },
-    },
-    salve: {
-      Icon: IconSalve,
-      item: {
-        description: "Cures blight.",
-        name: "salve",
-        price: 80,
-        weight: 3,
-      },
-    },
-  };
+export const CONSUMABLES: Record<
+	Consumable,
+	Description & { Icon: SVGIcon, item: ConsumableItem }
+> = {
+	antidote: {
+		description: "Cures # poison.",
+		descriptionIcons: [IconPoisoned],
+		Icon: IconAntidote,
+		item: {
+			ID: "",
+			name: "antidote",
+			price: 150,
+			weight: 5,
+		},
+	},
+	bandages: {
+		description: "Fully restores # health.",
+		descriptionIcons: [IconHealth],
+		Icon: IconBandages,
+		item: {
+			ID: "",
+			name: "bandages",
+			price: 35,
+			weight: 1,
+		},
+	},
+	elixir: {
+		description: "Fully restores # stamina.",
+		descriptionIcons: [IconStamina],
+		Icon: IconElixir,
+		item: {
+			ID: "",
+			name: "elixir",
+			price: 50,
+			weight: 2,
+		},
+	},
+	phylactery: {
+		description: "Resurrects the bearer upon # death.",
+		descriptionIcons: [IconFlatlined],
+		Icon: IconPhylactery,
+		item: {
+			ID: "",
+			name: "phylactery",
+			price: 375,
+			weight: 10,
+		},
+	},
+	salve: {
+		description: "Cures # blight.",
+		descriptionIcons: [IconBlighted],
+		Icon: IconSalve,
+		item: {
+			ID: "",
+			name: "salve",
+			price: 250,
+			weight: 3,
+		},
+	},
+}
 
 export const ELEMENTALS: Record<
-  Elemental,
-  {
-    ailment: ElementalAilment;
-    color: string;
-    damage: GeneratorRange;
-    damageModification: string;
-    duration: GeneratorRange;
-    durationCap: number;
-    gem: Gem;
-    Icon: SVGIcon;
-  }
+	Elemental,
+	{
+		ailment: ElementalAilment
+		color: string
+		damageArmor: GeneratorRange
+		damageWeapon: GeneratorRange
+		duration: GeneratorRange
+		durationCap: number
+		extent: Extent
+		gem: Gem
+		Icon: SVGIcon
+	}
 > = {
-  fire: {
-    ailment: "burning",
-    color: "text-orange",
-    damage: { maximum: 0.8, minimum: 0.1 },
-    damageModification: "high",
-    duration: { maximum: 2500, minimum: 1200 },
-    durationCap: 7500,
-    gem: "ruby",
-    Icon: IconFire,
-  },
-  ice: {
-    ailment: "frozen",
-    color: "text-blue",
-    damage: { maximum: 0.4, minimum: 0.05 },
-    damageModification: "low",
-    duration: { maximum: 2000, minimum: 900 },
-    durationCap: 3000,
-    gem: "sapphire",
-    Icon: IconIce,
-  },
-  lightning: {
-    ailment: "shocked",
-    color: "text-indigo",
-    damage: { maximum: 0.6, minimum: 0.075 },
-    damageModification: "medium",
-    duration: { maximum: 2200, minimum: 1000 },
-    durationCap: 5000,
-    gem: "topaz",
-    Icon: IconLightning,
-  },
-};
+	fire: {
+		ailment: "burning",
+		color: "orange",
+		damageArmor: { maximum: 2, minimum: 1 },
+		damageWeapon: { maximum: 0.5, minimum: 0.1 },
+		duration: { maximum: 2500, minimum: 1200 },
+		durationCap: 7500,
+		extent: "high",
+		gem: "ruby",
+		Icon: IconFire,
+	},
+	ice: {
+		ailment: "frozen",
+		color: "cyan",
+		damageArmor: { maximum: 1.75, minimum: 0.75 },
+		damageWeapon: { maximum: 0.4, minimum: 0.075 },
+		duration: { maximum: 2200, minimum: 1000 },
+		durationCap: 3500,
+		extent: "medium",
+		gem: "sapphire",
+		Icon: IconIce,
+	},
+	lightning: {
+		ailment: "shocked",
+		color: "purple",
+		damageArmor: { maximum: 1.5, minimum: 0.5 },
+		damageWeapon: { maximum: 0.25, minimum: 0.05 },
+		duration: { maximum: 2000, minimum: 900 },
+		durationCap: 5000,
+		extent: "low",
+		gem: "amethyst",
+		Icon: IconLightning,
+	},
+}
 
-export const ENCUMBRANCE_CAPACITY = 6;
+export const ENCUMBRANCE_CAPACITY = 6
 
 export const GEM_BASE = {
-  price: 250,
-  weight: 1,
-};
-export const GEM_DROP_CHANCE = { equalStage: 1, lowerStage: 0.25 };
-export const GEM_ENHANCEMENT_RANGE = { maximum: 1, minimum: 0.1 };
-export const GEM_FITTING_COST_RANGE = { maximum: 300, minimum: 10 };
-export const GEMS: Record<Gem, { elemental: Elemental; Icon: SVGIcon }> = {
-  ruby: { elemental: "fire", Icon: IconRuby },
-  sapphire: { elemental: "ice", Icon: IconSapphire },
-  topaz: { elemental: "lightning", Icon: IconTopaz },
-};
-export const GEMS_MAXIMUM = 5;
+	price: 250,
+	weight: 1,
+}
+export const GEM_ENHANCEMENT_RANGE = {
+	maximum: 1,
+	minimum: 0.1,
+}
+export const GEM_FITTING_COST_RANGE = {
+	maximum: 300,
+	minimum: 10,
+}
+export const GEMS_MAXIMUM = 5
+export const GEMS: Record<Gem, { elemental: Elemental, Icon: SVGIcon }> = {
+	amethyst: { elemental: "lightning", Icon: IconAmethyst },
+	ruby: { elemental: "fire", Icon: IconRuby },
+	sapphire: { elemental: "ice", Icon: IconSapphire },
+}
 
-export const INFUSION_BASE = 2;
+export const INFUSION_BASE = 2
 
-export const INFUSION_DELTA = FRAMERATE * 2;
-export const INFUSION_DURATION = 1000;
+export const INFUSION_DELTA = FRAMERATE * 2
+export const INFUSION_DURATION = 1000
 
 export const INFUSABLES: Record<
-  Infusable,
-  {
-    delta: Delta;
-    EffectIcon: SVGIcon;
-    Icon: SVGIcon;
-    item: Omit<InfusableItem, "ID">;
-    tooltip: string;
-  }
+	Infusable,
+	Description & {
+		delta: Delta
+		EffectIcon: SVGIcon
+		Icon: SVGIcon
+		item: InfusableItem
+		tooltip: string
+	}
 > = {
-  "eldritch codex": {
-    delta: "powerBonusBoost",
-    EffectIcon: IconPowerBonusBoost,
-    Icon: IconEldritchCodex,
-    item: {
-      description: "Boosts all attribute effects based on power level.",
-      effect: {
-        maximum: 1.5,
-        minimum: 0,
-      },
-      name: "eldritch codex",
-      price: 4000,
-      weight: 10,
-    },
-    tooltip: "Power bonus boost",
-  },
-  "mysterious egg": {
-    delta: "hatchingProgress",
-    EffectIcon: IconHatchingProgress,
-    Icon: IconMysteriousEgg,
-    item: {
-      description: "A perplexing ovum emanating otherworldly energy.",
-      effect: { maximum: 1, minimum: 0 },
-      name: "mysterious egg",
-      price: 1554,
-      weight: 7,
-    },
-    tooltip: "Hatching progress",
-  },
-};
+	"eldritch codex": {
+		delta: "lifeLeech",
+		description: "# Attacks return a fraction of # total damage as # health.",
+		descriptionIcons: [IconAttackRate, IconDamage, IconHealth],
+		EffectIcon: IconLifeLeech,
+		Icon: IconEldritchCodex,
+		item: {
+			effect: {
+				maximum: 0.25,
+				minimum: 0.01,
+			},
+			ID: "",
+			name: "eldritch codex",
+			price: 5000,
+			weight: 13,
+		},
+		tooltip: "Life leech",
+	},
+	"mysterious egg": {
+		delta: "hatchingProgress",
+		description: "A perplexing ovum emanating otherworldly energy.",
+		EffectIcon: IconHatchingProgress,
+		Icon: IconMysteriousEgg,
+		item: {
+			effect: { maximum: 1, minimum: 0 },
+			ID: "",
+			name: "mysterious egg",
+			price: 1554,
+			weight: 7,
+		},
+		tooltip: "Hatching progress",
+	},
+}
 
-export const KNAPSACK_CAPACITY = 15;
+export const KNAPSACK_CAPACITY = 16
+
+export const MUNITIONS = {
+	amount: 1,
+	maximum: LEVELLING_MAXIMUM,
+	priceRange: { maximum: 750, minimum: 3 },
+	satchelCapacity: 5,
+}
 
 export const RELIC_DROP_CHANCE = {
-  "dream catcher": { maximum: 0.06, minimum: 0.005 },
-  memento: { maximum: 0.08, minimum: 0.01 },
-  "torn manuscript": { maximum: 0.05, minimum: 0.01 },
-};
+	"dream catcher": { maximum: 0.05, minimum: 0.01 },
+	"memento": { maximum: 0.1, minimum: 0.01 },
+	"torn manuscript": { maximum: 0.05, minimum: 0.01 },
+}
 
 export const RELICS: Record<
-  Relic,
-  {
-    Icon: SVGIcon;
-    item: Omit<RelicItem, "ID">;
-  }
+	Relic,
+	Description & {
+		Icon: SVGIcon
+		item: RelicItem
+	}
 > = {
-  "ammunition pouch": {
-    Icon: IconAmmunitionPouch,
-    item: {
-      description: "Stores ammunition for ranged weapons.",
-      name: "ammunition pouch",
-      price: 300,
-      weight: 6,
-    },
-  },
-  compass: {
-    Icon: IconCompass,
-    item: {
-      description: "Allows free navigation of the wilderness to explore previous locations.",
-      name: "compass",
-      price: 50,
-      weight: 2,
-    },
-  },
-  "dream catcher": {
-    Icon: IconDreamCatcher,
-    item: {
-      description: "Protects the bearer from harm by disengaging from unfavorable encounters.",
-      name: "dream catcher",
-      price: 1554,
-      weight: 10,
-    },
-  },
-  "ender hook": {
-    Icon: IconEnderHook,
-    item: {
-      description: "Monsters are looted immediately upon death.",
-      name: "ender hook",
-      price: 2500,
-      weight: 15,
-    },
-  },
-  familiar: {
-    Icon: IconFamiliar,
-    item: {
-      description: "Blessed with the ability to see beyond the final entity.",
-      name: "familiar",
-      price: 1,
-      weight: 17,
-    },
-  },
-  hearthstone: {
-    Icon: IconStone,
-    item: {
-      description:
-        "Traveling back to the caravan is possible even when there are still lurking monsters.",
-      name: "hearthstone",
-      price: 100,
-      weight: 3,
-    },
-  },
-  journal: {
-    Icon: IconJournal,
-    item: {
-      description: "A compendium of quests.",
-      name: "journal",
-      price: 750,
-      weight: 5,
-    },
-  },
-  knapsack: {
-    Icon: IconKnapsack,
-    item: {
-      description: "Provides space for items and the ability to manage gear.",
-      name: "knapsack",
-      price: 15,
-      weight: 0,
-    },
-  },
-  lacrimatory: {
-    Icon: IconLacrimatory,
-    item: {
-      description: "Enables the collection of samples from noxious foes.",
-      name: "lacrimatory",
-      price: 1500,
-      weight: 8,
-    },
-  },
-  memento: {
-    Icon: IconMemento,
-    item: {
-      description: "Lost memories eventually lead to extraordinary discoveries.",
-      name: "memento",
-      price: 154,
-      weight: 2,
-    },
-  },
-  "perpetual loom": {
-    Icon: IconPerpetualLoom,
-    item: {
-      description:
-        "While weaving, automatically collects all loot and passes to the next stage once it is cleared of monsters.",
-      name: "perpetual loom",
-      price: 7000,
-      weight: 20,
-    },
-  },
-  "thaumaturgic goggles": {
-    Icon: IconThaumaturgicGoggles,
-    item: {
-      description: "Discerns the lethality of creatures.",
-      name: "thaumaturgic goggles",
-      price: 250,
-      weight: 4,
-    },
-  },
-  "torn manuscript": {
-    Icon: IconTornManuscript,
-    item: {
-      description: "Describes theurgical methodologies beyond comprehension.",
-      name: "torn manuscript",
-      price: 5000,
-      weight: 3,
-    },
-  },
-};
+	"[S751NQ]": {
+		description: "",
+		Icon: IconLogEntry,
+		item: {
+			ID: "",
+			name: "[S751NQ]",
+			price: 140_014,
+			weight: 14,
+		},
+	},
+	"automincer": {
+		description:
+			"While # equipped, collects # loot and passes to the next # stage once clear of monsters.",
+		descriptionIcons: [IconGrinding, IconLoot, IconStage],
+		Icon: IconAutomincer,
+		item: {
+			ID: "",
+			name: "automincer",
+			price: 5000,
+			weight: 20,
+		},
+	},
+	"compass": {
+		description: "Allows # navigation of the # wilderness to explore previous locations.",
+		descriptionIcons: [IconNavigation, IconWilderness],
+		Icon: IconCompass,
+		item: {
+			ID: "",
+			name: "compass",
+			price: 50,
+			weight: 2,
+		},
+	},
+	"dream catcher": {
+		description: "While # equipped and # attacking, consumes # bandages if at low # health or an # elixir if # exhausted, otherwise # retreats.",
+		descriptionIcons: [IconProtected, IconAttack, IconBandages, IconHealth, IconElixir, IconStamina, IconRetreat],
+		Icon: IconDreamCatcher,
+		item: {
+			ID: "",
+			name: "dream catcher",
+			price: 1500,
+			weight: 10,
+		},
+	},
+	"ender hook": {
+		description: "Monsters are # looted immediately.",
+		descriptionIcons: [IconLooting],
+		Icon: IconEnderHook,
+		item: {
+			ID: "",
+			name: "ender hook",
+			price: 2500,
+			weight: 15,
+		},
+	},
+	"familiar": {
+		description: "Compels the manifestation of the final entity.",
+		Icon: IconFamiliar,
+		item: {
+			ID: "",
+			name: "familiar",
+			price: 1,
+			weight: 75,
+		},
+	},
+	"hearthstone": {
+		description: "Instantly travel back to the # caravan regardless of any # lurking monsters.",
+		descriptionIcons: [IconCaravan, IconMonsterLurking],
+		Icon: IconStone,
+		item: {
+			ID: "",
+			name: "hearthstone",
+			price: 100,
+			weight: 3,
+		},
+	},
+	"journal": {
+		description: "A compendium of # quests.",
+		descriptionIcons: [IconQuests],
+		Icon: IconJournal,
+		item: {
+			ID: "",
+			name: "journal",
+			price: 750,
+			weight: 5,
+		},
+	},
+	"knapsack": {
+		description: "Provides space for items and the ability to manage # gear.",
+		descriptionIcons: [IconGear],
+		Icon: IconKnapsack,
+		item: {
+			ID: "",
+			name: "knapsack",
+			price: 15,
+			weight: 0,
+		},
+	},
+	"lacrimatory": {
+		description: "Collects # tears from # noxious foes.",
+		descriptionIcons: [IconTears, IconPoisonRating],
+		Icon: IconLacrimatory,
+		item: {
+			ID: "",
+			name: "lacrimatory",
+			price: 1500,
+			weight: 8,
+		},
+	},
+	"memento": {
+		description: "Lost memories held close unlock pathways to remarkable discoveries ...",
+		Icon: IconMemento,
+		item: {
+			ID: "",
+			name: "memento",
+			price: 154,
+			weight: 2,
+		},
+	},
+	"munitions satchel": {
+		description: "Stores # munitions to fire # ranged weapons.",
+		descriptionIcons: [IconMunitions, IconRanged],
+		Icon: IconMunitionsSatchel,
+		item: {
+			ID: "",
+			name: "munitions satchel",
+			price: 300,
+			weight: 6,
+		},
+	},
+	"thaumaturgic goggles": {
+		description: "Discerns # damage per second of all creatures.",
+		descriptionIcons: [IconDamagePerSecond],
+		Icon: IconThaumaturgicGoggles,
+		item: {
+			ID: "",
+			name: "thaumaturgic goggles",
+			price: 250,
+			weight: 4,
+		},
+	},
+	"torn manuscript": {
+		description: "Describes # theurgical methodologies beyond comprehension.",
+		descriptionIcons: [IconAlchemist],
+		Icon: IconTornManuscript,
+		item: {
+			ID: "",
+			name: "torn manuscript",
+			price: 5000,
+			weight: 3,
+		},
+	},
+}
 
-export const TEARS_MAXIMUM = 7;
+export const TEARS_MAXIMUM = 21

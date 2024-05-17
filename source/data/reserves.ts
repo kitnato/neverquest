@@ -1,31 +1,41 @@
-import type { Delta, Reserve } from "@neverquest/types/unions";
+import IconHealth from "@neverquest/icons/health.svg?react"
+import IconStamina from "@neverquest/icons/stamina.svg?react"
 
-export const AILING_RESERVE_MINIMUM = 1;
+import type { SVGIcon } from "@neverquest/types/components"
+import type { Attribute, Delta, Reserve } from "@neverquest/types/unions"
 
-export const HEALTH_LOW_THRESHOLD = 0.33;
+export const HEALTH_LOW_THRESHOLD = 0.25
+
+export const REGENERATION_METER_ANIMATION_THRESHOLD = 300
 
 export const RESERVES: Record<
-  Reserve,
-  {
-    baseAmount: number;
-    baseRegenerationAmount: number;
-    baseRegenerationRate: number;
-    regenerationDeltaAmount: Delta;
-    regenerationDeltaRate: Delta;
-  }
+	Reserve,
+	{
+		attribute: Attribute
+		baseAmount: number
+		baseRegenerationRate: number
+		Icon: SVGIcon
+		maximumDelta: Delta
+		regeneration: number
+		regenerationRateDelta: Delta
+	}
 > = {
-  health: {
-    baseAmount: 50,
-    baseRegenerationAmount: 4,
-    baseRegenerationRate: 2650,
-    regenerationDeltaAmount: "healthRegenerationAmount",
-    regenerationDeltaRate: "healthRegenerationRate",
-  },
-  stamina: {
-    baseAmount: 20,
-    baseRegenerationAmount: 2,
-    baseRegenerationRate: 2200,
-    regenerationDeltaAmount: "staminaRegenerationAmount",
-    regenerationDeltaRate: "staminaRegenerationRate",
-  },
-};
+	health: {
+		attribute: "vitality",
+		baseAmount: 50,
+		baseRegenerationRate: 3100,
+		Icon: IconHealth,
+		maximumDelta: "healthMaximum",
+		regeneration: 0.03,
+		regenerationRateDelta: "healthRegenerationRate",
+	},
+	stamina: {
+		attribute: "endurance",
+		baseAmount: 25,
+		baseRegenerationRate: 2300,
+		Icon: IconStamina,
+		maximumDelta: "staminaMaximum",
+		regeneration: 0.02,
+		regenerationRateDelta: "staminaRegenerationRate",
+	},
+}

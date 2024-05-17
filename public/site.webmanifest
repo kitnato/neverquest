@@ -1,7 +1,7 @@
 {
 	"name": "neverquest",
 	"short_name": "neverquest",
-	"description": "An irreverent incremental action RPG.",
+	"description": "An irreverent text-based incremental action role-playing game.",
 	"icons": [
 		{
 			"src": "/android-chrome-512x512.png",

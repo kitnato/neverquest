@@ -1,6 +1,6 @@
 # neverquest
 
-_An irreverent incremental action RPG._
+_An irreverent text-based incremental action role-playing game._
 
 > - View [gameplay manual](./source/data/manual.md).
 > - View [screenshots](#3-screenshots).

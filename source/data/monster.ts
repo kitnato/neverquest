@@ -113,7 +113,7 @@ export const MONSTER_DAMAGE = {
 	},
 	menace: {
 		maximum: 0.5,
-		minimum: 0.2,
+		minimum: 0.25,
 		requiredStage: 26,
 	},
 }
@@ -129,7 +129,7 @@ export const MONSTER_HEALTH = {
 	},
 	menace: {
 		maximum: 1.5,
-		minimum: 0.25,
+		minimum: 0.3,
 		requiredStage: 31,
 	},
 }

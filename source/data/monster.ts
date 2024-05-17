@@ -65,9 +65,9 @@ export const BLIGHT = {
 }
 
 export const ESSENCE = {
-	attenuation: 15,
+	attenuation: 16,
 	base: 5,
-	bonus: 0.03,
+	bonus: -0.03,
 	boss: 2,
 	finality: {
 		"res cogitans": 77777,
@@ -103,7 +103,7 @@ export const MONSTER_ATTACK_RATE = {
 }
 
 export const MONSTER_DAMAGE = {
-	attenuation: 25,
+	attenuation: 18,
 	base: 5,
 	bonus: 0.01,
 	boss: 1.075,
@@ -112,14 +112,14 @@ export const MONSTER_DAMAGE = {
 		"res dominus": 1075,
 	},
 	menace: {
-		maximum: 0.5,
-		minimum: 0.25,
-		requiredStage: 26,
+		maximum: 0.45,
+		minimum: 0.2,
+		requiredStage: 36,
 	},
 }
 
 export const MONSTER_HEALTH = {
-	attenuation: 25,
+	attenuation: 24,
 	base: 18,
 	bonus: 0.02,
 	boss: 1.8,
@@ -130,7 +130,7 @@ export const MONSTER_HEALTH = {
 	menace: {
 		maximum: 1.5,
 		minimum: 0.3,
-		requiredStage: 31,
+		requiredStage: 36,
 	},
 }
 

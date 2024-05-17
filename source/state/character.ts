@@ -39,7 +39,7 @@ export const canDodge = withStateKey("canDodge", key =>
 
 export const canResurrect = withStateKey("canResurrect", key =>
 	selector({
-		get: ({ get }) => get(reserveCurrent("health")) === 0 && get(ownedItem("phylactery")) !== undefined,
+		get: ({ get }) => get(isIncapacitated) && get(ownedItem("phylactery")) !== undefined,
 		key,
 	}),
 )
@@ -57,14 +57,14 @@ export const hasEnoughMunitions = withStateKey("hasEnoughMunitions", key =>
 
 export const hasFlatlined = withStateKey("hasFlatlined", key =>
 	selector({
-		get: ({ get }) => get(reserveCurrent("health")) === 0 && get(ownedItem("phylactery")) === undefined,
+		get: ({ get }) => get(isIncapacitated) && get(ownedItem("phylactery")) === undefined,
 		key,
 	}),
 )
 
 export const isIncapacitated = withStateKey("isIncapacitated", key =>
 	selector({
-		get: ({ get }) => get(canResurrect) || get(hasFlatlined),
+		get: ({ get }) => get(reserveCurrent("health")) === 0,
 		key,
 	}),
 )

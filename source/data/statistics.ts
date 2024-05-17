@@ -1,7 +1,7 @@
 export const AILMENT_PENALTY = {
 	frozen: 0.4,
 	shocked: 0.1,
-	staggered: 0.2,
+	staggered: 0.15,
 	stunned: 0.5,
 }
 
@@ -14,7 +14,7 @@ export const BLEED = {
 export const DEFLECTION_MAXIMUM = 0.95
 
 export const LOOTING_RATE = {
-	"base": 2300,
+	"base": 2400,
 	"ender hook": 600,
 }
 

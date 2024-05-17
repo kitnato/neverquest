@@ -73,7 +73,10 @@ export function ArmorOptions() {
 
 	return (
 		<Stack className="mx-auto w-50">
-			<Stack className={`mx-auto${hasCrafted ? " opacity-50" : ""}`} gap={3}>
+			<Stack
+				className={`mx-auto${hasCrafted ? " opacity-50" : ""}`}
+				gap={3}
+			>
 				<SetGearLevel
 					isDisabled={hasCrafted}
 					level={level}

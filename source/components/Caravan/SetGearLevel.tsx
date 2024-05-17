@@ -16,7 +16,11 @@ export function SetGearLevel({
 	setLevel: (level: number) => void
 }) {
 	return (
-		<IconDisplay Icon={IconGearLevel} iconProps={{ overlayPlacement: "left" }} tooltip="Gear level">
+		<IconDisplay
+			Icon={IconGearLevel}
+			iconProps={{ overlayPlacement: "left" }}
+			tooltip="Gear level"
+		>
 			<FormControl
 				disabled={isDisabled}
 				max={maximum}
@@ -34,6 +38,7 @@ export function SetGearLevel({
 
 					setLevel(parsedValue)
 				}}
+				style={{ width: 80 }}
 				type="number"
 				value={formatNumber({ value: level })}
 			/>

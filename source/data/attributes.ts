@@ -88,7 +88,7 @@ export const ATTRIBUTES: Record<
 		format: "integer",
 		Icon: IconStrength,
 		increment: 2,
-		incrementBonus: { maximum: 50, perRank: 1 },
+		incrementBonus: { maximum: 50, perRank: 2 },
 		shows: "damage",
 	},
 	vigor: {

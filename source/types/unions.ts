@@ -211,6 +211,7 @@ export const ROUTINE_TYPES = [
 	"acquiringRanged",
 	"munitionsCrafting",
 	"acquiringTwoHanded",
+	"fillingLacrimatory",
 	"infusing",
 	"infusingMaximum",
 	"attributesIncreasing",
@@ -479,6 +480,7 @@ export const RELIC_TYPES = [
 	"memento",
 	"thaumaturgic goggles",
 	"torn manuscript",
+	"war mask",
 ] as const
 export type Relic = (typeof RELIC_TYPES)[number]
 

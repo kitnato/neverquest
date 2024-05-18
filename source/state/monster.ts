@@ -30,7 +30,7 @@ import {
 	stageHighest,
 } from "@neverquest/state/encounter"
 import { ownedItem } from "@neverquest/state/inventory"
-import { hasLootedLogEntry, infusionEffect } from "@neverquest/state/items"
+import { hasLootedLogEntry, infusionEffect, isRelicEquipped } from "@neverquest/state/items"
 import { isSkillAcquired } from "@neverquest/state/skills"
 import { range } from "@neverquest/state/statistics"
 import { isFinality } from "@neverquest/types/type-guards"
@@ -126,7 +126,7 @@ export const hasMonsterClosed = withStateKey("hasMonsterClosed", key =>
 
 export const isEnraged = withStateKey("isEnraged", key =>
 	selector({
-		get: ({ get }) => get(rage) === RAGE.maximum,
+		get: ({ get }) => get(isRelicEquipped("war mask")) || get(rage) === RAGE.maximum,
 		key,
 	}),
 )

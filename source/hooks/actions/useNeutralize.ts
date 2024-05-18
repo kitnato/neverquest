@@ -43,6 +43,7 @@ export function useNeutralize() {
 
 					if (name === "lacrimatory") {
 						reset(tears)
+						reset(questProgress("fillingLacrimatory"))
 					}
 				}
 			},

@@ -21,7 +21,10 @@ export function CraftedGear({ item, onTransfer }: { item: GearItem, onTransfer: 
 	return (
 		<Stack gap={3}>
 			<div className={`mx-auto ${getAnimationClass({ animation: "pulse" })}`}>
-				<ItemDisplay item={item} />
+				<ItemDisplay
+					item={item}
+					overlayPlacement="top"
+				/>
 			</div>
 
 			<OverlayTrigger

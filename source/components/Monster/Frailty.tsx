@@ -34,7 +34,7 @@ export function Frailty() {
 				Icon={IconFrailty}
 				tooltip="Frailty"
 			>
-				<Stack direction="horizontal">
+				<Stack direction="horizontal" gap={1}>
 					<OverlayTrigger
 						overlay={(
 							<Popover>

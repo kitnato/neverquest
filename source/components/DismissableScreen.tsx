@@ -19,7 +19,7 @@ export function DismissableScreen({
 	title: string
 }) {
 	return (
-		<Offcanvas onHide={onClose} placement={placement} show={isShowing}>
+		<Offcanvas className="pe-3" onHide={onClose} placement={placement} show={isShowing}>
 			<OffcanvasHeader closeButton>
 				<OffcanvasTitle>
 					<span>{title}</span>

@@ -43,6 +43,7 @@ import IconPoisonRating from "@neverquest/icons/poison-rating.svg?react"
 import IconPoisoned from "@neverquest/icons/poisoned.svg?react"
 import IconProtected from "@neverquest/icons/protected.svg?react"
 import IconQuests from "@neverquest/icons/quests.svg?react"
+import IconRage from "@neverquest/icons/rage.svg?react"
 import IconRanged from "@neverquest/icons/ranged.svg?react"
 import IconRetreat from "@neverquest/icons/retreat.svg?react"
 import IconRuby from "@neverquest/icons/ruby.svg?react"
@@ -53,6 +54,7 @@ import IconStamina from "@neverquest/icons/stamina.svg?react"
 import IconTears from "@neverquest/icons/tears.svg?react"
 import IconThaumaturgicGoggles from "@neverquest/icons/thaumaturgic-goggles.svg?react"
 import IconTornManuscript from "@neverquest/icons/torn-manuscript.svg?react"
+import IconWarMask from "@neverquest/icons/war-mask.svg?react"
 import IconWilderness from "@neverquest/icons/wilderness.svg?react"
 
 import type { ConsumableItem, GeneratorRange, InfusableItem, RelicItem } from "@neverquest/types"
@@ -301,7 +303,7 @@ export const RELICS: Record<
 			ID: "",
 			name: "compass",
 			price: 50,
-			weight: 2,
+			weight: 3,
 		},
 	},
 	"dream catcher": {
@@ -344,7 +346,7 @@ export const RELICS: Record<
 			ID: "",
 			name: "hearthstone",
 			price: 100,
-			weight: 3,
+			weight: 5,
 		},
 	},
 	"journal": {
@@ -355,7 +357,7 @@ export const RELICS: Record<
 			ID: "",
 			name: "journal",
 			price: 750,
-			weight: 5,
+			weight: 8,
 		},
 	},
 	"knapsack": {
@@ -377,7 +379,7 @@ export const RELICS: Record<
 			ID: "",
 			name: "lacrimatory",
 			price: 1500,
-			weight: 8,
+			weight: 10,
 		},
 	},
 	"memento": {
@@ -386,7 +388,7 @@ export const RELICS: Record<
 		item: {
 			ID: "",
 			name: "memento",
-			price: 154,
+			price: 150,
 			weight: 2,
 		},
 	},
@@ -398,7 +400,7 @@ export const RELICS: Record<
 			ID: "",
 			name: "munitions satchel",
 			price: 300,
-			weight: 6,
+			weight: 15,
 		},
 	},
 	"thaumaturgic goggles": {
@@ -419,8 +421,19 @@ export const RELICS: Record<
 		item: {
 			ID: "",
 			name: "torn manuscript",
-			price: 5000,
+			price: 2000,
 			weight: 3,
+		},
+	},
+	"war mask": {
+		description: "All who glimpse it are # enraged. Why though?",
+		descriptionIcons: [IconRage],
+		Icon: IconWarMask,
+		item: {
+			ID: "",
+			name: "war mask",
+			price: 3500,
+			weight: 7,
 		},
 	},
 }

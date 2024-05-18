@@ -1,7 +1,6 @@
 import { LEVELLING_MAXIMUM } from "@neverquest/data/general"
 import { AILMENT_PENALTY } from "@neverquest/data/statistics"
 import IconDamage from "@neverquest/icons/damage.svg?react"
-import IconDistance from "@neverquest/icons/distance.svg?react"
 import IconMonsterAttackRate from "@neverquest/icons/monster-attack-rate.svg?react"
 import IconMonsterDamage from "@neverquest/icons/monster-damage.svg?react"
 import IconMonsterHealth from "@neverquest/icons/monster-health.svg?react"
@@ -14,12 +13,12 @@ export const AILMENT_DESCRIPTION: Record<Ailment, Description> = {
 	bleeding: { description: "Suffering periodic damage." },
 	burning: { description: "Cannot regenerate # health.", descriptionIcons: [IconMonsterHealth] },
 	frozen: {
-		description: `Attack # rate and # speed slowed by ${formatNumber({
+		description: `Attack # rate slowed by ${formatNumber({
 			decimals: 0,
 			format: "percentage",
 			value: AILMENT_PENALTY.frozen,
 		})}.`,
-		descriptionIcons: [IconMonsterAttackRate, IconDistance],
+		descriptionIcons: [IconMonsterAttackRate],
 	},
 	shocked: {
 		description: `Taking ${formatNumber({
@@ -99,7 +98,7 @@ export const MONSTER_ATTACK_RATE = {
 		"res cogitans": 1750,
 		"res dominus": 2750,
 	},
-	minimum: 2000,
+	minimum: 2500,
 }
 
 export const MONSTER_DAMAGE = {
@@ -112,24 +111,24 @@ export const MONSTER_DAMAGE = {
 		"res dominus": 1075,
 	},
 	menace: {
-		maximum: 0.45,
-		minimum: 0.2,
-		requiredStage: 36,
+		maximum: 1,
+		minimum: 0.175,
+		requiredStage: 33,
 	},
 }
 
 export const MONSTER_HEALTH = {
-	attenuation: 24,
+	attenuation: 22,
 	base: 18,
 	bonus: 0.02,
 	boss: 1.8,
 	finality: {
-		"res cogitans": 25757,
-		"res dominus": 13757,
+		"res cogitans": 15757,
+		"res dominus": 7575,
 	},
 	menace: {
-		maximum: 1.5,
-		minimum: 0.3,
+		maximum: 2,
+		minimum: 0.35,
 		requiredStage: 36,
 	},
 }
@@ -143,11 +142,11 @@ export const MONSTER_REGENERATION = {
 export const POISON = {
 	boss: 1.25,
 	chance: {
-		maximum: 0.35,
+		maximum: 0.3,
 		minimum: 0.1,
 	},
 	duration: {
-		maximum: 400_000,
+		maximum: 350_000,
 		minimum: 30_000,
 	},
 	finality: {

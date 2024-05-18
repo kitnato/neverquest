@@ -280,6 +280,10 @@ export const MERCHANT_OFFERS: Record<
 		monologue: "Allow me to offer a phial to collect your sorrows.",
 		offer: RELICS.lacrimatory.item,
 	},
+	50: {
+		monologue: "Now, release your anger.",
+		offer: RELICS["war mask"].item,
+	},
 }
 
 export const PURGE_PRICE_MULTIPLIER = {

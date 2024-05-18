@@ -304,6 +304,7 @@ export function useDefend() {
 					}
 					else {
 						if (canGatherTears) {
+							progressQuest({ quest: "fillingLacrimatory" })
 							set(tears, currentTears => currentTears + 1)
 						}
 
@@ -330,6 +331,7 @@ export function useDefend() {
 					}
 					else {
 						if (canGatherTears) {
+							progressQuest({ quest: "fillingLacrimatory" })
 							set(tears, currentTears => currentTears + 1)
 						}
 

@@ -69,7 +69,7 @@ export const MASTERIES: Record<
 		description: "Affects the # distance a monster must close before it can attack.",
 		descriptionIcons: [IconDistance],
 		Icon: IconMarksmanship,
-		increment: 0.8 / LEVELLING_MAXIMUM,
+		increment: 0.7 / LEVELLING_MAXIMUM,
 		instructionIcons: [IconRanged],
 		instructions: "Trains when dealing damage with a # ranged weapon.",
 		requiredSkill: "archery",

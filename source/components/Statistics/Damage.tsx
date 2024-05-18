@@ -30,7 +30,7 @@ import { reserveCurrent } from "@neverquest/state/reserves"
 import { damage, lifeLeech } from "@neverquest/state/statistics"
 import { isTraitAcquired } from "@neverquest/state/traits"
 import { isShowing } from "@neverquest/state/ui"
-import { isUnarmed, isUnshielded } from "@neverquest/types/type-guards"
+import { isMelee, isUnarmed, isUnshielded } from "@neverquest/types/type-guards"
 import { formatNumber } from "@neverquest/utilities/formatters"
 import { getAnimationClass, getGearIcon } from "@neverquest/utilities/getters"
 
@@ -41,6 +41,7 @@ export function Damage() {
 	const isShowingDamage = useRecoilValue(isShowing("damage"))
 	const isTraitAcquiredBrawler = useRecoilValue(isTraitAcquired("brawler"))
 	const isTraitAcquiredBruiser = useRecoilValue(isTraitAcquired("bruiser"))
+	const isTraitAcquiredColossus = useRecoilValue(isTraitAcquired("colossus"))
 	const lifeLeechValue = useRecoilValue(lifeLeech)
 	const questsBonusDamage = useRecoilValue(questsBonus("damageBonus"))
 	const reserveStamina = useRecoilValue(reserveCurrent("stamina"))
@@ -51,6 +52,7 @@ export function Damage() {
 	const progressQuest = useProgressQuest()
 
 	const { burden, damage: weaponDamage } = weaponValue
+	const isUnarmedWeapon = isUnarmed(weaponValue)
 
 	useDeltaText({
 		delta: "damage",
@@ -96,7 +98,7 @@ export function Damage() {
 											</td>
 										</tr>
 
-										{isTraitAcquiredBrawler && isUnshielded(shieldValue) && (
+										{isTraitAcquiredBrawler && isUnshielded(shieldValue) && (isMelee(weaponValue) || isUnarmedWeapon) && (weaponValue.grip === "one-handed" || isTraitAcquiredColossus) && (
 											<tr>
 												<td>
 													<IconDisplay Icon={IconBrawler} iconProps={{ className: "small" }}>
@@ -138,7 +140,7 @@ export function Damage() {
 											</tr>
 										)}
 
-										{isTraitAcquiredBruiser && isUnarmed(weaponValue) && (
+										{isTraitAcquiredBruiser && isUnarmedWeapon && (
 											<tr>
 												<td>
 													<IconDisplay Icon={IconBruiser} iconProps={{ className: "small" }}>

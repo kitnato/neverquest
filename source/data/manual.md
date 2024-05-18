@@ -663,7 +663,7 @@ Inflicted by fire [elemental](#elemental-damage) damage. While burning, the mons
 
 #### Frozen
 
-Inflicted by ice [elemental](#elemental-damage) damage. While frozen, attack rate and movement speed (time to close [distance](#range)) is slowed.
+Inflicted by ice [elemental](#elemental-damage) damage. While frozen, attack rate is slowed.
 
 #### Shocked
 

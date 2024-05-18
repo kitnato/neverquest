@@ -214,8 +214,12 @@ export function RangedOptions() {
 
 			{isSkillAcquiredArchery
 				? hasCrafted
-					? <CraftedGear item={fletcherInventoryValue} onTransfer={resetFletcherInventory} />
-
+					? (
+						<CraftedGear
+							item={fletcherInventoryValue}
+							onTransfer={resetFletcherInventory}
+						/>
+					)
 					: (
 						<CraftGear
 							onCraft={() => {

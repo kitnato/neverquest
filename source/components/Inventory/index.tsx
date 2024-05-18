@@ -47,6 +47,7 @@ const RELIC_ACTIONS: Partial<Record<Relic, FunctionComponent>> = {
 	"compass": CompassNavigate,
 	"dream catcher": () => <EquipRelic relic="dream catcher" />,
 	"hearthstone": HearthstoneWarp,
+	"war mask": () => <EquipRelic relic="war mask" />,
 }
 
 export function Inventory() {

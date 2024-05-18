@@ -45,7 +45,7 @@ export const ARMOR_SPECIFICATIONS: Record<
 			{ maximum: 0.2, minimum: 0.18 },
 		],
 		Icon: IconArmorHeavy,
-		price: { maximum: 8000, minimum: 25 },
+		price: { maximum: 8200, minimum: 25 },
 		protection: [
 			{ maximum: 8, minimum: 6 },
 			{ maximum: 800, minimum: 750 },
@@ -65,7 +65,7 @@ export const ARMOR_SPECIFICATIONS: Record<
 			{ maximum: 0.7, minimum: 0.68 },
 		],
 		Icon: IconArmorLight,
-		price: { maximum: 5000, minimum: 1 },
+		price: { maximum: 5500, minimum: 1 },
 		protection: [
 			{ maximum: 2, minimum: 1 },
 			{ maximum: 550, minimum: 500 },
@@ -85,7 +85,7 @@ export const ARMOR_SPECIFICATIONS: Record<
 			{ maximum: 0.42, minimum: 0.4 },
 		],
 		Icon: IconReinforced,
-		price: { maximum: 6500, minimum: 10 },
+		price: { maximum: 6600, minimum: 10 },
 		protection: [
 			{ maximum: 6, minimum: 3 },
 			{ maximum: 650, minimum: 600 },
@@ -201,12 +201,12 @@ export const WEAPON_BASE: GearRangeBase & {
 	],
 	price: { maximum: 8000, minimum: 1 },
 	range: [
-		{ maximum: 3300, minimum: 3000 },
-		{ maximum: 4500, minimum: 4300 },
+		{ maximum: 3200, minimum: 3000 },
+		{ maximum: 4200, minimum: 4000 },
 	],
 	rate: [
-		{ maximum: 3100, minimum: 3000 },
-		{ maximum: 2200, minimum: 2100 },
+		{ maximum: 3200, minimum: 3000 },
+		{ maximum: 2400, minimum: 2300 },
 	],
 	weight: [
 		{ maximum: 2, minimum: 1 },
@@ -225,18 +225,18 @@ export const WEAPON_MODIFIER = {
 	},
 	"ranged": {
 		ability: 0.8,
-		burden: 1,
-		damage: 1.05,
-		price: 1.25,
+		burden: 1.1,
+		damage: 1,
+		price: 1.2,
 		rate: 1.1,
 		weight: 1.15,
 	},
 	"two-handed": {
 		ability: 1.2,
-		burden: 1.3,
-		damage: 1.25,
+		burden: 1.25,
+		damage: 1.2,
 		price: 1.35,
-		rate: 1.2,
+		rate: 1.15,
 		weight: 1.25,
 	},
 }
@@ -267,7 +267,7 @@ export const WEAPON_SPECIFICATIONS: Record<
 		ability: "stun",
 		abilityChance: [
 			{ maximum: 0.15, minimum: 0.12 },
-			{ maximum: 0.35, minimum: 0.33 },
+			{ maximum: 0.4, minimum: 0.37 },
 		],
 		IconAbility: IconStunChance,
 		IconGearClass: IconBlunt,
@@ -276,7 +276,7 @@ export const WEAPON_SPECIFICATIONS: Record<
 		ability: "bleed",
 		abilityChance: [
 			{ maximum: 0.2, minimum: 0.17 },
-			{ maximum: 0.35, minimum: 0.33 },
+			{ maximum: 0.4, minimum: 0.38 },
 		],
 		IconAbility: IconBleedChance,
 		IconGearClass: IconPiercing,
@@ -285,7 +285,7 @@ export const WEAPON_SPECIFICATIONS: Record<
 		ability: "parry",
 		abilityChance: [
 			{ maximum: 0.15, minimum: 0.12 },
-			{ maximum: 0.3, minimum: 0.28 },
+			{ maximum: 0.35, minimum: 0.33 },
 		],
 		IconAbility: IconParryChance,
 		IconGearClass: IconSlashing,

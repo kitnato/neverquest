@@ -1,5 +1,5 @@
 import { LABEL_UNKNOWN, LEVELLING_END, LEVELLING_MAXIMUM } from "@neverquest/data/general"
-import { MUNITIONS } from "@neverquest/data/items"
+import { MUNITIONS, TEARS_MAXIMUM } from "@neverquest/data/items"
 import IconConquest from "@neverquest/icons/conquest.svg?react"
 import IconRoutine from "@neverquest/icons/routine.svg?react"
 import IconTriumph from "@neverquest/icons/triumph.svg?react"
@@ -35,10 +35,10 @@ export const QUEST_COMPLETION_BONUS: Record<QuestClass, number> = {
 export const QUEST_NOTIFICATION_DURATION = 5000
 
 export const QUEST_REQUIREMENTS = {
-	damage: 2500,
+	damage: 2000,
 	essenceCount: 7575,
 	monstersKilled: 75,
-	protection: 1000,
+	protection: 900,
 	skillsCraft: ["armorcraft", "shieldcraft", "siegecraft"] as Skill[],
 	survivingNoAttributes: 7,
 	survivingNoGear: 7,
@@ -287,6 +287,12 @@ export const QUESTS: Record<
 		requiresTracking: true,
 		title: "Wheeze",
 	},
+	fillingLacrimatory: {
+		description: "Fill the lacrimatory",
+		progression: [TEARS_MAXIMUM],
+		requiresTracking: false,
+		title: "Lilith & Niobe",
+	},
 	flatlining: {
 		description: "Die.",
 		progression: [1, 3, 5],
@@ -319,13 +325,13 @@ export const QUESTS: Record<
 	},
 	hiring: {
 		description: "Hire @ caravan crew members.",
-		progression: [3, 6],
+		progression: [2, 5],
 		requiresTracking: true,
 		title: "Don't forget the doctor",
 	},
 	hiringAll: {
 		description: "Hire all caravan crew members.",
-		progression: [CREW_MEMBER_TYPES.length],
+		progression: [CREW_MEMBER_TYPES.length - 1],
 		requiresTracking: true,
 		title: "Haven't died of dysentery",
 	},

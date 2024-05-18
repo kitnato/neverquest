@@ -34,7 +34,7 @@ import {
 	RELICS,
 } from "@neverquest/data/items"
 import { QUESTS, QUEST_TYPES_BY_CLASS } from "@neverquest/data/quests"
-import { PERKS } from "@neverquest/data/retirement"
+import { PERKS, RETIREMENT_STAGE } from "@neverquest/data/retirement"
 import IconArmorNone from "@neverquest/icons/armor-none.svg?react"
 import IconArmor from "@neverquest/icons/armor.svg?react"
 import IconOneHanded from "@neverquest/icons/one-handed.svg?react"
@@ -494,10 +494,13 @@ export function getSellPrice({ gemsFitted, item }: { gemsFitted?: number, item: 
 					name: "ruby",
 				},
 			}) * gemsFitted
-		) / 2
+		) / 2.5
 	}
 
-	return Math.max(Math.round(price / 2), GENERIC_MINIMUM) + supplement
+	return Math.max(
+		Math.round(price / (isGearItem(item) && item.level > RETIREMENT_STAGE ? 3 : 2)),
+		GENERIC_MINIMUM,
+	) + supplement
 }
 
 export function getShieldRanges({ factor, gearClass }: { factor: number, gearClass: ShieldClass }) {

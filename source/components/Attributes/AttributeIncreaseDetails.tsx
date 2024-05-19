@@ -10,7 +10,7 @@ import type { Attribute } from "@neverquest/types/unions"
 export function AttributeIncreaseDetails({ attribute }: { attribute: Attribute }) {
 	const attributeRankValue = useRecoilValue(attributeRank(attribute))
 
-	const { descriptionIcons, format, increment, incrementBonus } = ATTRIBUTES[attribute]
+	const { descriptionIcons, formatting, increment, incrementBonus } = ATTRIBUTES[attribute]
 
 	return (
 		<IconDisplay Icon={descriptionIcons[0]} iconProps={{ className: "small" }}>
@@ -18,7 +18,7 @@ export function AttributeIncreaseDetails({ attribute }: { attribute: Attribute }
 				{increment > 0 && "+"}
 
 				{formatNumber({
-					format,
+					...formatting,
 					value: incrementBonus === undefined
 						? increment
 						: Math.min(increment + incrementBonus.perRank * attributeRankValue, incrementBonus.maximum),

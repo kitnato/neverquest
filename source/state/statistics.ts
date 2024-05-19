@@ -124,14 +124,13 @@ export const damage = withStateKey("damage", key =>
 			const isWeaponUnarmed = isUnarmed(weaponValue)
 
 			return Math.round((
-				// Weapon damage multiplied by brawler trait bonus, if applicable.
-				weaponValue.damage * (
+				// Weapon damage with strength attribute effect and brawler trait bonus, if applicable.
+				weaponValue.damage * (1 + get(attributeStatistic("strength")) + (
 					get(isTraitAcquired("brawler")) && isUnshielded(get(shield)) && (isMelee(weaponValue) || isWeaponUnarmed) && (weaponValue.grip === "one-handed" || get(isTraitAcquired("colossus")))
-						? 1 + BRAWLER_DAMAGE_BONUS
-						: 1
+						? BRAWLER_DAMAGE_BONUS
+						: 0
 				)
-				// Strength attribute effect.
-				+ get(attributeStatistic("strength"))
+				)
 				// Elemental damage from any gems.
 				+ Object.values(get(elementalEffects).weapon).reduce((sum, { damage }) => sum + damage, 0)
 				// Current stamina portion from bruiser trait, if applicable.

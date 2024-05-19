@@ -18,6 +18,7 @@ import {
 	CLASS_ANIMATE_PREFIX,
 	GENERIC_MINIMUM,
 	LEVELLING_END,
+	LEVELLING_MAXIMUM,
 	MILLISECONDS_IN_SECOND,
 	ROMAN_NUMERALS,
 	ROMAN_NUMERAL_MAXIMUM,
@@ -34,7 +35,7 @@ import {
 	RELICS,
 } from "@neverquest/data/items"
 import { QUESTS, QUEST_TYPES_BY_CLASS } from "@neverquest/data/quests"
-import { PERKS, RETIREMENT_STAGE } from "@neverquest/data/retirement"
+import { PERKS } from "@neverquest/data/retirement"
 import IconArmorNone from "@neverquest/icons/armor-none.svg?react"
 import IconArmor from "@neverquest/icons/armor.svg?react"
 import IconOneHanded from "@neverquest/icons/one-handed.svg?react"
@@ -494,13 +495,14 @@ export function getSellPrice({ gemsFitted, item }: { gemsFitted?: number, item: 
 					name: "ruby",
 				},
 			}) * gemsFitted
-		) / 2.5
+		) / 3
 	}
 
-	return Math.max(
-		Math.round(price / (isGearItem(item) && item.level > RETIREMENT_STAGE ? 3 : 2)),
-		GENERIC_MINIMUM,
-	) + supplement
+	return Math.round(
+		Math.max(
+			price / (isGearItem(item) ? 4 : 2),
+			GENERIC_MINIMUM,
+		) + supplement)
 }
 
 export function getShieldRanges({ factor, gearClass }: { factor: number, gearClass: ShieldClass }) {
@@ -515,11 +517,17 @@ export function getShieldRanges({ factor, gearClass }: { factor: number, gearCla
 }
 
 // https://en.wikipedia.org/wiki/Sigmoid_function
-// f(0) = 0, f(37) = ~0.28, f(50) = ~0.73, f(75) = ~1, f(100) = ~1
+// f(0) = 0, f(37) = ~0.28, f(50) = ~0.73, f(75+) = 1
 export function getSigmoid(x: number) {
-	return x === 0
-		? 0
-		: (Math.tanh(x / 13 - 3) + 1) / 2
+	if (x === 0) {
+		return 0
+	}
+
+	if (x >= LEVELLING_MAXIMUM) {
+		return 1
+	}
+
+	return (Math.tanh(x / 13 - 3) + 1) / 2
 }
 
 export function getSnapshotGetter({ getLoadable }: Snapshot) {

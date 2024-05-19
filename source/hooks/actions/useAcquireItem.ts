@@ -4,7 +4,7 @@ import { useCanFit } from "@neverquest/hooks/actions/useCanFit"
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import { armor, shield, weapon } from "@neverquest/state/gear"
 import { acquiredItems, inventory, notifyOverEncumbrance } from "@neverquest/state/inventory"
-import { hasLootedLogEntry } from "@neverquest/state/items"
+import { hasLootedInheritable } from "@neverquest/state/items"
 import { isSkillAcquired } from "@neverquest/state/skills"
 import { isTraitAcquired } from "@neverquest/state/traits"
 import { isShowing } from "@neverquest/state/ui"
@@ -12,9 +12,9 @@ import {
 	isArmor,
 	isGearItem,
 	isGemItem,
+	isInheritableItem,
 	isMelee,
 	isRanged,
-	isRelicItem,
 	isShield,
 	isUnarmed,
 	isUnarmored,
@@ -47,21 +47,25 @@ export function useAcquireItem() {
 					progressQuest({ quest: "acquiringGems" })
 				}
 
-				if (isRelicItem(item)) {
+				if (isInheritableItem(item)) {
 					switch (item.name) {
 						case "[S751NQ]": {
-							set(hasLootedLogEntry, true)
+							set(hasLootedInheritable("[S751NQ]"), true)
 
 							progressQuest({ quest: "acquiringLogEntry" })
 							break
 						}
 
 						case "dream catcher": {
+							set(hasLootedInheritable("dream catcher"), true)
+
 							progressQuest({ quest: "acquiringDreamCatcher" })
 							break
 						}
 
 						case "familiar": {
+							set(hasLootedInheritable("familiar"), true)
+
 							progressQuest({ quest: "acquiringFamiliar" })
 							break
 						}
@@ -72,11 +76,20 @@ export function useAcquireItem() {
 						}
 
 						case "memento": {
+							set(hasLootedInheritable("memento"), true)
+
 							progressQuest({ quest: "acquiringMemento" })
 							break
 						}
 
+						case "mysterious egg": {
+							set(hasLootedInheritable("mysterious egg"), true)
+							break
+						}
+
 						case "torn manuscript": {
+							set(hasLootedInheritable("torn manuscript"), true)
+
 							progressQuest({ quest: "acquiringTornManuscript" })
 							break
 						}

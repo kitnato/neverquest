@@ -150,7 +150,7 @@ export const ELEMENTALS: Record<
 		ailment: "burning",
 		color: "orange",
 		damageArmor: { maximum: 1.75, minimum: 0.75 },
-		damageWeapon: { maximum: 0.5, minimum: 0.1 },
+		damageWeapon: { maximum: 0.4, minimum: 0.1 },
 		duration: { maximum: 2500, minimum: 1200 },
 		durationCap: 7500,
 		extent: "high",
@@ -161,7 +161,7 @@ export const ELEMENTALS: Record<
 		ailment: "frozen",
 		color: "cyan",
 		damageArmor: { maximum: 1.5, minimum: 0.5 },
-		damageWeapon: { maximum: 0.4, minimum: 0.075 },
+		damageWeapon: { maximum: 0.3, minimum: 0.075 },
 		duration: { maximum: 2200, minimum: 1000 },
 		durationCap: 3500,
 		extent: "medium",
@@ -172,7 +172,7 @@ export const ELEMENTALS: Record<
 		ailment: "shocked",
 		color: "purple",
 		damageArmor: { maximum: 1.25, minimum: 0.25 },
-		damageWeapon: { maximum: 0.25, minimum: 0.05 },
+		damageWeapon: { maximum: 0.2, minimum: 0.05 },
 		duration: { maximum: 2000, minimum: 900 },
 		durationCap: 5000,
 		extent: "low",
@@ -262,8 +262,8 @@ export const MUNITIONS = {
 
 export const RELIC_DROP_CHANCE = {
 	"dream catcher": { maximum: 0.03, minimum: 0.01 },
-	"memento": { maximum: 0.075, minimum: 0.01 },
-	"torn manuscript": { maximum: 0.03, minimum: 0.01 },
+	"memento": { maximum: 0.08, minimum: 0.01 },
+	"torn manuscript": { maximum: 0.05, minimum: 0.01 },
 }
 
 export const RELICS: Record<
@@ -421,7 +421,7 @@ export const RELICS: Record<
 		item: {
 			ID: "",
 			name: "torn manuscript",
-			price: 2000,
+			price: 500,
 			weight: 3,
 		},
 	},

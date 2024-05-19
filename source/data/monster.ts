@@ -6,6 +6,8 @@ import IconMonsterDamage from "@neverquest/icons/monster-damage.svg?react"
 import IconMonsterHealth from "@neverquest/icons/monster-health.svg?react"
 import { formatNumber } from "@neverquest/utilities/formatters"
 
+import { RETIREMENT_STAGE } from "./retirement"
+
 import type { Description } from "@neverquest/types/ui"
 import type { Ailment } from "@neverquest/types/unions"
 
@@ -50,7 +52,6 @@ export const BOSS_STAGE_INTERVAL = 5
 export const BOSS_STAGE_START = 10
 
 export const BLIGHT = {
-	boss: 1.2,
 	chance: {
 		maximum: 0.25,
 		minimum: 0.05,
@@ -64,14 +65,14 @@ export const BLIGHT = {
 }
 
 export const ESSENCE = {
-	attenuation: 16,
-	base: 5,
-	bonus: -0.03,
-	boss: 2,
+	attenuation: 3.5,
+	base: 6,
+	bossModifier: 1,
 	finality: {
 		"res cogitans": 77777,
 		"res dominus": 7777,
 	},
+	progressModifier: -0.03,
 }
 
 export const FINALITY_STAGE = {
@@ -80,57 +81,55 @@ export const FINALITY_STAGE = {
 }
 
 export const FRAILTY = {
-	"familiar": 0.25,
+	"familiar": -0.2,
 	"mysterious egg": {
-		maximum: 0.15,
-		minimum: 0.01,
+		maximum: -0.15,
+		minimum: -0.01,
 	},
 }
 
 export const MAXIMUM_GEM_DROP = 5
 
 export const MONSTER_ATTACK_RATE = {
-	attenuation: 4500,
-	base: 4100,
-	bonus: 0.005,
-	boss: 1.05,
+	attenuation: 4800,
 	finality: {
 		"res cogitans": 1750,
 		"res dominus": 2750,
 	},
-	minimum: 2500,
+	maximum: 4100,
+	minimum: 2200,
 }
 
 export const MONSTER_DAMAGE = {
-	attenuation: 18,
+	attenuation: 3.5,
 	base: 5,
-	bonus: 0.01,
-	boss: 1.075,
+	bossModifier: 0.05,
 	finality: {
-		"res cogitans": 1757,
+		"res cogitans": 1575,
 		"res dominus": 1075,
 	},
 	menace: {
-		maximum: 1,
-		minimum: 0.175,
-		requiredStage: 33,
+		maximum: 0.8,
+		minimum: 0.65,
+		requiredStage: RETIREMENT_STAGE + 1,
 	},
+	progressModifier: 0.01,
 }
 
 export const MONSTER_HEALTH = {
-	attenuation: 22,
+	attenuation: 2,
 	base: 18,
-	bonus: 0.02,
-	boss: 1.8,
+	bossModifier: 0.75,
 	finality: {
-		"res cogitans": 15757,
-		"res dominus": 7575,
+		"res cogitans": 7575,
+		"res dominus": 3757,
 	},
 	menace: {
-		maximum: 2,
-		minimum: 0.35,
-		requiredStage: 36,
+		maximum: 3.5,
+		minimum: 1.5,
+		requiredStage: RETIREMENT_STAGE + 1,
 	},
+	progressModifier: 0.02,
 }
 
 export const MONSTER_REGENERATION = {
@@ -140,7 +139,6 @@ export const MONSTER_REGENERATION = {
 }
 
 export const POISON = {
-	boss: 1.25,
 	chance: {
 		maximum: 0.3,
 		minimum: 0.1,

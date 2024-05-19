@@ -272,7 +272,9 @@ Offers training of new [skills](#skills).
 
 #### Merchant
 
-Sells new [items](#items) and purchases your unwanted ones. The merchant's inventory of items grows and diversifies after each new stage.
+Sells new [items](#items) and purchases your unwanted ones. Items sold to the merchant can be bought back for a surcharge. Items eradicated from the buy-back list are irretrievably lost.
+
+The merchant's inventory of items grows and diversifies after each new stage.
 
 #### Occultist
 

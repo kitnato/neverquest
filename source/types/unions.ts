@@ -339,7 +339,7 @@ export type StateKey =
 	| "hasEnoughMunitions"
 	| "hasFlatlined"
 	| "hasGeneratedOffer"
-	| "hasLootedLogEntry"
+	| "hasLootedInheritable"
 	| "hasMonsterClosed"
 	| "healthMaximumPoisoned"
 	| "infusion"

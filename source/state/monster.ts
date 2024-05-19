@@ -19,7 +19,7 @@ import {
 } from "@neverquest/data/monster"
 import { AILMENT_PENALTY } from "@neverquest/data/statistics"
 import { bleed } from "@neverquest/state/ailments"
-import { isHired, merchantInventory } from "@neverquest/state/caravan"
+import { isHired } from "@neverquest/state/caravan"
 import { handleStorage } from "@neverquest/state/effects/handleStorage"
 import {
 	encounter,
@@ -30,15 +30,18 @@ import {
 	stageHighest,
 } from "@neverquest/state/encounter"
 import { ownedItem } from "@neverquest/state/inventory"
-import { hasLootedLogEntry, infusionEffect, isRelicEquipped } from "@neverquest/state/items"
+import { hasLootedInheritable, infusionEffect, isRelicEquipped } from "@neverquest/state/items"
 import { isSkillAcquired } from "@neverquest/state/skills"
 import { range } from "@neverquest/state/statistics"
 import { isFinality } from "@neverquest/types/type-guards"
 import { formatNumber } from "@neverquest/utilities/formatters"
 import {
+	getArmorRanges,
+	getAttributePointCost,
 	getDamagePerRate,
 	getFromRange,
 	getLinearMapping,
+	getMeleeRanges,
 	getPerkEffect,
 	getSigmoid,
 	getTriangular,
@@ -67,7 +70,6 @@ export const blightChance = withStateKey("blightChance", key =>
 			const stageValue = get(stage)
 
 			const {
-				boss,
 				chance: { maximum, minimum },
 				finality,
 				requiredStage,
@@ -86,7 +88,7 @@ export const blightChance = withStateKey("blightChance", key =>
 					factor: getSigmoid(getLinearMapping({ offset: requiredStage, stage: stageValue })),
 					maximum,
 					minimum,
-				}) * (encounterValue === "boss" ? boss : 1)
+				})
 			)
 		},
 		key,
@@ -165,9 +167,8 @@ export const isMonsterRegenerating = withStateKey("isMonsterRegenerating", key =
 export const monsterAttackRate = withStateKey("monsterAttackRate", key =>
 	selector({
 		get: ({ get }) => {
-			const { attenuation, base, bonus, boss, finality, minimum } = MONSTER_ATTACK_RATE
+			const { attenuation, finality, maximum, minimum } = MONSTER_ATTACK_RATE
 			const encounterValue = get(encounter)
-			const factor = getTriangular(get(stage)) / attenuation
 
 			if (isFinality(encounterValue)) {
 				return finality[encounterValue]
@@ -175,8 +176,7 @@ export const monsterAttackRate = withStateKey("monsterAttackRate", key =>
 
 			return Math.round(
 				Math.max(
-					(base - base * factor * (1 + Math.min(get(progress), PROGRESS.maximum) * bonus))
-					* (encounterValue === "boss" ? boss : 1),
+					maximum - maximum * (getTriangular(get(stage)) / attenuation),
 					minimum,
 				) * (get(isEnraged) ? RAGE.effect : 1),
 			)
@@ -191,32 +191,78 @@ export const monsterDamage = withStateKey("monsterDamage", key =>
 			const {
 				attenuation,
 				base,
-				bonus,
-				boss,
+				bossModifier,
 				finality,
 				menace: { maximum, minimum, requiredStage },
+				progressModifier,
 			} = MONSTER_DAMAGE
 			const encounterValue = get(encounter)
 			const stageValue = get(stage)
-			const factor = getTriangular(stageValue) / attenuation
 
 			if (isFinality(encounterValue)) {
 				return finality[encounterValue]
 			}
 
-			return Math.round(
-				(base + base * factor * (1 + Math.min(get(progress), PROGRESS.maximum) * bonus))
-				* (encounterValue === "boss" ? boss : 1)
-				* (1 + (stageValue >= requiredStage
-					? getFromRange({
-						factor: getSigmoid(
-							getLinearMapping({ offset: requiredStage, stage: stageValue }),
-						),
-						maximum,
-						minimum,
-					})
-					: 0)) * (1 - get(frailty)),
-			)
+			[1, 6, 11, 16, 21, 26, 31, 36, 41, 46, 51, 56, 61, 66, 71, 74].forEach((s) => {
+				const l = getArmorRanges({
+					factor: getSigmoid(s),
+					gearClass: "light",
+				}).protection
+				const r = getArmorRanges({
+					factor: getSigmoid(s),
+					gearClass: "reinforced",
+				}).protection
+				const h = getArmorRanges({
+					factor: getSigmoid(s),
+					gearClass: "heavy",
+				}).protection
+				const bench = Math.round((r.maximum + r.minimum) / 2)
+				const d = Math.round((base + getTriangular(s) / attenuation) * (
+					1
+					+ Math.min(get(progress), PROGRESS.maximum) * progressModifier
+					+ (encounterValue === "boss" ? bossModifier : 0)
+					+ (
+						s >= requiredStage
+							? getFromRange({
+								factor: getSigmoid(
+									getLinearMapping({ offset: requiredStage, stage: s }),
+								),
+								maximum,
+								minimum,
+							})
+							: 0
+					)
+				))
+
+				console.log(
+					`stage${s} -`,
+					"monster",
+					d,
+					"armor",
+					Math.round((l.maximum + l.minimum) / 2),
+					bench,
+					Math.round((h.maximum + h.minimum) / 2),
+					"diff",
+					d - bench,
+				)
+			})
+
+			return Math.round((base + getTriangular(stageValue) / attenuation) * (
+				1
+				+ Math.min(get(progress), PROGRESS.maximum) * progressModifier
+				+ (encounterValue === "boss" ? bossModifier : 0)
+				+ (
+					stageValue >= requiredStage
+						? getFromRange({
+							factor: getSigmoid(
+								getLinearMapping({ offset: requiredStage, stage: stageValue }),
+							),
+							maximum,
+							minimum,
+						})
+						: 0
+				)
+			) * (1 + get(frailty)))
 		},
 		key,
 	}),
@@ -224,11 +270,10 @@ export const monsterDamage = withStateKey("monsterDamage", key =>
 
 export const monsterDamageAiling = withStateKey("monsterDamageAiling", key =>
 	selector({
-		get: ({ get }) =>
-			Math.round(
-				get(monsterDamage)
-				* (get(isMonsterAiling("staggered")) ? 1 - AILMENT_PENALTY.staggered : 1),
-			),
+		get: ({ get }) => Math.round(
+			get(monsterDamage)
+			* (get(isMonsterAiling("staggered")) ? 1 - AILMENT_PENALTY.staggered : 1),
+		),
 		key,
 	}),
 )
@@ -259,32 +304,69 @@ export const monsterHealthMaximum = withStateKey("monsterHealthMaximum", key =>
 			const {
 				attenuation,
 				base,
-				bonus,
-				boss,
+				bossModifier,
 				finality,
 				menace: { maximum, minimum, requiredStage },
+				progressModifier,
 			} = MONSTER_HEALTH
 			const encounterValue = get(encounter)
 			const stageValue = get(stage)
-			const factor = getTriangular(stageValue) / attenuation
 
 			if (isFinality(encounterValue)) {
 				return finality[encounterValue]
 			}
 
-			return Math.round(
-				(base + base * factor * (1 + Math.min(get(progress), PROGRESS.maximum) * bonus))
-				* (encounterValue === "boss" ? boss : 1)
-				* (1 + (stageValue >= requiredStage
-					? getFromRange({
-						factor: getSigmoid(
-							getLinearMapping({ offset: requiredStage, stage: stageValue }),
-						),
-						maximum,
-						minimum,
-					})
-					: 0)) * (1 - get(frailty)),
-			)
+			[1, 6, 11, 16, 21, 26, 31, 36, 41, 46, 51, 56, 61, 66, 71, 74].forEach((s) => {
+				const w = getMeleeRanges({
+					factor: getSigmoid(s),
+					gearClass: "blunt",
+					grip: "one-handed",
+				}).damage
+				const bench = Math.round((w.maximum + w.minimum) / 2)
+				const h = Math.round((base + getTriangular(s) / attenuation) * (
+					1
+					+ Math.min(get(progress), PROGRESS.maximum) * progressModifier
+					+ (encounterValue === "boss" ? bossModifier : 0)
+					+ (
+						s >= requiredStage
+							? getFromRange({
+								factor: getSigmoid(
+									getLinearMapping({ offset: requiredStage, stage: s }),
+								),
+								maximum,
+								minimum,
+							})
+							: 0
+					)
+				))
+
+				console.log(
+					`stage${s} -`,
+					"monster",
+					h,
+					"weapon",
+					bench,
+					"diff",
+					h / bench,
+				)
+			})
+
+			return Math.round((base + getTriangular(stageValue) / attenuation) * (
+				1
+				+ Math.min(get(progress), PROGRESS.maximum) * progressModifier
+				+ (encounterValue === "boss" ? bossModifier : 0)
+				+ (
+					stageValue >= requiredStage
+						? getFromRange({
+							factor: getSigmoid(
+								getLinearMapping({ offset: requiredStage, stage: stageValue }),
+							),
+							maximum,
+							minimum,
+						})
+						: 0
+				)
+			) * (1 + get(frailty)))
 		},
 		key,
 	}),
@@ -293,33 +375,48 @@ export const monsterHealthMaximum = withStateKey("monsterHealthMaximum", key =>
 export const monsterLoot = withStateKey("monsterLoot", key =>
 	selector({
 		get: ({ get }) => {
-			const { attenuation, base: essenceBase, bonus, boss, finality } = ESSENCE
+			const { attenuation, base, bossModifier, finality, progressModifier } = ESSENCE
 			const { equalStage, lowerStage } = LOOT_MODIFIER
 
 			const encounterValue = get(encounter)
 			const isMementoOwned = get(ownedItem("memento")) !== undefined
-			const merchantInventoryValue = get(merchantInventory)
 			const stageValue = get(stage)
 			const stageHighestValue = get(stageHighest)
+			const test = [1, 6, 11, 16, 21, 26, 31, 36, 41, 46, 51, 56, 61, 66, 71, 74]
 
-			const droppedEssence = essenceBase + ((essenceBase * getTriangular(stageValue)) / attenuation)
+			test.forEach((s) => {
+				console.log(
+					`stage/level ${s} -`,
+					"essence",
+					Math.round((base + getTriangular(s) / attenuation) * (
+						1
+						+ Math.min(get(progress), PROGRESS.maximum) * progressModifier
+						+ (encounterValue === "boss" ? bossModifier : 0)
+						+ getPerkEffect({ generation: get(generation), perk: "essenceBonus" })
+						+ (s < stageHighestValue ? lowerStage : equalStage)
+					)),
+					"cost",
+					getAttributePointCost(s),
+				)
+			})
 
 			return {
 				essence: isFinality(encounterValue)
 					? finality[encounterValue]
-					: Math.round(
-						(droppedEssence + droppedEssence * Math.min(get(progress), PROGRESS.maximum) * bonus)
-						* (encounterValue === "boss" ? boss : 1)
-						* (1 + getPerkEffect({ generation: get(generation), perk: "essenceBonus" }))
-						* (stageValue < stageHighestValue ? lowerStage : equalStage),
-					),
+					: Math.round((base + getTriangular(stageValue) / attenuation) * (
+						1
+						+ Math.min(get(progress), PROGRESS.maximum) * progressModifier
+						+ (encounterValue === "boss" ? bossModifier : 0)
+						+ getPerkEffect({ generation: get(generation), perk: "essenceBonus" })
+						+ (stageValue < stageHighestValue ? lowerStage : equalStage)
+					)),
 				gems: encounterValue === "boss"
 					? Math.min(
 						Array.from<undefined>({
 							length: 1 + Math.floor((stageValue - BOSS_STAGE_START) / BOSS_STAGE_INTERVAL),
 						}).reduce<number>(
 							(sum, _) =>
-								Math.random() <= (stageValue < stageHighestValue ? lowerStage : equalStage)
+								Math.random() <= 1 + (stageValue < stageHighestValue ? lowerStage : equalStage)
 									? sum + 1
 									: sum,
 							0,
@@ -328,20 +425,20 @@ export const monsterLoot = withStateKey("monsterLoot", key =>
 					: 0,
 				relic: encounterValue === "boss" || get(ownedItem("knapsack")) === undefined
 					? undefined
-					: encounterValue === "res dominus" && isMementoOwned && get(ownedItem("mysterious egg")) === undefined && get(ownedItem("familiar")) === undefined && !merchantInventoryValue.some(({ name }) => ["familiar", "mysterious egg"].includes(name))
-						// Mysterious egg only drops after defeating Res Dominus while carrying the Memento and if the egg and the familiar are neither carried nor sold.
+					: encounterValue === "res dominus" && isMementoOwned && !get(hasLootedInheritable("mysterious egg")) && !get(hasLootedInheritable("familiar"))
+						// Mysterious egg only drops after defeating Res Dominus while carrying the Memento and if the egg nor the familiar have ever been looted.
 						? { ...INFUSABLES["mysterious egg"].item, ID: nanoid() }
 						// Log Entry only drops after defeating Res Dominus while carrying the Memento and if it's never been looted before.
-						: encounterValue === "res dominus" && isMementoOwned && !get(hasLootedLogEntry)
+						: encounterValue === "res dominus" && isMementoOwned && !get(hasLootedInheritable("[S751NQ]"))
 							? { ...RELICS["[S751NQ]"].item, ID: nanoid() }
-							: isMementoOwned && get(ownedItem("torn manuscript")) === undefined && !merchantInventoryValue.some(({ name }) => name === "torn manuscript") && get(isHired("alchemist")) && !get(isSkillAcquired("memetics")) && Math.random() <= getFromRange({ factor: getSigmoid(stageValue), ...RELIC_DROP_CHANCE["torn manuscript"] })
-								// Torn manuscript drops if it's neither carried nor sold, if the memento is carried, if the correct crew member is hired, if the associated skill hasn't been trained and if the drop chance is reached.
+							: isMementoOwned && !get(hasLootedInheritable("torn manuscript")) && get(isHired("alchemist")) && !get(isSkillAcquired("memetics")) && Math.random() <= getFromRange({ factor: getSigmoid(stageValue), ...RELIC_DROP_CHANCE["torn manuscript"] })
+								// Torn manuscript drops if it's never been looted before, if the memento is carried, if the correct crew member is hired, if the associated skill hasn't been trained and if the drop chance is reached.
 								? { ...RELICS["torn manuscript"].item, ID: nanoid() }
-								: isMementoOwned && get(ownedItem("dream catcher")) === undefined && !merchantInventoryValue.some(({ name }) => name === "dream catcher") && get(isHired("occultist")) && Math.random() <= getFromRange({ factor: getSigmoid(stageValue), ...RELIC_DROP_CHANCE["dream catcher"] })
-									// Dream catcher drops if it's neither carried nor sold, if the memento is carried, if the correct crew member is hired and if the drop chance is reached.
+								: isMementoOwned && !get(hasLootedInheritable("dream catcher")) && get(isHired("occultist")) && !get(isSkillAcquired("meditation")) && Math.random() <= getFromRange({ factor: getSigmoid(stageValue), ...RELIC_DROP_CHANCE["dream catcher"] })
+									// Dream catcher drops if it's never been looted before, if the memento is carried, if the correct crew member is hired, if the associated skill hasn't been trained and if the drop chance is reached.
 									? { ...RELICS["dream catcher"].item, ID: nanoid() }
-									: !isMementoOwned && !merchantInventoryValue.some(({ name }) => name === "memento") && Math.random() <= getFromRange({ factor: getSigmoid(stageValue), ...RELIC_DROP_CHANCE.memento })
-										// Memento drops if it's neither carried nor sold and if the drop chance is reached.
+									: !get(hasLootedInheritable("memento")) && Math.random() <= getFromRange({ factor: getSigmoid(stageValue), ...RELIC_DROP_CHANCE.memento })
+										// Memento drops if it's never been looted before and if the drop chance is reached.
 										? { ...RELICS.memento.item, ID: nanoid() }
 										: undefined,
 			}
@@ -357,7 +454,6 @@ export const poisonChance = withStateKey("poisonChance", key =>
 			const stageValue = get(stage)
 
 			const {
-				boss,
 				chance: { maximum, minimum },
 				finality,
 				requiredStage,
@@ -376,7 +472,7 @@ export const poisonChance = withStateKey("poisonChance", key =>
 					factor: getSigmoid(getLinearMapping({ offset: requiredStage, stage: stageValue })),
 					maximum,
 					minimum,
-				}) * (encounterValue === "boss" ? boss : 1)
+				})
 			)
 		},
 		key,

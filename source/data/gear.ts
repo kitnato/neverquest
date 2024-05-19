@@ -121,8 +121,8 @@ export const SHIELD_SPECIFICATIONS: Record<
 > = {
 	medium: {
 		blockChance: [
-			{ maximum: 0.13, minimum: 0.1 },
-			{ maximum: 0.25, minimum: 0.22 },
+			{ maximum: 0.12, minimum: 0.1 },
+			{ maximum: 0.25, minimum: 0.23 },
 		],
 		burden: [
 			{ maximum: 6, minimum: 4 },
@@ -142,14 +142,14 @@ export const SHIELD_SPECIFICATIONS: Record<
 	small: {
 		blockChance: [
 			{ maximum: 0.06, minimum: 0.05 },
-			{ maximum: 0.15, minimum: 0.12 },
+			{ maximum: 0.15, minimum: 0.13 },
 		],
 		burden: [
 			{ maximum: 3, minimum: 2 },
 			{ maximum: 25, minimum: 23 },
 		],
 		Icon: IconShieldSmall,
-		price: { maximum: 3500, minimum: 2 },
+		price: { maximum: 3600, minimum: 2 },
 		staggerChance: [
 			{ maximum: 0.25, minimum: 0.23 },
 			{ maximum: 0.6, minimum: 0.55 },
@@ -161,8 +161,8 @@ export const SHIELD_SPECIFICATIONS: Record<
 	},
 	tower: {
 		blockChance: [
-			{ maximum: 0.2, minimum: 0.18 },
-			{ maximum: 0.35, minimum: 0.32 },
+			{ maximum: 0.2, minimum: 0.19 },
+			{ maximum: 0.35, minimum: 0.33 },
 		],
 		burden: [
 			{ maximum: 10, minimum: 8 },
@@ -227,7 +227,7 @@ export const WEAPON_MODIFIER = {
 		ability: 0.8,
 		burden: 1.1,
 		damage: 1,
-		price: 1.2,
+		price: 1.15,
 		rate: 1.1,
 		weight: 1.15,
 	},
@@ -235,7 +235,7 @@ export const WEAPON_MODIFIER = {
 		ability: 1.2,
 		burden: 1.25,
 		damage: 1.2,
-		price: 1.35,
+		price: 1.3,
 		rate: 1.15,
 		weight: 1.25,
 	},

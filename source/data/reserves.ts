@@ -31,7 +31,7 @@ export const RESERVES: Record<
 	},
 	stamina: {
 		attribute: "endurance",
-		baseAmount: 25,
+		baseAmount: 30,
 		baseRegenerationRate: 2300,
 		Icon: IconStamina,
 		maximumDelta: "staminaMaximum",

@@ -7,11 +7,11 @@ export const AFFIX_STRUCTURE_WEIGHTS: [AffixStructure, number][] = [
 	["prefix", 0.65],
 ]
 
-export const CORPSE_VALUE = 0.7
+export const CORPSE_VALUE = 0.75
 
 export const LOOT_MODIFIER = {
-	equalStage: 1,
-	lowerStage: 0.33,
+	equalStage: 0,
+	lowerStage: -0.6,
 }
 
 export const DEATH_STAGE_PENALTY = 1

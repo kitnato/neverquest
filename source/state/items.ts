@@ -14,7 +14,7 @@ import { essence } from "@neverquest/state/resources"
 import { getFromRange, getSigmoid, getTriangular } from "@neverquest/utilities/getters"
 import { withStateKey } from "@neverquest/utilities/helpers"
 
-import type { Infusable, Relic } from "@neverquest/types/unions"
+import type { Infusable, Inheritable, Relic } from "@neverquest/types/unions"
 
 // SELECTORS
 
@@ -79,10 +79,10 @@ export const munitions = withStateKey("munitions", key =>
 
 // ATOMS
 
-export const hasLootedLogEntry = withStateKey("hasLootedLogEntry", key =>
-	atom({
+export const hasLootedInheritable = withStateKey("hasLootedInheritable", key =>
+	atomFamily<boolean, Inheritable>({
 		default: false,
-		effects: [handleStorage({ key })],
+		effects: inheritable => [handleStorage({ key, parameter: inheritable })],
 		key,
 	}),
 )

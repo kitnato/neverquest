@@ -127,46 +127,45 @@ export const poisonMagnitude = withStateKey("poisonMagnitude", key =>
 
 export const regenerationAmount = withStateKey("regenerationAmount", key =>
 	selectorFamily({
-		get: (reserve: Reserve) =>
-			({ get }) =>
-				Math.max(
-					Math.round(RESERVES[reserve].regeneration * get(reserve === "health" ? healthMaximumPoisoned : staminaMaximumBlighted)),
-					GENERIC_MINIMUM,
-				),
+		get: (reserve: Reserve) => ({ get }) =>
+			Math.max(
+				Math.round(RESERVES[reserve].regeneration * get(reserve === "health" ? healthMaximumPoisoned : staminaMaximumBlighted)),
+				GENERIC_MINIMUM,
+			),
 		key,
 	}),
 )
 
 export const regenerationRate = withStateKey("regenerationRate", key =>
 	selectorFamily({
-		get: (reserve: Reserve) =>
-			({ get }) => {
-				const { baseRegenerationRate } = RESERVES[reserve]
+		get: (reserve: Reserve) => ({ get }) => {
+			const { baseRegenerationRate } = RESERVES[reserve]
 
-				return Math.round(
-					baseRegenerationRate
-					+ baseRegenerationRate * get(attributeStatistic("vigor")),
-				)
-			},
+			return Math.round(
+				baseRegenerationRate
+				+ baseRegenerationRate * get(attributeStatistic("vigor")),
+			)
+		},
 		key,
 	}),
 )
 
 export const reserveMaximum = withStateKey("reserveMaximum", key =>
 	selectorFamily({
-		get: (reserve: Reserve) =>
-			({ get }) => {
-				const { attribute } = RESERVES[reserve]
-				const attributeStatisticValue = get(attributeStatistic(attribute))
-				const questsBonusValue = get(questsBonus(`${reserve}Bonus`))
+		get: (reserve: Reserve) => ({ get }) => {
+			const { attribute } = RESERVES[reserve]
+			const attributeStatisticValue = get(attributeStatistic(attribute))
+			const questsBonusValue = get(questsBonus(`${reserve}Bonus`))
 
-				return (
-					attributeStatisticValue
-					+ (questsBonusValue === 0
+			return (
+				attributeStatisticValue
+				+ (
+					questsBonusValue === 0
 						? 0
-						: Math.max(Math.round(attributeStatisticValue * questsBonusValue), GENERIC_MINIMUM))
+						: Math.max(Math.round(attributeStatisticValue * questsBonusValue), GENERIC_MINIMUM)
 				)
-			},
+			)
+		},
 		key,
 	}),
 )

@@ -110,7 +110,7 @@ export const MONSTER_DAMAGE = {
 	},
 	menace: {
 		maximum: 0.8,
-		minimum: 0.65,
+		minimum: 0.6,
 		requiredStage: RETIREMENT_STAGE + 1,
 	},
 	progressModifier: 0.01,
@@ -126,7 +126,7 @@ export const MONSTER_HEALTH = {
 	},
 	menace: {
 		maximum: 3.5,
-		minimum: 1.5,
+		minimum: 1.4,
 		requiredStage: RETIREMENT_STAGE + 1,
 	},
 	progressModifier: 0.02,

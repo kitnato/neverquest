@@ -85,7 +85,12 @@ export function DodgeChance() {
 
 												<td>
 													<Stack gap={1}>
-														<span>{formatNumber({ format: "multiplier", value: dodgeBonus })}</span>
+														<span>
+															{formatNumber({
+																format: "multiplier",
+																value: dodgeBonus,
+															})}
+														</span>
 
 														<IconDisplay Icon={IconHealth} iconProps={{ className: "small" }}>
 															<span>

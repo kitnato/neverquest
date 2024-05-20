@@ -452,6 +452,7 @@ export type StateKey =
 	| "wildernesses"
 
 export const TRAIT_TYPES = [
+	"acanthaceous",
 	"brawler",
 	"bruiser",
 	"colossus",

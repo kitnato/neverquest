@@ -10,6 +10,7 @@ import {
 	RECOVERY_RATE,
 } from "@neverquest/data/statistics"
 import {
+	ACANTHACEOUS,
 	BRAWLER_DAMAGE_BONUS,
 	BRUISER,
 	INOCULATED_DEFLECTION_BASE,
@@ -17,7 +18,7 @@ import {
 	TANK_PROTECTION_BONUS,
 } from "@neverquest/data/traits"
 import { bleed, bleedChance, staggerChance, stunChance } from "@neverquest/state/ailments"
-import { attributeStatistic } from "@neverquest/state/attributes"
+import { attributeStatistic, powerLevel } from "@neverquest/state/attributes"
 import { armor, elementalEffects, shield, weapon } from "@neverquest/state/gear"
 import { infusionEffect } from "@neverquest/state/items"
 import { masteryStatistic } from "@neverquest/state/masteries"
@@ -305,7 +306,15 @@ export const stunRating = withStateKey("stunRating", key =>
 
 export const thorns = withStateKey("thorns", key =>
 	selector({
-		get: ({ get }) => Object.values(get(elementalEffects).armor).reduce((sum, { damage }) => sum + damage, 0),
+		get: ({ get }) => {
+			const isTraitAcquiredAcanthaceous = get(isTraitAcquired("acanthaceous"))
+
+			return Math.round(
+				(isTraitAcquiredAcanthaceous ? get(powerLevel) : 0)
+				+ Object.values(get(elementalEffects).armor).reduce((sum, { damage }) => sum + damage, 0)
+				* (1 + (isTraitAcquiredAcanthaceous ? ACANTHACEOUS : 0)),
+			)
+		},
 		key,
 	}),
 )

@@ -238,7 +238,10 @@ export function getElementalEffects({
 			effects[elemental] = {
 				damage: Math.max(
 					Math.round(
-						(armorEffect ? gear.level : gear.damage) * getFromRange({ factor: (amount - 1) / (GEMS_MAXIMUM - 1), ...armorEffect ? damageArmor : damageWeapon }),
+						(armorEffect ? gear.level : gear.damage) * getFromRange({
+							factor: (amount - 1) / (GEMS_MAXIMUM - 1),
+							...armorEffect ? damageArmor : damageWeapon,
+						}),
 					),
 					GENERIC_MINIMUM,
 				),
@@ -544,8 +547,8 @@ export function getTotalElementalEffects({
 	modifier: number
 }) {
 	return {
-		damage: Math.round(damage + damage * modifier),
-		duration: Math.round(duration + duration * modifier),
+		damage: Math.round(damage * (1 + modifier)),
+		duration: Math.round(duration * (1 + modifier)),
 	}
 }
 

@@ -36,12 +36,9 @@ import { range } from "@neverquest/state/statistics"
 import { isFinality } from "@neverquest/types/type-guards"
 import { formatNumber } from "@neverquest/utilities/formatters"
 import {
-	getArmorRanges,
-	getAttributePointCost,
 	getDamagePerRate,
 	getFromRange,
 	getLinearMapping,
-	getMeleeRanges,
 	getPerkEffect,
 	getSigmoid,
 	getTriangular,
@@ -203,50 +200,6 @@ export const monsterDamage = withStateKey("monsterDamage", key =>
 				return finality[encounterValue]
 			}
 
-			[1, 6, 11, 16, 21, 26, 31, 36, 41, 46, 51, 56, 61, 66, 71, 74].forEach((s) => {
-				const l = getArmorRanges({
-					factor: getSigmoid(s),
-					gearClass: "light",
-				}).protection
-				const r = getArmorRanges({
-					factor: getSigmoid(s),
-					gearClass: "reinforced",
-				}).protection
-				const h = getArmorRanges({
-					factor: getSigmoid(s),
-					gearClass: "heavy",
-				}).protection
-				const bench = Math.round((r.maximum + r.minimum) / 2)
-				const d = Math.round((base + getTriangular(s) / attenuation) * (
-					1
-					+ Math.min(get(progress), PROGRESS.maximum) * progressModifier
-					+ (encounterValue === "boss" ? bossModifier : 0)
-					+ (
-						s >= requiredStage
-							? getFromRange({
-								factor: getSigmoid(
-									getLinearMapping({ offset: requiredStage, stage: s }),
-								),
-								maximum,
-								minimum,
-							})
-							: 0
-					)
-				))
-
-				console.log(
-					`stage${s} -`,
-					"monster",
-					d,
-					"armor",
-					Math.round((l.maximum + l.minimum) / 2),
-					bench,
-					Math.round((h.maximum + h.minimum) / 2),
-					"diff",
-					d - bench,
-				)
-			})
-
 			return Math.round((base + getTriangular(stageValue) / attenuation) * (
 				1
 				+ Math.min(get(progress), PROGRESS.maximum) * progressModifier
@@ -316,41 +269,6 @@ export const monsterHealthMaximum = withStateKey("monsterHealthMaximum", key =>
 				return finality[encounterValue]
 			}
 
-			[1, 6, 11, 16, 21, 26, 31, 36, 41, 46, 51, 56, 61, 66, 71, 74].forEach((s) => {
-				const w = getMeleeRanges({
-					factor: getSigmoid(s),
-					gearClass: "blunt",
-					grip: "one-handed",
-				}).damage
-				const bench = Math.round((w.maximum + w.minimum) / 2)
-				const h = Math.round((base + getTriangular(s) / attenuation) * (
-					1
-					+ Math.min(get(progress), PROGRESS.maximum) * progressModifier
-					+ (encounterValue === "boss" ? bossModifier : 0)
-					+ (
-						s >= requiredStage
-							? getFromRange({
-								factor: getSigmoid(
-									getLinearMapping({ offset: requiredStage, stage: s }),
-								),
-								maximum,
-								minimum,
-							})
-							: 0
-					)
-				))
-
-				console.log(
-					`stage${s} -`,
-					"monster",
-					h,
-					"weapon",
-					bench,
-					"diff",
-					h / bench,
-				)
-			})
-
 			return Math.round((base + getTriangular(stageValue) / attenuation) * (
 				1
 				+ Math.min(get(progress), PROGRESS.maximum) * progressModifier
@@ -382,23 +300,6 @@ export const monsterLoot = withStateKey("monsterLoot", key =>
 			const isMementoOwned = get(ownedItem("memento")) !== undefined
 			const stageValue = get(stage)
 			const stageHighestValue = get(stageHighest)
-			const test = [1, 6, 11, 16, 21, 26, 31, 36, 41, 46, 51, 56, 61, 66, 71, 74]
-
-			test.forEach((s) => {
-				console.log(
-					`stage/level ${s} -`,
-					"essence",
-					Math.round((base + getTriangular(s) / attenuation) * (
-						1
-						+ Math.min(get(progress), PROGRESS.maximum) * progressModifier
-						+ (encounterValue === "boss" ? bossModifier : 0)
-						+ getPerkEffect({ generation: get(generation), perk: "essenceBonus" })
-						+ (s < stageHighestValue ? lowerStage : equalStage)
-					)),
-					"cost",
-					getAttributePointCost(s),
-				)
-			})
 
 			return {
 				essence: isFinality(encounterValue)

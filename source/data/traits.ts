@@ -1,3 +1,4 @@
+import IconAcanthaceous from "@neverquest/icons/acanthaceous.svg?react"
 import IconArmorNone from "@neverquest/icons/armor-none.svg?react"
 import IconArmor from "@neverquest/icons/armor.svg?react"
 import IconBleeding from "@neverquest/icons/bleeding.svg?react"
@@ -12,10 +13,12 @@ import IconDistance from "@neverquest/icons/distance.svg?react"
 import IconDodgeChance from "@neverquest/icons/dodge-chance.svg?react"
 import IconExecution from "@neverquest/icons/execution.svg?react"
 import IconExecutioner from "@neverquest/icons/executioner.svg?react"
+import IconGems from "@neverquest/icons/gems.svg?react"
 import IconHealth from "@neverquest/icons/health.svg?react"
 import IconInoculated from "@neverquest/icons/inoculated.svg?react"
 import IconNudist from "@neverquest/icons/nudist.svg?react"
 import IconOneHanded from "@neverquest/icons/one-handed.svg?react"
+import IconPowerLevel from "@neverquest/icons/power-level.svg?react"
 import IconProtection from "@neverquest/icons/protection.svg?react"
 import IconRanged from "@neverquest/icons/ranged.svg?react"
 import IconSharpshooter from "@neverquest/icons/sharpshooter.svg?react"
@@ -27,6 +30,7 @@ import IconStamina from "@neverquest/icons/stamina.svg?react"
 import IconStrength from "@neverquest/icons/strength.svg?react"
 import IconStunChance from "@neverquest/icons/stun-chance.svg?react"
 import IconTank from "@neverquest/icons/tank.svg?react"
+import IconThorns from "@neverquest/icons/thorns.svg?react"
 import IconTwoHanded from "@neverquest/icons/two-handed.svg?react"
 import IconWeaponDamage from "@neverquest/icons/weapon-damage.svg?react"
 import IconWeaponNone from "@neverquest/icons/weapon-none.svg?react"
@@ -35,6 +39,8 @@ import { formatNumber } from "@neverquest/utilities/formatters"
 import type { SVGIcon } from "@neverquest/types/components"
 import type { Description } from "@neverquest/types/ui"
 import type { Skill, Trait } from "@neverquest/types/unions"
+
+export const ACANTHACEOUS = 0.5
 
 export const BRAWLER_DAMAGE_BONUS = 0.25
 
@@ -59,6 +65,15 @@ export const TRAITS: Record<
 		requiredSkill?: Skill
 	}
 > = {
+	acanthaceous: {
+		description: `Base # thorns is determined by # power level and thorns damage from # gems is increased by ${formatNumber({
+			decimals: 0,
+			format: "percentage",
+			value: ACANTHACEOUS,
+		})}.`,
+		descriptionIcons: [IconThorns, IconPowerLevel, IconGems],
+		Icon: IconAcanthaceous,
+	},
 	brawler: {
 		description: `Being # unshielded increases # one-handed melee # weapon damage by ${formatNumber({
 			decimals: 0,

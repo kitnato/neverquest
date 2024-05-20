@@ -188,7 +188,7 @@ export const GEM_BASE = {
 	weight: 1,
 }
 export const GEM_ENHANCEMENT_RANGE = {
-	maximum: 1,
+	maximum: 0.5,
 	minimum: 0.1,
 }
 export const GEM_FITTING_COST_RANGE = {

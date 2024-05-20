@@ -5,15 +5,14 @@ import { useRecoilValue, useResetRecoilState } from "recoil"
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
 import { DetailsTable } from "@neverquest/components/DetailsTable"
 import { IconDisplay } from "@neverquest/components/IconDisplay"
-import { LABEL_EMPTY, LABEL_NO_PENALTY, POPOVER_TRIGGER } from "@neverquest/data/general"
+import { ArmorBurdenDisplay } from "@neverquest/components/Statistics/ArmorBurdenDisplay"
+import { LABEL_EMPTY, POPOVER_TRIGGER } from "@neverquest/data/general"
 import { TANK_PROTECTION_BONUS } from "@neverquest/data/traits"
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import { useDeltaText } from "@neverquest/hooks/useDeltaText"
 import IconArmor from "@neverquest/icons/armor.svg?react"
 import IconBurden from "@neverquest/icons/burden.svg?react"
 import IconProtection from "@neverquest/icons/protection.svg?react"
-import IconStalwart from "@neverquest/icons/stalwart.svg?react"
-import IconStamina from "@neverquest/icons/stamina.svg?react"
 import IconTank from "@neverquest/icons/tank.svg?react"
 import { armor, shield } from "@neverquest/state/gear"
 import { questProgress } from "@neverquest/state/quests"
@@ -27,7 +26,6 @@ import { getAnimationClass } from "@neverquest/utilities/getters"
 export function Protection() {
 	const armorValue = useRecoilValue(armor)
 	const isShowingProtection = useRecoilValue(isShowing("protection"))
-	const isTraitAcquiredStalwart = useRecoilValue(isTraitAcquired("stalwart"))
 	const isTraitAcquiredTank = useRecoilValue(isTraitAcquired("tank"))
 	const protectionValue = useRecoilValue(protection)
 	const shieldValue = useRecoilValue(shield)
@@ -107,20 +105,7 @@ export function Protection() {
 												</td>
 
 												<td>
-													{isTraitAcquiredStalwart
-														? (
-															<IconDisplay Icon={IconStalwart} iconProps={{ className: "small" }}>
-																<span>{LABEL_NO_PENALTY}</span>
-															</IconDisplay>
-														)
-														: (
-															<IconDisplay Icon={IconStamina} iconProps={{ className: "small" }}>
-																<span>
-																	-
-																	{formatNumber({ value: burden })}
-																</span>
-															</IconDisplay>
-														)}
+													<ArmorBurdenDisplay />
 												</td>
 											</tr>
 										)}

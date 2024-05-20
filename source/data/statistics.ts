@@ -18,7 +18,10 @@ export const LOOTING_RATE = {
 	"ender hook": 600,
 }
 
-export const PARRY_ABSORPTION = 0.33
-export const PARRY_DAMAGE = 0.25
+export const PARRY = {
+	avoidance: 0.1,
+	avoidanceAttenuation: 0.267, // maximum of 30% avoidance and 90% reflection
+	damage: 0.2,
+}
 
 export const RECOVERY_RATE = 1300

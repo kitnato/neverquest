@@ -5,8 +5,8 @@ import { BadgeMaximum } from "@neverquest/components/BadgeMaximum"
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
 import { DetailsTable } from "@neverquest/components/DetailsTable"
 import { IconDisplay } from "@neverquest/components/IconDisplay"
+import { ArmorBurdenDisplay } from "@neverquest/components/Statistics/ArmorBurdenDisplay"
 import { ATTRIBUTES } from "@neverquest/data/attributes"
-import { LABEL_NO_PENALTY } from "@neverquest/data/general"
 import { NUDIST } from "@neverquest/data/traits"
 import { useDeltaText } from "@neverquest/hooks/useDeltaText"
 import IconAgility from "@neverquest/icons/agility.svg?react"
@@ -14,10 +14,8 @@ import IconBurden from "@neverquest/icons/burden.svg?react"
 import IconDodgeChance from "@neverquest/icons/dodge-chance.svg?react"
 import IconHealth from "@neverquest/icons/health.svg?react"
 import IconNudist from "@neverquest/icons/nudist.svg?react"
-import IconStalwart from "@neverquest/icons/stalwart.svg?react"
-import IconStamina from "@neverquest/icons/stamina.svg?react"
 import { attributeStatistic } from "@neverquest/state/attributes"
-import { armor } from "@neverquest/state/gear"
+import { armor, armorBurden } from "@neverquest/state/gear"
 import { healthMaximumPoisoned } from "@neverquest/state/reserves"
 import { dodgeChance } from "@neverquest/state/statistics"
 import { isTraitAcquired } from "@neverquest/state/traits"
@@ -27,13 +25,11 @@ import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function DodgeChance() {
 	const armorValue = useRecoilValue(armor)
+	const armorBurdenValue = useRecoilValue(armorBurden)
 	const agility = useRecoilValue(attributeStatistic("agility"))
 	const dodgeChanceValue = useRecoilValue(dodgeChance)
 	const healthMaximumPoisonedValue = useRecoilValue(healthMaximumPoisoned)
 	const isTraitAcquiredNudist = useRecoilValue(isTraitAcquired("nudist"))
-	const isTraitAcquiredStalwart = useRecoilValue(isTraitAcquired("stalwart"))
-
-	const { burden } = armorValue
 	const { dodgeBonus, healAmount } = NUDIST
 	const formattedDodgeChance = formatNumber({ format: "percentage", value: dodgeChanceValue })
 
@@ -103,7 +99,7 @@ export function DodgeChance() {
 											</tr>
 										)}
 
-										{burden > 0 && (
+										{armorBurdenValue > 0 && (
 											<tr>
 												<td>
 													<IconDisplay Icon={IconBurden} iconProps={{ className: "small" }}>
@@ -112,20 +108,7 @@ export function DodgeChance() {
 												</td>
 
 												<td>
-													{isTraitAcquiredStalwart
-														? (
-															<IconDisplay Icon={IconStalwart} iconProps={{ className: "small" }}>
-																<span>{LABEL_NO_PENALTY}</span>
-															</IconDisplay>
-														)
-														: (
-															<IconDisplay Icon={IconStamina} iconProps={{ className: "small" }}>
-																<span>
-																	-
-																	{formatNumber({ value: burden })}
-																</span>
-															</IconDisplay>
-														)}
+													<ArmorBurdenDisplay />
 												</td>
 											</tr>
 										)}

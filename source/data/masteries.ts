@@ -1,4 +1,5 @@
 import { LEVELLING_MAXIMUM } from "@neverquest/data/general"
+import { PARRY } from "@neverquest/data/statistics"
 import IconBleeding from "@neverquest/icons/bleeding.svg?react"
 import IconBlockChance from "@neverquest/icons/block-chance.svg?react"
 import IconBlunt from "@neverquest/icons/blunt.svg?react"
@@ -11,7 +12,9 @@ import IconHealth from "@neverquest/icons/health.svg?react"
 import IconMarksmanship from "@neverquest/icons/marksmanship.svg?react"
 import IconMight from "@neverquest/icons/might.svg?react"
 import IconMonsterDamage from "@neverquest/icons/monster-damage.svg?react"
+import IconParryAvoidance from "@neverquest/icons/parry-avoidance.svg?react"
 import IconParryChance from "@neverquest/icons/parry-chance.svg?react"
+import IconParryDamage from "@neverquest/icons/parry-damage.svg?react"
 import IconPiercing from "@neverquest/icons/piercing.svg?react"
 import IconRanged from "@neverquest/icons/ranged.svg?react"
 import IconRecovery from "@neverquest/icons/recovery.svg?react"
@@ -56,10 +59,10 @@ export const MASTERIES: Record<
 	},
 	finesse: {
 		base: 0,
-		description: "Affects damage absorbed and reflected when # parrying.",
-		descriptionIcons: [IconParryChance],
+		description: "Affects damage # avoided and # reflected when # parrying.",
+		descriptionIcons: [IconParryAvoidance, IconParryDamage, IconParryChance],
 		Icon: IconFinesse,
-		increment: 1 / LEVELLING_MAXIMUM,
+		increment: (0.9 - PARRY.damage) / LEVELLING_MAXIMUM,
 		instructionIcons: [IconSlashing],
 		instructions: "Trains when dealing damage with a # slashing weapon.",
 		requiredSkill: "escrime",
@@ -75,7 +78,7 @@ export const MASTERIES: Record<
 		requiredSkill: "archery",
 	},
 	might: {
-		base: 1800,
+		base: 1500,
 		description: "Affects # stun duration.",
 		descriptionIcons: [IconStunned],
 		Icon: IconMight,
@@ -89,13 +92,13 @@ export const MASTERIES: Record<
 		description: "Affects # recovery rate.",
 		descriptionIcons: [IconRecovery],
 		Icon: IconResilience,
-		increment: 1 / LEVELLING_MAXIMUM,
+		increment: -1 / LEVELLING_MAXIMUM,
 		instructionIcons: [IconHealth, IconMonsterDamage],
 		instructions: "Trains when losing # health on being # struck.",
 		requiredSkill: "armorcraft",
 	},
 	stability: {
-		base: 1800,
+		base: 1500,
 		description: "Affects # stagger duration.",
 		descriptionIcons: [IconStaggered],
 		Icon: IconStability,

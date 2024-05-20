@@ -266,7 +266,7 @@ export const WEAPON_SPECIFICATIONS: Record<
 	blunt: {
 		ability: "stun",
 		abilityChance: [
-			{ maximum: 0.15, minimum: 0.12 },
+			{ maximum: 0.2, minimum: 0.17 },
 			{ maximum: 0.4, minimum: 0.37 },
 		],
 		IconAbility: IconStunChance,
@@ -275,8 +275,8 @@ export const WEAPON_SPECIFICATIONS: Record<
 	piercing: {
 		ability: "bleed",
 		abilityChance: [
-			{ maximum: 0.2, minimum: 0.17 },
-			{ maximum: 0.4, minimum: 0.38 },
+			{ maximum: 0.15, minimum: 0.12 },
+			{ maximum: 0.35, minimum: 0.33 },
 		],
 		IconAbility: IconBleedChance,
 		IconGearClass: IconPiercing,
@@ -284,8 +284,8 @@ export const WEAPON_SPECIFICATIONS: Record<
 	slashing: {
 		ability: "parry",
 		abilityChance: [
-			{ maximum: 0.15, minimum: 0.12 },
-			{ maximum: 0.35, minimum: 0.33 },
+			{ maximum: 0.12, minimum: 0.1 },
+			{ maximum: 0.3, minimum: 0.28 },
 		],
 		IconAbility: IconParryChance,
 		IconGearClass: IconSlashing,

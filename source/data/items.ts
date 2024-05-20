@@ -230,7 +230,7 @@ export const INFUSABLES: Record<
 			},
 			ID: "",
 			name: "eldritch codex",
-			price: 5000,
+			price: 3666,
 			weight: 13,
 		},
 		tooltip: "Life leech",
@@ -291,7 +291,7 @@ export const RELICS: Record<
 		item: {
 			ID: "",
 			name: "automincer",
-			price: 5000,
+			price: 4000,
 			weight: 20,
 		},
 	},

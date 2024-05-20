@@ -5,12 +5,11 @@ import { GENERIC_MINIMUM, PERCENTAGE } from "@neverquest/data/general"
 import {
 	BLEED,
 	DEFLECTION_MAXIMUM,
-	PARRY_ABSORPTION,
-	PARRY_DAMAGE,
+	PARRY,
 	RECOVERY_RATE,
 } from "@neverquest/data/statistics"
 import {
-	ACANTHACEOUS,
+	ACANTHACEOUS_GEM_EFFECT_BONUS,
 	BRAWLER_DAMAGE_BONUS,
 	BRUISER,
 	INOCULATED_DEFLECTION_BASE,
@@ -106,7 +105,7 @@ export const criticalDamage = withStateKey("criticalDamage", key =>
 
 export const criticalRating = withStateKey("criticalRating", key =>
 	selector({
-		get: ({ get }) => Math.round((get(criticalChance) * PERCENTAGE * 2) + (get(criticalDamage) * PERCENTAGE)),
+		get: ({ get }) => Math.round((get(criticalChance) * PERCENTAGE) + (get(criticalDamage) * PERCENTAGE)),
 		key,
 	}),
 )
@@ -130,8 +129,7 @@ export const damage = withStateKey("damage", key =>
 					get(isTraitAcquired("brawler")) && isUnshielded(get(shield)) && (isMelee(weaponValue) || isWeaponUnarmed) && (weaponValue.grip === "one-handed" || get(isTraitAcquired("colossus")))
 						? BRAWLER_DAMAGE_BONUS
 						: 0
-				)
-				)
+				))
 				// Elemental damage from any gems.
 				+ Object.values(get(elementalEffects).weapon).reduce((sum, { damage }) => sum + damage, 0)
 				// Current stamina portion from bruiser trait, if applicable.
@@ -215,9 +213,9 @@ export const lifeLeech = withStateKey("lifeLeech", key =>
 	}),
 )
 
-export const parryAbsorption = withStateKey("parryAbsorption", key =>
+export const parryAvoidance = withStateKey("parryAvoidance", key =>
 	selector({
-		get: ({ get }) => PARRY_ABSORPTION + get(masteryStatistic("finesse")),
+		get: ({ get }) => PARRY.avoidance + get(masteryStatistic("finesse")) * PARRY.avoidanceAttenuation,
 		key,
 	}),
 )
@@ -235,7 +233,7 @@ export const parryChance = withStateKey("parryChance", key =>
 
 export const parryDamage = withStateKey("parryDamage", key =>
 	selector({
-		get: ({ get }) => PARRY_DAMAGE + get(masteryStatistic("finesse")),
+		get: ({ get }) => PARRY.damage + get(masteryStatistic("finesse")),
 		key,
 	}),
 )
@@ -245,7 +243,7 @@ export const parryRating = withStateKey("parryRating", key =>
 		get: ({ get }) => get(parryChance) === 0
 			? 0
 			: Math.round(
-				get(parryAbsorption) * PERCENTAGE + get(parryChance) * PERCENTAGE + get(parryDamage) * PERCENTAGE,
+				get(parryAvoidance) * PERCENTAGE + get(parryChance) * PERCENTAGE + get(parryDamage) * PERCENTAGE,
 			),
 		key,
 	}),
@@ -272,7 +270,7 @@ export const protection = withStateKey("protection", key =>
 
 export const recoveryRate = withStateKey("recoveryRate", key =>
 	selector({
-		get: ({ get }) => Math.max(RECOVERY_RATE - RECOVERY_RATE * get(masteryStatistic("resilience")), 0),
+		get: ({ get }) => RECOVERY_RATE * (1 + get(masteryStatistic("resilience"))),
 		key,
 	}),
 )
@@ -312,7 +310,7 @@ export const thorns = withStateKey("thorns", key =>
 			return Math.round(
 				(isTraitAcquiredAcanthaceous ? get(powerLevel) : 0)
 				+ Object.values(get(elementalEffects).armor).reduce((sum, { damage }) => sum + damage, 0)
-				* (1 + (isTraitAcquiredAcanthaceous ? ACANTHACEOUS : 0)),
+				* (1 + (isTraitAcquiredAcanthaceous ? ACANTHACEOUS_GEM_EFFECT_BONUS : 0)),
 			)
 		},
 		key,

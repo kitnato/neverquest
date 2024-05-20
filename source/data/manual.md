@@ -112,7 +112,7 @@ A value determined by:
 
 Only applies if a [piercing](#piercing-weapons) weapon is equipped.
 
-Bleeding damage is increased by mastering [cruelty](#cruelty).
+Bleeding damage can be increased by mastering [cruelty](#cruelty).
 
 Requires the [anatomy](#anatomy) skill.
 
@@ -148,7 +148,7 @@ Requires the [evasion](#evasion) skill.
 
 A percentage determining the amount of monster health required before the next attack will kill it outright. Only applies if a [two-handed](#two-handed) weapon is equipped.
 
-This threshold is increased by mastering [butchery](#butchery).
+This threshold can be increased by mastering [butchery](#butchery).
 
 Requires the [siegecraft](#siegecraft) skill.
 
@@ -160,9 +160,9 @@ The restoration amount per cycle is a small percentage of maximum health. The ra
 
 #### Parry rating
 
-A value determined by the chance of successfully parrying when defending, along with the damage that is absorbed (after [protection](#protection)) and reflected back. Only occurs if a [slashing](#slashing-weapons) weapon is equipped.
+A value determined by the chance of successfully parrying when defending, along with the damage (after [protection](#protection)) that is avoided and reflected back. Only occurs if a [slashing](#slashing-weapons) weapon is equipped.
 
-The absorbed and reflected damage is increased by mastering [finesse](#finesse).
+The amount of damage avoided and reflected can be increased by mastering [finesse](#finesse).
 
 Requires the [escrime](#escrime) skill.
 
@@ -745,7 +745,7 @@ While at a [distance](#range), all attacks with a [ranged](#ranged-weapons) weap
 
 #### Stalwart
 
-There are no stamina costs associated with wearing armor.
+Stamina costs, i.e. the burden associated with wearing [armor](#armor) are lower.
 
 #### Tank
 

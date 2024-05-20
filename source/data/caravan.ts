@@ -66,7 +66,7 @@ export const CREW: Record<
 		description: "Crafts and identifies # gear.",
 		descriptionIcons: [IconGear],
 		Icon: IconBlacksmith,
-		interaction: "Craft",
+		interaction: "Forge",
 		monologues: {
 			1: "In need of better gear?",
 			[LEVELLING_END]: MONOLOGUE_EMPTY,
@@ -77,7 +77,7 @@ export const CREW: Record<
 		shows: ["gearClass", "gearLevel"],
 	},
 	fletcher: {
-		description: "Provides # ranged weapons and # munitions.",
+		description: "Makes # ranged weapons and # munitions.",
 		descriptionIcons: [IconRanged, IconMunitions],
 		Icon: IconFletcher,
 		interaction: "Craft",
@@ -273,7 +273,7 @@ export const MERCHANT_OFFERS: Record<
 		offer: RELICS.automincer.item,
 	},
 	40: {
-		monologue: "A dark wanderer passed through and sold me a strange book ...",
+		monologue: "A dark wanderer passed through and sold me a strange book.",
 		offer: INFUSABLES["eldritch codex"].item,
 	},
 	[POISON.requiredStage]: {

@@ -109,7 +109,7 @@ export function CraftMunitions() {
 								}}
 								variant="outline-dark"
 							>
-								<span>Craft</span>
+								<span>Make</span>
 							</Button>
 						</div>
 					</OverlayTrigger>

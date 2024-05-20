@@ -68,7 +68,6 @@ export function Recovery() {
 
 										<td>
 											<span>
-												-
 												{formatNumber({
 													format: "percentage",
 													value: resilienceValue,
@@ -80,7 +79,7 @@ export function Recovery() {
 							</PopoverBody>
 						</Popover>
 					)}
-					trigger={resilienceValue > 0 ? POPOVER_TRIGGER : []}
+					trigger={resilienceValue !== 0 ? POPOVER_TRIGGER : []}
 				>
 					<div className="w-100">
 						<RecoveryMeter />

@@ -6,6 +6,7 @@ import {
 	SHIELD_NONE,
 	WEAPON_NONE,
 } from "@neverquest/data/gear"
+import { STALWART_BURDEN_REDUCTION } from "@neverquest/data/traits"
 import { handleStorage } from "@neverquest/state/effects/handleStorage"
 import { isTraitAcquired } from "@neverquest/state/traits"
 import { isMelee, isUnarmed } from "@neverquest/types/type-guards"
@@ -15,6 +16,17 @@ import { withStateKey } from "@neverquest/utilities/helpers"
 import type { Armor, GemItem, Shield, Weapon } from "@neverquest/types"
 
 // SELECTORS
+
+export const armorBurden = withStateKey("armorBurden", key =>
+	selector({
+		get: ({ get }) => {
+			const { burden } = get(armor)
+
+			return get(isTraitAcquired("stalwart")) ? Math.round(burden * STALWART_BURDEN_REDUCTION) : burden
+		},
+		key,
+	}),
+)
 
 export const elementalEffects = withStateKey("elementalEffects", key =>
 	selector({

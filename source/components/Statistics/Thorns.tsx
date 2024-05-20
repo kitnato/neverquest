@@ -6,7 +6,7 @@ import { DetailsTable } from "@neverquest/components/DetailsTable"
 import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { ElementalDetails } from "@neverquest/components/Statistics/ElementalDetails"
 import { LABEL_SEPARATOR } from "@neverquest/data/general"
-import { ACANTHACEOUS } from "@neverquest/data/traits"
+import { ACANTHACEOUS_GEM_EFFECT_BONUS } from "@neverquest/data/traits"
 import { useDeltaText } from "@neverquest/hooks/useDeltaText"
 import IconAcanthaceous from "@neverquest/icons/acanthaceous.svg?react"
 import IconThorns from "@neverquest/icons/thorns.svg?react"
@@ -62,7 +62,7 @@ export function Thorns() {
 																		{formatNumber({
 																			decimals: 1,
 																			format: "multiplier",
-																			value: ACANTHACEOUS,
+																			value: ACANTHACEOUS_GEM_EFFECT_BONUS,
 																		})}
 																	</span>
 

@@ -19,7 +19,7 @@ import {
 	recoveryDuration,
 	statusElement,
 } from "@neverquest/state/character"
-import { armor, shield, weapon } from "@neverquest/state/gear"
+import { armor, armorBurden, shield, weapon } from "@neverquest/state/gear"
 import { ownedItem } from "@neverquest/state/inventory"
 import { tears } from "@neverquest/state/items"
 import { masteryStatistic } from "@neverquest/state/masteries"
@@ -44,7 +44,7 @@ import {
 	blockChance,
 	deflectionChance,
 	dodgeChance,
-	parryAbsorption,
+	parryAvoidance,
 	parryChance,
 	parryDamage,
 	protection,
@@ -75,12 +75,10 @@ export function useDefend() {
 			() => {
 				const get = getSnapshotGetter(snapshot)
 
-				const armorValue = get(armor)
-				const { burden: armorBurden } = armorValue
+				const armorBurdenValue = get(armorBurden)
 				const shieldValue = get(shield)
 				const { burden: shieldBurden } = shieldValue
 				const canBlockOrStaggerValue = get(canBlockOrStagger)
-				const incursArmorBurden = !get(isTraitAcquired("stalwart")) && armorBurden > 0
 				const ownedItemLacrimatory = get(ownedItem("lacrimatory"))
 				const canGatherTears = ownedItemLacrimatory !== undefined && get(tears) < TEARS_MAXIMUM
 
@@ -122,11 +120,9 @@ export function useDefend() {
 							value: "DODGED",
 						})
 
-						if (incursArmorBurden) {
-							changeStamina({ value: -armorBurden })
-						}
+						changeStamina({ value: -armorBurdenValue })
 
-						if (get(isTraitAcquired("nudist")) && isUnarmored(armorValue)) {
+						if (get(isTraitAcquired("nudist")) && isUnarmored(get(armor))) {
 							const healthGain = Math.round(get(healthMaximumPoisoned) * NUDIST.healAmount)
 
 							changeHealth({
@@ -154,7 +150,7 @@ export function useDefend() {
 							},
 							{
 								color: "text-danger",
-								value: `(${armorBurden})`,
+								value: `(${armorBurdenValue})`,
 							},
 						)
 
@@ -177,15 +173,13 @@ export function useDefend() {
 				let hasStaggered = !hasParried && Math.random() <= get(staggerChance)
 				let healthDamage = totalDamage > 0 ? totalDamage : 0
 				let monsterHealthDamage = 0
-				let staminaDamage = 0
+				let staminaCost = 0
 
 				// If parrying occurs, check if it's possible.
 				if (hasParried) {
 					if (get(canAttackOrParry)) {
-						const reflectedDamage = Math.round(monsterDamageAilingValue * get(parryDamage))
-
-						healthDamage -= Math.round(healthDamage * get(parryAbsorption))
-						monsterHealthDamage += reflectedDamage
+						healthDamage = Math.round(healthDamage * (1 - get(parryAvoidance)))
+						monsterHealthDamage += Math.round(healthDamage * get(parryDamage))
 
 						progressQuest({ quest: "parrying" })
 
@@ -220,7 +214,7 @@ export function useDefend() {
 				if (hasBlocked) {
 					if (canBlockOrStaggerValue) {
 						healthDamage = 0
-						staminaDamage += shieldBurden
+						staminaCost += shieldBurden
 
 						deltaHealth.push({
 							color: "text-secondary",
@@ -250,7 +244,7 @@ export function useDefend() {
 
 				if (hasStaggered) {
 					if (canBlockOrStaggerValue) {
-						staminaDamage += shieldBurden
+						staminaCost += shieldBurden
 
 						set(monsterAilmentDuration("staggered"), get(masteryStatistic("stability")))
 
@@ -287,9 +281,7 @@ export function useDefend() {
 						})
 					}
 
-					if (incursArmorBurden) {
-						staminaDamage += armorBurden
-					}
+					staminaCost += armorBurdenValue
 				}
 
 				// If already poisoned, check if blighting has occurred and if it's been deflected.
@@ -391,7 +383,7 @@ export function useDefend() {
 
 				// Take any damage and any stamina costs.
 				changeHealth({ contents: deltaHealth, value: -healthDamage })
-				changeStamina({ contents: deltaStamina, value: -staminaDamage })
+				changeStamina({ contents: deltaStamina, value: -staminaCost })
 			},
 		[
 			addDelta,

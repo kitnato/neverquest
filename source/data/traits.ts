@@ -40,7 +40,7 @@ import type { SVGIcon } from "@neverquest/types/components"
 import type { Description } from "@neverquest/types/ui"
 import type { Skill, Trait } from "@neverquest/types/unions"
 
-export const ACANTHACEOUS = 0.5
+export const ACANTHACEOUS_GEM_EFFECT_BONUS = 0.5
 
 export const BRAWLER_DAMAGE_BONUS = 0.25
 
@@ -56,7 +56,9 @@ export const NUDIST = {
 	healAmount: 0.1,
 }
 
-export const TANK_PROTECTION_BONUS = 0.15
+export const STALWART_BURDEN_REDUCTION = 0.5
+
+export const TANK_PROTECTION_BONUS = 0.2
 
 export const TRAITS: Record<
 	Trait,
@@ -69,7 +71,7 @@ export const TRAITS: Record<
 		description: `Base # thorns is determined by # power level and thorns damage from # gems is increased by ${formatNumber({
 			decimals: 0,
 			format: "percentage",
-			value: ACANTHACEOUS,
+			value: ACANTHACEOUS_GEM_EFFECT_BONUS,
 		})}.`,
 		descriptionIcons: [IconThorns, IconPowerLevel, IconGems],
 		Icon: IconAcanthaceous,
@@ -141,8 +143,12 @@ export const TRAITS: Record<
 		Icon: IconShredder,
 	},
 	stalwart: {
-		description: "Wearing # armor no longer incurs its # burden.",
-		descriptionIcons: [IconArmor, IconBurden],
+		description: `# Burden from # armor is reduced by ${formatNumber({
+			decimals: 0,
+			format: "percentage",
+			value: STALWART_BURDEN_REDUCTION,
+		})}.`,
+		descriptionIcons: [IconBurden, IconArmor],
 		Icon: IconStalwart,
 	},
 	tank: {

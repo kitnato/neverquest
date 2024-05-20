@@ -6,7 +6,7 @@ export const PERKS: Record<Perk, GeneratorRange & { generationMaximum: number }>
 	essenceBonus: {
 		generationMaximum: 5,
 		maximum: 1,
-		minimum: 0.25,
+		minimum: 0.2,
 	},
 	monsterReduction: {
 		generationMaximum: 5,

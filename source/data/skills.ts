@@ -99,7 +99,7 @@ export const SKILLS: Record<
 	},
 	escrime: {
 		description:
-			"Grants the ability to # parry attacks with # slashing weapons, partially reflecting damage.",
+			"Grants the ability to # parry attacks with # slashing weapons, partially avoiding and reflecting damage.",
 		descriptionIcons: [IconParryChance, IconSlashing],
 		Icon: IconEscrime,
 		isInheritable: false,

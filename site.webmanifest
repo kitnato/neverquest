@@ -4,19 +4,19 @@
 	"description": "An irreverent text-based incremental action role-playing game.",
 	"icons": [
 		{
-			"src": "/android-chrome-512x512.png",
+			"src": "/neverquest/android-chrome-512x512.png",
 			"sizes": "512x512",
 			"type": "image/png",
 			"purpose": "any"
 		},
 		{
-			"src": "/apple-touch-icon.png",
+			"src": "/neverquest/apple-touch-icon.png",
 			"sizes": "180x180",
 			"type": "image/png",
 			"purpose": "apple-touch-icon"
 		},
 		{
-			"src": "/mstile-310x310.png",
+			"src": "/neverquest/mstile-310x310.png",
 			"sizes": "310x310",
 			"type": "image/png",
 			"purpose": "maskable"
@@ -25,6 +25,5 @@
 	"theme_color": "#212529",
 	"background_color": "#ffffff",
 	"display": "standalone",
-	"orientation": "landscape",
-	"start_url": "/"
+	"orientation": "landscape"
 }

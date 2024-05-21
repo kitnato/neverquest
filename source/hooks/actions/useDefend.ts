@@ -7,9 +7,9 @@ import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta"
 import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth"
 import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth"
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina"
+import { useIncreaseMastery } from "@neverquest/hooks/actions/useIncreaseMastery"
 import { useInflictElementalAilment } from "@neverquest/hooks/actions/useInflictElementalAilment"
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
-import { useTrainMastery } from "@neverquest/hooks/actions/useTrainMastery"
 import { staggerChance } from "@neverquest/state/ailments"
 import {
 	isAttacking,
@@ -63,7 +63,7 @@ export function useDefend() {
 	const changeHealth = useChangeHealth()
 	const changeMonsterHealth = useChangeMonsterHealth()
 	const changeStamina = useChangeStamina()
-	const trainMastery = useTrainMastery()
+	const increaseMastery = useIncreaseMastery()
 	const inflictElementalAilment = useInflictElementalAilment()
 	const progressQuest = useProgressQuest()
 
@@ -218,7 +218,7 @@ export function useDefend() {
 							value: "BLOCKED",
 						})
 
-						trainMastery("stability")
+						increaseMastery("stability")
 						progressQuest({ quest: "blocking" })
 					}
 					else {
@@ -245,7 +245,7 @@ export function useDefend() {
 
 						set(monsterAilmentDuration("staggered"), get(masteryStatistic("stability")))
 
-						trainMastery("stability")
+						increaseMastery("stability")
 						progressQuest({ quest: "staggering" })
 					}
 					else {
@@ -348,7 +348,7 @@ export function useDefend() {
 				}
 
 				if (healthDamage > 0) {
-					trainMastery("resilience")
+					increaseMastery("resilience")
 				}
 
 				if (!hasBlocked && !hasParried && !hasStaggered) {
@@ -387,7 +387,7 @@ export function useDefend() {
 			changeHealth,
 			changeMonsterHealth,
 			changeStamina,
-			trainMastery,
+			increaseMastery,
 			inflictElementalAilment,
 			progressQuest,
 		],

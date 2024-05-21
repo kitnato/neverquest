@@ -13,7 +13,7 @@ import { getSnapshotGetter } from "@neverquest/utilities/getters"
 
 import type { Mastery } from "@neverquest/types/unions"
 
-export function useTrainMastery() {
+export function useIncreaseMastery() {
 	const progressQuest = useProgressQuest()
 
 	return useRecoilCallback(

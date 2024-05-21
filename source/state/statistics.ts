@@ -1,6 +1,7 @@
 import { selector } from "recoil"
 
 import { ATTRIBUTES } from "@neverquest/data/attributes"
+import { RECOVERY_MINIMUM } from "@neverquest/data/character"
 import { GENERIC_MINIMUM, PERCENTAGE } from "@neverquest/data/general"
 import {
 	BLEED,
@@ -196,6 +197,13 @@ export const executionThreshold = withStateKey("executionThreshold", key =>
 				? get(masteryStatistic("butchery"))
 				: 0
 		},
+		key,
+	}),
+)
+
+export const hasRecovery = withStateKey("hasRecovery", key =>
+	selector({
+		get: ({ get }) => get(recoveryRate) > RECOVERY_MINIMUM,
 		key,
 	}),
 )

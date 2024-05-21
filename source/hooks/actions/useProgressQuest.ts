@@ -24,14 +24,15 @@ export function useProgressQuest() {
 				}
 
 				const achievedQuests: QuestNotification[] = []
-				const questProgressState = questProgress(quest)
+				const currentQuestProgress = questProgress(quest)
 				const quests = getQuestsData(quest)
-				const newProgress = get(questProgressState) + amount
+				const newProgress = get(currentQuestProgress) + amount
+				const lastQuest = quests.at(-1)
 
-				set(questProgressState, newProgress)
+				if (lastQuest !== undefined && newProgress <= lastQuest.progressionMaximum) {
+					set(currentQuestProgress, newProgress)
 
-				set(questStatuses(quest), statuses =>
-					statuses.map((status, index) => {
+					set(questStatuses(quest), statuses => statuses.map((status, index) => {
 						const currentQuest = quests[index]
 
 						if (
@@ -45,13 +46,13 @@ export function useProgressQuest() {
 						}
 
 						return status
-					}),
-				)
+					}))
 
-				set(questNotifications, currentQuestNotifications => [
-					...achievedQuests,
-					...currentQuestNotifications,
-				])
+					set(questNotifications, currentQuestNotifications => [
+						...achievedQuests,
+						...currentQuestNotifications,
+					])
+				}
 			},
 		[],
 	)

@@ -51,15 +51,10 @@ export const canCompleteQuests = withStateKey("canCompleteQuests", key =>
 						return false
 					}
 
-					let currentCanCompleteQuests = false
-
-					for (const quest of QUEST_TYPES_BY_CLASS[questClass]) {
-						currentCanCompleteQuests ||= Object.values(get(questStatuses(quest))).includes(
-							"achieved",
-						)
-					}
-
-					return currentCanCompleteQuests
+					return QUEST_TYPES_BY_CLASS[questClass].some(
+						quest => Object.values(
+							get(questStatuses(quest)),
+						).includes("achieved"))
 				},
 		key,
 	}),
@@ -134,7 +129,7 @@ export const questProgress = withStateKey("questProgress", key =>
 
 export const questStatuses = withStateKey("questStatuses", key =>
 	atomFamily<QuestStatus[], Quest>({
-		default: quest => Object.keys(QUESTS[quest].progression).map(() => "incomplete"),
+		default: quest => QUESTS[quest].progression.map(() => "incomplete"),
 		effects: quest => [handleStorage({ key, parameter: quest })],
 		key,
 	}),

@@ -56,7 +56,7 @@ export const BRUISER = {
 export const INOCULATED_DEFLECTION_BASE = 0.3
 
 export const NUDIST = {
-	dodgeBonus: 0.5,
+	dodgeBonus: 1,
 	healAmount: 0.1,
 }
 
@@ -112,7 +112,7 @@ export const TRAITS: Record<
 		Icon: IconColossus,
 	},
 	executioner: {
-		description: "# Critical strikes with # two-handed melee weapons also have a chance to execute equivalent to the # execution threshold.",
+		description: "# Critical strikes with a # two-handed melee weapon also have a chance to execute equivalent to the # execution threshold.",
 		descriptionIcons: [IconCriticalRating, IconTwoHanded, IconExecution],
 		Icon: IconExecutioner,
 	},

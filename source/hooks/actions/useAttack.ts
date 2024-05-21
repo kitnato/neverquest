@@ -4,9 +4,9 @@ import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta"
 import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth"
 import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth"
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina"
+import { useIncreaseMastery } from "@neverquest/hooks/actions/useIncreaseMastery"
 import { useInflictElementalAilment } from "@neverquest/hooks/actions/useInflictElementalAilment"
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
-import { useTrainMastery } from "@neverquest/hooks/actions/useTrainMastery"
 import { bleed, bleedChance, stunChance } from "@neverquest/state/ailments"
 import {
 	attackDuration,
@@ -45,7 +45,7 @@ export function useAttack() {
 	const changeHealth = useChangeHealth()
 	const changeMonsterHealth = useChangeMonsterHealth()
 	const changeStamina = useChangeStamina()
-	const trainMastery = useTrainMastery()
+	const increaseMastery = useIncreaseMastery()
 	const inflictElementalAilment = useInflictElementalAilment()
 	const progressQuest = useProgressQuest()
 
@@ -168,11 +168,11 @@ export function useAttack() {
 						})
 					}
 
-					trainMastery("butchery")
-					trainMastery("cruelty")
-					trainMastery("finesse")
-					trainMastery("marksmanship")
-					trainMastery("might")
+					increaseMastery("butchery")
+					increaseMastery("cruelty")
+					increaseMastery("finesse")
+					increaseMastery("marksmanship")
+					increaseMastery("might")
 				}
 				else {
 					if (!canAttackOrParryValue) {
@@ -209,7 +209,7 @@ export function useAttack() {
 			changeHealth,
 			changeMonsterHealth,
 			changeStamina,
-			trainMastery,
+			increaseMastery,
 			inflictElementalAilment,
 			progressQuest,
 		],

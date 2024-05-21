@@ -11,3 +11,5 @@ export const PROGRESS = {
 	maximum: 20,
 	minimum: 3,
 }
+
+export const RECOVERY_MINIMUM = 200

@@ -451,6 +451,12 @@ export const QUESTS: Record<
 		requiresTracking: false,
 		title: "Quivering",
 	},
+	noRecovery: {
+		description: "Effectively have no recovery rate.",
+		progression: [1],
+		requiresTracking: true,
+		title: "Breath work",
+	},
 	parrying: {
 		description: "Parry @ attacks.",
 		progression: [5, 20, 50, 100],

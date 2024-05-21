@@ -57,7 +57,10 @@ export function QuestDisplay({
 			>
 				<CircularProgressbar
 					maxValue={progressionMaximum}
-					text={`${formatNumber({ format: "abbreviated", value: cappedProgress })}/${formatNumber({
+					text={`${formatNumber({
+						format: "abbreviated",
+						value: cappedProgress,
+					})}/${formatNumber({
 						format: "abbreviated",
 						value: progressionMaximum,
 					})}`}

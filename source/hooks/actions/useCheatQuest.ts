@@ -1,5 +1,7 @@
+import { nanoid } from "nanoid"
 import { useRecoilCallback } from "recoil"
 
+import { RELICS, RELIC_DROP_CHANCE } from "@neverquest/data/items"
 import { useAcquireSkill } from "@neverquest/hooks/actions/useAcquireSkill"
 import { useGenerateMerchantOffer } from "@neverquest/hooks/actions/useGenerateMerchantOffer"
 import { useIncreaseStage } from "@neverquest/hooks/actions/useIncreaseStage"
@@ -9,12 +11,16 @@ import { useToggleAttacking } from "@neverquest/hooks/actions/useToggleAttacking
 import { useToggleLocation } from "@neverquest/hooks/actions/useToggleLocation"
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence"
 import { isAttacking, location, progress, progressMaximum, stage } from "@neverquest/state/character"
+import { ownedItem } from "@neverquest/state/inventory"
 import { isInexhaustible, isInvulnerable } from "@neverquest/state/reserves"
 import { essenceLoot } from "@neverquest/state/resources"
-import { SKILL_TYPES, type Skill } from "@neverquest/types/unions"
+import { type Relic, SKILL_TYPES, type Skill } from "@neverquest/types/unions"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
 
+import { useAcquireItem } from "./useAcquireItem"
+
 export function useCheatQuest() {
+	const acquireItem = useAcquireItem()
 	const acquireSkill = useAcquireSkill()
 	const generateMerchantOffer = useGenerateMerchantOffer()
 	const increaseStage = useIncreaseStage()
@@ -54,7 +60,17 @@ export function useCheatQuest() {
 
 						break
 					}
-					// Source engine
+					// Grand Theft Auto 3
+					case "GUNSGUNSGUNS": {
+						Object.keys(RELIC_DROP_CHANCE).forEach((relic) => {
+							if (get(ownedItem(relic as Relic)) === undefined) {
+								acquireItem({ ...RELICS[relic as Relic].item, ID: nanoid() })
+							}
+						})
+
+						break
+					}
+					// Half-life
 					case "noclip": {
 						if (isAttackingValue) {
 							toggleAttacking()
@@ -97,6 +113,7 @@ export function useCheatQuest() {
 
 						break
 					}
+
 					default: {
 						console.warn("Some doors are better left unopened ...")
 

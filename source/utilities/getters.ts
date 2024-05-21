@@ -371,7 +371,7 @@ export function getMeleeRanges({
 	}
 }
 
-export function getQuestsData(quest: Quest): QuestData[] {
+export function getQuestsData(quest: Quest): [QuestData, ...QuestData[]] {
 	const { description, hidden, progression, title } = QUESTS[quest]
 
 	return progression.map((progress, index) => ({
@@ -381,7 +381,7 @@ export function getQuestsData(quest: Quest): QuestData[] {
 		progressionMaximum: progress,
 		questClass: isConquest(quest) ? "conquest" : isRoutine(quest) ? "routine" : "triumph",
 		title: `${title}${progression.length > 1 ? ` ${getRomanNumeral(index + 1)}` : ""}`,
-	}))
+	})) as [QuestData, ...QuestData[]]
 }
 
 export function getRange({

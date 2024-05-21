@@ -12,9 +12,11 @@ import type { TabsData } from "@neverquest/types/components"
 import type { QuestClass } from "@neverquest/types/unions"
 
 export function QuestTabsNav({ tabs }: { tabs: TabsData<QuestClass> }) {
-	const canCompleteConquests = useRecoilValue(canCompleteQuests("conquest"))
-	const canCompleteRoutines = useRecoilValue(canCompleteQuests("routine"))
-	const canCompleteTriumphs = useRecoilValue(canCompleteQuests("triumph"))
+	const canCompleteQuestsMapping = {
+		conquest: useRecoilValue(canCompleteQuests("conquest")),
+		routine: useRecoilValue(canCompleteQuests("routine")),
+		triumph: useRecoilValue(canCompleteQuests("triumph")),
+	}
 
 	return (
 		<Nav justify variant="pills">
@@ -25,21 +27,18 @@ export function QuestTabsNav({ tabs }: { tabs: TabsData<QuestClass> }) {
 							<Stack direction="horizontal" gap={3}>
 								<span>{capitalizeAll(label)}</span>
 
-								{
-									((label === "conquest" && canCompleteConquests) || (label === "routine" && canCompleteRoutines) || (label === "triumph" && canCompleteTriumphs))
-									&& (
-										<div
-											className={getAnimationClass({
-												animation: "pulse",
-												isInfinite: true,
-											})}
-										>
-											<Badge bg="secondary" className="align-middle">
-												<IconImage className="small" Icon={IconAttention} />
-											</Badge>
-										</div>
-									)
-								}
+								{canCompleteQuestsMapping[label] && (
+									<div
+										className={getAnimationClass({
+											animation: "pulse",
+											isInfinite: true,
+										})}
+									>
+										<Badge bg="secondary" className="align-middle">
+											<IconImage className="small" Icon={IconAttention} />
+										</Badge>
+									</div>
+								)}
 							</Stack>
 						</IconDisplay>
 					</NavLink>

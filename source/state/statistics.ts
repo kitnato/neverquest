@@ -26,8 +26,10 @@ import { reserveCurrent } from "@neverquest/state/reserves"
 import { isSkillAcquired } from "@neverquest/state/skills"
 import { isTraitAcquired } from "@neverquest/state/traits"
 import {
+	isArmor,
 	isMelee,
 	isRanged,
+	isShield,
 	isUnarmed,
 	isUnarmored,
 	isUnshielded,
@@ -259,8 +261,8 @@ export const protection = withStateKey("protection", key =>
 
 			return (
 				protection
-				+ (!isUnarmored(armorValue) && !isUnshielded(shieldValue) && get(isTraitAcquired("tank"))
-					? Math.max(Math.round(protection * TANK_PROTECTION_BONUS), GENERIC_MINIMUM)
+				+ (isArmor(armorValue) && isShield(shieldValue) && get(isTraitAcquired("tank"))
+					? Math.round(protection * TANK_PROTECTION_BONUS[armorValue.gearClass])
 					: 0)
 			)
 		},

@@ -73,10 +73,14 @@ export function formatNumber({
 }) {
 	switch (format) {
 		case "abbreviated": {
-			// Truncate all floats to 2 decimal places maximum if value is over the 3-digit threshold.
-			return Math.abs(value) > 999
-				? `${(Math.trunc((value / 1000) * Math.pow(10, 2)) / Math.pow(10, 2)).toLocaleString()}k`
-				: Math.round(value).toLocaleString()
+			const hasFourDigits = Math.abs(value) > 999
+			let truncated = (hasFourDigits ? value / 1000 : value).toLocaleString()
+
+			if (truncated.length > 3) {
+				truncated = truncated.slice(0, 2)
+			}
+
+			return hasFourDigits ? `${truncated}k` : truncated
 		}
 
 		case "float": {

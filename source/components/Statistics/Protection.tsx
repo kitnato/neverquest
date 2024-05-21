@@ -19,7 +19,7 @@ import { questProgress } from "@neverquest/state/quests"
 import { protection } from "@neverquest/state/statistics"
 import { isTraitAcquired } from "@neverquest/state/traits"
 import { isShowing } from "@neverquest/state/ui"
-import { isUnshielded } from "@neverquest/types/type-guards"
+import { isArmor, isUnshielded } from "@neverquest/types/type-guards"
 import { formatNumber } from "@neverquest/utilities/formatters"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
@@ -70,7 +70,7 @@ export function Protection() {
 											</td>
 										</tr>
 
-										{isTraitAcquiredTank && (
+										{isArmor(armorValue) && isTraitAcquiredTank && (
 											<tr>
 												<td>
 													<IconDisplay Icon={IconTank} iconProps={{ className: "small" }}>
@@ -81,14 +81,13 @@ export function Protection() {
 												<td>
 													{isUnshielded(shieldValue)
 														? <span>{LABEL_EMPTY}</span>
-
 														: (
 															<span>
 																+
 																{formatNumber({
 																	decimals: 0,
 																	format: "percentage",
-																	value: TANK_PROTECTION_BONUS,
+																	value: TANK_PROTECTION_BONUS[armorValue.gearClass],
 																})}
 															</span>
 														)}

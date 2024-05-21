@@ -83,7 +83,7 @@ export function useRetire() {
 					* get(absorbedEssence),
 				))
 				set(generation, nextGeneration)
-				set(stageRetired, get(stage))
+				set(stageRetired, stageMaximumValue)
 
 				reset(armor)
 				reset(blacksmithInventory)

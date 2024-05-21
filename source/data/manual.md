@@ -723,7 +723,7 @@ Current stamina adds to unarmed damage and unarmed attacks have a chance to [stu
 
 #### Executioner
 
-[Critical](#critical-rating) strikes with a two-handed melee weapon may also [execute](#execution-threshold) the monster. Critical strikes require the [assassination](#assassination) skill.
+[Critical](#critical-rating) strikes with a two-handed melee weapon may also [execute](#execution-threshold) the monster, based on the current threshold. Critical strikes require the [assassination](#assassination) skill.
 
 #### Inoculated
 

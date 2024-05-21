@@ -1,3 +1,5 @@
+import { ARMOR_CLASS_TYPES } from "@kitnato/locran/build/types"
+
 import IconAcanthaceous from "@neverquest/icons/acanthaceous.svg?react"
 import IconArmorNone from "@neverquest/icons/armor-none.svg?react"
 import IconArmor from "@neverquest/icons/armor.svg?react"
@@ -34,7 +36,9 @@ import IconThorns from "@neverquest/icons/thorns.svg?react"
 import IconTwoHanded from "@neverquest/icons/two-handed.svg?react"
 import IconWeaponDamage from "@neverquest/icons/weapon-damage.svg?react"
 import IconWeaponNone from "@neverquest/icons/weapon-none.svg?react"
-import { formatNumber } from "@neverquest/utilities/formatters"
+import { formatEnumeration, formatNumber } from "@neverquest/utilities/formatters"
+
+import { ARMOR_SPECIFICATIONS } from "./gear"
 
 import type { SVGIcon } from "@neverquest/types/components"
 import type { Description } from "@neverquest/types/ui"
@@ -58,7 +62,11 @@ export const NUDIST = {
 
 export const STALWART_BURDEN_REDUCTION = 0.5
 
-export const TANK_PROTECTION_BONUS = 0.2
+export const TANK_PROTECTION_BONUS = {
+	heavy: 0.05,
+	light: 0.2,
+	reinforced: 0.1,
+}
 
 export const TRAITS: Record<
 	Trait,
@@ -77,12 +85,12 @@ export const TRAITS: Record<
 		Icon: IconAcanthaceous,
 	},
 	brawler: {
-		description: `Being # unshielded increases # one-handed melee # weapon damage by ${formatNumber({
+		description: `While # unshielded, # weapon damage of # one-handed melee weapons and # two-handed melee weapons wielded in one hand are increased by ${formatNumber({
 			decimals: 0,
 			format: "percentage",
 			value: BRAWLER_DAMAGE_BONUS,
 		})}.`,
-		descriptionIcons: [IconShieldNone, IconOneHanded, IconWeaponDamage],
+		descriptionIcons: [IconShieldNone, IconWeaponDamage, IconOneHanded, IconTwoHanded],
 		Icon: IconBrawler,
 	},
 	bruiser: {
@@ -99,12 +107,12 @@ export const TRAITS: Record<
 		Icon: IconBruiser,
 	},
 	colossus: {
-		description: "# Two-handed melee weapons can be wielded as if they were # one-handed.",
-		descriptionIcons: [IconTwoHanded, IconOneHanded],
+		description: "# Two-handed melee weapons can be wielded in one hand.",
+		descriptionIcons: [IconTwoHanded],
 		Icon: IconColossus,
 	},
 	executioner: {
-		description: "On # critical strikes with a # two-handed melee weapon, the chance to execute is equivalent to its # threshold.",
+		description: "# Critical strikes with # two-handed melee weapons also have a chance to execute equivalent to the # execution threshold.",
 		descriptionIcons: [IconCriticalRating, IconTwoHanded, IconExecution],
 		Icon: IconExecutioner,
 	},
@@ -152,12 +160,13 @@ export const TRAITS: Record<
 		Icon: IconStalwart,
 	},
 	tank: {
-		description: `While a # shield is equipped, # protection is increased by ${formatNumber({
-			decimals: 0,
-			format: "percentage",
-			value: TANK_PROTECTION_BONUS,
-		})}.`,
-		descriptionIcons: [IconShield, IconProtection],
+		description: `While a # shield is equipped, # protection is increased by ${formatEnumeration(
+			ARMOR_CLASS_TYPES.map(armorClass => `${formatNumber({
+				decimals: 0,
+				format: "percentage",
+				value: TANK_PROTECTION_BONUS[armorClass],
+			})} for # ${armorClass}`)).replace("&", "and")} armor classes.`,
+		descriptionIcons: [IconShield, IconProtection, ...ARMOR_CLASS_TYPES.map(armorClass => ARMOR_SPECIFICATIONS[armorClass].Icon)],
 		Icon: IconTank,
 	},
 }

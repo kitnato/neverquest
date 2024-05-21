@@ -4,7 +4,7 @@ import { useGenerateMerchantOffer } from "@neverquest/hooks/actions/useGenerateM
 import { useSetMonologues } from "@neverquest/hooks/actions/useSetMonologues"
 import {
 	isStageCompleted,
-} from "@neverquest/state/encounter"
+} from "@neverquest/state/character"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
 
 export function useAdvanceCaravan() {

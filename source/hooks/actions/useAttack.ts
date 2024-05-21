@@ -10,11 +10,9 @@ import { useTrainMastery } from "@neverquest/hooks/actions/useTrainMastery"
 import { bleed, bleedChance, stunChance } from "@neverquest/state/ailments"
 import {
 	attackDuration,
-	canAttackOrParry,
-	hasEnoughMunitions,
 	isAttacking,
 } from "@neverquest/state/character"
-import { weapon } from "@neverquest/state/gear"
+import { canAttackOrParry, hasEnoughMunitions, weapon } from "@neverquest/state/gear"
 import { masteryStatistic } from "@neverquest/state/masteries"
 import {
 	distance,

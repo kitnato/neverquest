@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid"
 import { atom, atomFamily, selector, selectorFamily } from "recoil"
 
-import { LOOT_MODIFIER, PROGRESS } from "@neverquest/data/encounter"
+import { LOOT_MODIFIER, PROGRESS } from "@neverquest/data/character"
 import { LEVELLING_MAXIMUM } from "@neverquest/data/general"
 import { INFUSABLES, RELICS, RELIC_DROP_CHANCE } from "@neverquest/data/items"
 import {
@@ -20,15 +20,15 @@ import {
 import { AILMENT_PENALTY } from "@neverquest/data/statistics"
 import { bleed } from "@neverquest/state/ailments"
 import { isHired } from "@neverquest/state/caravan"
-import { handleStorage } from "@neverquest/state/effects/handleStorage"
 import {
 	encounter,
-	generation,
 	isStageStarted,
+	perkEffect,
 	progress,
 	stage,
 	stageHighest,
-} from "@neverquest/state/encounter"
+} from "@neverquest/state/character"
+import { handleStorage } from "@neverquest/state/effects/handleStorage"
 import { ownedItem } from "@neverquest/state/inventory"
 import { hasLootedInheritable, infusionEffect, isRelicEquipped } from "@neverquest/state/items"
 import { isSkillAcquired } from "@neverquest/state/skills"
@@ -39,7 +39,6 @@ import {
 	getDamagePerRate,
 	getFromRange,
 	getLinearMapping,
-	getPerkEffect,
 	getSigmoid,
 	getTriangular,
 } from "@neverquest/utilities/getters"
@@ -308,7 +307,7 @@ export const monsterLoot = withStateKey("monsterLoot", key =>
 						1
 						+ Math.min(get(progress), PROGRESS.maximum) * progressModifier
 						+ (encounterValue === "boss" ? bossModifier : 0)
-						+ getPerkEffect({ generation: get(generation), perk: "essenceBonus" })
+						+ get(perkEffect("essenceBonus"))
 						+ (stageValue < stageHighestValue ? lowerStage : equalStage)
 					)),
 				gems: encounterValue === "boss"

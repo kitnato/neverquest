@@ -11,11 +11,11 @@ import { useDeltaText } from "@neverquest/hooks/useDeltaText"
 import { usePreviousValue } from "@neverquest/hooks/usePreviousValue"
 import IconBlighted from "@neverquest/icons/blighted.svg?react"
 import IconPoisoned from "@neverquest/icons/poisoned.svg?react"
-import { isIncapacitated } from "@neverquest/state/character"
 import {
 	blightMagnitude,
 	healthMaximumPoisoned,
 	isBlighted,
+	isIncapacitated,
 	isPoisoned,
 	isRegenerating,
 	poisonDuration,

@@ -31,25 +31,25 @@ export const encumbranceExtent = withStateKey("encumbranceExtent", key =>
 
 export const encumbranceMaximum = withStateKey("encumbranceMaximum", key =>
 	selector({
-		get: ({ get }) => get(ownedItem("knapsack")) === undefined
-			? ENCUMBRANCE_CAPACITY
-			: get(knapsackCapacity),
+		get: ({ get }) =>
+			get(ownedItem("knapsack")) === undefined
+				? ENCUMBRANCE_CAPACITY
+				: get(knapsackCapacity),
 		key,
 	}),
 )
 
 export const ownedItem = withStateKey("ownedItem", key =>
 	selectorFamily({
-		get:
-			(itemName: Consumable | Inheritable) =>
-				({ get }): ConsumableItem | InheritableItem | undefined => {
-					const inventoryValue = get(inventory)
+		get: (itemName: Consumable | Inheritable) =>
+			({ get }): ConsumableItem | InheritableItem | undefined => {
+				const inventoryValue = get(inventory)
 
-					return (
-						inventoryValue.filter(isConsumableItem).find(({ name }) => name === itemName)
-						?? inventoryValue.filter(isInheritableItem).find(({ name }) => name === itemName)
-					)
-				},
+				return (
+					inventoryValue.filter(isConsumableItem).find(({ name }) => name === itemName)
+					?? inventoryValue.filter(isInheritableItem).find(({ name }) => name === itemName)
+				)
+			},
 		key,
 	}),
 )

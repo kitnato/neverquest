@@ -6,15 +6,16 @@ import { LABEL_UNKNOWN } from "@neverquest/data/general"
 import { useToggleLocation } from "@neverquest/hooks/actions/useToggleLocation"
 import IconFinalTravel from "@neverquest/icons/final-travel.svg?react"
 import IconTravel from "@neverquest/icons/travel.svg?react"
-import { isAttacking, isIncapacitated } from "@neverquest/state/character"
 import {
 	canAwaken,
+	isAttacking,
 	isStageCompleted,
 	location,
 	progress,
 	progressMaximum,
-} from "@neverquest/state/encounter"
+} from "@neverquest/state/character"
 import { encumbranceExtent } from "@neverquest/state/inventory"
+import { isIncapacitated } from "@neverquest/state/reserves"
 import { essenceLoot, itemsLoot } from "@neverquest/state/resources"
 import { isShowing } from "@neverquest/state/ui"
 import { getAnimationClass } from "@neverquest/utilities/getters"

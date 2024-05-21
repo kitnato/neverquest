@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil"
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
 import { LABEL_UNKNOWN, PERCENTAGE } from "@neverquest/data/general"
-import { progress, progressMaximum } from "@neverquest/state/encounter"
+import { progress, progressMaximum } from "@neverquest/state/character"
 import { formatNumber } from "@neverquest/utilities/formatters"
 
 export function ProgressMeter() {

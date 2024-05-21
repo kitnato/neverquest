@@ -24,7 +24,7 @@ import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness
 import IconBossHiding from "@neverquest/icons/boss-hiding.svg?react"
 import IconCompass from "@neverquest/icons/compass.svg?react"
 import IconNavigation from "@neverquest/icons/navigation.svg?react"
-import { location, stage, wildernesses } from "@neverquest/state/encounter"
+import { location, stage, wildernesses } from "@neverquest/state/character"
 import { activeControl } from "@neverquest/state/ui"
 import { formatNumber } from "@neverquest/utilities/formatters"
 

@@ -71,7 +71,11 @@ export function CraftMunitions() {
 			</IconDisplay>
 
 			<div className={CLASS_FULL_WIDTH_JUSTIFIED}>
-				<IconDisplay description={`Increases munitions by ${amount}.`} Icon={IconMunitions} tooltip="Munitions">
+				<IconDisplay
+					description={`Increases munitions by ${amount}.`}
+					Icon={IconMunitions}
+					tooltip="Munitions"
+				>
 					<span>New armaments</span>
 				</IconDisplay>
 

@@ -4,8 +4,7 @@ import { AILMENT_PENALTY, LOOTING_RATE } from "@neverquest/data/statistics"
 import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta"
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import { powerLevel } from "@neverquest/state/attributes"
-import { attackDuration, lootingDuration } from "@neverquest/state/character"
-import { encounter, stage } from "@neverquest/state/encounter"
+import { attackDuration, encounter, lootingDuration, stage } from "@neverquest/state/character"
 import { ownedItem } from "@neverquest/state/inventory"
 import {
 	distance,

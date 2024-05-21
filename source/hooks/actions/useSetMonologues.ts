@@ -2,7 +2,7 @@ import { useRecoilCallback } from "recoil"
 
 import { CREW, MERCHANT_OFFERS, MONOLOGUE_EMPTY } from "@neverquest/data/caravan"
 import { hasGeneratedOffer, monologue } from "@neverquest/state/caravan"
-import { stage, stageMaximum } from "@neverquest/state/encounter"
+import { stage, stageMaximum } from "@neverquest/state/character"
 import { CREW_MEMBER_TYPES } from "@neverquest/types/unions"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
 

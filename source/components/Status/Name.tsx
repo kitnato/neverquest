@@ -7,7 +7,8 @@ import { LABEL_UNKNOWN, LEVELLING_MAXIMUM, NAME_LENGTH_MAXIMUM } from "@neverque
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import IconFlatlined from "@neverquest/icons/flatlined.svg?react"
 import IconName from "@neverquest/icons/name.svg?react"
-import { isIncapacitated, name } from "@neverquest/state/character"
+import { name } from "@neverquest/state/character"
+import { isIncapacitated } from "@neverquest/state/reserves"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function Name() {

@@ -1,6 +1,14 @@
+import type { AffixStructure } from "@kitnato/locran/build/types"
 import type { OverlayTriggerType } from "react-bootstrap/esm/OverlayTrigger"
 
 export const ACCORDION_EVENT_KEY = "0"
+
+export const AFFIX_STRUCTURE_WEIGHTS: [AffixStructure, number][] = [
+	["noAffix", 0.025],
+	["prefixAndSuffix", 0.075],
+	["suffix", 0.25],
+	["prefix", 0.65],
+]
 
 export const CLASS_ANIMATE_PREFIX = "animate__"
 export const CLASS_ANIMATED = `${CLASS_ANIMATE_PREFIX}animated`

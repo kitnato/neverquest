@@ -1,8 +1,7 @@
 import { generateCreature, generateName } from "@kitnato/locran"
 import { useRecoilCallback } from "recoil"
 
-import { attackDuration, isAttacking } from "@neverquest/state/character"
-import { encounter } from "@neverquest/state/encounter"
+import { attackDuration, encounter, isAttacking } from "@neverquest/state/character"
 import {
 	distance,
 	isMonsterNew,

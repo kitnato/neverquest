@@ -12,7 +12,7 @@ import { FINALITY_STAGE } from "@neverquest/data/monster"
 import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem"
 import { useCanFit } from "@neverquest/hooks/actions/useCanFit"
 import { useGenerateMonster } from "@neverquest/hooks/actions/useGenerateMonster"
-import { encounter, stage } from "@neverquest/state/encounter"
+import { encounter, stage } from "@neverquest/state/character"
 import { inventory, ownedItem } from "@neverquest/state/inventory"
 import { infusionLevel } from "@neverquest/state/items"
 

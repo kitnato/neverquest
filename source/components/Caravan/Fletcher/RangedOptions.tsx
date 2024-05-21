@@ -23,7 +23,7 @@ import IconWeaponAttackRate from "@neverquest/icons/weapon-attack-rate.svg?react
 import IconWeaponDamage from "@neverquest/icons/weapon-damage.svg?react"
 import IconWeight from "@neverquest/icons/weight.svg?react"
 import { fletcherInventory, fletcherOptions } from "@neverquest/state/caravan"
-import { stageMaximum } from "@neverquest/state/encounter"
+import { stageMaximum } from "@neverquest/state/character"
 import { isSkillAcquired } from "@neverquest/state/skills"
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters"
 import { generateRangedWeapon } from "@neverquest/utilities/generators"

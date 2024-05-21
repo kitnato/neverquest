@@ -8,7 +8,7 @@ import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { WITCH_POTIONS } from "@neverquest/data/caravan"
 import { LABEL_UNKNOWN } from "@neverquest/data/general"
 import IconUnknown from "@neverquest/icons/unknown.svg?react"
-import { stageMaximum } from "@neverquest/state/encounter"
+import { stageMaximum } from "@neverquest/state/character"
 
 export function Witch() {
 	const stageMaximumValue = useRecoilValue(stageMaximum)

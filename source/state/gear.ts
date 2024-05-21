@@ -8,8 +8,10 @@ import {
 } from "@neverquest/data/gear"
 import { STALWART_BURDEN_REDUCTION } from "@neverquest/data/traits"
 import { handleStorage } from "@neverquest/state/effects/handleStorage"
+import { munitions } from "@neverquest/state/items"
+import { reserveCurrent } from "@neverquest/state/reserves"
 import { isTraitAcquired } from "@neverquest/state/traits"
-import { isMelee, isUnarmed } from "@neverquest/types/type-guards"
+import { isMelee, isRanged, isUnarmed } from "@neverquest/types/type-guards"
 import { getElementalEffects, getTotalElementalEffects } from "@neverquest/utilities/getters"
 import { withStateKey } from "@neverquest/utilities/helpers"
 
@@ -24,6 +26,31 @@ export const armorBurden = withStateKey("armorBurden", key =>
 
 			return get(isTraitAcquired("stalwart")) ? Math.round(burden * STALWART_BURDEN_REDUCTION) : burden
 		},
+		key,
+	}),
+)
+
+export const canAttackOrParry = withStateKey("canAttackOrParry", key =>
+	selector({
+		get: ({ get }) => {
+			const staminaValue = get(reserveCurrent("stamina"))
+
+			return staminaValue > 0 && staminaValue >= get(weapon).burden
+		},
+		key,
+	}),
+)
+
+export const canBlockOrStagger = withStateKey("canBlockOrStagger", key =>
+	selector({
+		get: ({ get }) => get(reserveCurrent("stamina")) >= get(shield).burden,
+		key,
+	}),
+)
+
+export const canDodge = withStateKey("canDodge", key =>
+	selector({
+		get: ({ get }) => get(isTraitAcquired("stalwart")) || get(reserveCurrent("stamina")) >= get(armor).burden,
 		key,
 	}),
 )
@@ -70,6 +97,17 @@ export const elementalEffects = withStateKey("elementalEffects", key =>
 					}),
 				},
 			}
+		},
+		key,
+	}),
+)
+
+export const hasEnoughMunitions = withStateKey("hasEnoughMunitions", key =>
+	selector({
+		get: ({ get }) => {
+			const weaponValue = get(weapon)
+
+			return isRanged(weaponValue) ? get(munitions) >= weaponValue.munitionsCost : true
 		},
 		key,
 	}),

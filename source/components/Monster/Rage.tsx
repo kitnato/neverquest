@@ -8,7 +8,7 @@ import { RAGE } from "@neverquest/data/monster"
 import { useDeltaText } from "@neverquest/hooks/useDeltaText"
 import IconMonsterAttackRate from "@neverquest/icons/monster-attack-rate.svg?react"
 import IconRage from "@neverquest/icons/rage.svg?react"
-import { stage } from "@neverquest/state/encounter"
+import { stage } from "@neverquest/state/character"
 import { rage } from "@neverquest/state/monster"
 import { formatNumber } from "@neverquest/utilities/formatters"
 

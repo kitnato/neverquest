@@ -1,70 +1,55 @@
-import { atom, selector } from "recoil"
+import { atom, atomFamily, selector, selectorFamily } from "recoil"
 
+import { PROGRESS } from "@neverquest/data/character"
 import { LABEL_UNKNOWN } from "@neverquest/data/general"
+import { BOSS_STAGE_INTERVAL, BOSS_STAGE_START, FINALITY_STAGE } from "@neverquest/data/monster"
 import { handleStorage } from "@neverquest/state/effects/handleStorage"
-import { armor, shield, weapon } from "@neverquest/state/gear"
 import { ownedItem } from "@neverquest/state/inventory"
-import { munitions } from "@neverquest/state/items"
-import { reserveCurrent } from "@neverquest/state/reserves"
-import { isTraitAcquired } from "@neverquest/state/traits"
-import { isRanged } from "@neverquest/types/type-guards"
+import { essenceLoot } from "@neverquest/state/resources"
+import { getFromRange, getPerkEffect, getSigmoid } from "@neverquest/utilities/getters"
 import { withStateKey } from "@neverquest/utilities/helpers"
 
+import type { Finality, Perk } from "@neverquest/types/unions"
+
 // SELECTORS
+export const canAwaken = withStateKey("canAwaken", key =>
+	selector({
+		get: ({ get }) =>
+			!get(hasAwoken)
+			&& get(isStageCompleted)
+			&& get(location) === "wilderness"
+			&& get(stage) === FINALITY_STAGE["res cogitans"]
+			&& get(essenceLoot) === 0
+			&& (get(encounter) !== "void" || get(hasDefeatedFinality("res cogitans"))),
+		key,
+	}),
+)
 
-export const canAttackOrParry = withStateKey("canAttackOrParry", key =>
+export const encounter = withStateKey("encounter", key =>
 	selector({
 		get: ({ get }) => {
-			const staminaValue = get(reserveCurrent("stamina"))
+			const stageValue = get(stage)
 
-			return staminaValue > 0 && staminaValue >= get(weapon).burden
+			if (stageValue === FINALITY_STAGE["res cogitans"]) {
+				if (get(hasDefeatedFinality("res cogitans")) || get(ownedItem("familiar")) === undefined) {
+					return "void"
+				}
+
+				return "res cogitans"
+			}
+
+			if (stageValue === FINALITY_STAGE["res dominus"]) {
+				if (get(hasDefeatedFinality("res dominus"))) {
+					return "void"
+				}
+
+				return "res dominus"
+			}
+
+			return stageValue >= BOSS_STAGE_START && stageValue % BOSS_STAGE_INTERVAL === 0
+				? "boss"
+				: "monster"
 		},
-		key,
-	}),
-)
-
-export const canBlockOrStagger = withStateKey("canBlockOrStagger", key =>
-	selector({
-		get: ({ get }) => get(reserveCurrent("stamina")) >= get(shield).burden,
-		key,
-	}),
-)
-
-export const canDodge = withStateKey("canDodge", key =>
-	selector({
-		get: ({ get }) => get(isTraitAcquired("stalwart")) || get(reserveCurrent("stamina")) >= get(armor).burden,
-		key,
-	}),
-)
-
-export const canResurrect = withStateKey("canResurrect", key =>
-	selector({
-		get: ({ get }) => get(isIncapacitated) && get(ownedItem("phylactery")) !== undefined,
-		key,
-	}),
-)
-
-export const hasEnoughMunitions = withStateKey("hasEnoughMunitions", key =>
-	selector({
-		get: ({ get }) => {
-			const weaponValue = get(weapon)
-
-			return isRanged(weaponValue) ? get(munitions) >= weaponValue.munitionsCost : true
-		},
-		key,
-	}),
-)
-
-export const hasFlatlined = withStateKey("hasFlatlined", key =>
-	selector({
-		get: ({ get }) => get(isIncapacitated) && get(ownedItem("phylactery")) === undefined,
-		key,
-	}),
-)
-
-export const isIncapacitated = withStateKey("isIncapacitated", key =>
-	selector({
-		get: ({ get }) => get(reserveCurrent("health")) === 0,
 		key,
 	}),
 )
@@ -83,6 +68,78 @@ export const isRecovering = withStateKey("isRecovering", key =>
 	}),
 )
 
+export const isStageCompleted = withStateKey("isStageCompleted", key =>
+	selector({
+		get: ({ get }) => get(progress) >= get(progressMaximum),
+		key,
+	}),
+)
+
+export const locationName = withStateKey("locationName", key =>
+	selector({
+		get: ({ get }) => {
+			if (get(location) === "wilderness") {
+				return get(wildernesses)[get(stage) - 1]
+			}
+
+			return "Caravan"
+		},
+		key,
+	}),
+)
+
+export const perkEffect = withStateKey("perkEffect", key =>
+	selectorFamily({
+		get: (perk: Perk) =>
+			({ get }) => {
+				if (perk === "essenceBonus" && (get(stage) > get(stageRetired))) {
+					return 0
+				}
+
+				return getPerkEffect({ generation: get(generation), perk })
+			},
+		key,
+	}),
+)
+
+export const progressMaximum = withStateKey("progressMaximum", key =>
+	selector({
+		get: ({ get }) => {
+			const { maximum, minimum } = PROGRESS
+			const encounterValue = get(encounter)
+			const stageValue = get(stage)
+
+			if (encounterValue === "monster") {
+				if (stageValue < get(stageMaximum)) {
+					return Number.POSITIVE_INFINITY
+				}
+
+				return Math.max(
+					1,
+					Math.round(
+						getFromRange({ factor: getSigmoid(stageValue), maximum, minimum })
+						* (1 - get(perkEffect("monsterReduction"))),
+					),
+				)
+			}
+
+			if (encounterValue === "void") {
+				return 0
+			}
+
+			return 1
+		},
+		key,
+	}),
+)
+
+export const stageMaximum = withStateKey("stageMaximum", key =>
+	selector({
+		get: ({ get }) => get(wildernesses).length,
+		key,
+	}),
+)
+
 // ATOMS
 
 export const attackDuration = withStateKey("attackDuration", key =>
@@ -93,9 +150,65 @@ export const attackDuration = withStateKey("attackDuration", key =>
 	}),
 )
 
+export const consciousness = withStateKey("consciousness", key =>
+	atom<"mors" | "somnium" | "vigilans">({
+		default: "somnium",
+		effects: [handleStorage({ key })],
+		key,
+	}),
+)
+
+export const corpse = withStateKey("corpse", key =>
+	atom<{ essence: number, stage: number } | undefined>({
+		default: undefined,
+		effects: [handleStorage({ key })],
+		key,
+	}),
+)
+
+export const generation = withStateKey("generation", key =>
+	atom({
+		default: 1,
+		effects: [handleStorage({ key })],
+		key,
+	}),
+)
+
+export const hasAwoken = withStateKey("hasAwoken", key =>
+	atom({
+		default: false,
+		effects: [handleStorage({ key })],
+		key,
+	}),
+)
+
+export const hasDefeatedFinality = withStateKey("hasDefeatedFinality", key =>
+	atomFamily<boolean, Finality>({
+		default: false,
+		effects: finality => [handleStorage({ key, parameter: finality })],
+		key,
+	}),
+)
+
 export const isAttacking = withStateKey("isAttacking", key =>
 	atom({
 		default: false,
+		effects: [handleStorage({ key })],
+		key,
+	}),
+)
+
+export const isStageStarted = withStateKey("isStageStarted", key =>
+	atom({
+		default: false,
+		effects: [handleStorage({ key })],
+		key,
+	}),
+)
+
+export const location = withStateKey("location", key =>
+	atom<"caravan" | "wilderness">({
+		default: "wilderness",
 		effects: [handleStorage({ key })],
 		key,
 	}),
@@ -117,7 +230,39 @@ export const name = withStateKey("name", key =>
 	}),
 )
 
+export const progress = withStateKey("progress", key =>
+	atom({
+		default: 0,
+		effects: [handleStorage({ key })],
+		key,
+	}),
+)
+
 export const recoveryDuration = withStateKey("recoveryDuration", key =>
+	atom({
+		default: 0,
+		effects: [handleStorage({ key })],
+		key,
+	}),
+)
+
+export const stage = withStateKey("stage", key =>
+	atom({
+		default: stageMaximum,
+		effects: [handleStorage({ key })],
+		key,
+	}),
+)
+
+export const stageHighest = withStateKey("stageHighest", key =>
+	atom({
+		default: stageMaximum,
+		effects: [handleStorage({ key })],
+		key,
+	}),
+)
+
+export const stageRetired = withStateKey("stageRetired", key =>
 	atom({
 		default: 0,
 		effects: [handleStorage({ key })],
@@ -128,6 +273,14 @@ export const recoveryDuration = withStateKey("recoveryDuration", key =>
 export const statusElement = withStateKey("statusElement", key =>
 	atom<HTMLDivElement | null>({
 		default: null,
+		effects: [handleStorage({ key })],
+		key,
+	}),
+)
+
+export const wildernesses = withStateKey("wildernesses", key =>
+	atom<string[]>({
+		default: [],
 		effects: [handleStorage({ key })],
 		key,
 	}),

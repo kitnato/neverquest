@@ -12,14 +12,11 @@ import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import { useTrainMastery } from "@neverquest/hooks/actions/useTrainMastery"
 import { staggerChance } from "@neverquest/state/ailments"
 import {
-	canAttackOrParry,
-	canBlockOrStagger,
-	canDodge,
 	isAttacking,
 	recoveryDuration,
 	statusElement,
 } from "@neverquest/state/character"
-import { armor, armorBurden, shield, weapon } from "@neverquest/state/gear"
+import { armor, armorBurden, canAttackOrParry, canBlockOrStagger, canDodge, shield, weapon } from "@neverquest/state/gear"
 import { ownedItem } from "@neverquest/state/inventory"
 import { tears } from "@neverquest/state/items"
 import { masteryStatistic } from "@neverquest/state/masteries"

@@ -4,8 +4,7 @@ import { useRecoilValue, useResetRecoilState } from "recoil"
 import { POPOVER_TRIGGER } from "@neverquest/data/general"
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import { useToggleLocation } from "@neverquest/hooks/actions/useToggleLocation"
-import { isAttacking } from "@neverquest/state/character"
-import { location } from "@neverquest/state/encounter"
+import { isAttacking, location } from "@neverquest/state/character"
 import { activeControl } from "@neverquest/state/ui"
 
 export function HearthstoneWarp() {

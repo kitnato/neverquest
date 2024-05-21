@@ -7,7 +7,8 @@ import { useAutoProgressStage } from "@neverquest/hooks/actions/useAutoProgressS
 import { useDropLoot } from "@neverquest/hooks/actions/useDropLoot"
 import { useProgression } from "@neverquest/hooks/actions/useProgression"
 import { useTimer } from "@neverquest/hooks/useTimer"
-import { isIncapacitated, isLooting, lootingDuration } from "@neverquest/state/character"
+import { isLooting, lootingDuration } from "@neverquest/state/character"
+import { isIncapacitated } from "@neverquest/state/reserves"
 
 export function Loot() {
 	const isIncapacitatedValue = useRecoilValue(isIncapacitated)

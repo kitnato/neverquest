@@ -2,8 +2,13 @@ import { useRecoilCallback } from "recoil"
 
 import { RAGE } from "@neverquest/data/monster"
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
-import { attackDuration, isAttacking } from "@neverquest/state/character"
-import { isStageCompleted, isStageStarted, stage } from "@neverquest/state/encounter"
+import {
+	attackDuration,
+	isAttacking,
+	isStageCompleted,
+	isStageStarted,
+	stage,
+} from "@neverquest/state/character"
 import {
 	distance,
 	isEnraged,

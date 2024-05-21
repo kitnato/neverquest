@@ -20,15 +20,15 @@ import {
 	merchantInventory,
 	monologue,
 } from "@neverquest/state/caravan"
-import { name } from "@neverquest/state/character"
 import {
-	corpse,
-	generation,
+	corpse, generation,
 	hasDefeatedFinality,
+	name,
 	stage,
 	stageHighest,
 	stageMaximum,
-} from "@neverquest/state/encounter"
+	stageRetired,
+} from "@neverquest/state/character"
 import { armor, gems, shield, weapon } from "@neverquest/state/gear"
 import { inventory } from "@neverquest/state/inventory"
 import { expandedMasteries, masteryProgress, masteryRank } from "@neverquest/state/masteries"
@@ -78,7 +78,12 @@ export function useRetire() {
 				resetAttributes()
 				resetCharacter(true)
 
-				set(essence, Math.round(getPerkEffect({ generation: nextGeneration, perk: "startingEssence" }) * get(absorbedEssence)))
+				set(essence, Math.round(
+					getPerkEffect({ generation: nextGeneration, perk: "startingEssence" })
+					* get(absorbedEssence),
+				))
+				set(generation, nextGeneration)
+				set(stageRetired, get(stage))
 
 				reset(armor)
 				reset(blacksmithInventory)
@@ -148,8 +153,6 @@ export function useRetire() {
 				}
 
 				reset(merchantInventory)
-
-				set(generation, nextGeneration)
 
 				if (get(isSkillAcquired("memetics"))) {
 					progressQuest({ quest: "decipheringJournal" })

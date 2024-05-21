@@ -13,7 +13,7 @@ import IconSkills from "@neverquest/icons/skills.svg?react"
 import IconStage from "@neverquest/icons/stage.svg?react"
 import IconTransmute from "@neverquest/icons/transmute.svg?react"
 import { powerLevel } from "@neverquest/state/attributes"
-import { generation, stage } from "@neverquest/state/encounter"
+import { generation, stage } from "@neverquest/state/character"
 import { formatCardinal, formatNumber } from "@neverquest/utilities/formatters"
 
 export function Renewal() {

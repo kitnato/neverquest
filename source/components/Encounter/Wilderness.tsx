@@ -11,7 +11,7 @@ import IconFinality from "@neverquest/icons/finality.svg?react"
 import IconMonsterHiding from "@neverquest/icons/monster-hiding.svg?react"
 import IconRemains from "@neverquest/icons/remains.svg?react"
 import IconVoid from "@neverquest/icons/void.svg?react"
-import { encounter, isStageCompleted, isStageStarted } from "@neverquest/state/encounter"
+import { encounter, isStageCompleted, isStageStarted } from "@neverquest/state/character"
 import { isFinality } from "@neverquest/types/type-guards"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 

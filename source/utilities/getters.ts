@@ -1,7 +1,6 @@
 import { nanoid } from "nanoid"
 
 import { ATTRIBUTE_COST_BASE } from "@neverquest/data/attributes"
-import { AFFIX_STRUCTURE_WEIGHTS } from "@neverquest/data/encounter"
 import {
 	type ARMOR_NONE,
 	ARMOR_SPECIFICATIONS,
@@ -14,6 +13,7 @@ import {
 	WEAPON_SPECIFICATIONS,
 } from "@neverquest/data/gear"
 import {
+	AFFIX_STRUCTURE_WEIGHTS,
 	CLASS_ANIMATED,
 	CLASS_ANIMATE_PREFIX,
 	GENERIC_MINIMUM,

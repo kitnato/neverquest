@@ -1,13 +1,12 @@
 import { useRecoilCallback } from "recoil"
 
-import { CORPSE_VALUE } from "@neverquest/data/encounter"
+import { CORPSE_VALUE } from "@neverquest/data/character"
 import { HEALTH_LOW_THRESHOLD } from "@neverquest/data/reserves"
 import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta"
 import { useMending } from "@neverquest/hooks/actions/useMending"
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import { useToggleAttacking } from "@neverquest/hooks/actions/useToggleAttacking"
-import { isAttacking, recoveryDuration } from "@neverquest/state/character"
-import { corpse, stage } from "@neverquest/state/encounter"
+import { corpse, isAttacking, recoveryDuration, stage } from "@neverquest/state/character"
 import { ownedItem } from "@neverquest/state/inventory"
 import { isRelicEquipped } from "@neverquest/state/items"
 import {

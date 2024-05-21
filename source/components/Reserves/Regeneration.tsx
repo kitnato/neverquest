@@ -14,8 +14,9 @@ import { useTimer } from "@neverquest/hooks/useTimer"
 import IconRegenerationRate from "@neverquest/icons/regeneration-rate.svg?react"
 import IconVigor from "@neverquest/icons/vigor.svg?react"
 import { attributeStatistic } from "@neverquest/state/attributes"
-import { isIncapacitated, isRecovering } from "@neverquest/state/character"
+import { isRecovering } from "@neverquest/state/character"
 import {
+	isIncapacitated,
 	isReserveAtMaximum,
 	regenerationAmount,
 	regenerationDuration,

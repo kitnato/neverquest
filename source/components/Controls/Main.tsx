@@ -23,16 +23,11 @@ import IconResting from "@neverquest/icons/resting.svg?react"
 import IconResurrection from "@neverquest/icons/resurrection.svg?react"
 import IconRetreat from "@neverquest/icons/retreat.svg?react"
 import { areAttributesAffordable } from "@neverquest/state/attributes"
-import {
-	canResurrect,
-	hasEnoughMunitions,
-	isAttacking,
-	isIncapacitated,
-} from "@neverquest/state/character"
-import { isStageCompleted, location } from "@neverquest/state/encounter"
+import { isAttacking, isStageCompleted, location } from "@neverquest/state/character"
+import { hasEnoughMunitions } from "@neverquest/state/gear"
 import { isRelicEquipped } from "@neverquest/state/items"
 import { isMonsterDead } from "@neverquest/state/monster"
-import { isHealthLow, protectedElement } from "@neverquest/state/reserves"
+import { canResurrect, isHealthLow, isIncapacitated, protectedElement } from "@neverquest/state/reserves"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
 import type { SVGIcon } from "@neverquest/types/components"

@@ -20,7 +20,7 @@ export function AcquireAlchemistSkill() {
 
 	return (
 		<Stack gap={3}>
-			<h6>Acquire skill</h6>
+			<h6>Train skill</h6>
 
 			{availableSkills.length === 0
 				? <span className="fst-italic">{LABEL_NONE_AVAILABLE}</span>

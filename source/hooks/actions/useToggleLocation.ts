@@ -6,7 +6,7 @@ import { useDefeatFinality } from "@neverquest/hooks/actions/useDefeatFinality"
 import { useIncreaseStage } from "@neverquest/hooks/actions/useIncreaseStage"
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness"
 import { blacksmithOptions, fletcherOptions } from "@neverquest/state/caravan"
-import { canAwaken, consciousness, hasAwoken, hasDefeatedFinality, isStageCompleted, location, stage, stageMaximum } from "@neverquest/state/encounter"
+import { canAwaken, consciousness, hasAwoken, hasDefeatedFinality, isStageCompleted, location, stage, stageMaximum } from "@neverquest/state/character"
 import { isShowing } from "@neverquest/state/ui"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
 

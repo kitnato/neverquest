@@ -55,7 +55,10 @@ export function GemDescription({ gem }: { gem: Gem }) {
 					</span>
 				</Stack>
 
-				<DescriptionDisplay description={`Monster ${description.toLowerCase()}`} descriptionIcons={descriptionIcons} />
+				<DescriptionDisplay
+					description={`Monster ${description.toLowerCase()}`}
+					descriptionIcons={descriptionIcons}
+				/>
 			</Stack>
 
 			<Stack gap={1}>

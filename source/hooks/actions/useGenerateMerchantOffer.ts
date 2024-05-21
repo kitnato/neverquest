@@ -3,7 +3,7 @@ import { useRecoilCallback } from "recoil"
 
 import { MERCHANT_OFFERS } from "@neverquest/data/caravan"
 import { hasGeneratedOffer, merchantInventory } from "@neverquest/state/caravan"
-import { stage, stageMaximum } from "@neverquest/state/encounter"
+import { stage, stageMaximum } from "@neverquest/state/character"
 import { ownedItem } from "@neverquest/state/inventory"
 import { isGearItem, isInheritableItem } from "@neverquest/types/type-guards"
 import {
@@ -38,8 +38,10 @@ export function useGenerateMerchantOffer() {
 					// In the case of being a relic or infusable, make sure it's not in any inventory.
 					if (
 						isInheritableItem(offer)
-						&& (newMerchantInventory.some(({ name }) => name === offer.name)
-						|| get(ownedItem(offer.name)) !== undefined)
+						&& (
+							newMerchantInventory.some(({ name }) => name === offer.name)
+							|| get(ownedItem(offer.name)) !== undefined
+						)
 					) {
 						return
 					}

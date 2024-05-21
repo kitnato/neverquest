@@ -5,7 +5,7 @@ import { useRecoilValue } from "recoil"
 import { LEVELLING_END } from "@neverquest/data/general"
 import { FINALITY_STAGE } from "@neverquest/data/monster"
 import { useAnimation } from "@neverquest/hooks/useAnimation"
-import { stage } from "@neverquest/state/encounter"
+import { stage } from "@neverquest/state/character"
 import { getFromRange, getLinearMapping, getRange } from "@neverquest/utilities/getters"
 
 const CHARACTERS = "!·&=?¿|@#~¬+/\\^*[]{}-_<>"

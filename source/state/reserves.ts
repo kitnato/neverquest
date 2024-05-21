@@ -4,8 +4,9 @@ import { GENERIC_MINIMUM } from "@neverquest/data/general"
 import { BLIGHT, POISON } from "@neverquest/data/monster"
 import { HEALTH_LOW_THRESHOLD, RESERVES } from "@neverquest/data/reserves"
 import { attributeStatistic } from "@neverquest/state/attributes"
+import { stage } from "@neverquest/state/character"
 import { handleStorage } from "@neverquest/state/effects/handleStorage"
-import { stage } from "@neverquest/state/encounter"
+import { ownedItem } from "@neverquest/state/inventory"
 import { questsBonus } from "@neverquest/state/quests"
 import { getFromRange, getLinearMapping, getSigmoid } from "@neverquest/utilities/getters"
 import { withStateKey } from "@neverquest/utilities/helpers"
@@ -17,6 +18,20 @@ import type { Reserve } from "@neverquest/types/unions"
 export const blightMagnitude = withStateKey("blightMagnitude", key =>
 	selector({
 		get: ({ get }) => get(blight) * BLIGHT.increment,
+		key,
+	}),
+)
+
+export const canResurrect = withStateKey("canResurrect", key =>
+	selector({
+		get: ({ get }) => get(isIncapacitated) && get(ownedItem("phylactery")) !== undefined,
+		key,
+	}),
+)
+
+export const hasFlatlined = withStateKey("hasFlatlined", key =>
+	selector({
+		get: ({ get }) => get(isIncapacitated) && get(ownedItem("phylactery")) === undefined,
 		key,
 	}),
 )
@@ -43,6 +58,13 @@ export const healthMaximumPoisoned = withStateKey("healthMaximumPoisoned", key =
 export const isBlighted = withStateKey("isBlighted", key =>
 	selector({
 		get: ({ get }) => get(blight) > 0,
+		key,
+	}),
+)
+
+export const isIncapacitated = withStateKey("isIncapacitated", key =>
+	selector({
+		get: ({ get }) => get(reserveCurrent("health")) === 0,
 		key,
 	}),
 )

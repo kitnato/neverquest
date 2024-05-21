@@ -8,7 +8,7 @@ import { POPOVER_TRIGGER } from "@neverquest/data/general"
 import { useDeltaText } from "@neverquest/hooks/useDeltaText"
 import IconCorpse from "@neverquest/icons/corpse.svg?react"
 import IconStage from "@neverquest/icons/stage.svg?react"
-import { corpse, stage, stageMaximum } from "@neverquest/state/encounter"
+import { corpse, stage, stageMaximum } from "@neverquest/state/character"
 import { formatNumber } from "@neverquest/utilities/formatters"
 
 export function Stage() {

@@ -4,7 +4,7 @@ import {
 	encounter,
 	hasDefeatedFinality,
 	isStageCompleted,
-} from "@neverquest/state/encounter"
+} from "@neverquest/state/character"
 import { isFinality } from "@neverquest/types/type-guards"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
 

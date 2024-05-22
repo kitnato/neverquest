@@ -2,6 +2,7 @@ import { useRecoilCallback } from "recoil"
 
 import { ATTRIBUTES } from "@neverquest/data/attributes"
 import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear"
+import { QUESTS } from "@neverquest/data/quests"
 import { RETIREMENT_STAGE } from "@neverquest/data/retirement"
 import { SKILLS } from "@neverquest/data/skills"
 import { useAcquireSkill } from "@neverquest/hooks/actions/useAcquireSkill"
@@ -32,7 +33,7 @@ import {
 import { armor, gems, shield, weapon } from "@neverquest/state/gear"
 import { inventory } from "@neverquest/state/inventory"
 import { expandedMasteries, masteryProgress, masteryRank } from "@neverquest/state/masteries"
-import { questProgress } from "@neverquest/state/quests"
+import { questProgress, questStatuses } from "@neverquest/state/quests"
 import { essence } from "@neverquest/state/resources"
 import { isSkillAcquired } from "@neverquest/state/skills"
 import { isTraitAcquired, selectedTrait } from "@neverquest/state/traits"
@@ -41,6 +42,7 @@ import {
 	ATTRIBUTE_TYPES,
 	CREW_MEMBER_TYPES,
 	MASTERY_TYPES,
+	type Quest,
 	SKILL_TYPES,
 } from "@neverquest/types/unions"
 import { getPerkEffect, getSnapshotGetter } from "@neverquest/utilities/getters"
@@ -101,18 +103,12 @@ export function useRetire() {
 				reset(stageHighest)
 				reset(weapon)
 
-				reset(questProgress("attributesUnlocking"))
-				reset(questProgress("hiring"))
-				reset(questProgress("hiringAll"))
-				reset(questProgress("masteriesAll"))
-				reset(questProgress("masteriesRankMaximum"))
-				reset(questProgress("powerLevel"))
-				reset(questProgress("powerLevelUltra"))
-				reset(questProgress("stages"))
-				reset(questProgress("stagesEnd"))
-				reset(questProgress("skillsCraft"))
-				reset(questProgress("survivingNoAttributes"))
-				reset(questProgress("survivingNoGear"))
+				Object.entries(QUESTS).forEach(([quest, { requiresTracking }]) => {
+					if (requiresTracking) {
+						reset(questProgress(quest as Quest))
+						set(questStatuses(quest as Quest), statuses => statuses.map(status => status === "complete" ? "incomplete" : status))
+					}
+				})
 
 				for (const attribute of ATTRIBUTE_TYPES) {
 					if (ATTRIBUTES[attribute].requiredSkill === undefined) {

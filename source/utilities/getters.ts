@@ -371,7 +371,7 @@ export function getMeleeRanges({
 	}
 }
 
-export function getQuestsData(quest: Quest): [QuestData, ...QuestData[]] {
+export function getQuestData(quest: Quest): [QuestData, ...QuestData[]] {
 	const { description, hidden, progression, title } = QUESTS[quest]
 
 	return progression.map((progress, index) => ({

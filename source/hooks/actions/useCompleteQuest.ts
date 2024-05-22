@@ -11,20 +11,27 @@ export function useCompleteQuest() {
 	const progressQuest = useProgressQuest()
 
 	return useRecoilCallback(
-		({ set, snapshot }) =>
-			({ bonus, progression, quest }: { bonus: QuestBonus, progression: number, quest: Quest }) => {
-				const get = getSnapshotGetter(snapshot)
+		({ set, snapshot }) => ({
+			bonus,
+			progression,
+			quest,
+		}: {
+			bonus: QuestBonus
+			progression: number
+			quest: Quest
+		}) => {
+			const get = getSnapshotGetter(snapshot)
 
-				const progressionIndex = QUESTS[quest].progression.indexOf(progression)
+			const progressionIndex = QUESTS[quest].progression.indexOf(progression)
 
-				if (get(questStatuses(quest))[progressionIndex] === "achieved") {
-					set(questStatuses(quest), statuses =>
-						statuses.map((status, index) => index === progressionIndex ? bonus : status),
-					)
+			if (get(questStatuses(quest))[progressionIndex] === "complete") {
+				set(questStatuses(quest), statuses =>
+					statuses.map((status, index) => index === progressionIndex ? bonus : status),
+				)
 
-					progressQuest({ quest: "completing" })
-				}
-			},
+				progressQuest({ quest: "completing" })
+			}
+		},
 		[progressQuest],
 	)
 }

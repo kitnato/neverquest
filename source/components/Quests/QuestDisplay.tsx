@@ -22,25 +22,33 @@ import type { QuestData } from "@neverquest/types"
 import type { Quest, QuestBonus } from "@neverquest/types/unions"
 
 export function QuestDisplay({
-	activeQuest: { description, hidden, progressionIndex, progressionMaximum, title },
+	activeQuest: {
+		description,
+		hidden,
+		progressionIndex,
+		progressionMaximum,
+		title,
+	},
 	quest,
 }: {
 	activeQuest: QuestData
 	quest: Quest
 }) {
 	const questProgressValue = useRecoilValue(questProgress(quest))
-	const questStatusValue = useRecoilValue(questStatuses(quest))
+	const questStatusesValue = useRecoilValue(questStatuses(quest))
 
 	const completeQuest = useCompleteQuest()
 
-	const status = questStatusValue[progressionIndex]
+	const previousStatus = progressionIndex > 0 && questStatusesValue.length > 1 ? questStatusesValue[progressionIndex - 1] : undefined
+	const status = questStatusesValue[progressionIndex]
 
 	if (status === undefined) {
 		return
 	}
 
 	const hasCompletedQuest = isQuestBonus(status)
-	const isQuestOver = hasCompletedQuest || status === "achieved"
+	const canCompleteQuest = !hasCompletedQuest && (previousStatus === undefined || isQuestBonus(previousStatus))
+	const isQuestOver = hasCompletedQuest || status === "complete"
 	const cappedProgress = isQuestOver
 		? progressionMaximum
 		: questProgressValue < 0
@@ -85,11 +93,11 @@ export function QuestDisplay({
 							<span>Choose a quest reward.</span>
 						</Tooltip>
 					)}
-					show={hasCompletedQuest ? false : undefined}
-					trigger={hasCompletedQuest ? [] : POPOVER_TRIGGER}
+					show={canCompleteQuest ? undefined : false}
+					trigger={canCompleteQuest ? POPOVER_TRIGGER : []}
 				>
 					<ToggleButtonGroup
-						className={`me-1${hasCompletedQuest ? " opacity-50" : ""}`}
+						className={`me-1${canCompleteQuest ? "" : " opacity-50"}`}
 						name={choiceID}
 						onChange={(value) => {
 							completeQuest({
@@ -107,7 +115,7 @@ export function QuestDisplay({
 							{ bonus: "damageBonus", Icon: IconDamage },
 						].map(({ bonus, Icon }) => (
 							<ToggleButton
-								disabled={hasCompletedQuest}
+								disabled={!canCompleteQuest}
 								id={`${choiceID}-${bonus}`}
 								key={bonus}
 								value={bonus}

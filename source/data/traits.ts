@@ -56,7 +56,7 @@ export const BRUISER = {
 export const INOCULATED_DEFLECTION_BASE = 0.3
 
 export const NUDIST = {
-	dodgeBonus: 1,
+	dodgeBonus: 0.75,
 	healAmount: 0.1,
 }
 

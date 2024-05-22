@@ -175,7 +175,7 @@ export type QuestBonus = (typeof QUEST_BONUS_TYPES)[number]
 export const QUEST_CLASS_TYPES = ["conquest", "routine", "triumph"] as const
 export type QuestClass = (typeof QUEST_CLASS_TYPES)[number]
 
-export type QuestStatus = QuestBonus | "achieved" | "incomplete"
+export type QuestStatus = QuestBonus | "complete" | "incomplete"
 
 export type Reserve = "health" | "stamina"
 

@@ -22,7 +22,6 @@ export function TraitSelection() {
 
 			{Object.values(acquiredTraitsValue).every(Boolean)
 				? <span className="fst-italic">All traits acquired.</span>
-
 				: (
 					<Stack gap={3}>
 						<FormCheck

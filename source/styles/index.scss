@@ -13,6 +13,10 @@ body {
 	user-select: none;
 }
 
+.form-check > * {
+	cursor: pointer;
+}
+
 h6 {
 	font-variant: all-petite-caps;
 }

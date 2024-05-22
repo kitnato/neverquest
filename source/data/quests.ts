@@ -128,7 +128,7 @@ export const QUESTS: Record<
 	attributesUnlocking: {
 		description: "Unlock all attributes.",
 		progression: [ATTRIBUTE_TYPES.length],
-		requiresTracking: false,
+		requiresTracking: true,
 		title: "Jack of all",
 	},
 	bandaging: {

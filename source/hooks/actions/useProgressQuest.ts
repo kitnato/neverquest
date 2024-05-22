@@ -8,7 +8,7 @@ import {
 	questProgress,
 	questStatuses,
 } from "@neverquest/state/quests"
-import { getQuestsData, getSnapshotGetter } from "@neverquest/utilities/getters"
+import { getQuestData, getSnapshotGetter } from "@neverquest/utilities/getters"
 
 import type { QuestNotification } from "@neverquest/types"
 import type { Quest } from "@neverquest/types/unions"
@@ -25,7 +25,7 @@ export function useProgressQuest() {
 
 				const achievedQuests: QuestNotification[] = []
 				const currentQuestProgress = questProgress(quest)
-				const quests = getQuestsData(quest)
+				const quests = getQuestData(quest)
 				const newProgress = get(currentQuestProgress) + amount
 				const lastQuest = quests.at(-1)
 
@@ -42,7 +42,7 @@ export function useProgressQuest() {
 						) {
 							achievedQuests.unshift({ ...currentQuest, ID: nanoid() })
 
-							return "achieved"
+							return "complete"
 						}
 
 						return status

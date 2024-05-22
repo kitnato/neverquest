@@ -12,7 +12,7 @@ import {
 	type QuestClass,
 	type QuestStatus,
 } from "@neverquest/types/unions"
-import { getQuestClass, getQuestsData } from "@neverquest/utilities/getters"
+import { getQuestClass, getQuestData } from "@neverquest/utilities/getters"
 import { withStateKey } from "@neverquest/utilities/helpers"
 
 import type { QuestNotification } from "@neverquest/types"
@@ -21,23 +21,22 @@ import type { QuestNotification } from "@neverquest/types"
 
 export const activeQuests = withStateKey("activeQuests", key =>
 	selectorFamily({
-		get:
-			(quest: Quest) =>
-				({ get }) => {
-					const questProgressValue = get(questProgress(quest))
+		get: (quest: Quest) =>
+			({ get }) => {
+				const currentQuestStatuses = get(questStatuses(quest))
 
-					const quests = []
+				const quests = []
 
-					for (const questData of getQuestsData(quest)) {
-						quests.push(questData)
+				for (const currentQuestData of getQuestData(quest)) {
+					quests.push(currentQuestData)
 
-						if (questData.progressionMaximum > questProgressValue) {
-							break
-						}
+					if (currentQuestStatuses[currentQuestData.progressionIndex] === "incomplete") {
+						break
 					}
+				}
 
-					return quests
-				},
+				return quests
+			},
 		key,
 	}),
 )
@@ -54,7 +53,7 @@ export const canCompleteQuests = withStateKey("canCompleteQuests", key =>
 					return QUEST_TYPES_BY_CLASS[questClass].some(
 						quest => Object.values(
 							get(questStatuses(quest)),
-						).includes("achieved"))
+						).includes("complete"))
 				},
 		key,
 	}),
@@ -72,39 +71,35 @@ export const canTrackQuests = withStateKey("canTrackQuests", key =>
 
 export const completedQuestsCount = withStateKey("completedQuestsCount", key =>
 	selectorFamily({
-		get:
-			(questClass: QuestClass) =>
-				({ get }) =>
-					QUEST_TYPES_BY_CLASS[questClass].reduce(
-						(sum, quest) =>
-							sum + Object.values(get(questStatuses(quest))).filter(isQuestBonus).length,
-						0,
-					),
+		get: (questClass: QuestClass) =>
+			({ get }) =>
+				QUEST_TYPES_BY_CLASS[questClass].reduce(
+					(sum, quest) =>
+						sum + Object.values(get(questStatuses(quest))).filter(isQuestBonus).length,
+					0,
+				),
 		key,
 	}),
 )
 
 export const questsBonus = withStateKey("questsBonus", key =>
 	selectorFamily({
-		get:
-			(questBonus: QuestBonus) =>
-				({ get }) => {
-					if (!get(canTrackQuests)) {
-						return 0
+		get: (questBonus: QuestBonus) =>
+			({ get }) => {
+				if (!get(canTrackQuests)) {
+					return 0
+				}
+
+				let bonus = 0
+
+				for (const questClass of QUEST_CLASS_TYPES) {
+					for (const quest of QUEST_TYPES_BY_CLASS[questClass]) {
+						bonus += Object.values(get(questStatuses(quest))).filter(status => questBonus === status).length * QUEST_COMPLETION_BONUS[getQuestClass(quest)]
 					}
+				}
 
-					let bonus = 0
-
-					for (const questClass of QUEST_CLASS_TYPES) {
-						for (const quest of QUEST_TYPES_BY_CLASS[questClass]) {
-							bonus
-								+= Object.values(get(questStatuses(quest))).filter(status => questBonus === status)
-									.length * QUEST_COMPLETION_BONUS[getQuestClass(quest)]
-						}
-					}
-
-					return bonus
-				},
+				return bonus
+			},
 		key,
 	}),
 )

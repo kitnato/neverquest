@@ -47,7 +47,7 @@ export function PurchaseItem({ merchantItem }: { merchantItem: MerchantInventory
 				}
 
 				progressQuest({
-					quest: isConsumableItem(item) ? "purchasingConsumable" : "purchasingItem",
+					quest: isConsumableItem(item) ? "purchasingConsumable" : "purchasingInheritable",
 				})
 			}}
 		/>

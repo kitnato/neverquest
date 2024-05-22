@@ -29,7 +29,6 @@ export function useHireCrewMember() {
 				}
 
 				progressQuest({ quest: "hiring" })
-				progressQuest({ quest: "hiringAll" })
 
 				if (
 					crewMember === "blacksmith" && CREW_MEMBER_TYPES

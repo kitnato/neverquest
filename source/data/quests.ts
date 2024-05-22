@@ -98,7 +98,7 @@ export const QUESTS: Record<
 		hidden: "memento.",
 		progression: [1],
 		requiresTracking: false,
-		title: "Subversive",
+		title: "Foreshadowing",
 	},
 	acquiringRanged: {
 		description: "Acquire a ranged weapon.",
@@ -325,15 +325,9 @@ export const QUESTS: Record<
 	},
 	hiring: {
 		description: "Hire @ caravan crew members.",
-		progression: [2, 5],
+		progression: [2, 5, CREW_MEMBER_TYPES.length - 1],
 		requiresTracking: true,
 		title: "Don't forget the doctor",
-	},
-	hiringAll: {
-		description: "Hire all caravan crew members.",
-		progression: [CREW_MEMBER_TYPES.length - 1],
-		requiresTracking: true,
-		title: "Haven't died of dysentery",
 	},
 	hiringBlacksmithFirst: {
 		description: "Hire the blacksmith as the first crew member.",
@@ -423,15 +417,9 @@ export const QUESTS: Record<
 	},
 	masteries: {
 		description: "Unlock masteries.",
-		progression: [1, 3],
+		progression: [1, 3, MASTERY_TYPES.length],
 		requiresTracking: true,
-		title: "Apprentice",
-	},
-	masteriesAll: {
-		description: "Unlock all masteries.",
-		progression: [MASTERY_TYPES.length],
-		requiresTracking: true,
-		title: "Guru",
+		title: "Come at me",
 	},
 	masteriesRank: {
 		description: "Rank up masteries @ times.",
@@ -509,9 +497,9 @@ export const QUESTS: Record<
 		requiresTracking: true,
 		title: "Target customer",
 	},
-	purchasingItem: {
+	purchasingInheritable: {
 		description: "Purchase @ gear items or relics.",
-		progression: [5, 20, 50],
+		progression: [5, 20],
 		requiresTracking: true,
 		title: "Reliquary",
 	},
@@ -577,15 +565,9 @@ export const QUESTS: Record<
 	},
 	skills: {
 		description: "Acquire skills.",
-		progression: [1, 3, 7],
+		progression: [1, 3, 7, SKILL_TYPES.length],
 		requiresTracking: true,
 		title: "Prodigy",
-	},
-	skillsAll: {
-		description: "Acquire all skills.",
-		progression: [SKILL_TYPES.length],
-		requiresTracking: true,
-		title: "The GOAT",
 	},
 	skillsCraft: {
 		description: `Acquire the ${formatEnumeration(QUEST_REQUIREMENTS.skillsCraft)} skills.`,
@@ -653,15 +635,9 @@ export const QUESTS: Record<
 	},
 	traits: {
 		description: "Acquire traits.",
-		progression: [1, 3, 6],
+		progression: [1, 3, 6, TRAIT_TYPES.length],
 		requiresTracking: false,
 		title: "Getting ink done",
-	},
-	traitsAll: {
-		description: "Acquire all traits.",
-		progression: [TRAIT_TYPES.length],
-		requiresTracking: false,
-		title: "Come at me",
 	},
 	visitingVoid: {
 		description: "Visit nothingness.",

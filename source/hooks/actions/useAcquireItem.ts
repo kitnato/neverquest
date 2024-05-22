@@ -3,7 +3,7 @@ import { useRecoilCallback } from "recoil"
 import { useCanFit } from "@neverquest/hooks/actions/useCanFit"
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import { armor, shield, weapon } from "@neverquest/state/gear"
-import { acquiredItems, inventory, notifyOverEncumbrance } from "@neverquest/state/inventory"
+import { acquiredItems, inventory, notifyOverEncumbrance, ownedItem } from "@neverquest/state/inventory"
 import { hasLootedInheritable } from "@neverquest/state/items"
 import { isSkillAcquired } from "@neverquest/state/skills"
 import { isTraitAcquired } from "@neverquest/state/traits"
@@ -34,7 +34,9 @@ export function useAcquireItem() {
 				const get = getSnapshotGetter(snapshot)
 
 				if (!canFit(item.weight)) {
-					set(notifyOverEncumbrance, true)
+					if (get(ownedItem("knapsack")) !== undefined) {
+						set(notifyOverEncumbrance, true)
+					}
 
 					return "failure"
 				}

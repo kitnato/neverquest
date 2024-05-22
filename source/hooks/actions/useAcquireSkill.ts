@@ -37,7 +37,6 @@ export function useAcquireSkill() {
 
 				if (Object.values(MASTERIES).some(({ requiredSkill }) => requiredSkill === skill)) {
 					progressQuest({ quest: "masteries" })
-					progressQuest({ quest: "masteriesAll" })
 				}
 
 				if (
@@ -48,7 +47,6 @@ export function useAcquireSkill() {
 				}
 
 				progressQuest({ quest: "skills" })
-				progressQuest({ quest: "skillsAll" })
 
 				if (skillsCraft.includes(skill)) {
 					progressQuest({ quest: "skillsCraft" })

@@ -181,7 +181,7 @@ export type Reserve = "health" | "stamina"
 
 export const ROUTINE_TYPES = [
 	"settingName",
-	"purchasingItem",
+	"purchasingInheritable",
 	"equippingWeapon",
 	"equippingArmor",
 	"equippingShield",
@@ -201,7 +201,6 @@ export const ROUTINE_TYPES = [
 	"flatlining",
 	"scavengingCorpse",
 	"hiring",
-	"hiringAll",
 	"crafting",
 	"acquiringGems",
 	"gemsApplying",
@@ -425,6 +424,7 @@ export type StateKey =
 	| "protection"
 	| "questNotifications"
 	| "questProgress"
+	| "questRewards"
 	| "questsBonus"
 	| "questStatuses"
 	| "rage"
@@ -503,9 +503,6 @@ export const TRIUMPH_TYPES = [
 	"hiringBlacksmithFirst",
 	"acquiringArcheryFirst",
 	"attributesUnlocking",
-	"skillsAll",
-	"masteriesAll",
-	"traitsAll",
 	"acquiringMemento",
 	"acquiringTornManuscript",
 	"acquiringDreamCatcher",

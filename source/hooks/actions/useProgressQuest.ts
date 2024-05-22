@@ -10,49 +10,38 @@ import {
 } from "@neverquest/state/quests"
 import { getQuestData, getSnapshotGetter } from "@neverquest/utilities/getters"
 
-import type { QuestNotification } from "@neverquest/types"
 import type { Quest } from "@neverquest/types/unions"
 
 export function useProgressQuest() {
 	return useRecoilCallback(
 		({ set, snapshot }) =>
-			({ amount = 1, quest }: { amount?: number, quest: Quest }) => {
+			({
+				amount = 1,
+				forceSet,
+				quest,
+			}: {
+				amount?: number
+				forceSet?: boolean
+				quest: Quest
+			}) => {
 				const get = getSnapshotGetter(snapshot)
 
-				if (QUESTS[quest].requiresTracking && !get(canTrackQuests)) {
+				if (!forceSet && QUESTS[quest].requiresTracking && !get(canTrackQuests)) {
 					return
 				}
 
-				const achievedQuests: QuestNotification[] = []
-				const currentQuestProgress = questProgress(quest)
-				const quests = getQuestData(quest)
-				const newProgress = get(currentQuestProgress) + amount
-				const lastQuest = quests.at(-1)
+				const currentQuestProgressState = questProgress(quest)
+				const newProgress = forceSet ? amount : get(currentQuestProgressState) + amount
+				const currentQuestStatuses = get(questStatuses(quest))
 
-				if (lastQuest !== undefined && newProgress <= lastQuest.progressionMaximum) {
-					set(currentQuestProgress, newProgress)
+				set(currentQuestProgressState, newProgress)
 
-					set(questStatuses(quest), statuses => statuses.map((status, index) => {
-						const currentQuest = quests[index]
-
-						if (
-							currentQuest !== undefined
-							&& status === "incomplete"
-							&& newProgress >= currentQuest.progressionMaximum
-						) {
-							achievedQuests.unshift({ ...currentQuest, ID: nanoid() })
-
-							return "complete"
-						}
-
-						return status
-					}))
-
-					set(questNotifications, currentQuestNotifications => [
-						...achievedQuests,
-						...currentQuestNotifications,
-					])
-				}
+				set(questNotifications, currentQuestNotifications => [
+					...getQuestData(quest)
+						.filter(({ progressionIndex, progressionMaximum }) => currentQuestStatuses[progressionIndex] === "incomplete" && newProgress >= progressionMaximum)
+						.map(questData => ({ ...questData, ID: nanoid() })),
+					...currentQuestNotifications,
+				])
 			},
 		[],
 	)

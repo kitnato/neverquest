@@ -1,6 +1,7 @@
 import { useRecoilCallback } from "recoil"
 
 import { ATTRIBUTES } from "@neverquest/data/attributes"
+import { MERCHANT_OFFERS } from "@neverquest/data/caravan"
 import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear"
 import { QUESTS } from "@neverquest/data/quests"
 import { RETIREMENT_STAGE } from "@neverquest/data/retirement"
@@ -33,7 +34,7 @@ import {
 import { armor, gems, shield, weapon } from "@neverquest/state/gear"
 import { inventory } from "@neverquest/state/inventory"
 import { expandedMasteries, masteryProgress, masteryRank } from "@neverquest/state/masteries"
-import { questProgress, questStatuses } from "@neverquest/state/quests"
+import { questProgress } from "@neverquest/state/quests"
 import { essence } from "@neverquest/state/resources"
 import { isSkillAcquired } from "@neverquest/state/skills"
 import { isTraitAcquired, selectedTrait } from "@neverquest/state/traits"
@@ -69,12 +70,15 @@ export function useRetire() {
 					return
 				}
 
+				if (get(isSkillAcquired("memetics"))) {
+					progressQuest({ quest: "decipheringJournal" })
+				}
+
 				if (selectedTraitValue !== undefined) {
 					set(isTraitAcquired(selectedTraitValue), true)
 					reset(selectedTrait)
 
 					progressQuest({ quest: "traits" })
-					progressQuest({ quest: "traitsAll" })
 				}
 
 				resetAttributes()
@@ -104,17 +108,16 @@ export function useRetire() {
 				reset(weapon)
 
 				Object.entries(QUESTS).forEach(([quest, { requiresTracking }]) => {
-					if (requiresTracking) {
+					if (requiresTracking && !["attributesUnlocking", "purchasingInheritable", "skills"].includes(quest)) {
 						reset(questProgress(quest as Quest))
-						set(questStatuses(quest as Quest), statuses => statuses.map(status => status === "complete" ? "incomplete" : status))
 					}
 				})
 
-				for (const attribute of ATTRIBUTE_TYPES) {
-					if (ATTRIBUTES[attribute].requiredSkill === undefined) {
-						progressQuest({ quest: "attributesUnlocking" })
-					}
-				}
+				progressQuest({
+					amount: ATTRIBUTE_TYPES.filter(attribute => ATTRIBUTES[attribute].requiredSkill === undefined).length,
+					forceSet: true,
+					quest: "attributesUnlocking",
+				})
 
 				for (const crewMember of CREW_MEMBER_TYPES) {
 					reset(monologue(crewMember))
@@ -129,30 +132,40 @@ export function useRetire() {
 					reset(masteryRank(mastery))
 				}
 
-				for (const skill of SKILL_TYPES) {
-					if (!SKILLS[skill].isInheritable) {
+				const inheritedSkills = SKILL_TYPES.filter(skill => SKILLS[skill].isInheritable && get(isSkillAcquired(skill)))
+
+				progressQuest({
+					amount: inheritedSkills.length,
+					forceSet: true,
+					quest: "skills",
+				})
+
+				SKILL_TYPES.forEach((skill) => {
+					if (!inheritedSkills.includes(skill)) {
 						reset(isSkillAcquired(skill))
-
-						if (get(isSkillAcquired(skill))) {
-							progressQuest({ amount: -1, quest: "skills" })
-							progressQuest({ amount: -1, quest: "skillsAll" })
-						}
 					}
-				}
+				})
 
-				set(inventory, currentInventory =>
-					currentInventory.filter(currentItem => isInheritableItem(currentItem)),
-				)
+				const inheritedItems = get(inventory).filter(currentItem => isInheritableItem(currentItem))
+
+				progressQuest({
+					amount: inheritedItems.filter(({ name }) => Object
+						.values(MERCHANT_OFFERS)
+						.map(({ offer }) => offer)
+						.filter(isInheritableItem)
+						.map(({ name }) => name).includes(name),
+					).length,
+					forceSet: true,
+					quest: "purchasingInheritable",
+				})
+
+				set(inventory, inheritedItems)
 
 				for (const item of get(merchantInventory)) {
 					neutralize({ item })
 				}
 
 				reset(merchantInventory)
-
-				if (get(isSkillAcquired("memetics"))) {
-					progressQuest({ quest: "decipheringJournal" })
-				}
 
 				progressQuest({ quest: "retiring" })
 

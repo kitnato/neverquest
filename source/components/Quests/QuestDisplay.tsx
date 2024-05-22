@@ -97,7 +97,7 @@ export function QuestDisplay({
 					trigger={canCompleteQuest ? POPOVER_TRIGGER : []}
 				>
 					<ToggleButtonGroup
-						className={`me-1${canCompleteQuest ? "" : " opacity-50"}`}
+						className={`me-1${hasCompletedQuest ? " opacity-50" : ""}`}
 						name={choiceID}
 						onChange={(value) => {
 							completeQuest({

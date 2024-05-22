@@ -1,21 +1,17 @@
 import { useRecoilCallback } from "recoil"
 
 import { QUEST_TYPES_BY_CLASS } from "@neverquest/data/quests"
-import { questProgress, questStatuses } from "@neverquest/state/quests"
-import { isQuestBonus } from "@neverquest/types/type-guards"
+import { questProgress, questRewards } from "@neverquest/state/quests"
 
 export function useResetCompletedQuests() {
 	return useRecoilCallback(
-		({ reset, set }) =>
+		({ reset }) =>
 			() => {
 				for (const quest of Object.values(QUEST_TYPES_BY_CLASS).flat()) {
-					set(questStatuses(quest), statuses =>
-						statuses.map(status => isQuestBonus(status) ? "complete" : status),
-					)
+					reset(questRewards(quest))
 				}
 
 				reset(questProgress("completing"))
-				reset(questStatuses("completing"))
 			},
 		[],
 	)

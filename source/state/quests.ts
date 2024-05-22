@@ -104,6 +104,19 @@ export const questsBonus = withStateKey("questsBonus", key =>
 	}),
 )
 
+export const questStatuses = withStateKey("questStatuses", key =>
+	selectorFamily<QuestStatus[], Quest>({
+		get: (quest: Quest) =>
+			({ get }) => QUESTS[quest]
+				.progression
+				.map((progress, index) =>
+					get(questRewards(quest))[index]
+					?? (get(questProgress(quest)) < progress ? "incomplete" : "complete"),
+				),
+		key,
+	}),
+)
+
 // ATOMS
 
 export const questNotifications = withStateKey("questNotifications", key =>
@@ -122,9 +135,9 @@ export const questProgress = withStateKey("questProgress", key =>
 	}),
 )
 
-export const questStatuses = withStateKey("questStatuses", key =>
-	atomFamily<QuestStatus[], Quest>({
-		default: quest => QUESTS[quest].progression.map(() => "incomplete"),
+export const questRewards = withStateKey("questRewards", key =>
+	atomFamily<(QuestBonus | undefined)[], Quest>({
+		default: quest => QUESTS[quest].progression.map(() => undefined) as [(QuestBonus | undefined), ...(QuestBonus | undefined)[]],
 		effects: quest => [handleStorage({ key, parameter: quest })],
 		key,
 	}),

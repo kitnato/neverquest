@@ -10,6 +10,7 @@ import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react"
 import IconFletcher from "@neverquest/icons/fletcher.svg?react"
 import IconGear from "@neverquest/icons/gear.svg?react"
 import IconGems from "@neverquest/icons/gems.svg?react"
+import IconKnapsack from "@neverquest/icons/knapsack.svg?react"
 import IconMedic from "@neverquest/icons/medic.svg?react"
 import IconMending from "@neverquest/icons/mending.svg?react"
 import IconMercenary from "@neverquest/icons/mercenary.svg?react"
@@ -59,7 +60,7 @@ export const CREW: Record<
 			[LEVELLING_END]: MONOLOGUE_EMPTY,
 			[LEVELLING_MAXIMUM]: "Nothing makes any sense.",
 		},
-		price: 400,
+		price: 500,
 		requiredStage: 25,
 	},
 	blacksmith: {
@@ -173,12 +174,12 @@ export const CREW: Record<
 			[LEVELLING_END]: MONOLOGUE_EMPTY,
 			[LEVELLING_MAXIMUM]: "I can't see any more.",
 		},
-		price: 650,
+		price: 750,
 		requiredStage: 30,
 	},
 	tailor: {
-		description: "Expands # encumbrance.",
-		descriptionIcons: [IconEncumbrance],
+		description: "Alleviates # encumbrance by expanding the # knapsack.",
+		descriptionIcons: [IconEncumbrance, IconKnapsack],
 		Icon: IconTailor,
 		interaction: "Stitch",
 		monologues: {

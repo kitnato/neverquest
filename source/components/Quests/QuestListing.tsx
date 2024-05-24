@@ -10,9 +10,8 @@ export function QuestListing({ quest }: { quest: Quest }) {
 
 	return activeQuestsValue.map(activeQuest => (
 		<QuestDisplay
-			activeQuest={activeQuest}
-			key={activeQuest.title}
-			quest={quest}
+			key={activeQuest.ID}
+			questData={activeQuest}
 		/>
 	),
 	)

@@ -13,7 +13,6 @@ import { useRecoilValue, useSetRecoilState } from "recoil"
 import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { IconImage } from "@neverquest/components/IconImage"
 import { DEATH_STAGE_PENALTY } from "@neverquest/data/character"
-import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import { useResetCharacter } from "@neverquest/hooks/actions/useResetCharacter"
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness"
 import IconCapabilities from "@neverquest/icons/capabilities.svg?react"
@@ -31,7 +30,6 @@ export function Flatline() {
 	const setStage = useSetRecoilState(stage)
 	const setWildernesses = useSetRecoilState(wildernesses)
 
-	const progressQuest = useProgressQuest()
 	const resetCharacter = useResetCharacter()
 	const resetWilderness = useResetWilderness()
 
@@ -81,15 +79,12 @@ export function Flatline() {
 				<Button
 					onClick={() => {
 						if (stageMaximumValue > DEATH_STAGE_PENALTY) {
-							setWildernesses(currentWildernesses => currentWildernesses.slice(0, -1))
-							setStage(currentStage => currentStage - 1)
+							setWildernesses(currentWildernesses => currentWildernesses.slice(0, -DEATH_STAGE_PENALTY))
+							setStage(currentStage => currentStage - DEATH_STAGE_PENALTY)
 						}
 						else {
 							setWildernesses([generateLocation({ affixStructure: getAffixStructure() })])
 						}
-
-						progressQuest({ amount: -1, quest: "stages" })
-						progressQuest({ amount: -1, quest: "stagesEnd" })
 
 						resetCharacter(true)
 						resetWilderness()

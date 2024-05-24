@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap"
-import { useRecoilValue, useResetRecoilState } from "recoil"
+import { useRecoilValue } from "recoil"
 
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
 import { DetailsTable } from "@neverquest/components/DetailsTable"
@@ -15,7 +15,6 @@ import IconBurden from "@neverquest/icons/burden.svg?react"
 import IconProtection from "@neverquest/icons/protection.svg?react"
 import IconTank from "@neverquest/icons/tank.svg?react"
 import { armor, shield } from "@neverquest/state/gear"
-import { questProgress } from "@neverquest/state/quests"
 import { protection } from "@neverquest/state/statistics"
 import { isTraitAcquired } from "@neverquest/state/traits"
 import { isShowing } from "@neverquest/state/ui"
@@ -29,7 +28,6 @@ export function Protection() {
 	const isTraitAcquiredTank = useRecoilValue(isTraitAcquired("tank"))
 	const protectionValue = useRecoilValue(protection)
 	const shieldValue = useRecoilValue(shield)
-	const resetQuestProgressProtection = useResetRecoilState(questProgress("protection"))
 
 	const progressQuest = useProgressQuest()
 
@@ -41,9 +39,12 @@ export function Protection() {
 	})
 
 	useEffect(() => {
-		resetQuestProgressProtection()
-		progressQuest({ amount: protectionValue, quest: "protection" })
-	}, [progressQuest, protectionValue, resetQuestProgressProtection])
+		progressQuest({
+			amount: protectionValue,
+			isAbsolute: true,
+			quest: "protection",
+		})
+	}, [progressQuest, protectionValue])
 
 	if (isShowingProtection) {
 		return (

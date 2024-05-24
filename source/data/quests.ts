@@ -213,7 +213,7 @@ export const QUESTS: Record<
 		requiresTracking: false,
 		title: "Parable of Stanislav",
 	},
-	decipheringJournal: {
+	deciphering: {
 		description: "Decipher the journal.",
 		progression: [1],
 		requiresTracking: false,
@@ -243,23 +243,11 @@ export const QUESTS: Record<
 		requiresTracking: true,
 		title: "Grim fandango",
 	},
-	equippingArmor: {
-		description: "Equip armor.",
+	equipping: {
+		description: "Have a weapon, armor and a shield equipped at the same time.",
 		progression: [1],
 		requiresTracking: true,
 		title: "Locked & loaded",
-	},
-	equippingShield: {
-		description: "Equip a shield.",
-		progression: [1],
-		requiresTracking: true,
-		title: "This doesn't give protection?",
-	},
-	equippingWeapon: {
-		description: "Equip a weapon.",
-		progression: [1],
-		requiresTracking: true,
-		title: "Armed & dangerous",
 	},
 	eradicating: {
 		description: "Eradicate @ items.",
@@ -324,8 +312,8 @@ export const QUESTS: Record<
 		title: "Better than mining",
 	},
 	hiring: {
-		description: "Hire @ caravan crew members.",
-		progression: [2, 5, CREW_MEMBER_TYPES.length - 1],
+		description: "Hire all caravan crew members.",
+		progression: [CREW_MEMBER_TYPES.length - 1],
 		requiresTracking: true,
 		title: "Don't forget the doctor",
 	},
@@ -342,7 +330,7 @@ export const QUESTS: Record<
 		title: "Voodoo",
 	},
 	infusingMaximum: {
-		description: "Infuse an item to its maximum level.",
+		description: "Infuse a relic to its maximum level.",
 		progression: [1],
 		requiresTracking: false,
 		title: "Witch doctor",
@@ -372,8 +360,7 @@ export const QUESTS: Record<
 		title: "Against all odds",
 	},
 	killingOneStrike: {
-		description:
-			"Kill a monster in one strike while at equal or lower power level than the current stage.",
+		description: "Kill a monster in one strike while at equal or lower power level than the current stage.",
 		progression: [1],
 		requiresTracking: true,
 		title: "One Punch Person",
@@ -416,8 +403,8 @@ export const QUESTS: Record<
 		title: "Hoarder",
 	},
 	masteries: {
-		description: "Unlock masteries.",
-		progression: [1, 3, MASTERY_TYPES.length],
+		description: "Unlock all masteries.",
+		progression: [MASTERY_TYPES.length],
 		requiresTracking: true,
 		title: "Come at me",
 	},
@@ -471,17 +458,9 @@ export const QUESTS: Record<
 	},
 	powerLevel: {
 		description: "Reach power level @.",
-		progression: [5, 20, 50, 100],
+		progression: [5, 20, 50, LEVELLING_END],
 		requiresTracking: true,
 		title: "One up",
-	},
-	powerLevelUltra: {
-		description: `Reach power level ${formatNumber({
-			value: LEVELLING_END,
-		})}.`,
-		progression: [LEVELLING_END],
-		requiresTracking: true,
-		title: `It's over ${formatNumber({ value: 9000 })}!`,
 	},
 	protection: {
 		description: `Have at least ${formatNumber({
@@ -498,20 +477,20 @@ export const QUESTS: Record<
 		title: "Target customer",
 	},
 	purchasingInheritable: {
-		description: "Purchase @ gear items or relics.",
+		description: "Purchase @ pieces of gear or relics.",
 		progression: [5, 20],
 		requiresTracking: true,
 		title: "Reliquary",
 	},
 	purgingEssence: {
 		description: "Undergo the essence purge ritual.",
-		progression: [1, 3],
+		progression: [1],
 		requiresTracking: true,
 		title: "Clean as a whistle",
 	},
 	purgingMemories: {
 		description: "Undergo the memory purge ritual.",
-		progression: [1, 3],
+		progression: [1],
 		requiresTracking: true,
 		title: "Who? What? Where?",
 	},
@@ -564,8 +543,8 @@ export const QUESTS: Record<
 		title: "Raiden",
 	},
 	skills: {
-		description: "Acquire skills.",
-		progression: [1, 3, 7, SKILL_TYPES.length],
+		description: "Acquire @ skills.",
+		progression: [3, 7, SKILL_TYPES.length],
 		requiresTracking: true,
 		title: "Prodigy",
 	},
@@ -583,15 +562,9 @@ export const QUESTS: Record<
 	},
 	stages: {
 		description: "Reach stage @.",
-		progression: [5, 20, 50, LEVELLING_MAXIMUM],
+		progression: [5, 20, 50, LEVELLING_MAXIMUM, LEVELLING_END],
 		requiresTracking: true,
 		title: "Sisyphean expedition",
-	},
-	stagesEnd: {
-		description: `Reach stage ${formatNumber({ value: LEVELLING_END })}.`,
-		progression: [LEVELLING_END],
-		requiresTracking: true,
-		title: "Does it end?",
 	},
 	staggering: {
 		description: "Stagger monsters @ times.",

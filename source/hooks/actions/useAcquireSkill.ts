@@ -19,7 +19,6 @@ export function useAcquireSkill() {
 			(skill: Skill) => {
 				const get = getSnapshotGetter(snapshot)
 
-				const { skillsCraft } = QUEST_REQUIREMENTS
 				const { shows } = SKILLS[skill]
 				const acquiredSkillsValue = get(acquiredSkills)
 
@@ -48,7 +47,7 @@ export function useAcquireSkill() {
 
 				progressQuest({ quest: "skills" })
 
-				if (skillsCraft.includes(skill)) {
+				if (QUEST_REQUIREMENTS.skillsCraft.includes(skill)) {
 					progressQuest({ quest: "skillsCraft" })
 				}
 			},

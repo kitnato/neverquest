@@ -1,4 +1,3 @@
-import { nanoid } from "nanoid"
 import { useRecoilCallback } from "recoil"
 
 import { QUESTS } from "@neverquest/data/quests"
@@ -17,31 +16,46 @@ export function useProgressQuest() {
 		({ set, snapshot }) =>
 			({
 				amount = 1,
-				forceSet,
+				isAbsolute,
 				quest,
 			}: {
 				amount?: number
-				forceSet?: boolean
+				isAbsolute?: boolean
 				quest: Quest
 			}) => {
 				const get = getSnapshotGetter(snapshot)
 
-				if (!forceSet && QUESTS[quest].requiresTracking && !get(canTrackQuests)) {
+				const questProgressState = questProgress(quest)
+				const questProgressValue = get(questProgressState)
+
+				const { progression, requiresTracking } = QUESTS[quest]
+				const lastProgression = progression.at(-1)
+
+				if (
+					(requiresTracking && !get(canTrackQuests))
+					|| (lastProgression !== undefined && questProgressValue >= lastProgression)
+				) {
 					return
 				}
 
-				const currentQuestProgressState = questProgress(quest)
-				const newProgress = forceSet ? amount : get(currentQuestProgressState) + amount
-				const currentQuestStatuses = get(questStatuses(quest))
+				const newProgress = isAbsolute ? amount : questProgressValue + amount
+				const newCompletedQuests = getQuestData(quest)
+					.filter(({ progressionIndex, progressionMaximum }) =>
+						get(questStatuses(quest))[progressionIndex] === "incomplete"
+						&& newProgress >= progressionMaximum)
 
-				set(currentQuestProgressState, newProgress)
+				set(questProgressState, newProgress)
 
-				set(questNotifications, currentQuestNotifications => [
-					...getQuestData(quest)
-						.filter(({ progressionIndex, progressionMaximum }) => currentQuestStatuses[progressionIndex] === "incomplete" && newProgress >= progressionMaximum)
-						.map(questData => ({ ...questData, ID: nanoid() })),
-					...currentQuestNotifications,
-				])
+				newCompletedQuests.forEach(({ progressionIndex, quest }) => {
+					set(questStatuses(quest), statuses => statuses.map((status, index) => index === progressionIndex ? "complete" : status))
+				})
+
+				if (newCompletedQuests.length > 0) {
+					set(questNotifications, currentQuestNotifications => [
+						...newCompletedQuests,
+						...currentQuestNotifications,
+					])
+				}
 			},
 		[],
 	)

@@ -3,7 +3,6 @@ import { useRecoilCallback } from "recoil"
 import { ATTRIBUTES } from "@neverquest/data/attributes"
 import { MERCHANT_OFFERS } from "@neverquest/data/caravan"
 import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear"
-import { QUESTS } from "@neverquest/data/quests"
 import { RETIREMENT_STAGE } from "@neverquest/data/retirement"
 import { SKILLS } from "@neverquest/data/skills"
 import { useAcquireSkill } from "@neverquest/hooks/actions/useAcquireSkill"
@@ -43,7 +42,6 @@ import {
 	ATTRIBUTE_TYPES,
 	CREW_MEMBER_TYPES,
 	MASTERY_TYPES,
-	type Quest,
 	SKILL_TYPES,
 } from "@neverquest/types/unions"
 import { getPerkEffect, getSnapshotGetter } from "@neverquest/utilities/getters"
@@ -68,10 +66,6 @@ export function useRetire() {
 
 				if (stageMaximumValue < RETIREMENT_STAGE) {
 					return
-				}
-
-				if (get(isSkillAcquired("memetics"))) {
-					progressQuest({ quest: "decipheringJournal" })
 				}
 
 				if (selectedTraitValue !== undefined) {
@@ -107,15 +101,14 @@ export function useRetire() {
 				reset(stageHighest)
 				reset(weapon)
 
-				Object.entries(QUESTS).forEach(([quest, { requiresTracking }]) => {
-					if (requiresTracking && !["attributesUnlocking", "purchasingInheritable", "skills"].includes(quest)) {
-						reset(questProgress(quest as Quest))
-					}
-				})
+				reset(questProgress("attributesIncreasing"))
+				reset(questProgress("hiring"))
+				reset(questProgress("powerLevel"))
+				reset(questProgress("stages"))
 
 				progressQuest({
 					amount: ATTRIBUTE_TYPES.filter(attribute => ATTRIBUTES[attribute].requiredSkill === undefined).length,
-					forceSet: true,
+					isAbsolute: true,
 					quest: "attributesUnlocking",
 				})
 
@@ -136,7 +129,7 @@ export function useRetire() {
 
 				progressQuest({
 					amount: inheritedSkills.length,
-					forceSet: true,
+					isAbsolute: true,
 					quest: "skills",
 				})
 
@@ -153,9 +146,10 @@ export function useRetire() {
 						.values(MERCHANT_OFFERS)
 						.map(({ offer }) => offer)
 						.filter(isInheritableItem)
-						.map(({ name }) => name).includes(name),
+						.map(({ name }) => name)
+						.includes(name),
 					).length,
-					forceSet: true,
+					isAbsolute: true,
 					quest: "purchasingInheritable",
 				})
 

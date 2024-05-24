@@ -377,8 +377,10 @@ export function getQuestData(quest: Quest): [QuestData, ...QuestData[]] {
 	return progression.map((progress, index) => ({
 		description: description.replace("@", formatNumber({ value: progress })),
 		hidden,
+		ID: nanoid(),
 		progressionIndex: index,
 		progressionMaximum: progress,
+		quest,
 		questClass: isConquest(quest) ? "conquest" : isRoutine(quest) ? "routine" : "triumph",
 		title: `${title}${progression.length > 1 ? ` ${getRomanNumeral(index + 1)}` : ""}`,
 	})) as [QuestData, ...QuestData[]]

@@ -182,9 +182,7 @@ export type Reserve = "health" | "stamina"
 export const ROUTINE_TYPES = [
 	"settingName",
 	"purchasingInheritable",
-	"equippingWeapon",
-	"equippingArmor",
-	"equippingShield",
+	"equipping",
 	"stages",
 	"knapsackExpanding",
 	"powerLevel",
@@ -212,13 +210,12 @@ export const ROUTINE_TYPES = [
 	"acquiringTwoHanded",
 	"fillingLacrimatory",
 	"infusing",
-	"infusingMaximum",
+	"attributesUnlocking",
 	"attributesIncreasing",
 	"skills",
 	"skillsCraft",
 	"masteries",
 	"masteriesRank",
-	"masteriesRankMaximum",
 	"resurrecting",
 	"retiring",
 	"purgingEssence",
@@ -424,7 +421,6 @@ export type StateKey =
 	| "protection"
 	| "questNotifications"
 	| "questProgress"
-	| "questRewards"
 	| "questsBonus"
 	| "questStatuses"
 	| "rage"
@@ -490,7 +486,7 @@ export const RELIC_TYPES = [
 export type Relic = (typeof RELIC_TYPES)[number]
 
 export const TRIUMPH_TYPES = [
-	"decipheringJournal",
+	"deciphering",
 	"settingSubjectName",
 	"survivingNoGear",
 	"survivingNoAttributes",
@@ -500,17 +496,16 @@ export const TRIUMPH_TYPES = [
 	"protection",
 	"noRecovery",
 	"essenceCount",
+	"masteriesRankMaximum",
 	"hiringBlacksmithFirst",
 	"acquiringArcheryFirst",
-	"attributesUnlocking",
 	"acquiringMemento",
 	"acquiringTornManuscript",
 	"acquiringDreamCatcher",
+	"infusingMaximum",
 	"killingResDominus",
 	"killingResDominusNoTraits",
 	"visitingVoid",
-	"powerLevelUltra",
-	"stagesEnd",
 	"acquiringFamiliar",
 	"killingResCogitans",
 	"deciding",

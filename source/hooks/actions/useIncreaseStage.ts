@@ -51,9 +51,6 @@ export function useIncreaseStage() {
 						generateLocation({ affixStructure: getAffixStructure() }),
 					])
 
-					progressQuest({ amount: stageValue === 1 ? 2 : 1, quest: "stages" })
-					progressQuest({ amount: stageValue === 1 ? 2 : 1, quest: "stagesEnd" })
-
 					if (stageValue === get(questProgress("survivingNoAttributes")) + 1) {
 						progressQuest({ quest: "survivingNoAttributes" })
 					}

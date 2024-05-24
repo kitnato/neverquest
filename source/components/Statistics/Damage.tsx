@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap"
-import { useRecoilValue, useResetRecoilState } from "recoil"
+import { useRecoilValue } from "recoil"
 
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
 import { DetailsTable } from "@neverquest/components/DetailsTable"
@@ -25,7 +25,7 @@ import IconWeaponDamage from "@neverquest/icons/weapon-damage.svg?react"
 import { attributeStatistic } from "@neverquest/state/attributes"
 import { shield, weapon } from "@neverquest/state/gear"
 import { infusionEffect } from "@neverquest/state/items"
-import { questProgress, questsBonus } from "@neverquest/state/quests"
+import { questsBonus } from "@neverquest/state/quests"
 import { reserveCurrent } from "@neverquest/state/reserves"
 import { damage, lifeLeech } from "@neverquest/state/statistics"
 import { isTraitAcquired } from "@neverquest/state/traits"
@@ -47,7 +47,6 @@ export function Damage() {
 	const reserveStamina = useRecoilValue(reserveCurrent("stamina"))
 	const shieldValue = useRecoilValue(shield)
 	const weaponValue = useRecoilValue(weapon)
-	const resetQuestProgressDamage = useResetRecoilState(questProgress("damage"))
 
 	const progressQuest = useProgressQuest()
 
@@ -60,9 +59,12 @@ export function Damage() {
 	})
 
 	useEffect(() => {
-		resetQuestProgressDamage()
-		progressQuest({ amount: damageValue, quest: "damage" })
-	}, [damageValue, progressQuest, resetQuestProgressDamage])
+		progressQuest({
+			amount: damageValue,
+			isAbsolute: true,
+			quest: "damage",
+		})
+	}, [damageValue, progressQuest])
 
 	if (isShowingDamage) {
 		return (

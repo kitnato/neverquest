@@ -9,7 +9,7 @@ import {
 	POPOVER_TRIGGER,
 } from "@neverquest/data/general"
 import { QUEST_COMPLETION_BONUS } from "@neverquest/data/quests"
-import { useCompleteQuest } from "@neverquest/hooks/actions/useCompleteQuest"
+import { useQuestReward } from "@neverquest/hooks/actions/useQuestReward"
 import IconDamage from "@neverquest/icons/damage.svg?react"
 import IconHealth from "@neverquest/icons/health.svg?react"
 import IconStamina from "@neverquest/icons/stamina.svg?react"
@@ -19,25 +19,25 @@ import { formatNumber } from "@neverquest/utilities/formatters"
 import { getQuestClass } from "@neverquest/utilities/getters"
 
 import type { QuestData } from "@neverquest/types"
-import type { Quest, QuestBonus } from "@neverquest/types/unions"
+import type { QuestBonus } from "@neverquest/types/unions"
 
 export function QuestDisplay({
-	activeQuest: {
+	questData: {
 		description,
 		hidden,
+		ID,
 		progressionIndex,
 		progressionMaximum,
+		quest,
 		title,
 	},
-	quest,
 }: {
-	activeQuest: QuestData
-	quest: Quest
+	questData: QuestData
 }) {
 	const questProgressValue = useRecoilValue(questProgress(quest))
 	const questStatusesValue = useRecoilValue(questStatuses(quest))
 
-	const completeQuest = useCompleteQuest()
+	const questReward = useQuestReward()
 
 	const previousStatus = progressionIndex > 0 && questStatusesValue.length > 1 ? questStatusesValue[progressionIndex - 1] : undefined
 	const status = questStatusesValue[progressionIndex]
@@ -46,20 +46,19 @@ export function QuestDisplay({
 		return
 	}
 
-	const hasCompletedQuest = isQuestBonus(status)
-	const canCompleteQuest = !hasCompletedQuest && (previousStatus === undefined || isQuestBonus(previousStatus))
-	const isQuestOver = hasCompletedQuest || status === "complete"
+	const isRewardChosen = isQuestBonus(status)
+	const canChooseReward = !isRewardChosen && (previousStatus === undefined || isQuestBonus(previousStatus))
+	const isQuestOver = isRewardChosen || status === "complete"
 	const cappedProgress = isQuestOver
 		? progressionMaximum
 		: questProgressValue < 0
 			? 0
 			: questProgressValue
-	const choiceID = `quest-completion-${quest}-${progressionMaximum}`
 
 	return (
 		<div className={CLASS_FULL_WIDTH_JUSTIFIED}>
 			<Stack
-				className={`me-2${hasCompletedQuest ? " opacity-25" : ""}`}
+				className={`me-2${isRewardChosen ? " opacity-25" : ""}`}
 				direction="horizontal"
 				gap={3}
 			>
@@ -93,21 +92,21 @@ export function QuestDisplay({
 							<span>Choose a quest reward.</span>
 						</Tooltip>
 					)}
-					show={canCompleteQuest ? undefined : false}
-					trigger={canCompleteQuest ? POPOVER_TRIGGER : []}
+					show={canChooseReward ? undefined : false}
+					trigger={canChooseReward ? POPOVER_TRIGGER : []}
 				>
 					<ToggleButtonGroup
-						className={`me-1${hasCompletedQuest ? " opacity-50" : ""}`}
-						name={choiceID}
+						className={`me-1${isRewardChosen ? " opacity-50" : ""}`}
+						name={ID}
 						onChange={(value) => {
-							completeQuest({
+							questReward({
 								bonus: value as QuestBonus,
 								progression: progressionMaximum,
 								quest,
 							})
 						}}
 						type="radio"
-						value={hasCompletedQuest ? status : undefined}
+						value={isRewardChosen ? status : undefined}
 					>
 						{[
 							{ bonus: "healthBonus", Icon: IconHealth },
@@ -115,8 +114,8 @@ export function QuestDisplay({
 							{ bonus: "damageBonus", Icon: IconDamage },
 						].map(({ bonus, Icon }) => (
 							<ToggleButton
-								disabled={!canCompleteQuest}
-								id={`${choiceID}-${bonus}`}
+								disabled={!canChooseReward}
+								id={`${ID}-${bonus}`}
 								key={bonus}
 								value={bonus}
 								variant="outline-dark"

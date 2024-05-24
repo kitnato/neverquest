@@ -2,12 +2,12 @@ import { useRecoilCallback } from "recoil"
 
 import { QUESTS } from "@neverquest/data/quests"
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
-import { questRewards, questStatuses } from "@neverquest/state/quests"
+import { questStatuses } from "@neverquest/state/quests"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
 
 import type { Quest, QuestBonus } from "@neverquest/types/unions"
 
-export function useCompleteQuest() {
+export function useQuestReward() {
 	const progressQuest = useProgressQuest()
 
 	return useRecoilCallback(
@@ -22,10 +22,11 @@ export function useCompleteQuest() {
 		}) => {
 			const get = getSnapshotGetter(snapshot)
 
+			const questStatusesState = questStatuses(quest)
 			const progressionIndex = QUESTS[quest].progression.indexOf(progression)
 
-			if (get(questStatuses(quest))[progressionIndex] === "complete") {
-				set(questRewards(quest), rewards => rewards.map((reward, index) => index === progressionIndex ? bonus : reward))
+			if (get(questStatusesState)[progressionIndex] === "complete") {
+				set(questStatusesState, statuses => statuses.map((status, index) => index === progressionIndex ? bonus : status))
 
 				progressQuest({ quest: "completing" })
 			}

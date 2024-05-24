@@ -2,7 +2,7 @@ import type { ArmorClass, ShieldClass, WeaponClass } from "@kitnato/locran/build
 import type { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear"
 import type { SVGIcon } from "@neverquest/types/components"
 import type { Description } from "@neverquest/types/ui"
-import type { Consumable, Gem, Grip, Infusable, QuestClass, Relic } from "@neverquest/types/unions"
+import type { Consumable, Gem, Grip, Infusable, Quest, QuestClass, Relic } from "@neverquest/types/unions"
 
 export type Armor = GearItemBase & {
 	burden: number
@@ -77,13 +77,13 @@ export type MerchantInventoryItem = InventoryItem & {
 export type QuestData = {
 	description: string
 	hidden?: string
+	ID: string
 	progressionIndex: number
 	progressionMaximum: number
+	quest: Quest
 	questClass: QuestClass
 	title: string
 }
-
-export type QuestNotification = QuestData & { ID: string }
 
 export type Ranged = WeaponBase & {
 	munitionsCost: number

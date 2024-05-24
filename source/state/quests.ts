@@ -15,7 +15,7 @@ import {
 import { getQuestClass, getQuestData } from "@neverquest/utilities/getters"
 import { withStateKey } from "@neverquest/utilities/helpers"
 
-import type { QuestNotification } from "@neverquest/types"
+import type { QuestData } from "@neverquest/types"
 
 // SELECTORS
 
@@ -64,7 +64,7 @@ export const canTrackQuests = withStateKey("canTrackQuests", key =>
 		get: ({ get }) =>
 			get(isSkillAcquired("memetics"))
 			&& get(ownedItem("journal")) !== undefined
-			&& get(questStatuses("decipheringJournal"))[0] !== "incomplete",
+			&& get(questStatuses("deciphering"))[0] !== "incomplete",
 		key,
 	}),
 )
@@ -104,23 +104,10 @@ export const questsBonus = withStateKey("questsBonus", key =>
 	}),
 )
 
-export const questStatuses = withStateKey("questStatuses", key =>
-	selectorFamily<QuestStatus[], Quest>({
-		get: (quest: Quest) =>
-			({ get }) => QUESTS[quest]
-				.progression
-				.map((progress, index) =>
-					get(questRewards(quest))[index]
-					?? (get(questProgress(quest)) < progress ? "incomplete" : "complete"),
-				),
-		key,
-	}),
-)
-
 // ATOMS
 
 export const questNotifications = withStateKey("questNotifications", key =>
-	atom<QuestNotification[]>({
+	atom<QuestData[]>({
 		default: [],
 		effects: [handleStorage({ key })],
 		key,
@@ -135,9 +122,9 @@ export const questProgress = withStateKey("questProgress", key =>
 	}),
 )
 
-export const questRewards = withStateKey("questRewards", key =>
-	atomFamily<(QuestBonus | undefined)[], Quest>({
-		default: quest => QUESTS[quest].progression.map(() => undefined) as [(QuestBonus | undefined), ...(QuestBonus | undefined)[]],
+export const questStatuses = withStateKey("questStatuses", key =>
+	atomFamily<QuestStatus[], Quest>({
+		default: quest => QUESTS[quest].progression.map(() => "incomplete"),
 		effects: quest => [handleStorage({ key, parameter: quest })],
 		key,
 	}),

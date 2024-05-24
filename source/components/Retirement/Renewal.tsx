@@ -9,7 +9,6 @@ import IconGeneration from "@neverquest/icons/generation.svg?react"
 import IconMasteries from "@neverquest/icons/masteries.svg?react"
 import IconMercenary from "@neverquest/icons/mercenary.svg?react"
 import IconPowerLevel from "@neverquest/icons/power-level.svg?react"
-import IconQuests from "@neverquest/icons/quests.svg?react"
 import IconSkills from "@neverquest/icons/skills.svg?react"
 import IconStage from "@neverquest/icons/stage.svg?react"
 import IconTransmute from "@neverquest/icons/transmute.svg?react"
@@ -122,20 +121,6 @@ export function Renewal() {
 				<ListGroupItem>
 					<IconDisplay Icon={IconGear} iconProps={{ className: "small" }}>
 						<span>Gear</span>
-					</IconDisplay>
-				</ListGroupItem>
-
-				<ListGroupItem>
-					<IconDisplay Icon={IconQuests} iconProps={{ className: "small" }}>
-						<Stack direction="horizontal" gap={1}>
-							<span>
-								Quests
-							</span>
-
-							<span className="small text-secondary">
-								except those whose reward has been chosen.
-							</span>
-						</Stack>
 					</IconDisplay>
 				</ListGroupItem>
 			</ListGroup>

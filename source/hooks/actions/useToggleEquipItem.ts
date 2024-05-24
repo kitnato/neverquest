@@ -3,7 +3,7 @@ import { useRecoilCallback } from "recoil"
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import { armor, shield, weapon } from "@neverquest/state/gear"
 import { isRelicEquipped } from "@neverquest/state/items"
-import { questProgress } from "@neverquest/state/quests"
+import { questProgress, questStatuses } from "@neverquest/state/quests"
 import { isSkillAcquired } from "@neverquest/state/skills"
 import { isTraitAcquired } from "@neverquest/state/traits"
 import { isShowing } from "@neverquest/state/ui"
@@ -46,6 +46,9 @@ export function useToggleEquipItem() {
 				const weaponValue = get(weapon)
 
 				const { burden, gearClass, ID } = item
+				const isArmorEquipped = isArmor(armorValue)
+				const isShieldEquipped = isShield(shieldValue)
+				const isWeaponEquipped = isWeapon(weaponValue)
 				const isWeaponRanged = isRanged(item)
 				const isWeaponTwoHanded = isMelee(item) && item.grip === "two-handed"
 
@@ -63,7 +66,9 @@ export function useToggleEquipItem() {
 						set(isShowing("armor"), true)
 						set(isShowing("protection"), true)
 
-						progressQuest({ quest: "equippingArmor" })
+						if (isShieldEquipped && isWeaponEquipped) {
+							progressQuest({ quest: "equipping" })
+						}
 					}
 				}
 
@@ -88,7 +93,9 @@ export function useToggleEquipItem() {
 
 						set(isShowing("offhand"), true)
 
-						progressQuest({ quest: "equippingShield" })
+						if (isArmorEquipped && isWeaponEquipped) {
+							progressQuest({ quest: "equipping" })
+						}
 					}
 				}
 
@@ -122,7 +129,9 @@ export function useToggleEquipItem() {
 						set(isShowing("damage"), true)
 						set(isShowing("weapon"), true)
 
-						progressQuest({ quest: "equippingWeapon" })
+						if (isArmorEquipped && isShieldEquipped) {
+							progressQuest({ quest: "equipping" })
+						}
 					}
 				}
 
@@ -130,7 +139,9 @@ export function useToggleEquipItem() {
 					set(isShowing("stamina"), true)
 				}
 
-				set(questProgress("survivingNoGear"), Number.NEGATIVE_INFINITY)
+				if (get(questStatuses("survivingNoGear"))[0] === "incomplete") {
+					set(questProgress("survivingNoGear"), Number.NEGATIVE_INFINITY)
+				}
 			},
 		[progressQuest],
 	)

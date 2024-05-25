@@ -140,14 +140,15 @@ export function useRetire() {
 				})
 
 				const inheritedItems = get(inventory).filter(currentItem => isInheritableItem(currentItem))
+				const inheritableOfferNames = Object
+					.values(MERCHANT_OFFERS)
+					.map(({ offer }) => offer)
+					.filter(isInheritableItem)
+					.map(({ name }) => name)
 
 				progressQuest({
-					amount: inheritedItems.filter(({ name }) => Object
-						.values(MERCHANT_OFFERS)
-						.map(({ offer }) => offer)
-						.filter(isInheritableItem)
-						.map(({ name }) => name)
-						.includes(name),
+					amount: inheritedItems.filter(({ name }) =>
+						inheritableOfferNames.some(inheritableOfferName => name === inheritableOfferName),
 					).length,
 					isAbsolute: true,
 					quest: "purchasingInheritable",

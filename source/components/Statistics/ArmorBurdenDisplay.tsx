@@ -33,7 +33,6 @@ export function ArmorBurdenDisplay() {
 					<IconDisplay Icon={IconStalwart} iconProps={{ className: "small" }}>
 						<span>
 							{formatNumber({
-								decimals: 0,
 								format: "percentage",
 								value: -STALWART_BURDEN_REDUCTION,
 							})}

@@ -2,7 +2,7 @@ import { nanoid } from "nanoid"
 import { atom, atomFamily, selector, selectorFamily } from "recoil"
 
 import { LOOT_MODIFIER, PROGRESS } from "@neverquest/data/character"
-import { LEVELLING_MAXIMUM } from "@neverquest/data/general"
+import { GENERIC_MINIMUM, LEVELLING_MAXIMUM } from "@neverquest/data/general"
 import { INFUSABLES, RELICS, RELIC_DROP_CHANCE } from "@neverquest/data/items"
 import {
 	BLIGHT,
@@ -301,15 +301,17 @@ export const monsterLoot = withStateKey("monsterLoot", key =>
 			const stageHighestValue = get(stageHighest)
 
 			return {
-				essence: isFinality(encounterValue)
-					? finality[encounterValue]
-					: Math.round((base + getTriangular(stageValue) / attenuation) * (
-						1
-						+ Math.min(get(progress), PROGRESS.maximum) * progressModifier
-						+ (encounterValue === "boss" ? bossModifier : 0)
-						+ get(perkEffect("essenceBonus"))
-						+ (stageValue < stageHighestValue ? lowerStage : equalStage)
-					)),
+				essence: Math.max(
+					isFinality(encounterValue)
+						? finality[encounterValue]
+						: Math.round((base + getTriangular(stageValue) / attenuation) * (
+							1
+							+ get(progress) * progressModifier
+							+ (encounterValue === "boss" ? bossModifier : 0)
+							+ get(perkEffect("essenceBonus"))
+						) * (stageValue < stageHighestValue ? lowerStage : equalStage)),
+					GENERIC_MINIMUM,
+				),
 				gems: encounterValue === "boss"
 					? Math.min(
 						Array.from<undefined>({

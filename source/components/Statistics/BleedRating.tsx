@@ -99,7 +99,6 @@ export function BleedRating() {
 														{ticks === 1
 															? " immediately"
 															: ` over ${formatNumber({
-																decimals: 0,
 																format: "time",
 																value: duration,
 															})}`}

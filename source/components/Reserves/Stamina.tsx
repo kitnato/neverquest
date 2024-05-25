@@ -79,7 +79,6 @@ export function Stamina() {
 														<span>
 															+
 															{formatNumber({
-																decimals: 0,
 																format: "percentage",
 																value: questsBonusStamina,
 															})}

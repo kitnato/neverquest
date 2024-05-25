@@ -85,7 +85,6 @@ export function ParryRating() {
 
 													<span>
 														{formatNumber({
-															decimals: 0,
 															format: "percentage",
 															value: damage,
 														})}
@@ -124,7 +123,6 @@ export function ParryRating() {
 
 													<span>
 														{formatNumber({
-															decimals: 0,
 															format: "percentage",
 															value: avoidance,
 														})}

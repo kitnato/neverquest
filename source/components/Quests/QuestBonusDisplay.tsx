@@ -35,7 +35,6 @@ export function QuestBonusDisplay({ bonus }: { bonus: QuestBonus }) {
 				<span>
 					+
 					{formatNumber({
-						decimals: 0,
 						format: "percentage",
 						value: questsBonusValue,
 					})}

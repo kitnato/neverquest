@@ -514,13 +514,13 @@ export const QUESTS: Record<
 	},
 	scavengingCorpse: {
 		description: "Scavenge corpses.",
-		progression: [1, 3, 5],
+		progression: [1, 5, 10],
 		requiresTracking: true,
 		title: "Necrophage",
 	},
 	selling: {
-		description: "Sell an item.",
-		progression: [1],
+		description: "Sell @ items.",
+		progression: [3, 10, 20],
 		requiresTracking: true,
 		title: "Hustler",
 	},
@@ -625,7 +625,7 @@ export const QUESTS: Record<
 		title: "... And back again",
 	},
 	warpingWilderness: {
-		description: "Navigate to a different wilderness @ times.",
+		description: "Navigate the wilderness @ times.",
 		progression: [5, 20, 50],
 		requiresTracking: true,
 		title: "There ...",

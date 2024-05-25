@@ -42,6 +42,19 @@ export const LEVELLING_MAXIMUM = 75
 
 export const NAME_LENGTH_MAXIMUM = 50
 
+export const NUMBER_FORMAT = {
+	formatter: /\.0+$|(?<=\.[0-9]*[1-9])0+$/,
+	mapping: [
+		{ symbol: "", threshold: 1 },
+		{ symbol: "k", threshold: 1e3 },
+		{ symbol: "M", threshold: 1e6 },
+		{ symbol: "G", threshold: 1e9 },
+		{ symbol: "T", threshold: 1e12 },
+		{ symbol: "P", threshold: 1e15 },
+		{ symbol: "E", threshold: 1e18 },
+	],
+}
+
 export const ORDINALS = new Intl.PluralRules("en", { type: "ordinal" })
 
 export const PERCENTAGE = 100

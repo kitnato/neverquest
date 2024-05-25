@@ -16,7 +16,6 @@ export const AILMENT_DESCRIPTION: Record<Ailment, Description> = {
 	burning: { description: "Cannot regenerate # health.", descriptionIcons: [IconMonsterHealth] },
 	frozen: {
 		description: `Attack # rate slowed by ${formatNumber({
-			decimals: 0,
 			format: "percentage",
 			value: AILMENT_PENALTY.frozen,
 		})}.`,
@@ -24,7 +23,6 @@ export const AILMENT_DESCRIPTION: Record<Ailment, Description> = {
 	},
 	shocked: {
 		description: `Taking ${formatNumber({
-			decimals: 0,
 			format: "percentage",
 			value: AILMENT_PENALTY.shocked,
 		})} increased # damage.`,
@@ -32,7 +30,6 @@ export const AILMENT_DESCRIPTION: Record<Ailment, Description> = {
 	},
 	staggered: {
 		description: `Dealing ${formatNumber({
-			decimals: 0,
 			format: "percentage",
 			value: AILMENT_PENALTY.staggered,
 		})} decreased # damage.`,
@@ -40,7 +37,6 @@ export const AILMENT_DESCRIPTION: Record<Ailment, Description> = {
 	},
 	stunned: {
 		description: `Chance to hit on # attack reduced to ${formatNumber({
-			decimals: 0,
 			format: "percentage",
 			value: AILMENT_PENALTY.stunned,
 		})}.`,

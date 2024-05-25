@@ -86,7 +86,6 @@ export function Protection() {
 															<span>
 																+
 																{formatNumber({
-																	decimals: 0,
 																	format: "percentage",
 																	value: TANK_PROTECTION_BONUS[armorValue.gearClass],
 																})}

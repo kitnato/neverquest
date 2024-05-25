@@ -225,9 +225,9 @@ export const WEAPON_MODIFIER = {
 	},
 	"ranged": {
 		ability: 0.8,
-		burden: 1.1,
+		burden: 1.05,
 		damage: 1,
-		price: 1.15,
+		price: 1.1,
 		rate: 1.1,
 		weight: 1.15,
 	},

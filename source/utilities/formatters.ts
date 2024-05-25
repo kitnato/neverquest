@@ -2,6 +2,7 @@ import {
 	MILLISECONDS_IN_HOUR,
 	MILLISECONDS_IN_MINUTE,
 	MILLISECONDS_IN_SECOND,
+	NUMBER_FORMAT,
 	ORDINALS,
 	PERCENTAGE,
 } from "@neverquest/data/general"
@@ -63,32 +64,38 @@ export function formatKebabCase(words: string) {
 }
 
 export function formatNumber({
-	decimals,
 	format = "integer",
 	value,
 }: {
-	decimals?: number
 	format?: NumberFormat
 	value: number
 }) {
 	switch (format) {
+		// https://stackoverflow.com/a/9462382
 		case "abbreviated": {
-			const hasFourDigits = Math.abs(value) > 999
-			let truncated = (hasFourDigits ? value / 1000 : value).toLocaleString()
+			const { formatter, mapping } = NUMBER_FORMAT
+			const number = mapping.findLast(item => value >= item.threshold)
 
-			if (truncated.length > 3) {
-				truncated = truncated.slice(0, 2)
-			}
-
-			return hasFourDigits ? `${truncated}k` : truncated
+			return number === undefined
+				? "0"
+				: formatFloat({ decimals: 1, value: value / number.threshold })
+					.replace(formatter, "")
+					.concat(number.symbol)
 		}
 
 		case "float": {
-			return formatFloat({ decimals, value })
+			return formatFloat({ value })
 		}
 
 		case "percentage": {
-			return `${formatFloat({ decimals, value: value * PERCENTAGE })}%`
+			const percentage = formatFloat({ value: value * PERCENTAGE })
+			const parts = percentage.split(".")
+
+			return `${parts[1] === undefined
+				? percentage
+				: parts[1] === "00"
+					? parts[0] ?? ""
+					: percentage}%`
 		}
 
 		case "integer": {
@@ -96,7 +103,7 @@ export function formatNumber({
 		}
 
 		case "multiplier": {
-			return `×${formatFloat({ decimals, value: value + 1 })}`
+			return `×${formatFloat({ value: value + 1 })}`
 		}
 
 		case "time": {
@@ -106,7 +113,7 @@ export function formatNumber({
 			const seconds = Math.floor((absoluteValue % MILLISECONDS_IN_MINUTE) / MILLISECONDS_IN_SECOND)
 
 			return `${value < 0 ? "-" : ""}${hours > 0 ? `${hours}h` : ""}${hours > 0 || minutes > 0 ? `${minutes}m` : ""}${minutes > 0 || seconds >= 10 ? `${seconds}s` : ""}${hours === 0 && minutes === 0 && seconds < 10
-				? `${formatFloat({ decimals, value: absoluteValue / MILLISECONDS_IN_SECOND })}s`
+				? `${formatFloat({ value: absoluteValue / MILLISECONDS_IN_SECOND })}s`
 				: ""}`
 		}
 	}

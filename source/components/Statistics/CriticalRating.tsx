@@ -79,7 +79,6 @@ export function CriticalRating() {
 													<IconDisplay Icon={IconCriticalDamage} iconProps={{ className: "small" }}>
 														<span>
 															{formatNumber({
-																decimals: 0,
 																format: "percentage",
 																value: attributeStatisticPerception,
 															})}

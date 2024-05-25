@@ -60,7 +60,6 @@ export function Thorns() {
 																<>
 																	<span>
 																		{formatNumber({
-																			decimals: 1,
 																			format: "multiplier",
 																			value: ACANTHACEOUS_GEM_EFFECT_BONUS,
 																		})}

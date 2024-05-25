@@ -5,7 +5,7 @@ import type { GeneratorRange } from "@neverquest/types"
 export const PERKS: Record<Perk, GeneratorRange & { generationMaximum: number }> = {
 	essenceBonus: {
 		generationMaximum: 5,
-		maximum: 1,
+		maximum: 1.2,
 		minimum: 0.2,
 	},
 	monsterReduction: {

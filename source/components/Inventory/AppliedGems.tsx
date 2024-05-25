@@ -41,7 +41,7 @@ export function AppliedGems({ gearItem }: { gearItem: GearItem | GearItemUnequip
 								<Stack direction="horizontal" gap={1} key={ID}>
 									<span className={color}>
 										{typeof effect === "number"
-											? `+${formatNumber({ decimals: 0, format: "percentage", value: effect })}`
+											? `+${formatNumber({ format: "percentage", value: effect })}`
 											: formatNumber({ value: effect.damage })}
 									</span>
 
@@ -50,7 +50,7 @@ export function AppliedGems({ gearItem }: { gearItem: GearItem | GearItemUnequip
 									<IconDisplay Icon={ElementalIcon} iconProps={{ className: "small" }}>
 										<span>
 											{typeof effect === "number"
-												? `+${formatNumber({ decimals: 0, format: "percentage", value: effect })}`
+												? `+${formatNumber({ format: "percentage", value: effect })}`
 												: formatNumber({ format: "time", value: effect.duration })}
 										</span>
 									</IconDisplay>

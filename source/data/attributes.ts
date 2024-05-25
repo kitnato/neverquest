@@ -66,7 +66,7 @@ export const ATTRIBUTES: Record<
 		description: "Increases # critical strike damage.",
 		descriptionIcons: [IconCriticalDamage],
 		formatting: {
-			decimals: 0,
+
 			format: "percentage",
 		},
 		Icon: IconPerception,
@@ -79,7 +79,7 @@ export const ATTRIBUTES: Record<
 		description: "Reduces # attack rate.",
 		descriptionIcons: [IconAttackRate],
 		formatting: {
-			decimals: 0,
+
 			format: "percentage",
 		},
 		Icon: IconSpeed,
@@ -92,7 +92,7 @@ export const ATTRIBUTES: Record<
 		description: "Increases # damage.",
 		descriptionIcons: [IconWeaponDamage],
 		formatting: {
-			decimals: 0,
+
 			format: "percentage",
 		},
 		Icon: IconStrength,

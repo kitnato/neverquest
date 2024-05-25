@@ -115,7 +115,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
 										<IconDisplay Icon={Icon} iconProps={{ className: "small" }}>
 											<span>
 												+
-												{formatNumber({ decimals: 0, format: "percentage", value: regeneration })}
+												{formatNumber({ format: "percentage", value: regeneration })}
 												{" "}
 												(
 												{formatNumber({ value: regenerationAmountValue })}

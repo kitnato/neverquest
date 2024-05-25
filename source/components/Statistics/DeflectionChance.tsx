@@ -67,7 +67,6 @@ export function DeflectionChance() {
 												<span>
 													+
 													{formatNumber({
-														decimals: 0,
 														format: "percentage",
 														value: INOCULATED_DEFLECTION_BASE,
 													})}

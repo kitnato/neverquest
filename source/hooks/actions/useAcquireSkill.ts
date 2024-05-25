@@ -39,8 +39,10 @@ export function useAcquireSkill() {
 				}
 
 				if (
-					Object.values(acquiredSkillsValue).every(hasAcquiredSkill => !hasAcquiredSkill)
-					&& skill === "archery"
+					skill === "archery"
+					&& Object.entries(acquiredSkillsValue)
+						.filter(([acquiredSkill]) => !SKILLS[acquiredSkill as Skill].isInheritable)
+						.every(([, hasAcquiredSkill]) => !hasAcquiredSkill)
 				) {
 					progressQuest({ quest: "acquiringArcheryFirst" })
 				}

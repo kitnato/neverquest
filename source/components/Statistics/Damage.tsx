@@ -112,7 +112,6 @@ export function Damage() {
 													<span>
 														+
 														{formatNumber({
-															decimals: 0,
 															format: "percentage",
 															value: BRAWLER_DAMAGE_BONUS,
 														})}
@@ -134,7 +133,6 @@ export function Damage() {
 														<span>
 															+
 															{formatNumber({
-																decimals: 0,
 																format: "percentage",
 																value: attributeStatisticStrength,
 															})}
@@ -176,7 +174,6 @@ export function Damage() {
 														<span>
 															+
 															{formatNumber({
-																decimals: 0,
 																format: "percentage",
 																value: questsBonusDamage,
 															})}

@@ -124,7 +124,6 @@ export function QuestDisplay({
 									<span>
 										+
 										{formatNumber({
-											decimals: 0,
 											format: "percentage",
 											value: QUEST_COMPLETION_BONUS[getQuestClass(quest)],
 										})}

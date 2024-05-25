@@ -88,7 +88,6 @@ export function Health() {
 														<span>
 															+
 															{formatNumber({
-																decimals: 0,
 																format: "percentage",
 																value: questsBonusHealth,
 															})}

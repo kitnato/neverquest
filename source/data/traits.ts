@@ -77,7 +77,6 @@ export const TRAITS: Record<
 > = {
 	acanthaceous: {
 		description: `Base # thorns is determined by # power level and thorns damage from # gems is increased by ${formatNumber({
-			decimals: 0,
 			format: "percentage",
 			value: ACANTHACEOUS_GEM_EFFECT_BONUS,
 		})}.`,
@@ -86,7 +85,6 @@ export const TRAITS: Record<
 	},
 	brawler: {
 		description: `While # unshielded, # weapon damage of # one-handed melee weapons and # two-handed melee weapons wielded in one hand are increased by ${formatNumber({
-			decimals: 0,
 			format: "percentage",
 			value: BRAWLER_DAMAGE_BONUS,
 		})}.`,
@@ -95,11 +93,9 @@ export const TRAITS: Record<
 	},
 	bruiser: {
 		description: `While # unarmed, # total damage is increased by ${formatNumber({
-			decimals: 0,
 			format: "percentage",
 			value: BRUISER.damage,
 		})} of current # stamina and # stun chance is ${formatNumber({
-			decimals: 0,
 			format: "percentage",
 			value: BRUISER.stun.increment,
 		})} per # strength attribute rank.`,
@@ -118,7 +114,6 @@ export const TRAITS: Record<
 	},
 	inoculated: {
 		description: `Base # deflection chance is ${formatNumber({
-			decimals: 0,
 			format: "percentage",
 			value: INOCULATED_DEFLECTION_BASE,
 		})}.`,
@@ -128,11 +123,9 @@ export const TRAITS: Record<
 	},
 	nudist: {
 		description: `While # unarmored, # dodge chance is increased by ${formatNumber({
-			decimals: 0,
 			format: "percentage",
 			value: NUDIST.dodgeBonus,
 		})}. When dodging, ${formatNumber({
-			decimals: 0,
 			format: "percentage",
 			value: NUDIST.healAmount,
 		})} of maximum # health is restored.`,
@@ -152,7 +145,6 @@ export const TRAITS: Record<
 	},
 	stalwart: {
 		description: `# Burden from # armor is reduced by ${formatNumber({
-			decimals: 0,
 			format: "percentage",
 			value: STALWART_BURDEN_REDUCTION,
 		})}.`,
@@ -162,7 +154,6 @@ export const TRAITS: Record<
 	tank: {
 		description: `While a # shield is equipped, # protection is increased by ${formatEnumeration(
 			ARMOR_CLASS_TYPES.map(armorClass => `${formatNumber({
-				decimals: 0,
 				format: "percentage",
 				value: TANK_PROTECTION_BONUS[armorClass],
 			})} for # ${armorClass}`)).replace("&", "and")} armor classes.`,

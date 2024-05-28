@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid"
 import { atom, atomFamily, selector, selectorFamily } from "recoil"
 
-import { LOOT_MODIFIER, PROGRESS } from "@neverquest/data/character"
+import { PROGRESS } from "@neverquest/data/character"
 import { GENERIC_MINIMUM, LEVELLING_MAXIMUM } from "@neverquest/data/general"
 import { INFUSABLES, RELICS, RELIC_DROP_CHANCE } from "@neverquest/data/items"
 import {
@@ -10,7 +10,8 @@ import {
 	BOSS_STAGE_START,
 	ESSENCE,
 	FRAILTY,
-	MAXIMUM_GEM_DROP,
+	GEM_DROP_MAXIMUM,
+	LOOT_MODIFIER,
 	MONSTER_ATTACK_RATE,
 	MONSTER_DAMAGE,
 	MONSTER_HEALTH,
@@ -318,12 +319,12 @@ export const monsterLoot = withStateKey("monsterLoot", key =>
 							length: 1 + Math.floor((stageValue - BOSS_STAGE_START) / BOSS_STAGE_INTERVAL),
 						}).reduce<number>(
 							(sum, _) =>
-								Math.random() <= 1 + (stageValue < stageHighestValue ? lowerStage : equalStage)
+								Math.random() <= (stageValue < stageHighestValue ? lowerStage : equalStage)
 									? sum + 1
 									: sum,
 							0,
 						),
-						MAXIMUM_GEM_DROP)
+						GEM_DROP_MAXIMUM)
 					: 0,
 				relic: encounterValue === "boss" || get(ownedItem("knapsack")) === undefined
 					? undefined

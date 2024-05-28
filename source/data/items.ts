@@ -149,7 +149,7 @@ export const ELEMENTALS: Record<
 	fire: {
 		ailment: "burning",
 		color: "orange",
-		damageArmor: { maximum: 1.75, minimum: 0.75 },
+		damageArmor: { maximum: 1.5, minimum: 0.75 },
 		damageWeapon: { maximum: 0.4, minimum: 0.1 },
 		duration: { maximum: 2500, minimum: 1200 },
 		durationCap: 7500,
@@ -160,7 +160,7 @@ export const ELEMENTALS: Record<
 	ice: {
 		ailment: "frozen",
 		color: "cyan",
-		damageArmor: { maximum: 1.5, minimum: 0.5 },
+		damageArmor: { maximum: 1.25, minimum: 0.5 },
 		damageWeapon: { maximum: 0.3, minimum: 0.075 },
 		duration: { maximum: 2200, minimum: 1000 },
 		durationCap: 3500,
@@ -171,7 +171,7 @@ export const ELEMENTALS: Record<
 	lightning: {
 		ailment: "shocked",
 		color: "purple",
-		damageArmor: { maximum: 1.25, minimum: 0.25 },
+		damageArmor: { maximum: 1, minimum: 0.25 },
 		damageWeapon: { maximum: 0.2, minimum: 0.05 },
 		duration: { maximum: 2000, minimum: 900 },
 		durationCap: 5000,
@@ -189,7 +189,7 @@ export const GEM_BASE = {
 }
 export const GEM_ENHANCEMENT_RANGE = {
 	maximum: 0.5,
-	minimum: 0.1,
+	minimum: 0.075,
 }
 export const GEM_FITTING_COST_RANGE = {
 	maximum: 300,

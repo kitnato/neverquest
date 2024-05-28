@@ -234,12 +234,13 @@ export function getElementalEffects({
 		for (const { amount, item } of stackItems(gems)) {
 			const { elemental } = GEMS[item.name]
 			const { damageArmor, damageWeapon, duration } = ELEMENTALS[elemental]
+			const factor = getExponential((amount - 1) / (GEMS_MAXIMUM - 1))
 
 			effects[elemental] = {
 				damage: Math.max(
 					Math.round(
 						(armorEffect ? gear.level : gear.damage) * getFromRange({
-							factor: (amount - 1) / (GEMS_MAXIMUM - 1),
+							factor,
 							...armorEffect ? damageArmor : damageWeapon,
 						}),
 					),
@@ -247,7 +248,7 @@ export function getElementalEffects({
 				),
 				duration: Math.round(
 					getFromRange({
-						factor: (amount - 1) / (GEMS_MAXIMUM - 1),
+						factor,
 						...duration,
 					}),
 				),
@@ -263,12 +264,25 @@ export function getElementalEffects({
 		const { elemental } = GEMS[item.name]
 
 		effects[elemental] = getFromRange({
-			factor: (amount - 1) / (GEMS_MAXIMUM - 1),
+			factor: getExponential((amount - 1) / (GEMS_MAXIMUM - 1)),
 			...GEM_ENHANCEMENT_RANGE,
 		})
 	}
 
 	return effects
+}
+
+// f(0) = 0, f(0.25) = ~0.047, f(0.5) = ~0.21, f(0.75) = ~0.51, f(1+) = 1
+export function getExponential(x: number) {
+	if (x === 0) {
+		return 0
+	}
+
+	if (x >= 1) {
+		return 1
+	}
+
+	return Math.pow(Math.E, 0.6935 * x) * x - x
 }
 
 export function getGearIcon(gearItem: GearItem | GearItemUnequipped) {

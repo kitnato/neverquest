@@ -84,7 +84,12 @@ export const FRAILTY = {
 	},
 }
 
-export const MAXIMUM_GEM_DROP = 5
+export const GEM_DROP_MAXIMUM = 5
+
+export const LOOT_MODIFIER = {
+	equalStage: 1,
+	lowerStage: 0.3,
+}
 
 export const MONSTER_ATTACK_RATE = {
 	attenuation: 4800,

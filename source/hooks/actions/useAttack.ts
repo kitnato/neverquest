@@ -22,7 +22,7 @@ import {
 	monsterHealthMaximum,
 } from "@neverquest/state/monster"
 import { isReserveAtMaximum } from "@neverquest/state/reserves"
-import { isSkillAcquired } from "@neverquest/state/skills"
+import { isSkillTrained } from "@neverquest/state/skills"
 import {
 	attackRate,
 	criticalChance,
@@ -31,7 +31,7 @@ import {
 	executionThreshold,
 	lifeLeech,
 } from "@neverquest/state/statistics"
-import { isTraitAcquired } from "@neverquest/state/traits"
+import { isTraitEarned } from "@neverquest/state/traits"
 import { isShowing } from "@neverquest/state/ui"
 import { isMelee, isRanged } from "@neverquest/types/type-guards"
 import { ELEMENTAL_TYPES } from "@neverquest/types/unions"
@@ -62,9 +62,9 @@ export function useAttack() {
 				const weaponValue = get(weapon)
 				const isWeaponRanged = isRanged(weaponValue)
 				const hasInflictedCritical = (
-					get(isSkillAcquired("assassination"))
+					get(isSkillTrained("assassination"))
 					&& isWeaponRanged
-					&& get(isTraitAcquired("sharpshooter"))
+					&& get(isTraitEarned("sharpshooter"))
 					&& get(distance) > 0
 				) || Math.random() <= get(criticalChance)
 
@@ -94,7 +94,7 @@ export function useAttack() {
 							&& monsterHealthValue / get(monsterHealthMaximum) <= executionThresholdValue
 						)
 						|| (
-							hasInflictedCritical && get(isTraitAcquired("executioner")) && Math.random() <= executionThresholdValue
+							hasInflictedCritical && get(isTraitEarned("executioner")) && Math.random() <= executionThresholdValue
 						)
 					) {
 						totalDamage = monsterHealthValue

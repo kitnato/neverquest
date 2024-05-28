@@ -13,13 +13,13 @@ import IconThorns from "@neverquest/icons/thorns.svg?react"
 import { powerLevel } from "@neverquest/state/attributes"
 import { elementalEffects } from "@neverquest/state/gear"
 import { thorns } from "@neverquest/state/statistics"
-import { isTraitAcquired } from "@neverquest/state/traits"
+import { isTraitEarned } from "@neverquest/state/traits"
 import { formatNumber } from "@neverquest/utilities/formatters"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function Thorns() {
 	const { armor } = useRecoilValue(elementalEffects)
-	const isTraitAcquiredAcanthaceous = useRecoilValue(isTraitAcquired("acanthaceous"))
+	const isTraitEarnedAcanthaceous = useRecoilValue(isTraitEarned("acanthaceous"))
 	const powerLevelValue = useRecoilValue(powerLevel)
 	const thornsValue = useRecoilValue(thorns)
 
@@ -45,7 +45,7 @@ export function Thorns() {
 									<DetailsTable>
 										{hasElementalEffect && <ElementalDetails slot="armor" />}
 
-										{isTraitAcquiredAcanthaceous && (
+										{isTraitEarnedAcanthaceous && (
 											<tr>
 												<td>
 													<IconDisplay Icon={IconAcanthaceous} iconProps={{ className: "small" }}>

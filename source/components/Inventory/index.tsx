@@ -22,7 +22,7 @@ import {
 import { useToggleEquipItem } from "@neverquest/hooks/actions/useToggleEquipItem"
 import { armor, shield, weapon } from "@neverquest/state/gear"
 import { inventory } from "@neverquest/state/inventory"
-import { isSkillAcquired } from "@neverquest/state/skills"
+import { isSkillTrained } from "@neverquest/state/skills"
 import {
 	isArmor,
 	isConsumableItem,
@@ -53,10 +53,10 @@ const RELIC_ACTIONS: Partial<Record<Relic, FunctionComponent>> = {
 export function Inventory() {
 	const armorValue = useRecoilValue(armor)
 	const inventoryValue = useRecoilValue(inventory)
-	const isSkillAcquiredArchery = useRecoilValue(isSkillAcquired("archery"))
-	const isSkillAcquiredArmorcraft = useRecoilValue(isSkillAcquired("armorcraft"))
-	const isSkillAcquiredShieldcraft = useRecoilValue(isSkillAcquired("shieldcraft"))
-	const isSkillAcquiredSiegecraft = useRecoilValue(isSkillAcquired("siegecraft"))
+	const isSkillTrainedArchery = useRecoilValue(isSkillTrained("archery"))
+	const isSkillTrainedArmorcraft = useRecoilValue(isSkillTrained("armorcraft"))
+	const isSkillTrainedShieldcraft = useRecoilValue(isSkillTrained("shieldcraft"))
+	const isSkillTrainedSiegecraft = useRecoilValue(isSkillTrained("siegecraft"))
 	const shieldValue = useRecoilValue(shield)
 	const weaponValue = useRecoilValue(weapon)
 
@@ -69,19 +69,19 @@ export function Inventory() {
 			|| (isShield(item) && shieldValue.ID !== item.ID)
 
 		if (isArmor(item) && item.gearClass === "heavy") {
-			canEquip = isSkillAcquiredArmorcraft
+			canEquip = isSkillTrainedArmorcraft
 		}
 
 		if (isMelee(item) && item.grip === "two-handed") {
-			canEquip = isSkillAcquiredSiegecraft
+			canEquip = isSkillTrainedSiegecraft
 		}
 
 		if (isRanged(item)) {
-			canEquip = isSkillAcquiredArchery
+			canEquip = isSkillTrainedArchery
 		}
 
 		if (isShield(item) && item.gearClass === "tower") {
-			canEquip = isSkillAcquiredShieldcraft
+			canEquip = isSkillTrainedShieldcraft
 		}
 
 		equippableItems[item.ID] = canEquip

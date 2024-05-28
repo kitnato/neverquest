@@ -16,7 +16,7 @@ import IconUnknown from "@neverquest/icons/unknown.svg?react"
 import IconWeight from "@neverquest/icons/weight.svg?react"
 import { blacksmithInventory, blacksmithOptions } from "@neverquest/state/caravan"
 import { stageMaximum } from "@neverquest/state/character"
-import { isSkillAcquired } from "@neverquest/state/skills"
+import { isSkillTrained } from "@neverquest/state/skills"
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters"
 import { generateShield } from "@neverquest/utilities/generators"
 import {
@@ -34,7 +34,7 @@ export function ShieldOptions() {
 		},
 		setBlacksmithOptions,
 	] = useRecoilState(blacksmithOptions)
-	const isSkillAcquiredShieldcraft = useRecoilValue(isSkillAcquired("shieldcraft"))
+	const isSkillTrainedShieldcraft = useRecoilValue(isSkillTrained("shieldcraft"))
 	const stageMaximumValue = useRecoilValue(stageMaximum)
 
 	const factor = getSigmoid(level)
@@ -123,11 +123,11 @@ export function ShieldOptions() {
 				</IconDisplay>
 
 				<IconDisplay
-					Icon={isSkillAcquiredShieldcraft ? IconStaggerChance : IconUnknown}
+					Icon={isSkillTrainedShieldcraft ? IconStaggerChance : IconUnknown}
 					iconProps={{ overlayPlacement: "left" }}
-					tooltip={isSkillAcquiredShieldcraft ? "Stagger chance" : LABEL_UNKNOWN}
+					tooltip={isSkillTrainedShieldcraft ? "Stagger chance" : LABEL_UNKNOWN}
 				>
-					{isSkillAcquiredShieldcraft
+					{isSkillTrainedShieldcraft
 						? `${formatNumber({ format: "percentage", value: staggerChance.minimum })} - ${formatNumber({
 							format: "percentage",
 							value: staggerChance.maximum,
@@ -158,7 +158,7 @@ export function ShieldOptions() {
 
 			<hr />
 
-			{!isSkillAcquiredShieldcraft && gearClass === "tower"
+			{!isSkillTrainedShieldcraft && gearClass === "tower"
 				? <span className="fst-italic text-center">{LABEL_SKILL_REQUIRED}</span>
 
 				: hasCrafted

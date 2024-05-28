@@ -4,7 +4,7 @@ import { LEVELLING_MAXIMUM } from "@neverquest/data/general"
 import { MASTERIES, MASTERY_COST_BASE } from "@neverquest/data/masteries"
 import { handleStorage } from "@neverquest/state/effects/handleStorage"
 import { shield, weapon } from "@neverquest/state/gear"
-import { isSkillAcquired } from "@neverquest/state/skills"
+import { isSkillTrained } from "@neverquest/state/skills"
 import { isMelee, isRanged, isUnshielded } from "@neverquest/types/type-guards"
 import { MASTERY_TYPES, type Mastery } from "@neverquest/types/unions"
 import { getComputedStatistic, getTriangular } from "@neverquest/utilities/getters"
@@ -17,7 +17,7 @@ export const canTrainMastery = withStateKey("canTrainMastery", key =>
 		get:
 			(mastery: Mastery) =>
 				({ get }) => {
-					const hasRequiredSkill = get(isSkillAcquired(MASTERIES[mastery].requiredSkill))
+					const hasRequiredSkill = get(isSkillTrained(MASTERIES[mastery].requiredSkill))
 
 					switch (mastery) {
 						case "butchery": {
@@ -82,7 +82,7 @@ export const masteryStatistic = withStateKey("masteryStatistic", key =>
 				({ get }) => {
 					const { base, increment, requiredSkill } = MASTERIES[mastery]
 
-					if (get(isSkillAcquired(requiredSkill))) {
+					if (get(isSkillTrained(requiredSkill))) {
 						const masteryRankValue = get(masteryRank(mastery))
 
 						return getComputedStatistic({ base, increment, rank: masteryRankValue })
@@ -100,7 +100,7 @@ export const unlockedMasteries = withStateKey("unlockedMasteries", key =>
 			const currentUnlockedMasteries = {} as Record<Mastery, boolean>
 
 			for (const mastery of MASTERY_TYPES) {
-				currentUnlockedMasteries[mastery] = get(isSkillAcquired(MASTERIES[mastery].requiredSkill))
+				currentUnlockedMasteries[mastery] = get(isSkillTrained(MASTERIES[mastery].requiredSkill))
 			}
 
 			return currentUnlockedMasteries

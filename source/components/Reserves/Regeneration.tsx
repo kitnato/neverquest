@@ -22,7 +22,7 @@ import {
 	regenerationDuration,
 	regenerationRate,
 } from "@neverquest/state/reserves"
-import { isSkillAcquired } from "@neverquest/state/skills"
+import { isSkillTrained } from "@neverquest/state/skills"
 import { formatNumber } from "@neverquest/utilities/formatters"
 
 import type { Reserve } from "@neverquest/types/unions"
@@ -41,7 +41,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
 	const isIncapacitatedValue = useRecoilValue(isIncapacitated)
 	const isRecoveringValue = useRecoilValue(isRecovering)
 	const isReserveAtMaximumValue = useRecoilValue(isReserveAtMaximum(reserve))
-	const isSkillAcquiredCalisthenics = useRecoilValue(isSkillAcquired("calisthenics"))
+	const isSkillTrainedCalisthenics = useRecoilValue(isSkillTrained("calisthenics"))
 	const regenerationAmountValue = useRecoilValue(regenerationAmount(reserve))
 	const setRegenerationDuration = useSetRecoilState(regenerationDuration(reserve))
 
@@ -129,7 +129,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
 					</Popover>
 				)}
 				placement="right"
-				trigger={isSkillAcquiredCalisthenics ? POPOVER_TRIGGER : []}
+				trigger={isSkillTrainedCalisthenics ? POPOVER_TRIGGER : []}
 			>
 				<div className="w-100">
 					<RegenerationMeter reserve={reserve} />

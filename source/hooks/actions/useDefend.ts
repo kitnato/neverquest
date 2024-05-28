@@ -48,7 +48,7 @@ import {
 	recoveryRate,
 	thorns,
 } from "@neverquest/state/statistics"
-import { isTraitAcquired } from "@neverquest/state/traits"
+import { isTraitEarned } from "@neverquest/state/traits"
 import { isShowing } from "@neverquest/state/ui"
 import { isUnarmored } from "@neverquest/types/type-guards"
 import { ELEMENTAL_TYPES } from "@neverquest/types/unions"
@@ -119,7 +119,7 @@ export function useDefend() {
 
 						changeStamina({ value: -armorBurdenValue })
 
-						if (get(isTraitAcquired("nudist")) && isUnarmored(get(armor))) {
+						if (get(isTraitEarned("nudist")) && isUnarmored(get(armor))) {
 							const healthGain = Math.round(get(healthMaximumPoisoned) * NUDIST.healAmount)
 
 							changeHealth({

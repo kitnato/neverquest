@@ -3,7 +3,7 @@ import { atom, atomFamily, selector, selectorFamily } from "recoil"
 import { QUESTS, QUEST_COMPLETION_BONUS, QUEST_TYPES_BY_CLASS } from "@neverquest/data/quests"
 import { handleStorage } from "@neverquest/state/effects/handleStorage"
 import { ownedItem } from "@neverquest/state/inventory"
-import { isSkillAcquired } from "@neverquest/state/skills"
+import { isSkillTrained } from "@neverquest/state/skills"
 import { isQuestBonus } from "@neverquest/types/type-guards"
 import {
 	QUEST_CLASS_TYPES,
@@ -62,7 +62,7 @@ export const canCompleteQuests = withStateKey("canCompleteQuests", key =>
 export const canTrackQuests = withStateKey("canTrackQuests", key =>
 	selector({
 		get: ({ get }) =>
-			get(isSkillAcquired("memetics"))
+			get(isSkillTrained("memetics"))
 			&& get(ownedItem("journal")) !== undefined
 			&& get(questStatuses("deciphering"))[0] !== "incomplete",
 		key,

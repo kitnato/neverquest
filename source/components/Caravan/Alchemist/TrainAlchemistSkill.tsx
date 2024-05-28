@@ -7,15 +7,15 @@ import { LABEL_NONE_AVAILABLE } from "@neverquest/data/general"
 import { SKILLS } from "@neverquest/data/skills"
 import IconTornManuscript from "@neverquest/icons/torn-manuscript.svg?react"
 import { ownedItem } from "@neverquest/state/inventory"
-import { acquiredSkills } from "@neverquest/state/skills"
+import { trainedSkills } from "@neverquest/state/skills"
 import { SKILL_TYPES } from "@neverquest/types/unions"
 
-export function AcquireAlchemistSkill() {
-	const acquiredSkillsValue = useRecoilValue(acquiredSkills)
+export function TrainAlchemistSkill() {
+	const trainedSkillsValue = useRecoilValue(trainedSkills)
 	const ownedItemTornManuscript = useRecoilValue(ownedItem("torn manuscript"))
 
 	const availableSkills = SKILL_TYPES.filter(
-		skill => SKILLS[skill].trainer === "alchemist" && !acquiredSkillsValue[skill],
+		skill => SKILLS[skill].trainer === "alchemist" && !trainedSkillsValue[skill],
 	)
 
 	return (

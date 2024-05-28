@@ -18,13 +18,13 @@ import IconWait from "@neverquest/icons/hourglass.svg?react"
 import IconIncrease from "@neverquest/icons/increase.svg?react"
 import IconUnknown from "@neverquest/icons/unknown.svg?react"
 import { areAttributesAffordable, isAttributeAtMaximum } from "@neverquest/state/attributes"
-import { acquiredSkills } from "@neverquest/state/skills"
+import { trainedSkills } from "@neverquest/state/skills"
 import { capitalizeAll } from "@neverquest/utilities/formatters"
 
 import type { Attribute } from "@neverquest/types/unions"
 
 export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
-	const acquiredSkillsValue = useRecoilValue(acquiredSkills)
+	const trainedSkillsValue = useRecoilValue(trainedSkills)
 	const areAttributesAffordableValue = useRecoilValue(areAttributesAffordable)
 	const isAttributeAtMaximumValue = useRecoilValue(isAttributeAtMaximum(attribute))
 
@@ -33,7 +33,7 @@ export function AttributeDisplay({ attribute }: { attribute: Attribute }) {
 	const { description, descriptionIcons, Icon, requiredSkill } = ATTRIBUTES[attribute]
 	const name = capitalizeAll(attribute)
 
-	if (requiredSkill === undefined || acquiredSkillsValue[requiredSkill]) {
+	if (requiredSkill === undefined || trainedSkillsValue[requiredSkill]) {
 		return (
 			<div className={CLASS_FULL_WIDTH_JUSTIFIED}>
 				<IconDisplay

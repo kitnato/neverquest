@@ -32,7 +32,7 @@ import {
 import { handleStorage } from "@neverquest/state/effects/handleStorage"
 import { ownedItem } from "@neverquest/state/inventory"
 import { hasLootedInheritable, infusionEffect, isRelicEquipped } from "@neverquest/state/items"
-import { isSkillAcquired } from "@neverquest/state/skills"
+import { isSkillTrained } from "@neverquest/state/skills"
 import { range } from "@neverquest/state/statistics"
 import { isFinality } from "@neverquest/types/type-guards"
 import { formatNumber } from "@neverquest/utilities/formatters"
@@ -334,10 +334,10 @@ export const monsterLoot = withStateKey("monsterLoot", key =>
 						// Log Entry only drops after defeating Res Dominus while carrying the Memento and if it's never been looted before.
 						: encounterValue === "res dominus" && isMementoOwned && !get(hasLootedInheritable("[S751NQ]"))
 							? { ...RELICS["[S751NQ]"].item, ID: nanoid() }
-							: isMementoOwned && !get(hasLootedInheritable("torn manuscript")) && get(isHired("alchemist")) && !get(isSkillAcquired("memetics")) && Math.random() <= getFromRange({ factor: getSigmoid(stageValue), ...RELIC_DROP_CHANCE["torn manuscript"] })
+							: isMementoOwned && !get(hasLootedInheritable("torn manuscript")) && get(isHired("alchemist")) && !get(isSkillTrained("memetics")) && Math.random() <= getFromRange({ factor: getSigmoid(stageValue), ...RELIC_DROP_CHANCE["torn manuscript"] })
 								// Torn manuscript drops if it's never been looted before, if the memento is carried, if the correct crew member is hired, if the associated skill hasn't been trained and if the drop chance is reached.
 								? { ...RELICS["torn manuscript"].item, ID: nanoid() }
-								: isMementoOwned && !get(hasLootedInheritable("dream catcher")) && get(isHired("occultist")) && !get(isSkillAcquired("meditation")) && Math.random() <= getFromRange({ factor: getSigmoid(stageValue), ...RELIC_DROP_CHANCE["dream catcher"] })
+								: isMementoOwned && !get(hasLootedInheritable("dream catcher")) && get(isHired("occultist")) && !get(isSkillTrained("meditation")) && Math.random() <= getFromRange({ factor: getSigmoid(stageValue), ...RELIC_DROP_CHANCE["dream catcher"] })
 									// Dream catcher drops if it's never been looted before, if the memento is carried, if the correct crew member is hired, if the associated skill hasn't been trained and if the drop chance is reached.
 									? { ...RELICS["dream catcher"].item, ID: nanoid() }
 									: !get(hasLootedInheritable("memento")) && Math.random() <= getFromRange({ factor: getSigmoid(stageValue), ...RELIC_DROP_CHANCE.memento })

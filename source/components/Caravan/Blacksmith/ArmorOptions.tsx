@@ -17,7 +17,7 @@ import IconUnknown from "@neverquest/icons/unknown.svg?react"
 import IconWeight from "@neverquest/icons/weight.svg?react"
 import { blacksmithInventory, blacksmithOptions } from "@neverquest/state/caravan"
 import { stageMaximum } from "@neverquest/state/character"
-import { isSkillAcquired } from "@neverquest/state/skills"
+import { isSkillTrained } from "@neverquest/state/skills"
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters"
 import { generateArmor } from "@neverquest/utilities/generators"
 import {
@@ -35,8 +35,8 @@ export function ArmorOptions() {
 		},
 		setBlacksmithOptions,
 	] = useRecoilState(blacksmithOptions)
-	const isSkillAcquiredArmorcraft = useRecoilValue(isSkillAcquired("armorcraft"))
-	const isSkillAcquiredImpermeability = useRecoilValue(isSkillAcquired("impermeability"))
+	const isSkillTrainedArmorcraft = useRecoilValue(isSkillTrained("armorcraft"))
+	const isSkillTrainedImpermeability = useRecoilValue(isSkillTrained("impermeability"))
 	const stageMaximumValue = useRecoilValue(stageMaximum)
 
 	const progressQuest = useProgressQuest()
@@ -126,11 +126,11 @@ export function ArmorOptions() {
 				</IconDisplay>
 
 				<IconDisplay
-					Icon={isSkillAcquiredImpermeability ? IconDeflectionChance : IconUnknown}
+					Icon={isSkillTrainedImpermeability ? IconDeflectionChance : IconUnknown}
 					iconProps={{ overlayPlacement: "left" }}
-					tooltip={isSkillAcquiredImpermeability ? "Deflection chance" : LABEL_UNKNOWN}
+					tooltip={isSkillTrainedImpermeability ? "Deflection chance" : LABEL_UNKNOWN}
 				>
-					{isSkillAcquiredImpermeability
+					{isSkillTrainedImpermeability
 						? `${formatNumber({
 							format: "percentage",
 							value: deflectionChance.minimum,
@@ -161,7 +161,7 @@ export function ArmorOptions() {
 
 			<hr />
 
-			{!isSkillAcquiredArmorcraft && gearClass === "heavy"
+			{!isSkillTrainedArmorcraft && gearClass === "heavy"
 				? <span className="fst-italic text-center">{LABEL_SKILL_REQUIRED}</span>
 
 				: hasCrafted

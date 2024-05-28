@@ -16,7 +16,7 @@ import IconProtection from "@neverquest/icons/protection.svg?react"
 import IconTank from "@neverquest/icons/tank.svg?react"
 import { armor, shield } from "@neverquest/state/gear"
 import { protection } from "@neverquest/state/statistics"
-import { isTraitAcquired } from "@neverquest/state/traits"
+import { isTraitEarned } from "@neverquest/state/traits"
 import { isShowing } from "@neverquest/state/ui"
 import { isArmor, isUnshielded } from "@neverquest/types/type-guards"
 import { formatNumber } from "@neverquest/utilities/formatters"
@@ -25,7 +25,7 @@ import { getAnimationClass } from "@neverquest/utilities/getters"
 export function Protection() {
 	const armorValue = useRecoilValue(armor)
 	const isShowingProtection = useRecoilValue(isShowing("protection"))
-	const isTraitAcquiredTank = useRecoilValue(isTraitAcquired("tank"))
+	const isTraitEarnedTank = useRecoilValue(isTraitEarned("tank"))
 	const protectionValue = useRecoilValue(protection)
 	const shieldValue = useRecoilValue(shield)
 
@@ -71,7 +71,7 @@ export function Protection() {
 											</td>
 										</tr>
 
-										{isArmor(armorValue) && isTraitAcquiredTank && (
+										{isArmor(armorValue) && isTraitEarnedTank && (
 											<tr>
 												<td>
 													<IconDisplay Icon={IconTank} iconProps={{ className: "small" }}>
@@ -112,7 +112,7 @@ export function Protection() {
 								</PopoverBody>
 							</Popover>
 						)}
-						trigger={burden > 0 || isTraitAcquiredTank ? POPOVER_TRIGGER : []}
+						trigger={burden > 0 || isTraitEarnedTank ? POPOVER_TRIGGER : []}
 					>
 						<span>{formatNumber({ value: protectionValue })}</span>
 					</OverlayTrigger>

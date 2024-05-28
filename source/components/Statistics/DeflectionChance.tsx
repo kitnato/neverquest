@@ -14,14 +14,14 @@ import IconDeflectionChance from "@neverquest/icons/deflection-chance.svg?react"
 import IconInoculated from "@neverquest/icons/inoculated.svg?react"
 import { armor } from "@neverquest/state/gear"
 import { deflectionChance } from "@neverquest/state/statistics"
-import { isTraitAcquired } from "@neverquest/state/traits"
+import { isTraitEarned } from "@neverquest/state/traits"
 import { formatNumber } from "@neverquest/utilities/formatters"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function DeflectionChance() {
 	const { deflectionChance: armorDeflectionChance } = useRecoilValue(armor)
 	const deflectionChanceValue = useRecoilValue(deflectionChance)
-	const isTraitAcquiredInoculated = useRecoilValue(isTraitAcquired("inoculated"))
+	const isTraitEarnedInoculated = useRecoilValue(isTraitEarned("inoculated"))
 
 	useDeltaText({
 		delta: "deflectionChance",
@@ -77,7 +77,7 @@ export function DeflectionChance() {
 								</PopoverBody>
 							</Popover>
 						)}
-						trigger={isTraitAcquiredInoculated ? POPOVER_TRIGGER : []}
+						trigger={isTraitEarnedInoculated ? POPOVER_TRIGGER : []}
 					>
 						<span>
 							{formatNumber({ format: "percentage", value: deflectionChanceValue })}

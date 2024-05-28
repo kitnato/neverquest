@@ -10,7 +10,7 @@ import { STALWART_BURDEN_REDUCTION } from "@neverquest/data/traits"
 import { handleStorage } from "@neverquest/state/effects/handleStorage"
 import { munitions } from "@neverquest/state/items"
 import { reserveCurrent } from "@neverquest/state/reserves"
-import { isTraitAcquired } from "@neverquest/state/traits"
+import { isTraitEarned } from "@neverquest/state/traits"
 import { isMelee, isRanged, isUnarmed } from "@neverquest/types/type-guards"
 import { getElementalEffects, getTotalElementalEffects } from "@neverquest/utilities/getters"
 import { withStateKey } from "@neverquest/utilities/helpers"
@@ -24,7 +24,7 @@ export const armorBurden = withStateKey("armorBurden", key =>
 		get: ({ get }) => {
 			const { burden } = get(armor)
 
-			return get(isTraitAcquired("stalwart")) ? Math.round(burden * STALWART_BURDEN_REDUCTION) : burden
+			return get(isTraitEarned("stalwart")) ? Math.round(burden * STALWART_BURDEN_REDUCTION) : burden
 		},
 		key,
 	}),
@@ -50,7 +50,7 @@ export const canBlockOrStagger = withStateKey("canBlockOrStagger", key =>
 
 export const canDodge = withStateKey("canDodge", key =>
 	selector({
-		get: ({ get }) => get(isTraitAcquired("stalwart")) || get(reserveCurrent("stamina")) >= get(armor).burden,
+		get: ({ get }) => get(isTraitEarned("stalwart")) || get(reserveCurrent("stamina")) >= get(armor).burden,
 		key,
 	}),
 )
@@ -68,7 +68,7 @@ export const elementalEffects = withStateKey("elementalEffects", key =>
 			})
 			// Only apply shield effects if they're actively used.
 			const shieldEffects
-				= (isMelee(weaponValue) || isUnarmed(weaponValue)) && (weaponValue.grip === "one-handed" || get(isTraitAcquired("colossus")))
+				= (isMelee(weaponValue) || isUnarmed(weaponValue)) && (weaponValue.grip === "one-handed" || get(isTraitEarned("colossus")))
 					? getElementalEffects({
 						gear: shieldValue,
 						gems: get(gems(shieldValue.ID)),

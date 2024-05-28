@@ -24,7 +24,7 @@ import IconWeaponDamage from "@neverquest/icons/weapon-damage.svg?react"
 import IconWeight from "@neverquest/icons/weight.svg?react"
 import { fletcherInventory, fletcherOptions } from "@neverquest/state/caravan"
 import { stageMaximum } from "@neverquest/state/character"
-import { isSkillAcquired } from "@neverquest/state/skills"
+import { isSkillTrained } from "@neverquest/state/skills"
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters"
 import { generateRangedWeapon } from "@neverquest/utilities/generators"
 import {
@@ -42,13 +42,13 @@ export function RangedOptions() {
 		},
 		setFletcherOptions,
 	] = useRecoilState(fletcherOptions)
-	const isSkillAcquiredArchery = useRecoilValue(isSkillAcquired("archery"))
+	const isSkillTrainedArchery = useRecoilValue(isSkillTrained("archery"))
 	const stageMaximumValue = useRecoilValue(stageMaximum)
 	const resetFletcherInventory = useResetRecoilState(fletcherInventory)
 
 	const { ability, IconAbility, IconGearClass } = WEAPON_SPECIFICATIONS[gearClass]
 
-	const isSkillAcquiredAbility = useRecoilValue(isSkillAcquired(WEAPON_ABILITY_SKILLS[ability]))
+	const isSkillTrainedAbility = useRecoilValue(isSkillTrained(WEAPON_ABILITY_SKILLS[ability]))
 
 	const factor = getSigmoid(level)
 	const { abilityChance, burden, damage, munitionsCost, range, rate, weight } = getRangedRanges({
@@ -175,12 +175,12 @@ export function RangedOptions() {
 				</IconDisplay>
 
 				<IconDisplay
-					Icon={isSkillAcquiredAbility ? IconAbility : IconUnknown}
+					Icon={isSkillTrainedAbility ? IconAbility : IconUnknown}
 					iconProps={{ overlayPlacement: "left" }}
-					tooltip={isSkillAcquiredAbility ? `${capitalizeAll(ability)} chance` : LABEL_UNKNOWN}
+					tooltip={isSkillTrainedAbility ? `${capitalizeAll(ability)} chance` : LABEL_UNKNOWN}
 				>
 					<span>
-						{isSkillAcquiredAbility
+						{isSkillTrainedAbility
 							? `${formatNumber({
 								format: "percentage",
 								value: abilityChance.minimum,
@@ -212,7 +212,7 @@ export function RangedOptions() {
 
 			<hr />
 
-			{isSkillAcquiredArchery
+			{isSkillTrainedArchery
 				? hasCrafted
 					? (
 						<CraftedGear

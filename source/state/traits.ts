@@ -6,16 +6,16 @@ import { withStateKey } from "@neverquest/utilities/helpers"
 
 // SELECTORS
 
-export const acquiredTraits = withStateKey("acquiredTraits", key =>
+export const earnedTraits = withStateKey("earnedTraits", key =>
 	selector({
 		get: ({ get }) => {
-			const currentAcquiredTraits = {} as Record<Trait, boolean>
+			const currentEarnedTraits = {} as Record<Trait, boolean>
 
 			for (const trait of TRAIT_TYPES) {
-				currentAcquiredTraits[trait] = get(isTraitAcquired(trait))
+				currentEarnedTraits[trait] = get(isTraitEarned(trait))
 			}
 
-			return currentAcquiredTraits
+			return currentEarnedTraits
 		},
 		key,
 	}),
@@ -23,7 +23,7 @@ export const acquiredTraits = withStateKey("acquiredTraits", key =>
 
 // ATOMS
 
-export const isTraitAcquired = withStateKey("isTraitAcquired", key =>
+export const isTraitEarned = withStateKey("isTraitEarned", key =>
 	atomFamily<boolean, Trait>({
 		default: false,
 		effects: trait => [handleStorage({ key, parameter: trait })],

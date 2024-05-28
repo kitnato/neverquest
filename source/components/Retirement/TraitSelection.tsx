@@ -4,15 +4,15 @@ import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil"
 import { TraitDisplay } from "@neverquest/components/Traits/TraitDisplay"
 import { LABEL_NONE } from "@neverquest/data/general"
 import { TRAITS } from "@neverquest/data/traits"
-import { acquiredSkills } from "@neverquest/state/skills"
-import { acquiredTraits, selectedTrait } from "@neverquest/state/traits"
+import { trainedSkills } from "@neverquest/state/skills"
+import { earnedTraits, selectedTrait } from "@neverquest/state/traits"
 import { TRAIT_TYPES, type Trait } from "@neverquest/types/unions"
 
 const FORM_NAME = "trait-selection"
 
 export function TraitSelection() {
-	const acquiredSkillsValue = useRecoilValue(acquiredSkills)
-	const acquiredTraitsValue = useRecoilValue(acquiredTraits)
+	const trainedSkillsValue = useRecoilValue(trainedSkills)
+	const earnedTraitsValue = useRecoilValue(earnedTraits)
 	const [selectedTraitValue, setSelectedTrait] = useRecoilState(selectedTrait)
 	const resetSelectedTrait = useResetRecoilState(selectedTrait)
 
@@ -20,8 +20,8 @@ export function TraitSelection() {
 		<Stack gap={3}>
 			<h6>Trait selection</h6>
 
-			{Object.values(acquiredTraitsValue).every(Boolean)
-				? <span className="fst-italic">All traits acquired.</span>
+			{Object.values(earnedTraitsValue).every(Boolean)
+				? <span className="fst-italic">All traits earned.</span>
 				: (
 					<Stack gap={3}>
 						<FormCheck
@@ -36,11 +36,11 @@ export function TraitSelection() {
 						{TRAIT_TYPES.map((trait) => {
 							const { requiredSkill } = TRAITS[trait]
 
-							if (!acquiredTraitsValue[trait]) {
+							if (!earnedTraitsValue[trait]) {
 								return (
 									<FormCheck
 										checked={selectedTraitValue === trait}
-										disabled={requiredSkill !== undefined && !acquiredSkillsValue[requiredSkill]}
+										disabled={requiredSkill !== undefined && !trainedSkillsValue[requiredSkill]}
 										id={trait}
 										key={trait}
 										label={<TraitDisplay key={trait} trait={trait} />}

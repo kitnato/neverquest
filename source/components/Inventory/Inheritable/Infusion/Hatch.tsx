@@ -44,9 +44,7 @@ export function Hatch() {
 					<Button
 						disabled={!canFitFamiliar}
 						onClick={() => {
-							const acquiredStatus = acquireItem({ ...familiarItem, ID: nanoid() })
-
-							if (acquiredStatus === "success") {
+							if (acquireItem({ ...familiarItem, ID: nanoid() }) === "success") {
 								setInventory(currentInventory =>
 									currentInventory.filter(({ ID }) => ID !== ownedItemMysteriousEgg.ID),
 								)

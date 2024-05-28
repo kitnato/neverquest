@@ -5,8 +5,8 @@ import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import { armor, shield, weapon } from "@neverquest/state/gear"
 import { acquiredItems, inventory, notifyOverEncumbrance, ownedItem } from "@neverquest/state/inventory"
 import { hasLootedInheritable } from "@neverquest/state/items"
-import { isSkillAcquired } from "@neverquest/state/skills"
-import { isTraitAcquired } from "@neverquest/state/traits"
+import { isSkillTrained } from "@neverquest/state/skills"
+import { isTraitEarned } from "@neverquest/state/traits"
 import { isShowing } from "@neverquest/state/ui"
 import {
 	isArmor,
@@ -122,25 +122,25 @@ export function useAcquireItem() {
 					if (
 						// .. acquiring armor while none is equipped, or
 						(isUnarmored(get(armor)) && isArmor(item))
-						// .... acquiring a shield while no shield is equipped and not wielding a ranged weapon nor two-handed weapon, unless colossus trait is acquired, or
+						// .... acquiring a shield while no shield is equipped and not wielding a ranged weapon nor two-handed weapon, unless colossus trait has been earned, or
 						|| (
 							isShieldUnequipped
 							&& isShield(item)
 							&& !isRanged(weaponValue)
 							&& (isMelee(weaponValue) || isUnarmed(weaponValue))
-							&& (weaponValue.grip === "one-handed" || get(isTraitAcquired("colossus")))
+							&& (weaponValue.grip === "one-handed" || get(isTraitEarned("colossus")))
 						)
-						// ... acquiring a weapon while no weapon is equipped, and if it's ranged or two-handed, having no shield equipped, unless colossus trait is acquired.
+						// ... acquiring a weapon while no weapon is equipped, and if it's ranged or two-handed, having no shield equipped, unless colossus trait has been earned.
 						|| (
 							isUnarmed(weaponValue)
 							&& (
 								(isItemMelee && item.grip === "one-handed")
-								|| get(isTraitAcquired("colossus"))
+								|| get(isTraitEarned("colossus"))
 								|| (
 									isShieldUnequipped
 									&& (
 										(isItemMelee && item.grip === "two-handed")
-										|| (isItemRanged && get(isSkillAcquired("archery")))
+										|| (isItemRanged && get(isSkillTrained("archery")))
 									)
 								)
 							)

@@ -5,8 +5,8 @@ import { BLEED } from "@neverquest/data/statistics"
 import { BRUISER } from "@neverquest/data/traits"
 import { attributeRank } from "@neverquest/state/attributes"
 import { elementalEffects, shield, weapon } from "@neverquest/state/gear"
-import { isSkillAcquired } from "@neverquest/state/skills"
-import { isTraitAcquired } from "@neverquest/state/traits"
+import { isSkillTrained } from "@neverquest/state/skills"
+import { isTraitEarned } from "@neverquest/state/traits"
 import { isUnarmed, isUnshielded } from "@neverquest/types/type-guards"
 import { AILMENT_TYPES, type Ailment, ELEMENTAL_TYPES } from "@neverquest/types/unions"
 import { withStateKey } from "@neverquest/utilities/helpers"
@@ -15,7 +15,7 @@ import { withStateKey } from "@neverquest/utilities/helpers"
 
 export const bleed = withStateKey("bleed", key =>
 	selector({
-		get: ({ get }) => BLEED[get(isTraitAcquired("shredder")) ? "shredder" : "base"],
+		get: ({ get }) => BLEED[get(isTraitEarned("shredder")) ? "shredder" : "base"],
 		key,
 	}),
 )
@@ -25,7 +25,7 @@ export const bleedChance = withStateKey("bleedChance", key =>
 		get: ({ get }) => {
 			const { abilityChance, gearClass } = get(weapon)
 
-			return get(isSkillAcquired("anatomy")) && gearClass === "piercing" ? abilityChance : 0
+			return get(isSkillTrained("anatomy")) && gearClass === "piercing" ? abilityChance : 0
 		},
 		key,
 	}),
@@ -79,7 +79,7 @@ export const staggerChance = withStateKey("staggerChance", key =>
 		get: ({ get }) => {
 			const shieldValue = get(shield)
 
-			return get(isSkillAcquired("shieldcraft")) && !isUnshielded(shieldValue)
+			return get(isSkillTrained("shieldcraft")) && !isUnshielded(shieldValue)
 				? get(shield).staggerChance
 				: 0
 		},
@@ -96,8 +96,8 @@ export const stunChance = withStateKey("stunChance", key =>
 				stun: { increment, maximum },
 			} = BRUISER
 
-			return get(isSkillAcquired("traumatology")) && gearClass === "blunt"
-				? get(isTraitAcquired("bruiser")) && isUnarmed(weaponValue)
+			return get(isSkillTrained("traumatology")) && gearClass === "blunt"
+				? get(isTraitEarned("bruiser")) && isUnarmed(weaponValue)
 					? Math.min(increment * get(attributeRank("strength")), maximum)
 					: abilityChance
 				: 0

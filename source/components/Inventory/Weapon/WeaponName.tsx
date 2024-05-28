@@ -20,7 +20,7 @@ import IconWeaponDamage from "@neverquest/icons/weapon-damage.svg?react"
 import { bleedChance, stunChance } from "@neverquest/state/ailments"
 import { weapon as weaponEquipped } from "@neverquest/state/gear"
 import { ownedItem } from "@neverquest/state/inventory"
-import { isSkillAcquired } from "@neverquest/state/skills"
+import { isSkillTrained } from "@neverquest/state/skills"
 import { parryChance } from "@neverquest/state/statistics"
 import { isShowing } from "@neverquest/state/ui"
 import { isMelee, isRanged, isUnarmed } from "@neverquest/types/type-guards"
@@ -56,7 +56,7 @@ export function WeaponName({
 	})
 	const isEquipped = ID === weaponEquippedValue.ID
 
-	const isSkillAcquiredAbility = useRecoilValue(isSkillAcquired(WEAPON_ABILITY_SKILLS[ability]))
+	const isSkillTrainedAbility = useRecoilValue(isSkillTrained(WEAPON_ABILITY_SKILLS[ability]))
 
 	return (
 		<OverlayTrigger
@@ -219,7 +219,7 @@ export function WeaponName({
 							</tr>
 
 							<tr>
-								{isSkillAcquiredAbility
+								{isSkillTrainedAbility
 									? (
 										<>
 											<td>

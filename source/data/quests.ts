@@ -61,7 +61,7 @@ export const QUESTS: Record<
 	}
 > = {
 	acquiringArcheryFirst: {
-		description: "Acquire archery as the first skill.",
+		description: "Train archery as the first skill.",
 		progression: [1],
 		requiresTracking: true,
 		title: "Ranger",
@@ -163,7 +163,7 @@ export const QUESTS: Record<
 	},
 	burning: {
 		description: "Inflict burning @ times.",
-		progression: [5, 20, 50, 100],
+		progression: [20, 50, 100, 250],
 		requiresTracking: true,
 		title: "Kindling",
 	},
@@ -289,7 +289,7 @@ export const QUESTS: Record<
 	},
 	freezing: {
 		description: "Inflict frozen @ times.",
-		progression: [5, 20, 50, 100],
+		progression: [20, 50, 100, 250],
 		requiresTracking: true,
 		title: "Air conditioning",
 	},
@@ -337,7 +337,7 @@ export const QUESTS: Record<
 	},
 	killing: {
 		description: "Kill @ monsters.",
-		progression: [5, 20, 50, 100, 1000],
+		progression: [5, 20, 50, 100, 250, 1000],
 		requiresTracking: true,
 		title: "Monstrocide",
 	},
@@ -398,7 +398,7 @@ export const QUESTS: Record<
 	},
 	looting: {
 		description: "Collect loot @ times.",
-		progression: [5, 20, 50, 100],
+		progression: [5, 20, 50, 100, 250],
 		requiresTracking: true,
 		title: "Hoarder",
 	},
@@ -502,7 +502,7 @@ export const QUESTS: Record<
 	},
 	retiring: {
 		description: "Go into retirement @ times.",
-		progression: [3, 6, TRAIT_TYPES.length],
+		progression: [3, 6, TRAIT_TYPES.length + 1],
 		requiresTracking: false,
 		title: "Getting too old for this",
 	},
@@ -538,18 +538,18 @@ export const QUESTS: Record<
 	},
 	shocking: {
 		description: "Inflict the shocking ailment @ times.",
-		progression: [5, 20, 50, 100],
+		progression: [20, 50, 100, 250],
 		requiresTracking: true,
 		title: "Raiden",
 	},
 	skills: {
-		description: "Acquire @ skills.",
+		description: "Train @ skills.",
 		progression: [3, 7, SKILL_TYPES.length],
 		requiresTracking: true,
 		title: "Prodigy",
 	},
 	skillsCraft: {
-		description: `Acquire the ${formatEnumeration(QUEST_REQUIREMENTS.skillsCraft)} skills.`,
+		description: `Train the ${formatEnumeration(QUEST_REQUIREMENTS.skillsCraft)} skills.`,
 		progression: [QUEST_REQUIREMENTS.skillsCraft.length],
 		requiresTracking: true,
 		title: "Warcraft",
@@ -596,7 +596,7 @@ export const QUESTS: Record<
 	},
 	thorns: {
 		description: "Inflict thorns damage @ times.",
-		progression: [5, 20, 50, 100],
+		progression: [20, 50, 100, 250],
 		requiresTracking: true,
 		title: "Cactus",
 	},
@@ -607,7 +607,7 @@ export const QUESTS: Record<
 		title: "Blue-shelling",
 	},
 	traits: {
-		description: "Acquire traits.",
+		description: "Earn traits.",
 		progression: [1, 3, 6, TRAIT_TYPES.length],
 		requiresTracking: false,
 		title: "Getting ink done",

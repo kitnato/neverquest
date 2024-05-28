@@ -4,19 +4,18 @@ import { useRecoilValue } from "recoil"
 import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { TrainableSkill } from "@neverquest/components/Skills/TrainableSkill"
 import { LABEL_NONE_AVAILABLE } from "@neverquest/data/general"
-import { TEARS_MAXIMUM } from "@neverquest/data/items"
 import { SKILLS } from "@neverquest/data/skills"
-import IconLacrimatory from "@neverquest/icons/lacrimatory.svg?react"
-import { tears } from "@neverquest/state/items"
-import { acquiredSkills } from "@neverquest/state/skills"
+import IconDreamCatcher from "@neverquest/icons/dream-catcher.svg?react"
+import { ownedItem } from "@neverquest/state/inventory"
+import { trainedSkills } from "@neverquest/state/skills"
 import { SKILL_TYPES } from "@neverquest/types/unions"
 
-export function AcquireWitchSkill() {
-	const acquiredSkillsValue = useRecoilValue(acquiredSkills)
-	const tearsValue = useRecoilValue(tears)
+export function TrainOccultistSkill() {
+	const trainedSkillsValue = useRecoilValue(trainedSkills)
+	const ownedItemDreamCatcher = useRecoilValue(ownedItem("dream catcher"))
 
 	const availableSkills = SKILL_TYPES.filter(
-		skill => SKILLS[skill].trainer === "witch" && !acquiredSkillsValue[skill],
+		skill => SKILLS[skill].trainer === "occultist" && !trainedSkillsValue[skill],
 	)
 
 	return (
@@ -26,19 +25,17 @@ export function AcquireWitchSkill() {
 			{availableSkills.length === 0
 				? <span className="fst-italic">{LABEL_NONE_AVAILABLE}</span>
 
-				: tearsValue < TEARS_MAXIMUM
+				: ownedItemDreamCatcher === undefined
 					? (
 						<span>
-							&quot;Before I can impart protective hexes, you must first taste the bitter tears of
-							experience.&quot;
+							&quot;There exists tremendous power in dreams, one must but find a medium to harness
+							them.&quot;
 						</span>
 					)
 					: (
 						<>
-							<IconDisplay Icon={IconLacrimatory} iconProps={{ className: "small" }}>
-								<span>
-									&quot;Your pernicious traumas resonate with the cipher. You are ready.&quot;
-								</span>
+							<IconDisplay Icon={IconDreamCatcher} iconProps={{ className: "small" }}>
+								<span>&quot;The cipher sings.&quot;</span>
 							</IconDisplay>
 
 							{availableSkills.map(skill =>

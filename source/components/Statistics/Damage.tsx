@@ -28,7 +28,7 @@ import { infusionEffect } from "@neverquest/state/items"
 import { questsBonus } from "@neverquest/state/quests"
 import { reserveCurrent } from "@neverquest/state/reserves"
 import { damage, lifeLeech } from "@neverquest/state/statistics"
-import { isTraitAcquired } from "@neverquest/state/traits"
+import { isTraitEarned } from "@neverquest/state/traits"
 import { isShowing } from "@neverquest/state/ui"
 import { isMelee, isUnarmed, isUnshielded } from "@neverquest/types/type-guards"
 import { formatNumber } from "@neverquest/utilities/formatters"
@@ -39,9 +39,9 @@ export function Damage() {
 	const damageValue = useRecoilValue(damage)
 	const infusionEffectEldritchCodex = useRecoilValue(infusionEffect("eldritch codex"))
 	const isShowingDamage = useRecoilValue(isShowing("damage"))
-	const isTraitAcquiredBrawler = useRecoilValue(isTraitAcquired("brawler"))
-	const isTraitAcquiredBruiser = useRecoilValue(isTraitAcquired("bruiser"))
-	const isTraitAcquiredColossus = useRecoilValue(isTraitAcquired("colossus"))
+	const isTraitEarnedBrawler = useRecoilValue(isTraitEarned("brawler"))
+	const isTraitEarnedBruiser = useRecoilValue(isTraitEarned("bruiser"))
+	const isTraitEarnedColossus = useRecoilValue(isTraitEarned("colossus"))
 	const lifeLeechValue = useRecoilValue(lifeLeech)
 	const questsBonusDamage = useRecoilValue(questsBonus("damageBonus"))
 	const reserveStamina = useRecoilValue(reserveCurrent("stamina"))
@@ -100,7 +100,7 @@ export function Damage() {
 											</td>
 										</tr>
 
-										{isTraitAcquiredBrawler && isUnshielded(shieldValue) && (isMelee(weaponValue) || isUnarmedWeapon) && (weaponValue.grip === "one-handed" || isTraitAcquiredColossus) && (
+										{isTraitEarnedBrawler && isUnshielded(shieldValue) && (isMelee(weaponValue) || isUnarmedWeapon) && (weaponValue.grip === "one-handed" || isTraitEarnedColossus) && (
 											<tr>
 												<td>
 													<IconDisplay Icon={IconBrawler} iconProps={{ className: "small" }}>
@@ -142,7 +142,7 @@ export function Damage() {
 											</tr>
 										)}
 
-										{isTraitAcquiredBruiser && isUnarmedWeapon && (
+										{isTraitEarnedBruiser && isUnarmedWeapon && (
 											<tr>
 												<td>
 													<IconDisplay Icon={IconBruiser} iconProps={{ className: "small" }}>

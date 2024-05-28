@@ -16,6 +16,8 @@ import { powerLevel } from "@neverquest/state/attributes"
 import { generation, stage } from "@neverquest/state/character"
 import { formatCardinal, formatNumber } from "@neverquest/utilities/formatters"
 
+import { DescriptionDisplay } from "../DescriptionDisplay"
+
 export function Renewal() {
 	const generationValue = useRecoilValue(generation)
 	const powerLevelValue = useRecoilValue(powerLevel)
@@ -94,21 +96,10 @@ export function Renewal() {
 
 				<ListGroupItem>
 					<IconDisplay Icon={IconSkills} iconProps={{ className: "small" }}>
-						<Stack direction="horizontal" gap={1}>
-							<span>
-								Skills
-							</span>
-
-							<span className="small text-secondary">
-								acquired from the
-							</span>
-
-							<IconImage className="small text-secondary" Icon={IconMercenary} />
-
-							<span className="small text-secondary">
-								Mercenary
-							</span>
-						</Stack>
+						<DescriptionDisplay
+							description="Skills trained by the # Mercenary."
+							descriptionIcons={[IconMercenary]}
+						/>
 					</IconDisplay>
 				</ListGroupItem>
 

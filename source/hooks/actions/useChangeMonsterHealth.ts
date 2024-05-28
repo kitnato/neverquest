@@ -15,8 +15,8 @@ import {
 	monsterHealthMaximum,
 	monsterRegenerationDuration,
 } from "@neverquest/state/monster"
-import { isHealthLow } from "@neverquest/state/reserves"
-import { acquiredTraits } from "@neverquest/state/traits"
+import { hasFlatlined, isHealthLow } from "@neverquest/state/reserves"
+import { earnedTraits } from "@neverquest/state/traits"
 import { formatNumber } from "@neverquest/utilities/formatters"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
 
@@ -54,86 +54,88 @@ export function useChangeMonsterHealth() {
 					reset(monsterAttackDuration)
 					reset(monsterRegenerationDuration)
 
-					set(
-						lootingDuration,
-						LOOTING_RATE[get(ownedItem("ender hook")) === undefined ? "base" : "ender hook"],
-					)
+					if (!get(hasFlatlined)) {
+						set(
+							lootingDuration,
+							LOOTING_RATE[get(ownedItem("ender hook")) === undefined ? "base" : "ender hook"],
+						)
 
-					if (get(distance) > 0) {
-						progressQuest({ quest: "distantKilling" })
-					}
-
-					if (get(isEnraged)) {
-						progressQuest({ quest: "killingEnraged" })
-					}
-
-					if (get(isHealthLow)) {
-						progressQuest({ quest: "killingLowHealth" })
-					}
-
-					switch (get(encounter)) {
-						case "boss": {
-							progressQuest({ quest: "killingBoss" })
-							break
+						if (get(distance) > 0) {
+							progressQuest({ quest: "distantKilling" })
 						}
 
-						case "monster": {
-							progressQuest({ quest: "killing" })
-							progressQuest({ quest: "killingStage" })
-							break
+						if (get(isEnraged)) {
+							progressQuest({ quest: "killingEnraged" })
 						}
 
-						case "res cogitans": {
-							progressQuest({ quest: "killingResCogitans" })
-							break
+						if (get(isHealthLow)) {
+							progressQuest({ quest: "killingLowHealth" })
 						}
 
-						case "res dominus": {
-							progressQuest({ quest: "killingResDominus" })
-
-							if (Object.values(get(acquiredTraits)).every(isAcquired => !isAcquired)) {
-								progressQuest({ quest: "killingResDominusNoTraits" })
+						switch (get(encounter)) {
+							case "boss": {
+								progressQuest({ quest: "killingBoss" })
+								break
 							}
-							break
+
+							case "monster": {
+								progressQuest({ quest: "killing" })
+								progressQuest({ quest: "killingStage" })
+								break
+							}
+
+							case "res cogitans": {
+								progressQuest({ quest: "killingResCogitans" })
+								break
+							}
+
+							case "res dominus": {
+								progressQuest({ quest: "killingResDominus" })
+
+								if (Object.values(get(earnedTraits)).every(isEarned => !isEarned)) {
+									progressQuest({ quest: "killingResDominusNoTraits" })
+								}
+								break
+							}
+
+							case "void": {
+								break
+							}
 						}
 
-						case "void": {
-							break
-						}
-					}
+						switch (damageType) {
+							case "bleeding": {
+								progressQuest({ quest: "bleedingKill" })
+								break
+							}
 
-					switch (damageType) {
-						case "bleeding": {
-							progressQuest({ quest: "bleedingKill" })
-							break
-						}
+							case "critical": {
+								progressQuest({ quest: "criticalKilling" })
+								break
+							}
 
-						case "critical": {
-							progressQuest({ quest: "criticalKilling" })
-							break
-						}
+							case "execution": {
+								progressQuest({ quest: "executing" })
+								break
+							}
 
-						case "execution": {
-							progressQuest({ quest: "executing" })
-							break
-						}
+							case "parry": {
+								progressQuest({ quest: "parryingKill" })
+								break
+							}
 
-						case "parry": {
-							progressQuest({ quest: "parryingKill" })
-							break
-						}
+							case "thorns": {
+								progressQuest({ quest: "thornsKill" })
+								break
+							}
 
-						case "thorns": {
-							progressQuest({ quest: "thornsKill" })
-							break
-						}
-
-						default: {
-							if (
-								monsterHealthValue === monsterHealthMaximumValue
-								&& get(powerLevel) <= get(stage)
-							) {
-								progressQuest({ quest: "killingOneStrike" })
+							default: {
+								if (
+									monsterHealthValue === monsterHealthMaximumValue
+									&& get(powerLevel) <= get(stage)
+								) {
+									progressQuest({ quest: "killingOneStrike" })
+								}
 							}
 						}
 					}

@@ -18,7 +18,7 @@ import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import { useRetire } from "@neverquest/hooks/actions/useRetire"
 import IconRetire from "@neverquest/icons/retire.svg?react"
 import { ownedItem } from "@neverquest/state/inventory"
-import { isSkillAcquired } from "@neverquest/state/skills"
+import { isSkillTrained } from "@neverquest/state/skills"
 
 import type { Dispatch, SetStateAction } from "react"
 
@@ -27,7 +27,7 @@ export function Retirement({
 }: {
 	state: [boolean, Dispatch<SetStateAction<boolean>>]
 }) {
-	const isSkillAcquiredMemetics = useRecoilValue(isSkillAcquired("memetics"))
+	const isSkillTrainedMemetics = useRecoilValue(isSkillTrained("memetics"))
 	const ownedItemJournal = useRecoilValue(ownedItem("journal"))
 
 	const progressQuest = useProgressQuest()
@@ -68,7 +68,7 @@ export function Retirement({
 					onClick={() => {
 						onHide()
 
-						if (ownedItemJournal !== undefined && isSkillAcquiredMemetics) {
+						if (ownedItemJournal !== undefined && isSkillTrainedMemetics) {
 							progressQuest({ quest: "deciphering" })
 						}
 

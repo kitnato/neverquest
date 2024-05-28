@@ -11,7 +11,7 @@ import IconEssence from "@neverquest/icons/essence.svg?react"
 import { armor, gems, shield, weapon } from "@neverquest/state/gear"
 import { inventory } from "@neverquest/state/inventory"
 import { essence } from "@neverquest/state/resources"
-import { isTraitAcquired } from "@neverquest/state/traits"
+import { isTraitEarned } from "@neverquest/state/traits"
 import { isShowing } from "@neverquest/state/ui"
 import { isGear, isMelee, isRanged, isUnarmed } from "@neverquest/types/type-guards"
 import { GEAR_TYPES } from "@neverquest/types/unions"
@@ -22,7 +22,7 @@ import type { GemItem } from "@neverquest/types"
 export function SocketGem({ gem }: { gem: GemItem }) {
 	const armorValue = useRecoilValue(armor)
 	const essenceValue = useRecoilValue(essence)
-	const isTraitAcquiredColossus = useRecoilValue(isTraitAcquired("colossus"))
+	const isTraitEarnedColossus = useRecoilValue(isTraitEarned("colossus"))
 	const shieldValue = useRecoilValue(shield)
 	const weaponValue = useRecoilValue(weapon)
 	const setInventory = useSetRecoilState(inventory)
@@ -97,7 +97,7 @@ export function SocketGem({ gem }: { gem: GemItem }) {
 						(
 							(isMelee(weaponValue) || isUnarmed(weaponValue))
 							&& weaponValue.grip === "one-handed"
-						) || isTraitAcquiredColossus
+						) || isTraitEarnedColossus
 					)
 					&& !isRanged(weaponValue)
 					: true,

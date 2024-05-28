@@ -367,13 +367,13 @@ Requires the [archery](#archery) skill. Also requires munitions, which can be cr
 
 ##### Weapon class
 
-Whatever melee or ranged, a weapon additionally falls into one of several classes that grants certain modifiers. These modifiers are only applied if the associated [skill](#skills) is acquired.
+Whatever melee or ranged, a weapon additionally falls into one of several classes that grants certain modifiers. These modifiers are only applied if the associated [skill](#skills) has been trained.
 
 ###### Blunt weapons
 
 Adds chance to [stun](#stunned) for a certain duration. Being unarmed is considered as wielding a blunt weapon.
 
-Stun requires the [traumatology](#traumatology) skill.
+Stunning requires the [traumatology](#traumatology) skill.
 
 ###### Piercing weapons
 
@@ -485,7 +485,7 @@ Relics that can be interacted with. Some can be equipped for their effect to be 
 
 ##### Infusable relics
 
-Some usable relics are infusable, meaning they allow [essence](#essence) to be spent on them to upgrade their effect via infusion levels. This can only be done once a certain [skill](#skills) has been acquired.
+Some usable relics are infusable, meaning they allow [essence](#essence) to be spent on them to upgrade their effect via infusion levels. This can only be done once a certain [skill](#skills) has been trained.
 
 To infuse continuously, the button can be held down so as to not require excessive clicking.
 
@@ -571,9 +571,9 @@ Requires the [armorcraft](#armorcraft) skill.
 
 ## Skills
 
-Skills are acquired primarily from the [mercenary](#mercenary) and bestow a permanent ability. They can unlock certain [attributes](#attributes), [statistics](#statistics) and [masteries](#masteries).
+Skills are trained primarily by the [mercenary](#mercenary) and bestow a permanent ability. They can unlock certain [attributes](#attributes), [statistics](#statistics) and [masteries](#masteries).
 
-Some skills are also trained by other crew members, but have special requirements before they can be acquired.
+Some skills are also trained by other crew members, but have special requirements before they become available.
 
 ### Anatomy
 
@@ -707,7 +707,7 @@ A percentage determining the reduction of the amount of monsters there are to de
 
 ### Traits
 
-Permanent passive abilities acquired upon [retiring](#retirement) for all subsequent new starts. One may be chosen at a time for every retirement.
+Permanent passive abilities earned upon [retiring](#retirement) for all subsequent new starts. One may be chosen at a time for every retirement.
 
 #### Brawler
 
@@ -753,7 +753,7 @@ Total [protection](#protection) is increased by the equipped shield's block chan
 
 ### Quests
 
-Quests are similar to achievements in that they have a set of requirements and track progress based on your progress and circumstances. They are unlocked once the journal [relic](#usable-relics) is acquired, and when having acquired a certain [skill](#skills).
+Quests are similar to achievements in that they have a set of requirements and track progress based on your progress and circumstances. They are unlocked once the journal [relic](#usable-relics) is acquired, and when having trained a certain [skill](#skills).
 
 Once a quest's requirements are achieved, the quest can be completed by choosing a permanent bonus to either [health](#health), [stamina](#stamina) or [total damage](#total-damage) that persists through retirement and while the journal is carried.
 

@@ -18,7 +18,7 @@ import { attributeStatistic } from "@neverquest/state/attributes"
 import { armor, armorBurden } from "@neverquest/state/gear"
 import { healthMaximumPoisoned } from "@neverquest/state/reserves"
 import { dodgeChance } from "@neverquest/state/statistics"
-import { isTraitAcquired } from "@neverquest/state/traits"
+import { isTraitEarned } from "@neverquest/state/traits"
 import { isUnarmored } from "@neverquest/types/type-guards"
 import { formatNumber } from "@neverquest/utilities/formatters"
 import { getAnimationClass } from "@neverquest/utilities/getters"
@@ -29,7 +29,7 @@ export function DodgeChance() {
 	const agility = useRecoilValue(attributeStatistic("agility"))
 	const dodgeChanceValue = useRecoilValue(dodgeChance)
 	const healthMaximumPoisonedValue = useRecoilValue(healthMaximumPoisoned)
-	const isTraitAcquiredNudist = useRecoilValue(isTraitAcquired("nudist"))
+	const isTraitEarnedNudist = useRecoilValue(isTraitEarned("nudist"))
 	const { dodgeBonus, healAmount } = NUDIST
 	const formattedDodgeChance = formatNumber({ format: "percentage", value: dodgeChanceValue })
 
@@ -71,7 +71,7 @@ export function DodgeChance() {
 											</td>
 										</tr>
 
-										{isTraitAcquiredNudist && isUnarmored(armorValue) && (
+										{isTraitEarnedNudist && isUnarmored(armorValue) && (
 											<tr>
 												<td>
 													<IconDisplay Icon={IconNudist} iconProps={{ className: "small" }}>

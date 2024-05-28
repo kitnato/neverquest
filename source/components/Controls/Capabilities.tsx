@@ -15,8 +15,8 @@ import IconUpgrade from "@neverquest/icons/upgrade.svg?react"
 import { areAttributesAffordable } from "@neverquest/state/attributes"
 import { isAttacking, location } from "@neverquest/state/character"
 import { isIncapacitated } from "@neverquest/state/reserves"
-import { acquiredSkills } from "@neverquest/state/skills"
-import { acquiredTraits } from "@neverquest/state/traits"
+import { trainedSkills } from "@neverquest/state/skills"
+import { earnedTraits } from "@neverquest/state/traits"
 import { activeControl, isShowing } from "@neverquest/state/ui"
 import { formatEnumeration } from "@neverquest/utilities/formatters"
 import { getAnimationClass } from "@neverquest/utilities/getters"
@@ -26,8 +26,8 @@ import type { Capability } from "@neverquest/types/unions"
 
 export function Capabilities() {
 	const [activeControlValue, setActiveControl] = useRecoilState(activeControl)
-	const acquiredSkillsValue = useRecoilValue(acquiredSkills)
-	const acquiredTraitsValue = useRecoilValue(acquiredTraits)
+	const trainedSkillsValue = useRecoilValue(trainedSkills)
+	const earnedTraitsValue = useRecoilValue(earnedTraits)
 	const areAttributesAffordableValue = useRecoilValue(areAttributesAffordable)
 	const isAttackingValue = useRecoilValue(isAttacking)
 	const isIncapacitatedValue = useRecoilValue(isIncapacitated)
@@ -44,8 +44,8 @@ export function Capabilities() {
 	]
 	let tooltip = ["Attributes"]
 
-	const isShowingSkills = Object.values(acquiredSkillsValue).some(Boolean)
-	const isShowingTraits = Object.values(acquiredTraitsValue).some(Boolean)
+	const isShowingSkills = Object.values(trainedSkillsValue).some(Boolean)
+	const isShowingTraits = Object.values(earnedTraitsValue).some(Boolean)
 	const isShowingSkillsOrTraits = isShowingSkills || isShowingTraits
 
 	if (isShowingSkills) {

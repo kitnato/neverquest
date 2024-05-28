@@ -5,13 +5,13 @@ import { MERCHANT_OFFERS } from "@neverquest/data/caravan"
 import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear"
 import { RETIREMENT_STAGE } from "@neverquest/data/retirement"
 import { SKILLS } from "@neverquest/data/skills"
-import { useAcquireSkill } from "@neverquest/hooks/actions/useAcquireSkill"
 import { useInitialize } from "@neverquest/hooks/actions/useInitialize"
 import { useNeutralize } from "@neverquest/hooks/actions/useNeutralize"
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import { useResetAttributes } from "@neverquest/hooks/actions/useResetAttributes"
 import { useResetCharacter } from "@neverquest/hooks/actions/useResetCharacter"
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness"
+import { useTrainSkill } from "@neverquest/hooks/actions/useTrainSkill"
 import { absorbedEssence } from "@neverquest/state/attributes"
 import {
 	blacksmithInventory,
@@ -35,8 +35,8 @@ import { inventory } from "@neverquest/state/inventory"
 import { expandedMasteries, masteryProgress, masteryRank } from "@neverquest/state/masteries"
 import { questProgress } from "@neverquest/state/quests"
 import { essence } from "@neverquest/state/resources"
-import { isSkillAcquired } from "@neverquest/state/skills"
-import { isTraitAcquired, selectedTrait } from "@neverquest/state/traits"
+import { isSkillTrained } from "@neverquest/state/skills"
+import { isTraitEarned, selectedTrait } from "@neverquest/state/traits"
 import { isInheritableItem } from "@neverquest/types/type-guards"
 import {
 	ATTRIBUTE_TYPES,
@@ -47,7 +47,7 @@ import {
 import { getPerkEffect, getSnapshotGetter } from "@neverquest/utilities/getters"
 
 export function useRetire() {
-	const acquireSkill = useAcquireSkill()
+	const trainSkill = useTrainSkill()
 	const initialize = useInitialize()
 	const neutralize = useNeutralize()
 	const progressQuest = useProgressQuest()
@@ -69,7 +69,7 @@ export function useRetire() {
 				}
 
 				if (selectedTraitValue !== undefined) {
-					set(isTraitAcquired(selectedTraitValue), true)
+					set(isTraitEarned(selectedTraitValue), true)
 					reset(selectedTrait)
 
 					progressQuest({ quest: "traits" })
@@ -125,7 +125,7 @@ export function useRetire() {
 					reset(masteryRank(mastery))
 				}
 
-				const inheritedSkills = SKILL_TYPES.filter(skill => SKILLS[skill].isInheritable && get(isSkillAcquired(skill)))
+				const inheritedSkills = SKILL_TYPES.filter(skill => SKILLS[skill].isInheritable && get(isSkillTrained(skill)))
 
 				progressQuest({
 					amount: inheritedSkills.length,
@@ -135,7 +135,7 @@ export function useRetire() {
 
 				SKILL_TYPES.forEach((skill) => {
 					if (!inheritedSkills.includes(skill)) {
-						reset(isSkillAcquired(skill))
+						reset(isSkillTrained(skill))
 					}
 				})
 
@@ -168,7 +168,7 @@ export function useRetire() {
 				initialize(true)
 			},
 		[
-			acquireSkill,
+			trainSkill,
 			initialize,
 			neutralize,
 			progressQuest,

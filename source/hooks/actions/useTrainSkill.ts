@@ -5,13 +5,13 @@ import { MASTERIES } from "@neverquest/data/masteries"
 import { QUEST_REQUIREMENTS } from "@neverquest/data/quests"
 import { SKILLS } from "@neverquest/data/skills"
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
-import { acquiredSkills, isSkillAcquired } from "@neverquest/state/skills"
+import { isSkillTrained, trainedSkills } from "@neverquest/state/skills"
 import { isShowing } from "@neverquest/state/ui"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
 
 import type { Skill } from "@neverquest/types/unions"
 
-export function useAcquireSkill() {
+export function useTrainSkill() {
 	const progressQuest = useProgressQuest()
 
 	return useRecoilCallback(
@@ -20,9 +20,9 @@ export function useAcquireSkill() {
 				const get = getSnapshotGetter(snapshot)
 
 				const { shows } = SKILLS[skill]
-				const acquiredSkillsValue = get(acquiredSkills)
+				const trainedSkillsValue = get(trainedSkills)
 
-				set(isSkillAcquired(skill), true)
+				set(isSkillTrained(skill), true)
 
 				if (shows !== undefined) {
 					for (const show of shows) {
@@ -40,9 +40,9 @@ export function useAcquireSkill() {
 
 				if (
 					skill === "archery"
-					&& Object.entries(acquiredSkillsValue)
-						.filter(([acquiredSkill]) => !SKILLS[acquiredSkill as Skill].isInheritable)
-						.every(([, hasAcquiredSkill]) => !hasAcquiredSkill)
+					&& Object.entries(trainedSkillsValue)
+						.filter(([trainedSkill]) => !SKILLS[trainedSkill as Skill].isInheritable)
+						.every(([, hasTrainedSkill]) => !hasTrainedSkill)
 				) {
 					progressQuest({ quest: "acquiringArcheryFirst" })
 				}

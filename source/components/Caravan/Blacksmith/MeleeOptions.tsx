@@ -23,7 +23,7 @@ import IconWeaponDamage from "@neverquest/icons/weapon-damage.svg?react"
 import IconWeight from "@neverquest/icons/weight.svg?react"
 import { blacksmithInventory, blacksmithOptions } from "@neverquest/state/caravan"
 import { stageMaximum } from "@neverquest/state/character"
-import { isSkillAcquired } from "@neverquest/state/skills"
+import { isSkillTrained } from "@neverquest/state/skills"
 import { GRIP_TYPES, type Grip } from "@neverquest/types/unions"
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters"
 import { generateMeleeWeapon } from "@neverquest/utilities/generators"
@@ -42,12 +42,12 @@ export function MeleeOptions() {
 		},
 		setBlacksmithOptions,
 	] = useRecoilState(blacksmithOptions)
-	const isSkillAcquiredSiegecraft = useRecoilValue(isSkillAcquired("siegecraft"))
+	const isSkillTrainedSiegecraft = useRecoilValue(isSkillTrained("siegecraft"))
 	const stageMaximumValue = useRecoilValue(stageMaximum)
 
 	const { ability, IconAbility, IconGearClass } = WEAPON_SPECIFICATIONS[gearClass]
 
-	const isSkillAcquiredAbility = useRecoilValue(isSkillAcquired(WEAPON_ABILITY_SKILLS[ability]))
+	const isSkillTrainedAbility = useRecoilValue(isSkillTrained(WEAPON_ABILITY_SKILLS[ability]))
 
 	const factor = getSigmoid(level)
 	const { abilityChance, burden, damage, rate, weight } = getMeleeRanges({
@@ -118,7 +118,7 @@ export function MeleeOptions() {
 					</DropdownButton>
 				</IconDisplay>
 
-				{isSkillAcquiredSiegecraft && (
+				{isSkillTrainedSiegecraft && (
 					<IconDisplay Icon={IconGrip} iconProps={{ overlayPlacement: "left" }} tooltip="Grip">
 						<DropdownButton
 							disabled={hasCrafted}
@@ -175,12 +175,12 @@ export function MeleeOptions() {
 				</IconDisplay>
 
 				<IconDisplay
-					Icon={isSkillAcquiredAbility ? IconAbility : IconUnknown}
+					Icon={isSkillTrainedAbility ? IconAbility : IconUnknown}
 					iconProps={{ overlayPlacement: "left" }}
-					tooltip={isSkillAcquiredAbility ? `${capitalizeAll(ability)} chance` : LABEL_UNKNOWN}
+					tooltip={isSkillTrainedAbility ? `${capitalizeAll(ability)} chance` : LABEL_UNKNOWN}
 				>
 					<span>
-						{isSkillAcquiredAbility
+						{isSkillTrainedAbility
 							? `${formatNumber({
 								format: "percentage",
 								value: abilityChance.minimum,

@@ -4,18 +4,19 @@ import { useRecoilValue } from "recoil"
 import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { TrainableSkill } from "@neverquest/components/Skills/TrainableSkill"
 import { LABEL_NONE_AVAILABLE } from "@neverquest/data/general"
+import { TEARS_MAXIMUM } from "@neverquest/data/items"
 import { SKILLS } from "@neverquest/data/skills"
-import IconDreamCatcher from "@neverquest/icons/dream-catcher.svg?react"
-import { ownedItem } from "@neverquest/state/inventory"
-import { acquiredSkills } from "@neverquest/state/skills"
+import IconLacrimatory from "@neverquest/icons/lacrimatory.svg?react"
+import { tears } from "@neverquest/state/items"
+import { trainedSkills } from "@neverquest/state/skills"
 import { SKILL_TYPES } from "@neverquest/types/unions"
 
-export function AcquireOccultistSkill() {
-	const acquiredSkillsValue = useRecoilValue(acquiredSkills)
-	const ownedItemDreamCatcher = useRecoilValue(ownedItem("dream catcher"))
+export function TrainWitchSkill() {
+	const trainedSkillsValue = useRecoilValue(trainedSkills)
+	const tearsValue = useRecoilValue(tears)
 
 	const availableSkills = SKILL_TYPES.filter(
-		skill => SKILLS[skill].trainer === "occultist" && !acquiredSkillsValue[skill],
+		skill => SKILLS[skill].trainer === "witch" && !trainedSkillsValue[skill],
 	)
 
 	return (
@@ -25,17 +26,19 @@ export function AcquireOccultistSkill() {
 			{availableSkills.length === 0
 				? <span className="fst-italic">{LABEL_NONE_AVAILABLE}</span>
 
-				: ownedItemDreamCatcher === undefined
+				: tearsValue < TEARS_MAXIMUM
 					? (
 						<span>
-							&quot;There exists tremendous power in dreams, one must but find a medium to harness
-							them.&quot;
+							&quot;Before I can impart protective hexes, you must first taste the bitter tears of
+							experience.&quot;
 						</span>
 					)
 					: (
 						<>
-							<IconDisplay Icon={IconDreamCatcher} iconProps={{ className: "small" }}>
-								<span>&quot;The cipher sings.&quot;</span>
+							<IconDisplay Icon={IconLacrimatory} iconProps={{ className: "small" }}>
+								<span>
+									&quot;Your pernicious traumas resonate with the cipher. You are ready.&quot;
+								</span>
 							</IconDisplay>
 
 							{availableSkills.map(skill =>

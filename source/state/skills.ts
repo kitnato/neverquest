@@ -7,16 +7,16 @@ import { withStateKey } from "@neverquest/utilities/helpers"
 
 // SELECTORS
 
-export const acquiredSkills = withStateKey("acquiredSkills", key =>
+export const trainedSkills = withStateKey("trainedSkills", key =>
 	selector({
 		get: ({ get }) => {
-			const currentAcquiredSkills = {} as Record<Skill, boolean>
+			const currentTrainedSkills = {} as Record<Skill, boolean>
 
 			for (const skill of SKILL_TYPES) {
-				currentAcquiredSkills[skill] = get(isSkillAcquired(skill))
+				currentTrainedSkills[skill] = get(isSkillTrained(skill))
 			}
 
-			return currentAcquiredSkills
+			return currentTrainedSkills
 		},
 		key,
 	}),
@@ -27,7 +27,7 @@ export const skillPrice = withStateKey("skillPrice", key =>
 		get: ({ get }) =>
 			Math.round(
 				SKILL_PRICE_BASE
-				* Math.pow(SKILL_PRICE_FACTOR, Object.values(get(acquiredSkills)).filter(Boolean).length),
+				* Math.pow(SKILL_PRICE_FACTOR, Object.values(get(trainedSkills)).filter(Boolean).length),
 			),
 		key,
 	}),
@@ -35,7 +35,7 @@ export const skillPrice = withStateKey("skillPrice", key =>
 
 // ATOMS
 
-export const isSkillAcquired = withStateKey("isSkillAcquired", key =>
+export const isSkillTrained = withStateKey("isSkillTrained", key =>
 	atomFamily<boolean, Skill>({
 		default: false,
 		effects: skill => [handleStorage({ key, parameter: skill })],

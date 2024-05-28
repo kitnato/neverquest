@@ -294,7 +294,7 @@ export const monsterLoot = withStateKey("monsterLoot", key =>
 	selector({
 		get: ({ get }) => {
 			const { attenuation, base, bossModifier, finality, progressModifier } = ESSENCE
-			const { equalStage, lowerStage } = LOOT_MODIFIER
+			const { equalStage, lowerStageEssence, lowerStageGems } = LOOT_MODIFIER
 
 			const encounterValue = get(encounter)
 			const isMementoOwned = get(ownedItem("memento")) !== undefined
@@ -310,7 +310,7 @@ export const monsterLoot = withStateKey("monsterLoot", key =>
 							+ get(progress) * progressModifier
 							+ (encounterValue === "boss" ? bossModifier : 0)
 							+ get(perkEffect("essenceBonus"))
-						) * (stageValue < stageHighestValue ? lowerStage : equalStage)),
+						) * (stageValue < stageHighestValue ? lowerStageEssence : equalStage)),
 					GENERIC_MINIMUM,
 				),
 				gems: encounterValue === "boss"
@@ -319,7 +319,7 @@ export const monsterLoot = withStateKey("monsterLoot", key =>
 							length: 1 + Math.floor((stageValue - BOSS_STAGE_START) / BOSS_STAGE_INTERVAL),
 						}).reduce<number>(
 							(sum, _) =>
-								Math.random() <= (stageValue < stageHighestValue ? lowerStage : equalStage)
+								Math.random() <= (stageValue < stageHighestValue ? lowerStageGems : equalStage)
 									? sum + 1
 									: sum,
 							0,

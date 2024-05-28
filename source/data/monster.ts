@@ -88,7 +88,8 @@ export const GEM_DROP_MAXIMUM = 5
 
 export const LOOT_MODIFIER = {
 	equalStage: 1,
-	lowerStage: 0.3,
+	lowerStageEssence: 0.35,
+	lowerStageGems: 0.2,
 }
 
 export const MONSTER_ATTACK_RATE = {

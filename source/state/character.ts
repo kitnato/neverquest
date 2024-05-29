@@ -15,12 +15,12 @@ import type { Finality, Perk } from "@neverquest/types/unions"
 export const canAwaken = withStateKey("canAwaken", key =>
 	selector({
 		get: ({ get }) =>
-			!get(hasAwoken)
+			!get(isAwoken)
 			&& get(isStageCompleted)
 			&& get(location) === "wilderness"
 			&& get(stage) === FINALITY_STAGE["res cogitans"]
 			&& get(essenceLoot) === 0
-			&& (get(encounter) !== "void" || get(hasDefeatedFinality("res cogitans"))),
+			&& (get(encounter) !== "void" || get(isFinalityDefeated("res cogitans"))),
 		key,
 	}),
 )
@@ -31,7 +31,7 @@ export const encounter = withStateKey("encounter", key =>
 			const stageValue = get(stage)
 
 			if (stageValue === FINALITY_STAGE["res cogitans"]) {
-				if (get(hasDefeatedFinality("res cogitans")) || get(ownedItem("familiar")) === undefined) {
+				if (get(isFinalityDefeated("res cogitans")) || get(ownedItem("familiar")) === undefined) {
 					return "void"
 				}
 
@@ -39,7 +39,7 @@ export const encounter = withStateKey("encounter", key =>
 			}
 
 			if (stageValue === FINALITY_STAGE["res dominus"]) {
-				if (get(hasDefeatedFinality("res dominus"))) {
+				if (get(isFinalityDefeated("res dominus"))) {
 					return "void"
 				}
 
@@ -174,26 +174,26 @@ export const generation = withStateKey("generation", key =>
 	}),
 )
 
-export const hasAwoken = withStateKey("hasAwoken", key =>
-	atom({
-		default: false,
-		effects: [handleStorage({ key })],
-		key,
-	}),
-)
-
-export const hasDefeatedFinality = withStateKey("hasDefeatedFinality", key =>
-	atomFamily<boolean, Finality>({
-		default: false,
-		effects: finality => [handleStorage({ key, parameter: finality })],
-		key,
-	}),
-)
-
 export const isAttacking = withStateKey("isAttacking", key =>
 	atom({
 		default: false,
 		effects: [handleStorage({ key })],
+		key,
+	}),
+)
+
+export const isAwoken = withStateKey("isAwoken", key =>
+	atom({
+		default: false,
+		effects: [handleStorage({ key })],
+		key,
+	}),
+)
+
+export const isFinalityDefeated = withStateKey("isFinalityDefeated", key =>
+	atomFamily<boolean, Finality>({
+		default: false,
+		effects: finality => [handleStorage({ key, parameter: finality })],
 		key,
 	}),
 )

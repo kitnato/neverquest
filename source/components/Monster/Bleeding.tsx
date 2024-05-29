@@ -28,7 +28,7 @@ export function Bleeding() {
 
 	const changeMonsterHealth = useChangeMonsterHealth()
 
-	const hasStoppedBleeding = !isMonsterBleedingValue || isMonsterDeadValue
+	const isBleeding = !isMonsterBleedingValue || isMonsterDeadValue
 
 	useTimer({
 		onElapsed: () => {
@@ -40,13 +40,13 @@ export function Bleeding() {
 			resetMonsterBleedingDelta()
 		},
 		setDuration: setMonsterBleedingDelta,
-		stop: hasStoppedBleeding,
+		stop: isBleeding,
 	})
 
 	useTimer({
 		onElapsed: resetMonsterBleedingDelta,
 		setDuration: setMonsterBleedingDuration,
-		stop: hasStoppedBleeding,
+		stop: isBleeding,
 	})
 
 	if (canReceiveAilmentBleeding) {

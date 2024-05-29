@@ -42,7 +42,7 @@ export function ShieldOptions() {
 		factor,
 		gearClass,
 	})
-	const hasCrafted = craftedShield !== undefined
+	const isCrafted = craftedShield !== undefined
 	const maximumShieldLevel = Math.min(
 		stageMaximumValue + GEAR_LEVEL_RANGE_MAXIMUM,
 		LEVELLING_MAXIMUM,
@@ -70,11 +70,11 @@ export function ShieldOptions() {
 	return (
 		<Stack className="mx-auto w-50">
 			<Stack
-				className={`mx-auto${hasCrafted ? " opacity-50" : ""}`}
+				className={`mx-auto${isCrafted ? " opacity-50" : ""}`}
 				gap={3}
 			>
 				<SetGearLevel
-					isDisabled={hasCrafted}
+					isDisabled={isCrafted}
 					level={level}
 					maximum={maximumShieldLevel}
 					setLevel={setGearLevel}
@@ -86,7 +86,7 @@ export function ShieldOptions() {
 					tooltip="Class"
 				>
 					<DropdownButton
-						disabled={hasCrafted}
+						disabled={isCrafted}
 						onSelect={(key) => {
 							if (key !== null) {
 								setBlacksmithOptions(options => ({
@@ -161,7 +161,7 @@ export function ShieldOptions() {
 			{!isSkillTrainedShieldcraft && gearClass === "tower"
 				? <span className="fst-italic text-center">{LABEL_SKILL_REQUIRED}</span>
 
-				: hasCrafted
+				: isCrafted
 					? (
 						<CraftedGear
 							item={craftedShield}

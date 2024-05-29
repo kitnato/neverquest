@@ -46,7 +46,7 @@ export function ArmorOptions() {
 		factor,
 		gearClass,
 	})
-	const hasCrafted = craftedArmor !== undefined
+	const isCrafted = craftedArmor !== undefined
 	const maximumArmorLevel = Math.min(
 		stageMaximumValue + GEAR_LEVEL_RANGE_MAXIMUM,
 		LEVELLING_MAXIMUM,
@@ -74,11 +74,11 @@ export function ArmorOptions() {
 	return (
 		<Stack className="mx-auto w-50">
 			<Stack
-				className={`mx-auto${hasCrafted ? " opacity-50" : ""}`}
+				className={`mx-auto${isCrafted ? " opacity-50" : ""}`}
 				gap={3}
 			>
 				<SetGearLevel
-					isDisabled={hasCrafted}
+					isDisabled={isCrafted}
 					level={level}
 					maximum={maximumArmorLevel}
 					setLevel={setGearLevel}
@@ -90,7 +90,7 @@ export function ArmorOptions() {
 					tooltip="Class"
 				>
 					<DropdownButton
-						disabled={hasCrafted}
+						disabled={isCrafted}
 						onSelect={(key) => {
 							if (key !== null) {
 								setBlacksmithOptions(options => ({
@@ -164,7 +164,7 @@ export function ArmorOptions() {
 			{!isSkillTrainedArmorcraft && gearClass === "heavy"
 				? <span className="fst-italic text-center">{LABEL_SKILL_REQUIRED}</span>
 
-				: hasCrafted
+				: isCrafted
 					? (
 						<CraftedGear
 							item={craftedArmor}

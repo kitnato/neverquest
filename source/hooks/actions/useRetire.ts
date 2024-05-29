@@ -17,13 +17,13 @@ import {
 	blacksmithInventory,
 	expandedBuyback,
 	fletcherInventory,
-	hasGeneratedOffer,
+	isOfferGenerated,
 	merchantInventory,
 	monologue,
 } from "@neverquest/state/caravan"
 import {
 	corpse, generation,
-	hasDefeatedFinality,
+	isFinalityDefeated,
 	name,
 	stage,
 	stageHighest,
@@ -90,7 +90,7 @@ export function useRetire() {
 				reset(corpse)
 				reset(expandedBuyback)
 				reset(expandedMasteries)
-				reset(hasDefeatedFinality("res dominus"))
+				reset(isFinalityDefeated("res dominus"))
 				reset(fletcherInventory)
 				reset(gems(ARMOR_NONE.ID))
 				reset(gems(SHIELD_NONE.ID))
@@ -117,7 +117,7 @@ export function useRetire() {
 				}
 
 				for (let index = 1; index <= stageMaximumValue; index++) {
-					reset(hasGeneratedOffer(index))
+					reset(isOfferGenerated(index))
 				}
 
 				for (const mastery of MASTERY_TYPES) {

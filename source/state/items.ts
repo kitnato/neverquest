@@ -79,14 +79,6 @@ export const munitions = withStateKey("munitions", key =>
 
 // ATOMS
 
-export const hasLootedInheritable = withStateKey("hasLootedInheritable", key =>
-	atomFamily<boolean, Inheritable>({
-		default: false,
-		effects: inheritable => [handleStorage({ key, parameter: inheritable })],
-		key,
-	}),
-)
-
 export const infusion = withStateKey("infusion", key =>
 	atomFamily<number, Infusable>({
 		default: 0,
@@ -99,6 +91,14 @@ export const infusionLevel = withStateKey("infusionLevel", key =>
 	atomFamily<number, Infusable>({
 		default: 0,
 		effects: infusable => [handleStorage({ key, parameter: infusable })],
+		key,
+	}),
+)
+
+export const isInheritableLooted = withStateKey("isInheritableLooted", key =>
+	atomFamily<boolean, Inheritable>({
+		default: false,
+		effects: inheritable => [handleStorage({ key, parameter: inheritable })],
 		key,
 	}),
 )

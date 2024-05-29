@@ -42,7 +42,7 @@ export function useTrainSkill() {
 					skill === "archery"
 					&& Object.entries(trainedSkillsValue)
 						.filter(([trainedSkill]) => !SKILLS[trainedSkill as Skill].isInheritable)
-						.every(([, hasTrainedSkill]) => !hasTrainedSkill)
+						.every(([, isTrained]) => !isTrained)
 				) {
 					progressQuest({ quest: "acquiringArcheryFirst" })
 				}

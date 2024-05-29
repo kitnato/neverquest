@@ -102,7 +102,7 @@ export const elementalEffects = withStateKey("elementalEffects", key =>
 	}),
 )
 
-export const hasEnoughMunitions = withStateKey("hasEnoughMunitions", key =>
+export const isMunitionsSufficient = withStateKey("isMunitionsSufficient", key =>
 	selector({
 		get: ({ get }) => {
 			const weaponValue = get(weapon)

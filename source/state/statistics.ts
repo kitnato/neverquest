@@ -201,7 +201,7 @@ export const executionThreshold = withStateKey("executionThreshold", key =>
 	}),
 )
 
-export const hasRecovery = withStateKey("hasRecovery", key =>
+export const isRecoveryRelevant = withStateKey("isRecoveryRelevant", key =>
 	selector({
 		get: ({ get }) => get(recoveryRate) > RECOVERY_MINIMUM,
 		key,

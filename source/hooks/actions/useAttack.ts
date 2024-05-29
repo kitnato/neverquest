@@ -12,7 +12,7 @@ import {
 	attackDuration,
 	isAttacking,
 } from "@neverquest/state/character"
-import { canAttackOrParry, hasEnoughMunitions, weapon } from "@neverquest/state/gear"
+import { canAttackOrParry, isMunitionsSufficient, weapon } from "@neverquest/state/gear"
 import { masteryStatistic } from "@neverquest/state/masteries"
 import {
 	distance,
@@ -55,20 +55,20 @@ export function useAttack() {
 				const get = getSnapshotGetter(snapshot)
 
 				const canAttackOrParryValue = get(canAttackOrParry)
-				const hasEnoughMunitionsValue = get(hasEnoughMunitions)
+				const isMunitionsSufficientValue = get(isMunitionsSufficient)
 				const executionThresholdValue = get(executionThreshold)
 				const lifeLeechValue = get(lifeLeech)
 				const monsterHealthValue = get(monsterHealth)
 				const weaponValue = get(weapon)
 				const isWeaponRanged = isRanged(weaponValue)
-				const hasInflictedCritical = (
+				const isCriticalStrike = (
 					get(isSkillTrained("assassination"))
 					&& isWeaponRanged
 					&& get(isTraitEarned("sharpshooter"))
 					&& get(distance) > 0
 				) || Math.random() <= get(criticalChance)
 
-				let totalDamage = Math.round(hasInflictedCritical ? get(criticalStrike) : get(damage))
+				let totalDamage = Math.round(isCriticalStrike ? get(criticalStrike) : get(damage))
 
 				set(isShowing("damage"), true)
 
@@ -76,7 +76,7 @@ export function useAttack() {
 					set(attackDuration, get(attackRate))
 				}
 
-				if (canAttackOrParryValue && hasEnoughMunitionsValue) {
+				if (canAttackOrParryValue && isMunitionsSufficientValue) {
 					if (weaponValue.burden > 0) {
 						changeStamina({ value: -weaponValue.burden })
 					}
@@ -94,7 +94,7 @@ export function useAttack() {
 							&& monsterHealthValue / get(monsterHealthMaximum) <= executionThresholdValue
 						)
 						|| (
-							hasInflictedCritical && get(isTraitEarned("executioner")) && Math.random() <= executionThresholdValue
+							isCriticalStrike && get(isTraitEarned("executioner")) && Math.random() <= executionThresholdValue
 						)
 					) {
 						totalDamage = monsterHealthValue
@@ -127,7 +127,7 @@ export function useAttack() {
 							})
 						}
 
-						if (hasInflictedCritical) {
+						if (isCriticalStrike) {
 							progressQuest({ quest: "critical" })
 
 							monsterDeltas.push({
@@ -153,7 +153,7 @@ export function useAttack() {
 
 						changeMonsterHealth({
 							contents: monsterDeltas,
-							damageType: hasInflictedCritical ? "critical" : undefined,
+							damageType: isCriticalStrike ? "critical" : undefined,
 							value: -totalDamage,
 						})
 					}
@@ -193,7 +193,7 @@ export function useAttack() {
 						progressQuest({ quest: "exhausting" })
 					}
 
-					if (!hasEnoughMunitionsValue) {
+					if (!isMunitionsSufficientValue) {
 						addDelta({
 							contents: {
 								color: "text-secondary",

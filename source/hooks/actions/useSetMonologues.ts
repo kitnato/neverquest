@@ -1,7 +1,7 @@
 import { useRecoilCallback } from "recoil"
 
 import { CREW, MERCHANT_OFFERS, MONOLOGUE_EMPTY } from "@neverquest/data/caravan"
-import { hasGeneratedOffer, monologue } from "@neverquest/state/caravan"
+import { isOfferGenerated, monologue } from "@neverquest/state/caravan"
 import { stage, stageMaximum } from "@neverquest/state/character"
 import { CREW_MEMBER_TYPES } from "@neverquest/types/unions"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
@@ -22,7 +22,7 @@ export function useSetMonologues() {
 						set(
 							monologue(crewMember),
 							// If it's the merchant, only change the monologue to the item's if it was generated (i.e. not inherited or sold), otherwise set the current stage's monologue if it exists or the most recent one.
-							crewMember === "merchant" && merchantOffer !== undefined && get(hasGeneratedOffer(stageValue)) && merchantOffer.monologue !== undefined
+							crewMember === "merchant" && merchantOffer !== undefined && get(isOfferGenerated(stageValue)) && merchantOffer.monologue !== undefined
 								? merchantOffer.monologue
 								: monologues[stageValue] ?? (() => {
 									for (let index = stageValue; index > 0; index--) {

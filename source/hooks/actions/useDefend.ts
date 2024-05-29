@@ -156,7 +156,7 @@ export function useDefend() {
 				}
 
 				const thornsValue = get(thorns)
-				const hasInflictedThorns = thornsValue > 0
+				const isThorny = thornsValue > 0
 
 				const deflectionChanceValue = get(deflectionChance)
 				const monsterDamageAilingValue = get(monsterDamageAiling)
@@ -165,15 +165,15 @@ export function useDefend() {
 				const deltaMonsterHealth: DeltaDisplay[] = []
 				const totalDamage = monsterDamageAilingValue - protectionValue
 
-				let hasParried = Math.random() <= get(parryChance)
-				let hasBlocked = !hasParried && Math.random() <= get(blockChance)
-				let hasStaggered = !hasParried && Math.random() <= get(staggerChance)
+				let isParried = Math.random() <= get(parryChance)
+				let isBlocked = !isParried && Math.random() <= get(blockChance)
+				let isStaggered = !isParried && Math.random() <= get(staggerChance)
 				let healthDamage = totalDamage > 0 ? totalDamage : 0
 				let monsterHealthDamage = 0
 				let staminaCost = 0
 
 				// If parrying occurs, check if it's possible.
-				if (hasParried) {
+				if (isParried) {
 					if (get(canAttackOrParry)) {
 						healthDamage = Math.round(healthDamage * (1 - get(parryAvoidance)))
 						monsterHealthDamage += Math.round(healthDamage * get(parryDamage))
@@ -191,7 +191,7 @@ export function useDefend() {
 						})
 					}
 					else {
-						hasParried = false
+						isParried = false
 
 						deltaStamina.push(
 							{
@@ -208,7 +208,7 @@ export function useDefend() {
 					}
 				}
 
-				if (hasBlocked) {
+				if (isBlocked) {
 					if (canBlockOrStaggerValue) {
 						healthDamage = 0
 						staminaCost += shieldBurden
@@ -222,7 +222,7 @@ export function useDefend() {
 						progressQuest({ quest: "blocking" })
 					}
 					else {
-						hasBlocked = false
+						isBlocked = false
 
 						deltaStamina.push(
 							{
@@ -239,7 +239,7 @@ export function useDefend() {
 					}
 				}
 
-				if (hasStaggered) {
+				if (isStaggered) {
 					if (canBlockOrStaggerValue) {
 						staminaCost += shieldBurden
 
@@ -249,7 +249,7 @@ export function useDefend() {
 						progressQuest({ quest: "staggering" })
 					}
 					else {
-						hasStaggered = false
+						isStaggered = false
 
 						deltaStamina.push(
 							{
@@ -267,7 +267,7 @@ export function useDefend() {
 				}
 
 				// If neither dodged, parried nor blocked, show damage with protection and increase resilience.
-				if (!hasBlocked && !hasParried) {
+				if (!isBlocked && !isParried) {
 					if (protectionValue > 0) {
 						deltaHealth.push({
 							color: "text-secondary",
@@ -336,7 +336,7 @@ export function useDefend() {
 				}
 
 				// Calculate & apply thorns damage.
-				if (hasInflictedThorns) {
+				if (isThorny) {
 					progressQuest({ quest: "thorns" })
 
 					monsterHealthDamage += thornsValue
@@ -351,7 +351,7 @@ export function useDefend() {
 					increaseMastery("resilience")
 				}
 
-				if (!hasBlocked && !hasParried && !hasStaggered) {
+				if (!isBlocked && !isParried && !isStaggered) {
 					set(isShowing("recovery"), true)
 					set(recoveryDuration, get(recoveryRate))
 				}
@@ -365,12 +365,12 @@ export function useDefend() {
 				if (monsterHealthDamage > 0) {
 					changeMonsterHealth({
 						contents: deltaMonsterHealth,
-						damageType: hasInflictedThorns ? "thorns" : hasParried ? "parry" : undefined,
+						damageType: isThorny ? "thorns" : isParried ? "parry" : undefined,
 						value: -monsterHealthDamage,
 					})
 				}
 
-				if ((hasStaggered && canBlockOrStaggerValue) || monsterHealthDamage > 0) {
+				if ((isStaggered && canBlockOrStaggerValue) || monsterHealthDamage > 0) {
 					animateElement({
 						animation: "headShake",
 						element: get(monsterElement),

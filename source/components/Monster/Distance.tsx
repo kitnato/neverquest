@@ -8,22 +8,22 @@ import { isAttacking } from "@neverquest/state/character"
 import { weapon } from "@neverquest/state/gear"
 import {
 	distance,
-	hasMonsterClosed,
+	isMonsterClose,
 	isMonsterDead,
 } from "@neverquest/state/monster"
 import { isRanged } from "@neverquest/types/type-guards"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function Distance() {
-	const hasMonsterClosedValue = useRecoilValue(hasMonsterClosed)
 	const isAttackingValue = useRecoilValue(isAttacking)
+	const isMonsterCloseValue = useRecoilValue(isMonsterClose)
 	const isMonsterDeadValue = useRecoilValue(isMonsterDead)
 	const weaponValue = useRecoilValue(weapon)
 	const setMonsterDistance = useSetRecoilState(distance)
 
 	useTimer({
 		setDuration: setMonsterDistance,
-		stop: !isAttackingValue || isMonsterDeadValue || hasMonsterClosedValue,
+		stop: !isAttackingValue || isMonsterDeadValue || isMonsterCloseValue,
 	})
 
 	if (isRanged(weaponValue)) {

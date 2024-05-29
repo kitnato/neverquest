@@ -21,11 +21,11 @@ import IconEssence from "@neverquest/icons/essence.svg?react"
 import IconFlatlined from "@neverquest/icons/flatlined.svg?react"
 import IconKnapsack from "@neverquest/icons/knapsack.svg?react"
 import { stage, stageMaximum, wildernesses } from "@neverquest/state/character"
-import { hasFlatlined } from "@neverquest/state/reserves"
+import { isFlatlined } from "@neverquest/state/reserves"
 import { getAffixStructure } from "@neverquest/utilities/getters"
 
 export function Flatline() {
-	const hasFlatlinedValue = useRecoilValue(hasFlatlined)
+	const isFlatlinedValue = useRecoilValue(isFlatlined)
 	const stageMaximumValue = useRecoilValue(stageMaximum)
 	const setStage = useSetRecoilState(stage)
 	const setWildernesses = useSetRecoilState(wildernesses)
@@ -34,7 +34,7 @@ export function Flatline() {
 	const resetWilderness = useResetWilderness()
 
 	return (
-		<Modal backdrop="static" show={hasFlatlinedValue}>
+		<Modal backdrop="static" show={isFlatlinedValue}>
 			<ModalHeader>
 				<ModalTitle>
 					<IconDisplay Icon={IconFlatlined}>

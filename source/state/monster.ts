@@ -31,7 +31,7 @@ import {
 } from "@neverquest/state/character"
 import { handleStorage } from "@neverquest/state/effects/handleStorage"
 import { ownedItem } from "@neverquest/state/inventory"
-import { hasLootedInheritable, infusionEffect, isRelicEquipped } from "@neverquest/state/items"
+import { infusionEffect, isInheritableLooted, isRelicEquipped } from "@neverquest/state/items"
 import { isSkillTrained } from "@neverquest/state/skills"
 import { range } from "@neverquest/state/statistics"
 import { isFinality } from "@neverquest/types/type-guards"
@@ -116,13 +116,6 @@ export const frailty = withStateKey("frailty", key =>
 	}),
 )
 
-export const hasMonsterClosed = withStateKey("hasMonsterClosed", key =>
-	selector({
-		get: ({ get }) => get(distance) === 0,
-		key,
-	}),
-)
-
 export const isEnraged = withStateKey("isEnraged", key =>
 	selector({
 		get: ({ get }) => get(isRelicEquipped("war mask")) || get(rage) === RAGE.maximum,
@@ -143,6 +136,13 @@ export const isMonsterAiling = withStateKey("isMonsterAiling", key =>
 export const isMonsterAtFullHealth = withStateKey("isMonsterAtFullHealth", key =>
 	selector({
 		get: ({ get }) => get(monsterHealth) === get(monsterHealthMaximum),
+		key,
+	}),
+)
+
+export const isMonsterClose = withStateKey("isMonsterClose", key =>
+	selector({
+		get: ({ get }) => get(distance) === 0,
 		key,
 	}),
 )
@@ -328,19 +328,19 @@ export const monsterLoot = withStateKey("monsterLoot", key =>
 					: 0,
 				relic: encounterValue === "boss" || get(ownedItem("knapsack")) === undefined
 					? undefined
-					: encounterValue === "res dominus" && isMementoOwned && !get(hasLootedInheritable("mysterious egg")) && !get(hasLootedInheritable("familiar"))
+					: encounterValue === "res dominus" && isMementoOwned && !get(isInheritableLooted("mysterious egg")) && !get(isInheritableLooted("familiar"))
 						// Mysterious egg only drops after defeating Res Dominus while carrying the Memento and if the egg nor the familiar have ever been looted.
 						? { ...INFUSABLES["mysterious egg"].item, ID: nanoid() }
 						// Log Entry only drops after defeating Res Dominus while carrying the Memento and if it's never been looted before.
-						: encounterValue === "res dominus" && isMementoOwned && !get(hasLootedInheritable("[S751NQ]"))
+						: encounterValue === "res dominus" && isMementoOwned && !get(isInheritableLooted("[S751NQ]"))
 							? { ...RELICS["[S751NQ]"].item, ID: nanoid() }
-							: isMementoOwned && !get(hasLootedInheritable("torn manuscript")) && get(isHired("alchemist")) && !get(isSkillTrained("memetics")) && Math.random() <= getFromRange({ factor: getSigmoid(stageValue), ...RELIC_DROP_CHANCE["torn manuscript"] })
+							: isMementoOwned && !get(isInheritableLooted("torn manuscript")) && get(isHired("alchemist")) && !get(isSkillTrained("memetics")) && Math.random() <= getFromRange({ factor: getSigmoid(stageValue), ...RELIC_DROP_CHANCE["torn manuscript"] })
 								// Torn manuscript drops if it's never been looted before, if the memento is carried, if the correct crew member is hired, if the associated skill hasn't been trained and if the drop chance is reached.
 								? { ...RELICS["torn manuscript"].item, ID: nanoid() }
-								: isMementoOwned && !get(hasLootedInheritable("dream catcher")) && get(isHired("occultist")) && !get(isSkillTrained("meditation")) && Math.random() <= getFromRange({ factor: getSigmoid(stageValue), ...RELIC_DROP_CHANCE["dream catcher"] })
+								: isMementoOwned && !get(isInheritableLooted("dream catcher")) && get(isHired("occultist")) && !get(isSkillTrained("meditation")) && Math.random() <= getFromRange({ factor: getSigmoid(stageValue), ...RELIC_DROP_CHANCE["dream catcher"] })
 									// Dream catcher drops if it's never been looted before, if the memento is carried, if the correct crew member is hired, if the associated skill hasn't been trained and if the drop chance is reached.
 									? { ...RELICS["dream catcher"].item, ID: nanoid() }
-									: !get(hasLootedInheritable("memento")) && Math.random() <= getFromRange({ factor: getSigmoid(stageValue), ...RELIC_DROP_CHANCE.memento })
+									: !get(isInheritableLooted("memento")) && Math.random() <= getFromRange({ factor: getSigmoid(stageValue), ...RELIC_DROP_CHANCE.memento })
 										// Memento drops if it's never been looted before and if the drop chance is reached.
 										? { ...RELICS.memento.item, ID: nanoid() }
 										: undefined,

@@ -55,7 +55,7 @@ export function MeleeOptions() {
 		gearClass,
 		grip,
 	})
-	const hasCrafted = craftedWeapon !== undefined
+	const isCrafted = craftedWeapon !== undefined
 	const maximumWeaponLevel = Math.min(
 		stageMaximumValue + GEAR_LEVEL_RANGE_MAXIMUM,
 		LEVELLING_MAXIMUM,
@@ -83,11 +83,11 @@ export function MeleeOptions() {
 	return (
 		<Stack className="mx-auto w-50">
 			<Stack
-				className={`mx-auto${hasCrafted ? " opacity-50" : ""}`}
+				className={`mx-auto${isCrafted ? " opacity-50" : ""}`}
 				gap={3}
 			>
 				<SetGearLevel
-					isDisabled={hasCrafted}
+					isDisabled={isCrafted}
 					level={level}
 					maximum={maximumWeaponLevel}
 					setLevel={setGearLevel}
@@ -95,7 +95,7 @@ export function MeleeOptions() {
 
 				<IconDisplay Icon={IconGearClass} iconProps={{ overlayPlacement: "left" }} tooltip="Class">
 					<DropdownButton
-						disabled={hasCrafted}
+						disabled={isCrafted}
 						onSelect={(key) => {
 							if (key !== null) {
 								setBlacksmithOptions(options => ({
@@ -121,7 +121,7 @@ export function MeleeOptions() {
 				{isSkillTrainedSiegecraft && (
 					<IconDisplay Icon={IconGrip} iconProps={{ overlayPlacement: "left" }} tooltip="Grip">
 						<DropdownButton
-							disabled={hasCrafted}
+							disabled={isCrafted}
 							onSelect={(key) => {
 								if (key !== null) {
 									setBlacksmithOptions(options => ({
@@ -212,7 +212,7 @@ export function MeleeOptions() {
 
 			<hr />
 
-			{hasCrafted
+			{isCrafted
 				? (
 					<CraftedGear
 						item={craftedWeapon}

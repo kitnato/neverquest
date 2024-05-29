@@ -15,15 +15,15 @@ import IconResilience from "@neverquest/icons/resilience.svg?react"
 import { isRecovering, recoveryDuration } from "@neverquest/state/character"
 import { masteryStatistic } from "@neverquest/state/masteries"
 import { isIncapacitated } from "@neverquest/state/reserves"
-import { hasRecovery, recoveryRate } from "@neverquest/state/statistics"
+import { isRecoveryRelevant, recoveryRate } from "@neverquest/state/statistics"
 import { isShowing } from "@neverquest/state/ui"
 import { formatNumber } from "@neverquest/utilities/formatters"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function Recovery() {
-	const hasRecoveryValue = useRecoilValue(hasRecovery)
 	const isIncapacitatedValue = useRecoilValue(isIncapacitated)
 	const isRecoveringValue = useRecoilValue(isRecovering)
+	const isRecoveryRelevantValue = useRecoilValue(isRecoveryRelevant)
 	const isShowingRecovery = useRecoilValue(isShowing("recovery"))
 	const resilienceValue = useRecoilValue(masteryStatistic("resilience"))
 	const setRecoveryDuration = useSetRecoilState(recoveryDuration)
@@ -42,12 +42,12 @@ export function Recovery() {
 	})
 
 	useEffect(() => {
-		if (!hasRecoveryValue) {
+		if (!isRecoveryRelevantValue) {
 			progressQuest({ quest: "noRecovery" })
 		}
-	}, [hasRecoveryValue, progressQuest])
+	}, [isRecoveryRelevantValue, progressQuest])
 
-	if (hasRecoveryValue && isShowingRecovery) {
+	if (isRecoveryRelevantValue && isShowingRecovery) {
 		return (
 			<IconDisplay
 				className={getAnimationClass({ animation: "flipInX" })}

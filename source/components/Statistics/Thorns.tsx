@@ -23,7 +23,7 @@ export function Thorns() {
 	const powerLevelValue = useRecoilValue(powerLevel)
 	const thornsValue = useRecoilValue(thorns)
 
-	const hasElementalEffect = Object.values(armor).some(({ damage }) => damage > 0)
+	const isThorny = Object.values(armor).some(({ damage }) => damage > 0)
 
 	useDeltaText({
 		delta: "thorns",
@@ -43,7 +43,7 @@ export function Thorns() {
 							<Popover>
 								<PopoverBody>
 									<DetailsTable>
-										{hasElementalEffect && <ElementalDetails slot="armor" />}
+										{isThorny && <ElementalDetails slot="armor" />}
 
 										{isTraitEarnedAcanthaceous && (
 											<tr>
@@ -56,7 +56,7 @@ export function Thorns() {
 												<td>
 													<Stack direction="horizontal" gap={1}>
 														<>
-															{hasElementalEffect && (
+															{isThorny && (
 																<>
 																	<span>
 																		{formatNumber({

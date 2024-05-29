@@ -2,7 +2,7 @@ import { nanoid } from "nanoid"
 import { useRecoilCallback } from "recoil"
 
 import { MERCHANT_OFFERS } from "@neverquest/data/caravan"
-import { hasGeneratedOffer, merchantInventory } from "@neverquest/state/caravan"
+import { isOfferGenerated, merchantInventory } from "@neverquest/state/caravan"
 import { stage, stageMaximum } from "@neverquest/state/character"
 import { ownedItem } from "@neverquest/state/inventory"
 import { isGearItem, isInheritableItem } from "@neverquest/types/type-guards"
@@ -31,7 +31,7 @@ export function useGenerateMerchantOffer() {
 				if (
 					merchantOffer !== undefined
 					&& stageValue === get(stageMaximum)
-					&& !get(hasGeneratedOffer(stageValue))
+					&& !get(isOfferGenerated(stageValue))
 				) {
 					const { offer } = merchantOffer
 
@@ -91,7 +91,7 @@ export function useGenerateMerchantOffer() {
 					})
 
 					set(merchantInventory, newMerchantInventory)
-					set(hasGeneratedOffer(stageValue), true)
+					set(isOfferGenerated(stageValue), true)
 				}
 			},
 		[],

@@ -17,37 +17,37 @@ export const canTrainMastery = withStateKey("canTrainMastery", key =>
 		get:
 			(mastery: Mastery) =>
 				({ get }) => {
-					const hasRequiredSkill = get(isSkillTrained(MASTERIES[mastery].requiredSkill))
+					const isSkillTrainedRequired = get(isSkillTrained(MASTERIES[mastery].requiredSkill))
 
 					switch (mastery) {
 						case "butchery": {
 							const weaponValue = get(weapon)
 
-							return hasRequiredSkill && isMelee(weaponValue) && weaponValue.grip === "two-handed"
+							return isSkillTrainedRequired && isMelee(weaponValue) && weaponValue.grip === "two-handed"
 						}
 
 						case "cruelty": {
-							return hasRequiredSkill && get(weapon).gearClass === "piercing"
+							return isSkillTrainedRequired && get(weapon).gearClass === "piercing"
 						}
 
 						case "finesse": {
-							return hasRequiredSkill && get(weapon).gearClass === "slashing"
+							return isSkillTrainedRequired && get(weapon).gearClass === "slashing"
 						}
 
 						case "marksmanship": {
-							return hasRequiredSkill && isRanged(get(weapon))
+							return isSkillTrainedRequired && isRanged(get(weapon))
 						}
 
 						case "might": {
-							return hasRequiredSkill && get(weapon).gearClass === "blunt"
+							return isSkillTrainedRequired && get(weapon).gearClass === "blunt"
 						}
 
 						case "resilience": {
-							return hasRequiredSkill
+							return isSkillTrainedRequired
 						}
 
 						case "stability": {
-							return hasRequiredSkill && !isUnshielded(get(shield))
+							return isSkillTrainedRequired && !isUnshielded(get(shield))
 						}
 					}
 				},

@@ -4,7 +4,7 @@ import { useCanFit } from "@neverquest/hooks/actions/useCanFit"
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import { armor, shield, weapon } from "@neverquest/state/gear"
 import { acquiredItems, inventory, notifyOverEncumbrance, ownedItem } from "@neverquest/state/inventory"
-import { hasLootedInheritable } from "@neverquest/state/items"
+import { isInheritableLooted } from "@neverquest/state/items"
 import { isSkillTrained } from "@neverquest/state/skills"
 import { isTraitEarned } from "@neverquest/state/traits"
 import { isShowing } from "@neverquest/state/ui"
@@ -52,21 +52,21 @@ export function useAcquireItem() {
 				if (isInheritableItem(item)) {
 					switch (item.name) {
 						case "[S751NQ]": {
-							set(hasLootedInheritable("[S751NQ]"), true)
+							set(isInheritableLooted("[S751NQ]"), true)
 
 							progressQuest({ quest: "acquiringLogEntry" })
 							break
 						}
 
 						case "dream catcher": {
-							set(hasLootedInheritable("dream catcher"), true)
+							set(isInheritableLooted("dream catcher"), true)
 
 							progressQuest({ quest: "acquiringDreamCatcher" })
 							break
 						}
 
 						case "familiar": {
-							set(hasLootedInheritable("familiar"), true)
+							set(isInheritableLooted("familiar"), true)
 
 							progressQuest({ quest: "acquiringFamiliar" })
 							break
@@ -78,19 +78,19 @@ export function useAcquireItem() {
 						}
 
 						case "memento": {
-							set(hasLootedInheritable("memento"), true)
+							set(isInheritableLooted("memento"), true)
 
 							progressQuest({ quest: "acquiringMemento" })
 							break
 						}
 
 						case "mysterious egg": {
-							set(hasLootedInheritable("mysterious egg"), true)
+							set(isInheritableLooted("mysterious egg"), true)
 							break
 						}
 
 						case "torn manuscript": {
-							set(hasLootedInheritable("torn manuscript"), true)
+							set(isInheritableLooted("torn manuscript"), true)
 
 							progressQuest({ quest: "acquiringTornManuscript" })
 							break

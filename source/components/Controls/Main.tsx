@@ -24,7 +24,7 @@ import IconResurrection from "@neverquest/icons/resurrection.svg?react"
 import IconRetreat from "@neverquest/icons/retreat.svg?react"
 import { areAttributesAffordable } from "@neverquest/state/attributes"
 import { isAttacking, isStageCompleted, location } from "@neverquest/state/character"
-import { hasEnoughMunitions } from "@neverquest/state/gear"
+import { isMunitionsSufficient } from "@neverquest/state/gear"
 import { isRelicEquipped } from "@neverquest/state/items"
 import { isMonsterDead } from "@neverquest/state/monster"
 import { canResurrect, isHealthLow, isIncapacitated, protectedElement } from "@neverquest/state/reserves"
@@ -35,11 +35,11 @@ import type { SVGIcon } from "@neverquest/types/components"
 export function Main() {
 	const areAttributesAffordableValue = useRecoilValue(areAttributesAffordable)
 	const canResurrectValue = useRecoilValue(canResurrect)
-	const hasEnoughMunitionsValue = useRecoilValue(hasEnoughMunitions)
 	const isAttackingValue = useRecoilValue(isAttacking)
 	const isHealthLowValue = useRecoilValue(isHealthLow)
 	const isIncapacitatedValue = useRecoilValue(isIncapacitated)
 	const isMonsterDeadValue = useRecoilValue(isMonsterDead)
+	const isMunitionsSufficientValue = useRecoilValue(isMunitionsSufficient)
 	const isAutomincerEquipped = useRecoilValue(isRelicEquipped("automincer"))
 	const isDreamCatcherEquipped = useRecoilValue(isRelicEquipped("dream catcher"))
 	const isStageCompletedValue = useRecoilValue(isStageCompleted)
@@ -87,7 +87,7 @@ export function Main() {
 		}
 
 		return {
-			animation: areAttributesAffordableValue || !hasEnoughMunitionsValue || isHealthLowValue || isMonsterDeadValue
+			animation: areAttributesAffordableValue || !isMunitionsSufficientValue || isHealthLowValue || isMonsterDeadValue
 				? undefined
 				: pulseAnimation,
 			Icon: IconAttack,

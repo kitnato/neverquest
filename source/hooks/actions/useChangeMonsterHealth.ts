@@ -15,7 +15,7 @@ import {
 	monsterHealthMaximum,
 	monsterRegenerationDuration,
 } from "@neverquest/state/monster"
-import { hasFlatlined, isHealthLow } from "@neverquest/state/reserves"
+import { isFlatlined, isHealthLow } from "@neverquest/state/reserves"
 import { earnedTraits } from "@neverquest/state/traits"
 import { formatNumber } from "@neverquest/utilities/formatters"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
@@ -54,7 +54,7 @@ export function useChangeMonsterHealth() {
 					reset(monsterAttackDuration)
 					reset(monsterRegenerationDuration)
 
-					if (!get(hasFlatlined)) {
+					if (!get(isFlatlined)) {
 						set(
 							lootingDuration,
 							LOOTING_RATE[get(ownedItem("ender hook")) === undefined ? "base" : "ender hook"],

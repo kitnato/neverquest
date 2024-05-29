@@ -29,7 +29,7 @@ export const canResurrect = withStateKey("canResurrect", key =>
 	}),
 )
 
-export const hasFlatlined = withStateKey("hasFlatlined", key =>
+export const isFlatlined = withStateKey("isFlatlined", key =>
 	selector({
 		get: ({ get }) => get(isIncapacitated) && get(ownedItem("phylactery")) === undefined,
 		key,

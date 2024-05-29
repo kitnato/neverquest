@@ -96,7 +96,7 @@ export const ATTRIBUTES: Record<
 			format: "percentage",
 		},
 		Icon: IconStrength,
-		increment: 0.05,
+		increment: 0.04,
 		maximum: 2,
 		shows: "damage",
 	},

@@ -86,9 +86,8 @@ export function Health() {
 												<td>
 													<IconDisplay Icon={IconHealth} iconProps={{ className: "small" }}>
 														<span>
-															+
 															{formatNumber({
-																format: "percentage",
+																format: "multiplier",
 																value: questsBonusHealth,
 															})}
 														</span>

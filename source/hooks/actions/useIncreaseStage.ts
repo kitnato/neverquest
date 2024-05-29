@@ -5,6 +5,7 @@ import { CREW } from "@neverquest/data/caravan"
 import { FINALITY_STAGE } from "@neverquest/data/monster"
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import { useToggleAttacking } from "@neverquest/hooks/actions/useToggleAttacking"
+import { blacksmithOptions, fletcherOptions } from "@neverquest/state/caravan"
 import { isAttacking, stage, stageHighest, stageMaximum, stageRetired, wildernesses } from "@neverquest/state/character"
 import { questProgress } from "@neverquest/state/quests"
 import { isShowing } from "@neverquest/state/ui"
@@ -38,6 +39,9 @@ export function useIncreaseStage() {
 				}
 
 				if (stageValue === get(stageMaximum)) {
+					reset(blacksmithOptions)
+					reset(fletcherOptions)
+
 					if (get(stageHighest) < nextStage) {
 						set(stageHighest, nextStage)
 					}

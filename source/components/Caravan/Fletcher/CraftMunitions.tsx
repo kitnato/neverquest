@@ -22,7 +22,7 @@ import { ownedItem } from "@neverquest/state/inventory"
 import { munitionsCapacity } from "@neverquest/state/items"
 import { essence } from "@neverquest/state/resources"
 import { formatNumber } from "@neverquest/utilities/formatters"
-import { getFromRange, getSigmoid } from "@neverquest/utilities/getters"
+import { getExponential, getFromRange } from "@neverquest/utilities/getters"
 
 export function CraftMunitions() {
 	const [munitionsCapacityValue, setMunitionsCapacity] = useRecoilState(munitionsCapacity)
@@ -35,7 +35,7 @@ export function CraftMunitions() {
 	const { amount, maximum, priceRange } = MUNITIONS
 	const price = Math.round(
 		getFromRange({
-			factor: getSigmoid(munitionsCapacityValue - MUNITIONS.satchelCapacity),
+			factor: getExponential(munitionsCapacityValue / maximum),
 			...priceRange,
 		}),
 	)

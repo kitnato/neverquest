@@ -422,7 +422,7 @@ export const QUESTS: Record<
 	},
 	munitionsCrafting: {
 		description: "Expand munitions satchel capacity @ times.",
-		progression: [5, 20, 50, MUNITIONS.maximum - MUNITIONS.satchelCapacity],
+		progression: [5, 20, 50, MUNITIONS.maximum - MUNITIONS.minimum],
 		requiresTracking: false,
 		title: "Quivering",
 	},

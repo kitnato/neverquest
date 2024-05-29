@@ -74,7 +74,7 @@ export const inventory = withStateKey("inventory", key =>
 
 export const knapsackCapacity = withStateKey("knapsackCapacity", key =>
 	atom({
-		default: KNAPSACK_CAPACITY,
+		default: KNAPSACK_CAPACITY.minimum,
 		effects: [handleStorage({ key })],
 		key,
 	}),

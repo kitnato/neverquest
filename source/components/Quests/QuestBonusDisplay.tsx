@@ -33,9 +33,8 @@ export function QuestBonusDisplay({ bonus }: { bonus: QuestBonus }) {
 		<IconDisplay Icon={Icon} key={bonus} tooltip={tooltip}>
 			<Stack direction="horizontal" gap={1}>
 				<span>
-					+
 					{formatNumber({
-						format: "percentage",
+						format: "multiplier",
 						value: questsBonusValue,
 					})}
 				</span>

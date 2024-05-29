@@ -19,7 +19,7 @@ import IconTailoring from "@neverquest/icons/tailoring.svg?react"
 import { knapsackCapacity } from "@neverquest/state/inventory"
 import { essence } from "@neverquest/state/resources"
 import { formatNumber } from "@neverquest/utilities/formatters"
-import { getFromRange, getSigmoid } from "@neverquest/utilities/getters"
+import { getExponential, getFromRange } from "@neverquest/utilities/getters"
 
 export function ExpandKnapsack() {
 	const [knapsackCapacityValue, setKnapsackCapacity] = useRecoilState(knapsackCapacity)
@@ -32,7 +32,7 @@ export function ExpandKnapsack() {
 
 	const price = Math.round(
 		getFromRange({
-			factor: getSigmoid((knapsackCapacityValue - KNAPSACK_CAPACITY) / 2.5),
+			factor: getExponential(knapsackCapacityValue / KNAPSACK_CAPACITY.threshold),
 			...priceRange,
 		}),
 	)

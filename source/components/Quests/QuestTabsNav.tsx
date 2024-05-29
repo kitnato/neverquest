@@ -25,7 +25,7 @@ export function QuestTabsNav({ tabs }: { tabs: TabsData<QuestClass> }) {
 					<NavLink className="d-flex justify-content-center" eventKey={label}>
 						<IconDisplay Icon={Icon}>
 							<Stack direction="horizontal" gap={3}>
-								<span>{capitalizeAll(label)}</span>
+								<span>{`${capitalizeAll(label)}s`}</span>
 
 								{canCompleteQuestsMapping[label] && (
 									<div

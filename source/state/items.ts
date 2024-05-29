@@ -113,7 +113,7 @@ export const isRelicEquipped = withStateKey("isRelicEquipped", key =>
 
 export const munitionsCapacity = withStateKey("munitionsCapacity", key =>
 	atom({
-		default: MUNITIONS.satchelCapacity,
+		default: MUNITIONS.minimum,
 		effects: [handleStorage({ key })],
 		key,
 	}),

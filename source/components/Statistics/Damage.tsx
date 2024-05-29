@@ -172,9 +172,8 @@ export function Damage() {
 												<td>
 													<IconDisplay Icon={IconDamage} iconProps={{ className: "small" }}>
 														<span>
-															+
 															{formatNumber({
-																format: "percentage",
+																format: "multiplier",
 																value: questsBonusDamage,
 															})}
 														</span>

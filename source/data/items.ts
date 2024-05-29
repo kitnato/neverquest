@@ -149,7 +149,7 @@ export const ELEMENTALS: Record<
 	fire: {
 		ailment: "burning",
 		color: "orange",
-		damageArmor: { maximum: 1.5, minimum: 0.75 },
+		damageArmor: { maximum: 1.5, minimum: 0.7 },
 		damageWeapon: { maximum: 0.4, minimum: 0.1 },
 		duration: { maximum: 2500, minimum: 1200 },
 		durationCap: 7500,
@@ -244,26 +244,29 @@ export const INFUSABLES: Record<
 			effect: { maximum: 1, minimum: 0 },
 			ID: "",
 			name: "mysterious egg",
-			price: 1554,
+			price: 1514,
 			weight: 7,
 		},
 		tooltip: "Hatching progress",
 	},
 }
 
-export const KNAPSACK_CAPACITY = 16
+export const KNAPSACK_CAPACITY = {
+	minimum: 16,
+	threshold: 250,
+}
 
 export const MUNITIONS = {
 	amount: 1,
 	maximum: LEVELLING_MAXIMUM,
-	priceRange: { maximum: 750, minimum: 3 },
-	satchelCapacity: 5,
+	minimum: 5,
+	priceRange: { maximum: 450, minimum: 3 },
 }
 
 export const RELIC_DROP_CHANCE = {
-	"dream catcher": { maximum: 0.03, minimum: 0.01 },
-	"memento": { maximum: 0.08, minimum: 0.01 },
-	"torn manuscript": { maximum: 0.05, minimum: 0.01 },
+	"dream catcher": { maximum: 0.1, minimum: 0.01 },
+	"memento": { maximum: 0.3, minimum: 0.01 },
+	"torn manuscript": { maximum: 0.15, minimum: 0.01 },
 }
 
 export const RELICS: Record<
@@ -378,7 +381,7 @@ export const RELICS: Record<
 		item: {
 			ID: "",
 			name: "lacrimatory",
-			price: 1500,
+			price: 1800,
 			weight: 10,
 		},
 	},
@@ -426,13 +429,13 @@ export const RELICS: Record<
 		},
 	},
 	"war mask": {
-		description: "All who glimpse it are # enraged. Why though?",
+		description: "All enemies that glimpse it become # enraged.",
 		descriptionIcons: [IconRage],
 		Icon: IconWarMask,
 		item: {
 			ID: "",
 			name: "war mask",
-			price: 3500,
+			price: 2900,
 			weight: 7,
 		},
 	},

@@ -63,7 +63,7 @@ export function Quests() {
 				</>
 			)}
 
-			{isShowingQuestBonusValue && <h6>Progress</h6>}
+			{isShowingQuestBonusValue && <h6>Journey</h6>}
 
 			<TabContainer defaultActiveKey={TABS[0].label}>
 				<Stack className="overflow-y-hidden" gap={1}>

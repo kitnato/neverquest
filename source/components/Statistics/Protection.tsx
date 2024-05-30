@@ -6,7 +6,7 @@ import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
 import { DetailsTable } from "@neverquest/components/DetailsTable"
 import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { ArmorBurdenDisplay } from "@neverquest/components/Statistics/ArmorBurdenDisplay"
-import { LABEL_EMPTY, POPOVER_TRIGGER } from "@neverquest/data/general"
+import { POPOVER_TRIGGER } from "@neverquest/data/general"
 import { TANK_PROTECTION_BONUS } from "@neverquest/data/traits"
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import { useDeltaText } from "@neverquest/hooks/useDeltaText"
@@ -18,7 +18,7 @@ import { armor, shield } from "@neverquest/state/gear"
 import { protection } from "@neverquest/state/statistics"
 import { isTraitEarned } from "@neverquest/state/traits"
 import { isShowing } from "@neverquest/state/ui"
-import { isArmor, isUnshielded } from "@neverquest/types/type-guards"
+import { isArmor, isShield } from "@neverquest/types/type-guards"
 import { formatNumber } from "@neverquest/utilities/formatters"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
@@ -71,7 +71,7 @@ export function Protection() {
 											</td>
 										</tr>
 
-										{isArmor(armorValue) && isTraitEarnedTank && (
+										{isArmor(armorValue) && isShield(shieldValue) && isTraitEarnedTank && (
 											<tr>
 												<td>
 													<IconDisplay Icon={IconTank} iconProps={{ className: "small" }}>
@@ -80,17 +80,13 @@ export function Protection() {
 												</td>
 
 												<td>
-													{isUnshielded(shieldValue)
-														? <span>{LABEL_EMPTY}</span>
-														: (
-															<span>
-																+
-																{formatNumber({
-																	format: "percentage",
-																	value: TANK_PROTECTION_BONUS[armorValue.gearClass],
-																})}
-															</span>
-														)}
+													<span>
+														+
+														{formatNumber({
+															format: "percentage",
+															value: TANK_PROTECTION_BONUS[armorValue.gearClass],
+														})}
+													</span>
 												</td>
 											</tr>
 										)}

@@ -67,11 +67,7 @@ export const isMasteryAtMaximum = withStateKey("isMasteryAtMaximum", key =>
 export const masteryCost = withStateKey("masteryCost", key =>
 	selectorFamily({
 		get: (mastery: Mastery) =>
-			({ get }) => {
-				const masteryRankValue = get(masteryRank(mastery))
-
-				return getTriangular(masteryRankValue + MASTERY_COST_BASE)
-			},
+			({ get }) => Math.min(getTriangular(get(masteryRank(mastery)) + MASTERY_COST_BASE), LEVELLING_MAXIMUM),
 		key,
 	}),
 )

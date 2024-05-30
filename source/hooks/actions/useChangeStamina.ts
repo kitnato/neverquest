@@ -4,6 +4,7 @@ import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta"
 import { useMending } from "@neverquest/hooks/actions/useMending"
 import { useToggleAttacking } from "@neverquest/hooks/actions/useToggleAttacking"
 import { isAttacking } from "@neverquest/state/character"
+import { shield, weapon } from "@neverquest/state/gear"
 import { ownedItem } from "@neverquest/state/inventory"
 import { isRelicEquipped } from "@neverquest/state/items"
 import {
@@ -52,7 +53,7 @@ export function useChangeStamina() {
 
 				if (
 					!isPositive
-					&& newStamina === 0
+					&& (newStamina < get(shield).burden || newStamina < get(weapon).burden)
 					&& get(isAttacking)
 					&& get(isRelicEquipped("dream catcher"))
 				) {
@@ -86,6 +87,6 @@ export function useChangeStamina() {
 					delta: "stamina",
 				})
 			},
-		[addDelta],
+		[addDelta, mending, toggleAttacking],
 	)
 }

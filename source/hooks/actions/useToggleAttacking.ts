@@ -10,7 +10,6 @@ import {
 	stage,
 } from "@neverquest/state/character"
 import {
-	distance,
 	isEnraged,
 	isMonsterDead,
 	monsterAttackDuration,
@@ -50,8 +49,6 @@ export function useToggleAttacking() {
 						if (!get(isEnraged) && get(stage) >= requiredStage) {
 							set(rage, currentRage => currentRage + increment)
 						}
-
-						reset(distance)
 
 						progressQuest({ quest: "retreating" })
 					}

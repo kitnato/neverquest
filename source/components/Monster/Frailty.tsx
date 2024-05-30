@@ -27,7 +27,7 @@ export function Frailty() {
 		state: frailty,
 	})
 
-	if (frailtyValue > 0) {
+	if (frailtyValue < 0) {
 		return (
 			<IconDisplay
 				className={getAnimationClass({ animation: "flipInX" })}
@@ -40,7 +40,7 @@ export function Frailty() {
 							<Popover>
 								<PopoverBody>
 									<DescriptionDisplay
-										description={`A # presence is weakening monster # health and # damage by ${formattedValue}.`}
+										description="A # presence is weakening # health and # damage."
 										descriptionIcons={[Icon, IconMonsterHealth, IconMonsterDamage]}
 									/>
 								</PopoverBody>
@@ -49,7 +49,6 @@ export function Frailty() {
 						placement="right"
 					>
 						<span className="fitted">
-							-
 							{formattedValue}
 						</span>
 					</OverlayTrigger>

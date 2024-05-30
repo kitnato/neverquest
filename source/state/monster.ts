@@ -154,6 +154,13 @@ export const isMonsterDead = withStateKey("isMonsterDead", key =>
 	}),
 )
 
+export const isMonsterDistant = withStateKey("isMonsterDistant", key =>
+	selector({
+		get: ({ get }) => get(distance) >= get(range),
+		key,
+	}),
+)
+
 export const isMonsterRegenerating = withStateKey("isMonsterRegenerating", key =>
 	selector({
 		get: ({ get }) => get(monsterRegenerationDuration) > 0,

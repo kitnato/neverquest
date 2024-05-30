@@ -32,11 +32,7 @@ export const armorBurden = withStateKey("armorBurden", key =>
 
 export const canAttackOrParry = withStateKey("canAttackOrParry", key =>
 	selector({
-		get: ({ get }) => {
-			const staminaValue = get(reserveCurrent("stamina"))
-
-			return staminaValue > 0 && staminaValue >= get(weapon).burden
-		},
+		get: ({ get }) => get(reserveCurrent("stamina")) >= get(weapon).burden,
 		key,
 	}),
 )

@@ -124,7 +124,7 @@ export const MONSTER_HEALTH = {
 	bossModifier: 0.75,
 	finality: {
 		"res cogitans": 75757,
-		"res dominus": 5757,
+		"res dominus": 7575,
 	},
 	menace: {
 		maximum: 5.5,
@@ -146,7 +146,7 @@ export const POISON = {
 		minimum: 0.1,
 	},
 	duration: {
-		maximum: 350_000,
+		maximum: 500_000,
 		minimum: 30_000,
 	},
 	finality: {

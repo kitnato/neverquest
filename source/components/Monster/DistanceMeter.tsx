@@ -17,7 +17,9 @@ export function DistanceMeter() {
 			variant="secondary"
 		>
 			<span>
-				{distanceValue === 0 ? LABEL_EMPTY : formatNumber({ format: "time", value: distanceValue })}
+				{distanceValue === 0
+					? LABEL_EMPTY
+					: formatNumber({ format: "time", value: distanceValue })}
 			</span>
 		</LabelledProgressBar>
 	)

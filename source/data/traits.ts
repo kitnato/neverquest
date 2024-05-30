@@ -44,7 +44,7 @@ import type { SVGIcon } from "@neverquest/types/components"
 import type { Description } from "@neverquest/types/ui"
 import type { Skill, Trait } from "@neverquest/types/unions"
 
-export const ACANTHACEOUS_GEM_EFFECT_BONUS = 0.5
+export const ACANTHACEOUS_GEM_EFFECT_BONUS = 0.65
 
 export const BRAWLER_DAMAGE_BONUS = 0.25
 

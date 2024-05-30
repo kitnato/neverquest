@@ -359,6 +359,7 @@ export type StateKey =
 	| "isMonsterAtFullHealth"
 	| "isMonsterClose"
 	| "isMonsterDead"
+	| "isMonsterDistant"
 	| "isMonsterNew"
 	| "isMonsterRegenerating"
 	| "isMunitionsSufficient"

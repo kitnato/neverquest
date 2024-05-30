@@ -60,8 +60,13 @@ export function useChangeHealth() {
 					}
 
 					if (get(ownedItem("phylactery")) === undefined) {
+						const corpseValue = get(corpse)
+
 						set(corpse, {
-							essence: Math.round(get(essence) * CORPSE_VALUE),
+							essence: Math.round((
+								get(essence)
+								+ (corpseValue === undefined ? 0 : corpseValue.essence)
+							) * CORPSE_VALUE),
 							stage: get(stage),
 						})
 					}

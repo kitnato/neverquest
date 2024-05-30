@@ -35,7 +35,7 @@ export const QUEST_COMPLETION_BONUS: Record<QuestClass, number> = {
 export const QUEST_NOTIFICATION_DURATION = 5000
 
 export const QUEST_REQUIREMENTS = {
-	damage: 2000,
+	damage: 2500,
 	essenceCount: 7575,
 	monstersKilled: LEVELLING_MAXIMUM,
 	protection: 900,
@@ -174,7 +174,7 @@ export const QUESTS: Record<
 		title: "I changed my mind",
 	},
 	completing: {
-		description: "Complete all quests",
+		description: "Complete all quests.",
 		// See line 677.
 		progression: [0],
 		requiresTracking: true,
@@ -276,7 +276,7 @@ export const QUESTS: Record<
 		title: "Wheeze",
 	},
 	fillingLacrimatory: {
-		description: "Fill the lacrimatory",
+		description: "Fill the lacrimatory.",
 		progression: [TEARS_MAXIMUM],
 		requiresTracking: false,
 		title: "Lilith & Niobe",

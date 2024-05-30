@@ -57,6 +57,7 @@ export const CREW: Record<
 		interaction: "Visit",
 		monologues: {
 			1: "Things are not always what they seem.",
+			[FINALITY_STAGE["res dominus"]]: "Cryptic relics reveal their true purpose once suffused with essence.",
 			[LEVELLING_END]: MONOLOGUE_EMPTY,
 			[LEVELLING_MAXIMUM]: "Nothing makes any sense.",
 		},
@@ -197,6 +198,7 @@ export const CREW: Record<
 		interaction: "Brew",
 		monologues: {
 			1: "Gaze into my cauldron ...",
+			[FINALITY_STAGE["res dominus"]]: "The oval spawn has the answers you seek.",
 			[LEVELLING_END]: MONOLOGUE_EMPTY,
 			[LEVELLING_MAXIMUM]: "The cipher has gone silent.",
 		},

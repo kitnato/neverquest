@@ -11,7 +11,6 @@ import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import { useResetAttributes } from "@neverquest/hooks/actions/useResetAttributes"
 import { useResetCharacter } from "@neverquest/hooks/actions/useResetCharacter"
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness"
-import { useTrainSkill } from "@neverquest/hooks/actions/useTrainSkill"
 import { absorbedEssence } from "@neverquest/state/attributes"
 import {
 	blacksmithInventory,
@@ -47,7 +46,6 @@ import {
 import { getPerkEffect, getSnapshotGetter } from "@neverquest/utilities/getters"
 
 export function useRetire() {
-	const trainSkill = useTrainSkill()
 	const initialize = useInitialize()
 	const neutralize = useNeutralize()
 	const progressQuest = useProgressQuest()
@@ -168,7 +166,6 @@ export function useRetire() {
 				initialize(true)
 			},
 		[
-			trainSkill,
 			initialize,
 			neutralize,
 			progressQuest,

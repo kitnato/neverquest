@@ -16,11 +16,15 @@ import {
 	GRIP_TYPES,
 	type Gear,
 	INFUSABLE_TYPES,
+	MASTERY_TYPES,
+	type Mastery,
 	QUEST_BONUS_TYPES,
 	type QuestBonus,
 	RELIC_TYPES,
 	ROUTINE_TYPES,
 	type Routine,
+	SKILL_TYPES,
+	type Skill,
 } from "@neverquest/types/unions"
 
 import type {
@@ -122,6 +126,10 @@ function isItem(thing: unknown): thing is ItemBase & { name: string } {
 	)
 }
 
+export function isMastery(thing: unknown): thing is Mastery {
+	return typeof thing === "string" && new Set<string>(MASTERY_TYPES).has(thing)
+}
+
 export function isMelee(thing: unknown): thing is Melee {
 	return (
 		isWeaponBase(thing)
@@ -129,10 +137,6 @@ export function isMelee(thing: unknown): thing is Melee {
 		&& typeof thing.grip === "string"
 		&& new Set<string>(GRIP_TYPES).has(thing.grip)
 	)
-}
-
-function isValidObject(thing: unknown): thing is Record<string, unknown> {
-	return typeof thing === "object" && thing !== null && Object.keys(thing).length > 0
 }
 
 export function isQuestBonus(thing: unknown): thing is QuestBonus {
@@ -177,6 +181,10 @@ export function isShield(thing: unknown): thing is Shield {
 	)
 }
 
+export function isSkill(thing: unknown): thing is Skill {
+	return typeof thing === "string" && new Set<string>(SKILL_TYPES).has(thing)
+}
+
 export function isStackableItem(thing: unknown): thing is StackableItem {
 	return isConsumableItem(thing) || isGemItem(thing)
 }
@@ -191,6 +199,10 @@ export function isUnarmored(thing: unknown): thing is typeof ARMOR_NONE {
 
 export function isUnshielded(thing: unknown): thing is typeof SHIELD_NONE {
 	return thing === SHIELD_NONE
+}
+
+function isValidObject(thing: unknown): thing is Record<string, unknown> {
+	return typeof thing === "object" && thing !== null && Object.keys(thing).length > 0
 }
 
 export function isWeapon(thing: unknown): thing is Weapon {

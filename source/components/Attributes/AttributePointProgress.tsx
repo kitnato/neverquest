@@ -1,8 +1,8 @@
 import { OverlayTrigger, Popover, PopoverBody } from "react-bootstrap"
 import { useRecoilValue } from "recoil"
 
+import { DescriptionDisplay } from "@neverquest/components/DescriptionDisplay"
 import { IconDisplay } from "@neverquest/components/IconDisplay"
-import { IconImage } from "@neverquest/components/IconImage"
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
 import { PERCENTAGE } from "@neverquest/data/general"
 import IconEssence from "@neverquest/icons/essence.svg?react"
@@ -33,27 +33,10 @@ export function AttributePointProgress({ isLoot }: { isLoot?: boolean }) {
 			overlay={(
 				<Popover>
 					<PopoverBody>
-						{isLoot
-							? (
-								<>
-									<span>Essence after </span>
-
-									<IconImage className="small" Icon={IconLoot} />
-
-									<span> loot collection</span>
-								</>
-							)
-							: (
-								<>
-									<span>Current </span>
-
-									<IconImage className="small" Icon={IconEssence} />
-
-									<span> essence</span>
-								</>
-							)}
-
-						<span> and required essence for next attribute point.</span>
+						<DescriptionDisplay
+							description={`${isLoot ? "Essence after # loot collection" : "Current # essence"} and required essence for next attribute point.`}
+							descriptionIcons={[isLoot ? IconLoot : IconEssence]}
+						/>
 					</PopoverBody>
 				</Popover>
 			)}

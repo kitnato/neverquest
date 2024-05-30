@@ -23,7 +23,7 @@ export const RESERVES: Record<
 	health: {
 		attribute: "vitality",
 		baseAmount: 50,
-		baseRegenerationRate: 3100,
+		baseRegenerationRate: 3300,
 		Icon: IconHealth,
 		maximumDelta: "healthMaximum",
 		regeneration: 0.03,
@@ -32,7 +32,7 @@ export const RESERVES: Record<
 	stamina: {
 		attribute: "endurance",
 		baseAmount: 30,
-		baseRegenerationRate: 2300,
+		baseRegenerationRate: 2500,
 		Icon: IconStamina,
 		maximumDelta: "staminaMaximum",
 		regeneration: 0.02,

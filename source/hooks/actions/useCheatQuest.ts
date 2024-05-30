@@ -1,9 +1,12 @@
 import { nanoid } from "nanoid"
 import { useRecoilCallback } from "recoil"
 
+import { LEVELLING_MAXIMUM } from "@neverquest/data/general"
 import { RELICS, RELIC_DROP_CHANCE } from "@neverquest/data/items"
+import { MASTERY_COST_BASE } from "@neverquest/data/masteries"
 import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem"
 import { useGenerateMerchantOffer } from "@neverquest/hooks/actions/useGenerateMerchantOffer"
+import { useIncreaseMastery } from "@neverquest/hooks/actions/useIncreaseMastery"
 import { useIncreaseStage } from "@neverquest/hooks/actions/useIncreaseStage"
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness"
 import { useSetMonologues } from "@neverquest/hooks/actions/useSetMonologues"
@@ -15,12 +18,15 @@ import { isAttacking, location, progress, progressMaximum, stage } from "@neverq
 import { ownedItem } from "@neverquest/state/inventory"
 import { isInexhaustible, isInvulnerable } from "@neverquest/state/reserves"
 import { essenceLoot } from "@neverquest/state/resources"
-import { type Relic, SKILL_TYPES, type Skill } from "@neverquest/types/unions"
-import { getSnapshotGetter } from "@neverquest/utilities/getters"
+import { isMastery, isSkill } from "@neverquest/types/type-guards"
+import { getSnapshotGetter, getTriangular } from "@neverquest/utilities/getters"
+
+import type { Relic } from "@neverquest/types/unions"
 
 export function useCheatQuest() {
 	const acquireItem = useAcquireItem()
 	const generateMerchantOffer = useGenerateMerchantOffer()
+	const increaseMastery = useIncreaseMastery()
 	const increaseStage = useIncreaseStage()
 	const resetWilderness = useResetWilderness()
 	const setMonologues = useSetMonologues()
@@ -31,7 +37,7 @@ export function useCheatQuest() {
 
 	return useRecoilCallback(
 		({ reset, set, snapshot }) =>
-			({ cheat, value }: { cheat: string, value?: Skill | number }) => {
+			({ cheat, value }: { cheat: string, value?: number | string }) => {
 				const get = getSnapshotGetter(snapshot)
 
 				const isAttackingValue = get(isAttacking)
@@ -53,7 +59,7 @@ export function useCheatQuest() {
 					}
 					// Heretic
 					case "gimmee": {
-						if (typeof value === "string" && SKILL_TYPES.includes(value)) {
+						if (isSkill(value)) {
 							trainSkill(value)
 						}
 
@@ -108,6 +114,22 @@ export function useCheatQuest() {
 							}
 
 							resetWilderness()
+						}
+
+						break
+					}
+					// Age of Empires
+					case "STEROIDS": {
+						if (isMastery(value)) {
+							let requiredIncreases = 0
+
+							for (let count = 0; count < LEVELLING_MAXIMUM; count++) {
+								requiredIncreases += getTriangular(MASTERY_COST_BASE + count)
+							}
+
+							for (let count = 0; count < requiredIncreases; count++) {
+								increaseMastery(value)
+							}
 						}
 
 						break

@@ -51,9 +51,10 @@ export const canCompleteQuests = withStateKey("canCompleteQuests", key =>
 					}
 
 					return QUEST_TYPES_BY_CLASS[questClass].some(
-						quest => Object.values(
-							get(questStatuses(quest)),
-						).includes("complete"))
+						quest => Object
+							.values(get(questStatuses(quest)))
+							.includes("complete"),
+					)
 				},
 		key,
 	}),

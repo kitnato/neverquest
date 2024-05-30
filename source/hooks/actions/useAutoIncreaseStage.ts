@@ -11,7 +11,7 @@ import { itemsLoot } from "@neverquest/state/resources"
 import { isFinality, isGemItem } from "@neverquest/types/type-guards"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
 
-export function useAutoProgressStage() {
+export function useAutoIncreaseStage() {
 	const advanceCaravan = useAdvanceCaravan()
 	const collectLoot = useCollectLoot()
 	const increaseStage = useIncreaseStage()

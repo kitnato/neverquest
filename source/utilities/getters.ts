@@ -569,6 +569,6 @@ export function getTotalElementalEffects({
 }
 
 // https://en.wikipedia.org/wiki/Triangular_number
-export function getTriangular(x: number) {
-	return (x * (x + 1)) / 2
+export function getTriangular(n: number) {
+	return (n * (n + 1)) / 2
 }

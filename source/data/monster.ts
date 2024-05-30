@@ -123,12 +123,12 @@ export const MONSTER_HEALTH = {
 	base: 18,
 	bossModifier: 0.75,
 	finality: {
-		"res cogitans": 7575,
-		"res dominus": 3757,
+		"res cogitans": 75757,
+		"res dominus": 5757,
 	},
 	menace: {
-		maximum: 4,
-		minimum: 1.4,
+		maximum: 5.5,
+		minimum: 1.5,
 		requiredStage: RETIREMENT_STAGE + 1,
 	},
 	progressModifier: 0.02,

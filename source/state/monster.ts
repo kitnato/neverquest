@@ -125,10 +125,9 @@ export const isEnraged = withStateKey("isEnraged", key =>
 
 export const isMonsterAiling = withStateKey("isMonsterAiling", key =>
 	selectorFamily({
-		get:
-			(ailment: Ailment) =>
-				({ get }) =>
-					get(monsterAilmentDuration(ailment)) > 0,
+		get: (ailment: Ailment) =>
+			({ get }) =>
+				get(monsterAilmentDuration(ailment)) > 0,
 		key,
 	}),
 )

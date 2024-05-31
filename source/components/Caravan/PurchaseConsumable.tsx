@@ -8,6 +8,7 @@ import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay"
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general"
 import { CONSUMABLES } from "@neverquest/data/items"
 import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem"
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence"
 import IconEssence from "@neverquest/icons/essence.svg?react"
 import { formatNumber } from "@neverquest/utilities/formatters"
@@ -19,6 +20,7 @@ export function PurchaseConsumable({ consumable }: { consumable: Consumable }) {
 	const [ID, setID] = useState(nanoid())
 
 	const acquireItem = useAcquireItem()
+	const progressQuest = useProgressQuest()
 	const transactEssence = useTransactEssence()
 
 	const { item } = CONSUMABLES[consumable]
@@ -42,6 +44,10 @@ export function PurchaseConsumable({ consumable }: { consumable: Consumable }) {
 					onPurchase={() => {
 						acquireItem(itemWithID)
 						transactEssence(-price)
+
+						progressQuest({
+							quest: "purchasingConsumable",
+						})
 
 						setID(nanoid())
 					}}

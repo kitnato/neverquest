@@ -42,7 +42,7 @@ export const ARMOR_SPECIFICATIONS: Record<
 		],
 		deflectionChance: [
 			{ maximum: 0.07, minimum: 0.05 },
-			{ maximum: 0.2, minimum: 0.18 },
+			{ maximum: 0.2, minimum: 0.15 },
 		],
 		Icon: IconArmorHeavy,
 		price: { maximum: 8200, minimum: 25 },
@@ -62,7 +62,7 @@ export const ARMOR_SPECIFICATIONS: Record<
 		],
 		deflectionChance: [
 			{ maximum: 0.3, minimum: 0.28 },
-			{ maximum: 0.7, minimum: 0.68 },
+			{ maximum: 0.7, minimum: 0.65 },
 		],
 		Icon: IconArmorLight,
 		price: { maximum: 5500, minimum: 1 },
@@ -82,7 +82,7 @@ export const ARMOR_SPECIFICATIONS: Record<
 		],
 		deflectionChance: [
 			{ maximum: 0.2, minimum: 0.18 },
-			{ maximum: 0.42, minimum: 0.4 },
+			{ maximum: 0.42, minimum: 0.37 },
 		],
 		Icon: IconReinforced,
 		price: { maximum: 6600, minimum: 10 },
@@ -122,7 +122,7 @@ export const SHIELD_SPECIFICATIONS: Record<
 	medium: {
 		blockChance: [
 			{ maximum: 0.12, minimum: 0.1 },
-			{ maximum: 0.25, minimum: 0.23 },
+			{ maximum: 0.25, minimum: 0.22 },
 		],
 		burden: [
 			{ maximum: 6, minimum: 4 },
@@ -142,7 +142,7 @@ export const SHIELD_SPECIFICATIONS: Record<
 	small: {
 		blockChance: [
 			{ maximum: 0.06, minimum: 0.05 },
-			{ maximum: 0.15, minimum: 0.13 },
+			{ maximum: 0.15, minimum: 0.12 },
 		],
 		burden: [
 			{ maximum: 3, minimum: 2 },
@@ -162,7 +162,7 @@ export const SHIELD_SPECIFICATIONS: Record<
 	tower: {
 		blockChance: [
 			{ maximum: 0.2, minimum: 0.19 },
-			{ maximum: 0.35, minimum: 0.33 },
+			{ maximum: 0.35, minimum: 0.32 },
 		],
 		burden: [
 			{ maximum: 10, minimum: 8 },
@@ -201,12 +201,12 @@ export const WEAPON_BASE: GearRangeBase & {
 	],
 	price: { maximum: 8000, minimum: 1 },
 	range: [
-		{ maximum: 3200, minimum: 3000 },
-		{ maximum: 4200, minimum: 4000 },
+		{ maximum: 2700, minimum: 2600 },
+		{ maximum: 3800, minimum: 3500 },
 	],
 	rate: [
 		{ maximum: 3200, minimum: 3000 },
-		{ maximum: 2400, minimum: 2300 },
+		{ maximum: 2500, minimum: 2300 },
 	],
 	weight: [
 		{ maximum: 2, minimum: 1 },

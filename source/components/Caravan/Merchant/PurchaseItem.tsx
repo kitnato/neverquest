@@ -6,7 +6,7 @@ import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import { useToggleEquipItem } from "@neverquest/hooks/actions/useToggleEquipItem"
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence"
 import { merchantInventory } from "@neverquest/state/caravan"
-import { isConsumableItem, isGearItem } from "@neverquest/types/type-guards"
+import { isGearItem, isInheritableItem } from "@neverquest/types/type-guards"
 
 import type { MerchantInventoryItem } from "@neverquest/types"
 
@@ -45,10 +45,11 @@ export function PurchaseItem({ merchantItem }: { merchantItem: MerchantInventory
 				if (isReturned) {
 					progressQuest({ quest: "buyingBack" })
 				}
-
-				progressQuest({
-					quest: isConsumableItem(item) ? "purchasingConsumable" : "purchasingInheritable",
-				})
+				else if (isInheritableItem(item)) {
+					progressQuest({
+						quest: "purchasingInheritable",
+					})
+				}
 			}}
 		/>
 	)

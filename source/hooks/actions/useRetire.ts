@@ -101,6 +101,7 @@ export function useRetire() {
 
 				reset(questProgress("attributesIncreasing"))
 				reset(questProgress("hiring"))
+				reset(questProgress("masteriesUnlocking"))
 				reset(questProgress("powerLevel"))
 				reset(questProgress("stages"))
 
@@ -128,7 +129,7 @@ export function useRetire() {
 				progressQuest({
 					amount: inheritedSkills.length,
 					isAbsolute: true,
-					quest: "skills",
+					quest: "skillsTraining",
 				})
 
 				SKILL_TYPES.forEach((skill) => {

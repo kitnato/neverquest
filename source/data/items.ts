@@ -282,7 +282,7 @@ export const RELICS: Record<
 		item: {
 			ID: "",
 			name: "[S751NQ]",
-			price: 140_014,
+			price: 140_010,
 			weight: 14,
 		},
 	},

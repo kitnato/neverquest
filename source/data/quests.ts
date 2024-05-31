@@ -300,7 +300,7 @@ export const QUESTS: Record<
 		title: "Jeweller",
 	},
 	gemsApplyingAll: {
-		description: "Have at least one gem in every equipped piece of gear.",
+		description: "Have at least one gem in three pieces of equipped gear.",
 		progression: [1],
 		requiresTracking: true,
 		title: "Trifecta",
@@ -402,12 +402,6 @@ export const QUESTS: Record<
 		requiresTracking: true,
 		title: "Hoarder",
 	},
-	masteries: {
-		description: "Unlock all masteries.",
-		progression: [MASTERY_TYPES.length],
-		requiresTracking: true,
-		title: "Come at me",
-	},
 	masteriesRank: {
 		description: "Rank up masteries @ times.",
 		progression: [5, 20, 50, 100],
@@ -419,6 +413,12 @@ export const QUESTS: Record<
 		progression: [1],
 		requiresTracking: true,
 		title: "Virtuoso",
+	},
+	masteriesUnlocking: {
+		description: "Unlock all masteries.",
+		progression: [MASTERY_TYPES.length],
+		requiresTracking: true,
+		title: "Come at me",
 	},
 	munitionsCrafting: {
 		description: "Expand munitions satchel capacity @ times.",
@@ -542,17 +542,17 @@ export const QUESTS: Record<
 		requiresTracking: true,
 		title: "Raiden",
 	},
-	skills: {
-		description: "Train @ skills.",
-		progression: [3, 7, SKILL_TYPES.length],
-		requiresTracking: true,
-		title: "Prodigy",
-	},
 	skillsCraft: {
 		description: `Train the ${formatEnumeration(QUEST_REQUIREMENTS.skillsCraft)} skills.`,
 		progression: [QUEST_REQUIREMENTS.skillsCraft.length],
 		requiresTracking: true,
 		title: "Warcraft",
+	},
+	skillsTraining: {
+		description: "Train @ skills.",
+		progression: [3, 7, SKILL_TYPES.length],
+		requiresTracking: true,
+		title: "Prodigy",
 	},
 	spendingEssence: {
 		description: "Spend @ essence.",

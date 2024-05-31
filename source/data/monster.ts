@@ -99,11 +99,11 @@ export const MONSTER_ATTACK_RATE = {
 		"res dominus": 2750,
 	},
 	maximum: 4100,
-	minimum: 2200,
+	minimum: 2000,
 }
 
 export const MONSTER_DAMAGE = {
-	attenuation: 3.5,
+	attenuation: 3.25,
 	base: 5,
 	bossModifier: 0.05,
 	finality: {
@@ -127,7 +127,7 @@ export const MONSTER_HEALTH = {
 		"res dominus": 7575,
 	},
 	menace: {
-		maximum: 5.5,
+		maximum: 6,
 		minimum: 1.5,
 		requiredStage: RETIREMENT_STAGE + 1,
 	},
@@ -154,7 +154,7 @@ export const POISON = {
 		"res dominus": 0.5757,
 	},
 	magnitude: {
-		maximum: 0.2,
+		maximum: 0.25,
 		minimum: 0.075,
 	},
 	requiredStage: 45,

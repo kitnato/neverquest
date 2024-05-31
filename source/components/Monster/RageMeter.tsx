@@ -2,10 +2,11 @@ import { Stack } from "react-bootstrap"
 import { useRecoilValue } from "recoil"
 
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
-import { Glitch } from "@neverquest/components/Glitch"
+import { IconImage } from "@neverquest/components/IconImage"
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
 import { PERCENTAGE } from "@neverquest/data/general"
 import { RAGE } from "@neverquest/data/monster"
+import IconWarMask from "@neverquest/icons/war-mask.svg?react"
 import { isRelicEquipped } from "@neverquest/state/items"
 import { isEnraged, rage } from "@neverquest/state/monster"
 import { formatNumber } from "@neverquest/utilities/formatters"
@@ -24,11 +25,7 @@ export function RageMeter() {
 			variant="secondary"
 		>
 			{isRelicEquippedWarMask
-				? (
-					<Glitch isContinuous>
-						<span>YOU SHALL NOT</span>
-					</Glitch>
-				)
+				? <IconImage className="small stencilled" Icon={IconWarMask} />
 				: (
 					<Stack direction="horizontal" gap={1}>
 						<span>

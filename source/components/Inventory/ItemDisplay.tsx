@@ -40,6 +40,7 @@ export function ItemDisplay({
 	const equippedRelics: Partial<Record<Relic, boolean>> = {
 		"automincer": useRecoilValue(isRelicEquipped("automincer")),
 		"dream catcher": useRecoilValue(isRelicEquipped("dream catcher")),
+		"war mask": useRecoilValue(isRelicEquipped("war mask")),
 	}
 
 	if (isArmor(item)) {

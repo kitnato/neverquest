@@ -3,7 +3,7 @@ import { useRecoilCallback } from "recoil"
 
 import { LEVELLING_MAXIMUM } from "@neverquest/data/general"
 import { RELICS, RELIC_DROP_CHANCE } from "@neverquest/data/items"
-import { MASTERY_COST_BASE } from "@neverquest/data/masteries"
+import { MASTERY_PROGRESS_MAXIMUM } from "@neverquest/data/masteries"
 import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem"
 import { useGenerateMerchantOffer } from "@neverquest/hooks/actions/useGenerateMerchantOffer"
 import { useIncreaseMastery } from "@neverquest/hooks/actions/useIncreaseMastery"
@@ -19,7 +19,7 @@ import { ownedItem } from "@neverquest/state/inventory"
 import { isInexhaustible, isInvulnerable } from "@neverquest/state/reserves"
 import { essenceLoot } from "@neverquest/state/resources"
 import { isMastery, isSkill } from "@neverquest/types/type-guards"
-import { getSnapshotGetter, getTriangular } from "@neverquest/utilities/getters"
+import { getSnapshotGetter } from "@neverquest/utilities/getters"
 
 import type { Relic } from "@neverquest/types/unions"
 
@@ -121,13 +121,7 @@ export function useCheatQuest() {
 					// Age of Empires
 					case "STEROIDS": {
 						if (isMastery(value)) {
-							let requiredIncreases = 0
-
-							for (let count = 0; count < LEVELLING_MAXIMUM; count++) {
-								requiredIncreases += getTriangular(MASTERY_COST_BASE + count)
-							}
-
-							for (let count = 0; count < requiredIncreases; count++) {
+							for (let count = 0; count < LEVELLING_MAXIMUM * MASTERY_PROGRESS_MAXIMUM; count++) {
 								increaseMastery(value)
 							}
 						}

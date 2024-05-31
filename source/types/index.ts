@@ -11,11 +11,10 @@ export type Armor = GearItemBase & {
 	protection: number
 }
 
-export type AttributeOrMasteryBaseData = Description & {
+export type AttributeOrMasteryBase = Description & {
 	base: number
 	descriptionIcons: [SVGIcon, ...SVGIcon[]]
 	Icon: SVGIcon
-	increment: number
 }
 
 export type ConsumableItem = ItemBase & {

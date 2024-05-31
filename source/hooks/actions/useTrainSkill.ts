@@ -30,12 +30,15 @@ export function useTrainSkill() {
 					}
 				}
 
-				if (Object.values(ATTRIBUTES).some(({ requiredSkill }) => requiredSkill === skill)) {
-					progressQuest({ quest: "attributesUnlocking" })
-				}
+				const unlockedAttributesCount = Object.values(ATTRIBUTES).filter(({ requiredSkill }) => requiredSkill === skill).length
+
+				progressQuest({
+					amount: unlockedAttributesCount,
+					quest: "attributesUnlocking",
+				})
 
 				if (Object.values(MASTERIES).some(({ requiredSkill }) => requiredSkill === skill)) {
-					progressQuest({ quest: "masteries" })
+					progressQuest({ quest: "masteriesUnlocking" })
 				}
 
 				if (
@@ -47,7 +50,7 @@ export function useTrainSkill() {
 					progressQuest({ quest: "acquiringArcheryFirst" })
 				}
 
-				progressQuest({ quest: "skills" })
+				progressQuest({ quest: "skillsTraining" })
 
 				if (QUEST_REQUIREMENTS.skillsCraft.includes(skill)) {
 					progressQuest({ quest: "skillsCraft" })

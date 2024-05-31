@@ -287,8 +287,7 @@ export const RELICS: Record<
 		},
 	},
 	"automincer": {
-		description:
-			"While # equipped, collects # loot and passes to the next # stage once clear of monsters.",
+		description: "While # equipped, collects # loot and passes to the next # stage once clear of monsters.",
 		descriptionIcons: [IconGrinding, IconLoot, IconStage],
 		Icon: IconAutomincer,
 		item: {

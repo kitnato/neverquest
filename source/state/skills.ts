@@ -7,6 +7,19 @@ import { withStateKey } from "@neverquest/utilities/helpers"
 
 // SELECTORS
 
+export const skillPrice = withStateKey("skillPrice", key =>
+	selector({
+		get: ({ get }) => Math.round(
+			SKILL_PRICE_BASE * Math.pow(
+				SKILL_PRICE_FACTOR,
+				Object
+					.entries(get(trainedSkills))
+					.filter(([skill, isTrained]) => !SKILLS[skill as Skill].isInheritable && isTrained).length),
+		),
+		key,
+	}),
+)
+
 export const trainedSkills = withStateKey("trainedSkills", key =>
 	selector({
 		get: ({ get }) => {
@@ -18,19 +31,6 @@ export const trainedSkills = withStateKey("trainedSkills", key =>
 
 			return currentTrainedSkills
 		},
-		key,
-	}),
-)
-
-export const skillPrice = withStateKey("skillPrice", key =>
-	selector({
-		get: ({ get }) => Math.round(
-			SKILL_PRICE_BASE * Math.pow(
-				SKILL_PRICE_FACTOR,
-				Object
-					.entries(get(trainedSkills))
-					.filter(([skill, isTrained]) => !SKILLS[skill as Skill].isInheritable && isTrained).length),
-		),
 		key,
 	}),
 )

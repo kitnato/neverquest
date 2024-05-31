@@ -73,7 +73,7 @@ export const ATTRIBUTES: Record<
 		formatting: { format: "percentage" },
 		Icon: IconPerception,
 		increment: { amount: 0.03 },
-		maximum: 2.5,
+		maximum: 2.1,
 		requiredSkill: "assassination",
 	},
 	speed: {

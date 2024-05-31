@@ -63,13 +63,15 @@ export const elementalEffects = withStateKey("elementalEffects", key =>
 				gems: get(gems(armorValue.ID)),
 			})
 			// Only apply shield effects if they're actively used.
-			const shieldEffects
-				= (isMelee(weaponValue) || isUnarmed(weaponValue)) && (weaponValue.grip === "one-handed" || get(isTraitEarned("colossus")))
-					? getElementalEffects({
-						gear: shieldValue,
-						gems: get(gems(shieldValue.ID)),
-					})
-					: SHIELD_ELEMENTAL_EFFECTS_BASE
+			const shieldEffects = (
+				isMelee(weaponValue)
+				|| isUnarmed(weaponValue)
+			) && (weaponValue.grip === "one-handed" || get(isTraitEarned("colossus")))
+				? getElementalEffects({
+					gear: shieldValue,
+					gems: get(gems(shieldValue.ID)),
+				})
+				: SHIELD_ELEMENTAL_EFFECTS_BASE
 			const weaponEffects = getElementalEffects({
 				gear: weaponValue,
 				gems: get(gems(weaponValue.ID)),

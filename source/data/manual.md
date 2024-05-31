@@ -711,7 +711,7 @@ Permanent passive abilities earned upon [retiring](#retirement) for all subseque
 
 #### Brawler
 
-Being unshielded increases one-handed melee damage.
+Being unshielded increases damage from one-handed melee weapons.
 
 #### Bruiser
 
@@ -719,7 +719,7 @@ Current stamina adds to unarmed damage and unarmed attacks have a chance to [stu
 
 #### Colossus
 
-[Two-handed](#two-handed) melee weapons are used as one-handed weapons. This means a shield can be equipped alongside it and any effects applicable to one-handed weapons apply to two-handed weapons as well.
+[Two-handed](#two-handed) melee weapons are wielded in one-hand. This means a shield can be equipped alongside it.
 
 #### Executioner
 

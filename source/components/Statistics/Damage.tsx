@@ -30,7 +30,7 @@ import { reserveCurrent } from "@neverquest/state/reserves"
 import { damage, lifeLeech } from "@neverquest/state/statistics"
 import { isTraitEarned } from "@neverquest/state/traits"
 import { isShowing } from "@neverquest/state/ui"
-import { isMelee, isUnarmed, isUnshielded } from "@neverquest/types/type-guards"
+import { isRanged, isUnarmed, isUnshielded } from "@neverquest/types/type-guards"
 import { formatNumber } from "@neverquest/utilities/formatters"
 import { getAnimationClass, getGearIcon } from "@neverquest/utilities/getters"
 
@@ -41,7 +41,6 @@ export function Damage() {
 	const isShowingDamage = useRecoilValue(isShowing("damage"))
 	const isTraitEarnedBrawler = useRecoilValue(isTraitEarned("brawler"))
 	const isTraitEarnedBruiser = useRecoilValue(isTraitEarned("bruiser"))
-	const isTraitEarnedColossus = useRecoilValue(isTraitEarned("colossus"))
 	const lifeLeechValue = useRecoilValue(lifeLeech)
 	const questsBonusDamage = useRecoilValue(questsBonus("damageBonus"))
 	const reserveStamina = useRecoilValue(reserveCurrent("stamina"))
@@ -100,7 +99,7 @@ export function Damage() {
 											</td>
 										</tr>
 
-										{isTraitEarnedBrawler && isUnshielded(shieldValue) && (isMelee(weaponValue) || isUnarmedWeapon) && (weaponValue.grip === "one-handed" || isTraitEarnedColossus) && (
+										{isTraitEarnedBrawler && isUnshielded(shieldValue) && !isRanged(weaponValue) && (weaponValue.grip === "one-handed") && (
 											<tr>
 												<td>
 													<IconDisplay Icon={IconBrawler} iconProps={{ className: "small" }}>

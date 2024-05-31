@@ -93,12 +93,10 @@ export function SocketGem({ gem }: { gem: GemItem }) {
 		>
 			{GEAR_TYPES.filter(gearType =>
 				gearType === "shield"
-					? (
-						(
-							(isMelee(weaponValue) || isUnarmed(weaponValue))
-							&& weaponValue.grip === "one-handed"
-						) || isTraitEarnedColossus
-					)
+					? ((
+						(isMelee(weaponValue) || isUnarmed(weaponValue))
+						&& weaponValue.grip === "one-handed"
+					) || isTraitEarnedColossus)
 					&& !isRanged(weaponValue)
 					: true,
 			).map((gearType) => {

@@ -84,11 +84,11 @@ export const TRAITS: Record<
 		Icon: IconAcanthaceous,
 	},
 	brawler: {
-		description: `While # unshielded, # weapon damage of # one-handed melee weapons and # two-handed melee weapons wielded in one hand are increased by ${formatNumber({
+		description: `While # unshielded, # weapon damage of # one-handed melee weapons is increased by ${formatNumber({
 			format: "percentage",
 			value: BRAWLER_DAMAGE_BONUS,
 		})}.`,
-		descriptionIcons: [IconShieldNone, IconWeaponDamage, IconOneHanded, IconTwoHanded],
+		descriptionIcons: [IconShieldNone, IconWeaponDamage, IconOneHanded],
 		Icon: IconBrawler,
 	},
 	bruiser: {
@@ -103,8 +103,8 @@ export const TRAITS: Record<
 		Icon: IconBruiser,
 	},
 	colossus: {
-		description: "# Two-handed melee weapons can be wielded in one hand.",
-		descriptionIcons: [IconTwoHanded],
+		description: "# Two-handed melee weapons can be equipped alongside a # shield.",
+		descriptionIcons: [IconTwoHanded, IconShield],
 		Icon: IconColossus,
 	},
 	executioner: {

@@ -23,6 +23,8 @@ import IconStaggered from "@neverquest/icons/staggered.svg?react"
 import IconStunned from "@neverquest/icons/stunned.svg?react"
 import IconTwoHanded from "@neverquest/icons/two-handed.svg?react"
 
+import { LEVELLING_MAXIMUM } from "./general"
+
 import type { AttributeOrMasteryBase } from "@neverquest/types"
 import type { SVGIcon } from "@neverquest/types/components"
 import type { Mastery, Skill } from "@neverquest/types/unions"
@@ -43,7 +45,7 @@ export const MASTERIES: Record<
 		Icon: IconButchery,
 		instructionIcons: [IconTwoHanded],
 		instructions: "Trains when dealing damage with a # two-handed weapon.",
-		maximum: 0.55,
+		maximum: 0.4,
 		requiredSkill: "siegecraft",
 	},
 	cruelty: {
@@ -83,7 +85,7 @@ export const MASTERIES: Record<
 		Icon: IconMight,
 		instructionIcons: [IconBlunt],
 		instructions: "Trains when dealing damage with a # blunt weapon.",
-		maximum: 3500,
+		maximum: 4000,
 		requiredSkill: "traumatology",
 	},
 	resilience: {
@@ -103,9 +105,12 @@ export const MASTERIES: Record<
 		Icon: IconStability,
 		instructionIcons: [IconBlockChance, IconStaggered],
 		instructions: "Trains when # blocking or # staggering a monster.",
-		maximum: 3500,
+		maximum: 4000,
 		requiredSkill: "shieldcraft",
 	},
 }
 
-export const MASTERY_PROGRESS_MAXIMUM = 10
+export const MASTERY_COST = {
+	base: 3,
+	maximum: LEVELLING_MAXIMUM,
+}

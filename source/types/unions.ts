@@ -383,6 +383,7 @@ export type StateKey =
 	| "location"
 	| "locationName"
 	| "lootingDuration"
+	| "masteryCost"
 	| "masteryProgress"
 	| "masteryRank"
 	| "masteryStatistic"

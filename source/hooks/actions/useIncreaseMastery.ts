@@ -1,11 +1,11 @@
 import { useRecoilCallback } from "recoil"
 
 import { GENERIC_MINIMUM, LEVELLING_MAXIMUM } from "@neverquest/data/general"
-import { MASTERY_PROGRESS_MAXIMUM } from "@neverquest/data/masteries"
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import {
 	canIncreaseMastery,
 	isMasteryAtMaximum,
+	masteryCost,
 	masteryProgress,
 	masteryRank,
 } from "@neverquest/state/masteries"
@@ -27,7 +27,7 @@ export function useIncreaseMastery() {
 
 				const newProgress = get(masteryProgress(mastery)) + GENERIC_MINIMUM
 
-				if (newProgress >= MASTERY_PROGRESS_MAXIMUM) {
+				if (newProgress >= get(masteryCost(mastery))) {
 					const newRank = get(masteryRank(mastery)) + GENERIC_MINIMUM
 
 					set(masteryRank(mastery), newRank)

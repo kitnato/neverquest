@@ -1,9 +1,8 @@
 import { nanoid } from "nanoid"
 import { useRecoilCallback } from "recoil"
 
-import { LEVELLING_MAXIMUM } from "@neverquest/data/general"
 import { RELICS, RELIC_DROP_CHANCE } from "@neverquest/data/items"
-import { MASTERY_PROGRESS_MAXIMUM } from "@neverquest/data/masteries"
+import { MASTERY_COST } from "@neverquest/data/masteries"
 import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem"
 import { useGenerateMerchantOffer } from "@neverquest/hooks/actions/useGenerateMerchantOffer"
 import { useIncreaseMastery } from "@neverquest/hooks/actions/useIncreaseMastery"
@@ -121,7 +120,10 @@ export function useCheatQuest() {
 					// Age of Empires
 					case "STEROIDS": {
 						if (isMastery(value)) {
-							for (let count = 0; count < LEVELLING_MAXIMUM * MASTERY_PROGRESS_MAXIMUM; count++) {
+							const { base, maximum } = MASTERY_COST
+							const sum = (maximum / 2) * (2 * base + (maximum - 1))
+
+							for (let count = 0; count < sum; count++) {
 								increaseMastery(value)
 							}
 						}

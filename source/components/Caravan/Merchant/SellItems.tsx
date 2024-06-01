@@ -60,6 +60,16 @@ export function SellItems() {
 								</div>
 							))}
 
+						{equippedGear.map((gearItem) => {
+							return (
+								<div className={CLASS_FULL_WIDTH_JUSTIFIED} key={gearItem.ID}>
+									<ItemDisplay isEquipped item={gearItem} />
+
+									<SellItem item={gearItem} />
+								</div>
+							)
+						})}
+
 						{[
 							...stackItems(
 								storedItems
@@ -89,16 +99,6 @@ export function SellItems() {
 									<SellItem item={inheritableItem} />
 								</div>
 							))}
-
-						{equippedGear.map((gearItem) => {
-							return (
-								<div className={CLASS_FULL_WIDTH_JUSTIFIED} key={gearItem.ID}>
-									<ItemDisplay isEquipped item={gearItem} />
-
-									<SellItem item={gearItem} />
-								</div>
-							)
-						})}
 
 						{equippedRelicItems.map((relicItem) => {
 							return (

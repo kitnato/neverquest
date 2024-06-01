@@ -6,14 +6,16 @@ import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
 import { DescriptionDisplay } from "@neverquest/components/DescriptionDisplay"
 import { LabelledProgressBar } from "@neverquest/components/LabelledProgressBar"
 import { PERCENTAGE } from "@neverquest/data/general"
-import { MASTERIES, MASTERY_PROGRESS_MAXIMUM } from "@neverquest/data/masteries"
+import { MASTERIES } from "@neverquest/data/masteries"
 import { useDeltaText } from "@neverquest/hooks/useDeltaText"
-import { isMasteryAtMaximum, masteryProgress } from "@neverquest/state/masteries"
+import { isMasteryAtMaximum, masteryCost, masteryProgress } from "@neverquest/state/masteries"
 
 import type { Delta, Mastery } from "@neverquest/types/unions"
 
 export function MasteryProgress({ mastery }: { mastery: Mastery }) {
 	const masteryProgressState = masteryProgress(mastery)
+
+	const masteryCostValue = useRecoilValue(masteryCost(mastery))
 	const isMasteryAtMaximumValue = useRecoilValue(isMasteryAtMaximum(mastery))
 	const masteryProgressValue = useRecoilValue(masteryProgressState)
 
@@ -41,7 +43,7 @@ export function MasteryProgress({ mastery }: { mastery: Mastery }) {
 					value={
 						isMasteryAtMaximumValue
 							? PERCENTAGE
-							: (masteryProgressValue / MASTERY_PROGRESS_MAXIMUM) * PERCENTAGE
+							: (masteryProgressValue / masteryCostValue) * PERCENTAGE
 					}
 					variant="secondary"
 				>
@@ -50,7 +52,7 @@ export function MasteryProgress({ mastery }: { mastery: Mastery }) {
 							? <BadgeMaximum />
 							: (
 								<span>
-									{`${masteryProgressValue} / ${MASTERY_PROGRESS_MAXIMUM}`}
+									{`${masteryProgressValue} / ${masteryCostValue}`}
 								</span>
 							)}
 

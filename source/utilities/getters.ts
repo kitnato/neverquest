@@ -501,13 +501,13 @@ function getRomanNumeral(value: number) {
 	return currentNumeral
 }
 
-export function getSellPrice({ gemsFitted, item }: { gemsFitted?: number, item: InventoryItem }) {
+export function getSecondHandPrice({ gemsFitted, item }: { gemsFitted?: number, item: InventoryItem }) {
 	const { price } = item
 	let supplement = 0
 
 	if (isGearItem(item) && gemsFitted !== undefined) {
 		supplement += (
-			getSellPrice({
+			getSecondHandPrice({
 				item: {
 					...GEM_BASE,
 					ID: nanoid(),

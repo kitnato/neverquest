@@ -28,7 +28,7 @@ export function useGenerateMonster() {
 
 				switch (encounterValue) {
 					case "boss": {
-						set(monsterName, generateName({ hasTitle: true }))
+						set(monsterName, generateName({ isTitled: true }))
 						break
 					}
 

@@ -10,7 +10,13 @@ import { isGearItem, isInheritableItem } from "@neverquest/types/type-guards"
 
 import type { MerchantInventoryItem } from "@neverquest/types"
 
-export function PurchaseItem({ merchantItem }: { merchantItem: MerchantInventoryItem }) {
+export function PurchaseItem({
+	merchantItem,
+	price,
+}: {
+	merchantItem: MerchantInventoryItem
+	price: number
+}) {
 	const setMerchantInventory = useSetRecoilState(merchantInventory)
 
 	const acquireItem = useAcquireItem()
@@ -30,7 +36,7 @@ export function PurchaseItem({ merchantItem }: { merchantItem: MerchantInventory
 					return
 				}
 
-				const { ID, price } = item
+				const { ID } = item
 
 				transactEssence(-price)
 

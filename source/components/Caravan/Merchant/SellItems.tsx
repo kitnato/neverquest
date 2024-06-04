@@ -30,16 +30,14 @@ export function SellItems() {
 
 	const equippedGear = [weaponValue, armorValue, shieldValue].filter(
 		gearItem => isArmor(gearItem) || isShield(gearItem) || isWeapon(gearItem),
-	) as (Armor | Shield | Weapon)[]
+	) as [Weapon, Armor, Shield]
 	const equippedRelicItems = inventoryValue
 		.filter(isRelicItem)
 		.filter(item => equippedRelicsValue[item.name])
 		.toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2))
 	const equippedItems = [...equippedGear, ...equippedRelicItems]
 	const equippedItemIDs = new Set(equippedItems.map(({ ID }) => ID))
-	const storedItems = inventoryValue.filter(
-		({ ID, name }) => !equippedItemIDs.has(ID) && name !== "knapsack",
-	)
+	const storedItems = inventoryValue.filter(({ ID }) => !equippedItemIDs.has(ID))
 
 	return (
 		<Stack gap={3}>

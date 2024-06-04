@@ -2,7 +2,6 @@ import { useRecoilCallback } from "recoil"
 
 import { ATTRIBUTES } from "@neverquest/data/attributes"
 import { MERCHANT_OFFERS } from "@neverquest/data/caravan"
-import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear"
 import { RETIREMENT_STAGE } from "@neverquest/data/retirement"
 import { SKILLS } from "@neverquest/data/skills"
 import { useInitialize } from "@neverquest/hooks/actions/useInitialize"
@@ -29,7 +28,7 @@ import {
 	stageMaximum,
 	stageRetired,
 } from "@neverquest/state/character"
-import { armor, gems, shield, weapon } from "@neverquest/state/gear"
+import { armor, fittedGems, shield, weapon } from "@neverquest/state/gear"
 import { inventory } from "@neverquest/state/inventory"
 import { expandedMasteries, masteryProgress, masteryRank } from "@neverquest/state/masteries"
 import { questProgress } from "@neverquest/state/quests"
@@ -90,9 +89,7 @@ export function useRetire() {
 				reset(expandedMasteries)
 				reset(isFinalityDefeated("res dominus"))
 				reset(fletcherInventory)
-				reset(gems(ARMOR_NONE.ID))
-				reset(gems(SHIELD_NONE.ID))
-				reset(gems(WEAPON_NONE.ID))
+				reset(fittedGems)
 				reset(name)
 				reset(shield)
 				reset(stage)
@@ -115,7 +112,7 @@ export function useRetire() {
 					reset(monologue(crewMember))
 				}
 
-				for (let index = 1; index <= stageMaximumValue; index++) {
+				for (let index = 1; index <= get(stageHighest); index++) {
 					reset(isOfferGenerated(index))
 				}
 

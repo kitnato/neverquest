@@ -36,8 +36,8 @@ export function Travel() {
 	const toggleLocation = useToggleLocation()
 
 	const isCaravan = locationValue === "caravan"
-	// Occurs if the knapsack is sold and carrying more than the weight difference of its absence.
-	const isOverEncumbered = isCaravan && encumbranceExtentValue === "over-encumbered"
+	// Occurs if the knapsack is relinquished and carrying more than the weight difference of its absence.
+	const isOverEncumbered = encumbranceExtentValue === "over-encumbered"
 
 	if (
 		(
@@ -67,7 +67,7 @@ export function Travel() {
 				<div className={getAnimationClass({ animation: "bounceIn" })}>
 					<Button
 						className={
-							!isAttackingValue && !isCaravan && itemsLootValue.length === 0
+							!isAttackingValue && !isCaravan && !isOverEncumbered && itemsLootValue.length === 0
 								? getAnimationClass({ animation: "pulse", isInfinite: true })
 								: undefined
 						}

@@ -57,6 +57,7 @@ export function PurchaseItem({
 					})
 				}
 			}}
+			purchasePrice={price}
 		/>
 	)
 }

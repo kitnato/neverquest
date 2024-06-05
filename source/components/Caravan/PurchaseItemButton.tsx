@@ -10,9 +10,11 @@ import type { InventoryItem } from "@neverquest/types"
 export function PurchaseItemButton({
 	item,
 	onPurchase,
+	purchasePrice,
 }: {
 	item: InventoryItem
 	onPurchase: () => void
+	purchasePrice?: number
 }) {
 	const essenceValue = useRecoilValue(essence)
 
@@ -21,7 +23,7 @@ export function PurchaseItemButton({
 	const canFit = useCanFit()
 
 	const canFitItem = canFit(weight)
-	const isAffordable = price <= essenceValue
+	const isAffordable = (purchasePrice ?? price) <= essenceValue
 	const isPurchasable = isAffordable && canFitItem
 
 	return (

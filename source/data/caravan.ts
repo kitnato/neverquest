@@ -10,6 +10,7 @@ import IconEncumbrance from "@neverquest/icons/encumbrance.svg?react"
 import IconFletcher from "@neverquest/icons/fletcher.svg?react"
 import IconGear from "@neverquest/icons/gear.svg?react"
 import IconGems from "@neverquest/icons/gems.svg?react"
+import IconKnapsack from "@neverquest/icons/knapsack.svg?react"
 import IconMedic from "@neverquest/icons/medic.svg?react"
 import IconMending from "@neverquest/icons/mending.svg?react"
 import IconMercenary from "@neverquest/icons/mercenary.svg?react"
@@ -56,17 +57,18 @@ export const CREW: Record<
 		interaction: "Visit",
 		monologues: {
 			1: "Things are not always what they seem.",
+			[FINALITY_STAGE["res dominus"]]: "Cryptic relics reveal their true purpose once suffused with essence.",
 			[LEVELLING_END]: MONOLOGUE_EMPTY,
 			[LEVELLING_MAXIMUM]: "Nothing makes any sense.",
 		},
-		price: 400,
+		price: 500,
 		requiredStage: 25,
 	},
 	blacksmith: {
 		description: "Crafts and identifies # gear.",
 		descriptionIcons: [IconGear],
 		Icon: IconBlacksmith,
-		interaction: "Craft",
+		interaction: "Forge",
 		monologues: {
 			1: "In need of better gear?",
 			[LEVELLING_END]: MONOLOGUE_EMPTY,
@@ -77,7 +79,7 @@ export const CREW: Record<
 		shows: ["gearClass", "gearLevel"],
 	},
 	fletcher: {
-		description: "Provides # ranged weapons and # munitions.",
+		description: "Makes # ranged weapons and # munitions.",
 		descriptionIcons: [IconRanged, IconMunitions],
 		Icon: IconFletcher,
 		interaction: "Craft",
@@ -97,7 +99,7 @@ export const CREW: Record<
 		monologues: {
 			1: "Allow me to patch you up.",
 			[LEVELLING_END]: MONOLOGUE_EMPTY,
-			[LEVELLING_MAXIMUM]: "Never-ending madness. Only agony.",
+			[LEVELLING_MAXIMUM]: "Never-ending agony.",
 		},
 		price: 20,
 		requiredStage: 5,
@@ -173,12 +175,12 @@ export const CREW: Record<
 			[LEVELLING_END]: MONOLOGUE_EMPTY,
 			[LEVELLING_MAXIMUM]: "I can't see any more.",
 		},
-		price: 650,
+		price: 750,
 		requiredStage: 30,
 	},
 	tailor: {
-		description: "Expands # encumbrance.",
-		descriptionIcons: [IconEncumbrance],
+		description: "Alleviates # encumbrance by expanding the # knapsack.",
+		descriptionIcons: [IconEncumbrance, IconKnapsack],
 		Icon: IconTailor,
 		interaction: "Stitch",
 		monologues: {
@@ -196,6 +198,7 @@ export const CREW: Record<
 		interaction: "Brew",
 		monologues: {
 			1: "Gaze into my cauldron ...",
+			[FINALITY_STAGE["res dominus"]]: "The oval spawn has the answers you seek.",
 			[LEVELLING_END]: MONOLOGUE_EMPTY,
 			[LEVELLING_MAXIMUM]: "The cipher has gone silent.",
 		},
@@ -273,12 +276,16 @@ export const MERCHANT_OFFERS: Record<
 		offer: RELICS.automincer.item,
 	},
 	40: {
-		monologue: "A dark wanderer passed through and sold me a strange book ...",
+		monologue: "A dark wanderer passed through and sold me a strange book.",
 		offer: INFUSABLES["eldritch codex"].item,
 	},
 	[POISON.requiredStage]: {
 		monologue: "Allow me to offer a phial to collect your sorrows.",
 		offer: RELICS.lacrimatory.item,
+	},
+	50: {
+		monologue: "Now, release your anger.",
+		offer: RELICS["war mask"].item,
 	},
 }
 

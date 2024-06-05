@@ -24,7 +24,7 @@ import { QuestNotifications } from "@neverquest/components/Quests/QuestNotificat
 import { Statistics } from "@neverquest/components/Statistics"
 import { Status } from "@neverquest/components/Status"
 import { CLASS_FULL_WIDTH_JUSTIFIED, SCREEN_WIDTH_MINIMUM } from "@neverquest/data/general"
-import { consciousness } from "@neverquest/state/encounter"
+import { consciousness } from "@neverquest/state/character"
 import { formatNumber } from "@neverquest/utilities/formatters"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 

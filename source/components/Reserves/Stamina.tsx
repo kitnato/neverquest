@@ -43,9 +43,7 @@ export function Stamina() {
 											</td>
 
 											<td>
-												<IconDisplay Icon={IconStamina} iconProps={{ className: "small" }}>
-													<span>{baseAmount}</span>
-												</IconDisplay>
+												<span>{baseAmount}</span>
 											</td>
 										</tr>
 
@@ -77,14 +75,14 @@ export function Stamina() {
 												</td>
 
 												<td>
-													<span>
-														+
-														{formatNumber({
-															decimals: 0,
-															format: "percentage",
-															value: questsBonusStamina,
-														})}
-													</span>
+													<IconDisplay Icon={IconStamina} iconProps={{ className: "small" }}>
+														<span>
+															{formatNumber({
+																format: "multiplier",
+																value: questsBonusStamina,
+															})}
+														</span>
+													</IconDisplay>
 												</td>
 											</tr>
 										)}

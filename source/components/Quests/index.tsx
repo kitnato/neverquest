@@ -8,7 +8,7 @@ import IconConquest from "@neverquest/icons/conquest.svg?react"
 import IconRoutine from "@neverquest/icons/routine.svg?react"
 import IconTriumph from "@neverquest/icons/triumph.svg?react"
 import { canTrackQuests } from "@neverquest/state/quests"
-import { isSkillAcquired } from "@neverquest/state/skills"
+import { isSkillTrained } from "@neverquest/state/skills"
 import { isShowingQuestBonus } from "@neverquest/state/ui"
 import { QUEST_BONUS_TYPES, type QuestClass } from "@neverquest/types/unions"
 
@@ -34,10 +34,10 @@ const TABS: TabsData<QuestClass> = [
 
 export function Quests() {
 	const canTrackQuestsValue = useRecoilValue(canTrackQuests)
-	const isSkillAcquiredMemetics = useRecoilValue(isSkillAcquired("memetics"))
+	const isSkillTrainedMemetics = useRecoilValue(isSkillTrained("memetics"))
 	const isShowingQuestBonusValue = useRecoilValue(isShowingQuestBonus)
 
-	if (!isSkillAcquiredMemetics) {
+	if (!isSkillTrainedMemetics) {
 		return (
 			<span className="fst-italic">
 				The journal is undecipherable. Perhaps someone versed in the alchemical arts can help ...
@@ -63,7 +63,7 @@ export function Quests() {
 				</>
 			)}
 
-			{isShowingQuestBonusValue && <h6>Progress</h6>}
+			{isShowingQuestBonusValue && <h6>Journey</h6>}
 
 			<TabContainer defaultActiveKey={TABS[0].label}>
 				<Stack className="overflow-y-hidden" gap={1}>

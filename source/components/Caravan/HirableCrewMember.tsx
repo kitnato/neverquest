@@ -15,7 +15,7 @@ import IconEssence from "@neverquest/icons/essence.svg?react"
 import IconStage from "@neverquest/icons/stage.svg?react"
 import IconUnknown from "@neverquest/icons/unknown.svg?react"
 import { isHired } from "@neverquest/state/caravan"
-import { stageMaximum } from "@neverquest/state/encounter"
+import { stageMaximum } from "@neverquest/state/character"
 import { essence } from "@neverquest/state/resources"
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters"
 

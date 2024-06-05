@@ -7,7 +7,7 @@ import { Typewriter } from "@neverquest/components/Typewriter"
 import { LEVELLING_MAXIMUM } from "@neverquest/data/general"
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import IconAwakening from "@neverquest/icons/awakening.svg?react"
-import { consciousness } from "@neverquest/state/encounter"
+import { consciousness } from "@neverquest/state/character"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function Awakening() {

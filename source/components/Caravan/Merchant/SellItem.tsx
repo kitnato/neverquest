@@ -7,16 +7,16 @@ import { useToggleEquipItem } from "@neverquest/hooks/actions/useToggleEquipItem
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence"
 import IconEssence from "@neverquest/icons/essence.svg?react"
 import { merchantInventory } from "@neverquest/state/caravan"
-import { gems } from "@neverquest/state/gear"
+import { fittedGems } from "@neverquest/state/gear"
 import { inventory } from "@neverquest/state/inventory"
 import { isGearItem, isRelicItem } from "@neverquest/types/type-guards"
 import { formatNumber } from "@neverquest/utilities/formatters"
-import { getSellPrice } from "@neverquest/utilities/getters"
+import { getSecondHandPrice } from "@neverquest/utilities/getters"
 
 import type { InventoryItem } from "@neverquest/types"
 
 export function SellItem({ item }: { item: InventoryItem }) {
-	const gemsFittedValue = useRecoilValue(gems(item.ID))
+	const fittedGemsValue = useRecoilValue(fittedGems)
 	const setInventory = useSetRecoilState(inventory)
 	const setMerchantInventory = useSetRecoilState(merchantInventory)
 
@@ -24,19 +24,22 @@ export function SellItem({ item }: { item: InventoryItem }) {
 	const toggleEquipItem = useToggleEquipItem()
 	const transactEssence = useTransactEssence()
 
-	const sellPrice = getSellPrice({ gemsFitted: gemsFittedValue.length, item })
+	const secondHandPrice = getSecondHandPrice({
+		gemsFitted: (fittedGemsValue[item.ID] ?? []).length,
+		item,
+	})
 
 	return (
 		<Stack className="ms-2" direction="horizontal" gap={3}>
 			<IconDisplay Icon={IconEssence} tooltip="Value">
-				<span>{formatNumber({ value: sellPrice })}</span>
+				<span>{formatNumber({ value: secondHandPrice })}</span>
 			</IconDisplay>
 
 			<Button
 				onClick={() => {
 					const { ID } = item
 
-					transactEssence(sellPrice)
+					transactEssence(secondHandPrice)
 
 					if (isGearItem(item) || isRelicItem(item)) {
 						toggleEquipItem({ forceUnequip: true, item })

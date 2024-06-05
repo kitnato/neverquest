@@ -1,7 +1,6 @@
 import { nanoid } from "nanoid"
 
 import { ATTRIBUTE_COST_BASE } from "@neverquest/data/attributes"
-import { AFFIX_STRUCTURE_WEIGHTS } from "@neverquest/data/encounter"
 import {
 	type ARMOR_NONE,
 	ARMOR_SPECIFICATIONS,
@@ -14,10 +13,12 @@ import {
 	WEAPON_SPECIFICATIONS,
 } from "@neverquest/data/gear"
 import {
+	AFFIX_STRUCTURE_WEIGHTS,
 	CLASS_ANIMATED,
 	CLASS_ANIMATE_PREFIX,
 	GENERIC_MINIMUM,
 	LEVELLING_END,
+	LEVELLING_MAXIMUM,
 	MILLISECONDS_IN_SECOND,
 	ROMAN_NUMERALS,
 	ROMAN_NUMERAL_MAXIMUM,
@@ -233,17 +234,21 @@ export function getElementalEffects({
 		for (const { amount, item } of stackItems(gems)) {
 			const { elemental } = GEMS[item.name]
 			const { damageArmor, damageWeapon, duration } = ELEMENTALS[elemental]
+			const factor = getExponential((amount - 1) / (GEMS_MAXIMUM - 1))
 
 			effects[elemental] = {
 				damage: Math.max(
 					Math.round(
-						(armorEffect ? gear.level : gear.damage) * getFromRange({ factor: (amount - 1) / (GEMS_MAXIMUM - 1), ...armorEffect ? damageArmor : damageWeapon }),
+						(armorEffect ? gear.level : gear.damage) * getFromRange({
+							factor,
+							...armorEffect ? damageArmor : damageWeapon,
+						}),
 					),
 					GENERIC_MINIMUM,
 				),
 				duration: Math.round(
 					getFromRange({
-						factor: (amount - 1) / (GEMS_MAXIMUM - 1),
+						factor,
 						...duration,
 					}),
 				),
@@ -259,12 +264,25 @@ export function getElementalEffects({
 		const { elemental } = GEMS[item.name]
 
 		effects[elemental] = getFromRange({
-			factor: (amount - 1) / (GEMS_MAXIMUM - 1),
+			factor: getExponential((amount - 1) / (GEMS_MAXIMUM - 1)),
 			...GEM_ENHANCEMENT_RANGE,
 		})
 	}
 
 	return effects
+}
+
+// f(0) = 0, f(0.25) = ~0.047, f(0.5) = ~0.21, f(0.75) = ~0.51, f(1+) = 1
+export function getExponential(x: number) {
+	if (x === 0) {
+		return 0
+	}
+
+	if (x >= 1) {
+		return 1
+	}
+
+	return Math.pow(Math.E, 0.6935 * x) * x - x
 }
 
 export function getGearIcon(gearItem: GearItem | GearItemUnequipped) {
@@ -367,17 +385,19 @@ export function getMeleeRanges({
 	}
 }
 
-export function getQuestsData(quest: Quest): QuestData[] {
+export function getQuestData(quest: Quest): [QuestData, ...QuestData[]] {
 	const { description, hidden, progression, title } = QUESTS[quest]
 
 	return progression.map((progress, index) => ({
 		description: description.replace("@", formatNumber({ value: progress })),
 		hidden,
+		ID: nanoid(),
 		progressionIndex: index,
 		progressionMaximum: progress,
+		quest,
 		questClass: isConquest(quest) ? "conquest" : isRoutine(quest) ? "routine" : "triumph",
 		title: `${title}${progression.length > 1 ? ` ${getRomanNumeral(index + 1)}` : ""}`,
-	}))
+	})) as [QuestData, ...QuestData[]]
 }
 
 export function getRange({
@@ -481,23 +501,27 @@ function getRomanNumeral(value: number) {
 	return currentNumeral
 }
 
-export function getSellPrice({ gemsFitted, item }: { gemsFitted?: number, item: InventoryItem }) {
+export function getSecondHandPrice({ gemsFitted, item }: { gemsFitted?: number, item: InventoryItem }) {
 	const { price } = item
 	let supplement = 0
 
 	if (isGearItem(item) && gemsFitted !== undefined) {
 		supplement += (
-			getSellPrice({
+			getSecondHandPrice({
 				item: {
 					...GEM_BASE,
 					ID: nanoid(),
 					name: "ruby",
 				},
 			}) * gemsFitted
-		) / 2
+		) / 3
 	}
 
-	return Math.max(Math.round(price / 2), GENERIC_MINIMUM) + supplement
+	return Math.round(
+		Math.max(
+			price / (isGearItem(item) ? 4 : 2),
+			GENERIC_MINIMUM,
+		) + supplement)
 }
 
 export function getShieldRanges({ factor, gearClass }: { factor: number, gearClass: ShieldClass }) {
@@ -512,11 +536,17 @@ export function getShieldRanges({ factor, gearClass }: { factor: number, gearCla
 }
 
 // https://en.wikipedia.org/wiki/Sigmoid_function
-// f(0) = 0, f(37) = ~0.28, f(50) = ~0.73, f(75) = ~1, f(100) = ~1
+// f(0) = 0, f(37) = ~0.28, f(50) = ~0.73, f(75+) = 1
 export function getSigmoid(x: number) {
-	return x === 0
-		? 0
-		: (Math.tanh(x / 13 - 3) + 1) / 2
+	if (x === 0) {
+		return 0
+	}
+
+	if (x >= LEVELLING_MAXIMUM) {
+		return 1
+	}
+
+	return (Math.tanh(x / 13 - 3) + 1) / 2
 }
 
 export function getSnapshotGetter({ getLoadable }: Snapshot) {
@@ -533,12 +563,12 @@ export function getTotalElementalEffects({
 	modifier: number
 }) {
 	return {
-		damage: Math.round(damage + damage * modifier),
-		duration: Math.round(duration + duration * modifier),
+		damage: Math.round(damage * (1 + modifier)),
+		duration: Math.round(duration * (1 + modifier)),
 	}
 }
 
 // https://en.wikipedia.org/wiki/Triangular_number
-export function getTriangular(x: number) {
-	return (x * (x + 1)) / 2
+export function getTriangular(n: number) {
+	return (n * (n + 1)) / 2
 }

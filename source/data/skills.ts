@@ -12,6 +12,7 @@ import IconCriticalChance from "@neverquest/icons/critical-chance.svg?react"
 import IconCriticalDamage from "@neverquest/icons/critical-damage.svg?react"
 import IconCriticalRating from "@neverquest/icons/critical-rating.svg?react"
 import IconDeflectionChance from "@neverquest/icons/deflection-chance.svg?react"
+import IconDexterity from "@neverquest/icons/dexterity.svg?react"
 import IconDodgeChance from "@neverquest/icons/dodge-chance.svg?react"
 import IconEscrime from "@neverquest/icons/escrime.svg?react"
 import IconEvasion from "@neverquest/icons/evasion.svg?react"
@@ -21,7 +22,9 @@ import IconImpermeability from "@neverquest/icons/impermeability.svg?react"
 import IconInfusionLevel from "@neverquest/icons/infusion-level.svg?react"
 import IconMeditation from "@neverquest/icons/meditation.svg?react"
 import IconMemetics from "@neverquest/icons/memetics.svg?react"
+import IconMonsterHealth from "@neverquest/icons/monster-health.svg?react"
 import IconParryChance from "@neverquest/icons/parry-chance.svg?react"
+import IconPerception from "@neverquest/icons/perception.svg?react"
 import IconPiercing from "@neverquest/icons/piercing.svg?react"
 import IconPoisoned from "@neverquest/icons/poisoned.svg?react"
 import IconRanged from "@neverquest/icons/ranged.svg?react"
@@ -36,6 +39,7 @@ import IconStamina from "@neverquest/icons/stamina.svg?react"
 import IconStunned from "@neverquest/icons/stunned.svg?react"
 import IconTraumatology from "@neverquest/icons/traumatology.svg?react"
 import IconTwoHanded from "@neverquest/icons/two-handed.svg?react"
+import IconVigor from "@neverquest/icons/vigor.svg?react"
 
 import type { SVGIcon } from "@neverquest/types/components"
 import type { Description } from "@neverquest/types/ui"
@@ -79,18 +83,16 @@ export const SKILLS: Record<
 		trainer: "mercenary",
 	},
 	assassination: {
-		description:
-			"Grants the ability to deal # critical strikes alongside attributes that determine their # chance and # damage.",
-		descriptionIcons: [IconCriticalRating, IconCriticalChance, IconCriticalDamage],
+		description: "Grants the ability to deal # critical strikes with two new attributes: # dexterity for # chance and # perception for # damage.",
+		descriptionIcons: [IconCriticalRating, IconDexterity, IconCriticalChance, IconPerception, IconCriticalDamage],
 		Icon: IconAssassination,
 		isInheritable: false,
 		requiredCrewMember: "merchant",
 		trainer: "mercenary",
 	},
 	calisthenics: {
-		description:
-			"Grants an # attribute that increases rates for # health regeneration and # stamina regeneration.",
-		descriptionIcons: [IconRegenerationRate, IconHealth, IconStamina],
+		description: "Grants the # vigor attribute that increases the # regeneration rate of # health and # stamina.",
+		descriptionIcons: [IconVigor, IconRegenerationRate, IconHealth, IconStamina],
 		Icon: IconCalisthenics,
 		isInheritable: false,
 		requiredCrewMember: "merchant",
@@ -98,8 +100,7 @@ export const SKILLS: Record<
 		trainer: "mercenary",
 	},
 	escrime: {
-		description:
-			"Grants the ability to # parry attacks with # slashing weapons, partially reflecting damage.",
+		description: "Grants the ability to # parry attacks with # slashing weapons, partially avoiding and reflecting damage.",
 		descriptionIcons: [IconParryChance, IconSlashing],
 		Icon: IconEscrime,
 		isInheritable: false,
@@ -115,8 +116,7 @@ export const SKILLS: Record<
 		trainer: "mercenary",
 	},
 	impermeability: {
-		description:
-			"Grants the ability to # deflect # poison and # blight ailments, avoiding them entirely.",
+		description: "Grants the ability to # deflect # poison and # blight ailments, avoiding them entirely.",
 		descriptionIcons: [IconDeflectionChance, IconPoisoned, IconBlighted],
 		Icon: IconImpermeability,
 		isInheritable: true,
@@ -140,7 +140,7 @@ export const SKILLS: Record<
 		trainer: "alchemist",
 	},
 	shieldcraft: {
-		description: "Grants the use of # tower shields and the ability to # stagger monsters, reducing their damage dealt.",
+		description: "Grants the use of # tower shields with the ability to # stagger monsters, reducing their damage dealt.",
 		descriptionIcons: [IconShieldTower, IconStaggered],
 		Icon: IconShieldcraft,
 		isInheritable: false,
@@ -148,9 +148,8 @@ export const SKILLS: Record<
 		trainer: "mercenary",
 	},
 	siegecraft: {
-		description:
-			"Grants the use of # two-handed melee weapons that have a chance to # execute monsters.",
-		descriptionIcons: [IconTwoHanded, IconExecution],
+		description: "Grants the use of # two-handed melee weapons that # execute monsters when they reach low # health.",
+		descriptionIcons: [IconTwoHanded, IconExecution, IconMonsterHealth],
 		Icon: IconSiegecraft,
 		isInheritable: false,
 		requiredCrewMember: "blacksmith",

@@ -1,10 +1,9 @@
 import { useRecoilCallback } from "recoil"
 
 import { ATTRIBUTES } from "@neverquest/data/attributes"
-import { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear"
+import { MERCHANT_OFFERS } from "@neverquest/data/caravan"
 import { RETIREMENT_STAGE } from "@neverquest/data/retirement"
 import { SKILLS } from "@neverquest/data/skills"
-import { useAcquireSkill } from "@neverquest/hooks/actions/useAcquireSkill"
 import { useInitialize } from "@neverquest/hooks/actions/useInitialize"
 import { useNeutralize } from "@neverquest/hooks/actions/useNeutralize"
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
@@ -16,26 +15,26 @@ import {
 	blacksmithInventory,
 	expandedBuyback,
 	fletcherInventory,
-	hasGeneratedOffer,
+	isOfferGenerated,
 	merchantInventory,
 	monologue,
 } from "@neverquest/state/caravan"
-import { name } from "@neverquest/state/character"
 import {
-	corpse,
-	generation,
-	hasDefeatedFinality,
+	corpse, generation,
+	isFinalityDefeated,
+	name,
 	stage,
 	stageHighest,
 	stageMaximum,
-} from "@neverquest/state/encounter"
-import { armor, gems, shield, weapon } from "@neverquest/state/gear"
+	stageRetired,
+} from "@neverquest/state/character"
+import { armor, fittedGems, shield, weapon } from "@neverquest/state/gear"
 import { inventory } from "@neverquest/state/inventory"
 import { expandedMasteries, masteryProgress, masteryRank } from "@neverquest/state/masteries"
 import { questProgress } from "@neverquest/state/quests"
 import { essence } from "@neverquest/state/resources"
-import { isSkillAcquired } from "@neverquest/state/skills"
-import { isTraitAcquired, selectedTrait } from "@neverquest/state/traits"
+import { isSkillTrained } from "@neverquest/state/skills"
+import { isTraitEarned, selectedTrait } from "@neverquest/state/traits"
 import { isInheritableItem } from "@neverquest/types/type-guards"
 import {
 	ATTRIBUTE_TYPES,
@@ -46,7 +45,6 @@ import {
 import { getPerkEffect, getSnapshotGetter } from "@neverquest/utilities/getters"
 
 export function useRetire() {
-	const acquireSkill = useAcquireSkill()
 	const initialize = useInitialize()
 	const neutralize = useNeutralize()
 	const progressQuest = useProgressQuest()
@@ -68,59 +66,54 @@ export function useRetire() {
 				}
 
 				if (selectedTraitValue !== undefined) {
-					set(isTraitAcquired(selectedTraitValue), true)
+					set(isTraitEarned(selectedTraitValue), true)
 					reset(selectedTrait)
 
 					progressQuest({ quest: "traits" })
-					progressQuest({ quest: "traitsAll" })
 				}
 
 				resetAttributes()
 				resetCharacter(true)
 
-				set(essence, Math.round(getPerkEffect({ generation: nextGeneration, perk: "startingEssence" }) * get(absorbedEssence)))
+				set(essence, Math.round(
+					getPerkEffect({ generation: nextGeneration, perk: "startingEssence" })
+					* get(absorbedEssence),
+				))
+				set(generation, nextGeneration)
+				set(stageRetired, stageMaximumValue)
 
 				reset(armor)
 				reset(blacksmithInventory)
 				reset(corpse)
 				reset(expandedBuyback)
 				reset(expandedMasteries)
-				reset(hasDefeatedFinality("res dominus"))
+				reset(isFinalityDefeated("res dominus"))
 				reset(fletcherInventory)
-				reset(gems(ARMOR_NONE.ID))
-				reset(gems(SHIELD_NONE.ID))
-				reset(gems(WEAPON_NONE.ID))
+				reset(fittedGems)
 				reset(name)
 				reset(shield)
 				reset(stage)
 				reset(stageHighest)
 				reset(weapon)
 
-				reset(questProgress("attributesUnlocking"))
+				reset(questProgress("attributesIncreasing"))
 				reset(questProgress("hiring"))
-				reset(questProgress("hiringAll"))
-				reset(questProgress("masteriesAll"))
-				reset(questProgress("masteriesRankMaximum"))
+				reset(questProgress("masteriesUnlocking"))
 				reset(questProgress("powerLevel"))
-				reset(questProgress("powerLevelUltra"))
 				reset(questProgress("stages"))
-				reset(questProgress("stagesEnd"))
-				reset(questProgress("skillsCraft"))
-				reset(questProgress("survivingNoAttributes"))
-				reset(questProgress("survivingNoGear"))
 
-				for (const attribute of ATTRIBUTE_TYPES) {
-					if (ATTRIBUTES[attribute].requiredSkill === undefined) {
-						progressQuest({ quest: "attributesUnlocking" })
-					}
-				}
+				progressQuest({
+					amount: ATTRIBUTE_TYPES.filter(attribute => ATTRIBUTES[attribute].requiredSkill === undefined).length,
+					isAbsolute: true,
+					quest: "attributesUnlocking",
+				})
 
 				for (const crewMember of CREW_MEMBER_TYPES) {
 					reset(monologue(crewMember))
 				}
 
-				for (let index = 1; index <= stageMaximumValue; index++) {
-					reset(hasGeneratedOffer(index))
+				for (let index = 1; index <= get(stageHighest); index++) {
+					reset(isOfferGenerated(index))
 				}
 
 				for (const mastery of MASTERY_TYPES) {
@@ -128,20 +121,36 @@ export function useRetire() {
 					reset(masteryRank(mastery))
 				}
 
-				for (const skill of SKILL_TYPES) {
-					if (!SKILLS[skill].isInheritable) {
-						reset(isSkillAcquired(skill))
+				const inheritedSkills = SKILL_TYPES.filter(skill => SKILLS[skill].isInheritable && get(isSkillTrained(skill)))
 
-						if (get(isSkillAcquired(skill))) {
-							progressQuest({ amount: -1, quest: "skills" })
-							progressQuest({ amount: -1, quest: "skillsAll" })
-						}
+				progressQuest({
+					amount: inheritedSkills.length,
+					isAbsolute: true,
+					quest: "skillsTraining",
+				})
+
+				SKILL_TYPES.forEach((skill) => {
+					if (!inheritedSkills.includes(skill)) {
+						reset(isSkillTrained(skill))
 					}
-				}
+				})
 
-				set(inventory, currentInventory =>
-					currentInventory.filter(currentItem => isInheritableItem(currentItem)),
-				)
+				const inheritedItems = get(inventory).filter(currentItem => isInheritableItem(currentItem))
+				const inheritableOfferNames = Object
+					.values(MERCHANT_OFFERS)
+					.map(({ offer }) => offer)
+					.filter(isInheritableItem)
+					.map(({ name }) => name)
+
+				progressQuest({
+					amount: inheritedItems.filter(({ name }) =>
+						inheritableOfferNames.some(inheritableOfferName => name === inheritableOfferName),
+					).length,
+					isAbsolute: true,
+					quest: "purchasingInheritable",
+				})
+
+				set(inventory, inheritedItems)
 
 				for (const item of get(merchantInventory)) {
 					neutralize({ item })
@@ -149,19 +158,12 @@ export function useRetire() {
 
 				reset(merchantInventory)
 
-				set(generation, nextGeneration)
-
-				if (get(isSkillAcquired("memetics"))) {
-					progressQuest({ quest: "decipheringJournal" })
-				}
-
 				progressQuest({ quest: "retiring" })
 
 				resetWilderness()
 				initialize(true)
 			},
 		[
-			acquireSkill,
 			initialize,
 			neutralize,
 			progressQuest,

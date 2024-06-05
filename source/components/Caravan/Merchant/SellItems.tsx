@@ -6,12 +6,14 @@ import { ItemDisplay } from "@neverquest/components/Inventory/ItemDisplay"
 import { CLASS_FULL_WIDTH_JUSTIFIED } from "@neverquest/data/general"
 import { armor, shield, weapon } from "@neverquest/state/gear"
 import { inventory } from "@neverquest/state/inventory"
+import { equippedRelics } from "@neverquest/state/items"
 import {
 	isArmor,
 	isConsumableItem,
 	isGearItem,
 	isGemItem,
 	isInheritableItem,
+	isRelicItem,
 	isShield,
 	isWeapon,
 } from "@neverquest/types/type-guards"
@@ -21,15 +23,21 @@ import type { Armor, Shield, Weapon } from "@neverquest/types"
 
 export function SellItems() {
 	const armorValue = useRecoilValue(armor)
+	const equippedRelicsValue = useRecoilValue(equippedRelics)
 	const inventoryValue = useRecoilValue(inventory)
 	const shieldValue = useRecoilValue(shield)
 	const weaponValue = useRecoilValue(weapon)
 
 	const equippedGear = [weaponValue, armorValue, shieldValue].filter(
 		gearItem => isArmor(gearItem) || isShield(gearItem) || isWeapon(gearItem),
-	) as (Armor | Shield | Weapon)[]
-	const equippedGearIDs = new Set(equippedGear.map(({ ID }) => ID))
-	const storedItems = inventoryValue.filter(item => !equippedGearIDs.has(item.ID))
+	) as [Weapon, Armor, Shield]
+	const equippedRelicItems = inventoryValue
+		.filter(isRelicItem)
+		.filter(item => equippedRelicsValue[item.name])
+		.toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2))
+	const equippedItems = [...equippedGear, ...equippedRelicItems]
+	const equippedItemIDs = new Set(equippedItems.map(({ ID }) => ID))
+	const storedItems = inventoryValue.filter(({ ID }) => !equippedItemIDs.has(ID))
 
 	return (
 		<Stack gap={3}>
@@ -37,7 +45,6 @@ export function SellItems() {
 
 			{inventoryValue.length === 0
 				? <span className="fst-italic">Nothing to sell.</span>
-
 				: (
 					<Stack gap={3}>
 						{storedItems
@@ -61,17 +68,6 @@ export function SellItems() {
 							)
 						})}
 
-						{storedItems
-							.filter(isInheritableItem)
-							.toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2))
-							.map(inheritableItem => (
-								<div className={CLASS_FULL_WIDTH_JUSTIFIED} key={inheritableItem.ID}>
-									<ItemDisplay item={inheritableItem} />
-
-									<SellItem item={inheritableItem} />
-								</div>
-							))}
-
 						{[
 							...stackItems(
 								storedItems
@@ -90,6 +86,27 @@ export function SellItems() {
 								<SellItem item={item} />
 							</div>
 						))}
+
+						{storedItems
+							.filter(isInheritableItem)
+							.toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2))
+							.map(inheritableItem => (
+								<div className={CLASS_FULL_WIDTH_JUSTIFIED} key={inheritableItem.ID}>
+									<ItemDisplay item={inheritableItem} />
+
+									<SellItem item={inheritableItem} />
+								</div>
+							))}
+
+						{equippedRelicItems.map((relicItem) => {
+							return (
+								<div className={CLASS_FULL_WIDTH_JUSTIFIED} key={relicItem.ID}>
+									<ItemDisplay isEquipped item={relicItem} />
+
+									<SellItem item={relicItem} />
+								</div>
+							)
+						})}
 					</Stack>
 				)}
 		</Stack>

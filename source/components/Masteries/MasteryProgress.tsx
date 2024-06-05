@@ -14,8 +14,9 @@ import type { Delta, Mastery } from "@neverquest/types/unions"
 
 export function MasteryProgress({ mastery }: { mastery: Mastery }) {
 	const masteryProgressState = masteryProgress(mastery)
-	const isMasteryAtMaximumValue = useRecoilValue(isMasteryAtMaximum(mastery))
+
 	const masteryCostValue = useRecoilValue(masteryCost(mastery))
+	const isMasteryAtMaximumValue = useRecoilValue(isMasteryAtMaximum(mastery))
 	const masteryProgressValue = useRecoilValue(masteryProgressState)
 
 	const { instructionIcons, instructions } = MASTERIES[mastery]

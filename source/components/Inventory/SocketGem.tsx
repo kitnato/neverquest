@@ -8,10 +8,10 @@ import { GEMS_MAXIMUM } from "@neverquest/data/items"
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence"
 import IconEssence from "@neverquest/icons/essence.svg?react"
-import { armor, gems, shield, weapon } from "@neverquest/state/gear"
+import { armor, fittedGems, shield, weapon } from "@neverquest/state/gear"
 import { inventory } from "@neverquest/state/inventory"
 import { essence } from "@neverquest/state/resources"
-import { isTraitAcquired } from "@neverquest/state/traits"
+import { isTraitEarned } from "@neverquest/state/traits"
 import { isShowing } from "@neverquest/state/ui"
 import { isGear, isMelee, isRanged, isUnarmed } from "@neverquest/types/type-guards"
 import { GEAR_TYPES } from "@neverquest/types/unions"
@@ -20,9 +20,10 @@ import { getGearIcon, getGemFittingCost } from "@neverquest/utilities/getters"
 import type { GemItem } from "@neverquest/types"
 
 export function SocketGem({ gem }: { gem: GemItem }) {
+	const [fittedGemsValue, setFittedGems] = useRecoilState(fittedGems)
 	const armorValue = useRecoilValue(armor)
 	const essenceValue = useRecoilValue(essence)
-	const isTraitAcquiredColossus = useRecoilValue(isTraitAcquired("colossus"))
+	const isTraitEarnedColossus = useRecoilValue(isTraitEarned("colossus"))
 	const shieldValue = useRecoilValue(shield)
 	const weaponValue = useRecoilValue(weapon)
 	const setInventory = useSetRecoilState(inventory)
@@ -32,31 +33,31 @@ export function SocketGem({ gem }: { gem: GemItem }) {
 		weapon: useSetRecoilState(isShowing("weapon")),
 	}
 
-	const [armorGemsValue, setArmorGems] = useRecoilState(gems(armorValue.ID))
-	const [shieldGemsValue, setShieldGems] = useRecoilState(gems(shieldValue.ID))
-	const [weaponGemsValue, setWeaponGems] = useRecoilState(gems(weaponValue.ID))
+	const armorGems = fittedGemsValue[armorValue.ID] ?? []
+	const shieldGems = fittedGemsValue[shieldValue.ID] ?? []
+	const weaponGems = fittedGemsValue[weaponValue.ID] ?? []
 
 	const gemFitting = {
 		armor: {
-			canFit: armorGemsValue.length < GEMS_MAXIMUM,
+			canFit: armorGems.length < GEMS_MAXIMUM,
 			gear: armorValue,
-			gemsFitted: armorGemsValue.length,
-			isAffordable: getGemFittingCost(armorGemsValue.length) <= essenceValue,
-			setGems: setArmorGems,
+			gemsFitted: armorGems.length,
+			isAffordable: getGemFittingCost(armorGems.length) <= essenceValue,
+			itemID: armorValue.ID,
 		},
 		shield: {
-			canFit: shieldGemsValue.length < GEMS_MAXIMUM,
+			canFit: shieldGems.length < GEMS_MAXIMUM,
 			gear: shieldValue,
-			gemsFitted: shieldGemsValue.length,
-			isAffordable: getGemFittingCost(shieldGemsValue.length) <= essenceValue,
-			setGems: setShieldGems,
+			gemsFitted: shieldGems.length,
+			isAffordable: getGemFittingCost(shieldGems.length) <= essenceValue,
+			itemID: shieldValue.ID,
 		},
 		weapon: {
-			canFit: weaponGemsValue.length < GEMS_MAXIMUM,
+			canFit: weaponGems.length < GEMS_MAXIMUM,
 			gear: weaponValue,
-			gemsFitted: weaponGemsValue.length,
-			isAffordable: getGemFittingCost(weaponGemsValue.length) <= essenceValue,
-			setGems: setWeaponGems,
+			gemsFitted: weaponGems.length,
+			isAffordable: getGemFittingCost(weaponGems.length) <= essenceValue,
+			itemID: weaponValue.ID,
 		},
 	}
 
@@ -67,9 +68,12 @@ export function SocketGem({ gem }: { gem: GemItem }) {
 		<DropdownButton
 			onSelect={(slot) => {
 				if (isGear(slot)) {
-					const { gemsFitted, setGems } = gemFitting[slot]
+					const { gemsFitted, itemID } = gemFitting[slot]
 
-					setGems(currentGems => [...currentGems, gem])
+					setFittedGems(currentFittedGems => ({
+						...currentFittedGems,
+						[itemID]: [...currentFittedGems[itemID] ?? [], gem],
+					}))
 					setInventory(currentInventory =>
 						currentInventory.filter(({ ID: itemID }) => itemID !== gem.ID),
 					)
@@ -93,21 +97,19 @@ export function SocketGem({ gem }: { gem: GemItem }) {
 		>
 			{GEAR_TYPES.filter(gearType =>
 				gearType === "shield"
-					? (
-						(
-							(isMelee(weaponValue) || isUnarmed(weaponValue))
-							&& weaponValue.grip === "one-handed"
-						) || isTraitAcquiredColossus
-					)
+					? ((
+						(isMelee(weaponValue) || isUnarmed(weaponValue))
+						&& weaponValue.grip === "one-handed"
+					) || isTraitEarnedColossus)
 					&& !isRanged(weaponValue)
 					: true,
 			).map((gearType) => {
 				const { canFit, gear, gemsFitted, isAffordable } = gemFitting[gearType]
 
-				const canApply = canFit && isAffordable
+				const canSocket = canFit && isAffordable
 
 				return (
-					<DropdownItem disabled={!canApply} eventKey={gearType} key={gearType}>
+					<DropdownItem disabled={!canSocket} eventKey={gearType} key={gearType}>
 						<div className={CLASS_FULL_WIDTH_JUSTIFIED}>
 							<IconDisplay Icon={getGearIcon(gear)} iconProps={{ className: "small" }}>
 								<span>{gear.name}</span>

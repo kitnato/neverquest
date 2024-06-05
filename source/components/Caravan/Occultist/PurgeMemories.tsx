@@ -22,8 +22,7 @@ import { essence } from "@neverquest/state/resources"
 import { formatNumber } from "@neverquest/utilities/formatters"
 
 export function PurgeMemories() {
-	const allCompletedQuestsCount
-		= useRecoilValue(completedQuestsCount("conquest"))
+	const allCompletedQuestsCount = useRecoilValue(completedQuestsCount("conquest"))
 		+ useRecoilValue(completedQuestsCount("routine"))
 		+ useRecoilValue(completedQuestsCount("triumph"))
 	const canTrackQuestsValue = useRecoilValue(canTrackQuests)
@@ -33,10 +32,10 @@ export function PurgeMemories() {
 	const resetCompletedQuests = useResetCompletedQuests()
 	const transactEssence = useTransactEssence()
 
-	const hasCompletedQuests = allCompletedQuestsCount > 0
+	const areQuestsCompleted = allCompletedQuestsCount > 0
 	const price = Math.round(allCompletedQuestsCount * PURGE_PRICE_MULTIPLIER.quests)
 	const isAffordable = price <= essenceValue
-	const isPurchasable = hasCompletedQuests && isAffordable
+	const isPurchasable = areQuestsCompleted && isAffordable
 
 	if (canTrackQuestsValue) {
 		return (
@@ -65,7 +64,7 @@ export function PurgeMemories() {
 								<Stack>
 									{!isAffordable && <span>{LABEL_NO_ESSENCE}</span>}
 
-									{!hasCompletedQuests && <span>No completed quests to purge.</span>}
+									{!areQuestsCompleted && <span>No completed quests to purge.</span>}
 								</Stack>
 							</Tooltip>
 						)}

@@ -2,8 +2,8 @@ import { nanoid } from "nanoid"
 import { useRecoilCallback } from "recoil"
 
 import { MERCHANT_OFFERS } from "@neverquest/data/caravan"
-import { hasGeneratedOffer, merchantInventory } from "@neverquest/state/caravan"
-import { stage, stageMaximum } from "@neverquest/state/encounter"
+import { isOfferGenerated, merchantInventory } from "@neverquest/state/caravan"
+import { stage, stageMaximum } from "@neverquest/state/character"
 import { ownedItem } from "@neverquest/state/inventory"
 import { isGearItem, isInheritableItem } from "@neverquest/types/type-guards"
 import {
@@ -31,15 +31,17 @@ export function useGenerateMerchantOffer() {
 				if (
 					merchantOffer !== undefined
 					&& stageValue === get(stageMaximum)
-					&& !get(hasGeneratedOffer(stageValue))
+					&& !get(isOfferGenerated(stageValue))
 				) {
 					const { offer } = merchantOffer
 
 					// In the case of being a relic or infusable, make sure it's not in any inventory.
 					if (
 						isInheritableItem(offer)
-						&& (newMerchantInventory.some(({ name }) => name === offer.name)
-						|| get(ownedItem(offer.name)) !== undefined)
+						&& (
+							newMerchantInventory.some(({ name }) => name === offer.name)
+							|| get(ownedItem(offer.name)) !== undefined
+						)
 					) {
 						return
 					}
@@ -89,7 +91,7 @@ export function useGenerateMerchantOffer() {
 					})
 
 					set(merchantInventory, newMerchantInventory)
-					set(hasGeneratedOffer(stageValue), true)
+					set(isOfferGenerated(stageValue), true)
 				}
 			},
 		[],

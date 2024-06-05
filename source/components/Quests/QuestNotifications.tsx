@@ -14,18 +14,13 @@ export function QuestNotifications() {
 		return (
 			<ToastContainer className="mb-4" position="bottom-center">
 				{questNotificationsValue.map(
-					({ description, hidden, ID: questNotificationOuterID, questClass, title }) => (
+					({ description, hidden, ID: outerID, questClass, title }) => (
 						<Toast
 							autohide
 							delay={QUEST_NOTIFICATION_DURATION}
-							key={questNotificationOuterID}
+							key={outerID}
 							onClose={() => {
-								setQuestNotifications(queue =>
-									queue.filter(
-										({ ID: questNotificationInnerID }) =>
-											questNotificationOuterID !== questNotificationInnerID,
-									),
-								)
+								setQuestNotifications(queue => queue.filter(({ ID: innerID }) => outerID !== innerID))
 							}}
 							show
 						>

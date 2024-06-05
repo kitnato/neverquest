@@ -7,19 +7,16 @@ import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta"
 import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth"
 import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth"
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina"
+import { useIncreaseMastery } from "@neverquest/hooks/actions/useIncreaseMastery"
 import { useInflictElementalAilment } from "@neverquest/hooks/actions/useInflictElementalAilment"
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
-import { useTrainMastery } from "@neverquest/hooks/actions/useTrainMastery"
 import { staggerChance } from "@neverquest/state/ailments"
 import {
-	canAttackOrParry,
-	canBlockOrStagger,
-	canDodge,
 	isAttacking,
 	recoveryDuration,
 	statusElement,
 } from "@neverquest/state/character"
-import { armor, shield, weapon } from "@neverquest/state/gear"
+import { armor, armorBurden, canAttackOrParry, canBlockOrStagger, canDodge, shield, weapon } from "@neverquest/state/gear"
 import { ownedItem } from "@neverquest/state/inventory"
 import { tears } from "@neverquest/state/items"
 import { masteryStatistic } from "@neverquest/state/masteries"
@@ -44,14 +41,14 @@ import {
 	blockChance,
 	deflectionChance,
 	dodgeChance,
-	parryAbsorption,
+	parryAvoidance,
 	parryChance,
 	parryDamage,
 	protection,
 	recoveryRate,
 	thorns,
 } from "@neverquest/state/statistics"
-import { isTraitAcquired } from "@neverquest/state/traits"
+import { isTraitEarned } from "@neverquest/state/traits"
 import { isShowing } from "@neverquest/state/ui"
 import { isUnarmored } from "@neverquest/types/type-guards"
 import { ELEMENTAL_TYPES } from "@neverquest/types/unions"
@@ -66,7 +63,7 @@ export function useDefend() {
 	const changeHealth = useChangeHealth()
 	const changeMonsterHealth = useChangeMonsterHealth()
 	const changeStamina = useChangeStamina()
-	const trainMastery = useTrainMastery()
+	const increaseMastery = useIncreaseMastery()
 	const inflictElementalAilment = useInflictElementalAilment()
 	const progressQuest = useProgressQuest()
 
@@ -75,12 +72,10 @@ export function useDefend() {
 			() => {
 				const get = getSnapshotGetter(snapshot)
 
-				const armorValue = get(armor)
-				const { burden: armorBurden } = armorValue
+				const armorBurdenValue = get(armorBurden)
 				const shieldValue = get(shield)
 				const { burden: shieldBurden } = shieldValue
 				const canBlockOrStaggerValue = get(canBlockOrStagger)
-				const incursArmorBurden = !get(isTraitAcquired("stalwart")) && armorBurden > 0
 				const ownedItemLacrimatory = get(ownedItem("lacrimatory"))
 				const canGatherTears = ownedItemLacrimatory !== undefined && get(tears) < TEARS_MAXIMUM
 
@@ -122,11 +117,9 @@ export function useDefend() {
 							value: "DODGED",
 						})
 
-						if (incursArmorBurden) {
-							changeStamina({ value: -armorBurden })
-						}
+						changeStamina({ value: -armorBurdenValue })
 
-						if (get(isTraitAcquired("nudist")) && isUnarmored(armorValue)) {
+						if (get(isTraitEarned("nudist")) && isUnarmored(get(armor))) {
 							const healthGain = Math.round(get(healthMaximumPoisoned) * NUDIST.healAmount)
 
 							changeHealth({
@@ -154,7 +147,7 @@ export function useDefend() {
 							},
 							{
 								color: "text-danger",
-								value: `(${armorBurden})`,
+								value: `(${armorBurdenValue})`,
 							},
 						)
 
@@ -163,7 +156,7 @@ export function useDefend() {
 				}
 
 				const thornsValue = get(thorns)
-				const hasInflictedThorns = thornsValue > 0
+				const isThorny = thornsValue > 0
 
 				const deflectionChanceValue = get(deflectionChance)
 				const monsterDamageAilingValue = get(monsterDamageAiling)
@@ -172,20 +165,18 @@ export function useDefend() {
 				const deltaMonsterHealth: DeltaDisplay[] = []
 				const totalDamage = monsterDamageAilingValue - protectionValue
 
-				let hasParried = Math.random() <= get(parryChance)
-				let hasBlocked = !hasParried && Math.random() <= get(blockChance)
-				let hasStaggered = !hasParried && Math.random() <= get(staggerChance)
+				let isParried = Math.random() <= get(parryChance)
+				let isBlocked = !isParried && Math.random() <= get(blockChance)
+				let isStaggered = !isParried && Math.random() <= get(staggerChance)
 				let healthDamage = totalDamage > 0 ? totalDamage : 0
 				let monsterHealthDamage = 0
-				let staminaDamage = 0
+				let staminaCost = 0
 
 				// If parrying occurs, check if it's possible.
-				if (hasParried) {
+				if (isParried) {
 					if (get(canAttackOrParry)) {
-						const reflectedDamage = Math.round(monsterDamageAilingValue * get(parryDamage))
-
-						healthDamage -= Math.round(healthDamage * get(parryAbsorption))
-						monsterHealthDamage += reflectedDamage
+						healthDamage = Math.round(healthDamage * (1 - get(parryAvoidance)))
+						monsterHealthDamage += Math.round(healthDamage * get(parryDamage))
 
 						progressQuest({ quest: "parrying" })
 
@@ -200,7 +191,7 @@ export function useDefend() {
 						})
 					}
 					else {
-						hasParried = false
+						isParried = false
 
 						deltaStamina.push(
 							{
@@ -217,21 +208,21 @@ export function useDefend() {
 					}
 				}
 
-				if (hasBlocked) {
+				if (isBlocked) {
 					if (canBlockOrStaggerValue) {
 						healthDamage = 0
-						staminaDamage += shieldBurden
+						staminaCost += shieldBurden
 
 						deltaHealth.push({
 							color: "text-secondary",
 							value: "BLOCKED",
 						})
 
-						trainMastery("stability")
+						increaseMastery("stability")
 						progressQuest({ quest: "blocking" })
 					}
 					else {
-						hasBlocked = false
+						isBlocked = false
 
 						deltaStamina.push(
 							{
@@ -248,17 +239,17 @@ export function useDefend() {
 					}
 				}
 
-				if (hasStaggered) {
+				if (isStaggered) {
 					if (canBlockOrStaggerValue) {
-						staminaDamage += shieldBurden
+						staminaCost += shieldBurden
 
 						set(monsterAilmentDuration("staggered"), get(masteryStatistic("stability")))
 
-						trainMastery("stability")
+						increaseMastery("stability")
 						progressQuest({ quest: "staggering" })
 					}
 					else {
-						hasStaggered = false
+						isStaggered = false
 
 						deltaStamina.push(
 							{
@@ -276,7 +267,7 @@ export function useDefend() {
 				}
 
 				// If neither dodged, parried nor blocked, show damage with protection and increase resilience.
-				if (!hasBlocked && !hasParried) {
+				if (!isBlocked && !isParried) {
 					if (protectionValue > 0) {
 						deltaHealth.push({
 							color: "text-secondary",
@@ -287,9 +278,7 @@ export function useDefend() {
 						})
 					}
 
-					if (incursArmorBurden) {
-						staminaDamage += armorBurden
-					}
+					staminaCost += armorBurdenValue
 				}
 
 				// If already poisoned, check if blighting has occurred and if it's been deflected.
@@ -304,6 +293,7 @@ export function useDefend() {
 					}
 					else {
 						if (canGatherTears) {
+							progressQuest({ quest: "fillingLacrimatory" })
 							set(tears, currentTears => currentTears + 1)
 						}
 
@@ -330,6 +320,7 @@ export function useDefend() {
 					}
 					else {
 						if (canGatherTears) {
+							progressQuest({ quest: "fillingLacrimatory" })
 							set(tears, currentTears => currentTears + 1)
 						}
 
@@ -345,7 +336,7 @@ export function useDefend() {
 				}
 
 				// Calculate & apply thorns damage.
-				if (hasInflictedThorns) {
+				if (isThorny) {
 					progressQuest({ quest: "thorns" })
 
 					monsterHealthDamage += thornsValue
@@ -357,10 +348,10 @@ export function useDefend() {
 				}
 
 				if (healthDamage > 0) {
-					trainMastery("resilience")
+					increaseMastery("resilience")
 				}
 
-				if (!hasBlocked && !hasParried && !hasStaggered) {
+				if (!isBlocked && !isParried && !isStaggered) {
 					set(isShowing("recovery"), true)
 					set(recoveryDuration, get(recoveryRate))
 				}
@@ -374,12 +365,12 @@ export function useDefend() {
 				if (monsterHealthDamage > 0) {
 					changeMonsterHealth({
 						contents: deltaMonsterHealth,
-						damageType: hasInflictedThorns ? "thorns" : hasParried ? "parry" : undefined,
+						damageType: isThorny ? "thorns" : isParried ? "parry" : undefined,
 						value: -monsterHealthDamage,
 					})
 				}
 
-				if ((hasStaggered && canBlockOrStaggerValue) || monsterHealthDamage > 0) {
+				if ((isStaggered && canBlockOrStaggerValue) || monsterHealthDamage > 0) {
 					animateElement({
 						animation: "headShake",
 						element: get(monsterElement),
@@ -389,14 +380,14 @@ export function useDefend() {
 
 				// Take any damage and any stamina costs.
 				changeHealth({ contents: deltaHealth, value: -healthDamage })
-				changeStamina({ contents: deltaStamina, value: -staminaDamage })
+				changeStamina({ contents: deltaStamina, value: -staminaCost })
 			},
 		[
 			addDelta,
 			changeHealth,
 			changeMonsterHealth,
 			changeStamina,
-			trainMastery,
+			increaseMastery,
 			inflictElementalAilment,
 			progressQuest,
 		],

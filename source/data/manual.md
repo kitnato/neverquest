@@ -112,7 +112,7 @@ A value determined by:
 
 Only applies if a [piercing](#piercing-weapons) weapon is equipped.
 
-Bleeding damage is increased by mastering [cruelty](#cruelty).
+Bleeding damage can be increased by mastering [cruelty](#cruelty).
 
 Requires the [anatomy](#anatomy) skill.
 
@@ -148,7 +148,7 @@ Requires the [evasion](#evasion) skill.
 
 A percentage determining the amount of monster health required before the next attack will kill it outright. Only applies if a [two-handed](#two-handed) weapon is equipped.
 
-This threshold is increased by mastering [butchery](#butchery).
+This threshold can be increased by mastering [butchery](#butchery).
 
 Requires the [siegecraft](#siegecraft) skill.
 
@@ -160,9 +160,9 @@ The restoration amount per cycle is a small percentage of maximum health. The ra
 
 #### Parry rating
 
-A value determined by the chance of successfully parrying when defending, along with the damage that is absorbed (after [protection](#protection)) and reflected back. Only occurs if a [slashing](#slashing-weapons) weapon is equipped.
+A value determined by the chance of successfully parrying when defending, along with the damage (after [protection](#protection)) that is avoided and reflected back. Only occurs if a [slashing](#slashing-weapons) weapon is equipped.
 
-The absorbed and reflected damage is increased by mastering [finesse](#finesse).
+The amount of damage avoided and reflected can be increased by mastering [finesse](#finesse).
 
 Requires the [escrime](#escrime) skill.
 
@@ -272,7 +272,9 @@ Offers training of new [skills](#skills).
 
 #### Merchant
 
-Sells new [items](#items) and purchases your unwanted ones. The merchant's inventory of items grows and diversifies after each new stage.
+Sells new [items](#items) and purchases your unwanted ones. Items sold to the merchant can be bought back for a surcharge. Items eradicated from the buy-back list are irretrievably lost.
+
+The merchant's inventory of items grows and diversifies after each new stage.
 
 #### Occultist
 
@@ -365,13 +367,13 @@ Requires the [archery](#archery) skill. Also requires munitions, which can be cr
 
 ##### Weapon class
 
-Whatever melee or ranged, a weapon additionally falls into one of several classes that grants certain modifiers. These modifiers are only applied if the associated [skill](#skills) is acquired.
+Whatever melee or ranged, a weapon additionally falls into one of several classes that grants certain modifiers. These modifiers are only applied if the associated [skill](#skills) has been trained.
 
 ###### Blunt weapons
 
 Adds chance to [stun](#stunned) for a certain duration. Being unarmed is considered as wielding a blunt weapon.
 
-Stun requires the [traumatology](#traumatology) skill.
+Stunning requires the [traumatology](#traumatology) skill.
 
 ###### Piercing weapons
 
@@ -483,7 +485,7 @@ Relics that can be interacted with. Some can be equipped for their effect to be 
 
 ##### Infusable relics
 
-Some usable relics are infusable, meaning they allow [essence](#essence) to be spent on them to upgrade their effect via infusion levels. This can only be done once a certain [skill](#skills) has been acquired.
+Some usable relics are infusable, meaning they allow [essence](#essence) to be spent on them to upgrade their effect via infusion levels. This can only be done once a certain [skill](#skills) has been trained.
 
 To infuse continuously, the button can be held down so as to not require excessive clicking.
 
@@ -569,9 +571,9 @@ Requires the [armorcraft](#armorcraft) skill.
 
 ## Skills
 
-Skills are acquired primarily from the [mercenary](#mercenary) and bestow a permanent ability. They can unlock certain [attributes](#attributes), [statistics](#statistics) and [masteries](#masteries).
+Skills are trained primarily by the [mercenary](#mercenary) and bestow a permanent ability. They can unlock certain [attributes](#attributes), [statistics](#statistics) and [masteries](#masteries).
 
-Some skills are also trained by other crew members, but have special requirements before they can be acquired.
+Some skills are also trained by other crew members, but have special requirements before they become available.
 
 ### Anatomy
 
@@ -663,7 +665,7 @@ Inflicted by fire [elemental](#elemental-damage) damage. While burning, the mons
 
 #### Frozen
 
-Inflicted by ice [elemental](#elemental-damage) damage. While frozen, attack rate and movement speed (time to close [distance](#range)) is slowed.
+Inflicted by ice [elemental](#elemental-damage) damage. While frozen, attack rate is slowed.
 
 #### Shocked
 
@@ -705,11 +707,11 @@ A percentage determining the reduction of the amount of monsters there are to de
 
 ### Traits
 
-Permanent passive abilities acquired upon [retiring](#retirement) for all subsequent new starts. One may be chosen at a time for every retirement.
+Permanent passive abilities earned upon [retiring](#retirement) for all subsequent new starts. One may be chosen at a time for every retirement.
 
 #### Brawler
 
-Being unshielded increases one-handed melee damage.
+Being unshielded increases damage from one-handed melee weapons.
 
 #### Bruiser
 
@@ -717,11 +719,11 @@ Current stamina adds to unarmed damage and unarmed attacks have a chance to [stu
 
 #### Colossus
 
-[Two-handed](#two-handed) melee weapons are used as one-handed weapons. This means a shield can be equipped alongside it and any effects applicable to one-handed weapons apply to two-handed weapons as well.
+[Two-handed](#two-handed) melee weapons are wielded in one-hand. This means a shield can be equipped alongside it.
 
 #### Executioner
 
-[Critical](#critical-rating) strikes with a two-handed melee weapon may also [execute](#execution-threshold) the monster. Critical strikes require the [assassination](#assassination) skill.
+[Critical](#critical-rating) strikes with a two-handed melee weapon may also [execute](#execution-threshold) the monster, based on the current threshold. Critical strikes require the [assassination](#assassination) skill.
 
 #### Inoculated
 
@@ -743,7 +745,7 @@ While at a [distance](#range), all attacks with a [ranged](#ranged-weapons) weap
 
 #### Stalwart
 
-There are no stamina costs associated with wearing armor.
+Stamina costs, i.e. the burden associated with wearing [armor](#armor) are lower.
 
 #### Tank
 
@@ -751,7 +753,7 @@ Total [protection](#protection) is increased by the equipped shield's block chan
 
 ### Quests
 
-Quests are similar to achievements in that they have a set of requirements and track progress based on your progress and circumstances. They are unlocked once the journal [relic](#usable-relics) is acquired, and when having acquired a certain [skill](#skills).
+Quests are similar to achievements in that they have a set of requirements and track progress based on your progress and circumstances. They are unlocked once the journal [relic](#usable-relics) is acquired, and when having trained a certain [skill](#skills).
 
 Once a quest's requirements are achieved, the quest can be completed by choosing a permanent bonus to either [health](#health), [stamina](#stamina) or [total damage](#total-damage) that persists through retirement and while the journal is carried.
 

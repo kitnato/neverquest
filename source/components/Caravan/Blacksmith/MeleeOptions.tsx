@@ -22,8 +22,8 @@ import IconWeaponAttackRate from "@neverquest/icons/weapon-attack-rate.svg?react
 import IconWeaponDamage from "@neverquest/icons/weapon-damage.svg?react"
 import IconWeight from "@neverquest/icons/weight.svg?react"
 import { blacksmithInventory, blacksmithOptions } from "@neverquest/state/caravan"
-import { stageMaximum } from "@neverquest/state/encounter"
-import { isSkillAcquired } from "@neverquest/state/skills"
+import { stageMaximum } from "@neverquest/state/character"
+import { isSkillTrained } from "@neverquest/state/skills"
 import { GRIP_TYPES, type Grip } from "@neverquest/types/unions"
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters"
 import { generateMeleeWeapon } from "@neverquest/utilities/generators"
@@ -42,12 +42,12 @@ export function MeleeOptions() {
 		},
 		setBlacksmithOptions,
 	] = useRecoilState(blacksmithOptions)
-	const isSkillAcquiredSiegecraft = useRecoilValue(isSkillAcquired("siegecraft"))
+	const isSkillTrainedSiegecraft = useRecoilValue(isSkillTrained("siegecraft"))
 	const stageMaximumValue = useRecoilValue(stageMaximum)
 
 	const { ability, IconAbility, IconGearClass } = WEAPON_SPECIFICATIONS[gearClass]
 
-	const isSkillAcquiredAbility = useRecoilValue(isSkillAcquired(WEAPON_ABILITY_SKILLS[ability]))
+	const isSkillTrainedAbility = useRecoilValue(isSkillTrained(WEAPON_ABILITY_SKILLS[ability]))
 
 	const factor = getSigmoid(level)
 	const { abilityChance, burden, damage, rate, weight } = getMeleeRanges({
@@ -55,7 +55,7 @@ export function MeleeOptions() {
 		gearClass,
 		grip,
 	})
-	const hasCrafted = craftedWeapon !== undefined
+	const isCrafted = craftedWeapon !== undefined
 	const maximumWeaponLevel = Math.min(
 		stageMaximumValue + GEAR_LEVEL_RANGE_MAXIMUM,
 		LEVELLING_MAXIMUM,
@@ -82,9 +82,12 @@ export function MeleeOptions() {
 
 	return (
 		<Stack className="mx-auto w-50">
-			<Stack className={`mx-auto${hasCrafted ? " opacity-50" : ""}`} gap={3}>
+			<Stack
+				className={`mx-auto${isCrafted ? " opacity-50" : ""}`}
+				gap={3}
+			>
 				<SetGearLevel
-					isDisabled={hasCrafted}
+					isDisabled={isCrafted}
 					level={level}
 					maximum={maximumWeaponLevel}
 					setLevel={setGearLevel}
@@ -92,7 +95,7 @@ export function MeleeOptions() {
 
 				<IconDisplay Icon={IconGearClass} iconProps={{ overlayPlacement: "left" }} tooltip="Class">
 					<DropdownButton
-						disabled={hasCrafted}
+						disabled={isCrafted}
 						onSelect={(key) => {
 							if (key !== null) {
 								setBlacksmithOptions(options => ({
@@ -115,10 +118,10 @@ export function MeleeOptions() {
 					</DropdownButton>
 				</IconDisplay>
 
-				{isSkillAcquiredSiegecraft && (
+				{isSkillTrainedSiegecraft && (
 					<IconDisplay Icon={IconGrip} iconProps={{ overlayPlacement: "left" }} tooltip="Grip">
 						<DropdownButton
-							disabled={hasCrafted}
+							disabled={isCrafted}
 							onSelect={(key) => {
 								if (key !== null) {
 									setBlacksmithOptions(options => ({
@@ -172,12 +175,12 @@ export function MeleeOptions() {
 				</IconDisplay>
 
 				<IconDisplay
-					Icon={isSkillAcquiredAbility ? IconAbility : IconUnknown}
+					Icon={isSkillTrainedAbility ? IconAbility : IconUnknown}
 					iconProps={{ overlayPlacement: "left" }}
-					tooltip={isSkillAcquiredAbility ? `${capitalizeAll(ability)} chance` : LABEL_UNKNOWN}
+					tooltip={isSkillTrainedAbility ? `${capitalizeAll(ability)} chance` : LABEL_UNKNOWN}
 				>
 					<span>
-						{isSkillAcquiredAbility
+						{isSkillTrainedAbility
 							? `${formatNumber({
 								format: "percentage",
 								value: abilityChance.minimum,
@@ -209,7 +212,7 @@ export function MeleeOptions() {
 
 			<hr />
 
-			{hasCrafted
+			{isCrafted
 				? (
 					<CraftedGear
 						item={craftedWeapon}

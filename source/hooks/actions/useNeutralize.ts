@@ -24,17 +24,14 @@ export function useNeutralize() {
 
 					reset(infusion(name))
 					reset(infusionLevel(name))
+
+					reset(questProgress("infusingMaximum"))
 				}
 
 				if (isRelicItem(item)) {
 					const { name } = item
 
 					toggleEquipItem({ forceUnequip: true, item })
-
-					if (name === "munitions satchel") {
-						reset(munitionsCapacity)
-						reset(questProgress("munitionsCrafting"))
-					}
 
 					if (name === "knapsack") {
 						reset(knapsackCapacity)
@@ -43,6 +40,12 @@ export function useNeutralize() {
 
 					if (name === "lacrimatory") {
 						reset(tears)
+						reset(questProgress("fillingLacrimatory"))
+					}
+
+					if (name === "munitions satchel") {
+						reset(munitionsCapacity)
+						reset(questProgress("munitionsCrafting"))
 					}
 				}
 			},

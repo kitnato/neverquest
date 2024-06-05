@@ -4,17 +4,15 @@ import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta"
 import { useChangeHealth } from "@neverquest/hooks/actions/useChangeHealth"
 import { useChangeMonsterHealth } from "@neverquest/hooks/actions/useChangeMonsterHealth"
 import { useChangeStamina } from "@neverquest/hooks/actions/useChangeStamina"
+import { useIncreaseMastery } from "@neverquest/hooks/actions/useIncreaseMastery"
 import { useInflictElementalAilment } from "@neverquest/hooks/actions/useInflictElementalAilment"
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
-import { useTrainMastery } from "@neverquest/hooks/actions/useTrainMastery"
 import { bleed, bleedChance, stunChance } from "@neverquest/state/ailments"
 import {
 	attackDuration,
-	canAttackOrParry,
-	hasEnoughMunitions,
 	isAttacking,
 } from "@neverquest/state/character"
-import { weapon } from "@neverquest/state/gear"
+import { canAttackOrParry, isMunitionsSufficient, weapon } from "@neverquest/state/gear"
 import { masteryStatistic } from "@neverquest/state/masteries"
 import {
 	distance,
@@ -24,7 +22,7 @@ import {
 	monsterHealthMaximum,
 } from "@neverquest/state/monster"
 import { isReserveAtMaximum } from "@neverquest/state/reserves"
-import { isSkillAcquired } from "@neverquest/state/skills"
+import { isSkillTrained } from "@neverquest/state/skills"
 import {
 	attackRate,
 	criticalChance,
@@ -33,7 +31,7 @@ import {
 	executionThreshold,
 	lifeLeech,
 } from "@neverquest/state/statistics"
-import { isTraitAcquired } from "@neverquest/state/traits"
+import { isTraitEarned } from "@neverquest/state/traits"
 import { isShowing } from "@neverquest/state/ui"
 import { isMelee, isRanged } from "@neverquest/types/type-guards"
 import { ELEMENTAL_TYPES } from "@neverquest/types/unions"
@@ -47,7 +45,7 @@ export function useAttack() {
 	const changeHealth = useChangeHealth()
 	const changeMonsterHealth = useChangeMonsterHealth()
 	const changeStamina = useChangeStamina()
-	const trainMastery = useTrainMastery()
+	const increaseMastery = useIncreaseMastery()
 	const inflictElementalAilment = useInflictElementalAilment()
 	const progressQuest = useProgressQuest()
 
@@ -57,20 +55,20 @@ export function useAttack() {
 				const get = getSnapshotGetter(snapshot)
 
 				const canAttackOrParryValue = get(canAttackOrParry)
-				const hasEnoughMunitionsValue = get(hasEnoughMunitions)
+				const isMunitionsSufficientValue = get(isMunitionsSufficient)
 				const executionThresholdValue = get(executionThreshold)
 				const lifeLeechValue = get(lifeLeech)
 				const monsterHealthValue = get(monsterHealth)
 				const weaponValue = get(weapon)
 				const isWeaponRanged = isRanged(weaponValue)
-				const hasInflictedCritical = (
-					get(isSkillAcquired("assassination"))
+				const isCriticalStrike = (
+					get(isSkillTrained("assassination"))
 					&& isWeaponRanged
-					&& get(isTraitAcquired("sharpshooter"))
+					&& get(isTraitEarned("sharpshooter"))
 					&& get(distance) > 0
 				) || Math.random() <= get(criticalChance)
 
-				let totalDamage = Math.round(hasInflictedCritical ? get(criticalStrike) : get(damage))
+				let totalDamage = Math.round(isCriticalStrike ? get(criticalStrike) : get(damage))
 
 				set(isShowing("damage"), true)
 
@@ -78,7 +76,7 @@ export function useAttack() {
 					set(attackDuration, get(attackRate))
 				}
 
-				if (canAttackOrParryValue && hasEnoughMunitionsValue) {
+				if (canAttackOrParryValue && isMunitionsSufficientValue) {
 					if (weaponValue.burden > 0) {
 						changeStamina({ value: -weaponValue.burden })
 					}
@@ -96,7 +94,7 @@ export function useAttack() {
 							&& monsterHealthValue / get(monsterHealthMaximum) <= executionThresholdValue
 						)
 						|| (
-							hasInflictedCritical && get(isTraitAcquired("executioner")) && Math.random() <= executionThresholdValue
+							isCriticalStrike && get(isTraitEarned("executioner")) && Math.random() <= executionThresholdValue
 						)
 					) {
 						totalDamage = monsterHealthValue
@@ -129,7 +127,7 @@ export function useAttack() {
 							})
 						}
 
-						if (hasInflictedCritical) {
+						if (isCriticalStrike) {
 							progressQuest({ quest: "critical" })
 
 							monsterDeltas.push({
@@ -155,7 +153,7 @@ export function useAttack() {
 
 						changeMonsterHealth({
 							contents: monsterDeltas,
-							damageType: hasInflictedCritical ? "critical" : undefined,
+							damageType: isCriticalStrike ? "critical" : undefined,
 							value: -totalDamage,
 						})
 					}
@@ -170,11 +168,11 @@ export function useAttack() {
 						})
 					}
 
-					trainMastery("butchery")
-					trainMastery("cruelty")
-					trainMastery("finesse")
-					trainMastery("marksmanship")
-					trainMastery("might")
+					increaseMastery("butchery")
+					increaseMastery("cruelty")
+					increaseMastery("finesse")
+					increaseMastery("marksmanship")
+					increaseMastery("might")
 				}
 				else {
 					if (!canAttackOrParryValue) {
@@ -195,7 +193,7 @@ export function useAttack() {
 						progressQuest({ quest: "exhausting" })
 					}
 
-					if (!hasEnoughMunitionsValue) {
+					if (!isMunitionsSufficientValue) {
 						addDelta({
 							contents: {
 								color: "text-secondary",
@@ -211,7 +209,7 @@ export function useAttack() {
 			changeHealth,
 			changeMonsterHealth,
 			changeStamina,
-			trainMastery,
+			increaseMastery,
 			inflictElementalAilment,
 			progressQuest,
 		],

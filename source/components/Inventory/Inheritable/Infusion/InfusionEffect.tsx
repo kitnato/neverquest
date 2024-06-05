@@ -18,9 +18,6 @@ export function InfusionEffect({ infusable }: { infusable: Infusable }) {
 	const {
 		delta,
 		EffectIcon,
-		item: {
-			effect: { maximum },
-		},
 		tooltip,
 	} = INFUSABLES[infusable]
 
@@ -35,7 +32,6 @@ export function InfusionEffect({ infusable }: { infusable: Infusable }) {
 			<IconDisplay Icon={EffectIcon} tooltip={tooltip}>
 				<span>
 					{formatNumber({
-						decimals: infusionEffectValue >= maximum ? 0 : 2,
 						format: "percentage",
 						value: Math.abs(infusionEffectValue),
 					})}

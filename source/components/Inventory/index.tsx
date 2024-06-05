@@ -22,7 +22,8 @@ import {
 import { useToggleEquipItem } from "@neverquest/hooks/actions/useToggleEquipItem"
 import { armor, shield, weapon } from "@neverquest/state/gear"
 import { inventory } from "@neverquest/state/inventory"
-import { isSkillAcquired } from "@neverquest/state/skills"
+import { equippedRelics } from "@neverquest/state/items"
+import { isSkillTrained } from "@neverquest/state/skills"
 import {
 	isArmor,
 	isConsumableItem,
@@ -47,40 +48,41 @@ const RELIC_ACTIONS: Partial<Record<Relic, FunctionComponent>> = {
 	"compass": CompassNavigate,
 	"dream catcher": () => <EquipRelic relic="dream catcher" />,
 	"hearthstone": HearthstoneWarp,
+	"war mask": () => <EquipRelic relic="war mask" />,
 }
 
 export function Inventory() {
 	const armorValue = useRecoilValue(armor)
+	const equippedRelicsValue = useRecoilValue(equippedRelics)
 	const inventoryValue = useRecoilValue(inventory)
-	const isSkillAcquiredArchery = useRecoilValue(isSkillAcquired("archery"))
-	const isSkillAcquiredArmorcraft = useRecoilValue(isSkillAcquired("armorcraft"))
-	const isSkillAcquiredShieldcraft = useRecoilValue(isSkillAcquired("shieldcraft"))
-	const isSkillAcquiredSiegecraft = useRecoilValue(isSkillAcquired("siegecraft"))
+	const isSkillTrainedArchery = useRecoilValue(isSkillTrained("archery"))
+	const isSkillTrainedArmorcraft = useRecoilValue(isSkillTrained("armorcraft"))
+	const isSkillTrainedShieldcraft = useRecoilValue(isSkillTrained("shieldcraft"))
+	const isSkillTrainedSiegecraft = useRecoilValue(isSkillTrained("siegecraft"))
 	const shieldValue = useRecoilValue(shield)
 	const weaponValue = useRecoilValue(weapon)
 
 	const equippableItems: Record<string, boolean> = {}
 
 	for (const item of inventoryValue) {
-		let canEquip
-			= (isArmor(item) && armorValue.ID !== item.ID)
+		let canEquip = (isArmor(item) && armorValue.ID !== item.ID)
 			|| (isWeapon(item) && weaponValue.ID !== item.ID)
 			|| (isShield(item) && shieldValue.ID !== item.ID)
 
 		if (isArmor(item) && item.gearClass === "heavy") {
-			canEquip = isSkillAcquiredArmorcraft
+			canEquip = isSkillTrainedArmorcraft
 		}
 
 		if (isMelee(item) && item.grip === "two-handed") {
-			canEquip = isSkillAcquiredSiegecraft
+			canEquip = isSkillTrainedSiegecraft
 		}
 
 		if (isRanged(item)) {
-			canEquip = isSkillAcquiredArchery
+			canEquip = isSkillTrainedArchery
 		}
 
 		if (isShield(item) && item.gearClass === "tower") {
-			canEquip = isSkillAcquiredShieldcraft
+			canEquip = isSkillTrainedShieldcraft
 		}
 
 		equippableItems[item.ID] = canEquip
@@ -91,10 +93,13 @@ export function Inventory() {
 	const equippedGear = [weaponValue, armorValue, shieldValue].filter(
 		gearItem => isArmor(gearItem) || isShield(gearItem) || isWeapon(gearItem),
 	) as (Armor | Shield | Weapon)[]
-	const equippedGearIDs = new Set(equippedGear.map(({ ID }) => ID))
-	const storedItems = inventoryValue.filter(
-		({ ID, name }) => !equippedGearIDs.has(ID) && name !== "knapsack",
-	)
+	const equippedRelicItems = inventoryValue
+		.filter(isRelicItem)
+		.filter(item => equippedRelicsValue[item.name])
+		.toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2))
+	const equippedItems = [...equippedGear, ...equippedRelicItems]
+	const equippedItemIDs = new Set(equippedItems.map(({ ID }) => ID))
+	const storedItems = inventoryValue.filter(({ ID }) => !equippedItemIDs.has(ID))
 
 	return (
 		<Stack gap={5}>
@@ -105,7 +110,7 @@ export function Inventory() {
 			<Stack gap={3}>
 				<h6>Equipped</h6>
 
-				{equippedGear.length === 0 && <span className="fst-italic">Nothing equipped.</span>}
+				{equippedItems.length === 0 && <span className="fst-italic">Nothing equipped.</span>}
 
 				{equippedGear.map((gearItem) => {
 					const { ID } = gearItem
@@ -123,6 +128,19 @@ export function Inventory() {
 							>
 								<span>Unequip</span>
 							</Button>
+						</div>
+					)
+				})}
+
+				{equippedRelicItems.map((relicItem) => {
+					const { ID, name } = relicItem
+					const Action = RELIC_ACTIONS[name]
+
+					return (
+						<div className={CLASS_FULL_WIDTH_JUSTIFIED} key={ID}>
+							<ItemDisplay item={relicItem} />
+
+							{Action !== undefined && <Action />}
 						</div>
 					)
 				})}

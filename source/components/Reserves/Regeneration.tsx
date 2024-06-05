@@ -14,14 +14,15 @@ import { useTimer } from "@neverquest/hooks/useTimer"
 import IconRegenerationRate from "@neverquest/icons/regeneration-rate.svg?react"
 import IconVigor from "@neverquest/icons/vigor.svg?react"
 import { attributeStatistic } from "@neverquest/state/attributes"
-import { isIncapacitated, isRecovering } from "@neverquest/state/character"
+import { isRecovering } from "@neverquest/state/character"
 import {
+	isIncapacitated,
 	isReserveAtMaximum,
 	regenerationAmount,
 	regenerationDuration,
 	regenerationRate,
 } from "@neverquest/state/reserves"
-import { isSkillAcquired } from "@neverquest/state/skills"
+import { isSkillTrained } from "@neverquest/state/skills"
 import { formatNumber } from "@neverquest/utilities/formatters"
 
 import type { Reserve } from "@neverquest/types/unions"
@@ -40,7 +41,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
 	const isIncapacitatedValue = useRecoilValue(isIncapacitated)
 	const isRecoveringValue = useRecoilValue(isRecovering)
 	const isReserveAtMaximumValue = useRecoilValue(isReserveAtMaximum(reserve))
-	const isSkillAcquiredCalisthenics = useRecoilValue(isSkillAcquired("calisthenics"))
+	const isSkillTrainedCalisthenics = useRecoilValue(isSkillTrained("calisthenics"))
 	const regenerationAmountValue = useRecoilValue(regenerationAmount(reserve))
 	const setRegenerationDuration = useSetRecoilState(regenerationDuration(reserve))
 
@@ -114,7 +115,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
 										<IconDisplay Icon={Icon} iconProps={{ className: "small" }}>
 											<span>
 												+
-												{formatNumber({ decimals: 0, format: "percentage", value: regeneration })}
+												{formatNumber({ format: "percentage", value: regeneration })}
 												{" "}
 												(
 												{formatNumber({ value: regenerationAmountValue })}
@@ -128,7 +129,7 @@ export function Regeneration({ reserve }: { reserve: Reserve }) {
 					</Popover>
 				)}
 				placement="right"
-				trigger={isSkillAcquiredCalisthenics ? POPOVER_TRIGGER : []}
+				trigger={isSkillTrainedCalisthenics ? POPOVER_TRIGGER : []}
 			>
 				<div className="w-100">
 					<RegenerationMeter reserve={reserve} />

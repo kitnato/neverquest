@@ -5,14 +5,13 @@ import { useCollectLoot } from "@neverquest/hooks/actions/useCollectLoot"
 import { useIncreaseStage } from "@neverquest/hooks/actions/useIncreaseStage"
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness"
 import { useToggleAttacking } from "@neverquest/hooks/actions/useToggleAttacking"
-import { isAttacking } from "@neverquest/state/character"
-import { encounter, isStageCompleted } from "@neverquest/state/encounter"
+import { encounter, isAttacking, isStageCompleted } from "@neverquest/state/character"
 import { isRelicEquipped } from "@neverquest/state/items"
 import { itemsLoot } from "@neverquest/state/resources"
 import { isFinality, isGemItem } from "@neverquest/types/type-guards"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
 
-export function useAutoProgressStage() {
+export function useAutoIncreaseStage() {
 	const advanceCaravan = useAdvanceCaravan()
 	const collectLoot = useCollectLoot()
 	const increaseStage = useIncreaseStage()

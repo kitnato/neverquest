@@ -12,7 +12,7 @@ import { FINALITY_STAGE } from "@neverquest/data/monster"
 import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem"
 import { useCanFit } from "@neverquest/hooks/actions/useCanFit"
 import { useGenerateMonster } from "@neverquest/hooks/actions/useGenerateMonster"
-import { encounter, stage } from "@neverquest/state/encounter"
+import { encounter, stage } from "@neverquest/state/character"
 import { inventory, ownedItem } from "@neverquest/state/inventory"
 import { infusionLevel } from "@neverquest/state/items"
 
@@ -44,9 +44,7 @@ export function Hatch() {
 					<Button
 						disabled={!canFitFamiliar}
 						onClick={() => {
-							const acquiredStatus = acquireItem({ ...familiarItem, ID: nanoid() })
-
-							if (acquiredStatus === "success") {
+							if (acquireItem({ ...familiarItem, ID: nanoid() }) === "success") {
 								setInventory(currentInventory =>
 									currentInventory.filter(({ ID }) => ID !== ownedItemMysteriousEgg.ID),
 								)

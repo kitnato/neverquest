@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil"
 import { IconDisplay } from "@neverquest/components/IconDisplay"
 import IconCaravan from "@neverquest/icons/caravan.svg?react"
 import IconWilderness from "@neverquest/icons/wilderness.svg?react"
-import { location, locationName } from "@neverquest/state/encounter"
+import { location, locationName } from "@neverquest/state/character"
 import { isShowing } from "@neverquest/state/ui"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 

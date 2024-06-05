@@ -8,20 +8,20 @@ import { TEARS_MAXIMUM } from "@neverquest/data/items"
 import { SKILLS } from "@neverquest/data/skills"
 import IconLacrimatory from "@neverquest/icons/lacrimatory.svg?react"
 import { tears } from "@neverquest/state/items"
-import { acquiredSkills } from "@neverquest/state/skills"
+import { trainedSkills } from "@neverquest/state/skills"
 import { SKILL_TYPES } from "@neverquest/types/unions"
 
-export function AcquireWitchSkill() {
-	const acquiredSkillsValue = useRecoilValue(acquiredSkills)
+export function TrainWitchSkill() {
+	const trainedSkillsValue = useRecoilValue(trainedSkills)
 	const tearsValue = useRecoilValue(tears)
 
 	const availableSkills = SKILL_TYPES.filter(
-		skill => SKILLS[skill].trainer === "witch" && !acquiredSkillsValue[skill],
+		skill => SKILLS[skill].trainer === "witch" && !trainedSkillsValue[skill],
 	)
 
 	return (
 		<Stack gap={3}>
-			<h6>Acquire skill</h6>
+			<h6>Train skill</h6>
 
 			{availableSkills.length === 0
 				? <span className="fst-italic">{LABEL_NONE_AVAILABLE}</span>

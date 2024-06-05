@@ -2,10 +2,14 @@ import { useRecoilCallback } from "recoil"
 
 import { RAGE } from "@neverquest/data/monster"
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
-import { attackDuration, isAttacking } from "@neverquest/state/character"
-import { isStageCompleted, isStageStarted, stage } from "@neverquest/state/encounter"
 import {
-	distance,
+	attackDuration,
+	isAttacking,
+	isStageCompleted,
+	isStageStarted,
+	stage,
+} from "@neverquest/state/character"
+import {
 	isEnraged,
 	isMonsterDead,
 	monsterAttackDuration,
@@ -45,8 +49,6 @@ export function useToggleAttacking() {
 						if (!get(isEnraged) && get(stage) >= requiredStage) {
 							set(rage, currentRage => currentRage + increment)
 						}
-
-						reset(distance)
 
 						progressQuest({ quest: "retreating" })
 					}

@@ -1,5 +1,5 @@
 import { LABEL_UNKNOWN, LEVELLING_END, LEVELLING_MAXIMUM } from "@neverquest/data/general"
-import { MUNITIONS } from "@neverquest/data/items"
+import { MUNITIONS, TEARS_MAXIMUM } from "@neverquest/data/items"
 import IconConquest from "@neverquest/icons/conquest.svg?react"
 import IconRoutine from "@neverquest/icons/routine.svg?react"
 import IconTriumph from "@neverquest/icons/triumph.svg?react"
@@ -37,8 +37,8 @@ export const QUEST_NOTIFICATION_DURATION = 5000
 export const QUEST_REQUIREMENTS = {
 	damage: 2500,
 	essenceCount: 7575,
-	monstersKilled: 75,
-	protection: 1000,
+	monstersKilled: LEVELLING_MAXIMUM,
+	protection: 900,
 	skillsCraft: ["armorcraft", "shieldcraft", "siegecraft"] as Skill[],
 	survivingNoAttributes: 7,
 	survivingNoGear: 7,
@@ -61,7 +61,7 @@ export const QUESTS: Record<
 	}
 > = {
 	acquiringArcheryFirst: {
-		description: "Acquire archery as the first skill.",
+		description: "Train archery as the first skill.",
 		progression: [1],
 		requiresTracking: true,
 		title: "Ranger",
@@ -82,7 +82,7 @@ export const QUESTS: Record<
 	},
 	acquiringGems: {
 		description: "Acquire @ gems.",
-		progression: [5, 15, 30],
+		progression: [5, 20, 50],
 		requiresTracking: true,
 		title: "Shiny",
 	},
@@ -98,7 +98,7 @@ export const QUESTS: Record<
 		hidden: "memento.",
 		progression: [1],
 		requiresTracking: false,
-		title: "Subversive",
+		title: "Foreshadowing",
 	},
 	acquiringRanged: {
 		description: "Acquire a ranged weapon.",
@@ -128,42 +128,42 @@ export const QUESTS: Record<
 	attributesUnlocking: {
 		description: "Unlock all attributes.",
 		progression: [ATTRIBUTE_TYPES.length],
-		requiresTracking: false,
+		requiresTracking: true,
 		title: "Jack of all",
 	},
 	bandaging: {
 		description: "Use @ bandages.",
-		progression: [5, 15, 30, 60],
+		progression: [5, 20, 50, 100],
 		requiresTracking: true,
 		title: "Mummified",
 	},
 	bleeding: {
 		description: "Inflict bleed @ times.",
-		progression: [5, 15, 30, 60],
+		progression: [5, 20, 50, 100],
 		requiresTracking: true,
 		title: "Bloodlust",
 	},
 	bleedingKill: {
 		description: "Kill @ monsters with bleed damage.",
-		progression: [5, 15, 30, 60],
+		progression: [5, 20, 50, 100],
 		requiresTracking: true,
 		title: "Phlebotomized",
 	},
 	blighting: {
 		description: "Become blighted @ times.",
-		progression: [5, 15, 30, 60],
+		progression: [5, 20, 50, 100],
 		requiresTracking: true,
 		title: "Coughing blood",
 	},
 	blocking: {
 		description: "Block @ attacks.",
-		progression: [5, 15, 30, 60],
+		progression: [5, 20, 50, 100],
 		requiresTracking: true,
 		title: "None shall pass",
 	},
 	burning: {
 		description: "Inflict burning @ times.",
-		progression: [5, 15, 30, 60],
+		progression: [20, 50, 100, 250],
 		requiresTracking: true,
 		title: "Kindling",
 	},
@@ -174,7 +174,7 @@ export const QUESTS: Record<
 		title: "I changed my mind",
 	},
 	completing: {
-		description: "Complete all quests",
+		description: "Complete all quests.",
 		// See line 677.
 		progression: [0],
 		requiresTracking: true,
@@ -182,19 +182,19 @@ export const QUESTS: Record<
 	},
 	crafting: {
 		description: "Craft @ items.",
-		progression: [5, 15, 30, 60],
+		progression: [5, 20, 50, 100],
 		requiresTracking: true,
 		title: "Factory",
 	},
 	critical: {
 		description: "Inflict @ critical strikes.",
-		progression: [5, 15, 30, 60],
+		progression: [5, 20, 50, 100],
 		requiresTracking: true,
 		title: "Brutality",
 	},
 	criticalKilling: {
 		description: "Kill @ monsters with a critical strike.",
-		progression: [5, 15, 30, 60],
+		progression: [5, 20, 50, 100],
 		requiresTracking: true,
 		title: "Fatality",
 	},
@@ -213,7 +213,7 @@ export const QUESTS: Record<
 		requiresTracking: false,
 		title: "Parable of Stanislav",
 	},
-	decipheringJournal: {
+	deciphering: {
 		description: "Decipher the journal.",
 		progression: [1],
 		requiresTracking: false,
@@ -221,7 +221,7 @@ export const QUESTS: Record<
 	},
 	deflecting: {
 		description: "Deflect @ ailments.",
-		progression: [5, 15, 30],
+		progression: [5, 20, 50],
 		requiresTracking: true,
 		title: "Incorruptible",
 	},
@@ -233,33 +233,21 @@ export const QUESTS: Record<
 	},
 	distantKilling: {
 		description: "Kill @ monsters at range.",
-		progression: [5, 15, 30],
+		progression: [5, 20, 50],
 		requiresTracking: true,
 		title: "Headshot",
 	},
 	dodging: {
 		description: "Dodge @ attacks.",
-		progression: [5, 15, 30, 60],
+		progression: [5, 20, 50, 100],
 		requiresTracking: true,
 		title: "Grim fandango",
 	},
-	equippingArmor: {
-		description: "Equip armor.",
+	equipping: {
+		description: "Have a weapon, armor and a shield equipped at the same time.",
 		progression: [1],
 		requiresTracking: true,
 		title: "Locked & loaded",
-	},
-	equippingShield: {
-		description: "Equip a shield.",
-		progression: [1],
-		requiresTracking: true,
-		title: "This doesn't give protection?",
-	},
-	equippingWeapon: {
-		description: "Equip a weapon.",
-		progression: [1],
-		requiresTracking: true,
-		title: "Armed & dangerous",
 	},
 	eradicating: {
 		description: "Eradicate @ items.",
@@ -277,15 +265,21 @@ export const QUESTS: Record<
 	},
 	executing: {
 		description: "Execute @ monsters.",
-		progression: [5, 15, 30],
+		progression: [5, 20, 50],
 		requiresTracking: true,
-		title: "Capital punishment",
+		title: "Capital punisher",
 	},
 	exhausting: {
 		description: "Be too exhausted to attack, dodge, parry, block or stagger @ times.",
-		progression: [5, 15, 30, 60],
+		progression: [5, 20, 50, 100],
 		requiresTracking: true,
 		title: "Wheeze",
+	},
+	fillingLacrimatory: {
+		description: "Fill the lacrimatory.",
+		progression: [TEARS_MAXIMUM],
+		requiresTracking: false,
+		title: "Lilith & Niobe",
 	},
 	flatlining: {
 		description: "Die.",
@@ -295,18 +289,18 @@ export const QUESTS: Record<
 	},
 	freezing: {
 		description: "Inflict frozen @ times.",
-		progression: [5, 15, 30, 60],
+		progression: [20, 50, 100, 250],
 		requiresTracking: true,
 		title: "Air conditioning",
 	},
 	gemsApplying: {
 		description: "Socket @ gems.",
-		progression: [5, 15, 30],
+		progression: [5, 20, 50],
 		requiresTracking: true,
 		title: "Jeweller",
 	},
 	gemsApplyingAll: {
-		description: "Have at least one gem in every equipped piece of gear.",
+		description: "Have at least one gem in three pieces of equipped gear.",
 		progression: [1],
 		requiresTracking: true,
 		title: "Trifecta",
@@ -318,16 +312,10 @@ export const QUESTS: Record<
 		title: "Better than mining",
 	},
 	hiring: {
-		description: "Hire @ caravan crew members.",
-		progression: [3, 6],
+		description: "Hire all caravan crew members.",
+		progression: [CREW_MEMBER_TYPES.length - 1],
 		requiresTracking: true,
 		title: "Don't forget the doctor",
-	},
-	hiringAll: {
-		description: "Hire all caravan crew members.",
-		progression: [CREW_MEMBER_TYPES.length],
-		requiresTracking: true,
-		title: "Haven't died of dysentery",
 	},
 	hiringBlacksmithFirst: {
 		description: "Hire the blacksmith as the first crew member.",
@@ -337,43 +325,42 @@ export const QUESTS: Record<
 	},
 	infusing: {
 		description: "Gain @ infusion levels.",
-		progression: [5, 15, 30, 60],
+		progression: [5, 20, 50, 100],
 		requiresTracking: false,
 		title: "Voodoo",
 	},
 	infusingMaximum: {
-		description: "Infuse an item to its maximum level.",
+		description: "Infuse a relic to its maximum level.",
 		progression: [1],
 		requiresTracking: false,
 		title: "Witch doctor",
 	},
 	killing: {
 		description: "Kill @ monsters.",
-		progression: [5, 15, 30, 60],
+		progression: [5, 20, 50, 100, 250, 1000],
 		requiresTracking: true,
 		title: "Monstrocide",
 	},
 	killingBoss: {
 		description: "Kill @ boss monsters.",
-		progression: [5, 15, 30, 60],
+		progression: [5, 20, 50, 100],
 		requiresTracking: true,
 		title: "Giant killer",
 	},
 	killingEnraged: {
 		description: "Kill @ enraged monsters.",
-		progression: [5, 15],
+		progression: [5, 20, 50],
 		requiresTracking: true,
 		title: "Tranquilizer",
 	},
 	killingLowHealth: {
 		description: "Kill @ monsters while at low health.",
-		progression: [5, 15, 30],
+		progression: [5, 20, 50],
 		requiresTracking: true,
 		title: "Against all odds",
 	},
 	killingOneStrike: {
-		description:
-			"Kill a monster in one strike while at equal or lower power level than the current stage.",
+		description: "Kill a monster in one strike while at equal or lower power level than the current stage.",
 		progression: [1],
 		requiresTracking: true,
 		title: "One Punch Person",
@@ -395,7 +382,7 @@ export const QUESTS: Record<
 		description: "Defeat the dominant being without having any traits.",
 		progression: [1],
 		requiresTracking: true,
-		title: "No rest for the wicked",
+		title: "Any% speedrun",
 	},
 	killingStage: {
 		description: "Kill @ monsters in one stage.",
@@ -405,31 +392,19 @@ export const QUESTS: Record<
 	},
 	knapsackExpanding: {
 		description: "Expand knapsack capacity @ times.",
-		progression: [5, 15, 30, 60],
+		progression: [5, 20, 50, 100],
 		requiresTracking: false,
 		title: "Deep pockets",
 	},
 	looting: {
 		description: "Collect loot @ times.",
-		progression: [5, 15, 30, 60],
+		progression: [5, 20, 50, 100, 250],
 		requiresTracking: true,
 		title: "Hoarder",
 	},
-	masteries: {
-		description: "Unlock masteries.",
-		progression: [1, 3],
-		requiresTracking: true,
-		title: "Apprentice",
-	},
-	masteriesAll: {
-		description: "Unlock all masteries.",
-		progression: [MASTERY_TYPES.length],
-		requiresTracking: true,
-		title: "Guru",
-	},
 	masteriesRank: {
 		description: "Rank up masteries @ times.",
-		progression: [5, 15, 30, 60],
+		progression: [5, 20, 50, 100],
 		requiresTracking: true,
 		title: "Practice makes perfect",
 	},
@@ -439,49 +414,53 @@ export const QUESTS: Record<
 		requiresTracking: true,
 		title: "Virtuoso",
 	},
+	masteriesUnlocking: {
+		description: "Unlock all masteries.",
+		progression: [MASTERY_TYPES.length],
+		requiresTracking: true,
+		title: "Come at me",
+	},
 	munitionsCrafting: {
 		description: "Expand munitions satchel capacity @ times.",
-		progression: [5, 15, 30, MUNITIONS.maximum - MUNITIONS.satchelCapacity],
+		progression: [5, 20, 50, MUNITIONS.maximum - MUNITIONS.minimum],
 		requiresTracking: false,
 		title: "Quivering",
 	},
+	noRecovery: {
+		description: "Effectively have no recovery rate.",
+		progression: [1],
+		requiresTracking: true,
+		title: "Breath work",
+	},
 	parrying: {
 		description: "Parry @ attacks.",
-		progression: [5, 15, 30, 60],
+		progression: [5, 20, 50, 100],
 		requiresTracking: true,
 		title: "Stop hitting yourself",
 	},
 	parryingKill: {
 		description: "Kill @ monsters with parry damage.",
-		progression: [5, 15, 30, 60],
+		progression: [5, 20, 50, 100],
 		requiresTracking: true,
 		title: "Nani?",
 	},
 	poisoning: {
 		description: "Become poisoned @ times.",
-		progression: [5, 15, 30, 60],
+		progression: [5, 20, 50, 100],
 		requiresTracking: true,
 		title: "Just a cough",
 	},
 	potions: {
 		description: "Consume @ witch's concoctions.",
-		progression: [5, 15, 30],
+		progression: [5, 20, 50],
 		requiresTracking: true,
 		title: "Intestinal discomfort",
 	},
 	powerLevel: {
 		description: "Reach power level @.",
-		progression: [5, 15, 30, 60],
+		progression: [5, 20, 50, LEVELLING_END],
 		requiresTracking: true,
 		title: "One up",
-	},
-	powerLevelUltra: {
-		description: `Reach power level ${formatNumber({
-			value: LEVELLING_END,
-		})}.`,
-		progression: [LEVELLING_END],
-		requiresTracking: true,
-		title: `It's over ${formatNumber({ value: 9000 })}!`,
 	},
 	protection: {
 		description: `Have at least ${formatNumber({
@@ -493,55 +472,55 @@ export const QUESTS: Record<
 	},
 	purchasingConsumable: {
 		description: "Purchase @ consumable items.",
-		progression: [5, 15, 30],
+		progression: [5, 20, 50],
 		requiresTracking: true,
 		title: "Target customer",
 	},
-	purchasingItem: {
-		description: "Purchase @ gear items or relics.",
-		progression: [5, 15, 30],
+	purchasingInheritable: {
+		description: "Purchase @ pieces of gear or relics.",
+		progression: [5, 20],
 		requiresTracking: true,
 		title: "Reliquary",
 	},
 	purgingEssence: {
 		description: "Undergo the essence purge ritual.",
-		progression: [1, 3],
+		progression: [1],
 		requiresTracking: true,
 		title: "Clean as a whistle",
 	},
 	purgingMemories: {
 		description: "Undergo the memory purge ritual.",
-		progression: [1, 3],
+		progression: [1],
 		requiresTracking: true,
 		title: "Who? What? Where?",
 	},
 	resurrecting: {
 		description: "Resurrect with a phylactery.",
-		progression: [1, 5, 15],
+		progression: [1, 5, 20],
 		requiresTracking: true,
 		title: "Lich king",
 	},
 	retiring: {
 		description: "Go into retirement @ times.",
-		progression: [3, 6, TRAIT_TYPES.length],
+		progression: [3, 6, TRAIT_TYPES.length + 1],
 		requiresTracking: false,
 		title: "Getting too old for this",
 	},
 	retreating: {
 		description: "Retreat @ times.",
-		progression: [5, 15, 30, 60],
+		progression: [5, 20, 50, 100],
 		requiresTracking: true,
 		title: "Thou needeth a wet-nurse",
 	},
 	scavengingCorpse: {
 		description: "Scavenge corpses.",
-		progression: [1, 3, 5],
+		progression: [1, 5, 10],
 		requiresTracking: true,
 		title: "Necrophage",
 	},
 	selling: {
-		description: "Sell an item.",
-		progression: [1],
+		description: "Sell @ items.",
+		progression: [3, 10, 20],
 		requiresTracking: true,
 		title: "Hustler",
 	},
@@ -559,55 +538,43 @@ export const QUESTS: Record<
 	},
 	shocking: {
 		description: "Inflict the shocking ailment @ times.",
-		progression: [5, 15, 30, 60],
+		progression: [20, 50, 100, 250],
 		requiresTracking: true,
 		title: "Raiden",
 	},
-	skills: {
-		description: "Acquire skills.",
-		progression: [1, 3, 7],
-		requiresTracking: true,
-		title: "Prodigy",
-	},
-	skillsAll: {
-		description: "Acquire all skills.",
-		progression: [SKILL_TYPES.length],
-		requiresTracking: true,
-		title: "The GOAT",
-	},
 	skillsCraft: {
-		description: `Acquire the ${formatEnumeration(QUEST_REQUIREMENTS.skillsCraft)} skills.`,
+		description: `Train the ${formatEnumeration(QUEST_REQUIREMENTS.skillsCraft)} skills.`,
 		progression: [QUEST_REQUIREMENTS.skillsCraft.length],
 		requiresTracking: true,
 		title: "Warcraft",
 	},
+	skillsTraining: {
+		description: "Train @ skills.",
+		progression: [3, 7, SKILL_TYPES.length],
+		requiresTracking: true,
+		title: "Prodigy",
+	},
 	spendingEssence: {
 		description: "Spend @ essence.",
-		progression: [100, 500, 1000, 2500, 5000, 10_000, 25_000],
+		progression: [100, 500, 1000, 5000, 10_000, 25_000, 100_000],
 		requiresTracking: true,
 		title: "High roller",
 	},
 	stages: {
 		description: "Reach stage @.",
-		progression: [5, 15, 30, 60, LEVELLING_MAXIMUM],
+		progression: [5, 20, 50, LEVELLING_MAXIMUM, LEVELLING_END],
 		requiresTracking: true,
 		title: "Sisyphean expedition",
 	},
-	stagesEnd: {
-		description: `Reach stage ${formatNumber({ value: LEVELLING_END })}.`,
-		progression: [LEVELLING_END],
-		requiresTracking: true,
-		title: "Does it end?",
-	},
 	staggering: {
 		description: "Stagger monsters @ times.",
-		progression: [5, 15, 30, 60],
+		progression: [5, 20, 50, 100],
 		requiresTracking: true,
 		title: "Stop wiggling",
 	},
 	stunning: {
 		description: "Stun monsters @ times.",
-		progression: [5, 15, 30, 60],
+		progression: [5, 20, 50, 100],
 		requiresTracking: true,
 		title: "Brain damage",
 	},
@@ -629,27 +596,21 @@ export const QUESTS: Record<
 	},
 	thorns: {
 		description: "Inflict thorns damage @ times.",
-		progression: [5, 15, 30, 60],
+		progression: [20, 50, 100, 250],
 		requiresTracking: true,
 		title: "Cactus",
 	},
 	thornsKill: {
 		description: "Kill @ monsters with thorns damage.",
-		progression: [5, 15, 30, 60],
+		progression: [5, 20, 50, 100],
 		requiresTracking: true,
 		title: "Blue-shelling",
 	},
 	traits: {
-		description: "Acquire traits.",
-		progression: [1, 3, 6],
+		description: "Earn traits.",
+		progression: [1, 3, 6, TRAIT_TYPES.length],
 		requiresTracking: false,
 		title: "Getting ink done",
-	},
-	traitsAll: {
-		description: "Acquire all traits.",
-		progression: [TRAIT_TYPES.length],
-		requiresTracking: false,
-		title: "Come at me",
 	},
 	visitingVoid: {
 		description: "Visit nothingness.",
@@ -659,13 +620,13 @@ export const QUESTS: Record<
 	},
 	warpingCaravan: {
 		description: "Warp to the caravan @ times.",
-		progression: [5, 15, 30],
+		progression: [5, 20, 50],
 		requiresTracking: true,
 		title: "... And back again",
 	},
 	warpingWilderness: {
-		description: "Navigate to a different wilderness @ times.",
-		progression: [5, 15, 30],
+		description: "Navigate the wilderness @ times.",
+		progression: [5, 20, 50],
 		requiresTracking: true,
 		title: "There ...",
 	},

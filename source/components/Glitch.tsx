@@ -2,10 +2,10 @@ import { nanoid } from "nanoid"
 import { type ReactNode, useCallback, useLayoutEffect, useMemo, useRef, useState } from "react"
 import { useRecoilValue } from "recoil"
 
-import { LEVELLING_END } from "@neverquest/data/general"
+import { GENERIC_MINIMUM, LEVELLING_END } from "@neverquest/data/general"
 import { FINALITY_STAGE } from "@neverquest/data/monster"
 import { useAnimation } from "@neverquest/hooks/useAnimation"
-import { stage } from "@neverquest/state/encounter"
+import { stage } from "@neverquest/state/character"
 import { getFromRange, getLinearMapping, getRange } from "@neverquest/utilities/getters"
 
 const CHARACTERS = "!·&=?¿|@#~¬+/\\^*[]{}-_<>"
@@ -68,8 +68,10 @@ export function Glitch({ children, isContinuous = false }: { children: ReactNode
 	const [intervalElapsed, setIntervalElapsed] = useState(0)
 
 	const factor = useMemo(
-		() =>
+		() => Math.min(
 			getLinearMapping({ offset: GLITCH_STAGE_MINIMUM, stage: stageValue }) / LEVELLING_END,
+			GENERIC_MINIMUM,
+		),
 		[stageValue],
 	)
 	const interval = useMemo(
@@ -82,7 +84,7 @@ export function Glitch({ children, isContinuous = false }: { children: ReactNode
 							factor,
 							ranges: [
 								{ maximum: 55_000, minimum: 50_000 },
-								{ maximum: 15_000, minimum: 12_000 },
+								{ maximum: 12_000, minimum: 10_000 },
 							],
 						}),
 					),
@@ -112,7 +114,7 @@ export function Glitch({ children, isContinuous = false }: { children: ReactNode
 										factor,
 										ranges: [
 											{ maximum: 600, minimum: 400 },
-											{ maximum: 3200, minimum: 2800 },
+											{ maximum: 3000, minimum: 2500 },
 										],
 									}),
 								),

@@ -11,12 +11,26 @@ import {
 import { handleStorage } from "@neverquest/state/effects/handleStorage"
 import { ownedItem } from "@neverquest/state/inventory"
 import { essence } from "@neverquest/state/resources"
+import { type Infusable, type Inheritable, RELIC_TYPES, type Relic } from "@neverquest/types/unions"
 import { getFromRange, getSigmoid, getTriangular } from "@neverquest/utilities/getters"
 import { withStateKey } from "@neverquest/utilities/helpers"
 
-import type { Infusable, Relic } from "@neverquest/types/unions"
-
 // SELECTORS
+
+export const equippedRelics = withStateKey("equippedRelics", key =>
+	selector({
+		get: ({ get }) => {
+			const currentEquippedRelics = {} as Record<Relic, boolean>
+
+			for (const relic of RELIC_TYPES) {
+				currentEquippedRelics[relic] = get(isRelicEquipped(relic))
+			}
+
+			return currentEquippedRelics
+		},
+		key,
+	}),
+)
 
 export const infusionEffect = withStateKey("infusionEffect", key =>
 	selectorFamily({
@@ -79,14 +93,6 @@ export const munitions = withStateKey("munitions", key =>
 
 // ATOMS
 
-export const hasLootedLogEntry = withStateKey("hasLootedLogEntry", key =>
-	atom({
-		default: false,
-		effects: [handleStorage({ key })],
-		key,
-	}),
-)
-
 export const infusion = withStateKey("infusion", key =>
 	atomFamily<number, Infusable>({
 		default: 0,
@@ -103,6 +109,14 @@ export const infusionLevel = withStateKey("infusionLevel", key =>
 	}),
 )
 
+export const isInheritableLooted = withStateKey("isInheritableLooted", key =>
+	atomFamily<boolean, Inheritable>({
+		default: false,
+		effects: inheritable => [handleStorage({ key, parameter: inheritable })],
+		key,
+	}),
+)
+
 export const isRelicEquipped = withStateKey("isRelicEquipped", key =>
 	atomFamily<boolean, Relic>({
 		default: false,
@@ -113,7 +127,7 @@ export const isRelicEquipped = withStateKey("isRelicEquipped", key =>
 
 export const munitionsCapacity = withStateKey("munitionsCapacity", key =>
 	atom({
-		default: MUNITIONS.satchelCapacity,
+		default: MUNITIONS.minimum,
 		effects: [handleStorage({ key })],
 		key,
 	}),

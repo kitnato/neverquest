@@ -14,7 +14,6 @@ export function useResetAttributes() {
 
 				reset(questProgress("attributesIncreasing"))
 				reset(questProgress("powerLevel"))
-				reset(questProgress("powerLevelUltra"))
 			},
 		[],
 	)

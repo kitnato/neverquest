@@ -5,8 +5,8 @@ import { CREW } from "@neverquest/data/caravan"
 import { FINALITY_STAGE } from "@neverquest/data/monster"
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import { useToggleAttacking } from "@neverquest/hooks/actions/useToggleAttacking"
-import { isAttacking } from "@neverquest/state/character"
-import { stage, stageHighest, stageMaximum, wildernesses } from "@neverquest/state/encounter"
+import { blacksmithOptions, fletcherOptions } from "@neverquest/state/caravan"
+import { isAttacking, stage, stageHighest, stageMaximum, stageRetired, wildernesses } from "@neverquest/state/character"
 import { questProgress } from "@neverquest/state/quests"
 import { isShowing } from "@neverquest/state/ui"
 import { getAffixStructure, getSnapshotGetter } from "@neverquest/utilities/getters"
@@ -21,7 +21,7 @@ export function useIncreaseStage() {
 	const toggleAttacking = useToggleAttacking()
 
 	return useRecoilCallback(
-		({ set, snapshot }) =>
+		({ reset, set, snapshot }) =>
 			() => {
 				const get = getSnapshotGetter(snapshot)
 
@@ -39,17 +39,21 @@ export function useIncreaseStage() {
 				}
 
 				if (stageValue === get(stageMaximum)) {
+					reset(blacksmithOptions)
+					reset(fletcherOptions)
+
 					if (get(stageHighest) < nextStage) {
 						set(stageHighest, nextStage)
+					}
+
+					if (get(stageRetired) < nextStage) {
+						reset(stageRetired)
 					}
 
 					set(wildernesses, currentWildernesses => [
 						...currentWildernesses,
 						generateLocation({ affixStructure: getAffixStructure() }),
 					])
-
-					progressQuest({ amount: stageValue === 1 ? 2 : 1, quest: "stages" })
-					progressQuest({ amount: stageValue === 1 ? 2 : 1, quest: "stagesEnd" })
 
 					if (stageValue === get(questProgress("survivingNoAttributes")) + 1) {
 						progressQuest({ quest: "survivingNoAttributes" })

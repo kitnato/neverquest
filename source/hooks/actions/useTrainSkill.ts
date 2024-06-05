@@ -5,13 +5,13 @@ import { MASTERIES } from "@neverquest/data/masteries"
 import { QUEST_REQUIREMENTS } from "@neverquest/data/quests"
 import { SKILLS } from "@neverquest/data/skills"
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
-import { acquiredSkills, isSkillAcquired } from "@neverquest/state/skills"
+import { isSkillTrained, trainedSkills } from "@neverquest/state/skills"
 import { isShowing } from "@neverquest/state/ui"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
 
 import type { Skill } from "@neverquest/types/unions"
 
-export function useAcquireSkill() {
+export function useTrainSkill() {
 	const progressQuest = useProgressQuest()
 
 	return useRecoilCallback(
@@ -19,11 +19,10 @@ export function useAcquireSkill() {
 			(skill: Skill) => {
 				const get = getSnapshotGetter(snapshot)
 
-				const { skillsCraft } = QUEST_REQUIREMENTS
 				const { shows } = SKILLS[skill]
-				const acquiredSkillsValue = get(acquiredSkills)
+				const trainedSkillsValue = get(trainedSkills)
 
-				set(isSkillAcquired(skill), true)
+				set(isSkillTrained(skill), true)
 
 				if (shows !== undefined) {
 					for (const show of shows) {
@@ -31,26 +30,29 @@ export function useAcquireSkill() {
 					}
 				}
 
-				if (Object.values(ATTRIBUTES).some(({ requiredSkill }) => requiredSkill === skill)) {
-					progressQuest({ quest: "attributesUnlocking" })
-				}
+				const unlockedAttributesCount = Object.values(ATTRIBUTES).filter(({ requiredSkill }) => requiredSkill === skill).length
+
+				progressQuest({
+					amount: unlockedAttributesCount,
+					quest: "attributesUnlocking",
+				})
 
 				if (Object.values(MASTERIES).some(({ requiredSkill }) => requiredSkill === skill)) {
-					progressQuest({ quest: "masteries" })
-					progressQuest({ quest: "masteriesAll" })
+					progressQuest({ quest: "masteriesUnlocking" })
 				}
 
 				if (
-					Object.values(acquiredSkillsValue).every(hasAcquiredSkill => !hasAcquiredSkill)
-					&& skill === "archery"
+					skill === "archery"
+					&& Object.entries(trainedSkillsValue)
+						.filter(([trainedSkill]) => !SKILLS[trainedSkill as Skill].isInheritable)
+						.every(([, isTrained]) => !isTrained)
 				) {
 					progressQuest({ quest: "acquiringArcheryFirst" })
 				}
 
-				progressQuest({ quest: "skills" })
-				progressQuest({ quest: "skillsAll" })
+				progressQuest({ quest: "skillsTraining" })
 
-				if (skillsCraft.includes(skill)) {
+				if (QUEST_REQUIREMENTS.skillsCraft.includes(skill)) {
 					progressQuest({ quest: "skillsCraft" })
 				}
 			},

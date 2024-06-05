@@ -21,7 +21,7 @@ export function AttributePoints() {
 
 	return (
 		<IconDisplay Icon={IconAttributePoints} tooltip="Available attribute points">
-			<Stack direction="horizontal">
+			<Stack direction="horizontal" gap={1}>
 				<OverlayTrigger
 					overlay={(
 						<Popover>

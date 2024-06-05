@@ -15,12 +15,11 @@ import IconWeaponAttackRate from "@neverquest/icons/weapon-attack-rate.svg?react
 import { attributeStatistic } from "@neverquest/state/attributes"
 import {
 	attackDuration,
-	canAttackOrParry,
 	isAttacking,
 	isLooting,
 	isRecovering,
 } from "@neverquest/state/character"
-import { weapon } from "@neverquest/state/gear"
+import { canAttackOrParry, weapon } from "@neverquest/state/gear"
 import { isMonsterDead } from "@neverquest/state/monster"
 import { attackRate } from "@neverquest/state/statistics"
 import { isShowing } from "@neverquest/state/ui"

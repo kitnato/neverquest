@@ -7,14 +7,18 @@ import {
 	ModalTitle,
 	Stack,
 } from "react-bootstrap"
+import { useRecoilValue } from "recoil"
 
 import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { ItemsInherited } from "@neverquest/components/Retirement/ItemsInherited"
 import { Perks } from "@neverquest/components/Retirement/Perks"
 import { Renewal } from "@neverquest/components/Retirement/Renewal"
 import { TraitSelection } from "@neverquest/components/Retirement/TraitSelection"
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import { useRetire } from "@neverquest/hooks/actions/useRetire"
 import IconRetire from "@neverquest/icons/retire.svg?react"
+import { ownedItem } from "@neverquest/state/inventory"
+import { isSkillTrained } from "@neverquest/state/skills"
 
 import type { Dispatch, SetStateAction } from "react"
 
@@ -23,6 +27,10 @@ export function Retirement({
 }: {
 	state: [boolean, Dispatch<SetStateAction<boolean>>]
 }) {
+	const isSkillTrainedMemetics = useRecoilValue(isSkillTrained("memetics"))
+	const ownedItemJournal = useRecoilValue(ownedItem("journal"))
+
+	const progressQuest = useProgressQuest()
 	const retire = useRetire()
 
 	const onHide = () => {
@@ -59,6 +67,11 @@ export function Retirement({
 				<Button
 					onClick={() => {
 						onHide()
+
+						if (ownedItemJournal !== undefined && isSkillTrainedMemetics) {
+							progressQuest({ quest: "deciphering" })
+						}
+
 						retire()
 					}}
 					variant="outline-dark"

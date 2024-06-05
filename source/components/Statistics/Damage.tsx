@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap"
-import { useRecoilValue, useResetRecoilState } from "recoil"
+import { useRecoilValue } from "recoil"
 
 import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
 import { DetailsTable } from "@neverquest/components/DetailsTable"
@@ -25,12 +25,12 @@ import IconWeaponDamage from "@neverquest/icons/weapon-damage.svg?react"
 import { attributeStatistic } from "@neverquest/state/attributes"
 import { shield, weapon } from "@neverquest/state/gear"
 import { infusionEffect } from "@neverquest/state/items"
-import { questProgress, questsBonus } from "@neverquest/state/quests"
+import { questsBonus } from "@neverquest/state/quests"
 import { reserveCurrent } from "@neverquest/state/reserves"
 import { damage, lifeLeech } from "@neverquest/state/statistics"
-import { isTraitAcquired } from "@neverquest/state/traits"
+import { isTraitEarned } from "@neverquest/state/traits"
 import { isShowing } from "@neverquest/state/ui"
-import { isUnarmed, isUnshielded } from "@neverquest/types/type-guards"
+import { isRanged, isUnarmed, isUnshielded } from "@neverquest/types/type-guards"
 import { formatNumber } from "@neverquest/utilities/formatters"
 import { getAnimationClass, getGearIcon } from "@neverquest/utilities/getters"
 
@@ -39,18 +39,18 @@ export function Damage() {
 	const damageValue = useRecoilValue(damage)
 	const infusionEffectEldritchCodex = useRecoilValue(infusionEffect("eldritch codex"))
 	const isShowingDamage = useRecoilValue(isShowing("damage"))
-	const isTraitAcquiredBrawler = useRecoilValue(isTraitAcquired("brawler"))
-	const isTraitAcquiredBruiser = useRecoilValue(isTraitAcquired("bruiser"))
+	const isTraitEarnedBrawler = useRecoilValue(isTraitEarned("brawler"))
+	const isTraitEarnedBruiser = useRecoilValue(isTraitEarned("bruiser"))
 	const lifeLeechValue = useRecoilValue(lifeLeech)
 	const questsBonusDamage = useRecoilValue(questsBonus("damageBonus"))
 	const reserveStamina = useRecoilValue(reserveCurrent("stamina"))
 	const shieldValue = useRecoilValue(shield)
 	const weaponValue = useRecoilValue(weapon)
-	const resetQuestProgressDamage = useResetRecoilState(questProgress("damage"))
 
 	const progressQuest = useProgressQuest()
 
 	const { burden, damage: weaponDamage } = weaponValue
+	const isUnarmedWeapon = isUnarmed(weaponValue)
 
 	useDeltaText({
 		delta: "damage",
@@ -58,9 +58,12 @@ export function Damage() {
 	})
 
 	useEffect(() => {
-		resetQuestProgressDamage()
-		progressQuest({ amount: damageValue, quest: "damage" })
-	}, [damageValue, progressQuest, resetQuestProgressDamage])
+		progressQuest({
+			amount: damageValue,
+			isAbsolute: true,
+			quest: "damage",
+		})
+	}, [damageValue, progressQuest])
 
 	if (isShowingDamage) {
 		return (
@@ -96,7 +99,7 @@ export function Damage() {
 											</td>
 										</tr>
 
-										{isTraitAcquiredBrawler && isUnshielded(shieldValue) && (
+										{isTraitEarnedBrawler && isUnshielded(shieldValue) && !isRanged(weaponValue) && (weaponValue.grip === "one-handed") && (
 											<tr>
 												<td>
 													<IconDisplay Icon={IconBrawler} iconProps={{ className: "small" }}>
@@ -108,7 +111,6 @@ export function Damage() {
 													<span>
 														+
 														{formatNumber({
-															decimals: 0,
 															format: "percentage",
 															value: BRAWLER_DAMAGE_BONUS,
 														})}
@@ -130,6 +132,7 @@ export function Damage() {
 														<span>
 															+
 															{formatNumber({
+																format: "percentage",
 																value: attributeStatisticStrength,
 															})}
 														</span>
@@ -138,7 +141,7 @@ export function Damage() {
 											</tr>
 										)}
 
-										{isTraitAcquiredBruiser && isUnarmed(weaponValue) && (
+										{isTraitEarnedBruiser && isUnarmedWeapon && (
 											<tr>
 												<td>
 													<IconDisplay Icon={IconBruiser} iconProps={{ className: "small" }}>
@@ -168,10 +171,8 @@ export function Damage() {
 												<td>
 													<IconDisplay Icon={IconDamage} iconProps={{ className: "small" }}>
 														<span>
-															+
 															{formatNumber({
-																decimals: 0,
-																format: "percentage",
+																format: "multiplier",
 																value: questsBonusDamage,
 															})}
 														</span>

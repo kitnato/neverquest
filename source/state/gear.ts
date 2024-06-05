@@ -1,4 +1,4 @@
-import { atom, atomFamily, selector } from "recoil"
+import { atom, selector } from "recoil"
 
 import {
 	ARMOR_NONE,
@@ -6,9 +6,12 @@ import {
 	SHIELD_NONE,
 	WEAPON_NONE,
 } from "@neverquest/data/gear"
+import { STALWART_BURDEN_REDUCTION } from "@neverquest/data/traits"
 import { handleStorage } from "@neverquest/state/effects/handleStorage"
-import { isTraitAcquired } from "@neverquest/state/traits"
-import { isMelee, isUnarmed } from "@neverquest/types/type-guards"
+import { munitions } from "@neverquest/state/items"
+import { reserveCurrent } from "@neverquest/state/reserves"
+import { isTraitEarned } from "@neverquest/state/traits"
+import { isMelee, isRanged, isUnarmed } from "@neverquest/types/type-guards"
 import { getElementalEffects, getTotalElementalEffects } from "@neverquest/utilities/getters"
 import { withStateKey } from "@neverquest/utilities/helpers"
 
@@ -16,28 +19,63 @@ import type { Armor, GemItem, Shield, Weapon } from "@neverquest/types"
 
 // SELECTORS
 
+export const armorBurden = withStateKey("armorBurden", key =>
+	selector({
+		get: ({ get }) => {
+			const { burden } = get(armor)
+
+			return get(isTraitEarned("stalwart")) ? Math.round(burden * STALWART_BURDEN_REDUCTION) : burden
+		},
+		key,
+	}),
+)
+
+export const canAttackOrParry = withStateKey("canAttackOrParry", key =>
+	selector({
+		get: ({ get }) => get(reserveCurrent("stamina")) >= get(weapon).burden,
+		key,
+	}),
+)
+
+export const canBlockOrStagger = withStateKey("canBlockOrStagger", key =>
+	selector({
+		get: ({ get }) => get(reserveCurrent("stamina")) >= get(shield).burden,
+		key,
+	}),
+)
+
+export const canDodge = withStateKey("canDodge", key =>
+	selector({
+		get: ({ get }) => get(isTraitEarned("stalwart")) || get(reserveCurrent("stamina")) >= get(armor).burden,
+		key,
+	}),
+)
+
 export const elementalEffects = withStateKey("elementalEffects", key =>
 	selector({
 		get: ({ get }) => {
 			const armorValue = get(armor)
 			const shieldValue = get(shield)
 			const weaponValue = get(weapon)
+			const fittedGemsValue = get(fittedGems)
 
 			const armorEffects = getElementalEffects({
 				gear: armorValue,
-				gems: get(gems(armorValue.ID)),
+				gems: fittedGemsValue[armorValue.ID] ?? [],
 			})
 			// Only apply shield effects if they're actively used.
-			const shieldEffects
-				= (isMelee(weaponValue) || isUnarmed(weaponValue)) && (weaponValue.grip === "one-handed" || get(isTraitAcquired("colossus")))
-					? getElementalEffects({
-						gear: shieldValue,
-						gems: get(gems(shieldValue.ID)),
-					})
-					: SHIELD_ELEMENTAL_EFFECTS_BASE
+			const shieldEffects = (
+				isMelee(weaponValue)
+				|| isUnarmed(weaponValue)
+			) && (weaponValue.grip === "one-handed" || get(isTraitEarned("colossus")))
+				? getElementalEffects({
+					gear: shieldValue,
+					gems: fittedGemsValue[shieldValue.ID] ?? [],
+				})
+				: SHIELD_ELEMENTAL_EFFECTS_BASE
 			const weaponEffects = getElementalEffects({
 				gear: weaponValue,
-				gems: get(gems(weaponValue.ID)),
+				gems: fittedGemsValue[weaponValue.ID] ?? [],
 			})
 
 			return {
@@ -63,6 +101,17 @@ export const elementalEffects = withStateKey("elementalEffects", key =>
 	}),
 )
 
+export const isMunitionsSufficient = withStateKey("isMunitionsSufficient", key =>
+	selector({
+		get: ({ get }) => {
+			const weaponValue = get(weapon)
+
+			return isRanged(weaponValue) ? get(munitions) >= weaponValue.munitionsCost : true
+		},
+		key,
+	}),
+)
+
 // ATOMS
 
 export const armor = withStateKey("armor", key =>
@@ -73,11 +122,14 @@ export const armor = withStateKey("armor", key =>
 	}),
 )
 
-// TODO - using UIDs as parameters causes memory leaks; they cannot be deleted once the UID reference is lost (e.g. discarding item).
-export const gems = withStateKey("gems", key =>
-	atomFamily<GemItem[], string>({
-		default: [],
-		effects: ID => [handleStorage({ key, parameter: ID })],
+export const fittedGems = withStateKey("fittedGems", key =>
+	atom<Record<string, GemItem[]>>({
+		default: {
+			[ARMOR_NONE.ID]: [],
+			[SHIELD_NONE.ID]: [],
+			[WEAPON_NONE.ID]: [],
+		},
+		effects: [handleStorage({ key })],
 		key,
 	}),
 )

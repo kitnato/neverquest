@@ -2,9 +2,9 @@ import { useRecoilCallback } from "recoil"
 
 import {
 	encounter,
-	hasDefeatedFinality,
+	isFinalityDefeated,
 	isStageCompleted,
-} from "@neverquest/state/encounter"
+} from "@neverquest/state/character"
 import { isFinality } from "@neverquest/types/type-guards"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
 
@@ -17,7 +17,7 @@ export function useDefeatFinality() {
 				const encounterValue = get(encounter)
 
 				if (get(isStageCompleted) && isFinality(encounterValue)) {
-					set(hasDefeatedFinality(encounterValue), true)
+					set(isFinalityDefeated(encounterValue), true)
 				}
 			},
 		[],

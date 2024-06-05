@@ -1,7 +1,7 @@
 export const AILMENT_PENALTY = {
 	frozen: 0.4,
 	shocked: 0.1,
-	staggered: 0.2,
+	staggered: 0.15,
 	stunned: 0.5,
 }
 
@@ -14,11 +14,14 @@ export const BLEED = {
 export const DEFLECTION_MAXIMUM = 0.95
 
 export const LOOTING_RATE = {
-	"base": 2300,
+	"base": 2400,
 	"ender hook": 600,
 }
 
-export const PARRY_ABSORPTION = 0.33
-export const PARRY_DAMAGE = 0.25
+export const PARRY = {
+	avoidance: 0.1,
+	avoidanceAttenuation: 0.267, // maximum of 30% avoidance and 90% reflection
+	damage: 0.2,
+}
 
 export const RECOVERY_RATE = 1300

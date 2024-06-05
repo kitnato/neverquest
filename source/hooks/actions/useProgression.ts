@@ -1,7 +1,7 @@
 import { useRecoilCallback } from "recoil"
 
 import { useGenerateMonster } from "@neverquest/hooks/actions/useGenerateMonster"
-import { progress, progressMaximum } from "@neverquest/state/encounter"
+import { progress, progressMaximum } from "@neverquest/state/character"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
 
 export function useProgression() {

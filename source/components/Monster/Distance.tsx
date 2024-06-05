@@ -2,35 +2,37 @@ import { useRecoilValue, useSetRecoilState } from "recoil"
 
 import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { DistanceMeter } from "@neverquest/components/Monster/DistanceMeter"
-import { AILMENT_PENALTY } from "@neverquest/data/statistics"
 import { useTimer } from "@neverquest/hooks/useTimer"
 import IconDistance from "@neverquest/icons/distance.svg?react"
 import { isAttacking } from "@neverquest/state/character"
-import { weapon } from "@neverquest/state/gear"
 import {
 	distance,
-	hasMonsterClosed,
-	isMonsterAiling,
+	isMonsterClose,
 	isMonsterDead,
+	isMonsterDistant,
 } from "@neverquest/state/monster"
-import { isRanged } from "@neverquest/types/type-guards"
+import { range } from "@neverquest/state/statistics"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function Distance() {
-	const hasMonsterClosedValue = useRecoilValue(hasMonsterClosed)
 	const isAttackingValue = useRecoilValue(isAttacking)
-	const isMonsterFrozen = useRecoilValue(isMonsterAiling("frozen"))
+	const isMonsterCloseValue = useRecoilValue(isMonsterClose)
 	const isMonsterDeadValue = useRecoilValue(isMonsterDead)
-	const weaponValue = useRecoilValue(weapon)
+	const isMonsterDistantValue = useRecoilValue(isMonsterDistant)
+	const rangeValue = useRecoilValue(range)
 	const setMonsterDistance = useSetRecoilState(distance)
 
 	useTimer({
-		factor: isMonsterFrozen ? 1 - AILMENT_PENALTY.frozen : 1,
+		factor: isAttackingValue ? 1 : -1,
+		maximumDuration: rangeValue,
 		setDuration: setMonsterDistance,
-		stop: !isAttackingValue || isMonsterDeadValue || hasMonsterClosedValue,
+		stop:
+			isMonsterDeadValue
+			|| (isAttackingValue && isMonsterCloseValue)
+			|| (!isAttackingValue && isMonsterDistantValue),
 	})
 
-	if (isRanged(weaponValue)) {
+	if (rangeValue > 0) {
 		return (
 			<IconDisplay
 				className={getAnimationClass({ animation: "flipInX" })}

@@ -1,33 +1,42 @@
+import { nanoid } from "nanoid"
 import { useRecoilCallback } from "recoil"
 
-import { useAcquireSkill } from "@neverquest/hooks/actions/useAcquireSkill"
+import { RELICS, RELIC_DROP_CHANCE } from "@neverquest/data/items"
+import { MASTERY_COST } from "@neverquest/data/masteries"
+import { useAcquireItem } from "@neverquest/hooks/actions/useAcquireItem"
 import { useGenerateMerchantOffer } from "@neverquest/hooks/actions/useGenerateMerchantOffer"
+import { useIncreaseMastery } from "@neverquest/hooks/actions/useIncreaseMastery"
 import { useIncreaseStage } from "@neverquest/hooks/actions/useIncreaseStage"
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness"
 import { useSetMonologues } from "@neverquest/hooks/actions/useSetMonologues"
 import { useToggleAttacking } from "@neverquest/hooks/actions/useToggleAttacking"
 import { useToggleLocation } from "@neverquest/hooks/actions/useToggleLocation"
+import { useTrainSkill } from "@neverquest/hooks/actions/useTrainSkill"
 import { useTransactEssence } from "@neverquest/hooks/actions/useTransactEssence"
-import { isAttacking } from "@neverquest/state/character"
-import { location, progress, progressMaximum, stage } from "@neverquest/state/encounter"
+import { isAttacking, location, progress, progressMaximum, stage } from "@neverquest/state/character"
+import { ownedItem } from "@neverquest/state/inventory"
 import { isInexhaustible, isInvulnerable } from "@neverquest/state/reserves"
 import { essenceLoot } from "@neverquest/state/resources"
-import { SKILL_TYPES, type Skill } from "@neverquest/types/unions"
+import { isMastery, isSkill } from "@neverquest/types/type-guards"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
 
+import type { Relic } from "@neverquest/types/unions"
+
 export function useCheatQuest() {
-	const acquireSkill = useAcquireSkill()
+	const acquireItem = useAcquireItem()
 	const generateMerchantOffer = useGenerateMerchantOffer()
+	const increaseMastery = useIncreaseMastery()
 	const increaseStage = useIncreaseStage()
 	const resetWilderness = useResetWilderness()
 	const setMonologues = useSetMonologues()
 	const toggleAttacking = useToggleAttacking()
 	const toggleLocation = useToggleLocation()
+	const trainSkill = useTrainSkill()
 	const transactEssence = useTransactEssence()
 
 	return useRecoilCallback(
 		({ reset, set, snapshot }) =>
-			({ cheat, value }: { cheat: string, value?: Skill | number }) => {
+			({ cheat, value }: { cheat: string, value?: number | string }) => {
 				const get = getSnapshotGetter(snapshot)
 
 				const isAttackingValue = get(isAttacking)
@@ -49,13 +58,23 @@ export function useCheatQuest() {
 					}
 					// Heretic
 					case "gimmee": {
-						if (typeof value === "string" && SKILL_TYPES.includes(value)) {
-							acquireSkill(value)
+						if (isSkill(value)) {
+							trainSkill(value)
 						}
 
 						break
 					}
-					// Source engine
+					// Grand Theft Auto 3
+					case "GUNSGUNSGUNS": {
+						Object.keys(RELIC_DROP_CHANCE).forEach((relic) => {
+							if (get(ownedItem(relic as Relic)) === undefined) {
+								acquireItem({ ...RELICS[relic as Relic].item, ID: nanoid() })
+							}
+						})
+
+						break
+					}
+					// Half-life
 					case "noclip": {
 						if (isAttackingValue) {
 							toggleAttacking()
@@ -98,6 +117,20 @@ export function useCheatQuest() {
 
 						break
 					}
+					// Age of Empires
+					case "STEROIDS": {
+						if (isMastery(value)) {
+							const { base, maximum } = MASTERY_COST
+							const sum = (maximum / 2) * (2 * base + (maximum - 1))
+
+							for (let count = 0; count < sum; count++) {
+								increaseMastery(value)
+							}
+						}
+
+						break
+					}
+
 					default: {
 						console.warn("Some doors are better left unopened ...")
 
@@ -106,13 +139,13 @@ export function useCheatQuest() {
 				}
 			},
 		[
-			acquireSkill,
 			generateMerchantOffer,
 			increaseStage,
 			resetWilderness,
 			setMonologues,
 			toggleAttacking,
 			toggleLocation,
+			trainSkill,
 			transactEssence,
 		],
 	)

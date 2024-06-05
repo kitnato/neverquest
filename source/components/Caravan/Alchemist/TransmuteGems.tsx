@@ -48,9 +48,9 @@ export function TransmuteGems() {
 		transmutation[gem] = gems.find(({ item: { name } }) => name === gem)?.amount ?? 0
 	}
 
-	const hasStock = transmutation[source] >= gemCost
 	const isAffordable = price <= essenceValue
-	const canTransmute = hasStock && isAffordable
+	const isStocked = transmutation[source] >= gemCost
+	const canTransmute = isAffordable && isStocked
 
 	const onSelect = (setSelection: (value: SetStateAction<Gem>) => void) => (gem: Gem) => {
 		setSelection(gem)
@@ -85,7 +85,7 @@ export function TransmuteGems() {
 					overlay={(
 						<Tooltip>
 							<Stack>
-								{!hasStock && <span>Insufficient source gems.</span>}
+								{!isStocked && <span>Insufficient source gems.</span>}
 
 								{!isAffordable && <span>{LABEL_NO_ESSENCE}</span>}
 							</Stack>

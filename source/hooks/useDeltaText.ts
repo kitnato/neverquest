@@ -42,7 +42,7 @@ export function useDeltaText({
 		if (
 			(format === "float" && Math.abs(difference) < 0.005)
 			|| (format === "integer" && difference === 0)
-			|| (format === "percentage" && Math.abs(difference) < 0.0005)
+			|| (format === "percentage" && Math.abs(difference) < 0.00005)
 			|| (isTime && Math.abs(difference) < 10)
 		) {
 			return

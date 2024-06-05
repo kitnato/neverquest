@@ -1,6 +1,6 @@
 {
 	"name": "neverquest",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"description": "An irreverent text-based incremental action role-playing game.",
 	"author": "kitnato",
 	"license": "cc-by-sa-4.0",
@@ -29,7 +29,7 @@
 		"souls-like"
 	],
 	"dependencies": {
-		"@kitnato/locran": "1.2.0",
+		"@kitnato/locran": "1.6.0",
 		"animate.css": "4.1.1",
 		"bootstrap": "5.3.3",
 		"localstorage-slim": "2.7.0",
@@ -58,7 +58,7 @@
 		"stylelint": "16.2.1",
 		"stylelint-config-standard-scss": "13.0.0",
 		"typescript": "5.4.3",
-		"vite": "5.2.3",
+		"vite": "5.2.11",
 		"vite-plugin-checker": "0.6.4",
 		"vite-plugin-pwa": "0.19.6",
 		"vite-plugin-svgr": "4.2.0",

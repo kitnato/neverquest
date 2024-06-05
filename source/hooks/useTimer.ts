@@ -7,11 +7,13 @@ import type { SetterOrUpdater } from "recoil"
 
 export function useTimer({
 	factor = 1,
+	maximumDuration,
 	onElapsed,
 	setDuration,
 	stop,
 }: {
 	factor?: number
+	maximumDuration?: number
 	onElapsed?: () => void
 	setDuration: SetterOrUpdater<number>
 	stop: boolean
@@ -58,6 +60,12 @@ export function useTimer({
 						return 0
 					}
 
+					if (maximumDuration !== undefined && newDelta >= maximumDuration) {
+						setHasTicked(true)
+
+						return maximumDuration
+					}
+
 					return newDelta
 				})
 
@@ -66,5 +74,5 @@ export function useTimer({
 		}
 
 		return terminate
-	}, [factor, setDuration, stop])
+	}, [factor, maximumDuration, setDuration, stop])
 }

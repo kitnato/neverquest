@@ -5,19 +5,19 @@ import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { LABEL_SEPARATOR } from "@neverquest/data/general"
 import { ELEMENTALS, GEMS } from "@neverquest/data/items"
 import IconElemental from "@neverquest/icons/elemental.svg?react"
-import { armor, elementalEffects, gems, weapon } from "@neverquest/state/gear"
+import { armor, elementalEffects, fittedGems, weapon } from "@neverquest/state/gear"
 import { formatNumber } from "@neverquest/utilities/formatters"
 import { stackItems } from "@neverquest/utilities/helpers"
 
-import type { GearItem, GearItemUnequipped } from "@neverquest/types"
-
 export function ElementalDetails({ slot }: { slot: "armor" | "weapon" }) {
-	const gemsValue = useRecoilValue(
-		gems(useRecoilValue<GearItem | GearItemUnequipped>(slot === "armor" ? armor : weapon).ID),
-	)
+	const armorValue = useRecoilValue(armor)
+	const fittedGemsValue = useRecoilValue(fittedGems)
 	const elementalEffectsValue = useRecoilValue(elementalEffects)
+	const weaponValue = useRecoilValue(weapon)
 
-	if (gemsValue.length > 0) {
+	const gems = fittedGemsValue[(slot === "armor" ? armorValue : weaponValue).ID] ?? []
+
+	if (gems.length > 0) {
 		return (
 			<tr>
 				<td>
@@ -29,7 +29,7 @@ export function ElementalDetails({ slot }: { slot: "armor" | "weapon" }) {
 				<td>
 					<Stack gap={1}>
 						{stackItems(
-							gemsValue.toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2)),
+							gems.toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2)),
 						).map(({ item }) => {
 							const { ID, name } = item
 							const { elemental } = GEMS[name]

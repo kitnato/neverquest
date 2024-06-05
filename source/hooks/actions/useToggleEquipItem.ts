@@ -3,9 +3,9 @@ import { useRecoilCallback } from "recoil"
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import { armor, shield, weapon } from "@neverquest/state/gear"
 import { isRelicEquipped } from "@neverquest/state/items"
-import { questProgress } from "@neverquest/state/quests"
-import { isSkillAcquired } from "@neverquest/state/skills"
-import { isTraitAcquired } from "@neverquest/state/traits"
+import { questProgress, questStatuses } from "@neverquest/state/quests"
+import { isSkillTrained } from "@neverquest/state/skills"
+import { isTraitEarned } from "@neverquest/state/traits"
 import { isShowing } from "@neverquest/state/ui"
 import {
 	isArmor,
@@ -46,11 +46,14 @@ export function useToggleEquipItem() {
 				const weaponValue = get(weapon)
 
 				const { burden, gearClass, ID } = item
+				const isArmorEquipped = isArmor(armorValue)
+				const isShieldEquipped = isShield(shieldValue)
+				const isWeaponEquipped = isWeapon(weaponValue)
 				const isWeaponRanged = isRanged(item)
 				const isWeaponTwoHanded = isMelee(item) && item.grip === "two-handed"
 
 				if (isArmor(item)) {
-					if (gearClass === "heavy" && !get(isSkillAcquired("armorcraft"))) {
+					if (gearClass === "heavy" && !get(isSkillTrained("armorcraft"))) {
 						return
 					}
 
@@ -63,12 +66,14 @@ export function useToggleEquipItem() {
 						set(isShowing("armor"), true)
 						set(isShowing("protection"), true)
 
-						progressQuest({ quest: "equippingArmor" })
+						if (isShieldEquipped && isWeaponEquipped) {
+							progressQuest({ quest: "equipping" })
+						}
 					}
 				}
 
 				if (isShield(item)) {
-					if (gearClass === "tower" && !get(isSkillAcquired("shieldcraft"))) {
+					if (gearClass === "tower" && !get(isSkillTrained("shieldcraft"))) {
 						return
 					}
 
@@ -78,9 +83,9 @@ export function useToggleEquipItem() {
 					else if (!forceUnequip) {
 						set(shield, item)
 
-						// Equipping a shield while a ranged or two-handed weapon is equipped un-equips the weapon (unless it's two-handed and the colossus trait is acquired).
+						// Equipping a shield while a ranged or two-handed weapon is equipped un-equips the weapon (unless it's two-handed and the colossus trait has been earned).
 						if (
-							(isMelee(weaponValue) && weaponValue.grip === "two-handed" && !get(isTraitAcquired("colossus")))
+							(isMelee(weaponValue) && weaponValue.grip === "two-handed" && !get(isTraitEarned("colossus")))
 							|| isRanged(weaponValue)
 						) {
 							reset(weapon)
@@ -88,16 +93,18 @@ export function useToggleEquipItem() {
 
 						set(isShowing("offhand"), true)
 
-						progressQuest({ quest: "equippingShield" })
+						if (isArmorEquipped && isWeaponEquipped) {
+							progressQuest({ quest: "equipping" })
+						}
 					}
 				}
 
 				if (isWeapon(item)) {
-					if (isWeaponTwoHanded && !get(isSkillAcquired("siegecraft"))) {
+					if (isWeaponTwoHanded && !get(isSkillTrained("siegecraft"))) {
 						return
 					}
 
-					if (isRanged(item) && !get(isSkillAcquired("archery"))) {
+					if (isRanged(item) && !get(isSkillTrained("archery"))) {
 						return
 					}
 
@@ -109,7 +116,7 @@ export function useToggleEquipItem() {
 
 						// Equipping a ranged or two-handed weapon while a shield is equipped un-equips the shield.
 						if (
-							(isWeaponRanged || (isWeaponTwoHanded && !get(isTraitAcquired("colossus"))))
+							(isWeaponRanged || (isWeaponTwoHanded && !get(isTraitEarned("colossus"))))
 							&& !isUnshielded(shieldValue)
 						) {
 							reset(shield)
@@ -122,7 +129,9 @@ export function useToggleEquipItem() {
 						set(isShowing("damage"), true)
 						set(isShowing("weapon"), true)
 
-						progressQuest({ quest: "equippingWeapon" })
+						if (isArmorEquipped && isShieldEquipped) {
+							progressQuest({ quest: "equipping" })
+						}
 					}
 				}
 
@@ -130,7 +139,9 @@ export function useToggleEquipItem() {
 					set(isShowing("stamina"), true)
 				}
 
-				set(questProgress("survivingNoGear"), Number.NEGATIVE_INFINITY)
+				if (get(questStatuses("survivingNoGear"))[0] === "incomplete") {
+					set(questProgress("survivingNoGear"), Number.NEGATIVE_INFINITY)
+				}
 			},
 		[progressQuest],
 	)

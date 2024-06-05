@@ -16,8 +16,8 @@ import IconArmorProtection from "@neverquest/icons/protection.svg?react"
 import IconUnknown from "@neverquest/icons/unknown.svg?react"
 import IconWeight from "@neverquest/icons/weight.svg?react"
 import { blacksmithInventory, blacksmithOptions } from "@neverquest/state/caravan"
-import { stageMaximum } from "@neverquest/state/encounter"
-import { isSkillAcquired } from "@neverquest/state/skills"
+import { stageMaximum } from "@neverquest/state/character"
+import { isSkillTrained } from "@neverquest/state/skills"
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters"
 import { generateArmor } from "@neverquest/utilities/generators"
 import {
@@ -35,8 +35,8 @@ export function ArmorOptions() {
 		},
 		setBlacksmithOptions,
 	] = useRecoilState(blacksmithOptions)
-	const isSkillAcquiredArmorcraft = useRecoilValue(isSkillAcquired("armorcraft"))
-	const isSkillAcquiredImpermeability = useRecoilValue(isSkillAcquired("impermeability"))
+	const isSkillTrainedArmorcraft = useRecoilValue(isSkillTrained("armorcraft"))
+	const isSkillTrainedImpermeability = useRecoilValue(isSkillTrained("impermeability"))
 	const stageMaximumValue = useRecoilValue(stageMaximum)
 
 	const progressQuest = useProgressQuest()
@@ -46,7 +46,7 @@ export function ArmorOptions() {
 		factor,
 		gearClass,
 	})
-	const hasCrafted = craftedArmor !== undefined
+	const isCrafted = craftedArmor !== undefined
 	const maximumArmorLevel = Math.min(
 		stageMaximumValue + GEAR_LEVEL_RANGE_MAXIMUM,
 		LEVELLING_MAXIMUM,
@@ -73,9 +73,12 @@ export function ArmorOptions() {
 
 	return (
 		<Stack className="mx-auto w-50">
-			<Stack className={`mx-auto${hasCrafted ? " opacity-50" : ""}`} gap={3}>
+			<Stack
+				className={`mx-auto${isCrafted ? " opacity-50" : ""}`}
+				gap={3}
+			>
 				<SetGearLevel
-					isDisabled={hasCrafted}
+					isDisabled={isCrafted}
 					level={level}
 					maximum={maximumArmorLevel}
 					setLevel={setGearLevel}
@@ -87,7 +90,7 @@ export function ArmorOptions() {
 					tooltip="Class"
 				>
 					<DropdownButton
-						disabled={hasCrafted}
+						disabled={isCrafted}
 						onSelect={(key) => {
 							if (key !== null) {
 								setBlacksmithOptions(options => ({
@@ -123,11 +126,11 @@ export function ArmorOptions() {
 				</IconDisplay>
 
 				<IconDisplay
-					Icon={isSkillAcquiredImpermeability ? IconDeflectionChance : IconUnknown}
+					Icon={isSkillTrainedImpermeability ? IconDeflectionChance : IconUnknown}
 					iconProps={{ overlayPlacement: "left" }}
-					tooltip={isSkillAcquiredImpermeability ? "Deflection chance" : LABEL_UNKNOWN}
+					tooltip={isSkillTrainedImpermeability ? "Deflection chance" : LABEL_UNKNOWN}
 				>
-					{isSkillAcquiredImpermeability
+					{isSkillTrainedImpermeability
 						? `${formatNumber({
 							format: "percentage",
 							value: deflectionChance.minimum,
@@ -158,10 +161,10 @@ export function ArmorOptions() {
 
 			<hr />
 
-			{!isSkillAcquiredArmorcraft && gearClass === "heavy"
+			{!isSkillTrainedArmorcraft && gearClass === "heavy"
 				? <span className="fst-italic text-center">{LABEL_SKILL_REQUIRED}</span>
 
-				: hasCrafted
+				: isCrafted
 					? (
 						<CraftedGear
 							item={craftedArmor}

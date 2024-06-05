@@ -13,7 +13,7 @@ import { LABEL_UNKNOWN } from "@neverquest/data/general"
 import IconBlockChance from "@neverquest/icons/block-chance.svg?react"
 import IconStaggerChance from "@neverquest/icons/stagger-chance.svg?react"
 import { shield as shieldEquipped } from "@neverquest/state/gear"
-import { isSkillAcquired } from "@neverquest/state/skills"
+import { isSkillTrained } from "@neverquest/state/skills"
 import { isShowing } from "@neverquest/state/ui"
 import { isUnshielded } from "@neverquest/types/type-guards"
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters"
@@ -30,7 +30,7 @@ export function ShieldName({
 }) {
 	const isShowingGearClass = useRecoilValue(isShowing("gearClass"))
 	const shieldEquippedValue = useRecoilValue(shieldEquipped)
-	const isSkillAcquiredShieldcraft = useRecoilValue(isSkillAcquired("shieldcraft"))
+	const isSkillTrainedShieldcraft = useRecoilValue(isSkillTrained("shieldcraft"))
 
 	const { blockChance, burden, ID, level, name, staggerChance, weight } = shield
 	const isShieldUnequipped = isUnshielded(shield)
@@ -74,7 +74,7 @@ export function ShieldName({
 							</tr>
 
 							<tr>
-								{isSkillAcquiredShieldcraft
+								{isSkillTrainedShieldcraft
 									? (
 										<>
 											<td>

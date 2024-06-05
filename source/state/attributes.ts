@@ -49,13 +49,13 @@ export const attributeStatistic = withStateKey("attributeStatistic", key =>
 	selectorFamily({
 		get: (attribute: Attribute) =>
 			({ get }) => {
-				const { base, increment, incrementBonus } = ATTRIBUTES[attribute]
+				const { base, increment: { amount, bonus } } = ATTRIBUTES[attribute]
 				const attributeRankValue = get(attributeRank(attribute))
 
 				return getComputedStatistic({
 					base,
-					bonus: incrementBonus,
-					increment,
+					bonus,
+					increment: amount,
 					rank: attributeRankValue,
 				})
 			},

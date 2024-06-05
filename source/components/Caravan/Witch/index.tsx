@@ -3,12 +3,12 @@ import { Stack } from "react-bootstrap"
 import { useRecoilValue } from "recoil"
 
 import { PurchaseConsumable } from "@neverquest/components/Caravan/PurchaseConsumable"
-import { AcquireWitchSkill } from "@neverquest/components/Caravan/Witch/AcquireWitchSkill"
+import { TrainWitchSkill } from "@neverquest/components/Caravan/Witch/TrainWitchSkill"
 import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { WITCH_POTIONS } from "@neverquest/data/caravan"
 import { LABEL_UNKNOWN } from "@neverquest/data/general"
 import IconUnknown from "@neverquest/icons/unknown.svg?react"
-import { stageMaximum } from "@neverquest/state/encounter"
+import { stageMaximum } from "@neverquest/state/character"
 
 export function Witch() {
 	const stageMaximumValue = useRecoilValue(stageMaximum)
@@ -36,7 +36,7 @@ export function Witch() {
 				))}
 			</Stack>
 
-			<AcquireWitchSkill />
+			<TrainWitchSkill />
 		</Stack>
 	)
 }

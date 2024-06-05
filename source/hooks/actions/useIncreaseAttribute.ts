@@ -9,7 +9,7 @@ import {
 	isAttributeAtMaximum,
 	powerLevel,
 } from "@neverquest/state/attributes"
-import { questProgress } from "@neverquest/state/quests"
+import { questProgress, questStatuses } from "@neverquest/state/quests"
 import { isShowing } from "@neverquest/state/ui"
 import { getAttributePointCost, getSnapshotGetter } from "@neverquest/utilities/getters"
 
@@ -42,13 +42,14 @@ export function useIncreaseAttribute() {
 				transactEssence(-getAttributePointCost(get(powerLevel)))
 
 				progressQuest({ quest: "powerLevel" })
-				progressQuest({ quest: "powerLevelUltra" })
 
 				if (attributeRankValue === 0) {
 					progressQuest({ quest: "attributesIncreasing" })
 				}
 
-				set(questProgress("survivingNoAttributes"), Number.NEGATIVE_INFINITY)
+				if (get(questStatuses("survivingNoAttributes"))[0] === "incomplete") {
+					set(questProgress("survivingNoAttributes"), Number.NEGATIVE_INFINITY)
+				}
 			},
 		[progressQuest, transactEssence],
 	)

@@ -15,8 +15,8 @@ import IconStaggerChance from "@neverquest/icons/stagger-chance.svg?react"
 import IconUnknown from "@neverquest/icons/unknown.svg?react"
 import IconWeight from "@neverquest/icons/weight.svg?react"
 import { blacksmithInventory, blacksmithOptions } from "@neverquest/state/caravan"
-import { stageMaximum } from "@neverquest/state/encounter"
-import { isSkillAcquired } from "@neverquest/state/skills"
+import { stageMaximum } from "@neverquest/state/character"
+import { isSkillTrained } from "@neverquest/state/skills"
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters"
 import { generateShield } from "@neverquest/utilities/generators"
 import {
@@ -34,7 +34,7 @@ export function ShieldOptions() {
 		},
 		setBlacksmithOptions,
 	] = useRecoilState(blacksmithOptions)
-	const isSkillAcquiredShieldcraft = useRecoilValue(isSkillAcquired("shieldcraft"))
+	const isSkillTrainedShieldcraft = useRecoilValue(isSkillTrained("shieldcraft"))
 	const stageMaximumValue = useRecoilValue(stageMaximum)
 
 	const factor = getSigmoid(level)
@@ -42,7 +42,7 @@ export function ShieldOptions() {
 		factor,
 		gearClass,
 	})
-	const hasCrafted = craftedShield !== undefined
+	const isCrafted = craftedShield !== undefined
 	const maximumShieldLevel = Math.min(
 		stageMaximumValue + GEAR_LEVEL_RANGE_MAXIMUM,
 		LEVELLING_MAXIMUM,
@@ -69,9 +69,12 @@ export function ShieldOptions() {
 
 	return (
 		<Stack className="mx-auto w-50">
-			<Stack className={`mx-auto${hasCrafted ? " opacity-50" : ""}`} gap={3}>
+			<Stack
+				className={`mx-auto${isCrafted ? " opacity-50" : ""}`}
+				gap={3}
+			>
 				<SetGearLevel
-					isDisabled={hasCrafted}
+					isDisabled={isCrafted}
 					level={level}
 					maximum={maximumShieldLevel}
 					setLevel={setGearLevel}
@@ -83,7 +86,7 @@ export function ShieldOptions() {
 					tooltip="Class"
 				>
 					<DropdownButton
-						disabled={hasCrafted}
+						disabled={isCrafted}
 						onSelect={(key) => {
 							if (key !== null) {
 								setBlacksmithOptions(options => ({
@@ -120,11 +123,11 @@ export function ShieldOptions() {
 				</IconDisplay>
 
 				<IconDisplay
-					Icon={isSkillAcquiredShieldcraft ? IconStaggerChance : IconUnknown}
+					Icon={isSkillTrainedShieldcraft ? IconStaggerChance : IconUnknown}
 					iconProps={{ overlayPlacement: "left" }}
-					tooltip={isSkillAcquiredShieldcraft ? "Stagger chance" : LABEL_UNKNOWN}
+					tooltip={isSkillTrainedShieldcraft ? "Stagger chance" : LABEL_UNKNOWN}
 				>
-					{isSkillAcquiredShieldcraft
+					{isSkillTrainedShieldcraft
 						? `${formatNumber({ format: "percentage", value: staggerChance.minimum })} - ${formatNumber({
 							format: "percentage",
 							value: staggerChance.maximum,
@@ -155,10 +158,10 @@ export function ShieldOptions() {
 
 			<hr />
 
-			{!isSkillAcquiredShieldcraft && gearClass === "tower"
+			{!isSkillTrainedShieldcraft && gearClass === "tower"
 				? <span className="fst-italic text-center">{LABEL_SKILL_REQUIRED}</span>
 
-				: hasCrafted
+				: isCrafted
 					? (
 						<CraftedGear
 							item={craftedShield}

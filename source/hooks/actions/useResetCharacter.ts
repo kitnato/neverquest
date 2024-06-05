@@ -1,8 +1,7 @@
 import { useRecoilCallback } from "recoil"
 
 import { blacksmithOptions, fletcherOptions } from "@neverquest/state/caravan"
-import { attackDuration, recoveryDuration } from "@neverquest/state/character"
-import { isStageStarted, location, progress } from "@neverquest/state/encounter"
+import { attackDuration, isStageStarted, location, progress, recoveryDuration } from "@neverquest/state/character"
 import { isRelicEquipped } from "@neverquest/state/items"
 import {
 	blight,

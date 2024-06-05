@@ -7,11 +7,12 @@ import { LABEL_UNKNOWN, LEVELLING_MAXIMUM, NAME_LENGTH_MAXIMUM } from "@neverque
 import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import IconFlatlined from "@neverquest/icons/flatlined.svg?react"
 import IconName from "@neverquest/icons/name.svg?react"
-import { hasFlatlined, name } from "@neverquest/state/character"
+import { name } from "@neverquest/state/character"
+import { isIncapacitated } from "@neverquest/state/reserves"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
 export function Name() {
-	const hasFlatlinedValue = useRecoilValue(hasFlatlined)
+	const isIncapacitatedValue = useRecoilValue(isIncapacitated)
 	const [nameValue, setName] = useRecoilState(name)
 
 	const [canEdit, setCanEdit] = useState(true)
@@ -46,7 +47,7 @@ export function Name() {
 	return (
 		<IconDisplay
 			className={getAnimationClass({ animation: "flipInX" })}
-			Icon={hasFlatlinedValue ? IconFlatlined : IconName}
+			Icon={isIncapacitatedValue ? IconFlatlined : IconName}
 			tooltip="Name"
 		>
 			<FormControl

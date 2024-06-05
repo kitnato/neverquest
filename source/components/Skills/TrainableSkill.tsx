@@ -9,17 +9,17 @@ import { SKILLS } from "@neverquest/data/skills"
 import IconEssence from "@neverquest/icons/essence.svg?react"
 import IconUnknown from "@neverquest/icons/unknown.svg?react"
 import { isHired } from "@neverquest/state/caravan"
-import { isSkillAcquired, skillPrice } from "@neverquest/state/skills"
+import { isSkillTrained, skillPrice } from "@neverquest/state/skills"
 import { formatNumber } from "@neverquest/utilities/formatters"
 
 import type { Skill } from "@neverquest/types/unions"
 
 export function TrainableSkill({ skill }: { skill: Skill }) {
 	const isHiredValue = useRecoilValue(isHired(SKILLS[skill].requiredCrewMember))
-	const isSkillAcquiredValue = useRecoilValue(isSkillAcquired(skill))
+	const isSkillTrainedValue = useRecoilValue(isSkillTrained(skill))
 	const skillPriceValue = useRecoilValue(skillPrice)
 
-	if (!isSkillAcquiredValue) {
+	if (!isSkillTrainedValue) {
 		return (
 			<div className={CLASS_FULL_WIDTH_JUSTIFIED}>
 				{isHiredValue

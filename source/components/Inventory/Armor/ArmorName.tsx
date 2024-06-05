@@ -13,7 +13,7 @@ import { LABEL_UNKNOWN } from "@neverquest/data/general"
 import IconDeflectionChance from "@neverquest/icons/deflection-chance.svg?react"
 import IconProtection from "@neverquest/icons/protection.svg?react"
 import { armor as armorEquipped } from "@neverquest/state/gear"
-import { isSkillAcquired } from "@neverquest/state/skills"
+import { isSkillTrained } from "@neverquest/state/skills"
 import { isShowing } from "@neverquest/state/ui"
 import { isUnarmored } from "@neverquest/types/type-guards"
 import { capitalizeAll, formatNumber } from "@neverquest/utilities/formatters"
@@ -30,7 +30,7 @@ export function ArmorName({
 }) {
 	const armorEquippedValue = useRecoilValue(armorEquipped)
 	const isShowingGearClass = useRecoilValue(isShowing("gearClass"))
-	const isSkillAcquireImpermeability = useRecoilValue(isSkillAcquired("impermeability"))
+	const isSkillTrainedImpermeability = useRecoilValue(isSkillTrained("impermeability"))
 
 	const { burden, deflectionChance, ID, level, name, protection, weight } = armor
 	const isArmorUnequipped = isUnarmored(armor)
@@ -112,7 +112,7 @@ export function ArmorName({
 							)}
 
 							<tr>
-								{isSkillAcquireImpermeability
+								{isSkillTrainedImpermeability
 									? (
 										<>
 											<td>

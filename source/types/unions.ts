@@ -140,7 +140,7 @@ export type Gem = (typeof GEM_TYPES)[number]
 export const GRIP_TYPES = ["one-handed", "two-handed"] as const
 export type Grip = (typeof GRIP_TYPES)[number]
 
-export const INFUSABLE_TYPES = ["mysterious egg", "eldritch codex"] as const
+export const INFUSABLE_TYPES = ["eldritch codex", "mysterious egg"] as const
 export type Infusable = (typeof INFUSABLE_TYPES)[number]
 
 export type Inheritable = Infusable | Relic
@@ -175,16 +175,14 @@ export type QuestBonus = (typeof QUEST_BONUS_TYPES)[number]
 export const QUEST_CLASS_TYPES = ["conquest", "routine", "triumph"] as const
 export type QuestClass = (typeof QUEST_CLASS_TYPES)[number]
 
-export type QuestStatus = QuestBonus | "achieved" | "incomplete"
+export type QuestStatus = QuestBonus | "complete" | "incomplete"
 
 export type Reserve = "health" | "stamina"
 
 export const ROUTINE_TYPES = [
 	"settingName",
-	"purchasingItem",
-	"equippingWeapon",
-	"equippingArmor",
-	"equippingShield",
+	"purchasingInheritable",
+	"equipping",
 	"stages",
 	"knapsackExpanding",
 	"powerLevel",
@@ -201,7 +199,6 @@ export const ROUTINE_TYPES = [
 	"flatlining",
 	"scavengingCorpse",
 	"hiring",
-	"hiringAll",
 	"crafting",
 	"acquiringGems",
 	"gemsApplying",
@@ -211,14 +208,14 @@ export const ROUTINE_TYPES = [
 	"acquiringRanged",
 	"munitionsCrafting",
 	"acquiringTwoHanded",
+	"fillingLacrimatory",
 	"infusing",
-	"infusingMaximum",
+	"attributesUnlocking",
 	"attributesIncreasing",
-	"skills",
+	"skillsTraining",
 	"skillsCraft",
-	"masteries",
+	"masteriesUnlocking",
 	"masteriesRank",
-	"masteriesRankMaximum",
 	"resurrecting",
 	"retiring",
 	"purgingEssence",
@@ -270,12 +267,11 @@ export type StateKey =
 	Gear
 	| "absorbedEssence"
 	| "acquiredItems"
-	| "acquiredSkills"
-	| "acquiredTraits"
 	| "activeControl"
 	| "activeCrewMember"
 	| "activeQuests"
 	| "areAttributesAffordable"
+	| "armorBurden"
 	| "attackDuration"
 	| "attackRate"
 	| "attributePoints"
@@ -300,11 +296,11 @@ export type StateKey =
 	| "canBlockOrStagger"
 	| "canCompleteQuests"
 	| "canDodge"
+	| "canIncreaseMastery"
 	| "canReceiveAilment"
 	| "canReceiveAilments"
 	| "canResurrect"
 	| "canTrackQuests"
-	| "canTrainMastery"
 	| "completedQuestsCount"
 	| "consciousness"
 	| "corpse"
@@ -318,28 +314,23 @@ export type StateKey =
 	| "deltas"
 	| "distance"
 	| "dodgeChance"
+	| "earnedTraits"
 	| "elementalEffects"
 	| "encounter"
 	| "encumbrance"
 	| "encumbranceExtent"
 	| "encumbranceMaximum"
+	| "equippedRelics"
 	| "essence"
 	| "essenceLoot"
 	| "executionThreshold"
 	| "expandedBuyback"
 	| "expandedMasteries"
+	| "fittedGems"
 	| "fletcherInventory"
 	| "fletcherOptions"
 	| "frailty"
-	| "gems"
 	| "generation"
-	| "hasAwoken"
-	| "hasDefeatedFinality"
-	| "hasEnoughMunitions"
-	| "hasFlatlined"
-	| "hasGeneratedOffer"
-	| "hasLootedLogEntry"
-	| "hasMonsterClosed"
 	| "healthMaximumPoisoned"
 	| "infusion"
 	| "infusionEffect"
@@ -349,34 +340,43 @@ export type StateKey =
 	| "inventory"
 	| "isAttacking"
 	| "isAttributeAtMaximum"
+	| "isAwoken"
 	| "isBlighted"
 	| "isCaravanHired"
 	| "isEnraged"
+	| "isFinalityDefeated"
+	| "isFlatlined"
 	| "isHealthLow"
 	| "isHired"
 	| "isIncapacitated"
 	| "isInexhaustible"
 	| "isInfusionAtMaximum"
+	| "isInheritableLooted"
 	| "isInvulnerable"
 	| "isLootAvailable"
 	| "isLooting"
 	| "isMasteryAtMaximum"
 	| "isMonsterAiling"
 	| "isMonsterAtFullHealth"
+	| "isMonsterClose"
 	| "isMonsterDead"
+	| "isMonsterDistant"
 	| "isMonsterNew"
 	| "isMonsterRegenerating"
+	| "isMunitionsSufficient"
+	| "isOfferGenerated"
 	| "isPoisoned"
 	| "isRecovering"
+	| "isRecoveryRelevant"
 	| "isRegenerating"
 	| "isRelicEquipped"
 	| "isReserveAtMaximum"
 	| "isShowing"
 	| "isShowingQuestBonus"
-	| "isSkillAcquired"
+	| "isSkillTrained"
 	| "isStageCompleted"
 	| "isStageStarted"
-	| "isTraitAcquired"
+	| "isTraitEarned"
 	| "itemsLoot"
 	| "knapsackCapacity"
 	| "lifeLeech"
@@ -406,10 +406,11 @@ export type StateKey =
 	| "name"
 	| "notifyOverEncumbrance"
 	| "ownedItem"
-	| "parryAbsorption"
+	| "parryAvoidance"
 	| "parryChance"
 	| "parryDamage"
 	| "parryRating"
+	| "perkEffect"
 	| "poisonChance"
 	| "poisonDuration"
 	| "poisonLength"
@@ -439,6 +440,7 @@ export type StateKey =
 	| "stage"
 	| "stageHighest"
 	| "stageMaximum"
+	| "stageRetired"
 	| "staggerChance"
 	| "staggerRating"
 	| "staminaMaximumBlighted"
@@ -447,10 +449,12 @@ export type StateKey =
 	| "stunRating"
 	| "tears"
 	| "thorns"
+	| "trainedSkills"
 	| "unlockedMasteries"
 	| "wildernesses"
 
 export const TRAIT_TYPES = [
+	"acanthaceous",
 	"brawler",
 	"bruiser",
 	"colossus",
@@ -479,11 +483,12 @@ export const RELIC_TYPES = [
 	"memento",
 	"thaumaturgic goggles",
 	"torn manuscript",
+	"war mask",
 ] as const
 export type Relic = (typeof RELIC_TYPES)[number]
 
 export const TRIUMPH_TYPES = [
-	"decipheringJournal",
+	"deciphering",
 	"settingSubjectName",
 	"survivingNoGear",
 	"survivingNoAttributes",
@@ -491,21 +496,18 @@ export const TRIUMPH_TYPES = [
 	"killingStage",
 	"damage",
 	"protection",
+	"noRecovery",
 	"essenceCount",
+	"masteriesRankMaximum",
 	"hiringBlacksmithFirst",
 	"acquiringArcheryFirst",
-	"attributesUnlocking",
-	"skillsAll",
-	"masteriesAll",
-	"traitsAll",
 	"acquiringMemento",
 	"acquiringTornManuscript",
 	"acquiringDreamCatcher",
+	"infusingMaximum",
 	"killingResDominus",
 	"killingResDominusNoTraits",
 	"visitingVoid",
-	"powerLevelUltra",
-	"stagesEnd",
 	"acquiringFamiliar",
 	"killingResCogitans",
 	"deciding",

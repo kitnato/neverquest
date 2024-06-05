@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil"
 import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { LABEL_SEPARATOR } from "@neverquest/data/general"
 import { ELEMENTALS, GEMS, GEMS_MAXIMUM } from "@neverquest/data/items"
-import { gems } from "@neverquest/state/gear"
+import { fittedGems } from "@neverquest/state/gear"
 import { formatNumber } from "@neverquest/utilities/formatters"
 import { getElementalEffects } from "@neverquest/utilities/getters"
 import { stackItems } from "@neverquest/utilities/helpers"
@@ -12,12 +12,13 @@ import { stackItems } from "@neverquest/utilities/helpers"
 import type { GearItem, GearItemUnequipped } from "@neverquest/types"
 
 export function AppliedGems({ gearItem }: { gearItem: GearItem | GearItemUnequipped }) {
-	const gemsValue = useRecoilValue(gems(gearItem.ID))
+	const fittedGemsValue = useRecoilValue(fittedGems)
 
-	const { length } = gemsValue
+	const gems = fittedGemsValue[gearItem.ID] ?? []
+	const { length } = gems
 	const elementalEffects = getElementalEffects({
 		gear: gearItem,
-		gems: gemsValue,
+		gems,
 	})
 
 	if (length > 0) {
@@ -30,7 +31,7 @@ export function AppliedGems({ gearItem }: { gearItem: GearItem | GearItemUnequip
 				<td>
 					<Stack gap={1}>
 						{stackItems(
-							gemsValue.toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2)),
+							gems.toSorted(({ name: name1 }, { name: name2 }) => name1.localeCompare(name2)),
 						).map(({ amount, item }) => {
 							const { ID, name } = item
 							const { elemental, Icon: GemIcon } = GEMS[name]
@@ -41,7 +42,7 @@ export function AppliedGems({ gearItem }: { gearItem: GearItem | GearItemUnequip
 								<Stack direction="horizontal" gap={1} key={ID}>
 									<span className={color}>
 										{typeof effect === "number"
-											? `+${formatNumber({ decimals: 0, format: "percentage", value: effect })}`
+											? `+${formatNumber({ format: "percentage", value: effect })}`
 											: formatNumber({ value: effect.damage })}
 									</span>
 
@@ -50,7 +51,7 @@ export function AppliedGems({ gearItem }: { gearItem: GearItem | GearItemUnequip
 									<IconDisplay Icon={ElementalIcon} iconProps={{ className: "small" }}>
 										<span>
 											{typeof effect === "number"
-												? `+${formatNumber({ decimals: 0, format: "percentage", value: effect })}`
+												? `+${formatNumber({ format: "percentage", value: effect })}`
 												: formatNumber({ format: "time", value: effect.duration })}
 										</span>
 									</IconDisplay>

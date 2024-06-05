@@ -1,5 +1,3 @@
-import { useRecoilValue } from "recoil"
-
 import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { ArmorName } from "@neverquest/components/Inventory/Armor/ArmorName"
 import { InfusionLevelDisplay } from "@neverquest/components/Inventory/Inheritable/Infusion/InfusionLevelDisplay"
@@ -11,7 +9,6 @@ import { WeaponName } from "@neverquest/components/Inventory/Weapon/WeaponName"
 import { CONSUMABLES, GEMS, INFUSABLES, RELICS } from "@neverquest/data/items"
 import IconArmor from "@neverquest/icons/armor.svg?react"
 import IconShield from "@neverquest/icons/shield.svg?react"
-import { isRelicEquipped } from "@neverquest/state/items"
 import {
 	isArmor,
 	isConsumableItem,
@@ -23,7 +20,6 @@ import {
 import { getGearIcon } from "@neverquest/utilities/getters"
 
 import type { InventoryItem } from "@neverquest/types"
-import type { Relic } from "@neverquest/types/unions"
 import type { Placement } from "react-bootstrap/esm/types"
 
 export function ItemDisplay({
@@ -37,11 +33,6 @@ export function ItemDisplay({
 	item: InventoryItem
 	overlayPlacement?: Placement
 }) {
-	const equippedRelics: Partial<Record<Relic, boolean>> = {
-		"automincer": useRecoilValue(isRelicEquipped("automincer")),
-		"dream catcher": useRecoilValue(isRelicEquipped("dream catcher")),
-	}
-
 	if (isArmor(item)) {
 		return (
 			<IconDisplay
@@ -98,7 +89,7 @@ export function ItemDisplay({
 						? <MunitionsStatus />
 						: name === "lacrimatory"
 							? <LacrimatoryStatus />
-							: equippedRelics[name]
+							: isEquipped
 								? <span>Equipped</span>
 								: undefined
 				}

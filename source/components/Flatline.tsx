@@ -12,8 +12,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil"
 
 import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { IconImage } from "@neverquest/components/IconImage"
-import { DEATH_STAGE_PENALTY } from "@neverquest/data/encounter"
-import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
+import { DEATH_STAGE_PENALTY } from "@neverquest/data/character"
 import { useResetCharacter } from "@neverquest/hooks/actions/useResetCharacter"
 import { useResetWilderness } from "@neverquest/hooks/actions/useResetWilderness"
 import IconCapabilities from "@neverquest/icons/capabilities.svg?react"
@@ -21,22 +20,21 @@ import IconCorpse from "@neverquest/icons/corpse.svg?react"
 import IconEssence from "@neverquest/icons/essence.svg?react"
 import IconFlatlined from "@neverquest/icons/flatlined.svg?react"
 import IconKnapsack from "@neverquest/icons/knapsack.svg?react"
-import { hasFlatlined } from "@neverquest/state/character"
-import { stage, stageMaximum, wildernesses } from "@neverquest/state/encounter"
+import { stage, stageMaximum, wildernesses } from "@neverquest/state/character"
+import { isFlatlined } from "@neverquest/state/reserves"
 import { getAffixStructure } from "@neverquest/utilities/getters"
 
 export function Flatline() {
-	const hasFlatlinedValue = useRecoilValue(hasFlatlined)
+	const isFlatlinedValue = useRecoilValue(isFlatlined)
 	const stageMaximumValue = useRecoilValue(stageMaximum)
 	const setStage = useSetRecoilState(stage)
 	const setWildernesses = useSetRecoilState(wildernesses)
 
-	const progressQuest = useProgressQuest()
 	const resetCharacter = useResetCharacter()
 	const resetWilderness = useResetWilderness()
 
 	return (
-		<Modal backdrop="static" show={hasFlatlinedValue}>
+		<Modal backdrop="static" show={isFlatlinedValue}>
 			<ModalHeader>
 				<ModalTitle>
 					<IconDisplay Icon={IconFlatlined}>
@@ -81,15 +79,12 @@ export function Flatline() {
 				<Button
 					onClick={() => {
 						if (stageMaximumValue > DEATH_STAGE_PENALTY) {
-							setWildernesses(currentWildernesses => currentWildernesses.slice(0, -1))
-							setStage(currentStage => currentStage - 1)
+							setWildernesses(currentWildernesses => currentWildernesses.slice(0, -DEATH_STAGE_PENALTY))
+							setStage(currentStage => currentStage - DEATH_STAGE_PENALTY)
 						}
 						else {
 							setWildernesses([generateLocation({ affixStructure: getAffixStructure() })])
 						}
-
-						progressQuest({ amount: -1, quest: "stages" })
-						progressQuest({ amount: -1, quest: "stagesEnd" })
 
 						resetCharacter(true)
 						resetWilderness()

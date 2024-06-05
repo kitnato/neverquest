@@ -27,10 +27,10 @@ export function PurgeEssence() {
 	const resetAttributes = useResetAttributes()
 	const transactEssence = useTransactEssence()
 
-	const hasAbsorbedEssence = absorbedEssenceValue > 0
 	const price = Math.round(absorbedEssenceValue * PURGE_PRICE_MULTIPLIER.essence)
 	const isAffordable = price <= essenceValue
-	const isPurchasable = hasAbsorbedEssence && isAffordable
+	const isEssenceAbsorbed = absorbedEssenceValue > 0
+	const isPurchasable = isEssenceAbsorbed && isAffordable
 
 	return (
 		<div className={CLASS_FULL_WIDTH_JUSTIFIED}>
@@ -58,7 +58,7 @@ export function PurgeEssence() {
 							<Stack>
 								{!isAffordable && <span>{LABEL_NO_ESSENCE}</span>}
 
-								{!hasAbsorbedEssence && <span>No essence to purge.</span>}
+								{!isEssenceAbsorbed && <span>No essence to purge.</span>}
 							</Stack>
 						</Tooltip>
 					)}

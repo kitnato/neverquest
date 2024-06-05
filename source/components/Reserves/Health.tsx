@@ -52,9 +52,7 @@ export function Health() {
 											</td>
 
 											<td>
-												<IconDisplay Icon={IconHealth} iconProps={{ className: "small" }}>
-													<span>{baseAmount}</span>
-												</IconDisplay>
+												<span>{baseAmount}</span>
 											</td>
 										</tr>
 
@@ -86,14 +84,14 @@ export function Health() {
 												</td>
 
 												<td>
-													<span>
-														+
-														{formatNumber({
-															decimals: 0,
-															format: "percentage",
-															value: questsBonusHealth,
-														})}
-													</span>
+													<IconDisplay Icon={IconHealth} iconProps={{ className: "small" }}>
+														<span>
+															{formatNumber({
+																format: "multiplier",
+																value: questsBonusHealth,
+															})}
+														</span>
+													</IconDisplay>
 												</td>
 											</tr>
 										)}

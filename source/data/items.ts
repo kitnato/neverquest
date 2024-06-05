@@ -43,6 +43,7 @@ import IconPoisonRating from "@neverquest/icons/poison-rating.svg?react"
 import IconPoisoned from "@neverquest/icons/poisoned.svg?react"
 import IconProtected from "@neverquest/icons/protected.svg?react"
 import IconQuests from "@neverquest/icons/quests.svg?react"
+import IconRage from "@neverquest/icons/rage.svg?react"
 import IconRanged from "@neverquest/icons/ranged.svg?react"
 import IconRetreat from "@neverquest/icons/retreat.svg?react"
 import IconRuby from "@neverquest/icons/ruby.svg?react"
@@ -53,6 +54,7 @@ import IconStamina from "@neverquest/icons/stamina.svg?react"
 import IconTears from "@neverquest/icons/tears.svg?react"
 import IconThaumaturgicGoggles from "@neverquest/icons/thaumaturgic-goggles.svg?react"
 import IconTornManuscript from "@neverquest/icons/torn-manuscript.svg?react"
+import IconWarMask from "@neverquest/icons/war-mask.svg?react"
 import IconWilderness from "@neverquest/icons/wilderness.svg?react"
 
 import type { ConsumableItem, GeneratorRange, InfusableItem, RelicItem } from "@neverquest/types"
@@ -147,8 +149,8 @@ export const ELEMENTALS: Record<
 	fire: {
 		ailment: "burning",
 		color: "orange",
-		damageArmor: { maximum: 2, minimum: 1 },
-		damageWeapon: { maximum: 0.5, minimum: 0.1 },
+		damageArmor: { maximum: 1.5, minimum: 0.7 },
+		damageWeapon: { maximum: 0.4, minimum: 0.1 },
 		duration: { maximum: 2500, minimum: 1200 },
 		durationCap: 7500,
 		extent: "high",
@@ -158,8 +160,8 @@ export const ELEMENTALS: Record<
 	ice: {
 		ailment: "frozen",
 		color: "cyan",
-		damageArmor: { maximum: 1.75, minimum: 0.75 },
-		damageWeapon: { maximum: 0.4, minimum: 0.075 },
+		damageArmor: { maximum: 1.25, minimum: 0.5 },
+		damageWeapon: { maximum: 0.3, minimum: 0.075 },
 		duration: { maximum: 2200, minimum: 1000 },
 		durationCap: 3500,
 		extent: "medium",
@@ -169,8 +171,8 @@ export const ELEMENTALS: Record<
 	lightning: {
 		ailment: "shocked",
 		color: "purple",
-		damageArmor: { maximum: 1.5, minimum: 0.5 },
-		damageWeapon: { maximum: 0.25, minimum: 0.05 },
+		damageArmor: { maximum: 1, minimum: 0.25 },
+		damageWeapon: { maximum: 0.2, minimum: 0.05 },
 		duration: { maximum: 2000, minimum: 900 },
 		durationCap: 5000,
 		extent: "low",
@@ -186,8 +188,8 @@ export const GEM_BASE = {
 	weight: 1,
 }
 export const GEM_ENHANCEMENT_RANGE = {
-	maximum: 1,
-	minimum: 0.1,
+	maximum: 0.5,
+	minimum: 0.075,
 }
 export const GEM_FITTING_COST_RANGE = {
 	maximum: 300,
@@ -228,7 +230,7 @@ export const INFUSABLES: Record<
 			},
 			ID: "",
 			name: "eldritch codex",
-			price: 5000,
+			price: 3666,
 			weight: 13,
 		},
 		tooltip: "Life leech",
@@ -242,26 +244,29 @@ export const INFUSABLES: Record<
 			effect: { maximum: 1, minimum: 0 },
 			ID: "",
 			name: "mysterious egg",
-			price: 1554,
+			price: 1514,
 			weight: 7,
 		},
 		tooltip: "Hatching progress",
 	},
 }
 
-export const KNAPSACK_CAPACITY = 16
+export const KNAPSACK_CAPACITY = {
+	minimum: 16,
+	threshold: 250,
+}
 
 export const MUNITIONS = {
 	amount: 1,
 	maximum: LEVELLING_MAXIMUM,
-	priceRange: { maximum: 750, minimum: 3 },
-	satchelCapacity: 5,
+	minimum: 5,
+	priceRange: { maximum: 450, minimum: 3 },
 }
 
 export const RELIC_DROP_CHANCE = {
-	"dream catcher": { maximum: 0.05, minimum: 0.01 },
-	"memento": { maximum: 0.1, minimum: 0.01 },
-	"torn manuscript": { maximum: 0.05, minimum: 0.01 },
+	"dream catcher": { maximum: 0.1, minimum: 0.01 },
+	"memento": { maximum: 0.3, minimum: 0.01 },
+	"torn manuscript": { maximum: 0.15, minimum: 0.01 },
 }
 
 export const RELICS: Record<
@@ -277,19 +282,18 @@ export const RELICS: Record<
 		item: {
 			ID: "",
 			name: "[S751NQ]",
-			price: 140_014,
+			price: 140_010,
 			weight: 14,
 		},
 	},
 	"automincer": {
-		description:
-			"While # equipped, collects # loot and passes to the next # stage once clear of monsters.",
+		description: "While # equipped, collects # loot and passes to the next # stage once clear of monsters.",
 		descriptionIcons: [IconGrinding, IconLoot, IconStage],
 		Icon: IconAutomincer,
 		item: {
 			ID: "",
 			name: "automincer",
-			price: 5000,
+			price: 4000,
 			weight: 20,
 		},
 	},
@@ -301,7 +305,7 @@ export const RELICS: Record<
 			ID: "",
 			name: "compass",
 			price: 50,
-			weight: 2,
+			weight: 3,
 		},
 	},
 	"dream catcher": {
@@ -344,7 +348,7 @@ export const RELICS: Record<
 			ID: "",
 			name: "hearthstone",
 			price: 100,
-			weight: 3,
+			weight: 5,
 		},
 	},
 	"journal": {
@@ -355,7 +359,7 @@ export const RELICS: Record<
 			ID: "",
 			name: "journal",
 			price: 750,
-			weight: 5,
+			weight: 8,
 		},
 	},
 	"knapsack": {
@@ -376,8 +380,8 @@ export const RELICS: Record<
 		item: {
 			ID: "",
 			name: "lacrimatory",
-			price: 1500,
-			weight: 8,
+			price: 1800,
+			weight: 10,
 		},
 	},
 	"memento": {
@@ -386,7 +390,7 @@ export const RELICS: Record<
 		item: {
 			ID: "",
 			name: "memento",
-			price: 154,
+			price: 150,
 			weight: 2,
 		},
 	},
@@ -398,7 +402,7 @@ export const RELICS: Record<
 			ID: "",
 			name: "munitions satchel",
 			price: 300,
-			weight: 6,
+			weight: 15,
 		},
 	},
 	"thaumaturgic goggles": {
@@ -419,8 +423,19 @@ export const RELICS: Record<
 		item: {
 			ID: "",
 			name: "torn manuscript",
-			price: 5000,
+			price: 500,
 			weight: 3,
+		},
+	},
+	"war mask": {
+		description: "All enemies that glimpse it become # enraged.",
+		descriptionIcons: [IconRage],
+		Icon: IconWarMask,
+		item: {
+			ID: "",
+			name: "war mask",
+			price: 2900,
+			weight: 7,
 		},
 	},
 }

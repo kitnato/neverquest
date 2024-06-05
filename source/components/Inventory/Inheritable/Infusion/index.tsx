@@ -18,12 +18,12 @@ import { InfusionLevel } from "@neverquest/components/Inventory/Inheritable/Infu
 import { InfusionProgress } from "@neverquest/components/Inventory/Inheritable/Infusion/InfusionProgress"
 import { LABEL_SKILL_REQUIRED, POPOVER_TRIGGER } from "@neverquest/data/general"
 import { INFUSABLES } from "@neverquest/data/items"
-import { isSkillAcquired } from "@neverquest/state/skills"
+import { isSkillTrained } from "@neverquest/state/skills"
 
 import type { Infusable } from "@neverquest/types/unions"
 
 export function Infusion({ infusable }: { infusable: Infusable }) {
-	const isSkillAcquiredMeditation = useRecoilValue(isSkillAcquired("meditation"))
+	const isSkillTrainedMeditation = useRecoilValue(isSkillTrained("meditation"))
 
 	const [isShowingInfusion, setIsShowingInfusion] = useState(false)
 
@@ -37,11 +37,11 @@ export function Infusion({ infusable }: { infusable: Infusable }) {
 						<span>{LABEL_SKILL_REQUIRED}</span>
 					</Tooltip>
 				)}
-				trigger={isSkillAcquiredMeditation ? [] : POPOVER_TRIGGER}
+				trigger={isSkillTrainedMeditation ? [] : POPOVER_TRIGGER}
 			>
 				<div>
 					<Button
-						disabled={!isSkillAcquiredMeditation}
+						disabled={!isSkillTrainedMeditation}
 						onClick={() => {
 							setIsShowingInfusion(true)
 						}}

@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { OverlayTrigger, Popover, PopoverBody, PopoverHeader, Stack } from "react-bootstrap"
 import { useRecoilValue } from "recoil"
 
@@ -5,10 +6,11 @@ import { DeltasDisplay } from "@neverquest/components/DeltasDisplay"
 import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { IconImage } from "@neverquest/components/IconImage"
 import { POPOVER_TRIGGER } from "@neverquest/data/general"
+import { useProgressQuest } from "@neverquest/hooks/actions/useProgressQuest"
 import { useDeltaText } from "@neverquest/hooks/useDeltaText"
 import IconCorpse from "@neverquest/icons/corpse.svg?react"
 import IconStage from "@neverquest/icons/stage.svg?react"
-import { corpse, stage, stageMaximum } from "@neverquest/state/encounter"
+import { corpse, stage, stageMaximum } from "@neverquest/state/character"
 import { formatNumber } from "@neverquest/utilities/formatters"
 
 export function Stage() {
@@ -16,10 +18,20 @@ export function Stage() {
 	const stageValue = useRecoilValue(stage)
 	const stageMaximumValue = useRecoilValue(stageMaximum)
 
+	const progressQuest = useProgressQuest()
+
 	useDeltaText({
 		delta: "stage",
 		state: stage,
 	})
+
+	useEffect(() => {
+		progressQuest({
+			amount: stageMaximumValue,
+			isAbsolute: true,
+			quest: "stages",
+		})
+	}, [stageMaximumValue, progressQuest])
 
 	return (
 		<IconDisplay Icon={IconStage} iconProps={{ overlayPlacement: "bottom" }} tooltip="Stage">

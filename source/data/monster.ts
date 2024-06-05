@@ -1,11 +1,12 @@
 import { LEVELLING_MAXIMUM } from "@neverquest/data/general"
 import { AILMENT_PENALTY } from "@neverquest/data/statistics"
 import IconDamage from "@neverquest/icons/damage.svg?react"
-import IconDistance from "@neverquest/icons/distance.svg?react"
 import IconMonsterAttackRate from "@neverquest/icons/monster-attack-rate.svg?react"
 import IconMonsterDamage from "@neverquest/icons/monster-damage.svg?react"
 import IconMonsterHealth from "@neverquest/icons/monster-health.svg?react"
 import { formatNumber } from "@neverquest/utilities/formatters"
+
+import { RETIREMENT_STAGE } from "./retirement"
 
 import type { Description } from "@neverquest/types/ui"
 import type { Ailment } from "@neverquest/types/unions"
@@ -14,16 +15,14 @@ export const AILMENT_DESCRIPTION: Record<Ailment, Description> = {
 	bleeding: { description: "Suffering periodic damage." },
 	burning: { description: "Cannot regenerate # health.", descriptionIcons: [IconMonsterHealth] },
 	frozen: {
-		description: `Attack # rate and # speed slowed by ${formatNumber({
-			decimals: 0,
+		description: `Attack # rate slowed by ${formatNumber({
 			format: "percentage",
 			value: AILMENT_PENALTY.frozen,
 		})}.`,
-		descriptionIcons: [IconMonsterAttackRate, IconDistance],
+		descriptionIcons: [IconMonsterAttackRate],
 	},
 	shocked: {
 		description: `Taking ${formatNumber({
-			decimals: 0,
 			format: "percentage",
 			value: AILMENT_PENALTY.shocked,
 		})} increased # damage.`,
@@ -31,7 +30,6 @@ export const AILMENT_DESCRIPTION: Record<Ailment, Description> = {
 	},
 	staggered: {
 		description: `Dealing ${formatNumber({
-			decimals: 0,
 			format: "percentage",
 			value: AILMENT_PENALTY.staggered,
 		})} decreased # damage.`,
@@ -39,7 +37,6 @@ export const AILMENT_DESCRIPTION: Record<Ailment, Description> = {
 	},
 	stunned: {
 		description: `Chance to hit on # attack reduced to ${formatNumber({
-			decimals: 0,
 			format: "percentage",
 			value: AILMENT_PENALTY.stunned,
 		})}.`,
@@ -51,7 +48,6 @@ export const BOSS_STAGE_INTERVAL = 5
 export const BOSS_STAGE_START = 10
 
 export const BLIGHT = {
-	boss: 1.2,
 	chance: {
 		maximum: 0.25,
 		minimum: 0.05,
@@ -65,14 +61,14 @@ export const BLIGHT = {
 }
 
 export const ESSENCE = {
-	attenuation: 15,
-	base: 5,
-	bonus: 0.03,
-	boss: 2,
+	attenuation: 3.5,
+	base: 6,
+	bossModifier: 1,
 	finality: {
 		"res cogitans": 77777,
 		"res dominus": 7777,
 	},
+	progressModifier: -0.03,
 }
 
 export const FINALITY_STAGE = {
@@ -81,57 +77,61 @@ export const FINALITY_STAGE = {
 }
 
 export const FRAILTY = {
-	"familiar": 0.25,
+	"familiar": -0.2,
 	"mysterious egg": {
-		maximum: 0.15,
-		minimum: 0.01,
+		maximum: -0.15,
+		minimum: -0.01,
 	},
 }
 
-export const MAXIMUM_GEM_DROP = 5
+export const GEM_DROP_MAXIMUM = 5
+
+export const LOOT_MODIFIER = {
+	equalStage: 1,
+	lowerStageEssence: 0.35,
+	lowerStageGems: 0.2,
+}
 
 export const MONSTER_ATTACK_RATE = {
-	attenuation: 4500,
-	base: 4100,
-	bonus: 0.005,
-	boss: 1.05,
+	attenuation: 4800,
 	finality: {
 		"res cogitans": 1750,
 		"res dominus": 2750,
 	},
+	maximum: 4100,
 	minimum: 2000,
 }
 
 export const MONSTER_DAMAGE = {
-	attenuation: 25,
+	attenuation: 3.5,
 	base: 5,
-	bonus: 0.01,
-	boss: 1.075,
+	bossModifier: 0.05,
 	finality: {
-		"res cogitans": 1757,
+		"res cogitans": 1575,
 		"res dominus": 1075,
 	},
 	menace: {
-		maximum: 0.5,
-		minimum: 0.25,
-		requiredStage: 26,
+		maximum: 0.85,
+		minimum: 0.6,
+		requiredStage: RETIREMENT_STAGE + 1,
 	},
+	progressModifier: 0.01,
 }
 
 export const MONSTER_HEALTH = {
-	attenuation: 25,
+	attenuation: 2,
 	base: 18,
-	bonus: 0.02,
-	boss: 1.8,
+	bossModifier: 0.75,
 	finality: {
-		"res cogitans": 25757,
-		"res dominus": 13757,
+		"res cogitans": 75757,
+		"res dominus": 7575,
 	},
 	menace: {
-		maximum: 1.5,
-		minimum: 0.3,
-		requiredStage: 31,
+		maximum: 6,
+		minimum: 1.5,
+		requiredStage: RETIREMENT_STAGE + 1,
 	},
+	progressModifier: 0.02,
 }
 
 export const MONSTER_REGENERATION = {
@@ -141,13 +141,12 @@ export const MONSTER_REGENERATION = {
 }
 
 export const POISON = {
-	boss: 1.25,
 	chance: {
-		maximum: 0.35,
+		maximum: 0.3,
 		minimum: 0.1,
 	},
 	duration: {
-		maximum: 400_000,
+		maximum: 500_000,
 		minimum: 30_000,
 	},
 	finality: {
@@ -155,7 +154,7 @@ export const POISON = {
 		"res dominus": 0.5757,
 	},
 	magnitude: {
-		maximum: 0.2,
+		maximum: 0.25,
 		minimum: 0.075,
 	},
 	requiredStage: 45,

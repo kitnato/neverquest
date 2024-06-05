@@ -43,4 +43,6 @@ export function Distance() {
 			</IconDisplay>
 		)
 	}
+
+	return null
 }

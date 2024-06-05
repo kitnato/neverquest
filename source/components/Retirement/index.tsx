@@ -20,7 +20,8 @@ import IconRetire from "@neverquest/icons/retire.svg?react"
 import { ownedItem } from "@neverquest/state/inventory"
 import { isSkillTrained } from "@neverquest/state/skills"
 
-import type { Dispatch, SetStateAction } from "react"
+import type { SetStateAction } from "preact/compat"
+import type { Dispatch } from "preact/hooks"
 
 export function Retirement({
 	state: [isShowing, setIsShowing],

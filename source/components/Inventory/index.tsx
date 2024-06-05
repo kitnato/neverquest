@@ -40,7 +40,7 @@ import { stackItems } from "@neverquest/utilities/helpers"
 
 import type { Armor, Shield, Weapon } from "@neverquest/types"
 import type { Relic } from "@neverquest/types/unions"
-import type { FunctionComponent } from "react"
+import type { FunctionComponent } from "preact"
 
 const RELIC_ACTIONS: Partial<Record<Relic, FunctionComponent>> = {
 	"[S751NQ]": SemperServatis,

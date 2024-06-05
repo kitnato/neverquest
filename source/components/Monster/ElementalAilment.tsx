@@ -35,4 +35,6 @@ export function ElementalAilment({ elemental }: { elemental: Elemental }) {
 			</IconDisplay>
 		)
 	}
+
+	return null
 }

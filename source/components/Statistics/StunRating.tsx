@@ -89,4 +89,6 @@ export function StunRating() {
 			</IconDisplay>
 		)
 	}
+
+	return null
 }

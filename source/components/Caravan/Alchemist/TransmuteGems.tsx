@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid"
-import { type SetStateAction, useEffect, useState } from "react"
+import { useEffect, useState } from "preact/hooks"
 import { Button, OverlayTrigger, Stack, Tooltip } from "react-bootstrap"
 import { useRecoilState, useRecoilValue } from "recoil"
 
@@ -24,6 +24,8 @@ import { isGemItem } from "@neverquest/types/type-guards"
 import { GEM_TYPES, type Gem } from "@neverquest/types/unions"
 import { formatNumber } from "@neverquest/utilities/formatters"
 import { stackItems } from "@neverquest/utilities/helpers"
+
+import type { SetStateAction } from "preact/compat"
 
 export function TransmuteGems() {
 	const [inventoryValue, setInventory] = useRecoilState(inventory)

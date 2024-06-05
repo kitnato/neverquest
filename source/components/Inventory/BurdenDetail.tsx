@@ -48,4 +48,6 @@ export function BurdenDetail({ burden, comparison }: { burden: number, compariso
 			</tr>
 		)
 	}
+
+	return null
 }

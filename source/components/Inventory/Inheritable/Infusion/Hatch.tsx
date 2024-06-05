@@ -30,8 +30,8 @@ export function Hatch() {
 	const { item: familiarItem } = RELICS.familiar
 	const canFitFamiliar = canFit(familiarItem.weight)
 
-	return (
-		infusionLevelValue >= LEVELLING_MAXIMUM && ownedItemMysteriousEgg !== undefined && (
+	if (infusionLevelValue >= LEVELLING_MAXIMUM && ownedItemMysteriousEgg !== undefined) {
+		return (
 			<OverlayTrigger
 				overlay={(
 					<Tooltip>
@@ -61,5 +61,7 @@ export function Hatch() {
 				</div>
 			</OverlayTrigger>
 		)
-	)
+	}
+
+	return null
 }

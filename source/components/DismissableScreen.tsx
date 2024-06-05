@@ -1,6 +1,6 @@
 import { Offcanvas, OffcanvasBody, OffcanvasHeader, OffcanvasTitle } from "react-bootstrap"
 
-import type { ReactNode } from "react"
+import type { ComponentChildren } from "preact"
 import type { OffcanvasPlacement } from "react-bootstrap/Offcanvas"
 
 export function DismissableScreen({
@@ -11,7 +11,7 @@ export function DismissableScreen({
 	placement = "end",
 	title,
 }: {
-	children: ReactNode
+	children: ComponentChildren
 	hideOverflow?: boolean
 	isShowing: boolean
 	onClose: () => void

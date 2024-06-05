@@ -1,4 +1,4 @@
-import { type JSX, useState } from "react"
+import { useState } from "preact/hooks"
 import {
 	Button,
 	Modal,
@@ -15,6 +15,8 @@ import { IconImage } from "@neverquest/components/IconImage"
 import manual from "@neverquest/data/manual.md?raw"
 import IconAbout from "@neverquest/icons/about.svg?react"
 import { formatKebabCase } from "@neverquest/utilities/formatters"
+
+import type { HTMLAttributes } from "preact/compat"
 
 const HEADERS = ["h2", "h3", "h4", "h5", "h6"] as const
 
@@ -59,7 +61,7 @@ export function About() {
 										children,
 										node: _,
 										...properties
-									}: ExtraProps & JSX.IntrinsicElements[typeof Current]) => (
+									}: ExtraProps & HTMLAttributes<HTMLHeadingElement>) => (
 										<Current
 											id={typeof children === "string" ? formatKebabCase(children) : undefined}
 											{...properties}

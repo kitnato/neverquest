@@ -1,6 +1,5 @@
 import ls from "localstorage-slim"
-import { StrictMode } from "react"
-import { createRoot } from "react-dom/client"
+import { render } from "preact"
 
 import { Core } from "@neverquest/components/Core"
 import { LEVELLING_MAXIMUM } from "@neverquest/data/general"
@@ -15,9 +14,5 @@ if (root === null) {
 	throw new Error("Cannot select document root.")
 }
 else {
-	createRoot(root).render(
-		<StrictMode>
-			<Core />
-		</StrictMode>,
-	)
+	render(<Core />, root)
 }

@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid"
-import { type ReactNode, useCallback, useLayoutEffect, useMemo, useRef, useState } from "react"
+import { useCallback, useLayoutEffect, useMemo, useRef, useState } from "preact/hooks"
 import { useRecoilValue } from "recoil"
 
 import { GENERIC_MINIMUM, LEVELLING_END } from "@neverquest/data/general"
@@ -7,6 +7,8 @@ import { FINALITY_STAGE } from "@neverquest/data/monster"
 import { useAnimation } from "@neverquest/hooks/useAnimation"
 import { stage } from "@neverquest/state/character"
 import { getFromRange, getLinearMapping, getRange } from "@neverquest/utilities/getters"
+
+import type { ComponentChildren } from "preact"
 
 const CHARACTERS = "!·&=?¿|@#~¬+/\\^*[]{}-_<>"
 
@@ -50,7 +52,7 @@ function glitchElementAt({ element, originalText }: { element: Element, original
 	}
 }
 
-export function Glitch({ children, isContinuous = false }: { children: ReactNode, isContinuous?: boolean }) {
+export function Glitch({ children, isContinuous = false }: { children: ComponentChildren, isContinuous?: boolean }) {
 	const stageValue = useRecoilValue(stage)
 
 	const [glitchingElements, setGlitchingElements] = useState<

@@ -39,4 +39,6 @@ export function BuybackItems() {
 			</Accordion>
 		)
 	}
+
+	return null
 }

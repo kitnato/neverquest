@@ -87,4 +87,6 @@ export function Range() {
 			</IconDisplay>
 		)
 	}
+
+	return null
 }

@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect } from "preact/hooks"
 import { OverlayTrigger, Popover, PopoverBody } from "react-bootstrap"
 import { useRecoilValue, useSetRecoilState } from "recoil"
 
@@ -100,4 +100,6 @@ export function Recovery() {
 			</IconDisplay>
 		)
 	}
+
+	return null
 }

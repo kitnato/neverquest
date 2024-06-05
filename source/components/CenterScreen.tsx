@@ -1,10 +1,10 @@
-import type { ReactNode } from "react"
+import type { ComponentChildren } from "preact"
 
 export function CenterScreen({
 	children,
 	className,
 }: {
-	children: ReactNode
+	children: ComponentChildren
 	className?: string
 }) {
 	return (

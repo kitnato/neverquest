@@ -119,4 +119,6 @@ export function BleedRating() {
 			</IconDisplay>
 		)
 	}
+
+	return null
 }

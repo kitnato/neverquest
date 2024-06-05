@@ -39,4 +39,6 @@ export function OffhandEquipped() {
 			</IconDisplay>
 		)
 	}
+
+	return null
 }

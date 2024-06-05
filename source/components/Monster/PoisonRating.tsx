@@ -97,4 +97,6 @@ export function PoisonRating() {
 			</IconDisplay>
 		)
 	}
+
+	return null
 }

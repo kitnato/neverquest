@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react"
+import { useEffect, useMemo } from "preact/hooks"
 import { useRecoilValue, useSetRecoilState } from "recoil"
 
 import { MonsterRegenerationMeter } from "@neverquest/components/Monster/MonsterRegenerationMeter"

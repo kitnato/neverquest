@@ -88,4 +88,6 @@ export function Thorns() {
 			</IconDisplay>
 		)
 	}
+
+	return null
 }

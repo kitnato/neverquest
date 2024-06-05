@@ -69,4 +69,6 @@ export function AppliedGems({ gearItem }: { gearItem: GearItem | GearItemUnequip
 			</tr>
 		)
 	}
+
+	return null
 }

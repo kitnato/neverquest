@@ -38,4 +38,6 @@ export function EssenceLoot() {
 			</Stack>
 		)
 	}
+
+	return null
 }

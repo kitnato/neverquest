@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid"
-import { useState } from "react"
+import { useState } from "preact/hooks"
 import { RecoilRoot } from "recoil"
 
 import { CenterScreen } from "@neverquest/components/CenterScreen"

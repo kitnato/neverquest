@@ -84,4 +84,6 @@ export function Travel() {
 			</OverlayTrigger>
 		)
 	}
+
+	return null
 }

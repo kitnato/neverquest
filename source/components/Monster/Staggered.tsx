@@ -32,4 +32,6 @@ export function Staggered() {
 			</IconDisplay>
 		)
 	}
+
+	return null
 }

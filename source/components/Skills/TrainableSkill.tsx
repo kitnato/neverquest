@@ -48,4 +48,6 @@ export function TrainableSkill({ skill }: { skill: Skill }) {
 			</div>
 		)
 	}
+
+	return null
 }

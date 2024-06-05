@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react"
+import { useEffect, useLayoutEffect, useRef, useState } from "preact/hooks"
 import { FormControl } from "react-bootstrap"
 import { useRecoilState, useRecoilValue } from "recoil"
 
@@ -52,7 +52,7 @@ export function Name() {
 		>
 			<FormControl
 				className={canEdit && !isEditing ? "hover-grow" : undefined}
-				onBlur={({ currentTarget: { value } }) => {
+				onBlur={({ currentTarget: { value } }: { currentTarget: { value: string } }) => {
 					const selected = window.getSelection()
 					const trimmedValue = value.trim().replaceAll(/\s+/g, " ")
 
@@ -78,7 +78,7 @@ export function Name() {
 						}
 					}
 				}}
-				onChange={({ target: { value } }) => {
+				onChange={({ currentTarget: { value } }) => {
 					if (value.length >= NAME_LENGTH_MAXIMUM) {
 						return
 					}
@@ -90,7 +90,7 @@ export function Name() {
 						setIsEditing(true)
 					}
 				}}
-				onKeyDown={({ key }) => {
+				onKeyDown={({ key }: { key: string }) => {
 					if (key === "Enter") {
 						setIsEditing(false)
 					}

@@ -112,4 +112,6 @@ export function Health() {
 			</IconDisplay>
 		)
 	}
+
+	return null
 }

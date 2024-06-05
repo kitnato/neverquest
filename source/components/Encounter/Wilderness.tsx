@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect } from "preact/hooks"
 import { Card, CardBody } from "react-bootstrap"
 import { useRecoilValue } from "recoil"
 

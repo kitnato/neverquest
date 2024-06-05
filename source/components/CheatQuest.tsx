@@ -1,4 +1,4 @@
-import { useLayoutEffect } from "react"
+import { useLayoutEffect } from "preact/hooks"
 
 import { useCheatQuest } from "@neverquest/hooks/actions/useCheatQuest"
 

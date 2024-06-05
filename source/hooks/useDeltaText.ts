@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect } from "preact/hooks"
 import { type RecoilValueReadOnly, useRecoilValue } from "recoil"
 
 import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta"

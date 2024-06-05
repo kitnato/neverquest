@@ -36,4 +36,6 @@ export function GearLevelDetail({ comparison, level }: { comparison: Comparison,
 			</tr>
 		)
 	}
+
+	return null
 }

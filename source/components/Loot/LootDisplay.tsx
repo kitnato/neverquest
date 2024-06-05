@@ -72,4 +72,6 @@ export function LootDisplay() {
 			</Card>
 		)
 	}
+
+	return null
 }

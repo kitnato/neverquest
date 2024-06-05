@@ -30,4 +30,6 @@ export function Ailments() {
 			</Card>
 		)
 	}
+
+	return null
 }

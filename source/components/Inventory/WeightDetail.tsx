@@ -44,8 +44,7 @@ export function WeightDetail({
 									/>
 								)}
 
-								{amount !== undefined && amount > 1
-								&& <span>{` (${formatNumber({ value: weight * amount })})`}</span>}
+								{amount !== undefined && amount > 1 && <span>{` (${formatNumber({ value: weight * amount })})`}</span>}
 							</Stack>
 						</td>
 					</>

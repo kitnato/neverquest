@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState } from "preact/hooks"
 
 import { IconImage } from "@neverquest/components/IconImage"
 import IconOuroboros from "@neverquest/icons/ouroboros.svg?react"

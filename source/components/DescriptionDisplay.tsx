@@ -1,4 +1,4 @@
-import { Fragment } from "react"
+import { Fragment } from "preact"
 
 import { IconImage } from "@neverquest/components/IconImage"
 

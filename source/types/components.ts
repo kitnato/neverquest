@@ -1,5 +1,5 @@
 import type { Showing } from "@neverquest/types/unions"
-import type { FunctionComponent, SVGProps } from "react"
+import type { ComponentProps, FunctionComponent } from "preact"
 import type { Placement } from "react-bootstrap/esm/types"
 
 export type Comparison =
@@ -20,7 +20,9 @@ export type IconImageProperties = {
 
 export type IconImageDOMProperties = Omit<IconImageProperties, "Icon">
 
-export type SVGIcon = FunctionComponent<SVGProps<SVGSVGElement> & { title?: string }>
+export type SVGIcon = FunctionComponent<
+	ComponentProps<"svg"> & { title?: string }
+>
 
 type TabData<Label> = {
 	Component: FunctionComponent

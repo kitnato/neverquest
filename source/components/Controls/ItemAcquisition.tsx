@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect } from "preact/hooks"
 import { useRecoilState, useResetRecoilState } from "recoil"
 
 import { IconImage } from "@neverquest/components/IconImage"

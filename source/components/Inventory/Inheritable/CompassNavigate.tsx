@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState } from "preact/hooks"
 import {
 	Button,
 	DropdownButton,
@@ -73,6 +73,8 @@ const StageDisplay = ({
 			</Stack>
 		)
 	}
+
+	return null
 }
 
 export function CompassNavigate() {
@@ -148,7 +150,7 @@ export function CompassNavigate() {
 								const stageIndex = index + 1
 
 								return (
-									<DropdownItem as="button" eventKey={stageIndex} key={name}>
+									<DropdownItem eventKey={stageIndex} key={name}>
 										<StageDisplay currentStage={stageIndex} wildernesses={wildernessesValue} />
 									</DropdownItem>
 								)

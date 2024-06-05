@@ -26,4 +26,6 @@ export function MonsterOffense() {
 			</Row>
 		)
 	}
+
+	return null
 }

@@ -1,5 +1,5 @@
 import ls from "localstorage-slim"
-import { useContext, useState } from "react"
+import { useContext, useState } from "preact/hooks"
 import {
 	Button,
 	Modal,

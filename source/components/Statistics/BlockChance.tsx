@@ -65,4 +65,6 @@ export function BlockChance() {
 			</IconDisplay>
 		)
 	}
+
+	return null
 }

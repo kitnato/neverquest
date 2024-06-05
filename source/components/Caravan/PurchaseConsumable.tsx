@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid"
-import { useState } from "react"
+import { useState } from "preact/hooks"
 import { Stack } from "react-bootstrap"
 
 import { PurchaseItemButton } from "@neverquest/components/Caravan/PurchaseItemButton"

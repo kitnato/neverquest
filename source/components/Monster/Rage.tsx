@@ -48,4 +48,6 @@ export function Rage() {
 			</IconDisplay>
 		)
 	}
+
+	return null
 }

@@ -81,4 +81,6 @@ export function HiredCrewMember({ crewMember }: { crewMember: CrewMember }) {
 			</>
 		)
 	}
+
+	return null
 }

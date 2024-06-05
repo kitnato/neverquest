@@ -64,4 +64,6 @@ export function Progress() {
 			</IconDisplay>
 		)
 	}
+
+	return null
 }

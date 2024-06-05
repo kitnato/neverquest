@@ -43,7 +43,7 @@ export function QuestDisplay({
 	const status = questStatusesValue[progressionIndex]
 
 	if (status === undefined) {
-		return
+		return null
 	}
 
 	const isRewardChosen = isQuestBonus(status)

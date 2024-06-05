@@ -58,4 +58,6 @@ export function Frailty() {
 			</IconDisplay>
 		)
 	}
+
+	return null
 }

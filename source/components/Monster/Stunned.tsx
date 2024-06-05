@@ -32,4 +32,6 @@ export function Stunned() {
 			</IconDisplay>
 		)
 	}
+
+	return null
 }

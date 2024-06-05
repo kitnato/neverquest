@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useRef } from "preact/hooks"
 import { Badge, Button, OverlayTrigger, Tooltip } from "react-bootstrap"
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil"
 
@@ -82,4 +82,6 @@ export function ShowInventory() {
 			</>
 		)
 	}
+
+	return null
 }

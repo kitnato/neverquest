@@ -153,4 +153,6 @@ export function ParryRating() {
 			</IconDisplay>
 		)
 	}
+
+	return null
 }

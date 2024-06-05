@@ -42,4 +42,6 @@ export function Masteries() {
 			</Accordion>
 		)
 	}
+
+	return null
 }

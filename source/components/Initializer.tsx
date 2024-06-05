@@ -1,8 +1,10 @@
-import { type ReactNode, useEffect } from "react"
+import { useEffect } from "preact/hooks"
 
 import { useInitialize } from "@neverquest/hooks/actions/useInitialize"
 
-export function Initializer({ children }: { children: ReactNode }) {
+import type { ComponentChildren } from "preact"
+
+export function Initializer({ children }: { children: ComponentChildren }) {
 	const initialize = useInitialize()
 
 	useEffect(initialize, [initialize])

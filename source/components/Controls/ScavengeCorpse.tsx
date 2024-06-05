@@ -73,4 +73,6 @@ export function ScavengeCorpse() {
 			)
 		}
 	}
+
+	return null
 }

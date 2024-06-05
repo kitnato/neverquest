@@ -21,4 +21,6 @@ export function WeaponEquipped() {
 			</IconDisplay>
 		)
 	}
+
+	return null
 }

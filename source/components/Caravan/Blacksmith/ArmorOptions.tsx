@@ -1,5 +1,5 @@
 import { ARMOR_CLASS_TYPES, type ArmorClass } from "@kitnato/locran/build/types"
-import { useCallback, useEffect } from "react"
+import { useCallback, useEffect } from "preact/hooks"
 import { DropdownButton, DropdownItem, Stack } from "react-bootstrap"
 import { useRecoilState, useRecoilValue } from "recoil"
 
@@ -106,7 +106,7 @@ export function ArmorOptions() {
 						variant="outline-dark"
 					>
 						{ARMOR_CLASS_TYPES.map(armorClassType => (
-							<DropdownItem as="button" eventKey={armorClassType} key={armorClassType}>
+							<DropdownItem eventKey={armorClassType} key={armorClassType}>
 								<span>{capitalizeAll(armorClassType)}</span>
 							</DropdownItem>
 						))}

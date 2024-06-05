@@ -32,4 +32,6 @@ export function Gear() {
 			</Card>
 		)
 	}
+
+	return null
 }

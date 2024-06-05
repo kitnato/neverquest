@@ -91,4 +91,6 @@ export function HirableCrewMember({ crewMember }: { crewMember: CrewMember }) {
 			</IconDisplay>
 		)
 	}
+
+	return null
 }

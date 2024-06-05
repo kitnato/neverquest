@@ -28,4 +28,6 @@ export function Looting() {
 	if (isLootAvailableValue) {
 		return <hr />
 	}
+
+	return null
 }

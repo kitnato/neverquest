@@ -103,4 +103,6 @@ export function Stamina() {
 			</IconDisplay>
 		)
 	}
+
+	return null
 }

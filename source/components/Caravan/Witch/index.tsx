@@ -1,4 +1,4 @@
-import { Fragment } from "react"
+import { Fragment } from "preact"
 import { Stack } from "react-bootstrap"
 import { useRecoilValue } from "recoil"
 

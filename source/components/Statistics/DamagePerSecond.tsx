@@ -36,4 +36,6 @@ export function DamagePerSecond() {
 			</IconDisplay>
 		)
 	}
+
+	return null
 }

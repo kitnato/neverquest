@@ -75,4 +75,6 @@ export function ShowQuests() {
 			</>
 		)
 	}
+
+	return null
 }

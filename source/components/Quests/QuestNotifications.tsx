@@ -45,4 +45,6 @@ export function QuestNotifications() {
 			</ToastContainer>
 		)
 	}
+
+	return null
 }

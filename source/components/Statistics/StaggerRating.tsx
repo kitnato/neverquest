@@ -83,4 +83,6 @@ export function StaggerRating() {
 			</IconDisplay>
 		)
 	}
+
+	return null
 }

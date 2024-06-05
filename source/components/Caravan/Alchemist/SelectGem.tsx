@@ -32,7 +32,7 @@ export function SelectGem({
 					{GEM_TYPES.map(
 						gemType =>
 							omit !== gemType && (
-								<DropdownItem as="button" eventKey={gemType} key={gemType}>
+								<DropdownItem eventKey={gemType} key={gemType}>
 									<span>{capitalizeAll(gemType)}</span>
 								</DropdownItem>
 							),

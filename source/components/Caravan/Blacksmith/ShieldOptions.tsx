@@ -1,5 +1,5 @@
 import { SHIELD_CLASS_TYPES, type ShieldClass } from "@kitnato/locran/build/types"
-import { useCallback, useEffect } from "react"
+import { useCallback, useEffect } from "preact/hooks"
 import { DropdownButton, DropdownItem, Stack } from "react-bootstrap"
 import { useRecoilState, useRecoilValue } from "recoil"
 
@@ -102,7 +102,7 @@ export function ShieldOptions() {
 						variant="outline-dark"
 					>
 						{SHIELD_CLASS_TYPES.map(shieldClass => (
-							<DropdownItem as="button" eventKey={shieldClass} key={shieldClass}>
+							<DropdownItem eventKey={shieldClass} key={shieldClass}>
 								<span>{capitalizeAll(shieldClass)}</span>
 							</DropdownItem>
 						))}

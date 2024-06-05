@@ -124,4 +124,6 @@ export function CriticalRating() {
 			</IconDisplay>
 		)
 	}
+
+	return null
 }

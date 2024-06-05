@@ -3,7 +3,8 @@ import { Stack } from "react-bootstrap"
 import { IconImage } from "@neverquest/components/IconImage"
 
 import type { IconImageDOMProperties, SVGIcon } from "@neverquest/types/components"
-import type { ReactNode } from "react"
+import type { ComponentChildren } from "preact"
+import type { ReactNode } from "preact/compat"
 import type { ResponsiveUtilityValue } from "react-bootstrap/esm/createUtilityClasses"
 import type { GapValue } from "react-bootstrap/esm/types"
 
@@ -16,7 +17,7 @@ export function IconDisplay({
 	iconProps,
 	tooltip,
 }: {
-	children?: ReactNode
+	children?: ComponentChildren
 	className?: string
 	description?: ReactNode
 	gap?: ResponsiveUtilityValue<GapValue>

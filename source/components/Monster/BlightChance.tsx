@@ -99,4 +99,6 @@ export function BlightChance() {
 			</IconDisplay>
 		)
 	}
+
+	return null
 }

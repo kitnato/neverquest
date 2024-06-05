@@ -21,4 +21,6 @@ export function MonsterDamagePerSecond() {
 			</IconDisplay>
 		)
 	}
+
+	return null
 }

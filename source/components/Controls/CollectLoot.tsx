@@ -50,4 +50,6 @@ export function CollectLoot() {
 			</OverlayTrigger>
 		)
 	}
+
+	return null
 }

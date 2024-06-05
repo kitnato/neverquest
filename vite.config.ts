@@ -1,7 +1,7 @@
 import path from "node:path"
 import { fileURLToPath } from "node:url"
 
-import react from "@vitejs/plugin-react"
+import { preact } from "@preact/preset-vite"
 import { defineConfig } from "vite"
 import { checker } from "vite-plugin-checker"
 import { VitePWA } from "vite-plugin-pwa"
@@ -20,11 +20,23 @@ export default defineConfig({
 			overlay: false,
 			typescript: true,
 		}),
-		react(),
-		svgr(),
+		preact(),
+		svgr({
+			svgrOptions: {
+				jsxRuntime: "classic-preact",
+				jsxRuntimeImport: {
+					defaultSpecifier: "React",
+					source: "preact/compat",
+				},
+			},
+		}),
 		tsconfigPaths(),
 		VitePWA({
-			includeAssets: ["apple-touch-icon.png", "android-chrome-512x512.png", "mstile-310x310.png"],
+			includeAssets: [
+				"apple-touch-icon.png",
+				"android-chrome-512x512.png",
+				"mstile-310x310.png",
+			],
 			registerType: "autoUpdate",
 		}),
 	],

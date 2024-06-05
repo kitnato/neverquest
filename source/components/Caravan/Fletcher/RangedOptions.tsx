@@ -1,5 +1,5 @@
 import { WEAPON_CLASS_TYPES, type WeaponClass } from "@kitnato/locran/build/types"
-import { useCallback, useEffect } from "react"
+import { useCallback, useEffect } from "preact/hooks"
 import { DropdownButton, DropdownItem, Stack } from "react-bootstrap"
 import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil"
 
@@ -112,7 +112,7 @@ export function RangedOptions() {
 					>
 						{WEAPON_CLASS_TYPES.filter(weaponClassType => weaponClassType !== "slashing").map(
 							weaponClassType => (
-								<DropdownItem as="button" eventKey={weaponClassType} key={weaponClassType}>
+								<DropdownItem eventKey={weaponClassType} key={weaponClassType}>
 									<span>{capitalizeAll(weaponClassType)}</span>
 								</DropdownItem>
 							),

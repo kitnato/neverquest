@@ -1,7 +1,8 @@
 import { OverlayTrigger, ProgressBar, Tooltip } from "react-bootstrap"
 
 import type { BootstrapColorVariant, UIAttachment } from "@neverquest/types/ui"
-import type { ReactNode } from "react"
+import type { ComponentChildren } from "preact"
+import type { ReactNode } from "preact/compat"
 
 export function LabelledProgressBar({
 	attachment,
@@ -14,7 +15,7 @@ export function LabelledProgressBar({
 	variant = "dark",
 }: {
 	attachment?: UIAttachment
-	children: ReactNode
+	children: ComponentChildren
 	disableTransitions?: boolean
 	isAnimated?: boolean
 	isSmall?: boolean
@@ -35,7 +36,7 @@ export function LabelledProgressBar({
 		>
 			{isSmall
 				? (
-					<OverlayTrigger overlay={<Tooltip>{children}</Tooltip>} placement="bottom">
+					<OverlayTrigger overlay={<Tooltip><>{children}</></Tooltip>} placement="bottom">
 						<ProgressBar className={`small${attachment ? ` attached-${attachment}` : ""}`}>
 							<ProgressBar {...appearance} now={value} variant={variant} />
 						</ProgressBar>
@@ -46,7 +47,7 @@ export function LabelledProgressBar({
 						<ProgressBar className={attachment ? `attached-${attachment}` : undefined}>
 							<ProgressBar {...appearance} now={value} variant={variant} />
 
-							{sibling}
+							<>{sibling}</>
 						</ProgressBar>
 
 						<div className="position-absolute small text-light text-shaded top-50 start-50 translate-middle">

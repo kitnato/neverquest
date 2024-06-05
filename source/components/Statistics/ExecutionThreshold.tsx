@@ -38,4 +38,6 @@ export function ExecutionThreshold() {
 			</IconDisplay>
 		)
 	}
+
+	return null
 }

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "preact/hooks"
 import { clearInterval, setInterval } from "worker-timers"
 
 import { FRAMERATE } from "@neverquest/data/general"

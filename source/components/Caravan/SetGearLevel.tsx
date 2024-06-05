@@ -25,7 +25,7 @@ export function SetGearLevel({
 				disabled={isDisabled}
 				max={maximum}
 				min={1}
-				onChange={({ target: { value } }) => {
+				onChange={({ currentTarget: { value } }) => {
 					if (!value) {
 						return
 					}

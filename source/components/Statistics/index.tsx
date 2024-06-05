@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from "react"
+import { useLayoutEffect, useRef, useState } from "preact/hooks"
 import { Card, CardBody, Col, Row, Stack } from "react-bootstrap"
 
 import { BleedRating } from "@neverquest/components/Statistics/BleedRating"

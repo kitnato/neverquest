@@ -1,10 +1,10 @@
 import { Table } from "react-bootstrap"
 
-import type { ReactNode } from "react"
+import type { ComponentChildren } from "preact"
 
-export function DetailsTable({ children }: { children: ReactNode }) {
+export function DetailsTable({ children }: { children: ComponentChildren }) {
 	return (
-		<Table borderless className="m-0 table-details" size="sm">
+		<Table borderless size="sm">
 			<tbody>{children}</tbody>
 		</Table>
 	)

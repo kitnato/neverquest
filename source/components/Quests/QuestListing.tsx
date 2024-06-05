@@ -8,11 +8,15 @@ import type { Quest } from "@neverquest/types/unions"
 export function QuestListing({ quest }: { quest: Quest }) {
 	const activeQuestsValue = useRecoilValue(activeQuests(quest))
 
-	return activeQuestsValue.map(activeQuest => (
-		<QuestDisplay
-			key={activeQuest.ID}
-			questData={activeQuest}
-		/>
-	),
+	return (
+		<>
+			{activeQuestsValue.map(activeQuest => (
+				<QuestDisplay
+					key={activeQuest.ID}
+					questData={activeQuest}
+				/>
+			),
+			)}
+		</>
 	)
 }

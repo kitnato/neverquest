@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect } from "preact/hooks"
 import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap"
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil"
 
@@ -123,4 +123,6 @@ export function AttackRate() {
 			</IconDisplay>
 		)
 	}
+
+	return null
 }

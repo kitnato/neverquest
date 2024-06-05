@@ -56,4 +56,6 @@ export function ElementalDetails({ slot }: { slot: "armor" | "weapon" }) {
 			</tr>
 		)
 	}
+
+	return null
 }

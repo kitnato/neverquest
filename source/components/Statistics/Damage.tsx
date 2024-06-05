@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect } from "preact/hooks"
 import { OverlayTrigger, Popover, PopoverBody, Stack } from "react-bootstrap"
 import { useRecoilValue } from "recoil"
 
@@ -246,4 +246,6 @@ export function Damage() {
 			</IconDisplay>
 		)
 	}
+
+	return null
 }

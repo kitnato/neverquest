@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useRef } from "preact/hooks"
 
 export function usePreviousValue(value: number) {
 	const reference = useRef<number | undefined>()

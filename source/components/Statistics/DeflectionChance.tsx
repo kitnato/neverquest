@@ -91,4 +91,6 @@ export function DeflectionChance() {
 			</IconDisplay>
 		)
 	}
+
+	return null
 }

@@ -60,4 +60,6 @@ export function Bleeding() {
 			</IconDisplay>
 		)
 	}
+
+	return null
 }

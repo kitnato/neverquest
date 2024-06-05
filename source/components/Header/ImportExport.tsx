@@ -1,5 +1,5 @@
 import ls from "localstorage-slim"
-import { useRef, useState } from "react"
+import { useRef, useState } from "preact/hooks"
 import {
 	Button,
 	Modal,
@@ -131,7 +131,7 @@ export function ImportExport() {
 							accept=".nq"
 							className="invisible position-absolute"
 							disabled={isLoading}
-							onChange={({ target: { files } }) => {
+							onChange={({ currentTarget: { files } }) => {
 								if (files !== null && files.length === 1) {
 									const [file] = files
 

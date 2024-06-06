@@ -88,7 +88,7 @@ export const ATTRIBUTES: Record<
 	},
 	strength: {
 		base: 0,
-		description: "Increases # damage.",
+		description: "Increases # weapon damage.",
 		descriptionIcons: [IconWeaponDamage],
 		formatting: { format: "percentage" },
 		Icon: IconStrength,

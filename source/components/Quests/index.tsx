@@ -12,7 +12,7 @@ import { isSkillTrained } from "@neverquest/state/skills"
 import { isShowingQuestBonus } from "@neverquest/state/ui"
 import { QUEST_BONUS_TYPES, type QuestClass } from "@neverquest/types/unions"
 
-import type { TabsData } from "@neverquest/types/components"
+import type { TabsData } from "@neverquest/types/general"
 
 const TABS: TabsData<QuestClass> = [
 	{

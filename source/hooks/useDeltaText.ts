@@ -5,7 +5,7 @@ import { useAddDelta } from "@neverquest/hooks/actions/useAddDelta"
 import { usePreviousValue } from "@neverquest/hooks/usePreviousValue"
 import { formatNumber } from "@neverquest/utilities/formatters"
 
-import type { DeltaDisplay } from "@neverquest/types/ui"
+import type { DeltaDisplay } from "@neverquest/types/general"
 import type { Delta, NumberFormat } from "@neverquest/types/unions"
 
 export function useDeltaText({

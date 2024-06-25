@@ -1,7 +1,6 @@
 import type { ArmorClass, ShieldClass, WeaponClass } from "@kitnato/locran/build/types"
 import type { ARMOR_NONE, SHIELD_NONE, WEAPON_NONE } from "@neverquest/data/gear"
-import type { SVGIcon } from "@neverquest/types/components"
-import type { Description } from "@neverquest/types/ui"
+import type { Description, SVGIcon } from "@neverquest/types/general"
 import type { Consumable, Gem, Grip, Infusable, Quest, QuestClass, Relic } from "@neverquest/types/unions"
 
 export type Armor = GearItemBase & {

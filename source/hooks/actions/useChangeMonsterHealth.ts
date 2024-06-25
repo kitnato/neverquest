@@ -20,7 +20,7 @@ import { earnedTraits } from "@neverquest/state/traits"
 import { formatNumber } from "@neverquest/utilities/formatters"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
 
-import type { DeltaReserve } from "@neverquest/types/ui"
+import type { DeltaReserve } from "@neverquest/types/general"
 
 export function useChangeMonsterHealth() {
 	const addDelta = useAddDelta()

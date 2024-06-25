@@ -1,34 +1,21 @@
-import { atom, atomFamily, selector } from "recoil"
+import { computed } from "@preact/signals"
 
-import { handleStorage } from "@neverquest/state/effects/handleStorage"
 import { questsBonus } from "@neverquest/state/quests"
 import { QUEST_BONUS_TYPES, type Showing } from "@neverquest/types/unions"
-import { withStateKey } from "@neverquest/utilities/helpers"
+import { persistentSignal, persistentSignalFamily } from "@neverquest/utilities/persistentSignal"
 
-// SELECTORS
+// COMPUTED
 
-export const isShowingQuestBonus = withStateKey("isShowingQuestBonus", key =>
-	selector({
-		get: ({ get }) =>
-			QUEST_BONUS_TYPES.reduce((sum, questBonus) => sum + get(questsBonus(questBonus)), 0) > 0,
-		key,
-	}),
-)
+export const isShowingQuestBonus = computed(() => QUEST_BONUS_TYPES.reduce((sum, questBonus) => sum + questsBonus(questBonus).value, 0) > 0)
 
-// ATOMS
+// SIGNALS
 
-export const activeControl = withStateKey("activeControl", key =>
-	atom<"capabilities" | "inventory" | "quests" | undefined>({
-		default: undefined,
-		effects: [handleStorage({ key })],
-		key,
-	}),
-)
+export const activeControl = persistentSignal<"capabilities" | "inventory" | "quests" | null>({
+	key: "activeControl",
+	value: null,
+})
 
-export const isShowing = withStateKey("isShowing", key =>
-	atomFamily<boolean, Showing>({
-		default: false,
-		effects: showing => [handleStorage({ key, parameter: showing })],
-		key,
-	}),
-)
+export const isShowing = persistentSignalFamily<Showing, boolean>({
+	key: "isShowing",
+	value: false,
+})

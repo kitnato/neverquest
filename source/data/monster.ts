@@ -8,7 +8,7 @@ import { formatNumber } from "@neverquest/utilities/formatters"
 
 import { RETIREMENT_STAGE } from "./retirement"
 
-import type { Description } from "@neverquest/types/ui"
+import type { Description } from "@neverquest/types/general"
 import type { Ailment } from "@neverquest/types/unions"
 
 export const AILMENT_DESCRIPTION: Record<Ailment, Description> = {

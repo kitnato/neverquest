@@ -1,265 +1,157 @@
-import { atom, atomFamily, selector, selectorFamily } from "recoil"
+import { computed } from "@preact/signals"
 
 import { GENERIC_MINIMUM } from "@neverquest/data/general"
 import { BLIGHT, POISON } from "@neverquest/data/monster"
 import { HEALTH_LOW_THRESHOLD, RESERVES } from "@neverquest/data/reserves"
 import { attributeStatistic } from "@neverquest/state/attributes"
 import { stage } from "@neverquest/state/character"
-import { handleStorage } from "@neverquest/state/effects/handleStorage"
 import { ownedItem } from "@neverquest/state/inventory"
 import { questsBonus } from "@neverquest/state/quests"
 import { getFromRange, getLinearMapping, getSigmoid } from "@neverquest/utilities/getters"
-import { withStateKey } from "@neverquest/utilities/helpers"
+import { computedFamily, persistentSignal, persistentSignalFamily } from "@neverquest/utilities/persistentSignal"
 
 import type { Reserve } from "@neverquest/types/unions"
 
-// SELECTORS
+// COMPUTED
 
-export const blightMagnitude = withStateKey("blightMagnitude", key =>
-	selector({
-		get: ({ get }) => get(blight) * BLIGHT.increment,
-		key,
-	}),
-)
+export const blightMagnitude = computed(() => blight.get() * BLIGHT.increment)
 
-export const canResurrect = withStateKey("canResurrect", key =>
-	selector({
-		get: ({ get }) => get(isIncapacitated) && get(ownedItem("phylactery")) !== undefined,
-		key,
-	}),
-)
+export const canResurrect = computed(() => isIncapacitated.value && ownedItem("phylactery").value !== undefined)
 
-export const isFlatlined = withStateKey("isFlatlined", key =>
-	selector({
-		get: ({ get }) => get(isIncapacitated) && get(ownedItem("phylactery")) === undefined,
-		key,
-	}),
-)
+export const isFlatlined = computed(() => isIncapacitated.value && ownedItem("phylactery").value === undefined)
 
-export const healthMaximumPoisoned = withStateKey("healthMaximumPoisoned", key =>
-	selector({
-		get: ({ get }) => {
-			const healthMaximumValue = get(reserveMaximum("health"))
+export const isBlighted = computed(() => blight.get() > 0)
 
-			return Math.max(
-				Math.round(
-					healthMaximumValue
-					- Math.round(
-						healthMaximumValue * get(poisonMagnitude) * (get(poisonDuration) / get(poisonLength)),
-					),
-				),
-				GENERIC_MINIMUM,
-			)
-		},
-		key,
-	}),
-)
+export const isIncapacitated = computed(() => reserveCurrent("health").get() === 0)
 
-export const isBlighted = withStateKey("isBlighted", key =>
-	selector({
-		get: ({ get }) => get(blight) > 0,
-		key,
-	}),
-)
+export const isHealthLow = computed(() => reserveCurrent("health").get() < reserveMaximumAiling("health").value * HEALTH_LOW_THRESHOLD)
 
-export const isIncapacitated = withStateKey("isIncapacitated", key =>
-	selector({
-		get: ({ get }) => get(reserveCurrent("health")) === 0,
-		key,
-	}),
-)
+export const isPoisoned = computed(() => poisonDuration.get() > 0)
 
-export const isReserveAtMaximum = withStateKey("isReserveAtMaximum", key =>
-	selectorFamily({
-		get: (reserve: Reserve) =>
-			({ get }) =>
-				get(reserveCurrent(reserve)) >= get(reserve === "health" ? healthMaximumPoisoned : staminaMaximumBlighted),
-		key,
-	}),
-)
+export const isReserveAtMaximum = computedFamily((reserve: Reserve) => () => reserveCurrent("health").get() >= reserveMaximumAiling(reserve).value)
 
-export const isHealthLow = withStateKey("isHealthLow", key =>
-	selector({
-		get: ({ get }) => get(reserveCurrent("health")) <= get(healthMaximumPoisoned) * HEALTH_LOW_THRESHOLD,
-		key,
-	}),
-)
+export const isReserveRegenerating = computedFamily((reserve: Reserve) => () => reserveRegenerationDuration(reserve).get() > 0)
 
-export const isPoisoned = withStateKey("isPoisoned", key =>
-	selector({
-		get: ({ get }) => get(poisonDuration) > 0,
-		key,
-	}),
-)
+export const poisonLength = computed(() => {
+	const {
+		duration: { maximum, minimum },
+		requiredStage,
+	} = POISON
 
-export const isRegenerating = withStateKey("isRegenerating", key =>
-	selectorFamily({
-		get: (reserve: Reserve) =>
-			({ get }) =>
-				get(regenerationDuration(reserve)) > 0,
-		key,
-	}),
-)
+	return getFromRange({
+		factor: getSigmoid(
+			getLinearMapping({
+				offset: requiredStage,
+				stage: stage.get(),
+			}),
+		),
+		maximum,
+		minimum,
+	})
+})
 
-export const poisonLength = withStateKey("poisonLength", key =>
-	selector({
-		get: ({ get }) => {
-			const {
-				duration: { maximum, minimum },
-				requiredStage,
-			} = POISON
+export const poisonMagnitude = computed(() => {
+	const {
+		magnitude: { maximum, minimum },
+		requiredStage,
+	} = POISON
 
-			return getFromRange({
-				factor: getSigmoid(
-					getLinearMapping({
-						offset: requiredStage,
-						stage: get(stage),
-					}),
-				),
-				maximum,
-				minimum,
-			})
-		},
-		key,
-	}),
-)
+	return getFromRange({
+		factor: getSigmoid(
+			getLinearMapping({
+				offset: requiredStage,
+				stage: stage.get(),
+			}),
+		),
+		maximum,
+		minimum,
+	})
+})
 
-export const poisonMagnitude = withStateKey("poisonMagnitude", key =>
-	selector({
-		get: ({ get }) => {
-			const {
-				magnitude: { maximum, minimum },
-				requiredStage,
-			} = POISON
+export const reserveMaximum = computedFamily((reserve: Reserve) => () => {
+	const { attribute } = RESERVES[reserve]
+	const attributeStatisticValue = attributeStatistic(attribute).value
+	const questsBonusValue = questsBonus(`${reserve}Bonus`).value
 
-			return getFromRange({
-				factor: getSigmoid(
-					getLinearMapping({
-						offset: requiredStage,
-						stage: get(stage),
-					}),
-				),
-				maximum,
-				minimum,
-			})
-		},
-		key,
-	}),
-)
+	return (
+		attributeStatisticValue
+		+ (
+			questsBonusValue === 0
+				? 0
+				: Math.max(Math.round(attributeStatisticValue * questsBonusValue), GENERIC_MINIMUM)
+		)
+	)
+})
 
-export const regenerationAmount = withStateKey("regenerationAmount", key =>
-	selectorFamily({
-		get: (reserve: Reserve) => ({ get }) =>
-			Math.max(
-				Math.round(RESERVES[reserve].regeneration * get(reserve === "health" ? healthMaximumPoisoned : staminaMaximumBlighted)),
-				GENERIC_MINIMUM,
-			),
-		key,
-	}),
-)
+export const reserveRegenerationAmount = computedFamily((reserve: Reserve) => () => Math.max(
+	Math.round(RESERVES[reserve].regeneration * reserveMaximum(reserve).value),
+	GENERIC_MINIMUM,
+))
 
-export const regenerationRate = withStateKey("regenerationRate", key =>
-	selectorFamily({
-		get: (reserve: Reserve) => ({ get }) => {
-			const { baseRegenerationRate } = RESERVES[reserve]
+export const reserveRegenerationRate = computedFamily((reserve: Reserve) => () => {
+	const { baseRegenerationRate } = RESERVES[reserve]
 
-			return Math.round(
-				baseRegenerationRate
-				+ baseRegenerationRate * get(attributeStatistic("vigor")),
-			)
-		},
-		key,
-	}),
-)
+	return Math.round(
+		baseRegenerationRate
+		+ baseRegenerationRate * attributeStatistic("vigor").value)
+})
 
-export const reserveMaximum = withStateKey("reserveMaximum", key =>
-	selectorFamily({
-		get: (reserve: Reserve) => ({ get }) => {
-			const { attribute } = RESERVES[reserve]
-			const attributeStatisticValue = get(attributeStatistic(attribute))
-			const questsBonusValue = get(questsBonus(`${reserve}Bonus`))
-
-			return (
-				attributeStatisticValue
-				+ (
-					questsBonusValue === 0
-						? 0
-						: Math.max(Math.round(attributeStatisticValue * questsBonusValue), GENERIC_MINIMUM)
-				)
-			)
-		},
-		key,
-	}),
-)
-
-export const staminaMaximumBlighted = withStateKey("staminaMaximumBlighted", key =>
-	selector({
-		get: ({ get }) => {
-			const staminaMaximumValue = get(reserveMaximum("stamina"))
+export const reserveMaximumAiling = computedFamily((reserve: Reserve) => {
+	if (reserve === "health") {
+		return () => {
+			const reserveMaximumValue = reserveMaximum(reserve).value
 
 			return Math.max(
-				Math.round(staminaMaximumValue - staminaMaximumValue * get(blightMagnitude)),
+				Math.round(reserveMaximumValue - Math.round(
+					reserveMaximumValue * poisonMagnitude.value * (poisonDuration.get() / poisonLength.value))),
 				GENERIC_MINIMUM,
 			)
-		},
-		key,
-	}),
-)
+		}
+	}
 
-// ATOMS
+	return () => {
+		const reserveMaximumValue = reserveMaximum(reserve).value
 
-export const blight = withStateKey("blight", key =>
-	atom({
-		default: 0,
-		effects: [handleStorage({ key })],
-		key,
-	}),
-)
+		return Math.max(
+			Math.round(reserveMaximumValue - reserveMaximumValue * blightMagnitude.value),
+			GENERIC_MINIMUM,
+		)
+	}
+})
 
-export const isInexhaustible = withStateKey("isInexhaustible", key =>
-	atom({
-		default: false,
-		effects: [handleStorage({ key })],
-		key,
-	}),
-)
+// SIGNALS
 
-export const isInvulnerable = withStateKey("isInvulnerable", key =>
-	atom({
-		default: false,
-		effects: [handleStorage({ key })],
-		key,
-	}),
-)
+export const blight = persistentSignal({
+	key: "blight",
+	value: 0,
+})
 
-export const poisonDuration = withStateKey("poisonDuration", key =>
-	atom({
-		default: 0,
-		effects: [handleStorage({ key })],
-		key,
-	}),
-)
+export const isInexhaustible = persistentSignal({
+	key: "isInexhaustible",
+	value: false,
+})
 
-export const protectedElement = withStateKey("protectedElement", key =>
-	atom<HTMLDivElement | null>({
-		default: null,
-		effects: [handleStorage({ key })],
-		key,
-	}),
-)
+export const isInvulnerable = persistentSignal({
+	key: "isInvulnerable",
+	value: false,
+})
 
-export const regenerationDuration = withStateKey("regenerationDuration", key =>
-	atomFamily<number, Reserve>({
-		default: 0,
-		effects: reserve => [handleStorage({ key, parameter: reserve })],
-		key,
-	}),
-)
+export const poisonDuration = persistentSignal({
+	key: "poisonDuration",
+	value: 0,
+})
 
-export const reserveCurrent = withStateKey("reserveCurrent", key =>
-	atomFamily<number, Reserve>({
-		default: reserve => reserve === "health" ? healthMaximumPoisoned : staminaMaximumBlighted,
-		effects: reserve => [handleStorage({ key, parameter: reserve })],
-		key,
-	}),
-)
+export const isDreamCatcherEquippedElement = persistentSignal<HTMLDivElement | null>({
+	key: "isDreamCatcherEquippedElement",
+	value: null,
+})
+
+export const reserveCurrent = persistentSignalFamily({
+	key: "reserveCurrent",
+	value: (reserve: Reserve) => reserveMaximum(reserve).value,
+})
+
+export const reserveRegenerationDuration = persistentSignalFamily<Reserve, number>({
+	key: "reserveCurrent",
+	value: 0,
+})

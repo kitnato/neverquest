@@ -21,7 +21,7 @@ import { activeControl, isShowing } from "@neverquest/state/ui"
 import { formatEnumeration } from "@neverquest/utilities/formatters"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
-import type { TabsData } from "@neverquest/types/components"
+import type { TabsData } from "@neverquest/types/general"
 import type { Capability } from "@neverquest/types/unions"
 
 export function Capabilities() {

@@ -41,8 +41,8 @@ import IconTraumatology from "@neverquest/icons/traumatology.svg?react"
 import IconTwoHanded from "@neverquest/icons/two-handed.svg?react"
 import IconVigor from "@neverquest/icons/vigor.svg?react"
 
-import type { SVGIcon } from "@neverquest/types/components"
-import type { Description } from "@neverquest/types/ui"
+import type { SVGIcon } from "@neverquest/types/general"
+import type { Description } from "@neverquest/types/general"
 import type { CrewMember, Showing, Skill, WeaponAbility } from "@neverquest/types/unions"
 
 export const SKILL_PRICE_BASE = 60

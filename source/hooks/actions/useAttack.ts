@@ -38,7 +38,7 @@ import { ELEMENTAL_TYPES } from "@neverquest/types/unions"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
 import { animateElement } from "@neverquest/utilities/helpers"
 
-import type { DeltaDisplay } from "@neverquest/types/ui"
+import type { DeltaDisplay } from "@neverquest/types/general"
 
 export function useAttack() {
 	const addDelta = useAddDelta()

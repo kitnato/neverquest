@@ -8,7 +8,7 @@ import IconWeight from "@neverquest/icons/weight.svg?react"
 import { isShowing } from "@neverquest/state/ui"
 import { formatNumber } from "@neverquest/utilities/formatters"
 
-import type { Comparison } from "@neverquest/types/components"
+import type { Comparison } from "@neverquest/types/general"
 
 export function WeightDetail({
 	amount,

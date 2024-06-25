@@ -58,8 +58,8 @@ import IconWarMask from "@neverquest/icons/war-mask.svg?react"
 import IconWilderness from "@neverquest/icons/wilderness.svg?react"
 
 import type { ConsumableItem, GeneratorRange, InfusableItem, RelicItem } from "@neverquest/types"
-import type { SVGIcon } from "@neverquest/types/components"
-import type { Description } from "@neverquest/types/ui"
+import type { SVGIcon } from "@neverquest/types/general"
+import type { Description } from "@neverquest/types/general"
 import type {
 	Consumable,
 	Delta,

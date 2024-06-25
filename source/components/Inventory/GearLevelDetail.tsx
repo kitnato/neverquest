@@ -7,7 +7,7 @@ import IconGearLevel from "@neverquest/icons/gear-level.svg?react"
 import { isShowing } from "@neverquest/state/ui"
 import { formatNumber } from "@neverquest/utilities/formatters"
 
-import type { Comparison } from "@neverquest/types/components"
+import type { Comparison } from "@neverquest/types/general"
 
 export function GearLevelDetail({ comparison, level }: { comparison: Comparison, level: number }) {
 	const isShowingGearLevel = useRecoilValue(isShowing("gearLevel"))

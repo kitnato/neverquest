@@ -1,4 +1,4 @@
-import { selector } from "recoil"
+import { computed } from "@preact/signals"
 
 import { ATTRIBUTES } from "@neverquest/data/attributes"
 import { RECOVERY_MINIMUM } from "@neverquest/data/character"
@@ -36,292 +36,170 @@ import {
 	isUnshielded,
 } from "@neverquest/types/type-guards"
 import { getAmountPerTick, getDamagePerRate } from "@neverquest/utilities/getters"
-import { withStateKey } from "@neverquest/utilities/helpers"
 
-// SELECTORS
+// COMPUTED
 
-export const attackRate = withStateKey("attackRate", key =>
-	selector({
-		get: ({ get }) => get(weapon).rate * (1 + get(attributeStatistic("speed"))),
-		key,
-	}),
-)
+export const attackRate = computed(() => weapon.get().rate * (1 + attributeStatistic("speed").value))
 
-export const bleedDamage = withStateKey("bleedDamage", key =>
-	selector({
-		get: ({ get }) => {
-			const { duration, ticks } = get(bleed)
+export const bleedDamage = computed(() => {
+	const { duration, ticks } = bleed.value
 
-			return Math.max(
-				BLEED.minimum,
-				Math.round(
-					getAmountPerTick({
-						amount: get(damage) * get(masteryStatistic("cruelty")),
-						duration,
-						ticks,
-					}),
-				),
-			)
-		},
-		key,
-	}),
-)
+	return Math.max(
+		BLEED.minimum,
+		Math.round(
+			getAmountPerTick({
+				amount: damage.value * masteryStatistic("cruelty").value,
+				duration,
+				ticks,
+			}),
+		),
+	)
+})
 
-export const bleedRating = withStateKey("bleedRating", key =>
-	selector({
-		get: ({ get }) => get(bleedChance) === 0
-			? 0
-			: Math.round(
-				get(masteryStatistic("cruelty")) * PERCENTAGE + get(bleedChance) * PERCENTAGE + get(bleedDamage) * get(bleed).ticks,
-			),
-		key,
-	}),
-)
+export const bleedRating = computed(() => bleedChance.value === 0
+	? 0
+	: Math.round(
+		masteryStatistic("cruelty").value * PERCENTAGE + bleedChance.value * PERCENTAGE + bleedDamage.value * bleed.value.ticks,
+	))
 
-export const blockChance = withStateKey("blockChance", key =>
-	selector({
-		get: ({ get }) => {
-			const weaponValue = get(weapon)
+export const blockChance = computed(() => {
+	const weaponValue = weapon.get()
 
-			return !isRanged(weaponValue)
-				&& (weaponValue.grip === "one-handed" || get(isTraitEarned("colossus")))
-				? get(shield).blockChance
+	return !isRanged(weaponValue)
+		&& (weaponValue.grip === "one-handed" || isTraitEarned("colossus").get())
+		? shield.get().blockChance
+		: 0
+})
+
+export const criticalChance = computed(() => isSkillTrained("assassination").get() ? attributeStatistic("dexterity").value : 0)
+
+export const criticalDamage = computed(() => isSkillTrained("assassination").get() ? attributeStatistic("perception").value : 0)
+
+export const criticalRating = computed(() => Math.round(criticalChance.value * PERCENTAGE) + (criticalDamage.value * PERCENTAGE))
+
+export const criticalStrike = computed(() => Math.round(damage.value * criticalDamage.value))
+
+export const damage = computed(() => {
+	const weaponValue = weapon.get()
+
+	return Math.round((
+		// Weapon damage with strength attribute effect and brawler trait bonus, if applicable.
+		weaponValue.damage * (1 + attributeStatistic("strength").value + (
+			isTraitEarned("brawler").get() && isUnshielded(shield.get()) && !isRanged(weaponValue) && (weaponValue.grip === "one-handed")
+				? BRAWLER_DAMAGE_BONUS
 				: 0
-		},
-		key,
-	}),
-)
+		))
+		// Elemental damage from any gems.
+		+ Object.values(elementalEffects.value.weapon).reduce((sum, { damage }) => sum + damage, 0)
+		// Current stamina portion from bruiser trait, if applicable.
+		+ (isTraitEarned("bruiser").get() && isUnarmed(weaponValue)
+			? reserveCurrent("stamina").get() * BRUISER.damage
+			: 0)
+		// All multiplied by total damage bonus from quest rewards.
+	) * (1 + questsBonus("damageBonus").value))
+})
 
-export const criticalChance = withStateKey("criticalChance", key =>
-	selector({
-		get: ({ get }) => get(isSkillTrained("assassination")) ? get(attributeStatistic("dexterity")) : 0,
-		key,
-	}),
-)
+export const damagePerSecond = computed(() => getDamagePerRate({
+	damage: damage.value,
+	damageModifier: criticalDamage.value,
+	damageModifierChance: criticalChance.value,
+	rate: attackRate.value,
+}))
 
-export const criticalDamage = withStateKey("criticalDamage", key =>
-	selector({
-		get: ({ get }) => get(isSkillTrained("assassination")) ? get(attributeStatistic("perception")) : 0,
-		key,
-	}),
-)
+export const deflectionChance = computed(() => isSkillTrained("impermeability").get()
+	? Math.min(
+		armor.get().deflectionChance
+		+ (isTraitEarned("inoculated").get() ? INOCULATED_DEFLECTION_BASE : 0),
+		DEFLECTION_MAXIMUM,
+	)
+	: 0)
 
-export const criticalRating = withStateKey("criticalRating", key =>
-	selector({
-		get: ({ get }) => Math.round((get(criticalChance) * PERCENTAGE) + (get(criticalDamage) * PERCENTAGE)),
-		key,
-	}),
-)
+export const dodgeChance = computed(() => isSkillTrained("evasion").get()
+	? Math.min(
+		attributeStatistic("agility").value
+		* (isTraitEarned("nudist").get() && isUnarmored(armor.get())
+			? 1 + NUDIST.dodgeBonus
+			: 1),
+		ATTRIBUTES.agility.maximum ?? Number.POSITIVE_INFINITY,
+	)
+	: 0)
 
-export const criticalStrike = withStateKey("criticalStrike", key =>
-	selector({
-		get: ({ get }) => Math.round(get(damage) * get(criticalDamage)),
-		key,
-	}),
-)
+export const executionThreshold = computed(() => {
+	const weaponValue = weapon.get()
 
-export const damage = withStateKey("damage", key =>
-	selector({
-		get: ({ get }) => {
-			const weaponValue = get(weapon)
+	return isSkillTrained("siegecraft").get()
+		&& isMelee(weaponValue)
+		&& weaponValue.grip === "two-handed"
+		? masteryStatistic("butchery").value
+		: 0
+})
 
-			return Math.round((
-				// Weapon damage with strength attribute effect and brawler trait bonus, if applicable.
-				weaponValue.damage * (1 + get(attributeStatistic("strength")) + (
-					get(isTraitEarned("brawler")) && isUnshielded(get(shield)) && !isRanged(weaponValue) && (weaponValue.grip === "one-handed")
-						? BRAWLER_DAMAGE_BONUS
-						: 0
-				))
-				// Elemental damage from any gems.
-				+ Object.values(get(elementalEffects).weapon).reduce((sum, { damage }) => sum + damage, 0)
-				// Current stamina portion from bruiser trait, if applicable.
-				+ (get(isTraitEarned("bruiser")) && isUnarmed(weaponValue)
-					? get(reserveCurrent("stamina")) * BRUISER.damage
-					: 0)
-				// All multiplied by total damage bonus from quest rewards.
-			) * (1 + get(questsBonus("damageBonus"))))
-		},
-		key,
-	}),
-)
+export const isRecoveryRelevant = computed(() => recoveryRate.value > RECOVERY_MINIMUM)
 
-export const damagePerSecond = withStateKey("damagePerSecond", key =>
-	selector({
-		get: ({ get }) => getDamagePerRate({
-			damage: get(damage),
-			damageModifier: get(criticalDamage),
-			damageModifierChance: get(criticalChance),
-			rate: get(attackRate),
-		}),
-		key,
-	}),
-)
+export const lifeLeech = computed(() => {
+	const infusionEffectEldritchCodex = infusionEffect("eldritch codex").value
 
-export const deflectionChance = withStateKey("deflectionChance", key =>
-	selector({
-		get: ({ get }) => get(isSkillTrained("impermeability"))
-			? Math.min(
-				get(armor).deflectionChance
-				+ (get(isTraitEarned("inoculated")) ? INOCULATED_DEFLECTION_BASE : 0),
-				DEFLECTION_MAXIMUM,
-			)
-			: 0,
-		key,
-	}),
-)
+	if (infusionEffectEldritchCodex === 0) {
+		return 0
+	}
 
-export const dodgeChance = withStateKey("dodgeChance", key =>
-	selector({
-		get: ({ get }) => get(isSkillTrained("evasion"))
-			? Math.min(
-				get(attributeStatistic("agility"))
-				* (get(isTraitEarned("nudist")) && isUnarmored(get(armor))
-					? 1 + NUDIST.dodgeBonus
-					: 1),
-				ATTRIBUTES.agility.maximum ?? Number.POSITIVE_INFINITY,
-			)
-			: 0,
-		key,
-	}),
-)
+	return Math.max(Math.round(damage.value * infusionEffectEldritchCodex), GENERIC_MINIMUM)
+})
 
-export const executionThreshold = withStateKey("executionThreshold", key =>
-	selector({
-		get: ({ get }) => {
-			const weaponValue = get(weapon)
+export const parryAvoidance = computed(() => PARRY.avoidance + masteryStatistic("finesse").value * PARRY.avoidanceAttenuation)
 
-			return get(isSkillTrained("siegecraft"))
-				&& isMelee(weaponValue)
-				&& weaponValue.grip === "two-handed"
-				? get(masteryStatistic("butchery"))
-				: 0
-		},
-		key,
-	}),
-)
+export const parryChance = computed(() => {
+	const { abilityChance, gearClass } = weapon.get()
 
-export const isRecoveryRelevant = withStateKey("isRecoveryRelevant", key =>
-	selector({
-		get: ({ get }) => get(recoveryRate) > RECOVERY_MINIMUM,
-		key,
-	}),
-)
+	return isSkillTrained("escrime").get() && gearClass === "slashing" ? abilityChance : 0
+})
 
-export const lifeLeech = withStateKey("lifeLeech", key =>
-	selector({
-		get: ({ get }) => {
-			const infusionEffectEldritchCodex = get(infusionEffect("eldritch codex"))
+export const parryDamage = computed(() => PARRY.damage + masteryStatistic("finesse").value)
 
-			if (infusionEffectEldritchCodex === 0) {
-				return 0
-			}
+export const parryRating = computed(() => {
+	const parryChanceValue = parryChance.value
 
-			return Math.max(Math.round(get(damage) * infusionEffectEldritchCodex), GENERIC_MINIMUM)
-		},
-		key,
-	}),
-)
+	return parryChanceValue === 0
+		? 0
+		: Math.round(
+			parryAvoidance.value * PERCENTAGE + parryChanceValue * PERCENTAGE + parryDamage.value * PERCENTAGE,
+		)
+})
 
-export const parryAvoidance = withStateKey("parryAvoidance", key =>
-	selector({
-		get: ({ get }) => PARRY.avoidance + get(masteryStatistic("finesse")) * PARRY.avoidanceAttenuation,
-		key,
-	}),
-)
+export const protection = computed(() => {
+	const armorValue = armor.get()
+	const shieldValue = shield.get()
 
-export const parryChance = withStateKey("parryChance", key =>
-	selector({
-		get: ({ get }) => {
-			const { abilityChance, gearClass } = get(weapon)
+	const { protection } = armorValue
 
-			return get(isSkillTrained("escrime")) && gearClass === "slashing" ? abilityChance : 0
-		},
-		key,
-	}),
-)
+	return (
+		protection
+		+ (isArmor(armorValue) && isShield(shieldValue) && isTraitEarned("tank").get()
+			? Math.round(protection * TANK_PROTECTION_BONUS[armorValue.gearClass])
+			: 0)
+	)
+})
 
-export const parryDamage = withStateKey("parryDamage", key =>
-	selector({
-		get: ({ get }) => PARRY.damage + get(masteryStatistic("finesse")),
-		key,
-	}),
-)
+export const recoveryRate = computed(() => RECOVERY_RATE * (1 + masteryStatistic("resilience").value))
 
-export const parryRating = withStateKey("parryRating", key =>
-	selector({
-		get: ({ get }) => get(parryChance) === 0
-			? 0
-			: Math.round(
-				get(parryAvoidance) * PERCENTAGE + get(parryChance) * PERCENTAGE + get(parryDamage) * PERCENTAGE,
-			),
-		key,
-	}),
-)
+export const range = computed(() => {
+	const weaponValue = weapon.get()
 
-export const protection = withStateKey("protection", key =>
-	selector({
-		get: ({ get }) => {
-			const armorValue = get(armor)
-			const shieldValue = get(shield)
+	return isSkillTrained("archery").get() && isRanged(weaponValue)
+		? weaponValue.range * (1 + masteryStatistic("marksmanship").value)
+		: 0
+})
 
-			const { protection } = armorValue
+export const staggerRating = computed(() => Math.round(staggerChance.value * masteryStatistic("stability").value))
 
-			return (
-				protection
-				+ (isArmor(armorValue) && isShield(shieldValue) && get(isTraitEarned("tank"))
-					? Math.round(protection * TANK_PROTECTION_BONUS[armorValue.gearClass])
-					: 0)
-			)
-		},
-		key,
-	}),
-)
+export const stunRating = computed(() => Math.round(stunChance.value * masteryStatistic("might").value))
 
-export const recoveryRate = withStateKey("recoveryRate", key =>
-	selector({
-		get: ({ get }) => RECOVERY_RATE * (1 + get(masteryStatistic("resilience"))),
-		key,
-	}),
-)
+export const thorns = computed(() => {
+	const isTraitEarnedAcanthaceous = isTraitEarned("acanthaceous").get()
 
-export const range = withStateKey("range", key =>
-	selector({
-		get: ({ get }) => {
-			const weaponValue = get(weapon)
-
-			return get(isSkillTrained("archery")) && isRanged(weaponValue)
-				? weaponValue.range * (1 + get(masteryStatistic("marksmanship")))
-				: 0
-		},
-		key,
-	}),
-)
-
-export const staggerRating = withStateKey("staggerRating", key =>
-	selector({
-		get: ({ get }) => Math.round(get(staggerChance) * get(masteryStatistic("stability"))),
-		key,
-	}),
-)
-
-export const stunRating = withStateKey("stunRating", key =>
-	selector({
-		get: ({ get }) => Math.round(get(stunChance) * get(masteryStatistic("might"))),
-		key,
-	}),
-)
-
-export const thorns = withStateKey("thorns", key =>
-	selector({
-		get: ({ get }) => {
-			const isTraitEarnedAcanthaceous = get(isTraitEarned("acanthaceous"))
-
-			return Math.round(
-				(isTraitEarnedAcanthaceous ? get(powerLevel) : 0)
-				+ Object.values(get(elementalEffects).armor).reduce((sum, { damage }) => sum + damage, 0)
-				* (1 + (isTraitEarnedAcanthaceous ? ACANTHACEOUS_GEM_EFFECT_BONUS : 0)),
-			)
-		},
-		key,
-	}),
-)
+	return Math.round(
+		(isTraitEarnedAcanthaceous ? powerLevel.value : 0)
+		+ Object.values(elementalEffects.value.armor).reduce((sum, { damage }) => sum + damage, 0)
+		* (1 + (isTraitEarnedAcanthaceous ? ACANTHACEOUS_GEM_EFFECT_BONUS : 0)),
+	)
+})

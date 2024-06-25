@@ -26,7 +26,7 @@ import IconTwoHanded from "@neverquest/icons/two-handed.svg?react"
 import { LEVELLING_MAXIMUM } from "./general"
 
 import type { AttributeOrMasteryBase } from "@neverquest/types"
-import type { SVGIcon } from "@neverquest/types/components"
+import type { SVGIcon } from "@neverquest/types/general"
 import type { Mastery, Skill } from "@neverquest/types/unions"
 
 export const MASTERIES: Record<

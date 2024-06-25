@@ -2,7 +2,7 @@ import { Stack } from "react-bootstrap"
 
 import { IconImage } from "@neverquest/components/IconImage"
 
-import type { IconImageDOMProperties, SVGIcon } from "@neverquest/types/components"
+import type { IconImageDOMProperties, SVGIcon } from "@neverquest/types/general"
 import type { ComponentChildren } from "preact"
 import type { ReactNode } from "preact/compat"
 import type { ResponsiveUtilityValue } from "react-bootstrap/esm/createUtilityClasses"

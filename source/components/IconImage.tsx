@@ -2,7 +2,7 @@ import { OverlayTrigger, Tooltip } from "react-bootstrap"
 
 import { POPOVER_TRIGGER } from "@neverquest/data/general"
 
-import type { IconImageProperties } from "@neverquest/types/components"
+import type { IconImageProperties } from "@neverquest/types/general"
 
 export function IconImage({
 	className,

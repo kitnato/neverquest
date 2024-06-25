@@ -1,8 +1,7 @@
 import { CLASS_ANIMATED, CLASS_ANIMATE_PREFIX } from "@neverquest/data/general"
 import { isStackableItem } from "@neverquest/types/type-guards"
 
-import type { Animation, AnimationSpeed } from "@neverquest/types/ui"
-import type { StateKey } from "@neverquest/types/unions"
+import type { Animation, AnimationSpeed } from "@neverquest/types/general"
 
 export function animateElement({
 	animation,
@@ -73,8 +72,4 @@ export function stackItems<ItemType>(items: ItemType[]) {
 	}
 
 	return stackedItems
-}
-
-export function withStateKey<State>(key: StateKey, assign: (key: StateKey) => State) {
-	return assign(key)
 }

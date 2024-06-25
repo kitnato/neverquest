@@ -1,7 +1,7 @@
 import IconHealth from "@neverquest/icons/health.svg?react"
 import IconStamina from "@neverquest/icons/stamina.svg?react"
 
-import type { SVGIcon } from "@neverquest/types/components"
+import type { SVGIcon } from "@neverquest/types/general"
 import type { Attribute, Delta, Reserve } from "@neverquest/types/unions"
 
 export const HEALTH_LOW_THRESHOLD = 0.25

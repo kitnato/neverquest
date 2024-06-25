@@ -1,6 +1,6 @@
 import { OverlayTrigger, ProgressBar, Tooltip } from "react-bootstrap"
 
-import type { BootstrapColorVariant, UIAttachment } from "@neverquest/types/ui"
+import type { Attachment, BootstrapColorVariant } from "@neverquest/types/general"
 import type { ComponentChildren } from "preact"
 import type { ReactNode } from "preact/compat"
 
@@ -14,7 +14,7 @@ export function LabelledProgressBar({
 	value,
 	variant = "dark",
 }: {
-	attachment?: UIAttachment
+	attachment?: Attachment
 	children: ComponentChildren
 	disableTransitions?: boolean
 	isAnimated?: boolean

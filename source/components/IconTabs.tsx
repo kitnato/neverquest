@@ -3,7 +3,7 @@ import { Nav, NavItem, NavLink, Stack, TabContainer, TabContent, TabPane } from 
 import { IconDisplay } from "@neverquest/components/IconDisplay"
 import { capitalizeAll } from "@neverquest/utilities/formatters"
 
-import type { TabsData } from "@neverquest/types/components"
+import type { TabsData } from "@neverquest/types/general"
 
 export function IconTabs<TabLabel extends string>({
 	activeKey,

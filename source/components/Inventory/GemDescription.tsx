@@ -16,7 +16,7 @@ import IconShield from "@neverquest/icons/shield.svg?react"
 import IconThorns from "@neverquest/icons/thorns.svg?react"
 import IconWeaponDamage from "@neverquest/icons/weapon-damage.svg?react"
 
-import type { SVGIcon } from "@neverquest/types/components"
+import type { SVGIcon } from "@neverquest/types/general"
 import type { Extent, Gem } from "@neverquest/types/unions"
 
 const IconExtent: Record<Extent, SVGIcon> = {

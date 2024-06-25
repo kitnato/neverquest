@@ -40,8 +40,8 @@ import { formatEnumeration, formatNumber } from "@neverquest/utilities/formatter
 
 import { ARMOR_SPECIFICATIONS } from "./gear"
 
-import type { SVGIcon } from "@neverquest/types/components"
-import type { Description } from "@neverquest/types/ui"
+import type { SVGIcon } from "@neverquest/types/general"
+import type { Description } from "@neverquest/types/general"
 import type { Skill, Trait } from "@neverquest/types/unions"
 
 export const ACANTHACEOUS_GEM_EFFECT_BONUS = 0.65

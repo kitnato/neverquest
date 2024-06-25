@@ -14,7 +14,7 @@ import IconStunChance from "@neverquest/icons/stun-chance.svg?react"
 
 import type { ArmorClass, ShieldClass, WeaponClass } from "@kitnato/locran/build/types"
 import type { Armor, GearRangeBase, GeneratorRange, Melee, Shield } from "@neverquest/types"
-import type { SVGIcon } from "@neverquest/types/components"
+import type { SVGIcon } from "@neverquest/types/general"
 import type { WeaponAbility } from "@neverquest/types/unions"
 
 export const ARMOR_NONE: Omit<Armor, "gearClass" | "price"> = {

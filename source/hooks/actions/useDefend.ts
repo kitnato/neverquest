@@ -56,7 +56,7 @@ import { formatNumber } from "@neverquest/utilities/formatters"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
 import { animateElement } from "@neverquest/utilities/helpers"
 
-import type { DeltaDisplay } from "@neverquest/types/ui"
+import type { DeltaDisplay } from "@neverquest/types/general"
 
 export function useDefend() {
 	const addDelta = useAddDelta()

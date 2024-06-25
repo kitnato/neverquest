@@ -1,41 +1,26 @@
-import { atom, selector } from "recoil"
+import { computed } from "@preact/signals"
 
-import { handleStorage } from "@neverquest/state/effects/handleStorage"
-import { withStateKey } from "@neverquest/utilities/helpers"
+import { persistentSignal } from "@neverquest/utilities/persistentSignal"
 
 import type { InventoryItem } from "@neverquest/types"
 
-// SELECTORS
+// COMPUTED
 
-export const isLootAvailable = withStateKey("isLootAvailable", key =>
-	selector({
-		get: ({ get }) => get(essenceLoot) > 0 || get(itemsLoot).length > 0,
-		key,
-	}),
-)
+export const isLootAvailable = computed(() => essenceLoot.get() > 0 || itemsLoot.get().length > 0)
 
-// ATOMS
+// SIGNALS
 
-export const essence = withStateKey("essence", key =>
-	atom({
-		default: 0,
-		effects: [handleStorage({ key })],
-		key,
-	}),
-)
+export const essence = persistentSignal({
+	key: "essence",
+	value: 0,
+})
 
-export const essenceLoot = withStateKey("essenceLoot", key =>
-	atom({
-		default: 0,
-		effects: [handleStorage({ key })],
-		key,
-	}),
-)
+export const essenceLoot = persistentSignal({
+	key: "essenceLoot",
+	value: 0,
+})
 
-export const itemsLoot = withStateKey("itemsLoot", key =>
-	atom<InventoryItem[]>({
-		default: [],
-		effects: [handleStorage({ key })],
-		key,
-	}),
-)
+export const itemsLoot = persistentSignal<InventoryItem[]>({
+	key: "itemsLoot",
+	value: [],
+})

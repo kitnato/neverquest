@@ -1,7 +1,6 @@
-import { atomFamily, selector, selectorFamily } from "recoil"
+import { computed } from "@preact/signals"
 
 import { ATTRIBUTES } from "@neverquest/data/attributes"
-import { handleStorage } from "@neverquest/state/effects/handleStorage"
 import { essence } from "@neverquest/state/resources"
 import { ATTRIBUTE_TYPES, type Attribute } from "@neverquest/types/unions"
 import {
@@ -9,82 +8,45 @@ import {
 	getAttributePoints,
 	getComputedStatistic,
 } from "@neverquest/utilities/getters"
-import { withStateKey } from "@neverquest/utilities/helpers"
+import { computedFamily, persistentSignalFamily } from "@neverquest/utilities/persistentSignal"
 
-// SELECTORS
+// COMPUTED
 
-export const absorbedEssence = withStateKey("absorbedEssence", key =>
-	selector({
-		get: ({ get }) => {
-			let currentAbsorbedEssence = 0
+export const absorbedEssence = computed(() => {
+	let currentAbsorbedEssence = 0
 
-			for (let index = 0; index < get(powerLevel); index++) {
-				currentAbsorbedEssence += getAttributePointCost(index)
-			}
+	for (let index = 0; index < powerLevel.value; index++) {
+		currentAbsorbedEssence += getAttributePointCost(index)
+	}
 
-			return currentAbsorbedEssence
-		},
-		key,
-	}),
-)
+	return currentAbsorbedEssence
+})
 
-export const areAttributesAffordable = withStateKey("areAttributesAffordable", key =>
-	selector({
-		get: ({ get }) => get(attributePoints) > 0,
-		key,
-	}),
-)
+export const areAttributesAffordable = computed(() => attributePoints.value > 0)
 
-export const attributePoints = withStateKey("attributePoints", key =>
-	selector({
-		get: ({ get }) => getAttributePoints({
-			essence: get(essence),
-			powerLevel: get(powerLevel),
-		}),
-		key,
-	}),
-)
+export const attributePoints = computed(() => getAttributePoints({
+	essence: essence.get(),
+	powerLevel: powerLevel.value,
+}))
 
-export const attributeStatistic = withStateKey("attributeStatistic", key =>
-	selectorFamily({
-		get: (attribute: Attribute) =>
-			({ get }) => {
-				const { base, increment: { amount, bonus } } = ATTRIBUTES[attribute]
-				const attributeRankValue = get(attributeRank(attribute))
+export const attributeStatistic = computedFamily((attribute: Attribute) => () => {
+	const { base, increment: { amount, bonus } } = ATTRIBUTES[attribute]
 
-				return getComputedStatistic({
-					base,
-					bonus,
-					increment: amount,
-					rank: attributeRankValue,
-				})
-			},
-		key,
-	}),
-)
+	return getComputedStatistic({
+		base,
+		bonus,
+		increment: amount,
+		rank: attributeRank(attribute).get(),
+	})
+})
 
-export const isAttributeAtMaximum = withStateKey("isAttributeAtMaximum", key =>
-	selectorFamily({
-		get:
-			(attribute: Attribute) =>
-				({ get }) => Math.abs(get(attributeStatistic(attribute))) >= Math.abs(ATTRIBUTES[attribute].maximum ?? Number.POSITIVE_INFINITY),
-		key,
-	}),
-)
+export const isAttributeAtMaximum = computedFamily((attribute: Attribute) => () => Math.abs(attributeStatistic(attribute).value) >= Math.abs(ATTRIBUTES[attribute].maximum ?? Number.POSITIVE_INFINITY))
 
-export const powerLevel = withStateKey("powerLevel", key =>
-	selector({
-		get: ({ get }) => ATTRIBUTE_TYPES.reduce((sum, attribute) => sum + get(attributeRank(attribute)), 0),
-		key,
-	}),
-)
+export const powerLevel = computed(() => ATTRIBUTE_TYPES.reduce((sum, attribute) => sum + attributeRank(attribute).get(), 0))
 
-// ATOMS
+// SIGNALS
 
-export const attributeRank = withStateKey("attributeRank", key =>
-	atomFamily<number, Attribute>({
-		default: 0,
-		effects: attribute => [handleStorage({ key, parameter: attribute })],
-		key,
-	}),
-)
+export const attributeRank = persistentSignalFamily<Attribute, number>({
+	key: "attributeRank",
+	value: 0,
+})

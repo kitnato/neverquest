@@ -1,89 +1,59 @@
-import { atom, selector, selectorFamily } from "recoil"
+import { computed } from "@preact/signals"
 
 import { ENCUMBRANCE_CAPACITY, KNAPSACK_CAPACITY } from "@neverquest/data/items"
-import { handleStorage } from "@neverquest/state/effects/handleStorage"
 import { isConsumableItem, isInheritableItem } from "@neverquest/types/type-guards"
-import { withStateKey } from "@neverquest/utilities/helpers"
+import { computedFamily, persistentSignal } from "@neverquest/utilities/persistentSignal"
 
-import type { ConsumableItem, InheritableItem, InventoryItem } from "@neverquest/types"
+import type { InventoryItem } from "@neverquest/types"
 import type { Consumable, Inheritable } from "@neverquest/types/unions"
 
-// SELECTORS
+// COMPUTED
 
-export const encumbrance = withStateKey("encumbrance", key =>
-	selector({
-		get: ({ get }) => get(inventory).reduce((sum, { weight }) => sum + weight, 0),
-		key,
-	}),
+export const encumbrance = computed(() => inventory.get().reduce((sum, { weight }) => sum + weight, 0))
+
+export const encumbranceExtent = computed(() => {
+	const encumbranceValue = encumbrance.value
+	const encumbranceMaximumValue = encumbranceMaximum.value
+
+	return encumbrance.value === encumbranceMaximum.value
+		? "encumbered"
+		: encumbranceValue > encumbranceMaximumValue
+			? "over-encumbered"
+			: undefined
+})
+
+export const encumbranceMaximum = computed(() => ownedItem("knapsack").value === undefined
+	? ENCUMBRANCE_CAPACITY
+	: knapsackCapacity.get(),
 )
 
-export const encumbranceExtent = withStateKey("encumbranceExtent", key =>
-	selector({
-		get: ({ get }) =>
-			get(encumbrance) === get(encumbranceMaximum)
-				? "encumbered"
-				: get(encumbrance) > get(encumbranceMaximum)
-					? "over-encumbered"
-					: undefined,
-		key,
-	}),
-)
+export const ownedItem = computedFamily((itemName: Consumable | Inheritable) => () => {
+	const inventoryValue = inventory.get()
 
-export const encumbranceMaximum = withStateKey("encumbranceMaximum", key =>
-	selector({
-		get: ({ get }) =>
-			get(ownedItem("knapsack")) === undefined
-				? ENCUMBRANCE_CAPACITY
-				: get(knapsackCapacity),
-		key,
-	}),
-)
+	return (
+		inventoryValue.filter(isConsumableItem).find(({ name }) => name === itemName)
+		?? inventoryValue.filter(isInheritableItem).find(({ name }) => name === itemName)
+	)
+})
 
-export const ownedItem = withStateKey("ownedItem", key =>
-	selectorFamily({
-		get: (itemName: Consumable | Inheritable) =>
-			({ get }): ConsumableItem | InheritableItem | undefined => {
-				const inventoryValue = get(inventory)
+// SIGNALS
 
-				return (
-					inventoryValue.filter(isConsumableItem).find(({ name }) => name === itemName)
-					?? inventoryValue.filter(isInheritableItem).find(({ name }) => name === itemName)
-				)
-			},
-		key,
-	}),
-)
+export const acquiredItems = persistentSignal<InventoryItem[]>({
+	key: "",
+	value: [],
+})
 
-// ATOMS
+export const inventory = persistentSignal<InventoryItem[]>({
+	key: "",
+	value: [],
+})
 
-export const acquiredItems = withStateKey("acquiredItems", key =>
-	atom<InventoryItem[]>({
-		default: [],
-		effects: [handleStorage({ key })],
-		key,
-	}),
-)
+export const knapsackCapacity = persistentSignal({
+	key: "",
+	value: KNAPSACK_CAPACITY.minimum,
+})
 
-export const inventory = withStateKey("inventory", key =>
-	atom<InventoryItem[]>({
-		default: [],
-		effects: [handleStorage({ key })],
-		key,
-	}),
-)
-
-export const knapsackCapacity = withStateKey("knapsackCapacity", key =>
-	atom({
-		default: KNAPSACK_CAPACITY.minimum,
-		effects: [handleStorage({ key })],
-		key,
-	}),
-)
-
-export const notifyOverEncumbrance = withStateKey("notifyOverEncumbrance", key =>
-	atom({
-		default: false,
-		effects: [handleStorage({ key })],
-		key,
-	}),
-)
+export const notifyOverEncumbrance = persistentSignal({
+	key: "",
+	value: false,
+})

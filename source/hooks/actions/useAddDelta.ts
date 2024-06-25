@@ -3,7 +3,7 @@ import { useRecoilCallback } from "recoil"
 
 import { deltas } from "@neverquest/state/deltas"
 
-import type { DeltaDisplay } from "@neverquest/types/ui"
+import type { DeltaDisplay } from "@neverquest/types/general"
 import type { Delta } from "@neverquest/types/unions"
 
 export function useAddDelta() {

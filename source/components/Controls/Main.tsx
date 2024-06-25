@@ -27,10 +27,10 @@ import { isAttacking, isStageCompleted, location } from "@neverquest/state/chara
 import { isMunitionsSufficient } from "@neverquest/state/gear"
 import { isRelicEquipped } from "@neverquest/state/items"
 import { isMonsterDead } from "@neverquest/state/monster"
-import { canResurrect, isHealthLow, isIncapacitated, protectedElement } from "@neverquest/state/reserves"
+import { canResurrect, isHealthLow, isIncapacitated, isDreamCatcherEquippedElement } from "@neverquest/state/reserves"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
-import type { SVGIcon } from "@neverquest/types/components"
+import type { SVGIcon } from "@neverquest/types/general"
 
 export function Main() {
 	const areAttributesAffordableValue = useRecoilValue(areAttributesAffordable)
@@ -44,8 +44,8 @@ export function Main() {
 	const isDreamCatcherEquipped = useRecoilValue(isRelicEquipped("dream catcher"))
 	const isStageCompletedValue = useRecoilValue(isStageCompleted)
 	const locationValue = useRecoilValue(location)
-	const setProtectedElement = useSetRecoilState(protectedElement)
-	const resetProtectedElement = useResetRecoilState(protectedElement)
+	const setProtectedElement = useSetRecoilState(isDreamCatcherEquippedElement)
+	const resetProtectedElement = useResetRecoilState(isDreamCatcherEquippedElement)
 
 	const protectedElementReference = useRef<HTMLDivElement | null>(null)
 

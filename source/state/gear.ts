@@ -1,4 +1,4 @@
-import { atom, selector } from "recoil"
+import { computed } from "@preact/signals"
 
 import {
 	ARMOR_NONE,
@@ -7,145 +7,104 @@ import {
 	WEAPON_NONE,
 } from "@neverquest/data/gear"
 import { STALWART_BURDEN_REDUCTION } from "@neverquest/data/traits"
-import { handleStorage } from "@neverquest/state/effects/handleStorage"
 import { munitions } from "@neverquest/state/items"
 import { reserveCurrent } from "@neverquest/state/reserves"
 import { isTraitEarned } from "@neverquest/state/traits"
 import { isMelee, isRanged, isUnarmed } from "@neverquest/types/type-guards"
 import { getElementalEffects, getTotalElementalEffects } from "@neverquest/utilities/getters"
-import { withStateKey } from "@neverquest/utilities/helpers"
+import { persistentSignal } from "@neverquest/utilities/persistentSignal"
 
 import type { Armor, GemItem, Shield, Weapon } from "@neverquest/types"
 
-// SELECTORS
+// COMPUTED
 
-export const armorBurden = withStateKey("armorBurden", key =>
-	selector({
-		get: ({ get }) => {
-			const { burden } = get(armor)
+export const armorBurden = computed(() => {
+	const { burden } = armor.get()
 
-			return get(isTraitEarned("stalwart")) ? Math.round(burden * STALWART_BURDEN_REDUCTION) : burden
+	return isTraitEarned("stalwart").get()
+		? Math.round(burden * STALWART_BURDEN_REDUCTION)
+		: burden
+})
+
+export const canAttackOrParry = computed(() => reserveCurrent("stamina").get() >= weapon.get().burden)
+
+export const canBlockOrStagger = computed(() => reserveCurrent("stamina").get() >= shield.get().burden)
+
+export const canDodge = computed(() => isTraitEarned("stalwart").get() || reserveCurrent("stamina").get() >= armor.get().burden)
+
+export const elementalEffects = computed(() => {
+	const armorValue = armor.get()
+	const shieldValue = shield.get()
+	const weaponValue = weapon.get()
+	const fittedGemsValue = fittedGems.get()
+
+	const armorEffects = getElementalEffects({
+		gear: armorValue,
+		gems: fittedGemsValue[armorValue.ID] ?? [],
+	})
+	// Only apply shield effects if they're actively used.
+	const shieldEffects = (
+		isMelee(weaponValue)
+		|| isUnarmed(weaponValue)
+	) && (weaponValue.grip === "one-handed" || isTraitEarned("colossus").get())
+		? getElementalEffects({
+			gear: shieldValue,
+			gems: fittedGemsValue[shieldValue.ID] ?? [],
+		})
+		: SHIELD_ELEMENTAL_EFFECTS_BASE
+	const weaponEffects = getElementalEffects({
+		gear: weaponValue,
+		gems: fittedGemsValue[weaponValue.ID] ?? [],
+	})
+
+	return {
+		armor: {
+			fire: getTotalElementalEffects({ ...armorEffects.fire, modifier: shieldEffects.fire }),
+			ice: getTotalElementalEffects({ ...armorEffects.ice, modifier: shieldEffects.ice }),
+			lightning: getTotalElementalEffects({
+				...armorEffects.lightning,
+				modifier: shieldEffects.lightning,
+			}),
 		},
-		key,
-	}),
-)
-
-export const canAttackOrParry = withStateKey("canAttackOrParry", key =>
-	selector({
-		get: ({ get }) => get(reserveCurrent("stamina")) >= get(weapon).burden,
-		key,
-	}),
-)
-
-export const canBlockOrStagger = withStateKey("canBlockOrStagger", key =>
-	selector({
-		get: ({ get }) => get(reserveCurrent("stamina")) >= get(shield).burden,
-		key,
-	}),
-)
-
-export const canDodge = withStateKey("canDodge", key =>
-	selector({
-		get: ({ get }) => get(isTraitEarned("stalwart")) || get(reserveCurrent("stamina")) >= get(armor).burden,
-		key,
-	}),
-)
-
-export const elementalEffects = withStateKey("elementalEffects", key =>
-	selector({
-		get: ({ get }) => {
-			const armorValue = get(armor)
-			const shieldValue = get(shield)
-			const weaponValue = get(weapon)
-			const fittedGemsValue = get(fittedGems)
-
-			const armorEffects = getElementalEffects({
-				gear: armorValue,
-				gems: fittedGemsValue[armorValue.ID] ?? [],
-			})
-			// Only apply shield effects if they're actively used.
-			const shieldEffects = (
-				isMelee(weaponValue)
-				|| isUnarmed(weaponValue)
-			) && (weaponValue.grip === "one-handed" || get(isTraitEarned("colossus")))
-				? getElementalEffects({
-					gear: shieldValue,
-					gems: fittedGemsValue[shieldValue.ID] ?? [],
-				})
-				: SHIELD_ELEMENTAL_EFFECTS_BASE
-			const weaponEffects = getElementalEffects({
-				gear: weaponValue,
-				gems: fittedGemsValue[weaponValue.ID] ?? [],
-			})
-
-			return {
-				armor: {
-					fire: getTotalElementalEffects({ ...armorEffects.fire, modifier: shieldEffects.fire }),
-					ice: getTotalElementalEffects({ ...armorEffects.ice, modifier: shieldEffects.ice }),
-					lightning: getTotalElementalEffects({
-						...armorEffects.lightning,
-						modifier: shieldEffects.lightning,
-					}),
-				},
-				weapon: {
-					fire: getTotalElementalEffects({ ...weaponEffects.fire, modifier: shieldEffects.fire }),
-					ice: getTotalElementalEffects({ ...weaponEffects.ice, modifier: shieldEffects.ice }),
-					lightning: getTotalElementalEffects({
-						...weaponEffects.lightning,
-						modifier: shieldEffects.lightning,
-					}),
-				},
-			}
+		weapon: {
+			fire: getTotalElementalEffects({ ...weaponEffects.fire, modifier: shieldEffects.fire }),
+			ice: getTotalElementalEffects({ ...weaponEffects.ice, modifier: shieldEffects.ice }),
+			lightning: getTotalElementalEffects({
+				...weaponEffects.lightning,
+				modifier: shieldEffects.lightning,
+			}),
 		},
-		key,
-	}),
-)
+	}
+})
 
-export const isMunitionsSufficient = withStateKey("isMunitionsSufficient", key =>
-	selector({
-		get: ({ get }) => {
-			const weaponValue = get(weapon)
+export const isMunitionsSufficient = computed(() => {
+	const weaponValue = weapon.get()
 
-			return isRanged(weaponValue) ? get(munitions) >= weaponValue.munitionsCost : true
-		},
-		key,
-	}),
-)
+	return isRanged(weaponValue) ? munitions.get() >= weaponValue.munitionsCost : true
+})
 
-// ATOMS
+// SIGNALS
 
-export const armor = withStateKey("armor", key =>
-	atom<Armor | typeof ARMOR_NONE>({
-		default: ARMOR_NONE,
-		effects: [handleStorage({ key })],
-		key,
-	}),
-)
+export const armor = persistentSignal<Armor | typeof ARMOR_NONE>({
+	key: "armor",
+	value: ARMOR_NONE,
+})
 
-export const fittedGems = withStateKey("fittedGems", key =>
-	atom<Record<string, GemItem[]>>({
-		default: {
-			[ARMOR_NONE.ID]: [],
-			[SHIELD_NONE.ID]: [],
-			[WEAPON_NONE.ID]: [],
-		},
-		effects: [handleStorage({ key })],
-		key,
-	}),
-)
+export const fittedGems = persistentSignal<Record<string, GemItem[]>>({
+	key: "fittedGems",
+	value: {
+		[ARMOR_NONE.ID]: [],
+		[SHIELD_NONE.ID]: [],
+		[WEAPON_NONE.ID]: [],
+	},
+})
 
-export const shield = withStateKey("shield", key =>
-	atom<Shield | typeof SHIELD_NONE>({
-		default: SHIELD_NONE,
-		effects: [handleStorage({ key })],
-		key,
-	}),
-)
+export const shield = persistentSignal<Shield | typeof SHIELD_NONE>({
+	key: "shield",
+	value: SHIELD_NONE,
+})
 
-export const weapon = withStateKey("weapon", key =>
-	atom<Weapon | typeof WEAPON_NONE>({
-		default: WEAPON_NONE,
-		effects: [handleStorage({ key })],
-		key,
-	}),
-)
+export const weapon = persistentSignal<Weapon | typeof WEAPON_NONE>({
+	key: "weapon",
+	value: WEAPON_NONE,
+})

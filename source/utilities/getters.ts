@@ -82,7 +82,7 @@ import type {
 	Shield,
 	Weapon,
 } from "@neverquest/types"
-import type { Animation, AnimationSpeed } from "@neverquest/types/ui"
+import type { Animation, AnimationSpeed } from "@neverquest/types/general"
 import type { Elemental, Grip, Perk, Quest, QuestClass } from "@neverquest/types/unions"
 import type { RecoilValue, Snapshot } from "recoil"
 

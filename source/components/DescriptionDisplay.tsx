@@ -2,7 +2,7 @@ import { Fragment } from "preact"
 
 import { IconImage } from "@neverquest/components/IconImage"
 
-import type { Description } from "@neverquest/types/ui"
+import type { Description } from "@neverquest/types/general"
 
 export function DescriptionDisplay({ description, descriptionIcons, isItalic }: Description) {
 	return (

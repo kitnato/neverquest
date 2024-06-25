@@ -1,7 +1,6 @@
-import { atom, atomFamily, selector } from "recoil"
+import { computed } from "@preact/signals"
 
 import { CREW, MONOLOGUE_EMPTY } from "@neverquest/data/caravan"
-import { handleStorage } from "@neverquest/state/effects/handleStorage"
 import {
 	CREW_MEMBER_TYPES,
 	type CrewMember,
@@ -9,64 +8,54 @@ import {
 	type Gear,
 	type Grip,
 } from "@neverquest/types/unions"
-import { withStateKey } from "@neverquest/utilities/helpers"
+import { persistentSignal, persistentSignalFamily } from "@neverquest/utilities/persistentSignal"
 
 import type { ArmorClass, ShieldClass, WeaponClass } from "@kitnato/locran/build/types"
 import type { Armor, Melee, MerchantInventoryItem, Ranged, Shield } from "@neverquest/types"
 
-// SELECTORS
+// COMPUTED
 
-export const isCaravanHired = withStateKey("isCaravanHired", key =>
-	selector({
-		get: ({ get }) => CREW_MEMBER_TYPES.every(crewMember => get(isHired(crewMember))),
-		key,
-	}),
-)
+export const isCaravanHired = computed(() => CREW_MEMBER_TYPES.every(crewMember => isHired(crewMember).get()))
 
-// ATOMS
+// SIGNALS
 
-export const activeCrewMember = withStateKey("activeCrewMember", key =>
-	atom<CrewMember | undefined>({
-		default: undefined,
-		effects: [handleStorage({ key })],
-		key,
-	}),
-)
+export const activeCrewMember = persistentSignal<CrewMember | null>({
+	key: "activeCrewMember",
+	value: null,
+})
 
-export const blacksmithInventory = withStateKey("blacksmithInventory", key =>
-	atom<{
-		armor: Armor | undefined
-		shield: Shield | undefined
-		weapon: Melee | undefined
-	}>({
-		default: {
-			armor: undefined,
-			shield: undefined,
-			weapon: undefined,
-		},
-		effects: [handleStorage({ key })],
-		key,
-	}),
-)
+export const blacksmithInventory = persistentSignal<{
+	armor: Armor | null
+	shield: Shield | null
+	weapon: Melee | null
+}>({
+	key: "blacksmithInventory",
+	value: {
+		armor: null,
+		shield: null,
+		weapon: null,
+	},
+})
 
-export const blacksmithOptions = withStateKey("blacksmithOptions", key =>
-	atom<{
-		activeTab: Gear
-		armor: {
-			gearClass: ArmorClass
-			level: number
-		}
-		shield: {
-			gearClass: ShieldClass
-			level: number
-		}
-		weapon: {
-			gearClass: WeaponClass
-			grip: Grip
-			level: number
-		}
-	}>({
-		default: {
+export const blacksmithOptions = persistentSignal<{
+	activeTab: Gear
+	armor: {
+		gearClass: ArmorClass
+		level: number
+	}
+	shield: {
+		gearClass: ShieldClass
+		level: number
+	}
+	weapon: {
+		gearClass: WeaponClass
+		grip: Grip
+		level: number
+	}
+}>(
+	{
+		key: "blacksmithOptions",
+		value: {
 			activeTab: "weapon",
 			armor: {
 				gearClass: "light",
@@ -82,75 +71,51 @@ export const blacksmithOptions = withStateKey("blacksmithOptions", key =>
 				level: 0,
 			},
 		},
-		effects: [handleStorage({ key })],
-		key,
-	}),
-)
+	})
 
-export const expandedBuyback = withStateKey("expandedBuyback", key =>
-	atom({
-		default: true,
-		effects: [handleStorage({ key })],
-		key,
-	}),
-)
+export const expandedBuyback = persistentSignal({
+	key: "expandedBuyback",
+	value: true,
+})
 
-export const fletcherInventory = withStateKey("fletcherInventory", key =>
-	atom<Ranged | undefined>({
-		default: undefined,
-		effects: [handleStorage({ key })],
-		key,
-	}),
-)
+export const fletcherInventory = persistentSignal<Ranged | null>({
+	key: "fletcherInventory",
+	value: null,
+})
 
-export const fletcherOptions = withStateKey("fletcherOptions", key =>
-	atom<{
-		activeTab: FletcherOption
+export const fletcherOptions = persistentSignal<{
+	activeTab: FletcherOption
+	ranged: {
+		gearClass: WeaponClass
+		level: number
+	}
+}>({
+	key: "fletcherOptions",
+	value: {
+		activeTab: "ranged",
 		ranged: {
-			gearClass: WeaponClass
-			level: number
-		}
-	}>({
-		default: {
-			activeTab: "ranged",
-			ranged: {
-				gearClass: "blunt",
-				level: 0,
-			},
+			gearClass: "blunt",
+			level: 0,
 		},
-		effects: [handleStorage({ key })],
-		key,
-	}),
-)
+	},
+})
 
-export const isHired = withStateKey("isHired", key =>
-	atomFamily<boolean, CrewMember>({
-		default: false,
-		effects: crewMember => [handleStorage({ key, parameter: crewMember })],
-		key,
-	}),
-)
+export const isHired = persistentSignalFamily<CrewMember, boolean>({
+	key: "isHired",
+	value: false,
+})
 
-export const isOfferGenerated = withStateKey("isOfferGenerated", key =>
-	atomFamily<boolean, number>({
-		default: false,
-		effects: stage => [handleStorage({ key, parameter: stage })],
-		key,
-	}),
-)
+export const isOfferGenerated = persistentSignalFamily<number, boolean>({
+	key: "isOfferGenerated",
+	value: false,
+})
 
-export const merchantInventory = withStateKey("merchantInventory", key =>
-	atom<MerchantInventoryItem[]>({
-		default: [],
-		effects: [handleStorage({ key })],
-		key,
-	}),
-)
+export const merchantInventory = persistentSignal<MerchantInventoryItem[]>({
+	key: "merchantInventory",
+	value: [],
+})
 
-export const monologue = withStateKey("monologue", key =>
-	atomFamily<string, CrewMember>({
-		default: crewMember => CREW[crewMember].monologues[1] ?? MONOLOGUE_EMPTY,
-		effects: crewMember => [handleStorage({ key, parameter: crewMember })],
-		key,
-	}),
-)
+export const monologue = persistentSignalFamily<CrewMember, string>({
+	key: "monologue",
+	value: crewMember => CREW[crewMember].monologues[1] ?? MONOLOGUE_EMPTY,
+})

@@ -33,8 +33,7 @@ import type {
 	WeaponModality,
 } from "@kitnato/locran/build/types"
 import type { InheritableItem } from "@neverquest/types"
-import type { SVGIcon } from "@neverquest/types/components"
-import type { Description } from "@neverquest/types/ui"
+import type { Description, SVGIcon } from "@neverquest/types/general"
 import type { Consumable, CrewMember, Grip, Showing } from "@neverquest/types/unions"
 
 export const MONOLOGUE_EMPTY = "..."

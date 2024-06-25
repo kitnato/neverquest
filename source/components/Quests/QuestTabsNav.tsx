@@ -8,7 +8,7 @@ import { canCompleteQuests } from "@neverquest/state/quests"
 import { capitalizeAll } from "@neverquest/utilities/formatters"
 import { getAnimationClass } from "@neverquest/utilities/getters"
 
-import type { TabsData } from "@neverquest/types/components"
+import type { TabsData } from "@neverquest/types/general"
 import type { QuestClass } from "@neverquest/types/unions"
 
 export function QuestTabsNav({ tabs }: { tabs: TabsData<QuestClass> }) {

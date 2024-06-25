@@ -30,6 +30,7 @@
 	],
 	"dependencies": {
 		"@kitnato/locran": "1.7.0",
+		"@preact/signals": "^1.2.3",
 		"animate.css": "4.1.1",
 		"bootstrap": "5.3.3",
 		"localstorage-slim": "2.7.0",
@@ -38,7 +39,6 @@
 		"react-bootstrap": "2.10.2",
 		"react-circular-progressbar": "2.1.0",
 		"react-markdown": "9.0.1",
-		"recoil": "^0.7.7",
 		"sass": "1.72.0",
 		"worker-timers": "7.1.4"
 	},

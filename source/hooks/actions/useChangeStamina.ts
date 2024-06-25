@@ -9,7 +9,7 @@ import { ownedItem } from "@neverquest/state/inventory"
 import { isRelicEquipped } from "@neverquest/state/items"
 import {
 	isInexhaustible,
-	protectedElement,
+	isDreamCatcherEquippedElement,
 	regenerationDuration,
 	reserveCurrent,
 	staminaMaximumBlighted,
@@ -18,7 +18,7 @@ import { formatNumber } from "@neverquest/utilities/formatters"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
 import { animateElement } from "@neverquest/utilities/helpers"
 
-import type { DeltaReserve } from "@neverquest/types/ui"
+import type { DeltaReserve } from "@neverquest/types/general"
 
 export function useChangeStamina() {
 	const addDelta = useAddDelta()
@@ -59,7 +59,7 @@ export function useChangeStamina() {
 				) {
 					animateElement({
 						animation: "heartBeat",
-						element: get(protectedElement),
+						element: get(isDreamCatcherEquippedElement),
 					})
 
 					const ownedElixir = get(ownedItem("elixir"))

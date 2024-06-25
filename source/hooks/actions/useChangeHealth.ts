@@ -12,7 +12,7 @@ import { isRelicEquipped } from "@neverquest/state/items"
 import {
 	healthMaximumPoisoned,
 	isInvulnerable,
-	protectedElement,
+	isDreamCatcherEquippedElement,
 	regenerationDuration,
 	reserveCurrent,
 } from "@neverquest/state/reserves"
@@ -21,7 +21,7 @@ import { formatNumber } from "@neverquest/utilities/formatters"
 import { getSnapshotGetter } from "@neverquest/utilities/getters"
 import { animateElement } from "@neverquest/utilities/helpers"
 
-import type { DeltaReserve } from "@neverquest/types/ui"
+import type { DeltaReserve } from "@neverquest/types/general"
 
 export function useChangeHealth() {
 	const addDelta = useAddDelta()
@@ -87,7 +87,7 @@ export function useChangeHealth() {
 				) {
 					animateElement({
 						animation: "heartBeat",
-						element: get(protectedElement),
+						element: get(isDreamCatcherEquippedElement),
 					})
 
 					const ownedBandages = get(ownedItem("bandages"))

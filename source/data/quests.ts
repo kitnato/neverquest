@@ -18,7 +18,7 @@ import {
 } from "@neverquest/types/unions"
 import { formatEnumeration, formatNumber } from "@neverquest/utilities/formatters"
 
-import type { SVGIcon } from "@neverquest/types/components"
+import type { SVGIcon } from "@neverquest/types/general"
 
 export const QUEST_CLASS_ICONS: Record<QuestClass, SVGIcon> = {
 	conquest: IconConquest,
